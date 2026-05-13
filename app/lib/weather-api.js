@@ -1,5 +1,5 @@
-// Network calls (Open-Meteo geocoding, forecast, air quality) plus the
-// transform that turns raw API responses into the per-hour shape the UI uses.
+// Network calls + the transform that turns raw API responses into the
+// per-hour shape the UI uses.
 
 import { cToF, mpsToMph, kmToMi, calcHI, calcWC, wxIcon } from "./calculations";
 
@@ -17,6 +17,7 @@ export const geoCode = async q => {
 };
 
 // 5-day hourly forecast for the given coordinates and timezone.
+// Includes apparent_temperature (drives feelsLike).
 export const getWx = async (lat, lon, tz) => {
   const p = new URLSearchParams({
     latitude: lat,
@@ -27,6 +28,7 @@ export const getWx = async (lat, lon, tz) => {
       "temperature_2m",
       "relative_humidity_2m",
       "dewpoint_2m",
+      "apparent_temperature",
       "precipitation_probability",
       "precipitation",
       "weathercode",
@@ -38,7 +40,7 @@ export const getWx = async (lat, lon, tz) => {
     ].join(","),
   });
   const r = await fetch(`https://api.open-meteo.com/v1/forecast?${p}`);
-  if (!r.ok) throw new Error("Weather data unavailable. Please try again.");
+  if (!r.ok) throw new Error("Weather data unavailable.");
   return r.json();
 };
 
@@ -59,40 +61,39 @@ export const getAQ = async (lat, lon, tz) => {
 // Combine raw Open-Meteo weather + air-quality responses into the
 // app's normalized per-hour shape, then group by date.
 // Returns { days: [[dateStr, hours[]], ...], loc }, capped at 5 days.
-export const buildForecast = (wx, aq, loc) => {
+export const buildFcData = (wx, aq, loc) => {
   const hours = wx.hourly.time.map((t, i) => {
     const tF = cToF(wx.hourly.temperature_2m[i]);
     const rh = wx.hourly.relative_humidity_2m[i];
     const wMph = mpsToMph(wx.hourly.windspeed_10m[i]);
     const gMph = mpsToMph(wx.hourly.windgusts_10m[i]);
-    const code = wx.hourly.weathercode[i];
-    const wx2 = wxIcon(code);
-    const visKm = (wx.hourly.visibility[i] || 0) / 1000;
+    const wx2 = wxIcon(wx.hourly.weathercode[i]);
     return {
       time: t,
       hour: new Date(t).getHours(),
       date: t.split("T")[0],
-      tempF: tF,
-      heatIndex: calcHI(tF, rh),
-      windChill: calcWC(tF, wMph),
-      windSpeed: wMph,
-      windGusts: gMph,
+      tempF: Math.round(tF),
+      feelsLike: Math.round(cToF(wx.hourly.apparent_temperature[i])),
+      heatIndex: Math.round(calcHI(tF, rh)),
+      windChill: Math.round(calcWC(tF, wMph)),
+      windSpeed: Math.round(wMph),
+      windGusts: Math.round(gMph),
       precipProb: wx.hourly.precipitation_probability[i] || 0,
-      precipAccum: (wx.hourly.precipitation[i] || 0) * 0.0393701,
+      precipAccum: parseFloat(
+        ((wx.hourly.precipitation[i] || 0) * 0.0393701).toFixed(2)
+      ),
       humidity: rh,
-      dewPoint: cToF(wx.hourly.dewpoint_2m[i]),
+      dewPoint: Math.round(cToF(wx.hourly.dewpoint_2m[i])),
       uvIndex: wx.hourly.uv_index[i] || 0,
       cloudCover: wx.hourly.cloudcover[i] || 0,
-      visibility: Math.max(0.01, kmToMi(visKm)),
+      visibility: parseFloat(
+        Math.max(0.01, kmToMi((wx.hourly.visibility[i] || 0) / 1000)).toFixed(1)
+      ),
       aqi: aq[i] || 0,
       icon: wx2.icon,
       condition: wx2.label,
-      thunder: wx2.thunder,
-      hail: wx2.hail,
-      thunderProb: wx2.thunder ? 90 : 0,
     };
   });
-
   const days = {};
   hours.forEach(h => {
     if (!days[h.date]) days[h.date] = [];

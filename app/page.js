@@ -1,29 +1,30 @@
 'use client';
 
-// OpsCast top-level page.
-// Owns app state (zip, hours, thresholds, view, forecast, etc.) and
-// orchestrates fetching + transitions between SetupView and ForecastView.
+// OpsCast top-level page (v2).
+// Owns app state (location, hours, day range, thresholds, view, forecast,
+// loading flags, error) and orchestrates the fetch + view transitions.
 
 import { useState } from "react";
 import SetupView from "./components/SetupView";
 import ForecastView from "./components/ForecastView";
-import { DEFAULTS } from "./lib/thresholds";
-import { geoCode, getWx, getAQ, buildForecast } from "./lib/weather-api";
+import { buildDefaults } from "./lib/thresholds";
+import { geoCode, getWx, getAQ, buildFcData } from "./lib/weather-api";
 
 export default function Page() {
   const [zip, setZip] = useState("");
   const [startH, setStartH] = useState(8);
   const [endH, setEndH] = useState(17);
-  const [thresh, setThresh] = useState(DEFAULTS);
+  const [dayFrom, setDayFrom] = useState(0);
+  const [dayTo, setDayTo] = useState(2);
+  const [thresh, setThresh] = useState(buildDefaults);
   const [view, setView] = useState("setup");
   const [forecast, setForecast] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [geoLoading, setGeoLoading] = useState(false);
+  const [geoLoad, setGeoLoad] = useState(false);
   const [err, setErr] = useState("");
-  const [selDay, setSelDay] = useState(0);
 
-  // Fetch a forecast either from a free-text query (default) or, when
-  // coordinates are passed in, directly (used by the geolocate flow).
+  // Fetch a forecast either from the typed query or, when coordinates are
+  // passed in, directly (used by the geolocate flow).
   const run = async (lat = null, lon = null, tz = null, name = null) => {
     setLoading(true);
     setErr("");
@@ -45,8 +46,7 @@ export default function Page() {
         getWx(loc.latitude, loc.longitude, loc.timezone),
         getAQ(loc.latitude, loc.longitude, loc.timezone),
       ]);
-      setForecast(buildForecast(wx, aq, loc));
-      setSelDay(0);
+      setForecast(buildFcData(wx, aq, loc));
       setView("forecast");
     } catch (e) {
       setErr(e.message);
@@ -54,14 +54,13 @@ export default function Page() {
     setLoading(false);
   };
 
-  // Use browser geolocation, then reverse-geocode the coords to a city name
-  // via Nominatim before fetching the forecast.
+  // Browser geolocation → reverse-geocode for a friendlier name → run().
   const useGeo = () => {
     if (!navigator.geolocation) {
-      setErr("Geolocation not supported by your browser.");
+      setErr("Geolocation not supported.");
       return;
     }
-    setGeoLoading(true);
+    setGeoLoad(true);
     setErr("");
     navigator.geolocation.getCurrentPosition(
       async pos => {
@@ -76,15 +75,19 @@ export default function Page() {
             d.address?.city ||
             d.address?.town ||
             d.address?.village ||
-            d.address?.county ||
             name;
         } catch {}
-        await run(lat, lon, Intl.DateTimeFormat().resolvedOptions().timeZone, name);
-        setGeoLoading(false);
+        await run(
+          lat,
+          lon,
+          Intl.DateTimeFormat().resolvedOptions().timeZone,
+          name
+        );
+        setGeoLoad(false);
       },
       () => {
         setErr("Location access denied.");
-        setGeoLoading(false);
+        setGeoLoad(false);
       }
     );
   };
@@ -92,12 +95,9 @@ export default function Page() {
   return (
     <div className="app">
       <div className="topbar">
-        <div className="brand">
-          <div className="brand-pip" />
-          <div>
-            <div className="brand-name">OpsCast</div>
-            <div className="brand-sub mono">Weather Intelligence</div>
-          </div>
+        <div>
+          <div className="brand-name">OpsCast</div>
+          <div className="brand-tag">Business Weather Intelligence</div>
         </div>
         {view === "forecast" && (
           <button
@@ -115,16 +115,13 @@ export default function Page() {
 
       {view === "setup" && (
         <SetupView
-          zip={zip}
-          setZip={setZip}
-          startH={startH}
-          setStartH={setStartH}
-          endH={endH}
-          setEndH={setEndH}
-          thresh={thresh}
-          setThresh={setThresh}
-          loading={loading}
-          geoLoading={geoLoading}
+          zip={zip} setZip={setZip}
+          startH={startH} setStartH={setStartH}
+          endH={endH} setEndH={setEndH}
+          dayFrom={dayFrom} setDayFrom={setDayFrom}
+          dayTo={dayTo} setDayTo={setDayTo}
+          thresh={thresh} setThresh={setThresh}
+          loading={loading} geoLoad={geoLoad}
           err={err}
           onSubmit={() => run()}
           onGeo={useGeo}
@@ -136,9 +133,9 @@ export default function Page() {
           forecast={forecast}
           startH={startH}
           endH={endH}
+          dayFrom={dayFrom}
+          dayTo={dayTo}
           thresh={thresh}
-          selDay={selDay}
-          setSelDay={setSelDay}
         />
       )}
     </div>
