@@ -1,7 +1,12 @@
 // Network calls + the transform that turns raw API responses into the
 // per-hour shape the UI uses.
+//
+// Open-Meteo defaults: temperature in °C, wind in km/h, precip in mm,
+// visibility in meters. We ask the API to return wind in mph directly
+// (via wind_speed_unit) to avoid a unit-confusion class of bug. The
+// other conversions still happen in-app (cToF, kmToMi).
 
-import { cToF, mpsToMph, kmToMi, calcHI, calcWC, wxIcon } from "./calculations";
+import { cToF, kmToMi, calcHI, calcWC, wxIcon } from "./calculations";
 
 // Resolve a free-text query (ZIP, city, place name) to a location object
 // with latitude/longitude/timezone/etc. Throws on no match.
@@ -24,6 +29,9 @@ export const getWx = async (lat, lon, tz) => {
     longitude: lon,
     timezone: tz,
     forecast_days: 5,
+    // Ask the API to return wind speeds in mph so we don't have to
+    // convert (and so we can't mix up km/h vs m/s).
+    wind_speed_unit: "mph",
     hourly: [
       "temperature_2m",
       "relative_humidity_2m",
@@ -65,8 +73,9 @@ export const buildFcData = (wx, aq, loc) => {
   const hours = wx.hourly.time.map((t, i) => {
     const tF = cToF(wx.hourly.temperature_2m[i]);
     const rh = wx.hourly.relative_humidity_2m[i];
-    const wMph = mpsToMph(wx.hourly.windspeed_10m[i]);
-    const gMph = mpsToMph(wx.hourly.windgusts_10m[i]);
+    // wind comes back already in mph (see wind_speed_unit param in getWx)
+    const wMph = wx.hourly.windspeed_10m[i];
+    const gMph = wx.hourly.windgusts_10m[i];
     const wx2 = wxIcon(wx.hourly.weathercode[i]);
     return {
       time: t,

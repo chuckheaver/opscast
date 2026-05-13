@@ -2,7 +2,6 @@
 // Pure functions — no side effects, safe to import anywhere.
 
 export const cToF = c => (c * 9) / 5 + 32;
-export const mpsToMph = m => m * 2.23694;
 export const kmToMi = k => k * 0.621371;
 
 // NOAA heat index (Rothfusz regression). Only meaningful at temps >= 80°F.
