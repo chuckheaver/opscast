@@ -1,20 +1,20 @@
 // Horizontal scrolling strip of the day's hours, each with an icon + status
 // dot. Tapping an hour opens a popup with all metric values for that hour.
+//
+// Past hours render with a muted dot and "-" placeholder in the popup.
 
 import { useState } from "react";
 import { STATUS, hourWorstStatus, cellStyle } from "../lib/colors";
-import { fmtHr, fmtHrFull, fmtV } from "../lib/formatting";
+import { fmtHr, fmtHrFull, fmtV, visibilityCategory } from "../lib/formatting";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
+
+const PAST_STYLE = { bg: "#EFEFEF", text: "#888" };
 
 export default function HourTimeline({ hours, thresh }) {
   const [selectedHour, setSelectedHour] = useState(null);
   const selectedHourData = hours.find(h => h.hour === selectedHour);
 
-  // Primary + active-advanced metrics (filter out excluded ones).
-  const visibleMetrics = [
-    ...PRIMARY.filter(m => !thresh[m.key]?.excluded),
-    ...ADVANCED.filter(m => !thresh[m.key]?.excluded),
-  ];
+  const visibleMetrics = [...PRIMARY, ...ADVANCED];
 
   return (
     <div className="timeline-wrap">
@@ -23,22 +23,29 @@ export default function HourTimeline({ hours, thresh }) {
       </div>
       <div className="timeline">
         {hours.map(h => {
-          const ws = hourWorstStatus(h, thresh);
           const isSel = selectedHour === h.hour;
-          const tlColors = STATUS[ws];
+          const ws = h.isPast ? null : hourWorstStatus(h, thresh);
+          const dotColors = h.isPast ? PAST_STYLE : STATUS[ws];
           return (
             <div
               key={h.hour}
               className={`tl-hour ${isSel ? "selected" : ""}`}
               onClick={() => setSelectedHour(isSel ? null : h.hour)}
+              style={h.isPast ? { opacity: 0.45 } : {}}
             >
               <span className="tl-time">{fmtHr(h.hour)}</span>
-              <span className="tl-icon">{h.icon}</span>
+              <span className="tl-icon">{h.isPast ? "·" : h.icon}</span>
               <div
                 className="tl-dot"
-                style={{ background: tlColors.bg, color: tlColors.text }}
+                style={{ background: dotColors.bg, color: dotColors.text }}
               >
-                {ws === "alert" ? "!" : ws === "caution" ? "~" : "✓"}
+                {h.isPast
+                  ? "-"
+                  : ws === "alert"
+                  ? "!"
+                  : ws === "caution"
+                  ? "~"
+                  : "✓"}
               </div>
             </div>
           );
@@ -60,19 +67,34 @@ export default function HourTimeline({ hours, thresh }) {
           <div className="tl-popup-metrics">
             {visibleMetrics.map(m => {
               const val = selectedHourData[m.key] ?? 0;
-              // cellStyle handles the Sky Cover blue/grey exception too.
-              const c = cellStyle(m.key, val, thresh);
+              // Past hours and after-sunset UV display as "-".
+              const blank =
+                selectedHourData.isPast ||
+                (m.key === "uvIndex" && selectedHourData.isDaylight === false);
+
+              const c = blank
+                ? PAST_STYLE
+                : cellStyle(m.key, val, thresh);
+
+              let display;
+              if (blank) {
+                display = "-";
+              } else if (m.key === "visibility") {
+                display = `${visibilityCategory(val)} ${fmtV(m.key, val)} mi`;
+              } else if (m.key === "windSpeed") {
+                display = `${fmtV(m.key, val)} mph${
+                  selectedHourData.windIsGust ? "g" : ""
+                }`;
+              } else {
+                display = `${fmtV(m.key, val)}${m.unit === "mph" ? " mph" : ""}`;
+              }
               return (
                 <span
                   key={m.key}
                   className="tl-pm"
                   style={{ background: c.bg, color: c.text }}
                 >
-                  {m.label.split(" ")[0]}:{" "}
-                  <strong>
-                    {fmtV(m.key, val)}
-                    {m.unit === "mph" ? " mph" : ""}
-                  </strong>
+                  {m.label.split(" ")[0]}: <strong>{display}</strong>
                 </span>
               );
             })}

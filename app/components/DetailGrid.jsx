@@ -1,35 +1,80 @@
 // Collapsible hour-by-hour grid: rows are metrics, columns are hours.
 // Each cell is color-coded by the metric's status for that hour.
+//
+// Special rendering:
+//   - Past hours (today only, h.isPast)            → "-" with neutral grey
+//   - UV at night (!h.isDaylight)                  → "-"
+//   - Wind row with windIsGust                     → small "g" after mph
+//   - Visibility row                               → category label + value
 
 import { useState } from "react";
 import { cellStyle } from "../lib/colors";
-import { fmtHr, fmtV } from "../lib/formatting";
+import { fmtHr, fmtV, visibilityCategory } from "../lib/formatting";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
+
+const PAST_BG = "#EFEFEF";
+const PAST_TEXT = "#888";
 
 // Sub-text shown below the main value in certain cells (units / context).
 const SUB_BY_KEY = {
   precipAccum: "in/hr",
-  visibility: "mi",
   humidity: "%",
   precipProb: "%",
 };
 
 // Renders a single cell for a single (metric, hour) pair.
-// Special case: "windSpeed" shows the sustained value as sub-text when
-// it differs from the effective (gust-based) value displayed in the cell.
 function renderCell(key, h, thresh) {
+  // Past hours collapse to a neutral dash everywhere.
+  if (h.isPast) {
+    return (
+      <td
+        key={key + h.hour}
+        className="dc"
+        style={{ background: PAST_BG }}
+      >
+        <span className="dc-v" style={{ color: PAST_TEXT }}>-</span>
+      </td>
+    );
+  }
+
+  // UV at night also dashes out (no meaningful value).
+  if (key === "uvIndex" && h.isDaylight === false) {
+    return (
+      <td key={key + h.hour} className="dc" style={{ background: PAST_BG }}>
+        <span className="dc-v" style={{ color: PAST_TEXT }}>-</span>
+      </td>
+    );
+  }
+
   const c = cellStyle(key, h[key] ?? 0, thresh);
 
   if (key === "windSpeed") {
-    const showSustained =
-      h.windSustained != null && h.windSustained < h.windSpeed;
     return (
       <td key={key + h.hour} className="dc" style={{ background: c.bg }}>
         <span className="dc-v" style={{ color: c.text }}>
           {h.windSpeed}
+          {h.windIsGust && (
+            <span style={{ fontSize: 9, marginLeft: 1 }}>g</span>
+          )}
         </span>
         <span className="dc-s" style={{ color: c.text }}>
-          {showSustained ? `sust ${h.windSustained} mph` : "mph"}
+          {h.windIsGust && h.windSustained < h.windSpeed
+            ? `sust ${h.windSustained}`
+            : "mph"}
+        </span>
+      </td>
+    );
+  }
+
+  if (key === "visibility") {
+    const cat = visibilityCategory(h.visibility);
+    return (
+      <td key={key + h.hour} className="dc" style={{ background: c.bg }}>
+        <span className="dc-v" style={{ color: c.text }}>
+          {cat}
+        </span>
+        <span className="dc-s" style={{ color: c.text }}>
+          {fmtV(key, h.visibility)} mi
         </span>
       </td>
     );
@@ -52,9 +97,6 @@ function renderCell(key, h, thresh) {
 
 export default function DetailGrid({ hours, thresh }) {
   const [open, setOpen] = useState(false);
-
-  const activePrimary = PRIMARY.filter(m => !thresh[m.key]?.excluded);
-  const activeAdvanced = ADVANCED.filter(m => !thresh[m.key]?.excluded);
 
   return (
     <>
@@ -92,42 +134,48 @@ export default function DetailGrid({ hours, thresh }) {
               <tr>
                 <td className="row-lbl">Condition</td>
                 {hours.map(h => (
-                  <td key={h.hour} className="cond-cell">
-                    <span className="cond-ic">{h.icon}</span>
-                    <span className="cond-lb">{h.condition}</span>
+                  <td
+                    key={h.hour}
+                    className="cond-cell"
+                    style={h.isPast ? { background: PAST_BG } : {}}
+                  >
+                    {h.isPast ? (
+                      <span className="cond-lb" style={{ color: PAST_TEXT }}>-</span>
+                    ) : (
+                      <>
+                        <span className="cond-ic">{h.icon}</span>
+                        <span className="cond-lb">{h.condition}</span>
+                      </>
+                    )}
                   </td>
                 ))}
               </tr>
-              {activePrimary.map(m => (
+              {PRIMARY.map(m => (
                 <tr key={m.key}>
                   <td className="row-lbl">{m.label}</td>
                   {hours.map(h => renderCell(m.key, h, thresh))}
                 </tr>
               ))}
-              {activeAdvanced.length > 0 && (
-                <>
-                  <tr>
-                    <td className="row-lbl sep-lbl" colSpan={hours.length + 1}>
-                      ADVANCED METRICS
-                    </td>
-                  </tr>
-                  {activeAdvanced.map(m => (
-                    <tr key={m.key}>
-                      <td
-                        className="row-lbl"
-                        style={{
-                          background: "#2e2e2e",
-                          color: "#aaa",
-                          fontSize: 9,
-                        }}
-                      >
-                        {m.label}
-                      </td>
-                      {hours.map(h => renderCell(m.key, h, thresh))}
-                    </tr>
-                  ))}
-                </>
-              )}
+              <tr>
+                <td className="row-lbl sep-lbl" colSpan={hours.length + 1}>
+                  ADVANCED METRICS
+                </td>
+              </tr>
+              {ADVANCED.map(m => (
+                <tr key={m.key}>
+                  <td
+                    className="row-lbl"
+                    style={{
+                      background: "#2e2e2e",
+                      color: "#aaa",
+                      fontSize: 9,
+                    }}
+                  >
+                    {m.label}
+                  </td>
+                  {hours.map(h => renderCell(m.key, h, thresh))}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

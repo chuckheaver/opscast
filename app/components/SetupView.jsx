@@ -1,14 +1,16 @@
-// Setup screen: location input, hours, day range, primary metric cards,
-// collapsible advanced metric grid, submit. Owns the "show advanced"
-// toggle locally; everything else is state passed from page.js.
+// Setup screen: location input (with autocomplete), hours, day range,
+// primary metric cards, collapsible advanced metric grid, submit.
+// All shared state is owned by page.js and passed in via props.
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import MetricCard from "./MetricCard";
 import AdvancedCard from "./AdvancedCard";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
-import { fmtHrFull, DAY_LABELS } from "../lib/formatting";
+import { fmtHrFull, dayLabel } from "../lib/formatting";
+import { geoSuggest } from "../lib/weather-api";
 
 const HOURS_24 = Array.from({ length: 24 }, (_, i) => i);
+const DAY_INDEXES = [0, 1, 2, 3, 4];
 
 export default function SetupView({
   zip, setZip,
@@ -19,10 +21,54 @@ export default function SetupView({
   thresh, setThresh,
   loading, geoLoad,
   err,
-  onSubmit, onGeo,
+  onSubmit, onGeo, onSelectLocation,
 }) {
   const [showAdvanced, setShowAdvanced] = useState(false);
-  const activeAdvanced = ADVANCED.filter(m => !thresh[m.key]?.excluded);
+
+  // Autocomplete state
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSugg, setShowSugg] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const debounceRef = useRef(null);
+  const blurTimerRef = useRef(null);
+
+  // Debounced location autocomplete: 300 ms after user stops typing.
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (!focused || zip.trim().length < 2) {
+      setSuggestions([]);
+      return;
+    }
+    debounceRef.current = setTimeout(async () => {
+      const results = await geoSuggest(zip);
+      setSuggestions(results);
+      setShowSugg(true);
+    }, 300);
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [zip, focused]);
+
+  const pickSuggestion = sug => {
+    setShowSugg(false);
+    setSuggestions([]);
+    setFocused(false);
+    onSelectLocation(sug);
+  };
+
+  const handleBlur = () => {
+    // Delay hiding so clicks on suggestions land before dismissal.
+    blurTimerRef.current = setTimeout(() => {
+      setShowSugg(false);
+      setFocused(false);
+    }, 150);
+  };
+
+  const handleFocus = () => {
+    if (blurTimerRef.current) clearTimeout(blurTimerRef.current);
+    setFocused(true);
+    if (suggestions.length) setShowSugg(true);
+  };
 
   return (
     <div className="setup">
@@ -31,16 +77,18 @@ export default function SetupView({
         <em>ideal conditions.</em>
       </div>
       <div className="page-sub">
-        Set your range · exclude what doesn't apply · pick your days
+        Set your range · pick your days
       </div>
 
       <div className="field-lbl">Location</div>
-      <div className="loc-row">
+      <div className="loc-row" style={{ position: "relative" }}>
         <input
           className="zip-inp"
           placeholder="ZIP code or city name…"
           value={zip}
           onChange={e => setZip(e.target.value)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           onKeyDown={e => e.key === "Enter" && !loading && onSubmit()}
         />
         <button
@@ -50,6 +98,26 @@ export default function SetupView({
         >
           {geoLoad ? "⏳" : "📍"}
         </button>
+        {showSugg && suggestions.length > 0 && (
+          <div className="autocomplete">
+            {suggestions.map((s, i) => (
+              <div
+                key={`${s.latitude},${s.longitude},${i}`}
+                className="autocomplete-item"
+                // onMouseDown fires before onBlur, so the click registers.
+                onMouseDown={e => {
+                  e.preventDefault();
+                  pickSuggestion(s);
+                }}
+              >
+                <span className="ac-name">{s.name}</span>
+                <span className="ac-meta">
+                  {[s.admin1, s.country].filter(Boolean).join(", ")}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="field-lbl">Daily Operating Hours</div>
@@ -89,8 +157,8 @@ export default function SetupView({
             if (v > dayTo) setDayTo(v);
           }}
         >
-          {DAY_LABELS.map((l, i) => (
-            <option key={i} value={i}>{l}</option>
+          {DAY_INDEXES.map(i => (
+            <option key={i} value={i}>{dayLabel(i)}</option>
           ))}
         </select>
         <span style={{ color: "#78716c", fontFamily: "'DM Mono',monospace" }}>through</span>
@@ -103,8 +171,8 @@ export default function SetupView({
             if (v < dayFrom) setDayFrom(v);
           }}
         >
-          {DAY_LABELS.map((l, i) => (
-            <option key={i} value={i} disabled={i < dayFrom}>{l}</option>
+          {DAY_INDEXES.map(i => (
+            <option key={i} value={i} disabled={i < dayFrom}>{dayLabel(i)}</option>
           ))}
         </select>
         <span className="sel-note">
@@ -112,7 +180,7 @@ export default function SetupView({
         </span>
       </div>
 
-      <div className="field-lbl">Your Ideal Conditions</div>
+      <div className="field-lbl">Tell Me Your Ideal Conditions</div>
       {PRIMARY.map(m => (
         <MetricCard
           key={m.key}
@@ -126,7 +194,6 @@ export default function SetupView({
         <div className="adv-line" />
         <button className="adv-btn">
           {showAdvanced ? "▲ Hide" : "▼ Show"} Advanced Metrics
-          {activeAdvanced.length > 0 && ` · ${activeAdvanced.length} active`}
         </button>
         <div className="adv-line" />
       </div>

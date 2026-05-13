@@ -1,10 +1,10 @@
 'use client';
 
-// OpsCast top-level page (v2).
+// OpsCast top-level page.
 // Owns app state (location, hours, day range, thresholds, view, forecast,
 // loading flags, error) and orchestrates the fetch + view transitions.
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import SetupView from "./components/SetupView";
 import ForecastView from "./components/ForecastView";
 import { buildDefaults } from "./lib/thresholds";
@@ -15,7 +15,7 @@ export default function Page() {
   const [startH, setStartH] = useState(8);
   const [endH, setEndH] = useState(17);
   const [dayFrom, setDayFrom] = useState(0);
-  const [dayTo, setDayTo] = useState(2);
+  const [dayTo, setDayTo] = useState(0); // default: Today through Today
   const [thresh, setThresh] = useState(buildDefaults);
   const [view, setView] = useState("setup");
   const [forecast, setForecast] = useState(null);
@@ -23,25 +23,14 @@ export default function Page() {
   const [geoLoad, setGeoLoad] = useState(false);
   const [err, setErr] = useState("");
 
-  // Fetch a forecast either from the typed query or, when coordinates are
-  // passed in, directly (used by the geolocate flow).
-  const run = async (lat = null, lon = null, tz = null, name = null) => {
+  // Once-per-mount guard for the auto-geolocate attempt below.
+  const autoGeoTriedRef = useRef(false);
+
+  // Forecast for arbitrary coords (used by geolocate AND autocomplete-select).
+  const runForLocation = async loc => {
     setLoading(true);
     setErr("");
     try {
-      let loc;
-      if (lat != null) {
-        loc = {
-          latitude: lat,
-          longitude: lon,
-          timezone: tz,
-          name: name || "Your Location",
-          admin1: "",
-          country: "",
-        };
-      } else {
-        loc = await geoCode(zip);
-      }
       const [wx, aq] = await Promise.all([
         getWx(loc.latitude, loc.longitude, loc.timezone),
         getAQ(loc.latitude, loc.longitude, loc.timezone),
@@ -54,7 +43,20 @@ export default function Page() {
     setLoading(false);
   };
 
-  // Browser geolocation → reverse-geocode for a friendlier name → run().
+  // Forecast for the typed query (uses geoCode to resolve first).
+  const run = async () => {
+    setLoading(true);
+    setErr("");
+    try {
+      const loc = await geoCode(zip);
+      await runForLocation(loc);
+    } catch (e) {
+      setErr(e.message);
+      setLoading(false);
+    }
+  };
+
+  // Browser geolocation → reverse-geocode for a friendlier name → forecast.
   const useGeo = () => {
     if (!navigator.geolocation) {
       setErr("Geolocation not supported.");
@@ -77,12 +79,15 @@ export default function Page() {
             d.address?.village ||
             name;
         } catch {}
-        await run(
-          lat,
-          lon,
-          Intl.DateTimeFormat().resolvedOptions().timeZone,
-          name
-        );
+        setZip(name);
+        await runForLocation({
+          latitude: lat,
+          longitude: lon,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          name,
+          admin1: "",
+          country: "",
+        });
         setGeoLoad(false);
       },
       () => {
@@ -91,6 +96,36 @@ export default function Page() {
       }
     );
   };
+
+  // Pick a suggestion from autocomplete → immediately fetch forecast.
+  const selectLocation = sug => {
+    setZip(`${sug.name}${sug.admin1 ? `, ${sug.admin1}` : ""}`);
+    runForLocation(sug);
+  };
+
+  // Auto-geolocate on mount IF the browser has already granted permission.
+  // We don't pop a fresh permission prompt — that would be jarring on first
+  // visit. Returning users with granted permission get the convenience.
+  useEffect(() => {
+    if (autoGeoTriedRef.current) return;
+    autoGeoTriedRef.current = true;
+    if (
+      typeof navigator !== "undefined" &&
+      navigator.permissions &&
+      navigator.geolocation
+    ) {
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then(result => {
+          if (result.state === "granted") {
+            useGeo();
+          }
+        })
+        .catch(() => {});
+    }
+    // useGeo references state setters captured at first render; safe to omit.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="app">
@@ -123,8 +158,9 @@ export default function Page() {
           thresh={thresh} setThresh={setThresh}
           loading={loading} geoLoad={geoLoad}
           err={err}
-          onSubmit={() => run()}
+          onSubmit={run}
           onGeo={useGeo}
+          onSelectLocation={selectLocation}
         />
       )}
 

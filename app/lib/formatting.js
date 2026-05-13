@@ -32,7 +32,44 @@ export const fmtDsShort = s =>
     day: "numeric",
   });
 
-export const DAY_LABELS = ["Today", "Tomorrow", "Day 3", "Day 4", "Day 5"];
+// Friendly day label for selectors and headers:
+//   index 0 → "Today (5/13)"
+//   index 1 → "Tomorrow (5/14)"
+//   index 2+ → "{weekday} (M/D)"  e.g. "Friday (5/15)"
+// `baseDate` optional — when provided as a "YYYY-MM-DD" string or Date,
+// label is computed from that date. When omitted, computed from today + index.
+export const dayLabel = (index, baseDate) => {
+  let d;
+  if (baseDate instanceof Date) {
+    d = new Date(baseDate);
+  } else if (typeof baseDate === "string") {
+    d = new Date(baseDate + "T12:00:00");
+  } else {
+    d = new Date();
+    d.setDate(d.getDate() + index);
+  }
+  const dateStr = `${d.getMonth() + 1}/${d.getDate()}`;
+  if (index === 0) return `Today (${dateStr})`;
+  if (index === 1) return `Tomorrow (${dateStr})`;
+  const weekday = d.toLocaleDateString("en-US", { weekday: "long" });
+  return `${weekday} (${dateStr})`;
+};
+
+// Visibility category labels — applied where visibility values are
+// displayed (DetailGrid, HourTimeline popup).
+//   < 0.25 mi → "Dense Fog"
+//   < 1 mi   → "Fog"
+//   ≤ 6 mi   → "Low"
+//   ≤ 15 mi  → "Moderate"
+//   > 15 mi  → "Clear"
+export const visibilityCategory = mi => {
+  if (mi == null) return "";
+  if (mi < 0.25) return "Dense Fog";
+  if (mi < 1) return "Fog";
+  if (mi <= 6) return "Low";
+  if (mi <= 15) return "Moderate";
+  return "Clear";
+};
 
 // Compact value display used in grid cells and KPI tiles (no unit suffix
 // unless intrinsic to the value, e.g. precip accumulation includes inches).

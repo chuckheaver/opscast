@@ -1,5 +1,8 @@
 // The 4-KPI strip across the top of each DayBlock:
 // Peak Feels Like · Max Wind · Max Precip Chance · Peak UV Index.
+//
+// Past hours (today only, marked h.isPast) are excluded from all
+// peak/min calculations so the cockpit reflects what's still ahead.
 
 import { STATUS, getStatus } from "../lib/colors";
 
@@ -12,19 +15,49 @@ const uvDescription = uv => {
 };
 
 export default function Cockpit({ hours, thresh }) {
-  if (!hours.length) return null;
+  // Future-only view of the day.
+  const future = hours.filter(h => !h.isPast);
 
-  const maxFeels = Math.max(...hours.map(h => h.feelsLike));
-  const minFeels = Math.min(...hours.map(h => h.feelsLike));
-  // h.windSpeed is the effective wind (gust value when available, else
-  // sustained). Sustained is kept separately for context display.
-  const maxWind = Math.max(...hours.map(h => h.windSpeed));
-  const maxSustained = Math.max(...hours.map(h => h.windSustained ?? h.windSpeed));
-  const maxPrecip = Math.max(...hours.map(h => h.precipProb));
-  const maxUV = Math.max(...hours.map(h => h.uvIndex));
+  // If the entire window has already passed, show a neutral placeholder.
+  if (!future.length) {
+    return (
+      <div className="cockpit">
+        <div className="kpi" style={{ background: "#EFEFEF" }}>
+          <div className="kpi-label" style={{ color: "#888" }}>Peak Feels Like</div>
+          <div className="kpi-value" style={{ color: "#888" }}>-</div>
+        </div>
+        <div className="kpi" style={{ background: "#EFEFEF" }}>
+          <div className="kpi-label" style={{ color: "#888" }}>Max Wind</div>
+          <div className="kpi-value" style={{ color: "#888" }}>-</div>
+        </div>
+        <div className="kpi" style={{ background: "#EFEFEF" }}>
+          <div className="kpi-label" style={{ color: "#888" }}>Max Precip Chance</div>
+          <div className="kpi-value" style={{ color: "#888" }}>-</div>
+        </div>
+        <div className="kpi" style={{ background: "#EFEFEF" }}>
+          <div className="kpi-label" style={{ color: "#888" }}>Peak UV Index</div>
+          <div className="kpi-value" style={{ color: "#888" }}>-</div>
+        </div>
+      </div>
+    );
+  }
+
+  const maxFeels = Math.max(...future.map(h => h.feelsLike));
+  const minFeels = Math.min(...future.map(h => h.feelsLike));
+  const maxWind = Math.max(...future.map(h => h.windSpeed));
+  // Identify the hour that produced the peak wind, so we know if it was a gust.
+  const peakWindHour = future.find(h => h.windSpeed === maxWind);
+  const peakWindIsGust = !!peakWindHour?.windIsGust;
+  const maxSustained = Math.max(...future.map(h => h.windSustained ?? h.windSpeed));
+  const maxPrecip = Math.max(...future.map(h => h.precipProb));
+  // UV maximum from daylight hours only.
+  const daylightHours = future.filter(h => h.isDaylight);
+  const maxUV = daylightHours.length
+    ? Math.max(...daylightHours.map(h => h.uvIndex))
+    : null;
 
   const kpiStatus = (key, val) =>
-    val != null ? STATUS[getStatus(key, val, thresh)] : STATUS.excluded;
+    val != null ? STATUS[getStatus(key, val, thresh)] : { bg: "#EFEFEF", text: "#888", dot: "#CCC", label: "—" };
 
   const fS = kpiStatus("feelsLike", maxFeels);
   const wS = kpiStatus("windSpeed", maxWind);
@@ -51,7 +84,9 @@ export default function Cockpit({ hours, thresh }) {
         </div>
         <div className="kpi-value" style={{ color: wS.text }}>
           {maxWind}
-          <span style={{ fontSize: 16, fontWeight: 400 }}> mph</span>
+          <span style={{ fontSize: 16, fontWeight: 400 }}>
+            {" "}mph{peakWindIsGust ? "g" : ""}
+          </span>
         </div>
         <div className="kpi-sub" style={{ color: wS.text }}>
           <span className="kpi-dot" style={{ background: wS.dot }} />
@@ -76,11 +111,11 @@ export default function Cockpit({ hours, thresh }) {
           Peak UV Index
         </div>
         <div className="kpi-value" style={{ color: uS.text }}>
-          {maxUV}
+          {maxUV ?? "-"}
         </div>
         <div className="kpi-sub" style={{ color: uS.text }}>
           <span className="kpi-dot" style={{ background: uS.dot }} />
-          {uvDescription(maxUV)}
+          {maxUV != null ? uvDescription(maxUV) : "After sunset"}
         </div>
       </div>
     </div>
