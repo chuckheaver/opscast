@@ -2,13 +2,12 @@
 // Each cell is color-coded by the metric's status for that hour.
 
 import { useState } from "react";
-import { STATUS, skyColor, cellStyle, getStatus } from "../lib/colors";
+import { cellStyle } from "../lib/colors";
 import { fmtHr, fmtV } from "../lib/formatting";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
 
-// Sub-text shown below the main value in certain cells (e.g. unit).
+// Sub-text shown below the main value in certain cells (units / context).
 const SUB_BY_KEY = {
-  windGusts: "mph",
   precipAccum: "in/hr",
   visibility: "mi",
   humidity: "%",
@@ -16,40 +15,26 @@ const SUB_BY_KEY = {
 };
 
 // Renders a single cell for a single (metric, hour) pair.
-// Special cases:
-//   - "windSpeed" row also shows gusts and picks the worse status of the two
-//   - "cloudCover" uses the sky-color gradient instead of status colors
+// Special case: "windSpeed" shows the sustained value as sub-text when
+// it differs from the effective (gust-based) value displayed in the cell.
 function renderCell(key, h, thresh) {
+  const c = cellStyle(key, h[key] ?? 0, thresh);
+
   if (key === "windSpeed") {
-    const wC = cellStyle("windSpeed", h.windSpeed, thresh);
-    const gC = cellStyle("windGusts", h.windGusts, thresh);
-    const ws = getStatus("windSpeed", h.windSpeed, thresh);
-    const gs = getStatus("windGusts", h.windGusts, thresh);
-    const worse =
-      gs === "alert" || (gs === "caution" && ws !== "alert") ? gs : ws;
-    const c = STATUS[worse];
+    const showSustained =
+      h.windSustained != null && h.windSustained < h.windSpeed;
     return (
       <td key={key + h.hour} className="dc" style={{ background: c.bg }}>
         <span className="dc-v" style={{ color: c.text }}>
           {h.windSpeed}
         </span>
         <span className="dc-s" style={{ color: c.text }}>
-          G:{h.windGusts} mph
+          {showSustained ? `sust ${h.windSustained} mph` : "mph"}
         </span>
       </td>
     );
   }
-  if (key === "cloudCover") {
-    const c = skyColor(h.cloudCover);
-    return (
-      <td key={key + h.hour} className="dc" style={{ background: c.bg }}>
-        <span className="dc-v" style={{ color: c.text }}>
-          {h.cloudCover}%
-        </span>
-      </td>
-    );
-  }
-  const c = cellStyle(key, h[key] ?? 0, thresh);
+
   const sub = SUB_BY_KEY[key] || null;
   return (
     <td key={key + h.hour} className="dc" style={{ background: c.bg }}>

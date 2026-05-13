@@ -39,7 +39,7 @@ export const DAY_LABELS = ["Today", "Tomorrow", "Day 3", "Day 4", "Day 5"];
 export const fmtV = (key, val) => {
   if (val == null) return "—";
   if (key === "precipAccum") return `${parseFloat(val).toFixed(2)}"`;
-  if (["feelsLike", "tempF", "heatIndex", "windChill", "dewPoint"].includes(key)) {
+  if (["feelsLike", "tempF", "windChill", "dewPoint"].includes(key)) {
     return `${Math.round(val)}°`;
   }
   if (["windSpeed", "windGusts"].includes(key)) return `${Math.round(val)}`;

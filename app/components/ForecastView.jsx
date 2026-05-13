@@ -6,12 +6,13 @@ import DayBlock from "./DayBlock";
 import { fmtHrFull } from "../lib/formatting";
 
 // Legend swatches shown above the day blocks.
+// Three-tier model for most metrics, plus a Sky Cover exception.
 const LEGEND = [
   ["#C8EAC8", "Within ideal range"],
-  ["#FFF0B3", "Slightly outside"],
-  ["#FFBDBD", "Alert — outside range"],
-  ["#D6EEFF", "Clear sky"],
-  ["#607585", "Overcast"],
+  ["#FFF0B3", "Within 2 of ideal — caution"],
+  ["#FFBDBD", "Outside ideal range — alert"],
+  ["#D6EEFF", "Sky Cover: in range"],
+  ["#A0B8CC", "Sky Cover: outside range"],
 ];
 
 export default function ForecastView({

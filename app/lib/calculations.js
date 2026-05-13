@@ -4,22 +4,6 @@
 export const cToF = c => (c * 9) / 5 + 32;
 export const kmToMi = k => k * 0.621371;
 
-// NOAA heat index (Rothfusz regression). Only meaningful at temps >= 80°F.
-export const calcHI = (f, rh) => {
-  if (f < 80) return f;
-  return (
-    -42.379 +
-    2.04901523 * f +
-    10.14333127 * rh -
-    0.22475541 * f * rh -
-    0.00683783 * f * f -
-    0.05391553 * rh * rh +
-    0.00122874 * f * f * rh +
-    0.00085282 * f * rh * rh -
-    0.00000199 * f * f * rh * rh
-  );
-};
-
 // NWS wind chill. Only meaningful at temps <= 50°F and wind >= 3 mph.
 export const calcWC = (f, mph) => {
   if (f > 50 || mph < 3) return f;

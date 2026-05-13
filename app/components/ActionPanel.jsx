@@ -1,5 +1,5 @@
 // "Operational Guidance" panel — purely presentational.
-// Receives the already-computed actions list (parent uses it for the badge too).
+// Each action is a one-line summary: icon + status badge + headline.
 
 import { STATUS } from "../lib/colors";
 
@@ -34,16 +34,7 @@ export default function ActionPanel({ actions }) {
               </span>
             </div>
             <div>
-              <div className="action-metric">{a.metric}</div>
-              <div className="action-time">{a.time}</div>
               <div className="action-headline">{a.headline}</div>
-              <ul className="action-steps">
-                {a.actions.map((step, si) => (
-                  <li key={si} className="action-step">
-                    {step}
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         ))

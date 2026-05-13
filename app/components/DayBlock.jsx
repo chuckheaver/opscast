@@ -6,7 +6,7 @@ import Cockpit from "./Cockpit";
 import HourTimeline from "./HourTimeline";
 import ActionPanel from "./ActionPanel";
 import DetailGrid from "./DetailGrid";
-import { STATUS } from "../lib/colors";
+import { STATUS, hourWorstStatus } from "../lib/colors";
 import { generateActions } from "../lib/actions";
 import { DAY_LABELS, fmtDs, fmtHrFull } from "../lib/formatting";
 
@@ -19,18 +19,27 @@ export default function DayBlock({
   endH,
 }) {
   const actions = generateActions(hours, thresh);
-  const alertCount = actions.filter(a => a.status === "alert").length;
-  const cautionCount = actions.filter(a => a.status === "caution").length;
-  const badgeStatus =
-    alertCount > 0 ? "alert" : cautionCount > 0 ? "caution" : "clear";
-  const badge = STATUS[badgeStatus];
 
+  // Day status = worst hour-level status across the day (excludes Sky Cover,
+  // per hourWorstStatus). This catches caution-tier metrics even when no
+  // hard alert action is generated.
+  const dayWorst = hours.reduce((worst, h) => {
+    const hw = hourWorstStatus(h, thresh);
+    if (hw === "alert") return "alert";
+    if (hw === "caution" && worst !== "alert") return "caution";
+    return worst;
+  }, "clear");
+  const badge = STATUS[dayWorst];
+
+  const alertCount = actions.length;
   const badgeText =
-    alertCount > 0
-      ? `${alertCount} Alert${alertCount > 1 ? "s" : ""}`
-      : cautionCount > 0
-      ? `${actions.length} Caution${actions.length > 1 ? "s" : ""}`
-      : badge.label;
+    dayWorst === "alert"
+      ? alertCount > 0
+        ? `${alertCount} Alert${alertCount > 1 ? "s" : ""}`
+        : "Alert"
+      : dayWorst === "caution"
+      ? "Caution"
+      : "Clear";
 
   return (
     <div className="day-block">

@@ -6,7 +6,7 @@
 // (via wind_speed_unit) to avoid a unit-confusion class of bug. The
 // other conversions still happen in-app (cToF, kmToMi).
 
-import { cToF, kmToMi, calcHI, calcWC, wxIcon } from "./calculations";
+import { cToF, kmToMi, calcWC, wxIcon } from "./calculations";
 
 // Resolve a free-text query (ZIP, city, place name) to a location object
 // with latitude/longitude/timezone/etc. Throws on no match.
@@ -76,6 +76,11 @@ export const buildFcData = (wx, aq, loc) => {
     // wind comes back already in mph (see wind_speed_unit param in getWx)
     const wMph = wx.hourly.windspeed_10m[i];
     const gMph = wx.hourly.windgusts_10m[i];
+    // "Effective wind" — use gust value when available and higher; fall
+    // back to sustained wind otherwise. This is what threshold checks
+    // and KPIs read via `windSpeed`. Keep the raw values around too for
+    // display purposes (sustained shown as context).
+    const windEffective = Math.max(gMph || 0, wMph);
     const wx2 = wxIcon(wx.hourly.weathercode[i]);
     return {
       time: t,
@@ -83,10 +88,10 @@ export const buildFcData = (wx, aq, loc) => {
       date: t.split("T")[0],
       tempF: Math.round(tF),
       feelsLike: Math.round(cToF(wx.hourly.apparent_temperature[i])),
-      heatIndex: Math.round(calcHI(tF, rh)),
       windChill: Math.round(calcWC(tF, wMph)),
-      windSpeed: Math.round(wMph),
+      windSpeed: Math.round(windEffective),
       windGusts: Math.round(gMph),
+      windSustained: Math.round(wMph),
       precipProb: wx.hourly.precipitation_probability[i] || 0,
       precipAccum: parseFloat(
         ((wx.hourly.precipitation[i] || 0) * 0.0393701).toFixed(2)

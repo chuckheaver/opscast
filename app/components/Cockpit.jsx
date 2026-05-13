@@ -16,8 +16,10 @@ export default function Cockpit({ hours, thresh }) {
 
   const maxFeels = Math.max(...hours.map(h => h.feelsLike));
   const minFeels = Math.min(...hours.map(h => h.feelsLike));
+  // h.windSpeed is the effective wind (gust value when available, else
+  // sustained). Sustained is kept separately for context display.
   const maxWind = Math.max(...hours.map(h => h.windSpeed));
-  const maxGusts = Math.max(...hours.map(h => h.windGusts));
+  const maxSustained = Math.max(...hours.map(h => h.windSustained ?? h.windSpeed));
   const maxPrecip = Math.max(...hours.map(h => h.precipProb));
   const maxUV = Math.max(...hours.map(h => h.uvIndex));
 
@@ -53,7 +55,7 @@ export default function Cockpit({ hours, thresh }) {
         </div>
         <div className="kpi-sub" style={{ color: wS.text }}>
           <span className="kpi-dot" style={{ background: wS.dot }} />
-          {wS.label} · Gusts {maxGusts} mph
+          {wS.label} · Sustained {maxSustained} mph
         </div>
       </div>
       <div className="kpi" style={{ background: pS.bg }}>

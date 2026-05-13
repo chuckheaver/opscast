@@ -2,7 +2,7 @@
 // dot. Tapping an hour opens a popup with all metric values for that hour.
 
 import { useState } from "react";
-import { STATUS, hourWorstStatus, getStatus, skyColor } from "../lib/colors";
+import { STATUS, hourWorstStatus, cellStyle } from "../lib/colors";
 import { fmtHr, fmtHrFull, fmtV } from "../lib/formatting";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
 
@@ -60,12 +60,8 @@ export default function HourTimeline({ hours, thresh }) {
           <div className="tl-popup-metrics">
             {visibleMetrics.map(m => {
               const val = selectedHourData[m.key] ?? 0;
-              const s =
-                m.key === "cloudCover"
-                  ? "clear"
-                  : getStatus(m.key, val, thresh);
-              const c =
-                m.key === "cloudCover" ? skyColor(val) : STATUS[s];
+              // cellStyle handles the Sky Cover blue/grey exception too.
+              const c = cellStyle(m.key, val, thresh);
               return (
                 <span
                   key={m.key}

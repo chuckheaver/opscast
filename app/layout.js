@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 // Geist fonts ship with the scaffold; kept available via CSS variables in case
-// we want them later. The OpsCast UI uses Syne + DM Mono (loaded in globals.css).
+// we want them later. The OpsCast UI uses DM Sans + DM Mono (loaded in globals.css).
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

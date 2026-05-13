@@ -1,5 +1,5 @@
 /* Google Fonts must come first (CSS requires @import rules at the top). */
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 /* ── OpsCast app styles (v2) ────────────────────────────────────────────── */
@@ -17,7 +17,7 @@
   --text: #1c1917;
   --muted: #78716c;
   --accent: #2563eb;
-  --sans: 'Syne', sans-serif;
+  --sans: 'DM Sans', sans-serif;
   --mono: 'DM Mono', monospace;
 }
 
@@ -28,7 +28,7 @@ body {
 .app {
   min-height: 100vh;
   background: #f0ece6;
-  font-family: 'Syne', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 /* ── Topbar ─────────────────────────────────────────────────────────────── */
@@ -59,7 +59,7 @@ body {
   border: 1px solid #555;
   color: #aaa;
   padding: 8px 16px;
-  font-family: 'Syne', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
@@ -453,7 +453,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   border: none;
   color: white;
   padding: 17px;
-  font-family: 'Syne', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 2px;
