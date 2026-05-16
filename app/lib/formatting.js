@@ -81,7 +81,7 @@ export const fmtV = (key, val) => {
     return `${Math.round(val)}%`;
   }
   if (key === "uvIndex") return `${val}`;
-  if (key === "visibility") return `${parseFloat(val).toFixed(1)}`;
+  if (key === "visibility") return `${Math.round(val)}`;
   if (key === "aqi") return val > 0 ? `${Math.round(val)}` : "—";
   return `${val}`;
 };
@@ -94,6 +94,6 @@ export const fmtT = (key, val) => {
   if (m.unit === "°F")  return `${val}°F`;
   if (m.unit === "mph") return `${val} mph`;
   if (m.unit === "%")   return `${val}%`;
-  if (m.unit === "mi")  return `${parseFloat(val).toFixed(1)} mi`;
+  if (m.unit === "mi")  return `${Math.round(val)} mi`;
   return `${val}`;
 };
