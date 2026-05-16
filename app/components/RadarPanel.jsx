@@ -47,11 +47,35 @@ export default function RadarPanel({ loc }) {
             </a>
             <a
               className="radar-link"
-              href={`https://www.weather.gov/forecastpoints/${loc.latitude},${loc.longitude}`}
+              href={`https://forecast.weather.gov/MapClick.php?lat=${loc.latitude}&lon=${loc.longitude}`}
               target="_blank"
               rel="noreferrer"
             >
               🔗 NWS Full Forecast
+            </a>
+            <a
+              className="radar-link"
+              href="https://earthquake.usgs.gov/earthquakes/map/?extent=17.85329,-127.35352&extent=54.44449,-62.66602"
+              target="_blank"
+              rel="noreferrer"
+            >
+              🔗 Shake Map
+            </a>
+            <a
+              className="radar-link"
+              href="https://www.nhc.noaa.gov"
+              target="_blank"
+              rel="noreferrer"
+            >
+              🔗 Hurricanes
+            </a>
+            <a
+              className="radar-link"
+              href="https://www.spc.noaa.gov/products/outlook/day1otlk.html"
+              target="_blank"
+              rel="noreferrer"
+            >
+              🔗 Severe Weather
             </a>
           </div>
         </div>
