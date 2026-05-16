@@ -73,7 +73,7 @@ export default function SetupView({
   return (
     <div className="setup">
       <div className="page-h">
-        Tell us your<br />
+        Tell me your<br />
         <em>ideal conditions.</em>
       </div>
       <div className="page-sub">
@@ -120,7 +120,7 @@ export default function SetupView({
         )}
       </div>
 
-      <div className="field-lbl">Daily Operating Hours</div>
+      <div className="field-lbl">Period to Forecast</div>
       <div className="sel-row">
         <select
           className="sel-box"

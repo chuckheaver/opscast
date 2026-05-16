@@ -18,10 +18,10 @@ const THRESH_STORAGE_KEY = "opscast.thresh.v1";
 
 export default function Page() {
   const [zip, setZip] = useState("");
-  const [startH, setStartH] = useState(8);
+  const [startH, setStartH] = useState(9);
   const [endH, setEndH] = useState(17);
   const [dayFrom, setDayFrom] = useState(0);
-  const [dayTo, setDayTo] = useState(0);
+  const [dayTo, setDayTo] = useState(1);
   const [thresh, setThresh] = useState(buildDefaults);
   const [view, setView] = useState("setup");
   const [forecast, setForecast] = useState(null);
@@ -168,7 +168,7 @@ export default function Page() {
     <div className="app">
       <div className="topbar">
         <div>
-          <div className="brand-name">OpsCast</div>
+          <div className="brand-name">Ur4Cast</div>
           <div className="brand-tag">Business Weather Intelligence</div>
         </div>
         {view === "forecast" && (
