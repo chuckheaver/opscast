@@ -25,7 +25,9 @@ export const ADVANCED = [
   { key: "precipAccum", label: "Rain Accumulation", unit: "in",  sMin: 0,   sMax: 2,   step: 0.05, dMin: 0,  dMax: 0.25, buf: 0.1, binaryStatus: true },
   { key: "humidity",    label: "Humidity",          unit: "%",   sMin: 0,   sMax: 100, step: 5,    dMin: 0,  dMax: 75,   buf: 10 },
   { key: "dewPoint",    label: "Dew Point",         unit: "°F",  sMin: 20,  sMax: 80,  step: 1,    dMin: 20, dMax: 65,   buf: 5  },
-  { key: "visibility",  label: "Visibility",        unit: "mi",  sMin: 0.1, sMax: 20,  step: 0.1,  dMin: 7,  dMax: 20,   buf: 0.5, binaryStatus: true },
+  // Visibility status is driven by fixed buckets (see getStatus in colors.js),
+  // not by the slider range. Slider still shown for future tuning.
+  { key: "visibility",  label: "Visibility",        unit: "mi",  sMin: 0.1, sMax: 20,  step: 0.1,  dMin: 7,  dMax: 20,   buf: 0.5 },
   { key: "aqi",         label: "Air Quality (AQI)", unit: "",    sMin: 0,   sMax: 300, step: 10,   dMin: 0,  dMax: 100,  buf: 50,  binaryStatus: true },
 ];
 

@@ -30,7 +30,18 @@ const SKY_OUT_OF_RANGE = { bg: "#A0B8CC", text: "#2A3F52" }; // muted grey-blue
 
 // Determine the operational status of a single metric value against the
 // user's threshold range. Returns "clear" | "caution" | "alert".
+//
+// Visibility uses fixed absolute-value buckets (not the user threshold):
+//   < 1 mi  → alert  (Fog, red)
+//   < 7 mi  → caution (Low, yellow)
+//   ≥ 7 mi  → clear  (Mod/Clr, green)
 export const getStatus = (key, val, thresh) => {
+  if (key === "visibility") {
+    if (val == null) return "clear";
+    if (val < 1) return "alert";
+    if (val < 7) return "caution";
+    return "clear";
+  }
   const cfg = thresh[key];
   if (!cfg) return "clear";
   if (val >= cfg.min && val <= cfg.max) return "clear";

@@ -56,19 +56,16 @@ export const dayLabel = (index, baseDate) => {
 };
 
 // Visibility category labels — applied where visibility values are
-// displayed (DetailGrid, HourTimeline popup).
-//   < 0.25 mi → "Dense Fog"
-//   < 1 mi   → "Fog"
-//   ≤ 6 mi   → "Low"
-//   ≤ 15 mi  → "Moderate"
-//   > 15 mi  → "Clear"
+// displayed (DetailGrid, HourTimeline popup). The category also drives
+// the cell color (see getStatus in colors.js).
+//   < 1 mi  → "Fog"     (red)
+//   < 7 mi  → "Low"     (yellow)
+//   ≥ 7 mi  → "Mod/Clr" (green)
 export const visibilityCategory = mi => {
   if (mi == null) return "";
-  if (mi < 0.25) return "Dense Fog";
   if (mi < 1) return "Fog";
-  if (mi <= 6) return "Low";
-  if (mi <= 15) return "Moderate";
-  return "Clear";
+  if (mi < 7) return "Low";
+  return "Mod/Clr";
 };
 
 // Compact value display used in grid cells and KPI tiles (no unit suffix
