@@ -88,13 +88,16 @@ export default function HourTimeline({ hours, thresh }) {
               } else {
                 display = `${fmtV(m.key, val)}${m.unit === "mph" ? " mph" : ""}`;
               }
+              // Popup chip label: first word of the metric name, except aqi
+              // which would otherwise collide with "Air Temperature".
+              const chipLabel = m.key === "aqi" ? "AQI" : m.label.split(" ")[0];
               return (
                 <span
                   key={m.key}
                   className="tl-pm"
                   style={{ background: c.bg, color: c.text }}
                 >
-                  {m.label.split(" ")[0]}: <strong>{display}</strong>
+                  {chipLabel}: <strong>{display}</strong>
                 </span>
               );
             })}
