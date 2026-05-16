@@ -3,6 +3,10 @@
 // OpsCast top-level page.
 // Owns app state (location, hours, day range, thresholds, view, forecast,
 // loading flags, error) and orchestrates the fetch + view transitions.
+//
+// Persistence: threshold ranges save to localStorage on every change and
+// re-hydrate on next mount, so the user's customized "ideal range" becomes
+// their personal default automatically.
 
 import { useState, useEffect, useRef } from "react";
 import SetupView from "./components/SetupView";
@@ -10,12 +14,14 @@ import ForecastView from "./components/ForecastView";
 import { buildDefaults } from "./lib/thresholds";
 import { geoCode, getWx, getAQ, buildFcData } from "./lib/weather-api";
 
+const THRESH_STORAGE_KEY = "opscast.thresh.v1";
+
 export default function Page() {
   const [zip, setZip] = useState("");
   const [startH, setStartH] = useState(8);
   const [endH, setEndH] = useState(17);
   const [dayFrom, setDayFrom] = useState(0);
-  const [dayTo, setDayTo] = useState(0); // default: Today through Today
+  const [dayTo, setDayTo] = useState(0);
   const [thresh, setThresh] = useState(buildDefaults);
   const [view, setView] = useState("setup");
   const [forecast, setForecast] = useState(null);
@@ -23,10 +29,37 @@ export default function Page() {
   const [geoLoad, setGeoLoad] = useState(false);
   const [err, setErr] = useState("");
 
-  // Once-per-mount guard for the auto-geolocate attempt below.
+  // True once we've attempted to load saved thresholds from localStorage.
+  // Prevents the auto-save effect from overwriting saved values with
+  // initial defaults before hydration completes.
+  const [hydrated, setHydrated] = useState(false);
   const autoGeoTriedRef = useRef(false);
 
-  // Forecast for arbitrary coords (used by geolocate AND autocomplete-select).
+  // ── Threshold persistence ────────────────────────────────────────────
+  // On mount: hydrate any saved threshold values from localStorage.
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(THRESH_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Merge with defaults so newly-added metrics still get sensible values.
+        setThresh({ ...buildDefaults(), ...parsed });
+      }
+    } catch {
+      // localStorage unavailable / parse error — fall back to defaults.
+    }
+    setHydrated(true);
+  }, []);
+
+  // After hydration, save threshold changes back to localStorage.
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      localStorage.setItem(THRESH_STORAGE_KEY, JSON.stringify(thresh));
+    } catch {}
+  }, [thresh, hydrated]);
+
+  // ── Forecast fetching ────────────────────────────────────────────────
   const runForLocation = async loc => {
     setLoading(true);
     setErr("");
@@ -43,7 +76,6 @@ export default function Page() {
     setLoading(false);
   };
 
-  // Forecast for the typed query (uses geoCode to resolve first).
   const run = async () => {
     setLoading(true);
     setErr("");
@@ -91,39 +123,44 @@ export default function Page() {
         setGeoLoad(false);
       },
       () => {
-        setErr("Location access denied.");
+        // Denied / failed — user can still type a location manually.
+        setErr("Location access denied. Type a city or ZIP to continue.");
         setGeoLoad(false);
       }
     );
   };
 
-  // Pick a suggestion from autocomplete → immediately fetch forecast.
+  // Autocomplete suggestion clicked → immediately fetch forecast for that loc.
   const selectLocation = sug => {
     setZip(`${sug.name}${sug.admin1 ? `, ${sug.admin1}` : ""}`);
     runForLocation(sug);
   };
 
-  // Auto-geolocate on mount IF the browser has already granted permission.
-  // We don't pop a fresh permission prompt — that would be jarring on first
-  // visit. Returning users with granted permission get the convenience.
+  // ── Auto-geolocate on mount ──────────────────────────────────────────
+  // Trigger the browser's location prompt as soon as the app loads, unless
+  // the user has already denied permission in this browser previously.
   useEffect(() => {
     if (autoGeoTriedRef.current) return;
     autoGeoTriedRef.current = true;
-    if (
-      typeof navigator !== "undefined" &&
-      navigator.permissions &&
-      navigator.geolocation
-    ) {
+    if (typeof navigator === "undefined" || !navigator.geolocation) return;
+
+    // If Permissions API is available, skip the prompt when previously denied.
+    if (navigator.permissions) {
       navigator.permissions
         .query({ name: "geolocation" })
         .then(result => {
-          if (result.state === "granted") {
+          if (result.state !== "denied") {
             useGeo();
           }
         })
-        .catch(() => {});
+        .catch(() => {
+          // Permissions API unavailable — try anyway; browser will prompt.
+          useGeo();
+        });
+    } else {
+      useGeo();
     }
-    // useGeo references state setters captured at first render; safe to omit.
+    // useGeo captures stable state setters; safe to omit from deps.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

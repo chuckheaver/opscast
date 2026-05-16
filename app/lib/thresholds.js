@@ -10,11 +10,11 @@
 //   binaryStatus  = if true, metric skips the caution band (clear → alert)
 
 export const PRIMARY = [
-  { key: "feelsLike",  label: "Feels Like Temp",        icon: "🌡️", unit: "°F",  sMin: -20, sMax: 115, step: 1, dMin: 55, dMax: 88, buf: 5,  desc: "How temperature feels on skin" },
-  { key: "windSpeed",  label: "Wind Speed incl. Gusts", icon: "💨", unit: "mph", sMin: 0,   sMax: 70,  step: 1, dMin: 0,  dMax: 20, buf: 5,  desc: "Strongest wind — gust value when available, else sustained" },
+  { key: "feelsLike",  label: "Feels Like Temp",        icon: "🌡️", unit: "°F",  sMin: -20, sMax: 115, step: 1, dMin: 60, dMax: 80, buf: 5,  desc: "How temperature feels on skin" },
+  { key: "windSpeed",  label: "Wind Speed incl. Gusts", icon: "💨", unit: "mph", sMin: 0,   sMax: 70,  step: 1, dMin: 0,  dMax: 15, buf: 5,  desc: "Strongest wind — gust value when available, else sustained" },
   { key: "precipProb", label: "Precip Probability",     icon: "🌧️", unit: "%",   sMin: 0,   sMax: 100, step: 5, dMin: 0,  dMax: 40, buf: 15, desc: "Chance of measurable precipitation" },
-  { key: "cloudCover", label: "Sky Cover",              icon: "☁️", unit: "%",   sMin: 0,   sMax: 100, step: 5, dMin: 0,  dMax: 60, buf: 15, desc: "Percentage of sky covered by clouds" },
-  { key: "uvIndex",    label: "UV Index",               icon: "☀️", unit: "",    sMin: 0,   sMax: 11,  step: 1, dMin: 0,  dMax: 6,  buf: 2,  desc: "Solar UV radiation intensity (0–11+)" },
+  { key: "cloudCover", label: "Sky Cover",              icon: "☁️", unit: "%",   sMin: 0,   sMax: 100, step: 5, dMin: 0,  dMax: 50, buf: 15, desc: "Percentage of sky covered by clouds" },
+  { key: "uvIndex",    label: "UV Index",               icon: "☀️", unit: "",    sMin: 0,   sMax: 11,  step: 1, dMin: 0,  dMax: 8,  buf: 2,  desc: "Solar UV radiation intensity (0–11+)" },
 ];
 
 // All metrics are always-on now (no exclude toggle in v2.1+).
