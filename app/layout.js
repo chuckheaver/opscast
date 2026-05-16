@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 // Geist fonts ship with the scaffold; kept available via CSS variables in case
-// we want them later. The OpsCast UI uses DM Sans + DM Mono (loaded in globals.css).
+// we want them later. The Ur4cast UI uses DM Sans + DM Mono (loaded in globals.css).
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -15,26 +15,32 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "OpsCast — Business Weather Intelligence",
+  // Production canonical domain. Relative URLs in metadata (like
+  // /og-image.png) resolve against this when rendered on any deploy.
+  metadataBase: new URL("https://www.ur4cast.com"),
+  title: "Ur4cast — Business Weather Intelligence",
   description:
     "Weather forecasting built for outdoor business operations. Set your ideal conditions and get operational guidance hour by hour.",
   openGraph: {
-    title: "OpsCast — Business Weather Intelligence",
+    title: "Ur4cast — Business Weather Intelligence",
     description:
       "Weather forecasting built for outdoor business operations. Set your ideal conditions and get operational guidance hour by hour.",
     type: "website",
+    url: "https://www.ur4cast.com",
+    siteName: "Ur4cast",
+    locale: "en_US",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "OpsCast — Business Weather Intelligence",
+        alt: "Ur4cast — Business Weather Intelligence",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "OpsCast — Business Weather Intelligence",
+    title: "Ur4cast — Business Weather Intelligence",
     description:
       "Weather forecasting built for outdoor business operations. Set your ideal conditions and get operational guidance hour by hour.",
     images: ["/og-image.png"],
@@ -56,7 +62,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         {children}
         {/* Plausible Analytics — uncomment (and the import above) once the domain is live */}
-        {/* <Script defer data-domain="opscast.app" src="https://plausible.io/js/script.js" /> */}
+        {/* <Script defer data-domain="ur4cast.com" src="https://plausible.io/js/script.js" /> */}
       </body>
     </html>
   );

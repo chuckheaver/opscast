@@ -1,6 +1,6 @@
 'use client';
 
-// OpsCast top-level page.
+// Ur4cast top-level page.
 // Owns app state (location, hours, day range, thresholds, view, forecast,
 // loading flags, error) and orchestrates the fetch + view transitions.
 //
@@ -14,7 +14,7 @@ import ForecastView from "./components/ForecastView";
 import { buildDefaults } from "./lib/thresholds";
 import { geoCode, getWx, getAQ, buildFcData } from "./lib/weather-api";
 
-const THRESH_STORAGE_KEY = "opscast.thresh.v1";
+const THRESH_STORAGE_KEY = "ur4cast.thresh.v1";
 
 export default function Page() {
   const [zip, setZip] = useState("");
@@ -168,7 +168,7 @@ export default function Page() {
     <div className="app">
       <div className="topbar">
         <div>
-          <div className="brand-name">Ur4Cast</div>
+          <div className="brand-name">Ur4cast</div>
           <div className="brand-tag">Business Weather Intelligence</div>
         </div>
         {view === "forecast" && (
