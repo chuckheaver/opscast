@@ -165,9 +165,10 @@ export default function FogMap({ geojson, picked, onPickFeature }) {
         <div>
           <h2>Mapbox token missing</h2>
           <p>
-            Set <code>NEXT_PUBLIC_MAPBOX_TOKEN</code> in <code>.env.local</code>{" "}
-            (get one at <a href="https://account.mapbox.com/access-tokens/" target="_blank" rel="noreferrer">mapbox.com</a>),
-            then restart the dev server.
+            <code>NEXT_PUBLIC_MAPBOX_TOKEN</code> isn&apos;t set in this
+            environment. Add it (get one at{" "}
+            <a href="https://account.mapbox.com/access-tokens/" target="_blank" rel="noreferrer">mapbox.com</a>),
+            then redeploy (or restart the dev server if running locally).
           </p>
         </div>
       </div>
