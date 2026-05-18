@@ -1079,3 +1079,197 @@ input[type=range]::-webkit-slider-thumb:hover {
     font-size: 24px;
   }
 }
+
+/* ── /fog (SF Fog Risk Map) ─────────────────────────────────────────────── */
+.fog-app {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  font-family: 'DM Sans', sans-serif;
+  background: #f0ece6;
+}
+.fog-sidebar {
+  background: #fff;
+  border-right: 1px solid var(--border);
+  padding: 22px 22px 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.fog-h { margin-bottom: 4px; }
+.fog-brand {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1c1917;
+  letter-spacing: 0.5px;
+}
+.fog-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.fog-lbl {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+.fog-search { position: relative; }
+.fog-input {
+  width: 100%;
+  background: #f7f5ef;
+  border: 1px solid var(--border);
+  padding: 11px 13px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #1c1917;
+  outline: none;
+}
+.fog-input:focus { border-color: var(--accent); }
+.fog-input:disabled { opacity: 0.5; }
+.fog-autocomplete {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0; right: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  z-index: 10;
+  max-height: 280px;
+  overflow-y: auto;
+}
+.fog-autocomplete-item {
+  padding: 9px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0ece6;
+}
+.fog-autocomplete-item:last-child { border-bottom: none; }
+.fog-autocomplete-item:hover { background: #f7f5ef; }
+.fog-ac-name { font-size: 14px; font-weight: 600; color: #1c1917; }
+.fog-ac-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.fog-note { font-size: 12px; color: var(--muted); font-style: italic; }
+.fog-err {
+  font-size: 12px;
+  color: #b91c1c;
+  padding: 8px 10px;
+  background: #fef2f2;
+  border-left: 3px solid #b91c1c;
+}
+.fog-empty {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 14px;
+  background: #f7f5ef;
+  border: 1px dashed var(--border);
+  line-height: 1.45;
+}
+.fog-result {
+  border: 1px solid var(--border);
+  padding: 16px;
+  background: #fff;
+}
+.fog-result-miss { border-style: dashed; }
+.fog-result-h {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1c1917;
+  letter-spacing: 0.3px;
+}
+.fog-result-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.fog-result-score {
+  margin-top: 14px;
+  padding: 18px 16px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.fog-score-num {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1;
+  font-family: 'DM Mono', monospace;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+}
+.fog-score-unit {
+  font-size: 10px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  margin-top: 6px;
+  opacity: 0.9;
+  font-family: 'DM Mono', monospace;
+}
+.fog-result-label {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1c1917;
+}
+.fog-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid #f0ece6;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.fog-footer code {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  background: #f7f5ef;
+  padding: 1px 4px;
+}
+.fog-map {
+  width: 100%;
+  height: 100%;
+}
+.fog-map-missing-token {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #f0ece6;
+  padding: 40px;
+  text-align: center;
+}
+.fog-map-missing-token h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #1c1917;
+}
+.fog-map-missing-token p {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 420px;
+  line-height: 1.5;
+}
+.fog-map-missing-token code {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  background: #fff;
+  padding: 1px 5px;
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 720px) {
+  .fog-app {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .fog-sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 50vh;
+  }
+}

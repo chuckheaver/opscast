@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "source": "stub",
+    "note": "Placeholder data. Replace via scripts/process-fog-data.mjs once real shapefiles are dropped into data/raw/.",
+    "units": "fogHours = annual mean hours of marine fog (synthetic)"
+  },
+  "features": [
+    { "type": "Feature", "properties": { "id": "outer-richmond", "name": "Outer Richmond", "fogHours": 1820 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.514,37.783],[-122.484,37.783],[-122.484,37.808],[-122.514,37.808],[-122.514,37.783]]] } },
+    { "type": "Feature", "properties": { "id": "inner-richmond", "name": "Inner Richmond", "fogHours": 1140 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.484,37.783],[-122.455,37.783],[-122.455,37.808],[-122.484,37.808],[-122.484,37.783]]] } },
+    { "type": "Feature", "properties": { "id": "pacific-heights", "name": "Pacific Heights", "fogHours": 720 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.455,37.783],[-122.425,37.783],[-122.425,37.808],[-122.455,37.808],[-122.455,37.783]]] } },
+    { "type": "Feature", "properties": { "id": "marina-north-beach", "name": "Marina / North Beach", "fogHours": 510 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.425,37.783],[-122.395,37.783],[-122.395,37.808],[-122.425,37.808],[-122.425,37.783]]] } },
+    { "type": "Feature", "properties": { "id": "outer-sunset-n", "name": "Outer Sunset (North)", "fogHours": 1710 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.514,37.758],[-122.484,37.758],[-122.484,37.783],[-122.514,37.783],[-122.514,37.758]]] } },
+    { "type": "Feature", "properties": { "id": "inner-sunset", "name": "Inner Sunset", "fogHours": 1230 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.484,37.758],[-122.455,37.758],[-122.455,37.783],[-122.484,37.783],[-122.484,37.758]]] } },
+    { "type": "Feature", "properties": { "id": "haight-western-addition", "name": "Haight / Western Addition", "fogHours": 820 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.455,37.758],[-122.425,37.758],[-122.425,37.783],[-122.455,37.783],[-122.455,37.758]]] } },
+    { "type": "Feature", "properties": { "id": "soma-civic", "name": "SoMa / Civic Center", "fogHours": 260 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.425,37.758],[-122.395,37.758],[-122.395,37.783],[-122.425,37.783],[-122.425,37.758]]] } },
+    { "type": "Feature", "properties": { "id": "outer-sunset-s", "name": "Outer Sunset (South)", "fogHours": 1680 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.514,37.733],[-122.484,37.733],[-122.484,37.758],[-122.514,37.758],[-122.514,37.733]]] } },
+    { "type": "Feature", "properties": { "id": "west-portal", "name": "West Portal / Forest Hill", "fogHours": 920 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.484,37.733],[-122.455,37.733],[-122.455,37.758],[-122.484,37.758],[-122.484,37.733]]] } },
+    { "type": "Feature", "properties": { "id": "twin-peaks", "name": "Twin Peaks / Castro", "fogHours": 1310 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.455,37.733],[-122.425,37.733],[-122.425,37.758],[-122.455,37.758],[-122.455,37.733]]] } },
+    { "type": "Feature", "properties": { "id": "mission", "name": "Mission", "fogHours": 210 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.425,37.733],[-122.395,37.733],[-122.395,37.758],[-122.425,37.758],[-122.425,37.733]]] } },
+    { "type": "Feature", "properties": { "id": "parkside", "name": "Parkside / Lake Merced", "fogHours": 1320 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.514,37.708],[-122.484,37.708],[-122.484,37.733],[-122.514,37.733],[-122.514,37.708]]] } },
+    { "type": "Feature", "properties": { "id": "ingleside", "name": "Ingleside / Ocean View", "fogHours": 690 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.484,37.708],[-122.455,37.708],[-122.455,37.733],[-122.484,37.733],[-122.484,37.708]]] } },
+    { "type": "Feature", "properties": { "id": "glen-bernal", "name": "Glen Park / Bernal", "fogHours": 410 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.455,37.708],[-122.425,37.708],[-122.425,37.733],[-122.455,37.733],[-122.455,37.708]]] } },
+    { "type": "Feature", "properties": { "id": "bayview-excelsior", "name": "Bayview / Excelsior", "fogHours": 290 },
+      "geometry": { "type": "Polygon", "coordinates": [[[-122.425,37.708],[-122.395,37.708],[-122.395,37.733],[-122.425,37.733],[-122.425,37.708]]] } }
+  ]
+}
