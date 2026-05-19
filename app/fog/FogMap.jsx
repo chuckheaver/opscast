@@ -9,30 +9,41 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { riskColorStops, TRANSITION_RANGE } from "./lib/risk";
 
-// Tile-safe canvas pattern: light-grey background with horizontal yellow
-// stripes. Registered as a Mapbox image and used as `fill-pattern` on the
-// transition-zone fill layer. Drawing here (not as an asset) keeps the
-// look co-located with the layer config and avoids a public/ round-trip.
+// 32×32 canvas pattern: bright-yellow background with scattered grey
+// cloud puffs. Registered as a Mapbox image and used as `fill-pattern`
+// on the transition-zone fill layer. Drawing here (not as an asset)
+// keeps the look co-located with the layer config and avoids a public/
+// round-trip.
 function buildPartlyCloudyPattern() {
   const size = 32;
-  const stripe = 8;     // total period (one yellow + one grey gap)
-  const yellowW = 3;    // height of the yellow stripe within each period
   const canvas = document.createElement("canvas");
   canvas.width = size;
   canvas.height = size;
   const ctx = canvas.getContext("2d");
 
-  // Light-grey base — matches the start of the Fog gradient so the
-  // transition reads as "mostly cloudy, sun breaking through".
-  ctx.fillStyle = "#d6d3d1";
+  // Sunny background (matches the Sun-zone yellow so the transition reads
+  // as "still mostly yellow, with some clouds").
+  ctx.fillStyle = "#fde047";
   ctx.fillRect(0, 0, size, size);
 
-  // Horizontal yellow stripes. Tile size is an exact multiple of the
-  // stripe period so the pattern repeats seamlessly across polygon fills.
-  ctx.fillStyle = "#fde047";
-  for (let y = 0; y < size; y += stripe) {
-    ctx.fillRect(0, y, size, yellowW);
-  }
+  // Two grey cloud puffs at different positions so the tile reads as
+  // scattered, not striped. Slight transparency lets the yellow peek
+  // through the cloud edges for a softer feel.
+  ctx.fillStyle = "rgba(120, 113, 108, 0.85)";
+  const puff = (cx, cy, r) => {
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fill();
+  };
+  // Upper-left cloud
+  puff(7, 9, 3.5);
+  puff(11, 9, 4.5);
+  puff(15, 9, 3.5);
+  puff(11, 6.5, 3);
+  // Lower-right cloud (smaller)
+  puff(22, 24, 2.5);
+  puff(26, 24, 3.5);
+  puff(29, 22, 2.5);
 
   return ctx.getImageData(0, 0, size, size);
 }
