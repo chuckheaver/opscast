@@ -41,11 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 # raw shapefile inputs — processed output (public/data/) IS committed
-/data/raw/*.shp
-/data/raw/*.dbf
-/data/raw/*.shx
-/data/raw/*.prj
-/data/raw/*.cpg
-/data/raw/*.qpj
-/data/raw/*.zip
+# Ignore everything in data/raw/ except the README that documents the layout.
+/data/raw/*
+!/data/raw/README.md
 /data/tmp/
