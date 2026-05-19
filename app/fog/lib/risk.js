@@ -14,8 +14,8 @@
 // Stops calibrated to the observed SF data range (6.3 → 12.5 hrs/day),
 // so the foggiest neighborhood actually hits the darkest grey.
 export const riskColorStops = [
-  [0,    "#fbbf24"], // Sun        — bright amber
-  [8.5,  "#fbbf24"], // Sun        — flat to here
+  [0,    "#fde047"], // Sun        — bright amber
+  [8.5,  "#fde047"], // Sun        — flat to here
   [9,    "#d6d3d1"], // Fog start  — light grey
   [10.5, "#78716c"], // Fog        — mid grey
   [12.5, "#292524"], // Fog peak   — near-black (SF max ≈ 12.5)

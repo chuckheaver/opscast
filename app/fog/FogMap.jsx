@@ -61,8 +61,8 @@ export default function FogMap({ geojson, picked, onPickFeature }) {
           "fill-opacity": [
             "case",
             ["boolean", ["feature-state", "picked"], false],
-            0.85,
-            0.55,
+            0.9,
+            0.72,
           ],
         },
       });
