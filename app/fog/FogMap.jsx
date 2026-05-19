@@ -136,10 +136,10 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         filter: ["==", ["coalesce", ["get", "hours"], 0], 8.5],
         layout: { "line-cap": "round", "line-join": "round" },
         paint: {
-          "line-color": "#3f3f46",
-          "line-width": 1.6,
-          "line-dasharray": [3, 2.5],
-          "line-opacity": 0.85,
+          "line-color": "#9ca3af",
+          "line-width": 1,
+          "line-dasharray": [2, 2.5],
+          "line-opacity": 0.55,
         },
       });
 
