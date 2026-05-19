@@ -24,6 +24,7 @@ const SF_CENTER = [-122.447, 37.7649];
 const CONTOUR_LAYER_IDS = [
   "fog-contours-fog",
   "fog-contours-transition",
+  "fog-contours-transition-outline",
   "fog-contours-sun",
 ];
 
@@ -122,6 +123,23 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         paint: {
           "fill-color": "#fde047",
           "fill-opacity": 0.55,
+        },
+      });
+
+      // Dashed outline on the transition (=8.5) polygons specifically so
+      // the partly-cloudy boundary stands out from neighborhood lines and
+      // adjacent solid-fill bands. Drawn after all fills so it sits on top.
+      map.addLayer({
+        id: "fog-contours-transition-outline",
+        type: "line",
+        source: "fog-contours",
+        filter: ["==", ["coalesce", ["get", "hours"], 0], 8.5],
+        layout: { "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": "#3f3f46",
+          "line-width": 1.6,
+          "line-dasharray": [3, 2.5],
+          "line-opacity": 0.85,
         },
       });
 
