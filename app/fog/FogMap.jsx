@@ -4,9 +4,9 @@
 //   - SF neighborhood polygons as OUTLINES ONLY (no fill colour) so streets
 //     and labels stay visible underneath.
 //   - The USGS fog-contour polygons as the primary data layer, in three
-//     visual bands by hours/day value:
-//       • < 8.5  → solid bright yellow
-//       • = 8.5  → warm yellow with scattered clouds pattern
+//     solid-colour bands by hours/day value:
+//       • < 8.5  → bright yellow
+//       • = 8.5  → warm grey-yellow (transition)
 //       • ≥ 9    → grey gradient (darker for higher fog hours)
 //
 // Click and hover detection sit on an invisible "fog-click-target" fill
@@ -19,36 +19,6 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
-
-// 32×32 canvas pattern: warm yellow background with sparse grey cloud
-// puffs, biased to the west side of the tile. Used as the fill-pattern
-// on the = 8.5 hrs contour layer.
-const SCATTERED_PUFFS = [
-  [5, 8, 2.5],
-  [8, 8, 3],
-  [11, 8, 2.5],
-  [8, 6, 2],
-  [4, 22, 2],
-  [7, 23, 2.5],
-];
-function buildScatteredCloudsPattern() {
-  const size = 32;
-  const canvas = document.createElement("canvas");
-  canvas.width = size;
-  canvas.height = size;
-  const ctx = canvas.getContext("2d");
-  // Warm yellow base — slightly muted from the Sun zone yellow so the
-  // 8.5 transition reads as "still mostly sunny, but clouds rolling in".
-  ctx.fillStyle = "#f5dc7e";
-  ctx.fillRect(0, 0, size, size);
-  ctx.fillStyle = "rgba(120, 113, 108, 0.85)";
-  SCATTERED_PUFFS.forEach(([cx, cy, r]) => {
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.fill();
-  });
-  return ctx.getImageData(0, 0, size, size);
-}
 
 // Layer IDs the "Show fog data" toggle flips on and off as a group.
 const CONTOUR_LAYER_IDS = [
@@ -88,12 +58,6 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
     mapRef.current = map;
 
     map.on("load", () => {
-      // Register both patterns up-front so the contour layers below can
-      // reference them.
-      if (!map.hasImage("scattered-clouds")) {
-        map.addImage("scattered-clouds", buildScatteredCloudsPattern());
-      }
-
       // ── Neighborhood source ─────────────────────────────────────────
       map.addSource("fog", {
         type: "geojson",
@@ -135,15 +99,17 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         },
       });
 
-      // Transition band (=8.5): scattered-clouds pattern on warm yellow.
+      // Transition band (=8.5): warm grey-yellow solid fill. Sits between
+      // the Sun yellow and the Fog grey-gradient start, leaning grey so
+      // the user reads it as "marine layer arriving, not full fog yet".
       map.addLayer({
         id: "fog-contours-transition",
         type: "fill",
         source: "fog-contours",
         filter: ["==", ["coalesce", ["get", "hours"], 0], 8.5],
         paint: {
-          "fill-pattern": "scattered-clouds",
-          "fill-opacity": 0.6,
+          "fill-color": "#d4cfb5",
+          "fill-opacity": 0.55,
         },
       });
 
