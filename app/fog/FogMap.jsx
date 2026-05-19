@@ -128,7 +128,15 @@ function buildScatteredCloudsPattern() {
   return ctx.getImageData(0, 0, size, size);
 }
 
-export default function FogMap({ geojson, contours, picked, onPickFeature }) {
+// Layer IDs the "Show fog data" toggle flips on and off as a group.
+const CONTOUR_LAYER_IDS = [
+  "fog-contours-fog",
+  "fog-contours-fog-icons",
+  "fog-contours-transition",
+  "fog-contours-sun",
+];
+
+export default function FogMap({ geojson, contours, showContours, picked, onPickFeature }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -356,6 +364,20 @@ export default function FogMap({ geojson, contours, picked, onPickFeature }) {
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [contours]);
+
+  // Flip the entire fog-data layer group on/off (sidebar checkbox).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showContours ? "visible" : "none";
+      CONTOUR_LAYER_IDS.forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showContours]);
 
   // Sync picked state: drop a marker, highlight the feature, fly there.
   useEffect(() => {

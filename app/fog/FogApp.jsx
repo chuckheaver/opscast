@@ -20,6 +20,9 @@ export default function FogApp() {
   const [contours, setContours] = useState(null);
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { feature, point: [lng, lat], address, contour }
+  // Fog data layer (contour fills + icon patterns) is shown by default;
+  // toggle off for a clean basemap with only neighborhood outlines.
+  const [showContours, setShowContours] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -78,10 +81,14 @@ export default function FogApp() {
         onPickFromAddress={pickFromAddress}
         dataErr={dataErr}
         ready={!!geojson}
+        contoursAvailable={!!contours}
+        showContours={showContours}
+        onToggleContours={setShowContours}
       />
       <FogMap
         geojson={geojson}
         contours={contours}
+        showContours={showContours}
         picked={picked}
         onPickFeature={pickFromMap}
       />
