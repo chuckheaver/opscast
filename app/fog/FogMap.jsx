@@ -9,18 +9,14 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { riskColorStops, TRANSITION_RANGE } from "./lib/risk";
 
-// Tile-safe canvas pattern: light-grey background with diagonal yellow
+// Tile-safe canvas pattern: light-grey background with horizontal yellow
 // stripes. Registered as a Mapbox image and used as `fill-pattern` on the
 // transition-zone fill layer. Drawing here (not as an asset) keeps the
 // look co-located with the layer config and avoids a public/ round-trip.
-//
-// Construction: the canvas is rotated 45° and the stripes are drawn as
-// vertical bars in that rotated frame, then we draw far enough outside the
-// canvas bounds in both directions so the tile is seamless when repeated.
 function buildPartlyCloudyPattern() {
   const size = 32;
-  const stripe = 8;     // total period (one yellow + one grey)
-  const yellowW = 3;    // width of the yellow stripe within each period
+  const stripe = 8;     // total period (one yellow + one grey gap)
+  const yellowW = 3;    // height of the yellow stripe within each period
   const canvas = document.createElement("canvas");
   canvas.width = size;
   canvas.height = size;
@@ -31,18 +27,12 @@ function buildPartlyCloudyPattern() {
   ctx.fillStyle = "#d6d3d1";
   ctx.fillRect(0, 0, size, size);
 
-  // Yellow stripes drawn diagonally. Translate to center, rotate, then
-  // draw vertical bars across a region wider than the canvas diagonal so
-  // the pattern tiles without seams.
-  ctx.save();
-  ctx.translate(size / 2, size / 2);
-  ctx.rotate(Math.PI / 4); // 45°
+  // Horizontal yellow stripes. Tile size is an exact multiple of the
+  // stripe period so the pattern repeats seamlessly across polygon fills.
   ctx.fillStyle = "#fde047";
-  const extent = size; // covers the rotated canvas
-  for (let x = -extent; x <= extent; x += stripe) {
-    ctx.fillRect(x, -extent, yellowW, extent * 2);
+  for (let y = 0; y < size; y += stripe) {
+    ctx.fillRect(0, y, size, yellowW);
   }
-  ctx.restore();
 
   return ctx.getImageData(0, 0, size, size);
 }
