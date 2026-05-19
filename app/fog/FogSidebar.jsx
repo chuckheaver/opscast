@@ -52,8 +52,8 @@ export default function FogSidebar({ picked, onPickFromAddress, dataErr, ready }
   return (
     <aside className="fog-sidebar">
       <header className="fog-h">
-        <div className="fog-brand">SF Fog Risk Map</div>
-        <div className="fog-tag">Historical fog hours by neighborhood</div>
+        <div className="fog-brand">Summer Fog Map</div>
+        <div className="fog-tag">Jun–Aug</div>
       </header>
 
       <label className="fog-lbl">San Francisco address</label>

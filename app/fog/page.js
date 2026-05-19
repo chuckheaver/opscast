@@ -3,9 +3,9 @@
 import FogApp from "./FogApp";
 
 export const metadata = {
-  title: "SF Fog Risk Map",
+  title: "Summer Fog Map · Jun–Aug",
   description:
-    "Enter a San Francisco address and see the historical fog risk for that neighborhood.",
+    "Enter a San Francisco address and see the average summer (Jun–Aug) fog hours for that neighborhood.",
 };
 
 export default function Page() {

@@ -7,45 +7,53 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { riskColorStops, TRANSITION_RANGE } from "./lib/risk";
+import { riskColorStops, TRANSITION_RANGE, TRANSITION_DENSITY_STEPS } from "./lib/risk";
 
-// 32×32 canvas pattern: bright-yellow background with scattered grey
-// cloud puffs. Registered as a Mapbox image and used as `fill-pattern`
-// on the transition-zone fill layer. Drawing here (not as an asset)
-// keeps the look co-located with the layer config and avoids a public/
-// round-trip.
-function buildPartlyCloudyPattern() {
+// 32×32 canvas patterns: light-yellow background with grey cloud puffs.
+// Three densities are pre-registered and the fog-transition layer picks
+// one per feature via a Mapbox `step` expression keyed on fogHours, so
+// the texture itself encodes how cloudy a transition neighborhood is.
+//
+// Densities are anchored on Buena Vista (≈8.3 hrs/day = 50/50 fog/sun):
+//   light  ≈ 25% cloud area
+//   mid    ≈ 50% cloud area  ← Buena Vista lands here
+//   heavy  ≈ 75% cloud area
+
+// Each puff = [centerX, centerY, radius] in canvas coordinates.
+const CLOUD_DENSITIES = {
+  light: [
+    [8, 9, 3], [12, 9, 3.5], [16, 10, 3], [12, 7, 2.5],
+  ],
+  mid: [
+    // Upper cloud
+    [7, 9, 3.5], [11, 9, 4.5], [15, 9, 3.5], [11, 6.5, 3],
+    // Lower cloud (smaller, offset)
+    [22, 24, 2.5], [26, 24, 3.5], [29, 22, 2.5],
+  ],
+  heavy: [
+    // Large upper cloud
+    [6, 9, 4], [11, 9, 5], [16, 9, 4], [11, 6, 3.5],
+    // Mid-right cloud
+    [22, 17, 3.5], [27, 17, 4.5], [24, 14, 3],
+    // Lower-left cloud
+    [9, 25, 3], [14, 25, 4], [19, 25, 3.5], [14, 22, 3],
+  ],
+};
+
+function buildCloudPattern(puffs, bg = "#fef08a") {
   const size = 32;
   const canvas = document.createElement("canvas");
   canvas.width = size;
   canvas.height = size;
   const ctx = canvas.getContext("2d");
-
-  // Light-yellow background — a step paler than the Sun-zone yellow so
-  // transition neighborhoods read as "still mostly sunny, but the
-  // marine layer is starting to push in".
-  ctx.fillStyle = "#fef08a";
+  ctx.fillStyle = bg;
   ctx.fillRect(0, 0, size, size);
-
-  // Two grey cloud puffs at different positions so the tile reads as
-  // scattered, not striped. Slight transparency lets the yellow peek
-  // through the cloud edges for a softer feel.
   ctx.fillStyle = "rgba(120, 113, 108, 0.85)";
-  const puff = (cx, cy, r) => {
+  puffs.forEach(([cx, cy, r]) => {
     ctx.beginPath();
     ctx.arc(cx, cy, r, 0, Math.PI * 2);
     ctx.fill();
-  };
-  // Upper-left cloud
-  puff(7, 9, 3.5);
-  puff(11, 9, 4.5);
-  puff(15, 9, 3.5);
-  puff(11, 6.5, 3);
-  // Lower-right cloud (smaller)
-  puff(22, 24, 2.5);
-  puff(26, 24, 3.5);
-  puff(29, 22, 2.5);
-
+  });
   return ctx.getImageData(0, 0, size, size);
 }
 
@@ -82,10 +90,15 @@ export default function FogMap({ geojson, picked, onPickFeature }) {
     mapRef.current = map;
 
     map.on("load", () => {
-      // Register the partly-cloudy pattern before any layer uses it.
-      if (!map.hasImage("partly-cloudy")) {
-        map.addImage("partly-cloudy", buildPartlyCloudyPattern());
-      }
+      // Register the three partly-cloudy density patterns before any layer
+      // uses them. Image IDs match what the fog-transition step expression
+      // below expects.
+      Object.entries(CLOUD_DENSITIES).forEach(([key, puffs]) => {
+        const imageId = `partly-cloudy-${key}`;
+        if (!map.hasImage(imageId)) {
+          map.addImage(imageId, buildCloudPattern(puffs));
+        }
+      });
       map.addSource("fog", {
         type: "geojson",
         data: { type: "FeatureCollection", features: [] },
@@ -116,9 +129,12 @@ export default function FogMap({ geojson, picked, onPickFeature }) {
           ],
         },
       });
-      // Transition-zone overlay: scatter-cloud pattern on yellow background.
-      // Filter mirrors the Sun/Fog split above so every feature is rendered
-      // by exactly one fill layer.
+      // Transition-zone overlay: scatter-cloud pattern on light-yellow
+      // background. The pattern variant is picked per-feature so the
+      // texture's cloud density tracks the underlying fogHours value
+      // (8.0-8.2 → light, 8.2-8.4 → mid, 8.4-8.6 → heavy). Filter mirrors
+      // the Sun/Fog split above so every feature is rendered by exactly
+      // one fill layer.
       map.addLayer({
         id: "fog-transition",
         type: "fill",
@@ -128,7 +144,13 @@ export default function FogMap({ geojson, picked, onPickFeature }) {
           ["<=", ["coalesce", ["get", "fogHours"], 0], TRANSITION_RANGE[1]],
         ],
         paint: {
-          "fill-pattern": "partly-cloudy",
+          "fill-pattern": [
+            "step",
+            ["coalesce", ["get", "fogHours"], 0],
+            "partly-cloudy-light",
+            TRANSITION_DENSITY_STEPS.midStart,   "partly-cloudy-mid",
+            TRANSITION_DENSITY_STEPS.heavyStart, "partly-cloudy-heavy",
+          ],
           "fill-opacity": [
             "case",
             ["boolean", ["feature-state", "picked"], false],
