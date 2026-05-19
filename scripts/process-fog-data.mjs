@@ -80,7 +80,12 @@ function main() {
     "-rename-fields", `name=${NEIGH_NAME_FIELD}`,
     "-each", "id = (this.properties.name||'unk').toLowerCase().replace(/[^a-z0-9]+/g,'-')",
     "-each", `fogHours = fogHours == null ? null : Math.round((fogHours / ${FOG_HOURS_DIVISOR}) * 10) / 10`,
-    "-simplify", "5%",
+    // -clean fills gap slivers between adjacent neighborhood polygons left
+    // over from the source data. Skipping -simplify entirely: 117 polygons
+    // produces a ~400KB GeoJSON, well under any size threshold worth
+    // bothering with, and simplification was creating the visible gap-slivers
+    // along shared edges. Topology in == topology out.
+    "-clean", "gap-fill-area=0",
     "-o", join(TMP_DIR, "joined.geojson"), "format=geojson",
   ]);
 
