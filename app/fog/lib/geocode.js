@@ -31,3 +31,22 @@ export async function geocodeSuggest(q) {
     center: f.center, // [lng, lat]
   }));
 }
+
+// Reverse geocode an arbitrary [lng, lat] to a human-readable place name.
+// Used when the user clicks the 📍 button — we want a label like
+// "1 Carl St, San Francisco" rather than raw coordinates. Falls back to
+// a coarse "Your Location" if the API call fails.
+export async function reverseGeocode([lng, lat]) {
+  if (!TOKEN) return "Your Location";
+  try {
+    const url =
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json` +
+      `?access_token=${TOKEN}&types=address,poi,place,neighborhood&limit=1`;
+    const r = await fetch(url);
+    if (!r.ok) return "Your Location";
+    const d = await r.json();
+    return d.features?.[0]?.place_name || "Your Location";
+  } catch {
+    return "Your Location";
+  }
+}

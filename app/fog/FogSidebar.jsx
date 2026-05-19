@@ -15,6 +15,9 @@ export default function FogSidebar({
   contoursAvailable,
   showContours,
   onToggleContours,
+  onUseGeoLocation,
+  geoLoading,
+  geoErr,
 }) {
   const [q, setQ] = useState("");
   const [sugs, setSugs] = useState([]);
@@ -69,15 +72,26 @@ export default function FogSidebar({
 
       <label className="fog-lbl">San Francisco address</label>
       <div className="fog-search">
-        <input
-          className="fog-input"
-          placeholder="1 Dr Carlton B Goodlett Pl…"
-          value={q}
-          onChange={e => setQ(e.target.value)}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          disabled={!ready}
-        />
+        <div className="fog-search-row">
+          <input
+            className="fog-input"
+            placeholder="1 Dr Carlton B Goodlett Pl…"
+            value={q}
+            onChange={e => setQ(e.target.value)}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            disabled={!ready}
+          />
+          <button
+            type="button"
+            className="fog-geo-btn"
+            onClick={onUseGeoLocation}
+            disabled={geoLoading || !ready}
+            title="Use my current location"
+          >
+            {geoLoading ? "⏳" : "📍"}
+          </button>
+        </div>
         {open && sugs.length > 0 && (
           <div className="fog-autocomplete">
             {sugs.map(s => (
@@ -102,6 +116,7 @@ export default function FogSidebar({
       )}
       {dataErr && <div className="fog-err">⚠ {dataErr}</div>}
       {err && <div className="fog-err">⚠ {err}</div>}
+      {geoErr && <div className="fog-err">⚠ {geoErr}</div>}
 
       {picked && <Result picked={picked} />}
 
@@ -139,21 +154,40 @@ export default function FogSidebar({
 
 function Result({ picked }) {
   const f = picked.feature;
-  if (!f) {
+  const contourHours = picked.contour?.properties?.hours;
+  const neighborhoodHours = f?.properties?.fogHours;
+
+  // No neighborhood AND no contour — totally outside coverage.
+  if (!f && contourHours == null) {
     return (
       <div className="fog-result fog-result-miss">
-        <div className="fog-result-h">Outside SF coverage</div>
+        <div className="fog-result-h">Outside coverage</div>
         <div className="fog-result-sub">{picked.address}</div>
-        <p>This address doesn&apos;t fall inside any indexed SF neighborhood.</p>
+        <p>This point falls outside the Bay Area fog dataset.</p>
       </div>
     );
   }
-  // Prefer the point-specific contour value over the neighborhood average,
-  // since the contour represents the actual USGS measurement at that
-  // exact location (the neighborhood number is just an average of all
-  // contours that overlap it).
-  const contourHours = picked.contour?.properties?.hours;
-  const neighborhoodHours = f.properties.fogHours;
+
+  // Inside the Bay Area contours but outside the SF neighborhood layer.
+  // Still show the fog value — just without the neighborhood-average sidebar.
+  if (!f) {
+    return (
+      <div className="fog-result">
+        <div className="fog-result-score" style={{ background: fogColor(contourHours) }}>
+          <div className="fog-score-num">{contourHours.toFixed(1)}</div>
+          <div className="fog-score-unit">summer fog hrs / day · at this point</div>
+        </div>
+        <div className="fog-result-label">{fogLabel(contourHours)}</div>
+        <div className="fog-result-h">Outside SF</div>
+        {picked.address && (
+          <div className="fog-result-sub">{picked.address}</div>
+        )}
+      </div>
+    );
+  }
+
+  // Inside SF — prefer the point-specific contour value over the
+  // neighborhood average, but show both when they differ.
   const primary = contourHours ?? neighborhoodHours;
   const source = contourHours != null ? "at this point" : "neighborhood avg";
   return (

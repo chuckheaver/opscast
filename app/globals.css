@@ -1128,8 +1128,12 @@ input[type=range]::-webkit-slider-thumb:hover {
   text-transform: uppercase;
 }
 .fog-search { position: relative; }
+.fog-search-row {
+  display: flex;
+  gap: 6px;
+}
 .fog-input {
-  width: 100%;
+  flex: 1;
   background: #f7f5ef;
   border: 1px solid var(--border);
   padding: 11px 13px;
@@ -1137,9 +1141,27 @@ input[type=range]::-webkit-slider-thumb:hover {
   font-size: 14px;
   color: #1c1917;
   outline: none;
+  min-width: 0;
 }
 .fog-input:focus { border-color: var(--accent); }
 .fog-input:disabled { opacity: 0.5; }
+.fog-geo-btn {
+  flex: 0 0 auto;
+  width: 42px;
+  background: #f7f5ef;
+  border: 1px solid var(--border);
+  font-size: 18px;
+  cursor: pointer;
+  color: #1c1917;
+}
+.fog-geo-btn:hover:not(:disabled) {
+  background: #ede9e0;
+  border-color: var(--accent);
+}
+.fog-geo-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
 .fog-autocomplete {
   position: absolute;
   top: calc(100% + 2px);
