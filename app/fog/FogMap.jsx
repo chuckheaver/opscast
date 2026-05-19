@@ -7,7 +7,45 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { riskColorStops } from "./lib/risk";
+import { riskColorStops, TRANSITION_RANGE } from "./lib/risk";
+
+// 32×32 canvas pattern: bright-yellow background with grey cloud puffs.
+// Registered as a Mapbox image and used as `fill-pattern` on the
+// transition-zone fill layer. Drawing here (not as an asset) keeps the
+// look co-located with the layer config and avoids a public/ round-trip.
+function buildPartlyCloudyPattern() {
+  const size = 32;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d");
+
+  // Sunny background (matches the Sun-zone yellow so the transition reads
+  // as "still mostly yellow, with some clouds").
+  ctx.fillStyle = "#fde047";
+  ctx.fillRect(0, 0, size, size);
+
+  // Two grey cloud puffs at different positions so the tile reads as
+  // scattered, not striped. Slight transparency lets the yellow peek
+  // through the cloud edges for a softer feel.
+  ctx.fillStyle = "rgba(120, 113, 108, 0.85)";
+  const puff = (cx, cy, r) => {
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fill();
+  };
+  // Upper-left cloud
+  puff(7, 9, 3.5);
+  puff(11, 9, 4.5);
+  puff(15, 9, 3.5);
+  puff(11, 6.5, 3);
+  // Lower-right cloud (smaller)
+  puff(22, 24, 2.5);
+  puff(26, 24, 3.5);
+  puff(29, 22, 2.5);
+
+  return ctx.getImageData(0, 0, size, size);
+}
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
@@ -42,6 +80,10 @@ export default function FogMap({ geojson, picked, onPickFeature }) {
     mapRef.current = map;
 
     map.on("load", () => {
+      // Register the partly-cloudy pattern before any layer uses it.
+      if (!map.hasImage("partly-cloudy")) {
+        map.addImage("partly-cloudy", buildPartlyCloudyPattern());
+      }
       map.addSource("fog", {
         type: "geojson",
         data: { type: "FeatureCollection", features: [] },
@@ -51,6 +93,12 @@ export default function FogMap({ geojson, picked, onPickFeature }) {
         id: "fog-fill",
         type: "fill",
         source: "fog",
+        // Skip the transition band on the base layer so the pattern overlay
+        // below isn't tinted by the underlying yellow→grey interpolation.
+        filter: ["any",
+          ["<", ["coalesce", ["get", "fogHours"], 0], TRANSITION_RANGE[0]],
+          [">", ["coalesce", ["get", "fogHours"], 0], TRANSITION_RANGE[1]],
+        ],
         paint: {
           "fill-color": [
             "interpolate",
@@ -63,6 +111,27 @@ export default function FogMap({ geojson, picked, onPickFeature }) {
             ["boolean", ["feature-state", "picked"], false],
             0.9,
             0.72,
+          ],
+        },
+      });
+      // Transition-zone overlay: scatter-cloud pattern on yellow background.
+      // Filter mirrors the Sun/Fog split above so every feature is rendered
+      // by exactly one fill layer.
+      map.addLayer({
+        id: "fog-transition",
+        type: "fill",
+        source: "fog",
+        filter: ["all",
+          [">=", ["coalesce", ["get", "fogHours"], 0], TRANSITION_RANGE[0]],
+          ["<=", ["coalesce", ["get", "fogHours"], 0], TRANSITION_RANGE[1]],
+        ],
+        paint: {
+          "fill-pattern": "partly-cloudy",
+          "fill-opacity": [
+            "case",
+            ["boolean", ["feature-state", "picked"], false],
+            1,
+            0.88,
           ],
         },
       });
@@ -125,18 +194,23 @@ export default function FogMap({ geojson, picked, onPickFeature }) {
         },
       });
 
-      map.on("mousemove", "fog-fill", e => {
-        if (!e.features?.length) return;
-        map.getCanvas().style.cursor = "pointer";
-        map.setFilter("fog-hover", ["==", ["get", "id"], e.features[0].properties.id]);
-      });
-      map.on("mouseleave", "fog-fill", () => {
-        map.getCanvas().style.cursor = "";
-        map.setFilter("fog-hover", ["==", ["get", "id"], ""]);
-      });
-      map.on("click", "fog-fill", e => {
-        if (!e.features?.length) return;
-        onPickRef.current(e.features[0], [e.lngLat.lng, e.lngLat.lat]);
+      // Same handlers apply to both fill layers (Sun/Fog gradient + Transition
+      // pattern). Listening on both ensures every neighborhood is clickable.
+      const PICK_LAYERS = ["fog-fill", "fog-transition"];
+      PICK_LAYERS.forEach(layerId => {
+        map.on("mousemove", layerId, e => {
+          if (!e.features?.length) return;
+          map.getCanvas().style.cursor = "pointer";
+          map.setFilter("fog-hover", ["==", ["get", "id"], e.features[0].properties.id]);
+        });
+        map.on("mouseleave", layerId, () => {
+          map.getCanvas().style.cursor = "";
+          map.setFilter("fog-hover", ["==", ["get", "id"], ""]);
+        });
+        map.on("click", layerId, e => {
+          if (!e.features?.length) return;
+          onPickRef.current(e.features[0], [e.lngLat.lng, e.lngLat.lat]);
+        });
       });
     });
 
