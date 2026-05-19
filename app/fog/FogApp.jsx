@@ -8,6 +8,7 @@
 // Renders FogMap (the actual map canvas) and FogSidebar (search + result card).
 
 import { useEffect, useState, useCallback, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import FogMap from "./FogMap";
 import FogSidebar from "./FogSidebar";
 import { findNeighborhoodForPoint, findContourForPoint } from "./lib/spatial";
@@ -17,6 +18,7 @@ const DATA_URL = "/data/sf-fog-neighborhoods.geojson";
 const CONTOURS_URL = "/data/sf-fog-contours.geojson";
 
 export default function FogApp() {
+  const searchParams = useSearchParams();
   const [geojson, setGeojson] = useState(null);
   const [contours, setContours] = useState(null);
   const [dataErr, setDataErr] = useState("");
@@ -27,6 +29,16 @@ export default function FogApp() {
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
   const autoGeoTriedRef = useRef(false);
+  const urlLocAppliedRef = useRef(false);
+
+  // If the page was opened with ?lat=&lng=&name= (e.g. the Fog Forecast
+  // button on Ur4cast), parse those once.
+  const urlLoc = (() => {
+    const lat = Number(searchParams?.get("lat"));
+    const lng = Number(searchParams?.get("lng"));
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+    return { point: [lng, lat], name: searchParams.get("name") || "" };
+  })();
   // Holds the latest contours/geojson for use inside async callbacks that
   // were captured before the data finished loading.
   const dataRef = useRef({ geojson: null, contours: null });
@@ -116,12 +128,32 @@ export default function FogApp() {
     );
   }, []);
 
+  // If a URL location was provided (e.g. linked from Ur4cast with
+  // ?lat=&lng=&name=), apply it as the initial pick as soon as the data
+  // loads. This pre-empts the auto-geolocation prompt — the user can
+  // still override with the search bar or 📍 button.
+  useEffect(() => {
+    if (urlLocAppliedRef.current) return;
+    if (!urlLoc) return;
+    if (!geojson) return; // wait for data so spatial lookups have something to hit
+    urlLocAppliedRef.current = true;
+    autoGeoTriedRef.current = true; // suppress the auto-geo prompt below
+    const feature = findNeighborhoodForPoint(geojson, urlLoc.point);
+    const contour = findContourForPoint(contours, urlLoc.point);
+    setPicked({
+      point: urlLoc.point,
+      address: urlLoc.name || null,
+      feature,
+      contour,
+    });
+  }, [urlLoc, geojson, contours]);
+
   // Auto-prompt for location on first mount, but only if permission isn't
-  // already denied — otherwise we'd just be re-asking for a no.
-  // The actual trigger is queued as a microtask so the synchronous
-  // setState inside requestGeoLocation doesn't fire during the effect body.
+  // already denied — otherwise we'd just be re-asking for a no. Skipped
+  // entirely when a URL location was provided.
   useEffect(() => {
     if (autoGeoTriedRef.current) return;
+    if (urlLoc) return; // URL-provided location takes precedence
     autoGeoTriedRef.current = true;
     if (typeof navigator === "undefined" || !navigator.geolocation) return;
     const trigger = () => queueMicrotask(requestGeoLocation);
@@ -135,7 +167,7 @@ export default function FogApp() {
     } else {
       trigger();
     }
-  }, [requestGeoLocation]);
+  }, [requestGeoLocation, urlLoc]);
 
   return (
     <div className="fog-app">

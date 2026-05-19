@@ -1,5 +1,8 @@
 // SF Fog Risk Map — server-rendered shell.
-// FogApp is the client component that owns the map + address lookup.
+// FogApp is the client component that owns the map + address lookup;
+// it reads useSearchParams() for the optional ?lat=&lng=&name= deep-link
+// from Ur4cast, so we wrap it in Suspense per Next.js's requirement.
+import { Suspense } from "react";
 import FogApp from "./FogApp";
 
 export const metadata = {
@@ -9,5 +12,9 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <FogApp />;
+  return (
+    <Suspense fallback={null}>
+      <FogApp />
+    </Suspense>
+  );
 }

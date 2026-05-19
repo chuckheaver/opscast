@@ -114,15 +114,16 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         },
       });
 
-      // Sun band (<8.5): solid bright yellow.
+      // Sun band (<8.5): soft pale yellow, kept transparent so the streets-v12
+      // basemap (roads, parks, transit, labels) still reads clearly through it.
       map.addLayer({
         id: "fog-contours-sun",
         type: "fill",
         source: "fog-contours",
         filter: ["<", ["coalesce", ["get", "hours"], 0], 8.5],
         paint: {
-          "fill-color": "#fde047",
-          "fill-opacity": 0.55,
+          "fill-color": "#fef08a",
+          "fill-opacity": 0.4,
         },
       });
 

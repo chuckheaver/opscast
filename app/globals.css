@@ -77,6 +77,13 @@ body {
   margin: 0 auto;
   padding: 40px 24px 80px;
 }
+.page-h-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 4px;
+}
 .page-h {
   font-size: 36px;
   font-weight: 800;
@@ -87,6 +94,33 @@ body {
 .page-h em {
   color: #2563eb;
   font-style: normal;
+}
+.fog-fc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  margin-top: 6px;
+  background: #1c1917;
+  color: #fef08a;
+  border: 1px solid #1c1917;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.fog-fc-btn:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+.fog-fc-icon {
+  display: inline-flex;
+  align-items: center;
 }
 .page-sub {
   font-family: 'DM Mono', monospace;
