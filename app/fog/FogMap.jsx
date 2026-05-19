@@ -49,7 +49,7 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
     mapboxgl.accessToken = TOKEN;
     const map = new mapboxgl.Map({
       container: containerRef.current,
-      style: "mapbox://styles/mapbox/light-v11",
+      style: "mapbox://styles/mapbox/streets-v12",
       center: SF_CENTER,
       zoom: 11.2,
       minZoom: 10,
