@@ -3,11 +3,11 @@
 // Mapbox GL JS map. Renders:
 //   - SF neighborhood polygons as OUTLINES ONLY (no fill colour) so streets
 //     and labels stay visible underneath.
-//   - The USGS fog-contour polygons as the primary data layer, with three
-//     visual treatments by hours/day band:
-//       • < 8.5  → yellow fill + scattered sun-icon pattern
-//       • = 8.5  → light grey-yellow fill + scattered clouds pattern
-//       • > 8.5  → grey gradient (darker for higher fog hours)
+//   - The USGS fog-contour polygons as the primary data layer, in three
+//     visual bands by hours/day value:
+//       • < 8.5  → solid bright yellow
+//       • = 8.5  → warm yellow with scattered clouds pattern
+//       • ≥ 9    → grey gradient (darker for higher fog hours)
 //
 // Click and hover detection sit on an invisible "fog-click-target" fill
 // over the neighborhoods, so the user can pick anywhere inside SF
@@ -20,87 +20,8 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
 
-// 32×32 canvas pattern: yellow background with two small sun icons.
-// Used as the fill-pattern on the < 8.5 hrs contour layer.
-function buildSunIconsPattern() {
-  const size = 32;
-  const canvas = document.createElement("canvas");
-  canvas.width = size;
-  canvas.height = size;
-  const ctx = canvas.getContext("2d");
-
-  // Bright Sun-zone yellow.
-  ctx.fillStyle = "#fde047";
-  ctx.fillRect(0, 0, size, size);
-
-  // Each sun: small amber disc + 8 radial rays.
-  const drawSun = (cx, cy, r) => {
-    ctx.fillStyle = "#f59e0b";
-    ctx.strokeStyle = "#f59e0b";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.fill();
-    const inner = r * 1.5;
-    const outer = inner + r * 0.9;
-    for (let i = 0; i < 8; i++) {
-      const a = (Math.PI * 2 / 8) * i;
-      const ca = Math.cos(a), sa = Math.sin(a);
-      ctx.beginPath();
-      ctx.moveTo(cx + ca * inner, cy + sa * inner);
-      ctx.lineTo(cx + ca * outer, cy + sa * outer);
-      ctx.stroke();
-    }
-  };
-  drawSun(9, 10, 2);
-  drawSun(23, 22, 1.6);
-
-  return ctx.getImageData(0, 0, size, size);
-}
-
-// 32×32 canvas pattern: transparent background with a couple small "fog"
-// icons (three horizontal wavy lines — the universal weather symbol for
-// fog). Drawn over the grey-gradient fog band, so the underlying gradient
-// shade still drives the perceived intensity but each tile reads as
-// "actively foggy" rather than just "dark grey".
-function buildFogIconsPattern() {
-  const size = 32;
-  const canvas = document.createElement("canvas");
-  canvas.width = size;
-  canvas.height = size;
-  const ctx = canvas.getContext("2d");
-
-  ctx.clearRect(0, 0, size, size);
-  ctx.strokeStyle = "rgba(28, 25, 23, 0.8)";
-  ctx.lineCap = "round";
-  ctx.lineWidth = 1.1;
-
-  // 3 horizontal lines stacked vertically, lengths varied so they read as
-  // wisps. (cx, cy) is the icon centre.
-  const drawFog = (cx, cy, scale = 1) => {
-    const w = 8 * scale;
-    const sp = 2.8 * scale;
-    const lines = [
-      [-w * 0.40,  w * 0.40, -sp],
-      [-w * 0.50,  w * 0.50,   0],
-      [-w * 0.45,  w * 0.30,  sp],
-    ];
-    lines.forEach(([x1, x2, dy]) => {
-      ctx.beginPath();
-      ctx.moveTo(cx + x1, cy + dy);
-      ctx.lineTo(cx + x2, cy + dy);
-      ctx.stroke();
-    });
-  };
-
-  drawFog(9, 10, 1);
-  drawFog(22, 22, 0.85);
-
-  return ctx.getImageData(0, 0, size, size);
-}
-
-// 32×32 canvas pattern: light grey-yellow background with sparse grey
-// cloud puffs, biased to the west side of the tile. Used as the fill-pattern
+// 32×32 canvas pattern: warm yellow background with sparse grey cloud
+// puffs, biased to the west side of the tile. Used as the fill-pattern
 // on the = 8.5 hrs contour layer.
 const SCATTERED_PUFFS = [
   [5, 8, 2.5],
@@ -116,8 +37,9 @@ function buildScatteredCloudsPattern() {
   canvas.width = size;
   canvas.height = size;
   const ctx = canvas.getContext("2d");
-  // Light grey-yellow base — "the air just before the marine layer rolls in".
-  ctx.fillStyle = "#e5dfc5";
+  // Warm yellow base — slightly muted from the Sun zone yellow so the
+  // 8.5 transition reads as "still mostly sunny, but clouds rolling in".
+  ctx.fillStyle = "#f5dc7e";
   ctx.fillRect(0, 0, size, size);
   ctx.fillStyle = "rgba(120, 113, 108, 0.85)";
   SCATTERED_PUFFS.forEach(([cx, cy, r]) => {
@@ -131,7 +53,6 @@ function buildScatteredCloudsPattern() {
 // Layer IDs the "Show fog data" toggle flips on and off as a group.
 const CONTOUR_LAYER_IDS = [
   "fog-contours-fog",
-  "fog-contours-fog-icons",
   "fog-contours-transition",
   "fog-contours-sun",
 ];
@@ -169,14 +90,8 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
     map.on("load", () => {
       // Register both patterns up-front so the contour layers below can
       // reference them.
-      if (!map.hasImage("sun-icons")) {
-        map.addImage("sun-icons", buildSunIconsPattern());
-      }
       if (!map.hasImage("scattered-clouds")) {
         map.addImage("scattered-clouds", buildScatteredCloudsPattern());
-      }
-      if (!map.hasImage("fog-icons")) {
-        map.addImage("fog-icons", buildFogIconsPattern());
       }
 
       // ── Neighborhood source ─────────────────────────────────────────
@@ -201,39 +116,26 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         data: { type: "FeatureCollection", features: [] },
       });
 
-      // High-fog band (>8.5): grey gradient, darker for higher hours.
-      // Drawn before the lower bands so the small inner high-fog polygons
-      // stack on top visually after we add the Transition / Sun layers.
+      // High-fog band (≥9): grey gradient, darker for higher hours.
+      // The transition into grey starts at 9, not 8.6, so the 8.5 contour
+      // can read as warm-yellow-with-clouds rather than nearly-grey.
       map.addLayer({
         id: "fog-contours-fog",
         type: "fill",
         source: "fog-contours",
-        filter: [">", ["coalesce", ["get", "hours"], 0], 8.5],
+        filter: [">=", ["coalesce", ["get", "hours"], 0], 9],
         paint: {
           "fill-color": [
             "interpolate", ["linear"], ["get", "hours"],
-            8.6,  "#d6d3d1",
+            9,    "#d6d3d1",
             10.5, "#78716c",
             12.5, "#292524",
           ],
           "fill-opacity": 0.45,
         },
       });
-      // Fog-icon overlay for the same band — the pattern has a transparent
-      // background, so the gradient colour below still drives the shade
-      // and these glyphs just add a "this is fog" cue per tile.
-      map.addLayer({
-        id: "fog-contours-fog-icons",
-        type: "fill",
-        source: "fog-contours",
-        filter: [">", ["coalesce", ["get", "hours"], 0], 8.5],
-        paint: {
-          "fill-pattern": "fog-icons",
-          "fill-opacity": 0.6,
-        },
-      });
 
-      // Transition band (=8.5): scattered-clouds pattern on grey-yellow.
+      // Transition band (=8.5): scattered-clouds pattern on warm yellow.
       map.addLayer({
         id: "fog-contours-transition",
         type: "fill",
@@ -241,18 +143,18 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         filter: ["==", ["coalesce", ["get", "hours"], 0], 8.5],
         paint: {
           "fill-pattern": "scattered-clouds",
-          "fill-opacity": 0.55,
+          "fill-opacity": 0.6,
         },
       });
 
-      // Sun band (<8.5): sun-icons pattern on bright yellow.
+      // Sun band (<8.5): solid bright yellow.
       map.addLayer({
         id: "fog-contours-sun",
         type: "fill",
         source: "fog-contours",
         filter: ["<", ["coalesce", ["get", "hours"], 0], 8.5],
         paint: {
-          "fill-pattern": "sun-icons",
+          "fill-color": "#fde047",
           "fill-opacity": 0.55,
         },
       });

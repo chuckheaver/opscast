@@ -62,6 +62,9 @@ export default function FogSidebar({
       <header className="fog-h">
         <div className="fog-brand">Summer Fog Map</div>
         <div className="fog-tag">Jun–Aug</div>
+        <div className="fog-note">
+          *Satellite historic driven data of the average hrs per day that a specific location receives fog.
+        </div>
       </header>
 
       <label className="fog-lbl">San Francisco address</label>
