@@ -1,23 +1,23 @@
 // Fog-hours → color + human label.
 //
 // Values are AVERAGE SUMMER fog/low-cloud hours per day (USGS GOES, 1999–2009).
-// SF observed range: ~6 hrs/day (NE bayside, Fishermans Wharf) to
-// ~13 hrs/day (Outer Sunset, Parkmerced, Lake Merced).
+// SF observed range: ~6 hrs/day (NE bayside) to ~13 hrs/day (Outer Sunset).
 //
-// The color scale runs from warm beige (low fog) to deep slate-blue (heavy
-// marine layer). Stops cover the full plausible SF range so neighborhoods
-// near the extremes don't clamp.
+// Three zones:
+//   • Sun         — low fog          → bright yellow
+//   • Transition  — mid-range hours  → warm beige fading to cool grey
+//   • Fog         — high fog         → dark grey
 //
 // `riskColorStops` is consumed by a Mapbox `interpolate` expression:
 //   ["interpolate", ["linear"], <input>, ...stops.flat()]
 
 export const riskColorStops = [
-  [4,  "#f3eee5"],
-  [6,  "#e8d4a8"],
-  [8,  "#b7c5cf"],
-  [10, "#7f9ab0"],
-  [12, "#4d6f8c"],
-  [14, "#1e3a5f"],
+  [4,  "#fbbf24"], // Sun        — bright amber
+  [6,  "#fde68a"], // Sun        — pale yellow
+  [8,  "#d6d3d1"], // Transition — warm light grey
+  [10, "#a8a29e"], // Transition — mid grey
+  [12, "#57534e"], // Fog        — dark grey
+  [14, "#292524"], // Fog        — near-black
 ];
 
 export function fogColor(hours) {
@@ -28,10 +28,9 @@ export function fogColor(hours) {
   return riskColorStops[0][1];
 }
 
+// Three-zone bucketing matching the color gradient.
 export function fogLabel(hours) {
-  if (hours >= 12) return "Famously socked-in";
-  if (hours >= 10) return "Frequently foggy";
-  if (hours >= 8)  return "Often misty";
-  if (hours >= 6)  return "Occasionally foggy";
-  return "Mostly clear";
+  if (hours >= 11) return "Fog";
+  if (hours >= 8)  return "Transition";
+  return "Sun";
 }
