@@ -58,6 +58,47 @@ function buildSunIconsPattern() {
   return ctx.getImageData(0, 0, size, size);
 }
 
+// 32×32 canvas pattern: transparent background with a couple small "fog"
+// icons (three horizontal wavy lines — the universal weather symbol for
+// fog). Drawn over the grey-gradient fog band, so the underlying gradient
+// shade still drives the perceived intensity but each tile reads as
+// "actively foggy" rather than just "dark grey".
+function buildFogIconsPattern() {
+  const size = 32;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d");
+
+  ctx.clearRect(0, 0, size, size);
+  ctx.strokeStyle = "rgba(28, 25, 23, 0.8)";
+  ctx.lineCap = "round";
+  ctx.lineWidth = 1.1;
+
+  // 3 horizontal lines stacked vertically, lengths varied so they read as
+  // wisps. (cx, cy) is the icon centre.
+  const drawFog = (cx, cy, scale = 1) => {
+    const w = 8 * scale;
+    const sp = 2.8 * scale;
+    const lines = [
+      [-w * 0.40,  w * 0.40, -sp],
+      [-w * 0.50,  w * 0.50,   0],
+      [-w * 0.45,  w * 0.30,  sp],
+    ];
+    lines.forEach(([x1, x2, dy]) => {
+      ctx.beginPath();
+      ctx.moveTo(cx + x1, cy + dy);
+      ctx.lineTo(cx + x2, cy + dy);
+      ctx.stroke();
+    });
+  };
+
+  drawFog(9, 10, 1);
+  drawFog(22, 22, 0.85);
+
+  return ctx.getImageData(0, 0, size, size);
+}
+
 // 32×32 canvas pattern: light grey-yellow background with sparse grey
 // cloud puffs, biased to the west side of the tile. Used as the fill-pattern
 // on the = 8.5 hrs contour layer.
@@ -126,6 +167,9 @@ export default function FogMap({ geojson, contours, picked, onPickFeature }) {
       if (!map.hasImage("scattered-clouds")) {
         map.addImage("scattered-clouds", buildScatteredCloudsPattern());
       }
+      if (!map.hasImage("fog-icons")) {
+        map.addImage("fog-icons", buildFogIconsPattern());
+      }
 
       // ── Neighborhood source ─────────────────────────────────────────
       map.addSource("fog", {
@@ -165,6 +209,19 @@ export default function FogMap({ geojson, contours, picked, onPickFeature }) {
             12.5, "#292524",
           ],
           "fill-opacity": 0.45,
+        },
+      });
+      // Fog-icon overlay for the same band — the pattern has a transparent
+      // background, so the gradient colour below still drives the shade
+      // and these glyphs just add a "this is fog" cue per tile.
+      map.addLayer({
+        id: "fog-contours-fog-icons",
+        type: "fill",
+        source: "fog-contours",
+        filter: [">", ["coalesce", ["get", "hours"], 0], 8.5],
+        paint: {
+          "fill-pattern": "fog-icons",
+          "fill-opacity": 0.6,
         },
       });
 
