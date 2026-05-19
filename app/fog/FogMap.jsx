@@ -90,6 +90,40 @@ export default function FogMap({ geojson, picked, onPickFeature }) {
         },
         filter: ["==", ["get", "id"], ""],
       });
+      // Neighborhood name labels. Placed at each polygon's pole-of-inaccessibility
+      // by Mapbox, with a white halo so they stay readable over any color in the
+      // choropleth. Faded out at far zooms where labels would crowd each other.
+      map.addLayer({
+        id: "fog-labels",
+        type: "symbol",
+        source: "fog",
+        layout: {
+          "text-field": ["get", "name"],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": [
+            "interpolate", ["linear"], ["zoom"],
+            11, 9,
+            13, 11,
+            15, 13,
+          ],
+          "text-max-width": 8,
+          "text-padding": 2,
+          "text-allow-overlap": false,
+          "symbol-placement": "point",
+        },
+        paint: {
+          "text-color": "#1c1917",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.4,
+          "text-halo-blur": 0.4,
+          "text-opacity": [
+            "interpolate", ["linear"], ["zoom"],
+            10.5, 0,
+            11.5, 0.85,
+            14, 1,
+          ],
+        },
+      });
 
       map.on("mousemove", "fog-fill", e => {
         if (!e.features?.length) return;
