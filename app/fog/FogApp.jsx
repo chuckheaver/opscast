@@ -19,8 +19,7 @@ export default function FogApp() {
   const [geojson, setGeojson] = useState(null);
   const [contours, setContours] = useState(null);
   const [dataErr, setDataErr] = useState("");
-  const [picked, setPicked] = useState(null); // { feature, point: [lng, lat], address }
-  const [showContours, setShowContours] = useState(false);
+  const [picked, setPicked] = useState(null); // { feature, point: [lng, lat], address, contour }
 
   useEffect(() => {
     let cancelled = false;
@@ -79,14 +78,10 @@ export default function FogApp() {
         onPickFromAddress={pickFromAddress}
         dataErr={dataErr}
         ready={!!geojson}
-        contoursAvailable={!!contours}
-        showContours={showContours}
-        onToggleContours={setShowContours}
       />
       <FogMap
         geojson={geojson}
         contours={contours}
-        showContours={showContours}
         picked={picked}
         onPickFeature={pickFromMap}
       />

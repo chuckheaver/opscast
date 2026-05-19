@@ -1,39 +1,82 @@
 'use client';
 
-// Mapbox GL JS map. Renders the SF neighborhood polygons colored by
-// fog hours, and lets the user click one. The picked-point marker is
-// driven by the parent (so address searches and map clicks share state).
+// Mapbox GL JS map. Renders:
+//   - SF neighborhood polygons as OUTLINES ONLY (no fill colour) so streets
+//     and labels stay visible underneath.
+//   - The USGS fog-contour polygons as the primary data layer, with three
+//     visual treatments by hours/day band:
+//       • < 8.5  → yellow fill + scattered sun-icon pattern
+//       • = 8.5  → light grey-yellow fill + scattered clouds pattern
+//       • > 8.5  → grey gradient (darker for higher fog hours)
+//
+// Click and hover detection sit on an invisible "fog-click-target" fill
+// over the neighborhoods, so the user can pick anywhere inside SF
+// regardless of which (if any) contour layer the cursor is on.
 
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { riskColorStops, TRANSITION_RANGE } from "./lib/risk";
 
-// 32×32 canvas pattern: light-yellow background with a few small grey
-// cloud puffs weighted toward the west side of the tile. Read across a
-// polygon's tiled fill, that lopsided distribution suggests marine layer
-// spilling in from the Pacific. Used as the fog-transition fill-pattern.
-//
-// Each puff = [centerX, centerY, radius] in canvas coordinates.
-// Two small clusters, both biased to the western half (x < 16):
+const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+const SF_CENTER = [-122.447, 37.7649];
+
+// 32×32 canvas pattern: yellow background with two small sun icons.
+// Used as the fill-pattern on the < 8.5 hrs contour layer.
+function buildSunIconsPattern() {
+  const size = 32;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d");
+
+  // Bright Sun-zone yellow.
+  ctx.fillStyle = "#fde047";
+  ctx.fillRect(0, 0, size, size);
+
+  // Each sun: small amber disc + 8 radial rays.
+  const drawSun = (cx, cy, r) => {
+    ctx.fillStyle = "#f59e0b";
+    ctx.strokeStyle = "#f59e0b";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fill();
+    const inner = r * 1.5;
+    const outer = inner + r * 0.9;
+    for (let i = 0; i < 8; i++) {
+      const a = (Math.PI * 2 / 8) * i;
+      const ca = Math.cos(a), sa = Math.sin(a);
+      ctx.beginPath();
+      ctx.moveTo(cx + ca * inner, cy + sa * inner);
+      ctx.lineTo(cx + ca * outer, cy + sa * outer);
+      ctx.stroke();
+    }
+  };
+  drawSun(9, 10, 2);
+  drawSun(23, 22, 1.6);
+
+  return ctx.getImageData(0, 0, size, size);
+}
+
+// 32×32 canvas pattern: light grey-yellow background with sparse grey
+// cloud puffs, biased to the west side of the tile. Used as the fill-pattern
+// on the = 8.5 hrs contour layer.
 const SCATTERED_PUFFS = [
-  // Upper-left cluster — slightly bigger (the western "front edge")
   [5, 8, 2.5],
   [8, 8, 3],
   [11, 8, 2.5],
   [8, 6, 2],
-  // Lower-left wisp — trailing, smaller
   [4, 22, 2],
   [7, 23, 2.5],
 ];
-
 function buildScatteredCloudsPattern() {
   const size = 32;
   const canvas = document.createElement("canvas");
   canvas.width = size;
   canvas.height = size;
   const ctx = canvas.getContext("2d");
-  ctx.fillStyle = "#fef08a";
+  // Light grey-yellow base — "the air just before the marine layer rolls in".
+  ctx.fillStyle = "#e5dfc5";
   ctx.fillRect(0, 0, size, size);
   ctx.fillStyle = "rgba(120, 113, 108, 0.85)";
   SCATTERED_PUFFS.forEach(([cx, cy, r]) => {
@@ -44,10 +87,7 @@ function buildScatteredCloudsPattern() {
   return ctx.getImageData(0, 0, size, size);
 }
 
-const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-const SF_CENTER = [-122.447, 37.7649];
-
-export default function FogMap({ geojson, contours, showContours, picked, onPickFeature }) {
+export default function FogMap({ geojson, contours, picked, onPickFeature }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -78,69 +118,88 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
     mapRef.current = map;
 
     map.on("load", () => {
-      // Register the scattered-clouds pattern before any layer uses it.
+      // Register both patterns up-front so the contour layers below can
+      // reference them.
+      if (!map.hasImage("sun-icons")) {
+        map.addImage("sun-icons", buildSunIconsPattern());
+      }
       if (!map.hasImage("scattered-clouds")) {
         map.addImage("scattered-clouds", buildScatteredCloudsPattern());
       }
+
+      // ── Neighborhood source ─────────────────────────────────────────
       map.addSource("fog", {
         type: "geojson",
         data: { type: "FeatureCollection", features: [] },
         promoteId: "id",
       });
+
+      // Invisible fill — exists purely to catch click/hover events anywhere
+      // inside an SF neighborhood. fill-opacity 0 still registers hits.
       map.addLayer({
-        id: "fog-fill",
+        id: "fog-click-target",
         type: "fill",
         source: "fog",
-        // Skip the transition band on the base layer so the pattern overlay
-        // below isn't tinted by the underlying yellow→grey interpolation.
-        filter: ["any",
-          ["<", ["coalesce", ["get", "fogHours"], 0], TRANSITION_RANGE[0]],
-          [">", ["coalesce", ["get", "fogHours"], 0], TRANSITION_RANGE[1]],
-        ],
+        paint: { "fill-color": "#000", "fill-opacity": 0 },
+      });
+
+      // ── Contour source (USGS fog isolines clipped to SF) ────────────
+      map.addSource("fog-contours", {
+        type: "geojson",
+        data: { type: "FeatureCollection", features: [] },
+      });
+
+      // High-fog band (>8.5): grey gradient, darker for higher hours.
+      // Drawn before the lower bands so the small inner high-fog polygons
+      // stack on top visually after we add the Transition / Sun layers.
+      map.addLayer({
+        id: "fog-contours-fog",
+        type: "fill",
+        source: "fog-contours",
+        filter: [">", ["coalesce", ["get", "hours"], 0], 8.5],
         paint: {
           "fill-color": [
-            "interpolate",
-            ["linear"],
-            ["coalesce", ["get", "fogHours"], 0],
-            ...riskColorStops.flat(),
+            "interpolate", ["linear"], ["get", "hours"],
+            8.6,  "#d6d3d1",
+            10.5, "#78716c",
+            12.5, "#292524",
           ],
-          "fill-opacity": [
-            "case",
-            ["boolean", ["feature-state", "picked"], false],
-            0.75,
-            0.4,
-          ],
+          "fill-opacity": 0.45,
         },
       });
-      // Transition-zone overlay: sparse scattered-clouds pattern on a
-      // light-yellow base, weighted toward the western edge of each tile
-      // so the polygon reads as marine layer rolling in from the Pacific.
-      // Filter mirrors the Sun/Fog split above so every feature is
-      // rendered by exactly one fill layer.
+
+      // Transition band (=8.5): scattered-clouds pattern on grey-yellow.
       map.addLayer({
-        id: "fog-transition",
+        id: "fog-contours-transition",
         type: "fill",
-        source: "fog",
-        filter: ["all",
-          [">=", ["coalesce", ["get", "fogHours"], 0], TRANSITION_RANGE[0]],
-          ["<=", ["coalesce", ["get", "fogHours"], 0], TRANSITION_RANGE[1]],
-        ],
+        source: "fog-contours",
+        filter: ["==", ["coalesce", ["get", "hours"], 0], 8.5],
         paint: {
           "fill-pattern": "scattered-clouds",
-          "fill-opacity": [
-            "case",
-            ["boolean", ["feature-state", "picked"], false],
-            0.75,
-            0.5,
-          ],
+          "fill-opacity": 0.55,
         },
       });
+
+      // Sun band (<8.5): sun-icons pattern on bright yellow.
+      map.addLayer({
+        id: "fog-contours-sun",
+        type: "fill",
+        source: "fog-contours",
+        filter: ["<", ["coalesce", ["get", "hours"], 0], 8.5],
+        paint: {
+          "fill-pattern": "sun-icons",
+          "fill-opacity": 0.55,
+        },
+      });
+
+      // ── Neighborhood outlines + hover highlight (on top of contours) ─
       map.addLayer({
         id: "fog-outline",
         type: "line",
         source: "fog",
         paint: {
           "line-color": "#1c1917",
+          "line-opacity": 0.7,
           "line-width": [
             "case",
             ["boolean", ["feature-state", "picked"], false],
@@ -153,67 +212,11 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         id: "fog-hover",
         type: "line",
         source: "fog",
-        paint: {
-          "line-color": "#2563eb",
-          "line-width": 2,
-        },
+        paint: { "line-color": "#2563eb", "line-width": 2 },
         filter: ["==", ["get", "id"], ""],
       });
-      // Toggleable raw-USGS contour overlay. Source registered now so the
-      // sidebar toggle can flip visibility without re-mounting layers.
-      // Data is fetched separately in FogApp; we lazy-load it into the
-      // source when the prop arrives. Layers default to "none" until
-      // the user enables the toggle.
-      map.addSource("fog-contours", {
-        type: "geojson",
-        data: { type: "FeatureCollection", features: [] },
-      });
-      // Contour fills sit very faintly behind the colored lines so each
-      // isoline visibly belongs to a band, without obscuring the streets
-      // or the neighborhood choropleth underneath.
-      map.addLayer({
-        id: "fog-contours-fill",
-        type: "fill",
-        source: "fog-contours",
-        layout: { visibility: "none" },
-        paint: {
-          "fill-color": [
-            "interpolate", ["linear"], ["coalesce", ["get", "hours"], 0],
-            6,   "#fde047",
-            8,   "#d6d3d1",
-            10,  "#78716c",
-            13,  "#292524",
-          ],
-          "fill-opacity": 0.1,
-        },
-      });
-      // Contour lines themselves are now the primary data presentation:
-      // colored by the same gradient, drawn smooth with round joins so
-      // the Chaikin-smoothed polygons read as natural isolines.
-      map.addLayer({
-        id: "fog-contours-line",
-        type: "line",
-        source: "fog-contours",
-        layout: {
-          visibility: "none",
-          "line-cap": "round",
-          "line-join": "round",
-        },
-        paint: {
-          "line-color": [
-            "interpolate", ["linear"], ["coalesce", ["get", "hours"], 0],
-            6,   "#fde047",
-            8,   "#d6d3d1",
-            10,  "#78716c",
-            13,  "#292524",
-          ],
-          "line-width": 2.5,
-          "line-opacity": 0.85,
-        },
-      });
-      // Neighborhood name labels. Placed at each polygon's pole-of-inaccessibility
-      // by Mapbox, with a white halo so they stay readable over any color in the
-      // choropleth. Faded out at far zooms where labels would crowd each other.
+
+      // Neighborhood name labels — same as before, fade in past zoom 11.5.
       map.addLayer({
         id: "fog-labels",
         type: "symbol",
@@ -246,23 +249,20 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         },
       });
 
-      // Same handlers apply to both fill layers (Sun/Fog gradient + Transition
-      // pattern). Listening on both ensures every neighborhood is clickable.
-      const PICK_LAYERS = ["fog-fill", "fog-transition"];
-      PICK_LAYERS.forEach(layerId => {
-        map.on("mousemove", layerId, e => {
-          if (!e.features?.length) return;
-          map.getCanvas().style.cursor = "pointer";
-          map.setFilter("fog-hover", ["==", ["get", "id"], e.features[0].properties.id]);
-        });
-        map.on("mouseleave", layerId, () => {
-          map.getCanvas().style.cursor = "";
-          map.setFilter("fog-hover", ["==", ["get", "id"], ""]);
-        });
-        map.on("click", layerId, e => {
-          if (!e.features?.length) return;
-          onPickRef.current(e.features[0], [e.lngLat.lng, e.lngLat.lat]);
-        });
+      // Click + hover handlers ride the invisible fog-click-target so they
+      // fire regardless of which contour layer the cursor is over.
+      map.on("mousemove", "fog-click-target", e => {
+        if (!e.features?.length) return;
+        map.getCanvas().style.cursor = "pointer";
+        map.setFilter("fog-hover", ["==", ["get", "id"], e.features[0].properties.id]);
+      });
+      map.on("mouseleave", "fog-click-target", () => {
+        map.getCanvas().style.cursor = "";
+        map.setFilter("fog-hover", ["==", ["get", "id"], ""]);
+      });
+      map.on("click", "fog-click-target", e => {
+        if (!e.features?.length) return;
+        onPickRef.current(e.features[0], [e.lngLat.lng, e.lngLat.lat]);
       });
     });
 
@@ -272,7 +272,7 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
     };
   }, []);
 
-  // Push GeoJSON into the source once it's loaded.
+  // Push neighborhood GeoJSON into its source once the style loads.
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !geojson || dataAppliedRef.current) return;
@@ -300,20 +300,6 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
     else map.once("load", apply);
   }, [contours]);
 
-  // Toggle the contour overlay layers' visibility.
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map) return;
-    const apply = () => {
-      const vis = showContours ? "visible" : "none";
-      ["fog-contours-fill", "fog-contours-line"].forEach(id => {
-        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
-      });
-    };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
-  }, [showContours]);
-
   // Sync picked state: drop a marker, highlight the feature, fly there.
   useEffect(() => {
     const map = mapRef.current;
@@ -323,8 +309,6 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
       markerRef.current.remove();
       markerRef.current = null;
     }
-    // Clear previous picked feature-state. (Tracking the prior id avoids
-    // having to iterate all features.)
     if (map.getSource("fog")) {
       geojson.features.forEach(f => {
         map.setFeatureState({ source: "fog", id: f.properties.id }, { picked: false });
