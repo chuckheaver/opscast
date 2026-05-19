@@ -47,11 +47,12 @@ function buildScatteredCloudsPattern() {
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
 
-export default function FogMap({ geojson, picked, onPickFeature }) {
+export default function FogMap({ geojson, contours, showContours, picked, onPickFeature }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const dataAppliedRef = useRef(false);
+  const contoursAppliedRef = useRef(false);
   const onPickRef = useRef(onPickFeature);
 
   // Keep latest click handler reachable from the map's event listener
@@ -158,6 +159,46 @@ export default function FogMap({ geojson, picked, onPickFeature }) {
         },
         filter: ["==", ["get", "id"], ""],
       });
+      // Toggleable raw-USGS contour overlay. Source registered now so the
+      // sidebar toggle can flip visibility without re-mounting layers.
+      // Data is fetched separately in FogApp; we lazy-load it into the
+      // source when the prop arrives. Layers default to "none" until
+      // the user enables the toggle.
+      map.addSource("fog-contours", {
+        type: "geojson",
+        data: { type: "FeatureCollection", features: [] },
+      });
+      map.addLayer({
+        id: "fog-contours-fill",
+        type: "fill",
+        source: "fog-contours",
+        layout: { visibility: "none" },
+        paint: {
+          // Same gradient as the choropleth but a single thin opacity, so
+          // higher-hour contours read as deeper grey-blue tints sitting on
+          // top of the neighborhood layer.
+          "fill-color": [
+            "interpolate", ["linear"], ["coalesce", ["get", "hours"], 0],
+            6,   "#fde047",
+            8,   "#d6d3d1",
+            10,  "#78716c",
+            13,  "#292524",
+          ],
+          "fill-opacity": 0.25,
+        },
+      });
+      map.addLayer({
+        id: "fog-contours-line",
+        type: "line",
+        source: "fog-contours",
+        layout: { visibility: "none" },
+        paint: {
+          "line-color": "#1e3a5f",
+          "line-width": 1.4,
+          "line-dasharray": [3, 2],
+          "line-opacity": 0.8,
+        },
+      });
       // Neighborhood name labels. Placed at each polygon's pole-of-inaccessibility
       // by Mapbox, with a white halo so they stay readable over any color in the
       // choropleth. Faded out at far zooms where labels would crowd each other.
@@ -232,6 +273,34 @@ export default function FogMap({ geojson, picked, onPickFeature }) {
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [geojson]);
+
+  // Push the raw USGS contours into their source when the prop arrives.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !contours || contoursAppliedRef.current) return;
+    const apply = () => {
+      const src = map.getSource("fog-contours");
+      if (!src) return;
+      src.setData(contours);
+      contoursAppliedRef.current = true;
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [contours]);
+
+  // Toggle the contour overlay layers' visibility.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showContours ? "visible" : "none";
+      ["fog-contours-fill", "fog-contours-line"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showContours]);
 
   // Sync picked state: drop a marker, highlight the feature, fly there.
   useEffect(() => {

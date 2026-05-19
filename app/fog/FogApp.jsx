@@ -13,11 +13,14 @@ import FogSidebar from "./FogSidebar";
 import { findNeighborhoodForPoint } from "./lib/spatial";
 
 const DATA_URL = "/data/sf-fog-neighborhoods.geojson";
+const CONTOURS_URL = "/data/sf-fog-contours.geojson";
 
 export default function FogApp() {
   const [geojson, setGeojson] = useState(null);
+  const [contours, setContours] = useState(null);
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { feature, point: [lng, lat], address }
+  const [showContours, setShowContours] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -32,6 +35,15 @@ export default function FogApp() {
       .catch(e => {
         if (!cancelled) setDataErr(e.message);
       });
+
+    // Contour overlay is optional — silently skip if the file isn't there.
+    fetch(CONTOURS_URL)
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => {
+        if (!cancelled && d) setContours(d);
+      })
+      .catch(() => {});
+
     return () => {
       cancelled = true;
     };
@@ -61,8 +73,17 @@ export default function FogApp() {
         onPickFromAddress={pickFromAddress}
         dataErr={dataErr}
         ready={!!geojson}
+        contoursAvailable={!!contours}
+        showContours={showContours}
+        onToggleContours={setShowContours}
       />
-      <FogMap geojson={geojson} picked={picked} onPickFeature={pickFromMap} />
+      <FogMap
+        geojson={geojson}
+        contours={contours}
+        showContours={showContours}
+        picked={picked}
+        onPickFeature={pickFromMap}
+      />
     </div>
   );
 }

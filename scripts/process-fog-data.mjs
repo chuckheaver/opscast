@@ -100,6 +100,20 @@ function main() {
 
   const withData = fc.features.filter(f => f.properties.fogHours != null).length;
   console.log(`✓ wrote ${OUT_PATH} (${fc.features.length} neighborhoods, ${withData} with fog data)`);
+
+  // 4. Separate "raw contours" export for the toggleable overlay on /fog.
+  //    Clips the USGS polygons to a slightly-expanded SF bbox so the file
+  //    stays small, and normalizes the contour attribute to actual hours.
+  const CONTOURS_OUT = join(ROOT, "public", "data", "sf-fog-contours.geojson");
+  run([
+    join(TMP_DIR, "fog.json"),
+    "-clip", "bbox=-122.55,37.70,-122.35,37.85",
+    "-each", `hours = Math.round((${FOG_HOURS_FIELD} / ${FOG_HOURS_DIVISOR}) * 10) / 10`,
+    "-filter-fields", "hours",
+    "-o", CONTOURS_OUT, "format=geojson",
+  ]);
+  const contours = JSON.parse(readFileSync(CONTOURS_OUT, "utf8"));
+  console.log(`✓ wrote ${CONTOURS_OUT} (${contours.features.length} raw fog contour polygons in SF)`);
 }
 
 main();

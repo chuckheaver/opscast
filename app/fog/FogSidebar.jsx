@@ -7,7 +7,15 @@ import { useEffect, useRef, useState } from "react";
 import { geocodeSuggest } from "./lib/geocode";
 import { fogLabel, fogColor } from "./lib/risk";
 
-export default function FogSidebar({ picked, onPickFromAddress, dataErr, ready }) {
+export default function FogSidebar({
+  picked,
+  onPickFromAddress,
+  dataErr,
+  ready,
+  contoursAvailable,
+  showContours,
+  onToggleContours,
+}) {
   const [q, setQ] = useState("");
   const [sugs, setSugs] = useState([]);
   const [open, setOpen] = useState(false);
@@ -98,6 +106,20 @@ export default function FogSidebar({ picked, onPickFromAddress, dataErr, ready }
         <div className="fog-empty">
           Search for an address above, or click a neighborhood on the map.
         </div>
+      )}
+
+      {contoursAvailable && (
+        <label className="fog-toggle">
+          <input
+            type="checkbox"
+            checked={showContours}
+            onChange={e => onToggleContours(e.target.checked)}
+          />
+          <span className="fog-toggle-label">Show raw fog contours</span>
+          <span className="fog-toggle-help">
+            Overlay the original USGS GOES isolines on top of the neighborhoods.
+          </span>
+        </label>
       )}
 
       <footer className="fog-footer">
