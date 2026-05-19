@@ -70,7 +70,7 @@ export default function FogSidebar({
         </div>
       </header>
 
-      <label className="fog-lbl">San Francisco address</label>
+      <label className="fog-lbl">Bay Area address</label>
       <div className="fog-search">
         <div className="fog-search-row">
           <input

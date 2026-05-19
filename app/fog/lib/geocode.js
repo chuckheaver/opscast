@@ -1,13 +1,16 @@
-// Mapbox forward geocoding, scoped to San Francisco.
+// Mapbox forward geocoding, scoped to the Bay Area (matches the contour
+// data extent: Pt Reyes → San Jose, Pacific coast → East Bay hills).
 // Returns up to 5 suggestions as { id, text, place_name, center: [lng, lat] }.
 //
-// `proximity` and a tight `bbox` around the SF peninsula bias results.
-// `country=us` cuts down on noise. Token is the public NEXT_PUBLIC_MAPBOX_TOKEN.
+// `proximity` keeps SF results ranked first when the query is ambiguous;
+// `bbox` keeps the suggestion list inside the Bay Area; `country=us`
+// trims noise. Token is the public NEXT_PUBLIC_MAPBOX_TOKEN.
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-// Rough bbox around SF (west, south, east, north).
-const SF_BBOX = "-122.55,37.70,-122.35,37.84";
+// Bay Area bbox (west, south, east, north) — covers Marin through San Jose,
+// matching the clipped USGS contour coverage on the map.
+const BAY_BBOX = "-123.00,37.20,-121.65,38.20";
 const SF_PROXIMITY = "-122.447,37.7649";
 
 export async function geocodeSuggest(q) {
@@ -18,7 +21,7 @@ export async function geocodeSuggest(q) {
     `&autocomplete=true` +
     `&country=us` +
     `&types=address,poi,place` +
-    `&bbox=${SF_BBOX}` +
+    `&bbox=${BAY_BBOX}` +
     `&proximity=${SF_PROXIMITY}` +
     `&limit=5`;
   const r = await fetch(url);
