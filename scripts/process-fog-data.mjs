@@ -3,28 +3,12 @@
 // Build pipeline: SF neighborhood + historical fog shapefiles
 //                 ──►  public/data/sf-fog-neighborhoods.geojson
 //
-// What this does
-// --------------
-// 1. Reads two shapefile bundles from data/raw/:
-//      - neighborhoods.shp  (polygons, one per SF neighborhood)
-//      - fog.shp            (polygons of historical fog hours, e.g. contour
-//                            bands derived from GOES satellite imagery)
-// 2. Uses mapshaper to spatial-join the fog polygons onto neighborhoods,
-//    aggregating the fog-hours attribute by AREA-WEIGHTED MEAN. (Sum is
-//    rarely what you want — it would penalize bigger neighborhoods.)
-// 3. Cleans, simplifies, and writes a single GeoJSON suitable for the
-//    client to fetch directly.
+// Defaults wired for:
+//   - data/raw/neighborhoods.shp  ("SF Find Neighborhoods" — name field)
+//   - data/raw/fog_belt_zones.shp (USGS GOES FLCC contours — `contour` field
+//                                  stored as hours × 100, summer hrs/day)
 //
-// You will likely need to edit two things to match your data:
-//   - FOG_HOURS_FIELD: the attribute name on your fog shapefile that holds
-//                      the annual hours (e.g. "FOG_HRS", "hours_yr").
-//   - NEIGH_NAME_FIELD: the attribute on your neighborhood shapefile that
-//                       holds the human-readable name (e.g. "name", "nhood").
-//
-// Run:
-//   node scripts/process-fog-data.mjs
-//
-// Requires: `mapshaper` (already a dev dep) reachable via npx.
+// To swap in different shapefiles, edit the constants below.
 
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -38,11 +22,21 @@ const OUT_PATH = join(ROOT, "public", "data", "sf-fog-neighborhoods.geojson");
 const TMP_DIR = join(ROOT, "data", "tmp");
 
 const NEIGH_SHP = join(RAW_DIR, "neighborhoods.shp");
-const FOG_SHP = join(RAW_DIR, "fog.shp");
+const FOG_SHP = join(RAW_DIR, "fog_belt_zones.shp");
 
-// ↓ EDIT THESE to match your shapefiles' attribute names.
-const FOG_HOURS_FIELD = "FOG_HRS";
+// Attribute on the fog shapefile holding the fog measurement.
+const FOG_HOURS_FIELD = "contour";
+
+// USGS stores `contour` as (hours × 100), so e.g. 1400 = 14.0 hrs/day.
+// Set to 1 if your dataset already encodes whole hours.
+const FOG_HOURS_DIVISOR = 100;
+
+// Attribute on the neighborhoods shapefile holding the human-readable name.
 const NEIGH_NAME_FIELD = "name";
+
+// Unit string baked into the output metadata. Updated to reflect the USGS
+// dataset, which measures *summer daytime* fog/low-cloud cover per day.
+const UNITS = "fogHours = average summer fog/low-cloud hrs per day (USGS GOES, 1999-2009)";
 
 function ensureInputs() {
   const missing = [];
@@ -69,19 +63,15 @@ function main() {
   mkdirSync(TMP_DIR, { recursive: true });
   mkdirSync(dirname(OUT_PATH), { recursive: true });
 
-  // Step 1: reproject both layers to WGS84 (Mapbox needs lng/lat).
+  // 1. Reproject both layers to WGS84 (Mapbox needs lng/lat).
   run([NEIGH_SHP, "-proj", "wgs84", "-o", join(TMP_DIR, "neigh.json"), "format=geojson"]);
   run([FOG_SHP,   "-proj", "wgs84", "-o", join(TMP_DIR, "fog.json"),   "format=geojson"]);
 
-  // Step 2: area-weighted spatial join. `calc` accumulates the field into the
-  // target feature; we then divide by hits to get the mean, and round.
-  //
-  //   -join target+source : per-target join, one row per target with calcs
-  //   calc="fogHours=average(<FIELD>)"
-  //
-  // This is the classic "for each neighborhood, average the overlapping
-  // fog-polygon hour values". If you want true area-weighting, switch to
-  // `-clip` then `-dissolve` per neighborhood with sum(area * hours)/sum(area).
+  // 2. Per-neighborhood spatial join: for each SF neighborhood polygon,
+  //    average the `contour` values of fog polygons that intersect it.
+  //    Unweighted — bigger fog polygons don't get more pull. Adequate for a
+  //    coarse risk index; switch to a -clip + area-weighted dissolve if you
+  //    need exact area weighting.
   run([
     join(TMP_DIR, "neigh.json"),
     "-join", join(TMP_DIR, "fog.json"),
@@ -89,20 +79,22 @@ function main() {
     "fields=" + FOG_HOURS_FIELD,
     "-rename-fields", `name=${NEIGH_NAME_FIELD}`,
     "-each", "id = (this.properties.name||'unk').toLowerCase().replace(/[^a-z0-9]+/g,'-')",
-    "-each", "fogHours = Math.round(fogHours || 0)",
+    "-each", `fogHours = fogHours == null ? null : Math.round((fogHours / ${FOG_HOURS_DIVISOR}) * 10) / 10`,
     "-simplify", "5%",
     "-o", join(TMP_DIR, "joined.geojson"), "format=geojson",
   ]);
 
-  // Step 3: read back, attach metadata, write to public/.
+  // 3. Attach metadata and write to public/.
   const fc = JSON.parse(readFileSync(join(TMP_DIR, "joined.geojson"), "utf8"));
   fc.metadata = {
-    source: "data/raw/neighborhoods.shp + data/raw/fog.shp",
+    source: "data/raw/neighborhoods.shp + data/raw/fog_belt_zones.shp",
     builtAt: new Date().toISOString(),
-    units: "fogHours = annual mean hours of marine fog",
+    units: UNITS,
   };
   writeFileSync(OUT_PATH, JSON.stringify(fc));
-  console.log(`✓ wrote ${OUT_PATH} (${fc.features.length} neighborhoods)`);
+
+  const withData = fc.features.filter(f => f.properties.fogHours != null).length;
+  console.log(`✓ wrote ${OUT_PATH} (${fc.features.length} neighborhoods, ${withData} with fog data)`);
 }
 
 main();

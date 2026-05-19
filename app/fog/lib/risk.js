@@ -1,21 +1,23 @@
 // Fog-hours → color + human label.
 //
-// The color scale is a low-saturation gradient from warm beige (low fog)
-// to deep slate-blue (high fog). Stops are tuned to the SF reality —
-// the foggiest western neighborhoods (Outer Sunset, Outer Richmond) sit
-// around 1500–2000 hours/year, while the southeastern Mission/Bernal
-// areas can be in the 200–400 range.
+// Values are AVERAGE SUMMER fog/low-cloud hours per day (USGS GOES, 1999–2009).
+// SF observed range: ~6 hrs/day (NE bayside, Fishermans Wharf) to
+// ~13 hrs/day (Outer Sunset, Parkmerced, Lake Merced).
+//
+// The color scale runs from warm beige (low fog) to deep slate-blue (heavy
+// marine layer). Stops cover the full plausible SF range so neighborhoods
+// near the extremes don't clamp.
 //
 // `riskColorStops` is consumed by a Mapbox `interpolate` expression:
 //   ["interpolate", ["linear"], <input>, ...stops.flat()]
 
 export const riskColorStops = [
-  [0,    "#f3eee5"],
-  [400,  "#e8d4a8"],
-  [800,  "#b7c5cf"],
-  [1200, "#7f9ab0"],
-  [1600, "#4d6f8c"],
-  [2000, "#1e3a5f"],
+  [4,  "#f3eee5"],
+  [6,  "#e8d4a8"],
+  [8,  "#b7c5cf"],
+  [10, "#7f9ab0"],
+  [12, "#4d6f8c"],
+  [14, "#1e3a5f"],
 ];
 
 export function fogColor(hours) {
@@ -27,9 +29,9 @@ export function fogColor(hours) {
 }
 
 export function fogLabel(hours) {
-  if (hours >= 1500) return "Famously socked-in";
-  if (hours >= 1000) return "Frequently foggy";
-  if (hours >= 600)  return "Often misty";
-  if (hours >= 300)  return "Occasionally foggy";
+  if (hours >= 12) return "Famously socked-in";
+  if (hours >= 10) return "Frequently foggy";
+  if (hours >= 8)  return "Often misty";
+  if (hours >= 6)  return "Occasionally foggy";
   return "Mostly clear";
 }

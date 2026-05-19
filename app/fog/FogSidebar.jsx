@@ -102,9 +102,8 @@ export default function FogSidebar({ picked, onPickFromAddress, dataErr, ready }
 
       <footer className="fog-footer">
         <div>
-          Fog data: stub values for scaffolding. Replace with real{" "}
-          <code>public/data/sf-fog-neighborhoods.geojson</code> via{" "}
-          <code>scripts/process-fog-data.mjs</code>.
+          Fog data: USGS GOES summertime fog &amp; low-cloud indices, 1999–2009
+          (Torregrosa et al., 2016). Neighborhood boundaries: DataSF.
         </div>
       </footer>
     </aside>
@@ -130,8 +129,8 @@ function Result({ picked }) {
         <div className="fog-result-sub">{picked.address}</div>
       )}
       <div className="fog-result-score" style={{ background: fogColor(hours) }}>
-        <div className="fog-score-num">{Math.round(hours)}</div>
-        <div className="fog-score-unit">avg fog hrs / year</div>
+        <div className="fog-score-num">{hours.toFixed(1)}</div>
+        <div className="fog-score-unit">avg summer fog hrs / day</div>
       </div>
       <div className="fog-result-label">{fogLabel(hours)}</div>
     </div>
