@@ -5,13 +5,10 @@
 //
 // Three zones with sharp boundaries:
 //   • Sun         — < 8.35 hrs/day → flat bright yellow
-//   • Transition  — 8.35–8.5       → partly-cloudy pattern, density steps
-//                                    through 3 sub-bands. Anchored loosely
-//                                    on Buena Vista as the partly-cloudy
-//                                    archetype; the actual window is tight
-//                                    (0.15 hrs wide) so only the truly
-//                                    mixed neighborhoods catch it.
-//                                    See FogMap.jsx for the patterns.
+//   • Transition  — 8.35–8.5       → sparse "scattered clouds" pattern,
+//                                    weighted toward the west side of each
+//                                    tile so it reads as marine layer
+//                                    spilling east. See FogMap.jsx.
 //   • Fog         — > 8.5          → light grey → near-black gradient
 //
 // `riskColorStops` is consumed by a Mapbox `interpolate` expression:
@@ -47,14 +44,3 @@ export function fogLabel(hours) {
 // Used by FogMap.jsx to filter the partly-cloudy pattern overlay layer
 // to just the transition band.
 export const TRANSITION_RANGE = [8.35, 8.5];
-
-// Sub-band thresholds *within* the 0.15-wide transition zone, used by the
-// FogMap step expression to pick which cloud-density pattern to render.
-// Equal thirds:
-//   [8.35, 8.40) → "light"  — sparse clouds, mostly sunny
-//   [8.40, 8.45) → "mid"    — balanced
-//   [8.45, 8.50] → "heavy"  — denser clouds, edge of full fog
-export const TRANSITION_DENSITY_STEPS = {
-  midStart: 8.4,
-  heavyStart: 8.45,
-};
