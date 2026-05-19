@@ -107,8 +107,8 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
           "fill-opacity": [
             "case",
             ["boolean", ["feature-state", "picked"], false],
-            0.9,
-            0.72,
+            0.75,
+            0.4,
           ],
         },
       });
@@ -130,8 +130,8 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
           "fill-opacity": [
             "case",
             ["boolean", ["feature-state", "picked"], false],
-            1,
-            0.88,
+            0.75,
+            0.5,
           ],
         },
       });
@@ -168,15 +168,15 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         type: "geojson",
         data: { type: "FeatureCollection", features: [] },
       });
+      // Contour fills sit very faintly behind the colored lines so each
+      // isoline visibly belongs to a band, without obscuring the streets
+      // or the neighborhood choropleth underneath.
       map.addLayer({
         id: "fog-contours-fill",
         type: "fill",
         source: "fog-contours",
         layout: { visibility: "none" },
         paint: {
-          // Same gradient as the choropleth but a single thin opacity, so
-          // higher-hour contours read as deeper grey-blue tints sitting on
-          // top of the neighborhood layer.
           "fill-color": [
             "interpolate", ["linear"], ["coalesce", ["get", "hours"], 0],
             6,   "#fde047",
@@ -184,19 +184,31 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
             10,  "#78716c",
             13,  "#292524",
           ],
-          "fill-opacity": 0.25,
+          "fill-opacity": 0.1,
         },
       });
+      // Contour lines themselves are now the primary data presentation:
+      // colored by the same gradient, drawn smooth with round joins so
+      // the Chaikin-smoothed polygons read as natural isolines.
       map.addLayer({
         id: "fog-contours-line",
         type: "line",
         source: "fog-contours",
-        layout: { visibility: "none" },
+        layout: {
+          visibility: "none",
+          "line-cap": "round",
+          "line-join": "round",
+        },
         paint: {
-          "line-color": "#1e3a5f",
-          "line-width": 1.4,
-          "line-dasharray": [3, 2],
-          "line-opacity": 0.8,
+          "line-color": [
+            "interpolate", ["linear"], ["coalesce", ["get", "hours"], 0],
+            6,   "#fde047",
+            8,   "#d6d3d1",
+            10,  "#78716c",
+            13,  "#292524",
+          ],
+          "line-width": 2.5,
+          "line-opacity": 0.85,
         },
       });
       // Neighborhood name labels. Placed at each polygon's pole-of-inaccessibility

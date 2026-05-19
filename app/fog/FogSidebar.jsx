@@ -143,18 +143,30 @@ function Result({ picked }) {
       </div>
     );
   }
-  const hours = f.properties.fogHours;
+  // Prefer the point-specific contour value over the neighborhood average,
+  // since the contour represents the actual USGS measurement at that
+  // exact location (the neighborhood number is just an average of all
+  // contours that overlap it).
+  const contourHours = picked.contour?.properties?.hours;
+  const neighborhoodHours = f.properties.fogHours;
+  const primary = contourHours ?? neighborhoodHours;
+  const source = contourHours != null ? "at this point" : "neighborhood avg";
   return (
     <div className="fog-result">
+      <div className="fog-result-score" style={{ background: fogColor(primary) }}>
+        <div className="fog-score-num">{primary.toFixed(1)}</div>
+        <div className="fog-score-unit">summer fog hrs / day · {source}</div>
+      </div>
+      <div className="fog-result-label">{fogLabel(primary)}</div>
       <div className="fog-result-h">{f.properties.name}</div>
       {picked.address && (
         <div className="fog-result-sub">{picked.address}</div>
       )}
-      <div className="fog-result-score" style={{ background: fogColor(hours) }}>
-        <div className="fog-score-num">{hours.toFixed(1)}</div>
-        <div className="fog-score-unit">avg summer fog hrs / day</div>
-      </div>
-      <div className="fog-result-label">{fogLabel(hours)}</div>
+      {contourHours != null && contourHours !== neighborhoodHours && (
+        <div className="fog-result-aux">
+          Neighborhood avg: {neighborhoodHours.toFixed(1)} hrs / day
+        </div>
+      )}
     </div>
   );
 }

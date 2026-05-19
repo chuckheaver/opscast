@@ -1216,6 +1216,13 @@ input[type=range]::-webkit-slider-thumb:hover {
   font-weight: 600;
   color: #1c1917;
 }
+.fog-result-aux {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.4px;
+}
 .fog-toggle {
   display: grid;
   grid-template-columns: auto 1fr;

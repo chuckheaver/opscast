@@ -10,6 +10,47 @@ export function findNeighborhoodForPoint(fc, point) {
   return null;
 }
 
+// Find the most specific (smallest-area) USGS contour polygon containing
+// a given point. Contour features can be nested — high-fog inner zones
+// sit inside lower-fog outer zones — so picking the most specific one
+// gives the highest applicable hours value for that exact location.
+export function findContourForPoint(fc, point) {
+  if (!fc) return null;
+  const [lng, lat] = point;
+  let best = null;
+  let bestArea = Infinity;
+  for (const f of fc.features) {
+    if (!pointInFeature([lng, lat], f)) continue;
+    const area = approxFeatureArea(f);
+    if (area < bestArea) {
+      best = f;
+      bestArea = area;
+    }
+  }
+  return best;
+}
+
+// Cheap planar area estimate in degrees² — fine for picking the smallest
+// of a small set of overlapping polygons; we don't need true geodesic area.
+function approxFeatureArea(feature) {
+  const g = feature.geometry;
+  if (!g) return Infinity;
+  if (g.type === "Polygon") return ringArea(g.coordinates[0]);
+  if (g.type === "MultiPolygon") {
+    return g.coordinates.reduce((sum, poly) => sum + ringArea(poly[0]), 0);
+  }
+  return Infinity;
+}
+
+function ringArea(ring) {
+  if (!ring || ring.length < 3) return 0;
+  let a = 0;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    a += (ring[j][0] + ring[i][0]) * (ring[j][1] - ring[i][1]);
+  }
+  return Math.abs(a / 2);
+}
+
 function pointInFeature(pt, feature) {
   const g = feature.geometry;
   if (!g) return false;

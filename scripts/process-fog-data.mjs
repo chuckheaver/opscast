@@ -38,6 +38,30 @@ const NEIGH_NAME_FIELD = "name";
 // dataset, which measures *summer daytime* fog/low-cloud cover per day.
 const UNITS = "fogHours = average summer fog/low-cloud hrs per day (USGS GOES, 1999-2009)";
 
+// Chaikin's corner-cutting smoothing for a closed ring of [lng, lat] pairs.
+// Each iteration replaces every edge with two interpolated points (at 1/4
+// and 3/4 along the edge), rounding hard corners into soft bends.
+function chaikinSmooth(ring, iterations = 3) {
+  if (!ring || ring.length < 4) return ring;
+  let points = ring;
+  for (let iter = 0; iter < iterations; iter++) {
+    const closed =
+      points[0][0] === points[points.length - 1][0] &&
+      points[0][1] === points[points.length - 1][1];
+    const n = closed ? points.length - 1 : points.length;
+    const next = [];
+    for (let i = 0; i < n; i++) {
+      const p = points[i];
+      const q = points[(i + 1) % n];
+      next.push([0.75 * p[0] + 0.25 * q[0], 0.75 * p[1] + 0.25 * q[1]]);
+      next.push([0.25 * p[0] + 0.75 * q[0], 0.25 * p[1] + 0.75 * q[1]]);
+    }
+    if (closed) next.push(next[0].slice());
+    points = next;
+  }
+  return points;
+}
+
 function ensureInputs() {
   const missing = [];
   if (!existsSync(NEIGH_SHP)) missing.push(NEIGH_SHP);
@@ -112,6 +136,24 @@ function main() {
     "-filter-fields", "hours",
     "-o", CONTOURS_OUT, "format=geojson",
   ]);
+  // Round off the raster-derived right angles with three iterations of
+  // Chaikin's corner-cutting algorithm. The USGS contours come out of
+  // the gridded source as stair-stepped polygons; Chaikin replaces each
+  // corner with two interpolated points, so adjacent edges become a soft
+  // bend instead of a 90° turn while topology stays intact.
+  const smoothed = JSON.parse(readFileSync(CONTOURS_OUT, "utf8"));
+  smoothed.features.forEach(f => {
+    const g = f.geometry;
+    if (!g) return;
+    if (g.type === "Polygon") {
+      g.coordinates = g.coordinates.map(ring => chaikinSmooth(ring, 3));
+    } else if (g.type === "MultiPolygon") {
+      g.coordinates = g.coordinates.map(poly =>
+        poly.map(ring => chaikinSmooth(ring, 3))
+      );
+    }
+  });
+  writeFileSync(CONTOURS_OUT, JSON.stringify(smoothed));
   const contours = JSON.parse(readFileSync(CONTOURS_OUT, "utf8"));
   console.log(`✓ wrote ${CONTOURS_OUT} (${contours.features.length} raw fog contour polygons in SF)`);
 }

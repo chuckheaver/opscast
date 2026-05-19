@@ -10,7 +10,7 @@
 import { useEffect, useState, useCallback } from "react";
 import FogMap from "./FogMap";
 import FogSidebar from "./FogSidebar";
-import { findNeighborhoodForPoint } from "./lib/spatial";
+import { findNeighborhoodForPoint, findContourForPoint } from "./lib/spatial";
 
 const DATA_URL = "/data/sf-fog-neighborhoods.geojson";
 const CONTOURS_URL = "/data/sf-fog-contours.geojson";
@@ -49,22 +49,28 @@ export default function FogApp() {
     };
   }, []);
 
-  // A search result resolved to a lng/lat — find the containing neighborhood
-  // and update the picked state. If the address is outside SF, picked.feature
-  // is null but we still set point + address so the map can fly there.
+  // A search result resolved to a lng/lat — find both the containing
+  // neighborhood (for context) and the containing fog contour (for the
+  // primary value). If the address is outside SF, feature/contour are null
+  // but we still set point + address so the map can fly there.
   const pickFromAddress = useCallback(
     (point, address) => {
       if (!geojson) return;
       const feature = findNeighborhoodForPoint(geojson, point);
-      setPicked({ point, address, feature });
+      const contour = findContourForPoint(contours, point);
+      setPicked({ point, address, feature, contour });
     },
-    [geojson]
+    [geojson, contours]
   );
 
   // User clicked a neighborhood directly on the map.
-  const pickFromMap = useCallback((feature, point) => {
-    setPicked({ point, address: null, feature });
-  }, []);
+  const pickFromMap = useCallback(
+    (feature, point) => {
+      const contour = findContourForPoint(contours, point);
+      setPicked({ point, address: null, feature, contour });
+    },
+    [contours]
+  );
 
   return (
     <div className="fog-app">
