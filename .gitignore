@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw shapefile inputs — processed output (public/data/) IS committed
+# Ignore everything in data/raw/ except the README that documents the layout.
+/data/raw/*
+!/data/raw/README.md
+/data/tmp/

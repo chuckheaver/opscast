@@ -182,6 +182,7 @@ export default function Page() {
       {view === "setup" && (
         <SetupView
           zip={zip} setZip={handleZipInput}
+          selectedLoc={selectedLoc}
           startH={startH} setStartH={setStartH}
           endH={endH} setEndH={setEndH}
           dayFrom={dayFrom} setDayFrom={setDayFrom}
