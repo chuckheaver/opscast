@@ -21,9 +21,10 @@ function buildPartlyCloudyPattern() {
   canvas.height = size;
   const ctx = canvas.getContext("2d");
 
-  // Sunny background (matches the Sun-zone yellow so the transition reads
-  // as "still mostly yellow, with some clouds").
-  ctx.fillStyle = "#fde047";
+  // Light-yellow background — a step paler than the Sun-zone yellow so
+  // transition neighborhoods read as "still mostly sunny, but the
+  // marine layer is starting to push in".
+  ctx.fillStyle = "#fef08a";
   ctx.fillRect(0, 0, size, size);
 
   // Two grey cloud puffs at different positions so the tile reads as

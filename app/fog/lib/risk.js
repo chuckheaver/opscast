@@ -4,22 +4,23 @@
 // SF observed range: ~6 hrs/day (NE bayside) to ~13 hrs/day (Outer Sunset).
 //
 // Three zones with sharp boundaries:
-//   • Sun         — < 8.3 hrs/day  → flat bright yellow
-//   • Transition  — 8.3–8.6        → partly-cloudy texture overlay
-//                                    (see FogMap.jsx, "partly-cloudy" pattern)
-//   • Fog         — > 8.6          → light grey → near-black gradient
+//   • Sun         — < 8.5 hrs/day  → flat bright yellow
+//   • Transition  — 8.5–9          → light-yellow base + partly-cloudy
+//                                    texture overlay (see FogMap.jsx,
+//                                    "partly-cloudy" pattern)
+//   • Fog         — > 9            → light grey → near-black gradient
 //
 // `riskColorStops` is consumed by a Mapbox `interpolate` expression:
 //   ["interpolate", ["linear"], <input>, ...stops.flat()]
 //
 // Stops calibrated to the observed SF data range (6.3 → 12.5 hrs/day),
 // so the foggiest neighborhood actually hits the darkest grey. The
-// transition zone (8.3–8.6) is rendered as a separate pattern layer
+// transition zone (8.5–9) is rendered as a separate pattern layer
 // on top of this base gradient.
 export const riskColorStops = [
   [0,    "#fde047"], // Sun       — bright yellow
-  [8.3,  "#fde047"], // Sun       — flat to here
-  [8.6,  "#d6d3d1"], // Fog start — light grey
+  [8.5,  "#fde047"], // Sun       — flat to here
+  [9,    "#d6d3d1"], // Fog start — light grey
   [10.5, "#78716c"], // Fog       — mid grey
   [12.5, "#292524"], // Fog peak  — near-black (SF max ≈ 12.5)
 ];
@@ -34,11 +35,11 @@ export function fogColor(hours) {
 
 // Three-zone bucketing matching the color gradient.
 export function fogLabel(hours) {
-  if (hours > 8.6) return "Fog";
-  if (hours >= 8.3) return "Transition";
+  if (hours > 9) return "Fog";
+  if (hours >= 8.5) return "Transition";
   return "Sun";
 }
 
 // Used by FogMap.jsx to filter the partly-cloudy pattern overlay layer
 // to just the transition band.
-export const TRANSITION_RANGE = [8.3, 8.6];
+export const TRANSITION_RANGE = [8.5, 9];
