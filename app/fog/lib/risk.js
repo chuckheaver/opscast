@@ -18,12 +18,14 @@
 //   - Three grey stops (8.5, 11, 14) shape the Fog gradient so the
 //     light-to-dark progression is visible at a glance.
 
+// Stops calibrated to the observed SF data range (6.3 → 12.5 hrs/day),
+// so the foggiest neighborhood actually hits the darkest grey.
 export const riskColorStops = [
-  [4,   "#fbbf24"], // Sun        — bright amber
-  [7.5, "#fbbf24"], // Sun        — flat to here
-  [8.5, "#d6d3d1"], // Transition end / Fog start — light grey
-  [11,  "#78716c"], // Fog        — mid grey
-  [14,  "#292524"], // Fog        — near-black
+  [4,    "#fbbf24"], // Sun        — bright amber
+  [7.5,  "#fbbf24"], // Sun        — flat to here
+  [8.5,  "#d6d3d1"], // Transition end / Fog start — light grey
+  [10.5, "#78716c"], // Fog        — mid grey
+  [12.5, "#292524"], // Fog peak   — near-black (SF max ≈ 12.5)
 ];
 
 export function fogColor(hours) {
