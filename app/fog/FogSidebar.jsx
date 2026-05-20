@@ -67,7 +67,12 @@ export default function FogSidebar({
   return (
     <aside className="fog-sidebar">
       <header className="fog-h">
-        <div className="fog-brand">Summer Fog Map</div>
+        <div className="fog-brand-row">
+          <FogWaveGlyph />
+          <h1 className="fog-brand">
+            Summer <em>Fog</em> Map
+          </h1>
+        </div>
         <div className="fog-tag">Jun–Aug</div>
         <div className="fog-note">
           *Satellite historic driven data of the average hrs per day that a specific location receives fog.
@@ -133,47 +138,27 @@ export default function FogSidebar({
       )}
 
       {contoursAvailable && (
-        <label className="fog-toggle">
-          <input
-            type="checkbox"
-            checked={showContours}
-            onChange={e => onToggleContours(e.target.checked)}
-          />
-          <span className="fog-toggle-label">Show fog data</span>
-          <span className="fog-toggle-help">
-            Toggle the colored USGS fog contour layer on or off. Off shows
-            just the neighborhood outlines on the basemap.
-          </span>
-        </label>
+        <ToggleSwitch
+          checked={showContours}
+          onChange={onToggleContours}
+          label="Fog data"
+          help="Colored USGS fog contour layer. Off reveals just the neighborhood outlines."
+        />
       )}
 
-      <label className="fog-toggle">
-        <input
-          type="checkbox"
-          checked={showTerrain}
-          onChange={e => onToggleTerrain(e.target.checked)}
-        />
-        <span className="fog-toggle-label">Show terrain &amp; peaks</span>
-        <span className="fog-toggle-help">
-          Hillshade overlay of the Bay Area's topography plus labelled
-          peaks (Mt Tam, Twin Peaks, San Bruno Mtn, etc.) so you can see
-          how the hills shape the fog patterns.
-        </span>
-      </label>
+      <ToggleSwitch
+        checked={showTerrain}
+        onChange={onToggleTerrain}
+        label="Terrain & peaks"
+        help="Hillshade overlay + labelled peaks (Mt Tam, Twin Peaks, San Bruno Mtn)."
+      />
 
-      <label className="fog-toggle">
-        <input
-          type="checkbox"
-          checked={showSeismic}
-          onChange={e => onToggleSeismic(e.target.checked)}
-        />
-        <span className="fog-toggle-label">Show seismic hazard zones</span>
-        <span className="fog-toggle-help">
-          California Geological Survey seismic hazard zones in SF
-          (liquefaction + earthquake-induced landslide areas). Source:
-          DataSF.
-        </span>
-      </label>
+      <ToggleSwitch
+        checked={showSeismic}
+        onChange={onToggleSeismic}
+        label="Seismic hazard zones"
+        help="CA Geological Survey liquefaction + landslide zones (via DataSF)."
+      />
 
 
       <footer className="fog-footer">
@@ -208,7 +193,7 @@ function Result({ picked }) {
     return (
       <div className="fog-result">
         <div className="fog-result-score" style={{ background: fogColor(contourHours) }}>
-          <div className="fog-score-num">{contourHours.toFixed(1)}</div>
+          <div className="fog-score-num"><CountUp value={contourHours} /></div>
           <div className="fog-score-unit">summer fog hrs / day · at this point</div>
         </div>
         <div className="fog-result-label">{fogLabel(contourHours)}</div>
@@ -227,7 +212,7 @@ function Result({ picked }) {
   return (
     <div className="fog-result">
       <div className="fog-result-score" style={{ background: fogColor(primary) }}>
-        <div className="fog-score-num">{primary.toFixed(1)}</div>
+        <div className="fog-score-num"><CountUp value={primary} /></div>
         <div className="fog-score-unit">summer fog hrs / day · {source}</div>
       </div>
       <div className="fog-result-label">{fogLabel(primary)}</div>
@@ -270,4 +255,74 @@ function LegendRow({ swatch, emoji, range, label }) {
       <span className="fog-legend-label">{label}</span>
     </div>
   );
+}
+
+// Three stacked wavy lines — the universal fog/mist weather symbol,
+// rendered with a subtle yellow→slate gradient that mirrors the
+// Summer→Fog colour story.
+function FogWaveGlyph() {
+  return (
+    <svg
+      width="32"
+      height="22"
+      viewBox="0 0 32 22"
+      fill="none"
+      aria-hidden="true"
+      className="fog-wave"
+    >
+      <defs>
+        <linearGradient id="fog-wave-grad" x1="0" y1="0" x2="32" y2="22" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#fbbf24" />
+          <stop offset="1" stopColor="#52525b" />
+        </linearGradient>
+      </defs>
+      <g stroke="url(#fog-wave-grad)" strokeWidth="2" strokeLinecap="round" fill="none">
+        <path d="M 2 5 Q 8 1 14 5 T 26 5 H 30" />
+        <path d="M 1 11 Q 7 7 13 11 T 25 11 H 31" />
+        <path d="M 3 17 Q 9 13 15 17 T 27 17 H 30" />
+      </g>
+    </svg>
+  );
+}
+
+// iOS-style toggle switch. Hidden native checkbox keeps the label/keyboard
+// behaviour while the sibling span draws the pill + knob.
+function ToggleSwitch({ checked, onChange, label, help }) {
+  return (
+    <label className="fog-switch">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={e => onChange(e.target.checked)}
+      />
+      <span className="fog-switch-track" aria-hidden="true">
+        <span className="fog-switch-knob" />
+      </span>
+      <span className="fog-switch-copy">
+        <span className="fog-switch-label">{label}</span>
+        <span className="fog-switch-help">{help}</span>
+      </span>
+    </label>
+  );
+}
+
+// Animated count-up from 0 → value (eased), runs whenever `value` changes.
+// 1-decimal output matches the rest of the score card formatting.
+function CountUp({ value, duration = 700 }) {
+  const [shown, setShown] = useState(0);
+  useEffect(() => {
+    if (value == null || !Number.isFinite(value)) return;
+    let start;
+    let raf;
+    const step = ts => {
+      if (!start) start = ts;
+      const t = Math.min((ts - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+      setShown(value * eased);
+      if (t < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [value, duration]);
+  return shown.toFixed(1);
 }
