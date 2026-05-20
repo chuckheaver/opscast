@@ -20,10 +20,39 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
 
+// 32×32 canvas pattern: two small white cloud puffs on a transparent
+// background. Painted on top of the 8.5 (Transition) grey fill so the
+// polygon reads as "lightly cloudy" while the underlying gradient still
+// carries the colour information.
+function buildTransitionCloudsPattern() {
+  const size = 32;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, size, size);
+  ctx.fillStyle = "rgba(255, 255, 255, 0.92)";
+
+  const drawCloud = (cx, cy, scale = 1) => {
+    const r = 2.4 * scale;
+    ctx.beginPath();
+    ctx.arc(cx - r * 0.8, cy + r * 0.3, r * 0.7, 0, Math.PI * 2);
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.arc(cx + r * 0.9, cy + r * 0.2, r * 0.65, 0, Math.PI * 2);
+    ctx.arc(cx, cy + r * 0.6, r * 0.55, 0, Math.PI * 2);
+    ctx.fill();
+  };
+
+  drawCloud(9, 11);
+  drawCloud(22, 22, 0.8);
+
+  return ctx.getImageData(0, 0, size, size);
+}
+
 // Layer IDs the "Show fog data" toggle flips on and off as a group.
 const CONTOUR_LAYER_IDS = [
   "fog-contours-fog",
-  "fog-contours-transition",
+  "fog-contours-transition-icons",
   "fog-contours-sun",
   "fog-contours-eight-outline",
 ];
@@ -59,6 +88,12 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
     mapRef.current = map;
 
     map.on("load", () => {
+      // Register the transition-zone cloud pattern up-front so the layer
+      // below can reference it by name.
+      if (!map.hasImage("transition-clouds")) {
+        map.addImage("transition-clouds", buildTransitionCloudsPattern());
+      }
+
       // ── Neighborhood source ─────────────────────────────────────────
       map.addSource("fog", {
         type: "geojson",
@@ -81,34 +116,22 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         data: { type: "FeatureCollection", features: [] },
       });
 
-      // Fog band (≥9 hrs): grey gradient, darker for higher hours.
-      // Polygon 9 sits at the lightest grey; 12.5 (SF max) at near-black.
+      // Grey gradient band (≥8.5 hrs): starts at light grey on the 8.5
+      // contour and steps to near-black at the foggiest 12.5 contour.
+      // The 8.5 polygon is also flagged by the cloud-icon overlay below.
       map.addLayer({
         id: "fog-contours-fog",
         type: "fill",
         source: "fog-contours",
-        filter: [">=", ["coalesce", ["get", "hours"], 0], 9],
+        filter: [">=", ["coalesce", ["get", "hours"], 0], 8.5],
         paint: {
           "fill-color": [
             "interpolate", ["linear"], ["get", "hours"],
-            9,    "#d6d3d1",
+            8.5,  "#d6d3d1",
             11,   "#78716c",
             12.5, "#292524",
           ],
           "fill-opacity": 0.5,
-        },
-      });
-
-      // Transition band — just the 8.5 contour. Distinct yellow/grey blend
-      // that reads as "the transition line" between Sun and Fog zones.
-      map.addLayer({
-        id: "fog-contours-transition",
-        type: "fill",
-        source: "fog-contours",
-        filter: ["==", ["coalesce", ["get", "hours"], 0], 8.5],
-        paint: {
-          "fill-color": "#e0d49c",
-          "fill-opacity": 0.65,
         },
       });
 
@@ -121,6 +144,20 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         paint: {
           "fill-color": "#fef08a",
           "fill-opacity": 0.4,
+        },
+      });
+
+      // Cloud icon overlay just on the 8.5 transition polygon. Pattern has
+      // a transparent background so the underlying light-grey fill stays
+      // visible; little white clouds sit on top to flag it as Transition.
+      map.addLayer({
+        id: "fog-contours-transition-icons",
+        type: "fill",
+        source: "fog-contours",
+        filter: ["==", ["coalesce", ["get", "hours"], 0], 8.5],
+        paint: {
+          "fill-pattern": "transition-clouds",
+          "fill-opacity": 0.95,
         },
       });
 

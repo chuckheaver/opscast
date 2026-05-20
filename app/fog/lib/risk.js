@@ -14,16 +14,15 @@
 // `riskColorStops` is consumed by a Mapbox `interpolate` expression:
 //   ["interpolate", ["linear"], <input>, ...stops.flat()]
 //
-// Stops calibrated to the observed SF data range (6.3 → 12.5 hrs/day) and
-// to match the three legend bands:
+// Stops calibrated to the observed SF data range (6.3 → 12.5 hrs/day):
 //   • < 8.5 hrs → soft yellow (Sun, includes the dashed-bordered 8.0 polygon)
-//   • = 8.5    → yellow/grey mix (Transition — single contour)
-//   • ≥ 9 hrs  → grey gradient, light at 9 → near-black at 12.5
+//   • ≥ 8.5    → grey gradient, light grey at 8.5 → near-black at 12.5
+//                (the 8.5 polygon also gets white cloud icons overlaid
+//                via a separate Mapbox layer in FogMap.jsx)
 export const riskColorStops = [
   [0,    "#fef08a"], // Sun        — pale yellow
   [8,    "#fef08a"], // Sun        — flat through here
-  [8.5,  "#e0d49c"], // Transition — distinct yellow/grey blend
-  [9,    "#d6d3d1"], // Fog start  — light grey
+  [8.5,  "#d6d3d1"], // Transition — light grey (with cloud icon overlay)
   [11,   "#78716c"], // Fog mid    — mid grey
   [12.5, "#292524"], // Fog peak   — near-black (SF max ≈ 12.5)
 ];

@@ -221,7 +221,7 @@ function Legend() {
       <div className="fog-legend-title">Microclimates · Fog Hours</div>
       <div className="fog-legend-rows">
         <LegendRow swatch="#fef08a" emoji="☀️"  range="≤ 8 hrs" label="Sun" />
-        <LegendRow swatch="#e0d49c" emoji="🌤️" range="8.5 hrs" label="Transition" />
+        <LegendRow swatch="#d6d3d1" emoji="🌤️" range="8.5 hrs" label="Transition" />
         <LegendRow swatch="#78716c" emoji="☁️"  range="≥ 9 hrs" label="Fog" />
       </div>
     </div>
