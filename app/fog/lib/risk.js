@@ -14,16 +14,18 @@
 // `riskColorStops` is consumed by a Mapbox `interpolate` expression:
 //   ["interpolate", ["linear"], <input>, ...stops.flat()]
 //
-// Stops calibrated to the observed SF data range (6.3 → 12.5 hrs/day),
-// so the foggiest neighborhood actually hits the darkest grey. The
-// transition zone (8.35–8.5) is rendered as a separate pattern layer
-// on top of this base gradient.
+// Stops calibrated to the observed SF data range (6.3 → 12.5 hrs/day) and
+// to match the three legend bands:
+//   • < 8.5 hrs → soft yellow (Sun, includes the dashed-bordered 8.0 polygon)
+//   • = 8.5    → yellow/grey mix (Transition — single contour)
+//   • ≥ 9 hrs  → grey gradient, light at 9 → near-black at 12.5
 export const riskColorStops = [
-  [0,    "#fde047"], // Sun       — bright yellow
-  [8.35, "#fde047"], // Sun       — flat to here
-  [8.5,  "#d6d3d1"], // Fog start — light grey
-  [10.5, "#78716c"], // Fog       — mid grey
-  [12.5, "#292524"], // Fog peak  — near-black (SF max ≈ 12.5)
+  [0,    "#fef08a"], // Sun        — pale yellow
+  [8,    "#fef08a"], // Sun        — flat through here
+  [8.5,  "#e0d49c"], // Transition — distinct yellow/grey blend
+  [9,    "#d6d3d1"], // Fog start  — light grey
+  [11,   "#78716c"], // Fog mid    — mid grey
+  [12.5, "#292524"], // Fog peak   — near-black (SF max ≈ 12.5)
 ];
 
 export function fogColor(hours) {
@@ -36,11 +38,12 @@ export function fogColor(hours) {
 
 // Three-zone bucketing matching the color gradient.
 export function fogLabel(hours) {
-  if (hours > 9) return "Fog";
-  if (hours >= 8) return "Transition";
+  if (hours >= 9) return "Fog";
+  if (hours >= 8.5) return "Transition";
   return "Sun";
 }
 
-// Used by FogMap.jsx to filter the transition fill + outline layers.
-// Bands match the legend shown in the sidebar (Microclimates · Fog Hours).
-export const TRANSITION_RANGE = [8, 9];
+// Used by FogMap.jsx to filter the transition fill layer. Transition is
+// just the 8.5 contour — polygon 8 stays Sun (with a dashed outline as a
+// "boundary of Sun" cue), 8.5 is the literal transition line, ≥9 is Fog.
+export const TRANSITION_RANGE = [8.5, 9];

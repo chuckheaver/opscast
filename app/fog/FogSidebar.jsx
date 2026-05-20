@@ -213,9 +213,9 @@ function Result({ picked }) {
 }
 
 // Microclimates legend — three bands matching the fog map's coloring:
-//   • < 8 hrs  → Sun         (yellow swatch + sun icon)
-//   • 8–9 hrs  → Transition  (grey-yellow swatch + partly-cloudy icon)
-//   • > 9 hrs  → Fog         (grey swatch + fog wisps icon)
+//   • ≤ 8 hrs  → Sun         (yellow swatch + sun icon)
+//   • 8.5 hrs  → Transition  (yellow/grey blend + partly-cloudy icon)
+//   • ≥ 9 hrs  → Fog         (grey swatch + fog wisps icon)
 function Legend() {
   return (
     <div className="fog-legend">
@@ -224,19 +224,19 @@ function Legend() {
         <LegendRow
           swatch="#fef08a"
           icon={<SunIcon />}
-          range="< 8 hrs"
+          range="≤ 8 hrs"
           label="Sun"
         />
         <LegendRow
-          swatch="#d4cfb5"
+          swatch="#e0d49c"
           icon={<PartlyCloudyIcon />}
-          range="8–9 hrs"
+          range="8.5 hrs"
           label="Transition"
         />
         <LegendRow
           swatch="#78716c"
           icon={<FogIcon />}
-          range="> 9 hrs"
+          range="≥ 9 hrs"
           label="Fog"
         />
       </div>
