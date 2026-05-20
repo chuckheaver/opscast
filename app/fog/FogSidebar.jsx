@@ -17,6 +17,8 @@ export default function FogSidebar({
   onToggleContours,
   showTerrain,
   onToggleTerrain,
+  showSeismic,
+  onToggleSeismic,
   onUseGeoLocation,
   geoLoading,
   geoErr,
@@ -156,6 +158,20 @@ export default function FogSidebar({
           Hillshade overlay of the Bay Area's topography plus labelled
           peaks (Mt Tam, Twin Peaks, San Bruno Mtn, etc.) so you can see
           how the hills shape the fog patterns.
+        </span>
+      </label>
+
+      <label className="fog-toggle">
+        <input
+          type="checkbox"
+          checked={showSeismic}
+          onChange={e => onToggleSeismic(e.target.checked)}
+        />
+        <span className="fog-toggle-label">Show seismic hazard zones</span>
+        <span className="fog-toggle-help">
+          California Geological Survey seismic hazard zones in SF
+          (liquefaction + earthquake-induced landslide areas). Source:
+          DataSF.
         </span>
       </label>
 

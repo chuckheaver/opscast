@@ -29,6 +29,8 @@ export default function FogApp() {
   // Topographic hillshade overlay — off by default since the data layer
   // is the primary view.
   const [showTerrain, setShowTerrain] = useState(false);
+  // CA Geological Survey seismic hazard zones — off by default.
+  const [showSeismic, setShowSeismic] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
   const autoGeoTriedRef = useRef(false);
@@ -214,6 +216,8 @@ export default function FogApp() {
         onToggleContours={setShowContours}
         showTerrain={showTerrain}
         onToggleTerrain={setShowTerrain}
+        showSeismic={showSeismic}
+        onToggleSeismic={setShowSeismic}
         onUseGeoLocation={requestGeoLocation}
         geoLoading={geoLoading}
         geoErr={geoErr}
@@ -223,6 +227,7 @@ export default function FogApp() {
         contours={contours}
         showContours={showContours}
         showTerrain={showTerrain}
+        showSeismic={showSeismic}
         picked={picked}
         onPickFeature={pickFromMap}
       />

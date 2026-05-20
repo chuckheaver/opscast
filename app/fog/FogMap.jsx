@@ -27,7 +27,7 @@ const CONTOUR_LAYER_IDS = [
   "fog-contours-eight-outline",
 ];
 
-export default function FogMap({ geojson, contours, showContours, showTerrain, picked, onPickFeature }) {
+export default function FogMap({ geojson, contours, showContours, showTerrain, showSeismic, picked, onPickFeature }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -194,6 +194,36 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, p
       });
 
 
+      // Seismic hazard zones (CA Geological Survey, via DataSF). Toggleable
+      // overlay separate from the fog data. Painted between the fog layers
+      // and the neighborhood outlines so the hazard zones sit on top of
+      // the fog colour but underneath the boundary lines and labels.
+      map.addSource("seismic", {
+        type: "geojson",
+        data: "/data/sf-seismic-hazards.geojson",
+      });
+      map.addLayer({
+        id: "seismic-fill",
+        type: "fill",
+        source: "seismic",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": "#dc2626",
+          "fill-opacity": 0.28,
+        },
+      });
+      map.addLayer({
+        id: "seismic-outline",
+        type: "line",
+        source: "seismic",
+        layout: { visibility: "none", "line-join": "round" },
+        paint: {
+          "line-color": "#991b1b",
+          "line-width": 0.8,
+          "line-opacity": 0.7,
+        },
+      });
+
       // Dashed outline ONLY on the 8.0 polygon — it's the "edge of Sun"
       // and we want that boundary visible against the surrounding yellow
       // and the 8.5 transition next to it. All other polygons stay solid.
@@ -346,6 +376,20 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, p
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showTerrain]);
+
+  // Toggle the seismic hazard overlay (fill + outline).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showSeismic ? "visible" : "none";
+      ["seismic-fill", "seismic-outline"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showSeismic]);
 
   // Sync picked state: drop a marker, highlight the feature, fly there.
   useEffect(() => {
