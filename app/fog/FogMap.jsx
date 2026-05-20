@@ -20,31 +20,34 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
 
-// 32×32 canvas pattern: two small white cloud puffs on a transparent
-// background. Painted on top of the 8.5 (Transition) grey fill so the
-// polygon reads as "lightly cloudy" while the underlying gradient still
-// carries the colour information.
+// 64×64 canvas pattern: four 🌤️ emoji scattered across a transparent
+// tile. Painted on top of the 8.5 (Transition) grey fill so the polygon
+// reads as "partly cloudy" using the same visual the user picked for the
+// legend. Bigger tile = less visible repetition at typical zooms.
 function buildTransitionCloudsPattern() {
-  const size = 32;
+  const size = 64;
   const canvas = document.createElement("canvas");
   canvas.width = size;
   canvas.height = size;
   const ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, size, size);
-  ctx.fillStyle = "rgba(255, 255, 255, 0.92)";
 
-  const drawCloud = (cx, cy, scale = 1) => {
-    const r = 2.4 * scale;
-    ctx.beginPath();
-    ctx.arc(cx - r * 0.8, cy + r * 0.3, r * 0.7, 0, Math.PI * 2);
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.arc(cx + r * 0.9, cy + r * 0.2, r * 0.65, 0, Math.PI * 2);
-    ctx.arc(cx, cy + r * 0.6, r * 0.55, 0, Math.PI * 2);
-    ctx.fill();
-  };
+  // System-emoji fonts in priority order — first one available wins.
+  ctx.font = '15px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif';
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
 
-  drawCloud(9, 11);
-  drawCloud(22, 22, 0.8);
+  // Hand-picked positions so the tile reads as scattered rather than gridded.
+  // Edges deliberately empty so a tiled neighbour doesn't crowd the seam.
+  const spots = [
+    [14, 14],
+    [42, 20],
+    [22, 42],
+    [52, 50],
+  ];
+  spots.forEach(([x, y]) => {
+    ctx.fillText("🌤️", x, y);
+  });
 
   return ctx.getImageData(0, 0, size, size);
 }
