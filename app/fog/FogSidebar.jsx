@@ -15,6 +15,8 @@ export default function FogSidebar({
   contoursAvailable,
   showContours,
   onToggleContours,
+  showTerrain,
+  onToggleTerrain,
   onUseGeoLocation,
   geoLoading,
   geoErr,
@@ -142,6 +144,20 @@ export default function FogSidebar({
           </span>
         </label>
       )}
+
+      <label className="fog-toggle">
+        <input
+          type="checkbox"
+          checked={showTerrain}
+          onChange={e => onToggleTerrain(e.target.checked)}
+        />
+        <span className="fog-toggle-label">Show terrain</span>
+        <span className="fog-toggle-help">
+          Hillshade overlay for the Bay Area's topography — Twin Peaks,
+          Mt Tam, San Bruno Mtn, etc. — to see how the hills shape the
+          fog patterns.
+        </span>
+      </label>
 
 
       <footer className="fog-footer">

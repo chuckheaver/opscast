@@ -27,7 +27,7 @@ const CONTOUR_LAYER_IDS = [
   "fog-contours-eight-outline",
 ];
 
-export default function FogMap({ geojson, contours, showContours, picked, onPickFeature }) {
+export default function FogMap({ geojson, contours, showContours, showTerrain, picked, onPickFeature }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -58,6 +58,32 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
     mapRef.current = map;
 
     map.on("load", () => {
+      // Hillshade overlay (toggleable). Lives between the basemap land/
+      // water and the basemap labels, so SF's hills (Twin Peaks, Mt Tam,
+      // San Bruno Mtn) shade visibly while street and place names stay
+      // legible on top.
+      map.addSource("mapbox-dem", {
+        type: "raster-dem",
+        url: "mapbox://mapbox.mapbox-terrain-dem-v1",
+        tileSize: 512,
+        maxzoom: 14,
+      });
+      const firstLabelLayer = map.getStyle().layers.find(l => l.type === "symbol");
+      map.addLayer(
+        {
+          id: "hillshade",
+          type: "hillshade",
+          source: "mapbox-dem",
+          layout: { visibility: "none" },
+          paint: {
+            "hillshade-exaggeration": 0.5,
+            "hillshade-shadow-color": "#1c1917",
+            "hillshade-highlight-color": "#fafaf9",
+          },
+        },
+        firstLabelLayer?.id
+      );
+
       // ── Neighborhood source ─────────────────────────────────────────
       map.addSource("fog", {
         type: "geojson",
@@ -250,6 +276,19 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showContours]);
+
+  // Toggle the hillshade terrain overlay.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      if (map.getLayer("hillshade")) {
+        map.setLayoutProperty("hillshade", "visibility", showTerrain ? "visible" : "none");
+      }
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showTerrain]);
 
   // Sync picked state: drop a marker, highlight the feature, fly there.
   useEffect(() => {

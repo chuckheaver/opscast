@@ -26,6 +26,9 @@ export default function FogApp() {
   // Fog data layer (contour fills + icon patterns) is shown by default;
   // toggle off for a clean basemap with only neighborhood outlines.
   const [showContours, setShowContours] = useState(true);
+  // Topographic hillshade overlay — off by default since the data layer
+  // is the primary view.
+  const [showTerrain, setShowTerrain] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
   const autoGeoTriedRef = useRef(false);
@@ -209,6 +212,8 @@ export default function FogApp() {
         contoursAvailable={!!contours}
         showContours={showContours}
         onToggleContours={setShowContours}
+        showTerrain={showTerrain}
+        onToggleTerrain={setShowTerrain}
         onUseGeoLocation={requestGeoLocation}
         geoLoading={geoLoading}
         geoErr={geoErr}
@@ -217,6 +222,7 @@ export default function FogApp() {
         geojson={geojson}
         contours={contours}
         showContours={showContours}
+        showTerrain={showTerrain}
         picked={picked}
         onPickFeature={pickFromMap}
       />
