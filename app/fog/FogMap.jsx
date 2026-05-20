@@ -20,42 +20,9 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
 
-// 64×64 canvas pattern: four 🌤️ emoji scattered across a transparent
-// tile. Painted on top of the 8.5 (Transition) grey fill so the polygon
-// reads as "partly cloudy" using the same visual the user picked for the
-// legend. Bigger tile = less visible repetition at typical zooms.
-function buildTransitionCloudsPattern() {
-  const size = 64;
-  const canvas = document.createElement("canvas");
-  canvas.width = size;
-  canvas.height = size;
-  const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, size, size);
-
-  // System-emoji fonts in priority order — first one available wins.
-  ctx.font = '15px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif';
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-
-  // Hand-picked positions so the tile reads as scattered rather than gridded.
-  // Edges deliberately empty so a tiled neighbour doesn't crowd the seam.
-  const spots = [
-    [14, 14],
-    [42, 20],
-    [22, 42],
-    [52, 50],
-  ];
-  spots.forEach(([x, y]) => {
-    ctx.fillText("🌤️", x, y);
-  });
-
-  return ctx.getImageData(0, 0, size, size);
-}
-
 // Layer IDs the "Show fog data" toggle flips on and off as a group.
 const CONTOUR_LAYER_IDS = [
   "fog-contours-fog",
-  "fog-contours-transition-icons",
   "fog-contours-sun",
   "fog-contours-eight-outline",
 ];
@@ -91,12 +58,6 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
     mapRef.current = map;
 
     map.on("load", () => {
-      // Register the transition-zone cloud pattern up-front so the layer
-      // below can reference it by name.
-      if (!map.hasImage("transition-clouds")) {
-        map.addImage("transition-clouds", buildTransitionCloudsPattern());
-      }
-
       // ── Neighborhood source ─────────────────────────────────────────
       map.addSource("fog", {
         type: "geojson",
@@ -150,19 +111,6 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         },
       });
 
-      // Cloud icon overlay just on the 8.5 transition polygon. Pattern has
-      // a transparent background so the underlying light-grey fill stays
-      // visible; little white clouds sit on top to flag it as Transition.
-      map.addLayer({
-        id: "fog-contours-transition-icons",
-        type: "fill",
-        source: "fog-contours",
-        filter: ["==", ["coalesce", ["get", "hours"], 0], 8.5],
-        paint: {
-          "fill-pattern": "transition-clouds",
-          "fill-opacity": 0.95,
-        },
-      });
 
       // Dashed outline ONLY on the 8.0 polygon — it's the "edge of Sun"
       // and we want that boundary visible against the surrounding yellow
