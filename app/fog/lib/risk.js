@@ -36,11 +36,11 @@ export function fogColor(hours) {
 
 // Three-zone bucketing matching the color gradient.
 export function fogLabel(hours) {
-  if (hours > 8.5) return "Fog";
-  if (hours >= 8.35) return "Transition";
+  if (hours > 9) return "Fog";
+  if (hours >= 8) return "Transition";
   return "Sun";
 }
 
-// Used by FogMap.jsx to filter the partly-cloudy pattern overlay layer
-// to just the transition band.
-export const TRANSITION_RANGE = [8.35, 8.5];
+// Used by FogMap.jsx to filter the transition fill + outline layers.
+// Bands match the legend shown in the sidebar (Microclimates · Fog Hours).
+export const TRANSITION_RANGE = [8, 9];

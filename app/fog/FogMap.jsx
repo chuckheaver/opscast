@@ -81,60 +81,63 @@ export default function FogMap({ geojson, contours, showContours, picked, onPick
         data: { type: "FeatureCollection", features: [] },
       });
 
-      // High-fog band (≥9): grey gradient, darker for higher hours.
-      // The transition into grey starts at 9, not 8.6, so the 8.5 contour
-      // can read as warm-yellow-with-clouds rather than nearly-grey.
+      // High-fog band (>9 hrs): grey gradient, darker for higher hours.
+      // Bands match the sidebar legend (< 8 / 8–9 / > 9).
       map.addLayer({
         id: "fog-contours-fog",
         type: "fill",
         source: "fog-contours",
-        filter: [">=", ["coalesce", ["get", "hours"], 0], 9],
+        filter: [">", ["coalesce", ["get", "hours"], 0], 9],
         paint: {
           "fill-color": [
             "interpolate", ["linear"], ["get", "hours"],
-            9,    "#d6d3d1",
-            10.5, "#78716c",
+            9.5,  "#d6d3d1",
+            11,   "#78716c",
             12.5, "#292524",
           ],
           "fill-opacity": 0.45,
         },
       });
 
-      // Transition band (=8.5): warm grey-yellow solid fill. Sits between
-      // the Sun yellow and the Fog grey-gradient start, leaning grey so
-      // the user reads it as "marine layer arriving, not full fog yet".
+      // Transition band (8 ≤ hrs ≤ 9): warm grey-yellow solid fill. Sits
+      // between Sun yellow and Fog grey-gradient.
       map.addLayer({
         id: "fog-contours-transition",
         type: "fill",
         source: "fog-contours",
-        filter: ["==", ["coalesce", ["get", "hours"], 0], 8.5],
+        filter: ["all",
+          [">=", ["coalesce", ["get", "hours"], 0], 8],
+          ["<=", ["coalesce", ["get", "hours"], 0], 9],
+        ],
         paint: {
           "fill-color": "#d4cfb5",
           "fill-opacity": 0.55,
         },
       });
 
-      // Sun band (<8.5): soft pale yellow, kept transparent so the streets-v12
-      // basemap (roads, parks, transit, labels) still reads clearly through it.
+      // Sun band (<8 hrs): soft pale yellow, kept transparent so the
+      // streets-v12 basemap reads clearly through it.
       map.addLayer({
         id: "fog-contours-sun",
         type: "fill",
         source: "fog-contours",
-        filter: ["<", ["coalesce", ["get", "hours"], 0], 8.5],
+        filter: ["<", ["coalesce", ["get", "hours"], 0], 8],
         paint: {
           "fill-color": "#fef08a",
           "fill-opacity": 0.4,
         },
       });
 
-      // Dashed outline on the transition (=8.5) polygons specifically so
-      // the partly-cloudy boundary stands out from neighborhood lines and
-      // adjacent solid-fill bands. Drawn after all fills so it sits on top.
+      // Dashed outline on every transition polygon so the partly-cloudy
+      // boundary stands out from neighborhood lines and adjacent bands.
       map.addLayer({
         id: "fog-contours-transition-outline",
         type: "line",
         source: "fog-contours",
-        filter: ["==", ["coalesce", ["get", "hours"], 0], 8.5],
+        filter: ["all",
+          [">=", ["coalesce", ["get", "hours"], 0], 8],
+          ["<=", ["coalesce", ["get", "hours"], 0], 9],
+        ],
         layout: { "line-cap": "round", "line-join": "round" },
         paint: {
           "line-color": "#9ca3af",

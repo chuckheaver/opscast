@@ -17,6 +17,9 @@ import { buildDefaults } from "./lib/thresholds";
 import { geoCode, getWx, getAQ, buildFcData } from "./lib/weather-api";
 
 const THRESH_STORAGE_KEY = "ur4cast.thresh.v1";
+// Last-selected location, shared with /fog so it can carry the location over
+// without depending on the Fog Forecast button's URL params (direct navs work).
+const LOC_STORAGE_KEY = "opscast.loc.v1";
 
 export default function Page() {
   const [zip, setZip] = useState("");
@@ -57,6 +60,20 @@ export default function Page() {
       localStorage.setItem(THRESH_STORAGE_KEY, JSON.stringify(thresh));
     } catch {}
   }, [thresh, hydrated]);
+
+  // Persist the selected location (geo-resolved or manually-picked) so /fog
+  // can pick it up on direct navigation. Cleared when the user types a new
+  // query — see handleZipInput.
+  useEffect(() => {
+    if (!selectedLoc) return;
+    try {
+      localStorage.setItem(LOC_STORAGE_KEY, JSON.stringify({
+        latitude: selectedLoc.latitude,
+        longitude: selectedLoc.longitude,
+        name: selectedLoc.name,
+      }));
+    } catch {}
+  }, [selectedLoc]);
 
   // User-typed input in the location field. Clears any cached selectedLoc
   // so the submit handler will fresh-geoCode whatever they finished typing.

@@ -70,6 +70,8 @@ export default function FogSidebar({
         </div>
       </header>
 
+      <Legend />
+
       <label className="fog-lbl">Bay Area address</label>
       <div className="fog-search">
         <div className="fog-search-row">
@@ -207,5 +209,101 @@ function Result({ picked }) {
         </div>
       )}
     </div>
+  );
+}
+
+// Microclimates legend — three bands matching the fog map's coloring:
+//   • < 8 hrs  → Sun         (yellow swatch + sun icon)
+//   • 8–9 hrs  → Transition  (grey-yellow swatch + partly-cloudy icon)
+//   • > 9 hrs  → Fog         (grey swatch + fog wisps icon)
+function Legend() {
+  return (
+    <div className="fog-legend">
+      <div className="fog-legend-title">Microclimates · Fog Hours</div>
+      <div className="fog-legend-rows">
+        <LegendRow
+          swatch="#fef08a"
+          icon={<SunIcon />}
+          range="< 8 hrs"
+          label="Sun"
+        />
+        <LegendRow
+          swatch="#d4cfb5"
+          icon={<PartlyCloudyIcon />}
+          range="8–9 hrs"
+          label="Transition"
+        />
+        <LegendRow
+          swatch="#78716c"
+          icon={<FogIcon />}
+          range="> 9 hrs"
+          label="Fog"
+        />
+      </div>
+    </div>
+  );
+}
+
+function LegendRow({ swatch, icon, range, label }) {
+  return (
+    <div className="fog-legend-row">
+      <span className="fog-legend-swatch" style={{ background: swatch }}>
+        {icon}
+      </span>
+      <span className="fog-legend-range">{range}</span>
+      <span className="fog-legend-label">{label}</span>
+    </div>
+  );
+}
+
+function SunIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <circle cx="9" cy="9" r="3.2" fill="#b45309" />
+      <g stroke="#b45309" strokeWidth="1.4" strokeLinecap="round">
+        <line x1="9" y1="1.8" x2="9" y2="3.2" />
+        <line x1="9" y1="14.8" x2="9" y2="16.2" />
+        <line x1="1.8" y1="9" x2="3.2" y2="9" />
+        <line x1="14.8" y1="9" x2="16.2" y2="9" />
+        <line x1="3.7" y1="3.7" x2="4.7" y2="4.7" />
+        <line x1="13.3" y1="13.3" x2="14.3" y2="14.3" />
+        <line x1="14.3" y1="3.7" x2="13.3" y2="4.7" />
+        <line x1="4.7" y1="13.3" x2="3.7" y2="14.3" />
+      </g>
+    </svg>
+  );
+}
+
+function PartlyCloudyIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      {/* Sun peeking from upper-right behind the cloud */}
+      <circle cx="13" cy="5" r="2.4" fill="#b45309" />
+      <g stroke="#b45309" strokeWidth="1" strokeLinecap="round">
+        <line x1="13" y1="1.5" x2="13" y2="2.2" />
+        <line x1="16.2" y1="5" x2="15.4" y2="5" />
+        <line x1="10.8" y1="2.8" x2="11.3" y2="3.3" />
+        <line x1="15.2" y1="2.8" x2="14.7" y2="3.3" />
+      </g>
+      {/* Cloud in front, lower-left */}
+      <g fill="#52525b">
+        <circle cx="5" cy="11.5" r="2.6" />
+        <circle cx="8" cy="10.5" r="3" />
+        <circle cx="11.2" cy="11.5" r="2.4" />
+        <rect x="4" y="11" width="9" height="3.6" rx="0.5" />
+      </g>
+    </svg>
+  );
+}
+
+function FogIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <g stroke="#f5f5f4" strokeWidth="1.6" strokeLinecap="round">
+        <line x1="3" y1="5.5" x2="14" y2="5.5" />
+        <line x1="2" y1="9" x2="16" y2="9" />
+        <line x1="3" y1="12.5" x2="13" y2="12.5" />
+      </g>
+    </svg>
   );
 }

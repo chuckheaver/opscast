@@ -148,6 +148,36 @@ export default function FogApp() {
     });
   }, [urlLoc, geojson, contours]);
 
+  // Fallback initial pick from localStorage when no URL params present.
+  // Ur4cast writes the user's selected location to opscast.loc.v1 — so
+  // navigating to /fog directly carries that location over without needing
+  // to round-trip through the Fog Forecast button's query string.
+  useEffect(() => {
+    if (urlLocAppliedRef.current) return;
+    if (autoGeoTriedRef.current) return;
+    if (urlLoc) return;
+    if (!geojson) return;
+    let stored;
+    try {
+      const raw = localStorage.getItem("opscast.loc.v1");
+      if (raw) stored = JSON.parse(raw);
+    } catch {}
+    const lat = Number(stored?.latitude);
+    const lng = Number(stored?.longitude);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+    urlLocAppliedRef.current = true;
+    autoGeoTriedRef.current = true;
+    const point = [lng, lat];
+    const feature = findNeighborhoodForPoint(geojson, point);
+    const contour = findContourForPoint(contours, point);
+    setPicked({
+      point,
+      address: stored.name || null,
+      feature,
+      contour,
+    });
+  }, [urlLoc, geojson, contours]);
+
   // Auto-prompt for location on first mount, but only if permission isn't
   // already denied — otherwise we'd just be re-asking for a no. Skipped
   // entirely when a URL location was provided.

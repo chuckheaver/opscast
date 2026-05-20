@@ -1154,6 +1154,51 @@ input[type=range]::-webkit-slider-thumb:hover {
   color: var(--muted);
   line-height: 1.45;
 }
+.fog-legend {
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+}
+.fog-legend-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.fog-legend-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.fog-legend-row {
+  display: grid;
+  grid-template-columns: 28px 62px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+.fog-legend-swatch {
+  width: 28px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+.fog-legend-range {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #1c1917;
+  letter-spacing: 0.4px;
+}
+.fog-legend-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1c1917;
+}
+
 .fog-lbl {
   font-size: 11px;
   font-weight: 700;
