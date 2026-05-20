@@ -79,9 +79,7 @@ export default function FogSidebar({
         </div>
       </header>
 
-      <Legend />
-
-      <label className="fog-lbl">Bay Area address</label>
+      <label className="fog-lbl">Location</label>
       <div className="fog-search">
         <div className="fog-search-row">
           <input
@@ -121,6 +119,8 @@ export default function FogSidebar({
           </div>
         )}
       </div>
+
+      <Legend />
 
       {!ready && !dataErr && (
         <div className="fog-note">Loading neighborhood data…</div>
@@ -196,7 +196,10 @@ function Result({ picked }) {
           <div className="fog-score-num"><CountUp value={contourHours} /></div>
           <div className="fog-score-unit">summer fog hrs / day · at this point</div>
         </div>
-        <div className="fog-result-label">{fogLabel(contourHours)}</div>
+        <div className="fog-result-zone">
+          <span className="fog-result-zone-prefix">Microclimate Zone —</span>
+          <span className="fog-result-zone-value">{fogLabel(contourHours)}</span>
+        </div>
         <div className="fog-result-h">Outside SF</div>
         {picked.address && (
           <div className="fog-result-sub">{picked.address}</div>
@@ -215,7 +218,10 @@ function Result({ picked }) {
         <div className="fog-score-num"><CountUp value={primary} /></div>
         <div className="fog-score-unit">summer fog hrs / day · {source}</div>
       </div>
-      <div className="fog-result-label">{fogLabel(primary)}</div>
+      <div className="fog-result-zone">
+        <span className="fog-result-zone-prefix">Microclimate Zone —</span>
+        <span className="fog-result-zone-value">{fogLabel(primary)}</span>
+      </div>
       <div className="fog-result-h">{f.properties.name}</div>
       {picked.address && (
         <div className="fog-result-sub">{picked.address}</div>
@@ -237,20 +243,18 @@ function Legend() {
     <div className="fog-legend">
       <div className="fog-legend-title">Microclimates · Fog Hours</div>
       <div className="fog-legend-rows">
-        <LegendRow swatch="#fef08a" emoji="☀️"  range="≤ 8 hrs" label="Sun" />
-        <LegendRow swatch="#d6d3d1" emoji="🌤️" range="8.5 hrs" label="Transition" />
-        <LegendRow swatch="#78716c" emoji="☁️"  range="≥ 9 hrs" label="Fog" />
+        <LegendRow emoji="☀️"  range="≤ 8 hrs" label="Sun" />
+        <LegendRow emoji="🌤️" range="8.5 hrs" label="Transition" />
+        <LegendRow emoji="☁️"  range="≥ 9 hrs" label="Fog" />
       </div>
     </div>
   );
 }
 
-function LegendRow({ swatch, emoji, range, label }) {
+function LegendRow({ emoji, range, label }) {
   return (
     <div className="fog-legend-row">
-      <span className="fog-legend-swatch" style={{ background: swatch }}>
-        <span className="fog-legend-emoji" aria-hidden="true">{emoji}</span>
-      </span>
+      <span className="fog-legend-emoji" aria-hidden="true">{emoji}</span>
       <span className="fog-legend-range">{range}</span>
       <span className="fog-legend-label">{label}</span>
     </div>

@@ -1190,22 +1190,14 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 .fog-legend-row {
   display: grid;
-  grid-template-columns: 34px 62px 1fr;
+  grid-template-columns: 24px 62px 1fr;
   align-items: center;
   gap: 10px;
 }
-.fog-legend-swatch {
-  width: 34px;
-  height: 26px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border);
-  border-radius: 2px;
-}
 .fog-legend-emoji {
-  font-size: 15px;
+  font-size: 18px;
   line-height: 1;
+  text-align: center;
 }
 .fog-legend-range {
   font-family: 'DM Mono', monospace;
@@ -1330,34 +1322,49 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-result-score {
   margin-top: 14px;
   padding: 18px 16px;
-  color: #fff;
+  color: #1c1917; /* black text reads well on the light bands; halo handles dark */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   border-radius: 3px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25),
-              inset 0 -1px 0 rgba(0, 0, 0, 0.18);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+              inset 0 -1px 0 rgba(0, 0, 0, 0.12);
 }
 .fog-score-num {
   font-size: 38px;
   font-weight: 800;
   line-height: 1;
   font-family: 'DM Mono', monospace;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  /* Soft white halo so the dark text still reads on the darker fog bands */
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.55),
+               0 0 4px rgba(255, 255, 255, 0.55);
 }
 .fog-score-unit {
   font-size: 10px;
   letter-spacing: 1.6px;
   text-transform: uppercase;
   margin-top: 6px;
-  opacity: 0.9;
   font-family: 'DM Mono', monospace;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.55);
 }
-.fog-result-label {
-  margin-top: 12px;
-  font-size: 14px;
-  font-weight: 600;
+.fog-result-zone {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.fog-result-zone-prefix {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+.fog-result-zone-value {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
   color: #1c1917;
 }
 .fog-result-aux {
