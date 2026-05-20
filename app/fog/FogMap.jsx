@@ -76,9 +76,10 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, p
           source: "mapbox-dem",
           layout: { visibility: "none" },
           paint: {
-            "hillshade-exaggeration": 0.5,
-            "hillshade-shadow-color": "#1c1917",
-            "hillshade-highlight-color": "#fafaf9",
+            "hillshade-exaggeration": 1,
+            "hillshade-shadow-color": "#000000",
+            "hillshade-accent-color": "#404040",
+            "hillshade-highlight-color": "#e7e5e4",
           },
         },
         firstLabelLayer?.id
