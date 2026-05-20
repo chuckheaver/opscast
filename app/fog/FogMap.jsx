@@ -61,7 +61,9 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, p
       // Hillshade overlay (toggleable). Lives between the basemap land/
       // water and the basemap labels, so SF's hills (Twin Peaks, Mt Tam,
       // San Bruno Mtn) shade visibly while street and place names stay
-      // legible on top.
+      // legible on top. A second hillshade pass from the opposite
+      // illumination angle stacks on top to deepen the shadows on slopes
+      // the primary light leaves flat.
       map.addSource("mapbox-dem", {
         type: "raster-dem",
         url: "mapbox://mapbox.mapbox-terrain-dem-v1",
@@ -78,12 +80,65 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, p
           paint: {
             "hillshade-exaggeration": 1,
             "hillshade-shadow-color": "#000000",
-            "hillshade-accent-color": "#404040",
-            "hillshade-highlight-color": "#e7e5e4",
+            "hillshade-accent-color": "#1c1917",
+            "hillshade-highlight-color": "#a8a29e",
           },
         },
         firstLabelLayer?.id
       );
+      // Second hillshade pass from the SE (155°) lights the slopes the
+      // default 335° leaves shadowed, doubling up the relief feel.
+      map.addLayer(
+        {
+          id: "hillshade-2",
+          type: "hillshade",
+          source: "mapbox-dem",
+          layout: { visibility: "none" },
+          paint: {
+            "hillshade-exaggeration": 1,
+            "hillshade-illumination-direction": 155,
+            "hillshade-shadow-color": "rgba(0, 0, 0, 0.6)",
+            "hillshade-accent-color": "rgba(28, 25, 23, 0.5)",
+            "hillshade-highlight-color": "rgba(168, 162, 158, 0)",
+          },
+        },
+        firstLabelLayer?.id
+      );
+
+      // Curated Bay Area peaks — labelled with name + elevation. Same
+      // toggle as the hillshade so they appear and hide together.
+      map.addSource("peaks", {
+        type: "geojson",
+        data: "/data/sf-bay-peaks.geojson",
+      });
+      map.addLayer({
+        id: "peaks-labels",
+        type: "symbol",
+        source: "peaks",
+        layout: {
+          visibility: "none",
+          "text-field": [
+            "format",
+            "▲ ", { "font-scale": 0.9 },
+            ["get", "name"], {},
+            "\n", {},
+            ["concat", ["to-string", ["get", "elevation_ft"]], " ft"],
+            { "font-scale": 0.85 },
+          ],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": 12,
+          "text-anchor": "left",
+          "text-offset": [0.7, 0],
+          "text-allow-overlap": false,
+          "text-padding": 4,
+        },
+        paint: {
+          "text-color": "#1c1917",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.6,
+          "text-halo-blur": 0.5,
+        },
+      });
 
       // ── Neighborhood source ─────────────────────────────────────────
       map.addSource("fog", {
@@ -278,14 +333,15 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, p
     else map.once("load", apply);
   }, [showContours]);
 
-  // Toggle the hillshade terrain overlay.
+  // Toggle the hillshade terrain overlay + peak labels.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
-      if (map.getLayer("hillshade")) {
-        map.setLayoutProperty("hillshade", "visibility", showTerrain ? "visible" : "none");
-      }
+      const vis = showTerrain ? "visible" : "none";
+      ["hillshade", "hillshade-2", "peaks-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
     };
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);

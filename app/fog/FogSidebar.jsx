@@ -151,11 +151,11 @@ export default function FogSidebar({
           checked={showTerrain}
           onChange={e => onToggleTerrain(e.target.checked)}
         />
-        <span className="fog-toggle-label">Show terrain</span>
+        <span className="fog-toggle-label">Show terrain &amp; peaks</span>
         <span className="fog-toggle-help">
-          Hillshade overlay for the Bay Area's topography — Twin Peaks,
-          Mt Tam, San Bruno Mtn, etc. — to see how the hills shape the
-          fog patterns.
+          Hillshade overlay of the Bay Area's topography plus labelled
+          peaks (Mt Tam, Twin Peaks, San Bruno Mtn, etc.) so you can see
+          how the hills shape the fog patterns.
         </span>
       </label>
 
