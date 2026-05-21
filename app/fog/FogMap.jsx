@@ -82,7 +82,7 @@ function buildTransitionEastEdges(contoursFc) {
 // Pick a few points along the eastern edge of a polygon's outer ring.
 // Used to scatter 🌤️ cloud markers on the 8.5 (Transition) contour —
 // fog "spills" east from the Pacific, so this is the marine-layer fringe.
-function eastEdgePoints(rings, count = 2) {
+function eastEdgePoints(rings, count = 3) {
   const outer = rings?.[0];
   if (!outer || outer.length < 4) return [];
   let minLng = Infinity, maxLng = -Infinity;
@@ -91,7 +91,9 @@ function eastEdgePoints(rings, count = 2) {
     if (lng > maxLng) maxLng = lng;
   });
   const width = maxLng - minLng;
-  const eastEdgeThreshold = maxLng - width * 0.12;
+  // Widened from 12% → 30% so small polygons still produce candidates
+  // and the markers spread more visibly along the eastern flank.
+  const eastEdgeThreshold = maxLng - width * 0.3;
   const candidates = outer.filter(([lng]) => lng >= eastEdgeThreshold);
   if (candidates.length === 0) return [];
   // Sort N→S so spacing reads as evenly distributed along the edge.
@@ -121,7 +123,7 @@ function buildTransitionMarkers(contoursFc) {
           ? f.geometry.coordinates
           : [];
     polys.forEach(rings => {
-      eastEdgePoints(rings, 2).forEach(p => out.push(p));
+      eastEdgePoints(rings, 3).forEach(p => out.push(p));
     });
   });
   return out;
@@ -346,19 +348,18 @@ export default function FogMap({
         data: { type: "FeatureCollection", features: [] },
       });
 
-      // Grey gradient band (≥9 hrs): light grey at 9 → near-black at 12.5.
-      // Anything below 9 is left fully transparent so the basemap reads
-      // through clearly; the 8.5 transition polygon picks up a few 🌤️
-      // DOM markers along its eastern edge instead (see FogApp).
+      // Grey gradient band (≥8.5 hrs): light grey at 8.5 → near-black
+      // at 12.5. The 8.5 polygon is the lightest step in the sequence;
+      // each darker shade above signals more daily fog hours.
       map.addLayer({
         id: "fog-contours-fog",
         type: "fill",
         source: "fog-contours",
-        filter: [">=", ["coalesce", ["get", "hours"], 0], 9],
+        filter: [">=", ["coalesce", ["get", "hours"], 0], 8.5],
         paint: {
           "fill-color": [
             "interpolate", ["linear"], ["get", "hours"],
-            9,    "#d6d3d1",
+            8.5,  "#e5e5e4",
             11,   "#78716c",
             12.5, "#292524",
           ],
@@ -725,10 +726,10 @@ export default function FogMap({
           "line-join": "round",
         },
         paint: {
-          "line-color": "#a8a29e",
-          "line-width": 1.2,
-          "line-dasharray": [2, 2.5],
-          "line-opacity": 0.55,
+          "line-color": "#1c1917",
+          "line-width": 1.6,
+          "line-dasharray": [2, 2.2],
+          "line-opacity": 0.8,
         },
       });
 
