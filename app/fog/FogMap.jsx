@@ -401,10 +401,10 @@ export default function FogMap({
         layout: {
           visibility: "none",
           "text-field": [
-            "format",
-            ["get", "nbrhood"], {},
-            "\n", {},
-            ["get", "nid"], { "font-scale": 0.78 },
+            "concat",
+            ["get", "nbrhood"],
+            "\n",
+            ["to-string", ["get", "nid"]],
           ],
           "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
           "text-size": [
@@ -413,6 +413,7 @@ export default function FogMap({
             13, 11,
             15, 13,
           ],
+          "text-line-height": 1.1,
           "text-max-width": 9,
           "text-padding": 3,
           "text-allow-overlap": false,
