@@ -352,23 +352,11 @@ export default function FogMap({
       });
 
       // Realtor Neighborhoods (DataSF) — 92 neighborhoods grouped into
-      // 10 SFAR districts. Fills colour-coded by district number so the
-      // user can see "this whole NW corner is District 1" at a glance,
-      // with the neighborhood name labelled at each polygon's center.
-      const realtorDistrictColor = [
-        "match", ["get", "district_num"],
-        1,  "#ef4444", // NW
-        2,  "#f97316", // Central West
-        3,  "#facc15", // SW
-        4,  "#22c55e", // Twin Peaks West
-        5,  "#14b8a6", // Central
-        6,  "#0ea5e9", // Central North
-        7,  "#6366f1", // North
-        8,  "#a855f7", // NE
-        9,  "#ec4899", // Central East
-        10, "#64748b", // SE
-        "#9ca3af",      // None / unknown
-      ];
+      // 10 SFAR districts. Each feature has a per-neighborhood `color`
+      // baked into properties by the slimming pass: the district number
+      // (1–10) picks a base hue, and the sub-letter (a, b, c, …) shifts
+      // lightness so e.g. 5a/5b/5c are all greens but visibly distinct
+      // from each other. Mapbox reads the property directly.
       map.addSource("realtor", {
         type: "geojson",
         data: "/data/sf-realtor-neighborhoods.geojson",
@@ -379,8 +367,8 @@ export default function FogMap({
         source: "realtor",
         layout: { visibility: "none" },
         paint: {
-          "fill-color": realtorDistrictColor,
-          "fill-opacity": 0.22,
+          "fill-color": ["get", "color"],
+          "fill-opacity": 0.28,
         },
       });
       map.addLayer({
@@ -389,9 +377,9 @@ export default function FogMap({
         source: "realtor",
         layout: { visibility: "none", "line-join": "round" },
         paint: {
-          "line-color": realtorDistrictColor,
-          "line-width": 1.6,
-          "line-opacity": 0.85,
+          "line-color": ["get", "color"],
+          "line-width": 1.8,
+          "line-opacity": 0.95,
         },
       });
       map.addLayer({
