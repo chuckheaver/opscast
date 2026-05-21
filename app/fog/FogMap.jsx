@@ -420,7 +420,7 @@ export default function FogMap({
           "symbol-placement": "point",
         },
         paint: {
-          "text-color": "#1c1917",
+          "text-color": "#1d4ed8",
           "text-halo-color": "#ffffff",
           "text-halo-width": 1.4,
           "text-halo-blur": 0.5,
