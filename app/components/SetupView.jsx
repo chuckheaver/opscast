@@ -160,7 +160,7 @@ export default function SetupView({
             <option key={h} value={h}>{fmtHrFull(h)}</option>
           ))}
         </select>
-        <span style={{ color: "#78716c", fontFamily: "'DM Mono',monospace" }}>→</span>
+        <span style={{ color: "#78716c", fontFamily: "'DM Sans',sans-serif" }}>→</span>
         <select
           className="sel-box"
           value={endH}
@@ -190,7 +190,7 @@ export default function SetupView({
             <option key={i} value={i}>{dayLabel(i)}</option>
           ))}
         </select>
-        <span style={{ color: "#78716c", fontFamily: "'DM Mono',monospace" }}>through</span>
+        <span style={{ color: "#78716c", fontFamily: "'DM Sans',sans-serif" }}>through</span>
         <select
           className="sel-box"
           value={dayTo}

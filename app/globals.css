@@ -1,5 +1,5 @@
 /* Google Fonts must come first (CSS requires @import rules at the top). */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 /* ── Ur4cast app styles (v2) ────────────────────────────────────────────── */
@@ -18,7 +18,7 @@
   --muted: #78716c;
   --accent: #2563eb;
   --sans: 'DM Sans', sans-serif;
-  --mono: 'DM Mono', monospace;
+  --mono: 'DM Sans', sans-serif;
 }
 
 body {
@@ -49,7 +49,7 @@ body {
   letter-spacing: 1px;
 }
 .brand-tag {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   color: #666;
   letter-spacing: 2px;
@@ -123,7 +123,7 @@ body {
   align-items: center;
 }
 .page-sub {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   color: #78716c;
   letter-spacing: 2px;
@@ -158,7 +158,7 @@ body {
   border: 1.5px solid #ddd8d0;
   color: #1c1917;
   padding: 13px 16px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   outline: none;
 }
@@ -218,7 +218,7 @@ body {
   color: #1c1917;
 }
 .ac-meta {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   color: #78716c;
   letter-spacing: 0.5px;
@@ -236,7 +236,7 @@ body {
   border: 1.5px solid #ddd8d0;
   color: #1c1917;
   padding: 11px 28px 11px 14px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   outline: none;
   cursor: pointer;
@@ -249,7 +249,7 @@ body {
   border-color: #1c1917;
 }
 .sel-note {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   color: #78716c;
   letter-spacing: 1px;
@@ -297,13 +297,13 @@ body {
   color: #1c1917;
 }
 .mc-desc {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   color: #78716c;
   margin-top: 1px;
 }
 .mc-range {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   color: #2563eb;
   font-weight: 500;
@@ -337,7 +337,7 @@ body {
   border-color: #1c1917;
 }
 .excl-lbl {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 9px;
   color: #78716c;
   letter-spacing: 1px;
@@ -351,7 +351,7 @@ body {
 .band-scale {
   display: flex;
   justify-content: space-between;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 9px;
   color: #78716c;
   margin-bottom: 4px;
@@ -386,7 +386,7 @@ body {
   gap: 10px;
 }
 .sl-lbl {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   color: #78716c;
   letter-spacing: 1px;
@@ -427,7 +427,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   transform: scale(1.25);
 }
 .sl-val {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   color: #2563eb;
   font-weight: 500;
@@ -456,7 +456,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   border: 1.5px solid #ddd8d0;
   color: #78716c;
   padding: 7px 16px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   letter-spacing: 1px;
   cursor: pointer;
@@ -493,7 +493,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   color: #1c1917;
 }
 .amc-range {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   color: #2563eb;
   margin-top: 2px;
@@ -523,7 +523,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   border-color: #1c1917;
 }
 .ig-lbl {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 9px;
   color: #78716c;
   letter-spacing: 1px;
@@ -558,7 +558,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   background: #FFBDBD;
   border: 1px solid #8B0000;
   color: #8B0000;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 12px;
 }
 
@@ -577,7 +577,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   color: #1c1917;
 }
 .fc-meta {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   color: #78716c;
   letter-spacing: 1px;
@@ -611,7 +611,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   color: #ff4444;
   letter-spacing: 1px;
@@ -635,7 +635,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   }
 }
 .radar-toggle {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   color: #888;
   letter-spacing: 1px;
@@ -661,7 +661,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   border: 1px solid #444;
   color: #aaa;
   padding: 7px 14px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   letter-spacing: 1px;
   cursor: pointer;
@@ -695,14 +695,14 @@ input[type=range]::-webkit-slider-thumb:hover {
   letter-spacing: 0.5px;
 }
 .day-date {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   color: #888;
   letter-spacing: 1px;
   margin-top: 1px;
 }
 .day-badge {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   font-weight: 700;
   padding: 6px 16px;
@@ -733,14 +733,14 @@ input[type=range]::-webkit-slider-thumb:hover {
   margin-bottom: 6px;
 }
 .kpi-value {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 32px;
   font-weight: 500;
   line-height: 1;
   margin-bottom: 4px;
 }
 .kpi-sub {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   color: #78716c;
   line-height: 1.3;
@@ -796,7 +796,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 .tl-time {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   color: #78716c;
 }
@@ -838,7 +838,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 .tl-pm {
   padding: 5px 10px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   font-weight: 500;
 }
@@ -890,7 +890,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   line-height: 1;
 }
 .action-status {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -906,7 +906,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   margin-bottom: 2px;
 }
 .action-time {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   color: #78716c;
   margin-bottom: 6px;
@@ -936,7 +936,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   content: "→";
   color: #78716c;
   flex-shrink: 0;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
 }
 .all-clear-banner {
   padding: 16px 18px;
@@ -954,7 +954,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   color: #145214;
 }
 .ac-sub {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   color: #2d7a2d;
   margin-top: 2px;
@@ -982,7 +982,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   color: #1c1917;
 }
 .detail-toggle-arr {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   color: #78716c;
   font-size: 12px;
 }
@@ -1002,7 +1002,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 .row-lbl {
   background: #2a2a2a;
   color: #ccc;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 9px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -1022,7 +1022,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 .hr-head {
   background: #f8f5f0;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   color: #1c1917;
   text-align: center;
@@ -1032,7 +1032,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 .dc {
   text-align: center;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   padding: 6px 3px;
   cursor: default;
@@ -1061,7 +1061,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   line-height: 1;
 }
 .cond-lb {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 8px;
   color: #78716c;
   display: block;
@@ -1070,7 +1070,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 .no-hrs {
   text-align: center;
   padding: 32px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   color: #78716c;
   letter-spacing: 2px;
@@ -1088,7 +1088,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   color: #78716c;
 }
@@ -1156,7 +1156,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   padding-right: 1px; /* fix italic clipping on Webkit */
 }
 .fog-tag {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   color: var(--muted);
   letter-spacing: 1.6px;
@@ -1200,7 +1200,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   text-align: center;
 }
 .fog-legend-range {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   color: #1c1917;
   letter-spacing: 0.4px;
@@ -1334,7 +1334,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   font-size: 38px;
   font-weight: 800;
   line-height: 1;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   /* Soft white halo so the dark text still reads on the darker fog bands */
   text-shadow: 0 0 12px rgba(255, 255, 255, 0.55),
                0 0 4px rgba(255, 255, 255, 0.55);
@@ -1344,7 +1344,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   letter-spacing: 1.6px;
   text-transform: uppercase;
   margin-top: 6px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.55);
 }
 .fog-result-zone {
@@ -1354,7 +1354,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   gap: 2px;
 }
 .fog-result-zone-prefix {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   color: var(--muted);
   letter-spacing: 1.4px;
@@ -1371,7 +1371,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   margin-top: 8px;
   font-size: 11px;
   color: var(--muted);
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   letter-spacing: 0.4px;
 }
 /* iOS-style toggle switch */
@@ -1454,7 +1454,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   line-height: 1.5;
 }
 .fog-footer code {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   background: #f7f5ef;
   padding: 1px 4px;
@@ -1490,7 +1490,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   line-height: 1.5;
 }
 .fog-map-missing-token code {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   background: #fff;
   padding: 1px 5px;
