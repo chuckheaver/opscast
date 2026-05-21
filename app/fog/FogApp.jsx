@@ -33,6 +33,8 @@ export default function FogApp() {
   const [showSeismic, setShowSeismic] = useState(false);
   // SFMTA Muni stops — off by default.
   const [showMuni, setShowMuni] = useState(false);
+  // SFMTA bike network — off by default.
+  const [showBikes, setShowBikes] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
   const autoGeoTriedRef = useRef(false);
@@ -222,6 +224,8 @@ export default function FogApp() {
         onToggleSeismic={setShowSeismic}
         showMuni={showMuni}
         onToggleMuni={setShowMuni}
+        showBikes={showBikes}
+        onToggleBikes={setShowBikes}
         onUseGeoLocation={requestGeoLocation}
         geoLoading={geoLoading}
         geoErr={geoErr}
@@ -233,6 +237,7 @@ export default function FogApp() {
         showTerrain={showTerrain}
         showSeismic={showSeismic}
         showMuni={showMuni}
+        showBikes={showBikes}
         picked={picked}
         onPickFeature={pickFromMap}
       />

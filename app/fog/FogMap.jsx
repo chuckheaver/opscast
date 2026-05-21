@@ -27,7 +27,7 @@ const CONTOUR_LAYER_IDS = [
   "fog-contours-eight-outline",
 ];
 
-export default function FogMap({ geojson, contours, showContours, showTerrain, showSeismic, showMuni, picked, onPickFeature }) {
+export default function FogMap({ geojson, contours, showContours, showTerrain, showSeismic, showMuni, showBikes, picked, onPickFeature }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -225,6 +225,68 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, s
       });
 
       // Dashed outline ONLY on the 8.0 polygon — it's the "edge of Sun"
+      // SFMTA bike network — 5,455 segments from DataSF. Color-coded by
+      // facility class:
+      //   CLASS I   (BIKE PATH)         → dark green, solid    — off-street, gold standard
+      //   CLASS IV  (SEPARATED BIKEWAY) → green, solid          — protected lane
+      //   CLASS II  (BIKE LANE)         → cyan, solid           — striped lane
+      //   CLASS III (BIKE ROUTE)        → grey, dashed          — sharrow / shared route
+      map.addSource("bikes", {
+        type: "geojson",
+        data: "/data/sf-bike-network.geojson",
+      });
+      // Solid lines for Class I / II / IV (the real infrastructure).
+      map.addLayer({
+        id: "bikes-solid",
+        type: "line",
+        source: "bikes",
+        layout: {
+          visibility: "none",
+          "line-cap": "round",
+          "line-join": "round",
+        },
+        filter: ["in", ["get", "facility"], ["literal", ["CLASS I", "CLASS II", "CLASS IV"]]],
+        paint: {
+          "line-color": [
+            "match", ["get", "facility"],
+            "CLASS I",  "#15803d",
+            "CLASS IV", "#22c55e",
+            "CLASS II", "#06b6d4",
+            "#06b6d4",
+          ],
+          "line-width": [
+            "interpolate", ["linear"], ["zoom"],
+            10, 1,
+            13, 2,
+            16, 3.5,
+          ],
+          "line-opacity": 0.9,
+        },
+      });
+      // Dashed lines for Class III (shared routes / sharrows).
+      map.addLayer({
+        id: "bikes-dashed",
+        type: "line",
+        source: "bikes",
+        layout: {
+          visibility: "none",
+          "line-cap": "round",
+          "line-join": "round",
+        },
+        filter: ["==", ["get", "facility"], "CLASS III"],
+        paint: {
+          "line-color": "#6b7280",
+          "line-width": [
+            "interpolate", ["linear"], ["zoom"],
+            10, 0.8,
+            13, 1.6,
+            16, 2.4,
+          ],
+          "line-dasharray": [2, 2.5],
+          "line-opacity": 0.75,
+        },
+      });
+
       // Muni stops — 3,260 points from DataSF/SFMTA. Small dots that
       // densify the city grid when toggled on; names appear at zoom 14+.
       map.addSource("muni", {
@@ -457,6 +519,20 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, s
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showMuni]);
+
+  // Toggle the bike network overlay (solid + dashed line layers).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showBikes ? "visible" : "none";
+      ["bikes-solid", "bikes-dashed"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showBikes]);
 
   // Sync picked state: drop a marker, highlight the feature, fly there.
   useEffect(() => {

@@ -21,6 +21,8 @@ export default function FogSidebar({
   onToggleSeismic,
   showMuni,
   onToggleMuni,
+  showBikes,
+  onToggleBikes,
   onUseGeoLocation,
   geoLoading,
   geoErr,
@@ -167,6 +169,13 @@ export default function FogSidebar({
         onChange={onToggleMuni}
         label="Muni stops"
         help="All SFMTA Muni stops (~3,260 points). Stop names appear when you zoom in past street level."
+      />
+
+      <ToggleSwitch
+        checked={showBikes}
+        onChange={onToggleBikes}
+        label="Bike network"
+        help="SFMTA bike network — dark green = off-street path, green = separated bikeway, cyan = striped bike lane, dashed grey = shared route."
       />
 
 
