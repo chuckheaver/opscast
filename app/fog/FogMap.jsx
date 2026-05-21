@@ -377,20 +377,21 @@ export default function FogMap({
         data: "/data/sf-realtor-neighborhoods.geojson",
       });
       // (Realtor fill removed by request — boundary lines + labels carry
-      //  the color now, polygons stay see-through.)
+      //  the boundary line is a single solid blue so the realtor
+      //  districts read distinctly against the black neighborhood
+      //  outlines.)
       map.addLayer({
         id: "realtor-outline",
         type: "line",
         source: "realtor",
         layout: { visibility: "none", "line-join": "round" },
         paint: {
-          "line-color": ["get", "color"],
+          "line-color": "#1d4ed8",
           "line-width": 1.8,
           "line-opacity": 0.95,
           // Inset each feature's outline into its own interior so adjacent
           // neighborhoods don't share a single seam — at shared edges the
-          // two offset lines sit side-by-side, one in each neighborhood's
-          // colour.
+          // two offset lines sit side-by-side.
           "line-offset": 1.5,
         },
       });
