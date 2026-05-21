@@ -1464,7 +1464,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   height: 100%;
 }
 .fog-cloud-marker {
-  font-size: 30px;
+  font-size: 24px;
   line-height: 1;
   pointer-events: none;
   filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35));

@@ -20,17 +20,68 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
 
-// Hand-picked SF "transition" locations — neighborhoods that locals know
-// as the partly-cloudy belt between the foggy western half and the sunny
-// eastern half. We pin a 🌤️ DOM marker at each, independent of the
-// contour data (which only has 8.5 polygons offshore / on the bay edge).
-const TRANSITION_PIN_POINTS = [
-  [-122.4400, 37.7700], // Buena Vista Heights
-  [-122.4500, 37.7660], // Cole Valley
-  [-122.4470, 37.7580], // Twin Peaks / Castro Heights
-  [-122.4330, 37.7510], // Noe Valley
-  [-122.4590, 37.7430], // Forest Hill
-  [-122.4330, 37.7340], // Glen Park
+// Hand-picked weather emoji at SF locations chosen from the user's
+// markup. Each pin renders as a DOM marker so the system emoji font
+// is honoured. Coordinates are eyeballed neighborhood centers and
+// can be tuned in place.
+const FOG_PIN_GROUPS = [
+  // ☀️ — fully sunny neighborhoods (squares in markup)
+  {
+    emoji: "☀️",
+    points: [
+      [-122.412, 37.792], // Nob Hill
+      [-122.418, 37.781], // Civic Center
+      [-122.391, 37.780], // South Beach
+      [-122.416, 37.762], // Mission Dolores / 18th
+      [-122.387, 37.730], // Bayview / India Basin
+    ],
+  },
+  // 🌤️ — partly-sunny transition belt (stars in markup)
+  {
+    emoji: "🌤️",
+    points: [
+      [-122.460, 37.797], // Presidio (west)
+      [-122.443, 37.795], // Presidio (east)
+      [-122.450, 37.787], // Presidio Heights
+      [-122.444, 37.781], // Anza Vista
+      [-122.447, 37.773], // Panhandle
+      [-122.451, 37.766], // Cole Valley
+      [-122.434, 37.762], // Castro
+      [-122.431, 37.751], // Noe Valley
+      [-122.415, 37.745], // Peralta Heights
+      [-122.420, 37.741], // Diamond Heights / Bernal
+      [-122.388, 37.762], // Central Waterfront / Dogpatch
+      [-122.379, 37.737], // India Basin
+      [-122.371, 37.728], // Hunters Point
+    ],
+  },
+  // ⛅️ — partly cloudy (circles in markup)
+  {
+    emoji: "⛅️",
+    points: [
+      [-122.493, 37.781], // Outer Richmond (NE)
+      [-122.474, 37.778], // Inner Richmond
+      [-122.488, 37.772], // Outer Richmond (mid)
+      [-122.453, 37.770], // GG Park east edge
+      [-122.464, 37.762], // Inner Sunset / Parnassus
+      [-122.503, 37.756], // Outer Sunset (Kirkham)
+      [-122.484, 37.754], // Sunset 24th Ave
+      [-122.456, 37.748], // Forest Knolls
+      [-122.438, 37.737], // Glen Park
+      [-122.408, 37.723], // Portola / University Mound
+      [-122.388, 37.728], // Bayview (north slope)
+    ],
+  },
+  // ☁️ — full fog (octagons in markup)
+  {
+    emoji: "☁️",
+    points: [
+      [-122.475, 37.732], // Parkside / Stoat Blvd
+      [-122.466, 37.720], // Ingleside Terraces
+      [-122.452, 37.722], // Westwood Park / Sunnyside
+      [-122.440, 37.713], // Cayuga / Excelsior
+    ],
+  },
 ];
 
 // Layer IDs the "Show fog data" toggle flips on and off as a group.
@@ -755,23 +806,26 @@ export default function FogMap({
     else map.once("load", apply);
   }, [showContours]);
 
-  // 🌤️ markers at hand-picked SF transition neighborhoods. Tied to the
-  // Fog-data toggle. Mounted as DOM mapboxgl.Markers so the system emoji
-  // font renders natively.
+  // Weather-emoji DOM markers at hand-picked SF locations. Tied to the
+  // Fog-data toggle. Mounted as mapboxgl.Markers so the system emoji
+  // font renders natively. Each group in FOG_PIN_GROUPS contributes a
+  // different emoji at its own list of coordinates.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     transitionMarkersRef.current.forEach(m => m.remove());
     transitionMarkersRef.current = [];
     if (!showContours) return;
-    TRANSITION_PIN_POINTS.forEach(pt => {
-      const el = document.createElement("div");
-      el.className = "fog-cloud-marker";
-      el.textContent = "🌤️";
-      const marker = new mapboxgl.Marker({ element: el, anchor: "center" })
-        .setLngLat(pt)
-        .addTo(map);
-      transitionMarkersRef.current.push(marker);
+    FOG_PIN_GROUPS.forEach(({ emoji, points }) => {
+      points.forEach(pt => {
+        const el = document.createElement("div");
+        el.className = "fog-cloud-marker";
+        el.textContent = emoji;
+        const marker = new mapboxgl.Marker({ element: el, anchor: "center" })
+          .setLngLat(pt)
+          .addTo(map);
+        transitionMarkersRef.current.push(marker);
+      });
     });
     return () => {
       transitionMarkersRef.current.forEach(m => m.remove());
