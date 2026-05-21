@@ -34,7 +34,6 @@ const FOG_PIN_GROUPS = [
       [-122.391, 37.780], // South Beach
       [-122.416, 37.762], // Mission Dolores / 18th
       [-122.434, 37.762], // Castro
-      [-122.387, 37.730], // Bayview / India Basin
     ],
   },
   // 🌤️ — partly-sunny transition belt (stars in markup)
@@ -46,7 +45,7 @@ const FOG_PIN_GROUPS = [
       [-122.450, 37.787], // Presidio Heights
       [-122.444, 37.781], // Anza Vista
       [-122.447, 37.773], // Panhandle
-      [-122.451, 37.766], // Cole Valley
+      [-122.451, 37.755], // Clarendon Heights
       [-122.431, 37.751], // Noe Valley
       [-122.415, 37.745], // Peralta Heights
       [-122.420, 37.741], // Diamond Heights / Bernal
@@ -62,7 +61,7 @@ const FOG_PIN_GROUPS = [
       [-122.493, 37.781], // Outer Richmond (NE)
       [-122.474, 37.778], // Inner Richmond
       [-122.488, 37.772], // Outer Richmond (mid)
-      [-122.453, 37.770], // GG Park east edge
+      [-122.480, 37.770], // Golden Gate Park center
       [-122.464, 37.762], // Inner Sunset / Parnassus
       [-122.503, 37.756], // Outer Sunset (Kirkham)
       [-122.484, 37.754], // Sunset 24th Ave
