@@ -43,6 +43,9 @@ export default function FogApp() {
   const [showZoning, setShowZoning] = useState(false);
   // Realtor Neighborhoods (SFAR districts) — off by default.
   const [showRealtor, setShowRealtor] = useState(false);
+  // SF neighborhood outlines + name labels — on by default, since they
+  // anchor the map for most users.
+  const [showNeighborhoods, setShowNeighborhoods] = useState(true);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
   const autoGeoTriedRef = useRef(false);
@@ -262,6 +265,8 @@ export default function FogApp() {
         onToggleZoning={setShowZoning}
         showRealtor={showRealtor}
         onToggleRealtor={setShowRealtor}
+        showNeighborhoods={showNeighborhoods}
+        onToggleNeighborhoods={setShowNeighborhoods}
         onUseGeoLocation={requestGeoLocation}
         geoLoading={geoLoading}
         geoErr={geoErr}
@@ -278,6 +283,7 @@ export default function FogApp() {
         showDistricts={showDistricts}
         showZoning={showZoning}
         showRealtor={showRealtor}
+        showNeighborhoods={showNeighborhoods}
         picked={picked}
         onPickFeature={pickFromMap}
       />

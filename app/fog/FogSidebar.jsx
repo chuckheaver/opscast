@@ -31,6 +31,8 @@ export default function FogSidebar({
   onToggleZoning,
   showRealtor,
   onToggleRealtor,
+  showNeighborhoods,
+  onToggleNeighborhoods,
   onUseGeoLocation,
   geoLoading,
   geoErr,
@@ -149,12 +151,19 @@ export default function FogSidebar({
         </div>
       )}
 
+      <ToggleSwitch
+        checked={showNeighborhoods}
+        onChange={onToggleNeighborhoods}
+        label="Neighborhoods"
+        help="SF neighborhood boundaries + name labels. On by default to anchor the map. Clicks still register when off."
+      />
+
       {contoursAvailable && (
         <ToggleSwitch
           checked={showContours}
           onChange={onToggleContours}
           label="Fog data"
-          help="Colored USGS fog contour layer. Off reveals just the neighborhood outlines."
+          help="Colored USGS fog contour layer. Off reveals just the basemap underneath."
         />
       )}
 

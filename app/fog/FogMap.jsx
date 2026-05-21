@@ -86,6 +86,7 @@ export default function FogMap({
   showDistricts,
   showZoning,
   showRealtor,
+  showNeighborhoods,
   picked,
   onPickFeature,
 }) {
@@ -361,16 +362,8 @@ export default function FogMap({
         type: "geojson",
         data: "/data/sf-realtor-neighborhoods.geojson",
       });
-      map.addLayer({
-        id: "realtor-fill",
-        type: "fill",
-        source: "realtor",
-        layout: { visibility: "none" },
-        paint: {
-          "fill-color": ["get", "color"],
-          "fill-opacity": 0.28,
-        },
-      });
+      // (Realtor fill removed by request — boundary lines + labels carry
+      //  the color now, polygons stay see-through.)
       map.addLayer({
         id: "realtor-outline",
         type: "line",
@@ -862,13 +855,29 @@ export default function FogMap({
     else map.once("load", apply);
   }, [showMuni]);
 
+  // Toggle the SF neighborhood outlines + name labels. The invisible
+  // click-target layer stays visible always so map clicks still resolve
+  // to a neighborhood regardless of whether the boundary is on screen.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showNeighborhoods ? "visible" : "none";
+      ["fog-outline", "fog-hover", "fog-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showNeighborhoods]);
+
   // Toggle the Realtor Neighborhoods overlay (fill + outline + labels).
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
       const vis = showRealtor ? "visible" : "none";
-      ["realtor-fill", "realtor-outline", "realtor-labels"].forEach(id => {
+      ["realtor-outline", "realtor-labels"].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
