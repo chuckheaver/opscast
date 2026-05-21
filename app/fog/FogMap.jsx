@@ -401,7 +401,11 @@ export default function FogMap({
         source: "realtor",
         layout: {
           visibility: "none",
-          "text-field": ["get", "nbrhood"],
+          // `display_label` is pre-baked into the GeoJSON as
+          // "<nbrhood>\n<nid>" so the renderer sees a single string
+          // with an embedded newline — bypasses any quirks with
+          // multi-section format expressions.
+          "text-field": ["coalesce", ["get", "display_label"], ["get", "nbrhood"]],
           "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
           "text-size": [
             "interpolate", ["linear"], ["zoom"],
@@ -409,8 +413,7 @@ export default function FogMap({
             13, 11,
             15, 13,
           ],
-          "text-anchor": "bottom",
-          "text-offset": [0, -0.1],
+          "text-line-height": 1.1,
           "text-max-width": 9,
           "text-padding": 3,
           "text-allow-overlap": false,
@@ -418,43 +421,6 @@ export default function FogMap({
         },
         paint: {
           "text-color": "#1c1917",
-          "text-halo-color": "#ffffff",
-          "text-halo-width": 1.4,
-          "text-halo-blur": 0.5,
-          "text-opacity": [
-            "interpolate", ["linear"], ["zoom"],
-            10.5, 0,
-            11.5, 0.9,
-            14, 1,
-          ],
-        },
-      });
-      // Second symbol layer that anchors the SFAR nid (e.g. "5a") just
-      // below the neighborhood name. Rendered as its own layer so the
-      // text reliably appears regardless of how the renderer handles
-      // multi-line format expressions.
-      map.addLayer({
-        id: "realtor-labels-nid",
-        type: "symbol",
-        source: "realtor",
-        layout: {
-          visibility: "none",
-          "text-field": ["get", "nid"],
-          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-          "text-size": [
-            "interpolate", ["linear"], ["zoom"],
-            11, 8,
-            13, 9,
-            15, 11,
-          ],
-          "text-anchor": "top",
-          "text-offset": [0, 0.2],
-          "text-allow-overlap": true,
-          "text-ignore-placement": true,
-          "symbol-placement": "point",
-        },
-        paint: {
-          "text-color": "#57534e",
           "text-halo-color": "#ffffff",
           "text-halo-width": 1.4,
           "text-halo-blur": 0.5,
@@ -954,7 +920,7 @@ export default function FogMap({
     if (!map) return;
     const apply = () => {
       const vis = showRealtor ? "visible" : "none";
-      ["realtor-outline", "realtor-labels", "realtor-labels-nid"].forEach(id => {
+      ["realtor-outline", "realtor-labels"].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
