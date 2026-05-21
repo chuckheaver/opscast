@@ -663,10 +663,10 @@ export default function FogMap({
           "line-join": "round",
         },
         paint: {
-          "line-color": "#1c1917",
-          "line-width": 1.6,
-          "line-dasharray": [2, 2.2],
-          "line-opacity": 0.8,
+          "line-color": "#9ca3af",
+          "line-width": 1.2,
+          "line-dasharray": [2, 2.6],
+          "line-opacity": 0.45,
         },
       });
 
