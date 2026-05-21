@@ -31,6 +31,8 @@ export default function FogApp() {
   const [showTerrain, setShowTerrain] = useState(false);
   // CA Geological Survey seismic hazard zones — off by default.
   const [showSeismic, setShowSeismic] = useState(false);
+  // SFMTA Muni stops — off by default.
+  const [showMuni, setShowMuni] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
   const autoGeoTriedRef = useRef(false);
@@ -218,6 +220,8 @@ export default function FogApp() {
         onToggleTerrain={setShowTerrain}
         showSeismic={showSeismic}
         onToggleSeismic={setShowSeismic}
+        showMuni={showMuni}
+        onToggleMuni={setShowMuni}
         onUseGeoLocation={requestGeoLocation}
         geoLoading={geoLoading}
         geoErr={geoErr}
@@ -228,6 +232,7 @@ export default function FogApp() {
         showContours={showContours}
         showTerrain={showTerrain}
         showSeismic={showSeismic}
+        showMuni={showMuni}
         picked={picked}
         onPickFeature={pickFromMap}
       />

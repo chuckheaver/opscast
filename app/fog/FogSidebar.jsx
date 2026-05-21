@@ -19,6 +19,8 @@ export default function FogSidebar({
   onToggleTerrain,
   showSeismic,
   onToggleSeismic,
+  showMuni,
+  onToggleMuni,
   onUseGeoLocation,
   geoLoading,
   geoErr,
@@ -158,6 +160,13 @@ export default function FogSidebar({
         onChange={onToggleSeismic}
         label="Seismic hazard zones"
         help="CA Geological Survey liquefaction + landslide zones (via DataSF)."
+      />
+
+      <ToggleSwitch
+        checked={showMuni}
+        onChange={onToggleMuni}
+        label="Muni stops"
+        help="All SFMTA Muni stops (~3,260 points). Stop names appear when you zoom in past street level."
       />
 
 

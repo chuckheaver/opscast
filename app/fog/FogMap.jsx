@@ -27,7 +27,7 @@ const CONTOUR_LAYER_IDS = [
   "fog-contours-eight-outline",
 ];
 
-export default function FogMap({ geojson, contours, showContours, showTerrain, showSeismic, picked, onPickFeature }) {
+export default function FogMap({ geojson, contours, showContours, showTerrain, showSeismic, showMuni, picked, onPickFeature }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -225,6 +225,59 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, s
       });
 
       // Dashed outline ONLY on the 8.0 polygon — it's the "edge of Sun"
+      // Muni stops — 3,260 points from DataSF/SFMTA. Small dots that
+      // densify the city grid when toggled on; names appear at zoom 14+.
+      map.addSource("muni", {
+        type: "geojson",
+        data: "/data/sf-muni-stops.geojson",
+      });
+      map.addLayer({
+        id: "muni-dots",
+        type: "circle",
+        source: "muni",
+        layout: { visibility: "none" },
+        paint: {
+          "circle-radius": [
+            "interpolate", ["linear"], ["zoom"],
+            10, 1.5,
+            13, 3,
+            16, 5,
+          ],
+          "circle-color": "#dc2626",
+          "circle-stroke-width": 1,
+          "circle-stroke-color": "#fff",
+          "circle-stroke-opacity": 0.9,
+          "circle-opacity": 0.85,
+        },
+      });
+      map.addLayer({
+        id: "muni-labels",
+        type: "symbol",
+        source: "muni",
+        layout: {
+          visibility: "none",
+          "text-field": ["get", "name"],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": 10,
+          "text-anchor": "top",
+          "text-offset": [0, 0.5],
+          "text-allow-overlap": false,
+          "text-padding": 2,
+          "text-optional": true,
+        },
+        paint: {
+          "text-color": "#1c1917",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.4,
+          "text-opacity": [
+            "interpolate", ["linear"], ["zoom"],
+            13.5, 0,
+            14.5, 1,
+          ],
+        },
+      });
+
+      // Dashed outline ONLY on the 8.0 polygon — it's the "edge of Sun"
       // and we want that boundary visible against the surrounding yellow
       // and the 8.5 transition next to it. All other polygons stay solid.
       map.addLayer({
@@ -390,6 +443,20 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, s
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showSeismic]);
+
+  // Toggle the Muni stops overlay (dots + zoom-in labels).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showMuni ? "visible" : "none";
+      ["muni-dots", "muni-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showMuni]);
 
   // Sync picked state: drop a marker, highlight the feature, fly there.
   useEffect(() => {
