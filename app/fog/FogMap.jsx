@@ -110,7 +110,6 @@ export default function FogMap({
   const markerRef = useRef(null);
   const transitionMarkersRef = useRef([]);
   const dataAppliedRef = useRef(false);
-  const contoursAppliedRef = useRef(false);
   const onPickRef = useRef(onPickFeature);
 
   // Keep latest click handler reachable from the map's event listener
@@ -297,9 +296,12 @@ export default function FogMap({
       });
 
       // ── Contour source (USGS fog isolines clipped to SF) ────────────
+      // Mapbox fetches the GeoJSON directly so the polygons render
+      // independent of FogApp's parallel fetch (which still happens so
+      // findContourForPoint can answer point-in-polygon queries).
       map.addSource("fog-contours", {
         type: "geojson",
-        data: { type: "FeatureCollection", features: [] },
+        data: "/data/sf-fog-contours.geojson",
       });
 
       // Grey gradient band (≥8.5 hrs): light grey at 8.5 → near-black
@@ -787,20 +789,6 @@ export default function FogMap({
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [geojson]);
-
-  // Push the raw USGS contours into their source when the prop arrives.
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !contours || contoursAppliedRef.current) return;
-    const apply = () => {
-      const src = map.getSource("fog-contours");
-      if (!src) return;
-      src.setData(contours);
-      contoursAppliedRef.current = true;
-    };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
-  }, [contours]);
 
   // Flip the entire fog-data layer group on/off (sidebar checkbox).
   useEffect(() => {
