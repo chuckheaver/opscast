@@ -100,7 +100,7 @@ export default function SetupView({
           <span className="fog-fc-orbit fog-fc-orbit-bl" aria-hidden="true">🚲</span>
           <span className="fog-fc-orbit fog-fc-orbit-br" aria-hidden="true">📭</span>
           <Link href={buildFogUrl(selectedLoc)} className="fog-fc-btn">
-            <span className="fog-fc-label">Fog<br />Forecast</span>
+            <span className="fog-fc-label">Ur Micro<br />Life</span>
           </Link>
         </div>
       </div>

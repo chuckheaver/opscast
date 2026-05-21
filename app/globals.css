@@ -33,7 +33,8 @@ body {
 
 /* ── Topbar ─────────────────────────────────────────────────────────────── */
 .topbar {
-  background: #1c1917;
+  background: linear-gradient(180deg, #ffffff 0%, #faf6ec 100%);
+  border-bottom: 1px solid var(--border);
   padding: 13px 22px;
   display: flex;
   align-items: center;
@@ -45,19 +46,28 @@ body {
 .brand-name {
   font-size: 18px;
   font-weight: 800;
-  color: white;
-  letter-spacing: 1px;
+  color: #1c1917;
+  letter-spacing: -0.4px;
+}
+.brand-name em {
+  font-style: italic;
+  background: linear-gradient(135deg, #fbbf24 0%, #6b7280 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 1px;
 }
 .brand-tag {
   font-family: 'DM Sans', sans-serif;
   font-size: 10px;
-  color: #666;
-  letter-spacing: 2px;
+  color: #78716c;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
 }
 .edit-btn {
-  background: none;
-  border: 1px solid #555;
-  color: #aaa;
+  background: #fff;
+  border: 1px solid var(--border);
+  color: #1c1917;
   padding: 8px 16px;
   font-family: 'DM Sans', sans-serif;
   font-size: 12px;
@@ -67,8 +77,8 @@ body {
   text-transform: uppercase;
 }
 .edit-btn:hover {
-  border-color: white;
-  color: white;
+  border-color: #1c1917;
+  background: #faf6ec;
 }
 
 /* ── Setup screen ───────────────────────────────────────────────────────── */
@@ -89,24 +99,29 @@ body {
   font-weight: 800;
   color: #1c1917;
   line-height: 1.05;
+  letter-spacing: -0.5px;
   margin-bottom: 4px;
 }
 .page-h em {
-  color: #2563eb;
-  font-style: normal;
+  font-style: italic;
+  background: linear-gradient(135deg, #fbbf24 0%, #6b7280 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 1px;
 }
 .fog-fc-wrap {
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 240px;
+  height: 240px;
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .fog-fc-btn {
-  width: 96px;
-  height: 96px;
+  width: 104px;
+  height: 104px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 25%, #60a5fa 0%, #2563eb 55%, #1d4ed8 100%);
   color: #fff;
@@ -118,8 +133,8 @@ body {
   font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   font-weight: 800;
-  letter-spacing: 1.2px;
-  line-height: 1.15;
+  letter-spacing: 1px;
+  line-height: 1.2;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
@@ -141,16 +156,16 @@ body {
 }
 .fog-fc-orbit {
   position: absolute;
-  font-size: 22px;
+  font-size: 46px;
   line-height: 1;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
   pointer-events: none;
 }
-.fog-fc-orbit-top { top: 2px;    left: 50%;  transform: translateX(-50%); }
-.fog-fc-orbit-tl  { top: 32px;   left: 12px; }
-.fog-fc-orbit-tr  { top: 32px;   right: 12px; }
-.fog-fc-orbit-bl  { bottom: 22px; left: 22px; }
-.fog-fc-orbit-br  { bottom: 22px; right: 22px; }
+.fog-fc-orbit-top { top: 0;       left: 50%;   transform: translateX(-50%); }
+.fog-fc-orbit-tl  { top: 38px;    left: 6px; }
+.fog-fc-orbit-tr  { top: 38px;    right: 6px; }
+.fog-fc-orbit-bl  { bottom: 14px; left: 18px; }
+.fog-fc-orbit-br  { bottom: 14px; right: 18px; }
 .page-sub {
   font-family: 'DM Sans', sans-serif;
   font-size: 11px;

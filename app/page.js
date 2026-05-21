@@ -179,7 +179,7 @@ export default function Page() {
     <div className="app">
       <div className="topbar">
         <div>
-          <div className="brand-name">Ur4cast</div>
+          <div className="brand-name">Ur<em>4cast</em></div>
           <div className="brand-tag">Business Weather Intelligence</div>
         </div>
         {view === "forecast" && (
