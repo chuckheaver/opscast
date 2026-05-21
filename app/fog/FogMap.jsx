@@ -805,31 +805,44 @@ export default function FogMap({
     else map.once("load", apply);
   }, [showContours]);
 
-  // Weather-emoji DOM markers at hand-picked SF locations. Tied to the
-  // Fog-data toggle. Mounted as mapboxgl.Markers so the system emoji
-  // font renders natively. Each group in FOG_PIN_GROUPS contributes a
-  // different emoji at its own list of coordinates.
+  // Weather-emoji DOM markers at hand-picked SF locations. Mounted as
+  // mapboxgl.Markers so the system emoji font renders natively. Each
+  // group in FOG_PIN_GROUPS contributes a different emoji at its own
+  // list of coordinates. Markers are created once and their CSS
+  // visibility is toggled in lockstep with the Fog-data layer — so the
+  // emojis turn on and off with the contour polygons.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    transitionMarkersRef.current.forEach(m => m.remove());
-    transitionMarkersRef.current = [];
-    if (!showContours) return;
-    FOG_PIN_GROUPS.forEach(({ emoji, points }) => {
-      points.forEach(pt => {
-        const el = document.createElement("div");
-        el.className = "fog-cloud-marker";
-        el.textContent = emoji;
-        const marker = new mapboxgl.Marker({ element: el, anchor: "center" })
-          .setLngLat(pt)
-          .addTo(map);
-        transitionMarkersRef.current.push(marker);
+    const create = () => {
+      transitionMarkersRef.current.forEach(m => m.remove());
+      transitionMarkersRef.current = [];
+      FOG_PIN_GROUPS.forEach(({ emoji, points }) => {
+        points.forEach(pt => {
+          const el = document.createElement("div");
+          el.className = "fog-cloud-marker";
+          el.textContent = emoji;
+          const marker = new mapboxgl.Marker({ element: el, anchor: "center" })
+            .setLngLat(pt)
+            .addTo(map);
+          transitionMarkersRef.current.push(marker);
+        });
       });
-    });
+    };
+    if (map.isStyleLoaded()) create();
+    else map.once("load", create);
     return () => {
       transitionMarkersRef.current.forEach(m => m.remove());
       transitionMarkersRef.current = [];
     };
+  }, []);
+
+  // Show/hide the emoji markers alongside the Fog-data toggle.
+  useEffect(() => {
+    transitionMarkersRef.current.forEach(m => {
+      const el = m.getElement();
+      if (el) el.style.display = showContours ? "" : "none";
+    });
   }, [showContours]);
 
   // Toggle the hillshade terrain overlay + peak labels.
