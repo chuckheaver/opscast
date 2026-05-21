@@ -93,17 +93,16 @@ export default function SetupView({
           Tell me your<br />
           <em>ideal conditions.</em>
         </div>
-        <Link href={buildFogUrl(selectedLoc)} className="fog-fc-btn">
-          <span className="fog-fc-icon" aria-hidden="true">
-            {/* Three stacked fog wisps — the standard weather symbol for fog */}
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path d="M3 7h13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              <path d="M2 11h17" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              <path d="M3 15h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-            </svg>
-          </span>
-          <span className="fog-fc-label">Fog Forecast</span>
-        </Link>
+        <div className="fog-fc-wrap">
+          <span className="fog-fc-orbit fog-fc-orbit-top" aria-hidden="true">🏡</span>
+          <span className="fog-fc-orbit fog-fc-orbit-tl" aria-hidden="true">⛅️</span>
+          <span className="fog-fc-orbit fog-fc-orbit-tr" aria-hidden="true">🚃</span>
+          <span className="fog-fc-orbit fog-fc-orbit-bl" aria-hidden="true">🚲</span>
+          <span className="fog-fc-orbit fog-fc-orbit-br" aria-hidden="true">📭</span>
+          <Link href={buildFogUrl(selectedLoc)} className="fog-fc-btn">
+            <span className="fog-fc-label">Fog<br />Forecast</span>
+          </Link>
+        </div>
       </div>
       <div className="page-sub">
         Set your range · pick your days
