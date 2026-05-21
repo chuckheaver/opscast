@@ -82,9 +82,9 @@ export default function FogSidebar({
     <aside className="fog-sidebar">
       <header className="fog-h">
         <div className="fog-brand-row">
-          <FogWaveGlyph />
+          <HomeGlyph />
           <h1 className="fog-brand">
-            Summer <em>Fog</em> Map
+            Ur <em>Micro</em> Life
           </h1>
         </div>
         <div className="fog-tag">Jun–Aug</div>
@@ -334,10 +334,10 @@ function LegendRow({ emoji, range, label }) {
   );
 }
 
-// Three stacked wavy lines — the universal fog/mist weather symbol,
-// rendered with a subtle yellow→slate gradient that mirrors the
-// Summer→Fog colour story.
-function FogWaveGlyph() {
+// House silhouette — pitched roof, square base, centred doorway —
+// rendered with the same yellow→slate gradient as the rest of the
+// header so the brand mark feels continuous.
+function HomeGlyph() {
   return (
     <svg
       width="32"
@@ -348,15 +348,20 @@ function FogWaveGlyph() {
       className="fog-wave"
     >
       <defs>
-        <linearGradient id="fog-wave-grad" x1="0" y1="0" x2="32" y2="22" gradientUnits="userSpaceOnUse">
+        <linearGradient id="home-grad" x1="0" y1="0" x2="32" y2="22" gradientUnits="userSpaceOnUse">
           <stop offset="0" stopColor="#fbbf24" />
           <stop offset="1" stopColor="#52525b" />
         </linearGradient>
       </defs>
-      <g stroke="url(#fog-wave-grad)" strokeWidth="2" strokeLinecap="round" fill="none">
-        <path d="M 2 5 Q 8 1 14 5 T 26 5 H 30" />
-        <path d="M 1 11 Q 7 7 13 11 T 25 11 H 31" />
-        <path d="M 3 17 Q 9 13 15 17 T 27 17 H 30" />
+      <g
+        stroke="url(#home-grad)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      >
+        <path d="M 4 11 L 16 2 L 28 11 V 20 H 4 Z" />
+        <path d="M 13 20 V 14 H 19 V 20" />
       </g>
     </svg>
   );
