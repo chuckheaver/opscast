@@ -20,10 +20,57 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
 
+// Pick a few points along the eastern edge of a polygon's outer ring.
+// Used to scatter 🌤️ cloud markers on the 8.5 (Transition) contour —
+// fog "spills" east from the Pacific, so this is the marine-layer fringe.
+function eastEdgePoints(rings, count = 2) {
+  const outer = rings?.[0];
+  if (!outer || outer.length < 4) return [];
+  let minLng = Infinity, maxLng = -Infinity;
+  outer.forEach(([lng]) => {
+    if (lng < minLng) minLng = lng;
+    if (lng > maxLng) maxLng = lng;
+  });
+  const width = maxLng - minLng;
+  const eastEdgeThreshold = maxLng - width * 0.12;
+  const candidates = outer.filter(([lng]) => lng >= eastEdgeThreshold);
+  if (candidates.length === 0) return [];
+  // Sort N→S so spacing reads as evenly distributed along the edge.
+  candidates.sort((a, b) => b[1] - a[1]);
+  const step = Math.max(1, Math.floor(candidates.length / (count + 1)));
+  const points = [];
+  for (let i = 1; i <= count && i * step < candidates.length; i++) {
+    const [lng, lat] = candidates[i * step];
+    // Nudge slightly west so the emoji sits just inside the polygon
+    // (the edge sample itself can sit right on the boundary).
+    points.push([lng - width * 0.025, lat]);
+  }
+  return points;
+}
+
+// Build the full list of 🌤️ marker positions from a contour FeatureCollection.
+function buildTransitionMarkers(contoursFc) {
+  if (!contoursFc) return [];
+  const out = [];
+  contoursFc.features.forEach(f => {
+    if (f.properties?.hours !== 8.5) return;
+    if (!f.geometry) return;
+    const polys =
+      f.geometry.type === "Polygon"
+        ? [f.geometry.coordinates]
+        : f.geometry.type === "MultiPolygon"
+          ? f.geometry.coordinates
+          : [];
+    polys.forEach(rings => {
+      eastEdgePoints(rings, 2).forEach(p => out.push(p));
+    });
+  });
+  return out;
+}
+
 // Layer IDs the "Show fog data" toggle flips on and off as a group.
 const CONTOUR_LAYER_IDS = [
   "fog-contours-fog",
-  "fog-contours-sun",
   "fog-contours-eight-outline",
 ];
 
@@ -44,6 +91,7 @@ export default function FogMap({
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
+  const transitionMarkersRef = useRef([]);
   const dataAppliedRef = useRef(false);
   const contoursAppliedRef = useRef(false);
   const onPickRef = useRef(onPickFeature);
@@ -237,18 +285,19 @@ export default function FogMap({
         data: { type: "FeatureCollection", features: [] },
       });
 
-      // Grey gradient band (≥8.5 hrs): starts at light grey on the 8.5
-      // contour and steps to near-black at the foggiest 12.5 contour.
-      // The 8.5 polygon is also flagged by the cloud-icon overlay below.
+      // Grey gradient band (≥9 hrs): light grey at 9 → near-black at 12.5.
+      // Anything below 9 is left fully transparent so the basemap reads
+      // through clearly; the 8.5 transition polygon picks up a few 🌤️
+      // DOM markers along its eastern edge instead (see FogApp).
       map.addLayer({
         id: "fog-contours-fog",
         type: "fill",
         source: "fog-contours",
-        filter: [">=", ["coalesce", ["get", "hours"], 0], 8.5],
+        filter: [">=", ["coalesce", ["get", "hours"], 0], 9],
         paint: {
           "fill-color": [
             "interpolate", ["linear"], ["get", "hours"],
-            8.5,  "#d6d3d1",
+            9,    "#d6d3d1",
             11,   "#78716c",
             12.5, "#292524",
           ],
@@ -256,17 +305,10 @@ export default function FogMap({
         },
       });
 
-      // Sun band (<8.5 hrs, includes the 8.0 polygon): soft pale yellow.
-      map.addLayer({
-        id: "fog-contours-sun",
-        type: "fill",
-        source: "fog-contours",
-        filter: ["<", ["coalesce", ["get", "hours"], 0], 8.5],
-        paint: {
-          "fill-color": "#fef08a",
-          "fill-opacity": 0.4,
-        },
-      });
+      // (Sun band — < 8.5 hrs — intentionally has no fill layer. Polygons
+      //  in that band are left transparent so the basemap reads through.
+      //  The 8.0 contour still gets a dashed outline below as a visible
+      //  boundary cue.)
 
 
       // SF Zoning Districts (DataSF) — 1,647 simplified polygons. Toggleable
@@ -460,15 +502,33 @@ export default function FogMap({
         type: "geojson",
         data: "/data/sf-supervisor-districts.geojson",
       });
+      // Per-district colour ramp so each Supervisor district reads as a
+      // distinct boundary. Same key (district number) drives both the
+      // outline and the matching label colour so the two read as a pair.
+      const districtColorMatch = [
+        "match", ["get", "district"],
+        1,  "#dc2626", // D1 — Richmond
+        2,  "#ea580c", // D2 — Marina / Pac Heights
+        3,  "#ca8a04", // D3 — North Beach / Russian Hill
+        4,  "#16a34a", // D4 — Sunset
+        5,  "#0891b2", // D5 — Western Addition / Haight
+        6,  "#2563eb", // D6 — SoMa / Tenderloin
+        7,  "#7c3aed", // D7 — West of Twin Peaks
+        8,  "#c026d3", // D8 — Castro / Noe
+        9,  "#db2777", // D9 — Mission / Bernal
+        10, "#475569", // D10 — Bayview / Hunters Point
+        11, "#65a30d", // D11 — Excelsior / OMI
+        "#525252",
+      ];
       map.addLayer({
         id: "districts-line",
         type: "line",
         source: "districts",
         layout: { visibility: "none", "line-join": "round" },
         paint: {
-          "line-color": "#7c3aed",
-          "line-width": 2.2,
-          "line-opacity": 0.75,
+          "line-color": districtColorMatch,
+          "line-width": 2.6,
+          "line-opacity": 0.95,
         },
       });
       map.addLayer({
@@ -484,7 +544,7 @@ export default function FogMap({
           "symbol-placement": "point",
         },
         paint: {
-          "text-color": "#4c1d95",
+          "text-color": districtColorMatch,
           "text-halo-color": "#ffffff",
           "text-halo-width": 2,
           "text-halo-blur": 0.5,
@@ -667,6 +727,32 @@ export default function FogMap({
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showContours]);
+
+  // 🌤️ markers scattered along the eastern edge of each 8.5 (Transition)
+  // contour polygon. Tied to the same Fog-data toggle. Mounted as DOM
+  // mapboxgl.Markers so the system emoji font renders natively.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    // Tear down any previous markers before re-mounting.
+    transitionMarkersRef.current.forEach(m => m.remove());
+    transitionMarkersRef.current = [];
+    if (!showContours || !contours) return;
+    const points = buildTransitionMarkers(contours);
+    points.forEach(pt => {
+      const el = document.createElement("div");
+      el.className = "fog-cloud-marker";
+      el.textContent = "🌤️";
+      const marker = new mapboxgl.Marker({ element: el, anchor: "center" })
+        .setLngLat(pt)
+        .addTo(map);
+      transitionMarkersRef.current.push(marker);
+    });
+    return () => {
+      transitionMarkersRef.current.forEach(m => m.remove());
+      transitionMarkersRef.current = [];
+    };
+  }, [contours, showContours]);
 
   // Toggle the hillshade terrain overlay + peak labels.
   useEffect(() => {
