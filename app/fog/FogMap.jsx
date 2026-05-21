@@ -20,65 +20,6 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
 
-// Walk the outer ring and pull out contiguous segments where both vertex
-// endpoints sit in the rightmost (eastern) ~35% of the polygon's bbox.
-// Returns an array of LineStrings, one per contiguous run. Used to draw
-// a lighter dashed accent along the marine-layer-facing edge of the 8.5
-// (Transition) contour.
-function eastSideEdgeSegments(rings) {
-  const outer = rings?.[0];
-  if (!outer || outer.length < 4) return [];
-  let minLng = Infinity, maxLng = -Infinity;
-  outer.forEach(([lng]) => {
-    if (lng < minLng) minLng = lng;
-    if (lng > maxLng) maxLng = lng;
-  });
-  const width = maxLng - minLng;
-  if (width === 0) return [];
-  const threshold = maxLng - width * 0.35;
-  const segments = [];
-  let current = [];
-  for (let i = 0; i < outer.length - 1; i++) {
-    const a = outer[i];
-    const b = outer[i + 1];
-    if (a[0] >= threshold && b[0] >= threshold) {
-      if (current.length === 0) current.push(a);
-      current.push(b);
-    } else if (current.length) {
-      if (current.length >= 2) segments.push(current);
-      current = [];
-    }
-  }
-  if (current.length >= 2) segments.push(current);
-  return segments;
-}
-
-// Build a FeatureCollection of east-edge LineStrings for all 8.5 contours.
-function buildTransitionEastEdges(contoursFc) {
-  if (!contoursFc) return { type: "FeatureCollection", features: [] };
-  const features = [];
-  contoursFc.features.forEach(f => {
-    if (f.properties?.hours !== 8.5) return;
-    if (!f.geometry) return;
-    const polys =
-      f.geometry.type === "Polygon"
-        ? [f.geometry.coordinates]
-        : f.geometry.type === "MultiPolygon"
-          ? f.geometry.coordinates
-          : [];
-    polys.forEach(rings => {
-      eastSideEdgeSegments(rings).forEach(coords => {
-        features.push({
-          type: "Feature",
-          properties: {},
-          geometry: { type: "LineString", coordinates: coords },
-        });
-      });
-    });
-  });
-  return { type: "FeatureCollection", features };
-}
-
 // Pick a few points along the eastern edge of a polygon's outer ring.
 // Used to scatter 🌤️ cloud markers on the 8.5 (Transition) contour —
 // fog "spills" east from the Pacific, so this is the marine-layer fringe.
@@ -132,7 +73,7 @@ function buildTransitionMarkers(contoursFc) {
 // Layer IDs the "Show fog data" toggle flips on and off as a group.
 const CONTOUR_LAYER_IDS = [
   "fog-contours-fog",
-  "transition-east-edge",
+  "fog-contours-transition-outline",
 ];
 
 export default function FogMap({
@@ -708,18 +649,14 @@ export default function FogMap({
         },
       });
 
-      // Light dashed accent along the eastern edge of every 8.5
-      // (Transition) contour polygon — the marine-layer fringe. The
-      // source is populated by FogApp once contours load (see effect
-      // below); empty until then.
-      map.addSource("transition-east", {
-        type: "geojson",
-        data: { type: "FeatureCollection", features: [] },
-      });
+      // Dashed outline on the entire 8.5 (Transition) polygon boundary.
+      // Reads natively off the contour source, no LineString preprocessing
+      // needed — so the dashes stay continuous wherever the contour goes.
       map.addLayer({
-        id: "transition-east-edge",
+        id: "fog-contours-transition-outline",
         type: "line",
-        source: "transition-east",
+        source: "fog-contours",
+        filter: ["==", ["coalesce", ["get", "hours"], 0], 8.5],
         layout: {
           visibility: "none",
           "line-cap": "round",
@@ -854,21 +791,6 @@ export default function FogMap({
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showContours]);
-
-  // Push the east-edge LineString geometry of each 8.5 contour into the
-  // transition-east source once contours are loaded. Static computation —
-  // doesn't depend on the toggle (the layer's visibility flips separately).
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !contours) return;
-    const fc = buildTransitionEastEdges(contours);
-    const apply = () => {
-      const src = map.getSource("transition-east");
-      if (src) src.setData(fc);
-    };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
-  }, [contours]);
 
   // 🌤️ markers scattered along the eastern edge of each 8.5 (Transition)
   // contour polygon. Tied to the same Fog-data toggle. Mounted as DOM
