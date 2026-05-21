@@ -87,10 +87,6 @@ export default function FogSidebar({
             Ur <em>Micro</em> Life
           </h1>
         </div>
-        <div className="fog-tag">Jun–Aug</div>
-        <div className="fog-note">
-          *Satellite historic driven data of the average hrs per day that a specific location receives fog.
-        </div>
       </header>
 
       <label className="fog-lbl">Location</label>
@@ -163,7 +159,7 @@ export default function FogSidebar({
           checked={showContours}
           onChange={onToggleContours}
           label="Fog data"
-          help="Colored USGS fog contour layer. Off reveals just the basemap underneath."
+          help="*Satellite historic driven data of the average hrs per day that a specific location receives fog from Jun – Aug."
         />
       )}
 
