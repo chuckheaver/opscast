@@ -387,6 +387,11 @@ export default function FogMap({
           "line-color": ["get", "color"],
           "line-width": 1.8,
           "line-opacity": 0.95,
+          // Inset each feature's outline into its own interior so adjacent
+          // neighborhoods don't share a single seam — at shared edges the
+          // two offset lines sit side-by-side, one in each neighborhood's
+          // colour.
+          "line-offset": 1.5,
         },
       });
       map.addLayer({
@@ -395,7 +400,12 @@ export default function FogMap({
         source: "realtor",
         layout: {
           visibility: "none",
-          "text-field": ["get", "nbrhood"],
+          "text-field": [
+            "format",
+            ["get", "nbrhood"], {},
+            "\n", {},
+            ["get", "nid"], { "font-scale": 0.78 },
+          ],
           "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
           "text-size": [
             "interpolate", ["linear"], ["zoom"],
