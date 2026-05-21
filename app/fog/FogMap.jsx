@@ -627,12 +627,12 @@ export default function FogMap({
         id: "zips-line",
         type: "line",
         source: "zips",
-        layout: { visibility: "none", "line-join": "round" },
+        layout: { visibility: "none", "line-join": "round", "line-cap": "round" },
         paint: {
-          "line-color": "#0f172a",
-          "line-width": 1,
-          "line-dasharray": [4, 2],
-          "line-opacity": 0.55,
+          "line-color": ["get", "color"],
+          "line-width": 2,
+          "line-dasharray": [3, 1.5],
+          "line-opacity": 0.9,
         },
       });
       map.addLayer({
@@ -642,15 +642,16 @@ export default function FogMap({
         layout: {
           visibility: "none",
           "text-field": ["to-string", ["get", "zip"]],
-          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-          "text-size": 12,
+          "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+          "text-size": 13,
           "text-allow-overlap": false,
           "symbol-placement": "point",
         },
         paint: {
-          "text-color": "#0f172a",
+          "text-color": ["get", "color"],
           "text-halo-color": "#ffffff",
-          "text-halo-width": 1.6,
+          "text-halo-width": 2,
+          "text-halo-blur": 0.5,
         },
       });
 
