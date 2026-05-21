@@ -20,55 +20,18 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
 
-// Pick a few points along the eastern edge of a polygon's outer ring.
-// Used to scatter 🌤️ cloud markers on the 8.5 (Transition) contour —
-// fog "spills" east from the Pacific, so this is the marine-layer fringe.
-function eastEdgePoints(rings, count = 3) {
-  const outer = rings?.[0];
-  if (!outer || outer.length < 4) return [];
-  let minLng = Infinity, maxLng = -Infinity;
-  outer.forEach(([lng]) => {
-    if (lng < minLng) minLng = lng;
-    if (lng > maxLng) maxLng = lng;
-  });
-  const width = maxLng - minLng;
-  // Widened from 12% → 30% so small polygons still produce candidates
-  // and the markers spread more visibly along the eastern flank.
-  const eastEdgeThreshold = maxLng - width * 0.3;
-  const candidates = outer.filter(([lng]) => lng >= eastEdgeThreshold);
-  if (candidates.length === 0) return [];
-  // Sort N→S so spacing reads as evenly distributed along the edge.
-  candidates.sort((a, b) => b[1] - a[1]);
-  const step = Math.max(1, Math.floor(candidates.length / (count + 1)));
-  const points = [];
-  for (let i = 1; i <= count && i * step < candidates.length; i++) {
-    const [lng, lat] = candidates[i * step];
-    // Nudge slightly west so the emoji sits just inside the polygon
-    // (the edge sample itself can sit right on the boundary).
-    points.push([lng - width * 0.025, lat]);
-  }
-  return points;
-}
-
-// Build the full list of 🌤️ marker positions from a contour FeatureCollection.
-function buildTransitionMarkers(contoursFc) {
-  if (!contoursFc) return [];
-  const out = [];
-  contoursFc.features.forEach(f => {
-    if (f.properties?.hours !== 8.5) return;
-    if (!f.geometry) return;
-    const polys =
-      f.geometry.type === "Polygon"
-        ? [f.geometry.coordinates]
-        : f.geometry.type === "MultiPolygon"
-          ? f.geometry.coordinates
-          : [];
-    polys.forEach(rings => {
-      eastEdgePoints(rings, 3).forEach(p => out.push(p));
-    });
-  });
-  return out;
-}
+// Hand-picked SF "transition" locations — neighborhoods that locals know
+// as the partly-cloudy belt between the foggy western half and the sunny
+// eastern half. We pin a 🌤️ DOM marker at each, independent of the
+// contour data (which only has 8.5 polygons offshore / on the bay edge).
+const TRANSITION_PIN_POINTS = [
+  [-122.4400, 37.7700], // Buena Vista Heights
+  [-122.4500, 37.7660], // Cole Valley
+  [-122.4470, 37.7580], // Twin Peaks / Castro Heights
+  [-122.4330, 37.7510], // Noe Valley
+  [-122.4590, 37.7430], // Forest Hill
+  [-122.4330, 37.7340], // Glen Park
+];
 
 // Layer IDs the "Show fog data" toggle flips on and off as a group.
 const CONTOUR_LAYER_IDS = [
@@ -792,18 +755,16 @@ export default function FogMap({
     else map.once("load", apply);
   }, [showContours]);
 
-  // 🌤️ markers scattered along the eastern edge of each 8.5 (Transition)
-  // contour polygon. Tied to the same Fog-data toggle. Mounted as DOM
-  // mapboxgl.Markers so the system emoji font renders natively.
+  // 🌤️ markers at hand-picked SF transition neighborhoods. Tied to the
+  // Fog-data toggle. Mounted as DOM mapboxgl.Markers so the system emoji
+  // font renders natively.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    // Tear down any previous markers before re-mounting.
     transitionMarkersRef.current.forEach(m => m.remove());
     transitionMarkersRef.current = [];
-    if (!showContours || !contours) return;
-    const points = buildTransitionMarkers(contours);
-    points.forEach(pt => {
+    if (!showContours) return;
+    TRANSITION_PIN_POINTS.forEach(pt => {
       const el = document.createElement("div");
       el.className = "fog-cloud-marker";
       el.textContent = "🌤️";
@@ -816,7 +777,7 @@ export default function FogMap({
       transitionMarkersRef.current.forEach(m => m.remove());
       transitionMarkersRef.current = [];
     };
-  }, [contours, showContours]);
+  }, [showContours]);
 
   // Toggle the hillshade terrain overlay + peak labels.
   useEffect(() => {
