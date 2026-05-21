@@ -160,7 +160,7 @@ export default function FogSidebar({
         checked={showTerrain}
         onChange={onToggleTerrain}
         label="Terrain & peaks"
-        help="Hillshade overlay + labelled peaks (Mt Tam, Twin Peaks, San Bruno Mtn)."
+        help="Topographic view — contour lines every 10m, bold every 100m + hillshade relief + labelled peaks (Mt Tam, Twin Peaks, etc.)."
       />
 
       <ToggleSwitch
@@ -249,6 +249,11 @@ function Result({ picked }) {
         {picked.address && (
           <div className="fog-result-sub">{picked.address}</div>
         )}
+        {Number.isFinite(picked.elevation_ft) && (
+          <div className="fog-result-aux">
+            Elevation: {picked.elevation_ft} ft
+          </div>
+        )}
       </div>
     );
   }
@@ -274,6 +279,11 @@ function Result({ picked }) {
       {contourHours != null && contourHours !== neighborhoodHours && (
         <div className="fog-result-aux">
           Neighborhood avg: {neighborhoodHours.toFixed(1)} hrs / day
+        </div>
+      )}
+      {Number.isFinite(picked.elevation_ft) && (
+        <div className="fog-result-aux">
+          Elevation: {picked.elevation_ft} ft
         </div>
       )}
     </div>

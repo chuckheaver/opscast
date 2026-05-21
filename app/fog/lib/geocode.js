@@ -35,6 +35,31 @@ export async function geocodeSuggest(q) {
   }));
 }
 
+// Query the Mapbox Terrain v2 vector tileset (same source as the contour
+// lines on the map) for the elevation at a [lng, lat] point. Returns the
+// average elevation of the nearest contour features in feet, rounded, or
+// null if unavailable.
+export async function elevationAtPoint([lng, lat]) {
+  if (!TOKEN) return null;
+  try {
+    const url =
+      `https://api.mapbox.com/v4/mapbox.mapbox-terrain-v2/tilequery/` +
+      `${lng},${lat}.json?` +
+      `layers=contour&radius=200&limit=5&access_token=${TOKEN}`;
+    const r = await fetch(url);
+    if (!r.ok) return null;
+    const d = await r.json();
+    const eles = (d.features || [])
+      .map(f => f.properties?.ele)
+      .filter(Number.isFinite);
+    if (!eles.length) return null;
+    const avgMeters = eles.reduce((a, b) => a + b, 0) / eles.length;
+    return Math.round(avgMeters * 3.28084);
+  } catch {
+    return null;
+  }
+}
+
 // Reverse geocode an arbitrary [lng, lat] to a human-readable place name.
 // Used when the user clicks the 📍 button — we want a label like
 // "1 Carl St, San Francisco" rather than raw coordinates. Falls back to

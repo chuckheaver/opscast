@@ -12,7 +12,7 @@ import { useSearchParams } from "next/navigation";
 import FogMap from "./FogMap";
 import FogSidebar from "./FogSidebar";
 import { findNeighborhoodForPoint, findContourForPoint } from "./lib/spatial";
-import { reverseGeocode } from "./lib/geocode";
+import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
 
 const DATA_URL = "/data/sf-fog-neighborhoods.geojson";
 const CONTOURS_URL = "/data/sf-fog-contours.geojson";
@@ -22,7 +22,7 @@ export default function FogApp() {
   const [geojson, setGeojson] = useState(null);
   const [contours, setContours] = useState(null);
   const [dataErr, setDataErr] = useState("");
-  const [picked, setPicked] = useState(null); // { feature, point: [lng, lat], address, contour }
+  const [picked, setPicked] = useState(null); // { feature, point: [lng, lat], address, contour, elevation_ft }
   // Fog data layer (contour fills + icon patterns) is shown by default;
   // toggle off for a clean basemap with only neighborhood outlines.
   const [showContours, setShowContours] = useState(true);
@@ -192,6 +192,26 @@ export default function FogApp() {
       contour,
     });
   }, [urlLoc, geojson, contours]);
+
+  // When a picked point lands, ask Mapbox for the terrain elevation at
+  // that lng/lat. Updates `picked.elevation_ft` once the async lookup
+  // resolves; the result card renders the number when present, hides
+  // the row when not.
+  useEffect(() => {
+    const point = picked?.point;
+    if (!point) return;
+    let cancelled = false;
+    elevationAtPoint(point).then(ft => {
+      if (cancelled) return;
+      setPicked(p => {
+        if (!p || p.point !== point) return p;
+        return { ...p, elevation_ft: ft };
+      });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [picked?.point]);
 
   // Auto-prompt for location on first mount, but only if permission isn't
   // already denied — otherwise we'd just be re-asking for a no. Skipped

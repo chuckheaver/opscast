@@ -118,6 +118,68 @@ export default function FogMap({
         firstLabelLayer?.id
       );
 
+      // Mapbox Terrain v2 vector tileset — provides true topographic
+      // contour lines (every 10m fine / 100m major). Combined with the
+      // hillshade below, this gives the /fog map a proper USGS feel
+      // when the user toggles terrain on.
+      map.addSource("terrain-v2", {
+        type: "vector",
+        url: "mapbox://mapbox.mapbox-terrain-v2",
+      });
+      map.addLayer(
+        {
+          id: "contour-lines",
+          type: "line",
+          source: "terrain-v2",
+          "source-layer": "contour",
+          layout: { visibility: "none", "line-cap": "round" },
+          paint: {
+            "line-color": "#4b5563",
+            "line-width": [
+              "match", ["get", "index"],
+              10, 1.1,   // major contours (every 100m) — bolder
+              5,  0.7,   // medium contours
+              0.35,       // fine 10m contours
+            ],
+            "line-opacity": [
+              "match", ["get", "index"],
+              10, 0.85,
+              5,  0.55,
+              0.3,
+            ],
+          },
+        },
+        firstLabelLayer?.id
+      );
+      // Elevation labels along major contour lines, only at street zoom
+      // so the map doesn't fill with numbers when you're zoomed out.
+      map.addLayer({
+        id: "contour-labels",
+        type: "symbol",
+        source: "terrain-v2",
+        "source-layer": "contour",
+        filter: ["==", ["get", "index"], 10],
+        layout: {
+          visibility: "none",
+          "text-field": ["concat", ["to-string", ["get", "ele"]], " m"],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": 10,
+          "text-padding": 12,
+          "symbol-placement": "line",
+          "text-allow-overlap": false,
+        },
+        paint: {
+          "text-color": "#374151",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.5,
+          "text-opacity": [
+            "interpolate", ["linear"], ["zoom"],
+            13, 0,
+            14, 1,
+          ],
+        },
+      });
+
       // Curated Bay Area peaks — labelled with name + elevation. Same
       // toggle as the hillshade so they appear and hide together.
       map.addSource("peaks", {
@@ -612,7 +674,7 @@ export default function FogMap({
     if (!map) return;
     const apply = () => {
       const vis = showTerrain ? "visible" : "none";
-      ["hillshade", "hillshade-2", "peaks-labels"].forEach(id => {
+      ["hillshade", "hillshade-2", "contour-lines", "contour-labels", "peaks-labels"].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
