@@ -29,6 +29,8 @@ export default function FogSidebar({
   onToggleDistricts,
   showZoning,
   onToggleZoning,
+  showRealtor,
+  onToggleRealtor,
   onUseGeoLocation,
   geoLoading,
   geoErr,
@@ -189,6 +191,13 @@ export default function FogSidebar({
         onChange={onToggleZoning}
         label="Zoning"
         help="SF zoning districts colored by category — green = residential, orange = mixed use, cyan = public, amber = commercial, grey = industrial."
+      />
+
+      <ToggleSwitch
+        checked={showRealtor}
+        onChange={onToggleRealtor}
+        label="Real estate districts"
+        help="SFAR Realtor Neighborhoods — 92 named neighborhoods colored by their parent District (NW, Central West, SW, Twin Peaks West, Central, Central North, North, NE, Central East, SE)."
       />
 
       <ToggleSwitch

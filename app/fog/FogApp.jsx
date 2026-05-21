@@ -41,6 +41,8 @@ export default function FogApp() {
   const [showDistricts, setShowDistricts] = useState(false);
   // Zoning Map color overlay — off by default.
   const [showZoning, setShowZoning] = useState(false);
+  // Realtor Neighborhoods (SFAR districts) — off by default.
+  const [showRealtor, setShowRealtor] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
   const autoGeoTriedRef = useRef(false);
@@ -258,6 +260,8 @@ export default function FogApp() {
         onToggleDistricts={setShowDistricts}
         showZoning={showZoning}
         onToggleZoning={setShowZoning}
+        showRealtor={showRealtor}
+        onToggleRealtor={setShowRealtor}
         onUseGeoLocation={requestGeoLocation}
         geoLoading={geoLoading}
         geoErr={geoErr}
@@ -273,6 +277,7 @@ export default function FogApp() {
         showZips={showZips}
         showDistricts={showDistricts}
         showZoning={showZoning}
+        showRealtor={showRealtor}
         picked={picked}
         onPickFeature={pickFromMap}
       />

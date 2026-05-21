@@ -85,6 +85,7 @@ export default function FogMap({
   showZips,
   showDistricts,
   showZoning,
+  showRealtor,
   picked,
   onPickFeature,
 }) {
@@ -347,6 +348,82 @@ export default function FogMap({
           "line-color": "#52525b",
           "line-width": 0.3,
           "line-opacity": 0.5,
+        },
+      });
+
+      // Realtor Neighborhoods (DataSF) — 92 neighborhoods grouped into
+      // 10 SFAR districts. Fills colour-coded by district number so the
+      // user can see "this whole NW corner is District 1" at a glance,
+      // with the neighborhood name labelled at each polygon's center.
+      const realtorDistrictColor = [
+        "match", ["get", "district_num"],
+        1,  "#ef4444", // NW
+        2,  "#f97316", // Central West
+        3,  "#facc15", // SW
+        4,  "#22c55e", // Twin Peaks West
+        5,  "#14b8a6", // Central
+        6,  "#0ea5e9", // Central North
+        7,  "#6366f1", // North
+        8,  "#a855f7", // NE
+        9,  "#ec4899", // Central East
+        10, "#64748b", // SE
+        "#9ca3af",      // None / unknown
+      ];
+      map.addSource("realtor", {
+        type: "geojson",
+        data: "/data/sf-realtor-neighborhoods.geojson",
+      });
+      map.addLayer({
+        id: "realtor-fill",
+        type: "fill",
+        source: "realtor",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": realtorDistrictColor,
+          "fill-opacity": 0.22,
+        },
+      });
+      map.addLayer({
+        id: "realtor-outline",
+        type: "line",
+        source: "realtor",
+        layout: { visibility: "none", "line-join": "round" },
+        paint: {
+          "line-color": realtorDistrictColor,
+          "line-width": 1.6,
+          "line-opacity": 0.85,
+        },
+      });
+      map.addLayer({
+        id: "realtor-labels",
+        type: "symbol",
+        source: "realtor",
+        layout: {
+          visibility: "none",
+          "text-field": ["get", "nbrhood"],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": [
+            "interpolate", ["linear"], ["zoom"],
+            11, 9,
+            13, 11,
+            15, 13,
+          ],
+          "text-max-width": 9,
+          "text-padding": 3,
+          "text-allow-overlap": false,
+          "symbol-placement": "point",
+        },
+        paint: {
+          "text-color": "#1c1917",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.4,
+          "text-halo-blur": 0.5,
+          "text-opacity": [
+            "interpolate", ["linear"], ["zoom"],
+            10.5, 0,
+            11.5, 0.9,
+            14, 1,
+          ],
         },
       });
 
@@ -795,6 +872,20 @@ export default function FogMap({
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showMuni]);
+
+  // Toggle the Realtor Neighborhoods overlay (fill + outline + labels).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showRealtor ? "visible" : "none";
+      ["realtor-fill", "realtor-outline", "realtor-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showRealtor]);
 
   // Toggle the zoning overlay (color-coded fills + thin outline).
   useEffect(() => {
