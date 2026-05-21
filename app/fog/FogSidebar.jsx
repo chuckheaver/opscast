@@ -23,6 +23,12 @@ export default function FogSidebar({
   onToggleMuni,
   showBikes,
   onToggleBikes,
+  showZips,
+  onToggleZips,
+  showDistricts,
+  onToggleDistricts,
+  showZoning,
+  onToggleZoning,
   onUseGeoLocation,
   geoLoading,
   geoErr,
@@ -176,6 +182,27 @@ export default function FogSidebar({
         onChange={onToggleBikes}
         label="Bike network"
         help="SFMTA bike network — dark green = off-street path, green = separated bikeway, cyan = striped bike lane, dashed grey = shared route."
+      />
+
+      <ToggleSwitch
+        checked={showZoning}
+        onChange={onToggleZoning}
+        label="Zoning"
+        help="SF zoning districts colored by category — green = residential, orange = mixed use, cyan = public, amber = commercial, grey = industrial."
+      />
+
+      <ToggleSwitch
+        checked={showDistricts}
+        onChange={onToggleDistricts}
+        label="Supervisor districts"
+        help="2022 SF Supervisor district boundaries with district numbers labelled at the center of each."
+      />
+
+      <ToggleSwitch
+        checked={showZips}
+        onChange={onToggleZips}
+        label="ZIP codes"
+        help="Dashed boundaries of SF ZIP codes (32 total) with the 5-digit code labelled inside each."
       />
 
 

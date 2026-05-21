@@ -35,6 +35,12 @@ export default function FogApp() {
   const [showMuni, setShowMuni] = useState(false);
   // SFMTA bike network — off by default.
   const [showBikes, setShowBikes] = useState(false);
+  // DataSF ZIP code boundaries — off by default.
+  const [showZips, setShowZips] = useState(false);
+  // 2022 Supervisor District boundaries — off by default.
+  const [showDistricts, setShowDistricts] = useState(false);
+  // Zoning Map color overlay — off by default.
+  const [showZoning, setShowZoning] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
   const autoGeoTriedRef = useRef(false);
@@ -226,6 +232,12 @@ export default function FogApp() {
         onToggleMuni={setShowMuni}
         showBikes={showBikes}
         onToggleBikes={setShowBikes}
+        showZips={showZips}
+        onToggleZips={setShowZips}
+        showDistricts={showDistricts}
+        onToggleDistricts={setShowDistricts}
+        showZoning={showZoning}
+        onToggleZoning={setShowZoning}
         onUseGeoLocation={requestGeoLocation}
         geoLoading={geoLoading}
         geoErr={geoErr}
@@ -238,6 +250,9 @@ export default function FogApp() {
         showSeismic={showSeismic}
         showMuni={showMuni}
         showBikes={showBikes}
+        showZips={showZips}
+        showDistricts={showDistricts}
+        showZoning={showZoning}
         picked={picked}
         onPickFeature={pickFromMap}
       />

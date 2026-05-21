@@ -27,7 +27,20 @@ const CONTOUR_LAYER_IDS = [
   "fog-contours-eight-outline",
 ];
 
-export default function FogMap({ geojson, contours, showContours, showTerrain, showSeismic, showMuni, showBikes, picked, onPickFeature }) {
+export default function FogMap({
+  geojson,
+  contours,
+  showContours,
+  showTerrain,
+  showSeismic,
+  showMuni,
+  showBikes,
+  showZips,
+  showDistricts,
+  showZoning,
+  picked,
+  onPickFeature,
+}) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -194,6 +207,45 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, s
       });
 
 
+      // SF Zoning Districts (DataSF) — 1,647 simplified polygons. Toggleable
+      // colored fill by generalized category so the user can see at a
+      // glance how Mission Bay reads as Mixed Use, the Marina as Residential,
+      // etc. Outline kept very thin so it doesn't compete with other layers.
+      map.addSource("zoning", {
+        type: "geojson",
+        data: "/data/sf-zoning.geojson",
+      });
+      map.addLayer({
+        id: "zoning-fill",
+        type: "fill",
+        source: "zoning",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": [
+            "match", ["get", "gen"],
+            "Residential", "#a3e635",
+            "Public",      "#06b6d4",
+            "Mixed Use",   "#fb923c",
+            "Mixed",       "#fb923c",
+            "Industrial",  "#71717a",
+            "Commercial",  "#fbbf24",
+            "#d4d4d8",
+          ],
+          "fill-opacity": 0.3,
+        },
+      });
+      map.addLayer({
+        id: "zoning-outline",
+        type: "line",
+        source: "zoning",
+        layout: { visibility: "none" },
+        paint: {
+          "line-color": "#52525b",
+          "line-width": 0.3,
+          "line-opacity": 0.5,
+        },
+      });
+
       // Seismic hazard zones (CA Geological Survey, via DataSF). Toggleable
       // overlay separate from the fog data. Painted between the fog layers
       // and the neighborhood outlines so the hazard zones sit on top of
@@ -336,6 +388,82 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, s
             13.5, 0,
             14.5, 1,
           ],
+        },
+      });
+
+      // Supervisor Districts (DataSF, 2022 boundaries) — 11 polygons,
+      // outlined with bold lines and labelled with the district number
+      // inside a pill so the political map reads cleanly when on.
+      map.addSource("districts", {
+        type: "geojson",
+        data: "/data/sf-supervisor-districts.geojson",
+      });
+      map.addLayer({
+        id: "districts-line",
+        type: "line",
+        source: "districts",
+        layout: { visibility: "none", "line-join": "round" },
+        paint: {
+          "line-color": "#7c3aed",
+          "line-width": 2.2,
+          "line-opacity": 0.75,
+        },
+      });
+      map.addLayer({
+        id: "districts-labels",
+        type: "symbol",
+        source: "districts",
+        layout: {
+          visibility: "none",
+          "text-field": ["concat", "D", ["to-string", ["get", "district"]]],
+          "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+          "text-size": 18,
+          "text-allow-overlap": false,
+          "symbol-placement": "point",
+        },
+        paint: {
+          "text-color": "#4c1d95",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 2,
+          "text-halo-blur": 0.5,
+        },
+      });
+
+      // ZIP codes (DataSF) — 32 polygons. Just outlines + the 5-digit ZIP
+      // label centered in each so the user can see which ZIP a picked
+      // address falls in without obscuring everything else.
+      map.addSource("zips", {
+        type: "geojson",
+        data: "/data/sf-zip-codes.geojson",
+      });
+      map.addLayer({
+        id: "zips-line",
+        type: "line",
+        source: "zips",
+        layout: { visibility: "none", "line-join": "round" },
+        paint: {
+          "line-color": "#0f172a",
+          "line-width": 1,
+          "line-dasharray": [4, 2],
+          "line-opacity": 0.55,
+        },
+      });
+      map.addLayer({
+        id: "zips-labels",
+        type: "symbol",
+        source: "zips",
+        layout: {
+          visibility: "none",
+          "text-field": ["to-string", ["get", "zip"]],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": 12,
+          "text-allow-overlap": false,
+          "symbol-placement": "point",
+        },
+        paint: {
+          "text-color": "#0f172a",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.6,
         },
       });
 
@@ -519,6 +647,48 @@ export default function FogMap({ geojson, contours, showContours, showTerrain, s
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showMuni]);
+
+  // Toggle the zoning overlay (color-coded fills + thin outline).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showZoning ? "visible" : "none";
+      ["zoning-fill", "zoning-outline"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showZoning]);
+
+  // Toggle the supervisor district outlines + labels.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showDistricts ? "visible" : "none";
+      ["districts-line", "districts-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showDistricts]);
+
+  // Toggle the ZIP code outlines + labels.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showZips ? "visible" : "none";
+      ["zips-line", "zips-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showZips]);
 
   // Toggle the bike network overlay (solid + dashed line layers).
   useEffect(() => {
