@@ -33,6 +33,7 @@ const FOG_PIN_GROUPS = [
       [-122.418, 37.781], // Civic Center
       [-122.391, 37.780], // South Beach
       [-122.416, 37.762], // Mission Dolores / 18th
+      [-122.434, 37.762], // Castro
       [-122.387, 37.730], // Bayview / India Basin
     ],
   },
@@ -46,7 +47,6 @@ const FOG_PIN_GROUPS = [
       [-122.444, 37.781], // Anza Vista
       [-122.447, 37.773], // Panhandle
       [-122.451, 37.766], // Cole Valley
-      [-122.434, 37.762], // Castro
       [-122.431, 37.751], // Noe Valley
       [-122.415, 37.745], // Peralta Heights
       [-122.420, 37.741], // Diamond Heights / Bernal
