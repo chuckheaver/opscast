@@ -1920,3 +1920,95 @@ body {
  *  override needed. Just bump the cond-cell base for past hours. */
 .app .cond-cell { background: rgba(15, 31, 50, 0.5); }
 .app .cond-lb { color: #cbd5e1; }
+
+/* ── Forecast hero — current-conditions block + chip strip ─────────────── */
+.fc-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.fc-top-left {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+.fc-now {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+.fc-now-icon {
+  font-size: 52px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+}
+.fc-now-temp {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1.5px;
+  color: #1c1917;
+  display: inline-flex;
+  align-items: flex-start;
+}
+.fc-now-deg {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-left: 2px;
+  margin-top: 4px;
+}
+.fc-now-cond {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #78716c;
+  margin-top: 2px;
+}
+.fc-now-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(28, 25, 23, 0.08);
+}
+.fc-now-chip {
+  flex: 1 1 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 6px;
+  border-radius: 8px;
+  background: rgba(28, 25, 23, 0.04);
+}
+.fc-now-chip-lbl {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: #78716c;
+}
+.fc-now-chip-val {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1c1917;
+}
+
+/* Dark-theme variants for the hero current-conditions block. Applies when
+ *  the hero sits inside the .app dark shell. */
+.app .fc-now-temp { color: #f8fafc; }
+.app .fc-now-cond { color: #94a3b8; }
+.app .fc-now-strip { border-top-color: rgba(148, 163, 184, 0.18); }
+.app .fc-now-chip { background: rgba(255, 255, 255, 0.05); }
+.app .fc-now-chip-lbl { color: #94a3b8; }
+.app .fc-now-chip-val { color: #f1f5f9; }
