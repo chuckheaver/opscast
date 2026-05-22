@@ -2075,3 +2075,46 @@ body {
   background: rgba(2, 8, 20, 0.55);
   color: #94a3b8;
 }
+
+/* ── Mobile sizing for the six facet icons ─────────────────────────────────
+ *  Two labels ("Summer Fog", "Bike Paths") are wide enough that with
+ *  `white-space: nowrap` the row overflows narrow iPhones. Let them
+ *  wrap to two lines and shrink the emoji + spacing as the viewport
+ *  narrows. */
+@media (max-width: 640px) {
+  .micro-icons {
+    gap: 4px;
+    margin: 14px 0 18px;
+  }
+  .micro-icon-item {
+    padding: 6px 2px;
+    gap: 4px;
+    min-width: 0; /* let the flex item shrink below its content width */
+  }
+  .micro-icon {
+    font-size: 36px;
+  }
+  .micro-icon-label {
+    font-size: 9px;
+    letter-spacing: 0.6px;
+    line-height: 1.15;
+    white-space: normal;       /* allow "Summer Fog" / "Bike Paths" to wrap */
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+  /* Compact the page heading + hero so vertical real estate is preserved. */
+  .page-h {
+    font-size: 28px;
+    letter-spacing: -0.4px;
+  }
+  .fc-top { padding: 18px 18px; }
+  .fc-city { font-size: 26px; }
+  .fc-now-icon { font-size: 42px; }
+  .fc-now-temp { font-size: 44px; }
+  .fc-now-deg  { font-size: 24px; margin-top: 2px; }
+}
+
+@media (max-width: 380px) {
+  .micro-icon { font-size: 32px; }
+  .micro-icon-label { font-size: 8.5px; }
+}
