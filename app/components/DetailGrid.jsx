@@ -8,7 +8,7 @@
 //   - Visibility row                               → category label + value
 
 import { useState } from "react";
-import { cellStyle } from "../lib/colors";
+import { cellStyle, hourWorstStatus, STATUS } from "../lib/colors";
 import { fmtHr, fmtV, visibilityCategory } from "../lib/formatting";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
 
@@ -133,22 +133,36 @@ export default function DetailGrid({ hours, thresh }) {
             <tbody>
               <tr>
                 <td className="row-lbl">Condition</td>
-                {hours.map(h => (
-                  <td
-                    key={h.hour}
-                    className="cond-cell"
-                    style={h.isPast ? { background: PAST_BG } : {}}
-                  >
-                    {h.isPast ? (
-                      <span className="cond-lb" style={{ color: PAST_TEXT }}>-</span>
-                    ) : (
-                      <>
-                        <span className="cond-ic">{h.icon}</span>
-                        <span className="cond-lb">{h.condition}</span>
-                      </>
-                    )}
-                  </td>
-                ))}
+                {hours.map(h => {
+                  // Past hours stay grey; live hours pick up the hour's
+                  // worst-status tint so the whole column reads at a
+                  // glance even before you scan the numeric rows below.
+                  let bg = PAST_BG;
+                  let labelColor = PAST_TEXT;
+                  if (!h.isPast) {
+                    const s = STATUS[hourWorstStatus(h, thresh)];
+                    bg = s.bg;
+                    labelColor = s.text;
+                  }
+                  return (
+                    <td
+                      key={h.hour}
+                      className="cond-cell"
+                      style={{ background: bg }}
+                    >
+                      {h.isPast ? (
+                        <span className="cond-lb" style={{ color: PAST_TEXT }}>-</span>
+                      ) : (
+                        <>
+                          <span className="cond-ic">{h.icon}</span>
+                          <span className="cond-lb" style={{ color: labelColor }}>
+                            {h.condition}
+                          </span>
+                        </>
+                      )}
+                    </td>
+                  );
+                })}
               </tr>
               {PRIMARY.map(m => (
                 <tr key={m.key}>
