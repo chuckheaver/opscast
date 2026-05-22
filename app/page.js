@@ -9,6 +9,7 @@
 import { useState, useEffect, useRef } from "react";
 import SetupView from "./components/SetupView";
 import ForecastView from "./components/ForecastView";
+import MicroLifeHeader from "./components/MicroLifeHeader";
 import { buildDefaults } from "./lib/thresholds";
 import { geoCode, getWx, getAQ, buildFcData } from "./lib/weather-api";
 
@@ -282,14 +283,33 @@ export default function Page() {
       )}
 
       {view === "forecast" && forecast && (
-        <ForecastView
-          forecast={forecast}
-          startH={startH}
-          endH={endH}
-          dayFrom={dayFrom}
-          dayTo={dayTo}
-          thresh={thresh}
-        />
+        <div className="setup">
+          <MicroLifeHeader
+            zip={zip}
+            setZip={handleZipInput}
+            selectedLoc={selectedLoc}
+            loading={loading}
+            geoLoad={geoLoad}
+            // Enter in the input runs the full submit path (geocode +
+            // fetch); picking a suggestion or hitting 📍 refetches
+            // straight away so the grid below updates without a trip
+            // through the settings page.
+            onSubmit={run}
+            onGeo={() => useGeo(true)}
+            onSelectLocation={sug => {
+              selectLocation(sug);
+              fetchForLoc(sug);
+            }}
+          />
+          <ForecastView
+            forecast={forecast}
+            startH={startH}
+            endH={endH}
+            dayFrom={dayFrom}
+            dayTo={dayTo}
+            thresh={thresh}
+          />
+        </div>
       )}
     </div>
   );
