@@ -2214,20 +2214,21 @@ body {
 
 /* Mobile: stack temp + badge vertically when there's no horizontal room. */
 @media (max-width: 540px) {
-  .fc-top-row {
-    flex-wrap: wrap;
-    align-items: flex-start;
-  }
-  .fc-now-sky {
-    flex: 1 1 100%;
-    align-self: flex-start;
-    flex-direction: row;
-    gap: 14px;
-    margin-top: 6px;
-  }
-  .fc-now-sky .fc-now-cond { font-size: 16px; }
-  .fc-now-stat { font-size: 14px; }
-  .fc-now-temp { font-size: 48px; }
+  /* Keep the two-column layout on phones — badge stays pinned right of
+   *  the temp/stats column instead of stacking below. Just shrink. */
+  .fc-top { padding: 14px 14px; margin-bottom: 16px; }
+  .fc-top-row { gap: 14px; flex-wrap: nowrap; align-items: center; }
+  .fc-top-left { min-width: 0; }
+  .fc-city { font-size: 22px; letter-spacing: -0.4px; }
+  .fc-meta { font-size: 9.5px; letter-spacing: 1.1px; }
+  .fc-now-temp { font-size: 42px; margin-top: 10px; }
+  .fc-now-deg  { font-size: 18px; margin-top: 4px; }
+  .fc-now-stats { margin-top: 10px; gap: 2px; }
+  .fc-now-stat { font-size: 13px; }
+  .fc-now-badge { width: 78px; height: 78px; }
+  .fc-now-badge .fc-now-icon { font-size: 44px; }
+  .fc-now-sky { gap: 6px; flex: 0 0 auto; align-self: center; }
+  .fc-now-sky .fc-now-cond { font-size: 14px; }
 }
 
 /* ── Hourly Detail Grid polish — Weather-Channel-style clean look ──────────
