@@ -43,6 +43,14 @@ function fmtHeroDate(d) {
   });
 }
 
+// 8-point compass abbreviation for a wind bearing in degrees.
+const COMPASS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+function compass(deg) {
+  if (deg == null || !Number.isFinite(deg)) return "";
+  const idx = Math.round(((deg % 360) / 45)) % 8;
+  return COMPASS[idx];
+}
+
 export default function ForecastView({
   forecast,
   startH,
@@ -84,30 +92,19 @@ export default function ForecastView({
         {now && (
           <div className="fc-now-strip">
             <div className="fc-now-chip">
-              <span className="fc-now-chip-lbl">Feels</span>
+              <span className="fc-now-chip-lbl">Temp</span>
+              <span className="fc-now-chip-val">{now.tempF}°</span>
+            </div>
+            <div className="fc-now-chip">
+              <span className="fc-now-chip-lbl">Feels Like</span>
               <span className="fc-now-chip-val">{now.feelsLike}°</span>
             </div>
             <div className="fc-now-chip">
               <span className="fc-now-chip-lbl">Wind</span>
               <span className="fc-now-chip-val">
+                {compass(now.windDir) && `${compass(now.windDir)} `}
                 {now.windSpeed} mph{now.windIsGust ? "g" : ""}
               </span>
-            </div>
-            <div className="fc-now-chip">
-              <span className="fc-now-chip-lbl">Humidity</span>
-              <span className="fc-now-chip-val">{now.humidity}%</span>
-            </div>
-            <div className="fc-now-chip">
-              <span className="fc-now-chip-lbl">Precip</span>
-              <span className="fc-now-chip-val">{now.precipProb}%</span>
-            </div>
-            <div className="fc-now-chip">
-              <span className="fc-now-chip-lbl">UV</span>
-              <span className="fc-now-chip-val">{now.uvIndex}</span>
-            </div>
-            <div className="fc-now-chip">
-              <span className="fc-now-chip-lbl">AQI</span>
-              <span className="fc-now-chip-val">{now.aqi}</span>
             </div>
           </div>
         )}

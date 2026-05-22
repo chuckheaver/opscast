@@ -56,6 +56,7 @@ export const getWx = async (lat, lon, tz) => {
       "cloudcover",
       "windspeed_10m",
       "windgusts_10m",
+      "winddirection_10m",
       "visibility",
       "uv_index",
     ].join(","),
@@ -128,6 +129,7 @@ export const buildFcData = (wx, aq, loc) => {
       windGusts: gusts,
       windSustained: sustained,
       windIsGust: gusts > sustained,
+      windDir: wx.hourly.winddirection_10m?.[i] ?? null,
       precipProb: wx.hourly.precipitation_probability[i] || 0,
       precipAccum: parseFloat(
         ((wx.hourly.precipitation[i] || 0) * 0.0393701).toFixed(2)
