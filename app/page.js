@@ -24,10 +24,10 @@ export default function Page() {
   // The submit handler uses this directly to skip the redundant geoCode call.
   // Typing in the zip field clears it (handled via handleZipInput).
   const [selectedLoc, setSelectedLoc] = useState(null);
-  const [startH, setStartH] = useState(9);
-  const [endH, setEndH] = useState(17);
+  const [startH, setStartH] = useState(7);
+  const [endH, setEndH] = useState(18);
   const [dayFrom, setDayFrom] = useState(0);
-  const [dayTo, setDayTo] = useState(1);
+  const [dayTo, setDayTo] = useState(4);
   const [thresh, setThresh] = useState(buildDefaults);
   // Three views: "loading" (fetching the auto-launch forecast), "forecast"
   // (results), and "settings" (the SetupView form behind the gear icon).
