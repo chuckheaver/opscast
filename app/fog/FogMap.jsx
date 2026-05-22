@@ -19,6 +19,13 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
+// Bounding box that frames just SF — Ocean Beach / Daly City to the
+// Embarcadero / Bayview — so the city fills the map without the
+// surrounding Bay competing for attention.
+const SF_BOUNDS = [
+  [-122.520, 37.708], // SW
+  [-122.355, 37.812], // NE
+];
 
 // Hand-picked weather emoji at SF locations chosen from the user's
 // markup. Each pin renders as a DOM marker so the system emoji font
@@ -109,6 +116,13 @@ export default function FogMap({
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const transitionMarkersRef = useRef([]);
+  // Mirrors `showContours` for the once-only marker create effect — so
+  // newly-spawned markers respect the latest toggle state even if the
+  // map's load event fires long after mount.
+  const showContoursRef = useRef(showContours);
+  useEffect(() => {
+    showContoursRef.current = showContours;
+  }, [showContours]);
   const dataAppliedRef = useRef(false);
   const onPickRef = useRef(onPickFeature);
 
@@ -126,8 +140,8 @@ export default function FogMap({
     const map = new mapboxgl.Map({
       container: containerRef.current,
       style: "mapbox://styles/mapbox/streets-v12",
-      center: SF_CENTER,
-      zoom: 11.2,
+      bounds: SF_BOUNDS,
+      fitBoundsOptions: { padding: 24 },
       minZoom: 10,
       maxZoom: 16,
     });
@@ -807,11 +821,13 @@ export default function FogMap({
     const create = () => {
       transitionMarkersRef.current.forEach(m => m.remove());
       transitionMarkersRef.current = [];
+      const visible = showContoursRef.current;
       FOG_PIN_GROUPS.forEach(({ emoji, points }) => {
         points.forEach(pt => {
           const el = document.createElement("div");
           el.className = "fog-cloud-marker";
           el.textContent = emoji;
+          if (!visible) el.style.display = "none";
           const marker = new mapboxgl.Marker({ element: el, anchor: "center" })
             .setLngLat(pt)
             .addTo(map);
@@ -982,7 +998,7 @@ export default function FogMap({
       markerRef.current = new mapboxgl.Marker({ color: "#2563eb" })
         .setLngLat(picked.point)
         .addTo(map);
-      map.flyTo({ center: SF_CENTER, zoom: 11.2, duration: 800 });
+      map.fitBounds(SF_BOUNDS, { padding: 24, duration: 800 });
     }
   }, [picked]);
 
