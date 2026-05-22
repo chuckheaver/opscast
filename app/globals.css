@@ -1787,9 +1787,16 @@ body {
   border-color: #38bdf8;
 }
 .app .sel-box:hover { border-color: rgba(148, 163, 184, 0.45); }
+/* Re-attach the arrow as a full background spec — the bare
+ *  `background-image` line used to inherit `background-repeat: repeat`
+ *  from the shorthand reset above, which tiled the arrow into a
+ *  diagonal triangle pattern across the whole select. */
 .app .sel-box {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2394a3b8'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
 }
+.app .sel-note { color: #94a3b8; }
 .app .autocomplete {
   background: rgba(15, 31, 50, 0.96);
   border-color: rgba(148, 163, 184, 0.25);
@@ -1800,6 +1807,91 @@ body {
 .app .autocomplete-item:hover { background: rgba(56, 189, 248, 0.1); }
 .app .ac-name { color: #f1f5f9; }
 .app .ac-meta { color: #94a3b8; }
+
+/* ── Settings page (SetupView) on dark ──────────────────────────────────────
+ *  All the threshold cards (.mc / .amc), the slider visualisations, the
+ *  Advanced Metrics toggle, and the submit button were defined in the
+ *  original light theme only — on the navy gradient those rendered as
+ *  glaring white slabs. These overrides bring the whole page into the
+ *  same navy-glass language used on the forecast view. */
+
+/* Primary metric cards: same glass-card treatment as .day-block. */
+.app .mc {
+  background: linear-gradient(180deg, rgba(15, 31, 50, 0.78) 0%, rgba(14, 28, 46, 0.7) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.app .mc-label { color: #f1f5f9; }
+.app .mc-desc  { color: #94a3b8; }
+.app .mc-range { color: #38bdf8; }
+
+/* Advanced metric cards (compact grid). */
+.app .amc {
+  background: linear-gradient(180deg, rgba(15, 31, 50, 0.78) 0%, rgba(14, 28, 46, 0.7) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+}
+.app .amc-label { color: #f1f5f9; }
+.app .amc-range { color: #38bdf8; }
+
+/* Band visualisation (track + scale labels). */
+.app .band-track {
+  background: rgba(2, 8, 20, 0.55);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+.app .band-scale { color: #94a3b8; }
+.app .band-scale em { color: #38bdf8; }
+
+/* Range sliders: brighter track + sky-blue thumb so they read on navy. */
+.app input[type=range] { background: rgba(148, 163, 184, 0.25); }
+.app input[type=range]::-webkit-slider-thumb {
+  background: #38bdf8;
+  border-color: rgba(15, 31, 50, 0.95);
+}
+.app input[type=range]::-moz-range-thumb {
+  background: #38bdf8;
+  border-color: rgba(15, 31, 50, 0.95);
+}
+.app .sl-lbl { color: #94a3b8; }
+.app .sl-val { color: #f1f5f9; }
+
+/* "Show Advanced Metrics" rule + button. */
+.app .adv-line { background: rgba(148, 163, 184, 0.2); }
+.app .adv-btn {
+  background: rgba(15, 31, 50, 0.55);
+  border-color: rgba(148, 163, 184, 0.25);
+  color: #cbd5e1;
+}
+.app .adv-btn:hover {
+  border-color: #38bdf8;
+  color: #f1f5f9;
+  background: rgba(56, 189, 248, 0.12);
+}
+
+/* Submit button: was hard #1c1917 — recast as a sky-blue gradient so it
+ *  reads as the primary CTA on the navy page instead of a darker hole. */
+.app .submit-btn {
+  background: linear-gradient(135deg, #2563eb 0%, #38bdf8 100%);
+  color: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+}
+.app .submit-btn:hover { opacity: 0.92; }
+.app .submit-btn:disabled {
+  opacity: 0.4;
+  box-shadow: none;
+}
+
+/* Error banner under the submit button. */
+.app .err-box {
+  background: rgba(220, 38, 38, 0.18);
+  border-color: rgba(220, 38, 38, 0.4);
+  color: #fecaca;
+}
 
 /* Splash dot matches dark theme. */
 .app .splash-msg { color: #94a3b8; }
