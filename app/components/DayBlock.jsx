@@ -1,10 +1,10 @@
 // One full day's content: header with status badge, then Cockpit,
-// HourTimeline, ActionPanel, DetailGrid. Past hours (today only) are
-// flagged with isPast so children can render them as "-".
+// HourTimeline, and the collapsed-by-default DetailGrid. Past hours
+// (today only) are flagged with isPast so children can render them
+// as "-".
 
 import Cockpit from "./Cockpit";
 import HourTimeline from "./HourTimeline";
-import ActionPanel from "./ActionPanel";
 import DetailGrid from "./DetailGrid";
 import { STATUS, hourWorstStatus } from "../lib/colors";
 import { generateActions } from "../lib/actions";
@@ -81,7 +81,6 @@ export default function DayBlock({
         <>
           <Cockpit hours={decorated} thresh={thresh} />
           <HourTimeline hours={decorated} thresh={thresh} />
-          <ActionPanel actions={actions} />
           <DetailGrid hours={decorated} thresh={thresh} />
         </>
       )}

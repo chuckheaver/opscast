@@ -4,7 +4,7 @@
 import { useState } from "react";
 
 export default function RadarPanel({ loc }) {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const radarSrc = `https://www.rainviewer.com/map.html?loc=${loc.latitude},${loc.longitude},9&oFa=0&oC=0&oU=0&oCS=1&oF=0&oAP=1&rmt=4&refmt=1&palmt=0&c=3`;
 
   return (
