@@ -77,13 +77,17 @@ export default function ForecastView({
             <div className="fc-meta">
               {fmtHeroDate(new Date())} · {fmtHrFull(startH)} – {fmtHrFull(endH)} each day
             </div>
-          </div>
-          {now && (
-            <div className="fc-now">
-              <span className="fc-now-icon" aria-hidden="true">{now.icon}</span>
+            {now && (
               <div className="fc-now-temp">
                 {now.tempF}
-                <span className="fc-now-deg">°</span>
+                <span className="fc-now-deg">°F</span>
+              </div>
+            )}
+          </div>
+          {now && (
+            <div className="fc-now-sky">
+              <div className="fc-now-badge" aria-hidden="true">
+                <span className="fc-now-icon">{now.icon}</span>
               </div>
               <div className="fc-now-cond">{now.condition}</div>
             </div>
@@ -104,13 +108,6 @@ export default function ForecastView({
               <span className="fc-now-chip-val">
                 {compass(now.windDir) && `${compass(now.windDir)} `}
                 {now.windSpeed} mph{now.windIsGust ? "g" : ""}
-              </span>
-            </div>
-            <div className="fc-now-chip">
-              <span className="fc-now-chip-lbl">Sky</span>
-              <span className="fc-now-chip-val">
-                <span className="fc-now-chip-icon" aria-hidden="true">{now.icon}</span>
-                {now.condition}
               </span>
             </div>
           </div>

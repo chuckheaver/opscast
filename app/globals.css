@@ -2118,3 +2118,62 @@ body {
   .micro-icon { font-size: 32px; }
   .micro-icon-label { font-size: 8.5px; }
 }
+
+/* ── Sky badge (circular slate disc for the current weather icon) ──────── */
+.fc-now-sky {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+.fc-now-badge {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(148, 163, 184, 0.35) 0%, rgba(71, 85, 105, 0.55) 60%, rgba(30, 41, 59, 0.7) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 8px 22px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fc-now-badge .fc-now-icon {
+  font-size: 64px;
+  line-height: 1;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+}
+/* Override the older inline icon sizing inside fc-now (kept for back-compat
+ *  with any other call sites). */
+.fc-now-sky .fc-now-cond {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #1c1917;
+}
+
+/* Light-theme fallback for the badge: a slightly cooler grey so it still
+ *  reads on a cream background. */
+:root .fc-now-badge {
+  background: radial-gradient(circle at 30% 30%, #f1f5f9 0%, #cbd5e1 60%, #94a3b8 100%);
+  border-color: rgba(28, 25, 23, 0.08);
+}
+:root .fc-now-sky .fc-now-cond { color: #1c1917; }
+
+/* Dark theme: brighter condition label so it pops on navy. */
+.app .fc-now-sky .fc-now-cond { color: #f1f5f9; }
+.app .fc-now-badge {
+  background: radial-gradient(circle at 30% 30%, rgba(148, 163, 184, 0.35) 0%, rgba(71, 85, 105, 0.55) 60%, rgba(15, 23, 42, 0.85) 100%);
+  border-color: rgba(148, 163, 184, 0.22);
+}
+
+/* Mobile: scale the badge down so it doesn't crowd the temp on phones. */
+@media (max-width: 640px) {
+  .fc-now-badge { width: 84px; height: 84px; }
+  .fc-now-badge .fc-now-icon { font-size: 48px; }
+  .fc-now-sky .fc-now-cond { font-size: 15px; }
+}
