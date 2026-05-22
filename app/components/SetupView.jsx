@@ -120,7 +120,7 @@ export default function SetupView({
         </a>
       </div>
       <div className="page-sub">
-        Set your ideal conditions, Pick your dates/times.
+        Set your ideal conditions, Pick your dates/times. I'll tell you when to worry!
       </div>
 
       <div id="setup-form" className="field-lbl">Location</div>
