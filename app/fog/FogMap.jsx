@@ -391,10 +391,6 @@ export default function FogMap({
           "line-color": "#1d4ed8",
           "line-width": 1.8,
           "line-opacity": 0.95,
-          // Inset each feature's outline into its own interior so adjacent
-          // neighborhoods don't share a single seam — at shared edges the
-          // two offset lines sit side-by-side.
-          "line-offset": 1.5,
         },
       });
       map.addLayer({
@@ -704,12 +700,7 @@ export default function FogMap({
         paint: {
           "line-color": "#1c1917",
           "line-opacity": 0.7,
-          "line-width": [
-            "case",
-            ["boolean", ["feature-state", "picked"], false],
-            2.5,
-            0.6,
-          ],
+          "line-width": 0.6,
         },
       });
       map.addLayer({
@@ -972,19 +963,17 @@ export default function FogMap({
     else map.once("load", apply);
   }, [showBikes]);
 
-  // Sync picked state: drop a marker, highlight the feature, fly there.
+  // Sync picked state: drop a marker at the address and frame the
+  // whole city. The map deliberately stays at the city-wide view so the
+  // pin reads in context — no zoom-in, no neighborhood polygon
+  // highlight (the marker alone marks the spot).
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !geojson) return;
+    if (!map) return;
 
     if (markerRef.current) {
       markerRef.current.remove();
       markerRef.current = null;
-    }
-    if (map.getSource("fog")) {
-      geojson.features.forEach(f => {
-        map.setFeatureState({ source: "fog", id: f.properties.id }, { picked: false });
-      });
     }
 
     if (!picked) return;
@@ -993,15 +982,9 @@ export default function FogMap({
       markerRef.current = new mapboxgl.Marker({ color: "#2563eb" })
         .setLngLat(picked.point)
         .addTo(map);
-      map.flyTo({ center: picked.point, zoom: 13, duration: 800 });
+      map.flyTo({ center: SF_CENTER, zoom: 11.2, duration: 800 });
     }
-    if (picked.feature?.properties?.id) {
-      map.setFeatureState(
-        { source: "fog", id: picked.feature.properties.id },
-        { picked: true }
-      );
-    }
-  }, [picked, geojson]);
+  }, [picked]);
 
   if (!TOKEN) {
     return (
