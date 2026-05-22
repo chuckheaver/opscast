@@ -7,7 +7,6 @@
 //   - Wind row with windIsGust                     → small "g" after mph
 //   - Visibility row                               → category label + value
 
-import { useState } from "react";
 import { cellStyle, hourWorstStatus, STATUS } from "../lib/colors";
 import { fmtHr, fmtV, visibilityCategory } from "../lib/formatting";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
@@ -95,9 +94,7 @@ function renderCell(key, h, thresh) {
   );
 }
 
-export default function DetailGrid({ hours, thresh }) {
-  const [open, setOpen] = useState(false);
-
+export default function DetailGrid({ hours, thresh, open, setOpen }) {
   return (
     <>
       <div className="detail-toggle" onClick={() => setOpen(v => !v)}>
@@ -132,7 +129,7 @@ export default function DetailGrid({ hours, thresh }) {
             </thead>
             <tbody>
               <tr>
-                <td className="row-lbl">Condition</td>
+                <td className="row-lbl">Sky</td>
                 {hours.map(h => {
                   // Past hours stay grey; live hours pick up the hour's
                   // worst-status tint so the whole column reads at a

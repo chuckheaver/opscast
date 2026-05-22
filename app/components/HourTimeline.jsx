@@ -1,108 +1,57 @@
-// Horizontal scrolling strip of the day's hours, each with an icon + status
-// dot. Tapping an hour opens a popup with all metric values for that hour.
+// "Hours on Alert" summary: for each metric that has at least one
+// alert-status hour in the day's window, render a line like
+//   "Wind/Gusts is on Alert at: 2 PM, 3 PM, 5 PM"
+// where the metric name is clickable and opens the Hourly Detail Grid
+// below. Caution and ideal hours don't appear here — those colours
+// already show up in the detail grid itself. If nothing is red in the
+// whole period, we show "No alerts during this period."
 //
-// Past hours render with a muted dot and "-" placeholder in the popup.
+// Sky Cover (cloudCover) is intentionally skipped — it uses a binary
+// in-range / out-of-range palette and isn't counted as an alert
+// anywhere else in the app (see hourWorstStatus in lib/colors.js).
 
-import { useState } from "react";
-import { STATUS, hourWorstStatus, cellStyle } from "../lib/colors";
-import { fmtHr, fmtHrFull, fmtV, visibilityCategory } from "../lib/formatting";
+import { getStatus } from "../lib/colors";
+import { fmtHr } from "../lib/formatting";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
 
-const PAST_STYLE = { bg: "#EFEFEF", text: "#888" };
+export default function HourTimeline({ hours, thresh, onOpenDetail }) {
+  const metrics = [...PRIMARY, ...ADVANCED].filter(m => m.key !== "cloudCover");
 
-export default function HourTimeline({ hours, thresh }) {
-  const [selectedHour, setSelectedHour] = useState(null);
-  const selectedHourData = hours.find(h => h.hour === selectedHour);
-
-  const visibleMetrics = [...PRIMARY, ...ADVANCED];
+  const rows = metrics
+    .map(m => {
+      const alertHours = hours.filter(h => {
+        if (h.isPast) return false;
+        // UV at night isn't a real reading — skip.
+        if (m.key === "uvIndex" && h.isDaylight === false) return false;
+        return getStatus(m.key, h[m.key] ?? 0, thresh) === "alert";
+      });
+      return { metric: m, alertHours };
+    })
+    .filter(row => row.alertHours.length > 0);
 
   return (
     <div className="timeline-wrap">
-      <div className="timeline-label">
-        Hour-by-Hour · tap any hour for detail
-      </div>
-      <div className="timeline">
-        {hours.map(h => {
-          const isSel = selectedHour === h.hour;
-          const ws = h.isPast ? null : hourWorstStatus(h, thresh);
-          const dotColors = h.isPast ? PAST_STYLE : STATUS[ws];
-          return (
-            <div
-              key={h.hour}
-              className={`tl-hour ${isSel ? "selected" : ""}`}
-              onClick={() => setSelectedHour(isSel ? null : h.hour)}
-              style={h.isPast ? { opacity: 0.45 } : {}}
-            >
-              <span className="tl-time">{fmtHr(h.hour)}</span>
-              <span className="tl-icon">{h.isPast ? "·" : h.icon}</span>
-              <div
-                className="tl-dot"
-                style={{ background: dotColors.bg, color: dotColors.text }}
+      <div className="timeline-label">Hours on Alert</div>
+      {rows.length === 0 ? (
+        <div className="alert-empty">No alerts during this period.</div>
+      ) : (
+        <ul className="alert-list">
+          {rows.map(({ metric, alertHours }) => (
+            <li key={metric.key} className="alert-row">
+              <button
+                type="button"
+                className="alert-metric"
+                onClick={onOpenDetail}
               >
-                {h.isPast
-                  ? "-"
-                  : ws === "alert"
-                  ? "!"
-                  : ws === "caution"
-                  ? "~"
-                  : "✓"}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {selectedHourData && (
-        <div className="tl-popup">
-          <button
-            className="tl-close"
-            onClick={() => setSelectedHour(null)}
-          >
-            ✕
-          </button>
-          <div className="tl-popup-title">
-            {selectedHourData.icon} {fmtHrFull(selectedHourData.hour)} —{" "}
-            {selectedHourData.condition}
-          </div>
-          <div className="tl-popup-metrics">
-            {visibleMetrics.map(m => {
-              const val = selectedHourData[m.key] ?? 0;
-              // Past hours and after-sunset UV display as "-".
-              const blank =
-                selectedHourData.isPast ||
-                (m.key === "uvIndex" && selectedHourData.isDaylight === false);
-
-              const c = blank
-                ? PAST_STYLE
-                : cellStyle(m.key, val, thresh);
-
-              let display;
-              if (blank) {
-                display = "-";
-              } else if (m.key === "visibility") {
-                display = `${visibilityCategory(val)} ${fmtV(m.key, val)} mi`;
-              } else if (m.key === "windSpeed") {
-                display = `${fmtV(m.key, val)} mph${
-                  selectedHourData.windIsGust ? "g" : ""
-                }`;
-              } else {
-                display = `${fmtV(m.key, val)}${m.unit === "mph" ? " mph" : ""}`;
-              }
-              // Popup chip label: first word of the metric name, except aqi
-              // which would otherwise collide with "Air Temperature".
-              const chipLabel = m.key === "aqi" ? "AQI" : m.label.split(" ")[0];
-              return (
-                <span
-                  key={m.key}
-                  className="tl-pm"
-                  style={{ background: c.bg, color: c.text }}
-                >
-                  {chipLabel}: <strong>{display}</strong>
-                </span>
-              );
-            })}
-          </div>
-        </div>
+                {metric.label}
+              </button>
+              <span className="alert-text">
+                {" "}is on Alert at:{" "}
+                {alertHours.map(h => fmtHr(h.hour)).join(", ")}
+              </span>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );

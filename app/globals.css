@@ -1052,7 +1052,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   padding: 6px 12px;
-  text-align: right;
+  text-align: left;
   white-space: nowrap;
   width: 120px;
   min-width: 120px;
@@ -1639,4 +1639,53 @@ input[type=range]::-webkit-slider-thumb:hover {
   letter-spacing: 1.4px;
   text-transform: uppercase;
   margin-top: 6px;
+}
+
+/* ── "Hours on Alert" summary (replaces old hour-by-hour strip) ─────────── */
+.alert-list {
+  list-style: none;
+  margin: 0;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.alert-row {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: #1c1917;
+  line-height: 1.4;
+}
+.alert-metric {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  color: #8B0000;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.alert-metric:hover {
+  color: #DC2626;
+  text-decoration-thickness: 2px;
+}
+.alert-text {
+  color: #57534e;
+}
+.alert-empty {
+  padding: 14px 16px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #065f46;
 }
