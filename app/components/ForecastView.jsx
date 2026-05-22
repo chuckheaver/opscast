@@ -3,7 +3,6 @@
 
 import RadarPanel from "./RadarPanel";
 import DayBlock from "./DayBlock";
-import { fmtHrFull } from "../lib/formatting";
 
 // Legend swatches shown above the day blocks.
 // Three-tier model for most metrics, plus a Sky Cover exception.
@@ -32,15 +31,6 @@ function findCurrentHour(days) {
     const d = Math.abs(h.hour - now.getHours());
     return !best || d < Math.abs(best.hour - now.getHours()) ? h : best;
   }, null);
-}
-
-// Friendly long-form date for the hero, e.g. "Thursday, May 21".
-function fmtHeroDate(d) {
-  return d.toLocaleDateString(undefined, {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  });
 }
 
 // 8-point compass abbreviation for a wind bearing in degrees.
@@ -85,9 +75,6 @@ export default function ForecastView({
             <div className="fc-city">
               {forecast.loc.name}
               {forecast.loc.admin1 ? `, ${forecast.loc.admin1}` : ""}
-            </div>
-            <div className="fc-meta">
-              {fmtHeroDate(new Date())} · {fmtHrFull(startH)} – {fmtHrFull(endH)} each day
             </div>
             {now && (
               <>
