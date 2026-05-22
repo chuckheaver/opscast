@@ -108,18 +108,7 @@ export default function DetailGrid({ hours, thresh, open, setOpen }) {
           <table className="wx-table">
             <thead>
               <tr>
-                <th
-                  className="row-lbl"
-                  style={{
-                    background: "#111",
-                    textAlign: "left",
-                    color: "#444",
-                    fontSize: 8,
-                    letterSpacing: 2,
-                  }}
-                >
-                  METRIC / HOUR
-                </th>
+                <th className="row-lbl row-lbl-corner">METRIC / HOUR</th>
                 {hours.map(h => (
                   <th key={h.hour} className="hr-head">
                     {fmtHr(h.hour)}
@@ -174,16 +163,7 @@ export default function DetailGrid({ hours, thresh, open, setOpen }) {
               </tr>
               {ADVANCED.map(m => (
                 <tr key={m.key}>
-                  <td
-                    className="row-lbl"
-                    style={{
-                      background: "#2e2e2e",
-                      color: "#aaa",
-                      fontSize: 9,
-                    }}
-                  >
-                    {m.label}
-                  </td>
+                  <td className="row-lbl row-lbl-adv">{m.label}</td>
                   {hours.map(h => renderCell(m.key, h, thresh))}
                 </tr>
               ))}

@@ -2021,3 +2021,57 @@ body {
   margin-right: 6px;
   vertical-align: -2px;
 }
+
+/* ── Strip remaining "old black" patches inside .app — day header bar,
+ *     radar chrome, detail-grid corner / advanced row labels.
+ *     Everything reads as one cohesive navy surface now. ───────────────── */
+
+/* Day header: the old solid #1c1917 strip is gone; the navy glass card's
+ *  divider provides the separation instead. */
+.app .day-hdr {
+  background: transparent;
+}
+
+/* Cockpit "no future hours" placeholder cells (the inline #EFEFEF set in
+ *  Cockpit.jsx) — those are pastel by design and read fine on dark. */
+
+/* Radar panel — re-tint the heavy black surround to match the navy
+ *  vocabulary. The iframe itself is third-party content; the wrapper
+ *  around it is what we paint. */
+.app .radar-body { background: rgba(2, 8, 20, 0.9); }
+.app .radar-links {
+  background: rgba(8, 18, 30, 0.85);
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+.app .radar-link {
+  border-color: rgba(148, 163, 184, 0.3);
+  color: #cbd5e1;
+}
+.app .radar-link:hover {
+  border-color: #38bdf8;
+  color: #f1f5f9;
+  background: rgba(56, 189, 248, 0.1);
+}
+.app .radar-toggle { color: #94a3b8; }
+
+/* Detail-grid header corner ("METRIC / HOUR") and advanced-metric row
+ *  labels — were inline #111 / #2e2e2e black-grey. Now navy variants. */
+.row-lbl-corner {
+  background: #0a1929;
+  color: #475569;
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+.row-lbl-adv {
+  background: #122131;
+  color: #94a3b8;
+  font-size: 9px;
+}
+.app .row-lbl-corner {
+  background: rgba(2, 8, 20, 0.75);
+  color: #64748b;
+}
+.app .row-lbl-adv {
+  background: rgba(2, 8, 20, 0.55);
+  color: #94a3b8;
+}
