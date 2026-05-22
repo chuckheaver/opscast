@@ -64,6 +64,18 @@ export default function ForecastView({
 
   const selectedDays = forecast.days.slice(dayFrom, dayTo + 1);
   const now = findCurrentHour(forecast.days);
+  // Today's overall Hi / Lo for the hero. Falls back to `now` if today's
+  // hour array is missing (defensive — shouldn't happen in practice).
+  let hi = null;
+  let lo = null;
+  if (now) {
+    const todayHours = (forecast.days.find(([d]) => d === now.date) || forecast.days[0])[1];
+    const temps = todayHours.map(h => h.tempF).filter(Number.isFinite);
+    if (temps.length) {
+      hi = Math.max(...temps);
+      lo = Math.min(...temps);
+    }
+  }
 
   return (
     <div className="fc">
@@ -78,10 +90,22 @@ export default function ForecastView({
               {fmtHeroDate(new Date())} · {fmtHrFull(startH)} – {fmtHrFull(endH)} each day
             </div>
             {now && (
-              <div className="fc-now-temp">
-                {now.tempF}
-                <span className="fc-now-deg">°F</span>
-              </div>
+              <>
+                <div className="fc-now-temp">
+                  {now.tempF}
+                  <span className="fc-now-deg">°F</span>
+                </div>
+                <div className="fc-now-stats">
+                  <div className="fc-now-stat">Feels Like: {now.feelsLike}°</div>
+                  {hi != null && lo != null && (
+                    <div className="fc-now-stat">Hi: {hi}° | Lo: {lo}°</div>
+                  )}
+                  <div className="fc-now-stat">
+                    Wind: {compass(now.windDir) && `${compass(now.windDir)} `}
+                    {now.windSpeed} mph{now.windIsGust ? "g" : ""}
+                  </div>
+                </div>
+              </>
             )}
           </div>
           {now && (
@@ -93,25 +117,6 @@ export default function ForecastView({
             </div>
           )}
         </div>
-        {now && (
-          <div className="fc-now-strip">
-            <div className="fc-now-chip">
-              <span className="fc-now-chip-lbl">Temp</span>
-              <span className="fc-now-chip-val">{now.tempF}°</span>
-            </div>
-            <div className="fc-now-chip">
-              <span className="fc-now-chip-lbl">Feels Like</span>
-              <span className="fc-now-chip-val">{now.feelsLike}°</span>
-            </div>
-            <div className="fc-now-chip">
-              <span className="fc-now-chip-lbl">Wind</span>
-              <span className="fc-now-chip-val">
-                {compass(now.windDir) && `${compass(now.windDir)} `}
-                {now.windSpeed} mph{now.windIsGust ? "g" : ""}
-              </span>
-            </div>
-          </div>
-        )}
       </div>
 
       <div className="fc-legend">

@@ -2177,3 +2177,55 @@ body {
   .fc-now-badge .fc-now-icon { font-size: 48px; }
   .fc-now-sky .fc-now-cond { font-size: 15px; }
 }
+
+/* ── Hero two-column lock: temp + inline stats LEFT, badge RIGHT ───────── */
+.fc-top-row {
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.fc-top-left {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.fc-now-sky {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+/* Inline stats stack under the big temperature: Feels Like, Hi/Lo, Wind. */
+.fc-now-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 14px;
+}
+.fc-now-stat {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1c1917;
+  letter-spacing: 0.1px;
+}
+.app .fc-now-stat { color: #cbd5e1; }
+
+/* Make the big temperature breathe a bit more inside the new layout. */
+.fc-now-temp { margin-top: 14px; }
+.fc-now-deg { margin-top: 8px; font-size: 24px; }
+
+/* Mobile: stack temp + badge vertically when there's no horizontal room. */
+@media (max-width: 540px) {
+  .fc-top-row {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .fc-now-sky {
+    flex: 1 1 100%;
+    align-self: flex-start;
+    flex-direction: row;
+    gap: 14px;
+    margin-top: 6px;
+  }
+  .fc-now-sky .fc-now-cond { font-size: 16px; }
+  .fc-now-stat { font-size: 14px; }
+  .fc-now-temp { font-size: 48px; }
+}
