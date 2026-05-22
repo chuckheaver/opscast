@@ -78,10 +78,16 @@ export default function ForecastView({
         <div className="fc-top-row">
           <div className="fc-top-left">
             {now && (
-              <div className="fc-now-temp">
-                {now.tempF}
-                <span className="fc-now-deg">°F</span>
-              </div>
+              <>
+                <div className="fc-now-temp">
+                  {now.tempF}
+                  <span className="fc-now-deg">°F</span>
+                </div>
+                <div className="fc-now-wind">
+                  {compass(now.windDir) && `${compass(now.windDir)} `}
+                  {now.windSpeed} mph{now.windIsGust ? "g" : ""}
+                </div>
+              </>
             )}
           </div>
           {now && (
@@ -99,10 +105,6 @@ export default function ForecastView({
             {hi != null && lo != null && (
               <span className="fc-now-stat">Hi {hi}° / Lo {lo}°</span>
             )}
-            <span className="fc-now-stat">
-              {compass(now.windDir) && `${compass(now.windDir)} `}
-              {now.windSpeed} mph{now.windIsGust ? "g" : ""}
-            </span>
           </div>
         )}
       </div>
