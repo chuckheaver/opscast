@@ -3,26 +3,11 @@
 // All shared state is owned by page.js and passed in via props.
 
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import MetricCard from "./MetricCard";
 import AdvancedCard from "./AdvancedCard";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
 import { fmtHrFull, dayLabel } from "../lib/formatting";
 import { geoSuggest } from "../lib/weather-api";
-
-// Build the /fog URL, forwarding the currently-selected location so the
-// Summer Fog Map can pin the user's spot without re-prompting. Users can
-// still override on the fog page via search or 📍.
-function buildFogUrl(loc) {
-  const qs = new URLSearchParams();
-  if (loc?.latitude != null && loc?.longitude != null) {
-    qs.set("lat", String(loc.latitude));
-    qs.set("lng", String(loc.longitude));
-    if (loc.name) qs.set("name", loc.name);
-  }
-  const s = qs.toString();
-  return s ? `/fog?${s}` : "/fog";
-}
 
 const HOURS_24 = Array.from({ length: 24 }, (_, i) => i);
 const DAY_INDEXES = [0, 1, 2, 3, 4];
@@ -88,24 +73,34 @@ export default function SetupView({
 
   return (
     <div className="setup">
-      <div className="page-h-row">
-        <div className="page-h">
-          Tell me your<br />
-          <em>ideal conditions.</em>
+      <div className="page-h">
+        Tell me about your<br />
+        <em>Micro Life</em>,
+      </div>
+      <div className="micro-icons">
+        <div className="micro-icon-item">
+          <span className="micro-icon" aria-hidden="true">🌤️</span>
+          <span className="micro-icon-label">Weather</span>
         </div>
-        <div className="fog-fc-wrap">
-          <span className="fog-fc-orbit fog-fc-orbit-top" aria-hidden="true">🏡</span>
-          <span className="fog-fc-orbit fog-fc-orbit-tl" aria-hidden="true">⛅️</span>
-          <span className="fog-fc-orbit fog-fc-orbit-tr" aria-hidden="true">🚃</span>
-          <span className="fog-fc-orbit fog-fc-orbit-bl" aria-hidden="true">🚲</span>
-          <span className="fog-fc-orbit fog-fc-orbit-br" aria-hidden="true">📭</span>
-          <Link href={buildFogUrl(selectedLoc)} className="fog-fc-btn">
-            <span className="fog-fc-label">Ur Micro<br />Life</span>
-          </Link>
+        <div className="micro-icon-item">
+          <span className="micro-icon" aria-hidden="true">🏡</span>
+          <span className="micro-icon-label">Housing</span>
+        </div>
+        <div className="micro-icon-item">
+          <span className="micro-icon" aria-hidden="true">🚃</span>
+          <span className="micro-icon-label">Transit</span>
+        </div>
+        <div className="micro-icon-item">
+          <span className="micro-icon" aria-hidden="true">🚲</span>
+          <span className="micro-icon-label">Bike Paths</span>
+        </div>
+        <div className="micro-icon-item">
+          <span className="micro-icon" aria-hidden="true">📭</span>
+          <span className="micro-icon-label">Postal</span>
         </div>
       </div>
       <div className="page-sub">
-        Set your range · pick your days
+        Set your ideal conditions, Pick your dates/times.
       </div>
 
       <div className="field-lbl">Location</div>
