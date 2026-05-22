@@ -106,6 +106,13 @@ export default function ForecastView({
                 {now.windSpeed} mph{now.windIsGust ? "g" : ""}
               </span>
             </div>
+            <div className="fc-now-chip">
+              <span className="fc-now-chip-lbl">Sky</span>
+              <span className="fc-now-chip-val">
+                <span className="fc-now-chip-icon" aria-hidden="true">{now.icon}</span>
+                {now.condition}
+              </span>
+            </div>
           </div>
         )}
       </div>

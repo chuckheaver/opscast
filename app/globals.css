@@ -2012,3 +2012,12 @@ body {
 .app .fc-now-chip { background: rgba(255, 255, 255, 0.05); }
 .app .fc-now-chip-lbl { color: #94a3b8; }
 .app .fc-now-chip-val { color: #f1f5f9; }
+
+/* Inline weather emoji inside the "Sky" chip — slightly larger than the
+ *  caption it sits next to so it reads as the chip's primary glyph. */
+.fc-now-chip-icon {
+  font-size: 18px;
+  line-height: 1;
+  margin-right: 6px;
+  vertical-align: -2px;
+}
