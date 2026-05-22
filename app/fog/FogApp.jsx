@@ -19,32 +19,36 @@ const CONTOURS_URL = "/data/sf-fog-contours.geojson";
 
 export default function FogApp() {
   const searchParams = useSearchParams();
+  // Preset chosen by the icon clicked on the Ur4cast home page. Each
+  // preset names exactly which layer(s) start on. Neighborhoods is
+  // always on regardless. No preset → keep the historical defaults
+  // (neighborhoods + fog data) so a direct nav to /fog still shows
+  // the headline layer.
+  const preset = searchParams?.get("preset") || "";
   const [geojson, setGeojson] = useState(null);
   const [contours, setContours] = useState(null);
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { feature, point: [lng, lat], address, contour, elevation_ft }
-  // Fog data layer (contour fills + icon patterns) is shown by default;
-  // toggle off for a clean basemap with only neighborhood outlines.
-  const [showContours, setShowContours] = useState(true);
-  // Topographic hillshade overlay — off by default since the data layer
-  // is the primary view.
+  // Fog data layer (contour fills + icon patterns).
+  const [showContours, setShowContours] = useState(preset === "" || preset === "fog");
+  // Topographic hillshade overlay.
   const [showTerrain, setShowTerrain] = useState(false);
-  // CA Geological Survey seismic hazard zones — off by default.
+  // CA Geological Survey seismic hazard zones.
   const [showSeismic, setShowSeismic] = useState(false);
-  // SFMTA Muni stops — off by default.
-  const [showMuni, setShowMuni] = useState(false);
-  // SFMTA bike network — off by default.
-  const [showBikes, setShowBikes] = useState(false);
-  // DataSF ZIP code boundaries — off by default.
-  const [showZips, setShowZips] = useState(false);
-  // 2022 Supervisor District boundaries — off by default.
+  // SFMTA Muni stops.
+  const [showMuni, setShowMuni] = useState(preset === "muni");
+  // SFMTA bike network.
+  const [showBikes, setShowBikes] = useState(preset === "bikes");
+  // DataSF ZIP code boundaries.
+  const [showZips, setShowZips] = useState(preset === "zips");
+  // 2022 Supervisor District boundaries.
   const [showDistricts, setShowDistricts] = useState(false);
-  // Zoning Map color overlay — off by default.
+  // Zoning Map color overlay.
   const [showZoning, setShowZoning] = useState(false);
-  // Realtor Neighborhoods (SFAR districts) — off by default.
+  // Realtor Neighborhoods (SFAR districts).
   const [showRealtor, setShowRealtor] = useState(false);
-  // SF neighborhood outlines + name labels — on by default, since they
-  // anchor the map for most users.
+  // SF neighborhood outlines + name labels — always on by default,
+  // and every Ur4cast icon preset keeps them on as the anchor layer.
   const [showNeighborhoods, setShowNeighborhoods] = useState(true);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");

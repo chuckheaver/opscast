@@ -103,14 +103,14 @@ body {
   color: transparent;
   padding-right: 1px;
 }
-/* Five large facet icons under the page heading: Weather / Housing /
-   Transit / Bike Paths / Postal. Each cell is centred, with a label
-   stacked underneath the emoji. */
+/* Six clickable facet icons under the page heading: Weather scrolls
+   to the form below; the other five jump to /fog with a layer preset
+   pre-toggled (Housing / Summer Fog / Transit / Bike Paths / Postal). */
 .micro-icons {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   margin: 18px 0 22px;
 }
 .micro-icon-item {
@@ -119,10 +119,23 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  padding: 8px 4px;
   text-align: center;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.micro-icon-item:hover {
+  background: rgba(28, 25, 23, 0.04);
+  transform: translateY(-2px);
+}
+.micro-icon-item:active {
+  transform: translateY(0);
 }
 .micro-icon {
-  font-size: 56px;
+  font-size: 48px;
   line-height: 1;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
 }
@@ -131,8 +144,9 @@ body {
   font-size: 11px;
   font-weight: 700;
   color: #57534e;
-  letter-spacing: 1.2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 .page-sub {
   font-family: 'DM Sans', sans-serif;

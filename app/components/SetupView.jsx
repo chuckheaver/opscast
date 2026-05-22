@@ -9,6 +9,22 @@ import { PRIMARY, ADVANCED } from "../lib/thresholds";
 import { fmtHrFull, dayLabel } from "../lib/formatting";
 import { geoSuggest } from "../lib/weather-api";
 
+// Build /fog URLs that forward the selected address (so the map pins
+// it without re-prompting) plus a `preset` flag that tells FogApp
+// which layer toggles to start on. The presets keep "Neighborhoods"
+// always on and layer the rest as labelled in the icon row.
+function buildFogUrl(loc, preset) {
+  const qs = new URLSearchParams();
+  if (loc?.latitude != null && loc?.longitude != null) {
+    qs.set("lat", String(loc.latitude));
+    qs.set("lng", String(loc.longitude));
+    if (loc.name) qs.set("name", loc.name);
+  }
+  if (preset) qs.set("preset", preset);
+  const s = qs.toString();
+  return s ? `/fog?${s}` : "/fog";
+}
+
 const HOURS_24 = Array.from({ length: 24 }, (_, i) => i);
 const DAY_INDEXES = [0, 1, 2, 3, 4];
 
@@ -78,32 +94,36 @@ export default function SetupView({
         <em>Micro Life</em>,
       </div>
       <div className="micro-icons">
-        <div className="micro-icon-item">
+        <a className="micro-icon-item" href="#setup-form">
           <span className="micro-icon" aria-hidden="true">🌤️</span>
           <span className="micro-icon-label">Weather</span>
-        </div>
-        <div className="micro-icon-item">
+        </a>
+        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "housing")}>
           <span className="micro-icon" aria-hidden="true">🏡</span>
           <span className="micro-icon-label">Housing</span>
-        </div>
-        <div className="micro-icon-item">
+        </a>
+        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "fog")}>
+          <span className="micro-icon" aria-hidden="true">🌁</span>
+          <span className="micro-icon-label">Summer Fog</span>
+        </a>
+        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "muni")}>
           <span className="micro-icon" aria-hidden="true">🚃</span>
           <span className="micro-icon-label">Transit</span>
-        </div>
-        <div className="micro-icon-item">
+        </a>
+        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "bikes")}>
           <span className="micro-icon" aria-hidden="true">🚲</span>
           <span className="micro-icon-label">Bike Paths</span>
-        </div>
-        <div className="micro-icon-item">
+        </a>
+        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "zips")}>
           <span className="micro-icon" aria-hidden="true">📭</span>
           <span className="micro-icon-label">Postal</span>
-        </div>
+        </a>
       </div>
       <div className="page-sub">
         Set your ideal conditions, Pick your dates/times.
       </div>
 
-      <div className="field-lbl">Location</div>
+      <div id="setup-form" className="field-lbl">Location</div>
       <div className="loc-row" style={{ position: "relative" }}>
         <input
           className="zip-inp"
