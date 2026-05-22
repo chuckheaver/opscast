@@ -83,8 +83,8 @@ export default function MicroLifeHeader({
   return (
     <div className="ml-header">
       <div className="page-h">
-        Tell me about your<br />
-        <em>Micro Life</em>
+        What&apos;s Your SF<br />
+        <em>Micro-Life?</em>
       </div>
       <div className="micro-icons">
         <a className="micro-icon-item" href="#setup-form">

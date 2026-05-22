@@ -2529,3 +2529,78 @@ body {
   text-overflow: ellipsis;
   margin-bottom: 8px;
 }
+
+/* ── Mobile-first compact hero ─────────────────────────────────────────────
+ *  The current-conditions card used to dominate the viewport on phones
+ *  (~600 px tall on iPhone). Same information, much tighter footprint:
+ *    - smaller city + condensed "CURRENTLY" caption
+ *    - temp + sky badge in a single row, badge ~half its previous size
+ *    - "Feels / Hi-Lo / Wind" collapsed from three stacked lines into a
+ *      single inline strip with dot separators */
+.app .fc-top {
+  padding: 14px 18px;
+  margin-bottom: 18px;
+}
+.app .fc-top .fc-city {
+  font-size: 22px;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+.app .fc-currently {
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-size: 10px;
+  letter-spacing: 1.6px;
+}
+.app .fc-top-row {
+  gap: 14px;
+  align-items: center;
+}
+.app .fc-now-temp {
+  font-size: 40px;
+  margin-top: 2px;
+  letter-spacing: -1px;
+}
+.app .fc-now-deg {
+  font-size: 18px;
+  margin-top: 4px;
+  margin-left: 1px;
+}
+.app .fc-now-badge {
+  width: 60px;
+  height: 60px;
+}
+.app .fc-now-badge .fc-now-icon {
+  font-size: 36px;
+}
+.app .fc-now-sky { gap: 4px; }
+.app .fc-now-sky .fc-now-cond {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+/* Inline stats strip below the temp/badge row. Replaces the old 3-line
+ *  stacked column. Dot separators between items keep the row readable
+ *  if it wraps on a narrow screen. */
+.app .fc-now-stats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 0;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+}
+.app .fc-now-stat {
+  font-size: 13px;
+  font-weight: 500;
+  color: #cbd5e1;
+}
+.app .fc-now-stat:not(:first-child)::before {
+  content: "·";
+  margin: 0 10px;
+  color: #64748b;
+  font-weight: 700;
+}

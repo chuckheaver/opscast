@@ -78,22 +78,10 @@ export default function ForecastView({
         <div className="fc-top-row">
           <div className="fc-top-left">
             {now && (
-              <>
-                <div className="fc-now-temp">
-                  {now.tempF}
-                  <span className="fc-now-deg">°F</span>
-                </div>
-                <div className="fc-now-stats">
-                  <div className="fc-now-stat">Feels Like: {now.feelsLike}°</div>
-                  {hi != null && lo != null && (
-                    <div className="fc-now-stat">Hi: {hi}° | Lo: {lo}°</div>
-                  )}
-                  <div className="fc-now-stat">
-                    Wind: {compass(now.windDir) && `${compass(now.windDir)} `}
-                    {now.windSpeed} mph{now.windIsGust ? "g" : ""}
-                  </div>
-                </div>
-              </>
+              <div className="fc-now-temp">
+                {now.tempF}
+                <span className="fc-now-deg">°F</span>
+              </div>
             )}
           </div>
           {now && (
@@ -105,6 +93,18 @@ export default function ForecastView({
             </div>
           )}
         </div>
+        {now && (
+          <div className="fc-now-stats">
+            <span className="fc-now-stat">Feels {now.feelsLike}°</span>
+            {hi != null && lo != null && (
+              <span className="fc-now-stat">Hi {hi}° / Lo {lo}°</span>
+            )}
+            <span className="fc-now-stat">
+              {compass(now.windDir) && `${compass(now.windDir)} `}
+              {now.windSpeed} mph{now.windIsGust ? "g" : ""}
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="fc-legend">
