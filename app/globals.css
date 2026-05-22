@@ -1703,3 +1703,220 @@ input[type=range]::-webkit-slider-thumb:hover {
   font-weight: 600;
   color: #065f46;
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+ *  Dark forecast theme — applied to .app (ur4cast home / forecast / settings)
+ *  Inspired by the Weather Channel hourly view: deep navy gradient base,
+ *  white type, slate cards, status colours that pop on dark. The /fog
+ *  experience keeps its own light theme (it lives inside .fog-app).
+ * ────────────────────────────────────────────────────────────────────────── */
+body {
+  background: #0a1929;
+}
+.app {
+  background:
+    radial-gradient(1200px 600px at 50% -100px, rgba(56, 189, 248, 0.18) 0%, transparent 60%),
+    linear-gradient(180deg, #0a1929 0%, #0e2438 45%, #0a2840 100%);
+  color: #e2e8f0;
+}
+
+/* Topbar — keep the gear-less variant (icon now lives in the page heading).
+ *  Dark slab, white brand, "4cast" stays in the yellow→slate gradient.   */
+.app .topbar {
+  background: linear-gradient(180deg, rgba(10, 25, 41, 0.85) 0%, rgba(14, 36, 56, 0.75) 100%);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  backdrop-filter: blur(8px);
+}
+.app .brand-name { color: #f8fafc; }
+.app .brand-tag  { color: #94a3b8; }
+.app .edit-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(148, 163, 184, 0.25);
+  color: #e2e8f0;
+}
+.app .edit-btn:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: #38bdf8;
+}
+
+/* Heading: bright white, em stays in its gradient italic. */
+.app .page-h { color: #f1f5f9; }
+
+/* Inline gear next to "Micro Life" — light icon on translucent disc. */
+.app .gear-btn,
+.app .gear-btn-inline {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(148, 163, 184, 0.3);
+  color: #e2e8f0;
+}
+.app .gear-btn:hover,
+.app .gear-btn-inline:hover {
+  background: rgba(56, 189, 248, 0.16);
+  border-color: #38bdf8;
+}
+
+/* Subhead + section labels. */
+.app .page-sub { color: #94a3b8; }
+.app .field-lbl { color: #e2e8f0; }
+.app .field-lbl::after { background: rgba(148, 163, 184, 0.2); }
+
+/* Six facet icons: just brighten the caption — emoji glyphs already render
+ *  in colour. Subtle white wash on hover. */
+.app .micro-icon-label { color: #cbd5e1; }
+.app .micro-icon-item:hover { background: rgba(255, 255, 255, 0.05); }
+
+/* Inputs / selectors / autocomplete: dark glass. */
+.app .zip-inp,
+.app .geo-btn,
+.app .sel-box {
+  background: rgba(15, 31, 50, 0.7);
+  border-color: rgba(148, 163, 184, 0.25);
+  color: #f1f5f9;
+  box-shadow: none;
+}
+.app .zip-inp::placeholder { color: #64748b; }
+.app .zip-inp:focus,
+.app .sel-box:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+.app .geo-btn { color: #cbd5e1; }
+.app .geo-btn:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: #38bdf8;
+}
+.app .sel-box:hover { border-color: rgba(148, 163, 184, 0.45); }
+.app .sel-box {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2394a3b8'/%3E%3C/svg%3E");
+}
+.app .autocomplete {
+  background: rgba(15, 31, 50, 0.96);
+  border-color: rgba(148, 163, 184, 0.25);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+}
+.app .autocomplete-item { border-bottom-color: rgba(148, 163, 184, 0.12); }
+.app .autocomplete-item:hover { background: rgba(56, 189, 248, 0.1); }
+.app .ac-name { color: #f1f5f9; }
+.app .ac-meta { color: #94a3b8; }
+
+/* Splash dot matches dark theme. */
+.app .splash-msg { color: #94a3b8; }
+
+/* ── Forecast hero card ────────────────────────────────────────────────── */
+.app .fc-top {
+  background: linear-gradient(135deg, rgba(15, 35, 56, 0.85) 0%, rgba(30, 64, 92, 0.7) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 16px;
+  padding: 22px 26px;
+  margin-bottom: 24px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+}
+.app .fc-city {
+  color: #f8fafc;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+.app .fc-meta { color: #94a3b8; }
+
+/* Forecast legend chips — keep status colours but on dark surface. */
+.app .fc-legend { color: #cbd5e1; }
+.app .fc-leg { color: #cbd5e1; }
+
+/* ── Day blocks ────────────────────────────────────────────────────────── */
+.app .day-block {
+  background: linear-gradient(180deg, rgba(15, 31, 50, 0.78) 0%, rgba(14, 28, 46, 0.7) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+}
+.app .day-hdr {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+.app .day-label {
+  color: #f8fafc;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+.app .day-date {
+  color: #94a3b8;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+/* "Hours on Alert" card on dark. */
+.app .timeline-label {
+  color: #cbd5e1;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.app .alert-list {
+  background: rgba(127, 29, 29, 0.18);
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(248, 113, 113, 0.08);
+}
+.app .alert-row { color: #fee2e2; }
+.app .alert-text { color: #fecaca; }
+.app .alert-metric {
+  color: #fca5a5;
+  font-weight: 800;
+}
+.app .alert-metric:hover { color: #fef2f2; }
+.app .alert-empty {
+  background: rgba(6, 78, 59, 0.22);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #a7f3d0;
+}
+
+/* Detail-grid toggle + grid surface. */
+.app .detail-toggle {
+  background: rgba(15, 31, 50, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 10px;
+  color: #e2e8f0;
+}
+.app .detail-toggle:hover {
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+.app .detail-toggle-lbl { color: #f1f5f9; }
+.app .detail-toggle-arr { color: #94a3b8; }
+
+.app .grid-wrap {
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+  background: rgba(8, 18, 30, 0.5);
+  border-radius: 0 0 12px 12px;
+}
+.app .wx-table th,
+.app .wx-table td { border-color: rgba(148, 163, 184, 0.1); }
+.app .row-lbl {
+  background: rgba(2, 8, 20, 0.65);
+  color: #cbd5e1;
+}
+.app .row-lbl.sep-lbl {
+  background: rgba(0, 0, 0, 0.55);
+  color: #64748b;
+}
+.app .hr-head {
+  background: rgba(2, 8, 20, 0.5);
+  color: #94a3b8;
+}
+/* Numeric cell backgrounds are set inline by cellStyle() (green/yellow/red/
+ *  blue/grey). Those tints read well on the dark surrounding chrome — no
+ *  override needed. Just bump the cond-cell base for past hours. */
+.app .cond-cell { background: rgba(15, 31, 50, 0.5); }
+.app .cond-lb { color: #cbd5e1; }
