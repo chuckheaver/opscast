@@ -1,15 +1,12 @@
-// One full day's content: header with status badge, then Cockpit,
-// the "Hours on Alert" summary (HourTimeline), and the
-// collapsible-but-can-be-opened-from-above DetailGrid. Past hours
-// (today only) are flagged with isPast so children can render them
-// as "-".
+// One full day's content: header, Cockpit, the "Hours on Alert"
+// summary (HourTimeline), and the collapsible-but-can-be-opened-from-
+// above DetailGrid. Past hours (today only) are flagged with isPast
+// so children can render them as "-".
 
 import { useState } from "react";
 import Cockpit from "./Cockpit";
 import HourTimeline from "./HourTimeline";
 import DetailGrid from "./DetailGrid";
-import { STATUS, hourWorstStatus } from "../lib/colors";
-import { generateActions } from "../lib/actions";
 import { dayLabel, fmtHrFull } from "../lib/formatting";
 
 // Today's local date string ("YYYY-MM-DD") and current hour.
@@ -41,28 +38,6 @@ export default function DayBlock({
     isPast: isToday && h.hour < currentHour,
   }));
 
-  const actions = generateActions(decorated, thresh);
-
-  // Day status from worst non-past hour (excludes Sky Cover via hourWorstStatus).
-  const dayWorst = decorated.reduce((worst, h) => {
-    if (h.isPast) return worst;
-    const hw = hourWorstStatus(h, thresh);
-    if (hw === "alert") return "alert";
-    if (hw === "caution" && worst !== "alert") return "caution";
-    return worst;
-  }, "clear");
-  const badge = STATUS[dayWorst];
-
-  const alertCount = actions.length;
-  const badgeText =
-    dayWorst === "alert"
-      ? alertCount > 0
-        ? `${alertCount} Alert${alertCount > 1 ? "s" : ""}`
-        : "Alert"
-      : dayWorst === "caution"
-      ? "Caution"
-      : "Ideal";
-
   return (
     <div className="day-block">
       <div className="day-hdr">
@@ -72,12 +47,6 @@ export default function DayBlock({
             {fmtHrFull(startH)} – {fmtHrFull(endH)}
           </div>
         </div>
-        <span
-          className="day-badge"
-          style={{ background: badge.bg, color: badge.text }}
-        >
-          {badgeText}
-        </span>
       </div>
 
       {decorated.length === 0 ? (
