@@ -1553,3 +1553,90 @@ input[type=range]::-webkit-slider-thumb:hover {
     max-height: 50vh;
   }
 }
+
+/* ── Forecast-first front page ──────────────────────────────────────────── */
+/* Gear button in the topbar that opens the SetupView (settings). Matches
+   the lighter topbar palette: round, subtle hover, focus ring. */
+.gear-btn {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: #1c1917;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+.gear-btn:hover {
+  border-color: #1c1917;
+  background: #faf6ec;
+  transform: rotate(20deg);
+}
+.gear-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+}
+
+/* Splash shown while the auto-launch forecast fetch is in flight. */
+.splash {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+.splash-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.splash-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #60a5fa 0%, #2563eb 60%, #1d4ed8 100%);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+  animation: splash-pulse 1.4s ease-in-out infinite;
+}
+.splash-msg {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #78716c;
+}
+@keyframes splash-pulse {
+  0%, 100% { transform: scale(1);   opacity: 0.85; }
+  50%      { transform: scale(1.35); opacity: 1; }
+}
+
+/* Polished forecast header. Big city name with the same gradient italic
+   used on the brand mark, hours/date as a small uppercase eyebrow. */
+.fc-top {
+  background: linear-gradient(180deg, #ffffff 0%, #faf6ec 100%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 22px;
+  box-shadow: 0 1px 2px rgba(28, 25, 23, 0.04);
+}
+.fc-city {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #1c1917;
+}
+.fc-meta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #78716c;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
