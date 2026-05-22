@@ -2229,3 +2229,92 @@ body {
   .fc-now-stat { font-size: 14px; }
   .fc-now-temp { font-size: 48px; }
 }
+
+/* ── Hourly Detail Grid polish — Weather-Channel-style clean look ──────────
+ *  Bigger numbers, cleaner row chrome, softer borders. Status pastels
+ *  stay as-is (they carry the green/yellow/red alert info on data cells). */
+
+/* Hour header row across the top of the grid: large, light, easy to scan. */
+.app .hr-head {
+  background: rgba(8, 18, 30, 0.6);
+  color: #e2e8f0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 10px 6px;
+  text-transform: uppercase;
+}
+
+/* Row labels — left column listing each metric. Slate band instead of
+ *  near-black, with brighter caption type. */
+.app .row-lbl {
+  background: rgba(15, 31, 50, 0.85);
+  color: #e2e8f0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  padding: 10px 14px;
+  text-transform: uppercase;
+}
+.app .row-lbl-corner {
+  background: rgba(8, 18, 30, 0.85);
+  color: #64748b;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+.app .row-lbl-adv {
+  background: rgba(8, 18, 30, 0.7);
+  color: #94a3b8;
+  font-size: 9px;
+}
+.app .row-lbl.sep-lbl {
+  background: rgba(0, 0, 0, 0.55);
+  color: #64748b;
+  font-size: 8.5px;
+  letter-spacing: 3.5px;
+  padding: 5px 14px;
+}
+
+/* Data cells: bigger primary value, dimmer sub-unit. */
+.app .dc {
+  padding: 10px 6px;
+}
+.app .dc-v {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.1px;
+}
+.app .dc-s {
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0.55;
+  letter-spacing: 0.3px;
+  margin-top: 2px;
+}
+
+/* Condition row icon + label spacing. */
+.app .cond-cell { padding: 10px 6px; }
+.app .cond-ic { font-size: 20px; }
+.app .cond-lb {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+/* Make borders almost invisible — let the colour blocks do the dividing. */
+.app .wx-table th,
+.app .wx-table td {
+  border-color: rgba(148, 163, 184, 0.08);
+}
+
+/* Slightly more breathing room around the whole grid table. */
+.app .grid-wrap {
+  background: rgba(8, 18, 30, 0.4);
+  padding: 4px;
+  border-radius: 12px;
+}
