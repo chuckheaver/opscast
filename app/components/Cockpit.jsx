@@ -52,17 +52,34 @@ export default function Cockpit({ hours, thresh }) {
   const maxPrecip = Math.max(...future.map(h => h.precipProb));
   // UV maximum from daylight hours only.
   const daylightHours = future.filter(h => h.isDaylight);
-  const maxUV = daylightHours.length
+  const maxUVRaw = daylightHours.length
     ? Math.max(...daylightHours.map(h => h.uvIndex))
     : null;
+  const maxUV = maxUVRaw != null ? Math.round(maxUVRaw) : null;
 
-  const kpiStatus = (key, val) =>
-    val != null ? STATUS[getStatus(key, val, thresh)] : { bg: "#EFEFEF", text: "#888", dot: "#CCC", label: "—" };
+  // Color the tile by the WORST status seen during the period — not just
+  // the peak/max value. This catches the two-sided case (e.g. Feels Like
+  // dipping below the ideal min even though the high stayed in range).
+  // UV is daylight-only; nighttime hours are skipped so the tile doesn't
+  // flash alert just because uvIndex is 0 at 6 AM.
+  const worstStatus = key => {
+    const pool = key === "uvIndex" ? daylightHours : future;
+    let worst = "clear";
+    for (const h of pool) {
+      const v = h[key];
+      if (v == null) continue;
+      const s = getStatus(key, v, thresh);
+      if (s === "alert") return "alert";
+      if (s === "caution" && worst !== "alert") worst = "caution";
+    }
+    return worst;
+  };
 
-  const fS = kpiStatus("feelsLike", maxFeels);
-  const wS = kpiStatus("windSpeed", maxWind);
-  const pS = kpiStatus("precipProb", maxPrecip);
-  const uS = kpiStatus("uvIndex", maxUV);
+  const placeholder = { bg: "#EFEFEF", text: "#888", dot: "#CCC", label: "—" };
+  const fS = STATUS[worstStatus("feelsLike")];
+  const wS = STATUS[worstStatus("windSpeed")];
+  const pS = STATUS[worstStatus("precipProb")];
+  const uS = maxUV != null ? STATUS[worstStatus("uvIndex")] : placeholder;
 
   return (
     <div className="cockpit">

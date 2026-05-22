@@ -35,12 +35,23 @@ const SKY_OUT_OF_RANGE = { bg: "#A0B8CC", text: "#2A3F52" }; // muted grey-blue
 //   < 1 mi  → alert  (Fog, red)
 //   < 7 mi  → caution (Low, yellow)
 //   ≥ 7 mi  → clear  (Mod/Clr, green)
+//
+// AQI uses fixed EPA-derived buckets (also not the user threshold):
+//   ≤ 50  → clear   (Good)
+//   ≤ 150 → caution (Mod)
+//   > 150 → alert   (Poor)
 export const getStatus = (key, val, thresh) => {
   if (key === "visibility") {
     if (val == null) return "clear";
     if (val < 1) return "alert";
     if (val < 7) return "caution";
     return "clear";
+  }
+  if (key === "aqi") {
+    if (val == null || val <= 0) return "clear";
+    if (val <= 50) return "clear";
+    if (val <= 150) return "caution";
+    return "alert";
   }
   const cfg = thresh[key];
   if (!cfg) return "clear";

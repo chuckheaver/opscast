@@ -5,13 +5,13 @@ import RadarPanel from "./RadarPanel";
 import DayBlock from "./DayBlock";
 
 // Legend swatches shown above the day blocks.
-// Three-tier model for most metrics, plus a Sky Cover exception.
+// Three-tier model used by all metrics. (Sky Cover swatches used to
+// appear here too but were dropped — the day blocks themselves carry
+// enough colour context.)
 const LEGEND = [
   ["#C8EAC8", "Ideal"],
   ["#FFF0B3", "Caution"],
   ["#FFBDBD", "Alert"],
-  ["#D6EEFF", "Ideal"],
-  ["#A0B8CC", "Alert"],
 ];
 
 // Locate the hour entry in today's hours array that best matches "right
@@ -70,12 +70,12 @@ export default function ForecastView({
   return (
     <div className="fc">
       <div className="fc-top">
+        <div className="fc-city">
+          {forecast.loc.name}
+          {forecast.loc.admin1 ? `, ${forecast.loc.admin1}` : ""}
+        </div>
         <div className="fc-top-row">
           <div className="fc-top-left">
-            <div className="fc-city">
-              {forecast.loc.name}
-              {forecast.loc.admin1 ? `, ${forecast.loc.admin1}` : ""}
-            </div>
             {now && (
               <>
                 <div className="fc-now-temp">

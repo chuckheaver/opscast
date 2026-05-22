@@ -18,11 +18,11 @@ export const metadata = {
   // Production canonical domain. Relative URLs in metadata (like
   // /og-image.png) resolve against this when rendered on any deploy.
   metadataBase: new URL("https://www.ur4cast.com"),
-  title: "Ur4cast — Business Weather Intelligence",
+  title: "Ur4cast — Weather Intelligence For You",
   description:
     "Weather forecasting built for outdoor business operations. Set your ideal conditions and get operational guidance hour by hour.",
   openGraph: {
-    title: "Ur4cast — Business Weather Intelligence",
+    title: "Ur4cast — Weather Intelligence For You",
     description:
       "Weather forecasting built for outdoor business operations. Set your ideal conditions and get operational guidance hour by hour.",
     type: "website",
@@ -34,13 +34,13 @@ export const metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Ur4cast — Business Weather Intelligence",
+        alt: "Ur4cast — Weather Intelligence For You",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ur4cast — Business Weather Intelligence",
+    title: "Ur4cast — Weather Intelligence For You",
     description:
       "Weather forecasting built for outdoor business operations. Set your ideal conditions and get operational guidance hour by hour.",
     images: ["/og-image.png"],

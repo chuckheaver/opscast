@@ -1583,12 +1583,12 @@ input[type=range]::-webkit-slider-thumb:hover {
    the page heading. Smaller, baseline-aligned, no rotate flourish so
    it doesn't compete with the typography. */
 .gear-btn-inline {
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
   margin-left: 8px;
   vertical-align: middle;
   position: relative;
-  top: -4px;
+  top: -2px;
 }
 .gear-btn-inline:hover {
   transform: rotate(20deg);
@@ -1666,6 +1666,12 @@ input[type=range]::-webkit-slider-thumb:hover {
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 10px;
+  cursor: pointer;
+}
+.alert-list:focus { outline: none; }
+.alert-list:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
 }
 .alert-row {
   font-family: 'DM Sans', sans-serif;
@@ -1681,14 +1687,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   background: none;
   border: none;
   padding: 0;
-  cursor: pointer;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-}
-.alert-metric:hover {
-  color: #DC2626;
-  text-decoration-thickness: 2px;
+  text-decoration: none;
 }
 .alert-text {
   color: #57534e;
@@ -1855,6 +1854,21 @@ body {
   margin-top: 2px;
 }
 
+/* Alert Summary (cockpit / 4-KPI grid) — match the rounded blue-bordered
+ *  look of the Hours on Alert card below it. The base .cockpit rule is a
+ *  flat grid with a hard divider; on dark we wrap it as a single card and
+ *  clip the inner KPI tiles to the rounded corners. */
+.app .day-block .cockpit {
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 4px;
+  box-shadow:
+    0 12px 26px rgba(2, 8, 20, 0.35),
+    0 2px 6px rgba(2, 8, 20, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
 /* "Hours on Alert" card on dark. */
 .app .day-block .timeline-label {
   color: #ffffff;
@@ -1890,12 +1904,14 @@ body {
 .app .alert-metric {
   color: #ffffff;
   font-weight: 800;
-  text-decoration-color: #38bdf8;
-  text-decoration-thickness: 2px;
+  text-decoration: none;
 }
-.app .alert-metric:hover {
-  color: #bae6fd;
-  text-decoration-color: #bae6fd;
+.app .day-block .alert-list:hover {
+  border-color: rgba(56, 189, 248, 0.7);
+  box-shadow:
+    0 14px 30px rgba(2, 8, 20, 0.4),
+    0 3px 8px rgba(2, 8, 20, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 .app .alert-empty {
   background:
@@ -2345,4 +2361,33 @@ body {
   background: rgba(8, 18, 30, 0.4);
   padding: 4px;
   border-radius: 12px;
+}
+
+/* Sticky left column ("METRIC / HOUR"): the row-label cells in the first
+ *  column stay anchored as the data cells scroll horizontally. Works on
+ *  both light and dark themes since the row-lbl rule already paints a
+ *  solid background. */
+.wx-table .row-lbl,
+.wx-table .row-lbl-corner {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+.wx-table thead .row-lbl-corner {
+  z-index: 3;
+}
+/* Subtle shadow on the right edge so scrolled data slides "under" the
+ *  sticky column instead of bleeding into it. */
+.app .wx-table .row-lbl,
+.app .wx-table .row-lbl-corner {
+  box-shadow: 4px 0 8px rgba(2, 8, 20, 0.25);
+}
+
+/* City name on the forecast hero: keep it on a single line, even if the
+ *  full "City, Region" overflows the card. Sits above the temp/badge row. */
+.fc-city {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 8px;
 }

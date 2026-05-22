@@ -118,7 +118,7 @@ export default function SetupView({
       </div>
       {showAdvanced && (
         <div className="adv-grid">
-          {ADVANCED.map(m => (
+          {ADVANCED.filter(m => !m.hiddenInSettings).map(m => (
             <AdvancedCard
               key={m.key}
               metric={m}

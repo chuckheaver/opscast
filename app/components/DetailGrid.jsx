@@ -8,17 +8,17 @@
 //   - Visibility row                               → category label + value
 
 import { cellStyle, hourWorstStatus, STATUS } from "../lib/colors";
-import { fmtHr, fmtV, visibilityCategory } from "../lib/formatting";
+import { fmtHr, fmtV, visibilityCategory, aqiCategory } from "../lib/formatting";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
 
 const PAST_BG = "#EFEFEF";
 const PAST_TEXT = "#888";
 
 // Sub-text shown below the main value in certain cells (units / context).
+// Note: precipProb and humidity used to live here too, but fmtV already
+// renders them with a trailing "%" — no second-line unit needed.
 const SUB_BY_KEY = {
   precipAccum: "in/hr",
-  humidity: "%",
-  precipProb: "%",
 };
 
 // Renders a single cell for a single (metric, hour) pair.
@@ -48,19 +48,19 @@ function renderCell(key, h, thresh) {
   const c = cellStyle(key, h[key] ?? 0, thresh);
 
   if (key === "windSpeed") {
+    const speedRound = Math.round(h.windSpeed);
+    const sustRound = Math.round(h.windSustained ?? h.windSpeed);
+    const isGust = h.windIsGust && h.windSustained < h.windSpeed;
     return (
       <td key={key + h.hour} className="dc" style={{ background: c.bg }}>
         <span className="dc-v" style={{ color: c.text }}>
-          {h.windSpeed}
-          {h.windIsGust && (
-            <span style={{ fontSize: 9, marginLeft: 1 }}>g</span>
-          )}
+          {speedRound} {isGust ? "gst" : "mph"}
         </span>
-        <span className="dc-s" style={{ color: c.text }}>
-          {h.windIsGust && h.windSustained < h.windSpeed
-            ? `sust ${h.windSustained}`
-            : "mph"}
-        </span>
+        {isGust && (
+          <span className="dc-s" style={{ color: c.text }}>
+            {sustRound} sus
+          </span>
+        )}
       </td>
     );
   }
@@ -74,6 +74,20 @@ function renderCell(key, h, thresh) {
         </span>
         <span className="dc-s" style={{ color: c.text }}>
           {fmtV(key, h.visibility)} mi
+        </span>
+      </td>
+    );
+  }
+
+  if (key === "aqi") {
+    const cat = aqiCategory(h.aqi);
+    return (
+      <td key={key + h.hour} className="dc" style={{ background: c.bg }}>
+        <span className="dc-v" style={{ color: c.text }}>
+          {cat || "—"}
+        </span>
+        <span className="dc-s" style={{ color: c.text }}>
+          {fmtV(key, h.aqi)}
         </span>
       </td>
     );
@@ -98,7 +112,7 @@ export default function DetailGrid({ hours, thresh, open, setOpen }) {
   return (
     <>
       <div className="detail-toggle" onClick={() => setOpen(v => !v)}>
-        <span className="detail-toggle-lbl">📊 Hourly Detail Grid</span>
+        <span className="detail-toggle-lbl">📊 Hourly Detail</span>
         <span className="detail-toggle-arr">
           {open ? "▲ Collapse" : "▼ Expand"}
         </span>
@@ -150,20 +164,9 @@ export default function DetailGrid({ hours, thresh, open, setOpen }) {
                   );
                 })}
               </tr>
-              {PRIMARY.map(m => (
+              {[...PRIMARY, ...ADVANCED].map(m => (
                 <tr key={m.key}>
                   <td className="row-lbl">{m.label}</td>
-                  {hours.map(h => renderCell(m.key, h, thresh))}
-                </tr>
-              ))}
-              <tr>
-                <td className="row-lbl sep-lbl" colSpan={hours.length + 1}>
-                  ADVANCED METRICS
-                </td>
-              </tr>
-              {ADVANCED.map(m => (
-                <tr key={m.key}>
-                  <td className="row-lbl row-lbl-adv">{m.label}</td>
                   {hours.map(h => renderCell(m.key, h, thresh))}
                 </tr>
               ))}

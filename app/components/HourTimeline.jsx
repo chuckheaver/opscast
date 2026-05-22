@@ -1,7 +1,7 @@
 // "Hours on Alert" summary: for each metric that has at least one
 // alert-status hour in the day's window, render a line like
-//   "Wind/Gusts is on Alert at: 2 PM, 3 PM, 5 PM"
-// where the metric name is clickable and opens the Hourly Detail Grid
+//   "Wind/Gusts: 2 PM, 3 PM, 5 PM"
+// The entire box is clickable and opens the Hourly Detail Grid
 // below. Caution and ideal hours don't appear here — those colours
 // already show up in the detail grid itself. If nothing is red in the
 // whole period, we show "No alerts during this period."
@@ -29,25 +29,31 @@ export default function HourTimeline({ hours, thresh, onOpenDetail }) {
     })
     .filter(row => row.alertHours.length > 0);
 
+  const handleKey = e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onOpenDetail();
+    }
+  };
+
   return (
     <div className="timeline-wrap">
       <div className="timeline-label">Hours on Alert</div>
       {rows.length === 0 ? (
         <div className="alert-empty">No alerts during this period.</div>
       ) : (
-        <ul className="alert-list">
+        <ul
+          className="alert-list"
+          role="button"
+          tabIndex={0}
+          onClick={onOpenDetail}
+          onKeyDown={handleKey}
+        >
           {rows.map(({ metric, alertHours }) => (
             <li key={metric.key} className="alert-row">
-              <button
-                type="button"
-                className="alert-metric"
-                onClick={onOpenDetail}
-              >
-                {metric.label}
-              </button>
+              <span className="alert-metric">{metric.label}:</span>
               <span className="alert-text">
-                {" "}is on Alert at:{" "}
-                {alertHours.map(h => fmtHr(h.hour)).join(", ")}
+                {" "}{alertHours.map(h => fmtHr(h.hour)).join(", ")}
               </span>
             </li>
           ))}

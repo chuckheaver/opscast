@@ -68,6 +68,18 @@ export const visibilityCategory = mi => {
   return "Mod/Clr";
 };
 
+// AQI category labels — same pattern as visibilityCategory. Cell colour
+// is driven by getStatus("aqi", val) in colors.js.
+//   ≤ 50  → "Good" (green)
+//   ≤ 150 → "Mod"  (yellow)
+//   > 150 → "Poor" (red)
+export const aqiCategory = val => {
+  if (val == null || val <= 0) return "";
+  if (val <= 50) return "Good";
+  if (val <= 150) return "Mod";
+  return "Poor";
+};
+
 // Compact value display used in grid cells and KPI tiles (no unit suffix
 // unless intrinsic to the value, e.g. precip accumulation includes inches).
 export const fmtV = (key, val) => {
@@ -80,7 +92,7 @@ export const fmtV = (key, val) => {
   if (["precipProb", "cloudCover", "humidity"].includes(key)) {
     return `${Math.round(val)}%`;
   }
-  if (key === "uvIndex") return `${val}`;
+  if (key === "uvIndex") return `${Math.round(val)}`;
   if (key === "visibility") return `${Math.round(val)}`;
   if (key === "aqi") return val > 0 ? `${Math.round(val)}` : "—";
   return `${val}`;

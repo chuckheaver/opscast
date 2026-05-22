@@ -28,7 +28,11 @@ export const ADVANCED = [
   // Visibility status is driven by fixed buckets (see getStatus in colors.js),
   // not by the slider range. Slider still shown for future tuning.
   { key: "visibility",  label: "Visibility",        unit: "mi",  sMin: 0.1, sMax: 20,  step: 0.1,  dMin: 7,  dMax: 20,   buf: 0.5 },
-  { key: "aqi",         label: "Air Quality (AQI)", unit: "",    sMin: 0,   sMax: 300, step: 10,   dMin: 0,  dMax: 100,  buf: 50,  binaryStatus: true },
+  // AQI status is driven by fixed EPA-derived buckets in getStatus
+  // (≤50 Good, ≤150 Mod, >150 Poor) — the slider range is unused for
+  // colour and would be misleading in settings, so hide its card.
+  // (Keeps the default threshold + grid row + alert counting intact.)
+  { key: "aqi",         label: "Air Quality (AQI)", unit: "",    sMin: 0,   sMax: 300, step: 10,   dMin: 0,  dMax: 100,  buf: 50,  binaryStatus: true, hiddenInSettings: true },
 ];
 
 // Convenience: all metrics in one array (primary first, then advanced).
