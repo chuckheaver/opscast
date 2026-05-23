@@ -8,23 +8,69 @@
 
 import { cToF, kmToMi, calcWC, wxIcon } from "./calculations";
 
-// Resolve a free-text query (ZIP, city, place name) to a location object
-// with latitude/longitude/timezone/etc. Throws on no match.
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+
+// Turn a Mapbox geocoding feature into the location shape the weather
+// flow needs. Mapbox doesn't return a timezone, so we pass "auto" and
+// let the Open-Meteo forecast endpoint infer it from the coordinates.
+// `admin1` carries the human context (city, state) shown under the name.
+const fromMapbox = f => ({
+  name: f.text,
+  place_name: f.place_name,
+  admin1: f.place_name
+    .split(",")
+    .slice(1)
+    .join(",")
+    .replace(/,\s*United States$/i, "")
+    .trim(),
+  country: "",
+  latitude: f.center[1],
+  longitude: f.center[0],
+  timezone: "auto",
+});
+
+// Resolve a free-text query (street address, ZIP, city, POI) to a
+// single location object. Prefers Mapbox (handles street addresses);
+// falls back to Open-Meteo (city/ZIP only) when no Mapbox token.
 export const geoCode = async q => {
+  if (MAPBOX_TOKEN) {
+    try {
+      const url =
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json` +
+        `?access_token=${MAPBOX_TOKEN}&country=us&types=address,postcode,place,locality,neighborhood,poi&limit=1`;
+      const r = await fetch(url);
+      if (r.ok) {
+        const d = await r.json();
+        if (d.features?.length) return fromMapbox(d.features[0]);
+      }
+    } catch {}
+  }
   const r = await fetch(
     `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=1&language=en&format=json`
   );
   const d = await r.json();
   if (!d.results?.length) {
-    throw new Error(`"${q}" not found. Try a city name or ZIP.`);
+    throw new Error(`"${q}" not found. Try an address, city, or ZIP.`);
   }
   return d.results[0];
 };
 
-// Autocomplete: returns up to 5 location suggestions for a partial query.
-// Used by the live search-as-you-type dropdown on SetupView.
+// Autocomplete: up to 5 suggestions for a partial query. Mapbox first
+// (street-address aware), Open-Meteo as a graceful fallback.
 export const geoSuggest = async q => {
   if (!q || q.trim().length < 2) return [];
+  if (MAPBOX_TOKEN) {
+    try {
+      const url =
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json` +
+        `?access_token=${MAPBOX_TOKEN}&autocomplete=true&country=us&types=address,postcode,place,locality,neighborhood,poi&limit=5`;
+      const r = await fetch(url);
+      if (r.ok) {
+        const d = await r.json();
+        if (d.features?.length) return d.features.map(fromMapbox);
+      }
+    } catch {}
+  }
   try {
     const r = await fetch(
       `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=5&language=en&format=json`
