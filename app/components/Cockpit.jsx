@@ -14,9 +14,18 @@ const uvDescription = uv => {
   return "Extreme";
 };
 
-export default function Cockpit({ hours, thresh }) {
+export default function Cockpit({ hours, thresh, onOpenDetail }) {
   // Future-only view of the day.
   const future = hours.filter(h => !h.isPast);
+
+  // Clicking/Entering the KPI strip opens the Hourly Detail grid below,
+  // matching the "Hours on Alert" card's behaviour.
+  const handleKey = e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onOpenDetail?.();
+    }
+  };
 
   // If the entire window has already passed, show a neutral placeholder.
   if (!future.length) {
@@ -82,7 +91,13 @@ export default function Cockpit({ hours, thresh }) {
   const uS = maxUV != null ? STATUS[worstStatus("uvIndex")] : placeholder;
 
   return (
-    <div className="cockpit">
+    <div
+      className="cockpit"
+      role="button"
+      tabIndex={0}
+      onClick={onOpenDetail}
+      onKeyDown={handleKey}
+    >
       <div className="kpi" style={{ background: fS.bg }}>
         <div className="kpi-label" style={{ color: fS.text }}>
           Peak Feels Like

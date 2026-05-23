@@ -770,6 +770,11 @@ input[type=range]::-webkit-slider-thumb:hover {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border-bottom: 2px solid #e0dbd4;
+  cursor: pointer;
+}
+.cockpit:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.35);
 }
 .kpi {
   padding: 16px 14px;

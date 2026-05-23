@@ -53,7 +53,11 @@ export default function DayBlock({
         <div className="no-hrs">No operating hours for this day.</div>
       ) : (
         <>
-          <Cockpit hours={decorated} thresh={thresh} />
+          <Cockpit
+            hours={decorated}
+            thresh={thresh}
+            onOpenDetail={() => setDetailOpen(true)}
+          />
           <HourTimeline
             hours={decorated}
             thresh={thresh}
