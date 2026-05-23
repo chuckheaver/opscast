@@ -7,6 +7,7 @@
 //   - Wind row with windIsGust                     → small "g" after mph
 //   - Visibility row                               → category label + value
 
+import { useRef, useEffect } from "react";
 import { cellStyle, hourWorstStatus, STATUS } from "../lib/colors";
 import { fmtHr, fmtV, visibilityCategory, aqiCategory } from "../lib/formatting";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
@@ -109,6 +110,28 @@ function renderCell(key, h, thresh) {
 }
 
 export default function DetailGrid({ hours, thresh, open, setOpen }) {
+  const gridRef = useRef(null);
+  const liveColRef = useRef(null);
+  // First non-past column = the current hour on today's grid. Past hours
+  // (today only) carry isPast; future days have none, so this is 0 there.
+  const firstLiveIdx = hours.findIndex(h => !h.isPast);
+
+  // When the grid opens on the current day, horizontally scroll so the
+  // current hour sits right after the sticky label column — the user
+  // shouldn't have to scroll past the blank historical columns.
+  useEffect(() => {
+    if (!open || firstLiveIdx <= 0) return;
+    const id = requestAnimationFrame(() => {
+      const grid = gridRef.current;
+      const cell = liveColRef.current;
+      if (!grid || !cell) return;
+      const corner = grid.querySelector(".row-lbl-corner");
+      const labelW = corner ? corner.offsetWidth : 0;
+      grid.scrollLeft = Math.max(0, cell.offsetLeft - labelW);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [open, firstLiveIdx]);
+
   return (
     <>
       <div className="detail-toggle" onClick={() => setOpen(v => !v)}>
@@ -118,13 +141,17 @@ export default function DetailGrid({ hours, thresh, open, setOpen }) {
         </span>
       </div>
       {open && (
-        <div className="grid-wrap">
+        <div className="grid-wrap" ref={gridRef}>
           <table className="wx-table">
             <thead>
               <tr>
                 <th className="row-lbl row-lbl-corner">METRIC / HOUR</th>
-                {hours.map(h => (
-                  <th key={h.hour} className="hr-head">
+                {hours.map((h, i) => (
+                  <th
+                    key={h.hour}
+                    className="hr-head"
+                    ref={i === firstLiveIdx ? liveColRef : undefined}
+                  >
                     {fmtHr(h.hour)}
                   </th>
                 ))}
