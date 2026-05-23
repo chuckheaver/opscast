@@ -10,12 +10,15 @@ import { cToF, kmToMi, calcWC, wxIcon } from "./calculations";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-// Turn a Mapbox geocoding feature into the location shape the weather
-// flow needs. Mapbox doesn't return a timezone, so we pass "auto" and
-// let the Open-Meteo forecast endpoint infer it from the coordinates.
-// `admin1` carries the human context (city, state) shown under the name.
+// Turn a Mapbox geocoding feature into a location object usable by
+// every page. Carries both the main-page shape (name/latitude/
+// longitude/timezone) and the /fog shape (id/text/center) so a single
+// geocoder can drive both. Mapbox has no timezone → "auto" lets the
+// Open-Meteo forecast endpoint infer it from the coordinates.
 const fromMapbox = f => ({
+  id: f.id,
   name: f.text,
+  text: f.text,
   place_name: f.place_name,
   admin1: f.place_name
     .split(",")
@@ -24,6 +27,7 @@ const fromMapbox = f => ({
     .replace(/,\s*United States$/i, "")
     .trim(),
   country: "",
+  center: f.center, // [lng, lat]
   latitude: f.center[1],
   longitude: f.center[0],
   timezone: "auto",

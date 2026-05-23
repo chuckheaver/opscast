@@ -1,39 +1,12 @@
-// Mapbox forward geocoding, scoped to the Bay Area (matches the contour
-// data extent: Pt Reyes → San Jose, Pacific coast → East Bay hills).
-// Returns up to 5 suggestions as { id, text, place_name, center: [lng, lat] }.
-//
-// `proximity` keeps SF results ranked first when the query is ambiguous;
-// `bbox` keeps the suggestion list inside the Bay Area; `country=us`
-// trims noise. Token is the public NEXT_PUBLIC_MAPBOX_TOKEN.
+// Address search for the fog map now shares ONE geocoder with the rest
+// of the app — the Mapbox-backed geoSuggest in app/lib/weather-api.js.
+// Its results carry both shapes (id/text/center for the map here, and
+// name/latitude/longitude/timezone for the forecast pages), so a single
+// implementation drives every location field. The fog-specific helpers
+// below (elevation + reverse geocode) still live here.
+export { geoSuggest as geocodeSuggest } from "../../lib/weather-api";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-
-// Bay Area bbox (west, south, east, north) — covers Marin through San Jose,
-// matching the clipped USGS contour coverage on the map.
-const BAY_BBOX = "-123.00,37.20,-121.65,38.20";
-const SF_PROXIMITY = "-122.447,37.7649";
-
-export async function geocodeSuggest(q) {
-  if (!TOKEN) throw new Error("NEXT_PUBLIC_MAPBOX_TOKEN not configured");
-  const url =
-    `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json` +
-    `?access_token=${TOKEN}` +
-    `&autocomplete=true` +
-    `&country=us` +
-    `&types=address,poi,place` +
-    `&bbox=${BAY_BBOX}` +
-    `&proximity=${SF_PROXIMITY}` +
-    `&limit=5`;
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(`Geocoder error (${r.status})`);
-  const d = await r.json();
-  return (d.features || []).map(f => ({
-    id: f.id,
-    text: f.text,
-    place_name: f.place_name,
-    center: f.center, // [lng, lat]
-  }));
-}
 
 // Query the Mapbox Terrain v2 vector tileset (same source as the contour
 // lines on the map) for the elevation at a [lng, lat] point. Returns the
