@@ -146,7 +146,8 @@ export default function Page() {
         setErr("Location access denied. Type a city or ZIP to continue.");
         setGeoLoad(false);
         if (view === "loading") setView("settings");
-      }
+      },
+      { enableHighAccuracy: false, timeout: 9000, maximumAge: 60000 }
     );
   };
 
@@ -173,8 +174,10 @@ export default function Page() {
 
   // ── Auto-launch on mount ─────────────────────────────────────────────
   // Try the stored location first (instant — no permission prompt). If
-  // we have one, fetch the forecast immediately. Otherwise fall back to
-  // browser geolocation, which then chains into a fetch.
+  // we have one, fetch the forecast immediately. Otherwise drop straight
+  // to the entry view so the user can type / tap 📍 right away, and
+  // attempt geolocation in the background (browsers often block the
+  // silent prompt, so we never block the UI waiting on it).
   useEffect(() => {
     if (!hydrated) return;
     if (autoFetchedRef.current) return;
@@ -202,22 +205,17 @@ export default function Page() {
       return;
     }
 
-    // No stored location — try geolocation and chain into a fetch.
+    // No stored location — show the entry view immediately so there's
+    // always a usable input, then try geolocation in the background.
+    setView("settings");
     if (autoGeoTriedRef.current) return;
     autoGeoTriedRef.current = true;
-    if (typeof navigator === "undefined" || !navigator.geolocation) {
-      setView("settings");
-      return;
-    }
-    if (navigator.permissions) {
+    if (typeof navigator === "undefined" || !navigator.geolocation) return;
+    if (navigator.permissions?.query) {
       navigator.permissions
         .query({ name: "geolocation" })
         .then(result => {
-          if (result.state === "denied") {
-            setView("settings");
-          } else {
-            useGeo(true);
-          }
+          if (result.state !== "denied") useGeo(true);
         })
         .catch(() => useGeo(true));
     } else {
