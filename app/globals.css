@@ -87,6 +87,14 @@ body {
   margin: 0 auto;
   padding: 40px 24px 80px;
 }
+/* Header (heading + icons + Location input) must stack above the
+ *  forecast hero below it — the hero's backdrop-filter creates a
+ *  stacking context that would otherwise paint over the location
+ *  autocomplete dropdown as it opens downward. */
+.ml-header {
+  position: relative;
+  z-index: 20;
+}
 .page-h {
   font-size: 36px;
   font-weight: 800;
@@ -232,7 +240,7 @@ body {
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 8px;
-  z-index: 70;
+  z-index: 100;
   max-height: 280px;
   overflow-y: auto;
   box-shadow: 0 8px 24px rgba(28, 25, 23, 0.08);
