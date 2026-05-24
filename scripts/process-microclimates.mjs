@@ -26,13 +26,18 @@ const TMP_DIR = join(ROOT, "data", "tmp");
 const OUT_PATH = join(ROOT, "public", "data", "sf-microclimates.geojson");
 
 // ── Tunable classification thresholds ──────────────────────────────────────
-const DOWNSAMPLE = 5;          // DEM cells per analysis block (≈10 m → ≈50 m)
-const TPI_RADIUS = 4;          // neighbourhood radius (blocks) for valley test
-// sun-pocket: south-ish facing AND meaningfully sloped
-const SUN_ASPECT = [112.5, 213.75]; // ESE → SSW (compass degrees)
-const SUN_MIN_SLOPE = 6;       // degrees
-// persistent-fog: high AND west/ocean-facing
-const FOG_ASPECT = [213.75, 337.5]; // SSW → NNW
+const DOWNSAMPLE = 2;          // DEM cells per analysis block (≈10 m → ≈20 m)
+const TPI_RADIUS = 7;          // neighbourhood radius (blocks) for valley test
+// sun-pocket: a 20–30° incline facing the sun (SE → S → SW). Slope is the
+// "estimated incline degrees" the user described — computed straight from
+// the elevation gradient (rise/run), which is what topo-line spacing encodes.
+const SUN_ASPECT = [112.5, 247.5]; // SE → SW (compass degrees)
+const SUN_SLOPE = [20, 30];        // degrees (per spec)
+// cool-shade: north-facing inclines — far less direct sun, so cooler.
+const COOL_MIN_SLOPE = 15;     // degrees (a real incline, not flat ground)
+// (north aspect handled in code: ≥ 292.5° or ≤ 67.5°, i.e. NW → N → NE)
+// persistent-fog: high AND west-facing (sits between sun & cool aspects).
+const FOG_ASPECT = [247.5, 300]; // W → WNW
 const FOG_MIN_ELEV = 80;       // metres
 const FOG_MIN_SLOPE = 4;       // degrees (exclude flat hilltops)
 // wind-corridor: notable valley/gap, not a cliff
@@ -40,7 +45,7 @@ const WIND_MAX_TPI = -5;       // metres below local mean
 const WIND_MAX_SLOPE = 10;     // degrees
 const MIN_NEIGHBORS = 2;       // de-speckle: drop lone classified cells
 
-const ZONES = { sun: 1, wind: 2, fog: 3 };
+const ZONES = { sun: 1, cool: 2, wind: 3, fog: 4 };
 
 function findDem() {
   if (!existsSync(RAW_DIR)) return null;
@@ -142,12 +147,15 @@ async function main() {
       }
       const tpi = e - sum / cnt;
 
-      // Classify (priority: fog > sun > wind) ─────────────────────────────
+      // Classify (priority: sun > cool > fog > wind) ──────────────────────
       const inAsp = (lo, hi) => asp >= lo && asp <= hi;
-      if (e >= FOG_MIN_ELEV && slope >= FOG_MIN_SLOPE && inAsp(...FOG_ASPECT)) {
-        zone[y * cw + x] = ZONES.fog;
-      } else if (slope >= SUN_MIN_SLOPE && inAsp(...SUN_ASPECT)) {
+      const northFacing = asp >= 292.5 || asp <= 67.5; // NW → N → NE
+      if (slope >= SUN_SLOPE[0] && slope <= SUN_SLOPE[1] && inAsp(...SUN_ASPECT)) {
         zone[y * cw + x] = ZONES.sun;
+      } else if (slope >= COOL_MIN_SLOPE && northFacing) {
+        zone[y * cw + x] = ZONES.cool;
+      } else if (e >= FOG_MIN_ELEV && slope >= FOG_MIN_SLOPE && inAsp(...FOG_ASPECT)) {
+        zone[y * cw + x] = ZONES.fog;
       } else if (tpi <= WIND_MAX_TPI && slope <= WIND_MAX_SLOPE) {
         zone[y * cw + x] = ZONES.wind;
       }
@@ -176,8 +184,8 @@ async function main() {
   const resX = (east - west) / W, resY = (north - south) / H;
   const blkX = F * resX, blkY = F * resY;
   const features = [];
-  const counts = { sun: 0, wind: 0, fog: 0 };
-  const NAME = { 1: "sun", 2: "wind", 3: "fog" };
+  const counts = { sun: 0, cool: 0, wind: 0, fog: 0 };
+  const NAME = { 1: "sun", 2: "cool", 3: "wind", 4: "fog" };
   for (let y = 0; y < ch; y++) {
     for (let x = 0; x < cw; x++) {
       const zv = cleaned[y * cw + x];
@@ -223,7 +231,8 @@ async function main() {
     source: "data/raw USGS 10 m DEM",
     builtAt: new Date().toISOString(),
     zones: {
-      sun: "South-facing slopes — warmer, sunnier, sheltered",
+      sun: "20–30° SE/S/SW-facing inclines — warmer, sunnier sun pockets",
+      cool: "North-facing inclines — far less direct sun, cooler & shaded",
       wind: "Valley floors / gaps that channel wind",
       fog: "High west/ocean-facing ridges where fog persists",
     },

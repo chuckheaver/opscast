@@ -7,9 +7,10 @@ import { useEffect, useRef, useState } from "react";
 import { geocodeSuggest } from "../fog/lib/geocode";
 
 const ZONES = [
-  ["☀️", "#f59e0b", "Sun Pockets", "South-facing slopes — warmer, sunnier, sheltered from wind."],
-  ["🌬️", "#22d3ee", "Wind Corridors", "Valley floors & gaps that funnel and accelerate wind."],
-  ["🌫️", "#818cf8", "Persistent Fog", "High west/ocean-facing ridges where the fog bank settles in."],
+  ["☀️", "#f59e0b", "Sun Pockets", "20–30° SE/S/SW-facing inclines — the warmest, sunniest slopes."],
+  ["❄️", "#38bdf8", "Cool / Shade", "North-facing inclines — far less direct sun, so cooler."],
+  ["🌬️", "#2dd4bf", "Wind Corridors", "Valley floors & gaps that funnel and accelerate wind."],
+  ["🌫️", "#a78bfa", "Persistent Fog", "High west/ocean-facing ridges where the fog bank settles in."],
 ];
 
 function ToggleSwitch({ checked, onChange, label, help }) {
@@ -33,6 +34,7 @@ export default function MicroSidebar({
   dataErr,
   ready,
   showSun, onToggleSun,
+  showCool, onToggleCool,
   showWind, onToggleWind,
   showFog, onToggleFog,
   showContours, onToggleContours,
@@ -142,7 +144,8 @@ export default function MicroSidebar({
         </div>
       </div>
 
-      <ToggleSwitch checked={showSun} onChange={onToggleSun} label="Sun pockets" help="South-facing warm slopes." />
+      <ToggleSwitch checked={showSun} onChange={onToggleSun} label="Sun pockets" help="20–30° south-facing warm slopes." />
+      <ToggleSwitch checked={showCool} onChange={onToggleCool} label="Cool / shade" help="North-facing cooler slopes." />
       <ToggleSwitch checked={showWind} onChange={onToggleWind} label="Wind corridors" help="Wind-channeling valleys." />
       <ToggleSwitch checked={showFog} onChange={onToggleFog} label="Persistent fog" help="High west-facing fog ridges." />
       <ToggleSwitch checked={showContours} onChange={onToggleContours} label="Elevation contours" help="Topographic relief lines (m)." />

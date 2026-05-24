@@ -23,6 +23,7 @@ export default function MicroApp() {
   // Layer toggles — all three sub-zones on by default; neighborhood
   // outlines on as the anchor.
   const [showSun, setShowSun] = useState(true);
+  const [showCool, setShowCool] = useState(true);
   const [showWind, setShowWind] = useState(true);
   const [showFog, setShowFog] = useState(true);
   const [showContours, setShowContours] = useState(false);
@@ -97,6 +98,7 @@ export default function MicroApp() {
         dataErr={dataErr}
         ready={!!neighborhoods}
         showSun={showSun} onToggleSun={setShowSun}
+        showCool={showCool} onToggleCool={setShowCool}
         showWind={showWind} onToggleWind={setShowWind}
         showFog={showFog} onToggleFog={setShowFog}
         showContours={showContours} onToggleContours={setShowContours}
@@ -109,6 +111,7 @@ export default function MicroApp() {
         neighborhoods={neighborhoods}
         zones={zones}
         showSun={showSun}
+        showCool={showCool}
         showWind={showWind}
         showFog={showFog}
         showContours={showContours}

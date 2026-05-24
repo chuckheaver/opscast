@@ -19,15 +19,17 @@ const SF_BOUNDS = [
 ];
 
 const ZONE_COLOR = {
-  sun: "#f59e0b",  // amber — warm south-facing slopes
-  wind: "#22d3ee", // cyan — wind-channeling valleys
-  fog: "#818cf8",  // indigo — persistent-fog ridges
+  sun: "#f59e0b",  // amber — warm 20–30° south-facing sun pockets
+  cool: "#38bdf8", // sky blue — cooler north-facing slopes
+  wind: "#2dd4bf", // teal — wind-channeling valleys
+  fog: "#a78bfa",  // violet — persistent-fog ridges
 };
 
 export default function MicroMap({
   neighborhoods,
   zones,
   showSun,
+  showCool,
   showWind,
   showFog,
   showContours,
@@ -41,7 +43,7 @@ export default function MicroMap({
 
   // Latest data + toggle state, readable from the stable callbacks below.
   const dataRef = useRef({ neighborhoods, zones });
-  const visRef = useRef({ showSun, showWind, showFog, showContours, showNeighborhoods });
+  const visRef = useRef({ showSun, showCool, showWind, showFog, showContours, showNeighborhoods });
 
   const applyVisibility = useCallback(() => {
     const map = mapRef.current;
@@ -51,6 +53,7 @@ export default function MicroMap({
       if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", on ? "visible" : "none");
     };
     set("micro-sun-fill", v.showSun);   set("micro-sun-line", v.showSun);
+    set("micro-cool-fill", v.showCool); set("micro-cool-line", v.showCool);
     set("micro-wind-fill", v.showWind); set("micro-wind-line", v.showWind);
     set("micro-fog-fill", v.showFog);   set("micro-fog-line", v.showFog);
     set("micro-contour-lines", v.showContours);
@@ -66,7 +69,7 @@ export default function MicroMap({
 
     if (zn && !map.getSource("micro-zones")) {
       map.addSource("micro-zones", { type: "geojson", data: zn });
-      ["sun", "wind", "fog"].forEach(zone => {
+      ["sun", "cool", "wind", "fog"].forEach(zone => {
         map.addLayer({
           id: `micro-${zone}-fill`,
           type: "fill",
@@ -192,9 +195,9 @@ export default function MicroMap({
 
   // Toggle changes → refresh refs + apply.
   useEffect(() => {
-    visRef.current = { showSun, showWind, showFog, showContours, showNeighborhoods };
+    visRef.current = { showSun, showCool, showWind, showFog, showContours, showNeighborhoods };
     applyVisibility();
-  }, [showSun, showWind, showFog, showContours, showNeighborhoods, applyVisibility]);
+  }, [showSun, showCool, showWind, showFog, showContours, showNeighborhoods, applyVisibility]);
 
   // Picked address → drop a marker, keep the city framed.
   useEffect(() => {
