@@ -58,6 +58,7 @@ export default function MicroMap({
     set("micro-fog-fill", v.showFog);   set("micro-fog-line", v.showFog);
     set("micro-contour-lines", v.showContours);
     set("micro-contour-labels", v.showContours);
+    set("micro-contour-peaks", v.showContours);
     set("micro-neigh-outline", v.showNeighborhoods);
     set("micro-neigh-labels", v.showNeighborhoods);
   }, []);
@@ -87,50 +88,74 @@ export default function MicroMap({
       });
     }
 
-    // Elevation contour lines from Mapbox Terrain v2 (vector tiles) — sit
-    // above the zone fills as a relief reference, below the neighborhoods.
-    if (!map.getSource("micro-terrain")) {
-      map.addSource("micro-terrain", { type: "vector", url: "mapbox://mapbox.mapbox-terrain-v2" });
+    // Elevation contours generated from the DEM (50 ft interval) + hill
+    // peak labels. Sit above the zone fills as a relief reference, below
+    // the neighborhood outlines/labels.
+    if (!map.getSource("micro-contours")) {
+      map.addSource("micro-contours", { type: "geojson", data: "/data/sf-contours.geojson" });
+      // Topo-brown lines, darkening with elevation (ele_ft). Index lines
+      // (every 250 ft) drawn heavier like a paper topo.
+      const lineColor = [
+        "interpolate", ["linear"], ["get", "ele_ft"],
+        50,  "#6b3f1e",  // low ground — deep tan-brown
+        450, "#4a2c12",  // mid slopes — dark brown
+        900, "#26160a",  // ridgelines/peaks — near-espresso
+      ];
       map.addLayer({
         id: "micro-contour-lines",
         type: "line",
-        source: "micro-terrain",
-        "source-layer": "contour",
+        source: "micro-contours",
+        filter: ["==", ["geometry-type"], "LineString"],
         layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
         paint: {
-          // Topo-map convention: brown contours, darkening with elevation
-          // so high ground (peaks) reads darker than low ground (valleys).
-          "line-color": [
-            "interpolate", ["linear"], ["get", "ele"],
-            0,   "#6b3f1e",  // valley floors — deep tan-brown
-            120, "#4a2c12",  // mid slopes — dark brown
-            285, "#26160a",  // ridgelines/peaks — near-espresso
-          ],
-          // Index contours (every 100 m) drawn heavier, like a paper topo.
-          "line-width": ["match", ["get", "index"], 10, 2, 5, 1.3, 0.9],
-          "line-opacity": ["match", ["get", "index"], 10, 1, 5, 0.95, 0.8],
+          "line-color": lineColor,
+          "line-width": ["match", ["get", "index"], 1, 2, 0.9],
+          "line-opacity": ["match", ["get", "index"], 1, 1, 0.8],
         },
       });
+      // "xxxx ft" labels along the contour lines (collision-thinned).
       map.addLayer({
         id: "micro-contour-labels",
         type: "symbol",
-        source: "micro-terrain",
-        "source-layer": "contour",
-        filter: ["==", ["get", "index"], 10],
+        source: "micro-contours",
+        filter: ["==", ["geometry-type"], "LineString"],
         layout: {
           visibility: "none",
-          "text-field": ["concat", ["to-string", ["round", ["*", ["get", "ele"], 3.28084]]], " ft"],
+          "text-field": ["concat", ["to-string", ["get", "ele_ft"]], " ft"],
           "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-          "text-size": 10,
-          "text-padding": 12,
+          "text-size": ["match", ["get", "index"], 1, 11, 9.5],
+          "text-padding": 14,
           "symbol-placement": "line",
+          "symbol-spacing": 320,
           "text-allow-overlap": false,
         },
         paint: {
-          "text-color": "#4a2c10",
+          "text-color": "#3d2410",
           "text-halo-color": "#ffffff",
           "text-halo-width": 1.6,
-          "text-opacity": ["interpolate", ["linear"], ["zoom"], 13, 0, 14, 1],
+          "text-opacity": ["interpolate", ["linear"], ["zoom"], 12.5, 0, 13.5, 1],
+        },
+      });
+      // Hill peak labels — always-on (higher peaks win collisions). These
+      // guarantee a value at the top of every hill.
+      map.addLayer({
+        id: "micro-contour-peaks",
+        type: "symbol",
+        source: "micro-contours",
+        filter: ["==", ["get", "peak"], 1],
+        layout: {
+          visibility: "none",
+          "text-field": ["concat", "▲ ", ["to-string", ["get", "ele_ft"]], " ft"],
+          "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+          "text-size": 12,
+          "symbol-sort-key": ["-", 0, ["get", "ele_ft"]], // higher peaks first
+          "text-allow-overlap": false,
+          "text-padding": 2,
+        },
+        paint: {
+          "text-color": "#26160a",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 2,
         },
       });
     }
