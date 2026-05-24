@@ -25,6 +25,7 @@ const RAW_DIR = join(ROOT, "data", "raw");
 const TMP_DIR = join(ROOT, "data", "tmp");
 const OUT_PATH = join(ROOT, "public", "data", "sf-microclimates.geojson");
 const PEAKS_OUT = join(ROOT, "public", "data", "sf-peaks.geojson");
+const FOG_LINE_OUT = join(ROOT, "public", "data", "sf-fog-inversion.geojson");
 
 // ── Tunable classification thresholds ──────────────────────────────────────
 const DOWNSAMPLE = 2;          // DEM cells per analysis block (≈10 m → ≈20 m)
@@ -149,6 +150,65 @@ function buildPeaks(elev, W, H, nodata, west, north, east, south) {
     geometry: { type: "Point", coordinates: [p.lng, p.lat] },
   }));
   return { type: "FeatureCollection", features };
+}
+
+// ── Fog inversion line ──────────────────────────────────────────────────────
+// Marine fog fills in from the west and stops migrating east roughly at the
+// 500 ft elevation, so the meaningful boundary is the EASTERN edge of the
+// ≥500 ft terrain. For each latitude we take the easternmost ≥500 ft cell,
+// smooth the resulting longitudes, and draw one continuous N→S envelope line.
+const FOG_LINE_FT = 500;
+const FOG_ROW_STEP = 4;        // sample every Nth DEM row (≈40 m)
+const FOG_LNG_SMOOTH = 6;      // moving-average half-window over longitude
+// Clip to SF latitudes: the DEM's NW corner catches the Marin Headlands
+// (500–900 ft) across the Golden Gate, which would yank the line north of
+// the bay. SF's own ≥500 ft terrain is all south of ~37.79.
+const FOG_MAX_LAT = 37.795;
+
+function buildFogEnvelope(elev, W, H, nodata, west, north, east, south) {
+  const T = FOG_LINE_FT / FT_PER_M; // metres
+  const resX = (east - west) / W, resY = (north - south) / H;
+  const pts = [];
+  for (let y = 0; y < H; y += FOG_ROW_STEP) {
+    const lat = north - y * resY;
+    if (lat > FOG_MAX_LAT) continue; // skip Marin Headlands across the bay
+    let eastX = -1;
+    for (let x = 0; x < W; x++) {
+      const v = elev[y * W + x];
+      if (nodata != null && v === nodata) continue;
+      if (v >= T) eastX = x; // keep last → easternmost above-threshold cell
+    }
+    if (eastX >= 0) pts.push([west + eastX * resX, north - y * resY]);
+  }
+  if (pts.length < 3) return { type: "FeatureCollection", features: [] };
+
+  // Moving-average the longitude (latitude is monotonic top→bottom) to damp
+  // the jumpiness from isolated eastern hilltops, then Chaikin for a soft line.
+  const k = FOG_LNG_SMOOTH;
+  const avg = pts.map((p, i) => {
+    let s = 0, n = 0;
+    for (let j = Math.max(0, i - k); j <= Math.min(pts.length - 1, i + k); j++) { s += pts[j][0]; n++; }
+    return [s / n, p[1]];
+  });
+  let line = avg;
+  for (let it = 0; it < 2; it++) {
+    const next = [line[0]];
+    for (let i = 0; i < line.length - 1; i++) {
+      const a = line[i], b = line[i + 1];
+      next.push([0.75 * a[0] + 0.25 * b[0], 0.75 * a[1] + 0.25 * b[1]]);
+      next.push([0.25 * a[0] + 0.75 * b[0], 0.25 * a[1] + 0.75 * b[1]]);
+    }
+    next.push(line[line.length - 1]);
+    line = next;
+  }
+  return {
+    type: "FeatureCollection",
+    features: [{
+      type: "Feature",
+      properties: { ele_ft: FOG_LINE_FT, fogLine: 1 },
+      geometry: { type: "LineString", coordinates: line },
+    }],
+  };
 }
 
 async function main() {
@@ -324,6 +384,17 @@ async function main() {
   };
   writeFileSync(PEAKS_OUT, JSON.stringify(peaks));
   console.log(`✓ wrote ${PEAKS_OUT} (${peaks.features.length} peak labels)`);
+
+  // 9. Fog inversion envelope — eastern edge of the ≥500 ft terrain. ─────────
+  const fogLine = buildFogEnvelope(elev, W, H, nodata, west, north, east, south);
+  fogLine.metadata = {
+    source: "data/raw USGS 10 m DEM",
+    builtAt: new Date().toISOString(),
+    note: `Eastern envelope of ${FOG_LINE_FT} ft terrain — approx eastern limit of marine fog migration.`,
+  };
+  writeFileSync(FOG_LINE_OUT, JSON.stringify(fogLine));
+  const npts = fogLine.features[0]?.geometry.coordinates.length || 0;
+  console.log(`✓ wrote ${FOG_LINE_OUT} (${npts}-point envelope line)`);
 }
 
 main();
