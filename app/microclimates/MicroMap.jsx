@@ -111,19 +111,21 @@ export default function MicroMap({
         },
       });
       // Relabel the metric contours in feet: round(ele_m × 3.28084) + " ft".
+      // No index filter — lower contour lines get labelled too (Mapbox
+      // collision-thins them); index (100 m) lines are drawn a bit larger.
       map.addLayer({
         id: "micro-contour-labels",
         type: "symbol",
         source: "micro-terrain",
         "source-layer": "contour",
-        filter: ["==", ["get", "index"], 10],
         layout: {
           visibility: "none",
           "text-field": ["concat", ["to-string", ["round", ["*", ["get", "ele"], 3.28084]]], " ft"],
           "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-          "text-size": 11,
-          "text-padding": 12,
+          "text-size": ["match", ["get", "index"], 10, 11, 9.5],
+          "text-padding": 10,
           "symbol-placement": "line",
+          "symbol-spacing": 300,
           "text-allow-overlap": false,
         },
         paint: {
