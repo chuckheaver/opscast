@@ -116,7 +116,7 @@ export default function MicroMap({
         filter: ["==", ["get", "index"], 10],
         layout: {
           visibility: "none",
-          "text-field": ["concat", ["to-string", ["get", "ele"]], " m"],
+          "text-field": ["concat", ["to-string", ["round", ["*", ["get", "ele"], 3.28084]]], " ft"],
           "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
           "text-size": 10,
           "text-padding": 12,
