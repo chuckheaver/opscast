@@ -24,7 +24,7 @@ const ROOT = join(__dirname, "..");
 const RAW_DIR = join(ROOT, "data", "raw");
 const TMP_DIR = join(ROOT, "data", "tmp");
 const OUT_PATH = join(ROOT, "public", "data", "sf-microclimates.geojson");
-const CONTOURS_OUT = join(ROOT, "public", "data", "sf-contours.geojson");
+const PEAKS_OUT = join(ROOT, "public", "data", "sf-peaks.geojson");
 
 // ── Tunable classification thresholds ──────────────────────────────────────
 const DOWNSAMPLE = 2;          // DEM cells per analysis block (≈10 m → ≈20 m)
@@ -78,14 +78,15 @@ function chaikinSmooth(ring, iterations = 2) {
   return pts;
 }
 
-// ── Contour generation (marching squares) ──────────────────────────────────
+// ── Hill-peak labels ────────────────────────────────────────────────────────
+// We let the basemap draw the contour LINES (Mapbox Terrain v2 — smooth and
+// accurate); from the DEM we only derive hill-peak label points so every
+// hilltop shows its elevation. Output: peak Points with ele_ft.
 const FT_PER_M = 3.28084;
-const CONTOUR_STEP_FT = 50;     // contour interval
-const CONTOUR_INDEX_FT = 250;   // bolder/index lines every N ft
-const CONTOUR_F = 4;            // DEM cells per contour grid block (≈40 m)
-const PEAK_RADIUS = 9;          // local-max suppression radius (blocks ≈360 m)
-const PEAK_MIN_ELEV_M = 70;     // ignore minor bumps below this (≈230 ft)
-const PEAK_MIN_GAP_M = 450;     // merge peaks closer than this, keep highest
+const PEAK_F = 4;              // DEM cells per peak-search block (≈40 m)
+const PEAK_RADIUS = 9;         // local-max suppression radius (blocks ≈360 m)
+const PEAK_MIN_ELEV_M = 70;    // ignore minor bumps below this (≈230 ft)
+const PEAK_MIN_GAP_M = 450;    // merge peaks closer than this, keep highest
 
 // Block-average a DEM into a coarser grid (skips nodata).
 function coarsen(elev, W, H, nodata, F) {
@@ -105,70 +106,7 @@ function coarsen(elev, W, H, nodata, F) {
   return { g, cw, ch };
 }
 
-// Marching squares: line segments (grid coords) where the surface crosses T.
-function marchingSquares(g, cw, ch, T) {
-  const segs = [];
-  const f = (a, b) => (T - a) / (b - a);
-  for (let y = 0; y < ch - 1; y++)
-    for (let x = 0; x < cw - 1; x++) {
-      const tl = g[y * cw + x], tr = g[y * cw + x + 1];
-      const bl = g[(y + 1) * cw + x], br = g[(y + 1) * cw + x + 1];
-      let idx = 0;
-      if (tl >= T) idx |= 8; if (tr >= T) idx |= 4;
-      if (br >= T) idx |= 2; if (bl >= T) idx |= 1;
-      if (idx === 0 || idx === 15) continue;
-      const top = [x + f(tl, tr), y];
-      const bot = [x + f(bl, br), y + 1];
-      const lft = [x, y + f(tl, bl)];
-      const rgt = [x + 1, y + f(tr, br)];
-      const p = (a, b) => segs.push([a, b]);
-      switch (idx) {
-        case 1: case 14: p(lft, bot); break;
-        case 2: case 13: p(bot, rgt); break;
-        case 3: case 12: p(lft, rgt); break;
-        case 4: case 11: p(top, rgt); break;
-        case 6: case 9:  p(top, bot); break;
-        case 7: case 8:  p(lft, top); break;
-        case 5:  p(lft, top); p(bot, rgt); break; // saddle
-        case 10: p(lft, bot); p(top, rgt); break; // saddle
-      }
-    }
-  return segs;
-}
-
-// Greedily stitch segments into polylines (quantized endpoint matching).
-function stitch(segs) {
-  const key = pt => `${Math.round(pt[0] * 1000)}_${Math.round(pt[1] * 1000)}`;
-  const used = new Array(segs.length).fill(false);
-  const byPt = new Map();
-  segs.forEach((s, i) => [0, 1].forEach(e => {
-    const k = key(s[e]);
-    (byPt.get(k) || byPt.set(k, []).get(k)).push({ i, e });
-  }));
-  const lines = [];
-  for (let i = 0; i < segs.length; i++) {
-    if (used[i]) continue;
-    used[i] = true;
-    const line = [segs[i][0].slice(), segs[i][1].slice()];
-    for (const dir of ["tail", "head"]) {
-      let go = true;
-      while (go) {
-        go = false;
-        const anchor = dir === "tail" ? line[line.length - 1] : line[0];
-        for (const { i: j, e } of byPt.get(key(anchor)) || []) {
-          if (used[j]) continue;
-          const other = (e === 0 ? segs[j][1] : segs[j][0]).slice();
-          if (dir === "tail") line.push(other); else line.unshift(other);
-          used[j] = true; go = true; break;
-        }
-      }
-    }
-    if (line.length >= 2) lines.push(line);
-  }
-  return lines;
-}
-
-// Local-maxima hill peaks on a coarse grid → label points (rounded ft).
+// Local-maxima hill peaks → label points (rounded ft), distance-deduped.
 function findPeaks(g, cw, ch, toLng, toLat) {
   const peaks = [];
   const R = PEAK_RADIUS;
@@ -184,7 +122,6 @@ function findPeaks(g, cw, ch, toLng, toLat) {
         }
       if (isMax) peaks.push({ lng: toLng(x), lat: toLat(y), elev: e, ft: Math.round(e * FT_PER_M) });
     }
-  // Distance-dedupe: drop any peak within PEAK_MIN_GAP_M of a higher one.
   peaks.sort((a, b) => b.elev - a.elev);
   const kept = [];
   const degLat = 111320, midLat = (toLat(0) + toLat(ch - 1)) / 2;
@@ -199,40 +136,18 @@ function findPeaks(g, cw, ch, toLng, toLat) {
   return kept;
 }
 
-// Build the contour-line + peak-label FeatureCollection from the DEM.
-function buildContours(elev, W, H, nodata, west, north, east, south) {
-  const { g, cw, ch } = coarsen(elev, W, H, nodata, CONTOUR_F);
-  const blkX = (CONTOUR_F * (east - west)) / W;
-  const blkY = (CONTOUR_F * (north - south)) / H;
+// DEM → peak-label FeatureCollection (Point features, ele_ft + peak flag).
+function buildPeaks(elev, W, H, nodata, west, north, east, south) {
+  const { g, cw, ch } = coarsen(elev, W, H, nodata, PEAK_F);
+  const blkX = (PEAK_F * (east - west)) / W;
+  const blkY = (PEAK_F * (north - south)) / H;
   const toLng = x => west + x * blkX;
   const toLat = y => north - y * blkY;
-
-  let maxFt = 0;
-  for (let i = 0; i < g.length; i++) maxFt = Math.max(maxFt, g[i] * FT_PER_M);
-
-  const features = [];
-  for (let ft = CONTOUR_STEP_FT; ft <= maxFt; ft += CONTOUR_STEP_FT) {
-    const segs = marchingSquares(g, cw, ch, ft / FT_PER_M);
-    if (!segs.length) continue;
-    const lines = stitch(segs)
-      .map(l => l.map(([gx, gy]) => [toLng(gx), toLat(gy)]))
-      .filter(l => l.length >= 2);
-    if (!lines.length) continue;
-    features.push({
-      type: "Feature",
-      properties: { ele_ft: ft, index: ft % CONTOUR_INDEX_FT === 0 ? 1 : 0 },
-      geometry: { type: "MultiLineString", coordinates: lines },
-    });
-  }
-
-  findPeaks(g, cw, ch, toLng, toLat).forEach(p => {
-    features.push({
-      type: "Feature",
-      properties: { ele_ft: p.ft, peak: 1 },
-      geometry: { type: "Point", coordinates: [p.lng, p.lat] },
-    });
-  });
-
+  const features = findPeaks(g, cw, ch, toLng, toLat).map(p => ({
+    type: "Feature",
+    properties: { ele_ft: p.ft, peak: 1 },
+    geometry: { type: "Point", coordinates: [p.lng, p.lat] },
+  }));
   return { type: "FeatureCollection", features };
 }
 
@@ -400,27 +315,15 @@ async function main() {
   const byZone = fc.features.reduce((m, f) => ((m[f.properties.zone] = (m[f.properties.zone] || 0) + 1), m), {});
   console.log(`✓ wrote ${OUT_PATH} (${fc.features.length} polygons:`, byZone, ")");
 
-  // 8. Elevation contours (50 ft) + peak labels, generated from the DEM ─────
-  const contours = buildContours(elev, W, H, nodata, west, north, east, south);
-  const peakFeatures = contours.features.filter(f => f.properties.peak);
-  const lineFeatures = contours.features.filter(f => !f.properties.peak);
-
-  // Simplify the (vertex-dense) contour lines via mapshaper to shrink the
-  // file; points pass through untouched, so peaks are added back after.
-  const C_RAW = join(TMP_DIR, "contours-raw.geojson");
-  const C_SIMP = join(TMP_DIR, "contours-simp.geojson");
-  writeFileSync(C_RAW, JSON.stringify({ type: "FeatureCollection", features: lineFeatures }));
-  run([C_RAW, "-simplify", "14%", "keep-shapes", "-o", C_SIMP, "format=geojson"]);
-  const simp = JSON.parse(readFileSync(C_SIMP, "utf8"));
-  simp.features.push(...peakFeatures);
-  simp.metadata = {
+  // 8. Hill-peak labels from the DEM (the basemap draws the contour LINES). ──
+  const peaks = buildPeaks(elev, W, H, nodata, west, north, east, south);
+  peaks.metadata = {
     source: "data/raw USGS 10 m DEM",
     builtAt: new Date().toISOString(),
-    interval_ft: CONTOUR_STEP_FT,
-    note: "Contour lines (MultiLineString, ele_ft + index) and hill peak labels (Point, ele_ft + peak).",
+    note: "Hill peak labels (Point, ele_ft + peak). Contour lines come from Mapbox Terrain v2 on the map.",
   };
-  writeFileSync(CONTOURS_OUT, JSON.stringify(simp));
-  console.log(`✓ wrote ${CONTOURS_OUT} (${lineFeatures.length} contour levels, ${peakFeatures.length} peak labels)`);
+  writeFileSync(PEAKS_OUT, JSON.stringify(peaks));
+  console.log(`✓ wrote ${PEAKS_OUT} (${peaks.features.length} peak labels)`);
 }
 
 main();
