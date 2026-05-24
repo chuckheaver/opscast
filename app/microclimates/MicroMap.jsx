@@ -3,8 +3,12 @@
 // Mapbox canvas for the micro-climate page. Renders the SF neighborhood
 // outlines + labels and the three terrain-derived sub-zone fills (sun /
 // wind / fog), each toggleable, plus a marker for the picked address.
+//
+// Data + toggle state are mirrored into refs so the stable addLayers /
+// applyVisibility callbacks always read the latest values — this avoids
+// the stale-closure race when the GeoJSON loads before the map style.
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -14,7 +18,6 @@ const SF_BOUNDS = [
   [-122.355, 37.812],
 ];
 
-// Per-zone fill colours — distinct from the grey fog scale on /fog.
 const ZONE_COLOR = {
   sun: "#f59e0b",  // amber — warm south-facing slopes
   wind: "#22d3ee", // cyan — wind-channeling valleys
@@ -35,40 +38,57 @@ export default function MicroMap({
   const markerRef = useRef(null);
   const readyRef = useRef(false);
 
-  // Mount once.
-  useEffect(() => {
-    if (!TOKEN || mapRef.current) return;
-    mapboxgl.accessToken = TOKEN;
-    const map = new mapboxgl.Map({
-      container: containerRef.current,
-      style: "mapbox://styles/mapbox/streets-v12",
-      bounds: SF_BOUNDS,
-      fitBoundsOptions: { padding: 24 },
-      minZoom: 10,
-      maxZoom: 16,
-    });
-    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
-    mapRef.current = map;
-    map.on("load", () => {
-      readyRef.current = true;
-      addLayers();
-    });
-    return () => { map.remove(); mapRef.current = null; readyRef.current = false; };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // Latest data + toggle state, readable from the stable callbacks below.
+  const dataRef = useRef({ neighborhoods, zones });
+  const visRef = useRef({ showSun, showWind, showFog, showNeighborhoods });
 
-  // Build sources + layers once both the map and the data are ready.
-  const addLayers = () => {
+  const applyVisibility = useCallback(() => {
     const map = mapRef.current;
     if (!map || !readyRef.current) return;
+    const v = visRef.current;
+    const set = (id, on) => {
+      if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", on ? "visible" : "none");
+    };
+    set("micro-sun-fill", v.showSun);   set("micro-sun-line", v.showSun);
+    set("micro-wind-fill", v.showWind); set("micro-wind-line", v.showWind);
+    set("micro-fog-fill", v.showFog);   set("micro-fog-line", v.showFog);
+    set("micro-neigh-outline", v.showNeighborhoods);
+    set("micro-neigh-labels", v.showNeighborhoods);
+  }, []);
 
-    if (neighborhoods && !map.getSource("micro-neigh")) {
-      map.addSource("micro-neigh", { type: "geojson", data: neighborhoods });
+  const addLayers = useCallback(() => {
+    const map = mapRef.current;
+    if (!map || !readyRef.current) return;
+    const { neighborhoods: neigh, zones: zn } = dataRef.current;
+
+    if (zn && !map.getSource("micro-zones")) {
+      map.addSource("micro-zones", { type: "geojson", data: zn });
+      ["sun", "wind", "fog"].forEach(zone => {
+        map.addLayer({
+          id: `micro-${zone}-fill`,
+          type: "fill",
+          source: "micro-zones",
+          filter: ["==", ["get", "zone"], zone],
+          paint: { "fill-color": ZONE_COLOR[zone], "fill-opacity": 0.42 },
+        });
+        map.addLayer({
+          id: `micro-${zone}-line`,
+          type: "line",
+          source: "micro-zones",
+          filter: ["==", ["get", "zone"], zone],
+          paint: { "line-color": ZONE_COLOR[zone], "line-width": 1, "line-opacity": 0.85 },
+        });
+      });
+    }
+
+    // Neighborhood outline + labels go ON TOP of the zone fills.
+    if (neigh && !map.getSource("micro-neigh")) {
+      map.addSource("micro-neigh", { type: "geojson", data: neigh });
       map.addLayer({
         id: "micro-neigh-outline",
         type: "line",
         source: "micro-neigh",
-        paint: { "line-color": "#1c1917", "line-opacity": 0.55, "line-width": 0.7 },
+        paint: { "line-color": "#1c1917", "line-opacity": 0.5, "line-width": 0.7 },
       });
       map.addLayer({
         id: "micro-neigh-labels",
@@ -89,56 +109,41 @@ export default function MicroMap({
         },
       });
     }
-
-    if (zones && !map.getSource("micro-zones")) {
-      map.addSource("micro-zones", { type: "geojson", data: zones });
-      // Insert zone fills BENEATH the neighborhood outline so labels/edges
-      // stay readable on top.
-      const before = map.getLayer("micro-neigh-outline") ? "micro-neigh-outline" : undefined;
-      ["sun", "wind", "fog"].forEach(zone => {
-        map.addLayer({
-          id: `micro-${zone}-fill`,
-          type: "fill",
-          source: "micro-zones",
-          filter: ["==", ["get", "zone"], zone],
-          paint: { "fill-color": ZONE_COLOR[zone], "fill-opacity": 0.42 },
-        }, before);
-        map.addLayer({
-          id: `micro-${zone}-line`,
-          type: "line",
-          source: "micro-zones",
-          filter: ["==", ["get", "zone"], zone],
-          paint: { "line-color": ZONE_COLOR[zone], "line-width": 1, "line-opacity": 0.8 },
-        }, before);
-      });
-    }
     applyVisibility();
-  };
+  }, [applyVisibility]);
 
-  const applyVisibility = () => {
-    const map = mapRef.current;
-    if (!map || !readyRef.current) return;
-    const set = (id, on) => {
-      if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", on ? "visible" : "none");
-    };
-    set("micro-sun-fill", showSun);  set("micro-sun-line", showSun);
-    set("micro-wind-fill", showWind); set("micro-wind-line", showWind);
-    set("micro-fog-fill", showFog);  set("micro-fog-line", showFog);
-    set("micro-neigh-outline", showNeighborhoods);
-    set("micro-neigh-labels", showNeighborhoods);
-  };
-
-  // Add layers when data arrives after the map has loaded.
+  // Mount once.
   useEffect(() => {
-    if (readyRef.current) addLayers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [neighborhoods, zones]);
+    if (!TOKEN || mapRef.current) return;
+    mapboxgl.accessToken = TOKEN;
+    const map = new mapboxgl.Map({
+      container: containerRef.current,
+      style: "mapbox://styles/mapbox/streets-v12",
+      bounds: SF_BOUNDS,
+      fitBoundsOptions: { padding: 24 },
+      minZoom: 10,
+      maxZoom: 16,
+    });
+    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
+    mapRef.current = map;
+    map.on("load", () => {
+      readyRef.current = true;
+      addLayers();
+    });
+    return () => { map.remove(); mapRef.current = null; readyRef.current = false; };
+  }, [addLayers]);
 
-  // Reflect toggle changes.
+  // Data arrives (possibly after or before map load) → refresh refs + add.
   useEffect(() => {
+    dataRef.current = { neighborhoods, zones };
+    addLayers();
+  }, [neighborhoods, zones, addLayers]);
+
+  // Toggle changes → refresh refs + apply.
+  useEffect(() => {
+    visRef.current = { showSun, showWind, showFog, showNeighborhoods };
     applyVisibility();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showSun, showWind, showFog, showNeighborhoods]);
+  }, [showSun, showWind, showFog, showNeighborhoods, applyVisibility]);
 
   // Picked address → drop a marker, keep the city framed.
   useEffect(() => {
