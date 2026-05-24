@@ -178,7 +178,7 @@ function buildFogPathMask(elev, W, H, nodata, west, north, east, south) {
   }
   const blkX = (FOG_PATH_F * (east - west)) / W;
   const blkY = (FOG_PATH_F * (north - south)) / H;
-  return { reach, cw, ch, blkX, blkY };
+  return { reach, g, cw, ch, blkX, blkY };
 }
 
 async function main() {
@@ -306,44 +306,61 @@ async function main() {
     }
   }
 
-  // Fog path: flood-fill the low ground from the west, emit as zone "fog".
+  // Fog path + elevation bands (fog thins as it climbs). Flood-fill the low
+  // ground from the west for the ≤200 ft "fog" path, then graduated bands
+  // above it: 200–350 (fog2), 350–500 (fog3), 500–1000 ft (fog4).
   const fp = buildFogPathMask(elev, W, H, nodata, west, north, east, south);
   for (let y = 0; y < fp.ch; y++) {
     for (let x = 0; x < fp.cw; x++) {
-      if (!fp.reach[y * fp.cw + x]) continue;
+      const i = y * fp.cw + x;
+      const ft = fp.g[i] * 3.28084;
+      let zn = null;
+      if (fp.reach[i]) zn = "fog";
+      else if (ft > 200 && ft <= 350) zn = "fog2";
+      else if (ft > 350 && ft <= 500) zn = "fog3";
+      else if (ft > 500 && ft <= 1000) zn = "fog4";
+      if (!zn) continue;
       const lng0 = west + x * fp.blkX, lng1 = west + (x + 1) * fp.blkX;
       const lat1 = north - y * fp.blkY, lat0 = north - (y + 1) * fp.blkY;
       features.push({
         type: "Feature",
-        properties: { zone: "fog" },
+        properties: { zone: zn },
         geometry: {
           type: "Polygon",
           coordinates: [[[lng0, lat0], [lng1, lat0], [lng1, lat1], [lng0, lat1], [lng0, lat0]]],
         },
       });
-      counts.fog++;
+      counts[zn] = (counts[zn] || 0) + 1;
     }
   }
   console.log("Classified cells:", counts);
 
-  const RAW_TMP = join(TMP_DIR, "microclimates-cells.geojson");
-  writeFileSync(RAW_TMP, JSON.stringify({ type: "FeatureCollection", features }));
-
-  // 6. Dissolve same-zone squares, clip to SF land (drops the ocean/bay the
-  //    fog flood-fill would otherwise cover), clean slivers, light simplify ─
+  // 6. Dissolve + clip to SF land + clean + simplify. The slope zones and
+  //    the fog bands are processed SEPARATELY — sun/cool slopes sit inside
+  //    the 200–500 ft fog bands, and a single planar clean would erase the
+  //    smaller slope zones where they overlap. Two passes keep them as
+  //    independent overlapping layers (they're separate toggles anyway).
   const NEIGH = join(ROOT, "public", "data", "sf-fog-neighborhoods.geojson");
-  const DISSOLVED = join(TMP_DIR, "microclimates-dissolved.geojson");
-  run([
-    RAW_TMP,
-    "-dissolve2", "fields=zone",
-    "-clip", NEIGH,
-    "-clean", "gap-fill-area=2000",
-    "-simplify", "8%", "keep-shapes",
-    "-o", DISSOLVED, "format=geojson",
-  ]);
+  const SLOPE = new Set(["sun", "cool", "wind"]);
+  const dissolveGroup = (feats, tag) => {
+    const raw = join(TMP_DIR, `microclimates-${tag}-raw.geojson`);
+    const out = join(TMP_DIR, `microclimates-${tag}-dis.geojson`);
+    writeFileSync(raw, JSON.stringify({ type: "FeatureCollection", features: feats }));
+    run([
+      raw,
+      "-dissolve2", "fields=zone",
+      "-clip", NEIGH,
+      "-clean", "gap-fill-area=2000",
+      "-simplify", "8%", "keep-shapes",
+      "-o", out, "format=geojson",
+    ]);
+    return JSON.parse(readFileSync(out, "utf8")).features;
+  };
+  const slopeFeats = dissolveGroup(features.filter(f => SLOPE.has(f.properties.zone)), "slope");
+  const fogFeats = dissolveGroup(features.filter(f => !SLOPE.has(f.properties.zone)), "fog");
 
   // 7. Chaikin-smooth + write final ─────────────────────────────────────────
-  const fc = JSON.parse(readFileSync(DISSOLVED, "utf8"));
+  const fc = { type: "FeatureCollection", features: [...slopeFeats, ...fogFeats] };
   fc.features.forEach(ft => {
     const gm = ft.geometry;
     if (!gm) return;
@@ -358,7 +375,10 @@ async function main() {
       sun: "20–30° SE/S/SW-facing inclines — warmer, sunnier sun pockets",
       cool: "North-facing inclines — far less direct sun, cooler & shaded",
       wind: "Valley floors / gaps that channel wind",
-      fog: "Fog path — low ground (≤200 ft) connected to the west coast that marine fog threads east through, around the hills",
+      fog: "Fog path — ≤200 ft low ground connected to the west coast that marine fog threads east through",
+      fog2: "Fog band 200–350 ft — fog laps this far up the slopes, thinning",
+      fog3: "Fog band 350–500 ft — fog reaches here only on the windward side",
+      fog4: "Fog band 500–1000 ft — fog crests here at most; usually above the fog",
     },
   };
   writeFileSync(OUT_PATH, JSON.stringify(fc));

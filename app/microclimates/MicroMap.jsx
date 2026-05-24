@@ -18,15 +18,20 @@ const SF_BOUNDS = [
   [-122.355, 37.812],
 ];
 
+// Slope zones (crisp colours) + the fog density bands (graduated greys,
+// darkest in the low fog path, lightening as fog thins up the slopes).
 const ZONE_COLOR = {
   sun: "#f59e0b",  // amber — warm 20–30° south-facing sun pockets
   cool: "#38bdf8", // sky blue — cooler north-facing slopes
   wind: "#2dd4bf", // teal — wind-channeling valleys
-  fog: "#94a3b8",  // grey — fog path (low ground fog floods through)
+  fog: "#334155",  // slate-700 — ≤200 ft fog path (densest)
+  fog2: "#64748b", // slate-500 — 200–350 ft
+  fog3: "#94a3b8", // slate-400 — 350–500 ft
+  fog4: "#cbd5e1", // slate-300 — 500–1000 ft (thinnest)
 };
-// Per-zone fill opacity — the fog path covers a lot of low ground, so it's
-// a lighter wash than the crisper slope zones.
-const ZONE_OPACITY = { sun: 0.45, cool: 0.45, wind: 0.45, fog: 0.3 };
+const ZONE_OPACITY = { sun: 0.45, cool: 0.45, wind: 0.45, fog: 0.4, fog2: 0.42, fog3: 0.44, fog4: 0.46 };
+const SLOPE_ZONES = ["sun", "cool", "wind"];
+const FOG_ZONES = ["fog", "fog2", "fog3", "fog4"];
 
 export default function MicroMap({
   neighborhoods,
@@ -59,7 +64,8 @@ export default function MicroMap({
     set("micro-sun-fill", v.showSun);   set("micro-sun-line", v.showSun);
     set("micro-cool-fill", v.showCool); set("micro-cool-line", v.showCool);
     set("micro-wind-fill", v.showWind); set("micro-wind-line", v.showWind);
-    set("micro-fog-fill", v.showFog);   set("micro-fog-line", v.showFog);
+    // All four fog density bands ride the one Fog toggle.
+    ["fog", "fog2", "fog3", "fog4"].forEach(z => set(`micro-${z}-fill`, v.showFog));
     set("micro-contour-lines", v.showContours);
     set("micro-contour-labels", v.showContours);
     set("micro-contour-peaks", v.showContours);
@@ -76,7 +82,18 @@ export default function MicroMap({
 
     if (zn && !map.getSource("micro-zones")) {
       map.addSource("micro-zones", { type: "geojson", data: zn });
-      ["sun", "cool", "wind", "fog"].forEach(zone => {
+      // Fog density bands first (underneath), darkest→lightest, fills only.
+      FOG_ZONES.forEach(zone => {
+        map.addLayer({
+          id: `micro-${zone}-fill`,
+          type: "fill",
+          source: "micro-zones",
+          filter: ["==", ["get", "zone"], zone],
+          paint: { "fill-color": ZONE_COLOR[zone], "fill-opacity": ZONE_OPACITY[zone] },
+        });
+      });
+      // Slope zones on top, with a matching outline.
+      SLOPE_ZONES.forEach(zone => {
         map.addLayer({
           id: `micro-${zone}-fill`,
           type: "fill",
