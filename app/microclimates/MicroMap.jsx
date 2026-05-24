@@ -93,11 +93,19 @@ export default function MicroMap({
         type: "line",
         source: "micro-terrain",
         "source-layer": "contour",
-        layout: { visibility: "none", "line-cap": "round" },
+        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
         paint: {
-          "line-color": "#4b5563",
-          "line-width": ["match", ["get", "index"], 10, 1.1, 5, 0.7, 0.35],
-          "line-opacity": ["match", ["get", "index"], 10, 0.85, 5, 0.55, 0.3],
+          // Topo-map convention: brown contours, darkening with elevation
+          // so high ground (peaks) reads darker than low ground (valleys).
+          "line-color": [
+            "interpolate", ["linear"], ["get", "ele"],
+            0,   "#9c6b43",  // valley floors — lighter tan-brown
+            120, "#6e3f1a",  // mid slopes — medium brown
+            285, "#3d2410",  // ridgelines/peaks — dark brown
+          ],
+          // Index contours (every 100 m) drawn heavier, like a paper topo.
+          "line-width": ["match", ["get", "index"], 10, 1.8, 5, 1.1, 0.7],
+          "line-opacity": ["match", ["get", "index"], 10, 1, 5, 0.85, 0.6],
         },
       });
       map.addLayer({
@@ -116,9 +124,9 @@ export default function MicroMap({
           "text-allow-overlap": false,
         },
         paint: {
-          "text-color": "#374151",
+          "text-color": "#4a2c10",
           "text-halo-color": "#ffffff",
-          "text-halo-width": 1.5,
+          "text-halo-width": 1.6,
           "text-opacity": ["interpolate", ["linear"], ["zoom"], 13, 0, 14, 1],
         },
       });
