@@ -138,16 +138,15 @@ export default function MicroMap({
           "text-opacity": ["interpolate", ["linear"], ["zoom"], 12.5, 0, 13.5, 1],
         },
       });
-    }
-    // Fog Inversion Line — a single DEM-derived envelope tracing the eastern
-    // edge of the ≥500 ft terrain (the usual eastern limit of marine fog).
-    // Bold dashed steel-blue so it reads distinctly from the brown contours.
-    if (!map.getSource("micro-fogline")) {
-      map.addSource("micro-fogline", { type: "geojson", data: "/data/sf-fog-inversion.geojson" });
+      // Fog Inversion Line — highlight every ~500 ft (150 m) contour in a
+      // bold blue dash. Marine fog pushing in from the west usually stops
+      // migrating east around this height, so these lines mark its limit.
       map.addLayer({
         id: "micro-fog-inversion",
         type: "line",
-        source: "micro-fogline",
+        source: "micro-terrain",
+        "source-layer": "contour",
+        filter: ["==", ["get", "ele"], 150],
         layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
         paint: {
           "line-color": "#1d4ed8",
@@ -159,7 +158,9 @@ export default function MicroMap({
       map.addLayer({
         id: "micro-fog-inversion-label",
         type: "symbol",
-        source: "micro-fogline",
+        source: "micro-terrain",
+        "source-layer": "contour",
+        filter: ["==", ["get", "ele"], 150],
         layout: {
           visibility: "none",
           "text-field": "Fog inversion ≈500 ft",
