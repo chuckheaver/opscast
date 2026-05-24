@@ -99,13 +99,13 @@ export default function MicroMap({
           // so high ground (peaks) reads darker than low ground (valleys).
           "line-color": [
             "interpolate", ["linear"], ["get", "ele"],
-            0,   "#9c6b43",  // valley floors — lighter tan-brown
-            120, "#6e3f1a",  // mid slopes — medium brown
-            285, "#3d2410",  // ridgelines/peaks — dark brown
+            0,   "#6b3f1e",  // valley floors — deep tan-brown
+            120, "#4a2c12",  // mid slopes — dark brown
+            285, "#26160a",  // ridgelines/peaks — near-espresso
           ],
           // Index contours (every 100 m) drawn heavier, like a paper topo.
-          "line-width": ["match", ["get", "index"], 10, 1.8, 5, 1.1, 0.7],
-          "line-opacity": ["match", ["get", "index"], 10, 1, 5, 0.85, 0.6],
+          "line-width": ["match", ["get", "index"], 10, 2, 5, 1.3, 0.9],
+          "line-opacity": ["match", ["get", "index"], 10, 1, 5, 0.95, 0.8],
         },
       });
       map.addLayer({
