@@ -22,8 +22,11 @@ const ZONE_COLOR = {
   sun: "#f59e0b",  // amber — warm 20–30° south-facing sun pockets
   cool: "#38bdf8", // sky blue — cooler north-facing slopes
   wind: "#2dd4bf", // teal — wind-channeling valleys
-  fog: "#a78bfa",  // violet — persistent-fog ridges
+  fog: "#94a3b8",  // grey — fog path (low ground fog floods through)
 };
+// Per-zone fill opacity — the fog path covers a lot of low ground, so it's
+// a lighter wash than the crisper slope zones.
+const ZONE_OPACITY = { sun: 0.45, cool: 0.45, wind: 0.45, fog: 0.3 };
 
 export default function MicroMap({
   neighborhoods,
@@ -79,7 +82,7 @@ export default function MicroMap({
           type: "fill",
           source: "micro-zones",
           filter: ["==", ["get", "zone"], zone],
-          paint: { "fill-color": ZONE_COLOR[zone], "fill-opacity": 0.42 },
+          paint: { "fill-color": ZONE_COLOR[zone], "fill-opacity": ZONE_OPACITY[zone] },
         });
         map.addLayer({
           id: `micro-${zone}-line`,

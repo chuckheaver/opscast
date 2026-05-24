@@ -37,14 +37,16 @@ const SUN_SLOPE = [20, 30];        // degrees (per spec)
 // cool-shade: north-facing inclines — far less direct sun, so cooler.
 const COOL_MIN_SLOPE = 15;     // degrees (a real incline, not flat ground)
 // (north aspect handled in code: ≥ 292.5° or ≤ 67.5°, i.e. NW → N → NE)
-// persistent-fog: high AND west-facing (sits between sun & cool aspects).
-const FOG_ASPECT = [247.5, 300]; // W → WNW
-const FOG_MIN_ELEV = 80;       // metres
-const FOG_MIN_SLOPE = 4;       // degrees (exclude flat hilltops)
 // wind-corridor: notable valley/gap, not a cliff
 const WIND_MAX_TPI = -5;       // metres below local mean
 const WIND_MAX_SLOPE = 10;     // degrees
 const MIN_NEIGHBORS = 2;       // de-speckle: drop lone classified cells
+// fog path: marine fog floods in from the west and threads east along the
+// low ground, blocked by the hills. Model it as everything ≤200 ft that is
+// connected to the western (ocean) edge by other ≤200 ft cells — the
+// valleys + gaps fog flows through, leaving the high ground blank.
+const FOG_CEILING_FT = 200;    // fog flows freely below this elevation
+const FOG_PATH_F = 4;          // DEM cells per fog-path block (≈40 m)
 
 const ZONES = { sun: 1, cool: 2, wind: 3, fog: 4 };
 
@@ -151,6 +153,33 @@ function buildPeaks(elev, W, H, nodata, west, north, east, south) {
   return { type: "FeatureCollection", features };
 }
 
+// ── Fog path (flood fill from the west) ─────────────────────────────────────
+// Returns a coarse boolean mask of cells fog can reach: everything at/below
+// FOG_CEILING_FT that is 4-connected back to the western (ocean) edge. The
+// hills (and basins walled off by >200 ft terrain) stay unreached, so the
+// mask traces the valleys + gaps fog threads through as it moves east.
+function buildFogPathMask(elev, W, H, nodata, west, north, east, south) {
+  const { g, cw, ch } = coarsen(elev, W, H, nodata, FOG_PATH_F);
+  const T = FOG_CEILING_FT / FT_PER_M;
+  const reach = new Uint8Array(cw * ch);
+  const q = [];
+  for (let y = 0; y < ch; y++) {
+    const i = y * cw; // x = 0, the western edge
+    if (g[i] <= T) { reach[i] = 1; q.push(i); }
+  }
+  let head = 0;
+  while (head < q.length) {
+    const i = q[head++], x = i % cw, y = (i / cw) | 0;
+    const tryCell = j => { if (!reach[j] && g[j] <= T) { reach[j] = 1; q.push(j); } };
+    if (x > 0) tryCell(i - 1);
+    if (x < cw - 1) tryCell(i + 1);
+    if (y > 0) tryCell(i - cw);
+    if (y < ch - 1) tryCell(i + cw);
+  }
+  const blkX = (FOG_PATH_F * (east - west)) / W;
+  const blkY = (FOG_PATH_F * (north - south)) / H;
+  return { reach, cw, ch, blkX, blkY };
+}
 
 async function main() {
   const DEM = findDem();
@@ -229,8 +258,6 @@ async function main() {
         zone[y * cw + x] = ZONES.sun;
       } else if (slope >= COOL_MIN_SLOPE && northFacing) {
         zone[y * cw + x] = ZONES.cool;
-      } else if (e >= FOG_MIN_ELEV && slope >= FOG_MIN_SLOPE && inAsp(...FOG_ASPECT)) {
-        zone[y * cw + x] = ZONES.fog;
       } else if (tpi <= WIND_MAX_TPI && slope <= WIND_MAX_SLOPE) {
         zone[y * cw + x] = ZONES.wind;
       }
@@ -278,16 +305,38 @@ async function main() {
       counts[NAME[zv]]++;
     }
   }
+
+  // Fog path: flood-fill the low ground from the west, emit as zone "fog".
+  const fp = buildFogPathMask(elev, W, H, nodata, west, north, east, south);
+  for (let y = 0; y < fp.ch; y++) {
+    for (let x = 0; x < fp.cw; x++) {
+      if (!fp.reach[y * fp.cw + x]) continue;
+      const lng0 = west + x * fp.blkX, lng1 = west + (x + 1) * fp.blkX;
+      const lat1 = north - y * fp.blkY, lat0 = north - (y + 1) * fp.blkY;
+      features.push({
+        type: "Feature",
+        properties: { zone: "fog" },
+        geometry: {
+          type: "Polygon",
+          coordinates: [[[lng0, lat0], [lng1, lat0], [lng1, lat1], [lng0, lat1], [lng0, lat0]]],
+        },
+      });
+      counts.fog++;
+    }
+  }
   console.log("Classified cells:", counts);
 
   const RAW_TMP = join(TMP_DIR, "microclimates-cells.geojson");
   writeFileSync(RAW_TMP, JSON.stringify({ type: "FeatureCollection", features }));
 
-  // 6. Dissolve adjacent same-zone squares, clean slivers, light simplify ───
+  // 6. Dissolve same-zone squares, clip to SF land (drops the ocean/bay the
+  //    fog flood-fill would otherwise cover), clean slivers, light simplify ─
+  const NEIGH = join(ROOT, "public", "data", "sf-fog-neighborhoods.geojson");
   const DISSOLVED = join(TMP_DIR, "microclimates-dissolved.geojson");
   run([
     RAW_TMP,
     "-dissolve2", "fields=zone",
+    "-clip", NEIGH,
     "-clean", "gap-fill-area=2000",
     "-simplify", "8%", "keep-shapes",
     "-o", DISSOLVED, "format=geojson",
@@ -309,7 +358,7 @@ async function main() {
       sun: "20–30° SE/S/SW-facing inclines — warmer, sunnier sun pockets",
       cool: "North-facing inclines — far less direct sun, cooler & shaded",
       wind: "Valley floors / gaps that channel wind",
-      fog: "High west/ocean-facing ridges where fog persists",
+      fog: "Fog path — low ground (≤200 ft) connected to the west coast that marine fog threads east through, around the hills",
     },
   };
   writeFileSync(OUT_PATH, JSON.stringify(fc));

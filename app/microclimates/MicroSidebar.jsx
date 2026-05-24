@@ -10,7 +10,7 @@ const ZONES = [
   ["☀️", "#f59e0b", "Sun Pockets", "20–30° SE/S/SW-facing inclines — the warmest, sunniest slopes."],
   ["❄️", "#38bdf8", "Cool / Shade", "North-facing inclines — far less direct sun, so cooler."],
   ["🌬️", "#2dd4bf", "Wind Corridors", "Valley floors & gaps that funnel and accelerate wind."],
-  ["🌫️", "#a78bfa", "Persistent Fog", "High west/ocean-facing ridges where the fog bank settles in."],
+  ["🌫️", "#94a3b8", "Fog Path", "Low ground (≤200 ft) fog floods east through, threading the gaps between hills."],
 ];
 
 function ToggleSwitch({ checked, onChange, label, help }) {
@@ -148,7 +148,7 @@ export default function MicroSidebar({
       <ToggleSwitch checked={showSun} onChange={onToggleSun} label="Sun pockets" help="20–30° south-facing warm slopes." />
       <ToggleSwitch checked={showCool} onChange={onToggleCool} label="Cool / shade" help="North-facing cooler slopes." />
       <ToggleSwitch checked={showWind} onChange={onToggleWind} label="Wind corridors" help="Wind-channeling valleys." />
-      <ToggleSwitch checked={showFog} onChange={onToggleFog} label="Persistent fog" help="High west-facing fog ridges." />
+      <ToggleSwitch checked={showFog} onChange={onToggleFog} label="Fog path" help="Low corridors fog floods east through." />
       <ToggleSwitch checked={showContours} onChange={onToggleContours} label="Elevation contours" help="Topographic relief lines (ft)." />
       <ToggleSwitch checked={showFogLine} onChange={onToggleFogLine} label="Fog inversion line" help="≈500 ft — the usual eastern limit of marine fog." />
       <ToggleSwitch checked={showNeighborhoods} onChange={onToggleNeighborhoods} label="Neighborhoods" help="SF outlines + name labels." />
