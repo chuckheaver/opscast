@@ -25,11 +25,11 @@ const ZONE_COLOR = {
   cool: "#38bdf8", // sky blue — cooler north-facing slopes
   wind: "#2dd4bf", // teal — wind-channeling valleys
   fog: "#334155",  // slate-700 — ≤200 ft fog path (densest)
-  fog2: "#64748b", // slate-500 — 200–350 ft
-  fog3: "#94a3b8", // slate-400 — 350–500 ft
-  fog4: "#cbd5e1", // slate-300 — 500–1000 ft (thinnest)
+  fog2: "#475569", // slate-600 — 200–350 ft
+  fog3: "#64748b", // slate-500 — 350–500 ft
+  fog4: "#94a3b8", // slate-400 — 500–1000 ft (thinnest, but still readable)
 };
-const ZONE_OPACITY = { sun: 0.45, cool: 0.45, wind: 0.45, fog: 0.4, fog2: 0.42, fog3: 0.44, fog4: 0.46 };
+const ZONE_OPACITY = { sun: 0.45, cool: 0.45, wind: 0.45, fog: 0.45, fog2: 0.5, fog3: 0.54, fog4: 0.58 };
 const SLOPE_ZONES = ["sun", "cool", "wind"];
 const FOG_ZONES = ["fog", "fog2", "fog3", "fog4"];
 
