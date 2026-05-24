@@ -30,6 +30,7 @@ export default function MicroMap({
   showSun,
   showWind,
   showFog,
+  showContours,
   showNeighborhoods,
   picked,
 }) {
@@ -40,7 +41,7 @@ export default function MicroMap({
 
   // Latest data + toggle state, readable from the stable callbacks below.
   const dataRef = useRef({ neighborhoods, zones });
-  const visRef = useRef({ showSun, showWind, showFog, showNeighborhoods });
+  const visRef = useRef({ showSun, showWind, showFog, showContours, showNeighborhoods });
 
   const applyVisibility = useCallback(() => {
     const map = mapRef.current;
@@ -52,6 +53,8 @@ export default function MicroMap({
     set("micro-sun-fill", v.showSun);   set("micro-sun-line", v.showSun);
     set("micro-wind-fill", v.showWind); set("micro-wind-line", v.showWind);
     set("micro-fog-fill", v.showFog);   set("micro-fog-line", v.showFog);
+    set("micro-contour-lines", v.showContours);
+    set("micro-contour-labels", v.showContours);
     set("micro-neigh-outline", v.showNeighborhoods);
     set("micro-neigh-labels", v.showNeighborhoods);
   }, []);
@@ -78,6 +81,46 @@ export default function MicroMap({
           filter: ["==", ["get", "zone"], zone],
           paint: { "line-color": ZONE_COLOR[zone], "line-width": 1, "line-opacity": 0.85 },
         });
+      });
+    }
+
+    // Elevation contour lines from Mapbox Terrain v2 (vector tiles) — sit
+    // above the zone fills as a relief reference, below the neighborhoods.
+    if (!map.getSource("micro-terrain")) {
+      map.addSource("micro-terrain", { type: "vector", url: "mapbox://mapbox.mapbox-terrain-v2" });
+      map.addLayer({
+        id: "micro-contour-lines",
+        type: "line",
+        source: "micro-terrain",
+        "source-layer": "contour",
+        layout: { visibility: "none", "line-cap": "round" },
+        paint: {
+          "line-color": "#4b5563",
+          "line-width": ["match", ["get", "index"], 10, 1.1, 5, 0.7, 0.35],
+          "line-opacity": ["match", ["get", "index"], 10, 0.85, 5, 0.55, 0.3],
+        },
+      });
+      map.addLayer({
+        id: "micro-contour-labels",
+        type: "symbol",
+        source: "micro-terrain",
+        "source-layer": "contour",
+        filter: ["==", ["get", "index"], 10],
+        layout: {
+          visibility: "none",
+          "text-field": ["concat", ["to-string", ["get", "ele"]], " m"],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": 10,
+          "text-padding": 12,
+          "symbol-placement": "line",
+          "text-allow-overlap": false,
+        },
+        paint: {
+          "text-color": "#374151",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.5,
+          "text-opacity": ["interpolate", ["linear"], ["zoom"], 13, 0, 14, 1],
+        },
       });
     }
 
@@ -141,9 +184,9 @@ export default function MicroMap({
 
   // Toggle changes → refresh refs + apply.
   useEffect(() => {
-    visRef.current = { showSun, showWind, showFog, showNeighborhoods };
+    visRef.current = { showSun, showWind, showFog, showContours, showNeighborhoods };
     applyVisibility();
-  }, [showSun, showWind, showFog, showNeighborhoods, applyVisibility]);
+  }, [showSun, showWind, showFog, showContours, showNeighborhoods, applyVisibility]);
 
   // Picked address → drop a marker, keep the city framed.
   useEffect(() => {

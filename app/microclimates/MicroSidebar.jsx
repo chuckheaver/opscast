@@ -35,6 +35,7 @@ export default function MicroSidebar({
   showSun, onToggleSun,
   showWind, onToggleWind,
   showFog, onToggleFog,
+  showContours, onToggleContours,
   showNeighborhoods, onToggleNeighborhoods,
   onUseGeoLocation,
   geoLoading,
@@ -144,6 +145,7 @@ export default function MicroSidebar({
       <ToggleSwitch checked={showSun} onChange={onToggleSun} label="Sun pockets" help="South-facing warm slopes." />
       <ToggleSwitch checked={showWind} onChange={onToggleWind} label="Wind corridors" help="Wind-channeling valleys." />
       <ToggleSwitch checked={showFog} onChange={onToggleFog} label="Persistent fog" help="High west-facing fog ridges." />
+      <ToggleSwitch checked={showContours} onChange={onToggleContours} label="Elevation contours" help="Topographic relief lines (m)." />
       <ToggleSwitch checked={showNeighborhoods} onChange={onToggleNeighborhoods} label="Neighborhoods" help="SF outlines + name labels." />
 
       <div className="fog-note" style={{ marginTop: "auto", opacity: 0.7 }}>

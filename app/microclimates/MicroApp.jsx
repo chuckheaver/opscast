@@ -25,6 +25,7 @@ export default function MicroApp() {
   const [showSun, setShowSun] = useState(true);
   const [showWind, setShowWind] = useState(true);
   const [showFog, setShowFog] = useState(true);
+  const [showContours, setShowContours] = useState(false);
   const [showNeighborhoods, setShowNeighborhoods] = useState(true);
 
   const [geoLoading, setGeoLoading] = useState(false);
@@ -98,6 +99,7 @@ export default function MicroApp() {
         showSun={showSun} onToggleSun={setShowSun}
         showWind={showWind} onToggleWind={setShowWind}
         showFog={showFog} onToggleFog={setShowFog}
+        showContours={showContours} onToggleContours={setShowContours}
         showNeighborhoods={showNeighborhoods} onToggleNeighborhoods={setShowNeighborhoods}
         onUseGeoLocation={requestGeoLocation}
         geoLoading={geoLoading}
@@ -109,6 +111,7 @@ export default function MicroApp() {
         showSun={showSun}
         showWind={showWind}
         showFog={showFog}
+        showContours={showContours}
         showNeighborhoods={showNeighborhoods}
         picked={picked}
       />
