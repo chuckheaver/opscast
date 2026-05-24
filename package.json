@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "fog:build": "node scripts/process-fog-data.mjs"
+    "fog:build": "node scripts/process-fog-data.mjs",
+    "micro:build": "node scripts/process-microclimates.mjs"
   },
   "dependencies": {
     "mapbox-gl": "^3.24.0",
