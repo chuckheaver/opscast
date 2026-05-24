@@ -33,6 +33,7 @@ export default function MicroMap({
   showWind,
   showFog,
   showContours,
+  showFogLine,
   showNeighborhoods,
   picked,
 }) {
@@ -43,7 +44,7 @@ export default function MicroMap({
 
   // Latest data + toggle state, readable from the stable callbacks below.
   const dataRef = useRef({ neighborhoods, zones });
-  const visRef = useRef({ showSun, showCool, showWind, showFog, showContours, showNeighborhoods });
+  const visRef = useRef({ showSun, showCool, showWind, showFog, showContours, showFogLine, showNeighborhoods });
 
   const applyVisibility = useCallback(() => {
     const map = mapRef.current;
@@ -59,6 +60,8 @@ export default function MicroMap({
     set("micro-contour-lines", v.showContours);
     set("micro-contour-labels", v.showContours);
     set("micro-contour-peaks", v.showContours);
+    set("micro-fog-inversion", v.showFogLine);
+    set("micro-fog-inversion-label", v.showFogLine);
     set("micro-neigh-outline", v.showNeighborhoods);
     set("micro-neigh-labels", v.showNeighborhoods);
   }, []);
@@ -133,6 +136,47 @@ export default function MicroMap({
           "text-halo-color": "#ffffff",
           "text-halo-width": 1.6,
           "text-opacity": ["interpolate", ["linear"], ["zoom"], 12.5, 0, 13.5, 1],
+        },
+      });
+      // Fog Inversion Line — the ~500 ft (150 m) contour. Marine fog pushing
+      // in from the west typically stops migrating east around this height,
+      // so this line approximates the eastern limit of the fog. Bold dashed
+      // steel-blue so it reads distinctly from the brown contours.
+      map.addLayer({
+        id: "micro-fog-inversion",
+        type: "line",
+        source: "micro-terrain",
+        "source-layer": "contour",
+        filter: ["==", ["get", "ele"], 150],
+        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": "#1d4ed8",
+          "line-width": 3,
+          "line-dasharray": [2, 1.4],
+          "line-opacity": 0.92,
+        },
+      });
+      map.addLayer({
+        id: "micro-fog-inversion-label",
+        type: "symbol",
+        source: "micro-terrain",
+        "source-layer": "contour",
+        filter: ["==", ["get", "ele"], 150],
+        layout: {
+          visibility: "none",
+          "text-field": "Fog inversion ≈500 ft",
+          "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+          "text-size": 11,
+          "symbol-placement": "line",
+          "symbol-spacing": 600,
+          "text-padding": 20,
+          "text-allow-overlap": false,
+        },
+        paint: {
+          "text-color": "#1d4ed8",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 2,
+          "text-opacity": ["interpolate", ["linear"], ["zoom"], 12, 0, 13, 1],
         },
       });
     }
@@ -221,9 +265,9 @@ export default function MicroMap({
 
   // Toggle changes → refresh refs + apply.
   useEffect(() => {
-    visRef.current = { showSun, showCool, showWind, showFog, showContours, showNeighborhoods };
+    visRef.current = { showSun, showCool, showWind, showFog, showContours, showFogLine, showNeighborhoods };
     applyVisibility();
-  }, [showSun, showCool, showWind, showFog, showContours, showNeighborhoods, applyVisibility]);
+  }, [showSun, showCool, showWind, showFog, showContours, showFogLine, showNeighborhoods, applyVisibility]);
 
   // Picked address → drop a marker, keep the city framed.
   useEffect(() => {
