@@ -145,7 +145,13 @@ export default function MicroLifeHeader({
             className="zip-inp"
             placeholder="Address, ZIP code, or city…"
             value={zip}
-            onChange={e => setZip(e.target.value)}
+            onChange={e => {
+              // Typing always re-opens the lookup and starts fresh, even
+              // right after a pick (the field keeps DOM focus through the
+              // mousedown-select, so onFocus never re-fires on its own).
+              if (!focused) setFocused(true);
+              setZip(e.target.value);
+            }}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onKeyDown={e => e.key === "Enter" && !loading && onSubmit && onSubmit()}
