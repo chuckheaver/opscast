@@ -11,7 +11,7 @@ import SetupView from "./components/SetupView";
 import ForecastView from "./components/ForecastView";
 import MicroLifeHeader from "./components/MicroLifeHeader";
 import { buildDefaults } from "./lib/thresholds";
-import { geoCode, getWx, getAQ, buildFcData } from "./lib/weather-api";
+import { geoCode, getWx, getAQ, buildFcData, reverseCityState } from "./lib/weather-api";
 
 const THRESH_STORAGE_KEY = "ur4cast.thresh.v1";
 // Last-selected location, shared with /fog so it can carry the location over
@@ -117,23 +117,14 @@ export default function Page() {
     navigator.geolocation.getCurrentPosition(
       async pos => {
         const { latitude: lat, longitude: lon } = pos.coords;
-        let name = "Your Location";
-        try {
-          const r = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
-          );
-          const d = await r.json();
-          name =
-            d.address?.city ||
-            d.address?.town ||
-            d.address?.village ||
-            name;
-        } catch {}
+        // Req 7: the 📍 pin resolves to a "City, ST" label.
+        const name = await reverseCityState([lon, lat]);
         const loc = {
           latitude: lat,
           longitude: lon,
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           name,
+          label: name,
           admin1: "",
           country: "",
         };
@@ -154,7 +145,9 @@ export default function Page() {
   // Autocomplete pick. Populates the field and caches the loc; user still
   // has to hit Get My Forecast.
   const selectLocation = sug => {
-    setZip(`${sug.name}${sug.admin1 ? `, ${sug.admin1}` : ""}`);
+    // Reqs 4/5: show the type-appropriate formatted label in the field
+    // (address → "123 Main St, City, ST"; ZIP/city → "City, ST").
+    setZip(sug.label || sug.name || "");
     setSelectedLoc(sug);
   };
 

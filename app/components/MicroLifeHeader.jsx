@@ -16,6 +16,10 @@
 import { useState, useEffect, useRef } from "react";
 import { geoSuggest } from "../lib/weather-api";
 
+// Bias autocomplete toward the user's picked location; fall back to the
+// SF city center so the very first keystroke still surfaces local hits.
+const SF_CENTER = [-122.4194, 37.7749];
+
 function buildFogUrl(loc, preset) {
   const qs = new URLSearchParams();
   if (loc?.latitude != null && loc?.longitude != null) {
@@ -50,15 +54,19 @@ export default function MicroLifeHeader({
       setSuggestions([]);
       return;
     }
+    const proximity =
+      selectedLoc?.longitude != null && selectedLoc?.latitude != null
+        ? [selectedLoc.longitude, selectedLoc.latitude]
+        : SF_CENTER;
     debounceRef.current = setTimeout(async () => {
-      const results = await geoSuggest(zip);
+      const results = await geoSuggest(zip, proximity);
       setSuggestions(results);
       setShowSugg(true);
     }, 300);
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
     };
-  }, [zip, focused]);
+  }, [zip, focused, selectedLoc]);
 
   const pickSuggestion = sug => {
     setShowSugg(false);
@@ -132,15 +140,29 @@ export default function MicroLifeHeader({
 
       <div id="setup-form" className="field-lbl">Location</div>
       <div className="loc-row" style={{ position: "relative" }}>
-        <input
-          className="zip-inp"
-          placeholder="ZIP code or city name…"
-          value={zip}
-          onChange={e => setZip(e.target.value)}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onKeyDown={e => e.key === "Enter" && !loading && onSubmit && onSubmit()}
-        />
+        <div className="zip-wrap">
+          <input
+            className="zip-inp"
+            placeholder="Address, ZIP code, or city…"
+            value={zip}
+            onChange={e => setZip(e.target.value)}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onKeyDown={e => e.key === "Enter" && !loading && onSubmit && onSubmit()}
+          />
+          {zip && (
+            <button
+              type="button"
+              className="clear-btn"
+              onMouseDown={e => e.preventDefault()}
+              onClick={() => { setZip(""); setSuggestions([]); setShowSugg(false); }}
+              aria-label="Clear location"
+              title="Clear"
+            >
+              ×
+            </button>
+          )}
+        </div>
         <button
           className="geo-btn"
           onClick={onGeo}
@@ -161,10 +183,10 @@ export default function MicroLifeHeader({
                   pickSuggestion(s);
                 }}
               >
-                <span className="ac-name">{s.name}</span>
-                <span className="ac-meta">
-                  {[s.admin1, s.country].filter(Boolean).join(", ")}
-                </span>
+                <span className="ac-name">{s.label || s.name}</span>
+                {s.place_name && s.place_name !== (s.label || s.name) && (
+                  <span className="ac-meta">{s.place_name}</span>
+                )}
               </div>
             ))}
           </div>

@@ -71,8 +71,8 @@ export default function ForecastView({
     <div className="fc">
       <div className="fc-top">
         <div className="fc-city">
-          {forecast.loc.name}
-          {forecast.loc.admin1 ? `, ${forecast.loc.admin1}` : ""}
+          {forecast.loc.label ||
+            `${forecast.loc.name}${forecast.loc.admin1 ? `, ${forecast.loc.admin1}` : ""}`}
         </div>
         {now && <div className="fc-currently">Currently</div>}
         <div className="fc-top-row">

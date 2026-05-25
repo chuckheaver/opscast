@@ -10,38 +10,81 @@ import { cToF, kmToMi, calcWC, wxIcon } from "./calculations";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
+// Pull a parent context entry (place = city, region = state, etc.) out
+// of a Mapbox feature by its id prefix.
+const ctx = (f, prefix) =>
+  (f.context || []).find(x => (x.id || "").startsWith(prefix));
+
+// Two-letter state code from a feature's region context ("US-CA" → "CA").
+const stateAbbr = f => {
+  const r = ctx(f, "region");
+  if (r?.short_code) return r.short_code.replace(/^US-/i, "").toUpperCase();
+  return r?.text || "";
+};
+
+// City name from a feature's place/locality context.
+const cityName = f => ctx(f, "place")?.text || ctx(f, "locality")?.text || "";
+
+// Human label tuned per place type:
+//   address   → "123 Main St, San Francisco, CA"
+//   postcode  → "San Francisco, CA"
+//   place     → "San Francisco, CA"
+//   other     → "<text>, San Francisco, CA"
+const labelFor = f => {
+  const type = f.place_type?.[0];
+  const city = cityName(f);
+  const st = stateAbbr(f);
+  if (type === "address") {
+    const street = [f.address, f.text].filter(Boolean).join(" ");
+    return [street, city, st].filter(Boolean).join(", ");
+  }
+  if (type === "postcode" || type === "place" || type === "locality") {
+    const head = type === "postcode" ? city : f.text;
+    return [head, st].filter(Boolean).join(", ");
+  }
+  return [f.text, city, st].filter(Boolean).join(", ") || f.place_name;
+};
+
 // Turn a Mapbox geocoding feature into a location object usable by
 // every page. Carries both the main-page shape (name/latitude/
 // longitude/timezone) and the /fog shape (id/text/center) so a single
-// geocoder can drive both. Mapbox has no timezone → "auto" lets the
-// Open-Meteo forecast endpoint infer it from the coordinates.
-const fromMapbox = f => ({
-  id: f.id,
-  name: f.text,
-  text: f.text,
-  place_name: f.place_name,
-  admin1: f.place_name
-    .split(",")
-    .slice(1)
-    .join(",")
-    .replace(/,\s*United States$/i, "")
-    .trim(),
-  country: "",
-  center: f.center, // [lng, lat]
-  latitude: f.center[1],
-  longitude: f.center[0],
-  timezone: "auto",
-});
+// geocoder can drive both. `label` is the formatted display string the
+// location field shows once a suggestion is chosen. Mapbox has no
+// timezone → "auto" lets the Open-Meteo forecast endpoint infer it.
+const fromMapbox = f => {
+  const label = labelFor(f);
+  return {
+    id: f.id,
+    name: label,
+    label,
+    text: f.text,
+    place_name: f.place_name,
+    admin1: [cityName(f), stateAbbr(f)].filter(Boolean).join(", "),
+    country: "",
+    center: f.center, // [lng, lat]
+    latitude: f.center[1],
+    longitude: f.center[0],
+    timezone: "auto",
+  };
+};
+
+// "&proximity=lng,lat" when a usable bias point is supplied, else "".
+const proximityParam = p =>
+  Array.isArray(p) && Number.isFinite(p[0]) && Number.isFinite(p[1])
+    ? `&proximity=${p[0]},${p[1]}`
+    : "";
 
 // Resolve a free-text query (street address, ZIP, city, POI) to a
 // single location object. Prefers Mapbox (handles street addresses);
 // falls back to Open-Meteo (city/ZIP only) when no Mapbox token.
-export const geoCode = async q => {
+// `proximity` ([lng, lat]) biases results toward the user's location.
+export const geoCode = async (q, proximity) => {
   if (MAPBOX_TOKEN) {
     try {
       const url =
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json` +
-        `?access_token=${MAPBOX_TOKEN}&country=us&types=address,postcode,place,locality,neighborhood,poi&limit=1`;
+        `?access_token=${MAPBOX_TOKEN}&country=us&types=address,postcode,place,locality,neighborhood,poi&limit=1` +
+        proximityParam(proximity);
       const r = await fetch(url);
       if (r.ok) {
         const d = await r.json();
@@ -61,13 +104,15 @@ export const geoCode = async q => {
 
 // Autocomplete: up to 5 suggestions for a partial query. Mapbox first
 // (street-address aware), Open-Meteo as a graceful fallback.
-export const geoSuggest = async q => {
+// `proximity` ([lng, lat]) surfaces the closest matching addresses first.
+export const geoSuggest = async (q, proximity) => {
   if (!q || q.trim().length < 2) return [];
   if (MAPBOX_TOKEN) {
     try {
       const url =
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json` +
-        `?access_token=${MAPBOX_TOKEN}&autocomplete=true&country=us&types=address,postcode,place,locality,neighborhood,poi&limit=5`;
+        `?access_token=${MAPBOX_TOKEN}&autocomplete=true&country=us&types=address,postcode,place,locality,neighborhood,poi&limit=5` +
+        proximityParam(proximity);
       const r = await fetch(url);
       if (r.ok) {
         const d = await r.json();
@@ -84,6 +129,27 @@ export const geoSuggest = async q => {
   } catch {
     return [];
   }
+};
+
+// Reverse-geocode a point to a "City, ST" label (for the 📍 pin button).
+// Falls back to "Your Location" when Mapbox is unavailable or empty.
+export const reverseCityState = async ([lng, lat]) => {
+  if (MAPBOX_TOKEN) {
+    try {
+      const url =
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json` +
+        `?access_token=${MAPBOX_TOKEN}&country=us&types=place,locality,postcode&limit=1`;
+      const r = await fetch(url);
+      if (r.ok) {
+        const d = await r.json();
+        if (d.features?.length) {
+          const lbl = labelFor(d.features[0]);
+          if (lbl) return lbl;
+        }
+      }
+    } catch {}
+  }
+  return "Your Location";
 };
 
 // 5-day hourly forecast for the given coordinates and timezone.

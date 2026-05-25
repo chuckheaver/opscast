@@ -231,6 +231,40 @@ body {
   cursor: not-allowed;
 }
 
+/* Wraps the location input so the clear "×" can sit inside it. */
+.zip-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+}
+.zip-wrap .zip-inp {
+  flex: 1;
+  padding-right: 34px;
+}
+.clear-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #b8b1a8;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.clear-btn:hover {
+  color: #57534e;
+  background: rgba(28, 25, 23, 0.06);
+}
+
 /* ── Location autocomplete dropdown ─────────────────────────────────────── */
 .autocomplete {
   position: absolute;
@@ -1798,6 +1832,11 @@ body {
 .app .geo-btn:hover {
   background: rgba(56, 189, 248, 0.12);
   border-color: #38bdf8;
+}
+.app .clear-btn { color: #64748b; }
+.app .clear-btn:hover {
+  color: #e2e8f0;
+  background: rgba(148, 163, 184, 0.18);
 }
 .app .sel-box:hover { border-color: rgba(148, 163, 184, 0.45); }
 /* Re-attach the arrow as a full background spec — the bare

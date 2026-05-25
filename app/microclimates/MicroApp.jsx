@@ -91,6 +91,22 @@ export default function MicroApp() {
     setPicked({ point: urlLoc.point, address: urlLoc.name || null });
   }, [urlLoc, neighborhoods]);
 
+  // Fallback to the shared location (opscast.loc.v1) when no URL params
+  // are present, so the selection carries across pages consistently.
+  useEffect(() => {
+    if (urlLocAppliedRef.current || urlLoc || !neighborhoods) return;
+    let stored;
+    try {
+      const raw = localStorage.getItem("opscast.loc.v1");
+      if (raw) stored = JSON.parse(raw);
+    } catch {}
+    const lat = Number(stored?.latitude);
+    const lng = Number(stored?.longitude);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+    urlLocAppliedRef.current = true;
+    setPicked({ point: [lng, lat], address: stored.name || null });
+  }, [urlLoc, neighborhoods]);
+
   return (
     <div className="fog-app">
       <MicroSidebar
