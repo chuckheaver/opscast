@@ -8,11 +8,22 @@ export { geoSuggest as geocodeSuggest } from "../../lib/weather-api";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-// Query the Mapbox Terrain v2 vector tileset (same source as the contour
-// lines on the map) for the elevation at a [lng, lat] point. Returns the
-// average elevation of the nearest contour features in feet, rounded, or
-// null if unavailable.
+// Elevation lookup. Prefers the local USGS NED 10 m DEM (sampled
+// server-side via /api/elevation — direct pixel value, ~1 m vertical
+// accuracy). For points outside the SF tile or when the API errors out,
+// falls back to Mapbox Terrain v2's contour tilequery (lower precision,
+// returns the average of the nearest contour features in feet).
 export async function elevationAtPoint([lng, lat]) {
+  // 1) Local DEM via the server route.
+  try {
+    const r = await fetch(`/api/elevation?lat=${lat}&lng=${lng}`);
+    if (r.ok) {
+      const d = await r.json();
+      if (Number.isFinite(d?.ft)) return d.ft;
+    }
+  } catch {}
+
+  // 2) Mapbox tilequery fallback for anything off-tile / on API failure.
   if (!TOKEN) return null;
   try {
     const url =

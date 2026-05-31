@@ -11,6 +11,7 @@
     "micro:build": "node scripts/process-microclimates.mjs"
   },
   "dependencies": {
+    "geotiff": "^3.0.5",
     "mapbox-gl": "^3.24.0",
     "next": "16.2.6",
     "react": "19.2.4",
