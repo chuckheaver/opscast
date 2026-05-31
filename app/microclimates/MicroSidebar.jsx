@@ -49,9 +49,18 @@ export default function MicroSidebar({
   const [open, setOpen] = useState(false);
   const debounceRef = useRef(null);
   const blurTimerRef = useRef(null);
+  // Skip the very next suggest-fetch after a pick so the dropdown
+  // doesn't re-open over the just-confirmed selection.
+  const suppressNextFetchRef = useRef(false);
 
   useEffect(() => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (suppressNextFetchRef.current) {
+      suppressNextFetchRef.current = false;
+      setSugs([]);
+      setOpen(false);
+      return;
+    }
     debounceRef.current = setTimeout(async () => {
       if (q.trim().length < 3) { setSugs([]); return; }
       try {
@@ -64,6 +73,7 @@ export default function MicroSidebar({
   }, [q]);
 
   const pick = sug => {
+    suppressNextFetchRef.current = true;
     setQ(sug.place_name);
     setSugs([]);
     setOpen(false);

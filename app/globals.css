@@ -1336,25 +1336,22 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-key-row-dark { border-bottom-color: rgba(255, 255, 255, 0.18); }
 
 .fog-toggles-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 10px auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 24px;
+  margin: 12px auto 0;
   max-width: 1280px;
 }
 /* Borderless variant for the bottom-panel toggle row — the iOS pill alone
    carries the toggle state, no surrounding card needed. */
 .fog-switch-compact {
-  flex: 1 1 0;
-  min-width: 0;
-  padding: 4px 0;
+  padding: 6px 0;
   background: transparent;
   border: none;
   border-radius: 0;
-  justify-content: center;
   grid-template-columns: 42px auto;
-  column-gap: 8px;
+  column-gap: 10px;
+  justify-content: start;
 }
 .fog-switch-compact:hover {
   background: transparent;
