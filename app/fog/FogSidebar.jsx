@@ -82,7 +82,6 @@ export default function FogSidebar({
     <aside className="fog-sidebar">
       <header className="fog-h">
         <div className="fog-brand-row">
-          <HomeGlyph />
           <h1 className="fog-brand">
             Ur <em>Micro</em> Life
           </h1>
@@ -327,39 +326,6 @@ function LegendRow({ emoji, range, label }) {
       <span className="fog-legend-range">{range}</span>
       <span className="fog-legend-label">{label}</span>
     </div>
-  );
-}
-
-// House silhouette — pitched roof, square base, centred doorway —
-// rendered with the same yellow→slate gradient as the rest of the
-// header so the brand mark feels continuous.
-function HomeGlyph() {
-  return (
-    <svg
-      width="32"
-      height="22"
-      viewBox="0 0 32 22"
-      fill="none"
-      aria-hidden="true"
-      className="fog-wave"
-    >
-      <defs>
-        <linearGradient id="home-grad" x1="0" y1="0" x2="32" y2="22" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#fbbf24" />
-          <stop offset="1" stopColor="#52525b" />
-        </linearGradient>
-      </defs>
-      <g
-        stroke="url(#home-grad)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      >
-        <path d="M 4 11 L 16 2 L 28 11 V 20 H 4 Z" />
-        <path d="M 13 20 V 14 H 19 V 20" />
-      </g>
-    </svg>
   );
 }
 
