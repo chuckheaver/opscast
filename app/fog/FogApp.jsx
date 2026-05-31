@@ -10,7 +10,8 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import FogMap from "./FogMap";
-import FogSidebar from "./FogSidebar";
+import FogTopBar from "./FogTopBar";
+import FogPanel from "./FogPanel";
 import { findNeighborhoodForPoint, findContourForPoint } from "./lib/spatial";
 import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
 
@@ -27,29 +28,29 @@ export default function FogApp() {
   const preset = searchParams?.get("preset") || "";
   const [geojson, setGeojson] = useState(null);
   const [contours, setContours] = useState(null);
+  const [zips, setZips] = useState(null);
+  const [supervisorDistricts, setSupervisorDistricts] = useState(null);
+  const [realtorNeighborhoods, setRealtorNeighborhoods] = useState(null);
+  const [microclimates, setMicroclimates] = useState(null);
   const [dataErr, setDataErr] = useState("");
-  const [picked, setPicked] = useState(null); // { feature, point: [lng, lat], address, contour, elevation_ft }
-  // Fog data layer (contour fills + icon patterns).
-  const [showContours, setShowContours] = useState(preset === "" || preset === "fog");
-  // Topographic hillshade overlay.
-  const [showTerrain, setShowTerrain] = useState(false);
-  // CA Geological Survey seismic hazard zones.
-  const [showSeismic, setShowSeismic] = useState(false);
-  // SFMTA Muni stops.
-  const [showMuni, setShowMuni] = useState(preset === "muni");
-  // SFMTA bike network.
+  const [picked, setPicked] = useState(null); // { feature, point, address, contour, elevation_ft, zip, supervisor, realtor, microZone }
+  // Summer fog overlay — on for the "Fog Map" preset; off otherwise.
+  const [showContours, setShowContours] = useState(preset === "fog");
+  // Transit (Muni stops) — on for the "Transit" preset.
+  const [showMuni, setShowMuni] = useState(preset === "transit");
+  // Bike network — on for the "Bike Paths" preset.
   const [showBikes, setShowBikes] = useState(preset === "bikes");
-  // DataSF ZIP code boundaries.
-  const [showZips, setShowZips] = useState(preset === "zips");
-  // 2022 Supervisor District boundaries.
-  const [showDistricts, setShowDistricts] = useState(false);
-  // Zoning Map color overlay.
-  const [showZoning, setShowZoning] = useState(false);
-  // Realtor Neighborhoods (SFAR districts).
-  const [showRealtor, setShowRealtor] = useState(false);
-  // SF neighborhood outlines + name labels — always on by default,
-  // and every Ur4cast icon preset keeps them on as the anchor layer.
+  // SF neighborhood outlines + name labels — always on by default and
+  // every preset keeps them on as the anchor layer.
   const [showNeighborhoods, setShowNeighborhoods] = useState(true);
+  // Supervisor district boundaries — on for the "Districts" preset.
+  const [showDistricts, setShowDistricts] = useState(preset === "districts");
+  // Background layers kept off — used for lookups, not for the UI toggle set.
+  const [showTerrain] = useState(false);
+  const [showSeismic] = useState(false);
+  const [showZips] = useState(false);
+  const [showZoning] = useState(false);
+  const [showRealtor] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
   const autoGeoTriedRef = useRef(false);
@@ -91,6 +92,18 @@ export default function FogApp() {
         if (!cancelled && d) setContours(d);
       })
       .catch(() => {});
+
+    // Extra layers used only for the key/legend lookups (not toggleable
+    // in the simplified toggle set). Loaded once on mount, in parallel.
+    const loadLookup = (url, setter) =>
+      fetch(url)
+        .then(r => (r.ok ? r.json() : null))
+        .then(d => { if (!cancelled && d) setter(d); })
+        .catch(() => {});
+    loadLookup("/data/sf-zip-codes.geojson", setZips);
+    loadLookup("/data/sf-supervisor-districts.geojson", setSupervisorDistricts);
+    loadLookup("/data/sf-realtor-neighborhoods.geojson", setRealtorNeighborhoods);
+    loadLookup("/data/sf-microclimates.geojson", setMicroclimates);
 
     return () => {
       cancelled = true;
@@ -244,52 +257,51 @@ export default function FogApp() {
   }, [requestGeoLocation, urlLoc]);
 
   return (
-    <div className="fog-app">
-      <FogSidebar
-        picked={picked}
+    <div className="fog-app fog-app-vertical">
+      <FogTopBar
         onPickFromAddress={pickFromAddress}
-        dataErr={dataErr}
+        onUseGeoLocation={requestGeoLocation}
         ready={!!geojson}
-        contoursAvailable={!!contours}
+        geoLoading={geoLoading}
+        picked={picked}
+        dataErr={dataErr}
+        geoErr={geoErr}
+      />
+      <div className="fog-map-wrap">
+        <FogMap
+          geojson={geojson}
+          contours={contours}
+          showContours={showContours}
+          showTerrain={showTerrain}
+          showSeismic={showSeismic}
+          showMuni={showMuni}
+          showBikes={showBikes}
+          showZips={showZips}
+          showDistricts={showDistricts}
+          showZoning={showZoning}
+          showRealtor={showRealtor}
+          showNeighborhoods={showNeighborhoods}
+          picked={picked}
+          onPickFeature={pickFromMap}
+        />
+      </div>
+      <FogPanel
+        picked={picked}
+        zips={zips}
+        supervisorDistricts={supervisorDistricts}
+        realtorNeighborhoods={realtorNeighborhoods}
+        microclimates={microclimates}
+        showNeighborhoods={showNeighborhoods}
+        onToggleNeighborhoods={setShowNeighborhoods}
         showContours={showContours}
         onToggleContours={setShowContours}
-        showTerrain={showTerrain}
-        onToggleTerrain={setShowTerrain}
-        showSeismic={showSeismic}
-        onToggleSeismic={setShowSeismic}
+        contoursAvailable={!!contours}
         showMuni={showMuni}
         onToggleMuni={setShowMuni}
         showBikes={showBikes}
         onToggleBikes={setShowBikes}
-        showZips={showZips}
-        onToggleZips={setShowZips}
         showDistricts={showDistricts}
         onToggleDistricts={setShowDistricts}
-        showZoning={showZoning}
-        onToggleZoning={setShowZoning}
-        showRealtor={showRealtor}
-        onToggleRealtor={setShowRealtor}
-        showNeighborhoods={showNeighborhoods}
-        onToggleNeighborhoods={setShowNeighborhoods}
-        onUseGeoLocation={requestGeoLocation}
-        geoLoading={geoLoading}
-        geoErr={geoErr}
-      />
-      <FogMap
-        geojson={geojson}
-        contours={contours}
-        showContours={showContours}
-        showTerrain={showTerrain}
-        showSeismic={showSeismic}
-        showMuni={showMuni}
-        showBikes={showBikes}
-        showZips={showZips}
-        showDistricts={showDistricts}
-        showZoning={showZoning}
-        showRealtor={showRealtor}
-        showNeighborhoods={showNeighborhoods}
-        picked={picked}
-        onPickFeature={pickFromMap}
       />
     </div>
   );

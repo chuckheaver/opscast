@@ -91,23 +91,22 @@ export default function MicroLifeHeader({
   return (
     <div className="ml-header">
       <div className="page-h">
-        What&apos;s Your SF<br />
-        <em>Micro-Life?</em>
+        What&apos;s Your SF <em>Micro-Life?</em>
       </div>
       <div className="micro-icons">
         <a className="micro-icon-item" href="#setup-form">
           <span className="micro-icon" aria-hidden="true">🌤️</span>
           <span className="micro-icon-label">Weather</span>
         </a>
-        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "housing")}>
+        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "hoods")}>
           <span className="micro-icon" aria-hidden="true">🏡</span>
-          <span className="micro-icon-label">Housing</span>
+          <span className="micro-icon-label">Hoods</span>
         </a>
         <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "fog")}>
           <span className="micro-icon" aria-hidden="true">🌁</span>
-          <span className="micro-icon-label">Summer Fog</span>
+          <span className="micro-icon-label">Fog Map</span>
         </a>
-        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "muni")}>
+        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "transit")}>
           <span className="micro-icon" aria-hidden="true">🚃</span>
           <span className="micro-icon-label">Transit</span>
         </a>
@@ -115,13 +114,13 @@ export default function MicroLifeHeader({
           <span className="micro-icon" aria-hidden="true">🚲</span>
           <span className="micro-icon-label">Bike Paths</span>
         </a>
-        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "zips")}>
+        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "districts")}>
           <span className="micro-icon" aria-hidden="true">📭</span>
-          <span className="micro-icon-label">Postal</span>
+          <span className="micro-icon-label">Districts</span>
         </a>
       </div>
       <div className="page-sub">
-        Set your ideal conditions once, pick your typical dates/times, and I&apos;ll tell you when you need to worry!
+        Set Your Ideal Weather
         {onOpenSettings && (
           <button
             type="button"
@@ -130,9 +129,11 @@ export default function MicroLifeHeader({
             aria-label="Settings"
             title="Settings"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="3" />
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="#ea580c"
+                d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm9.43 4.92l-2.05-1.16a7.6 7.6 0 0 0 0-2.52l2.05-1.16a.5.5 0 0 0 .2-.62l-1.94-3.36a.5.5 0 0 0-.6-.23l-2.4.84a7.5 7.5 0 0 0-2.18-1.26l-.36-2.53a.5.5 0 0 0-.5-.42h-3.88a.5.5 0 0 0-.5.42l-.36 2.53a7.5 7.5 0 0 0-2.18 1.26l-2.4-.84a.5.5 0 0 0-.6.23L2.32 7.96a.5.5 0 0 0 .2.62l2.05 1.16a7.6 7.6 0 0 0 0 2.52L2.52 13.42a.5.5 0 0 0-.2.62l1.94 3.36c.13.22.4.32.6.23l2.4-.84a7.5 7.5 0 0 0 2.18 1.26l.36 2.53c.04.24.25.42.5.42h3.88a.5.5 0 0 0 .5-.42l.36-2.53a7.5 7.5 0 0 0 2.18-1.26l2.4.84a.5.5 0 0 0 .6-.23l1.94-3.36a.5.5 0 0 0-.2-.62z"
+              />
             </svg>
           </button>
         )}

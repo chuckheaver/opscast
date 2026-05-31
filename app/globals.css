@@ -111,15 +111,15 @@ body {
   color: transparent;
   padding-right: 1px;
 }
-/* Six clickable facet icons under the page heading: Weather scrolls
+/* Six clickable facet icons under the page heading. Weather scrolls
    to the form below; the other five jump to /fog with a layer preset
-   pre-toggled (Housing / Summer Fog / Transit / Bike Paths / Postal). */
+   pre-toggled (Hoods / Fog Map / Transit / Bike Paths / Districts). */
 .micro-icons {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
-  margin: 18px 0 22px;
+  margin: 10px 0 14px;
 }
 .micro-icon-item {
   flex: 1;
@@ -163,7 +163,10 @@ body {
   color: #1c1917;
   line-height: 1.45;
   letter-spacing: 0.2px;
-  margin-bottom: 36px;
+  margin-bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 .field-lbl {
   font-size: 11px;
@@ -186,7 +189,7 @@ body {
 .loc-row {
   display: flex;
   gap: 8px;
-  margin-bottom: 28px;
+  margin-bottom: 14px;
 }
 .zip-inp {
   flex: 1;
@@ -1173,10 +1176,11 @@ input[type=range]::-webkit-slider-thumb:hover {
 /* ── Legend ─────────────────────────────────────────────────────────────── */
 .fc-legend {
   display: flex;
-  gap: 14px;
-  margin-top: 12px;
+  gap: 18px;
+  margin-top: 10px;
   flex-wrap: wrap;
   margin-bottom: 18px;
+  justify-content: center;
 }
 .fc-leg {
   display: flex;
@@ -1217,6 +1221,132 @@ input[type=range]::-webkit-slider-thumb:hover {
   font-family: 'DM Sans', sans-serif;
   background: #f0ece6;
 }
+/* Vertical stack used by the new /fog shell:
+   location bar → map → key/legend + toggles. */
+.fog-app-vertical {
+  display: flex;
+  flex-direction: column;
+}
+.fog-map-wrap {
+  flex: 1 1 auto;
+  min-height: 280px;
+  position: relative;
+}
+.fog-map-wrap .fog-map { position: absolute; inset: 0; }
+
+/* ── Top bar (location search above the map) ───────────────────────────── */
+.fog-topbar {
+  background: linear-gradient(180deg, #ffffff 0%, #faf6ec 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+}
+.fog-topbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.fog-topbar-lbl {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #1c1917;
+  flex: 0 0 auto;
+}
+.fog-topbar-search {
+  flex: 1 1 auto;
+  position: relative;
+  display: flex;
+  gap: 8px;
+}
+.fog-topbar-search .fog-input { flex: 1; }
+.fog-topbar-err {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #b91c1c;
+  display: flex;
+  gap: 12px;
+}
+
+/* ── Bottom panel (key + color box + toggles under the map) ───────────── */
+.fog-panel {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  padding: 12px 16px 14px;
+  max-height: 42vh;
+  overflow-y: auto;
+}
+.fog-panel-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.fog-keybox {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #fff;
+}
+.fog-keybox-h {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1c1917;
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+.fog-colorbox {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.fog-key-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 3px 0;
+  font-size: 12px;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.06);
+}
+.fog-key-row:last-child { border-bottom: none; }
+.fog-key-label {
+  color: #57534e;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+.fog-key-value {
+  color: #1c1917;
+  font-weight: 600;
+  text-align: right;
+}
+.fog-key-row-dark .fog-key-label { color: rgba(255, 255, 255, 0.85); }
+.fog-key-row-dark .fog-key-value { color: #ffffff; }
+.fog-key-row-dark { border-bottom-color: rgba(255, 255, 255, 0.18); }
+
+.fog-toggles-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.fog-switch-compact {
+  flex: 1 1 auto;
+  min-width: 140px;
+  padding: 8px 10px;
+}
+.fog-switch-compact .fog-switch-help { display: none; }
 .fog-sidebar {
   background: linear-gradient(180deg, #ffffff 0%, #faf6ec 100%);
   border-right: 1px solid var(--border);
@@ -1601,6 +1731,11 @@ input[type=range]::-webkit-slider-thumb:hover {
     border-bottom: 1px solid var(--border);
     max-height: 50vh;
   }
+  .fog-panel-row {
+    grid-template-columns: 1fr;
+  }
+  .fog-panel { max-height: 50vh; }
+  .fog-topbar-inner { flex-wrap: wrap; }
 }
 
 /* ── Forecast-first front page ──────────────────────────────────────────── */
@@ -1628,19 +1763,22 @@ input[type=range]::-webkit-slider-thumb:hover {
   outline: none;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
 }
-/* Inline variant: sits next to the "Micro Life" emphasised text in
-   the page heading. Smaller, baseline-aligned, no rotate flourish so
-   it doesn't compete with the typography. */
+/* Inline variant next to the "Set Your Ideal Weather" CTA. Borderless
+   so the filled orange gear icon reads as the button itself. */
 .gear-btn-inline {
-  width: 22px;
-  height: 22px;
-  margin-left: 6px;
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
   vertical-align: middle;
   position: relative;
-  top: -1px;
 }
 .gear-btn-inline:hover {
-  transform: rotate(20deg);
+  background: transparent;
+  border: none;
+  transform: rotate(30deg);
 }
 
 /* Splash shown while the auto-launch forecast fetch is in flight. */
