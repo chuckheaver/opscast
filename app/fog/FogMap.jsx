@@ -298,6 +298,69 @@ export default function FogMap({
         },
       });
 
+      // Precise 50 ft and 100 ft contour lines derived from the local
+      // USGS NED 10 m DEM (scripts/build-elevation-contours.mjs). These
+      // land exactly on imperial heights — Mapbox's terrain-v2 grid is
+      // in 10 m steps and can't hit them — so they're visually distinct
+      // from the metric contours and useful for reading the fog floor.
+      map.addSource("ft-contours", {
+        type: "geojson",
+        data: "/data/sf-contours-50-100ft.geojson",
+      });
+      map.addLayer({
+        id: "ft-contour-50",
+        type: "line",
+        source: "ft-contours",
+        filter: ["==", ["get", "ft"], 50],
+        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": "#0284c7",
+          "line-width": 1.3,
+          "line-opacity": 0.85,
+        },
+      });
+      map.addLayer({
+        id: "ft-contour-100",
+        type: "line",
+        source: "ft-contours",
+        filter: ["==", ["get", "ft"], 100],
+        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": "#7c3aed",
+          "line-width": 1.6,
+          "line-opacity": 0.9,
+        },
+      });
+      map.addLayer({
+        id: "ft-contour-labels",
+        type: "symbol",
+        source: "ft-contours",
+        layout: {
+          visibility: "none",
+          "text-field": ["concat", ["to-string", ["get", "ft"]], " ft"],
+          "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+          "text-size": 10,
+          "text-padding": 24,
+          "symbol-placement": "line",
+          "text-allow-overlap": false,
+        },
+        paint: {
+          "text-color": [
+            "match", ["get", "ft"],
+            50,  "#075985",
+            100, "#5b21b6",
+            "#1c1917",
+          ],
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.6,
+          "text-opacity": [
+            "interpolate", ["linear"], ["zoom"],
+            13, 0,
+            14, 1,
+          ],
+        },
+      });
+
       // ── Neighborhood source ─────────────────────────────────────────
       map.addSource("fog", {
         type: "geojson",
@@ -870,14 +933,21 @@ export default function FogMap({
     else map.once("load", apply);
   }, [showTerrain]);
 
-  // Toggle the elevation contour lines + ft labels + peak labels —
-  // the same topographic layer that powers /microclimates.
+  // Toggle the elevation contour lines + ft labels + peak labels +
+  // the precise 50/100 ft USGS-derived overlay.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
       const vis = showElevation ? "visible" : "none";
-      ["contour-lines", "contour-labels", "peaks-labels"].forEach(id => {
+      [
+        "contour-lines",
+        "contour-labels",
+        "peaks-labels",
+        "ft-contour-50",
+        "ft-contour-100",
+        "ft-contour-labels",
+      ].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
