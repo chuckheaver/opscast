@@ -22,6 +22,9 @@ export default function FogPanel({
   showBikes, onToggleBikes,
   showDistricts, onToggleDistricts,
   showZips, onToggleZips,
+  showTerrain, onToggleTerrain,
+  showElevation, onToggleElevation,
+  showSeismic, onToggleSeismic,
 }) {
   // Compute the per-location lookups inline so we don't double-store them.
   const point = picked?.point;
@@ -103,6 +106,21 @@ export default function FogPanel({
           checked={showZips}
           onChange={onToggleZips}
           label="Zip Codes"
+        />
+        <ToggleSwitch
+          checked={showElevation}
+          onChange={onToggleElevation}
+          label="Elevation"
+        />
+        <ToggleSwitch
+          checked={showTerrain}
+          onChange={onToggleTerrain}
+          label="Terrain"
+        />
+        <ToggleSwitch
+          checked={showSeismic}
+          onChange={onToggleSeismic}
+          label="Seismic"
         />
       </div>
     </div>

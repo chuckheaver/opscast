@@ -101,6 +101,7 @@ export default function FogMap({
   contours,
   showContours,
   showTerrain,
+  showElevation,
   showSeismic,
   showMuni,
   showBikes,
@@ -239,7 +240,11 @@ export default function FogMap({
         filter: ["==", ["get", "index"], 10],
         layout: {
           visibility: "none",
-          "text-field": ["concat", ["to-string", ["get", "ele"]], " m"],
+          "text-field": [
+            "concat",
+            ["to-string", ["round", ["*", ["get", "ele"], 3.28084]]],
+            " ft",
+          ],
           "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
           "text-size": 10,
           "text-padding": 12,
@@ -851,19 +856,34 @@ export default function FogMap({
     });
   }, [showContours]);
 
-  // Toggle the hillshade terrain overlay + peak labels.
+  // Toggle the hillshade terrain overlay.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
       const vis = showTerrain ? "visible" : "none";
-      ["hillshade", "hillshade-2", "contour-lines", "contour-labels", "peaks-labels"].forEach(id => {
+      ["hillshade", "hillshade-2"].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showTerrain]);
+
+  // Toggle the elevation contour lines + ft labels + peak labels —
+  // the same topographic layer that powers /microclimates.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showElevation ? "visible" : "none";
+      ["contour-lines", "contour-labels", "peaks-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showElevation]);
 
   // Toggle the seismic hazard overlay (fill + outline).
   useEffect(() => {

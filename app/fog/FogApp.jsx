@@ -46,9 +46,14 @@ export default function FogApp() {
   const [showDistricts, setShowDistricts] = useState(preset === "districts");
   // ZIP code boundaries — independent toggle.
   const [showZips, setShowZips] = useState(false);
+  // Topographic hillshade overlay.
+  const [showTerrain, setShowTerrain] = useState(false);
+  // Elevation contour lines + ft labels + peak labels — the layer set
+  // pulled in from /microclimates.
+  const [showElevation, setShowElevation] = useState(false);
+  // CA Geological Survey seismic hazard zones.
+  const [showSeismic, setShowSeismic] = useState(false);
   // Background layers kept off — used for lookups, not for the UI toggle set.
-  const [showTerrain] = useState(false);
-  const [showSeismic] = useState(false);
   const [showZoning] = useState(false);
   const [showRealtor] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
@@ -272,6 +277,7 @@ export default function FogApp() {
           contours={contours}
           showContours={showContours}
           showTerrain={showTerrain}
+          showElevation={showElevation}
           showSeismic={showSeismic}
           showMuni={showMuni}
           showBikes={showBikes}
@@ -302,6 +308,12 @@ export default function FogApp() {
         onToggleDistricts={setShowDistricts}
         showZips={showZips}
         onToggleZips={setShowZips}
+        showTerrain={showTerrain}
+        onToggleTerrain={setShowTerrain}
+        showElevation={showElevation}
+        onToggleElevation={setShowElevation}
+        showSeismic={showSeismic}
+        onToggleSeismic={setShowSeismic}
       />
     </div>
   );
