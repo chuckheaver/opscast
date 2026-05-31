@@ -1308,6 +1308,9 @@ input[type=range]::-webkit-slider-thumb:hover {
   flex-direction: column;
   justify-content: center;
 }
+.fog-colorbox .fog-key-label,
+.fog-colorbox .fog-key-value { color: #000; }
+.fog-colorbox .fog-key-row { border-bottom-color: rgba(0, 0, 0, 0.18); }
 .fog-key-row {
   display: flex;
   justify-content: space-between;
@@ -1335,18 +1338,30 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-toggles-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 10px auto 0;
   max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
 }
+/* Borderless variant for the bottom-panel toggle row — the iOS pill alone
+   carries the toggle state, no surrounding card needed. */
 .fog-switch-compact {
-  flex: 1 1 auto;
-  min-width: 140px;
-  padding: 8px 10px;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 4px 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  justify-content: center;
+  grid-template-columns: 42px auto;
+  column-gap: 8px;
+}
+.fog-switch-compact:hover {
+  background: transparent;
+  border: none;
 }
 .fog-switch-compact .fog-switch-help { display: none; }
+.fog-switch-compact .fog-switch-label { white-space: nowrap; }
 .fog-sidebar {
   background: linear-gradient(180deg, #ffffff 0%, #faf6ec 100%);
   border-right: 1px solid var(--border);

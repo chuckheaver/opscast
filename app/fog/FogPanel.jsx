@@ -8,31 +8,20 @@
 // Transit, Bike Paths).
 
 import { findNeighborhoodForPoint } from "./lib/spatial";
-import { fogColor } from "./lib/risk";
-
-// Human-readable label per microclimate zone id (from the DEM pipeline).
-const ZONE_LABEL = {
-  sun: "Sun Pocket",
-  cool: "Cool / Shade",
-  wind: "Wind Corridor",
-  fog: "Fog Path (≤200 ft)",
-  fog2: "Fog Band (200–350 ft)",
-  fog3: "Fog Band (350–500 ft)",
-  fog4: "Fog Band (500–1000 ft)",
-};
+import { fogColor, fogLabel } from "./lib/risk";
 
 export default function FogPanel({
   picked,
   zips,
   supervisorDistricts,
   realtorNeighborhoods,
-  microclimates,
   showNeighborhoods, onToggleNeighborhoods,
   showContours, onToggleContours,
   contoursAvailable,
   showMuni, onToggleMuni,
   showBikes, onToggleBikes,
   showDistricts, onToggleDistricts,
+  showZips, onToggleZips,
 }) {
   // Compute the per-location lookups inline so we don't double-store them.
   const point = picked?.point;
@@ -41,8 +30,6 @@ export default function FogPanel({
     ? findNeighborhoodForPoint(supervisorDistricts, point) : null;
   const realtorFeat = point && realtorNeighborhoods
     ? findNeighborhoodForPoint(realtorNeighborhoods, point) : null;
-  const microFeat = point && microclimates
-    ? findNeighborhoodForPoint(microclimates, point) : null;
 
   const neighborhoodName = picked?.feature?.properties?.name;
   const zipCode = zipFeat?.properties?.zip;
@@ -53,9 +40,10 @@ export default function FogPanel({
   const supervisorLabel = supFeat
     ? `District ${supFeat.properties.district}${supFeat.properties.supervisor ? ` — ${supFeat.properties.supervisor}` : ""}`
     : null;
-  const microZoneId = microFeat?.properties?.zone;
-  const microZoneLabel = microZoneId ? ZONE_LABEL[microZoneId] || microZoneId : null;
+  // Microclimate Zone derives from the USGS fog contour at the picked
+  // point — same source as the hours value below, just bucketed.
   const fogHrs = picked?.contour?.properties?.hours;
+  const microZoneLabel = Number.isFinite(fogHrs) ? fogLabel(fogHrs) : null;
 
   return (
     <div className="fog-panel">
@@ -75,11 +63,10 @@ export default function FogPanel({
           className="fog-colorbox"
           style={fogHrs != null ? { background: fogColor(fogHrs) } : undefined}
         >
-          <KeyRow label="Microclimate Zone" value={microZoneLabel} dark />
+          <KeyRow label="Microclimate Zone" value={microZoneLabel} />
           <KeyRow
             label="Avg Summer Fog Daily"
             value={fogHrs != null ? `${fogHrs.toFixed(1)} hrs / day` : null}
-            dark
           />
         </div>
       </div>
@@ -111,6 +98,11 @@ export default function FogPanel({
           checked={showDistricts}
           onChange={onToggleDistricts}
           label="Districts"
+        />
+        <ToggleSwitch
+          checked={showZips}
+          onChange={onToggleZips}
+          label="Zip Codes"
         />
       </div>
     </div>

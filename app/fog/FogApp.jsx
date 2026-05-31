@@ -31,7 +31,6 @@ export default function FogApp() {
   const [zips, setZips] = useState(null);
   const [supervisorDistricts, setSupervisorDistricts] = useState(null);
   const [realtorNeighborhoods, setRealtorNeighborhoods] = useState(null);
-  const [microclimates, setMicroclimates] = useState(null);
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { feature, point, address, contour, elevation_ft, zip, supervisor, realtor, microZone }
   // Summer fog overlay — on for the "Fog Map" preset; off otherwise.
@@ -45,10 +44,11 @@ export default function FogApp() {
   const [showNeighborhoods, setShowNeighborhoods] = useState(true);
   // Supervisor district boundaries — on for the "Districts" preset.
   const [showDistricts, setShowDistricts] = useState(preset === "districts");
+  // ZIP code boundaries — independent toggle.
+  const [showZips, setShowZips] = useState(false);
   // Background layers kept off — used for lookups, not for the UI toggle set.
   const [showTerrain] = useState(false);
   const [showSeismic] = useState(false);
-  const [showZips] = useState(false);
   const [showZoning] = useState(false);
   const [showRealtor] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
@@ -103,7 +103,6 @@ export default function FogApp() {
     loadLookup("/data/sf-zip-codes.geojson", setZips);
     loadLookup("/data/sf-supervisor-districts.geojson", setSupervisorDistricts);
     loadLookup("/data/sf-realtor-neighborhoods.geojson", setRealtorNeighborhoods);
-    loadLookup("/data/sf-microclimates.geojson", setMicroclimates);
 
     return () => {
       cancelled = true;
@@ -290,7 +289,6 @@ export default function FogApp() {
         zips={zips}
         supervisorDistricts={supervisorDistricts}
         realtorNeighborhoods={realtorNeighborhoods}
-        microclimates={microclimates}
         showNeighborhoods={showNeighborhoods}
         onToggleNeighborhoods={setShowNeighborhoods}
         showContours={showContours}
@@ -302,6 +300,8 @@ export default function FogApp() {
         onToggleBikes={setShowBikes}
         showDistricts={showDistricts}
         onToggleDistricts={setShowDistricts}
+        showZips={showZips}
+        onToggleZips={setShowZips}
       />
     </div>
   );
