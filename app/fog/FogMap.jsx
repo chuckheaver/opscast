@@ -614,6 +614,79 @@ export default function FogMap({
         type: "geojson",
         data: "/data/sf-muni-stops.geojson",
       });
+      // Muni routes — 135 service patterns from DataSF "Muni Simple
+      // Routes." Drawn under the dots so the markers stay on top.
+      // Coloured by route_name using SFMTA's brand palette for the
+      // metro letters / cable lines; buses fall through to a neutral
+      // grey, with Rapid (R suffix) / Express (X suffix) / Owl (90, 91)
+      // picking up distinct accents.
+      map.addSource("muni-routes", {
+        type: "geojson",
+        data: "/data/sf-muni-routes.geojson",
+      });
+      const MUNI_ROUTE_COLOR = [
+        "match", ["get", "route_name"],
+        "J", "#D85F2A",
+        "K", "#5B6770", "KBUS", "#5B6770",
+        "L", "#92278F",
+        "M", "#007749",
+        "N", "#005DAA", "NBUS", "#005DAA",
+        "T", "#BC1E2D", "TBUS", "#BC1E2D",
+        "F", "#C99729", "FBUS", "#C99729",
+        ["C", "PH", "PM"], "#B11116",
+        ["5R", "9R", "14R", "28R", "38R"], "#EA580C",
+        ["1X", "8AX", "8BX", "30X"], "#6D28D9",
+        ["90", "91"], "#1E3A8A",
+        "#6B7280",
+      ];
+      const MUNI_ROUTE_WIDTH = [
+        "match", ["get", "route_name"],
+        ["J", "K", "L", "M", "N", "T", "F", "C", "PH", "PM"], [
+          "interpolate", ["linear"], ["zoom"],
+          11, 1.2, 14, 2.4, 17, 4,
+        ],
+        ["5R", "9R", "14R", "28R", "38R", "1X", "8AX", "8BX", "30X"], [
+          "interpolate", ["linear"], ["zoom"],
+          11, 0.9, 14, 1.8, 17, 3,
+        ],
+        // Regular bus.
+        ["interpolate", ["linear"], ["zoom"],
+          11, 0.6, 14, 1.2, 17, 2.2,
+        ],
+      ];
+      map.addLayer({
+        id: "muni-routes-lines",
+        type: "line",
+        source: "muni-routes",
+        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": MUNI_ROUTE_COLOR,
+          "line-width": MUNI_ROUTE_WIDTH,
+          "line-opacity": [
+            "interpolate", ["linear"], ["zoom"],
+            10, 0.55,
+            14, 0.85,
+          ],
+        },
+      });
+      // Dash the temporary BUS substitutes (KBUS/NBUS/TBUS/FBUS) so they
+      // read as "bus replacing rail" rather than the actual metro line.
+      map.addLayer({
+        id: "muni-routes-bus-substitutes",
+        type: "line",
+        source: "muni-routes",
+        filter: ["in", ["get", "route_name"], ["literal", ["KBUS", "NBUS", "TBUS", "FBUS"]]],
+        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": "#ffffff",
+          "line-width": [
+            "interpolate", ["linear"], ["zoom"],
+            11, 0.5, 14, 1.0, 17, 1.6,
+          ],
+          "line-dasharray": [2, 2.5],
+          "line-opacity": 0.95,
+        },
+      });
       map.addLayer({
         id: "muni-dots",
         type: "circle",
@@ -987,7 +1060,12 @@ export default function FogMap({
     if (!map) return;
     const apply = () => {
       const vis = showMuni ? "visible" : "none";
-      ["muni-dots", "muni-labels"].forEach(id => {
+      [
+        "muni-routes-lines",
+        "muni-routes-bus-substitutes",
+        "muni-dots",
+        "muni-labels",
+      ].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };

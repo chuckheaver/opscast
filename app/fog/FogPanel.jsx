@@ -144,6 +144,23 @@ export default function FogPanel({
             ["#6b7280", "Class III · shared / sharrows", "dashed"],
           ]}
         />
+        <LayerLegend
+          title="Transit"
+          items={[
+            ["#D85F2A", "J Church"],
+            ["#5B6770", "K Ingleside"],
+            ["#92278F", "L Taraval"],
+            ["#007749", "M Ocean View"],
+            ["#005DAA", "N Judah"],
+            ["#BC1E2D", "T Third"],
+            ["#C99729", "F Heritage"],
+            ["#B11116", "Cable car"],
+            ["#EA580C", "Rapid (R)"],
+            ["#6D28D9", "Express (X)"],
+            ["#1E3A8A", "Owl (90 · 91)"],
+            ["#6B7280", "Bus route"],
+          ]}
+        />
       </div>
     </div>
   );
