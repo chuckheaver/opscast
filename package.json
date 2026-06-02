@@ -9,7 +9,8 @@
     "lint": "eslint",
     "fog:build": "node scripts/process-fog-data.mjs",
     "micro:build": "node scripts/process-microclimates.mjs",
-    "contours:build": "node scripts/build-elevation-contours.mjs"
+    "contours:build": "node scripts/build-elevation-contours.mjs",
+    "muni:build": "node scripts/build-muni-stops.mjs"
   },
   "dependencies": {
     "geotiff": "^3.0.5",

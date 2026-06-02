@@ -639,7 +639,18 @@ export default function FogMap({
         source: "muni",
         layout: {
           visibility: "none",
-          "text-field": ["get", "name"],
+          // Two lines: cross-street name on top, route list below in a
+          // smaller font. When `routes` is missing the second line stays
+          // empty and the label collapses to just the name.
+          "text-field": [
+            "format",
+            ["get", "name"], {},
+            ["case",
+              ["has", "routes"], ["concat", "\n", ["get", "routes"]],
+              "",
+            ],
+            { "font-scale": 0.85, "text-color": "#2563eb" },
+          ],
           "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
           "text-size": 10,
           "text-anchor": "top",
