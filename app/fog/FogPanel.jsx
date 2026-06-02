@@ -123,6 +123,52 @@ export default function FogPanel({
           label="Seismic"
         />
       </div>
+
+      <div className="fog-legend-row-wrap">
+        <LayerLegend
+          title="Elevation Contours"
+          items={[
+            ["#0ea5e9", "50 ft"],
+            ["#0d9488", "100 ft"],
+            ["#65a30d", "200 ft"],
+            ["#ca8a04", "300 ft"],
+            ["#b91c1c", "600 ft"],
+          ]}
+        />
+        <LayerLegend
+          title="Bike Paths"
+          items={[
+            ["#15803d", "Class I · off-street path", "solid"],
+            ["#06b6d4", "Class II · striped lane", "solid"],
+            ["#22c55e", "Class IV · separated", "solid"],
+            ["#6b7280", "Class III · shared / sharrows", "dashed"],
+          ]}
+        />
+      </div>
+    </div>
+  );
+}
+
+// Inline color/line key used under the toggle row to document what the
+// elevation contour colours and bike-network colours mean on the map.
+function LayerLegend({ title, items }) {
+  return (
+    <div className="fog-layer-legend">
+      <div className="fog-layer-legend-title">{title}</div>
+      <div className="fog-layer-legend-items">
+        {items.map(([color, label, style]) => {
+          const dashed = style === "dashed";
+          return (
+            <div key={label} className="fog-layer-legend-item">
+              <span
+                className={`fog-layer-legend-swatch${dashed ? " fog-layer-legend-swatch-dashed" : ""}`}
+                style={dashed ? { color } : { background: color }}
+              />
+              <span className="fog-layer-legend-label">{label}</span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -307,27 +307,34 @@ export default function FogMap({
         type: "geojson",
         data: "/data/sf-contours-50-100ft.geojson",
       });
+      // Hypsometric colour ramp — lowland cool, summit warm. Matches
+      // the colours surfaced in the panel legend so the on-map ramp
+      // and the legend agree.
+      const FT_COLOR = [
+        "match", ["get", "ft"],
+        50,  "#0ea5e9",  // sky blue   — sea-level fog floor
+        100, "#0d9488",  // teal       — low corridor
+        200, "#65a30d",  // lime       — mid slope
+        300, "#ca8a04",  // gold       — ridge
+        600, "#b91c1c",  // red        — summit
+        "#1c1917",
+      ];
       map.addLayer({
-        id: "ft-contour-50",
+        id: "ft-contour-lines",
         type: "line",
         source: "ft-contours",
-        filter: ["==", ["get", "ft"], 50],
         layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
         paint: {
-          "line-color": "#0284c7",
-          "line-width": 1.3,
-          "line-opacity": 0.85,
-        },
-      });
-      map.addLayer({
-        id: "ft-contour-100",
-        type: "line",
-        source: "ft-contours",
-        filter: ["==", ["get", "ft"], 100],
-        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
-        paint: {
-          "line-color": "#7c3aed",
-          "line-width": 1.6,
+          "line-color": FT_COLOR,
+          "line-width": [
+            "match", ["get", "ft"],
+            50,  1.1,
+            100, 1.4,
+            200, 1.4,
+            300, 1.6,
+            600, 1.8,
+            1.2,
+          ],
           "line-opacity": 0.9,
         },
       });
@@ -340,17 +347,12 @@ export default function FogMap({
           "text-field": ["concat", ["to-string", ["get", "ft"]], " ft"],
           "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
           "text-size": 10,
-          "text-padding": 24,
+          "text-padding": 28,
           "symbol-placement": "line",
           "text-allow-overlap": false,
         },
         paint: {
-          "text-color": [
-            "match", ["get", "ft"],
-            50,  "#075985",
-            100, "#5b21b6",
-            "#1c1917",
-          ],
+          "text-color": FT_COLOR,
           "text-halo-color": "#ffffff",
           "text-halo-width": 1.6,
           "text-opacity": [
@@ -944,8 +946,7 @@ export default function FogMap({
         "contour-lines",
         "contour-labels",
         "peaks-labels",
-        "ft-contour-50",
-        "ft-contour-100",
+        "ft-contour-lines",
         "ft-contour-labels",
       ].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);

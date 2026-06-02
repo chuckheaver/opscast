@@ -12,8 +12,9 @@ import path from "node:path";
 const DEM_DIR = "./data/raw";
 const OUT = "./public/data/sf-contours-50-100ft.geojson";
 
-// Contours we care about (feet → metres).
-const LEVELS_FT = [50, 100];
+// Imperial elevation contours we want exact lines for — Mapbox terrain-v2
+// is on a 10 m grid and can't hit these heights directly.
+const LEVELS_FT = [50, 100, 200, 300, 600];
 const FT_TO_M = 0.3048;
 
 async function findDem() {
@@ -105,39 +106,47 @@ function extractContour(elev, W, H, west, south, east, north, level) {
 }
 
 // Greedy chain — stitch 2-point segments into longer polylines whose
-// endpoints match within a small tolerance. Keeps rendering crisp at
-// every zoom (otherwise Mapbox renders thousands of tiny line caps).
-function chain(segments, eps = 1e-7) {
+// endpoints match within a small tolerance. Extends both directions
+// from each seed so a single chain grows to its full natural length,
+// rather than leaving the back half of each contour as separate pieces.
+function chain(segments) {
   const key = ([x, y]) => `${x.toFixed(7)},${y.toFixed(7)}`;
-  const byStart = new Map();
-  for (const seg of segments) {
-    const k = key(seg[0]);
-    if (!byStart.has(k)) byStart.set(k, []);
-    byStart.get(k).push(seg);
-  }
-  const used = new Set();
+  // endpoint key → list of {i, end} where end is 0 or 1 on segments[i]
+  const adj = new Map();
+  segments.forEach((seg, i) => {
+    for (let end = 0; end < 2; end++) {
+      const k = key(seg[end]);
+      if (!adj.has(k)) adj.set(k, []);
+      adj.get(k).push({ i, end });
+    }
+  });
+  const findUnused = pts => {
+    for (const { i, end } of pts) if (!used[i]) return { i, end };
+    return null;
+  };
+  const used = new Array(segments.length).fill(false);
   const chains = [];
   for (let i = 0; i < segments.length; i++) {
-    if (used.has(i)) continue;
-    used.add(i);
-    const chain = [...segments[i]];
-    // Extend forward.
+    if (used[i]) continue;
+    used[i] = true;
+    const ch = [segments[i][0], segments[i][1]];
+    // Forward
     while (true) {
-      const tail = chain[chain.length - 1];
-      const cands = byStart.get(key(tail)) || [];
-      let next = null;
-      let nextIdx = -1;
-      for (let j = 0; j < cands.length; j++) {
-        const c = cands[j];
-        const ci = segments.indexOf(c);
-        if (used.has(ci)) continue;
-        next = c; nextIdx = ci; break;
-      }
-      if (!next) break;
-      used.add(nextIdx);
-      chain.push(next[1]);
+      const tail = ch[ch.length - 1];
+      const hit = findUnused(adj.get(key(tail)) || []);
+      if (!hit) break;
+      used[hit.i] = true;
+      ch.push(segments[hit.i][1 - hit.end]);
     }
-    chains.push(chain);
+    // Backward
+    while (true) {
+      const head = ch[0];
+      const hit = findUnused(adj.get(key(head)) || []);
+      if (!hit) break;
+      used[hit.i] = true;
+      ch.unshift(segments[hit.i][1 - hit.end]);
+    }
+    chains.push(ch);
   }
   return chains;
 }
