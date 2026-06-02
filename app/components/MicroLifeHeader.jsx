@@ -120,7 +120,7 @@ export default function MicroLifeHeader({
         </a>
       </div>
       <div className="page-sub">
-        Set Your Ideal Weather
+        Set Your Ideal Weather and Times Here
         {onOpenSettings && (
           <button
             type="button"
