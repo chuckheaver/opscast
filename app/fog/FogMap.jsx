@@ -92,6 +92,7 @@ const FOG_PIN_GROUPS = [
 
 // Layer IDs the "Show fog data" toggle flips on and off as a group.
 const CONTOUR_LAYER_IDS = [
+  "fog-contours-sun",
   "fog-contours-fog",
   "fog-contours-transition-outline",
 ];
@@ -386,6 +387,20 @@ export default function FogMap({
       map.addSource("fog-contours", {
         type: "geojson",
         data: "/data/sf-fog-contours.geojson",
+      });
+
+      // Sun band (< 8 hrs/day): a very light yellow wash so the
+      // lowest-fog corner of the city reads as "sunny", instead of
+      // sitting transparent against the basemap.
+      map.addLayer({
+        id: "fog-contours-sun",
+        type: "fill",
+        source: "fog-contours",
+        filter: ["<", ["coalesce", ["get", "hours"], 0], 8],
+        paint: {
+          "fill-color": "#fef9c3",
+          "fill-opacity": 0.45,
+        },
       });
 
       // Grey gradient band (≥8.5 hrs): light grey at 8.5 → near-black
