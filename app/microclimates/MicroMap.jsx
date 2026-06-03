@@ -21,15 +21,15 @@ const SF_BOUNDS = [
 // Slope zones (crisp colours) + the fog density bands (graduated greys,
 // darkest in the low fog path, lightening as fog thins up the slopes).
 const ZONE_COLOR = {
-  sun: "#f59e0b",  // amber — warm 20–30° south-facing sun pockets
-  cool: "#38bdf8", // sky blue — cooler north-facing slopes
+  sun: "#fdba74",  // light orange — warm ≥20° south-facing sun pockets
+  cool: "#7dd3fc", // light blue — cool ≥20° north-facing slopes
   wind: "#2dd4bf", // teal — wind-channeling valleys
   fog: "#334155",  // slate-700 — ≤200 ft fog path (densest)
   fog2: "#475569", // slate-600 — 200–350 ft
   fog3: "#64748b", // slate-500 — 350–500 ft
   fog4: "#94a3b8", // slate-400 — 500–1000 ft (thinnest, but still readable)
 };
-const ZONE_OPACITY = { sun: 0.45, cool: 0.45, wind: 0.45, fog: 0.45, fog2: 0.5, fog3: 0.54, fog4: 0.58 };
+const ZONE_OPACITY = { sun: 0.55, cool: 0.55, wind: 0.45, fog: 0.45, fog2: 0.5, fog3: 0.54, fog4: 0.58 };
 const SLOPE_ZONES = ["sun", "cool", "wind"];
 const FOG_ZONES = ["fog", "fog2", "fog3", "fog4"];
 

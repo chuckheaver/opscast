@@ -29,13 +29,15 @@ const PEAKS_OUT = join(ROOT, "public", "data", "sf-peaks.geojson");
 // ── Tunable classification thresholds ──────────────────────────────────────
 const DOWNSAMPLE = 2;          // DEM cells per analysis block (≈10 m → ≈20 m)
 const TPI_RADIUS = 7;          // neighbourhood radius (blocks) for valley test
-// sun-pocket: a 20–30° incline facing the sun (SE → S → SW). Slope is the
-// "estimated incline degrees" the user described — computed straight from
-// the elevation gradient (rise/run), which is what topo-line spacing encodes.
+// sun-pocket: a ≥20° incline facing the sun (SE → S → SW). No upper
+// bound on slope — the steepest south faces (Bernal, Tank Hill, the
+// SW edge of Twin Peaks) get baked the hardest. Slope is computed
+// straight from the elevation gradient (rise/run), which is what topo
+// line spacing encodes.
 const SUN_ASPECT = [112.5, 247.5]; // SE → SW (compass degrees)
-const SUN_SLOPE = [20, 30];        // degrees (per spec)
-// cool-shade: north-facing inclines — far less direct sun, so cooler.
-const COOL_MIN_SLOPE = 15;     // degrees (a real incline, not flat ground)
+const SUN_MIN_SLOPE = 20;      // degrees
+// cool-shade: ≥20° north-facing inclines — far less direct sun, so cooler.
+const COOL_MIN_SLOPE = 20;     // degrees (matches sun threshold)
 // (north aspect handled in code: ≥ 292.5° or ≤ 67.5°, i.e. NW → N → NE)
 // wind-corridor: notable valley/gap, not a cliff
 const WIND_MAX_TPI = -5;       // metres below local mean
@@ -254,7 +256,7 @@ async function main() {
       // Classify (priority: sun > cool > fog > wind) ──────────────────────
       const inAsp = (lo, hi) => asp >= lo && asp <= hi;
       const northFacing = asp >= 292.5 || asp <= 67.5; // NW → N → NE
-      if (slope >= SUN_SLOPE[0] && slope <= SUN_SLOPE[1] && inAsp(...SUN_ASPECT)) {
+      if (slope >= SUN_MIN_SLOPE && inAsp(...SUN_ASPECT)) {
         zone[y * cw + x] = ZONES.sun;
       } else if (slope >= COOL_MIN_SLOPE && northFacing) {
         zone[y * cw + x] = ZONES.cool;
@@ -372,8 +374,8 @@ async function main() {
     source: "data/raw USGS 10 m DEM",
     builtAt: new Date().toISOString(),
     zones: {
-      sun: "20–30° SE/S/SW-facing inclines — warmer, sunnier sun pockets",
-      cool: "North-facing inclines — far less direct sun, cooler & shaded",
+      sun: "≥20° SE/S/SW-facing inclines — warmer, sunnier sun pockets",
+      cool: "≥20° NW/N/NE-facing inclines — far less direct sun, cooler & shaded",
       wind: "Valley floors / gaps that channel wind",
       fog: "Fog path — ≤200 ft low ground connected to the west coast that marine fog threads east through",
       fog2: "Fog band 200–350 ft — fog laps this far up the slopes, thinning",
