@@ -27,26 +27,14 @@ export default function Cockpit({ hours, thresh, onOpenDetail }) {
     }
   };
 
-  // If the entire window has already passed, show a neutral placeholder.
+  // If the entire window has already passed there's nothing to peak/min,
+  // so swap the 4-tile cockpit for an empty-state card matching the
+  // "Hours on Alert" styling below it.
   if (!future.length) {
     return (
-      <div className="cockpit">
-        <div className="kpi" style={{ background: "#EFEFEF" }}>
-          <div className="kpi-label" style={{ color: "#888" }}>Peak Feels Like</div>
-          <div className="kpi-value" style={{ color: "#888" }}>-</div>
-        </div>
-        <div className="kpi" style={{ background: "#EFEFEF" }}>
-          <div className="kpi-label" style={{ color: "#888" }}>Max Wind</div>
-          <div className="kpi-value" style={{ color: "#888" }}>-</div>
-        </div>
-        <div className="kpi" style={{ background: "#EFEFEF" }}>
-          <div className="kpi-label" style={{ color: "#888" }}>Max Precip Chance</div>
-          <div className="kpi-value" style={{ color: "#888" }}>-</div>
-        </div>
-        <div className="kpi" style={{ background: "#EFEFEF" }}>
-          <div className="kpi-label" style={{ color: "#888" }}>Peak UV Index</div>
-          <div className="kpi-value" style={{ color: "#888" }}>-</div>
-        </div>
+      <div className="timeline-wrap">
+        <div className="timeline-label">Forecast</div>
+        <div className="alert-empty">No data for selected time period.</div>
       </div>
     );
   }

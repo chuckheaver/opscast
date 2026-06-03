@@ -69,7 +69,7 @@ export default function DayBlock({
       {decorated.length === 0 ? (
         <div className="timeline-wrap">
           <div className="timeline-label">Forecast</div>
-          <div className="alert-empty">No data for selected period.</div>
+          <div className="alert-empty">No data for selected time period.</div>
         </div>
       ) : (
         <>
