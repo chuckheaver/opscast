@@ -59,7 +59,7 @@ export default function FogPanel({
           <KeyRow label="Neighborhood" value={neighborhoodName} />
           <KeyRow label="Zip Code" value={zipCode} />
           <KeyRow label="Elevation" value={Number.isFinite(elevationFt) ? `${elevationFt} ft` : null} />
-          <KeyRow label="Real Estate District" value={realtorLabel} />
+          <KeyRow label="Realtor District" value={realtorLabel} />
           <KeyRow label="Supervisor District" value={supervisorLabel} />
         </div>
 
@@ -126,7 +126,7 @@ export default function FogPanel({
         <ToggleSwitch
           checked={showRealtor}
           onChange={onToggleRealtor}
-          label="Real Estate Districts"
+          label="Realtor Districts"
         />
       </div>
 
