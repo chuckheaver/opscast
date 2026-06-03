@@ -389,14 +389,15 @@ export default function FogMap({
         data: "/data/sf-fog-contours.geojson",
       });
 
-      // Sun band (< 8 hrs/day): a very light yellow wash so the
+      // Sun band (< 8.5 hrs/day): a very light yellow wash so the
       // lowest-fog corner of the city reads as "sunny", instead of
-      // sitting transparent against the basemap.
+      // sitting transparent against the basemap. Covers both the
+      // < 8 polygons and the 8.0 boundary polygon.
       map.addLayer({
         id: "fog-contours-sun",
         type: "fill",
         source: "fog-contours",
-        filter: ["<", ["coalesce", ["get", "hours"], 0], 8],
+        filter: ["<", ["coalesce", ["get", "hours"], 0], 8.5],
         paint: {
           "fill-color": "#fef9c3",
           "fill-opacity": 0.45,
