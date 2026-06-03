@@ -53,9 +53,10 @@ export default function FogApp() {
   const [showElevation, setShowElevation] = useState(false);
   // CA Geological Survey seismic hazard zones.
   const [showSeismic, setShowSeismic] = useState(false);
+  // SFAR Realtor neighborhoods (blue outlines + nbrhood (nid) labels).
+  const [showRealtor, setShowRealtor] = useState(false);
   // Background layers kept off — used for lookups, not for the UI toggle set.
   const [showZoning] = useState(false);
-  const [showRealtor] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
   const autoGeoTriedRef = useRef(false);
@@ -314,6 +315,8 @@ export default function FogApp() {
         onToggleElevation={setShowElevation}
         showSeismic={showSeismic}
         onToggleSeismic={setShowSeismic}
+        showRealtor={showRealtor}
+        onToggleRealtor={setShowRealtor}
       />
     </div>
   );

@@ -14,6 +14,29 @@ import { getStatus } from "../lib/colors";
 import { fmtHr } from "../lib/formatting";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
 
+// Collapse a list of alert hour ints into a human range string —
+// consecutive hours roll up into "1 PM-5 PM", non-consecutive runs are
+// comma-joined: [13,14,15,17,18] → "1 PM-3 PM, 5 PM-6 PM".
+function compressHourRanges(hourArr) {
+  const sorted = [...new Set(hourArr)].sort((a, b) => a - b);
+  if (!sorted.length) return "";
+  const groups = [];
+  let start = sorted[0];
+  let prev = sorted[0];
+  for (let i = 1; i < sorted.length; i++) {
+    if (sorted[i] === prev + 1) {
+      prev = sorted[i];
+    } else {
+      groups.push([start, prev]);
+      start = prev = sorted[i];
+    }
+  }
+  groups.push([start, prev]);
+  return groups
+    .map(([s, e]) => (s === e ? fmtHr(s) : `${fmtHr(s)}-${fmtHr(e)}`))
+    .join(", ");
+}
+
 export default function HourTimeline({ hours, thresh, onOpenDetail }) {
   const metrics = [...PRIMARY, ...ADVANCED].filter(m => m.key !== "cloudCover");
 
@@ -53,7 +76,7 @@ export default function HourTimeline({ hours, thresh, onOpenDetail }) {
             <li key={metric.key} className="alert-row">
               <span className="alert-metric">{metric.label}:</span>
               <span className="alert-text">
-                {" "}{alertHours.map(h => fmtHr(h.hour)).join(", ")}
+                {" "}{compressHourRanges(alertHours.map(h => h.hour))}
               </span>
             </li>
           ))}

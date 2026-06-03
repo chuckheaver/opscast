@@ -25,6 +25,7 @@ export default function DayBlock({
   thresh,
   startH,
   endH,
+  onOpenSettings,
 }) {
   const { todayStr, currentHour } = getNowInfo();
   const isToday = date === todayStr;
@@ -47,10 +48,29 @@ export default function DayBlock({
             {fmtHrFull(startH)} – {fmtHrFull(endH)}
           </div>
         </div>
+        {onOpenSettings && (
+          <button
+            type="button"
+            className="gear-btn gear-btn-inline day-gear"
+            onClick={onOpenSettings}
+            aria-label="Settings"
+            title="Adjust thresholds or time window"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="#ea580c"
+                d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm9.43 4.92l-2.05-1.16a7.6 7.6 0 0 0 0-2.52l2.05-1.16a.5.5 0 0 0 .2-.62l-1.94-3.36a.5.5 0 0 0-.6-.23l-2.4.84a7.5 7.5 0 0 0-2.18-1.26l-.36-2.53a.5.5 0 0 0-.5-.42h-3.88a.5.5 0 0 0-.5.42l-.36 2.53a7.5 7.5 0 0 0-2.18 1.26l-2.4-.84a.5.5 0 0 0-.6.23L2.32 7.96a.5.5 0 0 0 .2.62l2.05 1.16a7.6 7.6 0 0 0 0 2.52L2.52 13.42a.5.5 0 0 0-.2.62l1.94 3.36c.13.22.4.32.6.23l2.4-.84a7.5 7.5 0 0 0 2.18 1.26l.36 2.53c.04.24.25.42.5.42h3.88a.5.5 0 0 0 .5-.42l.36-2.53a7.5 7.5 0 0 0 2.18-1.26l2.4.84a.5.5 0 0 0 .6-.23l1.94-3.36a.5.5 0 0 0-.2-.62z"
+              />
+            </svg>
+          </button>
+        )}
       </div>
 
       {decorated.length === 0 ? (
-        <div className="no-hrs">No operating hours for this day.</div>
+        <div className="timeline-wrap">
+          <div className="timeline-label">Forecast</div>
+          <div className="alert-empty">No data for selected period.</div>
+        </div>
       ) : (
         <>
           <Cockpit

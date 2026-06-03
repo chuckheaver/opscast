@@ -48,6 +48,7 @@ export default function ForecastView({
   dayFrom,
   dayTo,
   thresh,
+  onOpenSettings,
 }) {
   const filterToWindow = dh =>
     dh.filter(h => h.hour >= startH && h.hour < endH);
@@ -129,6 +130,7 @@ export default function ForecastView({
           thresh={thresh}
           startH={startH}
           endH={endH}
+          onOpenSettings={onOpenSettings}
         />
       ))}
     </div>

@@ -252,7 +252,7 @@ export const buildFcData = (wx, aq, loc) => {
       ),
       humidity: rh,
       dewPoint: Math.round(cToF(wx.hourly.dewpoint_2m[i])),
-      uvIndex: wx.hourly.uv_index[i] || 0,
+      uvIndex: Math.round(wx.hourly.uv_index[i] || 0),
       cloudCover: wx.hourly.cloudcover[i] || 0,
       visibility: parseFloat(
         Math.max(0.01, kmToMi((wx.hourly.visibility[i] || 0) / 1000)).toFixed(1)

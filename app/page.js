@@ -287,6 +287,7 @@ export default function Page() {
             dayFrom={dayFrom}
             dayTo={dayTo}
             thresh={thresh}
+            onOpenSettings={() => setView("settings")}
           />
         </div>
       )}
