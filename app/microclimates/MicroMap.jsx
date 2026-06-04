@@ -43,6 +43,7 @@ export default function MicroMap({
   showWind,
   showFog,
   showSolar,
+  showTerrain,
   showContours,
   showFogLine,
   showNeighborhoods,
@@ -55,7 +56,7 @@ export default function MicroMap({
 
   // Latest data + toggle state, readable from the stable callbacks below.
   const dataRef = useRef({ neighborhoods, zones, solar, canopy });
-  const visRef = useRef({ showSun, showCool, showWind, showFog, showSolar, showContours, showFogLine, showNeighborhoods });
+  const visRef = useRef({ showSun, showCool, showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods });
 
   const applyVisibility = useCallback(() => {
     const map = mapRef.current;
@@ -72,6 +73,8 @@ export default function MicroMap({
     set("micro-solar-fill", v.showSolar);
     set("micro-canopy-fill", v.showSolar);
     set("micro-canopy-outline", v.showSolar);
+    set("micro-hillshade", v.showTerrain);
+    set("micro-hillshade-2", v.showTerrain);
     set("micro-contour-lines", v.showContours);
     set("micro-contour-labels", v.showContours);
     set("micro-contour-peaks", v.showContours);
@@ -85,6 +88,42 @@ export default function MicroMap({
     const map = mapRef.current;
     if (!map || !readyRef.current) return;
     const { neighborhoods: neigh, zones: zn, solar: sl, canopy: cn } = dataRef.current;
+
+    // Hillshade terrain pair — Mapbox raster-dem-v1 baked into two
+    // hillshade passes (NW + SE light) for proper relief shading.
+    // Sits at the very bottom of the layer stack so every other zone
+    // paints on top of it.
+    if (!map.getSource("micro-dem")) {
+      map.addSource("micro-dem", {
+        type: "raster-dem",
+        url: "mapbox://mapbox.mapbox-terrain-dem-v1",
+      });
+      map.addLayer({
+        id: "micro-hillshade",
+        type: "hillshade",
+        source: "micro-dem",
+        layout: { visibility: "none" },
+        paint: {
+          "hillshade-exaggeration": 1,
+          "hillshade-shadow-color": "#000000",
+          "hillshade-accent-color": "#1c1917",
+          "hillshade-highlight-color": "#a8a29e",
+        },
+      });
+      map.addLayer({
+        id: "micro-hillshade-2",
+        type: "hillshade",
+        source: "micro-dem",
+        layout: { visibility: "none" },
+        paint: {
+          "hillshade-exaggeration": 1,
+          "hillshade-illumination-direction": 155,
+          "hillshade-shadow-color": "rgba(0, 0, 0, 0.6)",
+          "hillshade-accent-color": "rgba(28, 25, 23, 0.5)",
+          "hillshade-highlight-color": "rgba(168, 162, 158, 0)",
+        },
+      });
+    }
 
     // Solar irradiation layer goes UNDER everything else — it's the
     // background wash on which the sun/cool/wind/fog polygons paint.
@@ -337,9 +376,9 @@ export default function MicroMap({
 
   // Toggle changes → refresh refs + apply.
   useEffect(() => {
-    visRef.current = { showSun, showCool, showWind, showFog, showSolar, showContours, showFogLine, showNeighborhoods };
+    visRef.current = { showSun, showCool, showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods };
     applyVisibility();
-  }, [showSun, showCool, showWind, showFog, showSolar, showContours, showFogLine, showNeighborhoods, applyVisibility]);
+  }, [showSun, showCool, showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods, applyVisibility]);
 
   // Picked address → drop a marker, keep the city framed.
   useEffect(() => {

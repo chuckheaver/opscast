@@ -49,6 +49,7 @@ export default function MicroSidebar({
   showWind, onToggleWind,
   showFog, onToggleFog,
   showSolar, onToggleSolar,
+  showTerrain, onToggleTerrain,
   showContours, onToggleContours,
   showFogLine, onToggleFogLine,
   showNeighborhoods, onToggleNeighborhoods,
@@ -200,6 +201,7 @@ export default function MicroSidebar({
       <ToggleSwitch checked={showWind} onChange={onToggleWind} label="Wind corridors" help="Wind-channeling valleys." />
       <ToggleSwitch checked={showFog} onChange={onToggleFog} label="Fog path & bands" help="Grey by density: dense in the lows, thinning up the slopes." />
       <ToggleSwitch checked={showSolar} onChange={onToggleSolar} label="Solar exposure" help="Modelled annual sun: cream = most sun, near-black = deep shadow." />
+      <ToggleSwitch checked={showTerrain} onChange={onToggleTerrain} label="Terrain" help="Hillshade relief from the Mapbox DEM — adds light/shadow depth to the hills." />
       <ToggleSwitch checked={showContours} onChange={onToggleContours} label="Elevation contours" help="Topographic relief lines (ft)." />
       <ToggleSwitch checked={showFogLine} onChange={onToggleFogLine} label="Fog inversion line" help="≈500 ft — the usual eastern limit of marine fog." />
       <ToggleSwitch checked={showNeighborhoods} onChange={onToggleNeighborhoods} label="Neighborhoods" help="SF outlines + name labels." />

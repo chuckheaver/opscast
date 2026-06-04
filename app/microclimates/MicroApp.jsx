@@ -31,6 +31,7 @@ export default function MicroApp() {
   const [showWind, setShowWind] = useState(true);
   const [showFog, setShowFog] = useState(true);
   const [showSolar, setShowSolar] = useState(false);
+  const [showTerrain, setShowTerrain] = useState(false);
   const [showContours, setShowContours] = useState(false);
   const [showFogLine, setShowFogLine] = useState(false);
   const [showNeighborhoods, setShowNeighborhoods] = useState(true);
@@ -132,6 +133,7 @@ export default function MicroApp() {
         showWind={showWind} onToggleWind={setShowWind}
         showFog={showFog} onToggleFog={setShowFog}
         showSolar={showSolar} onToggleSolar={setShowSolar}
+        showTerrain={showTerrain} onToggleTerrain={setShowTerrain}
         showContours={showContours} onToggleContours={setShowContours}
         showFogLine={showFogLine} onToggleFogLine={setShowFogLine}
         showNeighborhoods={showNeighborhoods} onToggleNeighborhoods={setShowNeighborhoods}
@@ -149,6 +151,7 @@ export default function MicroApp() {
         showWind={showWind}
         showFog={showFog}
         showSolar={showSolar}
+        showTerrain={showTerrain}
         showContours={showContours}
         showFogLine={showFogLine}
         showNeighborhoods={showNeighborhoods}
