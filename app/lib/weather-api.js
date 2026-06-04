@@ -92,14 +92,21 @@ export const geoCode = async (q, proximity) => {
       }
     } catch {}
   }
-  const r = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=1&language=en&format=json`
-  );
-  const d = await r.json();
-  if (!d.results?.length) {
-    throw new Error(`"${q}" not found. Try an address, city, or ZIP.`);
+  try {
+    const r = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=1&language=en&format=json`
+    );
+    const d = await r.json();
+    if (!d.results?.length) {
+      throw new Error(`"${q}" not found. Try an address, city, or ZIP.`);
+    }
+    return d.results[0];
+  } catch (e) {
+    if (/load failed|failed to fetch|networkerror/i.test(e?.message || "")) {
+      throw new Error("Couldn't reach the location service. Check your connection and try again.");
+    }
+    throw e;
   }
-  return d.results[0];
 };
 
 // Autocomplete: up to 5 suggestions for a partial query. Mapbox first
@@ -177,9 +184,31 @@ export const getWx = async (lat, lon, tz) => {
       "uv_index",
     ].join(","),
   });
-  const r = await fetch(`https://api.open-meteo.com/v1/forecast?${p}`);
-  if (!r.ok) throw new Error("Weather data unavailable.");
-  return r.json();
+  // Single retry with a 500 ms back-off — Open-Meteo occasionally times
+  // out on the first hit from a cold CDN edge, and Safari surfaces those
+  // failures as a cryptic "Load failed" TypeError. Two attempts is enough
+  // to absorb that without making the user wait around.
+  const url = `https://api.open-meteo.com/v1/forecast?${p}`;
+  let lastErr;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const r = await fetch(url);
+      if (!r.ok) {
+        throw new Error(`Weather service returned ${r.status}.`);
+      }
+      return await r.json();
+    } catch (e) {
+      lastErr = e;
+      if (attempt === 0) await new Promise(res => setTimeout(res, 500));
+    }
+  }
+  // Translate "Load failed" / "Failed to fetch" into something a user
+  // can actually act on.
+  const friendly =
+    /load failed|failed to fetch|networkerror/i.test(lastErr?.message || "")
+      ? "Couldn't reach the weather service. Check your connection and try again."
+      : lastErr?.message || "Weather data unavailable.";
+  throw new Error(friendly);
 };
 
 // US AQI hourly series. Best-effort.
