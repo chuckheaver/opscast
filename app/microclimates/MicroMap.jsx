@@ -36,10 +36,12 @@ const FOG_ZONES = ["fog", "fog2", "fog3", "fog4"];
 export default function MicroMap({
   neighborhoods,
   zones,
+  solar,
   showSun,
   showCool,
   showWind,
   showFog,
+  showSolar,
   showContours,
   showFogLine,
   showNeighborhoods,
@@ -51,8 +53,8 @@ export default function MicroMap({
   const readyRef = useRef(false);
 
   // Latest data + toggle state, readable from the stable callbacks below.
-  const dataRef = useRef({ neighborhoods, zones });
-  const visRef = useRef({ showSun, showCool, showWind, showFog, showContours, showFogLine, showNeighborhoods });
+  const dataRef = useRef({ neighborhoods, zones, solar });
+  const visRef = useRef({ showSun, showCool, showWind, showFog, showSolar, showContours, showFogLine, showNeighborhoods });
 
   const applyVisibility = useCallback(() => {
     const map = mapRef.current;
@@ -66,6 +68,7 @@ export default function MicroMap({
     set("micro-wind-fill", v.showWind); set("micro-wind-line", v.showWind);
     // All four fog density bands ride the one Fog toggle.
     ["fog", "fog2", "fog3", "fog4"].forEach(z => set(`micro-${z}-fill`, v.showFog));
+    set("micro-solar-fill", v.showSolar);
     set("micro-contour-lines", v.showContours);
     set("micro-contour-labels", v.showContours);
     set("micro-contour-peaks", v.showContours);
@@ -78,7 +81,33 @@ export default function MicroMap({
   const addLayers = useCallback(() => {
     const map = mapRef.current;
     if (!map || !readyRef.current) return;
-    const { neighborhoods: neigh, zones: zn } = dataRef.current;
+    const { neighborhoods: neigh, zones: zn, solar: sl } = dataRef.current;
+
+    // Solar irradiation layer goes UNDER everything else — it's the
+    // background wash on which the sun/cool/wind/fog polygons paint.
+    // 5-step ramp matches the SF Solar Map reference legend (cream =
+    // most sun, near-black = deepest shadow).
+    if (sl && !map.getSource("micro-solar")) {
+      map.addSource("micro-solar", { type: "geojson", data: sl });
+      map.addLayer({
+        id: "micro-solar-fill",
+        type: "fill",
+        source: "micro-solar",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": [
+            "match", ["get", "level"],
+            1, "#1c1917",  // near-black — deep north shadow
+            2, "#7c2d12",  // dark brown — north faces
+            3, "#ea580c",  // orange     — flat city default
+            4, "#fdba74",  // pale orange — mild south-facing
+            5, "#fef3c7",  // cream      — steep south / sun peaks
+            "#ea580c",
+          ],
+          "fill-opacity": 0.55,
+        },
+      });
+    }
 
     if (zn && !map.getSource("micro-zones")) {
       map.addSource("micro-zones", { type: "geojson", data: zn });
@@ -278,15 +307,15 @@ export default function MicroMap({
 
   // Data arrives (possibly after or before map load) → refresh refs + add.
   useEffect(() => {
-    dataRef.current = { neighborhoods, zones };
+    dataRef.current = { neighborhoods, zones, solar };
     addLayers();
-  }, [neighborhoods, zones, addLayers]);
+  }, [neighborhoods, zones, solar, addLayers]);
 
   // Toggle changes → refresh refs + apply.
   useEffect(() => {
-    visRef.current = { showSun, showCool, showWind, showFog, showContours, showFogLine, showNeighborhoods };
+    visRef.current = { showSun, showCool, showWind, showFog, showSolar, showContours, showFogLine, showNeighborhoods };
     applyVisibility();
-  }, [showSun, showCool, showWind, showFog, showContours, showFogLine, showNeighborhoods, applyVisibility]);
+  }, [showSun, showCool, showWind, showFog, showSolar, showContours, showFogLine, showNeighborhoods, applyVisibility]);
 
   // Picked address → drop a marker, keep the city framed.
   useEffect(() => {

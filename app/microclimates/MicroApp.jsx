@@ -12,11 +12,13 @@ import { reverseGeocode } from "../fog/lib/geocode";
 
 const NEIGH_URL = "/data/sf-fog-neighborhoods.geojson";
 const ZONES_URL = "/data/sf-microclimates.geojson";
+const SOLAR_URL = "/data/sf-solar-irradiation.geojson";
 
 export default function MicroApp() {
   const searchParams = useSearchParams();
   const [neighborhoods, setNeighborhoods] = useState(null);
   const [zones, setZones] = useState(null);
+  const [solar, setSolar] = useState(null);
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { point: [lng,lat], address }
 
@@ -26,6 +28,7 @@ export default function MicroApp() {
   const [showCool, setShowCool] = useState(true);
   const [showWind, setShowWind] = useState(true);
   const [showFog, setShowFog] = useState(true);
+  const [showSolar, setShowSolar] = useState(false);
   const [showContours, setShowContours] = useState(false);
   const [showFogLine, setShowFogLine] = useState(false);
   const [showNeighborhoods, setShowNeighborhoods] = useState(true);
@@ -51,6 +54,10 @@ export default function MicroApp() {
       .then(r => (r.ok ? r.json() : Promise.reject(new Error(`zones ${r.status}`))))
       .then(d => { if (!cancelled) setZones(d); })
       .catch(e => { if (!cancelled) setDataErr(e.message); });
+    fetch(SOLAR_URL)
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { if (!cancelled && d) setSolar(d); })
+      .catch(() => {});
     return () => { cancelled = true; };
   }, []);
 
@@ -118,6 +125,7 @@ export default function MicroApp() {
         showCool={showCool} onToggleCool={setShowCool}
         showWind={showWind} onToggleWind={setShowWind}
         showFog={showFog} onToggleFog={setShowFog}
+        showSolar={showSolar} onToggleSolar={setShowSolar}
         showContours={showContours} onToggleContours={setShowContours}
         showFogLine={showFogLine} onToggleFogLine={setShowFogLine}
         showNeighborhoods={showNeighborhoods} onToggleNeighborhoods={setShowNeighborhoods}
@@ -128,10 +136,12 @@ export default function MicroApp() {
       <MicroMap
         neighborhoods={neighborhoods}
         zones={zones}
+        solar={solar}
         showSun={showSun}
         showCool={showCool}
         showWind={showWind}
         showFog={showFog}
+        showSolar={showSolar}
         showContours={showContours}
         showFogLine={showFogLine}
         showNeighborhoods={showNeighborhoods}
