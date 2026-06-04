@@ -13,6 +13,16 @@ const ZONES = [
   ["🌫️", "#64748b", "Fog Path & Bands", "Graduated grey by fog density: darkest in the ≤200 ft path fog floods through, lightening up the slopes (200–350, 350–500, 500–1000 ft) as fog thins."],
 ];
 
+// Solar exposure ramp — matches the four polygon colours the build
+// script emits (level 3 is intentionally dropped: the base map shows
+// through there because everyone in the city gets ~average sun).
+const SOLAR_BANDS = [
+  ["#fef3c7", "Steep S-facing peaks", "Top of the ramp — Bernal crest, the south side of Twin Peaks & Mt Davidson, parts of Potrero Hill."],
+  ["#fdba74", "Mild S-facing", "Broad south-tilted slopes catching more annual sun than the city average."],
+  ["#7c2d12", "N-facing slopes", "Cooler, shaded slopes — the back of every hill in the city."],
+  ["#1c1917", "Deep N shadow", "Steepest north faces of Mt Sutro, Twin Peaks, Mt Davidson — the darkest pockets."],
+];
+
 function ToggleSwitch({ checked, onChange, label, help }) {
   return (
     <label className="fog-switch">
@@ -153,6 +163,34 @@ export default function MicroSidebar({
               </span>
             </div>
           ))}
+          <div style={{ marginTop: 10, paddingTop: 8, borderTop: "1px solid rgba(148, 163, 184, 0.2)" }}>
+            <div className="fog-legend-label" style={{ color: "#fbbf24", fontWeight: 700, marginBottom: 4 }}>
+              Solar Exposure
+            </div>
+            <div className="fog-legend-range" style={{ display: "block", marginBottom: 8 }}>
+              Modelled annual sun. The orange &quot;city average&quot; band is hidden so the base map shows — everyone gets some sun.
+            </div>
+            {SOLAR_BANDS.map(([color, name, desc]) => (
+              <div key={name} className="fog-legend-row" style={{ gridTemplateColumns: "24px 1fr", marginTop: 4 }}>
+                <span
+                  aria-hidden="true"
+                  style={{
+                    display: "inline-block",
+                    width: 18,
+                    height: 18,
+                    borderRadius: 4,
+                    background: color,
+                    border: "1px solid rgba(0,0,0,0.25)",
+                    alignSelf: "center",
+                  }}
+                />
+                <span>
+                  <span className="fog-legend-label" style={{ color }}>{name}</span>
+                  <span className="fog-legend-range" style={{ display: "block" }}>{desc}</span>
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

@@ -28,7 +28,7 @@
 // Run with: npm run solar:build
 
 import { existsSync, mkdirSync, readdirSync } from "node:fs";
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { execFileSync } from "node:child_process";
 import { fromFile } from "geotiff";
@@ -79,6 +79,39 @@ function findDem() {
 function shell(cmd, args) {
   console.log("»", cmd, args.join(" "));
   execFileSync(cmd, args, { stdio: "inherit", cwd: ROOT });
+}
+
+// Chaikin corner-cutting smoother. Two passes turn the axis-aligned
+// staircase from raster cell aggregation into soft curves while keeping
+// rings closed. Same algorithm the fog/microclimate pipeline uses.
+function chaikinSmooth(ring, iterations = 2) {
+  if (!ring || ring.length < 4) return ring;
+  let pts = ring;
+  for (let it = 0; it < iterations; it++) {
+    const last = pts.length - 1;
+    const closed = pts[0][0] === pts[last][0] && pts[0][1] === pts[last][1];
+    const n = closed ? pts.length - 1 : pts.length;
+    const next = [];
+    for (let i = 0; i < n; i++) {
+      const p = pts[i], q = pts[(i + 1) % n];
+      next.push([0.75 * p[0] + 0.25 * q[0], 0.75 * p[1] + 0.25 * q[1]]);
+      next.push([0.25 * p[0] + 0.75 * q[0], 0.25 * p[1] + 0.75 * q[1]]);
+    }
+    if (closed) next.push(next[0].slice());
+    pts = next;
+  }
+  return pts;
+}
+
+function smoothFeature(f) {
+  const g = f.geometry;
+  if (!g) return f;
+  if (g.type === "Polygon") {
+    g.coordinates = g.coordinates.map(r => chaikinSmooth(r, 2));
+  } else if (g.type === "MultiPolygon") {
+    g.coordinates = g.coordinates.map(poly => poly.map(r => chaikinSmooth(r, 2)));
+  }
+  return f;
 }
 
 // Sun-position table at SF latitude for the whole year. Returns one
@@ -276,7 +309,16 @@ async function main() {
     "-o", OUT_PATH, "format=geojson", "force",
   ]);
 
-  console.log("Wrote", OUT_PATH);
+  // Post-process: drop the "average city" level-3 polygon (the base
+  // map shows through there — everyone gets some sun, no need to paint
+  // 80% of the city the same colour) and smooth the remaining cell-
+  // grid staircase with two Chaikin passes.
+  const fc = JSON.parse(await readFile(OUT_PATH, "utf8"));
+  fc.features = fc.features
+    .filter(f => f.properties.level !== 3)
+    .map(smoothFeature);
+  await writeFile(OUT_PATH, JSON.stringify(fc));
+  console.log(`Wrote ${OUT_PATH} (kept ${fc.features.length} features after dropping level 3 + smoothing)`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
