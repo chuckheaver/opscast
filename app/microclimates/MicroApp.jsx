@@ -13,12 +13,14 @@ import { reverseGeocode } from "../fog/lib/geocode";
 const NEIGH_URL = "/data/sf-fog-neighborhoods.geojson";
 const ZONES_URL = "/data/sf-microclimates.geojson";
 const SOLAR_URL = "/data/sf-solar-irradiation.geojson";
+const CANOPY_URL = "/data/sf-canopy.geojson";
 
 export default function MicroApp() {
   const searchParams = useSearchParams();
   const [neighborhoods, setNeighborhoods] = useState(null);
   const [zones, setZones] = useState(null);
   const [solar, setSolar] = useState(null);
+  const [canopy, setCanopy] = useState(null);
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { point: [lng,lat], address }
 
@@ -57,6 +59,10 @@ export default function MicroApp() {
     fetch(SOLAR_URL)
       .then(r => (r.ok ? r.json() : null))
       .then(d => { if (!cancelled && d) setSolar(d); })
+      .catch(() => {});
+    fetch(CANOPY_URL)
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { if (!cancelled && d) setCanopy(d); })
       .catch(() => {});
     return () => { cancelled = true; };
   }, []);
@@ -137,6 +143,7 @@ export default function MicroApp() {
         neighborhoods={neighborhoods}
         zones={zones}
         solar={solar}
+        canopy={canopy}
         showSun={showSun}
         showCool={showCool}
         showWind={showWind}

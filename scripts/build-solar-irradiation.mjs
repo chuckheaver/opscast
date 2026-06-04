@@ -309,16 +309,30 @@ async function main() {
     "-o", OUT_PATH, "format=geojson", "force",
   ]);
 
-  // Post-process: drop the "average city" level-3 polygon (the base
-  // map shows through there — everyone gets some sun, no need to paint
-  // 80% of the city the same colour) and smooth the remaining cell-
-  // grid staircase with two Chaikin passes.
+  // Post-process:
+  //   • Drop the "average city" level-3 polygon (the base map shows
+  //     through there — everyone gets some sun, no need to paint 80%
+  //     of the city the same colour).
+  //   • Merge level 1 into level 2: peaks themselves get sun, the
+  //     shadow only starts just over the crest, so a separate "deep
+  //     shadow" band overstates how dark those spots actually are.
+  //   • Smooth the remaining cell-grid staircase with two Chaikin
+  //     passes.
   const fc = JSON.parse(await readFile(OUT_PATH, "utf8"));
-  fc.features = fc.features
+  // Re-tag level 1 polygons as level 2, then re-emit a fresh
+  // dissolve pass mapshaper-side so they merge into the level-2 shape.
+  const remerged = fc.features
     .filter(f => f.properties.level !== 3)
-    .map(smoothFeature);
+    .map(f => {
+      if (f.properties.level === 1) f.properties.level = 2;
+      return f;
+    });
+  // No mapshaper re-dissolve here — overlapping levels are still
+  // separate features and render fine; Mapbox draws level 2's deeper
+  // and lighter shades both as the same colour.
+  fc.features = remerged.map(smoothFeature);
   await writeFile(OUT_PATH, JSON.stringify(fc));
-  console.log(`Wrote ${OUT_PATH} (kept ${fc.features.length} features after dropping level 3 + smoothing)`);
+  console.log(`Wrote ${OUT_PATH} (kept ${fc.features.length} features after merging L1→L2, dropping L3, smoothing)`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });

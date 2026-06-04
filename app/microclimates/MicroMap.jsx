@@ -37,6 +37,7 @@ export default function MicroMap({
   neighborhoods,
   zones,
   solar,
+  canopy,
   showSun,
   showCool,
   showWind,
@@ -53,7 +54,7 @@ export default function MicroMap({
   const readyRef = useRef(false);
 
   // Latest data + toggle state, readable from the stable callbacks below.
-  const dataRef = useRef({ neighborhoods, zones, solar });
+  const dataRef = useRef({ neighborhoods, zones, solar, canopy });
   const visRef = useRef({ showSun, showCool, showWind, showFog, showSolar, showContours, showFogLine, showNeighborhoods });
 
   const applyVisibility = useCallback(() => {
@@ -69,6 +70,8 @@ export default function MicroMap({
     // All four fog density bands ride the one Fog toggle.
     ["fog", "fog2", "fog3", "fog4"].forEach(z => set(`micro-${z}-fill`, v.showFog));
     set("micro-solar-fill", v.showSolar);
+    set("micro-canopy-fill", v.showSolar);
+    set("micro-canopy-outline", v.showSolar);
     set("micro-contour-lines", v.showContours);
     set("micro-contour-labels", v.showContours);
     set("micro-contour-peaks", v.showContours);
@@ -81,7 +84,7 @@ export default function MicroMap({
   const addLayers = useCallback(() => {
     const map = mapRef.current;
     if (!map || !readyRef.current) return;
-    const { neighborhoods: neigh, zones: zn, solar: sl } = dataRef.current;
+    const { neighborhoods: neigh, zones: zn, solar: sl, canopy: cn } = dataRef.current;
 
     // Solar irradiation layer goes UNDER everything else — it's the
     // background wash on which the sun/cool/wind/fog polygons paint.
@@ -97,15 +100,36 @@ export default function MicroMap({
         paint: {
           "fill-color": [
             "match", ["get", "level"],
-            1, "#1c1917",  // near-black — deep north shadow
-            2, "#7c2d12",  // dark brown — north faces
-            3, "#ea580c",  // orange     — flat city default
+            2, "#7c2d12",  // dark brown — north-facing slopes
             4, "#fdba74",  // pale orange — mild south-facing
             5, "#fef3c7",  // cream      — steep south / sun peaks
-            "#ea580c",
+            "#7c2d12",
           ],
           "fill-opacity": 0.55,
         },
+      });
+    }
+
+    // Heavy-vegetation overlay — Golden Gate Park, Presidio, Mt Sutro
+    // Forest, McLaren, etc. Canopy intercepts light before it reaches
+    // the ground so these zones make their own cooler / humider
+    // microclimates; light green so they read as "tree cover" against
+    // the warm solar ramp. Rides the same Solar Exposure toggle.
+    if (cn && !map.getSource("micro-canopy")) {
+      map.addSource("micro-canopy", { type: "geojson", data: cn });
+      map.addLayer({
+        id: "micro-canopy-fill",
+        type: "fill",
+        source: "micro-canopy",
+        layout: { visibility: "none" },
+        paint: { "fill-color": "#86efac", "fill-opacity": 0.55 },
+      });
+      map.addLayer({
+        id: "micro-canopy-outline",
+        type: "line",
+        source: "micro-canopy",
+        layout: { visibility: "none" },
+        paint: { "line-color": "#15803d", "line-width": 0.8, "line-opacity": 0.7 },
       });
     }
 
@@ -307,9 +331,9 @@ export default function MicroMap({
 
   // Data arrives (possibly after or before map load) → refresh refs + add.
   useEffect(() => {
-    dataRef.current = { neighborhoods, zones, solar };
+    dataRef.current = { neighborhoods, zones, solar, canopy };
     addLayers();
-  }, [neighborhoods, zones, solar, addLayers]);
+  }, [neighborhoods, zones, solar, canopy, addLayers]);
 
   // Toggle changes → refresh refs + apply.
   useEffect(() => {

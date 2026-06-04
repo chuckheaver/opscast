@@ -13,14 +13,15 @@ const ZONES = [
   ["🌫️", "#64748b", "Fog Path & Bands", "Graduated grey by fog density: darkest in the ≤200 ft path fog floods through, lightening up the slopes (200–350, 350–500, 500–1000 ft) as fog thins."],
 ];
 
-// Solar exposure ramp — matches the four polygon colours the build
-// script emits (level 3 is intentionally dropped: the base map shows
-// through there because everyone in the city gets ~average sun).
+// Solar exposure ramp — the level-1 "deep shadow" band has been folded
+// into N-facing slopes (peaks themselves catch sun, real shadow only
+// begins just past the crest) and the level-3 "city average" band is
+// dropped so the base map shows through there.
 const SOLAR_BANDS = [
   ["#fef3c7", "Steep S-facing peaks", "Top of the ramp — Bernal crest, the south side of Twin Peaks & Mt Davidson, parts of Potrero Hill."],
   ["#fdba74", "Mild S-facing", "Broad south-tilted slopes catching more annual sun than the city average."],
   ["#7c2d12", "N-facing slopes", "Cooler, shaded slopes — the back of every hill in the city."],
-  ["#1c1917", "Deep N shadow", "Steepest north faces of Mt Sutro, Twin Peaks, Mt Davidson — the darkest pockets."],
+  ["#86efac", "Heavy canopy", "Golden Gate Park, Presidio, Mt Sutro, McLaren, etc. — canopy absorbs sun before it reaches the ground; cooler, humider microclimates."],
 ];
 
 function ToggleSwitch({ checked, onChange, label, help }) {
