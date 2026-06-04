@@ -8,6 +8,7 @@ import AdvancedCard from "./AdvancedCard";
 import MicroLifeHeader from "./MicroLifeHeader";
 import { PRIMARY, ADVANCED } from "../lib/thresholds";
 import { fmtHrFull, dayLabel } from "../lib/formatting";
+import { DATA_SOURCE_DOWN_MSG } from "../lib/weather-api";
 
 const HOURS_24 = Array.from({ length: 24 }, (_, i) => i);
 const DAY_INDEXES = [0, 1, 2, 3, 4];
@@ -25,6 +26,7 @@ export default function SetupView({
   onSubmit, onGeo, onSelectLocation,
 }) {
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const dataSourceDown = err === DATA_SOURCE_DOWN_MSG;
 
   return (
     <div className="setup">
@@ -38,6 +40,13 @@ export default function SetupView({
         onGeo={onGeo}
         onSelectLocation={onSelectLocation}
       />
+
+      {dataSourceDown && (
+        <div className="data-source-notice">
+          <span aria-hidden="true">⚠</span>
+          <span>{DATA_SOURCE_DOWN_MSG}</span>
+        </div>
+      )}
 
       <div className="field-lbl">Period to Forecast</div>
       <div className="sel-row">
@@ -136,7 +145,7 @@ export default function SetupView({
       >
         {loading ? "Fetching Forecast…" : "Get My Forecast →"}
       </button>
-      {err && <div className="err-box">⚠ {err}</div>}
+      {err && !dataSourceDown && <div className="err-box">⚠ {err}</div>}
     </div>
   );
 }

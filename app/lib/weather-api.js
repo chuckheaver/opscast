@@ -10,6 +10,11 @@ import { cToF, kmToMi, calcWC, wxIcon } from "./calculations";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
+// Sentinel error string used by SetupView to render the "data source
+// updating" notice box directly under the location field, instead of
+// the generic error row at the bottom of the form.
+export const DATA_SOURCE_DOWN_MSG = "Data Source Updating. Check Back Later.";
+
 // Pull a parent context entry (place = city, region = state, etc.) out
 // of a Mapbox feature by its id prefix.
 const ctx = (f, prefix) =>
@@ -103,7 +108,7 @@ export const geoCode = async (q, proximity) => {
     return d.results[0];
   } catch (e) {
     if (/load failed|failed to fetch|networkerror/i.test(e?.message || "")) {
-      throw new Error("Couldn't reach the location service. Check your connection and try again.");
+      throw new Error(DATA_SOURCE_DOWN_MSG);
     }
     throw e;
   }
@@ -206,7 +211,7 @@ export const getWx = async (lat, lon, tz) => {
   // can actually act on.
   const friendly =
     /load failed|failed to fetch|networkerror/i.test(lastErr?.message || "")
-      ? "Couldn't reach the weather service. Check your connection and try again."
+      ? DATA_SOURCE_DOWN_MSG
       : lastErr?.message || "Weather data unavailable.";
   throw new Error(friendly);
 };

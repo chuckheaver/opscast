@@ -654,6 +654,26 @@ input[type=range]::-webkit-slider-thumb:hover {
   font-size: 12px;
 }
 
+/* "Data Source Updating" notice rendered directly under the location
+   field when Open-Meteo (or the geocoder) is unreachable. Warmer amber
+   palette so it reads as "service notice" rather than "you broke it".
+   Dark-mode tweak lives in the .app overrides further down the file. */
+.data-source-notice {
+  margin: 4px 0 16px;
+  padding: 11px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: #fef3c7;
+  border: 1px solid #d97706;
+  border-radius: 8px;
+  color: #92400e;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
 /* ── Forecast screen container ──────────────────────────────────────────── */
 .fc {
   padding: 20px 18px 80px;
@@ -2144,6 +2164,11 @@ body {
   background: rgba(220, 38, 38, 0.18);
   border-color: rgba(220, 38, 38, 0.4);
   color: #fecaca;
+}
+.app .data-source-notice {
+  background: rgba(217, 119, 6, 0.18);
+  border-color: rgba(217, 119, 6, 0.5);
+  color: #fde68a;
 }
 
 /* Splash dot matches dark theme. */
