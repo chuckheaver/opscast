@@ -104,6 +104,7 @@ export default function FogMap({
   showTerrain,
   showElevation,
   showSeismic,
+  showTsunami,
   showMuni,
   showBikes,
   showZips,
@@ -558,6 +559,37 @@ export default function FogMap({
           "line-color": "#991b1b",
           "line-width": 0.8,
           "line-opacity": 0.7,
+        },
+      });
+
+      // Tsunami inundation hazard zone — CGS 2021 update. Marks the
+      // low-lying coastal area that an emergency-planning tsunami would
+      // reach. Cool blue fill so it reads as "water-related hazard"
+      // distinct from the warm-red seismic zones above.
+      map.addSource("tsunami", {
+        type: "geojson",
+        data: "/data/sf-tsunami-hazard.geojson",
+      });
+      map.addLayer({
+        id: "tsunami-fill",
+        type: "fill",
+        source: "tsunami",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": "#0ea5e9",
+          "fill-opacity": 0.28,
+        },
+      });
+      map.addLayer({
+        id: "tsunami-outline",
+        type: "line",
+        source: "tsunami",
+        layout: { visibility: "none", "line-join": "round" },
+        paint: {
+          "line-color": "#0369a1",
+          "line-width": 1.2,
+          "line-dasharray": [3, 2],
+          "line-opacity": 0.85,
         },
       });
 
@@ -1078,6 +1110,20 @@ export default function FogMap({
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showSeismic]);
+
+  // Toggle the CGS tsunami hazard zone (fill + dashed outline).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showTsunami ? "visible" : "none";
+      ["tsunami-fill", "tsunami-outline"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showTsunami]);
 
   // Toggle the Muni stops overlay (dots + zoom-in labels).
   useEffect(() => {

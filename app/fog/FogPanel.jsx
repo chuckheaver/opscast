@@ -25,6 +25,7 @@ export default function FogPanel({
   showTerrain, onToggleTerrain,
   showElevation, onToggleElevation,
   showSeismic, onToggleSeismic,
+  showTsunami, onToggleTsunami,
   showRealtor, onToggleRealtor,
 }) {
   // Compute the per-location lookups inline so we don't double-store them.
@@ -122,6 +123,11 @@ export default function FogPanel({
           checked={showSeismic}
           onChange={onToggleSeismic}
           label="Seismic"
+        />
+        <ToggleSwitch
+          checked={showTsunami}
+          onChange={onToggleTsunami}
+          label="Tsunami Zone"
         />
         <ToggleSwitch
           checked={showRealtor}

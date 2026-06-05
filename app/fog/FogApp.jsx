@@ -53,6 +53,8 @@ export default function FogApp() {
   const [showElevation, setShowElevation] = useState(false);
   // CA Geological Survey seismic hazard zones.
   const [showSeismic, setShowSeismic] = useState(false);
+  // CGS Tsunami Hazard Area for Emergency Planning, 2021 update.
+  const [showTsunami, setShowTsunami] = useState(false);
   // SFAR Realtor neighborhoods (blue outlines + nbrhood (nid) labels).
   const [showRealtor, setShowRealtor] = useState(false);
   // Background layers kept off — used for lookups, not for the UI toggle set.
@@ -280,6 +282,7 @@ export default function FogApp() {
           showTerrain={showTerrain}
           showElevation={showElevation}
           showSeismic={showSeismic}
+          showTsunami={showTsunami}
           showMuni={showMuni}
           showBikes={showBikes}
           showZips={showZips}
@@ -315,6 +318,8 @@ export default function FogApp() {
         onToggleElevation={setShowElevation}
         showSeismic={showSeismic}
         onToggleSeismic={setShowSeismic}
+        showTsunami={showTsunami}
+        onToggleTsunami={setShowTsunami}
         showRealtor={showRealtor}
         onToggleRealtor={setShowRealtor}
       />
