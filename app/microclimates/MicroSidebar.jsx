@@ -13,16 +13,32 @@ const ZONES = [
   ["🌫️", "#64748b", "Fog Path & Bands", "Graduated grey by fog density: darkest in the ≤200 ft path fog floods through, lightening up the slopes (200–350, 350–500, 500–1000 ft) as fog thins."],
 ];
 
-// Solar exposure ramp — the level-1 "deep shadow" band has been folded
-// into N-facing slopes (peaks themselves catch sun, real shadow only
-// begins just past the crest) and the level-3 "city average" band is
-// dropped so the base map shows through there.
+// Two-colour solar exposure ramp: light yellow above the flat-ground
+// irradiation for the selected season, light brown below. Cells within
+// ±3% of flat are dropped so the base map reads as "city average".
 const SOLAR_BANDS = [
-  ["#fef3c7", "Steep S-facing peaks", "Top of the ramp — Bernal crest, the south side of Twin Peaks & Mt Davidson, parts of Potrero Hill."],
-  ["#fdba74", "Mild S-facing", "Broad south-tilted slopes catching more annual sun than the city average."],
-  ["#7c2d12", "N-facing slopes", "Cooler, shaded slopes — the back of every hill in the city."],
-  ["#86efac", "Heavy canopy", "Golden Gate Park, Presidio, Mt Sutro, McLaren, etc. — canopy absorbs sun before it reaches the ground; cooler, humider microclimates."],
+  ["#fef3c7", "More sun than flat", "Light yellow — slopes that beat flat-ground irradiation in the selected season (mostly south-facing)."],
+  ["#c4a574", "Shaded vs flat", "Light brown — slopes that fall short of flat-ground (mostly north-facing)."],
+  ["#86efac", "Heavy canopy", "Golden Gate Park, Presidio, Mt Sutro, McLaren — canopy absorbs sun before it reaches the ground; cooler, humider microclimates."],
 ];
+
+const SEASONS = [
+  { key: "annual",  label: "Annual" },
+  { key: "winter",  label: "Winter" },
+  { key: "equinox", label: "Spring / Fall" },
+  { key: "summer",  label: "Summer" },
+];
+
+// Solar declination + noon altitude at a given lat / day-of-year.
+function noonAltitudeDeg(latDeg, day) {
+  const decl = 23.44 * Math.sin((2 * Math.PI * (day - 81)) / 365);
+  return 90 - latDeg + decl;
+}
+function dayOfYearToday() {
+  const d = new Date();
+  const start = new Date(d.getFullYear(), 0, 0);
+  return Math.floor((d - start) / 86400000);
+}
 
 function ToggleSwitch({ checked, onChange, label, help }) {
   return (
@@ -49,6 +65,7 @@ export default function MicroSidebar({
   showWind, onToggleWind,
   showFog, onToggleFog,
   showSolar, onToggleSolar,
+  solarSeason, onSelectSolarSeason,
   showTerrain, onToggleTerrain,
   showContours, onToggleContours,
   showFogLine, onToggleFogLine,
@@ -146,10 +163,11 @@ export default function MicroSidebar({
       </div>
       {geoErr && <div className="fog-note" style={{ color: "#fca5a5" }}>{geoErr}</div>}
       {dataErr && <div className="fog-note" style={{ color: "#fca5a5" }}>Data error: {dataErr}</div>}
-      {picked?.address && (
+      {picked?.point && (
         <div className="fog-legend" style={{ marginTop: 2 }}>
           <div className="fog-legend-title">Marked location</div>
-          <div className="fog-ac-name">{picked.address}</div>
+          {picked.address && <div className="fog-ac-name">{picked.address}</div>}
+          <SunAltitudePanel lat={picked.point[1]} />
         </div>
       )}
 
@@ -200,7 +218,35 @@ export default function MicroSidebar({
       <ToggleSwitch checked={showCool} onChange={onToggleCool} label="Cool / shade" help="≥20° north-facing cooler slopes." />
       <ToggleSwitch checked={showWind} onChange={onToggleWind} label="Wind corridors" help="Wind-channeling valleys." />
       <ToggleSwitch checked={showFog} onChange={onToggleFog} label="Fog path & bands" help="Grey by density: dense in the lows, thinning up the slopes." />
-      <ToggleSwitch checked={showSolar} onChange={onToggleSolar} label="Solar exposure" help="Modelled annual sun: cream = most sun, near-black = deep shadow." />
+      <ToggleSwitch checked={showSolar} onChange={onToggleSolar} label="Solar exposure" help="Light yellow = above flat-ground sun, light brown = below. Switch seasons to see how aspect matters more in winter than summer." />
+      {showSolar && (
+        <div className="fog-legend" style={{ padding: "10px 12px", marginTop: 0 }}>
+          <div className="fog-legend-title" style={{ marginBottom: 6 }}>Season</div>
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            {SEASONS.map(s => (
+              <button
+                key={s.key}
+                type="button"
+                onClick={() => onSelectSolarSeason(s.key)}
+                style={{
+                  flex: "1 1 auto",
+                  padding: "6px 10px",
+                  fontSize: 12,
+                  fontWeight: 700,
+                  borderRadius: 6,
+                  border: solarSeason === s.key ? "1px solid #fbbf24" : "1px solid rgba(148,163,184,0.3)",
+                  background: solarSeason === s.key ? "rgba(251, 191, 36, 0.15)" : "transparent",
+                  color: solarSeason === s.key ? "#fbbf24" : "#cbd5e1",
+                  cursor: "pointer",
+                  letterSpacing: 0.3,
+                }}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <ToggleSwitch checked={showTerrain} onChange={onToggleTerrain} label="Terrain" help="Hillshade relief from the Mapbox DEM — adds light/shadow depth to the hills." />
       <ToggleSwitch checked={showContours} onChange={onToggleContours} label="Elevation contours" help="Topographic relief lines (ft)." />
       <ToggleSwitch checked={showFogLine} onChange={onToggleFogLine} label="Fog inversion line" help="≈500 ft — the usual eastern limit of marine fog." />
@@ -211,5 +257,37 @@ export default function MicroSidebar({
         not live observations — a guide to where each microclimate tends to sit.
       </div>
     </aside>
+  );
+}
+
+// Sun-altitude readout pinned to the picked location. Surfaces the
+// noon altitude today plus the annual envelope (winter solstice → summer
+// solstice) at this exact latitude — the same physics that drives the
+// Solar Exposure layer, just made legible for one point.
+function SunAltitudePanel({ lat }) {
+  if (!Number.isFinite(lat)) return null;
+  const today = noonAltitudeDeg(lat, dayOfYearToday());
+  const winter = noonAltitudeDeg(lat, 355); // Dec 21
+  const summer = noonAltitudeDeg(lat, 172); // Jun 21
+  const avg = noonAltitudeDeg(lat, 80);     // Mar 21 ≈ annual mean
+  const range = (summer - winter).toFixed(0);
+  const row = (label, val, color) => (
+    <div style={{ display: "flex", justifyContent: "space-between", padding: "2px 0", fontSize: 12 }}>
+      <span style={{ color: "#94a3b8" }}>{label}</span>
+      <span style={{ color, fontWeight: 700 }}>{val.toFixed(0)}°</span>
+    </div>
+  );
+  return (
+    <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px solid rgba(148, 163, 184, 0.2)" }}>
+      <div className="fog-legend-title" style={{ marginBottom: 4 }}>Solar Noon Altitude</div>
+      <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 6, fontStyle: "italic" }}>
+        Sun angle above the horizon at midday, lat&nbsp;{lat.toFixed(2)}°.
+        The ~{range}° annual swing is what makes winter slopes contrast and summer slopes blend.
+      </div>
+      {row("Today", today, "#fbbf24")}
+      {row("Winter solstice", winter, "#7dd3fc")}
+      {row("Annual avg",     avg,    "#cbd5e1")}
+      {row("Summer solstice", summer, "#fdba74")}
+    </div>
   );
 }

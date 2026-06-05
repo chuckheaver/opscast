@@ -139,12 +139,11 @@ export default function MicroMap({
         paint: {
           "fill-color": [
             "match", ["get", "level"],
-            2, "#7c2d12",  // dark brown — north-facing slopes
-            4, "#fdba74",  // pale orange — mild south-facing
-            5, "#fef3c7",  // cream      — steep south / sun peaks
-            "#7c2d12",
+            "sun",   "#fef3c7",   // light yellow — more sun than flat
+            "shade", "#c4a574",   // light brown  — less sun than flat
+            "#c4a574",
           ],
-          "fill-opacity": 0.55,
+          "fill-opacity": 0.6,
         },
       });
     }
@@ -371,6 +370,12 @@ export default function MicroMap({
   // Data arrives (possibly after or before map load) → refresh refs + add.
   useEffect(() => {
     dataRef.current = { neighborhoods, zones, solar, canopy };
+    const map = mapRef.current;
+    // If the solar source is already mounted, swap its data so changing
+    // seasons re-paints without a full layer rebuild.
+    if (map && readyRef.current && solar && map.getSource("micro-solar")) {
+      map.getSource("micro-solar").setData(solar);
+    }
     addLayers();
   }, [neighborhoods, zones, solar, canopy, addLayers]);
 

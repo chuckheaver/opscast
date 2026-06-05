@@ -12,14 +12,21 @@ import { reverseGeocode } from "../fog/lib/geocode";
 
 const NEIGH_URL = "/data/sf-fog-neighborhoods.geojson";
 const ZONES_URL = "/data/sf-microclimates.geojson";
-const SOLAR_URL = "/data/sf-solar-irradiation.geojson";
+const SOLAR_URLS = {
+  annual:  "/data/sf-solar-annual.geojson",
+  winter:  "/data/sf-solar-winter.geojson",
+  equinox: "/data/sf-solar-equinox.geojson",
+  summer:  "/data/sf-solar-summer.geojson",
+};
 const CANOPY_URL = "/data/sf-canopy.geojson";
 
 export default function MicroApp() {
   const searchParams = useSearchParams();
   const [neighborhoods, setNeighborhoods] = useState(null);
   const [zones, setZones] = useState(null);
-  const [solar, setSolar] = useState(null);
+  // Per-season solar layers; loaded on first switch and cached here.
+  const [solarBySeason, setSolarBySeason] = useState({});
+  const [solarSeason, setSolarSeason] = useState("annual");
   const [canopy, setCanopy] = useState(null);
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { point: [lng,lat], address }
@@ -57,10 +64,6 @@ export default function MicroApp() {
       .then(r => (r.ok ? r.json() : Promise.reject(new Error(`zones ${r.status}`))))
       .then(d => { if (!cancelled) setZones(d); })
       .catch(e => { if (!cancelled) setDataErr(e.message); });
-    fetch(SOLAR_URL)
-      .then(r => (r.ok ? r.json() : null))
-      .then(d => { if (!cancelled && d) setSolar(d); })
-      .catch(() => {});
     fetch(CANOPY_URL)
       .then(r => (r.ok ? r.json() : null))
       .then(d => { if (!cancelled && d) setCanopy(d); })
@@ -98,6 +101,25 @@ export default function MicroApp() {
     );
   }, []);
 
+  // Lazy-load the solar layer for the active season (cached in
+  // solarBySeason). Loads on first need so the page doesn't pay for
+  // ~1.5 MB of seasonal data when Solar exposure isn't even on.
+  useEffect(() => {
+    if (!showSolar) return;
+    if (solarBySeason[solarSeason]) return;
+    const url = SOLAR_URLS[solarSeason];
+    if (!url) return;
+    let cancelled = false;
+    fetch(url)
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => {
+        if (cancelled || !d) return;
+        setSolarBySeason(prev => ({ ...prev, [solarSeason]: d }));
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [showSolar, solarSeason, solarBySeason]);
+
   // Apply a URL-provided location once the data is ready.
   useEffect(() => {
     if (urlLocAppliedRef.current || !urlLoc || !neighborhoods) return;
@@ -133,6 +155,7 @@ export default function MicroApp() {
         showWind={showWind} onToggleWind={setShowWind}
         showFog={showFog} onToggleFog={setShowFog}
         showSolar={showSolar} onToggleSolar={setShowSolar}
+        solarSeason={solarSeason} onSelectSolarSeason={setSolarSeason}
         showTerrain={showTerrain} onToggleTerrain={setShowTerrain}
         showContours={showContours} onToggleContours={setShowContours}
         showFogLine={showFogLine} onToggleFogLine={setShowFogLine}
@@ -144,7 +167,7 @@ export default function MicroApp() {
       <MicroMap
         neighborhoods={neighborhoods}
         zones={zones}
-        solar={solar}
+        solar={solarBySeason[solarSeason] || null}
         canopy={canopy}
         showSun={showSun}
         showCool={showCool}

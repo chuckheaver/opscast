@@ -1,31 +1,23 @@
-// Build pipeline: USGS 10 m DEM → annual modelled solar irradiation
-// per cell → 5-level shaded layer matching the SF Solar Map legend
-// (cream → dark brown → black, low → high).
+// Build pipeline: USGS 10 m DEM → modelled solar irradiation per cell
+// for FOUR seasonal windows → two-band sun/shade layers (light yellow
+// where the slope catches more sun than flat ground in that season,
+// light brown where it catches less).
 //
-// Method (pure JS):
-//   1. Read DEM, downsample to a 40 m analysis grid.
-//   2. Compute slope + aspect per cell (Horn 3×3, compass aspect).
-//   3. Precompute a year-long sun-position table at SF latitude — sun
-//      vector + clear-sky atmospheric transmission for every daylight
-//      hour, 365 × 24 = 8760 samples (~4380 above the horizon).
-//   4. For each cell, accumulate SOLAR_CONSTANT × trans × dot(normal, sun)
-//      across the daylight hours. That's the modelled clear-sky direct-
-//      beam annual kWh/m² landing on the tilted surface.
-//   5. Bin into 5 levels matching the reference legend, emit a square
-//      polygon per cell, then dissolve by level through mapshaper.
+// Why seasonal: at SF latitude (37.77° N) the noon sun altitude
+// ranges from ~30° on the winter solstice to ~76° on the summer
+// solstice. Winter's low sun makes north-facing slopes drop deep into
+// the shade and south-facing slopes glow; summer's high sun barely
+// cares about aspect. Flipping between seasons makes that contrast
+// vivid.
 //
-// Caveats vs. the SF Solar Map reference image:
-//   - direct beam only (no diffuse); slightly under-counts on cloudy
-//     days, slightly over-counts on perfectly clear days.
-//   - clear-sky atmosphere; doesn't subtract fog/marine layer hours,
-//     so the Outer Richmond won't read darker than the Outer Sunset
-//     here (in the reference image it does, because that map embeds
-//     measured cloud cover).
-//   - no canopy; Golden Gate Park / Presidio look like their bare-
-//     ground irradiation, not the reduced ground-level value the
-//     canopy actually produces.
-//
-// Run with: npm run solar:build
+// Outputs (one file per season):
+//   public/data/sf-solar-annual.geojson
+//   public/data/sf-solar-winter.geojson
+//   public/data/sf-solar-equinox.geojson
+//   public/data/sf-solar-summer.geojson
+// Each carries two features: { level: "sun" } and { level: "shade" }.
+// Cells within ±3% of the flat-ground irradiation for the season are
+// dropped — the base map shows there and reads as "city average".
 
 import { existsSync, mkdirSync, readdirSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
@@ -36,38 +28,32 @@ import { fromFile } from "geotiff";
 const ROOT = resolve(".");
 const RAW_DIR = "./data/raw";
 const TMP_DIR = "./data/tmp";
-const OUT_PATH = "./public/data/sf-solar-irradiation.geojson";
+const OUT_DIR = "./public/data";
 const NEIGH_PATH = "./public/data/sf-fog-neighborhoods.geojson";
 
-const LAT = 37.77;                  // SF latitude
-const DOWNSAMPLE = 4;               // ≈40 m analysis grid
-const TIME_STEP_HOURS = 1;          // 1-hour sampling
-const TRANSMISSIVITY = 0.7;         // clear-sky atmospheric transmission
-const CLOUD_FACTOR = 0.78;          // SF averages ~22% cloud cover by year
-const SOLAR_CONSTANT_KW = 1.367;    // kW/m² at top of atmosphere
-// Annual diffuse-sky baseline on a flat surface — about 1/3 of SF's
-// 1700 kWh/m² total. Tilted surfaces see less sky, so they receive
-// DIFFUSE_ANNUAL × (1 + cos(slope))/2 (the standard isotropic sky-view
-// factor). Without this term, flat ground reads suspiciously dark
-// because the direct-beam-only model misses ~600 kWh/m² of scattered
-// light bouncing off the atmosphere and surroundings.
-const DIFFUSE_ANNUAL = 550;         // kWh/m²
+const LAT = 37.77;
+const DOWNSAMPLE = 4;
+const TIME_STEP_HOURS = 1;
+const TRANSMISSIVITY = 0.7;
+const CLOUD_FACTOR = 0.78;
+const SOLAR_CONSTANT_KW = 1.367;
+// Annual diffuse-sky baseline on a flat surface, scaled per-day so
+// the seasonal sums are consistent.
+const DIFFUSE_PER_DAY = 550 / 365; // kWh/m²/day
 
-// Annual kWh/m² → bucket id. SF's actual modelled distribution is
-// extremely peaked around flat-ground (~1799 kWh/m²) because most of
-// the city IS flat-ish — so the bins are tuned to let the hill faces
-// stand out either side of the flatland median, matching the visual
-// contrast on the SF Solar Map reference image.
-const LEVELS = [
-  { id: 1, max: 1550 },             // very low  — deep north-shadow
-  { id: 2, max: 1750 },             // low       — north-facing slopes
-  { id: 3, max: 1830 },             // medium    — flatlands (city default)
-  { id: 4, max: 1900 },             // high      — mild south-facing
-  { id: 5, max: Infinity },         // very high — steep south-facing peaks
-];
-const levelFromKWh = kwh => {
-  for (const l of LEVELS) if (kwh < l.max) return l.id;
-  return 5;
+// ±3% of the flat-ground irradiation marks the "city average" band.
+// Cells inside it are dropped so the base map shows; outside it we
+// paint sun (above) or shade (below).
+const NEUTRAL_BAND = 0.03;
+
+// Season day-of-year windows. Winter/Summer are 75-day blocks around
+// the solstices; Equinox combines spring + fall to represent the in-
+// between, when the sun's noon altitude sits near the annual mean.
+const SEASONS = {
+  annual:  { label: "Annual",      ranges: [[1, 365]] },
+  winter:  { label: "Winter",      ranges: [[335, 365], [1, 45]] },   // Dec 1  – Feb 14
+  equinox: { label: "Spring/Fall", ranges: [[60, 120], [244, 304]] }, // Mar 1  – Apr 30 + Sep 1 – Oct 31
+  summer:  { label: "Summer",      ranges: [[135, 212]] },            // May 15 – Jul 31
 };
 
 function findDem() {
@@ -81,9 +67,8 @@ function shell(cmd, args) {
   execFileSync(cmd, args, { stdio: "inherit", cwd: ROOT });
 }
 
-// Chaikin corner-cutting smoother. Two passes turn the axis-aligned
-// staircase from raster cell aggregation into soft curves while keeping
-// rings closed. Same algorithm the fog/microclimate pipeline uses.
+// Chaikin corner-cutting — two passes turn the cell-grid staircase
+// into smooth curves.
 function chaikinSmooth(ring, iterations = 2) {
   if (!ring || ring.length < 4) return ring;
   let pts = ring;
@@ -102,54 +87,52 @@ function chaikinSmooth(ring, iterations = 2) {
   }
   return pts;
 }
-
 function smoothFeature(f) {
   const g = f.geometry;
   if (!g) return f;
   if (g.type === "Polygon") {
     g.coordinates = g.coordinates.map(r => chaikinSmooth(r, 2));
   } else if (g.type === "MultiPolygon") {
-    g.coordinates = g.coordinates.map(poly => poly.map(r => chaikinSmooth(r, 2)));
+    g.coordinates = g.coordinates.map(p => p.map(r => chaikinSmooth(r, 2)));
   }
   return f;
 }
 
-// Sun-position table at SF latitude for the whole year. Returns one
-// entry per daylight hour with the sun unit vector in compass coords
-// (x = east, y = north, z = up) and a pre-multiplied per-hour energy
-// weight (SOLAR_CONSTANT × clear-sky transmission × cloud factor × dt).
-function buildSunTable() {
+const inSeason = (day, ranges) => ranges.some(([a, b]) => day >= a && day <= b);
+
+// Returns { table, days } for the season. Each table entry is one
+// daylight hour with the sun unit vector + the per-hour energy weight.
+function buildSunTable(seasonKey) {
   const latR = (LAT * Math.PI) / 180;
+  const ranges = SEASONS[seasonKey].ranges;
   const table = [];
+  let days = 0;
   for (let day = 1; day <= 365; day++) {
-    // Solar declination, Spencer's first-order approximation.
-    const decl = (23.44 * Math.PI / 180) *
-      Math.sin(2 * Math.PI * (day - 81) / 365);
+    if (!inSeason(day, ranges)) continue;
+    days++;
+    const decl = (23.44 * Math.PI / 180) * Math.sin(2 * Math.PI * (day - 81) / 365);
     for (let hour = 0; hour < 24; hour += TIME_STEP_HOURS) {
-      const hAng = ((hour - 12) * 15) * Math.PI / 180; // rad
+      const hAng = ((hour - 12) * 15) * Math.PI / 180;
       const sinAlt =
         Math.sin(latR) * Math.sin(decl) +
         Math.cos(latR) * Math.cos(decl) * Math.cos(hAng);
       if (sinAlt <= 0.01) continue;
       const alt = Math.asin(sinAlt);
-      // Solar azimuth (0 = N, clockwise). Symmetric about noon.
       const cosAz =
         (Math.sin(decl) - sinAlt * Math.sin(latR)) /
         (Math.cos(alt) * Math.cos(latR));
       let az = Math.acos(Math.max(-1, Math.min(1, cosAz)));
       if (hour > 12) az = 2 * Math.PI - az;
-      // Sun unit vector in compass coords (E, N, Up).
       const sx = Math.cos(alt) * Math.sin(az);
       const sy = Math.cos(alt) * Math.cos(az);
       const sz = sinAlt;
-      // Air mass (simple Lambert) and clear-sky transmission.
       const airMass = 1 / sinAlt;
       const trans = Math.pow(TRANSMISSIVITY, airMass);
       const weight = SOLAR_CONSTANT_KW * trans * CLOUD_FACTOR * TIME_STEP_HOURS;
       table.push({ sx, sy, sz, weight });
     }
   }
-  return table;
+  return { table, days };
 }
 
 async function main() {
@@ -159,7 +142,7 @@ async function main() {
     process.exit(1);
   }
   mkdirSync(TMP_DIR, { recursive: true });
-  mkdirSync(dirname(OUT_PATH), { recursive: true });
+  mkdirSync(OUT_DIR, { recursive: true });
 
   console.log("Reading DEM:", DEM);
   const tiff = await fromFile(DEM);
@@ -170,7 +153,7 @@ async function main() {
   const elev = (await img.readRasters())[0];
   console.log(`DEM ${W}×${H}, bbox [${west.toFixed(3)}, ${south.toFixed(3)}, ${east.toFixed(3)}, ${north.toFixed(3)}]`);
 
-  // Block-average downsample to the analysis grid.
+  // Block-average downsample.
   const F = DOWNSAMPLE;
   const cw = Math.floor(W / F), ch = Math.floor(H / F);
   const z = new Float32Array(cw * ch);
@@ -187,22 +170,18 @@ async function main() {
       z[cy * cw + cx] = cnt ? sum / cnt : NaN;
     }
   }
-  console.log(`Analysis grid: ${cw}×${ch} cells`);
 
-  // Convert geographic spacing to metres at SF latitude.
   const M_PER_DEG_LAT = 111_111;
   const M_PER_DEG_LNG = 111_111 * Math.cos((LAT * Math.PI) / 180);
   const dxM = ((east - west) / W) * M_PER_DEG_LNG * F;
   const dyM = ((north - south) / H) * M_PER_DEG_LAT * F;
-  console.log(`Cell size: ${dxM.toFixed(1)} m × ${dyM.toFixed(1)} m`);
 
-  console.log("Building annual sun-position table...");
-  const sunTable = buildSunTable();
-  console.log(`Sun table: ${sunTable.length} daylight samples`);
-
-  console.log("Computing slope, aspect, irradiation per cell...");
-  const irr = new Float32Array(cw * ch);
-  let counted = 0;
+  // Pre-compute slope + aspect per cell ONCE (constants across seasons).
+  console.log("Computing slope, aspect per cell...");
+  const nxA = new Float32Array(cw * ch);
+  const nyA = new Float32Array(cw * ch);
+  const nzA = new Float32Array(cw * ch);
+  const validA = new Uint8Array(cw * ch);
   for (let y = 1; y < ch - 1; y++) {
     for (let x = 1; x < cw - 1; x++) {
       const at = (cx, cy) => z[cy * cw + cx];
@@ -212,127 +191,95 @@ async function main() {
       const e = at(x, y);
       if (!Number.isFinite(e)) continue;
       if ([a,b,c,d,f,g,h,i].some(v => !Number.isFinite(v))) continue;
-
-      // Horn 3×3 derivatives. dzdy is (south - north)/dy because row
-      // index grows southward in the DEM.
       const dzdx = ((c + 2*f + i) - (a + 2*d + g)) / (8 * dxM);
       const dzdy = ((g + 2*h + i) - (a + 2*b + c)) / (8 * dyM);
-
-      // Slope in radians from horizontal.
       const slopeR = Math.atan(Math.hypot(dzdx, dzdy));
-      // Compass aspect (0=N, 90=E, 180=S, 270=W). Down-slope direction
-      // is -gradient; convert that vector to a compass bearing.
       let aspR = Math.atan2(-dzdx, dzdy);
       if (aspR < 0) aspR += 2 * Math.PI;
-
-      // Tilted-surface normal in compass coords.
       const cosB = Math.cos(slopeR), sinB = Math.sin(slopeR);
-      const nx = sinB * Math.sin(aspR);
-      const ny = sinB * Math.cos(aspR);
-      const nz = cosB;
-
-      let direct = 0;
-      for (let k = 0; k < sunTable.length; k++) {
-        const s = sunTable[k];
-        const dot = nx * s.sx + ny * s.sy + nz * s.sz;
-        if (dot <= 0) continue;
-        direct += s.weight * dot;
-      }
-      // Isotropic-sky diffuse: a tilted surface sees only (1+cosβ)/2
-      // of the sky dome, so half-sky for a vertical surface.
-      const diffuse = DIFFUSE_ANNUAL * (1 + cosB) / 2;
-      irr[y * cw + x] = direct + diffuse;
-      counted++;
+      const idx = y * cw + x;
+      nxA[idx] = sinB * Math.sin(aspR);
+      nyA[idx] = sinB * Math.cos(aspR);
+      nzA[idx] = cosB;
+      validA[idx] = 1;
     }
   }
-  console.log(`Computed irradiation for ${counted} cells`);
 
-  // Quick histogram + percentiles so we know how the bins are landing.
-  const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-  const values = [];
-  let minK = Infinity, maxK = -Infinity, sumK = 0, n = 0;
-  for (let k = 0; k < irr.length; k++) {
-    const v = irr[k];
-    if (!v) continue;
-    counts[levelFromKWh(v)]++;
-    values.push(v);
-    if (v < minK) minK = v;
-    if (v > maxK) maxK = v;
-    sumK += v; n++;
-  }
-  values.sort((a, b) => a - b);
-  const pct = p => values[Math.floor(values.length * p)];
-  console.log(`Irradiation kWh/m²: min ${minK.toFixed(0)}, mean ${(sumK/n).toFixed(0)}, max ${maxK.toFixed(0)}`);
-  console.log(`Percentiles: p10 ${pct(0.10).toFixed(0)} · p20 ${pct(0.20).toFixed(0)} · p40 ${pct(0.40).toFixed(0)} · p60 ${pct(0.60).toFixed(0)} · p80 ${pct(0.80).toFixed(0)} · p90 ${pct(0.90).toFixed(0)}`);
-  console.log("Cells per level:", counts);
-
-  // Emit a square polygon per cell tagged with its level. Mapshaper
-  // dissolves them into one polygon per level next.
+  // Cell → polygon helpers.
   const cellW = ((east - west) / W) * F;
   const cellH = ((north - south) / H) * F;
   const toLng = cx => west + ((cx + 0.5) * F * (east - west)) / W;
   const toLat = cy => north - ((cy + 0.5) * F * (north - south)) / H;
 
-  const features = [];
-  for (let y = 1; y < ch - 1; y++) {
-    for (let x = 1; x < cw - 1; x++) {
-      const v = irr[y * cw + x];
-      if (!v) continue;
-      const lvl = levelFromKWh(v);
-      const lng = toLng(x), lat = toLat(y);
-      const x0 = lng - cellW / 2, x1 = lng + cellW / 2;
-      const y0 = lat - cellH / 2, y1 = lat + cellH / 2;
-      features.push({
-        type: "Feature",
-        properties: { level: lvl },
-        geometry: {
-          type: "Polygon",
-          coordinates: [[[x0,y0],[x1,y0],[x1,y1],[x0,y1],[x0,y0]]],
-        },
-      });
+  for (const [key, def] of Object.entries(SEASONS)) {
+    console.log(`\n── ${def.label} (${key}) ──`);
+    const { table: sunTable, days } = buildSunTable(key);
+    console.log(`  sun-position samples: ${sunTable.length} (${days} days)`);
+
+    // Flat-ground threshold for this season: direct = Σ weight × sz,
+    // diffuse = DIFFUSE_PER_DAY × days (sky view = 1 for flat ground).
+    let flatDirect = 0;
+    for (const s of sunTable) flatDirect += s.weight * s.sz;
+    const flatDiffuse = DIFFUSE_PER_DAY * days;
+    const flat = flatDirect + flatDiffuse;
+    const hi = flat * (1 + NEUTRAL_BAND);
+    const lo = flat * (1 - NEUTRAL_BAND);
+    console.log(`  flat-ground irradiation: ${flat.toFixed(0)} kWh/m²  (sun >${hi.toFixed(0)}, shade <${lo.toFixed(0)})`);
+
+    // Classify each cell, emit only sun + shade polygons (drop neutral).
+    const features = [];
+    let nSun = 0, nShade = 0, nNeutral = 0;
+    for (let y = 1; y < ch - 1; y++) {
+      for (let x = 1; x < cw - 1; x++) {
+        const idx = y * cw + x;
+        if (!validA[idx]) continue;
+        const nx = nxA[idx], ny = nyA[idx], nz = nzA[idx];
+        let direct = 0;
+        for (let k = 0; k < sunTable.length; k++) {
+          const s = sunTable[k];
+          const dot = nx * s.sx + ny * s.sy + nz * s.sz;
+          if (dot > 0) direct += s.weight * dot;
+        }
+        const diffuse = DIFFUSE_PER_DAY * days * (1 + nz) / 2;
+        const total = direct + diffuse;
+
+        let level;
+        if (total > hi) { level = "sun"; nSun++; }
+        else if (total < lo) { level = "shade"; nShade++; }
+        else { nNeutral++; continue; }
+
+        const lng = toLng(x), lat = toLat(y);
+        const x0 = lng - cellW / 2, x1 = lng + cellW / 2;
+        const y0 = lat - cellH / 2, y1 = lat + cellH / 2;
+        features.push({
+          type: "Feature",
+          properties: { level },
+          geometry: {
+            type: "Polygon",
+            coordinates: [[[x0,y0],[x1,y0],[x1,y1],[x0,y1],[x0,y0]]],
+          },
+        });
+      }
     }
+    console.log(`  cells: sun=${nSun}, shade=${nShade}, neutral(dropped)=${nNeutral}`);
+
+    const RAW = join(TMP_DIR, `solar-${key}-raw.geojson`);
+    const OUT = join(OUT_DIR, `sf-solar-${key}.geojson`);
+    await writeFile(RAW, JSON.stringify({ type: "FeatureCollection", features }));
+    shell("npx", [
+      "--no-install", "mapshaper", RAW,
+      "-dissolve2", "fields=level",
+      "-clip", NEIGH_PATH,
+      "-clean", "gap-fill-area=2000",
+      "-simplify", "8%", "keep-shapes",
+      "-o", OUT, "format=geojson", "force",
+    ]);
+    const fc = JSON.parse(await readFile(OUT, "utf8"));
+    fc.metadata = { season: def.label, flat_kwh: Math.round(flat) };
+    fc.features = fc.features.map(smoothFeature);
+    await writeFile(OUT, JSON.stringify(fc));
+    console.log(`  wrote ${OUT}`);
   }
-  console.log(`Emitting ${features.length} cell polygons`);
-
-  const RAW = join(TMP_DIR, "solar-cells-raw.geojson");
-  await writeFile(RAW, JSON.stringify({
-    type: "FeatureCollection",
-    features,
-  }));
-
-  shell("npx", [
-    "--no-install", "mapshaper", RAW,
-    "-dissolve2", "fields=level",
-    "-clip", NEIGH_PATH,
-    "-clean", "gap-fill-area=2000",
-    "-simplify", "8%", "keep-shapes",
-    "-o", OUT_PATH, "format=geojson", "force",
-  ]);
-
-  // Post-process:
-  //   • Drop the "average city" level-3 polygon (the base map shows
-  //     through there — everyone gets some sun, no need to paint 80%
-  //     of the city the same colour).
-  //   • Merge level 1 into level 2: peaks themselves get sun, the
-  //     shadow only starts just over the crest, so a separate "deep
-  //     shadow" band overstates how dark those spots actually are.
-  //   • Smooth the remaining cell-grid staircase with two Chaikin
-  //     passes.
-  const fc = JSON.parse(await readFile(OUT_PATH, "utf8"));
-  // Re-tag level 1 polygons as level 2, then re-emit a fresh
-  // dissolve pass mapshaper-side so they merge into the level-2 shape.
-  const remerged = fc.features
-    .filter(f => f.properties.level !== 3)
-    .map(f => {
-      if (f.properties.level === 1) f.properties.level = 2;
-      return f;
-    });
-  // No mapshaper re-dissolve here — overlapping levels are still
-  // separate features and render fine; Mapbox draws level 2's deeper
-  // and lighter shades both as the same colour.
-  fc.features = remerged.map(smoothFeature);
-  await writeFile(OUT_PATH, JSON.stringify(fc));
-  console.log(`Wrote ${OUT_PATH} (kept ${fc.features.length} features after merging L1→L2, dropping L3, smoothing)`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
