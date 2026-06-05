@@ -31,6 +31,8 @@ export default function FogApp() {
   const [zips, setZips] = useState(null);
   const [supervisorDistricts, setSupervisorDistricts] = useState(null);
   const [realtorNeighborhoods, setRealtorNeighborhoods] = useState(null);
+  const [seismicHazards, setSeismicHazards] = useState(null);
+  const [tsunamiHazard, setTsunamiHazard] = useState(null);
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { feature, point, address, contour, elevation_ft, zip, supervisor, realtor, microZone }
   // Summer fog overlay — on for the "Fog Map" preset; off otherwise.
@@ -111,6 +113,8 @@ export default function FogApp() {
     loadLookup("/data/sf-zip-codes.geojson", setZips);
     loadLookup("/data/sf-supervisor-districts.geojson", setSupervisorDistricts);
     loadLookup("/data/sf-realtor-neighborhoods.geojson", setRealtorNeighborhoods);
+    loadLookup("/data/sf-seismic-hazards.geojson", setSeismicHazards);
+    loadLookup("/data/sf-tsunami-hazard.geojson", setTsunamiHazard);
 
     return () => {
       cancelled = true;
@@ -299,6 +303,8 @@ export default function FogApp() {
         zips={zips}
         supervisorDistricts={supervisorDistricts}
         realtorNeighborhoods={realtorNeighborhoods}
+        seismicHazards={seismicHazards}
+        tsunamiHazard={tsunamiHazard}
         showNeighborhoods={showNeighborhoods}
         onToggleNeighborhoods={setShowNeighborhoods}
         showContours={showContours}

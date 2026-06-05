@@ -15,6 +15,8 @@ export default function FogPanel({
   zips,
   supervisorDistricts,
   realtorNeighborhoods,
+  seismicHazards,
+  tsunamiHazard,
   showNeighborhoods, onToggleNeighborhoods,
   showContours, onToggleContours,
   contoursAvailable,
@@ -50,6 +52,13 @@ export default function FogPanel({
   const fogHrs = picked?.contour?.properties?.hours;
   const microZoneLabel = Number.isFinite(fogHrs) ? fogLabel(fogHrs) : null;
 
+  // Hazard checks — Y/N only resolve once the picked point AND the
+  // hazard dataset have both arrived; until then show the "—" placeholder.
+  const yesNo = (point, fc) =>
+    !point || !fc ? null : findNeighborhoodForPoint(fc, point) ? "Yes" : "No";
+  const seismicYN = yesNo(point, seismicHazards);
+  const tsunamiYN = yesNo(point, tsunamiHazard);
+
   return (
     <div className="fog-panel">
       <div className="fog-panel-row">
@@ -62,6 +71,8 @@ export default function FogPanel({
           <KeyRow label="Elevation" value={Number.isFinite(elevationFt) ? `${elevationFt} ft` : null} />
           <KeyRow label="Realtor District" value={realtorLabel} />
           <KeyRow label="Supervisor District" value={supervisorLabel} />
+          <KeyRow label="Seismic Zone" value={seismicYN} />
+          <KeyRow label="Tsunami Zone" value={tsunamiYN} />
         </div>
 
         <div
