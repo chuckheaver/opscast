@@ -37,7 +37,6 @@ export default function MicroMap({
   neighborhoods,
   zones,
   solar,
-  canopy,
   showSun,
   showCool,
   showWind,
@@ -55,7 +54,7 @@ export default function MicroMap({
   const readyRef = useRef(false);
 
   // Latest data + toggle state, readable from the stable callbacks below.
-  const dataRef = useRef({ neighborhoods, zones, solar, canopy });
+  const dataRef = useRef({ neighborhoods, zones, solar });
   const visRef = useRef({ showSun, showCool, showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods });
 
   const applyVisibility = useCallback(() => {
@@ -71,8 +70,6 @@ export default function MicroMap({
     // All four fog density bands ride the one Fog toggle.
     ["fog", "fog2", "fog3", "fog4"].forEach(z => set(`micro-${z}-fill`, v.showFog));
     set("micro-solar-fill", v.showSolar);
-    set("micro-canopy-fill", v.showSolar);
-    set("micro-canopy-outline", v.showSolar);
     set("micro-hillshade", v.showTerrain);
     set("micro-hillshade-2", v.showTerrain);
     set("micro-contour-lines", v.showContours);
@@ -87,7 +84,7 @@ export default function MicroMap({
   const addLayers = useCallback(() => {
     const map = mapRef.current;
     if (!map || !readyRef.current) return;
-    const { neighborhoods: neigh, zones: zn, solar: sl, canopy: cn } = dataRef.current;
+    const { neighborhoods: neigh, zones: zn, solar: sl } = dataRef.current;
 
     // Hillshade terrain pair — Mapbox raster-dem-v1 baked into two
     // hillshade passes (NW + SE light) for proper relief shading.
@@ -145,29 +142,6 @@ export default function MicroMap({
           ],
           "fill-opacity": 0.6,
         },
-      });
-    }
-
-    // Heavy-vegetation overlay — Golden Gate Park, Presidio, Mt Sutro
-    // Forest, McLaren, etc. Canopy intercepts light before it reaches
-    // the ground so these zones make their own cooler / humider
-    // microclimates; light green so they read as "tree cover" against
-    // the warm solar ramp. Rides the same Solar Exposure toggle.
-    if (cn && !map.getSource("micro-canopy")) {
-      map.addSource("micro-canopy", { type: "geojson", data: cn });
-      map.addLayer({
-        id: "micro-canopy-fill",
-        type: "fill",
-        source: "micro-canopy",
-        layout: { visibility: "none" },
-        paint: { "fill-color": "#86efac", "fill-opacity": 0.55 },
-      });
-      map.addLayer({
-        id: "micro-canopy-outline",
-        type: "line",
-        source: "micro-canopy",
-        layout: { visibility: "none" },
-        paint: { "line-color": "#15803d", "line-width": 0.8, "line-opacity": 0.7 },
       });
     }
 
@@ -369,7 +343,7 @@ export default function MicroMap({
 
   // Data arrives (possibly after or before map load) → refresh refs + add.
   useEffect(() => {
-    dataRef.current = { neighborhoods, zones, solar, canopy };
+    dataRef.current = { neighborhoods, zones, solar };
     const map = mapRef.current;
     // If the solar source is already mounted, swap its data so changing
     // seasons re-paints without a full layer rebuild.
@@ -377,7 +351,7 @@ export default function MicroMap({
       map.getSource("micro-solar").setData(solar);
     }
     addLayers();
-  }, [neighborhoods, zones, solar, canopy, addLayers]);
+  }, [neighborhoods, zones, solar, addLayers]);
 
   // Toggle changes → refresh refs + apply.
   useEffect(() => {

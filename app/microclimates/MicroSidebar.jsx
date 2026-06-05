@@ -19,7 +19,6 @@ const ZONES = [
 const SOLAR_BANDS = [
   ["#fef3c7", "More sun than flat", "Light yellow — slopes that beat flat-ground irradiation in the selected season (mostly south-facing)."],
   ["#c4a574", "Shaded vs flat", "Light brown — slopes that fall short of flat-ground (mostly north-facing)."],
-  ["#86efac", "Heavy canopy", "Golden Gate Park, Presidio, Mt Sutro, McLaren — canopy absorbs sun before it reaches the ground; cooler, humider microclimates."],
 ];
 
 const SEASONS = [

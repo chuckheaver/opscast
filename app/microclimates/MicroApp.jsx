@@ -18,7 +18,6 @@ const SOLAR_URLS = {
   equinox: "/data/sf-solar-equinox.geojson",
   summer:  "/data/sf-solar-summer.geojson",
 };
-const CANOPY_URL = "/data/sf-canopy.geojson";
 
 export default function MicroApp() {
   const searchParams = useSearchParams();
@@ -27,7 +26,6 @@ export default function MicroApp() {
   // Per-season solar layers; loaded on first switch and cached here.
   const [solarBySeason, setSolarBySeason] = useState({});
   const [solarSeason, setSolarSeason] = useState("annual");
-  const [canopy, setCanopy] = useState(null);
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { point: [lng,lat], address }
 
@@ -64,10 +62,6 @@ export default function MicroApp() {
       .then(r => (r.ok ? r.json() : Promise.reject(new Error(`zones ${r.status}`))))
       .then(d => { if (!cancelled) setZones(d); })
       .catch(e => { if (!cancelled) setDataErr(e.message); });
-    fetch(CANOPY_URL)
-      .then(r => (r.ok ? r.json() : null))
-      .then(d => { if (!cancelled && d) setCanopy(d); })
-      .catch(() => {});
     return () => { cancelled = true; };
   }, []);
 
@@ -168,7 +162,6 @@ export default function MicroApp() {
         neighborhoods={neighborhoods}
         zones={zones}
         solar={solarBySeason[solarSeason] || null}
-        canopy={canopy}
         showSun={showSun}
         showCool={showCool}
         showWind={showWind}
