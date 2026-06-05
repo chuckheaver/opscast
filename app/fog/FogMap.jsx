@@ -27,67 +27,16 @@ const SF_BOUNDS = [
   [-122.355, 37.812], // NE
 ];
 
-// Hand-picked weather emoji at SF locations chosen from the user's
-// markup. Each pin renders as a DOM marker so the system emoji font
-// is honoured. Coordinates are eyeballed neighborhood centers and
-// can be tuned in place.
+// Three large weather glyphs placed at the same latitude across the
+// east-west fog gradient so a user can read the three zones at a
+// glance: ☀️ in the Sun band (east), 🌤️ in the Transition belt (mid),
+// ☁️ in the Fog band (west). The hand-picked emoji-per-neighborhood
+// pins from the original markup are gone — they were doing more visual
+// noise than information.
 const FOG_PIN_GROUPS = [
-  // ☀️ — fully sunny neighborhoods (squares in markup)
-  {
-    emoji: "☀️",
-    points: [
-      [-122.412, 37.792], // Nob Hill
-      [-122.418, 37.781], // Civic Center
-      [-122.391, 37.780], // South Beach
-      [-122.416, 37.762], // Mission Dolores / 18th
-      [-122.434, 37.762], // Castro
-    ],
-  },
-  // 🌤️ — partly-sunny transition belt (stars in markup)
-  {
-    emoji: "🌤️",
-    points: [
-      [-122.460, 37.797], // Presidio (west)
-      [-122.443, 37.795], // Presidio (east)
-      [-122.450, 37.787], // Presidio Heights
-      [-122.444, 37.781], // Anza Vista
-      [-122.447, 37.773], // Panhandle
-      [-122.451, 37.755], // Clarendon Heights
-      [-122.431, 37.751], // Noe Valley
-      [-122.415, 37.745], // Peralta Heights
-      [-122.420, 37.741], // Diamond Heights / Bernal
-      [-122.388, 37.762], // Central Waterfront / Dogpatch
-      [-122.379, 37.737], // India Basin
-      [-122.371, 37.728], // Hunters Point
-    ],
-  },
-  // ⛅️ — partly cloudy (circles in markup)
-  {
-    emoji: "⛅️",
-    points: [
-      [-122.493, 37.781], // Outer Richmond (NE)
-      [-122.474, 37.778], // Inner Richmond
-      [-122.488, 37.772], // Outer Richmond (mid)
-      [-122.480, 37.770], // Golden Gate Park center
-      [-122.464, 37.762], // Inner Sunset / Parnassus
-      [-122.503, 37.756], // Outer Sunset (Kirkham)
-      [-122.484, 37.754], // Sunset 24th Ave
-      [-122.456, 37.748], // Forest Knolls
-      [-122.438, 37.737], // Glen Park
-      [-122.408, 37.723], // Portola / University Mound
-      [-122.388, 37.728], // Bayview (north slope)
-    ],
-  },
-  // ☁️ — full fog (octagons in markup)
-  {
-    emoji: "☁️",
-    points: [
-      [-122.475, 37.732], // Parkside / Stoat Blvd
-      [-122.466, 37.720], // Ingleside Terraces
-      [-122.452, 37.722], // Westwood Park / Sunnyside
-      [-122.440, 37.713], // Cayuga / Excelsior
-    ],
-  },
+  { emoji: "☀️", points: [[-122.425, 37.762]] },   // Sun        — Mission / Castro flats
+  { emoji: "🌤️", points: [[-122.460, 37.762]] },   // Transition — Inner Sunset / Cole Valley
+  { emoji: "☁️", points: [[-122.495, 37.762]] },   // Fog        — Outer Sunset
 ];
 
 // Layer IDs the "Show fog data" toggle flips on and off as a group.
