@@ -3048,7 +3048,11 @@ body {
 
 /* Map area */
 .re-map-wrap { position: relative; }
-.re-map { position: absolute; inset: 0; }
+/* Fill the wrapper by normal flow (width/height 100%) rather than absolute
+   inset:0 — Mapbox adds its own .mapboxgl-map { position: relative } to this
+   element, which overrides an absolute position and collapses it to 0 height.
+   The overlay panels below stay absolute and layer on top. */
+.re-map { width: 100%; height: 100%; }
 .re-map-missing-token {
   position: absolute; inset: 0;
   display: grid; place-items: center;
