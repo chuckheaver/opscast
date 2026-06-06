@@ -2890,3 +2890,294 @@ body {
   color: #64748b;
   font-weight: 700;
 }
+
+/* ── SF Microclimate Real Estate (/listings) ─────────────────────────────── */
+.re-app {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  font-family: 'DM Sans', sans-serif;
+  background: #f0ece6;
+}
+.re-sidebar {
+  background: linear-gradient(180deg, #ffffff 0%, #faf6ec 100%);
+  border-right: 1px solid var(--border);
+  padding: 20px 18px 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.re-head { margin-bottom: 2px; }
+.re-brand {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+  color: #1c1917;
+}
+.re-brand em {
+  font-style: italic;
+  background: linear-gradient(135deg, #fbbf24 0%, #2563eb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.re-tag {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+.re-err {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 8px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+/* Headline stat tiles */
+.re-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.re-stat {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.re-stat-v { font-size: 18px; font-weight: 800; color: #1c1917; line-height: 1.1; }
+.re-stat-l { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px; }
+
+.re-section {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.re-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.re-section-head h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #44403c;
+}
+.re-reset {
+  font-size: 11px;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+.re-reset:hover { text-decoration: underline; }
+
+/* Breakdown table */
+.re-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.re-table th {
+  text-align: right;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--muted);
+  padding: 4px 4px;
+  border-bottom: 1px solid var(--border);
+}
+.re-table th:first-child { text-align: left; }
+.re-table td { text-align: right; padding: 5px 4px; border-bottom: 1px solid #f0ece6; color: #1c1917; }
+.re-table td:first-child { text-align: left; }
+.re-grp { font-weight: 600; }
+.re-empty { text-align: center !important; color: var(--muted); font-style: italic; padding: 12px !important; }
+
+.re-lbl {
+  font-size: 11px;
+  font-weight: 600;
+  color: #57534e;
+  margin-top: 2px;
+}
+.re-row { display: flex; gap: 6px; }
+.re-input, .re-select {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 9px;
+  font-size: 13px;
+  font-family: inherit;
+  background: #fff;
+  color: #1c1917;
+}
+.re-input:focus, .re-select:focus { outline: none; border-color: var(--accent); }
+.re-select-sm { width: auto; padding: 4px 8px; font-size: 12px; }
+
+.re-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.re-chip {
+  font-size: 11px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #57534e;
+  cursor: pointer;
+  font-family: inherit;
+}
+.re-chip:hover { border-color: var(--accent); }
+.re-chip.on { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+
+.re-foot {
+  margin-top: auto;
+  font-size: 10px;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.5;
+  padding-top: 8px;
+}
+
+/* Map area */
+.re-map-wrap { position: relative; }
+.re-map { position: absolute; inset: 0; }
+.re-map-missing-token {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  background: #f0ece6; padding: 40px; text-align: center;
+}
+.re-map-missing-token code { background: #e7e5e4; padding: 1px 5px; border-radius: 4px; }
+
+.re-map-controls {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  font-size: 12px;
+}
+.re-ctrl-label { font-size: 11px; color: var(--muted); font-weight: 600; }
+.re-seg {
+  font-size: 12px;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #57534e;
+  cursor: pointer;
+  border-radius: 6px;
+  font-family: inherit;
+}
+.re-seg.on { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.re-ctrl-check { display: flex; align-items: center; gap: 4px; margin-left: 6px; color: #57534e; cursor: pointer; }
+
+/* Drill-down detail card */
+.re-detail {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 320px;
+  max-height: calc(100% - 24px);
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+}
+.re-detail-x {
+  position: absolute; top: 8px; right: 10px;
+  background: none; border: none; font-size: 22px; line-height: 1;
+  color: var(--muted); cursor: pointer;
+}
+.re-detail-status {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #e0e7ff;
+  color: #3730a3;
+}
+.re-detail-addr { margin: 8px 0 4px; font-size: 16px; font-weight: 700; color: #1c1917; line-height: 1.25; }
+.re-detail-price { font-size: 20px; font-weight: 800; color: #1c1917; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+.re-detail-delta { font-size: 12px; font-weight: 700; }
+.re-detail-delta.up { color: #16a34a; }
+.re-detail-delta.down { color: #dc2626; }
+.re-detail-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  margin: 14px 0 0;
+  font-size: 13px;
+}
+.re-detail-grid dt { color: var(--muted); }
+.re-detail-grid dd { margin: 0; text-align: right; color: #1c1917; font-weight: 500; }
+.re-detail-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.re-detail-link:hover { text-decoration: underline; }
+
+@media (max-width: 720px) {
+  .re-app { grid-template-columns: 1fr; grid-template-rows: 44vh 56vh; }
+  .re-detail { width: calc(100% - 24px); }
+}
+
+/* Breakdown bar chart */
+.re-chart { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.re-chart-title { font-size: 11px; font-weight: 600; color: #57534e; margin-bottom: 2px; }
+.re-bar-row { display: grid; grid-template-columns: 96px 1fr 52px; align-items: center; gap: 8px; }
+.re-bar-label {
+  font-size: 11px; color: #44403c;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.re-bar-track { background: #efeae1; border-radius: 4px; height: 14px; overflow: hidden; }
+.re-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s ease; min-width: 2px; }
+.re-bar-val { font-size: 11px; font-weight: 700; color: #1c1917; text-align: right; }
+
+/* Map color legend (bottom-left overlay) */
+.re-legend {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  max-width: calc(100% - 24px);
+}
+.re-legend-items { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.re-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #44403c; }
+.re-legend-dot { width: 11px; height: 11px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); }
+.re-legend-grad { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #44403c; }
+.re-grad-bar { width: 160px; height: 11px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.1); }
+
+/* Status-colored drill-down badge */
+.re-detail-status[data-status="Active"] { background: #dcfce7; color: #15803d; }
+.re-detail-status[data-status="Pending"] { background: #fef3c7; color: #b45309; }
+.re-detail-status[data-status="Closed"] { background: #dbeafe; color: #1d4ed8; }
+.re-detail-status[data-status="Sold Off MLS"] { background: #ede9fe; color: #6d28d9; }
+.re-detail-status[data-status="Coming Soon"] { background: #cffafe; color: #0e7490; }
+.re-detail-status[data-status="Contingent - Show"],
+.re-detail-status[data-status="Contingent - No Show"] { background: #ffedd5; color: #c2410c; }
