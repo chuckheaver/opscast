@@ -33,6 +33,28 @@ function groupColor(groupDim, key) {
 
 // Legend rows for the map, keyed to the active "Color by" mode. Must match
 // the paint ramps in ListingsMap.jsx.
+// Short labels for the property-subtype filter chips (Property Subtype 1
+// Display → abbreviation). Anything not listed falls back to its first three
+// letters, uppercased.
+const SUBTYPE_ABBREV = {
+  "Single Family Residence": "SFH",
+  "Condominium": "CND",
+  "Tenancy in Common": "TIC",
+  "Townhouse": "TNH",
+  "3+ Houses on Lot": "3+H",
+  "Other": "OTH",
+};
+// Preferred chip order; any other subtypes follow in data order.
+const SUBTYPE_ORDER = [
+  "Single Family Residence",
+  "Condominium",
+  "Tenancy in Common",
+  "Townhouse",
+  "3+ Houses on Lot",
+  "Other",
+];
+const subtypeAbbrev = t => SUBTYPE_ABBREV[t] || (t ? t.slice(0, 3).toUpperCase() : "?");
+
 const STATUS_LEGEND = [
   ["Active", "#16a34a"],
   ["Pending", "#f59e0b"],
@@ -48,6 +70,7 @@ export default function ListingsApp() {
 
   // Filters
   const [statuses, setStatuses] = useState(new Set()); // empty = all
+  const [subtypes, setSubtypes] = useState(new Set()); // property subtype, empty = all
   const [district, setDistrict] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [fogHrs, setFogHrs] = useState(""); // exact fog-hours value, "" = all
@@ -75,6 +98,12 @@ export default function ListingsApp() {
   // Distinct filter option lists, derived from the loaded data.
   const allProps = useMemo(() => features.map(f => f.properties), [features]);
   const statusOptions = useMemo(() => uniqSorted(allProps.map(p => p.status)), [allProps]);
+  const subtypeOptions = useMemo(() => {
+    const present = new Set(allProps.map(p => p.propType).filter(Boolean));
+    const ordered = SUBTYPE_ORDER.filter(t => present.has(t));
+    const extras = [...present].filter(t => !SUBTYPE_ORDER.includes(t)).sort();
+    return [...ordered, ...extras];
+  }, [allProps]);
   const districtOptions = useMemo(() => uniqSorted(allProps.map(p => p.district)), [allProps]);
   const neighborhoodOptions = useMemo(
     () => uniqSorted(allProps.map(p => p.neighborhood)),
@@ -95,6 +124,7 @@ export default function ListingsApp() {
     return features.filter(f => {
       const p = f.properties;
       if (statuses.size && !statuses.has(p.status)) return false;
+      if (subtypes.size && !subtypes.has(p.propType)) return false;
       if (district && p.district !== district) return false;
       if (neighborhood && p.neighborhood !== neighborhood) return false;
       if (fogHrs && String(p.fogHours) !== fogHrs) return false;
@@ -105,7 +135,7 @@ export default function ListingsApp() {
       if (hi != null && (price == null || price > hi)) return false;
       return true;
     });
-  }, [features, statuses, district, neighborhood, fogHrs, closedFrom, closedTo, minPrice, maxPrice]);
+  }, [features, statuses, subtypes, district, neighborhood, fogHrs, closedFrom, closedTo, minPrice, maxPrice]);
 
   const filteredProps = useMemo(() => filtered.map(f => f.properties), [filtered]);
   const stats = useMemo(() => computeStats(filteredProps), [filteredProps]);
@@ -122,8 +152,17 @@ export default function ListingsApp() {
     });
   }, []);
 
+  const toggleSubtype = useCallback(t => {
+    setSubtypes(prev => {
+      const next = new Set(prev);
+      next.has(t) ? next.delete(t) : next.add(t);
+      return next;
+    });
+  }, []);
+
   const resetFilters = useCallback(() => {
     setStatuses(new Set());
+    setSubtypes(new Set());
     setDistrict("");
     setNeighborhood("");
     setFogHrs("");
@@ -235,6 +274,20 @@ export default function ListingsApp() {
                 onClick={() => toggleStatus(s)}
               >
                 {s}
+              </button>
+            ))}
+          </div>
+
+          <label className="re-lbl">Property type</label>
+          <div className="re-chips">
+            {subtypeOptions.map(t => (
+              <button
+                key={t}
+                className={"re-chip" + (subtypes.has(t) ? " on" : "")}
+                onClick={() => toggleSubtype(t)}
+                title={t}
+              >
+                {subtypeAbbrev(t)}
               </button>
             ))}
           </div>

@@ -146,7 +146,7 @@ function loadListings() {
         address: g("Address"),
         unit: g("Unit"),
         status: g("Status"), // first "Status" col = display text
-        propType: g("Property Subtype Desc"),
+        propType: g("Property Subtype 1 Display"),
         bedrooms: g("Bedrooms"),
         bathrooms: g("Bathrooms Display"),
         sqft: sqftKey ? num(g(sqftKey)) : null,
