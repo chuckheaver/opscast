@@ -19,7 +19,7 @@
 // are cached in data/tmp/geocode-cache.json keyed by address so re-runs that
 // only change tagging logic don't re-hit the Census API.
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -29,7 +29,15 @@ import {
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
-const CSV_PATH = join(ROOT, "data", "raw", "listings.csv");
+// Every .csv dropped in data/raw/ is loaded and combined. The original
+// export covered SF Districts 1-2; additional exports (other districts) just
+// get dropped alongside it and are merged here, de-duped by Listing Number.
+const RAW_DIR = join(ROOT, "data", "raw");
+const listCsvFiles = () =>
+  readdirSync(RAW_DIR)
+    .filter(f => f.toLowerCase().endsWith(".csv"))
+    .sort()
+    .map(f => join(RAW_DIR, f));
 const PUBLIC_DATA = join(ROOT, "public", "data");
 const OUT_PATH = join(PUBLIC_DATA, "sf-listings.geojson");
 const CACHE_PATH = join(ROOT, "data", "tmp", "geocode-cache.json");
@@ -99,8 +107,9 @@ function parseCSV(text) {
   return rows;
 }
 
-function loadListings() {
-  const rows = parseCSV(readFileSync(CSV_PATH, "utf8"));
+// Parse one MLS CSV file → array of listing objects.
+function loadOneFile(path) {
+  const rows = parseCSV(readFileSync(path, "utf8"));
   const header = rows[0];
   // The export has two columns literally named "Status" (display + code).
   // Track the second occurrence so we keep both.
@@ -162,6 +171,24 @@ function loadListings() {
         url: g("Listing URL"),
       };
     });
+}
+
+// Load + combine every CSV in data/raw/, de-duping by Listing Number
+// (first file wins). Returns one flat array of listing objects.
+function loadAllListings() {
+  const files = listCsvFiles();
+  const byId = new Map();
+  let dupes = 0;
+  for (const f of files) {
+    const rows = loadOneFile(f);
+    for (const l of rows) {
+      if (byId.has(l.id)) { dupes++; continue; }
+      byId.set(l.id, l);
+    }
+    console.log(`  ${f.split("/").pop()}: ${rows.length} rows`);
+  }
+  if (dupes) console.log(`  (skipped ${dupes} duplicate listing numbers across files)`);
+  return [...byId.values()];
 }
 
 function num(s) {
@@ -246,15 +273,17 @@ function tag(point) {
 
 // ── Main ──────────────────────────────────────────────────────────────────
 async function main() {
-  if (!existsSync(CSV_PATH)) {
-    console.error(`Missing ${CSV_PATH}. Drop your MLS export there and re-run.`);
+  const files = listCsvFiles();
+  if (!files.length) {
+    console.error(`No .csv files in ${RAW_DIR}. Drop your MLS export(s) there and re-run.`);
     process.exit(1);
   }
   mkdirSync(dirname(CACHE_PATH), { recursive: true });
   mkdirSync(PUBLIC_DATA, { recursive: true });
 
-  const listings = loadListings();
-  console.log(`Parsed ${listings.length} listings from CSV.`);
+  console.log(`Loading ${files.length} CSV file(s) from data/raw/:`);
+  const listings = loadAllListings();
+  console.log(`Parsed ${listings.length} unique listings.`);
   const withSqft = listings.filter(l => Number.isFinite(l.sqft) && l.sqft > 0).length;
   console.log(
     withSqft
@@ -285,14 +314,26 @@ async function main() {
     writeFileSync(CACHE_PATH, JSON.stringify(cache));
   }
 
+  // SF bounding box (includes Treasure Island). Geocodes outside this are
+  // either Census mis-matches to same-named streets elsewhere, or non-SF
+  // listings that slipped into the export — drop them rather than drop a
+  // stray pin in the East Bay.
+  const inSF = ([lon, lat]) =>
+    lon >= -122.53 && lon <= -122.34 && lat >= 37.69 && lat <= 37.84;
+
   let matched = 0;
   let unmatched = [];
+  let outside = [];
   const features = [];
   for (const l of listings) {
     const c = cache[addrKey(l)];
     const point = c?.point || OVERRIDES[addrKey(l)];
     if (!point) {
       unmatched.push(l.address);
+      continue;
+    }
+    if (!inSF(point)) {
+      outside.push(l.address);
       continue;
     }
     matched++;
@@ -329,11 +370,12 @@ async function main() {
   const fc = {
     type: "FeatureCollection",
     metadata: {
-      source: "data/raw/listings.csv (MLS export)",
+      source: "data/raw/*.csv (combined MLS exports)",
       builtAt: new Date().toISOString(),
       geocoder: "US Census batch geocoder (Public_AR_Current)",
       total: listings.length,
       matched,
+      droppedOutsideSF: outside.length,
     },
     features,
   };
@@ -344,6 +386,10 @@ async function main() {
   console.log(`\n✓ wrote ${OUT_PATH}`);
   console.log(`  ${matched}/${listings.length} geocoded`);
   console.log(`  ${withFog} tagged with fog-hours, ${withNbhd} with a neighborhood/district`);
+  if (outside.length) {
+    console.log(`\n${outside.length} dropped as outside SF:`);
+    outside.slice(0, 10).forEach(a => console.log("  -", a));
+  }
   if (unmatched.length) {
     console.log(`\n${unmatched.length} unmatched address(es):`);
     unmatched.slice(0, 20).forEach(a => console.log("  -", a));
