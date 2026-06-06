@@ -314,11 +314,9 @@ async function main() {
     writeFileSync(CACHE_PATH, JSON.stringify(cache));
   }
 
-  // SF bounding box (includes Treasure Island). Geocodes outside this are
-  // either Census mis-matches to same-named streets elsewhere, or non-SF
-  // listings that slipped into the export — drop them rather than drop a
-  // stray pin in the East Bay.
-  const inSF = ([lon, lat]) =>
+  // SF bounding box (includes Treasure Island) — a fast first filter for
+  // gross mis-geocodes to same-named streets in other cities.
+  const inBBox = ([lon, lat]) =>
     lon >= -122.53 && lon <= -122.34 && lat >= 37.69 && lat <= 37.84;
 
   let matched = 0;
@@ -332,12 +330,16 @@ async function main() {
       unmatched.push(l.address);
       continue;
     }
-    if (!inSF(point)) {
+    const tags = tag(point);
+    // Strictly San Francisco only: the point must be inside the bbox AND
+    // inside an actual SFAR realtor-neighborhood polygon (the real city
+    // limits). This drops Daly City / San Ramon / any non-SF listing that
+    // slipped into an export, even when it sits just over the line.
+    if (!inBBox(point) || !tags.district) {
       outside.push(l.address);
       continue;
     }
     matched++;
-    const tags = tag(point);
     features.push({
       type: "Feature",
       geometry: { type: "Point", coordinates: point },
