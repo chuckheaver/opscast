@@ -77,13 +77,17 @@ export default function ListingsMap({ features, colorBy, showFog, selectedId, on
     mapboxgl.accessToken = TOKEN;
     const map = new mapboxgl.Map({
       container: containerRef.current,
-      style: "mapbox://styles/mapbox/light-v11",
+      // Same basemap as the /fog map so the grey fog-contour fills read the
+      // same way here as they do there.
+      style: "mapbox://styles/mapbox/streets-v12",
       bounds: SF_BOUNDS,
       fitBoundsOptions: { padding: 24 },
       minZoom: 10,
       maxZoom: 17,
     });
-    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
+    // Bottom-right so the zoom buttons never sit on top of the drill-down
+    // card (top-right) and block its close button.
+    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "bottom-right");
     mapRef.current = map;
 
     map.on("load", () => {
@@ -92,8 +96,22 @@ export default function ListingsMap({ features, colorBy, showFog, selectedId, on
         type: "geojson",
         data: "/data/sf-fog-contours.geojson",
       });
+      // Two fog fill layers identical to the /fog map so the backdrop lines
+      // up exactly: a light-yellow "sun" band under 8.5 hrs, and a grey
+      // gradient from 8.5 hrs (lightest) to 12.5 hrs (near-black).
       map.addLayer({
-        id: "re-fog-fill",
+        id: "re-fog-sun",
+        type: "fill",
+        source: "fog-contours",
+        filter: ["<", ["coalesce", ["get", "hours"], 0], 8.5],
+        layout: { visibility: showFog ? "visible" : "none" },
+        paint: {
+          "fill-color": "#fef9c3",
+          "fill-opacity": 0.45,
+        },
+      });
+      map.addLayer({
+        id: "re-fog-fog",
         type: "fill",
         source: "fog-contours",
         filter: [">=", ["coalesce", ["get", "hours"], 0], 8.5],
@@ -101,11 +119,11 @@ export default function ListingsMap({ features, colorBy, showFog, selectedId, on
         paint: {
           "fill-color": [
             "interpolate", ["linear"], ["get", "hours"],
-            8.5, "#fde68a",
-            10, "#cbd5e1",
-            11.5, "#64748b",
+            8.5,  "#e5e5e4",
+            11,   "#78716c",
+            12.5, "#292524",
           ],
-          "fill-opacity": 0.35,
+          "fill-opacity": 0.5,
         },
       });
 
@@ -199,9 +217,11 @@ export default function ListingsMap({ features, colorBy, showFog, selectedId, on
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !readyRef.current) return;
-    if (map.getLayer("re-fog-fill")) {
-      map.setLayoutProperty("re-fog-fill", "visibility", showFog ? "visible" : "none");
-    }
+    ["re-fog-sun", "re-fog-fog"].forEach(id => {
+      if (map.getLayer(id)) {
+        map.setLayoutProperty(id, "visibility", showFog ? "visible" : "none");
+      }
+    });
   }, [showFog]);
 
   // Highlight the selected property.

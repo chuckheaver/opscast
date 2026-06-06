@@ -355,9 +355,6 @@ export default function ListingsApp() {
               <Field k="APN" v={selected.apn} />
               <Field k="Agent" v={selected.agent} />
             </dl>
-            {selected.url && (
-              <a className="re-detail-link" href={selected.url} target="_blank" rel="noreferrer">Open in MLS ↗</a>
-            )}
           </div>
         )}
       </div>

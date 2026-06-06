@@ -3094,7 +3094,8 @@ body {
   top: 12px;
   right: 12px;
   width: 320px;
-  max-height: calc(100% - 24px);
+  /* Leave room at the bottom-right for the zoom controls. */
+  max-height: calc(100% - 96px);
   overflow-y: auto;
   background: #fff;
   border: 1px solid var(--border);
