@@ -7,7 +7,7 @@
 
 import { useEffect, useMemo, useState, useCallback } from "react";
 import ListingsMap from "./ListingsMap";
-import { computeStats, groupStats, GROUP_BY, fogColor, daysBetween } from "./lib/stats";
+import { computeStats, groupStats, GROUP_BY, fogZoneLabel, daysBetween } from "./lib/stats";
 
 const DATA_URL = "/data/sf-listings.geojson";
 
@@ -20,6 +20,16 @@ const fmtUSDshort = n => {
   return "$" + Math.round(n);
 };
 const fmtPct = n => (n == null ? "—" : n.toFixed(1) + "%");
+// ISO "2026-04-23" → "4/23/26"
+const fmtDate = iso => {
+  if (!iso) return "—";
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+  if (!m) return iso;
+  return `${Number(m[2])}/${Number(m[3])}/${m[1].slice(2)}`;
+};
+// All listings are in SF — drop the ", San Francisco, CA 94XXX" tail to save
+// space, keeping the street (and unit if present).
+const shortAddr = a => (a ? a.split(",")[0].trim() : "—");
 const fmtSqft = n => (n == null ? "—" : Math.round(n).toLocaleString("en-US"));
 const fmtPpsf = n => (n == null ? "—" : "$" + Math.round(n).toLocaleString("en-US"));
 const uniqSorted = arr => [...new Set(arr.filter(Boolean))].sort();
@@ -41,13 +51,6 @@ function realtorUrl(p) {
   if (!m) return null;
   const slug = s => s.replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "");
   return `https://www.realtor.com/realestateandhomes-search/${slug(street)}_${slug(parts[1])}_${m[1].toUpperCase()}_${m[2]}`;
-}
-
-// Bar colour for a breakdown group: fog hours use the fog gradient, every
-// other dimension uses the accent blue.
-function groupColor(groupDim, key) {
-  if (groupDim === "fog") return fogColor(Number(key));
-  return "#2563eb";
 }
 
 // Legend rows for the map, keyed to the active "Color by" mode. Must match
@@ -246,7 +249,15 @@ export default function ListingsApp() {
             <tbody>
               {groups.map(g => (
                 <tr key={g.key}>
-                  <td className="re-grp">{g.label}</td>
+                  <td className="re-grp">
+                    <button
+                      className="re-grp-link"
+                      onClick={() => setGroupModal(g)}
+                      title={`Show the ${g.stats.soldCount} sold listings`}
+                    >
+                      {g.label}
+                    </button>
+                  </td>
                   <td>{g.stats.count}</td>
                   <td>{fmtUSDshort(g.stats.medianSale)}</td>
                   <td>{fmtPpsf(g.stats.medianPpsf)}</td>
@@ -257,37 +268,6 @@ export default function ListingsApp() {
               {!groups.length && <tr><td colSpan={6} className="re-empty">No matching properties</td></tr>}
             </tbody>
           </table>
-
-          {/* Median-price bars — the headline microclimate visual */}
-          {groups.length > 0 && (
-            <div className="re-chart" role="img" aria-label={`Median sale price by ${GROUP_BY[groupDim].label}`}>
-              <div className="re-chart-title">Median sale price by {GROUP_BY[groupDim].label.toLowerCase()}</div>
-              {(() => {
-                const max = Math.max(...groups.map(g => g.stats.medianSale || 0)) || 1;
-                return groups.map(g => (
-                  <div className="re-bar-row" key={g.key}>
-                    <span className="re-bar-label" title={g.label}>{g.label}</span>
-                    <div className="re-bar-track">
-                      <div
-                        className="re-bar-fill"
-                        style={{
-                          width: `${((g.stats.medianSale || 0) / max) * 100}%`,
-                          background: groupColor(groupDim, g.key),
-                        }}
-                      />
-                    </div>
-                    <button
-                      className="re-bar-val re-bar-link"
-                      onClick={() => setGroupModal(g)}
-                      title={`Show the ${g.stats.soldCount} sold listings behind this median`}
-                    >
-                      {fmtUSDshort(g.stats.medianSale)}
-                    </button>
-                  </div>
-                ));
-              })()}
-            </div>
-          )}
         </section>
 
         {/* Filters */}
@@ -330,10 +310,10 @@ export default function ListingsApp() {
             <input type="date" className="re-input" value={closedTo} onChange={e => setClosedTo(e.target.value)} />
           </div>
 
-          <label className="re-lbl">Fog hours</label>
+          <label className="re-lbl">Fog Hr Exp</label>
           <select className="re-select" value={fogHrs} onChange={e => setFogHrs(e.target.value)}>
             <option value="">All fog levels</option>
-            {fogHrsOptions.map(h => <option key={h} value={String(h)}>{h} fog hrs/day</option>)}
+            {fogHrsOptions.map(h => <option key={h} value={String(h)}>{fogZoneLabel(h)}</option>)}
           </select>
 
           <label className="re-lbl">District</label>
@@ -414,7 +394,7 @@ export default function ListingsApp() {
           <div className="re-detail">
             <button className="re-detail-x" onClick={() => setSelected(null)}>×</button>
             <div className="re-detail-status" data-status={selected.status}>{selected.status}</div>
-            <h3 className="re-detail-addr">{selected.address}</h3>
+            <h3 className="re-detail-addr">{shortAddr(selected.address)}</h3>
             <div className="re-detail-price">
               {fmtUSD(selected.sellingPrice ?? selected.listPrice)}
               {selected.sellingPrice && selected.listPrice && (
@@ -430,12 +410,12 @@ export default function ListingsApp() {
               <Field k="$ / sq ft" v={selected.sqft && (selected.sellingPrice ?? selected.listPrice) ? fmtPpsf((selected.sellingPrice ?? selected.listPrice) / selected.sqft) : "—"} />
               <Field k="List price" v={fmtUSD(selected.listPrice)} />
               <Field k="Sale price" v={fmtUSD(selected.sellingPrice)} />
-              <Field k="Listed" v={selected.listDate ?? "—"} />
-              <Field k="Closed" v={selected.sellingDate ?? "—"} />
+              <Field k="Listed" v={fmtDate(selected.listDate)} />
+              <Field k="Closed" v={fmtDate(selected.sellingDate)} />
               <Field k="Days on market" v={selDom ?? "—"} />
               <Field k="Neighborhood" v={selected.neighborhood} />
               <Field k="District" v={selected.areaDesc} />
-              <Field k="Fog hours" v={selected.fogHours != null ? `${selected.fogHours} hrs/day` : "—"} />
+              <Field k="Fog Hr Exp" v={selected.fogHours != null ? fogZoneLabel(selected.fogHours) : "—"} />
               <Field k="Fog neighborhood" v={selected.fogNeighborhood} />
               <Field k="APN" v={selected.apn} />
               <Field k="Agent" v={selected.agent} />
@@ -470,7 +450,7 @@ export default function ListingsApp() {
                   <table className="re-modal-table">
                     <thead>
                       <tr>
-                        <th>Address</th><th>Status</th><th>Sale</th>
+                        <th>Address</th><th>Status</th><th>List</th><th>Sale</th>
                         <th>vs list</th><th>Closed</th><th>Neighborhood</th>
                       </tr>
                     </thead>
@@ -479,13 +459,14 @@ export default function ListingsApp() {
                         const delta = p.listPrice ? (p.sellingPrice / p.listPrice - 1) * 100 : null;
                         return (
                           <tr key={p.id} onClick={() => { setSelected(p); setGroupModal(null); }} title="Show on map">
-                            <td className="re-m-addr">{p.address}</td>
+                            <td className="re-m-addr">{shortAddr(p.address)}</td>
                             <td>{p.status}</td>
+                            <td className="re-m-num">{fmtUSD(p.listPrice)}</td>
                             <td className="re-m-num">{fmtUSD(p.sellingPrice)}</td>
                             <td className={"re-m-num " + (delta == null ? "" : delta >= 0 ? "up" : "down")}>
                               {delta == null ? "—" : (delta >= 0 ? "+" : "") + delta.toFixed(1) + "%"}
                             </td>
-                            <td>{p.sellingDate ?? "—"}</td>
+                            <td className="re-m-num">{fmtDate(p.sellingDate)}</td>
                             <td>{p.neighborhood ?? "—"}</td>
                           </tr>
                         );

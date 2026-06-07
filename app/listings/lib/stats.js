@@ -36,6 +36,20 @@ function lerpColor(a, b, t) {
   return "#" + ch.map(v => v.toString(16).padStart(2, "0")).join("");
 }
 
+// Three named exposure zones over the continuous fog-hours value:
+//   Sun   ≤ 8 hrs/day · Trans 8.1–8.9 · Fog ≥ 9
+export function fogZoneName(h) {
+  if (h == null) return null;
+  if (h <= 8) return "Sun";
+  if (h < 9) return "Trans";
+  return "Fog";
+}
+// e.g. 6.5 → "Sun Zone (6.5hrs)", 8.5 → "Trans Zone (8.5hrs)", 9 → "Fog Zone (9.0hrs)"
+export function fogZoneLabel(h) {
+  if (h == null) return "—";
+  return `${fogZoneName(h)} Zone (${Number(h).toFixed(1)}hrs)`;
+}
+
 // ── Math helpers ─────────────────────────────────────────────────────────────
 export function median(nums) {
   const a = nums.filter(n => Number.isFinite(n)).sort((x, y) => x - y);
@@ -121,10 +135,10 @@ export function groupStats(props, keyFn, labelFn = k => k, sortFn) {
 // Named grouping dimensions the UI exposes.
 export const GROUP_BY = {
   fog: {
-    label: "Fog hours",
+    label: "Fog Hr Exp",
     keyFn: p => (p.fogHours == null ? null : p.fogHours),
-    labelFn: k => `${k} fog hrs`,
-    // Ascending by fog hours so the chart reads sunniest → foggiest.
+    labelFn: k => fogZoneLabel(k),
+    // Ascending by fog hours so it reads sunniest → foggiest.
     sortFn: (a, b) => Number(a.key) - Number(b.key),
   },
   neighborhood: {
