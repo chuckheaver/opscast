@@ -34,9 +34,9 @@ const SF_BOUNDS = [
 // pins from the original markup are gone — they were doing more visual
 // noise than information.
 const FOG_PIN_GROUPS = [
-  { emoji: "☀️", points: [[-122.425, 37.762]] },   // Sun        — Mission / Castro flats
-  { emoji: "🌤️", points: [[-122.460, 37.762]] },   // Transition — Inner Sunset / Cole Valley
-  { emoji: "☁️", points: [[-122.495, 37.762]] },   // Fog        — Outer Sunset
+  { emoji: "☀️", points: [[-122.410, 37.785]] },   // Sun (S)         — Downtown / Union Square (NE)
+  { emoji: "🌤️", points: [[-122.448, 37.752]] },   // Transition (PC) — Clarendon Heights / Midtown Terrace (mid)
+  { emoji: "☁️", points: [[-122.472, 37.731]] },   // Fog (C)         — Stonestown / Merced Manor (SW)
 ];
 
 // Layer IDs the "Show fog data" toggle flips on and off as a group.
