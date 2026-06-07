@@ -225,7 +225,7 @@ export default function ListingsApp() {
           <Stat label="Median sale" value={fmtUSDshort(stats.medianSale)} />
           <Stat label="Avg sale" value={fmtUSDshort(stats.avgSale)} />
           <Stat label="Median days on mkt" value={stats.medianDom ?? "—"} />
-          <Stat label="% over asking" value={fmtPct(stats.pctOverList)} />
+          <Stat label="% Ask (med sale/med list)" value={fmtPct(stats.pctAsk)} />
           <Stat label="Avg % of list" value={fmtPct(stats.avgPctOfList)} />
           <Stat label="Median fog hrs" value={stats.medianFogHours ?? "—"} />
           <Stat label="Avg sq ft" value={fmtSqft(stats.avgSqft)} />
@@ -244,7 +244,7 @@ export default function ListingsApp() {
           </div>
           <table className="re-table">
             <thead>
-              <tr><th>{GROUP_BY[groupDim].label}</th><th>#</th><th>Median</th><th>$/SF</th><th>DOM</th><th>%&gt;ask</th></tr>
+              <tr><th>{GROUP_BY[groupDim].label}</th><th>#</th><th>Median</th><th>$/SF</th><th>DOM</th><th>%Ask</th></tr>
             </thead>
             <tbody>
               {groups.map(g => (
@@ -262,7 +262,7 @@ export default function ListingsApp() {
                   <td>{fmtUSDshort(g.stats.medianSale)}</td>
                   <td>{fmtPpsf(g.stats.medianPpsf)}</td>
                   <td>{g.stats.medianDom ?? "—"}</td>
-                  <td>{g.stats.pctOverList == null ? "—" : Math.round(g.stats.pctOverList) + "%"}</td>
+                  <td>{g.stats.pctAsk == null ? "—" : Math.round(g.stats.pctAsk) + "%"}</td>
                 </tr>
               ))}
               {!groups.length && <tr><td colSpan={6} className="re-empty">No matching properties</td></tr>}

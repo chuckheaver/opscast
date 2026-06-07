@@ -95,13 +95,23 @@ export function computeStats(props) {
     .filter(p => Number.isFinite(p.sqft) && p.sqft > 0)
     .map(p => p.sellingPrice / p.sqft);
 
+  // %Ask = median sale price ÷ median list price, over the sold listings that
+  // have both (so the numerator and denominator describe the same set).
+  const medSale = median(sold.map(p => p.sellingPrice));
+  const medListSold = median(
+    sold.filter(p => Number.isFinite(p.listPrice) && p.listPrice > 0).map(p => p.listPrice)
+  );
+  const pctAsk = medSale != null && medListSold ? (medSale / medListSold) * 100 : null;
+
   return {
     count: props.length,
     soldCount: sold.length,
-    medianSale: median(sold.map(p => p.sellingPrice)),
+    medianSale: medSale,
     avgSale: mean(sold.map(p => p.sellingPrice)),
     medianList: median(props.map(p => p.listPrice)),
+    medianListSold: medListSold,
     medianDom: median(dom),
+    pctAsk,
     pctOverList: sold.length ? (overList.length / sold.length) * 100 : null,
     avgPctOfList: mean(ratios),
     medianFogHours: median(props.map(p => p.fogHours)),
