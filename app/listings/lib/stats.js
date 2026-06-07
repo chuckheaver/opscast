@@ -112,6 +112,7 @@ export function groupStats(props, keyFn, labelFn = k => k, sortFn) {
     key,
     label: labelFn(key),
     stats: computeStats(items),
+    items, // the property objects in this group, for drill-in views
   }));
   rows.sort(sortFn || ((a, b) => (b.stats.medianSale ?? 0) - (a.stats.medianSale ?? 0)));
   return rows;

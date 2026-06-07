@@ -3186,3 +3186,68 @@ body {
 .re-detail-status[data-status="Coming Soon"] { background: #cffafe; color: #0e7490; }
 .re-detail-status[data-status="Contingent - Show"],
 .re-detail-status[data-status="Contingent - No Show"] { background: #ffedd5; color: #c2410c; }
+
+/* Clickable median value in the breakdown chart */
+.re-bar-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+  text-align: right;
+  text-decoration: underline;
+  text-decoration-color: rgba(37,99,235,0.35);
+  text-underline-offset: 2px;
+}
+.re-bar-link:hover { text-decoration-color: var(--accent); }
+
+/* Group drill-in modal */
+.re-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(28,25,23,0.45);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  padding: 24px;
+}
+.re-modal {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.28);
+  width: min(760px, 100%);
+  max-height: min(80vh, 720px);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 22px 8px;
+  position: relative;
+}
+.re-modal-x {
+  position: absolute; top: 10px; right: 14px;
+  background: none; border: none; font-size: 24px; line-height: 1;
+  color: var(--muted); cursor: pointer;
+}
+.re-modal-title { margin: 0 24px 2px 0; font-size: 18px; font-weight: 800; color: #1c1917; }
+.re-modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+.re-modal-sub strong { color: #1c1917; }
+.re-modal-empty { padding: 24px 0; color: var(--muted); font-style: italic; }
+.re-modal-scroll { overflow-y: auto; border-top: 1px solid var(--border); margin: 0 -22px; }
+.re-modal-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.re-modal-table thead th {
+  position: sticky; top: 0;
+  background: #faf6ec;
+  text-align: left;
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--muted); font-weight: 700;
+  padding: 8px 10px; border-bottom: 1px solid var(--border);
+}
+.re-modal-table tbody td { padding: 8px 10px; border-bottom: 1px solid #f0ece6; color: #1c1917; }
+.re-modal-table tbody tr { cursor: pointer; }
+.re-modal-table tbody tr:hover td { background: #f7f5ef; }
+.re-m-addr { font-weight: 600; }
+.re-m-num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.re-m-num.up { color: #16a34a; }
+.re-m-num.down { color: #dc2626; }
+

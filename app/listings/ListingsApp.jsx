@@ -84,6 +84,7 @@ export default function ListingsApp() {
   const [showFog, setShowFog] = useState(true);
   const [groupDim, setGroupDim] = useState("fog");
   const [selected, setSelected] = useState(null);
+  const [groupModal, setGroupModal] = useState(null); // clicked breakdown group
 
   useEffect(() => {
     fetch(DATA_URL)
@@ -250,7 +251,13 @@ export default function ListingsApp() {
                         }}
                       />
                     </div>
-                    <span className="re-bar-val">{fmtUSDshort(g.stats.medianSale)}</span>
+                    <button
+                      className="re-bar-val re-bar-link"
+                      onClick={() => setGroupModal(g)}
+                      title={`Show the ${g.stats.soldCount} sold listings behind this median`}
+                    >
+                      {fmtUSDshort(g.stats.medianSale)}
+                    </button>
                   </div>
                 ));
               })()}
@@ -411,6 +418,56 @@ export default function ListingsApp() {
           </div>
         )}
       </div>
+
+      {/* Group drill-in modal: the listings behind a breakdown median */}
+      {groupModal && (() => {
+        const sold = groupModal.items
+          .filter(p => Number.isFinite(p.sellingPrice) && p.sellingPrice > 0)
+          .sort((a, b) => b.sellingPrice - a.sellingPrice);
+        return (
+          <div className="re-modal-backdrop" onClick={() => setGroupModal(null)}>
+            <div className="re-modal" onClick={e => e.stopPropagation()}>
+              <button className="re-modal-x" onClick={() => setGroupModal(null)}>×</button>
+              <h3 className="re-modal-title">{groupModal.label}</h3>
+              <div className="re-modal-sub">
+                Median sale <strong>{fmtUSD(groupModal.stats.medianSale)}</strong>
+                {" · "}{sold.length} sold of {groupModal.stats.count} listings
+              </div>
+              {sold.length === 0 ? (
+                <div className="re-modal-empty">No sold listings in this group.</div>
+              ) : (
+                <div className="re-modal-scroll">
+                  <table className="re-modal-table">
+                    <thead>
+                      <tr>
+                        <th>Address</th><th>Status</th><th>Sale</th>
+                        <th>vs list</th><th>Closed</th><th>Neighborhood</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {sold.map(p => {
+                        const delta = p.listPrice ? (p.sellingPrice / p.listPrice - 1) * 100 : null;
+                        return (
+                          <tr key={p.id} onClick={() => { setSelected(p); setGroupModal(null); }} title="Show on map">
+                            <td className="re-m-addr">{p.address}</td>
+                            <td>{p.status}</td>
+                            <td className="re-m-num">{fmtUSD(p.sellingPrice)}</td>
+                            <td className={"re-m-num " + (delta == null ? "" : delta >= 0 ? "up" : "down")}>
+                              {delta == null ? "—" : (delta >= 0 ? "+" : "") + delta.toFixed(1) + "%"}
+                            </td>
+                            <td>{p.sellingDate ?? "—"}</td>
+                            <td>{p.neighborhood ?? "—"}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }
