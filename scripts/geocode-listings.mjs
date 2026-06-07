@@ -63,6 +63,14 @@ const OVERRIDES = {
   "40 sea view ter|san francisco|ca|94121": [-122.4911, 37.7843], // Sea View Terrace, Seacliff
 };
 
+// Per-address neighborhood overrides (keyed by addrKey). Use when the agent
+// wants a specific listing filed under a particular neighborhood regardless
+// of what the polygons / nearest-snap produce. District still comes from the
+// listing's own MLS Area Desc.
+const NEIGHBORHOOD_OVERRIDES = {
+  "3232 pacific ave|san francisco|ca|94118": "Lake Street", // per agent
+};
+
 // ── CSV parsing ───────────────────────────────────────────────────────────
 // Minimal RFC-4180 parser: handles quoted fields, embedded commas, and
 // doubled "" escapes. Returns array-of-arrays.
@@ -257,11 +265,57 @@ function csvCell(v) {
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
+// ── Nearest-neighborhood snap ───────────────────────────────────────────────
+// Presidio, Golden Gate Park, and Lincoln Park are parkland with no real
+// estate (they carry a null district_num in the realtor data). A listing that
+// geocodes into one of them is an edge case — snap it to the nearest
+// neighborhood polygon that actually has real estate.
+const KX = Math.cos((37.77 * Math.PI) / 180); // scale lng→x at SF latitude
+
+function segDist2(px, py, ax, ay, bx, by) {
+  const dx = bx - ax, dy = by - ay;
+  const len2 = dx * dx + dy * dy;
+  let t = len2 ? ((px - ax) * dx + (py - ay) * dy) / len2 : 0;
+  t = t < 0 ? 0 : t > 1 ? 1 : t;
+  const ex = px - (ax + t * dx), ey = py - (ay + t * dy);
+  return ex * ex + ey * ey;
+}
+function featureMinDist2([lng, lat], feature) {
+  const g = feature.geometry;
+  if (!g) return Infinity;
+  const px = lng * KX, py = lat;
+  const polys =
+    g.type === "Polygon" ? [g.coordinates] : g.type === "MultiPolygon" ? g.coordinates : [];
+  let best = Infinity;
+  for (const poly of polys)
+    for (const ring of poly)
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const d = segDist2(px, py, ring[j][0] * KX, ring[j][1], ring[i][0] * KX, ring[i][1]);
+        if (d < best) best = d;
+      }
+  return best;
+}
+function nearestRealtorWithRE(point) {
+  let best = null, bestD = Infinity;
+  for (const f of REALTOR.features) {
+    if (f.properties?.district_num == null) continue; // skip parkland
+    const d = featureMinDist2(point, f);
+    if (d < bestD) { bestD = d; best = f; }
+  }
+  return best;
+}
+
 // ── Spatial tagging ─────────────────────────────────────────────────────────
 function tag(point) {
   const contour = findContourForPoint(CONTOURS, point);
   const fogN = findNeighborhoodForPoint(FOG_NEIGH, point);
-  const realtor = findNeighborhoodForPoint(REALTOR, point);
+  let realtor = findNeighborhoodForPoint(REALTOR, point);
+  // Landed in a no-real-estate park polygon → reassign to the nearest
+  // neighborhood that has real estate. (A point outside all polygons stays
+  // null so the SF-only guard still drops it.)
+  if (realtor && realtor.properties?.district_num == null) {
+    realtor = nearestRealtorWithRE(point) || realtor;
+  }
   return {
     fogHours: contour?.properties?.hours ?? fogN?.properties?.fogHours ?? null,
     fogNeighborhood: fogN?.properties?.name ?? null,
@@ -339,6 +393,8 @@ async function main() {
       outside.push(l.address);
       continue;
     }
+    const nbOverride = NEIGHBORHOOD_OVERRIDES[addrKey(l)];
+    if (nbOverride) tags.neighborhood = nbOverride;
     matched++;
     features.push({
       type: "Feature",
