@@ -132,7 +132,17 @@ export const GROUP_BY = {
     keyFn: p => p.neighborhood,
   },
   district: {
-    label: "Real estate district",
-    keyFn: p => p.district,
+    label: "District",
+    // Use the MLS "Area Desc" (e.g. "SF District 9") — the authoritative
+    // SFAR district on each listing — not the point-in-polygon result.
+    keyFn: p => p.areaDesc,
+    // Natural order: SF District 1 → 10, not by price.
+    sortFn: (a, b) => districtNo(a.key) - districtNo(b.key),
   },
 };
+
+// Pull the numeric district out of an "SF District N" string for ordering.
+function districtNo(s) {
+  const m = /(\d+)/.exec(s || "");
+  return m ? Number(m[1]) : 999;
+}

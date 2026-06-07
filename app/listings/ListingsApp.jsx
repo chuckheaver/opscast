@@ -105,7 +105,13 @@ export default function ListingsApp() {
     const extras = [...present].filter(t => !SUBTYPE_ORDER.includes(t)).sort();
     return [...ordered, ...extras];
   }, [allProps]);
-  const districtOptions = useMemo(() => uniqSorted(allProps.map(p => p.district)), [allProps]);
+  const districtOptions = useMemo(
+    () =>
+      [...new Set(allProps.map(p => p.areaDesc).filter(Boolean))].sort(
+        (a, b) => (parseInt(a.replace(/\D/g, ""), 10) || 999) - (parseInt(b.replace(/\D/g, ""), 10) || 999)
+      ),
+    [allProps]
+  );
   const neighborhoodOptions = useMemo(
     () => uniqSorted(allProps.map(p => p.neighborhood)),
     [allProps]
@@ -126,7 +132,7 @@ export default function ListingsApp() {
       const p = f.properties;
       if (statuses.size && !statuses.has(p.status)) return false;
       if (subtypes.size && !subtypes.has(p.propType)) return false;
-      if (district && p.district !== district) return false;
+      if (district && p.areaDesc !== district) return false;
       if (neighborhood && p.neighborhood !== neighborhood) return false;
       if (fogHrs && String(p.fogHours) !== fogHrs) return false;
       if (closedFrom && (!p.sellingDate || p.sellingDate < closedFrom)) return false;
@@ -409,7 +415,7 @@ export default function ListingsApp() {
               <Field k="Closed" v={selected.sellingDate ?? "—"} />
               <Field k="Days on market" v={selDom ?? "—"} />
               <Field k="Neighborhood" v={selected.neighborhood} />
-              <Field k="District" v={selected.district} />
+              <Field k="District" v={selected.areaDesc} />
               <Field k="Fog hours" v={selected.fogHours != null ? `${selected.fogHours} hrs/day` : "—"} />
               <Field k="Fog neighborhood" v={selected.fogNeighborhood} />
               <Field k="APN" v={selected.apn} />
