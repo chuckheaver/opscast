@@ -102,6 +102,7 @@ export function computeStats(props) {
     sold.filter(p => Number.isFinite(p.listPrice) && p.listPrice > 0).map(p => p.listPrice)
   );
   const pctAsk = medSale != null && medListSold ? (medSale / medListSold) * 100 : null;
+  const medDom = median(dom);
 
   return {
     count: props.length,
@@ -110,7 +111,7 @@ export function computeStats(props) {
     avgSale: mean(sold.map(p => p.sellingPrice)),
     medianList: median(props.map(p => p.listPrice)),
     medianListSold: medListSold,
-    medianDom: median(dom),
+    medianDom: medDom == null ? null : Math.round(medDom),
     pctAsk,
     pctOverList: sold.length ? (overList.length / sold.length) * 100 : null,
     avgPctOfList: mean(ratios),
