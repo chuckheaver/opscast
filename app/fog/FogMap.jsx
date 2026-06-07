@@ -35,7 +35,7 @@ const SF_BOUNDS = [
 // noise than information.
 const FOG_PIN_GROUPS = [
   { emoji: "☀️", points: [[-122.410, 37.785]] },   // Sun (S)         — Downtown / Union Square (NE)
-  { emoji: "🌤️", points: [[-122.448, 37.752]] },   // Transition (PC) — Clarendon Heights / Midtown Terrace (mid)
+  { emoji: "🌤️", points: [[-122.438, 37.757]] },   // Transition (PC) — between Castro / Dolores Heights / Clarendon Heights
   { emoji: "☁️", points: [[-122.472, 37.731]] },   // Fog (C)         — Stonestown / Merced Manor (SW)
 ];
 
