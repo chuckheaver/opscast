@@ -24,20 +24,23 @@ const fmtSqft = n => (n == null ? "—" : Math.round(n).toLocaleString("en-US"))
 const fmtPpsf = n => (n == null ? "—" : "$" + Math.round(n).toLocaleString("en-US"));
 const uniqSorted = arr => [...new Set(arr.filter(Boolean))].sort();
 
-// Build a Realtor.com search URL from a listing's address. There's no public
-// by-address deep link to the exact detail page (that needs Realtor's internal
-// id), so this targets their address search, which lands on or beside the
-// property. The unit (#…) is dropped so the building resolves cleanly.
-function realtorUrl(address) {
+// Realtor.com search by MLS / Listing Number — the unique key for the exact
+// listing (more precise than an address search, especially for condo units
+// and closed sales). Realtor's search box accepts an MLS number; this targets
+// that search URL. Falls back to an address search if no listing number.
+function realtorUrl(p) {
+  if (p?.id) {
+    return `https://www.realtor.com/realestateandhomes-search/${encodeURIComponent(String(p.id).trim())}`;
+  }
+  const address = p?.address;
   if (!address) return null;
   const parts = address.split(",").map(s => s.trim());
   if (parts.length < 3) return null;
   const street = parts[0].replace(/\s+#.*$/, "");
-  const city = parts[1];
   const m = /^([A-Za-z]{2})\s+(\d{5})/.exec(parts[2]);
   if (!m) return null;
   const slug = s => s.replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  return `https://www.realtor.com/realestateandhomes-search/${slug(street)}_${slug(city)}_${m[1].toUpperCase()}_${m[2]}`;
+  return `https://www.realtor.com/realestateandhomes-search/${slug(street)}_${slug(parts[1])}_${m[1].toUpperCase()}_${m[2]}`;
 }
 
 // Bar colour for a breakdown group: fog hours use the fog gradient, every
@@ -437,9 +440,9 @@ export default function ListingsApp() {
               <Field k="APN" v={selected.apn} />
               <Field k="Agent" v={selected.agent} />
             </dl>
-            {realtorUrl(selected.address) && (
-              <a className="re-detail-link" href={realtorUrl(selected.address)} target="_blank" rel="noreferrer">
-                View on Realtor.com ↗
+            {realtorUrl(selected) && (
+              <a className="re-detail-link" href={realtorUrl(selected)} target="_blank" rel="noreferrer">
+                View on Realtor.com ↗ <span className="re-detail-mls">MLS #{selected.id}</span>
               </a>
             )}
           </div>

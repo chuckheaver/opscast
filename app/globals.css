@@ -3251,3 +3251,5 @@ body {
 .re-m-num.up { color: #16a34a; }
 .re-m-num.down { color: #dc2626; }
 
+
+.re-detail-mls { color: var(--muted); font-weight: 400; font-size: 11px; margin-left: 4px; }
