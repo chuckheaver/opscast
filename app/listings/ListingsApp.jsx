@@ -24,6 +24,22 @@ const fmtSqft = n => (n == null ? "—" : Math.round(n).toLocaleString("en-US"))
 const fmtPpsf = n => (n == null ? "—" : "$" + Math.round(n).toLocaleString("en-US"));
 const uniqSorted = arr => [...new Set(arr.filter(Boolean))].sort();
 
+// Build a Realtor.com search URL from a listing's address. There's no public
+// by-address deep link to the exact detail page (that needs Realtor's internal
+// id), so this targets their address search, which lands on or beside the
+// property. The unit (#…) is dropped so the building resolves cleanly.
+function realtorUrl(address) {
+  if (!address) return null;
+  const parts = address.split(",").map(s => s.trim());
+  if (parts.length < 3) return null;
+  const street = parts[0].replace(/\s+#.*$/, "");
+  const city = parts[1];
+  const m = /^([A-Za-z]{2})\s+(\d{5})/.exec(parts[2]);
+  if (!m) return null;
+  const slug = s => s.replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  return `https://www.realtor.com/realestateandhomes-search/${slug(street)}_${slug(city)}_${m[1].toUpperCase()}_${m[2]}`;
+}
+
 // Bar colour for a breakdown group: fog hours use the fog gradient, every
 // other dimension uses the accent blue.
 function groupColor(groupDim, key) {
@@ -421,6 +437,11 @@ export default function ListingsApp() {
               <Field k="APN" v={selected.apn} />
               <Field k="Agent" v={selected.agent} />
             </dl>
+            {realtorUrl(selected.address) && (
+              <a className="re-detail-link" href={realtorUrl(selected.address)} target="_blank" rel="noreferrer">
+                View on Realtor.com ↗
+              </a>
+            )}
           </div>
         )}
       </div>
