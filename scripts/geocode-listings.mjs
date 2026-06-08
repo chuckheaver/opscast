@@ -136,6 +136,14 @@ function loadOneFile(path) {
   ];
   const sqftKey = SQFT_FIELDS.find(f => idx[f] != null) || null;
 
+  // Optional columns (per docs/MARKET_DATA_SPEC.md). First present alias wins;
+  // all fall back gracefully when the export doesn't carry them.
+  const pick = aliases => aliases.find(a => idx[a] != null) || null;
+  const latKey = pick(["Latitude", "Lat", "GeoLat"]);
+  const lngKey = pick(["Longitude", "Lng", "Long", "GeoLon"]);
+  const nbhdKey = pick(["Neighborhood", "Subdivision Name"]);
+  const contractKey = pick(["Pending Date", "Contract Date", "Under Contract Date", "Contingent Date"]);
+
   return rows
     .slice(1)
     .filter(r => r.length >= header.length && r[idx["Listing Number"]])
@@ -167,6 +175,12 @@ function loadOneFile(path) {
         bedrooms: g("Bedrooms"),
         bathrooms: g("Bathrooms Display"),
         sqft: sqftKey ? num(g(sqftKey)) : null,
+        // Optional, per spec. lat/lng skip geocoding; nbhd overrides the
+        // polygon guess; contractDate powers future "Went Into Contract".
+        lat: latKey ? coord(g(latKey)) : null,
+        lng: lngKey ? coord(g(lngKey)) : null,
+        nbhd: nbhdKey ? g(nbhdKey) : null,
+        contractDate: contractKey ? usDate(g(contractKey)) : null,
         listPrice: num(g("Listing Price")),
         sellingPrice: num(g("Selling Price")),
         listDate: usDate(g("Listing Date")),
@@ -181,8 +195,10 @@ function loadOneFile(path) {
     });
 }
 
-// Load + combine every CSV in data/raw/, de-duping by Listing Number
-// (first file wins). Returns one flat array of listing objects.
+// Load + combine every CSV in data/raw/, de-duping by Listing Number. When the
+// same listing appears in more than one file, the record with the most recent
+// Status Date wins, so status changes (Active → Pending → Closed) propagate as
+// newer exports are added. Returns one flat array of listing objects.
 function loadAllListings() {
   const files = listCsvFiles();
   const byId = new Map();
@@ -190,8 +206,13 @@ function loadAllListings() {
   for (const f of files) {
     const rows = loadOneFile(f);
     for (const l of rows) {
-      if (byId.has(l.id)) { dupes++; continue; }
-      byId.set(l.id, l);
+      const ex = byId.get(l.id);
+      if (ex) {
+        dupes++;
+        if ((l.statusDate || "") > (ex.statusDate || "")) byId.set(l.id, l); // newer wins
+      } else {
+        byId.set(l.id, l);
+      }
     }
     console.log(`  ${f.split("/").pop()}: ${rows.length} rows`);
   }
@@ -202,6 +223,12 @@ function loadAllListings() {
 function num(s) {
   const n = Number(String(s).replace(/[^0-9.]/g, ""));
   return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+// Signed decimal parse for coordinates (num() would strip the minus sign).
+function coord(s) {
+  const v = parseFloat(s);
+  return Number.isFinite(v) ? v : null;
 }
 
 // MLS exports dates as MM/DD/YY. Normalize to ISO YYYY-MM-DD so the map can
@@ -346,7 +373,9 @@ async function main() {
   );
 
   const cache = loadCache();
-  const need = listings.filter(l => !cache[addrKey(l)]);
+  // Listings that already carry lat/long don't need geocoding at all.
+  const hasLatLng = l => Number.isFinite(l.lat) && Number.isFinite(l.lng);
+  const need = listings.filter(l => !hasLatLng(l) && !cache[addrKey(l)]);
   console.log(
     `${listings.length - need.length} cached, ${need.length} to geocode.`
   );
@@ -379,7 +408,7 @@ async function main() {
   const features = [];
   for (const l of listings) {
     const c = cache[addrKey(l)];
-    const point = c?.point || OVERRIDES[addrKey(l)];
+    const point = (hasLatLng(l) ? [l.lng, l.lat] : null) || c?.point || OVERRIDES[addrKey(l)];
     if (!point) {
       unmatched.push(l.address);
       continue;
@@ -393,6 +422,9 @@ async function main() {
       outside.push(l.address);
       continue;
     }
+    // An MLS-supplied neighborhood is authoritative over the polygon guess;
+    // a manual per-address override beats both.
+    if (l.nbhd) tags.neighborhood = l.nbhd;
     const nbOverride = NEIGHBORHOOD_OVERRIDES[addrKey(l)];
     if (nbOverride) tags.neighborhood = nbOverride;
     matched++;
@@ -408,6 +440,7 @@ async function main() {
         bedrooms: l.bedrooms ? Number(l.bedrooms) : null,
         bathrooms: l.bathrooms || null,
         sqft: l.sqft ?? null,
+        contractDate: l.contractDate ?? null,
         listPrice: l.listPrice,
         sellingPrice: l.sellingPrice,
         // Most useful single "price" for styling: sale price if closed, else list.
