@@ -3217,8 +3217,11 @@ body {
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 12px 48px rgba(0,0,0,0.28);
-  width: min(760px, 100%);
-  max-height: min(80vh, 720px);
+  width: min(760px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);   /* never exceed the viewport (mobile) */
+  max-height: calc(100vh - 32px);
+  min-width: 0;                    /* allow shrinking below content width... */
+  min-height: 0;                   /* ...and height, so the inner table scrolls */
   display: flex;
   flex-direction: column;
   padding: 20px 22px 8px;
@@ -3233,7 +3236,15 @@ body {
 .re-modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
 .re-modal-sub strong { color: #1c1917; }
 .re-modal-empty { padding: 24px 0; color: var(--muted); font-style: italic; }
-.re-modal-scroll { overflow-y: auto; border-top: 1px solid var(--border); margin: 0 -22px; }
+.re-modal-scroll {
+  overflow: auto;                       /* scroll BOTH directions inside the box */
+  -webkit-overflow-scrolling: touch;
+  flex: 1;
+  min-height: 0;                        /* let the flex child shrink + scroll */
+  border-top: 1px solid var(--border);
+  margin: 0 -22px;
+}
+.re-modal-table { min-width: 520px; }   /* keep columns readable; scroll if narrower */
 .re-modal-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .re-modal-table thead th {
   position: sticky; top: 0;
@@ -3348,4 +3359,20 @@ body {
   padding: 1px 7px;
   margin-left: 2px;
 }
+
+
+/* On phones the group popup goes full-screen so the header (and its × close)
+   stay pinned and the table scrolls within the box. */
+@media (max-width: 720px) {
+  .re-modal-backdrop { padding: 0; }
+  .re-modal {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+  }
+  .re-modal-scroll { margin: 0; }
+}
+
 
