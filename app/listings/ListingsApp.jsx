@@ -309,14 +309,17 @@ export default function ListingsApp() {
             <button className="re-collapse" onClick={() => setSummaryOpen(o => !o)} aria-expanded={summaryOpen}>
               <span className="re-chevron">{summaryOpen ? "▾" : "▸"}</span>
               <h2>Market Summary</h2>
-              {!summaryOpen && (
-                <span className="re-filter-crit">
-                  {stats.count.toLocaleString()} · {fmtUSDshort(stats.medianSale)} median
-                </span>
-              )}
             </button>
           </div>
-          {summaryOpen && (
+          {/* Collapsed: 4 key metrics. Expanded: the full tile grid. */}
+          {!summaryOpen ? (
+            <div className="re-mini-row">
+              <div className="re-mini"><div className="re-mini-v">{stats.count.toLocaleString()}</div><div className="re-mini-l">Qty</div></div>
+              <div className="re-mini"><div className="re-mini-v">{fmtUSDshort(stats.medianSale)}</div><div className="re-mini-l">Med Price</div></div>
+              <div className="re-mini"><div className="re-mini-v">{stats.medianDom ?? "—"}</div><div className="re-mini-l">Med DOM</div></div>
+              <div className="re-mini"><div className="re-mini-v">{fmtPpsf(stats.avgPpsf)}</div><div className="re-mini-l">Avg $/sf</div></div>
+            </div>
+          ) : (
             <div className="re-stats-grid">
               <Stat label="Properties" value={stats.count.toLocaleString()} />
               <Stat label="Closed" value={stats.soldCount.toLocaleString()} />

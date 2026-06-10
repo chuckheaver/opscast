@@ -118,6 +118,7 @@ export function computeStats(props) {
     medianFogHours: median(props.map(p => p.fogHours)),
     avgSqft: mean(withSqft.map(p => p.sqft)),
     medianPpsf: median(ppsf),
+    avgPpsf: mean(ppsf),
   };
 }
 
