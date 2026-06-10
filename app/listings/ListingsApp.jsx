@@ -34,25 +34,6 @@ const fmtSqft = n => (n == null ? "—" : Math.round(n).toLocaleString("en-US"))
 const fmtPpsf = n => (n == null ? "—" : "$" + Math.round(n).toLocaleString("en-US"));
 const uniqSorted = arr => [...new Set(arr.filter(Boolean))].sort();
 
-// Realtor.com search by MLS / Listing Number — the unique key for the exact
-// listing (more precise than an address search, especially for condo units
-// and closed sales). Realtor's search box accepts an MLS number; this targets
-// that search URL. Falls back to an address search if no listing number.
-function realtorUrl(p) {
-  if (p?.id) {
-    return `https://www.realtor.com/realestateandhomes-search/${encodeURIComponent(String(p.id).trim())}`;
-  }
-  const address = p?.address;
-  if (!address) return null;
-  const parts = address.split(",").map(s => s.trim());
-  if (parts.length < 3) return null;
-  const street = parts[0].replace(/\s+#.*$/, "");
-  const m = /^([A-Za-z]{2})\s+(\d{5})/.exec(parts[2]);
-  if (!m) return null;
-  const slug = s => s.replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  return `https://www.realtor.com/realestateandhomes-search/${slug(street)}_${slug(parts[1])}_${m[1].toUpperCase()}_${m[2]}`;
-}
-
 // Legend rows for the map, keyed to the active "Color by" mode. Must match
 // the paint ramps in ListingsMap.jsx.
 // Short labels for the property-subtype filter chips (Property Subtype 1
@@ -413,13 +394,9 @@ export default function ListingsApp() {
               <Field k="Fog Hr Exp" v={selected.fogHours != null ? fogZoneLabel(selected.fogHours) : "—"} />
               <Field k="Fog neighborhood" v={selected.fogNeighborhood} />
               <Field k="APN" v={selected.apn} />
+              <Field k="MLS #" v={selected.id} />
               <Field k="Agent" v={selected.agent} />
             </dl>
-            {realtorUrl(selected) && (
-              <a className="re-detail-link" href={realtorUrl(selected)} target="_blank" rel="noreferrer">
-                View on Realtor.com ↗ <span className="re-detail-mls">MLS #{selected.id}</span>
-              </a>
-            )}
           </div>
         )}
       </div>
