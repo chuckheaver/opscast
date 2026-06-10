@@ -88,7 +88,7 @@ export default function ListingsApp() {
   const [groupDim, setGroupDim] = useState("neighborhood");
   const [selected, setSelected] = useState(null);
   const [groupModal, setGroupModal] = useState(null); // clicked breakdown group
-  const [filtersOpen, setFiltersOpen] = useState(true); // collapsible filters
+  const [filtersOpen, setFiltersOpen] = useState(false); // collapsible filters, default collapsed
 
   useEffect(() => {
     fetch(DATA_URL)
