@@ -3322,3 +3322,5 @@ body {
 
 .mk-page { min-height: 100vh; background: #f0ece6; }
 
+
+.re-section-top { border-top: none; padding-top: 0; }

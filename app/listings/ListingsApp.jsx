@@ -221,60 +221,8 @@ export default function ListingsApp() {
 
         {err && <div className="re-err">{err}</div>}
 
-        {/* Headline stats */}
-        <div className="re-stats-grid">
-          <Stat label="Properties" value={stats.count.toLocaleString()} />
-          <Stat label="Closed" value={stats.soldCount.toLocaleString()} />
-          <Stat label="Median sale" value={fmtUSDshort(stats.medianSale)} />
-          <Stat label="Avg sale" value={fmtUSDshort(stats.avgSale)} />
-          <Stat label="Median days on mkt" value={stats.medianDom ?? "—"} />
-          <Stat label="% Ask (med sale/med list)" value={fmtPct(stats.pctAsk)} />
-          <Stat label="Avg % of list" value={fmtPct(stats.avgPctOfList)} />
-          <Stat label="Median fog hrs" value={stats.medianFogHours ?? "—"} />
-          <Stat label="Avg sq ft" value={fmtSqft(stats.avgSqft)} />
-          <Stat label="$ / sq ft" value={fmtPpsf(stats.medianPpsf)} />
-        </div>
-
-        {/* Group-by table — the microclimate story */}
-        <section className="re-section">
-          <div className="re-section-head">
-            <h2>Breakdown by</h2>
-            <select value={groupDim} onChange={e => setGroupDim(e.target.value)} className="re-select re-select-sm">
-              {Object.entries(GROUP_BY).map(([k, v]) => (
-                <option key={k} value={k}>{v.label}</option>
-              ))}
-            </select>
-          </div>
-          <table className="re-table">
-            <thead>
-              <tr><th>{GROUP_BY[groupDim].label}</th><th>#</th><th>Median</th><th>$/SF</th><th>DOM</th><th>%Ask</th></tr>
-            </thead>
-            <tbody>
-              {groups.map(g => (
-                <tr key={g.key}>
-                  <td className="re-grp">
-                    <button
-                      className="re-grp-link"
-                      onClick={() => setGroupModal(g)}
-                      title={`Show the ${g.stats.soldCount} sold listings`}
-                    >
-                      {g.label}
-                    </button>
-                  </td>
-                  <td>{g.stats.count}</td>
-                  <td>{fmtUSDshort(g.stats.medianSale)}</td>
-                  <td>{fmtPpsf(g.stats.medianPpsf)}</td>
-                  <td>{g.stats.medianDom ?? "—"}</td>
-                  <td>{g.stats.pctAsk == null ? "—" : Math.round(g.stats.pctAsk) + "%"}</td>
-                </tr>
-              ))}
-              {!groups.length && <tr><td colSpan={6} className="re-empty">No matching properties</td></tr>}
-            </tbody>
-          </table>
-        </section>
-
-        {/* Filters */}
-        <section className="re-section">
+        {/* Filters — first so you choose the set, then read summary + detail */}
+        <section className="re-section re-section-top">
           <div className="re-section-head">
             <h2>Filters</h2>
             <button className="re-reset" onClick={resetFilters}>Reset</button>
@@ -336,6 +284,58 @@ export default function ListingsApp() {
             <input type="number" placeholder="Min $" className="re-input" value={minPrice} onChange={e => setMinPrice(e.target.value)} />
             <input type="number" placeholder="Max $" className="re-input" value={maxPrice} onChange={e => setMaxPrice(e.target.value)} />
           </div>
+        </section>
+
+        {/* Headline stats — summary of the filtered set */}
+        <div className="re-stats-grid">
+          <Stat label="Properties" value={stats.count.toLocaleString()} />
+          <Stat label="Closed" value={stats.soldCount.toLocaleString()} />
+          <Stat label="Median sale" value={fmtUSDshort(stats.medianSale)} />
+          <Stat label="Avg sale" value={fmtUSDshort(stats.avgSale)} />
+          <Stat label="Median days on mkt" value={stats.medianDom ?? "—"} />
+          <Stat label="% Ask (med sale/med list)" value={fmtPct(stats.pctAsk)} />
+          <Stat label="Avg % of list" value={fmtPct(stats.avgPctOfList)} />
+          <Stat label="Median fog hrs" value={stats.medianFogHours ?? "—"} />
+          <Stat label="Avg sq ft" value={fmtSqft(stats.avgSqft)} />
+          <Stat label="$ / sq ft" value={fmtPpsf(stats.medianPpsf)} />
+        </div>
+
+        {/* Group-by table — the detail by metric */}
+        <section className="re-section">
+          <div className="re-section-head">
+            <h2>Breakdown by</h2>
+            <select value={groupDim} onChange={e => setGroupDim(e.target.value)} className="re-select re-select-sm">
+              {Object.entries(GROUP_BY).map(([k, v]) => (
+                <option key={k} value={k}>{v.label}</option>
+              ))}
+            </select>
+          </div>
+          <table className="re-table">
+            <thead>
+              <tr><th>{GROUP_BY[groupDim].label}</th><th>#</th><th>Median</th><th>$/SF</th><th>DOM</th><th>%Ask</th></tr>
+            </thead>
+            <tbody>
+              {groups.map(g => (
+                <tr key={g.key}>
+                  <td className="re-grp">
+                    <button
+                      className="re-grp-link"
+                      onClick={() => setGroupModal(g)}
+                      title={`Show the ${g.stats.soldCount} sold listings`}
+                    >
+                      {g.label}
+                    </button>
+                  </td>
+                  <td>{g.stats.count}</td>
+                  <td>{fmtUSDshort(g.stats.medianSale)}</td>
+                  <td>{fmtPpsf(g.stats.medianPpsf)}</td>
+                  <td>{g.stats.medianDom ?? "—"}</td>
+                  <td>{g.stats.pctAsk == null ? "—" : Math.round(g.stats.pctAsk) + "%"}</td>
+                </tr>
+              ))}
+              {!groups.length && <tr><td colSpan={6} className="re-empty">No matching properties</td></tr>}
+            </tbody>
+          </table>
         </section>
 
         <p className="re-foot">
