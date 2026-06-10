@@ -115,8 +115,10 @@ export function computeStats(props) {
     pctAsk,
     pctOverList: sold.length ? (overList.length / sold.length) * 100 : null,
     avgPctOfList: mean(ratios),
+    medianPctOfList: median(ratios),
     medianFogHours: median(props.map(p => p.fogHours)),
     avgSqft: mean(withSqft.map(p => p.sqft)),
+    medianSqft: median(withSqft.map(p => p.sqft)),
     medianPpsf: median(ppsf),
     avgPpsf: mean(ppsf),
   };

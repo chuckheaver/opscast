@@ -311,7 +311,7 @@ export default function ListingsApp() {
               <h2>Market Summary</h2>
               {!summaryOpen && (
                 <span className="re-filter-crit">
-                  Qty: {stats.count.toLocaleString()} · Median Price: {fmtUSDshort(stats.medianSale)} · DOM: {stats.medianDom ?? "—"} · $/sf: {fmtPpsf(stats.avgPpsf)}
+                  Qty: {stats.count.toLocaleString()} · Median Price: {fmtUSDshort(stats.medianSale)} · DOM: {stats.medianDom ?? "—"} · $/sf: {fmtPpsf(stats.medianPpsf)}
                 </span>
               )}
             </button>
@@ -321,13 +321,13 @@ export default function ListingsApp() {
               <Stat label="Properties" value={stats.count.toLocaleString()} />
               <Stat label="Closed" value={stats.soldCount.toLocaleString()} />
               <Stat label="Median sale" value={fmtUSDshort(stats.medianSale)} />
-              <Stat label="Avg sale" value={fmtUSDshort(stats.avgSale)} />
+              <Stat label="Median list" value={fmtUSDshort(stats.medianListSold)} />
               <Stat label="Median days on mkt" value={stats.medianDom ?? "—"} />
               <Stat label="% Ask (med sale/med list)" value={fmtPct(stats.pctAsk)} />
-              <Stat label="Avg % of list" value={fmtPct(stats.avgPctOfList)} />
+              <Stat label="Median % of list" value={fmtPct(stats.medianPctOfList)} />
               <Stat label="Median fog hrs" value={stats.medianFogHours ?? "—"} />
-              <Stat label="Avg sq ft" value={fmtSqft(stats.avgSqft)} />
-              <Stat label="$ / sq ft" value={fmtPpsf(stats.medianPpsf)} />
+              <Stat label="Median sq ft" value={fmtSqft(stats.medianSqft)} />
+              <Stat label="$ / sq ft (median)" value={fmtPpsf(stats.medianPpsf)} />
             </div>
           )}
         </section>
