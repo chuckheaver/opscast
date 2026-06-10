@@ -3390,7 +3390,12 @@ body {
 
 
 
-/* Market Summary two-row (median / average) layout */
-.re-sum2 { display: flex; align-items: baseline; gap: 5px; flex-basis: 100%; }
-.re-sum-qty { white-space: nowrap; flex: 0 0 auto; }
-.re-sum-rows { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+/* Market Summary: two non-wrapping metric lines (median / average) */
+.re-sum-lines { margin-top: 6px; display: flex; flex-direction: column; gap: 3px; }
+.re-sum-lines div {
+  white-space: nowrap;
+  font-size: 11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+}

@@ -20,6 +20,7 @@ const fmtUSDshort = n => {
   return "$" + Math.round(n);
 };
 const fmtPct = n => (n == null ? "—" : n.toFixed(1) + "%");
+const fmtPct0 = n => (n == null ? "—" : Math.round(n) + "%"); // whole-number percent
 // ISO "2026-04-23" → "4/23/26"
 const fmtDate = iso => {
   if (!iso) return "—";
@@ -309,17 +310,15 @@ export default function ListingsApp() {
             <button className="re-collapse" onClick={() => setSummaryOpen(o => !o)} aria-expanded={summaryOpen}>
               <span className="re-chevron">{summaryOpen ? "▾" : "▸"}</span>
               <h2>Market Summary</h2>
-              {!summaryOpen && (
-                <span className="re-filter-crit re-sum2">
-                  <span className="re-sum-qty">Qty: {stats.count.toLocaleString()} ·</span>
-                  <span className="re-sum-rows">
-                    <span>Median Price: {fmtUSDshort(stats.medianSale)} · DOM: {stats.medianDom ?? "—"} · $/sf: {fmtPpsf(stats.medianPpsf)} · %List: {fmtPct(stats.medianPctOfList)}</span>
-                    <span>Average Price: {fmtUSDshort(stats.avgSale)} · DOM: {stats.avgDom ?? "—"} · $/sf: {fmtPpsf(stats.avgPpsf)} · %List: {fmtPct(stats.avgPctOfList)}</span>
-                  </span>
-                </span>
-              )}
+              {!summaryOpen && <span className="re-filter-crit">Qty: {stats.count.toLocaleString()}</span>}
             </button>
           </div>
+          {!summaryOpen && (
+            <div className="re-sum-lines">
+              <div>Median Price: {fmtUSDshort(stats.medianSale)} · DOM: {stats.medianDom ?? "—"} · $/sf: {fmtPpsf(stats.medianPpsf)} · %List: {fmtPct0(stats.medianPctOfList)}</div>
+              <div>Average Price: {fmtUSDshort(stats.avgSale)} · DOM: {stats.avgDom ?? "—"} · $/sf: {fmtPpsf(stats.avgPpsf)} · %List: {fmtPct0(stats.avgPctOfList)}</div>
+            </div>
+          )}
           {summaryOpen && (
             <div className="re-stats-grid">
               <Stat label="Properties" value={stats.count.toLocaleString()} />
