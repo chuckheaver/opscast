@@ -3389,3 +3389,8 @@ body {
 .re-mini-l { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
 
 
+
+/* Market Summary two-row (median / average) layout */
+.re-sum2 { display: flex; align-items: baseline; gap: 5px; flex-basis: 100%; }
+.re-sum-qty { white-space: nowrap; flex: 0 0 auto; }
+.re-sum-rows { display: flex; flex-direction: column; gap: 3px; min-width: 0; }

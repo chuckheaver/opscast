@@ -310,8 +310,12 @@ export default function ListingsApp() {
               <span className="re-chevron">{summaryOpen ? "▾" : "▸"}</span>
               <h2>Market Summary</h2>
               {!summaryOpen && (
-                <span className="re-filter-crit">
-                  Qty: {stats.count.toLocaleString()} · Median Price: {fmtUSDshort(stats.medianSale)} · DOM: {stats.medianDom ?? "—"} · $/sf: {fmtPpsf(stats.medianPpsf)}
+                <span className="re-filter-crit re-sum2">
+                  <span className="re-sum-qty">Qty: {stats.count.toLocaleString()} ·</span>
+                  <span className="re-sum-rows">
+                    <span>Median Price: {fmtUSDshort(stats.medianSale)} · DOM: {stats.medianDom ?? "—"} · $/sf: {fmtPpsf(stats.medianPpsf)} · %List: {fmtPct(stats.medianPctOfList)}</span>
+                    <span>Average Price: {fmtUSDshort(stats.avgSale)} · DOM: {stats.avgDom ?? "—"} · $/sf: {fmtPpsf(stats.avgPpsf)} · %List: {fmtPct(stats.avgPctOfList)}</span>
+                  </span>
                 </span>
               )}
             </button>

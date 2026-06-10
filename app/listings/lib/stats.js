@@ -112,6 +112,7 @@ export function computeStats(props) {
     medianList: median(props.map(p => p.listPrice)),
     medianListSold: medListSold,
     medianDom: medDom == null ? null : Math.round(medDom),
+    avgDom: (() => { const a = mean(dom); return a == null ? null : Math.round(a); })(),
     pctAsk,
     pctOverList: sold.length ? (overList.length / sold.length) * 100 : null,
     avgPctOfList: mean(ratios),
