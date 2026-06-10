@@ -85,7 +85,7 @@ export default function ListingsApp() {
 
   // Display options
   const [showFog, setShowFog] = useState(true);
-  const [groupDim, setGroupDim] = useState("fog");
+  const [groupDim, setGroupDim] = useState("neighborhood");
   const [selected, setSelected] = useState(null);
   const [groupModal, setGroupModal] = useState(null); // clicked breakdown group
   const [filtersOpen, setFiltersOpen] = useState(true); // collapsible filters
