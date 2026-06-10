@@ -157,8 +157,11 @@ export default function ListingsApp() {
       if (district && p.areaDesc !== district) return false;
       if (neighborhood && p.neighborhood !== neighborhood) return false;
       if (fogHrs && String(p.fogHours) !== fogHrs) return false;
-      if (closedFrom && (!p.sellingDate || p.sellingDate < closedFrom)) return false;
-      if (closedTo && (!p.sellingDate || p.sellingDate > closedTo)) return false;
+      // "Closed between" only constrains listings that actually closed; a
+      // listing with no sale date (Active/Pending/Coming Soon) isn't excluded
+      // by a closing-date range — the Status chips govern those instead.
+      if (closedFrom && p.sellingDate && p.sellingDate < closedFrom) return false;
+      if (closedTo && p.sellingDate && p.sellingDate > closedTo) return false;
       const price = p.price;
       if (lo != null && (price == null || price < lo)) return false;
       if (hi != null && (price == null || price > hi)) return false;
