@@ -3324,3 +3324,28 @@ body {
 
 
 .re-section-top { border-top: none; padding-top: 0; }
+
+/* Collapsible Filters header */
+.re-collapse {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+.re-collapse h2 { margin: 0; }
+.re-chevron { font-size: 11px; color: var(--muted); width: 10px; }
+.re-filter-badge {
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 1px 7px;
+  margin-left: 2px;
+}
+

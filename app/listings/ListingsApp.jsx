@@ -107,6 +107,7 @@ export default function ListingsApp() {
   const [groupDim, setGroupDim] = useState("fog");
   const [selected, setSelected] = useState(null);
   const [groupModal, setGroupModal] = useState(null); // clicked breakdown group
+  const [filtersOpen, setFiltersOpen] = useState(true); // collapsible filters
 
   useEffect(() => {
     fetch(DATA_URL)
@@ -211,6 +212,12 @@ export default function ListingsApp() {
       ? (selected.sellingPrice / selected.listPrice - 1) * 100
       : null;
 
+  // How many filters are currently applied (shown as a badge when collapsed).
+  const activeFilterCount =
+    statuses.size + subtypes.size +
+    (district ? 1 : 0) + (neighborhood ? 1 : 0) + (fogHrs ? 1 : 0) +
+    (closedFrom ? 1 : 0) + (closedTo ? 1 : 0) + (minPrice ? 1 : 0) + (maxPrice ? 1 : 0);
+
   return (
     <div className="re-app">
       <aside className="re-sidebar">
@@ -221,13 +228,20 @@ export default function ListingsApp() {
 
         {err && <div className="re-err">{err}</div>}
 
-        {/* Filters — first so you choose the set, then read summary + detail */}
+        {/* Filters — collapsible; first so you choose the set, then read summary + detail */}
         <section className="re-section re-section-top">
           <div className="re-section-head">
-            <h2>Filters</h2>
-            <button className="re-reset" onClick={resetFilters}>Reset</button>
+            <button className="re-collapse" onClick={() => setFiltersOpen(o => !o)} aria-expanded={filtersOpen}>
+              <span className="re-chevron">{filtersOpen ? "▾" : "▸"}</span>
+              <h2>Filters</h2>
+              {!filtersOpen && activeFilterCount > 0 && (
+                <span className="re-filter-badge">{activeFilterCount}</span>
+              )}
+            </button>
+            {filtersOpen && <button className="re-reset" onClick={resetFilters}>Reset</button>}
           </div>
 
+          {filtersOpen && (<>
           <label className="re-lbl">Status</label>
           <div className="re-chips">
             {statusOptions.map(s => (
@@ -284,6 +298,7 @@ export default function ListingsApp() {
             <input type="number" placeholder="Min $" className="re-input" value={minPrice} onChange={e => setMinPrice(e.target.value)} />
             <input type="number" placeholder="Max $" className="re-input" value={maxPrice} onChange={e => setMaxPrice(e.target.value)} />
           </div>
+          </>)}
         </section>
 
         {/* Headline stats — summary of the filtered set */}
