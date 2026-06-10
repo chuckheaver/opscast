@@ -308,10 +308,10 @@ export default function ListingsApp() {
           <div className="re-section-head">
             <button className="re-collapse" onClick={() => setSummaryOpen(o => !o)} aria-expanded={summaryOpen}>
               <span className="re-chevron">{summaryOpen ? "▾" : "▸"}</span>
-              <h2>Summary</h2>
+              <h2>Market Summary</h2>
               {!summaryOpen && (
                 <span className="re-filter-crit">
-                  {stats.count.toLocaleString()} · {fmtUSDshort(stats.medianSale)} med · {stats.medianDom ?? "—"} DOM · {fmtPpsf(stats.avgPpsf)}/sf
+                  Qty: {stats.count.toLocaleString()} · Median Price: {fmtUSDshort(stats.medianSale)} · DOM: {stats.medianDom ?? "—"} · $/sf: {fmtPpsf(stats.avgPpsf)}
                 </span>
               )}
             </button>
