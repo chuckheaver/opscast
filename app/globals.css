@@ -3376,3 +3376,8 @@ body {
 }
 
 
+
+/* Criteria summary shown beside "Filters" when collapsed */
+.re-collapse { flex-wrap: wrap; text-align: left; }
+.re-filter-crit { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.3; }
+

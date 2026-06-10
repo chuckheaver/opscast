@@ -5,7 +5,7 @@
 // and (b) the live stats shown in the sidebar. Map and stats are always
 // computed from the same filtered set, so they never disagree.
 
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import ListingsMap from "./ListingsMap";
 import { computeStats, groupStats, GROUP_BY, fogZoneLabel, daysBetween } from "./lib/stats";
 
@@ -72,13 +72,14 @@ export default function ListingsApp() {
   const [err, setErr] = useState("");
 
   // Filters
-  const [statuses, setStatuses] = useState(new Set()); // empty = all
-  const [subtypes, setSubtypes] = useState(new Set()); // property subtype, empty = all
+  // Default view: closed single-family sales for the current year.
+  const [statuses, setStatuses] = useState(() => new Set(["Closed"]));
+  const [subtypes, setSubtypes] = useState(() => new Set(["Single Family Residence"]));
   const [district, setDistrict] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [fogHrs, setFogHrs] = useState(""); // exact fog-hours value, "" = all
-  const [closedFrom, setClosedFrom] = useState("");
-  const [closedTo, setClosedTo] = useState("");
+  const [closedFrom, setClosedFrom] = useState("2026-01-01");
+  const [closedTo, setClosedTo] = useState(""); // set to the last close date once data loads
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
@@ -101,6 +102,19 @@ export default function ListingsApp() {
 
   // Distinct filter option lists, derived from the loaded data.
   const allProps = useMemo(() => features.map(f => f.properties), [features]);
+
+  // Most recent close date present in the data — the default "to" boundary.
+  const lastCloseDate = useMemo(
+    () => allProps.reduce((m, p) => (p.sellingDate && p.sellingDate > m ? p.sellingDate : m), ""),
+    [allProps]
+  );
+  // Apply it as the default end date once, after the data loads.
+  const dateInitRef = useRef(false);
+  useEffect(() => {
+    if (dateInitRef.current || !lastCloseDate) return;
+    dateInitRef.current = true;
+    setClosedTo(prev => prev || lastCloseDate);
+  }, [lastCloseDate]);
   const statusOptions = useMemo(() => uniqSorted(allProps.map(p => p.status)), [allProps]);
   const subtypeOptions = useMemo(() => {
     const present = new Set(allProps.map(p => p.propType).filter(Boolean));
@@ -173,17 +187,18 @@ export default function ListingsApp() {
     });
   }, []);
 
+  // Reset restores the default view (Closed · SFH · this year), not a blank slate.
   const resetFilters = useCallback(() => {
-    setStatuses(new Set());
-    setSubtypes(new Set());
+    setStatuses(new Set(["Closed"]));
+    setSubtypes(new Set(["Single Family Residence"]));
     setDistrict("");
     setNeighborhood("");
     setFogHrs("");
-    setClosedFrom("");
-    setClosedTo("");
+    setClosedFrom("2026-01-01");
+    setClosedTo(lastCloseDate);
     setMinPrice("");
     setMaxPrice("");
-  }, []);
+  }, [lastCloseDate]);
 
   const selDom =
     selected ? daysBetween(selected.listDate, selected.sellingDate) : null;
@@ -192,11 +207,19 @@ export default function ListingsApp() {
       ? (selected.sellingPrice / selected.listPrice - 1) * 100
       : null;
 
-  // How many filters are currently applied (shown as a badge when collapsed).
-  const activeFilterCount =
-    statuses.size + subtypes.size +
-    (district ? 1 : 0) + (neighborhood ? 1 : 0) + (fogHrs ? 1 : 0) +
-    (closedFrom ? 1 : 0) + (closedTo ? 1 : 0) + (minPrice ? 1 : 0) + (maxPrice ? 1 : 0);
+  // Compact, human-readable summary of the active filters — shown next to
+  // "Filters" when the section is collapsed. e.g. "Closed, SFH, 1/1/26 to 6/10/26"
+  const criteriaText = (() => {
+    const parts = [];
+    if (statuses.size) parts.push([...statuses].join(" / "));
+    if (subtypes.size) parts.push([...subtypes].map(subtypeAbbrev).join(" / "));
+    if (closedFrom || closedTo) parts.push(`${fmtDate(closedFrom)} to ${fmtDate(closedTo)}`);
+    if (fogHrs) parts.push(fogZoneLabel(Number(fogHrs)));
+    if (district) parts.push(district);
+    if (neighborhood) parts.push(neighborhood);
+    if (minPrice || maxPrice) parts.push(`$${minPrice || "0"}–${maxPrice || "∞"}`);
+    return parts.join(", ") || "All listings";
+  })();
 
   return (
     <div className="re-app">
@@ -214,9 +237,7 @@ export default function ListingsApp() {
             <button className="re-collapse" onClick={() => setFiltersOpen(o => !o)} aria-expanded={filtersOpen}>
               <span className="re-chevron">{filtersOpen ? "▾" : "▸"}</span>
               <h2>Filters</h2>
-              {!filtersOpen && activeFilterCount > 0 && (
-                <span className="re-filter-badge">{activeFilterCount}</span>
-              )}
+              {!filtersOpen && <span className="re-filter-crit">{criteriaText}</span>}
             </button>
             {filtersOpen && <button className="re-reset" onClick={resetFilters}>Reset</button>}
           </div>
