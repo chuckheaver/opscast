@@ -414,11 +414,13 @@ async function main() {
       continue;
     }
     const tags = tag(point);
-    // Strictly San Francisco only: the point must be inside the bbox AND
-    // inside an actual SFAR realtor-neighborhood polygon (the real city
-    // limits). This drops Daly City / San Ramon / any non-SF listing that
-    // slipped into an export, even when it sits just over the line.
-    if (!inBBox(point) || !tags.district) {
+    // San Francisco only. Drop by city name — catches Daly City / San Ramon,
+    // which the SF MLS still tags with an "SF District" so we can't rely on
+    // that — plus a bbox sanity check for gross geocode misses. We do NOT
+    // require a realtor-neighborhood polygon match, so valid SF spots that
+    // aren't in those polygons (e.g. Treasure Island) are kept.
+    const cityOk = !l.city || /san\s*francisco/i.test(l.city);
+    if (!inBBox(point) || !cityOk) {
       outside.push(l.address);
       continue;
     }
