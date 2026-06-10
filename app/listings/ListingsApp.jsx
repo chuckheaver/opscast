@@ -102,7 +102,6 @@ export default function ListingsApp() {
   const [maxPrice, setMaxPrice] = useState("");
 
   // Display options
-  const [colorBy, setColorBy] = useState("status");
   const [showFog, setShowFog] = useState(true);
   const [groupDim, setGroupDim] = useState("fog");
   const [selected, setSelected] = useState(null);
@@ -361,50 +360,28 @@ export default function ListingsApp() {
       <div className="re-map-wrap">
         <ListingsMap
           features={filtered}
-          colorBy={colorBy}
+          colorBy="status"
           showFog={showFog}
           selectedId={selected?.id}
           onSelect={setSelected}
         />
 
-        {/* Map controls overlay */}
+        {/* Map controls overlay — just the fog layer toggle */}
         <div className="re-map-controls">
-          <span className="re-ctrl-label">Color by</span>
-          {["status", "fog", "price"].map(c => (
-            <button key={c} className={"re-seg" + (colorBy === c ? " on" : "")} onClick={() => setColorBy(c)}>
-              {c === "fog" ? "Fog" : c === "price" ? "Price" : "Status"}
-            </button>
-          ))}
           <label className="re-ctrl-check">
-            <input type="checkbox" checked={showFog} onChange={e => setShowFog(e.target.checked)} /> Fog overlay
+            <input type="checkbox" checked={showFog} onChange={e => setShowFog(e.target.checked)} /> Fog Layer
           </label>
         </div>
 
-        {/* Color legend — reflects the active "Color by" mode */}
+        {/* Status color legend */}
         <div className="re-legend">
-          {colorBy === "status" && (
-            <div className="re-legend-items">
-              {STATUS_LEGEND.map(([label, color]) => (
-                <span className="re-legend-item" key={label}>
-                  <span className="re-legend-dot" style={{ background: color }} />{label}
-                </span>
-              ))}
-            </div>
-          )}
-          {colorBy === "fog" && (
-            <div className="re-legend-grad">
-              <span>8.5 hrs (sunnier)</span>
-              <span className="re-grad-bar" style={{ background: "linear-gradient(90deg,#fcd34d,#cbd5e1,#6b7280,#1f2937)" }} />
-              <span>11.5 hrs (foggiest)</span>
-            </div>
-          )}
-          {colorBy === "price" && (
-            <div className="re-legend-grad">
-              <span>$800K</span>
-              <span className="re-grad-bar" style={{ background: "linear-gradient(90deg,#dbeafe,#60a5fa,#2563eb,#1e3a8a,#312e81)" }} />
-              <span>$12M+</span>
-            </div>
-          )}
+          <div className="re-legend-items">
+            {STATUS_LEGEND.map(([label, color]) => (
+              <span className="re-legend-item" key={label}>
+                <span className="re-legend-dot" style={{ background: color }} />{label}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Drill-down card */}
