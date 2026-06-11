@@ -19,7 +19,6 @@ const fmtUSDshort = n => {
   if (n >= 1e3) return "$" + Math.round(n / 1e3) + "K";
   return "$" + Math.round(n);
 };
-const fmtPct = n => (n == null ? "—" : n.toFixed(1) + "%");
 const fmtPct0 = n => (n == null ? "—" : Math.round(n) + "%"); // whole-number percent
 // ISO "2026-04-23" → "4/23/26"
 const fmtDate = iso => {
@@ -85,12 +84,11 @@ export default function ListingsApp() {
   const [maxPrice, setMaxPrice] = useState("");
 
   // Display options
-  const [showFog, setShowFog] = useState(true);
+  const [showFog, setShowFog] = useState(false);
   const [groupDim, setGroupDim] = useState("neighborhood");
   const [selected, setSelected] = useState(null);
   const [groupModal, setGroupModal] = useState(null); // clicked breakdown group
   const [filtersOpen, setFiltersOpen] = useState(false); // collapsible filters, default collapsed
-  const [summaryOpen, setSummaryOpen] = useState(false); // collapsible market summary, default collapsed
 
   useEffect(() => {
     fetch(DATA_URL)
@@ -304,35 +302,16 @@ export default function ListingsApp() {
           </>)}
         </section>
 
-        {/* Summary — collapsible; collapsed shows an inline metric line */}
+        {/* Market Summary — condensed left-justified lines, always shown */}
         <section className="re-section">
-          <div className="re-section-head">
-            <button className="re-collapse" onClick={() => setSummaryOpen(o => !o)} aria-expanded={summaryOpen}>
-              <span className="re-chevron">{summaryOpen ? "▾" : "▸"}</span>
-              <h2>Market Summary</h2>
-              {!summaryOpen && <span className="re-filter-crit">Qty: {stats.count.toLocaleString()}</span>}
-            </button>
+          <div className="re-sum-head">
+            <h2>Market Summary</h2>
+            <span className="re-sum-qty">Qty: {stats.count.toLocaleString()}</span>
           </div>
-          {!summaryOpen && (
-            <div className="re-sum-lines">
-              <div>Median Price: {fmtUSDshort(stats.medianSale)} · DOM: {stats.medianDom ?? "—"} · $/sf: {fmtPpsf(stats.medianPpsf)} · %List: {fmtPct0(stats.medianPctOfList)}</div>
-              <div>Average Price: {fmtUSDshort(stats.avgSale)} · DOM: {stats.avgDom ?? "—"} · $/sf: {fmtPpsf(stats.avgPpsf)} · %List: {fmtPct0(stats.avgPctOfList)}</div>
-            </div>
-          )}
-          {summaryOpen && (
-            <div className="re-stats-grid">
-              <Stat label="Properties" value={stats.count.toLocaleString()} />
-              <Stat label="Closed" value={stats.soldCount.toLocaleString()} />
-              <Stat label="Median sale" value={fmtUSDshort(stats.medianSale)} />
-              <Stat label="Median list" value={fmtUSDshort(stats.medianListSold)} />
-              <Stat label="Median days on mkt" value={stats.medianDom ?? "—"} />
-              <Stat label="% Ask (med sale/med list)" value={fmtPct(stats.pctAsk)} />
-              <Stat label="Median % of list" value={fmtPct(stats.medianPctOfList)} />
-              <Stat label="Median fog hrs" value={stats.medianFogHours ?? "—"} />
-              <Stat label="Median sq ft" value={fmtSqft(stats.medianSqft)} />
-              <Stat label="$ / sq ft (median)" value={fmtPpsf(stats.medianPpsf)} />
-            </div>
-          )}
+          <div className="re-sum-lines">
+            <div>Median Price: {fmtUSDshort(stats.medianSale)} · DOM: {stats.medianDom ?? "—"} · $/sf: {fmtPpsf(stats.medianPpsf)} · %List: {fmtPct0(stats.medianPctOfList)}</div>
+            <div>Average Price: {fmtUSDshort(stats.avgSale)} · DOM: {stats.avgDom ?? "—"} · $/sf: {fmtPpsf(stats.avgPpsf)} · %List: {fmtPct0(stats.avgPctOfList)}</div>
+          </div>
         </section>
 
         {/* Group-by table — the detail by metric */}
@@ -390,7 +369,7 @@ export default function ListingsApp() {
         {/* Map controls overlay — just the fog layer toggle */}
         <div className="re-map-controls">
           <label className="re-ctrl-check">
-            <input type="checkbox" checked={showFog} onChange={e => setShowFog(e.target.checked)} /> Fog Layer
+            <input type="checkbox" checked={showFog} onChange={e => setShowFog(e.target.checked)} /> <strong>Fog Layer</strong>
           </label>
         </div>
 
@@ -491,15 +470,6 @@ export default function ListingsApp() {
           </div>
         );
       })()}
-    </div>
-  );
-}
-
-function Stat({ label, value }) {
-  return (
-    <div className="re-stat">
-      <div className="re-stat-v">{value}</div>
-      <div className="re-stat-l">{label}</div>
     </div>
   );
 }
