@@ -72,8 +72,8 @@ export default function ListingsApp() {
   const [err, setErr] = useState("");
 
   // Filters
-  // Default view: closed single-family sales for the current year.
-  const [statuses, setStatuses] = useState(() => new Set(["Closed"]));
+  // Default view: completed (Closed + Sold Off MLS) single-family sales this year.
+  const [statuses, setStatuses] = useState(() => new Set(["Closed", "Sold Off MLS"]));
   const [subtypes, setSubtypes] = useState(() => new Set(["Single Family Residence"]));
   const [district, setDistrict] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
@@ -189,7 +189,7 @@ export default function ListingsApp() {
 
   // Reset restores the default view (Closed · SFH · this year), not a blank slate.
   const resetFilters = useCallback(() => {
-    setStatuses(new Set(["Closed"]));
+    setStatuses(new Set(["Closed", "Sold Off MLS"]));
     setSubtypes(new Set(["Single Family Residence"]));
     setDistrict("");
     setNeighborhood("");
