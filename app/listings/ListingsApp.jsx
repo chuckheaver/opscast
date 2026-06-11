@@ -430,9 +430,10 @@ export default function ListingsApp() {
             <div className="re-modal" onClick={e => e.stopPropagation()}>
               <button className="re-modal-x" onClick={() => setGroupModal(null)}>×</button>
               <h3 className="re-modal-title">{groupModal.label}</h3>
-              <div className="re-modal-sub">
-                Median sale <strong>{fmtUSD(groupModal.stats.medianSale)}</strong>
-                {" · "}{sold.length} sold of {groupModal.stats.count} listings
+              <div className="re-modal-sub">{sold.length} sold of {groupModal.stats.count} listings</div>
+              <div className="re-sum-lines re-modal-lines">
+                <div>Median Price: {fmtUSDshort(groupModal.stats.medianSale)} · DOM: {groupModal.stats.medianDom ?? "—"} · $/sf: {fmtPpsf(groupModal.stats.medianPpsf)} · %List: {fmtPct0(groupModal.stats.medianPctOfList)}</div>
+                <div>Average Price: {fmtUSDshort(groupModal.stats.avgSale)} · DOM: {groupModal.stats.avgDom ?? "—"} · $/sf: {fmtPpsf(groupModal.stats.avgPpsf)} · %List: {fmtPct0(groupModal.stats.avgPctOfList)}</div>
               </div>
               {sold.length === 0 ? (
                 <div className="re-modal-empty">No sold listings in this group.</div>
