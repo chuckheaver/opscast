@@ -8,6 +8,7 @@
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import ListingsMap from "./ListingsMap";
 import { computeStats, groupStats, GROUP_BY, fogZoneLabel, daysBetween } from "./lib/stats";
+import { elevationAtPoint } from "../fog/lib/geocode";
 
 const DATA_URL = "/data/sf-listings.geojson";
 
@@ -88,6 +89,7 @@ export default function ListingsApp() {
   const [groupDim, setGroupDim] = useState("neighborhood");
   const [selected, setSelected] = useState(null);
   const [groupModal, setGroupModal] = useState(null); // clicked breakdown group
+  const [elevation, setElevation] = useState(null); // elevation (ft) of the selected property
   const [filtersOpen, setFiltersOpen] = useState(false); // collapsible filters, default collapsed
 
   useEffect(() => {
@@ -99,6 +101,17 @@ export default function ListingsApp() {
       .then(d => setFeatures(d.features || []))
       .catch(e => setErr(e.message));
   }, []);
+
+  // Look up the selected property's elevation (Mapbox terrain) on demand.
+  useEffect(() => {
+    setElevation(null);
+    if (!selected || selected.lng == null || selected.lat == null) return;
+    let cancelled = false;
+    elevationAtPoint([selected.lng, selected.lat]).then(ft => {
+      if (!cancelled) setElevation(ft);
+    });
+    return () => { cancelled = true; };
+  }, [selected]);
 
   // Distinct filter option lists, derived from the loaded data.
   const allProps = useMemo(() => features.map(f => f.properties), [features]);
@@ -407,14 +420,17 @@ export default function ListingsApp() {
               <Field k="Sale price" v={fmtUSD(selected.sellingPrice)} />
               <Field k="Listed" v={fmtDate(selected.listDate)} />
               <Field k="Closed" v={fmtDate(selected.sellingDate)} />
-              <Field k="Days on market" v={selDom ?? "—"} />
+              <Field k="Days on market" v={selected.dom ?? selDom} />
               <Field k="Neighborhood" v={selected.neighborhood} />
               <Field k="District" v={selected.areaDesc} />
+              <Field k="Real Estate District" v={selected.district} />
+              <Field k="Elevation" v={elevation != null ? elevation.toLocaleString() + " ft" : "—"} />
+              <Field k="Zip" v={selected.zip} />
               <Field k="Fog Hr Exp" v={selected.fogHours != null ? fogZoneLabel(selected.fogHours) : "—"} />
-              <Field k="Fog neighborhood" v={selected.fogNeighborhood} />
               <Field k="APN" v={selected.apn} />
               <Field k="MLS #" v={selected.id} />
-              <Field k="Agent" v={selected.agent} />
+              <Field k="Listing Agent" v={selected.agent} />
+              <Field k="Selling Agent" v={selected.sellingAgent} />
             </dl>
           </div>
         )}
@@ -481,7 +497,7 @@ function Field({ k, v }) {
   return (
     <>
       <dt>{k}</dt>
-      <dd>{v || "—"}</dd>
+      <dd>{v == null || v === "" ? "—" : v}</dd>
     </>
   );
 }

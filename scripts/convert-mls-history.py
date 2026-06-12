@@ -26,7 +26,7 @@ CANON = ["Listing Number", "Status", "Status Date", "Property Subtype 1 Display"
          "Address", "City", "State", "Address - ZIP", "Latitude", "Longitude",
          "Neighborhood", "Area Desc", "APN", "Bedrooms", "Bathrooms Display",
          "Square Footage", "Listing Price", "Selling Price", "Listing Date",
-         "Pending Date", "Selling Date", "Listing Agent Name"]
+         "Pending Date", "Selling Date", "Listing Agent Name", "Selling Agent Name", "DOM"]
 
 # app field -> candidate source column names (first present wins)
 SRC = {
@@ -51,6 +51,7 @@ SRC = {
     "closeDate": ["Close Date", "Selling Date", "Closed Date"],
     "dom": ["DOM", "Days on Market", "CDOM"],
     "agent": ["Agent Name", "Listing Agent Name"],
+    "sellingAgent": ["Selling Agent Name", "Selling Agent", "Buyer Agent Name", "Buyer Agent"],
 }
 
 
@@ -138,6 +139,8 @@ def main():
                 g(r, "bd"), g(r, "ba"), sqft,
                 g(r, "listPrice"), g(r, "salePrice"), list_date,
                 mdy(g(r, "pendingDate")), mdy(g(r, "closeDate")), g(r, "agent"),
+                g(r, "sellingAgent"),
+                (int(dom) if isinstance(dom, (int, float)) else ""),
             ])
             n += 1
     print(f"✓ wrote {out} ({n} rows)")

@@ -189,6 +189,8 @@ function loadOneFile(path) {
         areaDesc: g("Area Desc"),
         apn: g("APN"),
         agent: g("Listing Agent Name"),
+        sellingAgent: g("Selling Agent Name"),
+        dom: g("DOM") === "" ? null : Number(g("DOM")),
         office: g("Listing Office Name / ID"),
         url: g("Listing URL"),
       };
@@ -450,11 +452,17 @@ async function main() {
         listDate: l.listDate,
         sellingDate: l.sellingDate,
         statusDate: l.statusDate,
+        dom: l.dom ?? null,
+        zip: l.zip || null,
         areaDesc: l.areaDesc,
         apn: l.apn,
         agent: l.agent,
+        sellingAgent: l.sellingAgent || null,
         office: l.office,
         url: l.url,
+        // Coordinates so the UI can look up elevation on demand.
+        lng: point[0],
+        lat: point[1],
         ...tags,
       },
     });
