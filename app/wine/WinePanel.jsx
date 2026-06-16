@@ -11,6 +11,28 @@
 import { useState, useEffect } from "react";
 import { fogMicroclimate, typicalGrapes } from "./lib/avas";
 import { SOIL_ORDER_INFO, SOIL_ORDER_LIST, formatSoil } from "./WineMap";
+import { hasGrapeProfile } from "./lib/grapes";
+
+// Render a list of grape names, comma-separated, with the ones we have a
+// profile for as clickable links into the grape modal.
+function GrapeList({ names, onGrapeClick }) {
+  return (
+    <>
+      {names.map((name, i) => (
+        <span key={`${name}-${i}`}>
+          {i > 0 ? ", " : ""}
+          {hasGrapeProfile(name) && onGrapeClick ? (
+            <button type="button" className="grape-link" onClick={() => onGrapeClick(name)}>
+              {name}
+            </button>
+          ) : (
+            name
+          )}
+        </span>
+      ))}
+    </>
+  );
+}
 
 // Fog legend bands — colors mirror the map's fog-fill ramp, labels match
 // fogMicroclimate(). Hour ranges are the same thresholds.
@@ -38,6 +60,7 @@ export default function WinePanel({
   varietalsByAva = {},
   fogByAva = {},
   wineriesByAva = {},
+  onGrapeClick,
 }) {
   const p = selected?.properties;
   // Roster of wineries in this AVA + whether the click-through list is open.
@@ -62,9 +85,13 @@ export default function WinePanel({
   // Terroir-based grape suitability for the selected AVA: climate from the
   // AVA's mean fog, soil character from the clicked point's soil order.
   const grapes = typicalGrapes(soil?.order, avaFog);
-  const grapesLabel = grapes
-    ? `${grapes.grapes}${grapes.character ? ` · ${grapes.character}` : ""}`
-    : null;
+  // Typical grapes as a clickable list (+ muted soil-character note).
+  const grapesValue = grapes ? (
+    <>
+      <GrapeList names={grapes.list} onGrapeClick={onGrapeClick} />
+      {grapes.character ? <span className="wine-soil-note"> · {grapes.character}</span> : null}
+    </>
+  ) : null;
   const countyLabel = p
     ? [p.inNapa && "Napa", p.inSonoma && "Sonoma"].filter(Boolean).join(" & ")
     : null;
@@ -127,11 +154,16 @@ export default function WinePanel({
               {knownFor.length > 0 && (
                 <KeyRow
                   label="Known For"
-                  value={knownFor.slice(0, 5).map(v => v.variety).join(", ")}
+                  value={
+                    <GrapeList
+                      names={knownFor.slice(0, 5).map(v => v.variety)}
+                      onGrapeClick={onGrapeClick}
+                    />
+                  }
                 />
               )}
               {soilLabel && <KeyRow label="Soil (at point)" value={soilLabel} />}
-              {grapesLabel && <KeyRow label="Typical grapes" value={grapesLabel} />}
+              {grapesValue && <KeyRow label="Typical grapes" value={grapesValue} />}
             </>
           )}
         </div>

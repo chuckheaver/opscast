@@ -13,7 +13,9 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import WineMap from "./WineMap";
 import WinePanel from "./WinePanel";
+import GrapeModal from "./GrapeModal";
 import { mergeAvaCollections, buildLabelPoints, avasAtPoint, fogHoursAtPoint } from "./lib/avas";
+import { getGrapeProfile } from "./lib/grapes";
 
 const NAPA_URL = "/data/avas/napa_avas.geojson";
 const SONOMA_URL = "/data/avas/sonoma_avas.geojson";
@@ -183,6 +185,14 @@ export default function WineApp() {
     [merged]
   );
 
+  // Grape encyclopedia modal — opened from any clickable grape name
+  // (winery popup varietals, AVA Known-For / Typical grapes).
+  const [grape, setGrape] = useState(null);
+  const openGrape = useCallback(name => {
+    const profile = getGrapeProfile(name);
+    if (profile) setGrape(profile);
+  }, []);
+
   // Choosing an appellation chip switches the detail card from the
   // winery (if any) to that AVA.
   const selectAva = useCallback(feature => {
@@ -222,6 +232,7 @@ export default function WineApp() {
           selectedId={selected?.properties?.ava_id || null}
           picked={picked}
           onPickPoint={pickPoint}
+          onGrapeClick={openGrape}
         />
       </div>
       <WinePanel
@@ -251,7 +262,9 @@ export default function WineApp() {
         onToggleTerrain={setShowTerrain}
         showElevation={showElevation}
         onToggleElevation={setShowElevation}
+        onGrapeClick={openGrape}
       />
+      <GrapeModal grape={grape} onClose={() => setGrape(null)} />
     </div>
   );
 }

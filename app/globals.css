@@ -3591,3 +3591,49 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .wine-list-meta a { color: #2563eb; text-decoration: none; }
 .wine-list-meta a:hover { text-decoration: underline; }
 .wine-list-na { color: #a8a29e; }
+
+/* Clickable grape names → grape encyclopedia modal. */
+.grape-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: #7c2d12;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+}
+.grape-link:hover { color: #b91c1c; text-decoration-style: solid; }
+.wine-soil-note { color: #78716c; }
+
+/* Grape modal — reuses .wine-list-overlay / .wine-list-box shell. */
+.grape-box { width: min(460px, 100%); }
+.grape-type { color: #78716c; font-weight: 600; }
+.grape-body { padding: 6px 0 10px; }
+.grape-row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 10px;
+  padding: 5px 16px;
+  font-size: 13px;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.07);
+}
+.grape-row-label {
+  color: #57534e;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.grape-row-value { color: #1c1917; }
+.grape-facts { padding: 8px 16px 2px; }
+.grape-facts .grape-row-label { display: block; margin-bottom: 4px; }
+.grape-facts ul { margin: 0; padding-left: 18px; }
+.grape-facts li {
+  font-size: 13px;
+  color: #1c1917;
+  margin-bottom: 4px;
+  line-height: 1.35;
+}

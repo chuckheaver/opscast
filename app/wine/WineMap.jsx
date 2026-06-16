@@ -19,6 +19,27 @@ import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { fogHoursAtPoint, fogMicroclimate, typicalGrapes } from "./lib/avas";
+import { hasGrapeProfile } from "./lib/grapes";
+
+// A <span> of comma-separated grape names; ones we have a profile for
+// become clickable buttons that open the grape modal via onGrapeClick.
+function grapeListEl(names, onGrapeClick) {
+  const span = document.createElement("span");
+  names.forEach((name, i) => {
+    if (i > 0) span.appendChild(document.createTextNode(", "));
+    if (onGrapeClick && hasGrapeProfile(name)) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "grape-link";
+      b.textContent = name;
+      b.addEventListener("click", () => onGrapeClick(name));
+      span.appendChild(b);
+    } else {
+      span.appendChild(document.createTextNode(name));
+    }
+  });
+  return span;
+}
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -75,7 +96,7 @@ const WINE_BOUNDS = [
 // Build the winery popup DOM. Constructed with createElement (not an
 // HTML string) so scraped text can never inject markup. Rows with no
 // data show an em-dash, matching the panel's KeyRow convention.
-function buildWineryPopup(p, microclimate, soil, grapes) {
+function buildWineryPopup(p, microclimate, soil, grapes, onGrapeClick) {
   const root = document.createElement("div");
   root.className = "wine-popup";
 
@@ -122,17 +143,26 @@ function buildWineryPopup(p, microclimate, soil, grapes) {
     } catch {}
   }
   row("Website", p.website ? link(p.website, `${websiteHost || "website"} ↗`) : null);
-  row("Varietals", p.varietals ? p.varietals.split("|").join(", ") : null);
+  row(
+    "Varietals",
+    p.varietals
+      ? grapeListEl(p.varietals.split("|").map(s => s.trim()).filter(Boolean), onGrapeClick)
+      : null
+  );
   row("Elevation", Number.isFinite(p.elevationFt) ? `${p.elevationFt.toLocaleString()} ft` : null);
   row("AVA", p.ava || "Outside any AVA");
   row("Microclimate", microclimate || "Toggle Summer Fog on");
   row("Soil", soil ? formatSoil(soil) : "Toggle Soils on");
-  row(
-    "Typical grapes",
-    grapes
-      ? `${grapes.grapes}${grapes.character ? ` · ${grapes.character}` : ""}`
-      : null
-  );
+  if (grapes) {
+    const span = grapeListEl(grapes.list, onGrapeClick);
+    if (grapes.character) {
+      const note = document.createElement("span");
+      note.className = "wine-soil-note";
+      note.textContent = ` · ${grapes.character}`;
+      span.appendChild(note);
+    }
+    row("Typical grapes", span);
+  }
   return root;
 }
 
@@ -155,6 +185,7 @@ export default function WineMap({
   selectedId,
   picked,
   onPickPoint,
+  onGrapeClick,
 }) {
   const containerRef = useRef(null);
   const markerRef = useRef(null);
@@ -165,6 +196,11 @@ export default function WineMap({
   useEffect(() => {
     fogRef.current = fog;
   }, [fog]);
+  // Same pattern for the grape-modal opener.
+  const onGrapeClickRef = useRef(onGrapeClick);
+  useEffect(() => {
+    onGrapeClickRef.current = onGrapeClick;
+  }, [onGrapeClick]);
   const dataAppliedRef = useRef(false);
   const onPickRef = useRef(onPickPoint);
   // The map lives in state (not just a ref) so the data/filter effects
@@ -617,7 +653,7 @@ export default function WineMap({
             closeButton: true,
           })
             .setLngLat(coords)
-            .setDOMContent(buildWineryPopup(winery, microclimate, soil, grapes))
+            .setDOMContent(buildWineryPopup(winery, microclimate, soil, grapes, onGrapeClickRef.current))
             .addTo(map);
         }
         onPickRef.current([e.lngLat.lng, e.lngLat.lat], winery, soil);

@@ -223,5 +223,5 @@ export function typicalGrapes(soilOrder, fogHours) {
   else if (fogHours < 4.5) grapes = ["Cabernet Sauvignon", "Merlot", "Sauvignon Blanc"];
   else if (fogHours < 5.5) grapes = ["Pinot Noir", "Chardonnay", "Merlot"];
   else grapes = ["Pinot Noir", "Chardonnay", "sparkling"];
-  return { grapes: grapes.join(", "), character: SOIL_CHARACTER[soilOrder] || null };
+  return { grapes: grapes.join(", "), list: grapes, character: SOIL_CHARACTER[soilOrder] || null };
 }
