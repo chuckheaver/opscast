@@ -118,6 +118,12 @@ export default function MicroLifeHeader({
           <span className="micro-icon" aria-hidden="true">📭</span>
           <span className="micro-icon-label">Districts</span>
         </a>
+        {/* Wine Country AVA map — Napa & Sonoma appellations, wineries,
+            vineyard blocks, fog & climate. Shipped Jun 2026. */}
+        <a className="micro-icon-item" href="/wine">
+          <span className="micro-icon" aria-hidden="true">🍷</span>
+          <span className="micro-icon-label">Wine AVAs</span>
+        </a>
       </div>
       <div className="page-sub">
         Set Your Ideal Weather and Times Here
