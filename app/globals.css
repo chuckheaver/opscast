@@ -3614,7 +3614,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .grape-body { padding: 6px 0 10px; }
 .grape-row {
   display: grid;
-  grid-template-columns: 96px 1fr;
+  grid-template-columns: 110px 1fr;
   gap: 10px;
   padding: 5px 16px;
   font-size: 13px;

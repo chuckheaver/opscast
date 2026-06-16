@@ -13,6 +13,9 @@ export default function GrapeModal({ grape, onClose }) {
     ["Parentage", grape.parentage],
     ["Also called", grape.aka?.length ? grape.aka.join(", ") : null],
     ["Grown in", grape.regions?.join(", ")],
+    ["Ideal climate", grape.climate],
+    ["Site & exposure", grape.site],
+    ["Preferred soils", grape.soils],
     ["Tastes like", grape.tastes?.join(", ")],
     ["Style", grape.style],
   ].filter(([, v]) => v);

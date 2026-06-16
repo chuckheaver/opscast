@@ -7,6 +7,11 @@
 //   parentage  DNA cross / lineage (optional)
 //   aka        synonyms / other names (array; optional)
 //   regions    where it's grown today (array)
+//   climate    ideal MICROCLIMATE — temp regime, fog/marine influence,
+//              ripening season, diurnal swing (the meteorology link)
+//   site       topographic position & exposure — valley floor vs. hill/
+//              bench, aspect, sun, position vs. the fog/inversion line
+//   soils      preferred soils (one line)
 //   tastes     typical flavor/aroma notes (array)
 //   style      body / acid / tannin one-liner
 //   facts      2–3 short "good to know" bullets
@@ -22,6 +27,9 @@ export const GRAPE_PROFILES = {
     parentage: "Pinot Noir × Gouais Blanc",
     aka: ["Aubaine", "Beaunois", "Melon Blanc"],
     regions: ["Burgundy (Chablis, Meursault)", "Champagne", "Russian River Valley", "Sonoma Coast", "Los Carneros", "Oregon", "Australia", "New Zealand"],
+    climate: "Cool to moderate; morning fog and a long, even ripening season keep its acidity",
+    site: "Valley floor to gentle slopes; thrives in fog-influenced sites; full to partial sun",
+    soils: "Limestone, chalk, and clay-limestone",
     tastes: ["green apple", "lemon", "peach", "pineapple", "butter", "vanilla"],
     style: "Light to full-bodied; high acid; often oaked",
     facts: [
@@ -36,6 +44,9 @@ export const GRAPE_PROFILES = {
     parentage: "Cabernet Franc × Sauvignon Blanc",
     aka: ["Cab", "Bouchet"],
     regions: ["Bordeaux (Médoc, Pauillac)", "Napa Valley (Oakville, Rutherford, Stags Leap)", "Washington", "Chile", "Coonawarra", "Tuscany"],
+    climate: "Warm, sunny, long season; ripens late; wide diurnal swing builds color and tannin",
+    site: "Well-drained benches and hillsides above the fog line; south/west-facing, full sun",
+    soils: "Gravelly, well-drained loam; warm hillside soils",
     tastes: ["blackcurrant", "black cherry", "cedar", "graphite", "bell pepper"],
     style: "Full-bodied; high tannin; ages for decades",
     facts: [
@@ -50,6 +61,9 @@ export const GRAPE_PROFILES = {
     parentage: "Ancient variety; mutates into Pinot Gris & Pinot Blanc",
     aka: ["Spätburgunder", "Pinot Nero"],
     regions: ["Burgundy", "Champagne", "Russian River Valley", "Sonoma Coast", "Los Carneros", "Willamette Valley", "New Zealand"],
+    climate: "Cool; marine air and morning fog, moderate heat; very sensitive to heat spikes",
+    site: "Fog-influenced valley floors and lower slopes; cool aspects; good air drainage to limit frost",
+    soils: "Limestone, clay-limestone, well-drained volcanic",
     tastes: ["red cherry", "raspberry", "rose", "forest floor", "mushroom"],
     style: "Light to medium-bodied; high acid; soft tannins",
     facts: [
@@ -64,6 +78,9 @@ export const GRAPE_PROFILES = {
     parentage: "Same grape as Primitivo (Italy) & Tribidrag (Croatia)",
     aka: ["Primitivo", "Tribidrag", "Crljenak Kaštelanski"],
     regions: ["Dry Creek Valley", "Lodi", "Sierra Foothills", "Napa", "Puglia (Italy)"],
+    climate: "Warm and sunny with steady, even warmth (ripens unevenly otherwise)",
+    site: "Warm valley floors and benches in full sun; classic on old head-trained flats",
+    soils: "Well-drained sandy and gravelly loam",
     tastes: ["jammy blackberry", "raspberry", "black pepper", "baking spice"],
     style: "Full-bodied; high alcohol; ripe and jammy",
     facts: [
@@ -78,6 +95,9 @@ export const GRAPE_PROFILES = {
     parentage: "Offspring of Cabernet Franc",
     aka: [],
     regions: ["Bordeaux Right Bank (Pomerol, Saint-Émilion)", "Napa", "Sonoma", "Washington", "Italy", "Chile"],
+    climate: "Moderate to warm; ripens earlier than Cabernet, so it suits slightly cooler sites",
+    site: "Valley floor and lower slopes; tolerates cooler, damper ground",
+    soils: "Water-holding clay and limestone (e.g. Pomerol clay)",
     tastes: ["plum", "black cherry", "chocolate", "herbs"],
     style: "Medium to full-bodied; soft, plush tannins",
     facts: [
@@ -92,6 +112,9 @@ export const GRAPE_PROFILES = {
     parentage: "A parent of Cabernet Sauvignon",
     aka: ["Fumé Blanc", "Blanc Fumé"],
     regions: ["Loire (Sancerre, Pouilly-Fumé)", "Bordeaux", "Marlborough (NZ)", "California", "Chile", "South Africa"],
+    climate: "Cool to moderate; cooler sites and big diurnal swings keep its bright acidity & aromatics",
+    site: "Valley floor to slopes; full sun with cool nights; fog-influenced sites work well",
+    soils: "Gravel, limestone, and flinty/silex soils",
     tastes: ["gooseberry", "lime", "grapefruit", "cut grass", "passionfruit"],
     style: "Light-bodied; crisp, high acid; aromatic",
     facts: [
@@ -106,6 +129,9 @@ export const GRAPE_PROFILES = {
     parentage: "Dureza × Mondeuse Blanche",
     aka: ["Shiraz"],
     regions: ["Northern Rhône (Hermitage, Côte-Rôtie)", "Barossa Valley", "California", "Washington", "South Africa"],
+    climate: "Moderate to warm; sunny with reliable heat to ripen",
+    site: "Steep, sun-drenched hillsides (classic Northern Rhône); south-facing slopes, full sun",
+    soils: "Granite and schist; well-drained",
     tastes: ["blackberry", "plum", "black pepper", "smoked meat", "olive"],
     style: "Full-bodied; savory to jammy",
     facts: [
@@ -120,6 +146,9 @@ export const GRAPE_PROFILES = {
     parentage: "Syrah × Peloursin (true name: Durif)",
     aka: ["Durif"],
     regions: ["Napa", "Sonoma", "Lodi", "Australia", "Israel"],
+    climate: "Warm; needs sustained heat to ripen its thick skins (late-ripening)",
+    site: "Warm valley floors and benches in full sun",
+    soils: "Well-drained loam and gravel",
     tastes: ["blueberry", "blackberry", "black pepper", "dark chocolate"],
     style: "Full-bodied; inky; very high tannin",
     facts: [
@@ -134,6 +163,9 @@ export const GRAPE_PROFILES = {
     parentage: "Likely related to Syrah",
     aka: [],
     regions: ["Condrieu (Rhône)", "California", "Australia", "Virginia"],
+    climate: "Warm; needs heat to build its aromatics while holding enough acidity",
+    site: "Steep, sun-facing slopes (classic Condrieu); full sun",
+    soils: "Granite and decomposed schist",
     tastes: ["peach", "apricot", "honeysuckle", "tangerine"],
     style: "Full-bodied; low acid; floral and aromatic",
     facts: [
