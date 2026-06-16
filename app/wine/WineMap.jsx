@@ -18,7 +18,7 @@
 import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { fogHoursAtPoint, fogMicroclimate } from "./lib/avas";
+import { fogHoursAtPoint, fogMicroclimate, typicalGrapes } from "./lib/avas";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -65,7 +65,7 @@ const WINE_BOUNDS = [
 // Build the winery popup DOM. Constructed with createElement (not an
 // HTML string) so scraped text can never inject markup. Rows with no
 // data show an em-dash, matching the panel's KeyRow convention.
-function buildWineryPopup(p, microclimate, soil) {
+function buildWineryPopup(p, microclimate, soil, grapes) {
   const root = document.createElement("div");
   root.className = "wine-popup";
 
@@ -121,6 +121,12 @@ function buildWineryPopup(p, microclimate, soil) {
     soil
       ? `${soil.series || soil.name || "—"} — ${soilPlain(soil.order)}`
       : "Toggle Soils on"
+  );
+  row(
+    "Typical grapes",
+    grapes
+      ? `${grapes.grapes}${grapes.character ? ` · ${grapes.character}` : ""}`
+      : null
   );
   return root;
 }
@@ -597,14 +603,16 @@ export default function WineMap({
         popupRef.current = null;
         if (winery) {
           const coords = hits[0].geometry.coordinates;
-          const microclimate = fogMicroclimate(fogHoursAtPoint(fogRef.current, coords));
+          const fogH = fogHoursAtPoint(fogRef.current, coords);
+          const microclimate = fogMicroclimate(fogH);
+          const grapes = typicalGrapes(soil?.order, fogH);
           popupRef.current = new mapboxgl.Popup({
             offset: 10,
             maxWidth: "300px",
             closeButton: true,
           })
             .setLngLat(coords)
-            .setDOMContent(buildWineryPopup(winery, microclimate, soil))
+            .setDOMContent(buildWineryPopup(winery, microclimate, soil, grapes))
             .addTo(map);
         }
         onPickRef.current([e.lngLat.lng, e.lngLat.lat], winery, soil);

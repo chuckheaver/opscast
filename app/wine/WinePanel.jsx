@@ -9,7 +9,7 @@
 // Followed by the layer toggles.
 
 import { useState, useEffect } from "react";
-import { fogMicroclimate } from "./lib/avas";
+import { fogMicroclimate, typicalGrapes } from "./lib/avas";
 import { SOIL_ORDER_INFO, SOIL_ORDER_LIST, soilPlain } from "./WineMap";
 
 // Fog legend bands — colors mirror the map's fog-fill ramp, labels match
@@ -60,6 +60,12 @@ export default function WinePanel({
   const soil = picked?.soil;
   const soilLabel = soil
     ? `${soil.series || soil.name || "—"} — ${soilPlain(soil.order)}`
+    : null;
+  // Terroir-based grape suitability for the selected AVA: climate from the
+  // AVA's mean fog, soil character from the clicked point's soil order.
+  const grapes = typicalGrapes(soil?.order, avaFog);
+  const grapesLabel = grapes
+    ? `${grapes.grapes}${grapes.character ? ` · ${grapes.character}` : ""}`
     : null;
   const countyLabel = p
     ? [p.inNapa && "Napa", p.inSonoma && "Sonoma"].filter(Boolean).join(" & ")
@@ -127,6 +133,7 @@ export default function WinePanel({
                 />
               )}
               {soilLabel && <KeyRow label="Soil (at point)" value={soilLabel} />}
+              {grapesLabel && <KeyRow label="Typical grapes" value={grapesLabel} />}
             </>
           )}
         </div>

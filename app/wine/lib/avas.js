@@ -202,3 +202,26 @@ export function fogMicroclimate(hours) {
   if (hours < 5.5) return "Cool · regular fog";
   return "Strong marine / fog";
 }
+
+// Grape suitability is driven mostly by CLIMATE (the textbook Napa/Sonoma
+// pattern: cool & foggy → Pinot/Chardonnay, warm & sunny → Cabernet/
+// Zinfandel), so the grape list keys off fog hours. SOIL adds the terroir
+// character note (drainage/vigor), which is why a returned object carries
+// both. General guidance — not a parcel-level recommendation.
+const SOIL_CHARACTER = {
+  Mollisols: "deep, fertile valley floor — vigorous",
+  Alfisols: "water-holding clay loam",
+  Ultisols: "free-draining red hillside — low vigor, concentrated",
+  Inceptisols: "young hillside soil",
+  Entisols: "free-draining alluvial",
+  Vertisols: "heavy clay — water-retentive",
+};
+export function typicalGrapes(soilOrder, fogHours) {
+  if (fogHours == null) return null;
+  let grapes;
+  if (fogHours < 3.5) grapes = ["Cabernet Sauvignon", "Zinfandel", "Petite Sirah"];
+  else if (fogHours < 4.5) grapes = ["Cabernet Sauvignon", "Merlot", "Sauvignon Blanc"];
+  else if (fogHours < 5.5) grapes = ["Pinot Noir", "Chardonnay", "Merlot"];
+  else grapes = ["Pinot Noir", "Chardonnay", "sparkling"];
+  return { grapes: grapes.join(", "), character: SOIL_CHARACTER[soilOrder] || null };
+}
