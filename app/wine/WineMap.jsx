@@ -55,6 +55,16 @@ export function soilPlain(order) {
   return (SOIL_ORDER_INFO[order] || SOIL_ORDER_INFO["Not ranked"]).plain;
 }
 
+// Soil readout label: scientific order first, then plain meaning, then the
+// specific series — e.g. "Mollisols — Rich valley-floor loam (Bale)".
+export function formatSoil(soil) {
+  if (!soil) return null;
+  const order = soil.order && soil.order !== "Not ranked" ? soil.order : null;
+  const head = order ? `${order} — ${soilPlain(soil.order)}` : soilPlain(soil.order);
+  const series = soil.series || soil.name;
+  return series ? `${head} (${series})` : head;
+}
+
 // Frames both valleys — Sonoma's coast at Fort Ross across to Napa's
 // eastern hills, Carneros up to the Mendocino county line.
 const WINE_BOUNDS = [
@@ -116,12 +126,7 @@ function buildWineryPopup(p, microclimate, soil, grapes) {
   row("Elevation", Number.isFinite(p.elevationFt) ? `${p.elevationFt.toLocaleString()} ft` : null);
   row("AVA", p.ava || "Outside any AVA");
   row("Microclimate", microclimate || "Toggle Summer Fog on");
-  row(
-    "Soil",
-    soil
-      ? `${soil.series || soil.name || "—"} — ${soilPlain(soil.order)}`
-      : "Toggle Soils on"
-  );
+  row("Soil", soil ? formatSoil(soil) : "Toggle Soils on");
   row(
     "Typical grapes",
     grapes
