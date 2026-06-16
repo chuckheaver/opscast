@@ -10,6 +10,7 @@
 
 import { useState, useEffect } from "react";
 import { fogMicroclimate } from "./lib/avas";
+import { SOIL_ORDER_INFO, SOIL_ORDER_LIST, soilPlain } from "./WineMap";
 
 // Fog legend bands — colors mirror the map's fog-fill ramp, labels match
 // fogMicroclimate(). Hour ranges are the same thresholds.
@@ -31,6 +32,7 @@ export default function WinePanel({
   showWineries, onToggleWineries,
   showVineyards, onToggleVineyards,
   showFog, onToggleFog,
+  showSoils, onToggleSoils,
   showTerrain, onToggleTerrain,
   showElevation, onToggleElevation,
   varietalsByAva = {},
@@ -54,6 +56,11 @@ export default function WinePanel({
   // Top grapes poured across this AVA's wineries (our public proxy for
   // parcel-varietal data). Shown only on the AVA card, not the winery card.
   const knownFor = (p && varietalsByAva[p.name]) || [];
+  // Soil under the clicked point (only present when the Soils layer is on).
+  const soil = picked?.soil;
+  const soilLabel = soil
+    ? `${soil.series || soil.name || "—"} — ${soilPlain(soil.order)}`
+    : null;
   const countyLabel = p
     ? [p.inNapa && "Napa", p.inSonoma && "Sonoma"].filter(Boolean).join(" & ")
     : null;
@@ -119,6 +126,7 @@ export default function WinePanel({
                   value={knownFor.slice(0, 5).map(v => v.variety).join(", ")}
                 />
               )}
+              {soilLabel && <KeyRow label="Soil (at point)" value={soilLabel} />}
             </>
           )}
         </div>
@@ -132,6 +140,7 @@ export default function WinePanel({
         <ToggleSwitch checked={showWineries} onChange={onToggleWineries} label="Wineries" />
         <ToggleSwitch checked={showVineyards} onChange={onToggleVineyards} label="Vineyard Blocks" />
         <ToggleSwitch checked={showFog} onChange={onToggleFog} label="Summer Fog" />
+        <ToggleSwitch checked={showSoils} onChange={onToggleSoils} label="Soils" />
         <ToggleSwitch checked={showElevation} onChange={onToggleElevation} label="Elevation" />
         <ToggleSwitch checked={showTerrain} onChange={onToggleTerrain} label="Terrain" />
       </div>
@@ -154,6 +163,36 @@ export default function WinePanel({
                   </span>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showSoils && (
+        <div className="fog-legend-row-wrap">
+          <div className="fog-layer-legend">
+            <div className="fog-layer-legend-title">
+              Soil type · what it means for the vines (USDA-NRCS SSURGO)
+            </div>
+            <div className="fog-layer-legend-items">
+              {SOIL_ORDER_LIST.map(order => {
+                const info = SOIL_ORDER_INFO[order];
+                return (
+                  <div key={order} className="fog-layer-legend-item">
+                    <span
+                      className="fog-layer-legend-swatch wine-fog-swatch"
+                      style={{ background: info.color }}
+                    />
+                    <span>
+                      {info.plain}{" "}
+                      <span className="wine-fog-range">
+                        {order}
+                        {info.note ? ` · ${info.note}` : ""}
+                      </span>
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

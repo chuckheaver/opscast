@@ -24,6 +24,7 @@ const WINERY_URLS = [
   "/data/avas/napa-wineries.geojson",
 ];
 const FOG_URL = "/data/avas/wine-fog-contours.geojson";
+const SOILS_URL = "/data/avas/soils.geojson";
 
 // Roll the wineries' own varietal lists up by AVA → a ranked "Known for"
 // list per appellation. This is the public proxy for the (confidential)
@@ -64,6 +65,23 @@ export default function WineApp() {
   const [showFog, setShowFog] = useState(false);
   const [showTerrain, setShowTerrain] = useState(false);
   const [showElevation, setShowElevation] = useState(false);
+  // Soils (SSURGO) is the heaviest layer (~6.7 MB), so it's lazy-loaded:
+  // fetched only the first time the Soils toggle is switched on.
+  const [showSoils, setShowSoils] = useState(false);
+  const [soils, setSoils] = useState(null);
+  useEffect(() => {
+    if (!showSoils || soils) return;
+    let cancelled = false;
+    fetch(SOILS_URL)
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => {
+        if (!cancelled && d) setSoils(d);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [showSoils, soils]);
 
   useEffect(() => {
     let cancelled = false;
@@ -157,9 +175,9 @@ export default function WineApp() {
   // click landed on a winery dot, its properties ride along and the
   // panel leads with the winery card.
   const pickPoint = useCallback(
-    (point, winery = null) => {
+    (point, winery = null, soil = null) => {
       const stack = avasAtPoint(merged, point);
-      setPicked({ point, stack, winery });
+      setPicked({ point, stack, winery, soil });
       setSelected(stack[0] || null);
     },
     [merged]
@@ -197,6 +215,8 @@ export default function WineApp() {
           showVineyards={showVineyards}
           fog={fog}
           showFog={showFog}
+          soils={soils}
+          showSoils={showSoils}
           showTerrain={showTerrain}
           showElevation={showElevation}
           selectedId={selected?.properties?.ava_id || null}
@@ -225,6 +245,8 @@ export default function WineApp() {
         onToggleVineyards={setShowVineyards}
         showFog={showFog}
         onToggleFog={setShowFog}
+        showSoils={showSoils}
+        onToggleSoils={setShowSoils}
         showTerrain={showTerrain}
         onToggleTerrain={setShowTerrain}
         showElevation={showElevation}

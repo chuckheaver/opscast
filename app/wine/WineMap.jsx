@@ -22,6 +22,39 @@ import { fogHoursAtPoint, fogMicroclimate } from "./lib/avas";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
+// Soil-order fill ramp (USDA taxonomy). Earthy, distinct hues; shared by
+// the map layer and the panel legend (SOIL_ORDER_LEGEND mirrors it).
+const SOIL_ORDER_COLOR = [
+  "match", ["get", "order"],
+  "Mollisols", "#6b4423",    // dark fertile valley-floor/grassland soils
+  "Alfisols", "#c8772e",     // orange-brown forested soils
+  "Ultisols", "#a83a2c",     // weathered red hill soils
+  "Inceptisols", "#cbb079",  // young tan soils
+  "Entisols", "#ecd9a6",     // very young / alluvial
+  "Vertisols", "#5c6b3a",    // shrink-swell clays
+  "#c9c9c9",                  // Not ranked / other
+];
+// Plain-English meaning of each USDA soil order, framed for what it means
+// to a vine/visitor — the scientific term ("Mollisols") is kept as a muted
+// secondary label. `plain` is the headline; `note` is the one-line why.
+export const SOIL_ORDER_INFO = {
+  Mollisols:    { color: "#6b4423", plain: "Rich valley-floor loam", note: "deep & fertile — vigorous vines" },
+  Alfisols:     { color: "#c8772e", plain: "Clay-rich woodland soil", note: "holds water well" },
+  Ultisols:     { color: "#a83a2c", plain: "Weathered red hillside soil", note: "free-draining, lower vigor" },
+  Inceptisols:  { color: "#cbb079", plain: "Young hillside soil", note: "thin, still developing" },
+  Entisols:     { color: "#ecd9a6", plain: "Young riverwash soil", note: "alluvial, free-draining" },
+  Vertisols:    { color: "#5c6b3a", plain: "Heavy cracking clay", note: "swells wet, cracks dry" },
+  "Not ranked": { color: "#c9c9c9", plain: "Mixed / unclassified", note: "" },
+};
+// Display order for the legend.
+export const SOIL_ORDER_LIST = [
+  "Mollisols", "Alfisols", "Ultisols", "Inceptisols", "Entisols", "Vertisols", "Not ranked",
+];
+// Plain-English description for a given soil order (falls back gracefully).
+export function soilPlain(order) {
+  return (SOIL_ORDER_INFO[order] || SOIL_ORDER_INFO["Not ranked"]).plain;
+}
+
 // Frames both valleys — Sonoma's coast at Fort Ross across to Napa's
 // eastern hills, Carneros up to the Mendocino county line.
 const WINE_BOUNDS = [
@@ -32,7 +65,7 @@ const WINE_BOUNDS = [
 // Build the winery popup DOM. Constructed with createElement (not an
 // HTML string) so scraped text can never inject markup. Rows with no
 // data show an em-dash, matching the panel's KeyRow convention.
-function buildWineryPopup(p, microclimate) {
+function buildWineryPopup(p, microclimate, soil) {
   const root = document.createElement("div");
   root.className = "wine-popup";
 
@@ -83,6 +116,12 @@ function buildWineryPopup(p, microclimate) {
   row("Elevation", Number.isFinite(p.elevationFt) ? `${p.elevationFt.toLocaleString()} ft` : null);
   row("AVA", p.ava || "Outside any AVA");
   row("Microclimate", microclimate || "Toggle Summer Fog on");
+  row(
+    "Soil",
+    soil
+      ? `${soil.series || soil.name || "—"} — ${soilPlain(soil.order)}`
+      : "Toggle Soils on"
+  );
   return root;
 }
 
@@ -98,6 +137,8 @@ export default function WineMap({
   showVineyards,
   fog,
   showFog,
+  soils,
+  showSoils,
   showTerrain,
   showElevation,
   selectedId,
@@ -339,6 +380,36 @@ export default function WineMap({
         },
       });
 
+      // SSURGO soil map units (USDA-NRCS, build-soils.mjs), colored by
+      // taxonomic soil ORDER — the headline terroir layer. Lazy-loaded
+      // (data arrives only when the toggle is first switched on). Drawn
+      // above fog but below vineyards / AVA lines / dots.
+      map.addSource("soils", {
+        type: "geojson",
+        data: { type: "FeatureCollection", features: [] },
+      });
+      map.addLayer({
+        id: "soil-fill",
+        type: "fill",
+        source: "soils",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": SOIL_ORDER_COLOR,
+          "fill-opacity": 0.5,
+        },
+      });
+      map.addLayer({
+        id: "soil-line",
+        type: "line",
+        source: "soils",
+        layout: { visibility: "none" },
+        paint: {
+          "line-color": "#57534e",
+          "line-width": 0.4,
+          "line-opacity": 0.4,
+        },
+      });
+
       // Sub-AVA fills. Source order (large→small) controls paint order
       // within the layer, keeping nested AVAs on top.
       // Actual planted vineyard blocks — DWR Statewide Crop Mapping 2023
@@ -516,6 +587,12 @@ export default function WineMap({
         // A winery dot under the cursor wins over the AVA underneath it.
         const hits = map.queryRenderedFeatures(e.point, { layers: ["winery-dots"] });
         const winery = hits.length ? hits[0].properties : null;
+        // Soil under the cursor — only resolves when the Soils layer is
+        // toggled on (and thus rendered), which is when it's relevant.
+        const soilHits = map.getLayer("soil-fill")
+          ? map.queryRenderedFeatures(e.point, { layers: ["soil-fill"] })
+          : [];
+        const soil = soilHits.length ? soilHits[0].properties : null;
         popupRef.current?.remove();
         popupRef.current = null;
         if (winery) {
@@ -527,10 +604,10 @@ export default function WineMap({
             closeButton: true,
           })
             .setLngLat(coords)
-            .setDOMContent(buildWineryPopup(winery, microclimate))
+            .setDOMContent(buildWineryPopup(winery, microclimate, soil))
             .addTo(map);
         }
-        onPickRef.current([e.lngLat.lng, e.lngLat.lat], winery);
+        onPickRef.current([e.lngLat.lng, e.lngLat.lat], winery, soil);
       });
       });
     }, 0);
@@ -577,6 +654,13 @@ export default function WineMap({
     if (!map || !fog) return;
     whenReady(map, () => map.getSource("fog")?.setData(fog));
   }, [mapObj, fog]);
+
+  // Soils arrive lazily (only after the toggle is first switched on).
+  useEffect(() => {
+    const map = mapObj;
+    if (!map || !soils) return;
+    whenReady(map, () => map.getSource("soils")?.setData(soils));
+  }, [mapObj, soils]);
 
   // County toggles rebuild the filters on the fill/border/label layers.
   // Los Carneros and North Coast belong to both counties, so visibility
@@ -635,6 +719,8 @@ export default function WineMap({
         ["vineyard-fill", showVineyards],
         ["vineyard-line", showVineyards],
         ["fog-fill", showFog],
+        ["soil-fill", showSoils],
+        ["soil-line", showSoils],
         ["wine-hillshade", showTerrain],
         ["wine-hillshade-2", showTerrain],
         ["wine-contour-lines", showElevation],
@@ -647,7 +733,7 @@ export default function WineMap({
       });
     };
     whenReady(map, apply);
-  }, [mapObj, showRegions, showLabels, showWineries, showVineyards, showFog, showTerrain, showElevation]);
+  }, [mapObj, showRegions, showLabels, showWineries, showVineyards, showFog, showSoils, showTerrain, showElevation]);
 
   // Highlight the panel-selected AVA.
   useEffect(() => {
