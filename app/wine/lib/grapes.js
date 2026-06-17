@@ -173,6 +173,101 @@ export const GRAPE_PROFILES = {
       "Co-fermented with Syrah in Côte-Rôtie to lift aromatics.",
     ],
   },
+  "Petit Verdot": {
+    type: "Red",
+    origin: "Bordeaux, France",
+    parentage: "Old Bordeaux variety (obscure lineage)",
+    aka: ["Verdot"],
+    regions: ["Bordeaux (Médoc)", "Napa", "Washington", "Spain", "Australia", "Argentina"],
+    climate: "Warm; ripens very late — needs a long, hot season (often unripe in cool Bordeaux years)",
+    site: "Warm valley floors and benches, full sun; struggles on cool, foggy sites",
+    soils: "Well-drained gravel",
+    tastes: ["violet", "blackberry", "plum", "black pepper", "leather"],
+    style: "Deeply colored; full-bodied; high tannin",
+    facts: [
+      "A classic Bordeaux 'seasoning' grape — small amounts add color, tannin, and floral violet notes.",
+      "Ripens so late it was historically unreliable in Bordeaux; thrives in warm California and Spain.",
+      "Increasingly bottled on its own in warm New-World regions.",
+    ],
+  },
+};
+
+// Wine STYLES / blend categories (not single grapes). Shown in the same
+// modal but with a 'how it's made + what's blended' layout. `summary` and
+// `how` are one-liners; `blends` lists the typical grapes or sub-styles.
+export const STYLE_PROFILES = {
+  "Red Wine Blends": {
+    kind: "Wine style",
+    summary: "One wine made from two or more red grapes.",
+    how: "Varieties are usually fermented separately, then blended so each contributes something — structure, fruit, color, softness — for a more complete whole than any single grape.",
+    blends: [
+      "Bordeaux blend: Cabernet Sauvignon, Merlot, Cabernet Franc, Petit Verdot, Malbec",
+      "Rhône / 'GSM' blend: Grenache, Syrah, Mourvèdre",
+      "'Meritage' — the California name for a Bordeaux-style blend",
+    ],
+    facts: [
+      "Many of the world's most famous reds (Bordeaux, Châteauneuf-du-Pape) are blends, not single varieties.",
+      "Blending can combine different grapes, vineyards, and even vintages.",
+    ],
+  },
+  "White Wine Blends": {
+    kind: "Wine style",
+    summary: "One wine made from two or more white grapes.",
+    how: "Grapes are blended to balance aromatics, acidity, body, and texture — a richer grape rounding out a leaner, zippier one.",
+    blends: [
+      "White Bordeaux: Sauvignon Blanc + Sémillon",
+      "Rhône whites: Viognier, Marsanne, Roussanne, Grenache Blanc",
+      "Field blends: several whites grown and pressed together",
+    ],
+    facts: [
+      "Sauvignon Blanc–Sémillon is the classic dry white blend of Bordeaux — and the base of sweet Sauternes.",
+    ],
+  },
+  "Rosé": {
+    kind: "Wine style",
+    summary: "Pink wine — made from red grapes, but only lightly tinted.",
+    how: "Red-grape skins sit in the juice just a few hours (not weeks), giving color without heavy tannin. Some rosé is 'bled off' (saignée) from a red-wine tank; blending red + white is generally allowed only for Champagne.",
+    blends: [
+      "Provence (the benchmark): Grenache, Cinsault, Syrah, Mourvèdre",
+      "California: Pinot Noir, Grenache, Zinfandel (the off-dry 'White Zinfandel')",
+    ],
+    facts: [
+      "Color comes only from skin-contact time — pale Provence rosé sees the skins for just hours.",
+      "Rosé can be bone-dry (Provence) or sweet (White Zinfandel).",
+    ],
+  },
+  "Sparkling Wines": {
+    kind: "Wine style",
+    summary: "Wines with bubbles — CO₂ trapped from a second fermentation.",
+    how: "A still 'base wine' ferments a second time in a sealed vessel; the carbon dioxide has nowhere to go and dissolves into the wine. The traditional method (Champagne) does this in the bottle; the tank method (Prosecco) does it in a pressurized tank.",
+    blends: [
+      "Champagne & traditional-method: Chardonnay, Pinot Noir, Pinot Meunier",
+      "Prosecco: Glera",
+      "Blanc de Blancs = 100% Chardonnay; Blanc de Noirs = white wine from red grapes",
+    ],
+    facts: [
+      "'Champagne' legally means only the sparkling wine from that French region — elsewhere it's sparkling wine, Crémant, Cava, or Prosecco.",
+      "Traditional-method wines age on spent yeast ('lees') for a bready, brioche character.",
+    ],
+  },
+  "Unique Reds": {
+    kind: "Wine style",
+    summary: "A catch-all for less-common red varieties and small-lot bottlings.",
+    how: "A directory category rather than a single style — what's inside varies by winery, covering reds beyond the mainstream Cabernet / Merlot / Pinot / Zinfandel.",
+    blends: [
+      "Often: Petite Sirah, Petit Verdot, Malbec, Cabernet Franc, Grenache, Mourvèdre, Carignane, Barbera, Sangiovese",
+    ],
+    facts: ["Exactly what's poured depends on the producer."],
+  },
+  "Unique White Wines": {
+    kind: "Wine style",
+    summary: "A catch-all for less-common white varieties.",
+    how: "A directory category for whites beyond Chardonnay and Sauvignon Blanc — the specific grape varies by producer.",
+    blends: [
+      "Often: Viognier, Roussanne, Marsanne, Grenache Blanc, Pinot Gris, Riesling, Gewürztraminer, Albariño, Vermentino",
+    ],
+    facts: ["A directory bucket — the grape inside varies by winery."],
+  },
 };
 
 // Synonyms / alternate spellings → canonical key in GRAPE_PROFILES.
@@ -184,6 +279,16 @@ const ALIASES = {
   Spätburgunder: "Pinot Noir",
   "Pinot Nero": "Pinot Noir",
   Zin: "Zinfandel",
+  Verdot: "Petit Verdot",
+};
+
+// Style-name normalization → canonical key in STYLE_PROFILES.
+const STYLE_ALIASES = {
+  "Sparkling Wine": "Sparkling Wines",
+  Sparkling: "Sparkling Wines",
+  Rose: "Rosé",
+  "Red Blends": "Red Wine Blends",
+  "White Blends": "White Wine Blends",
 };
 
 // Look up a profile by grape name (case/spacing-insensitive, alias-aware).
@@ -203,3 +308,31 @@ export function getGrapeProfile(name) {
 }
 
 export const hasGrapeProfile = name => getGrapeProfile(name) != null;
+
+// Look up a wine STYLE profile (Rosé, Sparkling, blends…), alias-aware.
+function getStyleProfile(name) {
+  if (!name) return null;
+  const raw = name.trim();
+  if (STYLE_PROFILES[raw]) return { name: raw, ...STYLE_PROFILES[raw] };
+  if (STYLE_ALIASES[raw]) return { name: STYLE_ALIASES[raw], ...STYLE_PROFILES[STYLE_ALIASES[raw]] };
+  const lower = raw.toLowerCase();
+  const key = Object.keys(STYLE_PROFILES).find(k => k.toLowerCase() === lower);
+  if (key) return { name: key, ...STYLE_PROFILES[key] };
+  const aliasKey = Object.keys(STYLE_ALIASES).find(k => k.toLowerCase() === lower);
+  if (aliasKey) return { name: STYLE_ALIASES[aliasKey], ...STYLE_PROFILES[STYLE_ALIASES[aliasKey]] };
+  return null;
+}
+
+// Unified lookup used by the UI: a grape profile (kind: "grape") or a
+// wine-style profile (kind: "style"), or null when we have neither.
+export function getWineProfile(name) {
+  // kind is set AFTER the spread so it always wins as the discriminator
+  // (style entries carry their own descriptive "kind" field internally).
+  const g = getGrapeProfile(name);
+  if (g) return { ...g, kind: "grape" };
+  const s = getStyleProfile(name);
+  if (s) return { ...s, kind: "style" };
+  return null;
+}
+
+export const hasWineProfile = name => getWineProfile(name) != null;

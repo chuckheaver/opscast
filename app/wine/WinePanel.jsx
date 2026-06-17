@@ -11,7 +11,7 @@
 import { useState, useEffect } from "react";
 import { fogMicroclimate, typicalGrapes } from "./lib/avas";
 import { SOIL_ORDER_INFO, SOIL_ORDER_LIST, formatSoil } from "./WineMap";
-import { hasGrapeProfile } from "./lib/grapes";
+import { hasWineProfile } from "./lib/grapes";
 
 // Render a list of grape names, comma-separated, with the ones we have a
 // profile for as clickable links into the grape modal.
@@ -21,7 +21,7 @@ function GrapeList({ names, onGrapeClick }) {
       {names.map((name, i) => (
         <span key={`${name}-${i}`}>
           {i > 0 ? ", " : ""}
-          {hasGrapeProfile(name) && onGrapeClick ? (
+          {hasWineProfile(name) && onGrapeClick ? (
             <button type="button" className="grape-link" onClick={() => onGrapeClick(name)}>
               {name}
             </button>

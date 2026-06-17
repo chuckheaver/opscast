@@ -15,7 +15,7 @@ import WineMap from "./WineMap";
 import WinePanel from "./WinePanel";
 import GrapeModal from "./GrapeModal";
 import { mergeAvaCollections, buildLabelPoints, avasAtPoint, fogHoursAtPoint } from "./lib/avas";
-import { getGrapeProfile } from "./lib/grapes";
+import { getWineProfile } from "./lib/grapes";
 
 const NAPA_URL = "/data/avas/napa_avas.geojson";
 const SONOMA_URL = "/data/avas/sonoma_avas.geojson";
@@ -189,7 +189,7 @@ export default function WineApp() {
   // (winery popup varietals, AVA Known-For / Typical grapes).
   const [grape, setGrape] = useState(null);
   const openGrape = useCallback(name => {
-    const profile = getGrapeProfile(name);
+    const profile = getWineProfile(name);
     if (profile) setGrape(profile);
   }, []);
 

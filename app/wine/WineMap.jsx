@@ -19,7 +19,7 @@ import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { fogHoursAtPoint, fogMicroclimate, typicalGrapes } from "./lib/avas";
-import { hasGrapeProfile } from "./lib/grapes";
+import { hasWineProfile } from "./lib/grapes";
 
 // A <span> of comma-separated grape names; ones we have a profile for
 // become clickable buttons that open the grape modal via onGrapeClick.
@@ -27,7 +27,7 @@ function grapeListEl(names, onGrapeClick) {
   const span = document.createElement("span");
   names.forEach((name, i) => {
     if (i > 0) span.appendChild(document.createTextNode(", "));
-    if (onGrapeClick && hasGrapeProfile(name)) {
+    if (onGrapeClick && hasWineProfile(name)) {
       const b = document.createElement("button");
       b.type = "button";
       b.className = "grape-link";
