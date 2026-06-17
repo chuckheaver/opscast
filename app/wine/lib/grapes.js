@@ -190,6 +190,23 @@ export const GRAPE_PROFILES = {
       "Increasingly bottled on its own in warm New-World regions.",
     ],
   },
+  Malbec: {
+    type: "Red",
+    origin: "Southwest France (Cahors)",
+    parentage: "Magdeleine Noire × Prunelard (a half-sibling of Merlot)",
+    aka: ["Côt", "Auxerrois", "Pressac"],
+    regions: ["Cahors (SW France)", "Mendoza (Argentina — esp. high-altitude Uco Valley)", "Bordeaux (minor blender)", "California", "Washington", "Chile"],
+    climate: "Warm and sunny; high-altitude sites give a big diurnal swing for color and freshness",
+    site: "Warm valley floors and benches in full sun; in Argentina, high-elevation sites (3,000+ ft) with intense sun and cool nights",
+    soils: "Well-drained alluvial and limestone-clay soils",
+    tastes: ["blackberry", "plum", "blueberry", "violet", "cocoa"],
+    style: "Inky purple; full-bodied; medium-high, plush tannin",
+    facts: [
+      "One of the six permitted Bordeaux red grapes — but it found stardom in Argentina.",
+      "Argentina's signature grape, especially high-altitude Mendoza.",
+      "In its French home of Cahors it's called Côt and makes an inky 'black wine'.",
+    ],
+  },
 };
 
 // Wine STYLES / blend categories (not single grapes). Shown in the same
@@ -280,6 +297,7 @@ const ALIASES = {
   "Pinot Nero": "Pinot Noir",
   Zin: "Zinfandel",
   Verdot: "Petit Verdot",
+  Côt: "Malbec",
 };
 
 // Style-name normalization → canonical key in STYLE_PROFILES.
