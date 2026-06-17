@@ -98,9 +98,9 @@ export default function MicroLifeHeader({
           <span className="micro-icon" aria-hidden="true">🌤️</span>
           <span className="micro-icon-label">Weather</span>
         </a>
-        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "hoods")}>
+        <a className="micro-icon-item" href="/listings">
           <span className="micro-icon" aria-hidden="true">🏡</span>
-          <span className="micro-icon-label">Hoods</span>
+          <span className="micro-icon-label">Market</span>
         </a>
         <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "fog")}>
           <span className="micro-icon" aria-hidden="true">🌁</span>
