@@ -442,7 +442,7 @@ export default function WineMap({
         layout: { visibility: "none" },
         paint: {
           "fill-color": SOIL_ORDER_COLOR,
-          "fill-opacity": 0.5,
+          "fill-opacity": 0.28,
         },
       });
       map.addLayer({
