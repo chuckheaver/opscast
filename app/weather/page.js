@@ -1,0 +1,298 @@
+'use client';
+
+// Weather sub-page (the Weather tile on the home hub links here).
+// Forecast-first: on mount we use the stored/auto-geolocated location,
+// fetch the forecast, and show the result. The threshold form (ideal
+// weather + times) lives behind the ⚙ gear icon, accessed only when the
+// user wants to change something. This was the original Ur4cast home
+// page — it moved here so the home screen could become a clean hub.
+
+import { useState, useEffect, useRef } from "react";
+import SetupView from "../components/SetupView";
+import ForecastView from "../components/ForecastView";
+import MicroLifeHeader from "../components/MicroLifeHeader";
+import { buildDefaults } from "../lib/thresholds";
+import { geoCode, getWx, getAQ, buildFcData, reverseCityState } from "../lib/weather-api";
+
+const THRESH_STORAGE_KEY = "ur4cast.thresh.v1";
+// Last-selected location, shared with the home hub and /fog.
+const LOC_STORAGE_KEY = "opscast.loc.v1";
+
+export default function WeatherPage() {
+  const [zip, setZip] = useState("");
+  // When the user accepts geolocation or picks an autocomplete suggestion,
+  // we cache the full location object here (coords + timezone + name).
+  // The submit handler uses this directly to skip the redundant geoCode call.
+  // Typing in the zip field clears it (handled via handleZipInput).
+  const [selectedLoc, setSelectedLoc] = useState(null);
+  const [startH, setStartH] = useState(7);
+  const [endH, setEndH] = useState(18);
+  const [dayFrom, setDayFrom] = useState(0);
+  const [dayTo, setDayTo] = useState(4);
+  const [thresh, setThresh] = useState(buildDefaults);
+  // Three views: "loading" (fetching the auto-launch forecast), "forecast"
+  // (results), and "settings" (the SetupView form behind the gear icon).
+  // We start in "loading" so the splash is intentional, then fall through
+  // to "settings" only if geolocation fails or returns nothing.
+  const [view, setView] = useState("loading");
+  const [forecast, setForecast] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [geoLoad, setGeoLoad] = useState(false);
+  const [err, setErr] = useState("");
+
+  const [hydrated, setHydrated] = useState(false);
+  const autoGeoTriedRef = useRef(false);
+  const autoFetchedRef = useRef(false);
+
+  // ── Threshold persistence ────────────────────────────────────────────
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(THRESH_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setThresh({ ...buildDefaults(), ...parsed });
+      }
+    } catch {}
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      localStorage.setItem(THRESH_STORAGE_KEY, JSON.stringify(thresh));
+    } catch {}
+  }, [thresh, hydrated]);
+
+  // Persist the selected location (geo-resolved or manually-picked) so the
+  // hub and /fog can pick it up. Cleared when the user types a new query —
+  // see handleZipInput.
+  useEffect(() => {
+    if (!selectedLoc) return;
+    try {
+      localStorage.setItem(LOC_STORAGE_KEY, JSON.stringify({
+        latitude: selectedLoc.latitude,
+        longitude: selectedLoc.longitude,
+        name: selectedLoc.name,
+      }));
+    } catch {}
+  }, [selectedLoc]);
+
+  // User-typed input in the location field. Clears any cached selectedLoc
+  // so the submit handler will fresh-geoCode whatever they finished typing.
+  const handleZipInput = val => {
+    setZip(val);
+    if (selectedLoc !== null) setSelectedLoc(null);
+  };
+
+  // Fetch the forecast for a given location object and flip to the
+  // forecast view. Used by both auto-launch and manual submit.
+  const fetchForLoc = async loc => {
+    setLoading(true);
+    setErr("");
+    try {
+      const [wx, aq] = await Promise.all([
+        getWx(loc.latitude, loc.longitude, loc.timezone),
+        getAQ(loc.latitude, loc.longitude, loc.timezone),
+      ]);
+      setForecast(buildFcData(wx, aq, loc));
+      setView("forecast");
+    } catch (e) {
+      setErr(e.message);
+      setView("settings");
+    }
+    setLoading(false);
+  };
+
+  // Manual 📍 click OR auto-trigger on mount. Populates the location
+  // and (when autoFetch is true) chains directly into a forecast fetch
+  // so the user lands on the result page without a second click.
+  const useGeo = (autoFetch = false) => {
+    if (!navigator.geolocation) {
+      setErr("Geolocation not supported.");
+      if (view === "loading") setView("settings");
+      return;
+    }
+    setGeoLoad(true);
+    setErr("");
+    navigator.geolocation.getCurrentPosition(
+      async pos => {
+        const { latitude: lat, longitude: lon } = pos.coords;
+        // Req 7: the 📍 pin resolves to a "City, ST" label.
+        const name = await reverseCityState([lon, lat]);
+        const loc = {
+          latitude: lat,
+          longitude: lon,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          name,
+          label: name,
+          admin1: "",
+          country: "",
+        };
+        setZip(name);
+        setSelectedLoc(loc);
+        setGeoLoad(false);
+        if (autoFetch) fetchForLoc(loc);
+      },
+      () => {
+        setErr("Location access denied. Type a city or ZIP to continue.");
+        setGeoLoad(false);
+        if (view === "loading") setView("settings");
+      },
+      { enableHighAccuracy: false, timeout: 9000, maximumAge: 60000 }
+    );
+  };
+
+  // Autocomplete pick. Populates the field and caches the loc; user still
+  // has to hit Get My Forecast.
+  const selectLocation = sug => {
+    // Reqs 4/5: show the type-appropriate formatted label in the field
+    // (address → "123 Main St, City, ST"; ZIP/city → "City, ST").
+    setZip(sug.label || sug.name || "");
+    setSelectedLoc(sug);
+  };
+
+  // SetupView's submit handler — geocodes the typed text if needed and
+  // jumps back to the forecast view with the new data.
+  const run = async () => {
+    setLoading(true);
+    setErr("");
+    try {
+      const loc = selectedLoc || (await geoCode(zip));
+      await fetchForLoc(loc);
+    } catch (e) {
+      setErr(e.message);
+      setLoading(false);
+    }
+  };
+
+  // ── Auto-launch on mount ─────────────────────────────────────────────
+  // Try the stored location first (instant — no permission prompt). If
+  // we have one, fetch the forecast immediately. Otherwise drop straight
+  // to the entry view so the user can type / tap 📍 right away, and
+  // attempt geolocation in the background (browsers often block the
+  // silent prompt, so we never block the UI waiting on it).
+  useEffect(() => {
+    if (!hydrated) return;
+    if (autoFetchedRef.current) return;
+    autoFetchedRef.current = true;
+
+    let stored = null;
+    try {
+      const raw = localStorage.getItem(LOC_STORAGE_KEY);
+      if (raw) stored = JSON.parse(raw);
+    } catch {}
+    const lat = Number(stored?.latitude);
+    const lng = Number(stored?.longitude);
+    if (Number.isFinite(lat) && Number.isFinite(lng)) {
+      const loc = {
+        latitude: lat,
+        longitude: lng,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        name: stored.name || "Your Location",
+        admin1: "",
+        country: "",
+      };
+      setZip(loc.name);
+      setSelectedLoc(loc);
+      fetchForLoc(loc);
+      return;
+    }
+
+    // No stored location — show the entry view immediately so there's
+    // always a usable input, then try geolocation in the background.
+    setView("settings");
+    if (autoGeoTriedRef.current) return;
+    autoGeoTriedRef.current = true;
+    if (typeof navigator === "undefined" || !navigator.geolocation) return;
+    if (navigator.permissions?.query) {
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then(result => {
+          if (result.state !== "denied") useGeo(true);
+        })
+        .catch(() => useGeo(true));
+    } else {
+      useGeo(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hydrated]);
+
+  return (
+    <div className="app">
+      <div className="topbar">
+        <div>
+          <div className="brand-name">Ur<em>4cast</em></div>
+          <div className="brand-tag">Weather Intelligence For You</div>
+        </div>
+        {view === "settings" && forecast ? (
+          <button
+            className="edit-btn"
+            onClick={() => setView("forecast")}
+          >
+            ← Back to Forecast
+          </button>
+        ) : (
+          <a className="edit-btn" href="/">← Home</a>
+        )}
+      </div>
+
+      {view === "loading" && (
+        <div className="splash">
+          <div className="splash-inner">
+            <div className="splash-dot" />
+            <div className="splash-msg">Fetching your forecast…</div>
+          </div>
+        </div>
+      )}
+
+      {view === "settings" && (
+        <SetupView
+          zip={zip} setZip={handleZipInput}
+          selectedLoc={selectedLoc}
+          startH={startH} setStartH={setStartH}
+          endH={endH} setEndH={setEndH}
+          dayFrom={dayFrom} setDayFrom={setDayFrom}
+          dayTo={dayTo} setDayTo={setDayTo}
+          thresh={thresh} setThresh={setThresh}
+          loading={loading} geoLoad={geoLoad}
+          err={err}
+          onSubmit={run}
+          onGeo={() => useGeo(false)}
+          onSelectLocation={selectLocation}
+        />
+      )}
+
+      {view === "forecast" && forecast && (
+        <div className="setup">
+          <MicroLifeHeader
+            zip={zip}
+            setZip={handleZipInput}
+            selectedLoc={selectedLoc}
+            loading={loading}
+            geoLoad={geoLoad}
+            // Enter in the input runs the full submit path (geocode +
+            // fetch); picking a suggestion or hitting 📍 refetches
+            // straight away so the grid below updates without a trip
+            // through the settings page.
+            onSubmit={run}
+            onGeo={() => useGeo(true)}
+            onSelectLocation={sug => {
+              selectLocation(sug);
+              fetchForLoc(sug);
+            }}
+            onOpenSettings={() => setView("settings")}
+          />
+          <ForecastView
+            forecast={forecast}
+            startH={startH}
+            endH={endH}
+            dayFrom={dayFrom}
+            dayTo={dayTo}
+            thresh={thresh}
+            onOpenSettings={() => setView("settings")}
+          />
+        </div>
+      )}
+    </div>
+  );
+}

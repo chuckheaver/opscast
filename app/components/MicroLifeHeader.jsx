@@ -1,129 +1,40 @@
-// Shared top section used on both the front (forecast) page and the
-// gear-accessed settings page. Owns:
-//   - the "Tell me about your Micro Life," heading
-//   - the six facet icons (Weather / Housing / Summer Fog / Transit /
-//     Bike Paths / Postal) with their /fog?preset=… or "#setup-form"
-//     destinations
-//   - the muted call-to-action subhead
-//   - the Location input with autocomplete + 📍 geo button
+// Header for the weather sub-page (/weather), shown on both the forecast
+// result and the gear-accessed settings view. The facet icon grid that
+// used to live here moved to the home hub (HomeHub.jsx); this is now just
+// the Location bar (top), the "Your SF Micro Life" title, and the
+// call-to-action subhead with the ⚙ gear that opens the threshold form.
 //
-// Stateless apart from the autocomplete UI (suggestions/show/focus);
-// everything else (zip text, selected location, loading flags) is
-// driven by props so the parent decides what each interaction does
-// (e.g. front-page picks auto-refetch the forecast, settings-page
-// picks wait for the explicit Submit click).
+// Stateless apart from the autocomplete inside LocationBar; everything
+// else (zip text, selected location, loading flags) is driven by props so
+// the parent decides what each interaction does.
 
-import { useState, useEffect, useRef } from "react";
-import { geoSuggest } from "../lib/weather-api";
-
-// Bias autocomplete toward the user's picked location; fall back to the
-// SF city center so the very first keystroke still surfaces local hits.
-const SF_CENTER = [-122.4194, 37.7749];
-
-function buildFogUrl(loc, preset) {
-  const qs = new URLSearchParams();
-  if (loc?.latitude != null && loc?.longitude != null) {
-    qs.set("lat", String(loc.latitude));
-    qs.set("lng", String(loc.longitude));
-    if (loc.name) qs.set("name", loc.name);
-  }
-  if (preset) qs.set("preset", preset);
-  const s = qs.toString();
-  return s ? `/fog?${s}` : "/fog";
-}
+import LocationBar from "./LocationBar";
 
 export default function MicroLifeHeader({
   zip, setZip,
   selectedLoc,
   loading, geoLoad,
   onSubmit, onGeo, onSelectLocation,
-  // When provided, renders a ⚙ gear button inline next to "Micro Life"
-  // that opens the settings page. Omitted on the settings page itself
+  // When provided, renders a ⚙ gear button inline next to the subhead
+  // that opens the settings form. Omitted on the settings page itself
   // (where it would be redundant).
   onOpenSettings,
 }) {
-  const [suggestions, setSuggestions] = useState([]);
-  const [showSugg, setShowSugg] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const debounceRef = useRef(null);
-  const blurTimerRef = useRef(null);
-
-  useEffect(() => {
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    if (!focused || zip.trim().length < 2) {
-      setSuggestions([]);
-      return;
-    }
-    const proximity =
-      selectedLoc?.longitude != null && selectedLoc?.latitude != null
-        ? [selectedLoc.longitude, selectedLoc.latitude]
-        : SF_CENTER;
-    debounceRef.current = setTimeout(async () => {
-      const results = await geoSuggest(zip, proximity);
-      setSuggestions(results);
-      setShowSugg(true);
-    }, 300);
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, [zip, focused, selectedLoc]);
-
-  const pickSuggestion = sug => {
-    setShowSugg(false);
-    setSuggestions([]);
-    setFocused(false);
-    onSelectLocation(sug);
-  };
-
-  const handleBlur = () => {
-    blurTimerRef.current = setTimeout(() => {
-      setShowSugg(false);
-      setFocused(false);
-    }, 150);
-  };
-
-  const handleFocus = () => {
-    if (blurTimerRef.current) clearTimeout(blurTimerRef.current);
-    setFocused(true);
-    if (suggestions.length) setShowSugg(true);
-  };
-
   return (
     <div className="ml-header">
-      <div className="page-h">
-        What&apos;s Your SF <em>Micro-Life?</em>
-      </div>
-      <div className="micro-icons">
-        <a className="micro-icon-item" href="#setup-form">
-          <span className="micro-icon" aria-hidden="true">🌤️</span>
-          <span className="micro-icon-label">Weather</span>
-        </a>
-        <a className="micro-icon-item" href="/listings">
-          <span className="micro-icon" aria-hidden="true">🏡</span>
-          <span className="micro-icon-label">Market</span>
-        </a>
-        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "fog")}>
-          <span className="micro-icon" aria-hidden="true">🌁</span>
-          <span className="micro-icon-label">Fog Map</span>
-        </a>
-        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "transit")}>
-          <span className="micro-icon" aria-hidden="true">🚃</span>
-          <span className="micro-icon-label">Transit</span>
-        </a>
-        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "bikes")}>
-          <span className="micro-icon" aria-hidden="true">🚲</span>
-          <span className="micro-icon-label">Bike Paths</span>
-        </a>
-        <a className="micro-icon-item" href={buildFogUrl(selectedLoc, "districts")}>
-          <span className="micro-icon" aria-hidden="true">📭</span>
-          <span className="micro-icon-label">Districts</span>
-        </a>
-        {/* Wine Country AVA map — Napa & Sonoma appellations, wineries,
-            vineyard blocks, fog & climate. Shipped Jun 2026. */}
-        <a className="micro-icon-item" href="/wine">
-          <span className="micro-icon" aria-hidden="true">🍷</span>
-          <span className="micro-icon-label">Wine AVAs</span>
-        </a>
+      <LocationBar
+        zip={zip}
+        setZip={setZip}
+        selectedLoc={selectedLoc}
+        loading={loading}
+        geoLoad={geoLoad}
+        onSubmit={onSubmit}
+        onGeo={onGeo}
+        onSelectLocation={onSelectLocation}
+      />
+
+      <div className="page-h" style={{ marginTop: 18 }}>
+        Your SF <em>Micro Life</em>
       </div>
       <div className="page-sub">
         Set Your Ideal Weather and Times Here
@@ -142,67 +53,6 @@ export default function MicroLifeHeader({
               />
             </svg>
           </button>
-        )}
-      </div>
-
-      <div id="setup-form" className="field-lbl">Location</div>
-      <div className="loc-row" style={{ position: "relative" }}>
-        <div className="zip-wrap">
-          <input
-            className="zip-inp"
-            placeholder="Address, ZIP code, or city…"
-            value={zip}
-            onChange={e => {
-              // Typing always re-opens the lookup and starts fresh, even
-              // right after a pick (the field keeps DOM focus through the
-              // mousedown-select, so onFocus never re-fires on its own).
-              if (!focused) setFocused(true);
-              setZip(e.target.value);
-            }}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            onKeyDown={e => e.key === "Enter" && !loading && onSubmit && onSubmit()}
-          />
-          {zip && (
-            <button
-              type="button"
-              className="clear-btn"
-              onMouseDown={e => e.preventDefault()}
-              onClick={() => { setZip(""); setSuggestions([]); setShowSugg(false); }}
-              aria-label="Clear location"
-              title="Clear"
-            >
-              ×
-            </button>
-          )}
-        </div>
-        <button
-          className="geo-btn"
-          onClick={onGeo}
-          disabled={geoLoad || loading}
-          aria-label="Use my current location"
-          title="Use my current location"
-        >
-          {geoLoad ? "⏳" : "📍"}
-        </button>
-        {showSugg && suggestions.length > 0 && (
-          <div className="autocomplete">
-            {suggestions.map((s, i) => (
-              <div
-                key={`${s.latitude},${s.longitude},${i}`}
-                className="autocomplete-item"
-                onMouseDown={e => {
-                  e.preventDefault();
-                  pickSuggestion(s);
-                }}
-              >
-                <span className="ac-name">{s.label || s.name}</span>
-                {s.place_name && s.place_name !== (s.label || s.name) && (
-                  <span className="ac-meta">{s.place_name}</span>
-                )}
-              </div>
-            ))}
-          </div>
         )}
       </div>
     </div>
