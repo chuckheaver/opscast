@@ -68,6 +68,7 @@ export default function FogTopBar({
   return (
     <div className="fog-topbar">
       <div className="fog-topbar-inner">
+        <a className="fog-topbar-lbl" href="/">← UrMicroLife</a>
         <label className="fog-topbar-lbl">Location</label>
         <div className="fog-topbar-search">
           <div className="zip-wrap">

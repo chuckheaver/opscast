@@ -109,12 +109,14 @@ export default function MarketApp() {
     return { props, stats: computeStats(props) };
   };
 
-  if (err) return <div className="mk-page"><div className="mk-wrap"><div className="mk-err">{err}</div></div></div>;
-  if (!features.length) return <div className="mk-page"><div className="mk-wrap"><p className="mk-loading">Loading market data…</p></div></div>;
+  const backLink = <a className="fog-topbar-lbl" href="/" style={{ display: "inline-block", marginBottom: 12 }}>← UrMicroLife</a>;
+  if (err) return <div className="mk-page"><div className="mk-wrap">{backLink}<div className="mk-err">{err}</div></div></div>;
+  if (!features.length) return <div className="mk-page"><div className="mk-wrap">{backLink}<p className="mk-loading">Loading market data…</p></div></div>;
 
   return (
     <div className="mk-page">
     <div className="mk-wrap">
+      <a className="fog-topbar-lbl" href="/" style={{ display: "inline-block", marginBottom: 12 }}>← UrMicroLife</a>
       <header className="mk-head">
         <h1 className="mk-title">SF <em>Market Update</em></h1>
         <div className="mk-controls">

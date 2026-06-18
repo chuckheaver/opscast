@@ -237,6 +237,7 @@ export default function ListingsApp() {
   return (
     <div className="re-app">
       <aside className="re-sidebar">
+        <a className="fog-topbar-lbl" href="/" style={{ display: "inline-block", marginBottom: 10 }}>← UrMicroLife</a>
         <header className="re-head">
           <h1 className="re-brand">SF Microclimate <em>Real Estate</em></h1>
           <p className="re-tag">Fog zones · Neighborhoods · Sales</p>

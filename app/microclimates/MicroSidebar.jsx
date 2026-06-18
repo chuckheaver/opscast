@@ -112,6 +112,7 @@ export default function MicroSidebar({
   return (
     <aside className="fog-sidebar">
       <header className="fog-h">
+        <a className="fog-topbar-lbl" href="/" style={{ display: "inline-block", marginBottom: 8 }}>← UrMicroLife</a>
         <div className="fog-brand-row">
           <h1 className="fog-brand">
             Micro<em>Climate</em> Zones

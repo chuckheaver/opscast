@@ -204,7 +204,7 @@ export default function WineApp() {
     <div className="fog-app fog-app-vertical">
       <div className="fog-topbar">
         <div className="fog-topbar-inner">
-          <a className="fog-topbar-lbl" href="/">← Ur4cast</a>
+          <a className="fog-topbar-lbl" href="/">← UrMicroLife</a>
           <span className="wine-topbar-title">🍷 Wine Country AVAs · Napa &amp; Sonoma</span>
           <span className="wine-topbar-hint">
             Click anywhere to see every appellation at that spot

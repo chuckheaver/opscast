@@ -232,7 +232,7 @@ export default function WeatherPage() {
             ← Back to Forecast
           </button>
         ) : (
-          <a className="edit-btn" href="/">← Home</a>
+          <a className="edit-btn" href="/">← UrMicroLife</a>
         )}
       </div>
 
