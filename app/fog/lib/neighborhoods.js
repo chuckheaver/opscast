@@ -291,6 +291,205 @@ export const NEIGHBORHOODS = {
     transit:
       "A short walk to Van Ness and Civic Center stations puts the full Muni Metro (J, K, L, M, N, T) and BART within reach. The 21 Hayes runs the length of the neighborhood, with the 5 Fulton, 7 Haight, and 49 Van Ness close by.",
   },
+
+  "Pacific Heights": {
+    spirit:
+      "Mansion-lined hills with knockout bay views and a polished Fillmore Street — old-money San Francisco at its most genteel.",
+    reasons: [
+      "Grand Victorian & Edwardian mansions",
+      "Upscale Fillmore St shopping",
+      "Bay & Golden Gate views",
+      "Quiet, leafy streets",
+    ],
+    aka: "Pac Heights",
+    history:
+      "Pacific Heights rose as a wealthy enclave once cable cars made its steep hills reachable in the 1870s–80s. The high ground escaped the 1906 fire, so block after block of grand Victorian and Edwardian mansions survive. Today it holds some of the city's priciest real estate, with upper Fillmore Street as its refined shopping-and-dining spine.",
+    facts: [
+      {
+        icon: "money",
+        title: "Billionaires' Row",
+        text:
+          "The stretch of Broadway between Divisadero and Lyon is among the most expensive residential blocks in the U.S., home to tech moguls and old San Francisco fortunes.",
+      },
+      {
+        icon: "house",
+        title: "A Victorian open to all",
+        text:
+          "The Haas-Lilienthal House (1886) on Franklin St is the only intact Queen Anne Victorian mansion in the city operated as a public museum.",
+      },
+      {
+        icon: "quake",
+        title: "Above the 1906 fire",
+        text:
+          "Because the hilltop escaped the post-earthquake fires, Pacific Heights preserves one of the densest collections of pre-1906 mansions in San Francisco.",
+      },
+      {
+        icon: "star",
+        title: "Author of the Spreckels Mansion",
+        text:
+          "Novelist Danielle Steel owns the landmark Spreckels Mansion on Washington St — one of several grand homes that have drawn famous residents to the neighborhood.",
+      },
+      {
+        icon: "shopping",
+        title: "Upper Fillmore's rise",
+        text:
+          "What began as a post-1906 commercial strip is now one of the city's most upscale shopping streets, lined with boutiques and sidewalk cafés.",
+      },
+    ],
+    restaurants: [
+      { name: "SPQR", address: "1911 Fillmore St", phone: "(415) 771-7779", url: "https://www.spqrsf.com" },
+      { name: "The Snug", address: "2301 Fillmore St", phone: "(415) 562-5092", url: "https://www.thesnugsf.com" },
+      { name: "Jackson Fillmore Trattoria", address: "2506 Fillmore St", phone: "(415) 346-5288", url: "https://www.jacksonfillmoresf.com" },
+      { name: "Pizzeria Delfina", address: "2406 California St", phone: "(415) 440-1189", url: "https://www.pizzeriadelfina.com" },
+    ],
+    bars: [
+      { name: "Harry's Bar", address: "2020 Fillmore St", phone: "(415) 921-1000", url: "https://www.harrysbarsf.com" },
+      { name: "Scopo Divino", address: "2800 California St", phone: "(415) 928-3728", url: "https://www.scopodivino.com" },
+      { name: "Vic's Winehouse", address: "1870 Fillmore St", phone: "(619) 381-2576", url: "https://vicswinehouse.com" },
+      { name: "Verve Wine", address: "2358 Fillmore St", phone: "(415) 896-4935", url: "https://sf.vervewine.com" },
+    ],
+    hospital: {
+      name: "CPMC Van Ness Campus",
+      address: "1101 Van Ness Ave",
+      dist: "about 1.2 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "A bus neighborhood: the 1 California and 2 Clement run east–west to downtown, while the 22 Fillmore and 24 Divisadero cross north–south. The nearest rail is the Van Ness Muni Metro station, a ride downhill.",
+  },
+
+  Mission: {
+    spirit:
+      "Sun-soaked and street-art-splashed — the city's warmest, most flavorful neighborhood, where taquerias, galleries, and destination restaurants share every block.",
+    reasons: [
+      "The city's sunniest microclimate",
+      "Legendary taquerias & dining",
+      "Murals & Valencia St culture",
+      "Two BART stations",
+    ],
+    aka: "La Misión",
+    history:
+      "The Mission grew up around Mission San Francisco de Asís (Mission Dolores), founded in 1776 — the city's oldest building and its namesake. For generations a working-class, heavily Latino neighborhood, it's famous for its murals, its taquerias, and the sunniest weather in San Francisco. A wave of acclaimed restaurants and rising rents has reshaped it in recent decades.",
+    facts: [
+      {
+        icon: "church",
+        title: "The city's oldest building",
+        text:
+          "Mission Dolores, completed in 1791, is the oldest intact structure in San Francisco and gave both the neighborhood and the city their names.",
+      },
+      {
+        icon: "art",
+        title: "San Francisco's mural capital",
+        text:
+          "Balmy Alley and Clarion Alley are open-air galleries of Latino and political street art, maintained and renewed by community artists since the 1970s.",
+      },
+      {
+        icon: "burrito",
+        title: "Home of the Mission burrito",
+        text:
+          "The oversized, foil-wrapped “Mission-style” burrito — rice and beans included — was born in the neighborhood's taquerias in the late 1960s and exported worldwide.",
+      },
+      {
+        icon: "sun",
+        title: "The sunny side of the fog",
+        text:
+          "Sheltered by Twin Peaks from the ocean fog, the Mission is reliably the warmest, sunniest neighborhood in the city — often 10°F above the foggy west side.",
+      },
+      {
+        icon: "subway",
+        title: "A transit crossroads",
+        text:
+          "Two BART stations at 16th and 24th & Mission, plus the busiest bus lines in the city, make it one of San Francisco's most connected neighborhoods.",
+      },
+    ],
+    restaurants: [
+      { name: "Foreign Cinema", address: "2534 Mission St", phone: "(415) 648-7600", url: "https://foreigncinema.com" },
+      { name: "Flour + Water", address: "2401 Harrison St", phone: "(415) 826-7000", url: "https://www.flourandwater.com" },
+      { name: "La Taqueria", address: "2889 Mission St", phone: "(415) 285-7117", url: "https://lataqueriasf.net" },
+      { name: "Delfina", address: "3621 18th St", phone: "(415) 552-4055", url: "https://www.delfinasf.com" },
+      { name: "Beretta", address: "1199 Valencia St", phone: "(415) 695-1199", url: "https://www.berettasf.com" },
+    ],
+    bars: [
+      { name: "Trick Dog", address: "3010 20th St", phone: "(415) 471-2999", url: "https://www.trickdogbar.com" },
+      { name: "Zeitgeist", address: "199 Valencia St", phone: "(415) 255-7505", url: "https://www.zeitgeistsf.com" },
+      { name: "True Laurel", address: "753 Alabama St", phone: "(415) 341-0020", url: "https://truelaurelsf.com" },
+      { name: "ABV", address: "3174 16th St", phone: "(415) 400-4748", url: "https://www.abvsf.com" },
+    ],
+    hospital: {
+      name: "Zuckerberg San Francisco General",
+      address: "1001 Potrero Ave",
+      dist: "about 1 mi",
+      url: "https://zuckerbergsanfranciscogeneral.org",
+    },
+    transit:
+      "Two BART stations — 16th St and 24th St Mission — plus the 14 Mission and 49 Van Ness/Mission rapid buses make this one of the city's best-connected neighborhoods. The J-Church Muni Metro skirts the western edge.",
+  },
+
+  "North Beach": {
+    spirit:
+      "San Francisco's Little Italy and Beat heartland — espresso bars, red-sauce institutions, and literary saloons under the Coit Tower hill.",
+    reasons: [
+      "Historic Little Italy dining",
+      "Beat-era cafés & bars",
+      "Walk to Coit Tower & the bay",
+      "Lively, walkable Columbus Ave",
+    ],
+    aka: "Little Italy",
+    history:
+      "Settled by Italian immigrants around the turn of the 20th century, North Beach became San Francisco's Little Italy. In the 1950s it was the epicenter of the Beat Generation — City Lights Bookstore, Vesuvio, and poets Kerouac and Ginsberg. It remains a dense, walkable warren of Italian restaurants, cafés, and historic bars beneath Telegraph Hill and Coit Tower.",
+    facts: [
+      {
+        icon: "book",
+        title: "Where the Beats began",
+        text:
+          "City Lights Bookstore, founded by poet Lawrence Ferlinghetti in 1953, published Ginsberg's “Howl” and anchored the Beat movement — still a fiercely independent landmark.",
+      },
+      {
+        icon: "coffee",
+        title: "West Coast espresso, first poured here",
+        text:
+          "Caffe Trieste (1956) claims to have introduced espresso to the West Coast, and North Beach's Italian café culture is among the oldest in the country.",
+      },
+      {
+        icon: "tower",
+        title: "Coit Tower's murals",
+        text:
+          "The 1933 tower crowning Telegraph Hill is lined inside with Depression-era WPA frescoes depicting California life — free to view in the lobby.",
+      },
+      {
+        icon: "pizza",
+        title: "The West's first pizza oven",
+        text:
+          "Tommaso's brought the first wood-fired brick pizza oven to the West Coast in 1935 — one of a string of red-sauce institutions still feeding the neighborhood.",
+      },
+      {
+        icon: "bird",
+        title: "The wild parrots",
+        text:
+          "A flock of feral cherry-headed conures — the famous wild parrots of Telegraph Hill — roosts in the trees above North Beach, subject of a hit documentary.",
+      },
+    ],
+    restaurants: [
+      { name: "Tommaso's", address: "1042 Kearny St", phone: "(415) 398-9696", url: "https://tommasos.com" },
+      { name: "Sotto Mare", address: "552 Green St", phone: "(415) 398-3181", url: "https://www.sottomaresf.com" },
+      { name: "Tony's Pizza Napoletana", address: "1570 Stockton St", phone: "(415) 835-9888", url: "https://tonyspizzanapoletana.com" },
+      { name: "Original Joe's", address: "601 Union St", phone: "(415) 775-4877", url: "https://www.originaljoes.com/north-beach" },
+    ],
+    bars: [
+      { name: "Vesuvio Cafe", address: "255 Columbus Ave", url: "https://vesuvio.com" },
+      { name: "Specs' Twelve Adler Museum Cafe", address: "12 William Saroyan Pl", phone: "(415) 421-4112", url: "https://www.specsbarsf.com" },
+      { name: "Comstock Saloon", address: "155 Columbus Ave", phone: "(415) 617-0071", url: "https://www.comstocksaloon.com" },
+    ],
+    hospital: {
+      name: "Chinese Hospital",
+      address: "845 Jackson St",
+      dist: "about 0.7 mi",
+      url: "https://www.chinesehospital-sf.org",
+    },
+    transit:
+      "The Powell-Mason cable car and the 30 Stockton, 8 Market, and 39 Coit buses serve the neighborhood; the T-Third Central Subway stops just south at Chinatown–Rose Pak station. Compact North Beach is best explored on foot.",
+  },
 };
 
 // Look up curated content for a neighborhood name (exact match on the fog

@@ -17,6 +17,9 @@ const FACT_EMOJI = {
   flag: "🏳️‍🌈", shop: "📷", movie: "🎬", confetti: "🎉", pin: "📍",
   mayor: "🏛️", quake: "🏚️", stroller: "👶", tram: "🚊", shopping: "🛍️",
   fair: "🎡", wave: "🌊", park: "🌳", art: "🎨",
+  money: "💰", house: "🏠", star: "⭐", church: "⛪", burrito: "🌯",
+  sun: "☀️", subway: "🚇", book: "📖", coffee: "☕", tower: "🗼",
+  pizza: "🍕", bird: "🦜",
 };
 
 function buildUrl(base, loc, extra = {}) {
