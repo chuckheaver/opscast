@@ -490,6 +490,200 @@ export const NEIGHBORHOODS = {
     transit:
       "The Powell-Mason cable car and the 30 Stockton, 8 Market, and 39 Coit buses serve the neighborhood; the T-Third Central Subway stops just south at Chinatown–Rose Pak station. Compact North Beach is best explored on foot.",
   },
+
+  "Russian Hill": {
+    spirit:
+      "Steep, secret-stairway hills crowned by the crookedest street in the world — leafy and quiet above the buzz of Polk Street.",
+    reasons: [
+      "Iconic Lombard St & stair-walks",
+      "Polk St dining & bars",
+      "Bay & bridge views",
+      "Quiet, leafy hilltop living",
+    ],
+    history:
+      "Russian Hill is named for a small Russian Orthodox cemetery early settlers found at its summit — graves of sailors and fur traders, later removed. Its steep grade kept it semi-rural until cable cars arrived, after which it became an early-1900s colony of writers and artists. It remains a quiet, affluent hill famous for Lombard Street's switchbacks and its hidden pedestrian stairways.",
+    facts: [
+      {
+        icon: "pin",
+        title: "Named for a lost cemetery",
+        text:
+          "Settlers found a small plot of Russian graves atop the hill in the 1850s. The bodies were eventually moved, but the name “Russian Hill” stuck.",
+      },
+      {
+        icon: "road",
+        title: "The crookedest street",
+        text:
+          "Lombard Street's one block of eight tight switchbacks was built in 1922 to tame a slope too steep for cars — now one of the most-visited sights in the city.",
+      },
+      {
+        icon: "stairs",
+        title: "Secret stairway streets",
+        text:
+          "Car-free garden stairways lace the hill — Vallejo, Filbert, and Macondray Lane, the last said to be the model for Armistead Maupin's fictional Barbary Lane.",
+      },
+      {
+        icon: "art",
+        title: "A bohemian summit",
+        text:
+          "In the early 1900s cheap rents and big views drew a colony of writers and artists, including California's first poet laureate, Ina Coolbrith, who lived on the hill.",
+      },
+      {
+        icon: "bridge",
+        title: "Some of the best views in the city",
+        text:
+          "The crest looks out over the bay, Alcatraz, and both bridges — the Willis Polk-designed Vallejo Street stairway gardens (1914) frame one of the finest vantage points.",
+      },
+    ],
+    restaurants: [
+      { name: "Nisei", address: "2316 Polk St", phone: "(415) 827-6898", url: "https://www.restaurantnisei.com" },
+      { name: "Sorella", address: "1760 Polk St", phone: "(415) 359-1212", url: "https://sorellasf.com" },
+      { name: "Frascati", address: "1901 Hyde St", phone: "(415) 928-1406", url: "https://www.frascatisf.com" },
+      { name: "Leopold's", address: "2400 Polk St", phone: "(415) 874-9829", url: "https://www.gasthausleopolds.com" },
+    ],
+    bars: [
+      { name: "Bar Iris", address: "2310 Polk St", phone: "(415) 827-6898", url: "https://www.bar-iris.com" },
+      { name: "Macondray", address: "2209 Polk St", phone: "(415) 829-3464", url: "https://www.macondraysf.com" },
+      { name: "Amélie", address: "1754 Polk St", phone: "(415) 292-6916", url: "https://www.ameliewinebar.com" },
+    ],
+    hospital: {
+      name: "CPMC Van Ness Campus",
+      address: "1101 Van Ness Ave",
+      dist: "about 0.9 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "The Powell-Hyde cable car climbs right over the hill past Lombard Street. Buses: the 19 Polk and 41/45 Union serve the slopes, with the 49 Van Ness rapid a short walk east toward downtown.",
+  },
+
+  "Nob Hill": {
+    spirit:
+      "The city's loftiest old-money summit — grand hotels, Grace Cathedral, and cable cars clanging past the ghosts of the railroad barons.",
+    reasons: [
+      "Historic luxury hotels",
+      "Grace Cathedral",
+      "Cable cars at the door",
+      "Sweeping city views",
+    ],
+    aka: "“Snob Hill”",
+    history:
+      "Nob Hill became San Francisco's most prestigious address in the 1870s, when the railroad and silver tycoons known as the “Big Four” built mansions atop it — made reachable by Andrew Hallidie's new cable cars. The 1906 fire destroyed the wooden palaces; in their place rose the grand hotels and Grace Cathedral that define the hill today.",
+    facts: [
+      {
+        icon: "money",
+        title: "Built by the Big Four",
+        text:
+          "Railroad barons Stanford, Crocker, Hopkins, and Huntington built their mansions here in the 1870s — the source of the hill's name (from “nabob”) and its airs.",
+      },
+      {
+        icon: "tram",
+        title: "The cable car made it possible",
+        text:
+          "Only after Hallidie's 1873 cable car conquered the brutal grade could the wealthy build at the top. Three cable car lines still cross Nob Hill.",
+      },
+      {
+        icon: "quake",
+        title: "Stone survived, wood didn't",
+        text:
+          "The 1906 fire leveled the wooden mansions; only the granite Flood Mansion endured — now the Pacific-Union Club — while the rubble cleared the way for the grand hotels.",
+      },
+      {
+        icon: "church",
+        title: "Grace Cathedral's golden doors",
+        text:
+          "Completed in 1964, Grace Cathedral has gilded “Ghiberti” doors cast from the Florence Baptistery originals and two labyrinths open for walking meditation.",
+      },
+      {
+        icon: "star",
+        title: "A wartime farewell",
+        text:
+          "At the Top of the Mark sky lounge (1939), WWII servicemen toasted from the northwest “Squadron Corner” before shipping out across the Pacific — a ritual that became legend.",
+      },
+    ],
+    restaurants: [
+      { name: "Acquerello", address: "1722 Sacramento St", phone: "(415) 567-5432", url: "https://www.acquerellosf.com" },
+      { name: "Sons & Daughters", address: "708 Bush St", phone: "(415) 994-7933", url: "https://www.sonsanddaughterssf.com" },
+      { name: "Swan Oyster Depot", address: "1517 Polk St", phone: "(415) 673-1101" },
+      { name: "The Big Four", address: "1075 California St", phone: "(415) 212-6569", url: "https://www.thehuntingtonhotel.com/the-big-four" },
+    ],
+    bars: [
+      { name: "Top of the Mark", address: "999 California St", phone: "(415) 392-3434", url: "https://www.topofthemark.com" },
+      { name: "Tonga Room & Hurricane Bar", address: "950 Mason St", phone: "(415) 772-5278", url: "https://www.fairmont-san-francisco.com/dine/tonga-room-hurricane-bar/" },
+      { name: "Harper & Rye", address: "1695 Polk St", phone: "(415) 562-7493", url: "https://www.harperandrye.com" },
+    ],
+    hospital: {
+      name: "Saint Francis Memorial Hospital",
+      address: "900 Hyde St",
+      dist: "about 0.5 mi",
+      url: "https://www.dignityhealth.org/bayarea/locations/saint-francis",
+    },
+    transit:
+      "All three cable car lines cross Nob Hill — the California St line runs right over the summit, with the Powell-Hyde and Powell-Mason lines on either flank. The 1 California bus and a walk down to Powell St BART/Muni round it out.",
+  },
+
+  "Cole Valley": {
+    spirit:
+      "A tucked-away village at the foot of Tank Hill — a few sunny blocks of cafés and bistros wrapped in Edwardian flats, minutes from Golden Gate Park.",
+    reasons: [
+      "Village-y, walkable Cole St",
+      "Steps from Golden Gate Park",
+      "Sunny pocket below the hills",
+      "Family-friendly Edwardians",
+    ],
+    history:
+      "Cole Valley is a small, affluent enclave just south of Haight-Ashbury, built out as a streetcar suburb in the early 1900s — much of it just after the 1906 earthquake. It's named for Cole Street, which honors Dr. R. Beverly Cole, a prominent 19th-century physician and UC medical dean. Sitting below Tank Hill and Mount Sutro, beside UCSF and Golden Gate Park, it's prized for its quiet, village feel.",
+    facts: [
+      {
+        icon: "mayor",
+        title: "Named for a doctor",
+        text:
+          "Cole Street and the neighborhood honor Dr. R. Beverly Cole, a leading 19th-century San Francisco physician and dean of the University of California medical school.",
+      },
+      {
+        icon: "tram",
+        title: "Built by the N-Judah",
+        text:
+          "The N-Judah streetcar (1928) dives under the hill through the Sunset Tunnel, surfacing at Cole Valley's Carl & Cole portal — the line that built and still serves the village.",
+      },
+      {
+        icon: "bridge",
+        title: "Tank Hill's hidden view",
+        text:
+          "The rocky outcrop above Cole Valley — once home to a giant water tank — offers one of the city's best and least-crowded panoramas, from downtown to the Golden Gate.",
+      },
+      {
+        icon: "house",
+        title: "An Edwardian time capsule",
+        text:
+          "Built largely just after 1906, Cole Valley's tidy blocks of Edwardian flats stayed quietly residential even as the Haight next door became a 1960s counterculture epicenter.",
+      },
+      {
+        icon: "sun",
+        title: "On the sunny side",
+        text:
+          "Sheltered just east of Twin Peaks and Mount Sutro, Cole Valley catches noticeably more sun than the fog-bound Sunset neighborhoods immediately to the west.",
+      },
+    ],
+    restaurants: [
+      { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
+      { name: "Beit Rima", address: "86 Carl St", phone: "(415) 566-1274", url: "https://beitrimasf.com" },
+      { name: "Bambino's Ristorante", address: "945 Cole St", phone: "(415) 731-1343", url: "https://www.bambinosristorante.com" },
+    ],
+    bars: [
+      { name: "Cole Valley Tavern", address: "900 Cole St", phone: "(415) 681-6768", url: "https://www.colevalleytavern.com" },
+      { name: "Finnegans Wake", address: "937 Cole St", phone: "(415) 731-6119", url: "http://www.finneganssf.com" },
+      { name: "InoVino", address: "108B Carl St", phone: "(415) 681-3770", url: "https://inovinosanfrancisco.com" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 0.4 mi",
+      phone: "(415) 476-1000",
+      url: "https://www.ucsfhealth.org",
+    },
+    transit:
+      "The N-Judah Muni Metro stops at Carl & Cole on its way downtown through the Sunset Tunnel. The 6 Haight–Parnassus, 37 Corbett, and 43 Masonic buses fill in, and Golden Gate Park is a block north.",
+  },
 };
 
 // Look up curated content for a neighborhood name (exact match on the fog
