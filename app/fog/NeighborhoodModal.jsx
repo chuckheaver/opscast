@@ -16,6 +16,7 @@ const CUR_YEAR = "2026";
 const FACT_EMOJI = {
   flag: "🏳️‍🌈", shop: "📷", movie: "🎬", confetti: "🎉", pin: "📍",
   mayor: "🏛️", quake: "🏚️", stroller: "👶", tram: "🚊", shopping: "🛍️",
+  fair: "🎡", wave: "🌊", park: "🌳", art: "🎨",
 };
 
 function buildUrl(base, loc, extra = {}) {
@@ -68,12 +69,16 @@ function PlaceRow({ p, first }) {
       borderTop: first ? "none" : "1px solid #ece8df",
     }}>
       <div>
-        <a href={p.url} target="_blank" rel="noopener noreferrer" style={{
-          fontSize: 14, fontWeight: 600, color: "#1c1917", textDecoration: "none",
-          display: "inline-flex", alignItems: "center", gap: 5,
-        }}>
-          {p.name} <span style={{ fontSize: 12, color: "#2563eb" }} aria-hidden="true">↗</span>
-        </a>
+        {p.url ? (
+          <a href={p.url} target="_blank" rel="noopener noreferrer" style={{
+            fontSize: 14, fontWeight: 600, color: "#1c1917", textDecoration: "none",
+            display: "inline-flex", alignItems: "center", gap: 5,
+          }}>
+            {p.name} <span style={{ fontSize: 12, color: "#2563eb" }} aria-hidden="true">↗</span>
+          </a>
+        ) : (
+          <span style={{ fontSize: 14, fontWeight: 600, color: "#1c1917" }}>{p.name}</span>
+        )}
         <div style={{ fontSize: 12, color: "#78716c" }}>{p.address}</div>
       </div>
       {p.phone && (
