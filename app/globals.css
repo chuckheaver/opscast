@@ -3059,6 +3059,8 @@ body {
   border-bottom: 1px solid var(--border);
 }
 .re-table th:first-child { text-align: left; }
+.re-table th.re-th-sort { cursor: pointer; user-select: none; white-space: nowrap; }
+.re-table th.re-th-sort:hover { color: var(--accent); }
 .re-table td { text-align: right; padding: 5px 4px; border-bottom: 1px solid #f0ece6; color: #1c1917; }
 .re-table td:first-child { text-align: left; }
 .re-grp { font-weight: 600; }

@@ -15,6 +15,17 @@ const DATA_URL = "/data/sf-listings.geojson";
 const SUPERVISOR_URL = "/data/sf-supervisor-districts.geojson";
 const REALTOR_NBHD_URL = "/data/sf-realtor-neighborhoods.geojson";
 
+// Breakdown-table columns the user can click to sort. "str" sorts
+// alphanumerically (the group name), "num" numerically (the stats).
+const SORT_COLS = {
+  label:  { get: g => g.label,            type: "str" },
+  count:  { get: g => g.stats.count,      type: "num" },
+  median: { get: g => g.stats.medianSale, type: "num" },
+  ppsf:   { get: g => g.stats.medianPpsf, type: "num" },
+  dom:    { get: g => g.stats.medianDom,  type: "num" },
+  pctAsk: { get: g => g.stats.pctAsk,     type: "num" },
+};
+
 const fmtUSD = n =>
   n == null ? "—" : "$" + Math.round(n).toLocaleString("en-US");
 const fmtUSDshort = n => {
@@ -92,6 +103,9 @@ export default function ListingsApp() {
   // Display options
   const [showFog, setShowFog] = useState(false);
   const [groupDim, setGroupDim] = useState("neighborhood");
+  // Optional click-to-sort override for the breakdown table. null = the
+  // dimension's natural order (e.g. districts 1→10, microclimate Sun→Fog).
+  const [sort, setSort] = useState(null);
   const [selected, setSelected] = useState(null);
   const [groupModal, setGroupModal] = useState(null); // clicked breakdown group
   const [elevation, setElevation] = useState(null); // elevation (ft) of the selected property
@@ -219,6 +233,33 @@ export default function ListingsApp() {
     const g = GROUP_BY[groupDim];
     return groupStats(filteredProps, g.keyFn, g.labelFn, g.sortFn);
   }, [filteredProps, groupDim]);
+
+  // Apply the click-to-sort override (if any) on top of the natural order.
+  const sortedGroups = useMemo(() => {
+    if (!sort) return groups;
+    const { get, type } = SORT_COLS[sort.col];
+    const arr = [...groups];
+    arr.sort((a, b) => {
+      const va = get(a), vb = get(b);
+      if (va == null && vb == null) return 0;
+      if (va == null) return 1;   // missing values sort last regardless of dir
+      if (vb == null) return -1;
+      const cmp = type === "str"
+        ? String(va).localeCompare(String(vb), undefined, { numeric: true, sensitivity: "base" })
+        : va - vb;
+      return sort.dir === "asc" ? cmp : -cmp;
+    });
+    return arr;
+  }, [groups, sort]);
+
+  // Click a header: first click sorts descending for numbers (high→low) and
+  // ascending for the name column (A→Z); clicking the active column flips it.
+  const onSort = useCallback(col => {
+    setSort(s => (s && s.col === col
+      ? { col, dir: s.dir === "asc" ? "desc" : "asc" }
+      : { col, dir: col === "label" ? "asc" : "desc" }));
+  }, []);
+  const sortArrow = col => (sort?.col === col ? (sort.dir === "asc" ? " ▲" : " ▼") : "");
 
   const toggleStatus = useCallback(s => {
     setStatuses(prev => {
@@ -368,7 +409,7 @@ export default function ListingsApp() {
         <section className="re-section">
           <div className="re-section-head">
             <h2>Breakdown by</h2>
-            <select value={groupDim} onChange={e => setGroupDim(e.target.value)} className="re-select re-select-sm">
+            <select value={groupDim} onChange={e => { setGroupDim(e.target.value); setSort(null); }} className="re-select re-select-sm">
               {Object.entries(GROUP_BY).map(([k, v]) => (
                 <option key={k} value={k}>{v.label}</option>
               ))}
@@ -376,10 +417,17 @@ export default function ListingsApp() {
           </div>
           <table className="re-table">
             <thead>
-              <tr><th>{GROUP_BY[groupDim].label}</th><th>#</th><th>Median</th><th>$/SF</th><th>DOM</th><th>%Ask</th></tr>
+              <tr>
+                <th className="re-th-sort" onClick={() => onSort("label")}>{GROUP_BY[groupDim].label}{sortArrow("label")}</th>
+                <th className="re-th-sort" onClick={() => onSort("count")}>#{sortArrow("count")}</th>
+                <th className="re-th-sort" onClick={() => onSort("median")}>Median{sortArrow("median")}</th>
+                <th className="re-th-sort" onClick={() => onSort("ppsf")}>$/SF{sortArrow("ppsf")}</th>
+                <th className="re-th-sort" onClick={() => onSort("dom")}>DOM{sortArrow("dom")}</th>
+                <th className="re-th-sort" onClick={() => onSort("pctAsk")}>%Ask{sortArrow("pctAsk")}</th>
+              </tr>
             </thead>
             <tbody>
-              {groups.map(g => (
+              {sortedGroups.map(g => (
                 <tr key={g.key}>
                   <td className="re-grp">
                     <button
