@@ -147,30 +147,41 @@ export function groupStats(props, keyFn, labelFn = k => k, sortFn) {
   return rows;
 }
 
-// Named grouping dimensions the UI exposes.
+// Microclimate buckets over the continuous fog-hours value:
+//   Sun ≤ 8 hr · Transition 8–9 hr · Fog 9+ hr
+const MICRO_LABEL = { Sun: "Sun (≤8 hr)", Trans: "Transition (8–9 hr)", Fog: "Fog (9+ hr)" };
+const MICRO_RANK = { Sun: 0, Trans: 1, Fog: 2 };
+
+// Named grouping dimensions the UI exposes, in display order:
+// Microclimate · City (Supervisor) District · RE (SFAR) District · Neighborhood.
 export const GROUP_BY = {
-  fog: {
-    label: "Fog Hr Exp",
-    keyFn: p => (p.fogHours == null ? null : p.fogHours),
-    labelFn: k => fogZoneLabel(k),
-    // Ascending by fog hours so it reads sunniest → foggiest.
-    sortFn: (a, b) => Number(a.key) - Number(b.key),
+  microclimate: {
+    label: "Microclimate",
+    keyFn: p => fogZoneName(p.fogHours),
+    labelFn: k => MICRO_LABEL[k] || k,
+    // Sun → Transition → Fog (sunniest to foggiest).
+    sortFn: (a, b) => (MICRO_RANK[a.key] ?? 9) - (MICRO_RANK[b.key] ?? 9),
+  },
+  cityDistrict: {
+    label: "City District",
+    // Supervisor (political) district, tagged at runtime from the
+    // sf-supervisor-districts polygons via point-in-polygon.
+    keyFn: p => p.cityDistrict,
+    sortFn: (a, b) => districtNo(a.key) - districtNo(b.key),
+  },
+  reDistrict: {
+    label: "RE District",
+    // SFAR realtor district, e.g. "District 9 - Central East".
+    keyFn: p => p.district,
+    sortFn: (a, b) => districtNo(a.key) - districtNo(b.key),
   },
   neighborhood: {
     label: "Neighborhood",
     keyFn: p => p.neighborhood,
   },
-  district: {
-    label: "District",
-    // Use the MLS "Area Desc" (e.g. "SF District 9") — the authoritative
-    // SFAR district on each listing — not the point-in-polygon result.
-    keyFn: p => p.areaDesc,
-    // Natural order: SF District 1 → 10, not by price.
-    sortFn: (a, b) => districtNo(a.key) - districtNo(b.key),
-  },
 };
 
-// Pull the numeric district out of an "SF District N" string for ordering.
+// Pull the leading number out of a "District N ..." / "SF District N" string.
 function districtNo(s) {
   const m = /(\d+)/.exec(s || "");
   return m ? Number(m[1]) : 999;

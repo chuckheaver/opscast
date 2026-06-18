@@ -9,8 +9,10 @@ import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import ListingsMap from "./ListingsMap";
 import { computeStats, groupStats, GROUP_BY, fogZoneLabel, daysBetween } from "./lib/stats";
 import { elevationAtPoint } from "../fog/lib/geocode";
+import { findNeighborhoodForPoint } from "../fog/lib/spatial";
 
 const DATA_URL = "/data/sf-listings.geojson";
+const SUPERVISOR_URL = "/data/sf-supervisor-districts.geojson";
 
 const fmtUSD = n =>
   n == null ? "—" : "$" + Math.round(n).toLocaleString("en-US");
@@ -70,6 +72,7 @@ const STATUS_LEGEND = [
 
 export default function ListingsApp() {
   const [features, setFeatures] = useState([]);
+  const [supDistricts, setSupDistricts] = useState(null);
   const [err, setErr] = useState("");
 
   // Filters
@@ -101,6 +104,33 @@ export default function ListingsApp() {
       .then(d => setFeatures(d.features || []))
       .catch(e => setErr(e.message));
   }, []);
+
+  // Supervisor ("City") district boundaries — used to tag each listing so the
+  // breakdown can group by political district (the listings only carry the
+  // SFAR realtor district natively).
+  useEffect(() => {
+    fetch(SUPERVISOR_URL)
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => d && setSupDistricts(d))
+      .catch(() => {});
+  }, []);
+
+  // Tag each listing with its supervisor district via point-in-polygon, once
+  // both datasets are loaded. Idempotent — runs a single pass.
+  useEffect(() => {
+    if (!supDistricts || !features.length) return;
+    if (features[0].properties.cityDistrict !== undefined) return;
+    for (const f of features) {
+      const { lng, lat } = f.properties;
+      let d = null;
+      if (Number.isFinite(lng) && Number.isFinite(lat)) {
+        const hit = findNeighborhoodForPoint(supDistricts, [lng, lat]);
+        if (hit) d = `District ${hit.properties.district}`;
+      }
+      f.properties.cityDistrict = d;
+    }
+    setFeatures(prev => [...prev]);
+  }, [supDistricts, features]);
 
   // Look up the selected property's elevation (Mapbox terrain) on demand.
   useEffect(() => {
