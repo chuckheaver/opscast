@@ -7,8 +7,11 @@
 // Followed by the four primary layer toggles (Neighborhoods, Summer Fog,
 // Transit, Bike Paths).
 
+import { useState } from "react";
 import { findNeighborhoodForPoint } from "./lib/spatial";
 import { fogColor, fogLabel } from "./lib/risk";
+import { getNeighborhood } from "./lib/neighborhoods";
+import NeighborhoodModal from "./NeighborhoodModal";
 
 export default function FogPanel({
   picked,
@@ -30,6 +33,8 @@ export default function FogPanel({
   showTsunami, onToggleTsunami,
   showRealtor, onToggleRealtor,
 }) {
+  const [hoodOpen, setHoodOpen] = useState(false);
+
   // Compute the per-location lookups inline so we don't double-store them.
   const point = picked?.point;
   const zipFeat = point && zips ? findNeighborhoodForPoint(zips, point) : null;
@@ -39,6 +44,7 @@ export default function FogPanel({
     ? findNeighborhoodForPoint(realtorNeighborhoods, point) : null;
 
   const neighborhoodName = picked?.feature?.properties?.name;
+  const hoodData = getNeighborhood(neighborhoodName);
   const zipCode = zipFeat?.properties?.zip;
   const elevationFt = picked?.elevation_ft;
   const realtorLabel = realtorFeat
@@ -61,12 +67,27 @@ export default function FogPanel({
 
   return (
     <div className="fog-panel">
+      {hoodOpen && hoodData && (
+        <NeighborhoodModal
+          name={neighborhoodName}
+          data={hoodData}
+          fogHrs={Number.isFinite(fogHrs) ? fogHrs : null}
+          zoneLabel={microZoneLabel}
+          supervisorDistrict={supFeat?.properties?.district}
+          loc={picked}
+          onClose={() => setHoodOpen(false)}
+        />
+      )}
       <div className="fog-panel-row">
         <div className="fog-keybox">
           <div className="fog-keybox-h">
             {picked?.address || (point ? "Selected location" : "Pick a location")}
           </div>
-          <KeyRow label="Neighborhood" value={neighborhoodName} />
+          <KeyRow label="Neighborhood" value={
+            hoodData
+              ? <button type="button" className="fog-hood-link" onClick={() => setHoodOpen(true)}>{neighborhoodName} ›</button>
+              : neighborhoodName
+          } />
           <KeyRow label="Zip Code" value={zipCode} />
           <KeyRow label="Elevation" value={Number.isFinite(elevationFt) ? `${elevationFt} ft` : null} />
           <KeyRow label="Realtor District" value={realtorLabel} />

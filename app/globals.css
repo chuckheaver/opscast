@@ -3489,6 +3489,36 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
    same gradient hero look as the sidebar pages, sized to the bar. */
 .fog-topbar-brand { flex: 0 0 auto; margin: 0; }
 
+/* Clickable neighborhood name on the fog card → opens the highlights modal. */
+.fog-hood-link {
+  background: none; border: none; padding: 0; font: inherit;
+  color: #2563eb; cursor: pointer; font-weight: 600;
+}
+.fog-hood-link:hover { text-decoration: underline; }
+
+/* Neighborhood highlights modal. */
+.nh-backdrop {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(10, 25, 41, 0.5);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 24px 16px; overflow-y: auto;
+}
+.nh-modal {
+  width: 100%; max-width: 420px; position: relative;
+  background: #fff; border-radius: 16px; padding: 20px 20px 28px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+.nh-x {
+  position: absolute; top: 12px; right: 14px;
+  width: 30px; height: 30px; border: none; background: transparent;
+  font-size: 24px; line-height: 1; color: #78716c; cursor: pointer; border-radius: 50%;
+}
+.nh-x:hover { background: rgba(0, 0, 0, 0.06); color: #1c1917; }
+@media (max-width: 520px) {
+  .nh-backdrop { padding: 0; }
+  .nh-modal { max-width: none; min-height: 100%; border-radius: 0; }
+}
+
 /* Appellation-stack chips in the color box — smallest AVA first. */
 .wine-chips {
   display: flex;

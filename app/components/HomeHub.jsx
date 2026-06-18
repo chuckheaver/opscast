@@ -126,7 +126,26 @@ export default function HomeHub() {
     { emoji: "🌁", label: "Fog Map",       href: buildFogUrl(selectedLoc, "fog") },
     { emoji: "🚃", label: "Transit",       href: buildFogUrl(selectedLoc, "transit") },
     { emoji: "🚲", label: "Bike Paths",    href: buildFogUrl(selectedLoc, "bikes") },
-    { emoji: "📭", label: "Districts",     href: buildFogUrl(selectedLoc, "districts") },
+    {
+      label: "Neighborhoods",
+      href: buildFogUrl(selectedLoc, "neighborhoods"),
+      svg: (
+        <svg width="58" height="58" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Folded map">
+          <g stroke="#a89f8a" strokeWidth="1.2" strokeLinejoin="round">
+            <polygon points="8,18 24,12 24,51 8,57" fill="#ece7d8" />
+            <polygon points="24,12 40,18 40,57 24,51" fill="#dcd6c4" />
+            <polygon points="40,18 56,12 56,51 40,57" fill="#ece7d8" />
+          </g>
+          <path d="M10,40 L24,34 L40,40 L54,34" stroke="#7fb27f" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+          <path d="M16,49 L30,44" stroke="#9cc1e0" strokeWidth="2" fill="none" strokeLinecap="round" />
+          <path d="M12,25 L26,31 M31,23 L45,29" stroke="#bfb6a0" strokeWidth="1" fill="none" />
+          <g transform="translate(36,27)">
+            <path d="M0,-7 C4,-7 6,-4 6,-1 C6,3 0,9 0,9 C0,9 -6,3 -6,-1 C-6,-4 -4,-7 0,-7 Z" fill="#e24b4a" stroke="#fff" strokeWidth="1" />
+            <circle cx="0" cy="-1" r="2.2" fill="#fff" />
+          </g>
+        </svg>
+      ),
+    },
     { emoji: "🍷", label: "Wine AVAs",     href: "/wine" },
   ];
 
@@ -152,7 +171,7 @@ export default function HomeHub() {
       <div className="micro-grid">
         {tiles.map(t => (
           <a className="micro-tile" href={t.href} key={t.label}>
-            <span className="micro-tile-emoji" aria-hidden="true">{t.emoji}</span>
+            <span className="micro-tile-emoji" aria-hidden="true">{t.svg || t.emoji}</span>
             <span className="micro-tile-label">{t.label}</span>
           </a>
         ))}

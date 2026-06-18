@@ -183,7 +183,7 @@ export default function FogApp() {
   useEffect(() => {
     if (urlLocAppliedRef.current) return;
     if (!urlLoc) return;
-    if (!geojson) return; // wait for data so spatial lookups have something to hit
+    if (!geojson || !contours) return; // wait for BOTH so neighborhood + fog zone resolve
     urlLocAppliedRef.current = true;
     autoGeoTriedRef.current = true; // suppress the auto-geo prompt below
     const feature = findNeighborhoodForPoint(geojson, urlLoc.point);
@@ -270,7 +270,7 @@ export default function FogApp() {
   return (
     <div className="fog-app fog-app-vertical">
       <FogTopBar
-        title={{ fog: "Summer Fog", transit: "Transit", bikes: "Bike Paths", districts: "Districts" }[preset] || "Summer Fog"}
+        title={{ fog: "Summer Fog", transit: "Transit", bikes: "Bike Paths", districts: "Districts", neighborhoods: "Neighborhoods" }[preset] || "Summer Fog"}
         onPickFromAddress={pickFromAddress}
         onUseGeoLocation={requestGeoLocation}
         ready={!!geojson}
