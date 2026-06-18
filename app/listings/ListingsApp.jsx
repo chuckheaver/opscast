@@ -510,7 +510,7 @@ export default function ListingsApp() {
                             </td>
                             <td className="re-m-num">{dom == null ? "—" : dom}</td>
                             <td>{p.status}</td>
-                            <td>{p.neighborhood ?? "—"}</td>
+                            <td>{p.fogNeighborhood ?? "—"}</td>
                           </tr>
                         );
                       })}

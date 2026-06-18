@@ -177,7 +177,11 @@ export const GROUP_BY = {
   },
   neighborhood: {
     label: "Neighborhood",
-    keyFn: p => p.neighborhood,
+    // Group by the city neighborhood polygon the listing actually falls in
+    // (point-in-polygon against sf-fog-neighborhoods), NOT the MLS-supplied
+    // label — so a property only counts toward the neighborhood whose
+    // boundary geographically contains it.
+    keyFn: p => p.fogNeighborhood,
   },
 };
 
