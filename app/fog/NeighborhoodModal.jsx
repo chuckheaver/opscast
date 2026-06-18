@@ -13,7 +13,10 @@ const CUR_YEAR = "2026";
 
 // Section / fact icons. The app is emoji-forward (see the home hub), so we
 // use emoji here rather than pulling in an icon font.
-const FACT_EMOJI = { flag: "🏳️‍🌈", shop: "📷", movie: "🎬", confetti: "🎉", pin: "📍" };
+const FACT_EMOJI = {
+  flag: "🏳️‍🌈", shop: "📷", movie: "🎬", confetti: "🎉", pin: "📍",
+  mayor: "🏛️", quake: "🏚️", stroller: "👶", tram: "🚊", shopping: "🛍️",
+};
 
 function buildUrl(base, loc, extra = {}) {
   const qs = new URLSearchParams();
