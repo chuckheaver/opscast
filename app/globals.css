@@ -3485,6 +3485,10 @@ body {
 a.fog-topbar-lbl { text-decoration: none; }
 a.fog-topbar-lbl:hover { text-decoration: underline; }
 
+/* Page title living inside the horizontal map top-bar (/fog, /wine):
+   same gradient hero look as the sidebar pages, sized to the bar. */
+.fog-topbar-brand { flex: 0 0 auto; margin: 0; }
+
 /* Appellation-stack chips in the color box — smallest AVA first. */
 .wine-chips {
   display: flex;

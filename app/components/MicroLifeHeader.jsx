@@ -34,7 +34,7 @@ export default function MicroLifeHeader({
       />
 
       <div className="page-h" style={{ marginTop: 18 }}>
-        Your SF <em>Micro Life</em>
+        SF <em>Ideal Weather</em>
       </div>
       <div className="page-sub">
         Set Your Ideal Weather and Times Here

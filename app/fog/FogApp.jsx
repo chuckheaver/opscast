@@ -270,6 +270,7 @@ export default function FogApp() {
   return (
     <div className="fog-app fog-app-vertical">
       <FogTopBar
+        title={{ fog: "Summer Fog", transit: "Transit", bikes: "Bike Paths", districts: "Districts" }[preset] || "Summer Fog"}
         onPickFromAddress={pickFromAddress}
         onUseGeoLocation={requestGeoLocation}
         ready={!!geojson}

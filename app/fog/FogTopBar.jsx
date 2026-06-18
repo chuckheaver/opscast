@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { geocodeSuggest } from "./lib/geocode";
 
 export default function FogTopBar({
+  title,
   onPickFromAddress,
   onUseGeoLocation,
   ready,
@@ -69,6 +70,7 @@ export default function FogTopBar({
     <div className="fog-topbar">
       <div className="fog-topbar-inner">
         <a className="fog-topbar-lbl" href="/">← UrMicroLife</a>
+        {title && <h1 className="fog-brand fog-topbar-brand">SF <em>{title}</em></h1>}
         <label className="fog-topbar-lbl">Location</label>
         <div className="fog-topbar-search">
           <div className="zip-wrap">
