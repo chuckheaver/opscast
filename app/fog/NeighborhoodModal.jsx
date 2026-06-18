@@ -20,7 +20,7 @@ const FACT_EMOJI = {
   money: "💰", house: "🏠", star: "⭐", church: "⛪", burrito: "🌯",
   sun: "☀️", subway: "🚇", book: "📖", coffee: "☕", tower: "🗼",
   pizza: "🍕", bird: "🦜", road: "🛣️", stairs: "🪜", bridge: "🌉",
-  dog: "🐕", beer: "🍺", factory: "🏭",
+  dog: "🐕", beer: "🍺", factory: "🏭", cow: "🐄", water: "💧",
 };
 
 function buildUrl(base, loc, extra = {}) {

@@ -877,11 +877,211 @@ export const NEIGHBORHOODS = {
     transit:
       "Glen Park BART puts downtown, the East Bay, and SFO all within a short ride — the neighborhood's biggest draw. Muni buses 23 Monterey, 35 Eureka, 36 Teresita, and 44 O'Shaughnessy climb the surrounding hills.",
   },
+
+  "Cow Hollow": {
+    spirit:
+      "Boutique-lined Union Street between the Marina and Pac Heights — brunch, blowouts, and bars on a flat, walkable stretch that was once a literal dairy pasture.",
+    reasons: [
+      "Union St shopping & brunch",
+      "Flat & walkable",
+      "Between Marina & Pac Heights",
+      "Lively bar scene",
+    ],
+    history:
+      "Cow Hollow was a marshy valley of dairy farms in the mid-1800s — dozens of dairies grazed cows here, which is exactly how it got its name. The city shut the dairies in 1891 over pollution of Washerwoman's Lagoon, filled the pond, and the area built out with Victorian and Edwardian homes. Union Street reinvented itself as a chic boutique-and-dining strip in the 1950s–60s.",
+    facts: [
+      {
+        icon: "cow",
+        title: "Once an actual cow hollow",
+        text:
+          "In the 1860s this green valley held dozens of dairy farms grazing the cows that supplied the growing city's milk — hence the name.",
+      },
+      {
+        icon: "water",
+        title: "The lagoon that vanished",
+        text:
+          "The dairies and tanneries fouled Washerwoman's Lagoon, a freshwater pond once used for laundry. The city closed them in 1891 and filled the lagoon, clearing the way for homes.",
+      },
+      {
+        icon: "house",
+        title: "A dairy farmhouse still stands",
+        text:
+          "The 1854 farmhouse that gave Cow Hollow its name survives on Union St — today it houses the Palm House bar and restaurant, behind one of the city's oldest palm trees.",
+      },
+      {
+        icon: "shopping",
+        title: "An early boutique row",
+        text:
+          "In the 1950s–60s, shopkeepers converted Union Street's old Victorians into one of San Francisco's first boutique shopping strips — a template the city's commercial streets still follow.",
+      },
+      {
+        icon: "star",
+        title: "A 1913 power saloon",
+        text:
+          "The Balboa Cafe (1913) is one of the city's oldest continuously operating saloons and a longtime see-and-be-seen hangout for San Francisco's political set.",
+      },
+    ],
+    restaurants: [
+      { name: "Atelier Crenn", address: "3127 Fillmore St", phone: "(415) 440-0460", url: "https://www.ateliercrenn.com" },
+      { name: "Flores", address: "2030 Union St", phone: "(415) 796-2926", url: "https://www.floressf.com" },
+      { name: "Roaming Goat", address: "1830 Union St", phone: "(415) 769-7281", url: "https://www.roaminggoatsf.com" },
+      { name: "Rooster & Rice", address: "2211 Filbert St", phone: "(415) 776-3647", url: "https://www.roosterandrice.com" },
+    ],
+    bars: [
+      { name: "Balboa Cafe", address: "3199 Fillmore St", phone: "(415) 921-3944", url: "https://www.balboacafesf.com" },
+      { name: "Palm House", address: "2032 Union St", phone: "(415) 400-4355", url: "https://www.palmhousesf.com" },
+      { name: "Bar Crenn", address: "3131 Fillmore St", phone: "(415) 440-0460", url: "https://www.barcrenn.com" },
+    ],
+    hospital: {
+      name: "CPMC Van Ness Campus",
+      address: "1101 Van Ness Ave",
+      dist: "about 1.4 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "The 41 Union and 45 Union–Stockton buses run the length of Union Street toward downtown, with the 22 Fillmore and 43 Masonic crossing toward the rest of the city. There's no rail nearby — it's a bus-and-walk neighborhood.",
+  },
+
+  "Duboce Triangle": {
+    spirit:
+      "A leafy wedge where the Castro, the Mission, and the Lower Haight meet — a dog park, a streetcar portal, and Victorian calm a block off the Market Street action.",
+    reasons: [
+      "Central & transit-rich",
+      "Duboce Park & dog run",
+      "Quiet Victorian streets",
+      "Steps from the Castro & Mission",
+    ],
+    history:
+      "Duboce Triangle is a small wedge of Victorian and Edwardian homes between the Castro, the Mission, and the Lower Haight, named for Duboce Avenue — itself honoring Victor Duboce, a San Francisco supervisor and Spanish-American War officer. Built up after 1900 and largely spared by the 1906 fire, it centers on Duboce Park and the streetcar portal where the N-Judah dives underground.",
+    facts: [
+      {
+        icon: "mayor",
+        title: "Named for a war hero",
+        text:
+          "Duboce Avenue and the neighborhood honor Victor Duboce, a city supervisor who commanded San Francisco's volunteer regiment in the Spanish-American War.",
+      },
+      {
+        icon: "tram",
+        title: "Where the N-Judah dives under",
+        text:
+          "At Duboce Park, the N-Judah Muni Metro plunges into the 1928 Sunset Tunnel through the Duboce Portal — a favorite trainspotting and dog-walking spot.",
+      },
+      {
+        icon: "dog",
+        title: "One of the city's best dog parks",
+        text:
+          "Duboce Park's off-leash meadow, ringed by Victorian flats and a community garden, is among the most beloved dog runs in San Francisco.",
+      },
+      {
+        icon: "art",
+        title: "America's oldest public darkroom",
+        text:
+          "The Harvey Milk Photo Center on the park's edge — founded in 1937 — is the oldest and largest public photography center and darkroom in the United States.",
+      },
+      {
+        icon: "house",
+        title: "Pre-quake Victorians intact",
+        text:
+          "Spared major 1906 fire damage, the triangle keeps a dense, intact stock of pre-earthquake Victorian and Edwardian homes on its quiet, leafy blocks.",
+      },
+    ],
+    restaurants: [
+      { name: "Aquitaine", address: "216 Church St", phone: "(415) 658-7863", url: "https://aquitainesf.com" },
+      { name: "Wooden Spoon", address: "2172 Market St", url: "https://www.woodenspoonsf.com" },
+    ],
+    bars: [
+      { name: "Last Rites", address: "718 14th St", phone: "(415) 295-2965", url: "https://www.lastritesbar.com" },
+      { name: "Blackbird", address: "2124 Market St", phone: "(415) 872-5310", url: "https://www.blackbirdbar.com" },
+      { name: "Churchill", address: "198 Church St", phone: "(415) 570-9198", url: "https://www.churchillsf.com" },
+    ],
+    hospital: {
+      name: "CPMC Davies Campus",
+      address: "45 Castro St at Duboce Ave",
+      dist: "about 0.3 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "Church St station puts the entire Muni Metro (J, K, L, M, N, T) and the F-line streetcar at your feet, and the N-Judah surfaces right at Duboce Park. The 22 Fillmore crosses on Church St.",
+  },
+
+  "South of Market": {
+    spirit:
+      "The city's flat, fast-changing engine room — tech towers, world-class museums, ballpark roar, and warehouse nightlife sprawled across the blocks south of Market.",
+    reasons: [
+      "Museums, Moscone & the ballpark",
+      "Tech-job epicenter",
+      "Nightlife & clubs",
+      "Transit & freeway hub",
+    ],
+    aka: "SoMa",
+    history:
+      "South of Market — “SoMa” — was the city's industrial and working-class heart from the Gold Rush on: rail yards, factories, and laborers' rooming houses in the area once called “South of the Slot.” Hit hard by the 1906 quake and fire, it was reborn in stages — Moscone Center, Yerba Buena, SFMOMA, and the ballpark — then transformed again by the 2000s–2010s tech boom and its high-rises.",
+    facts: [
+      {
+        icon: "factory",
+        title: "“South of the Slot”",
+        text:
+          "SoMa was long called “South of the Slot,” for the cable-car slot down Market St that divided the working-class, industrial south side from the white-collar north.",
+      },
+      {
+        icon: "art",
+        title: "A museum district",
+        text:
+          "Yerba Buena Gardens and SFMOMA anchor a dense cultural quarter; SFMOMA — founded 1935 and rebuilt in 2016 — is one of the largest modern-art museums in the country.",
+      },
+      {
+        icon: "money",
+        title: "The tech boom's home base",
+        text:
+          "The 2010s planted tech headquarters across SoMa, capped by Salesforce Tower (2018) — at 1,070 feet, the tallest building in San Francisco.",
+      },
+      {
+        icon: "subway",
+        title: "The city's transit spine",
+        text:
+          "Multiple Muni Metro and BART stations line Market St, the T-Third Central Subway runs under 4th, Caltrain terminates at 4th & King, and the Salesforce Transit Center tops it off.",
+      },
+      {
+        icon: "quake",
+        title: "Built on filled marsh",
+        text:
+          "Much of SoMa sits on filled creek beds and bay mud — soft ground that shook hard and burned in both 1906 and 1989, and still shapes the city's seismic maps today.",
+      },
+    ],
+    restaurants: [
+      { name: "Yank Sing", address: "101 Spear St (Rincon Center)", phone: "(415) 781-1111", url: "https://yanksing.com" },
+      { name: "Deli Board", address: "1058 Folsom St", phone: "(415) 552-7687", url: "https://www.deliboardsf.com" },
+      { name: "Square Pie Guys", address: "1077 Mission St", phone: "(415) 872-9290", url: "https://www.squarepieguys.com" },
+      { name: "Montesacro Pinseria", address: "510 Stevenson St", phone: "(415) 795-3040", url: "https://www.montesacrosf.com" },
+    ],
+    bars: [
+      { name: "The Pawn Shop", address: "993 Mission St", phone: "(415) 874-8041", url: "https://www.thepawnshopsf.com" },
+      { name: "House of Shields", address: "39 New Montgomery St", phone: "(415) 769-8109", url: "https://www.thehouseofshields.com" },
+      { name: "Local Edition", address: "691 Market St", phone: "(415) 795-1375", url: "https://www.localeditionsf.com" },
+    ],
+    hospital: {
+      name: "Zuckerberg San Francisco General",
+      address: "1001 Potrero Ave",
+      dist: "about 1.5 mi",
+      url: "https://zuckerbergsanfranciscogeneral.org",
+    },
+    transit:
+      "SoMa is the city's transit hub: Powell, Montgomery, and Civic Center stations connect Muni Metro and BART, the T-Third Central Subway runs under 4th St, and Caltrain to the Peninsula terminates at 4th & King.",
+  },
+};
+
+// Some fog polygons split one colloquial neighborhood into two names —
+// map those aliases onto the authored entry so a click anywhere in the
+// area opens the right highlights.
+const ALIASES = {
+  "Union Street": "Cow Hollow", // the commercial strip within greater Cow Hollow
 };
 
 // Look up curated content for a neighborhood name (exact match on the fog
-// geojson `name`). Returns null when we haven't authored that one yet.
+// geojson `name`, then aliases). Returns null when we haven't authored it.
 export function getNeighborhood(name) {
   if (!name) return null;
-  return NEIGHBORHOODS[name] || null;
+  return NEIGHBORHOODS[name] || NEIGHBORHOODS[ALIASES[name]] || null;
 }
