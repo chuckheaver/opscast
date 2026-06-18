@@ -177,11 +177,17 @@ export const GROUP_BY = {
   },
   neighborhood: {
     label: "Neighborhood",
-    // Group by the city neighborhood polygon the listing actually falls in
-    // (point-in-polygon against sf-fog-neighborhoods), NOT the MLS-supplied
-    // label — so a property only counts toward the neighborhood whose
-    // boundary geographically contains it.
+    // City neighborhood polygons (sf-fog-neighborhoods): non-overlapping, so
+    // each point lands in exactly one. Tagged geographically, not from the
+    // MLS label.
     keyFn: p => p.fogNeighborhood,
+  },
+  reNeighborhood: {
+    label: "RE Neighborhood",
+    // SFAR realtor neighborhoods (sf-realtor-neighborhoods): the trade's own
+    // carve-up of the city. Also tagged geographically (point-in-polygon),
+    // so it's a parallel lens on the same fixed locations.
+    keyFn: p => p.reNeighborhood,
   },
 };
 

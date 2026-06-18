@@ -13,6 +13,7 @@ import { findNeighborhoodForPoint } from "../fog/lib/spatial";
 
 const DATA_URL = "/data/sf-listings.geojson";
 const SUPERVISOR_URL = "/data/sf-supervisor-districts.geojson";
+const REALTOR_NBHD_URL = "/data/sf-realtor-neighborhoods.geojson";
 
 const fmtUSD = n =>
   n == null ? "—" : "$" + Math.round(n).toLocaleString("en-US");
@@ -73,6 +74,7 @@ const STATUS_LEGEND = [
 export default function ListingsApp() {
   const [features, setFeatures] = useState([]);
   const [supDistricts, setSupDistricts] = useState(null);
+  const [reNbhds, setReNbhds] = useState(null);
   const [err, setErr] = useState("");
 
   // Filters
@@ -105,32 +107,36 @@ export default function ListingsApp() {
       .catch(e => setErr(e.message));
   }, []);
 
-  // Supervisor ("City") district boundaries — used to tag each listing so the
-  // breakdown can group by political district (the listings only carry the
-  // SFAR realtor district natively).
+  // Boundary lookups used to tag each listing geographically, so the
+  // breakdown can group by lenses the listing doesn't carry natively:
+  //   • Supervisor ("City") districts  • SFAR realtor neighborhoods
   useEffect(() => {
-    fetch(SUPERVISOR_URL)
-      .then(r => (r.ok ? r.json() : null))
-      .then(d => d && setSupDistricts(d))
-      .catch(() => {});
+    fetch(SUPERVISOR_URL).then(r => (r.ok ? r.json() : null)).then(d => d && setSupDistricts(d)).catch(() => {});
+    fetch(REALTOR_NBHD_URL).then(r => (r.ok ? r.json() : null)).then(d => d && setReNbhds(d)).catch(() => {});
   }, []);
 
-  // Tag each listing with its supervisor district via point-in-polygon, once
-  // both datasets are loaded. Idempotent — runs a single pass.
+  // Tag each listing's supervisor district and realtor neighborhood via
+  // point-in-polygon, once the listings + each boundary set are loaded.
+  // Idempotent — tags whichever field is still missing.
   useEffect(() => {
-    if (!supDistricts || !features.length) return;
-    if (features[0].properties.cityDistrict !== undefined) return;
+    if (!features.length) return;
+    const needCity = supDistricts && features[0].properties.cityDistrict === undefined;
+    const needRe = reNbhds && features[0].properties.reNeighborhood === undefined;
+    if (!needCity && !needRe) return;
     for (const f of features) {
       const { lng, lat } = f.properties;
-      let d = null;
-      if (Number.isFinite(lng) && Number.isFinite(lat)) {
-        const hit = findNeighborhoodForPoint(supDistricts, [lng, lat]);
-        if (hit) d = `District ${hit.properties.district}`;
+      const pt = Number.isFinite(lng) && Number.isFinite(lat) ? [lng, lat] : null;
+      if (needCity) {
+        const hit = pt && findNeighborhoodForPoint(supDistricts, pt);
+        f.properties.cityDistrict = hit ? `District ${hit.properties.district}` : null;
       }
-      f.properties.cityDistrict = d;
+      if (needRe) {
+        const hit = pt && findNeighborhoodForPoint(reNbhds, pt);
+        f.properties.reNeighborhood = hit ? hit.properties.nbrhood : null;
+      }
     }
     setFeatures(prev => [...prev]);
-  }, [supDistricts, features]);
+  }, [supDistricts, reNbhds, features]);
 
   // Look up the selected property's elevation (Mapbox terrain) on demand.
   useEffect(() => {
