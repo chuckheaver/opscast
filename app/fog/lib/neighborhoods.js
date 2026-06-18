@@ -684,6 +684,199 @@ export const NEIGHBORHOODS = {
     transit:
       "The N-Judah Muni Metro stops at Carl & Cole on its way downtown through the Sunset Tunnel. The 6 Haight–Parnassus, 37 Corbett, and 43 Masonic buses fill in, and Golden Gate Park is a block north.",
   },
+
+  "Bernal Heights": {
+    spirit:
+      "A sunny village on a grassy hill — off-leash dog heaven, knockout views, and a low-key Cortland Avenue that still feels like a small town.",
+    reasons: [
+      "Sunny, village-y Cortland Ave",
+      "Bernal Hill off-leash park & views",
+      "Family-friendly & laid-back",
+      "Quiet hillside streets",
+    ],
+    aka: "“Maternal Heights”",
+    history:
+      "Bernal Heights sits on a rocky hill that was the heart of Rancho Rincón de las Salinas, granted to José Cornelio Bernal in 1839. It grew as a working-class, almost rural district; because it sits on solid bedrock, it largely escaped the 1906 quake, and refugees built cottages here. Long bohemian and diverse, it's now a beloved family neighborhood known for its sun, its hilltop park, and the small-town feel of Cortland Avenue.",
+    facts: [
+      {
+        icon: "pin",
+        title: "Named for a land-grant family",
+        text:
+          "José Cornelio Bernal's 1839 Mexican land grant — Rancho Rincón de las Salinas y Potrero Viejo — covered the hill and the flats around it, and gave the neighborhood its name.",
+      },
+      {
+        icon: "quake",
+        title: "Saved by bedrock",
+        text:
+          "Bernal sits on solid Franciscan rock and barely shook in 1906. Refugees from the burning city threw up earthquake-shack cottages on the hill — some still tucked among the houses today.",
+      },
+      {
+        icon: "dog",
+        title: "The city's dog park",
+        text:
+          "Grassy, treeless Bernal Heights Park crowns the hill — one of San Francisco's most-loved off-leash dog runs, with a 360° view loop that fills with locals at sunset.",
+      },
+      {
+        icon: "stairs",
+        title: "Stairways and hidden lanes",
+        text:
+          "The steep hill is laced with public stairway streets and narrow lanes — Esmeralda, Coso, and the Bernal “goat paths” — that wander between gardens instead of along the road grid.",
+      },
+      {
+        icon: "star",
+        title: "“Maternal Heights”",
+        text:
+          "Long a haven for artists, lesbian families, and working households, Bernal kept its mellow, small-town character as the city changed — earning its affectionate nickname.",
+      },
+    ],
+    restaurants: [
+      { name: "3rd Cousin", address: "919 Cortland Ave", phone: "(415) 814-3709", url: "https://www.3rdcousinsf.com" },
+      { name: "Precita Social", address: "300 Precita Ave", phone: "(415) 729-9029", url: "https://www.precitasocial.com" },
+      { name: "Emmy's Spaghetti Shack", address: "3230 Mission St", phone: "(415) 206-2086", url: "https://sfspaghettishack.com" },
+      { name: "Moki's Sushi & Pacific Grill", address: "615 Cortland Ave", phone: "(415) 970-9336", url: "https://mokisf.com" },
+    ],
+    bars: [
+      { name: "VinoRosso", address: "629 Cortland Ave", phone: "(415) 647-1268", url: "https://www.vinorosso-sf.com" },
+      { name: "Mothership", address: "3152 Mission St", url: "https://www.mothershipbar.com" },
+      { name: "The Royal Cuckoo", address: "3202 Mission St" },
+    ],
+    hospital: {
+      name: "CPMC Mission Bernal Campus",
+      address: "3555 Cesar Chavez St",
+      dist: "about 0.7 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "The 24 Divisadero runs along Cortland Ave, and the little 67 Bernal Heights bus loops up the hill. Down on Mission St, the 14 and 49 rapid buses and the 24th St Mission BART station connect to the rest of the city.",
+  },
+
+  "Potrero Hill": {
+    spirit:
+      "The city's sunniest hill — sweeping downtown-and-bay views, sleepy residential streets, and a tucked-away 18th Street strip of neighborhood favorites.",
+    reasons: [
+      "One of SF's sunniest, warmest spots",
+      "Downtown & bay views",
+      "Quiet, low-key 18th St",
+      "Central & freeway-close",
+    ],
+    history:
+      "Potrero — Spanish for “pasture” — was 19th-century grazing land that grew into a working-class, industrial neighborhood of shipyard workers and a tight Russian and Slovenian community. Sheltered from the fog by the hills to its west, it's among the sunniest parts of the city. Long overlooked, it's now prized for its sun, its big views, and its quiet streets above the old industrial flats.",
+    facts: [
+      {
+        icon: "sun",
+        title: "The sunny pasture",
+        text:
+          "“Potrero” means pasture in Spanish — and tucked in the lee of Twin Peaks, the hill is one of the sunniest, warmest, least foggy neighborhoods in San Francisco.",
+      },
+      {
+        icon: "beer",
+        title: "Home of Anchor Steam",
+        text:
+          "Anchor Brewing brewed its iconic Anchor Steam on Potrero Hill from 1979 until the brewery's closure in 2023 — a neighborhood institution for over four decades.",
+      },
+      {
+        icon: "factory",
+        title: "A working-class, immigrant hill",
+        text:
+          "Shipyard and industrial jobs drew Russian, Slovenian, and other immigrant families; the Slovenian Hall on Mariposa St still stands as a reminder of that heritage.",
+      },
+      {
+        icon: "road",
+        title: "The other crookedest street",
+        text:
+          "Vermont Street's tight switchbacks on Potrero Hill are often argued to be even more crooked than Lombard — with a fraction of the tourists.",
+      },
+      {
+        icon: "bridge",
+        title: "Front-row downtown views",
+        text:
+          "The hill's eastern slopes look straight across at the downtown skyline and the bay — a big reason its quiet streets have become so sought-after.",
+      },
+    ],
+    restaurants: [
+      { name: "Plow", address: "1299 18th St", phone: "(415) 821-7569", url: "https://www.eatatplow.com" },
+      { name: "Chez Maman", address: "1401 18th St", phone: "(415) 655-9542", url: "https://www.chezmamanrestos.com" },
+      { name: "Goat Hill Pizza", address: "300 Connecticut St", phone: "(415) 641-1440", url: "https://www.goathillpizza.com" },
+      { name: "Umi", address: "1328 18th St", phone: "(415) 355-1328", url: "http://umisf.com" },
+    ],
+    bars: [
+      { name: "Bloom's Saloon", address: "1318 18th St", phone: "(415) 552-6707" },
+      { name: "Thee Parkside", address: "1600 17th St", phone: "(415) 252-1330", url: "https://www.theeparkside.com" },
+      { name: "Ruby Wine", address: "1419 18th St", phone: "(415) 401-7708", url: "https://rubywinesf.com" },
+    ],
+    hospital: {
+      name: "Zuckerberg San Francisco General",
+      address: "1001 Potrero Ave",
+      dist: "about 0.7 mi",
+      url: "https://zuckerbergsanfranciscogeneral.org",
+    },
+    transit:
+      "The 22 Fillmore crosses the hill toward the Mission and Mission Bay, with the 19 Polk and 10 Townsend serving the slopes. The 22nd Street Caltrain station sits at the eastern foot for quick trips down the Peninsula.",
+  },
+
+  "Glen Park": {
+    spirit:
+      "A leafy “village in the city” wrapped around a wild canyon — a tiny Diamond Street downtown, a BART stop, and a creek-fed park at the back door.",
+    reasons: [
+      "Village downtown + BART",
+      "Glen Canyon Park & trails",
+      "Quiet & family-friendly",
+      "Sheltered, sunny valley",
+    ],
+    aka: "“The Village in the City”",
+    history:
+      "Glen Park grew around Glen Canyon, a rugged ravine that in the 1880s held an amusement park, a small zoo, and — less charmingly — a dynamite works that occasionally blew up. Streetcars and later BART (1973) turned it into a commuter-friendly enclave. It remains a small, leafy neighborhood with a compact “village” downtown where Diamond and Chenery meet.",
+    facts: [
+      {
+        icon: "park",
+        title: "A wild canyon in the city",
+        text:
+          "Glen Canyon Park is a rugged ravine with rock-climbing outcrops and Islais Creek — one of the last free-flowing creeks in San Francisco — a pocket of the landscape as it was before the city.",
+      },
+      {
+        icon: "fair",
+        title: "Amusement park & dynamite",
+        text:
+          "In the 1880s the canyon held a popular amusement park and zoo. It also hosted a dynamite-manufacturing works whose periodic explosions rattled the early neighborhood.",
+      },
+      {
+        icon: "subway",
+        title: "Small neighborhood, big transit",
+        text:
+          "Glen Park BART (opened 1973) makes this tiny village one of the most transit-convenient spots in the city — a quick ride to downtown, the East Bay, or SFO.",
+      },
+      {
+        icon: "book",
+        title: "A bookstore with a beat",
+        text:
+          "The village's anchor is Bird & Beckett Books — a beloved independent bookstore that doubles as one of the city's most dedicated live-jazz venues.",
+      },
+      {
+        icon: "sun",
+        title: "A sheltered sunny pocket",
+        text:
+          "Tucked into a valley east of Twin Peaks, Glen Park catches more sun and less wind than the foggy neighborhoods just over the hill to the west.",
+      },
+    ],
+    restaurants: [
+      { name: "Gialina Pizzeria", address: "2842 Diamond St", phone: "(415) 239-8500", url: "https://www.gialina.com" },
+      { name: "La Corneta Taqueria", address: "2834 Diamond St", phone: "(415) 469-8757", url: "https://lacorneta.com" },
+      { name: "One Waan Thai", address: "2922 Diamond St", url: "https://onewaansf.com" },
+    ],
+    bars: [
+      { name: "Glen Park Station", address: "2816 Diamond St", phone: "(415) 333-4633" },
+    ],
+    hospital: {
+      name: "CPMC Mission Bernal Campus",
+      address: "3555 Cesar Chavez St",
+      dist: "about 1.3 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "Glen Park BART puts downtown, the East Bay, and SFO all within a short ride — the neighborhood's biggest draw. Muni buses 23 Monterey, 35 Eureka, 36 Teresita, and 44 O'Shaughnessy climb the surrounding hills.",
+  },
 };
 
 // Look up curated content for a neighborhood name (exact match on the fog

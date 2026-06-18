@@ -20,6 +20,7 @@ const FACT_EMOJI = {
   money: "💰", house: "🏠", star: "⭐", church: "⛪", burrito: "🌯",
   sun: "☀️", subway: "🚇", book: "📖", coffee: "☕", tower: "🗼",
   pizza: "🍕", bird: "🦜", road: "🛣️", stairs: "🪜", bridge: "🌉",
+  dog: "🐕", beer: "🍺", factory: "🏭",
 };
 
 function buildUrl(base, loc, extra = {}) {
@@ -194,14 +195,14 @@ export default function NeighborhoodModal({
 
         {data.restaurants?.length > 0 && (
           <section style={SEC}>
-            <Banner emoji="🍽️">3 · Top {data.restaurants.length} restaurants</Banner>
+            <Banner emoji="🍽️">3 · Top {data.restaurants.length} restaurant{data.restaurants.length === 1 ? "" : "s"}</Banner>
             {data.restaurants.map((p, i) => <PlaceRow key={p.name} p={p} first={i === 0} />)}
           </section>
         )}
 
         {data.bars?.length > 0 && (
           <section style={SEC}>
-            <Banner emoji="🍸">4 · Top {data.bars.length} bars</Banner>
+            <Banner emoji="🍸">4 · Top {data.bars.length} bar{data.bars.length === 1 ? "" : "s"}</Banner>
             {data.bars.map((p, i) => <PlaceRow key={p.name} p={p} first={i === 0} />)}
           </section>
         )}
