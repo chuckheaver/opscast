@@ -96,7 +96,7 @@ body {
   z-index: 20;
 }
 .page-h {
-  font-size: 36px;
+  font-size: 22px;
   font-weight: 800;
   color: #1c1917;
   line-height: 1.05;
@@ -105,7 +105,7 @@ body {
 }
 .page-h em {
   font-style: italic;
-  background: linear-gradient(135deg, #fbbf24 0%, #6b7280 100%);
+  background: linear-gradient(135deg, #fbbf24 0%, #2563eb 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -1274,7 +1274,7 @@ input[type=range]::-webkit-slider-thumb:hover {
     grid-template-columns: 1fr;
   }
   .page-h {
-    font-size: 28px;
+    font-size: 22px;
   }
   .kpi-value {
     font-size: 24px;
@@ -1497,7 +1497,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-wave { flex: 0 0 auto; }
 .fog-brand {
   margin: 0;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.5px;
@@ -1505,7 +1505,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 .fog-brand em {
   font-style: italic;
-  background: linear-gradient(135deg, #fbbf24 0%, #6b7280 100%);
+  background: linear-gradient(135deg, #fbbf24 0%, #2563eb 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -2580,8 +2580,8 @@ body {
   }
   /* Compact the page heading + hero so vertical real estate is preserved. */
   .page-h {
-    font-size: 28px;
-    letter-spacing: -0.4px;
+    font-size: 22px;
+    letter-spacing: -0.5px;
   }
   .fc-top { padding: 18px 18px; }
   .fc-city { font-size: 26px; }
@@ -3352,7 +3352,7 @@ body {
   color: #1c1917;
 }
 .mk-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.mk-title { margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.5px; }
+.mk-title { margin: 0; font-size: 22px; font-weight: 800; line-height: 1.05; letter-spacing: -0.5px; }
 .mk-title em { font-style: italic; background: linear-gradient(135deg, #fbbf24 0%, #2563eb 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .mk-controls { display: flex; align-items: center; gap: 8px; }
 .mk-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); font-weight: 600; }
@@ -3386,7 +3386,7 @@ body {
 .mk-foot { margin-top: 24px; font-size: 11px; color: var(--muted); font-style: italic; line-height: 1.5; }
 
 @media (max-width: 640px) {
-  .mk-title { font-size: 24px; }
+  .mk-title { font-size: 22px; }
   .mk-table { font-size: 13px; }
   .mk-table th, .mk-table td { padding: 6px 6px; }
 }
