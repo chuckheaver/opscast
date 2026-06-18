@@ -14,18 +14,22 @@ import { geoCode, reverseCityState } from "../lib/weather-api";
 // Shared with /weather and /fog so the picked location carries across.
 const LOC_STORAGE_KEY = "opscast.loc.v1";
 
-// Build a /fog URL carrying the current location + the layer preset.
-function buildFogUrl(loc, preset) {
+// Build a URL carrying the current location (lat/lng/name) plus any extra
+// query params. Used for the /fog layer presets and the /microclimates
+// winds + radiation map.
+function buildLocUrl(base, loc, extra = {}) {
   const qs = new URLSearchParams();
   if (loc?.latitude != null && loc?.longitude != null) {
     qs.set("lat", String(loc.latitude));
     qs.set("lng", String(loc.longitude));
     if (loc.name) qs.set("name", loc.name);
   }
-  if (preset) qs.set("preset", preset);
+  for (const [k, v] of Object.entries(extra)) if (v) qs.set(k, v);
   const s = qs.toString();
-  return s ? `/fog?${s}` : "/fog";
+  return s ? `${base}?${s}` : base;
 }
+
+const buildFogUrl = (loc, preset) => buildLocUrl("/fog", loc, { preset });
 
 export default function HomeHub() {
   const [zip, setZip] = useState("");
@@ -117,7 +121,7 @@ export default function HomeHub() {
 
   const tiles = [
     { emoji: "🌤️", label: "Weather",       href: "/weather" },
-    { emoji: "🌍", label: "Micro-Climate", href: "/microclimates" },
+    { emoji: "🌍", label: "Micro-Climate", href: buildLocUrl("/microclimates", selectedLoc, { layer: "solar" }) },
     { emoji: "🏡", label: "Market",        href: "/listings" },
     { emoji: "🌁", label: "Fog Map",       href: buildFogUrl(selectedLoc, "fog") },
     { emoji: "🚃", label: "Transit",       href: buildFogUrl(selectedLoc, "transit") },

@@ -65,6 +65,14 @@ export default function MicroApp() {
     return () => { cancelled = true; };
   }, []);
 
+  // Opening from the home hub's Micro-Climate tile (?layer=solar) lands
+  // straight on the radiation view: flip the Solar Exposure layer on once.
+  // Done in an effect (not initial state) so SSR/hydration stay in sync.
+  useEffect(() => {
+    const layer = searchParams?.get("layer");
+    if (layer === "solar" || layer === "radiation") setShowSolar(true);
+  }, [searchParams]);
+
   const pickFromAddress = useCallback((point, address) => {
     setPicked({ point, address });
   }, []);

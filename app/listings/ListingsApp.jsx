@@ -239,7 +239,7 @@ export default function ListingsApp() {
       <aside className="re-sidebar">
         <a className="fog-topbar-lbl" href="/" style={{ display: "inline-block", marginBottom: 10 }}>← UrMicroLife</a>
         <header className="re-head">
-          <h1 className="re-brand">SF Microclimate <em>Real Estate</em></h1>
+          <h1 className="re-brand">SF <em>Real Estate Market</em></h1>
           <p className="re-tag">Fog zones · Neighborhoods · Sales</p>
         </header>
 
@@ -461,23 +461,25 @@ export default function ListingsApp() {
                   <table className="re-modal-table">
                     <thead>
                       <tr>
-                        <th>Address</th><th>Status</th><th>List</th><th>Sale</th>
-                        <th>vs list</th><th>Closed</th><th>Neighborhood</th>
+                        <th>Address</th><th>Closed</th><th>List</th><th>Sale</th>
+                        <th>vs list</th><th>DOM</th><th>Status</th><th>Neighborhood</th>
                       </tr>
                     </thead>
                     <tbody>
                       {sold.map(p => {
                         const delta = p.listPrice ? (p.sellingPrice / p.listPrice - 1) * 100 : null;
+                        const dom = p.dom ?? daysBetween(p.listDate, p.sellingDate);
                         return (
                           <tr key={p.id} onClick={() => { setSelected(p); setGroupModal(null); }} title="Show on map">
                             <td className="re-m-addr">{shortAddr(p.address)}</td>
-                            <td>{p.status}</td>
+                            <td className="re-m-num">{fmtDate(p.sellingDate)}</td>
                             <td className="re-m-num">{fmtUSD(p.listPrice)}</td>
                             <td className="re-m-num">{fmtUSD(p.sellingPrice)}</td>
                             <td className={"re-m-num " + (delta == null ? "" : delta >= 0 ? "up" : "down")}>
                               {delta == null ? "—" : (delta >= 0 ? "+" : "") + delta.toFixed(1) + "%"}
                             </td>
-                            <td className="re-m-num">{fmtDate(p.sellingDate)}</td>
+                            <td className="re-m-num">{dom == null ? "—" : dom}</td>
+                            <td>{p.status}</td>
                             <td>{p.neighborhood ?? "—"}</td>
                           </tr>
                         );
