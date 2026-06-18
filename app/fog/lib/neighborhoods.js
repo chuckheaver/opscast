@@ -1070,6 +1070,462 @@ export const NEIGHBORHOODS = {
     transit:
       "SoMa is the city's transit hub: Powell, Montgomery, and Civic Center stations connect Muni Metro and BART, the T-Third Central Subway runs under 4th St, and Caltrain to the Peninsula terminates at 4th & King.",
   },
+
+  "Presidio Heights": {
+    spirit:
+      "A hushed, tree-lined enclave of grand mansions and a discreet, upscale Sacramento Street, where old San Francisco money lives quietly at the edge of the Presidio.",
+    reasons: [
+      "Stately mansions, leafy streets",
+      "Boutique Sacramento St shopping",
+      "Steps from the Presidio",
+      "Quiet, safe, and central",
+    ],
+    aka: "Presidio Terrace area",
+    history:
+      "Presidio Heights takes its name from its perch on the high ground beside the Presidio army post. The district filled in during the early 1900s, accelerating after the 1906 earthquake and fire as prosperous families rebuilt west of the ruined downtown. Its centerpiece, Presidio Terrace, was a master-planned community begun in 1905 by developers Baldwin & Howell, with thirty-six lots on a single private oval street.",
+    facts: [
+      {
+        icon: "money",
+        title: "The $90,000 street",
+        text:
+          "In 2015 a San Jose couple bought Presidio Terrace's private street at a city tax auction for about $90,100 after the homeowners association left a small annual tax bill unpaid for years. The city later voted to reverse the sale.",
+      },
+      {
+        icon: "house",
+        title: "A gated private oval",
+        text:
+          "Presidio Terrace is a single circular private street ringed by mansions. It was among the first San Francisco developments with underground utilities and electric street lights, unusual luxuries for the early 1900s.",
+      },
+      {
+        icon: "church",
+        title: "Temple Emanu-El's dome",
+        text:
+          "The neighborhood's skyline is anchored by Congregation Emanu-El, completed in 1926. Its massive red-tiled dome was inspired by Istanbul's Hagia Sophia and remains one of the city's landmark houses of worship.",
+      },
+      {
+        icon: "star",
+        title: "Michelin on Sacramento St",
+        text:
+          "For a quiet residential district, the dining is serious. Spruce and Sorrel have both earned Michelin recognition, drawing diners from across the city to a few low-key blocks.",
+      },
+      {
+        icon: "park",
+        title: "The Presidio at the doorstep",
+        text:
+          "Residents step almost directly into the Presidio, a former military base turned national park. Its forests, trails, and bay overlooks form a vast green backyard along the neighborhood's northern edge.",
+      },
+    ],
+    restaurants: [
+      { name: "Spruce", address: "3640 Sacramento St", phone: "(415) 931-5100", url: "https://www.sprucesf.com" },
+      { name: "Sorrel", address: "3228 Sacramento St", phone: "(415) 525-3765", url: "https://www.sorrelrestaurant.com" },
+      { name: "Sociale", address: "3665 Sacramento St", phone: "(415) 921-3200", url: "https://sfsociale.com" },
+    ],
+    bars: [
+      { name: "Spruce Bar", address: "3640 Sacramento St", phone: "(415) 931-5100", url: "https://www.sprucesf.com" },
+      { name: "Scopo Divino", address: "2800 California St", phone: "(415) 928-3728", url: "https://www.scopodivino.com" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 1.6 mi",
+      phone: "(415) 353-1008",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "The 1 California trolleybus is the workhorse, running along Sacramento and California streets east to downtown and west toward the Richmond. The 33 Ashbury/18th and 43 Masonic add north–south connections via Presidio Avenue.",
+  },
+
+  "Telegraph Hill": {
+    spirit:
+      "A steep, leafy enclave crowned by Coit Tower, threaded with hidden garden stairways and screeching wild parrots, perched dramatically above North Beach and the bay.",
+    reasons: [
+      "Coit Tower at your door",
+      "Iconic garden staircases",
+      "Wild parrot neighbors",
+      "Walk to North Beach",
+    ],
+    aka: "Goat Hill",
+    history:
+      "Telegraph Hill takes its name from the semaphore signal station built atop it in 1849, which flagged arriving ships to merchants below. Earlier called Loma Alta by the Spanish and \"Goat Hill\" by settlers, it became a working-class enclave of Irish and Italian immigrants. Quarrying blasted away its eastern face for ballast and seawall fill, creating today's sheer cliffs. In the 1930s the hill's artists and bohemians cemented its reputation, and Coit Tower rose in 1933.",
+    facts: [
+      {
+        icon: "tower",
+        title: "A firefighter's gift",
+        text:
+          "Coit Tower was funded by a bequest from heiress Lillie Hitchcock Coit, who adored the city's volunteer firefighters. Despite the resemblance, it was not designed to look like a fire hose nozzle.",
+      },
+      {
+        icon: "bird",
+        title: "The wild parrots",
+        text:
+          "A flock of feral cherry-headed conures roams the hill, descended from escaped or released pets. They were made famous by the 2003 documentary The Wild Parrots of Telegraph Hill.",
+      },
+      {
+        icon: "stairs",
+        title: "Secret garden stairs",
+        text:
+          "The Filbert and Greenwich Steps descend the hill's steep eastern cliff through lush private gardens. They were largely planted and tended for decades by resident Grace Marchant.",
+      },
+      {
+        icon: "art",
+        title: "Depression-era murals",
+        text:
+          "The interior of Coit Tower is lined with 1934 fresco murals painted by 25 artists under the New Deal's Public Works of Art Project. Their social-realist themes briefly stirred political controversy.",
+      },
+      {
+        icon: "quake",
+        title: "Saved by wine",
+        text:
+          "Residents are said to have saved homes on the hill's eastern slope from the 1906 fire by dousing them with barrels of red wine when the water mains failed.",
+      },
+    ],
+    restaurants: [
+      { name: "Sotto Mare Oysteria & Seafood", address: "552 Green St", phone: "(415) 398-3181", url: "https://www.sottomaresf.com" },
+      { name: "Tony's Pizza Napoletana", address: "1570 Stockton St", phone: "(415) 835-9888", url: "https://tonyspizzanapoletana.com" },
+      { name: "Mama's on Washington Square", address: "1701 Stockton St", phone: "(415) 362-6421", url: "https://www.mamas-sf.com" },
+      { name: "Original Joe's North Beach", address: "601 Union St", phone: "(415) 775-4877", url: "https://www.originaljoes.com/north-beach" },
+      { name: "Caffe Trieste", address: "601 Vallejo St", phone: "(415) 392-6739", url: "https://caffetrieste.com" },
+    ],
+    bars: [
+      { name: "Vesuvio Cafe", address: "255 Columbus Ave", phone: "(415) 595-9313", url: "https://vesuvio.com" },
+      { name: "Specs' Twelve Adler Museum Cafe", address: "12 William Saroyan Pl", phone: "(415) 421-4112", url: "https://www.specsbarsf.com" },
+    ],
+    hospital: {
+      name: "Chinese Hospital",
+      address: "845 Jackson St",
+      dist: "about 0.6 mi",
+      phone: "(415) 982-2400",
+      url: "https://chinesehospital-sf.org",
+    },
+    transit:
+      "Muni bus 39 (Coit) climbs the hill to Coit Tower and connects to Washington Square. Nearby, the 8, 30, and 45 lines run along Columbus and Stockton through North Beach, with the F Market streetcar down on the Embarcadero.",
+  },
+
+  Seacliff: {
+    spirit:
+      "San Francisco's most exclusive enclave, where grand mansions perch on the bluffs above China Beach and Baker Beach, framing sweeping Golden Gate views.",
+    reasons: [
+      "Grand cliffside mansions",
+      "Sweeping Golden Gate views",
+      "Secluded China Beach",
+      "Old-money exclusivity",
+    ],
+    aka: "Sea Cliff",
+    history:
+      "Sea Cliff takes its name from its dramatic perch on the bluffs above the Pacific. The Allen real-estate group began developing the enclave around 1912 as one of San Francisco's master-planned \"residence parks,\" with landscape architect Mark Daniels laying out the curving streets, ornate entry gates, fountains and large lots to evoke genteel country living. Mediterranean and period-revival homes filled in through the 1920s and 1930s, and the neighborhood has remained a quiet, purely residential address ever since.",
+    facts: [
+      {
+        icon: "house",
+        title: "A planned residence park",
+        text:
+          "Sea Cliff was one of San Francisco's master-planned residence parks laid out after the 1906 quake. Landscape architect Mark Daniels designed it with gated entries, sculptures and fountains to feel like a garden suburb.",
+      },
+      {
+        icon: "money",
+        title: "Celebrity enclave",
+        text:
+          "The neighborhood's privacy and views have long drawn the wealthy and famous. Robin Williams and Sharon Stone both owned homes here, alongside tech founders and old San Francisco families.",
+      },
+      {
+        icon: "wave",
+        title: "China Beach and Baker Beach",
+        text:
+          "Tucked below the bluffs, sheltered China Beach is one of the city's few swimmable coves. Just north, larger Baker Beach stretches toward the Golden Gate Bridge with postcard views.",
+      },
+      {
+        icon: "water",
+        title: "The 1995 sewer collapse",
+        text:
+          "In December 1995 a ruptured sewer on Sea Cliff Avenue triggered aggressive erosion and a series of slope collapses along El Camino del Mar. Several homes were damaged in one of the neighborhood's most dramatic incidents.",
+      },
+      {
+        icon: "bridge",
+        title: "Golden Gate panoramas",
+        text:
+          "Built on bluffs west of the Presidio, Sea Cliff offers some of the city's finest views of the Golden Gate Bridge and the Marin Headlands. Many homes were oriented expressly to capture them.",
+      },
+    ],
+    restaurants: [
+      { name: "Burma Superstar", address: "309 Clement St", phone: "(415) 387-2147", url: "https://www.burmasuperstar.com" },
+      { name: "Mamahuhu", address: "517 Clement St", phone: "(415) 742-4958", url: "https://eatmamahuhu.com" },
+      { name: "Chapeau!", address: "126 Clement St", phone: "(415) 387-0408", url: "https://www.chapeausf.com" },
+      { name: "Le Soleil", address: "133 Clement St", phone: "(415) 668-4848" },
+    ],
+    bars: [
+      { name: "The Plough and the Stars", address: "116 Clement St", phone: "(415) 751-1122" },
+      { name: "540 Club", address: "540 Clement St", phone: "(415) 752-7276" },
+      { name: "Richmond Republic Draught House", address: "642 Clement St", phone: "(415) 379-9000" },
+    ],
+    hospital: {
+      name: "Kaiser Permanente San Francisco Medical Center",
+      address: "2425 Geary Blvd",
+      dist: "about 2.5 mi",
+      phone: "(415) 833-2000",
+      url: "https://healthy.kaiserpermanente.org",
+    },
+    transit:
+      "Seacliff is a quiet, car-oriented enclave; the nearest lines are the 1 California along the southern edge, with the 18 46th Avenue and 29 Sunset skirting Lincoln Park to the west.",
+  },
+
+  "Lake Street": {
+    spirit:
+      "A serene enclave of stately period homes lining a leafy street between the Presidio and Mountain Lake Park, prosperous and quiet on the Richmond's northern edge.",
+    reasons: [
+      "Grand period homes",
+      "Steps from the Presidio",
+      "Mountain Lake Park nearby",
+      "Quiet residential elegance",
+    ],
+    aka: "Lake District",
+    history:
+      "Lake Street takes its name from Mountain Lake, one of the last natural lakes in San Francisco, fed by a chain of dunes and springs along the Presidio's southern boundary. Spanish explorer Juan Bautista de Anza camped at the lake in March 1776 while scouting sites for the Presidio and Mission. The surrounding Richmond District sand dunes were subdivided and developed in the early 20th century, when builders erected the large, architecturally rich single-family homes that still define this prosperous corridor today.",
+    facts: [
+      {
+        icon: "water",
+        title: "A real natural lake",
+        text:
+          "Mountain Lake is one of San Francisco's few remaining natural lakes. Long degraded by runoff, it underwent a major restoration in the 2010s that returned native plants and wildlife to its shores.",
+      },
+      {
+        icon: "flag",
+        title: "Anza camped here in 1776",
+        text:
+          "Juan Bautista de Anza's expedition made camp at Mountain Lake in late March 1776. From here he set out to choose the sites for the Presidio and Mission Dolores, founding the city.",
+      },
+      {
+        icon: "park",
+        title: "Mountain Lake Park",
+        text:
+          "The lake anchors a beloved green park with playgrounds, tennis courts, and trails. A path connects directly into the Presidio and the Juan Bautista de Anza National Historic Trail.",
+      },
+      {
+        icon: "house",
+        title: "Grand period homes",
+        text:
+          "Lake Street is known for its large, well-kept early-20th-century houses in Mediterranean, Tudor, and period-revival styles. It is one of the Richmond's most affluent and architecturally distinguished residential streets.",
+      },
+      {
+        icon: "park",
+        title: "On the Presidio's doorstep",
+        text:
+          "The street runs along the Presidio's southern edge, giving residents quick access to forested trails, scenic overlooks, and the national park's vast open space.",
+      },
+    ],
+    restaurants: [
+      { name: "Burma Superstar", address: "309 Clement St", phone: "(415) 387-2147", url: "https://www.burmasuperstar.com" },
+      { name: "Good Luck Dim Sum", address: "736 Clement St", phone: "(415) 386-3388" },
+      { name: "Hard Knox Cafe", address: "2526 Clement St", phone: "(415) 752-3770", url: "https://www.hardknoxcafe.com" },
+    ],
+    bars: [
+      { name: "The Plough and the Stars", address: "116 Clement St", phone: "(415) 751-1122" },
+      { name: "Trad'r Sam", address: "6150 Geary Blvd", phone: "(415) 221-0773" },
+      { name: "Blue Danube Coffee House", address: "306 Clement St", phone: "(415) 221-9041" },
+    ],
+    hospital: {
+      name: "Kaiser Permanente San Francisco Medical Center",
+      address: "2425 Geary Blvd",
+      dist: "about 2 mi",
+      phone: "(415) 833-2000",
+      url: "https://healthy.kaiserpermanente.org",
+    },
+    transit:
+      "The 1 California and 2 Clement run a few blocks south toward downtown, while the 33 Ashbury/18th, 38 Geary, and 38R Geary Rapid carry crosstown trips along the Richmond's main corridors.",
+  },
+
+  "Alamo Square": {
+    spirit:
+      "A grassy hilltop crowned with Victorians, where the candy-colored Painted Ladies pose against the downtown skyline like the postcard San Francisco everyone pictures.",
+    reasons: [
+      "Iconic Painted Ladies row",
+      "Hilltop downtown skyline view",
+      "Full House filming spot",
+      "NoPa dining at the foot",
+    ],
+    aka: "Postcard Row",
+    history:
+      "The square was named for a lone cottonwood tree — álamo in Spanish — that marked a watering stop on the road from Mission Dolores to the Presidio. The four-acre park was reserved in an 1856 city survey under Mayor James Van Ness, as San Francisco platted the Western Addition. The surrounding blocks filled with grand Victorian and Edwardian homes through the 1890s, many surviving the 1906 quake, and the eastern \"Painted Ladies\" became one of the city's most photographed sights.",
+    facts: [
+      {
+        icon: "house",
+        title: "Postcard Row",
+        text:
+          "The six matching Victorians at 710–720 Steiner Street, built by developer Matthew Kavanaugh between 1892 and 1896, are the famed \"Painted Ladies.\" Their colorful facades framed by the skyline make this one of the most photographed blocks in San Francisco.",
+      },
+      {
+        icon: "movie",
+        title: "Full House opening",
+        text:
+          "The Steiner Street row appears in the opening credits of the sitcom Full House. The actual house used for exterior establishing shots, however, sits across town in Lower Pacific Heights, not on the square.",
+      },
+      {
+        icon: "star",
+        title: "The Westerfeld House",
+        text:
+          "The towering 1889 Queen Anne at 1198 Fulton Street, known as the Westerfeld House, anchors the square's northwest corner. Over the decades it has housed Russian émigrés, a jazz club, and a commune of artists and filmmakers.",
+      },
+      {
+        icon: "park",
+        title: "Hilltop park",
+        text:
+          "Alamo Square Park climbs a steep rise to roughly 100 feet, opening a sweeping view across the Painted Ladies to the downtown towers. The grassy slopes draw picnickers, dog walkers, and tourists year-round.",
+      },
+      {
+        icon: "pin",
+        title: "Western Addition roots",
+        text:
+          "The neighborhood sits within the Western Addition, just north of the dining corridor locals call NoPa, for \"North of the Panhandle.\" Many of its wooden homes predate the 1906 earthquake that leveled much of the city to the east.",
+      },
+    ],
+    restaurants: [
+      { name: "Nopa", address: "560 Divisadero St", phone: "(415) 864-8643", url: "https://www.nopasf.com" },
+      { name: "Bar Crudo", address: "655 Divisadero St", phone: "(415) 409-0679", url: "https://www.barcrudo.com" },
+      { name: "The Mill", address: "736 Divisadero St", phone: "(415) 345-1953", url: "https://www.themillsf.com" },
+    ],
+    bars: [
+      { name: "Madrone Art Bar", address: "500 Divisadero St", phone: "(415) 241-0202" },
+      { name: "The Page", address: "298 Divisadero St", phone: "(415) 255-6101" },
+    ],
+    hospital: {
+      name: "CPMC Van Ness Campus",
+      address: "1101 Van Ness Ave",
+      dist: "about 1.3 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "A bus neighborhood: the 5 Fulton and 21 Hayes run east–west toward downtown, while the 22 Fillmore and 24 Divisadero cross north–south past the foot of the park.",
+  },
+
+  "St. Francis Wood": {
+    spirit:
+      "A hushed 1910s residence park of grand homes, brick-diamond sidewalks, and Italian Renaissance fountains terracing up the green western slope below Mount Davidson.",
+    reasons: [
+      "Olmsted-planned residence park",
+      "Twin Renaissance fountains",
+      "Architecturally landmark homes",
+      "Steps from West Portal",
+    ],
+    history:
+      "Named for St. Francis of Assisi, the neighborhood was launched in 1912 when the Mason-McDuffie Company bought former Sutro land to build one of California's first \"residence parks.\" Duncan McDuffie hired the Olmsted Brothers to lay curving streets along the natural topography. Architect John Galen Howard designed the entry gates, lampposts, and lower fountain; Henry Gutterson succeeded him, shaping the upper fountain and scores of homes. Most houses rose in the 1920s, and the district joined the National Register in 2022.",
+    facts: [
+      {
+        icon: "park",
+        title: "A pioneering residence park",
+        text:
+          "Mason-McDuffie marketed St. Francis Wood as a planned \"residence park\" with lots roughly twice the size of an ordinary city lot. Landscaped medians, boulevards, and deed restrictions were meant to keep it parklike in perpetuity.",
+      },
+      {
+        icon: "road",
+        title: "Designed by the Olmsted Brothers",
+        text:
+          "In 1913 Duncan McDuffie hired the famed Olmsted Brothers firm, led by James Frederick Dawson, to design the curvilinear street plan. The streets were laid out to follow the site's natural hillside contours rather than a rigid grid.",
+      },
+      {
+        icon: "water",
+        title: "Two formal fountains",
+        text:
+          "St. Francis Boulevard is anchored by two ornamental fountains evoking Italian Renaissance gardens. John Galen Howard designed the lower fountain and entry gates, and his successor Henry Gutterson designed the monumental upper fountain.",
+      },
+      {
+        icon: "house",
+        title: "Architect-designed homes",
+        text:
+          "Henry Gutterson served as supervising architect for three decades and personally designed many of the houses. The collection of period-revival homes by notable architects is central to the neighborhood's character.",
+      },
+      {
+        icon: "star",
+        title: "On the National Register",
+        text:
+          "After a resident-led campaign, St. Francis Wood was added to the National Register of Historic Places in 2022, recognized as an early-20th-century residence park and an intact collection of architecturally significant homes.",
+      },
+    ],
+    restaurants: [
+      { name: "Trattoria da Vittorio", address: "150 W Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
+      { name: "Little Original Joe's", address: "393 W Portal Ave", phone: "(415) 759-1155", url: "https://www.littleoriginaljoes.com" },
+      { name: "Elena's Mexican Restaurant", address: "255 W Portal Ave", phone: "(415) 622-4440", url: "https://www.elenasmexican.com" },
+      { name: "Mozzarella di Bufala", address: "69 W Portal Ave", phone: "(415) 661-8900", url: "https://dibufala.com" },
+    ],
+    bars: [
+      { name: "The Dubliner", address: "328 W Portal Ave", phone: "(415) 566-9444", url: "https://dublinerwp.com" },
+      { name: "Philosopher's Club", address: "824 Ulloa St", phone: "(415) 753-0599" },
+      { name: "Bullshead Restaurant", address: "840 Ulloa St", phone: "(415) 665-4350" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 2.5 mi",
+      phone: "(415) 476-1000",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "West Portal Station, a short walk downhill, is a Muni Metro hub for the K Ingleside, L Taraval, and M Ocean View lines into downtown; the 48 Quintara/24th St bus links across the south of the city.",
+  },
+
+  "Haight Ashbury": {
+    spirit:
+      "Tie-dyed and timeless, the Haight still hums with the ghost of 1967 — Victorian flats, record shops, and incense drifting toward Golden Gate Park.",
+    reasons: [
+      "Birthplace of Summer of Love",
+      "Grateful Dead history",
+      "Vintage shops & Victorians",
+      "Steps from Golden Gate Park",
+    ],
+    aka: "The Haight",
+    history:
+      "Named for pioneer banker Henry Haight and Monroe Ashbury, an early San Francisco supervisor who shaped the adjacent park land, the district filled with Victorian flats after the 1880s. Cheap rents in those subdivided homes drew artists and students in the 1960s, and by 1967 the corner of Haight and Ashbury became the epicenter of the hippie movement, drawing tens of thousands of young people during the Summer of Love and birthing a counterculture of music, protest, and psychedelia.",
+    facts: [
+      {
+        icon: "confetti",
+        title: "The Summer of Love",
+        text:
+          "In 1967, an estimated 100,000 young people converged on the Haight during the Summer of Love. The neighborhood became the global heart of hippie counterculture, music, and the psychedelic movement.",
+      },
+      {
+        icon: "house",
+        title: "The Grateful Dead house",
+        text:
+          "The Grateful Dead lived communally at 710 Ashbury Street from 1966 to 1968. The Victorian became a counterculture landmark and was the site of a famous 1967 drug bust that the band protested publicly.",
+      },
+      {
+        icon: "star",
+        title: "Janis Joplin lived here",
+        text:
+          "Singer Janis Joplin lived at 122 Lyon Street, near the Panhandle, during her rise to fame in the late 1960s. Many leading musicians of the era called the surrounding blocks home.",
+      },
+      {
+        icon: "park",
+        title: "Hippie Hill",
+        text:
+          "Just inside Golden Gate Park near the Haight Street entrance lies Hippie Hill, a grassy gathering spot for drum circles since the 1960s. It remains the site of an enormous unofficial 4/20 celebration each year.",
+      },
+      {
+        icon: "flag",
+        title: "The famous corner",
+        text:
+          "The intersection of Haight and Ashbury streets is the symbolic center of the neighborhood. A clock on the corner building is famously stuck at 4:20, and the street sign is among the most photographed in the city.",
+      },
+    ],
+    restaurants: [
+      { name: "Cha Cha Cha", address: "1801 Haight St", phone: "(415) 386-7670", url: "https://www.chachachasf.com" },
+      { name: "Parada 22", address: "1805 Haight St", phone: "(415) 750-1111", url: "https://www.parada22.com" },
+      { name: "Pork Store Cafe", address: "1451 Haight St", phone: "(415) 864-6981", url: "https://www.porkstorecafe.com" },
+      { name: "Magnolia Brewing", address: "1398 Haight St", phone: "(415) 864-7468", url: "https://magnoliabrewing.com" },
+    ],
+    bars: [
+      { name: "Aub Zam Zam", address: "1633 Haight St", phone: "(415) 861-2545" },
+      { name: "Toronado", address: "547 Haight St", phone: "(415) 863-2276", url: "https://www.toronado.com" },
+      { name: "The Alembic", address: "1725 Haight St", phone: "(415) 666-0822", url: "https://alembicsf.com" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 0.7 mi",
+      phone: "(415) 353-1008",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "Muni bus lines 6, 7, 33, 43, and 71 serve the Haight; the N Judah Metro line runs a few blocks south on Carl Street and along the park.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
