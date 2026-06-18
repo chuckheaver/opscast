@@ -11,7 +11,7 @@ export default function Page() {
       <div className="topbar">
         <div>
           <div className="brand-name">Ur<em>4cast</em></div>
-          <div className="brand-tag">Weather Intelligence For You</div>
+          <div className="brand-tag">Local Intelligence For You</div>
         </div>
       </div>
       <HomeHub />

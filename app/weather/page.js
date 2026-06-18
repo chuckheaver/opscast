@@ -222,7 +222,7 @@ export default function WeatherPage() {
       <div className="topbar">
         <div>
           <div className="brand-name">Ur<em>4cast</em></div>
-          <div className="brand-tag">Weather Intelligence For You</div>
+          <div className="brand-tag">Local Intelligence For You</div>
         </div>
         {view === "settings" && forecast ? (
           <button
