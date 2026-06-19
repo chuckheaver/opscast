@@ -20,6 +20,26 @@ const SF_BOUNDS = [
 
 const EMPTY_FC = { type: "FeatureCollection", features: [] };
 
+// City neighborhood boundaries — the same set the /fog map picks against, so
+// a neighborhood name from the fog pop-up matches a polygon here exactly.
+const NBHD_URL = "/data/sf-fog-neighborhoods.geojson";
+
+// Bounding box [[minLng,minLat],[maxLng,maxLat]] of a GeoJSON feature's
+// geometry, walking nested Polygon / MultiPolygon coordinate arrays.
+function bboxOfFeature(feature) {
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  const walk = c => {
+    if (typeof c[0] === "number") {
+      if (c[0] < minX) minX = c[0];
+      if (c[1] < minY) minY = c[1];
+      if (c[0] > maxX) maxX = c[0];
+      if (c[1] > maxY) maxY = c[1];
+    } else c.forEach(walk);
+  };
+  if (feature?.geometry?.coordinates) walk(feature.geometry.coordinates);
+  return Number.isFinite(minX) ? [[minX, minY], [maxX, maxY]] : null;
+}
+
 // Categorical colour ramp for the status field.
 const STATUS_COLOR = [
   "match", ["get", "status"],
@@ -58,7 +78,7 @@ function colorExpr(colorBy) {
   return STATUS_COLOR;
 }
 
-export default function ListingsMap({ features, colorBy, showFog, selectedId, onSelect }) {
+export default function ListingsMap({ features, colorBy, showFog, showNbhds, focusNbhd, selectedId, onSelect }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const readyRef = useRef(false);
@@ -66,10 +86,18 @@ export default function ListingsMap({ features, colorBy, showFog, selectedId, on
   // Latest props captured for callbacks / deferred-apply on style load.
   const featuresRef = useRef(features);
   const colorByRef = useRef(colorBy);
+  const showNbhdsRef = useRef(showNbhds);
+  const focusNbhdRef = useRef(focusNbhd);
+  // The neighborhood-boundary GeoJSON, held for bbox-based fitBounds.
+  const nbhdDataRef = useRef(null);
+  // Set inside the map "load" handler so the focus effect can re-apply.
+  const applyFocusRef = useRef(null);
 
   useEffect(() => { onSelectRef.current = onSelect; }, [onSelect]);
   useEffect(() => { featuresRef.current = features; }, [features]);
   useEffect(() => { colorByRef.current = colorBy; }, [colorBy]);
+  useEffect(() => { showNbhdsRef.current = showNbhds; }, [showNbhds]);
+  useEffect(() => { focusNbhdRef.current = focusNbhd; }, [focusNbhd]);
 
   // Mount once.
   useEffect(() => {
@@ -126,6 +154,56 @@ export default function ListingsMap({ features, colorBy, showFog, selectedId, on
           "fill-opacity": 0.5,
         },
       });
+
+      // City neighborhood boundaries (loaded async, then slotted *below* the
+      // listing circles so the dots stay on top and clickable):
+      //   nbhd-fill / nbhd-line  — every neighborhood, faint
+      //   nbhd-focus(-line)      — the one the user came to see, highlighted
+      const applyFocus = nm => {
+        if (!mapRef.current?.getLayer("nbhd-focus")) return;
+        const filter = ["==", ["get", "name"], nm || ""];
+        map.setFilter("nbhd-focus", filter);
+        map.setFilter("nbhd-focus-line", filter);
+        if (!nm) return;
+        const feat = (nbhdDataRef.current?.features || []).find(x => x.properties?.name === nm);
+        const bb = feat && bboxOfFeature(feat);
+        if (bb) map.fitBounds(bb, { padding: 60, maxZoom: 15, duration: 800 });
+      };
+      applyFocusRef.current = applyFocus;
+
+      fetch(NBHD_URL)
+        .then(r => (r.ok ? r.json() : null))
+        .then(gj => {
+          if (!gj || !mapRef.current) return;
+          nbhdDataRef.current = gj;
+          const vis = showNbhdsRef.current ? "visible" : "none";
+          map.addSource("nbhds", { type: "geojson", data: gj });
+          map.addLayer({
+            id: "nbhd-fill", type: "fill", source: "nbhds",
+            layout: { visibility: vis },
+            paint: { "fill-color": "#2563eb", "fill-opacity": 0.04 },
+          }, "listings-circles");
+          map.addLayer({
+            id: "nbhd-line", type: "line", source: "nbhds",
+            layout: { visibility: vis },
+            paint: { "line-color": "#2563eb", "line-width": 1, "line-opacity": 0.45 },
+          }, "listings-circles");
+          map.addLayer({
+            id: "nbhd-focus", type: "fill", source: "nbhds",
+            filter: ["==", ["get", "name"], ""],
+            layout: { visibility: vis },
+            paint: { "fill-color": "#2563eb", "fill-opacity": 0.16 },
+          }, "listings-circles");
+          map.addLayer({
+            id: "nbhd-focus-line", type: "line", source: "nbhds",
+            filter: ["==", ["get", "name"], ""],
+            layout: { visibility: vis },
+            paint: { "line-color": "#1e3a8a", "line-width": 2.5 },
+          }, "listings-circles");
+          // Apply any focus set before the boundaries finished loading.
+          applyFocus(focusNbhdRef.current);
+        })
+        .catch(() => {});
 
       // Listings source + circle layer.
       map.addSource("listings", {
@@ -223,6 +301,24 @@ export default function ListingsMap({ features, colorBy, showFog, selectedId, on
       }
     });
   }, [showFog]);
+
+  // Toggle the neighborhood-boundary layers (no-op until they finish loading;
+  // the load handler sets their initial visibility from the latest prop).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !readyRef.current) return;
+    ["nbhd-fill", "nbhd-line", "nbhd-focus", "nbhd-focus-line"].forEach(id => {
+      if (map.getLayer(id)) {
+        map.setLayoutProperty(id, "visibility", showNbhds ? "visible" : "none");
+      }
+    });
+  }, [showNbhds]);
+
+  // Highlight + zoom to the focused neighborhood.
+  useEffect(() => {
+    if (!readyRef.current) return;
+    applyFocusRef.current?.(focusNbhd);
+  }, [focusNbhd]);
 
   // Highlight the selected property.
   useEffect(() => {

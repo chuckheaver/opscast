@@ -6,6 +6,7 @@
 // computed from the same filtered set, so they never disagree.
 
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import ListingsMap from "./ListingsMap";
 import { computeStats, groupStats, GROUP_BY, fogZoneLabel, daysBetween } from "./lib/stats";
 import { elevationAtPoint } from "../fog/lib/geocode";
@@ -83,6 +84,12 @@ const STATUS_LEGEND = [
 ];
 
 export default function ListingsApp() {
+  // Deep-link from the fog neighborhood pop-up's "See Market data" button:
+  //   /listings?nbhd=<name>&layer=nbhd  → open with that neighborhood
+  //   highlighted, zoomed to, and the neighborhood layer turned on.
+  const searchParams = useSearchParams();
+  const initialNbhd = searchParams?.get("nbhd") || "";
+
   const [features, setFeatures] = useState([]);
   const [supDistricts, setSupDistricts] = useState(null);
   const [reNbhds, setReNbhds] = useState(null);
@@ -102,6 +109,8 @@ export default function ListingsApp() {
 
   // Display options
   const [showFog, setShowFog] = useState(false);
+  const [showNbhds, setShowNbhds] = useState(() => !!initialNbhd || searchParams?.get("layer") === "nbhd");
+  const [focusNbhd] = useState(initialNbhd); // neighborhood to highlight + zoom to (from deep-link)
   const [groupDim, setGroupDim] = useState("neighborhood");
   // Optional click-to-sort override for the breakdown table. null = the
   // dimension's natural order (e.g. districts 1→10, microclimate Sun→Fog).
@@ -460,14 +469,19 @@ export default function ListingsApp() {
           features={filtered}
           colorBy="status"
           showFog={showFog}
+          showNbhds={showNbhds}
+          focusNbhd={focusNbhd}
           selectedId={selected?.id}
           onSelect={setSelected}
         />
 
-        {/* Map controls overlay — just the fog layer toggle */}
+        {/* Map controls overlay — layer toggles */}
         <div className="re-map-controls">
           <label className="re-ctrl-check">
             <input type="checkbox" checked={showFog} onChange={e => setShowFog(e.target.checked)} /> <strong>Fog Layer</strong>
+          </label>
+          <label className="re-ctrl-check">
+            <input type="checkbox" checked={showNbhds} onChange={e => setShowNbhds(e.target.checked)} /> <strong>Neighborhoods</strong>
           </label>
         </div>
 

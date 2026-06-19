@@ -111,31 +111,37 @@ function PlaceRow({ p, first }) {
 export default function NeighborhoodModal({
   name, data, fogHrs, zoneLabel, supervisorDistrict, loc, onClose,
 }) {
-  const [price, setPrice] = useState("loading");
+  const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
 
-  // Compute the current-year median single-family sale price for this
-  // neighborhood straight from the listings dataset.
+  // Compute the current-year median sale price for this neighborhood —
+  // separately for single-family homes and condos — straight from the
+  // listings dataset. Each is { value, n } or null when nothing sold yet.
   useEffect(() => {
     let cancelled = false;
     fetch(LISTINGS_URL)
       .then(r => (r.ok ? r.json() : Promise.reject()))
       .then(g => {
         if (cancelled) return;
-        const sales = (g.features || [])
-          .filter(f => {
-            const p = f.properties || {};
-            const inHood = p.neighborhood === name || p.fogNeighborhood === name;
-            return inHood
-              && /single family/i.test(p.propType || "")
-              && Number(p.sellingPrice) > 0
-              && String(p.sellingDate || "").slice(0, 4) === CUR_YEAR;
-          })
-          .map(f => Number(f.properties.sellingPrice))
-          .sort((a, b) => a - b);
-        const median = sales.length ? sales[Math.floor((sales.length - 1) / 2)] : null;
-        setPrice(median == null ? null : { value: fmtPrice(median), n: sales.length });
+        const feats = g.features || [];
+        const medianFor = typeRe => {
+          const sales = feats
+            .filter(f => {
+              const p = f.properties || {};
+              const inHood = p.neighborhood === name || p.fogNeighborhood === name;
+              return inHood
+                && typeRe.test(p.propType || "")
+                && Number(p.sellingPrice) > 0
+                && String(p.sellingDate || "").slice(0, 4) === CUR_YEAR;
+            })
+            .map(f => Number(f.properties.sellingPrice))
+            .sort((a, b) => a - b);
+          if (!sales.length) return null;
+          const median = sales[Math.floor((sales.length - 1) / 2)];
+          return { value: fmtPrice(median), n: sales.length };
+        };
+        setPrices({ sfh: medianFor(/single family/i), condo: medianFor(/condo/i) });
       })
-      .catch(() => { if (!cancelled) setPrice(null); });
+      .catch(() => { if (!cancelled) setPrices(null); });
     return () => { cancelled = true; };
   }, [name]);
 
@@ -259,19 +265,27 @@ export default function NeighborhoodModal({
 
         <section style={SEC}>
           <Banner emoji="🏠">7 · Home prices</Banner>
-          <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 8 }}>
-            {price === "loading" ? (
-              <span style={{ fontSize: 14, color: "#78716c" }}>Loading…</span>
-            ) : price ? (
-              <>
-                <span style={{ fontSize: 24, fontWeight: 700, color: "#1c1917" }}>{price.value}</span>
-                <span style={{ fontSize: 13, color: "#78716c" }}>median single-family, {CUR_YEAR} YTD ({price.n} sold)</span>
-              </>
-            ) : (
-              <span style={{ fontSize: 13, color: "#78716c" }}>No {CUR_YEAR} single-family sales recorded yet.</span>
-            )}
-          </div>
-          <a style={LINK} href="/listings">↗ See Market data</a>
+          {prices === "loading" ? (
+            <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#78716c" }}>Loading…</span></div>
+          ) : prices && (prices.sfh || prices.condo) ? (
+            <div style={{ marginBottom: 8 }}>
+              {prices.sfh && (
+                <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: prices.condo ? 6 : 0 }}>
+                  <span style={{ fontSize: 24, fontWeight: 700, color: "#1c1917" }}>{prices.sfh.value}</span>
+                  <span style={{ fontSize: 13, color: "#78716c" }}>median single-family, {CUR_YEAR} YTD ({prices.sfh.n} sold)</span>
+                </div>
+              )}
+              {prices.condo && (
+                <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+                  <span style={{ fontSize: 24, fontWeight: 700, color: "#1c1917" }}>{prices.condo.value}</span>
+                  <span style={{ fontSize: 13, color: "#78716c" }}>median condo, {CUR_YEAR} YTD ({prices.condo.n} sold)</span>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>No {CUR_YEAR} sales recorded yet.</span></div>
+          )}
+          <a style={LINK} href={`/listings?nbhd=${encodeURIComponent(name)}&layer=nbhd`}>↗ See Market data</a>
         </section>
 
         {microText && (
