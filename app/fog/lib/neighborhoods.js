@@ -3353,6 +3353,192 @@ export const NEIGHBORHOODS = {
     hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 3.5 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
     transit: "Balboa Park BART (401 Geneva Ave) sits just southwest and is a terminus for Muni Metro J, K, and M light rail. Muni buses include the 14-Mission and 14R Rapid, 49 Van Ness/Mission, 29 Sunset, 8 Bayshore, 52 Excelsior, and 54 Felton.",
   },
+
+  "Portola": {
+    spirit: "A sunny, working-class corner of southeast San Francisco once carpeted with flower greenhouses, where the multicultural San Bruno Avenue strip still hums with bakeries, taquerias and pho.",
+    reasons: ["Sunny southeast pocket", "Diverse San Bruno Ave eats", "Historic Garden District", "Near McLaren Park"],
+    aka: "the Garden District",
+    history: "In the early 1900s, Italian, Maltese and Jewish immigrants settled the Portola and built greenhouses to grow cut flowers for the city. By the 1920s dozens of family nurseries blanketed the neighborhood, supplying most of the flowers sold at the San Francisco Flower Mart and earning Portola its nickname as the city's Garden District. After World War II most growers moved south and greenhouses gave way to single-family homes, though the Garibaldi family's University Mound Nursery on Woolsey Street kept growing roses until 1990. San Bruno Avenue grew into the neighborhood's Main Street, and today the area is among the city's most Asian-majority, with a deeply multicultural commercial strip.",
+    facts: [
+      { icon: "sun", title: "San Francisco's Garden District", text: "A 2016 city resolution officially recognized the Portola as San Francisco's Garden District, honoring its flower-growing past." },
+      { icon: "factory", title: "The last greenhouses", text: "The Garibaldi family's University Mound Nursery at 770 Woolsey St grew roses for the SF Flower Mart until 1990; its redwood-and-glass greenhouses are the last of their kind in the district." },
+      { icon: "movie", title: "The Avenue Theatre", text: "This 1927 San Bruno Ave movie house was famed for its Wurlitzer organ before closing in 1984; the building still stands." },
+      { icon: "park", title: "Next to McLaren Park", text: "John McLaren Park, the city's second-largest park at over 300 acres, borders the neighborhood." },
+      { icon: "house", title: "A family neighborhood", text: "Portola is a quiet district of low-slung single-family homes that replaced the old nurseries after World War II." },
+    ],
+    restaurants: [
+      { name: "Pho Nation", address: "2428 San Bruno Ave", phone: "(415) 347-7115" },
+      { name: "Ming Hing Restaurant", address: "2550 San Bruno Ave", phone: "(415) 468-5309" },
+      { name: "Restaurant Pupuseria Ilobasco", address: "2680 San Bruno Ave", phone: "(415) 468-3300" },
+      { name: "The Old Clam House", address: "299 Bayshore Blvd", phone: "(415) 695-2866", url: "https://theoldclamhouse.com" },
+      { name: "Round Table Pizza", address: "2660 San Bruno Ave", phone: "(415) 481-4705" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 2.5 mi", phone: "(628) 206-8000", url: "https://zuckerbergsanfranciscogeneral.org" },
+    transit: "Muni 9-San Bruno and 9R-San Bruno Rapid run the length of San Bruno Ave; the 8-Bayshore, 23-Monterey and 54-Felton also serve the neighborhood. Bayshore Caltrain station is just east.",
+  },
+
+  "Visitacion Valley": {
+    spirit: "A quiet, working-class corner of San Francisco's far southeast, where a multicultural community gathers along the little Leland Avenue main street between the Cow Palace and the green slopes of McLaren Park.",
+    reasons: ["Leland Avenue main street", "Steps from McLaren Park", "Deeply multicultural", "T-Third light rail at the door"],
+    aka: "Viz Valley",
+    history: "Spanish friars and soldiers bound for the new Presidio camped in this bayside valley in 1777 on the Catholic Feast of the Visitation, giving the area its name. Through the 19th century it was a landscape of farms and dairies on the old Rancho Cañada de Guadalupe la Visitacion y Rodeo Viejo. In 1926 the Schlage Lock Company opened a factory here that made locks and anchored the local economy for more than seventy years, drawing a working-class immigrant community. Schlage closed in 1999, and the former plant is now being redeveloped as the mixed-use Baylands North community, approved in 2014 with roughly 1,670 new homes. Today Visitacion Valley is one of the city's most diverse neighborhoods, with Asian residents making up over half the population.",
+    facts: [
+      { icon: "church", title: "Named for a feast day", text: "A 1777 expedition camped here on the Catholic Feast of the Visitation, and the valley has carried the name 'Visitacion' ever since." },
+      { icon: "factory", title: "Schlage Lock town", text: "The Schlage Lock factory opened in 1926 and made locks here for over 70 years until it closed in 1999." },
+      { icon: "house", title: "Baylands North rising", text: "The former Schlage Lock site, approved for redevelopment in 2014, is being rebuilt as a mixed-use community with around 1,670 homes." },
+      { icon: "park", title: "The Greenway", text: "The Visitacion Valley Greenway, begun in 2000, links six one-block parks and community gardens from Leland Avenue toward McLaren Park." },
+      { icon: "tram", title: "T-Third terminus", text: "The neighborhood's Sunnydale Station anchors the south end of Muni's T-Third light rail line, which since 2023 runs through to Chinatown." },
+    ],
+    restaurants: [
+      { name: "Pho Luen Fat", address: "110 Leland Ave", phone: "(415) 585-1167" },
+    ],
+    bars: [
+      { name: "Mission Blue", address: "144 Leland Ave", phone: "(415) 508-7416", url: "https://missionbluesf.com" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 5 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
+    transit: "Sunnydale Station anchors the south end of Muni Metro's T-Third line (extended through downtown to Chinatown in 2023). Bus lines 8-Bayshore, 9-San Bruno and 56 serve the area, and Bayshore Caltrain is just to the east.",
+  },
+
+  "Sunnyside": {
+    spirit: "A small, sunny, low-key residential village on the south slope below Mount Davidson, where rows of early-1900s cottages line quiet streets above an unhurried Monterey Boulevard.",
+    reasons: ["Quiet residential streets", "Among the city's more affordable single-family homes", "Glen Park BART close by", "Hidden Victorian conservatory"],
+    history: "Sunnyside was laid out in 1891 by the Sunnyside Land Company, whose president, Behrend Joost, had bought the farmland from Leland Stanford. Joost's real ambition was transit: in 1892 he built the Sunnyside Powerhouse on what was then Sunnyside Avenue (today's Monterey Boulevard) to power the San Francisco and San Mateo Electric Railway, the city's first electric streetcar line, which opened April 27, 1892, running from Steuart and Market out past Glen Park to the Colma cemeteries. The streetcar drew buyers to the new subdivision, and through the early 1900s the tract filled in with modest cottages and single-family homes. Around 1901, British mining engineer W.A. Merralls built the octagonal redwood Sunnyside Conservatory, which still stands amid its palms as a city landmark.",
+    facts: [
+      { icon: "tram", title: "City's first electric streetcar", text: "The San Francisco and San Mateo Electric Railway, powered from the Sunnyside Powerhouse on Monterey Blvd, opened April 27, 1892." },
+      { icon: "house", title: "Planned in 1891", text: "The Sunnyside Land Company, led by Behrend Joost, subdivided the tract from former Leland Stanford farmland in 1891." },
+      { icon: "park", title: "Sunnyside Conservatory", text: "An octagonal redwood Victorian conservatory built around 1901 by engineer W.A. Merralls, now a city landmark surrounded by mature palms at 236 Monterey Blvd." },
+      { icon: "road", title: "Monterey Boulevard was 'Sunnyside Avenue'", text: "The neighborhood's main commercial street was originally named Sunnyside Avenue before becoming Monterey Boulevard." },
+      { icon: "sun", title: "Named for its sunshine", text: "The 'Sunnyside' name reflects the open, sunny south-facing slope the subdivision was marketed on." },
+    ],
+    restaurants: [
+      { name: "Big Joe's", address: "717 Monterey Blvd", phone: "(415) 333-2878" },
+      { name: "Won Kok Restaurant", address: "700 Monterey Blvd", phone: "(415) 587-1826", url: "https://won-kok.com" },
+      { name: "Shanghai Dumpling King", address: "696 Monterey Blvd", phone: "(415) 585-1300" },
+    ],
+    bars: [
+      { name: "Friends Bar", address: "558 Monterey Blvd", phone: "(415) 999-1338" },
+      { name: "Railroad Expresso", address: "705 Monterey Blvd", phone: "(415) 333-4009" },
+    ],
+    hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St", dist: "about 2 mi", phone: "(415) 641-6625", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "Glen Park BART (Daly City/Millbrae and SFO lines) sits just east of the neighborhood. Muni buses 36-Teresita and 43-Masonic serve Sunnyside directly; the 44-O'Shaughnessy and 52-Excelsior connect at Glen Park station, and the K-Ingleside Muni Metro runs nearby along Ocean Avenue.",
+  },
+
+  "Oceanview": {
+    spirit: "A quiet, diverse, working-class residential corner in San Francisco's far southwest, anchored by City College and the Ocean Avenue corridor as the historic heart of the OMI district.",
+    reasons: ["Part of historic OMI", "Quiet residential streets", "Near City College", "Transit to downtown via Ocean Ave"],
+    aka: "Part of OMI",
+    history: "Ocean View grew up around a stop on the San Francisco and San Jose Railroad, which began service in 1860, and was successfully subdivided in 1883 into a self-contained village with its own school, post office, and churches along Broad Street. The nearby Ingleside Racetrack opened in 1895 off the old Ocean Road, drawing roadhouses and gambling before an 1899 anti-betting ordinance shut the track down. After World War II, Ocean View became one of the few places in San Francisco where African-American families could buy homes, and during Western Addition redevelopment in the 1960s and 1970s many more families moved in. Residents coined the name 'OMI' — Ocean View, Merced Heights, Ingleside — in the 1960s to lobby together for city services, and the area became one of the city's earliest racially integrated communities.",
+    facts: [
+      { icon: "flag", title: "An early integrated community", text: "Post-WWII Ocean View was one of the few SF neighborhoods where Black families could buy property, making the OMI one of the city's earliest racially integrated areas." },
+      { icon: "book", title: "City College's Ocean Campus", text: "City College of San Francisco opened in 1935 and built its 56-acre Ocean Campus just north of the neighborhood at 50 Frida Kahlo Way." },
+      { icon: "road", title: "A racetrack frozen in the street grid", text: "Just west in Ingleside Terraces, Urbano Drive forms an oval traced on the loop of the 1895 Ingleside Racetrack, paved over when the residence park opened in 1912." },
+      { icon: "church", title: "A 19th-century village core", text: "Ocean View functioned as its own village, with St. Michael's Church established on Broad Street in 1899 and a Congregational church there since 1895." },
+      { icon: "tram", title: "Streetcars named for the area", text: "The M Ocean View streetcar line, built in 1927, and the K Ingleside both still run, terminating at Balboa Park Station." },
+    ],
+    nearby: ["Ingleside", "Ocean Avenue"],
+    restaurants: [
+      { name: "Beep's Burgers", address: "1051 Ocean Ave", phone: "(415) 584-2650", url: "https://www.beepsburgers.com" },
+      { name: "Megan's Table", address: "1422 Ocean Ave", phone: "(415) 347-7044", url: "https://meganstablesf.com" },
+    ],
+    bars: [
+      { name: "Ocean Ale House", address: "1314 Ocean Ave", phone: "(415) 988-7521", url: "https://oceanalehouse.com" },
+    ],
+    hospital: { name: "AHMC Seton Medical Center", address: "1900 Sullivan Ave, Daly City", dist: "about 2 mi", phone: "(650) 992-4000", url: "https://www.ahmchealth.com/smc/" },
+    transit: "Muni Metro K-Ingleside runs in the median of Ocean Avenue; the M-Ocean View line runs nearby; both terminate at Balboa Park Station with BART. Buses include the 29-Sunset, 54-Felton, 8-Bayshore, and 49 Van Ness/Mission.",
+  },
+
+  "Outer Mission": {
+    spirit: "A sunny, working-class stretch at the southern tip of Mission Street, where modest single-family homes back up to a lively Latino, Filipino, and Asian commercial corridor running toward the Daly City line.",
+    reasons: ["Latino & Asian food corridor", "Family-friendly single-family homes", "Transit hub at Balboa Park BART", "Tucked-away Cayuga Park"],
+    aka: "Cayuga Terrace",
+    history: "The Outer Mission grew up in the 1910s as a southern extension of the Mission District, along the old road out of town that became Mission Street. The neighborhood's southern blocks of Mission Street follow the route of El Camino Real, the historic road linking San Francisco down the Peninsula. Once farmland that supplied the city with produce, it filled in during the early 20th century with modest single-family homes served by streetcar and Southern Pacific rail lines. Early residents were largely Irish and Italian American; by the late 20th century the area became a working-class enclave home to many Latino and Filipino/Asian families. Many of its streets carry Native American tribe names — Cayuga, Onondaga, Seneca — drawn from 1860s 'West End Homestead' maps.",
+    facts: [
+      { icon: "road", title: "On El Camino Real", text: "The southern blocks of Mission Street trace the historic El Camino Real, the road that once linked San Francisco's mission down the Peninsula." },
+      { icon: "art", title: "Cayuga Park's carved wonderland", text: "Gardener Demetrio Braceros, a Filipino immigrant, spent 1986–2008 transforming Cayuga Playground, carving hundreds of wooden statues — the Arts Commission later counted 376." },
+      { icon: "subway", title: "One of BART's busiest stops", text: "Balboa Park Station at the neighborhood's edge is the busiest BART station outside downtown San Francisco, an intermodal hub for BART, Muni Metro, and many bus lines." },
+      { icon: "house", title: "A single-family enclave", text: "The district is overwhelmingly attached single-family homes, long one of the city's few remaining low-rent and middle-class residential pockets." },
+      { icon: "burrito", title: "Salvadoran & Peruvian corridor", text: "The Mission Street strip is lined with pupuserias, panaderias, and Peruvian and Guatemalan kitchens rather than national chains." },
+    ],
+    restaurants: [
+      { name: "El Porteno", address: "5173 Mission St", phone: "(415) 586-1206" },
+      { name: "Reina's Restaurant", address: "5479 Mission St", phone: "(415) 585-7694", url: "https://www.reinasrestaurant.com" },
+      { name: "Tikal Restaurante y Panaderia", address: "5099 Mission St", phone: "(415) 347-7125" },
+    ],
+    hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St", dist: "about 2 mi", phone: "(415) 641-6625", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "Balboa Park BART and Daly City BART both sit at the neighborhood's edges. The 14-Mission and 14R-Rapid run the full length of Mission Street to Daly City BART; the 49-Van Ness/Mission serves the corridor toward City College and downtown.",
+  },
+
+  "Mission Terrace": {
+    spirit: "A quiet, sunny pocket of 1920s bungalows tucked between the Excelsior and Balboa Park, in the shadow of City College.",
+    reasons: ["Single-family bungalow streets", "Steps from Balboa Park BART", "City College next door", "Easy Mission St dining"],
+    history: "The land was surveyed for residential development by the Baldwin & Howell Company in 1911, on former farmland once worked by Italian and French truck gardeners. Most of the homes went up in the 1920s and 1930s, when streetcar lines along the Mission corridor let working families commute without a car. The neighborhood sits just east of Balboa Park, and City College of San Francisco opened its permanent Ocean Campus on adjacent parkland on August 27, 1940. Decades later, the construction of Interstate 280 and BART's Balboa Park station reshaped the neighborhood's southern and western edges. Many of the original 1920s bungalows still stand today, largely unchanged.",
+    facts: [
+      { icon: "house", title: "Bungalow subdivision", text: "Surveyed by Baldwin & Howell in 1911 and built out mostly in the 1920s–30s as modest single-family bungalows." },
+      { icon: "book", title: "City College next door", text: "CCSF's Ocean Campus opened on adjacent land on August 27, 1940, after a land swap with Balboa Park." },
+      { icon: "subway", title: "Balboa Park BART", text: "The Balboa Park hub at 401 Geneva Ave sits at the neighborhood's edge, served by four BART lines and three Muni Metro lines." },
+      { icon: "cow", title: "Truck-garden farmland", text: "Before development, the area was truck-garden farmland; early streetcars literally ran through the fields." },
+      { icon: "road", title: "Reshaped by I-280", text: "Interstate 280 and BART construction in the 1960s–70s redrew the neighborhood's southern and western edges." },
+    ],
+    nearby: ["the Excelsior", "Balboa Park"],
+    restaurants: [
+      { name: "El Farolito", address: "4817 Mission St", phone: "(415) 337-5500", url: "https://elfarolitosf.com" },
+      { name: "Pho Golden", address: "4683 Mission St" },
+      { name: "Ocean Subs", address: "18 Ocean Ave" },
+    ],
+    bars: [
+      { name: "The Halfway Club", address: "1166 Geneva Ave", url: "https://www.halfwayclub.com" },
+      { name: "Tala Wine", address: "4625 Mission St", phone: "(415) 740-8494", url: "https://www.tala.wine" },
+    ],
+    hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St", dist: "about 2.5 mi", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "Balboa Park BART station (401 Geneva Ave) sits in the neighborhood, served by BART plus Muni Metro J, K and M lines. Muni buses include the 8, 29, 43 and 49; the 14-Mission and 14R run nearby along Mission Street in the Excelsior.",
+  },
+
+  "Crocker Amazon": {
+    spirit: "A sunny, quiet pocket of single-family homes tucked into San Francisco's far southeast corner, hard against the Daly City line and the green edge of McLaren Park.",
+    reasons: ["Quiet family residential", "Big playground and parks", "Among the city's sunnier corners", "Borders McLaren Park"],
+    aka: "Crocker-Amazon",
+    history: "The neighborhood sits on land once part of the holdings associated with railroad magnate Charles Crocker, and it takes the second half of its name from Amazon Avenue in the adjacent Excelsior. Subdivided in the early 20th century, it was built out largely with modest single-family homes through the mid-century, in a mix of Marina, Arts and Crafts, Victorian, Edwardian, and Mid-Century Modern styles. It remains slightly more affluent than the neighboring Excelsior while sharing much of that district's diversity, including a large Filipino community. The large Crocker Amazon Playground borders the neighborhood to the north, and John McLaren Park, the city's third-largest park, sits just to the east.",
+    facts: [
+      { icon: "park", title: "Crocker Amazon Playground", text: "A sprawling sports complex at Moscow St and Geneva Ave with five full-size lighted soccer fields, plus baseball, tennis, basketball, and bocce courts." },
+      { icon: "money", title: "Named for a railroad baron", text: "The 'Crocker' honors land once tied to Central Pacific Railroad magnate Charles Crocker; 'Amazon' comes from nearby Amazon Avenue." },
+      { icon: "house", title: "Homes with elbow room", text: "Unusually for San Francisco, many houses here sit on lots with roughly ten feet of space on either side rather than wall-to-wall." },
+      { icon: "sun", title: "A sunnier corner", text: "Set in the city's southeast, the neighborhood tends to escape the heaviest coastal fog." },
+      { icon: "park", title: "Next to McLaren Park", text: "John McLaren Park, the city's third-largest park after Golden Gate and the Presidio, sits just east with trails, lakes, and the Jerry Garcia Amphitheater." },
+    ],
+    nearby: ["the Excelsior"],
+    restaurants: [
+      { name: "El Farolito", address: "4817 Mission St", phone: "(415) 337-5500", url: "https://elfarolitosf.com" },
+      { name: "Calabria Brothers", address: "4763 Mission St", phone: "(415) 239-2555", url: "https://calabriabrosdeli.com" },
+      { name: "Restaurante Familiar", address: "4499 Mission St", phone: "(415) 334-6100" },
+    ],
+    hospital: { name: "AHMC Seton Medical Center", address: "1900 Sullivan Ave, Daly City", dist: "about 1.5 mi", phone: "(650) 992-4000", url: "https://www.ahmchealth.com/smc/" },
+    transit: "Muni buses 8-Bayshore, 14-Mission/14R, 52-Excelsior, and 54-Felton serve the area along Mission St and Geneva Ave; Balboa Park BART and the Muni Metro are a short ride northwest.",
+  },
+
+  "Miraloma Park": {
+    spirit: "A quiet, leafy hillside enclave on the southern slopes of Mount Davidson, where curving streets, mid-century homes, woodsy calm, and sweeping views meet one of the city's most active neighborhood associations.",
+    reasons: ["Woodsy hillside calm", "Big ridge-top views", "Strong neighborhood club", "Steps from Mount Davidson"],
+    history: "Miraloma Park was laid out from 1926 through the 1950s, developed largely by the Meyer Brothers, who assembled land from the Sutro estate, Wells Fargo & Company, and other owners. They marketed it as a 'City in Itself,' a suburban home center of mostly one-story-over-garage houses on curving streets that follow the hill's contours in the City Beautiful tradition. Roughly 2,400 single-family homes were built, many on the lower slopes of Mount Davidson, whose summit had been preserved as a public park in 1929. Residents organized the Miraloma Park Improvement Club, whose first meeting was held in 1930 and which incorporated in 1936. The developer built and donated a clubhouse on Del Vale Avenue, dedicated November 10, 1940, and the club remains vigorous today.",
+    facts: [
+      { icon: "park", title: "San Francisco's highest peak", text: "Mount Davidson rises 928 feet, the highest natural point in the city, and its summit and slopes form Mount Davidson Park." },
+      { icon: "church", title: "The summit cross", text: "A 103-foot concrete cross, dedicated in 1934, stands atop Mount Davidson and has been a landmark of the city's skyline for generations." },
+      { icon: "house", title: "A planned hillside subdivision", text: "Roughly 2,400 mostly single-family homes were built from the late 1920s on, on curving streets that follow the hill's contours in the City Beautiful style." },
+      { icon: "flag", title: "An old, active improvement club", text: "The Miraloma Park Improvement Club traces its first meeting to 1930 and meets in a clubhouse donated by the developer and dedicated in 1940." },
+      { icon: "tram", title: "Residents won their bus line", text: "Early club efforts brought transit to the hill; Mayor Rossi piloted the first 36 bus from Forest Hill Station on July 23, 1939." },
+    ],
+    nearby: ["Glen Park", "West Portal"],
+    restaurants: [
+      { name: "Gialina Pizzeria", address: "2842 Diamond St (Glen Park)", phone: "(415) 239-8500", url: "https://www.gialina.com" },
+      { name: "La Corneta Taqueria", address: "2834 Diamond St (Glen Park)", phone: "(415) 469-8757", url: "https://lacorneta.com" },
+      { name: "Bursa Mediterranean Cuisine", address: "60 West Portal Ave (West Portal)", phone: "(415) 564-4006", url: "https://bursasf.com" },
+      { name: "Goat Hill Pizza - West Portal", address: "170 W Portal Ave (West Portal)", phone: "(415) 242-4628", url: "https://www.goathillpizza.com" },
+    ],
+    bars: [
+      { name: "Glen Park Station", address: "2816 Diamond St (Glen Park)", phone: "(415) 333-4633" },
+    ],
+    hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St", dist: "about 2.5 mi", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "Muni 36-Teresita winds through the neighborhood; the 44-O'Shaughnessy runs along O'Shaughnessy Boulevard nearby, and the 43-Masonic serves the western edge. Glen Park BART and the Forest Hill Muni Metro station are each a short ride away.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
