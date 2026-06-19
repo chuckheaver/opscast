@@ -3915,6 +3915,205 @@ export const NEIGHBORHOODS = {
     hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 4 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
     transit: "Bayshore Caltrain station (400 Tunnel Ave) is adjacent. Muni buses 9-San Bruno, 8-Bayshore and 56-Rutland serve the area, with the T-Third Muni Metro line nearby in Visitacion Valley.",
   },
+
+  "Lone Mountain": {
+    spirit: "A quiet hilltop crown above the city's north-central neighborhoods, where steep streets of Edwardian flats climb toward the University of San Francisco's dramatic Gothic campus and the views open up in every direction.",
+    reasons: ["Among the city's best skyline and Golden Gate views", "Calm streets of historic Edwardian homes", "Steps from USF's landmark hilltop campus", "Walkable to Clement Street and Divisadero"],
+    history: "Lone Mountain takes its name from a prominent hill that, beginning in the 1850s, anchored a cluster of grand Victorian-era cemeteries — Laurel Hill (1854), Calvary (1860), and the Masonic and Odd Fellows grounds. After the city banned burials, the dead were removed to Colma and the land was redeveloped through the early 1940s. The Religious of the Sacred Heart built a Spanish-Gothic main building atop the hill in 1932 for the San Francisco College for Women, reached by a grand garden staircase. The college went co-ed as Lone Mountain College in 1969 and was acquired by the University of San Francisco in 1978, which still operates it as the Lone Mountain campus next to St. Ignatius Church.",
+    facts: [
+      { icon: "church", title: "Cemetery hill", text: "The neighborhood sits atop the former Laurel Hill, Calvary, Masonic, and Odd Fellows cemeteries; burials were relocated to Colma by the early 1940s." },
+      { icon: "book", title: "College for women", text: "The 1932 Spanish-Gothic building atop the hill housed the San Francisco College for Women until it became co-ed Lone Mountain College in 1969." },
+      { icon: "tower", title: "USF's hilltop campus", text: "The University of San Francisco acquired the site in 1978 and runs it today as its Lone Mountain campus." },
+      { icon: "stairs", title: "The grand staircase", text: "A garden stairway nicknamed the Spanish Steps climbs the hillside to the landmark Gothic main building." },
+      { icon: "bridge", title: "Big views", text: "The hilltop offers panoramic vistas across the city, out to the Golden Gate Bridge and the ocean." },
+    ],
+    nearby: ["Inner Richmond", "NoPa", "Laurel Heights"],
+    restaurants: [
+      { name: "Chapeau!", address: "126 Clement St", phone: "(415) 750-9787", url: "https://www.chapeausf.com" },
+      { name: "Nopa", address: "560 Divisadero St", phone: "(415) 864-8643", url: "https://www.nopasf.com" },
+    ],
+    bars: [
+      { name: "Madrone Art Bar", address: "500 Divisadero St", url: "https://madroneartbar.com" },
+    ],
+    hospital: { name: "UCSF Health Stanyan Hospital (formerly St. Mary's)", address: "450 Stanyan St", dist: "about 0.8 mi", phone: "(415) 668-1000", url: "https://sfcommunityhospitals.ucsfhealth.org/st-marys" },
+    transit: "Muni buses 31-Balboa, 33-Ashbury/18th St, 38-Geary, 43-Masonic and 5-Fulton serve the neighborhood's edges.",
+  },
+
+  "Anza Vista": {
+    spirit: "A quiet mid-century pocket on the hill where San Francisco once buried its dead and then built its postwar future — tidy 1940s–50s homes and apartments climbing the slope between Geary and the Western Addition, with Kaiser's big medical campus and the Divisadero corridor a short walk away.",
+    reasons: ["Calm, residential, and central", "Steps from Kaiser's main SF hospital", "Easy reach to NoPa and Divisadero dining", "38-Geary puts downtown within one ride"],
+    history: "The neighborhood sits atop the former Calvary Cemetery, one of the large Catholic burying grounds near Lone Mountain. After San Francisco banned new burials in 1902, the graves here were disinterred and moved to Colma through the 1930s and 1940s. The cleared land was redeveloped in the late 1940s and 1950s into the mid-century homes and apartments that define Anza Vista today. The neighborhood and its central avenue are named for Juan Bautista de Anza, who led the 1775–1776 Spanish expedition that reached San Francisco Bay and chose the sites of the Presidio and Mission. Kaiser Permanente's San Francisco Medical Center anchors the neighborhood's northern edge along Geary Boulevard.",
+    facts: [
+      { icon: "quake", title: "Built on a former cemetery", text: "Anza Vista rose on the site of Calvary Cemetery; the graves were moved to Colma in the 1930s–40s before homes went up." },
+      { icon: "house", title: "A postwar neighborhood", text: "Most of the homes and apartments date to a late-1940s and 1950s building boom on the cleared cemetery land." },
+      { icon: "flag", title: "Named for an explorer", text: "Anza Vista honors Juan Bautista de Anza, who led 240-plus colonists overland to San Francisco Bay in 1775–1776." },
+      { icon: "pin", title: "Kaiser's SF home base", text: "Kaiser Permanente's San Francisco Medical Center sits right along Geary Boulevard at the neighborhood's edge." },
+      { icon: "shopping", title: "City Center retail", text: "The Target-anchored City Center shopping center stands at Geary and Masonic in the neighborhood's northwest corner." },
+    ],
+    nearby: ["NoPa", "Laurel Heights", "Western Addition"],
+    restaurants: [
+      { name: "Nopa", address: "560 Divisadero St", phone: "(415) 864-8643", url: "https://nopasf.com" },
+    ],
+    bars: [
+      { name: "Madrone Art Bar", address: "500 Divisadero St", phone: "(415) 241-0202", url: "https://www.madroneartbar.com" },
+      { name: "The Page", address: "298 Divisadero St", phone: "(415) 255-6101" },
+      { name: "The Mill", address: "736 Divisadero St", phone: "(415) 345-1953", url: "https://www.themillsf.com" },
+    ],
+    hospital: { name: "Kaiser Permanente San Francisco Medical Center", address: "2425 Geary Blvd", dist: "about 0.5 mi", phone: "(415) 833-2000", url: "https://healthy.kaiserpermanente.org" },
+    transit: "Served by the 38-Geary and 38R-Geary Rapid along the north edge, plus the 31-Balboa, 43-Masonic, and 24-Divisadero buses.",
+  },
+
+  "Cathedral Hill": {
+    spirit: "A mid-rise corridor of apartment towers and big institutions strung along Van Ness and Geary, anchored by the soaring white sails of St. Mary's Cathedral — north-central San Francisco at its most modern and practical, tucked between Japantown, Pacific Heights, and Polk Gulch.",
+    reasons: ["Transit-rich, with Van Ness BRT and 38-Geary at the door", "Major hospital care right in the neighborhood", "Walkable to Japantown and Polk Street", "Striking modern architecture and apartment living"],
+    history: "The district takes its name from the Cathedral of Saint Mary of the Assumption, dedicated in 1971 at Gough and Geary, designed by Pietro Belluschi and engineer Pier Luigi Nervi with local architects John Michael Lee, Paul A. Ryan, and Angus McSweeney. Its hyperbolic-paraboloid roof rises 190 feet and reads as a great white cupola over the corridor, earning the nickname the 'washing-machine' cathedral. Through the mid-20th century the Van Ness and Geary corridor filled with apartment buildings and hotels, including the modernist Jack Tar Hotel of 1960, later the Cathedral Hill Hotel, which occupied the full block at Geary and Van Ness until it closed in 2009 and was demolished in 2013. On that site, California Pacific Medical Center opened its new Van Ness Campus hospital in 2019, and the long-awaited Van Ness Bus Rapid Transit busway opened in 2022.",
+    facts: [
+      { icon: "church", title: "The 'washing-machine' cathedral", text: "St. Mary's Cathedral (1971), at 1111 Gough St, rises 190 feet under a roof of eight hyperbolic-paraboloid segments, topped by a 55-foot golden cross." },
+      { icon: "house", title: "CPMC Van Ness, opened 2019", text: "California Pacific Medical Center's Van Ness Campus hospital opened in 2019 on the block once occupied by the old Jack Tar / Cathedral Hill Hotel." },
+      { icon: "tram", title: "Van Ness Bus Rapid Transit", text: "The Van Ness BRT busway opened in 2022, giving the 49 and 47 lines dedicated center-running lanes down the avenue." },
+      { icon: "star", title: "A hofbrau since 1947", text: "Tommy's Joynt, the corner carvery at Geary and Van Ness, has been slicing pastrami and turkey at 1101 Geary Blvd since 1947." },
+    ],
+    nearby: ["Japantown", "Polk Gulch", "Pacific Heights"],
+    restaurants: [
+      { name: "Tommy's Joynt", address: "1101 Geary Blvd", phone: "(415) 949-0399", url: "http://tommysjoynt.com" },
+      { name: "Grubstake Diner", address: "1525 Pine St", phone: "(415) 228-8420", url: "https://www.grubstakesf.com" },
+    ],
+    bars: [
+      { name: "Saint Frank Coffee", address: "2340 Polk St", phone: "(415) 881-8062", url: "https://www.saintfrankcoffee.com" },
+    ],
+    hospital: { name: "CPMC Van Ness Campus", address: "1101 Van Ness Ave", dist: "in the neighborhood", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "Van Ness Bus Rapid Transit (49 Van Ness/Mission and 47 Van Ness) runs the corridor; the 38-Geary and 38R Geary Rapid cross at Geary. Also the 2 Sutter, 3 Jackson, and 19 Polk.",
+  },
+
+  "Polk Gulch": {
+    spirit: "A low valley that became a high-energy strip — restaurants, dive bars, cocktail dens, and corner shops packed into a walkable stretch between Nob Hill and Russian Hill, with a queer history that predates the Castro.",
+    reasons: ["Dense, walkable restaurant-and-bar corridor", "Transit-rich on Polk and Van Ness", "Layered LGBTQ history", "Apartments and Victorians side by side"],
+    aka: "the Polk Strip",
+    history: "Polk Street was named for U.S. President James K. Polk, but the 'Gulch' comes from the low valley between Nob Hill and Russian Hill that once carried a creek. After the 1906 earthquake, the corridor grew into a busy commercial strip of shops, restaurants, and small storefronts. From the 1950s into the early 1980s, Polk Gulch was the center of San Francisco's gay life, home to dozens of gay-owned bars and businesses, and it hosted the city's first Pride march in 1970 before the scene's center shifted to the Castro.",
+    facts: [
+      { icon: "flag", title: "The original gayborhood", text: "Before the Castro, the Polk Strip was San Francisco's main gay neighborhood, with dozens of gay bars and businesses by the late 1960s." },
+      { icon: "confetti", title: "First Pride march", text: "San Francisco's earliest Pride march stepped off along Polk Street in June 1970." },
+      { icon: "water", title: "A creek under the street", text: "The 'Gulch' name reflects the low valley and old watercourse that once ran through the area between two hills." },
+      { icon: "shop", title: "A true commercial strip", text: "Polk Street remains a dense, independent corridor of restaurants, bars, and shops rather than a residential pocket." },
+      { icon: "star", title: "Swan Oyster Depot", text: "The family-run seafood counter at 1517 Polk has been a San Francisco institution since 1912." },
+    ],
+    restaurants: [
+      { name: "Swan Oyster Depot", address: "1517 Polk St", phone: "(415) 673-1101" },
+      { name: "Dunya Bistro", address: "1609 Polk St", phone: "(415) 400-5770", url: "https://dunyabistrosf.com" },
+      { name: "Karam", address: "1725 Polk St", phone: "(415) 374-7142" },
+      { name: "Bob's Donuts & Pastry Shop", address: "1720 Polk St", phone: "(415) 776-3141", url: "https://www.bobsdonutssf.com" },
+    ],
+    bars: [
+      { name: "The Cinch Saloon", address: "1723 Polk St", phone: "(415) 776-4162" },
+      { name: "Lush Lounge", address: "1221 Polk St", phone: "(415) 771-2022", url: "http://lushloungesf.com" },
+      { name: "McTeague's Saloon", address: "1237 Polk St", phone: "(415) 776-1237", url: "https://www.sfmcteagues.com" },
+      { name: "Amelie", address: "1754 Polk St", phone: "(415) 292-6916" },
+      { name: "Bar Iris", address: "2316 Polk St", url: "https://www.bar-iris.com" },
+    ],
+    hospital: { name: "CPMC Van Ness Campus", address: "1101 Van Ness Ave", dist: "about 0.4 mi", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "Served by the 19-Polk and 1-California Muni buses, plus the 47 and 49 Van Ness routes (49 Van Ness BRT) and the 2 and 3 lines a block over. Van Ness Avenue carries north-south bus rapid transit.",
+  },
+
+  "Lower Nob Hill": {
+    spirit: "The dense apartment-house district on Nob Hill's lower southern slope, where 1910s–1920s brick high-rises and old residential hotels stack up just steps from downtown, the cable cars climbing the hill above and a lively run of restaurants and bars at street level.",
+    reasons: ["Walkable to Union Square and the Financial District", "Cable cars on the hill above", "Historic apartment-house architecture", "Dense, affordable nightlife and dining"],
+    aka: "the Tendernob",
+    history: "After the 1906 earthquake and the three-day fire that leveled the area, this lower slope of Nob Hill was rebuilt almost entirely between 1906 and 1925 with fireproof brick and reinforced-concrete apartment buildings and residential hotels. Rising three to seven stories, they housed workers and middle-class residents within walking distance of downtown, below the grand mansions and hotels crowning Nob Hill above. The blocks around Bush, Sutter and Post are now recognized as the Lower Nob Hill Apartment Hotel District, listed on the National Register of Historic Places in 1991 with 296 contributing buildings. Sitting between Nob Hill proper and the Tenderloin, the neighborhood picked up the nickname the Tendernob.",
+    facts: [
+      { icon: "house", title: "An apartment-house district", text: "The Lower Nob Hill Apartment Hotel District holds 296 contributing buildings, mostly three- to seven-story brick apartment houses and residential hotels rebuilt after the 1906 fire." },
+      { icon: "quake", title: "Rebuilt after 1906", text: "The 1906 quake and fire destroyed everything here; the district was rebuilt almost entirely between 1906 and 1925 using fireproof materials the city newly required." },
+      { icon: "book", title: "On the National Register", text: "The district was listed on the National Register of Historic Places on July 31, 1991, and designated a California Historical Landmark the same day." },
+      { icon: "tram", title: "Cable cars overhead", text: "The Powell-Hyde, Powell-Mason and California Street cable car lines run along the crest of Nob Hill just above the neighborhood." },
+      { icon: "pin", title: "The Tendernob", text: "Wedged between Nob Hill and the Tenderloin, the area earned the blended nickname the Tendernob." },
+    ],
+    restaurants: [
+      { name: "Liholiho Yacht Club", address: "871 Sutter St", phone: "(415) 440-5446", url: "https://lycsf.com" },
+      { name: "Cocobang", address: "550 Taylor St", phone: "(415) 292-5144", url: "https://cocobang.org" },
+      { name: "620 Jones", address: "620 Jones St", phone: "(415) 845-2257", url: "https://620-jones.com" },
+    ],
+    bars: [
+      { name: "Bourbon & Branch", address: "501 Jones St", phone: "(415) 346-1735", url: "https://www.bourbonandbranch.com" },
+      { name: "Rye", address: "688 Geary St", url: "https://www.ryesf.com" },
+    ],
+    hospital: { name: "UCSF Health Hyde Hospital", address: "900 Hyde St", dist: "about 0.4 mi", phone: "(415) 353-6000", url: "https://www.ucsfhealth.org/locations/hyde-hospital" },
+    transit: "Cable cars run along the hill above: Powell-Hyde and Powell-Mason on Powell Street and the California Street line. Muni buses 2, 3, 19, 27, 38 and 1 serve the surrounding streets.",
+  },
+
+  "Downtown / Union Square": {
+    spirit: "San Francisco's grand front parlor of department stores, theater marquees, and cable-car bells, where the whole city converges around one historic plaza.",
+    reasons: ["The city's retail and luxury-shopping core", "Heart of the Theater District", "Transit hub for the entire Bay Area", "Walk-everywhere hotel and dining density"],
+    history: "Union Square takes its name from the pro-Union rallies held here on the eve of the Civil War. At its center stands the Dewey Monument, a 97-foot column topped by the bronze figure 'Victory,' dedicated by President Theodore Roosevelt on May 14, 1903, to commemorate Admiral George Dewey's win at Manila Bay. The neighborhood rebuilt rapidly after the 1906 earthquake and fire, anchored by the Westin St. Francis hotel, which had opened on Powell Street in 1904. For more than a century it has remained the city's central district of flagship stores, grand hotels, and theaters.",
+    facts: [
+      { icon: "art", title: "The Victory statue", text: "The Dewey Monument's bronze 'Victory' was modeled by Alma de Bretteville Spreckels and sculpted by Robert Ingersoll Aitken, dedicated in 1903." },
+      { icon: "house", title: "The Westin St. Francis", text: "Opened in 1904, the St. Francis is the only hotel directly on Union Square and survived the 1906 disaster." },
+      { icon: "tram", title: "Powell cable-car turnaround", text: "At Powell and Market, the Powell-Hyde and Powell-Mason cars are spun by hand on the city's most-photographed turntable." },
+      { icon: "movie", title: "The Theater District", text: "The Curran, Orpheum, and American Conservatory Theater anchor the live-stage blocks just west of the square." },
+      { icon: "quake", title: "Rebuilt after 1906", text: "Much of the district was leveled by the 1906 earthquake and fire, then rebuilt within a few years as the city's retail core." },
+    ],
+    restaurants: [
+      { name: "John's Grill", address: "63 Ellis St", phone: "(415) 986-0069", url: "https://www.johnsgrill.com" },
+      { name: "Kin Khao", address: "55 Cyril Magnin St", phone: "(415) 362-7456", url: "https://www.kinkhao.com" },
+      { name: "Bourbon Steak", address: "335 Powell St", phone: "(415) 770-0291", url: "https://www.bourbonsteak.com/location/san-francisco/" },
+      { name: "Sears Fine Food", address: "439 Powell St", phone: "(415) 986-0700", url: "https://www.searsfinefood.com" },
+      { name: "Cafe de la Presse", address: "352 Grant Ave", phone: "(415) 398-2680", url: "https://www.cafedelapresse.com" },
+    ],
+    bars: [
+      { name: "Pacific Cocktail Haven", address: "550 Sutter St", url: "https://www.pacificcocktailsf.com" },
+      { name: "Local Edition", address: "691 Market St", phone: "(415) 795-1375", url: "https://www.localeditionsf.com" },
+    ],
+    hospital: { name: "UCSF Health Hyde Hospital (formerly Saint Francis Memorial)", address: "900 Hyde St", dist: "about 0.7 mi", phone: "(415) 353-6000", url: "https://www.ucsfhealth.org/locations/hyde-hospital" },
+    transit: "Powell St Station serves BART and Muni Metro (J, K, L, M, N lines); the underground Union Square/Market St Station serves Muni Metro as well. Powell-Hyde and Powell-Mason cable cars turn around at Powell and Market, alongside the F-Market streetcar and many bus lines.",
+  },
+
+  "Yerba Buena": {
+    spirit: "San Francisco's cultural living room — a walkable cluster of world-class museums, public gardens, and convention halls wrapped in glassy high-rise condos and hotels, where the city quite literally began.",
+    reasons: ["The city's densest concentration of museums", "Built around a downtown park with a memorial waterfall", "Transit-rich: BART, Muni Metro, Central Subway, F-line", "Walk-everywhere dining, shopping, and nightlife"],
+    aka: "SoMa cultural district",
+    history: "The neighborhood takes its name from Yerba Buena, the Mexican-era pueblo founded around 1835 whose name (Spanish for 'good herb') came from a fragrant mint that grew nearby; on January 30, 1847 the settlement was renamed San Francisco. The blocks south of Market were cleared in a long, contested mid-20th-century redevelopment effort that displaced many existing residents and businesses. The first phase of Yerba Buena Gardens opened in 1993 atop the underground halls of the Moscone Convention Center, anchored by the Yerba Buena Center for the Arts. Over the following decades a dense museum cluster took shape around the gardens, and the district filled in with residential towers and hotels.",
+    facts: [
+      { icon: "art", title: "SFMOMA", text: "The San Francisco Museum of Modern Art at 151 Third Street reopened in May 2016 after a Snohetta-designed expansion that roughly tripled its gallery space." },
+      { icon: "water", title: "MLK Memorial Waterfall", text: "Yerba Buena Gardens opened in 1993; behind its memorial waterfall, glass panels honor Dr. Martin Luther King Jr. with his words from the civil rights movement." },
+      { icon: "fair", title: "Moscone Center", text: "The George R. Moscone Convention Center — named for the San Francisco mayor assassinated in 1978 — tucks much of its exhibition hall underground, beneath Yerba Buena Gardens." },
+      { icon: "flag", title: "Where San Francisco began", text: "The district recalls the original Yerba Buena settlement, the small Mexican-era pueblo that grew into San Francisco." },
+      { icon: "subway", title: "Central Subway", text: "The Yerba Buena/Moscone Station on Muni's T Third Street line opened in November 2022, its glass roof drawing daylight three stories down to the platform." },
+    ],
+    restaurants: [
+      { name: "Tropisueno", address: "75 Yerba Buena Ln", phone: "(415) 985-2264", url: "https://www.tropisueno.com" },
+      { name: "Dirty Habit", address: "12 4th St", phone: "(415) 348-1555", url: "https://www.zhotelssf.com/hotels/dirty-habit" },
+      { name: "B Restaurant & Bar", address: "720 Howard St", phone: "(415) 495-9800" },
+      { name: "Joyride Pizza", address: "730 Howard St", phone: "(415) 295-2914", url: "https://www.joyridepizza.com" },
+    ],
+    bars: [
+      { name: "The View Lounge", address: "780 Mission St", phone: "(415) 896-1600", url: "https://www.theviewlounge-sf.com" },
+      { name: "Press Club", address: "20 Yerba Buena Ln", phone: "(415) 744-5000", url: "https://www.pressclubsf.com" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 2 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
+    transit: "Powell St and Montgomery St stations (BART and Muni Metro) sit two blocks north; the Yerba Buena/Moscone Station serves the Muni Metro T Third line. The F-Market streetcar runs along Market Street, with many bus lines nearby.",
+  },
+
+  "Presidio Terrace": {
+    spirit: "San Francisco's hidden oval of grandeur — a single private street where about three dozen century-old mansions sit behind a gate just south of the Presidio.",
+    reasons: ["One of SF's first private residence parks (1905)", "Gated, ultra-exclusive single oval street", "Steps from the Presidio and Clement Street", "Quiet, leafy, and storied"],
+    history: "Presidio Terrace was laid out beginning in 1905 by the real-estate firm Baldwin & Howell as one of San Francisco's first private 'residence parks,' built just south of the Presidio. About 35 to 36 grand mansions, in Beaux-Arts, Mission Revival and Tudor Revival styles, line a single privately owned oval street entered through a gate off Arguello Boulevard. It was historically and explicitly exclusionary: a 1906 brochure boasted it was a place where 'only Caucasians' could buy, a racial covenant of the sort the U.S. Supreme Court struck down in 1948. In 2015 a San Jose couple bought the private street and its common areas at a city tax auction for about $90,000 after the homeowners' association failed to pay roughly $14-a-year property taxes for decades; in November 2017 the Board of Supervisors voted to reverse the sale and return the street to the homeowners. Notable residents have included Senator Dianne Feinstein and former House Speaker Nancy Pelosi.",
+    facts: [
+      { icon: "house", title: "One private oval", text: "About 35 mansions ring a single privately owned oval street, entered through a gate off Arguello Boulevard." },
+      { icon: "money", title: "The $90,000 street", text: "In 2015 a couple bought the private street at a city tax auction for about $90,000 after the HOA missed roughly $14-a-year taxes for decades." },
+      { icon: "mayor", title: "Sale reversed", text: "In November 2017 the Board of Supervisors voted 7-4 to reverse the sale and return the street to the homeowners." },
+      { icon: "star", title: "Notable residents", text: "Past residents include Senator Dianne Feinstein and former House Speaker Nancy Pelosi." },
+      { icon: "flag", title: "An early residence park", text: "Begun in 1905 by Baldwin & Howell, it was among San Francisco's first private 'residence parks,' with underground utilities and electric street lights." },
+    ],
+    nearby: ["Inner Richmond", "Laurel Heights", "Presidio Heights"],
+    restaurants: [
+      { name: "Spruce", address: "3640 Sacramento St", phone: "(415) 931-5100", url: "https://www.sprucesf.com" },
+      { name: "Burma Superstar", address: "309 Clement St", phone: "(415) 387-2147", url: "https://www.burmasuperstar.com" },
+    ],
+    bars: [
+      { name: "The Bitter End", address: "441 Clement St", phone: "(415) 221-9538", url: "https://www.thebitterendsf.com" },
+      { name: "Toy Boat by Jane", address: "401 Clement St", phone: "(415) 751-7505", url: "https://www.itsjane.com/location/toy-boat-by-jane" },
+    ],
+    hospital: { name: "UCSF Health Stanyan Hospital (formerly St. Mary's)", address: "450 Stanyan St", dist: "about 1.6 mi", phone: "(415) 668-1000", url: "https://sfcommunityhospitals.ucsfhealth.org/st-marys" },
+    transit: "The gated entrance is off Arguello Blvd. Muni 33-Ashbury stops at Arguello and California, one block south; the 1-California runs along California St; the 2-Sutter and 43-Masonic serve nearby Presidio Heights; the 38-Geary runs along Geary Blvd to the south.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
