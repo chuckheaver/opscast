@@ -564,9 +564,32 @@ export default function FogMap({
         const link = reportUrl
           ? `<a href="${reportUrl}" target="_blank" rel="noopener noreferrer">More Information ↗</a>`
           : `<span style="color:#888">No more information available</span>`;
-        const html = `<div class="cbd-popup"><strong>${name}</strong><br/>${link}</div>`;
+
+        // Build the detail rows from the DataSF attributes. Each is optional
+        // so districts with missing values (e.g. no renewal yet) just skip it.
+        const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+        const revNum = parseInt(p.revenue, 10);
+        const revenue = Number.isFinite(revNum) ? `$${revNum.toLocaleString("en-US")}/yr` : null;
+        const em = p.expiration && /^(\d{4})-(\d{2})/.exec(p.expiration);
+        const expires = em ? `${MONTHS[+em[2] - 1]} ${em[1]}` : null;
+        const term = p.contract_duration ? p.contract_duration.replace(/\s*years?$/i, "-yr term") : "";
+        const rows = [];
+        if (revenue) rows.push(["Revenue", revenue]);
+        if (p.established) rows.push(["Established", p.established]);
+        if (expires) rows.push(["Expires", term ? `${expires} (${term})` : expires]);
+        if (p.renewed) rows.push(["Renewed", p.renewed]);
+        if (p.annual_report_latest_year) rows.push(["Latest report", p.annual_report_latest_year]);
+        const details = rows
+          .map(([k, v]) => `<div><span style="color:#6b7280">${k}:</span> ${v}</div>`)
+          .join("");
+
+        const html = `<div class="cbd-popup" style="font-size:12.5px;line-height:1.5">`
+          + `<strong style="font-size:13.5px">${name}</strong>`
+          + `<div style="margin:4px 0 6px">${details}</div>`
+          + link
+          + `</div>`;
         if (cbdPopup) cbdPopup.remove();
-        cbdPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "240px" })
+        cbdPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "260px" })
           .setLngLat(e.lngLat)
           .setHTML(html)
           .addTo(map);
