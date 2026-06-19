@@ -2914,6 +2914,240 @@ export const NEIGHBORHOODS = {
     transit:
       "The 37 Corbett climbs through the neighborhood; the 33 and 43 run nearby, and Forest Hill Station is a short ride away.",
   },
+
+  "Chinatown": {
+    spirit:
+      "The oldest Chinatown in North America — a dense, lantern-strung hillside of temples, dim sum parlors and dragon-topped alleys where over a century of Chinese-American life still hums.",
+    reasons: ["Oldest Chinatown in North America", "Incredibly walkable", "Transit-rich", "World-class dim sum"],
+    history:
+      "Chinatown grew up around Portsmouth Square and old Dupont Street (now Grant Avenue) after the 1848 Gold Rush, when San Francisco became the port of entry for Chinese miners and merchants bound for “Gold Mountain.” Grant Avenue is the city’s oldest street, and the quarter became the cultural anchor for Chinese immigrants across North America. Leveled by the 1906 earthquake and fire, the community rebuilt on the same blocks in a deliberately ornate style to draw tourism and resist relocation. Today its roughly 30 blocks remain one of the most densely populated neighborhoods in San Francisco.",
+    facts: [
+      { icon: "tower", title: "A gift from across the Pacific", text: "The Dragon Gate at Grant Ave and Bush St was built in 1970 as a gift from the Republic of China (Taiwan); its inscription reads “All under heaven is for the good of the people.”" },
+      { icon: "church", title: "One of the oldest Taoist temples in the U.S.", text: "Tin How Temple on Waverly Place, dedicated to the sea goddess Mazu, traces its roots to the 1850s and still operates several flights up a narrow stairway." },
+      { icon: "factory", title: "Fortune cookies folded by hand", text: "The Golden Gate Fortune Cookie Factory has hand-folded cookies in tiny Ross Alley since 1962 — you can watch them come off the press." },
+      { icon: "quake", title: "Rebuilt after 1906", text: "After the earthquake and fire destroyed it, the community rebuilt Chinatown on its original site with the flamboyant pagoda rooflines that define Grant Avenue today." },
+    ],
+    restaurants: [
+      { name: "Mister Jiu's", address: "28 Waverly Pl", phone: "(415) 857-9688", url: "https://misterjius.com" },
+      { name: "R&G Lounge", address: "631 Kearny St", phone: "(415) 982-7877", url: "https://www.rnglounge.com" },
+      { name: "Z & Y Restaurant", address: "655 Jackson St", phone: "(415) 981-8988", url: "https://www.zandyrestaurant.com" },
+      { name: "Great Eastern Restaurant", address: "649 Jackson St", phone: "(415) 986-2500", url: "https://www.greateasternsf.com" },
+      { name: "Good Mong Kok Bakery", address: "1039 Stockton St", phone: "(415) 397-2688" },
+    ],
+    bars: [
+      { name: "Li Po Cocktail Lounge", address: "916 Grant Ave", phone: "(415) 982-0072" },
+      { name: "Comstock Saloon", address: "155 Columbus Ave", phone: "(415) 617-0071", url: "https://www.comstocksaloon.com" },
+    ],
+    hospital: { name: "Chinese Hospital", address: "845 Jackson St", dist: "in the neighborhood", phone: "(415) 982-2400", url: "https://chinesehospital-sf.org" },
+    transit:
+      "The Central Subway's Chinatown–Rose Pak Station (Stockton at Washington) serves Muni Metro's T Third line. The California Street cable car runs through the heart of the neighborhood, and the Powell-Mason and Powell-Hyde cable cars run along its western edge. Buses: 1, 8, 30, 45.",
+  },
+
+  "Financial District": {
+    spirit:
+      "San Francisco's glass-and-granite canyon — where Gold Rush fortunes built the West's oldest banking center and steel towers still catch the morning fog.",
+    reasons: ["Walk to work downtown", "BART + Muni hub", "Historic dining institutions", "Steps from the waterfront"],
+    aka: "Barbary Coast",
+    history:
+      "The Financial District grew out of the 1849 Gold Rush as San Francisco's first commercial center, rising on land that was once shoreline and buried ships near the old Long Wharf. Its northern edge overlaps the Barbary Coast, a notorious 19th-century district of saloons, dance halls and brothels named after the pirate-plagued coast of North Africa. As banks and trading houses replaced the vice trade, the area became one of the largest and oldest financial districts in the western United States. Montgomery Street, its main spine, earned the nickname 'the Wall Street of the West.'",
+    facts: [
+      { icon: "tower", title: "An 853-foot landmark", text: "The Transamerica Pyramid, completed in 1972, was the city's tallest building until Salesforce Tower surpassed it in 2018." },
+      { icon: "park", title: "A redwood grove downtown", text: "Transamerica Redwood Park, planted in 1974, holds nearly 50 mature redwoods transplanted from the Santa Cruz area, now towering over 100 feet." },
+      { icon: "road", title: "Pony Express headquarters", text: "601 Montgomery St was the western business headquarters of the company that ran the 1860–61 Pony Express; a historic marker still stands there." },
+      { icon: "money", title: "Bank of America's old HQ", text: "555 California St, finished in 1969, was the tallest building west of the Mississippi until 1972 and served as Bank of America's world headquarters." },
+      { icon: "money", title: "California's oldest restaurant", text: "Tadich Grill traces its roots to an 1849 coffee stand on Long Wharf, making it the oldest continuously run restaurant in the state." },
+    ],
+    restaurants: [
+      { name: "Tadich Grill", address: "240 California St", phone: "(415) 391-1849", url: "https://tadichgrillsf.com" },
+      { name: "Kokkari Estiatorio", address: "200 Jackson St", phone: "(415) 981-0983", url: "https://kokkari.com" },
+      { name: "Wayfare Tavern", address: "201 Pine St", phone: "(415) 772-9060", url: "https://www.wayfaretavern.com" },
+      { name: "Schroeder's", address: "240 Front St", phone: "(415) 421-4778", url: "https://www.schroederssf.com" },
+    ],
+    bars: [
+      { name: "Comstock Saloon", address: "155 Columbus Ave", phone: "(415) 617-0071", url: "https://www.comstocksaloon.com" },
+      { name: "Blue Bottle Coffee", address: "115 Sansome St", url: "https://bluebottlecoffee.com/cafes/sansome" },
+    ],
+    hospital: { name: "Chinese Hospital", address: "845 Jackson St", dist: "about 0.6 mi", phone: "(415) 982-2400", url: "https://chinesehospital-sf.org" },
+    transit:
+      "Montgomery St and Embarcadero stations both serve BART (Blue, Green, Red and Yellow lines) and Muni Metro (J, K, L, M, N and T lines) beneath Market St. The historic F-Market streetcar and the California Street cable car also run through the district.",
+  },
+
+  "Tenderloin": {
+    spirit:
+      "San Francisco's gritty, big-hearted downtown core — a dense grid of historic SRO hotels, Vietnamese kitchens and speakeasy cocktail dens, raw and real in equal measure.",
+    reasons: ["Best cheap eats in SF", "Historic speakeasy bars", "Steps from BART & Muni", "Little Saigon"],
+    aka: "The TL",
+    history:
+      "The 'Tenderloin' nickname is widely traced to a vice-era police culture in which officers working this lucrative beat could afford the finest cut of meat — the tenderloin — borrowing the name from a similar district in New York. After the 1906 earthquake the area filled with single-room-occupancy (SRO) hotels for transient workers, and by the 1920s it was the city's nightlife and speakeasy quarter. The fall of Saigon in 1975 brought waves of Vietnamese, Cambodian and Laotian refugees, who built the businesses that became 'Little Saigon' along Larkin Street. Today the Uptown Tenderloin Historic District protects the world's largest collection of historic SRO hotels.",
+    facts: [
+      { icon: "house", title: "World's largest SRO collection", text: "The Uptown Tenderloin Historic District, listed on the National Register in 2009, has over 400 contributing buildings and the world's largest concentration of historic single-room-occupancy hotels." },
+      { icon: "burrito", title: "Little Saigon", text: "In 2004 the city designated the Larkin Street corridor between Eddy and O'Farrell as 'Little Saigon,' honoring the Vietnamese community rooted here since the 1970s." },
+      { icon: "beer", title: "Prohibition-era speakeasy", text: "Bourbon & Branch at 501 Jones operated as a real speakeasy from 1921–1933, hidden behind a sign reading 'Anti-Saloon League.'" },
+      { icon: "subway", title: "Transit-rich downtown", text: "Powell and Civic Center stations — both BART and Muni Metro — sit within a five-minute walk, plus the historic F-Market streetcar." },
+    ],
+    restaurants: [
+      { name: "Saigon Sandwich", address: "560 Larkin St", phone: "(415) 474-5698" },
+      { name: "Pho 2000", address: "637 Larkin St", phone: "(415) 474-1188" },
+      { name: "Lers Ros Thai", address: "730 Larkin St", phone: "(415) 931-6917", url: "https://lersros.com" },
+      { name: "Bodega SF", address: "138 Mason St", phone: "(415) 655-9341" },
+    ],
+    bars: [
+      { name: "Bourbon & Branch", address: "501 Jones St", phone: "(415) 346-1735", url: "https://www.bourbonandbranch.com" },
+      { name: "Aunt Charlie's Lounge", address: "133 Turk St", phone: "(415) 441-2922", url: "https://auntcharlieslounge.com" },
+      { name: "Emperor Norton's BoozeLand", address: "510 Larkin St" },
+      { name: "Ha-Ra Club", address: "875 Geary St", phone: "(415) 673-3148", url: "https://www.harasf.com" },
+      { name: "Geary Club", address: "768 Geary St", phone: "(415) 928-4516" },
+    ],
+    hospital: { name: "UCSF Health Hyde Hospital", address: "900 Hyde St", dist: "about 0.5 mi", phone: "(415) 353-6000", url: "https://www.ucsfhealth.org/locations/hyde-hospital" },
+    transit:
+      "Civic Center and Powell Street stations (BART and Muni Metro J, K, L, M, N, T) are a short walk along Market St, as is the F-Market historic streetcar. Muni buses: 19, 27, 31, 38, 49.",
+  },
+
+  "Civic Center": {
+    spirit:
+      "San Francisco's grand Beaux-Arts heart — a monumental plaza ringed by the gilded-dome City Hall, world-class opera and symphony, and the city's great library.",
+    reasons: ["Beaux-Arts grandeur", "Arts and culture hub", "Major BART/Muni hub", "Walk to City Hall"],
+    history:
+      "After the 1906 earthquake and fire leveled the area, San Francisco rebuilt it as a 'City Beautiful' showpiece — a unified Beaux-Arts civic complex of monumental buildings framing a formal plaza. The centerpiece, City Hall, opened in 1915 with a gilded dome rising about 301 feet, taller than the U.S. Capitol's. Over following decades the surrounding Performing Arts district took shape, anchored by the War Memorial Opera House (1932) and, later, Davies Symphony Hall. In 1945 delegates of fifty nations met here, adopting the United Nations Charter at the Opera House and signing it next door at the War Memorial's Herbst Theatre.",
+    facts: [
+      { icon: "tower", title: "A dome taller than the Capitol", text: "City Hall's gilded Beaux-Arts dome rises about 301 feet, higher than the U.S. Capitol in Washington." },
+      { icon: "flag", title: "Birthplace of the U.N.", text: "The United Nations Charter was adopted at the War Memorial Opera House and signed at the adjacent Herbst Theatre in June 1945." },
+      { icon: "book", title: "A grand main library", text: "The San Francisco Main Library at 100 Larkin St opened in 1996 with over 376,000 square feet across seven floors." },
+      { icon: "art", title: "Asian art treasure house", text: "The Asian Art Museum holds one of the world's most comprehensive collections of Asian art, in the former Main Library building." },
+      { icon: "music", title: "Opera, symphony and ballet", text: "The War Memorial Opera House and Davies Symphony Hall make Civic Center the city's performing-arts district." },
+    ],
+    nearby: ["Hayes Valley", "Tenderloin"],
+    restaurants: [
+      { name: "Zuni Café", address: "1658 Market St", phone: "(415) 552-2522", url: "https://zunicafe.com" },
+      { name: "Rich Table", address: "199 Gough St", phone: "(415) 355-9085", url: "https://www.richtablesf.com" },
+      { name: "Absinthe Brasserie & Bar", address: "398 Hayes St", phone: "(415) 551-1590", url: "https://www.absinthe.com" },
+      { name: "Brenda's French Soul Food", address: "652 Polk St", phone: "(415) 345-8100", url: "https://frenchsoulfood.com" },
+    ],
+    bars: [
+      { name: "Smuggler's Cove", address: "650 Gough St", phone: "(415) 869-1900", url: "https://www.smugglerscovesf.com" },
+      { name: "Birba", address: "458 Grove St", phone: "(415) 549-7612", url: "https://www.birbawine.com" },
+    ],
+    hospital: { name: "UCSF Health Saint Francis Hospital", address: "900 Hyde St", dist: "about 0.8 mi", phone: "(415) 353-6000", url: "https://www.ucsfhealth.org/locations/saint-francis-hospital" },
+    transit:
+      "Civic Center/UN Plaza Station serves BART (all lines through downtown) and Muni Metro lines J, K, L, M and N at Market and 8th Streets. Many Muni bus and trolley lines run on Market, Van Ness and Polk.",
+  },
+
+  "Fishermans Wharf": {
+    spirit:
+      "A working crab fleet turned world-famous waterfront — barking sea lions at PIER 39, steaming Dungeness pots, and the cable car clanging to a stop at the bay's edge.",
+    reasons: ["Iconic SF waterfront", "Sea lions at PIER 39", "Dungeness crab heritage", "Cable cars & streetcars"],
+    history:
+      "The Wharf grew in the late 1800s as Italian immigrant fishermen — many from Genoa — launched lateen-rigged feluccas and Monterey clippers to chase herring and Dungeness crab, selling their catch from stalls along the pier. It was here that Genoese fishermen created cioppino, the communal seafood stew. After the 1906 earthquake the area was rebuilt over the rubble of the old Meiggs Wharf, and through the 20th century the shrinking fishing fleet gave way to a tourism economy of crab stands, restaurants, and shops. In October 1989, following the Loma Prieta earthquake, California sea lions began hauling out on PIER 39's K-Dock; by 1990 hundreds had taken over, and they have lived there ever since. Today a small commercial fishing fleet still works alongside one of America's most-visited waterfronts.",
+    facts: [
+      { icon: "bird", title: "Sea lions since 1990", text: "Hundreds of California sea lions haul out on PIER 39's K-Dock; a record 2,000-plus crowded the docks in April 2024." },
+      { icon: "factory", title: "Ghirardelli Square", text: "The former Ghirardelli chocolate factory, with roots to 1852, became one of the first major U.S. adaptive-reuse projects in the 1960s." },
+      { icon: "water", title: "Birthplace of cioppino", text: "Genoese fishermen invented the Dungeness-crab stew cioppino here in the late 1800s." },
+      { icon: "tram", title: "Cable-car turnarounds", text: "The Powell-Hyde and Powell-Mason cable car lines both terminate at the Wharf, at Hyde & Beach and Taylor & Bay." },
+      { icon: "coffee", title: "Irish coffee's U.S. debut", text: "The Buena Vista, near the Hyde Street turnaround, is credited with introducing Irish coffee to America in 1952." },
+    ],
+    restaurants: [
+      { name: "Scoma's", address: "1965 Al Scoma Way (Pier 47)", phone: "(415) 771-4383", url: "https://scomas.com" },
+      { name: "Fog Harbor Fish House", address: "PIER 39, Suite A202", phone: "(415) 421-2442", url: "https://fogharbor.com" },
+      { name: "The Franciscan Crab Restaurant", address: "Pier 43 1/2", phone: "(415) 362-7733", url: "https://www.franciscancrabrestaurant.com" },
+      { name: "Bistro Boudin", address: "160 Jefferson St", phone: "(415) 351-5561", url: "https://bistroboudin.com" },
+    ],
+    bars: [
+      { name: "The Buena Vista", address: "2765 Hyde St", phone: "(415) 474-5044", url: "https://www.thebuenavista.com" },
+    ],
+    hospital: { name: "CPMC Van Ness Campus", address: "1101 Van Ness Ave", dist: "about 1.5 mi", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit:
+      "F-Market & Wharves historic streetcar serves the Embarcadero and Jefferson St. Powell-Hyde and Powell-Mason cable cars terminate at the Wharf (Hyde & Beach, Taylor & Bay). E-Embarcadero streetcar and buses 8, 30, 39 and 47 also serve the area.",
+  },
+
+  "Inner Sunset": {
+    spirit:
+      "A foggy, leafy district pressed between Golden Gate Park and UCSF, where the buzzing 9th Avenue and Irving Street strip anchors one of the city's best global-food corners.",
+    reasons: ["Steps from Golden Gate Park", "Strong restaurant row on 9th & Irving", "N-Judah straight downtown", "Next to UCSF Parnassus"],
+    history:
+      "Through the 1860s–1880s the Inner Sunset was open sand dunes dotted with dairies, roadhouses, and dynamite works on the city's western edge. Development took hold after entrepreneur Aurelius Buckingham began building near 5th Avenue and Lincoln Way in 1887, and accelerated with the 1894 California Midwinter Exposition staged in adjacent Golden Gate Park. UCSF planted its medical campus uphill on Parnassus Heights in 1897, a presence that still shapes the neighborhood. Streetcar service through the new Sunset Tunnel and the N-Judah line (Mayor 'Sunny Jim' Rolph drove the first car in 1928) finally tied the once-remote 'outside lands' to downtown, filling the blocks with homes.",
+    facts: [
+      { icon: "park", title: "Park at the doorstep", text: "Golden Gate Park borders the neighborhood to the north, putting the de Young Museum, Academy of Sciences, and Botanical Garden within a short walk." },
+      { icon: "subway", title: "N-Judah lifeline", text: "The N-Judah Muni Metro line runs through Inner Sunset along Irving and 9th, connecting the neighborhood to downtown and the ballpark." },
+      { icon: "house", title: "UCSF on the hill", text: "UCSF established its medical center on Parnassus Heights, just uphill, in 1897 — still a major employer and presence." },
+      { icon: "beer", title: "SF's oldest bar", text: "The Little Shamrock on Lincoln Way has poured drinks since 1893, making it one of San Francisco's oldest continuously operating bars." },
+      { icon: "fair", title: "Born of a world's fair", text: "Growth surged after the 1894 California Midwinter International Exposition drew crowds to neighboring Golden Gate Park." },
+    ],
+    restaurants: [
+      { name: "Marnee Thai", address: "1243 9th Ave", phone: "(415) 731-9999", url: "https://www.marneethaisf.com" },
+      { name: "San Tung", address: "1031 Irving St", phone: "(415) 242-0828", url: "https://www.santungsf.com" },
+      { name: "Fiorella Sunset", address: "1240 9th Ave", phone: "(415) 404-6997", url: "https://fiorella-sf.com" },
+      { name: "Arizmendi Bakery", address: "1331 9th Ave", phone: "(415) 566-3117", url: "https://www.arizmendibakery.com" },
+    ],
+    bars: [
+      { name: "The Little Shamrock", address: "807 Lincoln Way", phone: "(415) 661-0060" },
+      { name: "Yancy's Saloon", address: "734 Irving St", phone: "(415) 665-6551" },
+    ],
+    hospital: { name: "UCSF Medical Center at Parnassus", address: "505 Parnassus Ave", dist: "about 0.5 mi", phone: "(415) 476-1000", url: "https://www.ucsfhealth.org/locations/parnassus-campus" },
+    transit:
+      "The N-Judah Muni Metro line runs through the neighborhood along Irving Street and 9th Avenue to downtown. Buses 6, 7, 28, 43, 44, and 66 serve the 9th Ave & Irving area.",
+  },
+
+  "Outer Sunset": {
+    spirit:
+      "A foggy, laid-back surf-and-sand district at the edge of the city, where the N-Judah ends at Ocean Beach and life moves at a mellow pace.",
+    reasons: ["Steps from Ocean Beach", "Surf culture", "Quieter, more space for the money", "Beloved café scene"],
+    aka: "the Outside Lands",
+    history:
+      "Now-residential streets here were once the windswept sand dunes of the 'Outside Lands' on San Francisco's far west side, long considered too remote to settle. The Park and Ocean Railroad began bringing weekend crowds to Ocean Beach in 1883, but the dunes remained mostly empty until the 1920s and 1930s. Developers including Henry Doelger took advantage of new FHA loans to build row upon row of affordable stucco single-family homes. From 1934 to 1941 Doelger was the largest homebuilder in the country, putting up roughly two houses a day, and by just after World War II the dunes had been filled with a sea of these row houses.",
+    facts: [
+      { icon: "wave", title: "Ocean Beach surf", text: "The neighborhood fronts Ocean Beach, one of the most powerful and challenging surf breaks on the West Coast." },
+      { icon: "house", title: "Doelger row houses", text: "Builder Henry Doelger raised much of the Sunset in the 1930s, at his peak the nation's largest homebuilder, completing about two stucco houses a day." },
+      { icon: "park", title: "Sunset Dunes park", text: "The 77-acre car-free Sunset Dunes park opened along the former Upper Great Highway on April 12, 2025 — California's largest pedestrianization project." },
+      { icon: "sun", title: "Sunset Reservoir solar", text: "The 5-megawatt Sunset Reservoir solar array, completed in 2009 with nearly 24,000 panels, was one of the largest municipal solar projects in the country at the time." },
+      { icon: "coffee", title: "Café and surf culture", text: "Spots like Trouble Coffee, Andytown and Outerlands helped define a low-key beachside café culture that draws visitors from across the city." },
+    ],
+    restaurants: [
+      { name: "Outerlands", address: "4001 Judah St", phone: "(415) 661-6140", url: "https://www.outerlandssf.com" },
+      { name: "Thanh Long", address: "4101 Judah St", phone: "(415) 665-1146", url: "https://www.thanhlongsf.com" },
+      { name: "Hook Fish Co.", address: "4542 Irving St", phone: "(415) 569-4984", url: "https://www.hookfishco.com" },
+      { name: "Devil's Teeth Baking Company", address: "3876 Noriega St", phone: "(415) 683-5533", url: "https://www.devilsteethbakingcompany.com" },
+    ],
+    bars: [
+      { name: "White Cap", address: "3608 Taraval St", url: "https://whitecapsf.com" },
+      { name: "Woods Outbound", address: "4045 Judah St", phone: "(415) 571-8025", url: "https://www.woodsbeer.com/outbound" },
+      { name: "Andytown Coffee Roasters", address: "3655 Lawton St", phone: "(415) 753-9775", url: "https://andytownsf.com" },
+      { name: "Java Beach Cafe", address: "1396 La Playa St", phone: "(415) 665-5282", url: "https://javabeachcafe.com" },
+    ],
+    hospital: { name: "UCSF Medical Center at Parnassus", address: "505 Parnassus Ave", dist: "about 2.5 mi", phone: "(415) 476-1000", url: "https://www.ucsfhealth.org/locations/parnassus-campus" },
+    transit:
+      "N-Judah Muni Metro runs to Ocean Beach at La Playa; L-Taraval serves the southern Outer Sunset. Buses include 7-Haight/Noriega, 18-46th Avenue, 29-Sunset and 48-Quintara/24th St.",
+  },
+
+  "Outer Richmond": {
+    spirit:
+      "San Francisco's foggy edge of the continent — a calm, residential grid of avenues running west to Ocean Beach, Lands End, and the ruins of Sutro Baths.",
+    reasons: ["Near Lands End & Ocean Beach", "Clement St food scene", "Calm, residential", "38-Geary buses downtown"],
+    aka: "The Avenues",
+    history:
+      "At the turn of the 20th century the area west of Arguello was windswept sand dunes and potato fields, lumped with the rest of the western city as the “Outside Lands.” New cable and electric streetcar lines opened it to the public, carrying San Franciscans out to Golden Gate Park, Ocean Beach, and Adolph Sutro's Cliff House and Sutro Baths. After the 1906 earthquake and fire, displaced residents settled the avenues in large numbers. Waves of Russian refugees arrived after the Russian Revolution, and from the 1950s onward — especially after 1965 — Chinese immigrants made the district home, giving Geary Boulevard and Clement Street their distinctive Russian and Cantonese character.",
+    facts: [
+      { icon: "wave", title: "Sutro Baths ruins", text: "The 1894 Sutro Baths, once the world's largest indoor saltwater swimming complex, survive as dramatic oceanfront ruins at Lands End." },
+      { icon: "art", title: "Legion of Honor", text: "The Legion of Honor fine-arts museum, a replica of Paris's Palais de la Légion d'Honneur, sits on a bluff above Lands End." },
+      { icon: "church", title: "Holy Virgin Cathedral", text: "The gold-domed Holy Virgin Cathedral (6210 Geary), completed in 1965, is the largest cathedral of the Russian Orthodox Church Outside Russia." },
+      { icon: "park", title: "Lands End", text: "Lands End offers cliffside coastal trails with Golden Gate Bridge views, plus Mile Rock Beach and the old Fort Miley." },
+      { icon: "beer", title: "Oldest U.S. tiki bar", text: "Trad'r Sam on Geary, opened in 1937, bills itself as the oldest continuously operating tiki bar in the United States." },
+    ],
+    restaurants: [
+      { name: "Pearl 6101", address: "6101 California St", phone: "(415) 592-9777", url: "https://www.pearl6101.com" },
+      { name: "Violet's Tavern", address: "2301 Clement St", phone: "(415) 682-4861", url: "https://www.violets-sf.com" },
+      { name: "Pacific Cafe", address: "7000 Geary Blvd", phone: "(415) 387-7091", url: "https://pacificcafesf.com" },
+      { name: "Hong Kong Lounge", address: "5322 Geary Blvd", phone: "(415) 668-8836", url: "https://www.newhongkonglounge.com" },
+    ],
+    bars: [
+      { name: "Trad'r Sam", address: "6150 Geary Blvd", phone: "(415) 221-0773", url: "https://tradrsam.net" },
+      { name: "The Blarney Stone", address: "5625 Geary Blvd", phone: "(415) 386-9914" },
+      { name: "Ireland's 32", address: "3920 Geary Blvd", phone: "(415) 386-6173" },
+      { name: "Simple Pleasures Cafe", address: "3434 Balboa St", phone: "(415) 387-4022" },
+    ],
+    hospital: { name: "UCSF Health Stanyan Hospital (formerly St. Mary's)", address: "450 Stanyan St", dist: "about 3 mi", phone: "(415) 668-1000", url: "https://sfcommunityhospitals.ucsfhealth.org/st-marys" },
+    transit:
+      "38-Geary and 38R-Geary Rapid run the length of Geary Blvd to downtown; 1-California to the north; 5-Fulton and 5R-Fulton Rapid along Fulton; 31-Balboa and 29-Sunset also serve the avenues.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
