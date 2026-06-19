@@ -3148,6 +3148,211 @@ export const NEIGHBORHOODS = {
     transit:
       "38-Geary and 38R-Geary Rapid run the length of Geary Blvd to downtown; 1-California to the north; 5-Fulton and 5R-Fulton Rapid along Fulton; 31-Balboa and 29-Sunset also serve the avenues.",
   },
+
+  "Dogpatch": {
+    spirit: "A sun-warmed slice of the central waterfront where 19th-century shipyards and workers' cottages have been reborn as breweries, art galleries and some of the city's most beloved restaurants.",
+    reasons: ["Historic maker district", "Galleries & breweries", "Sunny waterfront pocket", "T-Third light rail"],
+    aka: "Central Waterfront",
+    history: "Dogpatch grew up in the 1870s as an informal company town for the ironworks, refineries and shipyards along the bay's edge. Three-quarters of its households worked for big employers like the Union Iron Works (later Bethlehem Steel) at Pier 70, and developers threw up rows of cheap Victorian and Edwardian cottages, including a cluster of identical Eastlake-style homes built to plans by architect John Cotter Pelton, Jr. Spared by the 1906 earthquake and fire, much of that worker housing survives, making Dogpatch one of the city's most intact pre-1910 neighborhoods. Shipbuilding faded after World War II, and in recent decades the old industrial blocks have been reborn as an arts, maker and dining district anchored by the Minnesota Street Project galleries.",
+    facts: [
+      { icon: "factory", title: "Birthplace of warships", text: "The Union Iron Works, founded 1883, built vessels like the battleship USS Oregon along this waterfront." },
+      { icon: "quake", title: "Survived 1906", text: "Much of Dogpatch escaped the earthquake and fire, leaving a rare intact district of 1870s–1910 workers' cottages." },
+      { icon: "house", title: "Pelton cottages", text: "Clusters of identical Eastlake-style cottages were built to plans by architect John Cotter Pelton, Jr." },
+      { icon: "art", title: "An arts hub", text: "The Minnesota Street Project at 1275 Minnesota St houses more than a dozen independent fine-art galleries." },
+      { icon: "dog", title: "A name nobody agrees on", text: "Theories trace 'Dogpatch' to dogfennel weed, packs of stray dogs, or the Li'l Abner comic strip." },
+    ],
+    restaurants: [
+      { name: "Piccino", address: "1001 Minnesota St", phone: "(415) 824-4224", url: "https://www.piccino.com" },
+      { name: "Long Bridge Pizza Co.", address: "2347 3rd St", phone: "(415) 829-8999", url: "https://www.longbridgepizza.com" },
+      { name: "Wolfsbane", address: "2495 3rd St", phone: "(415) 961-4017", url: "https://wolfsbanesf.com" },
+    ],
+    bars: [
+      { name: "The Sea Star", address: "2289 3rd St", phone: "(415) 552-5330", url: "https://www.theseastarsf.com" },
+      { name: "Third Rail", address: "628 20th St", url: "https://www.thirdrailbarsf.com" },
+      { name: "Dogpatch Saloon", address: "2496 3rd St" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 1.3 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
+    transit: "T-Third Muni Metro light rail runs the length of Third St with stops at 20th St and 23rd St. Buses 22 Fillmore, 48 Quintara/24th St and 55 Dogpatch also serve the neighborhood.",
+  },
+
+  "Mission Bay": {
+    spirit: "San Francisco's newest neighborhood from the ground up — a master-planned waterfront district of biotech labs, modern mid-rises and arena lights rising where rail yards once stood.",
+    reasons: ["New construction", "UCSF & biotech jobs", "Chase Center events", "Waterfront parks"],
+    history: "Mission Bay began as tidal marsh, filled in over the late 1800s to become wharves and Southern Pacific railroad yards. After the rail yards shut down, the land sat largely vacant for decades until a roughly 300-acre redevelopment — the city's largest since Golden Gate Park — broke ground in the late 1990s. UCSF opened its Mission Bay research campus in 2003 with Genentech Hall, anchoring what became one of the nation's largest biomedical university expansions and seeding a cluster of biotech companies. The Warriors' Chase Center arena followed in 2019, and new waterfront parks have continued to open into the 2020s.",
+    facts: [
+      { icon: "factory", title: "Built on old rail yards", text: "The neighborhood rose on former Southern Pacific railroad yards, redeveloped from the late 1990s in a roughly 300-acre plan." },
+      { icon: "money", title: "A biotech hub", text: "UCSF's Mission Bay campus opened in 2003 and helped grow the city's biotech sector from one company to more than 100 within a decade." },
+      { icon: "star", title: "Home of the Warriors", text: "Chase Center opened in 2019 as a privately financed arena seating about 18,000 for Golden State Warriors basketball and concerts." },
+      { icon: "water", title: "New waterfront parks", text: "Bayfront Park sits between Chase Center and the Bay, and China Basin Park opened in 2024 at the mouth of Mission Creek." },
+      { icon: "tram", title: "A streetcar district", text: "The T Third Muni Metro line runs up Third Street with a stop right at UCSF/Chase Center." },
+    ],
+    restaurants: [
+      { name: "Che Fico Pizzeria", address: "1 Warriors Way, Ste 300", phone: "(415) 655-9675", url: "https://www.chefico.com" },
+      { name: "Dumpling Time", address: "191 Warriors Way", url: "https://www.dumplingtime.com/thrive-city" },
+      { name: "Burma Love", address: "151 Warriors Way, Ste 105", phone: "(415) 881-1800", url: "https://www.burmalove.co/burma-love-thrive-city" },
+      { name: "Gott's Roadside", address: "151 Warriors Way, Ste 102", phone: "(415) 815-2992", url: "https://www.gotts.com/location/sfmissionbay/" },
+    ],
+    bars: [
+      { name: "Golden Rule", address: "720 Terry Francois Blvd", url: "https://www.goldenrulebar.com" },
+      { name: "Spark Social SF", address: "601 Mission Bay Blvd North", url: "https://sparksocialsf.com" },
+    ],
+    hospital: { name: "UCSF Medical Center at Mission Bay", address: "1825 4th St", dist: "right in the neighborhood", phone: "(415) 353-3000", url: "https://www.ucsfhealth.org/locations/mission-bay-campus" },
+    transit: "The T-Third Muni Metro line runs up Third Street with a stop at UCSF/Chase Center; the N-Judah also serves the area. Caltrain's terminus at 4th & King is just to the north.",
+  },
+
+  "South Beach": {
+    spirit: "San Francisco's waterfront ballpark village — Bay Bridge views, a yacht-filled harbor, and Giants energy wrapped around Oracle Park.",
+    reasons: ["Steps from Oracle Park", "Waterfront promenade", "Bay Bridge views", "Ferry & Muni access"],
+    history: "Once a working stretch of industrial piers, rail yards, and warehouses along China Basin, South Beach spent more than a century as a blue-collar waterfront. Redevelopment began in the 1980s, anchored by the South Beach Harbor marina, which opened in 1986 on Port of San Francisco land. The neighborhood's transformation accelerated when the Giants broke ground for a new ballpark at Third and King in 1997. Pacific Bell Park opened on April 11, 2000 (later SBC Park, AT&T Park, and now Oracle Park), turning the sleepy district into a dense neighborhood of condos, restaurants, and bars. Today it blends marina living, waterfront parks, and game-day crowds.",
+    facts: [
+      { icon: "star", title: "A privately financed ballpark", text: "Oracle Park opened April 11, 2000 at Third and King as Pacific Bell Park — the first privately financed Major League ballpark since Dodger Stadium in 1962." },
+      { icon: "water", title: "McCovey Cove", text: "The slice of San Francisco Bay beyond Oracle Park's right-field wall is nicknamed McCovey Cove, where kayakers wait to fish out home-run 'splash hits.'" },
+      { icon: "wave", title: "A 700-slip harbor", text: "South Beach Harbor, built in 1986 between Pier 40 and the ballpark, holds about 700 slips on concrete docks just half a mile south of the Bay Bridge." },
+      { icon: "bridge", title: "Cupid's Span", text: "The 60-foot bow-and-arrow sculpture by Claes Oldenburg and Coosje van Bruggen was installed in 2002 at Rincon Park on the Embarcadero, framing the waterfront's Bay Bridge views." },
+    ],
+    restaurants: [
+      { name: "MoMo's", address: "760 2nd St", phone: "(415) 227-8660", url: "https://www.sfmomos.com" },
+      { name: "Marlowe", address: "500 Brannan St", phone: "(415) 777-1413", url: "https://www.marlowesf.com" },
+      { name: "Town's End Brunch", address: "2 Townsend St", phone: "(415) 875-9984", url: "https://townsendbrunch.com" },
+      { name: "Red's Java House", address: "Pier 30, The Embarcadero", phone: "(415) 777-5626", url: "https://www.redsjavahouse.com" },
+    ],
+    bars: [
+      { name: "Candlestick Park Sports Bar", address: "747 3rd St", phone: "(415) 655-9982", url: "https://www.candlestickbarsf.com" },
+      { name: "Hi Dive", address: "Pier 28 1/2, The Embarcadero", phone: "(415) 977-0170", url: "https://www.hidivesf.com" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 2 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
+    transit: "Muni Metro N-Judah stops at 2nd & King beside Oracle Park; the T-Third/Central Subway stops at 4th & King. The F-Market historic streetcar runs the Embarcadero, and Caltrain terminates at 4th & King.",
+  },
+
+  "Rincon Hill": {
+    spirit: "A vertical neighborhood of glass residential towers rising at the foot of the Bay Bridge's western anchorage — one of San Francisco's densest, newest skylines.",
+    reasons: ["High-rise living", "At the Bay Bridge", "Salesforce Transit Center nearby", "Walk to FiDi & SoMa"],
+    aka: "The East Cut",
+    history: "In the 1850s and 1860s Rincon Hill was San Francisco's first fashionable address, a pre-Nob Hill enclave of garden mansions where figures like Leland Stanford and William T. Sherman lived. The controversial Second Street Cut of 1869 carved a deep chasm through the hill to ease access to the waterfront wharves, and the neighborhood lost its cachet. Through the 20th century it became an industrial district of warehouses, residential hotels, and the bridge's western approach. Rezoned for high density in 1985 and again in 2005, it has since filled with luxury condominium towers and was branded part of 'The East Cut' community-benefit district in 2015.",
+    facts: [
+      { icon: "bridge", title: "Bridge anchorage", text: "Rincon Hill is the western land anchorage of the San Francisco–Oakland Bay Bridge, whose suspension span lands here." },
+      { icon: "road", title: "The Second Street Cut", text: "In 1869 crews dug a roughly 100-foot-deep cut through the hill along Second Street from Folsom to Bryant to reach the wharves — a project that ended its mansion era." },
+      { icon: "tower", title: "One Rincon Hill", text: "The One Rincon Hill South Tower, completed in 2008, rises 60 stories and about 641 feet at the hill's apex." },
+      { icon: "house", title: "Built for density", text: "The 2005 rezoning planned for thousands of new residents, making Rincon Hill one of the city's densest residential districts." },
+      { icon: "star", title: "The East Cut", text: "Formed in 2015 (originally the Greater Rincon Hill CBD), 'The East Cut' unites Rincon Hill, Folsom Street, and the Transbay area under one community-benefit district." },
+    ],
+    nearby: ["The East Cut", "Embarcadero", "SoMa"],
+    restaurants: [
+      { name: "EPIC Steak", address: "369 The Embarcadero", phone: "(415) 369-9955", url: "https://www.epicsteak.com" },
+      { name: "Waterbar", address: "399 The Embarcadero", phone: "(415) 284-9922", url: "https://www.waterbarsf.com" },
+      { name: "Yank Sing (Rincon Center)", address: "101 Spear St", phone: "(415) 781-1111", url: "https://yanksing.com" },
+    ],
+    bars: [
+      { name: "Hi Dive", address: "Pier 28 1/2, The Embarcadero", phone: "(415) 977-0170", url: "https://www.hidivesf.com" },
+    ],
+    hospital: { name: "CPMC Van Ness Campus", address: "1101 Van Ness Ave", dist: "about 2.5 mi", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "The Salesforce Transit Center (bus hub for AC Transit transbay, Muni, Golden Gate Transit and SamTrans) sits a few blocks north. Embarcadero BART and Muni Metro station and the F-Market historic streetcar along the Embarcadero are within walking distance; the Bay Bridge bus approach runs overhead.",
+  },
+
+  "Corona Heights": {
+    spirit: "A quiet residential hill between the Castro and the Haight, crowned by the rocky, chert-red Corona Heights Park with some of the city's best skyline views and home to the family-favorite Randall Museum.",
+    reasons: ["Knockout city views", "Quiet & residential", "Corona Heights Park", "Walk to the Castro"],
+    aka: "Museum Hill",
+    history: "The hill was once Rock Hill, site of the Gray Brothers' quarry and brick factory, which began blasting into the slope around 1899 and exposed the deep-red Franciscan chert that still defines the summit. The Gray brothers, George and Harry, ran several quarries across the city, but their substandard bricks and rough operations drew lasting complaints. In 1941, San Francisco's first Superintendent of Recreation, Josephine D. Randall, persuaded the city to buy the land for public recreation, and the renamed Corona Heights opened as a park. The Josephine D. Randall Junior Museum opened on the site in 1951 in a building by architect William Merchant, carrying forward Randall's vision of a hands-on museum for children.",
+    facts: [
+      { icon: "factory", title: "Born from a brickyard", text: "The park's jagged red summit is exposed Franciscan chert, blasted bare by the Gray Brothers' quarry and brick factory beginning around 1899." },
+      { icon: "art", title: "Randall Museum", text: "The free Josephine D. Randall Museum at 199 Museum Way has offered hands-on science, art and nature programs for kids since opening here in 1951." },
+      { icon: "star", title: "Big-city panorama", text: "The rocky peak rises to about 520 feet, opening up sweeping views of downtown, the bay and beyond." },
+      { icon: "dog", title: "Off-leash hill", text: "Corona Heights Park includes a dedicated dog play area, a playground and tennis courts alongside its trails." },
+      { icon: "park", title: "A hilltop preserved", text: "Recreation Superintendent Josephine Randall convinced the city to buy the old quarry in 1941 and turn its roughly 16 acres into public parkland." },
+    ],
+    nearby: ["the Castro", "Cole Valley"],
+    restaurants: [
+      { name: "Frances", address: "3870 17th St", phone: "(415) 621-3870", url: "https://frances-sf.com" },
+      { name: "Starbelly", address: "3583 16th St", phone: "(415) 252-7500", url: "https://www.starbellysf.com" },
+      { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
+    ],
+    bars: [
+      { name: "Twin Peaks Tavern", address: "401 Castro St", phone: "(415) 864-9470", url: "https://twinpeakstavern.com" },
+      { name: "InoVino", address: "108B Carl St", phone: "(415) 681-3770", url: "https://inovinosanfrancisco.com" },
+    ],
+    hospital: { name: "CPMC Davies Campus", address: "601 Duboce Ave", dist: "about 0.7 mi", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "Muni 37-Corbett runs along Roosevelt Way past the park; the 24-Divisadero stops along Castro Street. Castro Station (Muni Metro K, L, M) and the F-Market streetcar are a short walk downhill in the Castro.",
+  },
+
+  "Bayview": {
+    spirit: "San Francisco's sun-warmed southeast corner — a hilly, historically African-American neighborhood where the Third Street corridor still beats with deep community roots.",
+    reasons: ["Among the city's sunniest", "Rich cultural history", "T-Third light rail", "More space for the money"],
+    aka: "Bayview–Hunters Point",
+    history: "Bayview grew up around Butchertown, the slaughterhouse district where cattle were once driven down Third Street, and the heavy industry of the city's southeastern flats. During World War II, thousands of African-American workers came to labor at the Hunters Point Naval Shipyard, and the neighborhood became the heart of Black San Francisco. For decades the area was underserved by transit until the Third Street Light Rail Project brought the Muni Metro T line to the corridor in 2007. Today the Third Street corridor holds the largest concentration of Black-owned businesses in the city, anchored by the 1888 Bayview Opera House.",
+    facts: [
+      { icon: "factory", title: "Shipyard heritage", text: "The WWII-era Hunters Point Naval Shipyard drew thousands of African-American workers, shaping Bayview into the heart of Black San Francisco." },
+      { icon: "music", title: "City's oldest theatre", text: "The Bayview Opera House at 4705 Third St, built in 1888, is reputed to be the oldest surviving theatre in San Francisco — a City Landmark and on the National Register of Historic Places." },
+      { icon: "tram", title: "T-Third light rail", text: "The Third Street Light Rail brought Muni Metro's T line to the long-underserved corridor in 2007, with stations the length of Third Street." },
+      { icon: "cow", title: "Butchertown roots", text: "Bayview grew up around Butchertown, the city's old slaughterhouse district, where cowboys once drove cattle down Third Street." },
+      { icon: "shop", title: "Black-owned business hub", text: "The Third Street corridor is home to the largest concentration of Black-owned businesses in San Francisco." },
+    ],
+    restaurants: [
+      { name: "Gumbo Social", address: "5176 3rd St", phone: "(415) 655-9195", url: "https://www.gumbosocial.com" },
+      { name: "Smoke Soul Kitchen", address: "4618 3rd St", phone: "(415) 900-6093", url: "https://www.smokesoulkitchen.com" },
+      { name: "Old Skool Cafe", address: "1429 Mendell St", phone: "(415) 822-8531", url: "https://www.oldskoolcafe.org" },
+      { name: "All Good Pizza", address: "1605 Jerrold Ave", phone: "(415) 933-9384", url: "https://www.allgoodpizza.com" },
+      { name: "Tallio's Coffee", address: "4732 3rd St", phone: "(415) 610-8031", url: "https://tallioscoffee.com" },
+    ],
+    bars: [
+      { name: "Laughing Monk Brewing", address: "1439 Egbert Ave", phone: "(415) 678-5157", url: "https://taproom.laughingmonk.com" },
+      { name: "D10 Taproom at Hunters Point Brewery", address: "1195 Evans Ave" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 3 mi", phone: "(628) 206-8000", url: "https://zuckerbergsanfranciscogeneral.org" },
+    transit: "The T-Third Muni Metro line runs the length of Third Street with stations including Evans, Williams, Revere/Shafter and Carroll. Connecting buses include the 19, 24, 29, 44 and 54.",
+  },
+
+  "Hunters Point": {
+    spirit: "A sun-warmed hill jutting into the bay on the city's southeastern edge — a proud, historically Black community where a former naval shipyard now holds one of the largest artist colonies in the country.",
+    reasons: ["Sunniest corner of SF", "Sweeping bay views", "Shipyard artist studios", "Major waterfront redevelopment"],
+    aka: "The Point",
+    history: "The Hunters Point drydocks date to the 1860s and were billed as one of the world's great shipyards by the early 1900s. The U.S. Navy took over the site in 1940, and during World War II the Hunters Point Naval Shipyard employed roughly 18,500 people, drawing a large Black workforce in the wartime Great Migration that put down lasting roots here. After the Navy established a Naval Radiological Defense Laboratory in 1946, decades of military and industrial use left soil and groundwater badly contaminated; the yard closed in 1974 and was named a federal Superfund site in 1989. Today the old shipyard hosts the Hunters Point Shipyard Artists — one of the nation's largest artist communities, with hundreds of studios — while the surrounding land undergoes a long, contested environmental cleanup and a multi-thousand-home redevelopment.",
+    facts: [
+      { icon: "water", title: "World-class drydocks", text: "The Hunters Point drydocks opened in the 1860s and were promoted as one of the greatest shipyards on earth by the early 1900s." },
+      { icon: "factory", title: "WWII shipyard", text: "The Navy acquired the yard in 1940; at its WWII peak the Hunters Point Naval Shipyard employed about 18,500 workers." },
+      { icon: "art", title: "Huge artist colony", text: "The Hunters Point Shipyard Artists run hundreds of working studios at 451 Galvez Ave and hold free Open Studios each spring and fall." },
+      { icon: "house", title: "Shipyard redevelopment", text: "The former Navy land is being rebuilt as The San Francisco Shipyard, a master-planned community slated for thousands of new homes plus parks and commercial space." },
+      { icon: "park", title: "New waterfront parks", text: "The India Basin Waterfront Park project is knitting together more than 60 acres of shoreline, connecting Heron's Head Park and its EcoCenter to future Northside Park." },
+    ],
+    nearby: ["Bayview"],
+    restaurants: [
+      { name: "Old Skool Cafe", address: "1429 Mendell St", phone: "(415) 822-8531", url: "https://www.oldskoolcafe.org" },
+      { name: "Smoke Soul Kitchen", address: "4618 3rd St", phone: "(415) 900-6093", url: "https://www.smokesoulkitchen.com" },
+      { name: "All Good Pizza", address: "1605 Jerrold Ave", phone: "(415) 933-9384", url: "https://www.allgoodpizza.com" },
+    ],
+    bars: [
+      { name: "Laughing Monk Brewing", address: "1439 Egbert Ave", phone: "(415) 678-5157", url: "https://taproom.laughingmonk.com" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 4 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
+    transit: "The 15 Bayview Hunters Point Express and 19 Polk buses serve Hunters Point directly. The T-Third Muni Metro line runs nearby up Third Street, with the 29 Sunset, 44 O'Shaughnessy and 54 Felton buses crossing the area.",
+  },
+
+  "Excelsior": {
+    spirit: "A sunny, working-class hilltop on the city's southern edge — single-family homes lining streets named for European nations, with Mission Street's commercial spine packed with family-run immigrant kitchens.",
+    reasons: ["One of SF's most diverse districts", "Family-run eats on Mission St", "Single-family homes", "Balboa Park BART nearby"],
+    history: "The Excelsior was laid out in the late 1860s as an out-of-town subdivision: in 1869 the Excelsior Homestead Association filed a plat defining its distinctive 'around-the-world' grid, with streets named for capitals and avenues for countries (Paris, Lisbon, Madrid, Naples, London, Munich, and more). Developer plans aimed to lure working families out of the crowded inner city, and the 1906 earthquake spurred a wave of new home-buyers. Early residents were largely Irish, German, and Italian farm and dairy workers; some street names such as China and Japan were later changed to Avalon and Excelsior amid anti-Asian sentiment of the era. Through the 20th century the district drew successive immigrant communities, and today it is one of San Francisco's most ethnically diverse neighborhoods, with large Asian and Latino populations.",
+    facts: [
+      { icon: "road", title: "An atlas in street signs", text: "Streets are named for European capitals and avenues for countries — Paris, Madrid, Naples, London, Munich, Lisbon — a naming scheme set by the Excelsior Homestead Association in 1869." },
+      { icon: "house", title: "Out-of-town subdivision", text: "Platted in the late 1860s as a homestead tract of modest single-family cottages well beyond the built-up city; the 1906 earthquake drove a surge of buyers seeking new homes." },
+      { icon: "flag", title: "Among SF's most diverse", text: "Roughly half of residents were born abroad, with Spanish, Mandarin, and Tagalog among the most common languages spoken at home." },
+      { icon: "subway", title: "Balboa Park transit hub", text: "Balboa Park BART at 401 Geneva Ave is one of the busiest BART stations outside downtown and a terminus for three Muni Metro light-rail lines." },
+      { icon: "burrito", title: "Immigrant restaurant row", text: "Mission Street through the Excelsior is lined with family-run Salvadoran pupuserías, Filipino diners, Vietnamese bánh mì shops, Italian delis, and taquerías." },
+    ],
+    restaurants: [
+      { name: "Taqueria El Farolito", address: "4817 Mission St", phone: "(415) 337-5500", url: "https://elfarolitosf.com" },
+      { name: "Calabria Bros Deli", address: "4763 Mission St", phone: "(415) 239-2555", url: "https://calabriabrosdeli.com" },
+      { name: "Pupuseria Metapan", address: "4769 Mission St", phone: "(415) 587-8599" },
+      { name: "Restaurante Familiar", address: "4499 Mission St", phone: "(415) 334-6100" },
+      { name: "Super Star Restaurant", address: "4919 Mission St", phone: "(415) 585-4360" },
+    ],
+    bars: [
+      { name: "The Halfway Club", address: "1166 Geneva Ave", url: "https://www.halfwayclub.com" },
+      { name: "Tala Wine", address: "4625 Mission St", phone: "(415) 740-8494", url: "https://www.tala.wine" },
+      { name: "Excelsior Coffee", address: "4495 Mission St", phone: "(415) 347-7333", url: "https://www.xlcrsf.com" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 3.5 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
+    transit: "Balboa Park BART (401 Geneva Ave) sits just southwest and is a terminus for Muni Metro J, K, and M light rail. Muni buses include the 14-Mission and 14R Rapid, 49 Van Ness/Mission, 29 Sunset, 8 Bayshore, 52 Excelsior, and 54 Felton.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
