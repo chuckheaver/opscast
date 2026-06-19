@@ -3725,6 +3725,196 @@ export const NEIGHBORHOODS = {
     hospital: { name: "UCSF Medical Center at Parnassus", address: "505 Parnassus Ave", dist: "about 3.5 mi", phone: "(415) 353-1008", url: "https://www.ucsfhealth.org/locations/emergency-department-er-parnassus" },
     transit: "Muni Metro K-Ingleside and M-Ocean View run nearby along 19th Avenue and St. Francis Circle, with West Portal Station a short ride away. Buses include the 28-19th Avenue, 17, 23 and 57.",
   },
+
+  "Merced Heights": {
+    spirit: "A quiet hilltop village in the city's southwest corner — modest mid-century homes along a ridgeline, big Pacific views from Brooks Park, and the deep-rooted, neighborly spirit of the historic OMI.",
+    reasons: ["Peaceful, residential hilltop streets", "Hilltop views at Brooks Park", "Steps from City College's Ocean campus", "Historic, diverse OMI community"],
+    history: "Merced Heights sits at the center of the OMI — Ocean View, Merced Heights, and Ingleside — on a ridge running between San Jose Avenue and Junipero Serra Boulevard. The name dates only to the years after World War II, when open hillside on the western slopes was subdivided into new housing. Beginning at midcentury, an influx of African-American families settled here, and Merced Heights emerged as an island of Black home ownership uphill from earlier residential parks that had barred minority buyers, making the OMI one of San Francisco's early integrated neighborhoods. City College of San Francisco's Ocean campus anchors the area's northern edge. Atop the neighborhood's peak, Brooks Park preserves rocky outcrops with native plants and a large community garden, on land once used by Ohlone families summering near Lake Merced.",
+    facts: [
+      { icon: "house", title: "Island of ownership", text: "After WWII, Merced Heights became a rare hilltop enclave of African-American home ownership, helping make the OMI one of the city's early integrated neighborhoods." },
+      { icon: "park", title: "Brooks Park", text: "A hilltop park at 400 Shields St with native-plant gardens, a large community garden, and sweeping Pacific views." },
+      { icon: "book", title: "City College", text: "CCSF's Ocean campus at 50 Frida Kahlo Way, the college's largest, borders the neighborhood." },
+      { icon: "burrito", title: "Beep's since 1962", text: "Beep's Burgers has flipped patties at its original Ocean Avenue drive-in since 1962." },
+    ],
+    nearby: ["Ingleside", "the Ocean Avenue strip"],
+    restaurants: [
+      { name: "Beep's Burgers", address: "1051 Ocean Ave", phone: "(415) 584-2650", url: "https://www.beepsburgers.com" },
+      { name: "Sakesan Sushi & Robata", address: "1400 Ocean Ave", phone: "(415) 347-7898" },
+      { name: "That's Amore SF", address: "1901 Ocean Ave" },
+    ],
+    bars: [
+      { name: "Ocean Ale House", address: "1314 Ocean Ave", phone: "(415) 988-7521", url: "https://oceanalehouse.com" },
+    ],
+    hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St", phone: "(415) 641-6625", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "Muni 29-Sunset and 54-Felton serve Merced Heights directly. Muni Metro K-Ingleside and M-Ocean View run nearby along Ocean Avenue; the 49 Van Ness/Mission is close. Balboa Park BART and Muni station is the area's major transit hub.",
+  },
+
+  "Parkside": {
+    spirit: "The outer Sunset's foggy, family-anchored southern half — mile after mile of pastel 1930s row houses, a working Main Street on Taraval, and big green breathing room at Stern Grove and the city's western edge.",
+    reasons: ["L-Taraval streetcar down Main Street", "Stern Grove's free summer concerts", "A real neighborhood dining strip", "Steps from the Zoo, Stern Grove and Ocean Beach"],
+    aka: "the Outer Sunset",
+    history: "Parkside began in 1905 when a syndicate quietly bought former Outside Lands dunes from the Adolph Sutro estate and others to launch a new residential subdivision centered on Taraval Street. Early pioneers built on bare sand far from city services and organized the Parkside District Improvement Club in 1908 to demand them. Muni's L-Taraval streetcar opened along Taraval in 1919, opening the area to wider settlement. In the 1920s through 1940s builders like Henry Doelger, the Gellerts and the Stoneson brothers used new FHA loans to fill the dunes with rows of affordable stucco single-family homes. Though planned as its own neighborhood, Parkside is today generally considered part of the larger Sunset District.",
+    facts: [
+      { icon: "tram", title: "A century on the L", text: "Muni's L-Taraval streetcar opened along Taraval Street in 1919 and still runs down the neighborhood's spine today." },
+      { icon: "music", title: "Free concerts at Stern Grove", text: "Sigmund Stern Grove, gifted to the city by Rosalie Stern, has hosted the nation's oldest free summer concert series since 1938." },
+      { icon: "house", title: "Doelger's dunes", text: "Builder Henry Doelger's company produced roughly 26,000 Bay Area homes, helping turn Parkside's sand dunes into rows of stucco houses." },
+      { icon: "park", title: "Zoo at the edge", text: "The San Francisco Zoo has sat at Sloat Boulevard and the Great Highway, just southwest of Parkside, since 1929." },
+      { icon: "flag", title: "Born from the dunes", text: "A 1905 syndicate bought former Outside Lands dunes from the Adolph Sutro estate to create the Parkside subdivision around Taraval Street." },
+    ],
+    restaurants: [
+      { name: "Dumpling Kitchen", address: "1935 Taraval St", phone: "(415) 682-8938", url: "https://www.dumplingkitchenca.com" },
+      { name: "Kingdom of Dumpling", address: "1713 Taraval St", phone: "(415) 566-6143" },
+      { name: "Taraval Okazu Ya", address: "1735 Taraval St", phone: "(415) 759-6850" },
+      { name: "Lou's Cafe", address: "1508 Taraval St", phone: "(415) 682-4083", url: "http://www.louscafesf.com" },
+      { name: "Shin Toe Bul Yi", address: "2001 Taraval St", phone: "(415) 566-9221" },
+    ],
+    bars: [
+      { name: "O'Brien's Irish Pub", address: "1940 Taraval St", phone: "(415) 463-6712", url: "https://obriensirishpubsf.com" },
+      { name: "White Cap", address: "3608 Taraval St", phone: "(415) 682-4215", url: "https://whitecapsf.com" },
+    ],
+    hospital: { name: "UCSF Medical Center at Parnassus", address: "505 Parnassus Ave", dist: "about 4 mi", phone: "(415) 353-1008", url: "https://www.ucsfhealth.org/locations/emergency-department-er-parnassus" },
+    transit: "The L-Taraval Muni Metro line runs along Taraval Street through the heart of Parkside. Buses include the 28-19th Avenue, 29-Sunset, 18-46th Avenue and 23-Monterey.",
+  },
+
+  "Parkmerced": {
+    spirit: "A planned garden-and-towers community on San Francisco's far southwest edge, where mid-century apartment living meets Lake Merced air and the bustle of SF State next door.",
+    reasons: ["Master-planned green space", "Steps from SF State and Stonestown", "Beside Lake Merced and Stern Grove", "M-line and 19th Avenue transit at the door"],
+    history: "In 1941 the Metropolitan Life Insurance Company assembled nearly 200 acres of former Spring Valley Water Company land to build a 'city within a city' of rental housing. The garden apartments and townhouses went up between 1941 and 1951, joined in the 1950s by a ring of high-rise towers, with landscape architect Thomas Church shaping the radiating street plan and lawns. The community totals roughly 3,200 units and was designed for the post-war middle-class housing boom. In May 2011 the SF Board of Supervisors approved a long-term redevelopment plan that would phase out most low-rise garden units in favor of denser mid-rise housing over several decades.",
+    facts: [
+      { icon: "house", title: "A planned community", text: "MetLife began building Parkmerced in 1941 as a 'city within a city,' with about 3,200 rental units." },
+      { icon: "tower", title: "Ring of towers", text: "Thirteen-story residential towers added in the 1950s rise above the original two-story garden apartments and courtyards." },
+      { icon: "water", title: "Lake Merced at the edge", text: "The neighborhood sits between 19th Avenue and Lake Merced, near Harding Park and Stern Grove." },
+      { icon: "book", title: "Next to SF State", text: "Parkmerced lies just south of San Francisco State University and is popular with students and faculty." },
+      { icon: "tram", title: "M-line through the door", text: "The M Ocean View Muni Metro runs the 19th Avenue median past the neighborhood and SF State." },
+    ],
+    nearby: ["Stonestown", "SF State"],
+    restaurants: [
+      { name: "Le Soleil", address: "3251 20th Ave, Ste 221", phone: "(415) 877-8899", url: "https://www.lesoleilsf.com/stonestown" },
+      { name: "Marugame Udon", address: "3251 20th Ave", phone: "(415) 680-1280", url: "https://www.marugameudon.com/locations/stonestown/" },
+    ],
+    bars: [
+      { name: "Kizuki Ramen & Izakaya", address: "3251 20th Ave, Ste 172", url: "https://www.kizuki.com/locations/" },
+    ],
+    hospital: { name: "UCSF Health Hyde Hospital", address: "900 Hyde St", phone: "(415) 353-6000", url: "https://www.ucsfhealth.org/locations/hyde-hospital" },
+    transit: "M Ocean View Muni Metro runs the 19th Avenue median past Parkmerced and SF State. Buses 28 and 28R (19th Avenue), 18 (46th Avenue) and 57 (Parkmerced) serve the area; Daly City BART is nearby with a 28 bus connection.",
+  },
+
+  "Stonestown": {
+    spirit: "San Francisco's southwest crossroads, where a mid-century mall reborn as a dining-and-shopping hub meets a university campus and the open green of Lake Merced.",
+    reasons: ["Anchored by the Stonestown Galleria", "Next to San Francisco State University", "Steps from Lake Merced parkland", "Muni Metro and major bus lines on 19th Avenue"],
+    history: "Stonestown was developed by brothers Henry and Ellis Stoneson beginning in the late 1940s on former farmland southwest of downtown. The Stonestown Shopping Center opened in 1952, with The Emporium department store as its anchor, and was one of the West's first large regional shopping centers paired with adjacent apartments housing several thousand residents. The neighborhood grew up alongside San Francisco State University, whose campus sits just across 19th Avenue. A 1980s renovation enclosed the center and rebranded it the Stonestown Galleria, and in 2024 the city approved a major redevelopment to add roughly 3,500 new homes, parks, and a new retail main street on the surrounding parking lots.",
+    facts: [
+      { icon: "shopping", title: "Opened in 1952", text: "The original Stonestown Shopping Center opened in 1952, anchored by The Emporium, and was among the first large regional shopping centers in the western U.S." },
+      { icon: "house", title: "Built by the Stoneson brothers", text: "Brothers Henry and Ellis Stoneson developed Stonestown's mall and apartments in the late 1940s and early 1950s." },
+      { icon: "book", title: "Next to SF State", text: "San Francisco State University sits directly across 19th Avenue, bringing tens of thousands of students to the area." },
+      { icon: "house", title: "3,500 homes coming", text: "In 2024 San Francisco approved a Brookfield-led redevelopment to build about 3,500 homes, parks, and a new retail main street around the Galleria." },
+      { icon: "tram", title: "M-line on 19th Ave", text: "The Muni Metro M Ocean View light rail runs in the median of 19th Avenue with a stop adjacent to the Galleria." },
+    ],
+    restaurants: [
+      { name: "Le Soleil", address: "3251 20th Ave, Ste 221", phone: "(415) 877-8899", url: "https://www.lesoleilsf.com/stonestown" },
+      { name: "Marugame Udon", address: "3251 20th Ave", phone: "(415) 680-1280", url: "https://www.marugameudon.com/locations/stonestown/" },
+      { name: "Rooster & Rice", address: "3251 20th Ave", phone: "(415) 573-0610", url: "https://www.roosterandrice.com/location/rooster-and-rice-stonestown-galleria/" },
+      { name: "Shake Shack", address: "3251 20th Ave", phone: "(415) 382-7271", url: "https://shakeshack.com/location/stonestown-galleria-ca" },
+      { name: "Supreme Dumplings", address: "3251 20th Ave, Ste 219A", url: "https://www.supreme-dumplings.com/locations" },
+    ],
+    hospital: { name: "UCSF Medical Center at Parnassus", address: "505 Parnassus Ave", phone: "(415) 353-1008", url: "https://www.ucsfhealth.org/locations/emergency-department-er-parnassus" },
+    transit: "The Muni Metro M Ocean View light rail stops at Stonestown Galleria station in the 19th Avenue median, serving SF State and the mall. Bus lines on 19th Avenue and nearby include the 28-19th Avenue, 17, 18, 29, and 57.",
+  },
+
+  "Lakeshore": {
+    spirit: "San Francisco's quiet southwest corner, where streets curve around Lake Merced and the city trades fog-bound bustle for a near-suburban calm of golf greens, lakeside trails, and Pacific air.",
+    reasons: ["Lake Merced's 4-mile loop at your doorstep", "Steps from Harding Park golf", "Quiet, family-friendly streets", "Minutes to Ocean Beach and Stonestown"],
+    history: "Lake Merced is one of San Francisco's few natural freshwater lakes and supplied the city's drinking water from the late 1860s until 1934, when Hetch Hetchy took over. The city-run Harding Park golf course opened along its shores on July 18, 1925, designed by Willie Watson and Sam Whiting. The surrounding Lakeshore tracts were developed mid-century as planned residential subdivisions, including the Gellert brothers' Lakeshore Park, marketed from 1939 as a deluxe subdivision south of Sloat Boulevard. Lakeshore Plaza, the neighborhood's main shopping center at Sloat and Lake Merced boulevards, anchors the area's everyday commerce today.",
+    facts: [
+      { icon: "water", title: "A rare natural lake", text: "Lake Merced is one of the largest freshwater lakes in San Francisco and once served as the city's water source until 1934." },
+      { icon: "park", title: "The four-mile loop", text: "A flat, paved multi-use path circles Lake Merced, drawing walkers, runners, cyclists, and birders past golf courses and eucalyptus groves." },
+      { icon: "flag", title: "Championship golf", text: "Harding Park opened in 1925 and, as TPC Harding Park, has hosted PGA Tour and major championship events along the lakeshore." },
+      { icon: "bird", title: "Pine Lake Park", text: "Just north, Pine Lake is one of the city's few remaining natural lakes, ringed by a birding trail into Stern Grove." },
+      { icon: "wave", title: "Boathouse on the water", text: "The Lake Merced Boathouse at 1 Harding Road offers picnic areas, a fishing pier, and a boat launch on the lake's edge." },
+    ],
+    nearby: ["Stonestown", "West Portal"],
+    restaurants: [
+      { name: "Chipotle Mexican Grill", address: "1523 Sloat Blvd", phone: "(415) 592-2187", url: "https://locations.chipotle.com/ca/san-francisco/1523-sloat-blvd" },
+      { name: "Le Soleil", address: "3251 20th Ave, Ste 221", phone: "(415) 877-8899", url: "https://www.lesoleilsf.com/stonestown" },
+      { name: "Crumbl", address: "1567 Sloat Blvd", phone: "(628) 358-9689", url: "https://crumblcookies.com/calakeshore" },
+    ],
+    bars: [
+      { name: "The Dubliner", address: "328 W Portal Ave", phone: "(415) 566-9444", url: "https://dublinerwp.com" },
+    ],
+    hospital: { name: "AHMC Seton Medical Center", address: "1900 Sullivan Ave, Daly City", dist: "about 2.5 mi", phone: "(650) 992-4000", url: "https://www.ahmchealth.com/smc/" },
+    transit: "M-Ocean View Muni Metro serves nearby SF State and Stonestown along 19th Avenue. Buses include the 18-46th Avenue, 23-Monterey, 28-19th Avenue, and 57-Parkmerced. Daly City BART is a short ride south.",
+  },
+
+  "Cayuga": {
+    spirit: "A hushed pocket of single-family homes tucked between Alemany, Geneva and I-280 in the city's deep south, trading nightlife for front gardens, quiet streets, and one of San Francisco's most surprising public treasures: a playground filled with hundreds of hand-carved wooden folk-art sculptures.",
+    reasons: ["Calm, walkable residential streets", "Steps from Cayuga Playground's folk-art garden", "Minutes to the Balboa Park BART/Muni hub", "Close to the Outer Mission's food corridor"],
+    aka: "Cayuga Terrace",
+    history: "Cayuga Terrace took shape in the early 20th century as homestead-association land in the city's southern reaches was subdivided for housing. Many of its streets carry Native-American names, mostly of peoples and languages of the northeastern United States, a naming theme shared with neighboring Mission Terrace and the Outer Mission. Before 1918 a body of water known as Lake Geneva sat near what is now Cayuga Avenue, the street that gives the neighborhood its name. Through the first half of the century the area filled in with the detached single-family homes that still define it, served by nearby rail and streetcar lines and, later, the Balboa Park transit hub.",
+    facts: [
+      { icon: "art", title: "A sculpture garden made on lunch breaks", text: "Gardener Demetrio Braceros, assigned to Cayuga Park in 1986, hand-carved over 375 wooden totems, figurines and statues on his breaks; the San Francisco Arts Commission later inventoried 376 of them." },
+      { icon: "park", title: "Cayuga Playground reborn", text: "The roughly four-acre playground at 301 Naglee Avenue closed in 2011 for an $8.4 million renovation and reopened in August 2013, with many of Braceros's sculptures restored." },
+      { icon: "subway", title: "A transit powerhouse next door", text: "The nearby Balboa Park Station, opened in 1973, is one of BART's busiest stops outside downtown San Francisco and a major Muni transfer point." },
+      { icon: "pin", title: "Streets named for Native peoples", text: "Cayuga Avenue and many surrounding streets are named for Native-American peoples and languages, a deliberate theme set when the area was subdivided." },
+    ],
+    nearby: ["the Outer Mission", "Balboa Park"],
+    restaurants: [
+      { name: "Taqueria Guadalajara", address: "4798 Mission St", phone: "(415) 469-5480" },
+      { name: "JJamPPong", address: "5249 Mission St", phone: "(415) 347-7412" },
+    ],
+    bars: [
+      { name: "Ocean Ale House", address: "1314 Ocean Ave", phone: "(415) 988-7521", url: "https://oceanalehouse.com" },
+      { name: "Machu Picchu Cafe", address: "402 Geneva Ave", phone: "(415) 568-1887", url: "https://www.cafemp.com" },
+    ],
+    hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St (ER entrance on 27th St)", phone: "(415) 641-6625", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "Balboa Park Station nearby serves BART and Muni Metro J, K and M lines, plus many bus routes; the 29-Sunset, 49, 14-Mission and 8-Bayshore run along the Mission Street corridor to the east.",
+  },
+
+  "Sunnydale": {
+    spirit: "A close-knit, working-class community at San Francisco's far southeastern edge, wrapped by the green hills of McLaren Park — long anchored by one of the city's largest public housing developments, and now in the middle of a generational rebuild into a mixed-income neighborhood.",
+    reasons: ["Borders sprawling McLaren Park", "A major HOPE SF rebuild underway", "T-Third light rail right at the door", "Tight-knit, diverse community"],
+    history: "Built during World War II, the Sunnydale (later Sunnydale-Velasco) development became one of San Francisco's largest public housing complexes. After decades of disinvestment and isolation at the city's edge, it was selected for HOPE SF, the city's effort to rebuild its most distressed public housing without displacing residents. Demolition and phased construction are transforming the roughly 50-acre site into a mixed-income community of around 1,770 homes, with new streets, parks, retail, and a community hub. The arrival of the T-Third light rail line in 2007, with its terminus at nearby Sunnydale Station, finally connected the neighborhood to downtown by rail.",
+    facts: [
+      { icon: "park", title: "McLaren Park at the doorstep", text: "John McLaren Park covers more than 300 acres on Sunnydale's northern edge, making it one of the largest parks in San Francisco." },
+      { icon: "house", title: "A generational rebuild", text: "Through HOPE SF, the WWII-era Sunnydale-Velasco development is being rebuilt as a mixed-income community of about 1,770 homes, with new parks and neighborhood retail." },
+      { icon: "tram", title: "Light rail terminus nearby", text: "The T-Third line's southern end, Sunnydale Station, opened in 2007 in the median of Bayshore Boulevard, linking the area to downtown." },
+      { icon: "music", title: "Cow Palace next door", text: "The historic Cow Palace arena, just over the line in Daly City, has hosted everyone from The Beatles to the Grand National Rodeo since 1941." },
+    ],
+    nearby: ["Visitacion Valley"],
+    restaurants: [
+      { name: "Pho Luen Fat", address: "110 Leland Ave", phone: "(415) 585-1167" },
+      { name: "7 Mile House", address: "2800 Bayshore Blvd, Brisbane", phone: "(415) 467-2343", url: "https://7milehouse.com" },
+    ],
+    bars: [
+      { name: "Mission Blue", address: "144 Leland Ave", phone: "(415) 508-7416", url: "https://missionbluesf.com" },
+      { name: "7 Mile House", address: "2800 Bayshore Blvd, Brisbane", phone: "(415) 467-2343", url: "https://7milehouse.com" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 5 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
+    transit: "T-Third light rail terminates nearby at Sunnydale Station, in the median of Bayshore Boulevard at Sunnydale Avenue. Muni buses include the 8-Bayshore, 9/9R-San Bruno, 29-Sunset, and 56-Rutland serving the surrounding Visitacion Valley area.",
+  },
+
+  "Little Hollywood": {
+    spirit: "A hidden pocket of red-tile-roofed bungalows tucked between Bayshore Boulevard and Highway 101 — one of San Francisco's quietest, most surprising residential enclaves.",
+    reasons: ["Quiet, tight-knit residential pocket", "Distinctive 1920s–30s Spanish-style bungalows", "Steps from Bayshore Caltrain", "Easy freeway and transit access to the Peninsula"],
+    aka: "Bayshore Tract",
+    history: "The area was developed by the Crocker Estate Company in the early 1920s as part of the 'Bayshore Tract.' In the late 1920s and early 1930s, builder William H. Grahn put up rows of Spanish- and Mediterranean-style homes, many designed by architect Charles Strothoff. Their stucco walls and red tile roofs evoked the houses of the Hollywood Hills, earning the enclave its 'Little Hollywood' nickname. Hemmed in by Bayshore Boulevard, U.S. 101, and the rail corridor, the small neighborhood remains an isolated, working-class pocket of about 1,165 residents on the city's far southeastern edge.",
+    facts: [
+      { icon: "movie", title: "How it got its name", text: "The 1920s–30s stucco-and-tile bungalows resembled homes in the Hollywood Hills, giving the neighborhood its 'Little Hollywood' nickname." },
+      { icon: "tram", title: "Bayshore Caltrain", text: "The Bayshore station at 400 Tunnel Ave sits right beside the neighborhood, with commuter rail service down the Peninsula." },
+      { icon: "house", title: "A pocket-sized enclave", text: "Spanning only about a quarter square kilometer, Little Hollywood is home to roughly 1,165 residents." },
+      { icon: "music", title: "Cow Palace nearby", text: "The historic Cow Palace arena (2600 Geneva Ave) sits just to the southwest, hosting concerts and events for generations." },
+      { icon: "road", title: "Wedged by the freeway", text: "Tucked between Bayshore Boulevard and U.S. Highway 101 near the San Mateo county line, it is one of the city's most tucked-away neighborhoods." },
+    ],
+    nearby: ["Visitacion Valley"],
+    restaurants: [
+      { name: "La Joya Mexican Cafe", address: "28 Leland Ave", phone: "(415) 508-9192", url: "https://la-joya-cafe.com" },
+      { name: "Creative Ideas Cafe", address: "58 Leland Ave", phone: "(415) 988-7165", url: "https://creativeideascateringcafe.com" },
+    ],
+    bars: [
+      { name: "1945 Restaurant Bar Lounge", address: "5 Leland Ave", phone: "(415) 347-7052", url: "https://1945rbl.com" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 4 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
+    transit: "Bayshore Caltrain station (400 Tunnel Ave) is adjacent. Muni buses 9-San Bruno, 8-Bayshore and 56-Rutland serve the area, with the T-Third Muni Metro line nearby in Visitacion Valley.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
