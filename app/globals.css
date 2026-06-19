@@ -1398,6 +1398,24 @@ input[type=range]::-webkit-slider-thumb:hover {
 
 /* Slim point-level strip (right column) */
 .fog-point-strip { display: flex; flex-direction: column; }
+/* Seismic / Tsunami label rendered as a layer toggle link */
+.fog-key-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #2563eb;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+}
+.fog-key-toggle:hover { color: #1d4ed8; text-decoration-style: solid; }
+.fog-key-toggle.on { color: #047857; text-decoration-style: solid; }
+.fog-key-toggle.on::before { content: "\25C9\00a0"; }       /* filled dot when layer on */
+.fog-key-toggle:not(.on)::before { content: "\25CB\00a0"; } /* hollow dot when off */
 .fog-point-empty {
   font-size: 12.5px;
   color: #78716c;

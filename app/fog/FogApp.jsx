@@ -158,7 +158,7 @@ export default function FogApp() {
       if (!feature) return;
       const point = centroidOfFeature(feature);
       const contour = point ? findContourForPoint(contours, point) : null;
-      setPicked({ point, address: null, feature, contour });
+      setPicked({ point, address: null, feature, contour, scope: "neighborhood" });
       setOpenHood(name);
     },
     [geojson, contours]

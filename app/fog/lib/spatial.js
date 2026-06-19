@@ -66,6 +66,68 @@ export function centroidOfFeature(feature) {
   return [x / (3 * area2), y / (3 * area2)];
 }
 
+// Does `feature`'s geometry intersect ANY feature in collection `fc`?
+// Answers "is any part of this neighborhood inside a hazard zone?" for the
+// neighborhood-level Seismic / Tsunami readouts. Polygon–polygon test:
+// bbox reject → either ring's vertices inside the other → edge crossings.
+export function featureIntersectsAny(feature, fc) {
+  if (!feature || !fc?.features) return false;
+  const aPolys = toPolygons(feature.geometry);
+  for (const f of fc.features) {
+    for (const a of aPolys) {
+      for (const b of toPolygons(f.geometry)) {
+        if (polygonsIntersect(a, b)) return true;
+      }
+    }
+  }
+  return false;
+}
+
+// Normalise a geometry to an array of polygons, each [outerRing, ...holes].
+function toPolygons(g) {
+  if (!g) return [];
+  if (g.type === "Polygon") return [g.coordinates];
+  if (g.type === "MultiPolygon") return g.coordinates;
+  return [];
+}
+
+function ringBbox(ring) {
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const [x, y] of ring) {
+    if (x < minX) minX = x;
+    if (y < minY) minY = y;
+    if (x > maxX) maxX = x;
+    if (y > maxY) maxY = y;
+  }
+  return [minX, minY, maxX, maxY];
+}
+
+function polygonsIntersect(a, b) {
+  const ra = a[0], rb = b[0];
+  if (!ra?.length || !rb?.length) return false;
+  // Quick bounding-box reject.
+  const [aMinX, aMinY, aMaxX, aMaxY] = ringBbox(ra);
+  const [bMinX, bMinY, bMaxX, bMaxY] = ringBbox(rb);
+  if (aMaxX < bMinX || bMaxX < aMinX || aMaxY < bMinY || bMaxY < aMinY) return false;
+  // Either polygon's vertices inside the other (covers containment + overlap).
+  for (const pt of ra) if (pointInPolygon(pt, b)) return true;
+  for (const pt of rb) if (pointInPolygon(pt, a)) return true;
+  // Edge crossings (covers overlap with no vertex inside the other).
+  for (let i = 0; i < ra.length - 1; i++) {
+    for (let j = 0; j < rb.length - 1; j++) {
+      if (segmentsIntersect(ra[i], ra[i + 1], rb[j], rb[j + 1])) return true;
+    }
+  }
+  return false;
+}
+
+function segmentsIntersect(p1, p2, p3, p4) {
+  const d = (a, b, c) => (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
+  const d1 = d(p3, p4, p1), d2 = d(p3, p4, p2);
+  const d3 = d(p1, p2, p3), d4 = d(p1, p2, p4);
+  return ((d1 > 0) !== (d2 > 0)) && ((d3 > 0) !== (d4 > 0));
+}
+
 // Cheap planar area estimate in degrees² — fine for picking the smallest
 // of a small set of overlapping polygons; we don't need true geodesic area.
 function approxFeatureArea(feature) {

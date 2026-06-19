@@ -8,7 +8,7 @@
 //      pop-up (NeighborhoodModal).
 //   2) The layer toggles + map legends.
 
-import { findNeighborhoodForPoint } from "./lib/spatial";
+import { findNeighborhoodForPoint, featureIntersectsAny } from "./lib/spatial";
 import { fogLabel } from "./lib/risk";
 import { getNeighborhood, listNeighborhoods } from "./lib/neighborhoods";
 import NeighborhoodModal from "./NeighborhoodModal";
@@ -63,12 +63,19 @@ export default function FogPanel({
   const fogHrs = picked?.contour?.properties?.hours;
   const microZoneLabel = Number.isFinite(fogHrs) ? fogLabel(fogHrs) : null;
 
-  // Hazard checks — Y/N only resolve once the picked point AND the
-  // hazard dataset have both arrived; until then show the "—" placeholder.
-  const yesNo = (point, fc) =>
-    !point || !fc ? null : findNeighborhoodForPoint(fc, point) ? "Yes" : "No";
-  const seismicYN = yesNo(point, seismicHazards);
-  const tsunamiYN = yesNo(point, tsunamiHazard);
+  // Hazard checks — Y/N only resolve once the location AND the hazard
+  // dataset have both arrived; until then show the "—" placeholder.
+  //   • Neighborhood pick (clicked a name): "Yes" if ANY part of the
+  //     neighborhood polygon overlaps the hazard zone.
+  //   • Exact point (map click / address): "Yes" if that point sits in one.
+  const isNeighborhoodScope = picked?.scope === "neighborhood" && !!picked?.feature;
+  const hazardYN = fc => {
+    if (!fc) return null;
+    if (isNeighborhoodScope) return featureIntersectsAny(picked.feature, fc) ? "Yes" : "No";
+    return point ? (findNeighborhoodForPoint(fc, point) ? "Yes" : "No") : null;
+  };
+  const seismicYN = hazardYN(seismicHazards);
+  const tsunamiYN = hazardYN(tsunamiHazard);
 
   // The neighborhood whose pop-up is open. Point-derived facts (fog,
   // supervisor, realtor district) only apply when the picked point is
@@ -118,8 +125,8 @@ export default function FogPanel({
               <div className="fog-keybox-h">{picked?.address || neighborhoodName || "Selected point"}</div>
               <KeyRow label="Zip Code" value={zipCode} />
               <KeyRow label="Elevation" value={Number.isFinite(elevationFt) ? `${elevationFt} ft` : null} />
-              <KeyRow label="Seismic Zone" value={seismicYN} />
-              <KeyRow label="Tsunami Zone" value={tsunamiYN} />
+              <ToggleKeyRow label="Seismic Zone" value={seismicYN} active={showSeismic} onToggle={() => onToggleSeismic(!showSeismic)} />
+              <ToggleKeyRow label="Tsunami Zone" value={tsunamiYN} active={showTsunami} onToggle={() => onToggleTsunami(!showTsunami)} />
               {hoodData && (
                 <button type="button" className="fog-hood-link fog-point-cta" onClick={() => onOpenHood(neighborhoodName)}>
                   View {neighborhoodName} details ›
@@ -264,6 +271,25 @@ function KeyRow({ label, value, dark }) {
   return (
     <div className={`fog-key-row${dark ? " fog-key-row-dark" : ""}`}>
       <span className="fog-key-label">{label}</span>
+      <span className="fog-key-value">{value || "—"}</span>
+    </div>
+  );
+}
+
+// A KeyRow whose label is a link that toggles a map layer on/off; `active`
+// reflects whether that layer is currently shown.
+function ToggleKeyRow({ label, value, active, onToggle }) {
+  return (
+    <div className="fog-key-row">
+      <button
+        type="button"
+        className={`fog-key-toggle${active ? " on" : ""}`}
+        onClick={onToggle}
+        aria-pressed={active}
+        title={`${active ? "Hide" : "Show"} the ${label} layer`}
+      >
+        {label}
+      </button>
       <span className="fog-key-value">{value || "—"}</span>
     </div>
   );
