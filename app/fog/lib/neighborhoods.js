@@ -3539,6 +3539,192 @@ export const NEIGHBORHOODS = {
     hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St", dist: "about 2.5 mi", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
     transit: "Muni 36-Teresita winds through the neighborhood; the 44-O'Shaughnessy runs along O'Shaughnessy Boulevard nearby, and the 43-Masonic serves the western edge. Glen Park BART and the Forest Hill Muni Metro station are each a short ride away.",
   },
+
+  "Golden Gate Heights": {
+    spirit: "A hushed, hilltop maze of winding streets and artful stairways crowned by some of the city's most sweeping ocean-to-bay views.",
+    reasons: ["Hilltop park panoramas", "Famous tiled staircases", "Quiet residential streets", "Steps from the Inner Sunset"],
+    history: "Once part of the windswept Outside Lands dunes west of downtown, the hills here were graded and laced with stairways around 1927 and built out as a residential district through the 1910s to 1950s. The neighborhood wraps around a chain of rocky peaks, including Grand View Park atop 'Turtle Hill,' which looks out over the Pacific, Golden Gate Park, the Marin Headlands and the Financial District. In 2003, residents Jessie Audette and Alice Yee Xavier launched a community project to beautify the 16th Avenue stairway; artists Aileen Barr and Colette Crutcher designed 163 mosaic panels, and the now-famous Tiled Steps opened on August 27, 2005. The nearby Hidden Garden Steps on 16th Avenue followed as a second community mosaic stairway.",
+    facts: [
+      { icon: "stairs", title: "The 16th Avenue Tiled Steps", text: "163 mosaic panels climb sea-to-stars to the base of Grandview Park; opened in 2005." },
+      { icon: "park", title: "Grand View Park", text: "Atop 'Turtle Hill,' it offers panoramas of the ocean, Golden Gate Park and the bay." },
+      { icon: "art", title: "A second mosaic stairway", text: "The Hidden Garden Steps add another community-built tiled climb nearby." },
+      { icon: "house", title: "Built on the old dunes", text: "Streets were graded and stairways built around 1927 on the former Outside Lands sand hills." },
+    ],
+    nearby: ["the Inner Sunset"],
+    restaurants: [
+      { name: "San Tung", address: "1031 Irving St", phone: "(415) 242-0828", url: "https://www.santungsf.com" },
+      { name: "Ebisu", address: "1283 9th Ave", phone: "(415) 566-1770", url: "https://ebisusushi.com" },
+      { name: "Marnee Thai", address: "2225 Irving St", phone: "(415) 665-9500" },
+    ],
+    bars: [
+      { name: "The Little Shamrock", address: "807 Lincoln Way", phone: "(415) 661-0060" },
+      { name: "Tartine Inner Sunset", address: "1226 9th Ave", phone: "(415) 742-5005", url: "https://tartinebakery.com" },
+    ],
+    hospital: { name: "UCSF Medical Center at Parnassus", address: "505 Parnassus Ave", dist: "about 1 mi", phone: "(415) 476-1000", url: "https://www.ucsfhealth.org/locations/parnassus-campus" },
+    transit: "N-Judah Muni Metro a walk downhill along Irving/Judah; buses 6, 7, 43, 44 and 66 serve the surrounding slopes.",
+  },
+
+  "Midtown Terrace": {
+    spirit: "A quiet 1950s hilltop tract of near-identical view homes spread across the western slope of Twin Peaks, directly beneath the soaring Sutro Tower.",
+    reasons: ["Sweeping westside and ocean views", "Peaceful residential streets", "Under the iconic Sutro Tower", "Minutes from Twin Peaks and Forest Hill Station"],
+    history: "The neighborhood rose on 150 acres of the old Rancho San Miguel land that Adolph Sutro later planted with eucalyptus. Beginning in 1953, the Standard Building Company, owned by brothers Carl and Fred Gellert, developed roughly 1,000 modest two- and three-bedroom single-family homes across seven terraced streets engineered to capture the view. By February 1959 about 900 of the planned homes were complete, with a covered Sutro Reservoir and a playground built into the tract. Since 1973 the 977-foot Sutro Tower has loomed directly over the rooftops, becoming the neighborhood's defining landmark.",
+    facts: [
+      { icon: "tower", title: "Sutro Tower overhead", text: "The 977-foot Sutro Tower, completed in 1973 with first transmissions on July 4 of that year, rises on the ridge directly above the neighborhood." },
+      { icon: "house", title: "A mid-century tract", text: "Beginning in 1953 the Gellert brothers' Standard Building Company built roughly 1,000 near-uniform single-family homes terraced across the hillside for their views." },
+      { icon: "water", title: "Built atop a reservoir", text: "A covered Sutro Reservoir was incorporated into the tract, with the Midtown Terrace Playground built nearby." },
+      { icon: "park", title: "Beneath Twin Peaks", text: "The homes climb the western slope just below Twin Peaks, one of the highest points in San Francisco." },
+    ],
+    nearby: ["West Portal"],
+    restaurants: [
+      { name: "Trattoria da Vittorio", address: "150 West Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
+      { name: "Spiazzo Ristorante", address: "33 West Portal Ave", url: "https://www.spiazzoristorante.com" },
+    ],
+    bars: [
+      { name: "The Dubliner", address: "328 West Portal Ave", phone: "(415) 566-9444", url: "https://dublinerwp.com" },
+    ],
+    hospital: { name: "UCSF Medical Center at Parnassus", address: "505 Parnassus Ave", dist: "about 2 mi", phone: "(415) 353-1008", url: "https://www.ucsfhealth.org/locations/emergency-department-er-parnassus" },
+    transit: "Forest Hill Station, on the Twin Peaks Tunnel, serves Muni Metro K, L, M and S lines. The 36-Teresita bus climbs into Midtown Terrace itself via Panorama Drive and Olympia Way; the 37-Corbett serves the Twin Peaks side of the hill.",
+  },
+
+  "Mt. Davidson Manor": {
+    spirit: "A quiet 1920s tract of tile-roofed single-family homes tucked below Mount Davidson, San Francisco's highest peak.",
+    reasons: ["Calm, well-kept residential streets", "Steps from Mount Davidson Park's trails", "Walkable to West Portal's shops", "Muni Metro and bus lines close by"],
+    history: "Mt. Davidson Manor was developed beginning in 1923 by Fernando Nelson, one of San Francisco's most prolific homebuilders, who bought roughly 50 acres and filled the blocks with affordable single-family homes in a Spanish-Mediterranean style with tile roofs. It is one of the residence-park-adjacent tracts west of Twin Peaks, sitting between Westwood Park and Balboa Terrace near St. Francis Wood. The neighborhood takes its name from Mount Davidson, which rises just to the northeast and, at 928 feet, is the highest natural point in the city. In 1929 the city acquired about 20 acres at the summit for a public park. A 103-foot concrete cross was erected at the peak in 1934 and remains a landmark visible across the southern city.",
+    facts: [
+      { icon: "tower", title: "City's highest peak", text: "Mount Davidson rises 928 feet, the highest natural point in San Francisco." },
+      { icon: "church", title: "Summit cross", text: "A 103-foot concrete cross was built atop Mount Davidson in 1934." },
+      { icon: "park", title: "Park since 1929", text: "About 20 acres at the summit were set aside as city parkland in 1929." },
+      { icon: "house", title: "Fernando Nelson homes", text: "The tract was built from 1923 by Fernando Nelson, who constructed thousands of SF homes." },
+      { icon: "movie", title: "Big-screen cameo", text: "The summit cross appears in the climactic scene of the 1971 film Dirty Harry." },
+    ],
+    nearby: ["West Portal", "Ingleside"],
+    restaurants: [
+      { name: "Spiazzo Ristorante", address: "33 W Portal Ave", phone: "(415) 664-9511", url: "https://www.spiazzoristorante.com" },
+      { name: "Trattoria da Vittorio", address: "150 W Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
+      { name: "Beep's Burgers", address: "1051 Ocean Ave", phone: "(415) 584-2650", url: "https://www.beepsburgers.com" },
+    ],
+    bars: [
+      { name: "The Dubliner", address: "328 W Portal Ave", phone: "(415) 566-9444", url: "https://dublinerwp.com" },
+    ],
+    hospital: { name: "UCSF Medical Center at Parnassus", address: "505 Parnassus Ave", dist: "about 3 mi", phone: "(415) 476-1000", url: "https://www.ucsfhealth.org/locations/parnassus-campus" },
+    transit: "K-Ingleside and M-Ocean View Muni Metro lines run nearby along Ocean Ave and Junipero Serra; buses 23-Monterey, 36-Teresita, 43-Masonic and 44-O'Shaughnessy serve the area. West Portal Station is a short ride away.",
+  },
+
+  "Sherwood Forest": {
+    spirit: "A tiny, leafy enclave of custom homes on Mount Davidson's southern slope, named for Robin Hood and prized for its hush and its big-sky views.",
+    reasons: ["One of the city's quietest pockets", "Big westside and bay views", "Steps from Mount Davidson Park", "A short ride to West Portal"],
+    history: "Sherwood Forest is a mid-20th-century subdivision laid out across the wooded southern and western slopes of Mount Davidson, San Francisco's highest natural hill. Its developers gave the winding streets a Robin Hood theme, with names like Robinhood Drive, Sherwood Court, Dalewood Way, Lansdale Avenue and Idora Avenue. The homes are large single-family residences, some dating to the 1930s, set among the eucalyptus that Adolph Sutro planted decades earlier. The neighborhood sits just below Mount Davidson Park, whose 20 hilltop acres the city acquired as parkland in 1929. Robinhood Drive is often cited as the highest residential street in San Francisco.",
+    facts: [
+      { icon: "house", title: "Robin Hood streets", text: "Streets carry a Sherwood theme, including Robinhood Drive, Sherwood Court, Dalewood Way, Lansdale Avenue and Idora Avenue." },
+      { icon: "tower", title: "City's highest hill", text: "Mount Davidson rises 928 feet, the highest natural point in San Francisco, crowned by a 103-foot concrete cross." },
+      { icon: "park", title: "Mount Davidson Park", text: "The city bought 20 acres atop the hill for parkland in 1929; its trails wind just above the neighborhood." },
+      { icon: "stairs", title: "Highest homes in the city", text: "Robinhood Drive is frequently described as the highest residential street in San Francisco." },
+      { icon: "tram", title: "Highest bus stop in town", text: "The 36-Teresita climbs through the neighborhood to Myra at Dalewood, the highest Muni bus stop in San Francisco." },
+    ],
+    nearby: ["West Portal"],
+    restaurants: [
+      { name: "Trattoria da Vittorio", address: "150 W Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
+      { name: "Bursa", address: "60 W Portal Ave", phone: "(415) 564-4006", url: "https://bursasf.com" },
+    ],
+    bars: [
+      { name: "Philosopher's Club", address: "824 Ulloa St", phone: "(415) 753-0599" },
+    ],
+    hospital: { name: "UCSF Medical Center at Parnassus", address: "505 Parnassus Ave", dist: "about 3 mi", phone: "(415) 476-1000", url: "https://www.ucsfhealth.org/locations/parnassus-campus" },
+    transit: "The 36-Teresita runs through the neighborhood (including the Myra at Dalewood stop near Mount Davidson); the 44-O'Shaughnessy passes nearby. West Portal Station, a ride away, serves Muni Metro K, L and M.",
+  },
+
+  "Forest Knolls": {
+    spirit: "A quiet, woodsy 1960s hillside enclave of mid-century modern homes wrapped in the eucalyptus of Mount Sutro's cloud-like fog.",
+    reasons: ["Tucked into the Mount Sutro forest", "Winding, low-traffic streets", "Mid-century modern architecture", "Steps from UCSF and Cole Valley"],
+    history: "Forest Knolls sits on the western slopes of Mount Sutro and was built out between roughly 1959 and 1963 as a subdivision of single-family homes, many in the mid-century modern style with the living areas upstairs over a ground-floor garage. The hillside above it is the Mount Sutro Open Space Reserve, a forest that traces back to Adolph Sutro, who bought hundreds of acres west of Twin Peaks in 1880. Beginning around San Francisco's first Arbor Day in 1886, Sutro planted the slopes with blue gum eucalyptus, Monterey pine and Monterey cypress, creating the woods that still shade the neighborhood. The reserve is now owned and managed by UC San Francisco, whose Parnassus campus sits just over the hill.",
+    facts: [
+      { icon: "park", title: "Mount Sutro forest", text: "The neighborhood wraps around the Mount Sutro Open Space Reserve, a roughly 61-acre eucalyptus forest crisscrossed with trails." },
+      { icon: "park", title: "Sutro's trees", text: "Adolph Sutro planted the hillside with blue gum eucalyptus, Monterey pine and Monterey cypress starting around 1886." },
+      { icon: "house", title: "Mid-century modern", text: "Most homes were built between about 1959 and 1963, many with sleek mid-century facades and living space stacked over a garage." },
+      { icon: "sun", title: "Foggy and green", text: "Fog drifting through the dense canopy gives the slopes a cloud-forest feel even in summer." },
+    ],
+    nearby: ["the Inner Sunset", "Cole Valley"],
+    restaurants: [
+      { name: "Marnee Thai", address: "1243 9th Ave", phone: "(415) 731-9999", url: "https://www.marneethaisf.com" },
+      { name: "San Tung", address: "1031 Irving St", phone: "(415) 242-0828", url: "https://www.santungsf.com" },
+      { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
+    ],
+    bars: [
+      { name: "InoVino", address: "108B Carl St", phone: "(415) 681-3770", url: "https://inovinosanfrancisco.com" },
+      { name: "Cole Valley Tavern", address: "900 Cole St", url: "https://www.colevalleytavern.com" },
+    ],
+    hospital: { name: "UCSF Medical Center at Parnassus", address: "400 Parnassus Ave", dist: "about 0.7 mi", phone: "(415) 476-1000", url: "https://www.ucsfhealth.org/locations/parnassus-campus" },
+    transit: "The 36-Teresita bus climbs the hill and connects to Forest Hill Station; the 43-Masonic runs nearby. Downhill, the N-Judah Muni Metro and Forest Hill Station reach downtown.",
+  },
+
+  "Westwood Park": {
+    spirit: "A serene 1916 residence park of craftsman bungalows curling along oval streets just south of City College.",
+    reasons: ["Historic 1916 residence-park planning", "Distinctive curving oval streets", "Quiet single-family bungalow blocks", "Transit-rich edge on Ocean Avenue"],
+    history: "Westwood Park was developed in 1916 by the prominent San Francisco real estate firm Baldwin & Howell on roughly ninety acres of former Sutro land near the old Ingleside Racetrack area, marketed as a 'residence park' for families of average means. The firm laid out a signature plan of curving, concentric oval streets, bisected by Miramar Avenue, with nearly every street avoiding a straight line. More than 650 craftsman- and Mediterranean-style bungalows were built, the majority in the 1920s, many designed by architects Charles F. Strothoff and Ida F. McCain. Residents formed the Westwood Park Association on March 22, 1917, and the neighborhood remains governed by single-family deed restrictions. Architect Louis Christian Mullgardt designed the brick entrance gateways and pillars, now City Landmark No. 314.",
+    facts: [
+      { icon: "house", title: "650+ bungalows", text: "More than 650 craftsman and Mediterranean bungalows, most built in the 1920s." },
+      { icon: "road", title: "Oval street plan", text: "Curving, concentric oval streets bisected by Miramar Avenue, with almost no straight street." },
+      { icon: "star", title: "City Landmark No. 314", text: "The 1916 Mullgardt-designed gateway pillars were designated a San Francisco landmark in 2024." },
+      { icon: "flag", title: "Born 1916", text: "Opened by Baldwin & Howell in 1916 as a planned 'residence park' near the old Ingleside Racetrack land." },
+      { icon: "house", title: "Westwood Park Association", text: "Residents organized the Westwood Park Association on March 22, 1917, still active today." },
+    ],
+    nearby: ["the Ocean Avenue strip"],
+    restaurants: [
+      { name: "Beep's Burgers", address: "1051 Ocean Ave", phone: "(415) 584-2650", url: "https://www.beepsburgers.com" },
+      { name: "Sakesan Sushi & Robata", address: "1400 Ocean Ave" },
+    ],
+    bars: [
+      { name: "Ocean Ale House", address: "1314 Ocean Ave", phone: "(415) 988-7521", url: "https://oceanalehouse.com" },
+    ],
+    hospital: { name: "UCSF Health Stanyan Hospital (formerly St. Mary's)", address: "450 Stanyan St", dist: "about 3 mi", phone: "(415) 668-1000", url: "https://sfcommunityhospitals.ucsfhealth.org/st-marys" },
+    transit: "K-Ingleside Muni Metro runs along Ocean Avenue to Balboa Park Station; Balboa Park BART is nearby. Muni buses include the 29, 43 and 49.",
+  },
+
+  "Westwood Highlands": {
+    spirit: "A hushed, hilly tract of period-revival homes curving along the southern slopes of Mount Davidson, the city's highest peak.",
+    reasons: ["Quiet single-family streets", "Steps from Mount Davidson Park", "Minutes to West Portal and Ocean Ave", "Curving hillside street plan"],
+    history: "Westwood Highlands was laid out in the 1920s as one of San Francisco's early 'residence parks' on the southern slope of Mount Davidson, the city's highest natural point. The 283 custom-built homes of the original tract were constructed from 1924 to 1929 under the realtors Baldwin and Howell. Rather than follow the city's grid, the developers used curvilinear streets that fit the steep terrain, with detached single-family houses, rear garages, and utility poles set behind the homes. Each house was given a different architectural design from its neighbor, ranging from English cottages to Spanish-influenced stuccoed homes. It was among the first residential communities in the United States to adopt a shared set of covenants and restrictions.",
+    facts: [
+      { icon: "tower", title: "Below the city's high point", text: "The neighborhood climbs the southern slope of Mount Davidson, at 928 feet the highest natural point in San Francisco, crowned by a 103-foot concrete cross." },
+      { icon: "park", title: "Mount Davidson Park", text: "Roughly 40 acres of wooded open space and trails sit at the top of the hill, just northeast of the neighborhood." },
+      { icon: "house", title: "283 custom homes", text: "The original tract was built out from 1924 to 1929, each home given a different architectural design from its neighbor." },
+      { icon: "road", title: "Curving by design", text: "Streets were laid out as curvilinear routes to fit the steep terrain, a deliberate break from San Francisco's grid." },
+      { icon: "star", title: "Active neighborhood association", text: "The Westwood Highlands Association represents homeowners and is a member of the West of Twin Peaks Central Council." },
+    ],
+    nearby: ["West Portal", "Ingleside", "Sunnyside"],
+    restaurants: [
+      { name: "Elena's Mexican Restaurant", address: "255 West Portal Ave", phone: "(415) 622-4440", url: "https://www.elenasmexican.com" },
+      { name: "Sakesan Sushi & Robata", address: "1400 Ocean Ave", phone: "(415) 347-7898" },
+    ],
+    bars: [
+      { name: "The Dubliner", address: "328 West Portal Ave", phone: "(415) 566-9444", url: "https://dublinerwp.com" },
+      { name: "Friends Bar", address: "558 Monterey Blvd", phone: "(415) 999-1338" },
+    ],
+    hospital: { name: "UCSF Health Stanyan Hospital (formerly St. Mary's)", address: "450 Stanyan St", dist: "about 3 mi", phone: "(415) 668-1000", url: "https://sfcommunityhospitals.ucsfhealth.org/st-marys" },
+    transit: "Muni buses 36-Teresita and 43-Masonic serve the hillside; the K-Ingleside Muni Metro line runs along nearby Ocean Avenue (Ocean & Lee stop). Glen Park and Balboa Park BART stations are a short ride away.",
+  },
+
+  "Merced Manor": {
+    spirit: "A hushed pocket of 1930s storybook homes tucked between Stern Grove and Lake Merced in San Francisco's quiet southwest.",
+    reasons: ["Quiet, tree-lined streets", "Steps from Stern Grove's free summer concerts", "Walkable to West Portal", "Easy Muni Metro and 19th Ave access"],
+    history: "Merced Manor was laid out as a residential subdivision in the 1930s on former Rancho Laguna de la Merced lands near Lake Merced, on terrain that had once been windswept coastal sand dunes. The tract filled in with the Spanish- and Mediterranean-influenced single-family homes that still define it today. Its signature landmark is the Merced Manor Reservoir, a covered 9.6-million-gallon SFPUC facility along Sloat Boulevard, fronted by a classical valve house. Just to the north lies Sigmund Stern Grove, the eucalyptus-and-redwood canyon that has hosted the free Stern Grove Festival concerts since 1938.",
+    facts: [
+      { icon: "music", title: "Free summer concerts", text: "Sigmund Stern Grove, just north of the neighborhood, has hosted the free Stern Grove Festival concert series since 1938." },
+      { icon: "water", title: "The reservoir at the edge", text: "The Merced Manor Reservoir, a covered 9.6-million-gallon SFPUC facility with a classical valve house, sits along Sloat Boulevard at the neighborhood's northern edge." },
+      { icon: "house", title: "1930s storybook tract", text: "The neighborhood was subdivided in the 1930s and is filled with Spanish- and Mediterranean-style single-family homes from that era." },
+      { icon: "wave", title: "Beside Lake Merced", text: "Built on former Rancho Laguna de la Merced lands, the tract sits just east of Lake Merced and its surrounding parkland and trails." },
+    ],
+    nearby: ["West Portal"],
+    restaurants: [
+      { name: "Trattoria da Vittorio", address: "150 West Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
+      { name: "Little Original Joe's", address: "393 West Portal Ave", phone: "(415) 759-1155", url: "https://www.littleoriginaljoes.com" },
+    ],
+    bars: [
+      { name: "The Dubliner", address: "328 West Portal Ave", phone: "(415) 566-9444", url: "https://dublinerwp.com" },
+    ],
+    hospital: { name: "UCSF Medical Center at Parnassus", address: "505 Parnassus Ave", dist: "about 3.5 mi", phone: "(415) 353-1008", url: "https://www.ucsfhealth.org/locations/emergency-department-er-parnassus" },
+    transit: "Muni Metro K-Ingleside and M-Ocean View run nearby along 19th Avenue and St. Francis Circle, with West Portal Station a short ride away. Buses include the 28-19th Avenue, 17, 23 and 57.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
