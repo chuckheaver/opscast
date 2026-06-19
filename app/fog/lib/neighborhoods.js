@@ -4114,6 +4114,261 @@ export const NEIGHBORHOODS = {
     hospital: { name: "UCSF Health Stanyan Hospital (formerly St. Mary's)", address: "450 Stanyan St", dist: "about 1.6 mi", phone: "(415) 668-1000", url: "https://sfcommunityhospitals.ucsfhealth.org/st-marys" },
     transit: "The gated entrance is off Arguello Blvd. Muni 33-Ashbury stops at Arguello and California, one block south; the 1-California runs along California St; the 2-Sutter and 43-Masonic serve nearby Presidio Heights; the 38-Geary runs along Geary Blvd to the south.",
   },
+
+  "Holly Park": {
+    spirit: "Bernal's quiet green crown — a ring of homes wrapped around a round hilltop park, where a single loop path delivers a 360-degree sweep of the city and the streets below stay residential and calm.",
+    reasons: ["360-degree views from one of SF's oldest parks", "Quiet, walkable residential streets", "Cortland Ave's shops minutes away", "Hilltop loop path and playground at the center"],
+    history: "Holly Park sits on land carved from the old Bernal land grant and set aside as one of San Francisco's earliest park reservations in the 1860s, donated to the city in 1862. For decades the surrounding Bernal Heights slopes were sparsely built, leaving the new public land hard to reach; the park was improved in the 1920s and again with city funding from the 1950s onward. Today its 7.5-acre hilltop oval, crowned by Holly Hill, is ringed by Victorian and cottage-style homes along Holly Park Circle. The name likely traces to the hollyleaf (Islais) cherry that once grew near Islais Creek just south of the hill.",
+    facts: [
+      { icon: "park", title: "One of SF's oldest parks", text: "Holly Park was set aside as a public reservation in the 1860s and donated to the city in 1862, making it among San Francisco's oldest municipal parks." },
+      { icon: "tower", title: "360-degree views", text: "A loop path around the summit of Holly Hill opens up panoramic views of downtown, the Salesforce Tower, the Bay, and Sutro Tower." },
+      { icon: "house", title: "A round park ringed by homes", text: "Holly Park Circle wraps the 7.5-acre oval, with homes facing the green on all sides along Bocana, Highland, Appleton, and Murray streets." },
+      { icon: "art", title: "Public art on the hill", text: "A kinetic sculpture, 'Odonatoa' by Joyce Hsu, stands near the children's playground." },
+    ],
+    nearby: ["Bernal Heights", "the Mission"],
+    restaurants: [
+      { name: "Moki's Sushi & Pacific Grill", address: "615 Cortland Ave", phone: "(415) 970-9336", url: "https://mokisf.com" },
+      { name: "Emmy's Spaghetti Shack", address: "3230 Mission St", phone: "(415) 206-2086", url: "https://emmysspaghettishack.com" },
+    ],
+    bars: [
+      { name: "Wild Side West", address: "424 Cortland Ave", phone: "(415) 647-3099", url: "https://www.wildsidewest.com" },
+      { name: "Holy Water", address: "309 Cortland Ave", phone: "(415) 570-8916", url: "https://holywatersf.com" },
+      { name: "Progressive Grounds", address: "400 Cortland Ave", phone: "(415) 282-6233" },
+    ],
+    hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St", dist: "about 1 mi", phone: "(415) 641-6625", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "The 67-Bernal Heights climbs the hill nearby (Ellsworth and Crescent), and the 24-Divisadero runs along Cortland Ave; the 14-Mission and 49 run down Mission St. Glen Park and 24th St Mission BART are a short ride away.",
+  },
+
+  "Fairmount": {
+    spirit: "A hushed hillside of Victorians on the western slope of Bernal Heights, tucked between Glen Park, the Mission, and Bernal — one of San Francisco's oldest homestead tracts, prized for quiet streets, sun, and a short walk to Glen Park BART.",
+    reasons: ["One of the city's earliest homestead tracts", "Quiet, walkable Victorian streets", "Steps from Glen Park BART and the J Church", "Tucked between Glen Park, the Mission, and Bernal"],
+    aka: "Fairmount Heights",
+    history: "The Fairmount Tract was platted in 1861, one of San Francisco's earliest suburban subdivisions west of the Mission, when the area was still rural hinterland beyond the Valencia Street horse railroad. The Fairmount School opened to students of the new tract in September 1864, making it one of the oldest schools in the city. Build-out came in waves: a burst in the 1880s, especially after the electric streetcar line reached Chenery Street in 1892, another after the 1906 earthquake, and a third following World War I. The original large lots were subdivided over time, filling the hillside with the modest Victorians and Edwardians that still line its streets. Today the neighborhood is often folded into Glen Park on maps, but its name survives in Fairmount Street and the surrounding tract.",
+    facts: [
+      { icon: "book", title: "Fairmount School, 1864", text: "The Fairmount School opened to students of the newly platted tract in September 1864, one of the oldest schools in San Francisco." },
+      { icon: "house", title: "An early homestead tract", text: "Platted in 1861, the Fairmount Tract predates Glen Park and Sunnyside by roughly 30 years and is among the oldest residential districts on the city's west side." },
+      { icon: "tram", title: "The streetcar era", text: "An electric streetcar line reached nearby Chenery Street in 1892, spurring a wave of home-building on the hillside." },
+      { icon: "subway", title: "BART at the bottom of the hill", text: "Glen Park BART, at Diamond and Bosworth, sits just downhill, putting downtown and the airport line within easy reach." },
+      { icon: "stairs", title: "A hillside of Victorians", text: "The neighborhood climbs the southeastern slope above College Hill, its streets lined with Victorian and Edwardian homes." },
+    ],
+    nearby: ["Glen Park", "the Mission", "Bernal Heights"],
+    restaurants: [
+      { name: "Manzoni", address: "2788 Diamond St", phone: "(415) 334-2251", url: "https://www.manzonisf.com" },
+      { name: "Gialina Pizzeria", address: "2842 Diamond St", phone: "(415) 239-8500", url: "https://www.gialina.com" },
+      { name: "La Corneta Taqueria", address: "2834 Diamond St", phone: "(415) 469-8757", url: "https://lacorneta.com" },
+      { name: "La Taqueria", address: "2889 Mission St", phone: "(415) 285-7117" },
+    ],
+    bars: [
+      { name: "Holy Water", address: "309 Cortland Ave", phone: "(415) 570-8916", url: "https://holywatersf.com" },
+      { name: "Wild Side West", address: "424 Cortland Ave", phone: "(415) 225-4918" },
+    ],
+    hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St", dist: "about 1.5 mi", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "Glen Park BART sits just downhill at Diamond and Bosworth, served by Muni buses 23, 35, 36, 44 and 52. The J Church Muni Metro stops nearby at San Jose/Glen Park in the San Jose Avenue median.",
+  },
+
+  "Peralta Heights": {
+    spirit: "A hidden pocket on Bernal Heights' northeast slope, where steep streets, secret stairways, and tucked-away gardens climb toward sweeping views of downtown and the bay.",
+    reasons: ["Quiet, tucked-away residential streets", "Hidden stairways and hillside gardens", "Big views toward downtown and the bay", "Steps from Bernal's Cortland Avenue"],
+    history: "The enclave sits on the northeast flank of Bernal Heights, built on land that was once part of Rancho Rincon de las Salinas y Potrero Viejo, a Mexican land grant. Peralta Avenue and the neighborhood take their name from the prominent Peralta family of Spanish-era California land-grant holders. Like much of Bernal, the area's slopes proved too steep for a full street grid, so paths and public stairways were threaded between the hillside lots. Modest early homes and gardens filled in along these winding streets, giving the pocket its quiet, hidden-away character.",
+    facts: [
+      { icon: "house", title: "A Peralta namesake", text: "Peralta Avenue, the spine of the enclave, honors the Peralta family of Spanish and Mexican California land-grant fame." },
+      { icon: "stairs", title: "Stairway streets", text: "Bernal's slopes were too steep for a full grid, so public stairways link the hillside streets, a hallmark of the neighborhood." },
+      { icon: "tower", title: "Downtown views", text: "The northeast-facing slope opens up big views toward downtown San Francisco and the bay." },
+      { icon: "park", title: "Gardens on the hill", text: "Hidden gardens tucked along the steep lots and stairways give the pocket its green, tucked-away feel." },
+    ],
+    nearby: ["Bernal Heights", "the Mission", "Precita Park"],
+    restaurants: [
+      { name: "Emmy's Spaghetti Shack", address: "3230 Mission St", phone: "(415) 206-2086", url: "https://sfspaghettishack.com" },
+      { name: "Precita Social", address: "300 Precita Ave", phone: "(415) 729-3197", url: "https://www.precitasocial.com" },
+      { name: "Precita Park Cafe", address: "500 Precita Ave", phone: "(415) 647-7702" },
+    ],
+    bars: [
+      { name: "Wild Side West", address: "424 Cortland Ave", phone: "(415) 647-3099", url: "https://www.wildsidewest.com" },
+    ],
+    hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St", dist: "about 1 mi", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "Muni 67-Bernal Heights connects the hill to 24th St Mission BART; the 27, 24 and 14-Mission run nearby along the Mission Street corridor.",
+  },
+
+  "St. Marys Park": {
+    spirit: "A hushed, leafy pocket of curving streets tucked on the south slope below Bernal Heights, where mid-century and earlier homes line streets famously laid out in the shape of a bell — a nod to the old St. Mary's College that once crowned this hill.",
+    reasons: ["Quiet streets with little through traffic", "A small neighborhood park at its heart", "Minutes from Cortland Ave and Mission St dining", "14-Mission and BART put downtown within reach"],
+    aka: "College Hill",
+    history: "The hill takes its name from St. Mary's College, founded by Roman Catholic archbishop Joseph Alemany, who bought 60 acres from Jesus Bernal for $1,600 and laid the college cornerstone on August 3, 1862. The college operated here until 1889, when it moved to Oakland and later to Moraga, leaving the area known for decades as College Hill. In 1924 the land was surveyed and opened as a residential subdivision, its streets famously platted in the shape of a bell to honor the school; Justin, Genebern, and Agnon streets were named for teaching brothers of the college. The St. Mary's Park Improvement Club, founded in 1941, has worked to preserve the neighborhood's character ever since.",
+    facts: [
+      { icon: "church", title: "A college on the hill", text: "Archbishop Alemany laid the cornerstone of St. Mary's College here on August 3, 1862; it stayed until 1889 before moving to Oakland and eventually Moraga." },
+      { icon: "book", title: "College Hill", text: "Because of that early college, the area was long known as College Hill, and several streets carry the names of the teaching brothers." },
+      { icon: "house", title: "Streets shaped like a bell", text: "When the subdivision opened in 1924, the curving streets were laid out in the shape of a bell as a tribute to St. Mary's College." },
+      { icon: "park", title: "A park at its center", text: "The neighborhood is organized around St. Mary's Recreation Center and park just to the east, set aside by the city in the 1920s." },
+      { icon: "flag", title: "An improvement club since 1941", text: "The St. Mary's Park Improvement Club, founded in 1941, has championed the neighborhood for more than eight decades." },
+    ],
+    nearby: ["Bernal Heights", "the Mission St corridor"],
+    restaurants: [
+      { name: "Emmy's Spaghetti Shack", address: "3230 Mission St", phone: "(415) 206-2086", url: "https://www.sfspaghettishack.com" },
+      { name: "Black Jet Baking Co.", address: "833 Cortland Ave", phone: "(415) 829-3905", url: "https://www.blackjetbakery.com" },
+    ],
+    bars: [
+      { name: "Wild Side West", address: "424 Cortland Ave", phone: "(415) 647-3099", url: "https://www.wildsidewest.com" },
+      { name: "Holy Water", address: "309 Cortland Ave", phone: "(415) 570-8916", url: "https://holywatersf.com" },
+    ],
+    hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St", dist: "about 1 mi", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "14-Mission and 14R-Mission Rapid run along nearby Mission St; the 67-Bernal Heights and 24-Divisadero connect up the hill and to Cortland Ave. Balboa Park and 24th St Mission BART stations are a short ride away.",
+  },
+
+  "University Mound": {
+    spirit: "A quiet, sun-touched hillside in the city's southeast where single-family homes climb toward a giant reservoir, and the diverse, working-class Portola flatlands hum just downhill on San Bruno Avenue.",
+    reasons: ["Calm, residential streets of single-family homes", "Steps from the Portola's diverse San Bruno Ave eats", "Minutes from sprawling McLaren Park", "Deep, layered local history"],
+    history: "The name dates to 1859, when Rev. George Burrowes founded University College (also called City College) and acquired hilltop land here by 1862, intending a grand campus that was never built; the surrounding streets were laid out and named for schools and educators. Crowning the hill is the University Mound Reservoir, an SFPUC facility holding about 140 million gallons that supplies roughly a quarter of San Francisco's tap water, second in size only to the Sunset Reservoir. Just downhill, the adjacent Portola earned the nickname the 'Garden District,' its slopes once dense with commercial greenhouses and nurseries that grew much of the city's flower crop. The University Mound Ladies Home, founded in 1884 with money from philanthropist James Lick, gave single women of modest means a place to live for 130 years before closing in 2014. The area filled in with modest single-family homes through the 20th century into the diverse, working-class neighborhood it is today.",
+    facts: [
+      { icon: "water", title: "140 million gallons", text: "The University Mound Reservoir atop the hill holds about 140 million gallons and supplies roughly a quarter of San Francisco's tap water, second only to the Sunset Reservoir." },
+      { icon: "book", title: "The university that never was", text: "The neighborhood is named for University College, founded in 1859, which acquired land here by 1862 for a campus that was ultimately never built." },
+      { icon: "park", title: "McLaren Park next door", text: "John McLaren Park, one of the largest parks in San Francisco, spreads out just to the west." },
+      { icon: "flag", title: "The Garden District", text: "The neighboring Portola was long called the Garden District for the greenhouses and flower nurseries that once blanketed its hillsides." },
+      { icon: "house", title: "130 years of refuge", text: "The University Mound Ladies Home, endowed by James Lick and opened in 1884, housed women of modest means until it closed in 2014." },
+    ],
+    nearby: ["the Portola"],
+    restaurants: [
+      { name: "Breakfast at Tiffany's", address: "2499 San Bruno Ave", phone: "(415) 468-8805", url: "https://www.breakfastattiffanyssf.com" },
+      { name: "Banh Mi House", address: "2701 San Bruno Ave", phone: "(415) 769-5556" },
+    ],
+    bars: [
+      { name: "El Toro Night Club", address: "2470 San Bruno Ave", phone: "(415) 468-0670" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 3 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
+    transit: "Muni buses serve the area via the 9 San Bruno and 9R San Bruno Rapid along San Bruno Avenue, plus the 8 Bayshore, 29 Sunset, and 54 Felton. Bayshore Caltrain is a short ride east.",
+  },
+
+  "Silver Terrace": {
+    spirit: "A sunny, working-class pocket tucked in the crook where the 280 and 101 freeways meet — hillside homes above, the auto-and-industrial flats below, with quiet streets and big southeast-facing views.",
+    reasons: ["Some of the city's oldest houses on quiet streets", "Sunny southeast corner with bay views", "Walk to the Portola and the Bayview's Third St", "Minutes from McLaren Park"],
+    history: "Silver Terrace takes its name from Joseph S. Silver, who in the 1850s claimed and fenced a tract running from the old San Bruno turnpike (now San Bruno Avenue) east toward what is today Third Street; despite the name, there was never any silver ore here. In 1870 the land agents Duncan & Co. launched a homestead association on hundreds of lots from the Haley & O'Neill tract, and Eadweard Muybridge had been hired in 1869 to photograph the still-rural fields and marsh for promotional images. Most homes went up in the 20th century, but hidden in the streets are some of the oldest houses in San Francisco, survivors of that first tract. The hillside filled in with single-family homes while the flats along Bayshore Boulevard became an auto row of dealerships and light industry. The result is the neighborhood's enduring split character: residential slopes above, working blocks below.",
+    facts: [
+      { icon: "money", title: "Not actually silver", text: "The name honors landowner Joseph S. Silver, not any mine; no silver was ever dug here." },
+      { icon: "road", title: "Bayshore auto row", text: "The flat blocks along Bayshore Boulevard grew into a strip of car dealerships and light industry." },
+      { icon: "house", title: "Some of SF's oldest homes", text: "A few Haley & O'Neill tract houses tucked in the streets are among the oldest in the city." },
+      { icon: "park", title: "McLaren Park next door", text: "John McLaren Park, one of San Francisco's largest at over 300 acres, sits just west." },
+      { icon: "sun", title: "Sunny southeast corner", text: "Sitting in the elbow of the 280 and 101, the hillside catches sun and wide bay-facing views." },
+    ],
+    nearby: ["the Portola", "the Bayview"],
+    restaurants: [
+      { name: "Breakfast at Tiffany's", address: "2499 San Bruno Ave", phone: "(415) 468-8805" },
+      { name: "Smoke Soul Kitchen", address: "4618 Third St", phone: "(415) 900-6093", url: "https://www.smokesoulkitchen.com" },
+    ],
+    bars: [
+      { name: "Old Skool Cafe", address: "1429 Mendell St", phone: "(415) 822-8531", url: "https://www.oldskoolcafe.org" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 2.5 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
+    transit: "Muni buses 9-San Bruno, 8-Bayshore, 23-Monterey, 44-O'Shaughnessy and 54-Felton serve the area; the T-Third light rail runs along Third St in the Bayview, a ride east.",
+  },
+
+  "India Basin": {
+    spirit: "A working bayshore reborn as parkland, where 19th-century shipwrights once launched scow schooners and a brand-new 64-acre waterfront park now opens the Bay to the Bayview.",
+    reasons: ["Brand-new India Basin Waterfront Park", "Rich shipbuilding heritage", "Bay Trail access and Heron's Head birdwatching", "Emerging new bayfront housing"],
+    history: "India Basin began as a shallow tidal cove on the Hunters Point shoreline and became a hub of 19th-century boatbuilding, where shipwrights launched scow schooners that hauled cargo around San Francisco Bay. Carpenter and shipwright John Dirks built the c. 1875 Shipwright's Cottage at 900 Innes Avenue, and boatbuilding families ran the adjacent yard for decades. The cove's industry surged during the World War II shipyard era at neighboring Hunters Point, then entered a long postwar decline that left the shoreline largely industrial. Today the city's new India Basin Waterfront Park is transforming the basin back into public space along the water.",
+    facts: [
+      { icon: "park", title: "A new 64-acre shoreline park", text: "India Basin Waterfront Park is being built across the basin's shoreline; its 900 Innes section opened in October 2024, with the larger shoreline portion under construction through the late 2020s." },
+      { icon: "factory", title: "Shipwright's Cottage", text: "The c. 1875 cottage at 900 Innes Avenue, a San Francisco Designated Landmark since 2008, once housed boatbuilders who crafted scow schooners and now anchors the new park." },
+      { icon: "bird", title: "Heron's Head Park", text: "Just north along the shore, this reclaimed salt marsh is one of the city's best birdwatching spots and home to the off-grid, LEED Platinum EcoCenter." },
+      { icon: "water", title: "Built on a boatbuilding cove", text: "The basin was a center of San Francisco Bay scow-schooner construction; the historic schooner Alma, built nearby in 1891, survives at the Maritime National Historical Park." },
+    ],
+    nearby: ["the Bayview"],
+    restaurants: [
+      { name: "Gumbo Social", address: "5176 3rd St", phone: "(415) 655-9195", url: "https://www.gumbosocial.com" },
+      { name: "Old Skool Cafe", address: "1429 Mendell St", phone: "(415) 822-8531", url: "https://www.oldskoolcafe.org" },
+    ],
+    bars: [
+      { name: "Laughing Monk Brewing", address: "1439 Egbert Ave", phone: "(415) 678-5157", url: "https://taproom.laughingmonk.com" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 3 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
+    transit: "The 19-Polk bus runs into India Basin along Innes Avenue toward Hunters Point. The T-Third Muni Metro line stops at the Hudson/Innes platform on Third Street, with the 44-O'Shaughnessy and 54-Felton buses connecting there; the 23-Monterey serves the wider Bayview.",
+  },
+
+  "Central Waterfront": {
+    spirit: "San Francisco's working bayshore, where 170 years of shipbuilding meet a new waterfront of parks, lofts, and a beer hall under crane shadows.",
+    reasons: ["Historic Pier 70 shipyard setting", "New Crane Cove Park on the bay", "Emerging Pier 70 mixed-use district", "T-Third light rail to downtown"],
+    history: "This stretch of the central-eastern waterfront grew up around the Union Iron Works, the shipyard Peter Donahue's firm established at Potrero Point in the 19th century and which built the battleship USS Oregon and early U.S. Navy submarines. Charles Schwab's Bethlehem Steel bought the yard in the early 1900s, and during World War II Pier 70 built and repaired thousands of naval vessels. Commercial ship repair continued in the two floating dry docks until the operator walked away in 2017, leaving them idle. The Port of San Francisco opened the seven-acre Crane Cove Park here in 2020, and Brookfield's Pier 70 redevelopment is restoring historic structures like the WWII-era Building 12 while adding housing, parks, and arts and maker space.",
+    facts: [
+      { icon: "factory", title: "Union Iron Works", text: "The Pier 70 shipyard traces to the 19th-century Union Iron Works at Potrero Point, later Bethlehem Steel, which built the battleship USS Oregon and some of the Navy's first submarines." },
+      { icon: "water", title: "Idle dry docks", text: "Pier 70's two floating dry docks repaired ships for decades but have sat deserted since the operator left in 2017; the Port has budgeted to demolish the aging structures." },
+      { icon: "park", title: "Crane Cove Park", text: "Opened in 2020, this seven-acre Port park off Illinois Street has a sandy beach, lawns, a dog run, and two preserved shipyard cranes on the bay." },
+      { icon: "factory", title: "Building 12 reborn", text: "Brookfield's Pier 70 project rehabilitated the WWII-era steel warehouse Building 12 into a market hall of makers, artists, food, and a taproom, the heart of the new district." },
+      { icon: "house", title: "Pier 70 redevelopment", text: "The Pier 70 plan adds roughly 3.6 million square feet of housing, commercial, arts, and light-industrial space plus new waterfront parks to the historic district." },
+    ],
+    nearby: ["Dogpatch"],
+    restaurants: [
+      { name: "Piccino", address: "1001 Minnesota St", phone: "(415) 824-4224", url: "https://www.piccino.com" },
+      { name: "Long Bridge Pizza Co.", address: "2347 3rd St", phone: "(415) 829-8999", url: "https://www.longbridgepizza.com" },
+    ],
+    bars: [
+      { name: "Standard Deviant Brewing (Pier 70, Building 12)", address: "1070 Maryland St", phone: "(415) 690-2337", url: "https://www.standarddeviantbrewing.com" },
+      { name: "Dogpatch Saloon", address: "2496 3rd St" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 1.5 mi", phone: "(628) 206-8000", url: "https://zuckerbergsanfranciscogeneral.org" },
+    transit: "T-Third light rail runs on Third Street with the 20th Street (Dogpatch) and 23rd Street stops; Muni buses 22-Fillmore and 48 serve the area.",
+  },
+
+  "Showplace Square": {
+    spirit: "San Francisco's design district in the flats northwest of Potrero Hill, where brick warehouses turned interior-design showrooms, tech offices, and breweries — home of the San Francisco Design Center, trading in furniture, fabric, and light.",
+    reasons: ["Heart of SF's design and showroom trade", "Handsome early-1900s brick warehouse architecture", "Walkable to Potrero Hill and the Mission", "Brewery taprooms and design-district dining"],
+    aka: "Design District",
+    history: "The district grew up in the early 20th century as a flatland of brick-and-timber warehouses and light industry serving the rail and port economy. In the 1970s developer Henry Adams assembled several adjacent brick buildings (one wing had been cold storage) into the San Francisco Design Center, adding the dramatic glass-roofed Galleria atrium and bringing in the first interior-design showrooms as tenants. The cluster of showrooms gave the area its name, Showplace Square, after the Showplace building. Today the Design Center still houses more than 100 showrooms representing thousands of manufacturers, while the surrounding warehouse blocks have filled with tech offices, breweries, and new live/work lofts.",
+    facts: [
+      { icon: "art", title: "San Francisco Design Center", text: "The SF Design Center spans two buildings, the Showplace and the Galleria, with over 100 showrooms representing more than 2,000 manufacturers of furniture, fabric, lighting, and more." },
+      { icon: "star", title: "The Galleria atrium", text: "Henry Adams joined four brick buildings around a dramatic skylit atrium in the 1970s; the Galleria at 101 Henry Adams St is now a landmark event hall." },
+      { icon: "factory", title: "Brick warehouse roots", text: "The Showplace building at 2 Henry Adams St dates to about 1915, typical of the district's early-1900s brick-and-timber warehouse stock." },
+      { icon: "beer", title: "Brewery scene", text: "Ballast Point's San Francisco tasting room and kitchen anchors the 16th Street edge of the district." },
+    ],
+    nearby: ["Potrero Hill", "SoMa"],
+    restaurants: [
+      { name: "Niku Steakhouse", address: "61 Division St", phone: "(415) 829-7817", url: "https://www.nikusteakhouse.com" },
+      { name: "Dumpling Time", address: "11 Division St", phone: "(415) 525-4797", url: "https://www.dumplingtime.com" },
+    ],
+    bars: [
+      { name: "Ballast Point", address: "705 16th St", phone: "(628) 400-5763", url: "https://ballastpoint.com/location/san-francisco/" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 1 mi", phone: "(628) 206-8000", url: "https://zuckerbergsanfranciscogeneral.org" },
+    transit: "Muni buses 22-Fillmore (to Mission Bay), 19-Polk, 10-Townsend, and 55-Dogpatch serve the district; the 16th St corridor and Mission Bay are nearby.",
+  },
+
+  "Mint Hill": {
+    spirit: "A tiny, history-soaked wedge at the seam of SoMa, the Mission, and Mid-Market, anchored by the granite hulk of the Old U.S. Mint and the buzzing pedestrian world of Mint Plaza — central, dense, and transit-rich.",
+    reasons: ["One of the most transit-connected spots in the city", "Walk to Mint Plaza dining and 5th Street shopping", "Built around a true 1906 survivor landmark", "Central to SoMa, Union Square, and the Mission"],
+    history: "The Old United States Mint at 5th and Mission, completed in 1874, is a neoclassical fortress nicknamed the 'Granite Lady.' When the 1906 earthquake and fire leveled the surrounding South of Market, Superintendent Frank Leach and his crew fought back the flames, and the building survived as one of the few structures left standing for blocks. At the time it held roughly a third of the nation's gold reserves and briefly served as the city's only working financial institution during the recovery. The Mint operated until 1937; a century later, in 2007, the once-neglected alley behind it was reborn as Mint Plaza, a privately funded pedestrian square that now hosts dining, markets, and events at the heart of this small, central district.",
+    facts: [
+      { icon: "quake", title: "Survived 1906", text: "The Old Mint was one of the few buildings left standing for blocks after the 1906 earthquake and fire, saved by its superintendent and staff." },
+      { icon: "money", title: "A third of the gold", text: "At the time of the 1906 fire the Mint held about $300 million, roughly one-third of the entire nation's gold reserves." },
+      { icon: "factory", title: "The Granite Lady", text: "Built 1869 to 1874 in neoclassical style, the Old U.S. Mint earned its nickname and coined gold and silver until 1937." },
+      { icon: "fair", title: "Mint Plaza", text: "In 2007 the alley behind the Mint became Mint Plaza, San Francisco's first privately funded conversion of a city street into a public pedestrian plaza." },
+    ],
+    nearby: ["SoMa", "Union Square"],
+    restaurants: [
+      { name: "54 Mint Cucina Romana", address: "16 Mint Plaza", phone: "(415) 543-5100", url: "https://www.54mint.com" },
+    ],
+    bars: [
+      { name: "SOMA Restaurant & Bar", address: "85 5th St", phone: "(415) 778-8500", url: "https://somarestaurantandbar.com" },
+    ],
+    hospital: { name: "CPMC Van Ness Campus", address: "1101 Van Ness Ave", dist: "about 1 mi", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "Powell Street BART/Muni Metro station is a block away, serving BART (Red, Yellow, Green, Blue) and Muni Metro lines J, K, L, M, N. The F-Market streetcar and Powell-Hyde and Powell-Mason cable cars run nearby on Market Street.",
+  },
+
+  "Bret Harte": {
+    spirit: "A tiny, easy-to-miss residential pocket in San Francisco's far southeast, tucked between the freeways near the Bayview and Portola edges.",
+    reasons: ["Quiet, modest, residential southeast SF", "Near McLaren Park green space", "Close to Caltrain and Muni lines", "Bayview and Portola dining a short ride away"],
+    history: "The neighborhood takes its name from Bret Harte (1836–1902), the Gold Rush-era writer whose 1868 story 'The Luck of Roaring Camp' made him one of the first California authors to win an international following. The pocket itself is one of the city's smallest neighborhoods, a cluster of modest homes wedged among the freeway corridors near the U.S. 101 and Interstate 280 interchange. It sits along the Bayview's industrial southeastern edge, bordered by Silver Terrace, the Portola, and the Bayshore corridor. Largely residential and ringed by industrial blocks, it remains obscure even to many lifelong San Franciscans.",
+    facts: [
+      { icon: "book", title: "Named for a Gold Rush writer", text: "Bret Harte (1836–1902) wrote 'The Luck of Roaring Camp' and was among the first California authors to gain international fame." },
+      { icon: "road", title: "Wedged among freeways", text: "The small residential pocket sits near the U.S. 101 / Interstate 280 interchange in the city's far southeast." },
+      { icon: "park", title: "McLaren Park nearby", text: "John McLaren Park, San Francisco's second-largest park at roughly 313 acres, sits just to the west above the Portola." },
+      { icon: "tram", title: "Bayshore Caltrain close by", text: "The Bayshore Caltrain station at 400 Tunnel Ave is a short hop south, linking the area down the Peninsula." },
+    ],
+    nearby: ["the Bayview", "the Portola"],
+    restaurants: [
+      { name: "The Old Clam House", address: "299 Bayshore Blvd", phone: "(415) 695-2866", url: "https://theoldclamhouse.com" },
+      { name: "Breakfast at Tiffany's", address: "2499 San Bruno Ave", phone: "(415) 468-8805", url: "https://www.breakfastattiffanyssf.com" },
+      { name: "Old Skool Cafe", address: "1429 Mendell St", phone: "(415) 822-8531", url: "https://www.oldskoolcafe.org" },
+    ],
+    hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 4 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
+    transit: "Muni 9-San Bruno and 8-Bayshore buses serve the nearby San Bruno Ave and Bayshore corridors; the T-Third light rail runs along Third St in the Bayview. Bayshore Caltrain station at 400 Tunnel Ave is just south.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
