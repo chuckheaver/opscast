@@ -121,7 +121,7 @@ function PlaceRow({ p, first }) {
 }
 
 export default function NeighborhoodModal({
-  name, data, fogHrs, zoneLabel, supervisorDistrict, loc, onClose,
+  name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict, loc, onClose,
 }) {
   const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
 
@@ -189,6 +189,7 @@ export default function NeighborhoodModal({
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, margin: "12px 0 2px" }}>
           {data.aka && <span style={{ fontSize: 12, padding: "3px 9px", borderRadius: 8, background: "#f1ede5", color: "#78716c" }}>{data.aka}</span>}
+          {realtorDistrict && <span style={{ fontSize: 12, padding: "3px 9px", borderRadius: 8, background: "#f1ede5", color: "#78716c" }}>RE District {realtorDistrict}</span>}
           {supervisorDistrict != null && <span style={{ fontSize: 12, padding: "3px 9px", borderRadius: 8, background: "#f1ede5", color: "#78716c" }}>Supervisor District {supervisorDistrict}</span>}
           {zoneLabel && <span style={{ fontSize: 12, padding: "3px 9px", borderRadius: 8, background: "#FAEEDA", color: "#854F0B" }}>{zoneLabel} zone</span>}
         </div>

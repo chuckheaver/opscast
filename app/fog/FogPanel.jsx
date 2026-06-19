@@ -1,20 +1,27 @@
 'use client';
 
 // Bottom panel under the map. Two stacked sections:
-//   1) Key/Legend box — what we know about the picked location:
-//      Neighborhood, ZIP, Elevation, Real Estate District, Supervisor District
-//   2) Color box (smaller) — microclimate zone + average summer fog hrs/day
-// Followed by the four primary layer toggles (Neighborhoods, Summer Fog,
-// Transit, Bike Paths).
+//   1) A–Z index of authored neighborhoods (click a name → open its pop-up)
+//      alongside a slim "selected point" strip with the point-level facts
+//      that depend on the exact spot clicked (ZIP, elevation, seismic,
+//      tsunami). Neighborhood-level facts + the editorial story live in the
+//      pop-up (NeighborhoodModal).
+//   2) The layer toggles + map legends.
 
-import { useState } from "react";
 import { findNeighborhoodForPoint } from "./lib/spatial";
-import { fogColor, fogLabel } from "./lib/risk";
-import { getNeighborhood } from "./lib/neighborhoods";
+import { fogLabel } from "./lib/risk";
+import { getNeighborhood, listNeighborhoods } from "./lib/neighborhoods";
 import NeighborhoodModal from "./NeighborhoodModal";
+
+// Alphabetical index of authored neighborhoods — stable across renders.
+const NBHD_INDEX = listNeighborhoods();
 
 export default function FogPanel({
   picked,
+  openHood,
+  onOpenHood,
+  onCloseHood,
+  onPickNeighborhood,
   zips,
   supervisorDistricts,
   realtorNeighborhoods,
@@ -33,8 +40,6 @@ export default function FogPanel({
   showTsunami, onToggleTsunami,
   showRealtor, onToggleRealtor,
 }) {
-  const [hoodOpen, setHoodOpen] = useState(false);
-
   // Compute the per-location lookups inline so we don't double-store them.
   const point = picked?.point;
   const zipFeat = point && zips ? findNeighborhoodForPoint(zips, point) : null;
@@ -65,46 +70,67 @@ export default function FogPanel({
   const seismicYN = yesNo(point, seismicHazards);
   const tsunamiYN = yesNo(point, tsunamiHazard);
 
+  // The neighborhood whose pop-up is open. Point-derived facts (fog,
+  // supervisor, realtor district) only apply when the picked point is
+  // actually inside the open neighborhood.
+  const openData = openHood ? getNeighborhood(openHood) : null;
+  const factsMatch = neighborhoodName === openHood;
+
   return (
     <div className="fog-panel">
-      {hoodOpen && hoodData && (
+      {openHood && openData && (
         <NeighborhoodModal
-          name={neighborhoodName}
-          data={hoodData}
-          fogHrs={Number.isFinite(fogHrs) ? fogHrs : null}
-          zoneLabel={microZoneLabel}
-          supervisorDistrict={supFeat?.properties?.district}
-          loc={picked}
-          onClose={() => setHoodOpen(false)}
+          name={openHood}
+          data={openData}
+          fogHrs={factsMatch && Number.isFinite(fogHrs) ? fogHrs : null}
+          zoneLabel={factsMatch ? microZoneLabel : null}
+          supervisorDistrict={factsMatch ? supFeat?.properties?.district : null}
+          realtorDistrict={factsMatch ? realtorLabel : null}
+          loc={factsMatch ? picked : null}
+          onClose={onCloseHood}
         />
       )}
       <div className="fog-panel-row">
-        <div className="fog-keybox">
+        {/* A–Z index of every neighborhood we've written highlights for.
+            Click a name to drop a pin at its centre and open the pop-up. */}
+        <div className="fog-nbhd-index">
           <div className="fog-keybox-h">
-            {picked?.address || (point ? "Selected location" : "Pick a location")}
+            Neighborhoods <span className="fog-nbhd-count">({NBHD_INDEX.length})</span>
           </div>
-          <KeyRow label="Neighborhood" value={
-            hoodData
-              ? <button type="button" className="fog-hood-link" onClick={() => setHoodOpen(true)}>{neighborhoodName} ›</button>
-              : neighborhoodName
-          } />
-          <KeyRow label="Zip Code" value={zipCode} />
-          <KeyRow label="Elevation" value={Number.isFinite(elevationFt) ? `${elevationFt} ft` : null} />
-          <KeyRow label="Realtor District" value={realtorLabel} />
-          <KeyRow label="Supervisor District" value={supervisorLabel} />
-          <KeyRow label="Seismic Zone" value={seismicYN} />
-          <KeyRow label="Tsunami Zone" value={tsunamiYN} />
+          <div className="fog-nbhd-list">
+            {NBHD_INDEX.map(n => (
+              <button
+                key={n.key}
+                type="button"
+                className={"fog-nbhd-link" + (n.key === openHood ? " on" : "")}
+                onClick={() => onPickNeighborhood(n.key)}
+              >
+                {n.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div
-          className="fog-colorbox"
-          style={fogHrs != null ? { background: fogColor(fogHrs) } : undefined}
-        >
-          <KeyRow label="Microclimate Zone" value={microZoneLabel} />
-          <KeyRow
-            label="Avg Summer Fog Daily"
-            value={fogHrs != null ? `${fogHrs.toFixed(1)} hrs / day` : null}
-          />
+        {/* Slim point-level strip: facts that depend on the exact spot. */}
+        <div className="fog-keybox fog-point-strip">
+          {point ? (
+            <>
+              <div className="fog-keybox-h">{picked?.address || neighborhoodName || "Selected point"}</div>
+              <KeyRow label="Zip Code" value={zipCode} />
+              <KeyRow label="Elevation" value={Number.isFinite(elevationFt) ? `${elevationFt} ft` : null} />
+              <KeyRow label="Seismic Zone" value={seismicYN} />
+              <KeyRow label="Tsunami Zone" value={tsunamiYN} />
+              {hoodData && (
+                <button type="button" className="fog-hood-link fog-point-cta" onClick={() => onOpenHood(neighborhoodName)}>
+                  View {neighborhoodName} details ›
+                </button>
+              )}
+            </>
+          ) : (
+            <div className="fog-point-empty">
+              Click a neighborhood name, or anywhere on the map, to see its details.
+            </div>
+          )}
         </div>
       </div>
 

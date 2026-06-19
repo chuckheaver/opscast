@@ -12,7 +12,7 @@ import { useSearchParams } from "next/navigation";
 import FogMap from "./FogMap";
 import FogTopBar from "./FogTopBar";
 import FogPanel from "./FogPanel";
-import { findNeighborhoodForPoint, findContourForPoint } from "./lib/spatial";
+import { findNeighborhoodForPoint, findContourForPoint, findFeatureByName, centroidOfFeature } from "./lib/spatial";
 import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
 
 const DATA_URL = "/data/sf-fog-neighborhoods.geojson";
@@ -35,6 +35,7 @@ export default function FogApp() {
   const [tsunamiHazard, setTsunamiHazard] = useState(null);
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { feature, point, address, contour, elevation_ft, zip, supervisor, realtor, microZone }
+  const [openHood, setOpenHood] = useState(null); // neighborhood name whose highlights pop-up is open
   // Summer fog overlay — on for the "Fog Map" preset; off otherwise.
   const [showContours, setShowContours] = useState(preset === "fog");
   // Transit (Muni stops) — on for the "Transit" preset.
@@ -135,13 +136,32 @@ export default function FogApp() {
     [geojson, contours]
   );
 
-  // User clicked a neighborhood directly on the map.
+  // User clicked a neighborhood directly on the map — pick the point and
+  // open that neighborhood's highlights pop-up.
   const pickFromMap = useCallback(
     (feature, point) => {
       const contour = findContourForPoint(contours, point);
       setPicked({ point, address: null, feature, contour });
+      setOpenHood(feature?.properties?.name || null);
     },
     [contours]
+  );
+
+  // User clicked a neighborhood name in the A–Z index — treat it like
+  // clicking the centre of that neighborhood on the map: drop a pin at its
+  // centroid (so the point-level lookups + elevation resolve) and open the
+  // highlights pop-up.
+  const pickFromNeighborhood = useCallback(
+    name => {
+      if (!geojson) return;
+      const feature = findFeatureByName(geojson, name);
+      if (!feature) return;
+      const point = centroidOfFeature(feature);
+      const contour = point ? findContourForPoint(contours, point) : null;
+      setPicked({ point, address: null, feature, contour });
+      setOpenHood(name);
+    },
+    [geojson, contours]
   );
 
   // Browser geolocation → reverse-geocoded address → pick. The dataRef
@@ -301,6 +321,10 @@ export default function FogApp() {
       </div>
       <FogPanel
         picked={picked}
+        openHood={openHood}
+        onOpenHood={setOpenHood}
+        onCloseHood={() => setOpenHood(null)}
+        onPickNeighborhood={pickFromNeighborhood}
         zips={zips}
         supervisorDistricts={supervisorDistricts}
         realtorNeighborhoods={realtorNeighborhoods}

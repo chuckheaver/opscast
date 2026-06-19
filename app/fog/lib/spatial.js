@@ -30,6 +30,42 @@ export function findContourForPoint(fc, point) {
   return best;
 }
 
+// Find a neighborhood feature by its `name` property (exact match).
+export function findFeatureByName(fc, name) {
+  if (!fc || !name) return null;
+  return fc.features.find(f => f.properties?.name === name) || null;
+}
+
+// A representative interior-ish point for a polygon feature: the area
+// centroid of its largest outer ring. Good enough to drop a pin and run
+// the point-in-polygon lookups when the user picks a neighborhood by name
+// (rather than clicking an exact spot). Returns [lng, lat] or null.
+export function centroidOfFeature(feature) {
+  const g = feature?.geometry;
+  if (!g) return null;
+  let ring = null;
+  if (g.type === "Polygon") ring = g.coordinates[0];
+  else if (g.type === "MultiPolygon") {
+    let best = -Infinity;
+    for (const poly of g.coordinates) {
+      const a = ringArea(poly[0]);
+      if (a > best) { best = a; ring = poly[0]; }
+    }
+  }
+  if (!ring || ring.length < 3) return null;
+  let x = 0, y = 0, area2 = 0;
+  for (let i = 0; i < ring.length - 1; i++) {
+    const [x0, y0] = ring[i];
+    const [x1, y1] = ring[i + 1];
+    const cross = x0 * y1 - x1 * y0;
+    area2 += cross;
+    x += (x0 + x1) * cross;
+    y += (y0 + y1) * cross;
+  }
+  if (area2 === 0) return ring[0];
+  return [x / (3 * area2), y / (3 * area2)];
+}
+
 // Cheap planar area estimate in degrees² — fine for picking the smallest
 // of a small set of overlapping polygons; we don't need true geodesic area.
 function approxFeatureArea(feature) {

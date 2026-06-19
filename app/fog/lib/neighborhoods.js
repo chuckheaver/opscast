@@ -2014,3 +2014,13 @@ export function getNeighborhood(name) {
   if (!name) return null;
   return NEIGHBORHOODS[name] || NEIGHBORHOODS[ALIASES[name]] || null;
 }
+
+// Alphabetical index of authored neighborhoods for the A–Z list on the page.
+// `key` is the fog geojson `name` (what the map/lookup uses); `label` is the
+// display name (the `title` override when present, e.g. "Cow Hollow / Union
+// Street").
+export function listNeighborhoods() {
+  return Object.entries(NEIGHBORHOODS)
+    .map(([key, v]) => ({ key, label: v.title || key }))
+    .sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: "base" }));
+}

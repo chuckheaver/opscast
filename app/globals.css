@@ -1368,6 +1368,47 @@ input[type=range]::-webkit-slider-thumb:hover {
   margin-bottom: 6px;
   letter-spacing: -0.2px;
 }
+
+/* A–Z neighborhood index (left column of the panel row) */
+.fog-nbhd-index {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #fff;
+}
+.fog-nbhd-count { color: #a8a29e; font-weight: 600; }
+.fog-nbhd-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+.fog-nbhd-link {
+  background: #f5f3ef;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 4px 9px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1c1917;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.fog-nbhd-link:hover { background: #E6F1FB; border-color: #93c5fd; color: #042C53; }
+.fog-nbhd-link.on { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+/* Slim point-level strip (right column) */
+.fog-point-strip { display: flex; flex-direction: column; }
+.fog-point-empty {
+  font-size: 12.5px;
+  color: #78716c;
+  line-height: 1.5;
+  margin: auto 0;
+}
+.fog-point-cta {
+  align-self: flex-start;
+  margin-top: 8px;
+  font-size: 13px;
+}
 .fog-colorbox {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
