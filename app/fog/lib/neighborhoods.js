@@ -2455,6 +2455,465 @@ export const NEIGHBORHOODS = {
     transit:
       "Muni 1 California, 2 Clement, and the 38 Geary / 38R Geary Rapid carry the Richmond to downtown; the 44 O'Shaughnessy links to Golden Gate Park.",
   },
+
+  "Mission Dolores": {
+    spirit:
+      "Sunny, palm-dotted heart of the city where San Francisco was born — anchored by its 1776 adobe mission and the picnic-blanket sprawl of Dolores Park.",
+    reasons: [
+      "Sunniest microclimate in SF",
+      "City's oldest standing building",
+      "Dolores Park people-watching",
+      "Victorian flats & bakeries",
+    ],
+    history:
+      "Mission San Francisco de Asís was founded in 1776 and nicknamed Mission Dolores for the nearby Laguna de los Dolores. Its adobe chapel, completed in 1791, is the oldest intact building in San Francisco and survived the 1906 quake; the grand Mission Dolores Basilica beside it dates to 1918. The surrounding neighborhood of Victorian and Edwardian flats grew up around the church, and today Mission Dolores Park draws sun-seekers to its sloping lawns and skyline views.",
+    facts: [
+      {
+        icon: "church",
+        title: "Oldest building in SF",
+        text:
+          "The Mission Dolores adobe chapel, completed in 1791, is the oldest intact structure in San Francisco and came through the 1906 earthquake undamaged.",
+      },
+      {
+        icon: "flag",
+        title: "Founded 1776",
+        text:
+          "Mission San Francisco de Asís was founded in 1776, the sixth of California's 21 Spanish missions and the namesake of the entire Mission District.",
+      },
+      {
+        icon: "park",
+        title: "Dolores Park",
+        text:
+          "Mission Dolores Park opened in 1905 on former cemetery land and served as a refugee camp after the 1906 quake; today its lawns are the city's favorite sunny gathering spot.",
+      },
+      {
+        icon: "sun",
+        title: "Sunny microclimate",
+        text:
+          "Sheltered from the coastal fog that blankets the western neighborhoods, Mission Dolores enjoys some of the warmest, sunniest weather in the city.",
+      },
+      {
+        icon: "house",
+        title: "Victorian flats",
+        text:
+          "The streets around Dolores and Church are lined with ornate Victorian and Edwardian flats, many predating the 1906 earthquake.",
+      },
+    ],
+    restaurants: [
+      { name: "Tartine Bakery", address: "600 Guerrero St", phone: "(415) 487-2600", url: "https://tartinebakery.com" },
+      { name: "Delfina", address: "3621 18th St", phone: "(415) 552-4055", url: "https://www.delfinasf.com" },
+      { name: "Pizzeria Delfina", address: "3611 18th St", url: "https://www.pizzeriadelfina.com" },
+      { name: "Foreign Cinema", address: "2534 Mission St", phone: "(415) 648-7600", url: "https://foreigncinema.com" },
+      { name: "Bi-Rite Creamery", address: "3692 18th St", phone: "(415) 626-5600", url: "https://biritemarket.com" },
+    ],
+    bars: [
+      { name: "Zeitgeist", address: "199 Valencia St", phone: "(415) 255-7505", url: "https://www.zeitgeistsf.com" },
+      { name: "El Rio", address: "3158 Mission St", phone: "(415) 282-3325", url: "https://www.elriosf.com" },
+      { name: "Blackbird", address: "2124 Market St", phone: "(415) 872-5310", url: "https://www.blackbirdbar.com" },
+      { name: "Beauty Bar", address: "2299 Mission St", phone: "(415) 769-0117", url: "https://www.beautybarsf.com" },
+    ],
+    hospital: {
+      name: "CPMC Davies Campus",
+      address: "601 Duboce Ave",
+      dist: "about 0.7 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "The J Church Muni Metro runs up Church St past Dolores Park; the 22 Fillmore and 33 cross through, and the 16th St BART/Muni station is a few blocks east.",
+  },
+
+  "Laguna Honda": {
+    spirit:
+      "Tucked into the wooded hills above the city's deepest lagoon, where fog drifts through eucalyptus and the only traffic is the Muni gliding into the tunnel.",
+    reasons: [
+      "Wooded hillside calm",
+      "Reservoir & open space",
+      "Forest Hill Station close",
+      "Pure single-family quiet",
+    ],
+    history:
+      "Named for Laguna Honda, Spanish for \"deep lagoon\" — a natural lake along the old wagon road over the hills, later tapped as a city reservoir. Laguna Honda Hospital opened nearby in the 1860s as the city's almshouse, growing into one of the largest public skilled-nursing facilities in the United States. The surrounding slopes filled in through the early-to-mid 20th century with single-family homes, climbing the grades between Forest Hill, Midtown Terrace, and Twin Peaks.",
+    facts: [
+      {
+        icon: "water",
+        title: "A real deep lagoon",
+        text:
+          "Laguna Honda is one of San Francisco's few natural lakes, fed by hillside springs and later pressed into service as a city reservoir.",
+      },
+      {
+        icon: "house",
+        title: "Pure residential",
+        text:
+          "There's no commercial strip here — just curving streets of single-family homes set into the wooded grades.",
+      },
+      {
+        icon: "bird",
+        title: "Wild green edges",
+        text:
+          "Mount Sutro's cloud forest and the Twin Peaks open space wrap the neighborhood in eucalyptus, coyote brush, and birdsong.",
+      },
+      {
+        icon: "tram",
+        title: "Through the tunnel",
+        text:
+          "Forest Hill Station feeds the K, L, and M lines straight into the Twin Peaks Tunnel and downtown, minutes away.",
+      },
+      {
+        icon: "star",
+        title: "A landmark institution",
+        text:
+          "Laguna Honda Hospital, dating to the 1860s, is among the largest skilled-nursing and rehabilitation facilities in the country.",
+      },
+    ],
+    nearby: ["West Portal", "the Inner Sunset"],
+    restaurants: [
+      { name: "Elena's Mexican Restaurant", address: "255 W Portal Ave" },
+      { name: "Trattoria da Vittorio", address: "150 W Portal Ave" },
+      { name: "Fiorella Sunset", address: "1240 9th Ave" },
+      { name: "Art's Cafe", address: "747 Irving St" },
+      { name: "Arizmendi Bakery", address: "1331 9th Ave" },
+    ],
+    bars: [
+      { name: "Philosopher's Club", address: "824 Ulloa St" },
+      { name: "The Little Shamrock", address: "807 Lincoln Way" },
+      { name: "Yancy's Saloon", address: "734 Irving St" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 1.5 mi",
+      phone: "(415) 476-1000",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "Forest Hill Station (K, L, M) sits at the neighborhood's edge, feeding the Twin Peaks Tunnel to downtown; the 36 Teresita, 43, 44, and 52 buses wind the hills.",
+  },
+
+  "Upper Market": {
+    spirit:
+      "A transit-humming sliver of upper Market where rainbow-flag history, Victorian flats, and glassy new condos share one streetcar-rattled spine.",
+    reasons: [
+      "Castro Muni Metro hub",
+      "Vintage F-line streetcars",
+      "Walkable restaurant row",
+      "Bridges Castro & Duboce",
+    ],
+    history:
+      "Upper Market Street grew up as a transit spine, carrying cable cars and then electric streetcars up from downtown toward Eureka Valley. The 1980 opening of the Castro Street Muni Metro station cemented it as a transfer hub, while the historic F-line streetcars still rumble past. In recent decades the corridor between the Castro and Church Street filled in with mixed-use development, new condos rising beside Victorian flats and linking the Castro, Duboce Triangle, and Mission Dolores into one walkable, transit-rich strip.",
+    facts: [
+      {
+        icon: "subway",
+        title: "Castro Station hub",
+        text:
+          "Castro Muni Metro station opened in 1980, putting the K, L, M, S, and F lines underfoot at Market and Castro.",
+      },
+      {
+        icon: "tram",
+        title: "Historic streetcars",
+        text:
+          "The F-line runs restored vintage streetcars from cities around the world up Market Street past the corridor.",
+      },
+      {
+        icon: "flag",
+        title: "Castro at the west end",
+        text:
+          "The corridor's western edge opens into the historic LGBTQ Castro and Harvey Milk Plaza.",
+      },
+      {
+        icon: "house",
+        title: "New flats meet old",
+        text:
+          "Recent mixed-use buildings rose alongside classic Victorian flats, reshaping the upper Market streetscape.",
+      },
+      {
+        icon: "shopping",
+        title: "Walkable strip",
+        text:
+          "Restaurants, bars, and shops line the corridor, stitching the Castro to Duboce Triangle and Mission Dolores.",
+      },
+    ],
+    restaurants: [
+      { name: "Catch French Bistro", address: "2362 Market St", phone: "(415) 431-5000", url: "https://catchfrenchbistro.com" },
+      { name: "La Méditerranée", address: "288 Noe St", phone: "(415) 431-7210", url: "https://lamednoe.com" },
+      { name: "Mama Ji's", address: "4416 18th St", phone: "(415) 626-4416" },
+      { name: "Poesia Osteria Italiana", address: "4072 18th St", phone: "(415) 252-9325", url: "https://poesiasf.com" },
+    ],
+    bars: [
+      { name: "Blackbird", address: "2124 Market St", url: "https://www.blackbirdbar.com" },
+      { name: "Hi Tops", address: "2247 Market St", phone: "(415) 551-2500", url: "https://hitopsbar.com" },
+      { name: "The Cafe", address: "2369 Market St", phone: "(415) 779-3171", url: "https://cafesf.com" },
+      { name: "Lookout", address: "3600 16th St" },
+    ],
+    hospital: {
+      name: "CPMC Davies Campus",
+      address: "601 Duboce Ave",
+      dist: "about 0.5 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "Castro Station puts the F, K, L, M, and S lines underfoot; the J Church runs nearby, with the 24 Divisadero and 37 buses crossing the corridor.",
+  },
+
+  "Forest Hill": {
+    spirit:
+      "A hushed, leafy enclave of architect-designed homes on winding wooded streets, where the city feels a world away just above the Twin Peaks Tunnel.",
+    reasons: [
+      "Architect-designed homes",
+      "Winding wooded streets",
+      "Maybeck clubhouse",
+      "Historic Muni station",
+    ],
+    history:
+      "Forest Hill was laid out from 1912–1913 by the Newell-Murdoch Company as one of San Francisco's first planned residence parks. Engineers carved curving, tree-lined streets into the slopes below Mount Sutro and filled them with large architect-designed homes in Tudor, Spanish, and Mediterranean styles. The neighborhood's social heart is the Forest Hill Clubhouse, designed by Bernard Maybeck in 1919 and now a city landmark. Purely residential, it remains one of the city's most serene addresses.",
+    facts: [
+      {
+        icon: "house",
+        title: "Architect-designed homes",
+        text:
+          "Built as a residence park, Forest Hill is full of large custom homes in Tudor, Spanish, and Mediterranean revival styles set on winding wooded streets.",
+      },
+      {
+        icon: "star",
+        title: "A Maybeck masterpiece",
+        text:
+          "The Forest Hill Clubhouse was designed by legendary Bay Area architect Bernard Maybeck in 1919 and is a designated San Francisco landmark.",
+      },
+      {
+        icon: "subway",
+        title: "One of America's oldest subway stops",
+        text:
+          "Forest Hill Station opened in 1918 as Laguna Honda Station, among the first municipal underground rail stations built in the United States.",
+      },
+      {
+        icon: "road",
+        title: "A planned residence park",
+        text:
+          "Developed from 1912–1913 by the Newell-Murdoch Company, its curving streets and stone gateways were designed to follow the natural hillside.",
+      },
+      {
+        icon: "park",
+        title: "Under Mount Sutro",
+        text:
+          "Tucked below the forested slopes of Mount Sutro and near Laguna Honda, the area stays leafy, quiet, and almost entirely residential.",
+      },
+    ],
+    nearby: ["West Portal"],
+    restaurants: [
+      { name: "Elena's Mexican Restaurant", address: "255 W Portal Ave", phone: "(415) 622-4440", url: "https://www.elenasmexican.com" },
+      { name: "Trattoria da Vittorio", address: "150 W Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
+      { name: "Little Original Joe's", address: "393 W Portal Ave", phone: "(415) 759-1155", url: "https://www.littleoriginaljoes.com" },
+      { name: "Khao Tiew", address: "272 Claremont Blvd", phone: "(415) 996-1919" },
+    ],
+    bars: [
+      { name: "The Dubliner", address: "328 W Portal Ave", phone: "(415) 566-9444", url: "https://dublinerwp.com" },
+      { name: "Philosopher's Club", address: "824 Ulloa St", phone: "(415) 753-0599" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 1.5 mi",
+      phone: "(415) 476-1000",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "Forest Hill Station (K, L, M) runs through the Twin Peaks Tunnel to downtown; the 36 Teresita and 44 O'Shaughnessy buses serve the surrounding hills.",
+  },
+
+  "Diamond Heights": {
+    spirit:
+      "Hilltop calm with knockout views — a planned mid-century enclave wrapped in open space, where curving streets and modern homes look out over the whole city.",
+    reasons: [
+      "Sweeping skyline views",
+      "Glen Canyon Park next door",
+      "Mid-century modern homes",
+      "Quiet, planned streets",
+    ],
+    aka: "Red Rock Hill",
+    history:
+      "One of San Francisco's redevelopment-era projects. The steep, rocky \"Red Rock\" hills above Glen Canyon sat largely undeveloped for decades, too rugged to build on cheaply. In the late 1950s and 1960s the SF Redevelopment Agency carved curving streets into the slopes and built Diamond Heights as a planned mid-century community of homes, condos, and townhouses, anchored by a new shopping center. It takes its name from nearby Diamond Street below.",
+    facts: [
+      {
+        icon: "road",
+        title: "A planned community",
+        text:
+          "Diamond Heights was master-planned by the SF Redevelopment Agency in the late 1950s–60s — one of the few city neighborhoods designed largely from scratch, with curving streets that follow the hillside contours.",
+      },
+      {
+        icon: "star",
+        title: "Views in every direction",
+        text:
+          "Built high on the slopes near Twin Peaks, homes here capture sweeping panoramas of downtown, the bay, and the surrounding hills.",
+      },
+      {
+        icon: "park",
+        title: "Glen Canyon Park",
+        text:
+          "On the western edge, this rugged park preserves Islais Creek, dramatic rock outcrops, and trails through one of the city's last natural canyons.",
+      },
+      {
+        icon: "house",
+        title: "Mid-century by design",
+        text:
+          "The housing stock skews modern — 1960s-era homes, townhouses, and condos reflecting the redevelopment era rather than the Victorians common elsewhere in SF.",
+      },
+      {
+        icon: "bird",
+        title: "Wildlife in the canyon",
+        text:
+          "Glen Canyon's wild slopes draw red-tailed hawks, great horned owls, and coyotes — a pocket of nature minutes from the shopping center.",
+      },
+    ],
+    nearby: ["Glen Park", "Noe Valley"],
+    restaurants: [
+      { name: "Fiorella Noe", address: "4042 24th St" },
+      { name: "Novy", address: "4000 24th St", url: "https://www.novysf.com" },
+      { name: "Fresca", address: "3945 24th St", url: "https://www.frescasf.com" },
+      { name: "Noe Indian Cuisine", address: "4116 24th St", url: "https://www.noeindiancuisine.com" },
+    ],
+    bars: [
+      { name: "Glen Park Station", address: "2816 Diamond St" },
+      { name: "The Valley Tavern", address: "4054 24th St", url: "https://www.valleytavern.com" },
+    ],
+    hospital: {
+      name: "CPMC Mission Bernal Campus",
+      address: "3555 Cesar Chavez St",
+      dist: "about 2 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "Muni 35 Eureka, 36 Teresita, and 52 Excelsior serve the hilltop; Glen Park BART/Muni station is a short ride downhill.",
+  },
+
+  "Ingleside Terraces": {
+    spirit:
+      "A foggy 1910s residence park built on a vanished racetrack, where curving streets and a giant marble sundial keep time over blocks of stately homes.",
+    reasons: [
+      "Giant outdoor Sundial",
+      "Oval racetrack street",
+      "1910s residence park",
+      "Pure residential calm",
+    ],
+    history:
+      "Built around 1910–1911 by Joseph A. Leonard's Urban Realty Improvement Company on the site of the former Ingleside Racetrack (1895–1905), once the last horse-racing venue in San Francisco. Leonard reimagined the land as a planned residence park of single-family homes with curving, landscaped streets. The oval Urbano Drive traces the exact loop of the old track, and a massive sundial, dedicated in 1913 as a marketing stunt, became the neighborhood's lasting landmark.",
+    facts: [
+      {
+        icon: "sun",
+        title: "One of the world's largest sundials",
+        text:
+          "The Ingleside Terraces Sundial, dedicated October 10, 1913, stands about 28 feet tall in marble and concrete on Entrada Court. Promoted as the largest in the world at the time, some 1,500 people attended its unveiling.",
+      },
+      {
+        icon: "road",
+        title: "Streets shaped like a racetrack",
+        text:
+          "The oval Urbano Drive is laid out exactly along the loop of the old Ingleside Racetrack, so residents today live around the curve of a vanished horse-racing course.",
+      },
+      {
+        icon: "star",
+        title: "A planned residence park",
+        text:
+          "Laid out as a self-contained residence park, the neighborhood was given curving streets, generous lots, gates, and entry monuments to attract upper-income buyers in the early 1910s.",
+      },
+      {
+        icon: "house",
+        title: "Purely residential",
+        text:
+          "There are no shops or restaurants inside Ingleside Terraces itself — it is almost entirely single-family homes; daily errands happen a few blocks north on Ocean Avenue.",
+      },
+      {
+        icon: "tram",
+        title: "The tunnel sealed the deal",
+        text:
+          "The development was timed to benefit from the Twin Peaks Tunnel streetcar line, which promised fast, clean transit to downtown for buyers settling these outer blocks.",
+      },
+    ],
+    nearby: ["Ocean Avenue"],
+    restaurants: [
+      { name: "Beep's Burgers", address: "1051 Ocean Ave", phone: "(415) 584-2650" },
+      { name: "Sakesan Sushi & Robata", address: "1400 Ocean Ave", phone: "(415) 347-7898" },
+      { name: "Pakwan Restaurant", address: "1140 Ocean Ave", phone: "(415) 841-8400" },
+    ],
+    bars: [
+      { name: "Ocean Ale House", address: "1314 Ocean Ave", phone: "(415) 988-7521", url: "https://oceanalehouse.com" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 4 mi",
+      phone: "(415) 476-1000",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "The K Ingleside runs along Ocean Avenue at the northern edge; the 49 and 29 buses connect nearby, and Balboa Park BART is a short hop east.",
+  },
+
+  "Clarendon Heights": {
+    spirit:
+      "A hushed hilltop of big homes and bigger views, tucked right under the red-and-white legs of Sutro Tower.",
+    reasons: [
+      "Sweeping bay-to-ocean views",
+      "Steps from Mount Sutro forest",
+      "Right below Sutro Tower",
+      "Quiet, leafy, residential",
+    ],
+    history:
+      "Clarendon Heights took shape as a mid-20th-century residential area climbing the north slopes below Mount Sutro and Twin Peaks, named for Clarendon Avenue, which threads up the hill. Single-family homes filled the steep lots through the 1940s and 1950s. The 977-foot Sutro Tower, completed in 1973, rose directly above the enclave, and the wooded Interior Greenbelt and Mount Sutro forest at its back have long defined its quiet, view-rich character.",
+    facts: [
+      {
+        icon: "tower",
+        title: "Sutro Tower looms overhead",
+        text:
+          "The 977-foot red-and-white TV and radio tower, completed in 1973, sits directly above the neighborhood and is visible across much of the city.",
+      },
+      {
+        icon: "star",
+        title: "Views in every direction",
+        text:
+          "Hillside homes here capture sweeping panoramas, from the bay and downtown to the Pacific and the western avenues.",
+      },
+      {
+        icon: "bird",
+        title: "Backed by a hidden forest",
+        text:
+          "The Interior Greenbelt and the eucalyptus woods of Mount Sutro climb right behind the homes, with trails just steps away.",
+      },
+      {
+        icon: "house",
+        title: "Purely residential enclave",
+        text:
+          "There are no shops or restaurants within Clarendon Heights itself — it's a small, affluent pocket of large single-family homes.",
+      },
+      {
+        icon: "road",
+        title: "Named for Clarendon Avenue",
+        text:
+          "The neighborhood takes its name from the winding avenue that climbs the hill, connecting it toward Twin Peaks and Laguna Honda.",
+      },
+    ],
+    nearby: ["Cole Valley", "the Haight"],
+    restaurants: [
+      { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
+      { name: "Beit Rima", address: "86 Carl St", phone: "(415) 566-1274", url: "https://beitrimasf.com" },
+      { name: "InoVino", address: "108B Carl St", phone: "(415) 681-3770", url: "https://inovinosanfrancisco.com" },
+    ],
+    bars: [
+      { name: "Cole Valley Tavern", address: "900 Cole St", phone: "(415) 681-7678", url: "https://www.colevalleytavern.com" },
+      { name: "Toronado", address: "547 Haight St", phone: "(415) 863-2276", url: "https://www.toronado.com" },
+      { name: "Aub Zam Zam", address: "1633 Haight St", phone: "(415) 861-2545" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 1 mi",
+      phone: "(415) 476-1000",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "The 37 Corbett climbs through the neighborhood; the 33 and 43 run nearby, and Forest Hill Station is a short ride away.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
