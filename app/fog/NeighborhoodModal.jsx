@@ -53,6 +53,18 @@ function fmtList(arr) {
   return `${arr.slice(0, -1).join(", ")}, and ${arr[arr.length - 1]}`;
 }
 
+// One median line in the Home-prices section. Always renders (so the condo
+// row shows even with no sales), dashing the price and showing "0 sold" when
+// `data` is null. `data` is { value, n } or null.
+function PriceLine({ data, label, gap }) {
+  return (
+    <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: gap ? 6 : 0 }}>
+      <span style={{ fontSize: 24, fontWeight: 700, color: data ? "#1c1917" : "#a8a29e" }}>{data ? data.value : "—"}</span>
+      <span style={{ fontSize: 13, color: "#78716c" }}>median {label}, {CUR_YEAR} YTD ({data ? data.n : 0} sold)</span>
+    </div>
+  );
+}
+
 const BANNER = {
   display: "flex", alignItems: "center", gap: 8, marginBottom: 10,
   background: "#E6F1FB", color: "#042C53", padding: "7px 11px", borderRadius: 8,
@@ -267,23 +279,13 @@ export default function NeighborhoodModal({
           <Banner emoji="🏠">7 · Home prices</Banner>
           {prices === "loading" ? (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#78716c" }}>Loading…</span></div>
-          ) : prices && (prices.sfh || prices.condo) ? (
+          ) : prices ? (
             <div style={{ marginBottom: 8 }}>
-              {prices.sfh && (
-                <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: prices.condo ? 6 : 0 }}>
-                  <span style={{ fontSize: 24, fontWeight: 700, color: "#1c1917" }}>{prices.sfh.value}</span>
-                  <span style={{ fontSize: 13, color: "#78716c" }}>median single-family, {CUR_YEAR} YTD ({prices.sfh.n} sold)</span>
-                </div>
-              )}
-              {prices.condo && (
-                <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-                  <span style={{ fontSize: 24, fontWeight: 700, color: "#1c1917" }}>{prices.condo.value}</span>
-                  <span style={{ fontSize: 13, color: "#78716c" }}>median condo, {CUR_YEAR} YTD ({prices.condo.n} sold)</span>
-                </div>
-              )}
+              <PriceLine data={prices.sfh} label="single-family" gap />
+              <PriceLine data={prices.condo} label="condo" />
             </div>
           ) : (
-            <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>No {CUR_YEAR} sales recorded yet.</span></div>
+            <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>Market data unavailable.</span></div>
           )}
           <a style={LINK} href={`/listings?nbhd=${encodeURIComponent(name)}&layer=nbhd`}>↗ See Market data</a>
         </section>
