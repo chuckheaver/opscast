@@ -156,12 +156,17 @@ export default function NeighborhoodModal({
     return `${name} sits in a ${zoneLabel || "microclimate"} zone, averaging about ${fogHrs.toFixed(1)} hours of summer fog a day${tail}`;
   })();
 
+  // When one entry covers two fog polygons (e.g. Cow Hollow / Union Street),
+  // the entry sets `title` so the header credits both, regardless of which
+  // polygon was clicked.
+  const heading = data.title || name;
+
   return (
     <div className="nh-backdrop" onClick={onClose}>
-      <div className="nh-modal" onClick={e => e.stopPropagation()} role="dialog" aria-label={`${name} neighborhood highlights`}>
+      <div className="nh-modal" onClick={e => e.stopPropagation()} role="dialog" aria-label={`${heading} neighborhood highlights`}>
         <button className="nh-x" onClick={onClose} aria-label="Close">×</button>
 
-        <div style={{ fontSize: 22, fontWeight: 800, color: "#1c1917", lineHeight: 1.1, letterSpacing: "-0.5px" }}>{name}</div>
+        <div style={{ fontSize: 22, fontWeight: 800, color: "#1c1917", lineHeight: 1.1, letterSpacing: "-0.5px" }}>{heading}</div>
         <div style={{ fontSize: 13, color: "#78716c", marginTop: 3 }}>Neighborhood highlights</div>
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, margin: "12px 0 2px" }}>

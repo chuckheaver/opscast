@@ -6,6 +6,9 @@
 // picked fog contour), so they're never stored stale.
 //
 // Schema per entry:
+//   title       string?  header override when one entry covers two fog
+//                        polygons that share a story (e.g. "Cow Hollow /
+//                        Union Street"); defaults to the clicked polygon name
 //   spirit      string   one creative line capturing the neighborhood
 //   reasons     string[] short "why live here" chips
 //   aka         string?  alternate / historic name shown as a chip
@@ -884,6 +887,7 @@ export const NEIGHBORHOODS = {
   },
 
   "Cow Hollow": {
+    title: "Cow Hollow / Union Street",
     spirit:
       "Boutique-lined Union Street between the Marina and Pac Heights — brunch, blowouts, and bars on a flat, walkable stretch that was once a literal dairy pasture.",
     reasons: [
