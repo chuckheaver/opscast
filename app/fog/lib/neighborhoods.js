@@ -4369,14 +4369,51 @@ export const NEIGHBORHOODS = {
     hospital: { name: "Zuckerberg San Francisco General Hospital and Trauma Center", address: "1001 Potrero Ave", dist: "about 4 mi", phone: "(628) 206-8000", url: "https://www.zuckerbergsanfranciscogeneral.org" },
     transit: "Muni 9-San Bruno and 8-Bayshore buses serve the nearby San Bruno Ave and Bayshore corridors; the T-Third light rail runs along Third St in the Bayview. Bayshore Caltrain station at 400 Tunnel Ave is just south.",
   },
+
+  "Ingleside": {
+    spirit: "A diverse, down-to-earth southwest village strung along Ocean Avenue — where a 1962 burger drive-in, family taquerias, and an all-ages brewery sit in the shadow of City College, all an easy hop from the K-line and Balboa Park BART.",
+    reasons: ["Real working commercial strip on Ocean Ave", "Transit-rich: K-Ingleside Metro plus Balboa Park BART", "Next door to City College's Ocean campus", "One of the city's most diverse, neighborly districts"],
+    aka: "OMI (Ocean View-Merced Heights-Ingleside)",
+    history: "The neighborhood traces to the Ingleside Racetrack, which the Pacific Coast Jockey Club opened just off Ocean Road (now Ocean Avenue) on November 28, 1895, drawing thousands by special rail line and becoming the first American track with a real starting gate. Streetcar service reached Ocean Avenue the same year to serve the track, and after the racetrack era ended the area filled in with single-family homes along the new lines, accelerated when the K-Ingleside opened through the Twin Peaks Tunnel on February 3, 1918. City College of San Francisco opened its permanent Ocean campus at Ocean and Phelan avenues on August 27, 1940, anchoring the district. The old racetrack oval survives as the curving loop of Urbano Drive in the adjacent Ingleside Terraces residence park, home to a giant 1913 sundial. Today Ingleside is a middle- and working-class community known for its diversity, with the Ocean Avenue corridor as its commercial heart.",
+    facts: [
+      { icon: "book", title: "City College's flagship", text: "CCSF's Ocean campus opened at Ocean and Phelan in 1940, its Timothy Pflueger-designed Science Hall a showpiece of monumental architecture." },
+      { icon: "tram", title: "Streetcar since 1918", text: "The K-Ingleside began running through the Twin Peaks Tunnel on February 3, 1918, and still rolls down the middle of Ocean Avenue today." },
+      { icon: "book", title: "Ingleside Branch Library", text: "The neighborhood's public library sits right on the strip at 1298 Ocean Ave, a modern branch rebuilt for the community." },
+      { icon: "road", title: "A racetrack in the street grid", text: "The 1895 Ingleside Racetrack's oval lives on as the curving loop of Urbano Drive in neighboring Ingleside Terraces." },
+      { icon: "subway", title: "Two rail systems at the door", text: "Balboa Park BART and the K and M Muni Metro lines all meet at the neighborhood's eastern edge." },
+    ],
+    restaurants: [
+      { name: "Beep's Burgers", address: "1051 Ocean Ave", phone: "(415) 584-2650", url: "https://www.beepsburgers.com" },
+      { name: "Sakesan Sushi & Robata", address: "1400 Ocean Ave", phone: "(415) 347-7898" },
+      { name: "Pakwan", address: "1140 Ocean Ave", phone: "(415) 841-8400", url: "https://pakwanrestaurant.com" },
+      { name: "Champa Garden", address: "613 Faxon Ave", phone: "(415) 349-4186" },
+    ],
+    bars: [
+      { name: "Ocean Ale House", address: "1314 Ocean Ave", phone: "(415) 988-7521", url: "https://oceanalehouse.com" },
+      { name: "Philz Coffee", address: "1110 Ocean Ave", phone: "(415) 841-1178", url: "https://philzcoffee.com/locations/ocean-ave" },
+    ],
+    hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St", dist: "about 2.5 mi", phone: "(415) 641-6625", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "K-Ingleside Muni Metro runs along Ocean Avenue; M-Ocean View and Balboa Park BART meet at the neighborhood's eastern edge. Buses 29-Sunset, 49 Van Ness-Mission, 8-Bayshore and 54-Felton serve the area.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
 // map those aliases onto the authored entry so a click anywhere in the
 // area opens the right highlights.
 const ALIASES = {
-  "Union Street": "Cow Hollow", // the commercial strip within greater Cow Hollow
+  "Union Street": "Cow Hollow",          // commercial strip within greater Cow Hollow
+  "Eureka Valley": "Castro",             // the Castro's historic name; same polygon story
+  "Sutro Heights": "Outer Richmond",     // tiny clifftop pocket at the Outer Richmond's edge
+  "Northern Waterfront": "Fishermans Wharf", // the piers overlap the Wharf entry
 };
+
+// Fog polygons intentionally left WITHOUT a highlights entry because they are
+// parks, military reservations, or pure industrial/maritime zones — not places
+// to "live," so the residential-style pop-up doesn't fit: Apparel City,
+// Aquatic Park / Ft. Mason, Candlestick Point SRA, Golden Gate Park,
+// Lincoln Park / Ft. Miley, McLaren Park, Presidio National Park, Produce Market.
+// Treasure Island and Yerba Buena Island are residential but mid-redevelopment;
+// they were deferred and could be added later.
 
 // Look up curated content for a neighborhood name (exact match on the fog
 // geojson `name`, then aliases). Returns null when we haven't authored it.
