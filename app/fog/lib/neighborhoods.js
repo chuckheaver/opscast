@@ -1526,6 +1526,463 @@ export const NEIGHBORHOODS = {
     transit:
       "Muni bus lines 6, 7, 33, 43, and 71 serve the Haight; the N Judah Metro line runs a few blocks south on Carl Street and along the park.",
   },
+
+  Japantown: {
+    spirit:
+      "A compact, vibrant pocket of Japanese-American culture where the Peace Pagoda presides over mall arcades, taiko drums, and cherry blossoms — one of America's last three Japantowns.",
+    reasons: [
+      "One of three U.S. Japantowns",
+      "Japan Center under one roof",
+      "Cherry Blossom Festival yearly",
+      "Walkable Buchanan mall charm",
+    ],
+    aka: "Nihonmachi",
+    history:
+      "Nihonmachi, meaning \"Japantown,\" took root after the 1906 earthquake and fire pushed Japanese immigrants into the Western Addition, where the community flourished for decades. Executive Order 9066 forced their incarceration during World War II, emptying the district almost overnight; African-American war workers filled the vacated homes. Postwar, returning families rebuilt, but 1960s redevelopment razed Victorian blocks and displaced many residents, reshaping the area into today's Japan Center malls and Peace Plaza.",
+    facts: [
+      {
+        icon: "tower",
+        title: "Peace Pagoda",
+        text:
+          "The five-tiered concrete Peace Pagoda was a 1968 gift from sister city Osaka, designed by Japanese architect Yoshiro Taniguchi. It rises about 100 feet over Peace Plaza.",
+      },
+      {
+        icon: "confetti",
+        title: "Cherry Blossom Festival",
+        text:
+          "Held each April since 1968, the Northern California Cherry Blossom Festival is among the largest of its kind in the country. It draws hundreds of thousands over two weekends.",
+      },
+      {
+        icon: "flag",
+        title: "Incarceration and Redress",
+        text:
+          "Some 120,000 Japanese Americans were incarcerated during WWII under Executive Order 9066. The 1988 Civil Liberties Act later issued a formal apology and reparations to survivors.",
+      },
+      {
+        icon: "movie",
+        title: "The Kabuki cinema",
+        text:
+          "The neighborhood's landmark movie house opened in 1986 as the AMC Kabuki. It became known for reserved seating and a 21-and-over dine-in concept.",
+      },
+      {
+        icon: "house",
+        title: "Shrinking footprint",
+        text:
+          "Once spanning some 30 blocks before the war, Japantown today covers only about six. Redevelopment-era demolitions permanently shrank the historic district.",
+      },
+    ],
+    restaurants: [
+      { name: "Benihana", address: "1737 Post St", phone: "(415) 563-4844", url: "https://www.benihana.com" },
+      { name: "Suzu Noodle House", address: "1825 Post St", phone: "(415) 346-5083" },
+      { name: "On the Bridge", address: "1581 Webster St", phone: "(415) 922-7765", url: "https://onthebridgesf.com" },
+      { name: "Kui Shin Bo", address: "1737 Post St", phone: "(415) 931-2002", url: "https://kuishinborestaurant.com" },
+      { name: "Yakitori Edomasa", address: "1581 Webster St", phone: "(415) 872-7646", url: "https://www.edomasa-us.com" },
+    ],
+    bars: [
+      { name: "Pa'ina Lounge & Restaurant", address: "1865 Post St", phone: "(415) 829-2642" },
+      { name: "Boom Boom Room", address: "1601 Fillmore St", phone: "(415) 673-8067", url: "https://www.boomboomroom.com" },
+      { name: "Kimpton Buchanan Hotel bar", address: "1800 Sutter St", phone: "(415) 921-4000" },
+    ],
+    hospital: {
+      name: "Kaiser Permanente San Francisco Medical Center",
+      address: "2425 Geary Blvd",
+      dist: "about 0.6 mi",
+      phone: "(415) 833-2000",
+      url: "https://healthy.kaiserpermanente.org",
+    },
+    transit:
+      "The 38 Geary and 38R Geary Rapid run just south along Geary Boulevard, while the 2 Sutter/Clement, 3 Jackson, and 22 Fillmore buses serve the surrounding blocks. The 22 Fillmore connects north to the Marina and south toward the Mission.",
+  },
+
+  "Western Addition": {
+    spirit:
+      "Once the West Coast's jazz capital, this resilient district pairs Victorian flats and historic Black churches with the Fillmore's neon marquees and a still-swinging live-music heartbeat.",
+    reasons: [
+      "Harlem of the West",
+      "Historic jazz district",
+      "Iconic Fillmore Auditorium",
+      "Stately Victorian flats",
+    ],
+    aka: "The Fillmore",
+    history:
+      "The neighborhood is literally the \"Western Addition\" appended to the original 1850s street survey as the young city pushed west of Van Ness. After WWII its Fillmore corridor became the \"Harlem of the West,\" packed with Black-owned jazz clubs. Then 1960s–70s redevelopment (the A-2 project) bulldozed dozens of blocks, displacing thousands of mostly African-American residents and businesses — a wound the district still feels. Surviving Victorians, churches, and a revived jazz district carry that layered legacy forward.",
+    facts: [
+      {
+        icon: "music",
+        title: "Harlem of the West",
+        text:
+          "In the 1940s and '50s, Fillmore Street brimmed with jazz and blues clubs drawing greats like Billie Holiday and John Coltrane. The scene earned the neighborhood its \"Harlem of the West\" nickname.",
+      },
+      {
+        icon: "confetti",
+        title: "The Fillmore Auditorium",
+        text:
+          "At Geary and Fillmore, this 1912 hall became Bill Graham's psychedelic-rock mecca in the 1960s, launching the Grateful Dead, Janis Joplin, and Jimi Hendrix. It still hosts shows today.",
+      },
+      {
+        icon: "road",
+        title: "Urban renewal scars",
+        text:
+          "The 1960s–70s A-2 redevelopment project demolished some 60 blocks of the Western Addition. Thousands of mostly Black residents and hundreds of businesses were displaced, and many were never able to return.",
+      },
+      {
+        icon: "house",
+        title: "Surviving Victorians",
+        text:
+          "The district retains rows of ornate Victorian and Edwardian flats that escaped demolition. During redevelopment, some prized homes were even lifted onto trucks and relocated to new lots.",
+      },
+      {
+        icon: "church",
+        title: "Historic Black churches",
+        text:
+          "Congregations like Third Baptist and St. John Coltrane African Orthodox Church anchored the community through displacement. They remain cultural pillars of African-American life in San Francisco.",
+      },
+    ],
+    restaurants: [
+      { name: "State Bird Provisions", address: "1529 Fillmore St", phone: "(415) 795-1272", url: "https://www.statebirdsf.com" },
+      { name: "Woodhouse Fish Co.", address: "1914 Fillmore St", phone: "(415) 437-2722", url: "https://www.woodhousefish.com" },
+      { name: "La Méditerranée", address: "2210 Fillmore St", phone: "(415) 921-2956" },
+    ],
+    bars: [
+      { name: "The Fillmore", address: "1805 Geary Blvd", phone: "(415) 346-3000", url: "https://www.thefillmore.com" },
+      { name: "Boom Boom Room", address: "1601 Fillmore St", phone: "(415) 673-8067", url: "https://www.boomboomroom.com" },
+      { name: "Sheba Piano Lounge", address: "1419 Fillmore St", phone: "(415) 440-7414", url: "https://www.shebapianolounge.com" },
+      { name: "The Social Study", address: "1795 Geary Blvd", phone: "(415) 292-7417", url: "https://www.thesocialstudysf.com" },
+    ],
+    hospital: {
+      name: "CPMC Van Ness Campus",
+      address: "1101 Van Ness Ave",
+      dist: "about 1 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "A bus-rich district: the 22 Fillmore runs north–south through its heart, the 5 Fulton and 31 Balboa cross east–west, and the 38 Geary rapid lines skirt the southern edge toward downtown.",
+  },
+
+  "Laurel Heights / Jordan Park": {
+    spirit:
+      "A hushed, leafy enclave of grand homes and old money south of California Street, where stately mansions, a tidy shopping village, and a buried cemetery past coexist quietly.",
+    reasons: [
+      "Grand planned-tract homes",
+      "Quiet, affluent streets",
+      "Laurel Village shopping",
+      "Michelin dining nearby",
+    ],
+    history:
+      "Beneath these quiet streets lies the former Laurel Hill Cemetery, one of San Francisco's \"Big Four\" burial grounds, which interred the city's elite from the 1850s. As the growing city ran out of room, voters banned new burials in 1900, and by the 1940s the remaining graves were exhumed and the dead relocated to Colma. Meanwhile, developer James Clark Jordan had laid out Jordan Park around 1906 as an upscale planned tract, lining its blocks with the grand homes that still define the neighborhood today.",
+    facts: [
+      {
+        icon: "church",
+        title: "A neighborhood atop a cemetery",
+        text:
+          "Laurel Hill Cemetery once covered much of this area, holding tens of thousands of San Franciscans. It was one of the city's \"Big Four\" cemeteries clustered near Lone Mountain.",
+      },
+      {
+        icon: "quake",
+        title: "The great removal to Colma",
+        text:
+          "After San Francisco banned new burials in 1900, the city eventually ordered the cemeteries cleared. By the 1940s Laurel Hill's remains were disinterred and moved south to Colma, freeing the land for housing.",
+      },
+      {
+        icon: "house",
+        title: "Jordan Park's grand tract",
+        text:
+          "Developer James Clark Jordan began laying out Jordan Park around 1906 as an exclusive residential tract. Its wide, well-kept blocks of stately homes remain among the city's most prized.",
+      },
+      {
+        icon: "shopping",
+        title: "Laurel Village shopping",
+        text:
+          "The Laurel Village center along the 3500 block of California Street has anchored neighborhood errands since the 1940s. Its grocers, cafés, and shops draw residents from across the surrounding hills.",
+      },
+      {
+        icon: "book",
+        title: "The 3333 California campus",
+        text:
+          "The large complex at 3333 California St began as Fireman's Fund headquarters and later housed UCSF's Laurel Heights campus. It has since been redeveloped into a mixed-use residential and academic site.",
+      },
+    ],
+    restaurants: [
+      { name: "Spruce", address: "3640 Sacramento St", phone: "(415) 931-5100", url: "https://www.sprucesf.com" },
+      { name: "Sociale", address: "3665 Sacramento St", phone: "(415) 921-3200", url: "https://sfsociale.com" },
+      { name: "Sorrel", address: "3228 Sacramento St", phone: "(415) 525-3765", url: "https://www.sorrelrestaurant.com" },
+      { name: "Boichik Bagels", address: "3665 Sacramento St", phone: "(628) 867-7485", url: "https://boichikbagels.com" },
+      { name: "Bryan's Grocery", address: "3445 California St", phone: "(415) 752-0179" },
+    ],
+    bars: [
+      { name: "Scopo Divino", address: "2800 California St", phone: "(415) 928-3728", url: "https://www.scopodivino.com" },
+      { name: "Spruce Bar", address: "3640 Sacramento St", phone: "(415) 931-5100", url: "https://www.sprucesf.com" },
+    ],
+    hospital: {
+      name: "CPMC Van Ness Campus",
+      address: "1101 Van Ness Ave",
+      dist: "about 1.5 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "The 1 California trolleybus runs along the southern edge toward downtown and the Richmond, with the 2 Clement, 33 Ashbury/18th, and 43 Masonic adding crosstown connections nearby.",
+  },
+
+  "Ashbury Heights": {
+    spirit:
+      "A hushed, fog-kissed hilltop of grand Victorians and Edwardians stacked on streets so steep they break into stairways, perched serenely above the busy Haight below.",
+    reasons: [
+      "Grand hillside Victorians",
+      "Sweeping city views",
+      "Quiet leafy streets",
+      "Tank Hill at the edge",
+    ],
+    history:
+      "Ashbury Heights climbs the slope above Haight-Ashbury, sharing its name with Monroe Ashbury, a San Francisco supervisor of the 1860s who helped plan nearby Golden Gate Park. As streetcar and cable lines pushed west in the late 1800s, developers terraced these hills with grand Victorian and Edwardian homes, creating an affluent residential enclave perched above the commercial Haight. Its steep, leafy streets, hillside stairways, and panoramic views have kept it quieter and pricier than the neighborhood below ever since.",
+    facts: [
+      {
+        icon: "park",
+        title: "Buena Vista Park",
+        text:
+          "Bordering the neighborhood, Buena Vista Park is San Francisco's oldest official park, dedicated in 1867. Its wooded summit offers sweeping views across the city and bay.",
+      },
+      {
+        icon: "house",
+        title: "Hillside Victorians",
+        text:
+          "The Heights is prized for its grand Victorian and Edwardian houses lining steep blocks. Built during the streetcar-era expansion of the late 1800s, many survived the 1906 disaster intact.",
+      },
+      {
+        icon: "star",
+        title: "Tank Hill views",
+        text:
+          "At the neighborhood's edge sits Tank Hill, named for a water tank installed by the Spring Valley Water Company in 1894. The tank came down in 1957, leaving one of the city's best panoramic viewpoints.",
+      },
+      {
+        icon: "stairs",
+        title: "Streets that become stairs",
+        text:
+          "Some slopes here are too steep for cars, so the streets give way to public stairways. These hidden walkways connect blocks and reward climbers with quiet garden views.",
+      },
+      {
+        icon: "mayor",
+        title: "Named for a supervisor",
+        text:
+          "Monroe Ashbury served on the Board of Supervisors in the 1860s. He had a hand in planning both the surrounding neighborhood and Golden Gate Park, and the area took his name.",
+      },
+    ],
+    restaurants: [
+      { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
+      { name: "Crepes on Cole", address: "100 Carl St", phone: "(415) 664-1800", url: "https://www.crepesoncole.com" },
+      { name: "InoVino", address: "108B Carl St", phone: "(415) 681-3770", url: "https://inovinosanfrancisco.com" },
+      { name: "Cole Valley Tavern", address: "900 Cole St", phone: "(415) 681-7678", url: "https://www.colevalleytavern.com" },
+    ],
+    bars: [
+      { name: "The Alembic", address: "1725 Haight St", phone: "(415) 666-0822", url: "https://alembicsf.com" },
+      { name: "Aub Zam Zam", address: "1633 Haight St", phone: "(415) 861-2545" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 0.6 mi",
+      phone: "(415) 353-1008",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "The 37 Corbett climbs through the neighborhood; the 6, 7, and 43 run nearby, and the N Judah Metro line is a short walk downhill in Cole Valley.",
+  },
+
+  "Lower Pacific Heights": {
+    spirit:
+      "The flat, walkable shelf below grand Pacific Heights, where Victorian flats meet the lower Fillmore's restaurants, jazz heritage, and a buzzing Japantown edge.",
+    reasons: [
+      "Fillmore Street dining strip",
+      "Historic jazz heritage",
+      "Walk to Japantown",
+      "Victorian & Edwardian flats",
+    ],
+    aka: "Lower Pac Heights",
+    history:
+      "Lower Pacific Heights is the flatter southern apron of Pacific Heights, blending into the Fillmore and Western Addition. Streetcar lines along Fillmore and Geary spurred dense Victorian and Edwardian flats in the late 1800s and early 1900s. The Fillmore corridor became the heart of a thriving Black community and jazz scene mid-century, much of it razed during 1960s redevelopment. Today the strip mixes longtime shops, restaurants, and music venues just north of Japantown.",
+    facts: [
+      {
+        icon: "music",
+        title: "Harlem of the West",
+        text:
+          "The lower Fillmore was a renowned jazz hub in the 1940s and '50s, nicknamed the \"Harlem of the West.\" Ella Fitzgerald, Duke Ellington, and Billie Holiday all played its clubs.",
+      },
+      {
+        icon: "art",
+        title: "Fillmore Jazz Festival",
+        text:
+          "Each July 4th weekend the street hosts the largest free jazz festival on the West Coast. It spans about twelve blocks and draws well over 100,000 visitors.",
+      },
+      {
+        icon: "movie",
+        title: "The \"Full House\" house",
+        text:
+          "The Victorian used for exterior shots in TV's Full House sits nearby at 1709 Broderick Street. Built in 1883, it remains a private residence and a popular photo stop.",
+      },
+      {
+        icon: "house",
+        title: "Streetcar-era flats",
+        text:
+          "Much of the area is lined with Victorian and Edwardian flats from the late 1800s and early 1900s. Frequent transit along Fillmore and Geary made it an early streetcar suburb.",
+      },
+      {
+        icon: "shopping",
+        title: "The Fillmore strip",
+        text:
+          "The street is one of the city's premier shopping and dining corridors. Its southern end blends boutiques and restaurants with the neighboring Japantown commercial district.",
+      },
+    ],
+    restaurants: [
+      { name: "State Bird Provisions", address: "1529 Fillmore St", phone: "(415) 795-1272", url: "https://www.statebirdsf.com" },
+      { name: "Copra", address: "1700 Fillmore St", phone: "(415) 873-0795", url: "https://www.coprarestaurant.com" },
+      { name: "Woodhouse Fish Co.", address: "1914 Fillmore St", phone: "(415) 437-2722", url: "https://www.woodhousefish.com" },
+    ],
+    bars: [
+      { name: "Harry's Bar", address: "2020 Fillmore St", phone: "(415) 921-1000", url: "https://www.harrysbarsf.com" },
+      { name: "The Page", address: "298 Divisadero St", phone: "(415) 255-6101" },
+      { name: "Fly Bar & Restaurant", address: "762 Divisadero St", phone: "(415) 780-1630", url: "https://www.flybardivis.com" },
+    ],
+    hospital: {
+      name: "CPMC Van Ness Campus",
+      address: "1101 Van Ness Ave",
+      dist: "about 1 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "The 1 California, 2 Clement, 3 Jackson, and 22 Fillmore buses all serve the area, with the 38 Geary rapid lines a block south on Geary Boulevard.",
+  },
+
+  "Buena Vista": {
+    spirit:
+      "A hushed hilltop of grand Victorians wrapped around a forested park, ringed by the Haight, the Castro, and Corona Heights, with sweeping bay-to-ocean views.",
+    reasons: [
+      "SF's oldest park",
+      "Sweeping bay views",
+      "Grand hillside Victorians",
+      "Forested hilltop trails",
+    ],
+    aka: "Buena Vista Park",
+    history:
+      "The name is Spanish for \"good view\" — fitting for a hill that looks from the bay to the Pacific. Buena Vista Park was set aside in 1867, making it San Francisco's oldest official park, originally called Hill Park. As cable and streetcar lines reached the area in the late 1800s, developers lined the steep surrounding streets with ornate Victorian and Edwardian homes, many of which survived the 1906 earthquake and still stand today.",
+    facts: [
+      {
+        icon: "park",
+        title: "The city's oldest park",
+        text:
+          "Buena Vista Park was established in 1867, making it the oldest official park in San Francisco. Its forested slopes climb to one of the highest points in the central city.",
+      },
+      {
+        icon: "book",
+        title: "Headstones in the gutters",
+        text:
+          "The park's drainage gutters are lined with marble fragments from old headstones. They came from city cemeteries cleared in the early 20th century, and carved names and dates are still visible.",
+      },
+      {
+        icon: "star",
+        title: "Bay-to-ocean views",
+        text:
+          "From the summit you can see the Golden Gate Bridge, the bay, downtown, and out to the Pacific. The vista is the reason for the Spanish name \"buena vista,\" meaning good view.",
+      },
+      {
+        icon: "house",
+        title: "A showcase of Victorians",
+        text:
+          "The steep streets ringing the park are famous for grand Victorian and Edwardian houses. Many were built during the late-1800s streetcar boom and survived the 1906 earthquake and fire.",
+      },
+      {
+        icon: "bird",
+        title: "A forested refuge",
+        text:
+          "Once a windswept hill, the park was planted with eucalyptus, pine, and cypress starting in the 1890s. Today its dense canopy shelters owls, hawks, and migrating songbirds in the heart of the city.",
+      },
+    ],
+    restaurants: [
+      { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
+      { name: "Cha Cha Cha", address: "1801 Haight St", phone: "(415) 386-7670", url: "https://www.chachachasf.com" },
+      { name: "Frances", address: "3870 17th St", phone: "(415) 621-3870", url: "https://www.frances-sf.com" },
+      { name: "Pork Store Cafe", address: "1451 Haight St", phone: "(415) 864-6981", url: "https://www.porkstorecafe.com" },
+    ],
+    bars: [
+      { name: "Aub Zam Zam", address: "1633 Haight St", phone: "(415) 861-2545" },
+      { name: "The Alembic", address: "1725 Haight St", phone: "(415) 666-0822", url: "https://alembicsf.com" },
+      { name: "Kezar Pub", address: "770 Stanyan St", phone: "(415) 386-9292", url: "https://www.kezarpub.com" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 0.8 mi",
+      phone: "(415) 353-1008",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "The 6 Haight/Parnassus and 7 Haight/Noriega run along the northern foot of the hill, with the 37 Corbett, 24 Divisadero, and 43 Masonic crossing nearby.",
+  },
+
+  "Dolores Heights": {
+    spirit:
+      "A sun-drenched hilltop enclave of steep streets and hidden stairways, where landscaped mini-parks and modernist homes frame sweeping views above Dolores Park.",
+    reasons: [
+      "Famous hidden stairways",
+      "Sunny microclimate",
+      "Panoramic hilltop views",
+      "Above Dolores Park",
+    ],
+    history:
+      "The name traces to Mission San Francisco de Asís, founded in 1776 and long known as Mission Dolores after the nearby Laguna de los Dolores, the \"Lagoon of Sorrows.\" As San Francisco grew, this steep hill above the mission lands developed into an affluent residential enclave. Builders carved homes, public stairways, and landscaped mini-parks into the precipitous terrain, creating a quiet, leafy neighborhood prized for its period and modernist houses and commanding city views.",
+    facts: [
+      {
+        icon: "stairs",
+        title: "Hidden stairways",
+        text:
+          "The neighborhood is laced with public stairways that climb its steepest blocks. The landscaped Cumberland and Vista stairways are local landmarks, linking streets too steep for cars and offering pocket gardens and views along the way.",
+      },
+      {
+        icon: "church",
+        title: "Mission Dolores roots",
+        text:
+          "The Dolores name comes from Mission San Francisco de Asís, founded in 1776 and nicknamed Mission Dolores for the nearby Laguna de los Dolores. The original adobe mission is the oldest surviving building in San Francisco.",
+      },
+      {
+        icon: "sun",
+        title: "One of the sunny pockets",
+        text:
+          "Tucked east of Twin Peaks, Dolores Heights sits in one of the city's sunnier microclimates. The hills often catch sun while fog blankets neighborhoods just to the west.",
+      },
+      {
+        icon: "park",
+        title: "Mini-parks on the slopes",
+        text:
+          "Beyond the stairways, small landscaped open spaces are built into the hillside. These mini-parks soften the steep grades and give the residential streets a quiet, garden-like character distinct from the busier Mission below.",
+      },
+      {
+        icon: "house",
+        title: "Architectural mix",
+        text:
+          "The enclave is known for its blend of housing styles, from Edwardian and period homes to striking mid-century modernist residences. The hilltop lots command panoramic views, making it one of the city's more coveted addresses.",
+      },
+    ],
+    restaurants: [
+      { name: "Firefly", address: "4288 24th St", phone: "(415) 821-7652", url: "https://www.fireflysf.com" },
+      { name: "Saru Sushi Bar", address: "3856 24th St", phone: "(415) 400-4510", url: "https://sarusushisf.com" },
+      { name: "Noe Indian Cuisine", address: "4116 24th St", url: "https://www.noeindiancuisine.com" },
+      { name: "Lovejoy's Tea Room", address: "1351 Church St", phone: "(415) 648-5895", url: "https://www.lovejoystearoom.com" },
+    ],
+    bars: [
+      { name: "Valley Tavern", address: "4054 24th St", phone: "(415) 285-0674", url: "https://www.valleytavern.com" },
+      { name: "The Dubliner", address: "3838 24th St", phone: "(415) 826-2279", url: "https://www.dublinerbarsf.com" },
+    ],
+    hospital: {
+      name: "CPMC Mission Bernal Campus",
+      address: "3555 Cesar Chavez St",
+      dist: "about 1 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "The J Church Muni Metro skirts the eastern foot of the hill by Dolores Park, with the 33, 35 Eureka, and 48 Quintara/24th St buses linking to the Mission, Castro, and Noe Valley.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
