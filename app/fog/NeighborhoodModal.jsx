@@ -44,6 +44,15 @@ function fmtPrice(n) {
   return `$${Math.round(n / 1000)}k`;
 }
 
+// Join a list of place names into prose: ["A"] → "A", ["A","B"] → "A and B",
+// ["A","B","C"] → "A, B, and C".
+function fmtList(arr) {
+  if (!arr?.length) return "";
+  if (arr.length === 1) return arr[0];
+  if (arr.length === 2) return `${arr[0]} and ${arr[1]}`;
+  return `${arr.slice(0, -1).join(", ")}, and ${arr[arr.length - 1]}`;
+}
+
 const BANNER = {
   display: "flex", alignItems: "center", gap: 8, marginBottom: 10,
   background: "#E6F1FB", color: "#042C53", padding: "7px 11px", borderRadius: 8,
@@ -55,6 +64,10 @@ const LINK = {
   display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13,
   color: "#2563eb", textDecoration: "none", border: "1px solid #ddd8d0",
   borderRadius: 8, padding: "6px 10px",
+};
+const NEARBY_NOTE = {
+  fontSize: 12, fontStyle: "italic", color: "#78716c",
+  margin: "0 0 9px", lineHeight: 1.5,
 };
 
 function Banner({ emoji, children }) {
@@ -196,14 +209,20 @@ export default function NeighborhoodModal({
 
         {data.restaurants?.length > 0 && (
           <section style={SEC}>
-            <Banner emoji="🍽️">3 · Top {data.restaurants.length} restaurant{data.restaurants.length === 1 ? "" : "s"}</Banner>
+            <Banner emoji="🍽️">3 · {data.nearby ? "Nearby" : "Top"} {data.restaurants.length} restaurant{data.restaurants.length === 1 ? "" : "s"}</Banner>
+            {data.nearby && (
+              <p style={NEARBY_NOTE}>Primarily a residential neighborhood — the closest restaurants are nearby in {fmtList(data.nearby)}.</p>
+            )}
             {data.restaurants.map((p, i) => <PlaceRow key={p.name} p={p} first={i === 0} />)}
           </section>
         )}
 
         {data.bars?.length > 0 && (
           <section style={SEC}>
-            <Banner emoji="🍸">4 · Top {data.bars.length} bar{data.bars.length === 1 ? "" : "s"}</Banner>
+            <Banner emoji="🍸">4 · {data.nearby ? "Nearby" : "Top"} {data.bars.length} bar{data.bars.length === 1 ? "" : "s"}</Banner>
+            {data.nearby && (
+              <p style={NEARBY_NOTE}>Primarily a residential neighborhood — the closest bars are nearby in {fmtList(data.nearby)}.</p>
+            )}
             {data.bars.map((p, i) => <PlaceRow key={p.name} p={p} first={i === 0} />)}
           </section>
         )}

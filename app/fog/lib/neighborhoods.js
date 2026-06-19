@@ -13,6 +13,11 @@
 //   facts       [{ icon, title, text }]   section 2 — lesser-known facts
 //   restaurants [{ name, address, phone, url }]   section 3 (top 5)
 //   bars        [{ name, address, phone, url }]   section 4 (top 5)
+//   nearby      string[]?  for residential-only areas with no/few venues of
+//                          their own: the adjacent areas the listed spots
+//                          actually sit in (e.g. ["Cole Valley", "the Haight"]).
+//                          When set, sections 3 & 4 are titled "Nearby …" and
+//                          carry a "primarily residential" note.
 //   hospital    { name, address, dist, phone, url }   section 5
 //   transit     string   section 6 — main lines that serve the area
 //
@@ -1179,6 +1184,7 @@ export const NEIGHBORHOODS = {
           "Residents are said to have saved homes on the hill's eastern slope from the 1906 fire by dousing them with barrels of red wine when the water mains failed.",
       },
     ],
+    nearby: ["North Beach"],
     restaurants: [
       { name: "Sotto Mare Oysteria & Seafood", address: "552 Green St", phone: "(415) 398-3181", url: "https://www.sottomaresf.com" },
       { name: "Tony's Pizza Napoletana", address: "1570 Stockton St", phone: "(415) 835-9888", url: "https://tonyspizzanapoletana.com" },
@@ -1245,6 +1251,7 @@ export const NEIGHBORHOODS = {
           "Built on bluffs west of the Presidio, Sea Cliff offers some of the city's finest views of the Golden Gate Bridge and the Marin Headlands. Many homes were oriented expressly to capture them.",
       },
     ],
+    nearby: ["the Inner Richmond"],
     restaurants: [
       { name: "Burma Superstar", address: "309 Clement St", phone: "(415) 387-2147", url: "https://www.burmasuperstar.com" },
       { name: "Mamahuhu", address: "517 Clement St", phone: "(415) 742-4958", url: "https://eatmamahuhu.com" },
@@ -1311,6 +1318,7 @@ export const NEIGHBORHOODS = {
           "The street runs along the Presidio's southern edge, giving residents quick access to forested trails, scenic overlooks, and the national park's vast open space.",
       },
     ],
+    nearby: ["the Richmond District"],
     restaurants: [
       { name: "Burma Superstar", address: "309 Clement St", phone: "(415) 387-2147", url: "https://www.burmasuperstar.com" },
       { name: "Good Luck Dim Sum", address: "736 Clement St", phone: "(415) 386-3388" },
@@ -1439,6 +1447,7 @@ export const NEIGHBORHOODS = {
           "After a resident-led campaign, St. Francis Wood was added to the National Register of Historic Places in 2022, recognized as an early-20th-century residence park and an intact collection of architecturally significant homes.",
       },
     ],
+    nearby: ["West Portal"],
     restaurants: [
       { name: "Trattoria da Vittorio", address: "150 W Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
       { name: "Little Original Joe's", address: "393 W Portal Ave", phone: "(415) 759-1155", url: "https://www.littleoriginaljoes.com" },
@@ -1768,6 +1777,7 @@ export const NEIGHBORHOODS = {
           "Monroe Ashbury served on the Board of Supervisors in the 1860s. He had a hand in planning both the surrounding neighborhood and Golden Gate Park, and the area took his name.",
       },
     ],
+    nearby: ["Cole Valley", "the Haight"],
     restaurants: [
       { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
       { name: "Crepes on Cole", address: "100 Carl St", phone: "(415) 664-1800", url: "https://www.crepesoncole.com" },
@@ -1898,6 +1908,7 @@ export const NEIGHBORHOODS = {
           "Once a windswept hill, the park was planted with eucalyptus, pine, and cypress starting in the 1890s. Today its dense canopy shelters owls, hawks, and migrating songbirds in the heart of the city.",
       },
     ],
+    nearby: ["the Haight", "Cole Valley", "the Castro"],
     restaurants: [
       { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
       { name: "Cha Cha Cha", address: "1801 Haight St", phone: "(415) 386-7670", url: "https://www.chachachasf.com" },
@@ -1963,6 +1974,7 @@ export const NEIGHBORHOODS = {
           "The enclave is known for its blend of housing styles, from Edwardian and period homes to striking mid-century modernist residences. The hilltop lots command panoramic views, making it one of the city's more coveted addresses.",
       },
     ],
+    nearby: ["Noe Valley"],
     restaurants: [
       { name: "Firefly", address: "4288 24th St", phone: "(415) 821-7652", url: "https://www.fireflysf.com" },
       { name: "Saru Sushi Bar", address: "3856 24th St", phone: "(415) 400-4510", url: "https://sarusushisf.com" },
