@@ -203,7 +203,7 @@ export default function FogPanel({
         <ToggleSwitch
           checked={showCBD}
           onChange={onToggleCBD}
-          label="Benefit Districts"
+          label="CBD/Mello-Roos Districts"
         />
       </div>
 

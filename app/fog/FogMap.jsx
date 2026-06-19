@@ -561,10 +561,9 @@ export default function FogMap({
           reportUrl = typeof raw === "string" ? raw : "";
         }
         const name = p.community_benefit_district || "Benefit District";
-        const year = p.annual_report_latest_year ? ` (${p.annual_report_latest_year})` : "";
         const link = reportUrl
-          ? `<a href="${reportUrl}" target="_blank" rel="noopener noreferrer">View annual report${year} ↗</a>`
-          : `<span style="color:#888">No annual report on file</span>`;
+          ? `<a href="${reportUrl}" target="_blank" rel="noopener noreferrer">More Information ↗</a>`
+          : `<span style="color:#888">No more information available</span>`;
         const html = `<div class="cbd-popup"><strong>${name}</strong><br/>${link}</div>`;
         if (cbdPopup) cbdPopup.remove();
         cbdPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "240px" })
