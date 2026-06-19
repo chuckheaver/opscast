@@ -86,9 +86,12 @@ const STATUS_LEGEND = [
 export default function ListingsApp() {
   // Deep-link from the fog neighborhood pop-up's "See Market data" button:
   //   /listings?nbhd=<name>&layer=nbhd  → open with that neighborhood
-  //   highlighted, zoomed to, and the neighborhood layer turned on.
+  //   highlighted, zoomed to, the neighborhood layer on, and the three
+  //   ownership product types (SFH, condo, TIC) shown so the activity
+  //   matches the pop-up's single-family and condo/TIC stat lines.
   const searchParams = useSearchParams();
   const initialNbhd = searchParams?.get("nbhd") || "";
+  const deepLinked = !!initialNbhd || searchParams?.get("layer") === "nbhd";
 
   const [features, setFeatures] = useState([]);
   const [supDistricts, setSupDistricts] = useState(null);
@@ -98,7 +101,9 @@ export default function ListingsApp() {
   // Filters
   // Default view: completed (Closed + Sold Off MLS) single-family sales this year.
   const [statuses, setStatuses] = useState(() => new Set(["Closed", "Sold Off MLS"]));
-  const [subtypes, setSubtypes] = useState(() => new Set(["Single Family Residence"]));
+  const [subtypes, setSubtypes] = useState(() => deepLinked
+    ? new Set(["Single Family Residence", "Condominium", "Tenancy in Common"])
+    : new Set(["Single Family Residence"]));
   const [district, setDistrict] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [fogHrs, setFogHrs] = useState(""); // exact fog-hours value, "" = all
@@ -109,7 +114,7 @@ export default function ListingsApp() {
 
   // Display options
   const [showFog, setShowFog] = useState(false);
-  const [showNbhds, setShowNbhds] = useState(() => !!initialNbhd || searchParams?.get("layer") === "nbhd");
+  const [showNbhds, setShowNbhds] = useState(() => deepLinked);
   const [focusNbhd] = useState(initialNbhd); // neighborhood to highlight + zoom to (from deep-link)
   const [groupDim, setGroupDim] = useState("neighborhood");
   // Optional click-to-sort override for the breakdown table. null = the

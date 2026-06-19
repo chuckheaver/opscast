@@ -126,8 +126,8 @@ export default function NeighborhoodModal({
   const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
 
   // Compute the current-year median sale price for this neighborhood —
-  // separately for single-family homes and condos — straight from the
-  // listings dataset. Each is { value, n } or null when nothing sold yet.
+  // single-family homes vs. attached ownership units (condos + TICs) —
+  // straight from the listings dataset. Each is { value, n } or null.
   useEffect(() => {
     let cancelled = false;
     fetch(LISTINGS_URL)
@@ -151,7 +151,7 @@ export default function NeighborhoodModal({
           const median = sales[Math.floor((sales.length - 1) / 2)];
           return { value: fmtPrice(median), n: sales.length };
         };
-        setPrices({ sfh: medianFor(/single family/i), condo: medianFor(/condo/i) });
+        setPrices({ sfh: medianFor(/single family/i), condo: medianFor(/condo|tenancy in common/i) });
       })
       .catch(() => { if (!cancelled) setPrices(null); });
     return () => { cancelled = true; };
@@ -282,7 +282,7 @@ export default function NeighborhoodModal({
           ) : prices ? (
             <div style={{ marginBottom: 8 }}>
               <PriceLine data={prices.sfh} label="single-family" gap />
-              <PriceLine data={prices.condo} label="condo" />
+              <PriceLine data={prices.condo} label="condo/TIC" />
             </div>
           ) : (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>Market data unavailable.</span></div>
