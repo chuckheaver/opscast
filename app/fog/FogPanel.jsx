@@ -39,6 +39,7 @@ export default function FogPanel({
   showSeismic, onToggleSeismic,
   showTsunami, onToggleTsunami,
   showRealtor, onToggleRealtor,
+  showCBD, onToggleCBD,
 }) {
   // Compute the per-location lookups inline so we don't double-store them.
   const point = picked?.point;
@@ -198,6 +199,11 @@ export default function FogPanel({
           checked={showRealtor}
           onChange={onToggleRealtor}
           label="Realtor Districts"
+        />
+        <ToggleSwitch
+          checked={showCBD}
+          onChange={onToggleCBD}
+          label="Benefit Districts"
         />
       </div>
 

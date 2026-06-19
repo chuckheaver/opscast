@@ -60,6 +60,8 @@ export default function FogApp() {
   const [showTsunami, setShowTsunami] = useState(false);
   // SFAR Realtor neighborhoods (blue outlines + nbrhood (nid) labels).
   const [showRealtor, setShowRealtor] = useState(false);
+  // SF Community Benefit Districts (purple fill + outline + name labels).
+  const [showCBD, setShowCBD] = useState(false);
   // Background layers kept off — used for lookups, not for the UI toggle set.
   const [showZoning] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
@@ -314,6 +316,7 @@ export default function FogApp() {
           showDistricts={showDistricts}
           showZoning={showZoning}
           showRealtor={showRealtor}
+          showCBD={showCBD}
           showNeighborhoods={showNeighborhoods}
           picked={picked}
           onPickFeature={pickFromMap}
@@ -353,6 +356,8 @@ export default function FogApp() {
         onToggleTsunami={setShowTsunami}
         showRealtor={showRealtor}
         onToggleRealtor={setShowRealtor}
+        showCBD={showCBD}
+        onToggleCBD={setShowCBD}
       />
     </div>
   );

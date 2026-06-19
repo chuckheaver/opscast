@@ -60,6 +60,7 @@ export default function FogMap({
   showDistricts,
   showZoning,
   showRealtor,
+  showCBD,
   showNeighborhoods,
   picked,
   onPickFeature,
@@ -479,6 +480,97 @@ export default function FogMap({
             14, 1,
           ],
         },
+      });
+
+      // Community Benefit Districts (DataSF) — 16 special-assessment
+      // districts that fund neighborhood services. Toggleable purple
+      // fill + outline + name labels; the district name lives in the
+      // `community_benefit_district` property.
+      map.addSource("cbd", {
+        type: "geojson",
+        data: "/data/sf-community-benefit-districts.geojson",
+      });
+      map.addLayer({
+        id: "cbd-fill",
+        type: "fill",
+        source: "cbd",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": "#7c3aed",
+          "fill-opacity": 0.18,
+        },
+      });
+      map.addLayer({
+        id: "cbd-outline",
+        type: "line",
+        source: "cbd",
+        layout: { visibility: "none", "line-join": "round" },
+        paint: {
+          "line-color": "#6d28d9",
+          "line-width": 1.8,
+          "line-opacity": 0.95,
+        },
+      });
+      map.addLayer({
+        id: "cbd-labels",
+        type: "symbol",
+        source: "cbd",
+        layout: {
+          visibility: "none",
+          "text-field": ["get", "community_benefit_district"],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": [
+            "interpolate", ["linear"], ["zoom"],
+            11, 9,
+            13, 11,
+            15, 13,
+          ],
+          "text-max-width": 8,
+          "text-padding": 4,
+          "text-allow-overlap": false,
+        },
+        paint: {
+          "text-color": "#5b21b6",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.4,
+          "text-halo-blur": 0.5,
+        },
+      });
+
+      // Click a Community Benefit District to open a popup with its name
+      // and a link to the latest annual report. Mapbox only fires these
+      // layer-scoped handlers when cbd-fill is actually visible, so the
+      // popup is inert until the "Benefit Districts" toggle is on.
+      let cbdPopup = null;
+      map.on("mouseenter", "cbd-fill", () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", "cbd-fill", () => {
+        map.getCanvas().style.cursor = "";
+      });
+      map.on("click", "cbd-fill", e => {
+        if (!e.features?.length) return;
+        const p = e.features[0].properties;
+        // Nested GeoJSON objects arrive as JSON strings through Mapbox, so
+        // the {url} object on annual_report_url needs parsing back out.
+        let reportUrl = "";
+        const raw = p.annual_report_url;
+        try {
+          reportUrl = typeof raw === "string" ? (JSON.parse(raw).url || "") : (raw?.url || "");
+        } catch {
+          reportUrl = typeof raw === "string" ? raw : "";
+        }
+        const name = p.community_benefit_district || "Benefit District";
+        const year = p.annual_report_latest_year ? ` (${p.annual_report_latest_year})` : "";
+        const link = reportUrl
+          ? `<a href="${reportUrl}" target="_blank" rel="noopener noreferrer">View annual report${year} ↗</a>`
+          : `<span style="color:#888">No annual report on file</span>`;
+        const html = `<div class="cbd-popup"><strong>${name}</strong><br/>${link}</div>`;
+        if (cbdPopup) cbdPopup.remove();
+        cbdPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "240px" })
+          .setLngLat(e.lngLat)
+          .setHTML(html)
+          .addTo(map);
       });
 
       // Seismic hazard zones (CA Geological Survey, via DataSF). Toggleable
@@ -1122,6 +1214,20 @@ export default function FogMap({
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showRealtor]);
+
+  // Toggle the Community Benefit Districts overlay (fill + outline + labels).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showCBD ? "visible" : "none";
+      ["cbd-fill", "cbd-outline", "cbd-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showCBD]);
 
   // Toggle the zoning overlay (color-coded fills + thin outline).
   useEffect(() => {
