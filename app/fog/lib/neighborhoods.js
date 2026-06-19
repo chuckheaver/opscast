@@ -1999,6 +1999,462 @@ export const NEIGHBORHOODS = {
     transit:
       "The J Church Muni Metro skirts the eastern foot of the hill by Dolores Park, with the 33, 35 Eureka, and 48 Quintara/24th St buses linking to the Mission, Castro, and Noe Valley.",
   },
+
+  "Parnassus Heights": {
+    spirit:
+      "A foggy hillside where med students, eucalyptus forest, and big-sky views crowd around UCSF, wedged quietly between Cole Valley, the Haight, and the Inner Sunset.",
+    reasons: [
+      "UCSF medical campus",
+      "Mount Sutro forest trails",
+      "Sweeping city views",
+      "Steep, quiet streets",
+    ],
+    history:
+      "Parnassus Avenue takes its name from Mount Parnassus of Greek myth, echoing the classical street names nearby. In 1895 Mayor Adolph Sutro donated land overlooking Golden Gate Park, and the Affiliated Colleges opened here in 1898 — the seed of today's UCSF. The medical center grew steadily up the hillside through the 20th century, while modest homes filled the steep blocks below the forested crown of Mount Sutro.",
+    facts: [
+      {
+        icon: "book",
+        title: "Birthplace of UCSF",
+        text:
+          "The Affiliated Colleges opened on this hill in 1898 on land donated by Adolph Sutro. They became the University of California's San Francisco campus, now a world-renowned medical school and hospital.",
+      },
+      {
+        icon: "bird",
+        title: "Mount Sutro forest",
+        text:
+          "The Interior Greenbelt cloaks Mount Sutro in a dense eucalyptus forest planted under Adolph Sutro in the 1880s. UCSF maintains the roughly 60-acre Mount Sutro Open Space Reserve, laced with hiking trails.",
+      },
+      {
+        icon: "star",
+        title: "Views above the fog",
+        text:
+          "Perched high between Golden Gate Park and Twin Peaks, the upper streets deliver sweeping vistas. On clear days the outlook stretches across the city, the bay, and the Pacific.",
+      },
+      {
+        icon: "house",
+        title: "Steep, quiet hillside",
+        text:
+          "Narrow, sharply graded streets climb the slopes between the campus and the forest. The residential blocks are calm and tucked away, with shopping and dining concentrated in adjacent Cole Valley and the Inner Sunset.",
+      },
+      {
+        icon: "subway",
+        title: "The Sunset Tunnel",
+        text:
+          "The N Judah Muni Metro line dives under the hill through the Sunset Tunnel, linking the area to downtown and the beach. Its eastern portal sits in Cole Valley at Carl and Cole.",
+      },
+    ],
+    nearby: ["Cole Valley", "the Inner Sunset"],
+    restaurants: [
+      { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
+      { name: "San Tung", address: "1031 Irving St", phone: "(415) 242-0828", url: "https://www.santungsf.com" },
+      { name: "Manna", address: "845 Irving St", phone: "(415) 665-5969" },
+    ],
+    bars: [
+      { name: "Finnegans Wake", address: "937 Cole St", phone: "(415) 731-6119", url: "https://www.finneganssf.com" },
+      { name: "The Little Shamrock", address: "807 Lincoln Way", phone: "(415) 661-0060" },
+      { name: "The Red Tail", address: "545 Irving St", phone: "(415) 571-8066", url: "https://www.redtailsf.com" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "right here",
+      phone: "(415) 476-1000",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "The N Judah Muni Metro runs through the Sunset Tunnel below the hill; the 6 Haight/Parnassus, 43 Masonic, and 66 Quintara buses serve the slopes.",
+  },
+
+  "Lower Haight": {
+    spirit:
+      "A gritty-creative pocket of Victorian flats where DJ history, dive bars, and record shops collide along a few blocks of low-key cool.",
+    reasons: [
+      "Legendary beer bars",
+      "DJ & record-shop roots",
+      "Victorian flats",
+      "Gritty-creative vibe",
+    ],
+    aka: "Haight-Fillmore",
+    history:
+      "Just east of Haight-Ashbury and folded into the historic Western Addition, the Lower Haight filled with streetcar-era Victorian flats in the late 1800s, many surviving the 1906 quake. Long tied to the neighborhood's Black community, it became a 1990s hub of DJ and house-music culture, and its dive bars, cafés, and record and skate shops still define a scrappy, creative character.",
+    facts: [
+      {
+        icon: "beer",
+        title: "A beer-bar legend",
+        text:
+          "Toronado opened at 547 Haight in 1987 and earned national fame for its deep, ever-rotating craft and Belgian draft list — a cash-only temple for beer pilgrims.",
+      },
+      {
+        icon: "music",
+        title: "DJ and house-music roots",
+        text:
+          "In the 1990s the Lower Haight was a hub of San Francisco's underground DJ and house-music scene, anchored by its record shops.",
+      },
+      {
+        icon: "house",
+        title: "Victorians that survived 1906",
+        text:
+          "The strip is lined with streetcar-era Victorian and Edwardian flats, many of which came through the 1906 earthquake intact.",
+      },
+      {
+        icon: "art",
+        title: "Western Addition heritage",
+        text:
+          "Part of the historic Western Addition, the area is long tied to San Francisco's Black community and its cultural legacy.",
+      },
+      {
+        icon: "shop",
+        title: "Records, skate, and vintage",
+        text:
+          "Record stores, skate shops, and vintage spots give the few blocks a creative, independent retail character.",
+      },
+    ],
+    restaurants: [
+      { name: "Kate's Kitchen", address: "471 Haight St", phone: "(415) 626-3984", url: "https://orderkateskitchen.com" },
+      { name: "The Grind Cafe", address: "783 Haight St", phone: "(415) 864-0955", url: "https://thegrindcafe.com" },
+      { name: "Song Wat", address: "312 Divisadero St", phone: "(415) 552-6881" },
+      { name: "Jules", address: "237 Fillmore St", phone: "(415) 839-9642", url: "https://www.julespizza.co" },
+    ],
+    bars: [
+      { name: "Toronado", address: "547 Haight St", phone: "(415) 863-2276", url: "https://www.toronado.com" },
+      { name: "Noc Noc", address: "557 Haight St", phone: "(415) 861-5811" },
+      { name: "Molotov's", address: "582 Haight St", phone: "(415) 558-8019" },
+    ],
+    hospital: {
+      name: "CPMC Davies Campus",
+      address: "601 Duboce Ave",
+      dist: "about 1 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "Muni 6, 7, and 22 Fillmore serve the area, with the N Judah Metro a few blocks south at Duboce.",
+  },
+
+  "Monterey Heights": {
+    spirit:
+      "A hushed 1920s residence park of grand period-revival homes curving up Mount Davidson's wooded slopes, where mature trees, hilltop views, and quiet prevail.",
+    reasons: [
+      "1920s residence-park elegance",
+      "Grand period-revival homes",
+      "Mount Davidson views",
+      "Quiet, leafy, residential",
+    ],
+    history:
+      "Monterey Heights was laid out in the 1920s by the Baldwin & Howell real-estate firm as one of San Francisco's planned residence parks on the slopes near Mount Davidson, west of Glen Park and beside St. Francis Wood and Westwood Highlands. The developers platted gently curving, tree-lined streets and filled them with large single-family period-revival homes — Spanish, Mediterranean, and Tudor styles. Purely residential by design, it remains an affluent, view-rich enclave a century later.",
+    facts: [
+      {
+        icon: "house",
+        title: "A planned residence park",
+        text:
+          "Developed in the 1920s by Baldwin & Howell as a single-family residence park with large period-revival homes and no commercial lots.",
+      },
+      {
+        icon: "star",
+        title: "Mount Davidson next door",
+        text:
+          "At 938 feet, adjacent Mount Davidson is the highest natural point in San Francisco, crowned by a 103-foot concrete cross.",
+      },
+      {
+        icon: "road",
+        title: "Curving by design",
+        text:
+          "Streets were deliberately laid out to curve with the hillside contours, giving the neighborhood its leafy, parklike feel.",
+      },
+      {
+        icon: "park",
+        title: "Trees and trails",
+        text:
+          "Mature street trees and the eucalyptus groves of Mount Davidson Park, planted in Adolph Sutro's era, frame the slopes.",
+      },
+      {
+        icon: "tram",
+        title: "West Portal nearby",
+        text:
+          "The closest shops, restaurants, and Muni Metro station sit a short distance away along West Portal Avenue.",
+      },
+    ],
+    nearby: ["West Portal"],
+    restaurants: [
+      { name: "Trattoria da Vittorio", address: "150 W Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
+      { name: "Bursa", address: "60 W Portal Ave", phone: "(415) 564-4006", url: "https://bursasf.com" },
+      { name: "Elena's Mexican Restaurant", address: "255 W Portal Ave", phone: "(415) 622-4440", url: "https://www.elenasmexican.com" },
+      { name: "Spiazzo Ristorante", address: "33 W Portal Ave", phone: "(415) 664-9511", url: "https://www.spiazzoristorante.com" },
+    ],
+    bars: [
+      { name: "Philosopher's Club", address: "824 Ulloa St", phone: "(415) 753-0599" },
+      { name: "Bullshead Restaurant", address: "840 Ulloa St", url: "https://www.bullsheadsf.com" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 3 mi",
+      phone: "(415) 476-1000",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "West Portal Station (K Ingleside, L Taraval, M Ocean View) is the nearest Metro; the 36 Teresita and 48 buses wind through the hills.",
+  },
+
+  Panhandle: {
+    spirit:
+      "A leafy half-mile green arm reaching east from Golden Gate Park, flanked by grand painted Victorians and a buzzing Divisadero dining strip locals call NoPa.",
+    reasons: [
+      "Half-mile green park strip",
+      "Grand Victorian rowhouses",
+      "Buzzing Divisadero dining",
+      "Bike & jog path",
+    ],
+    aka: "NoPa",
+    history:
+      "The Panhandle was laid out in the 1870s as the original eastern entrance to Golden Gate Park, shaped under engineer William Hammond Hall as a tree-lined carriage approach. Its elegant Victorians survived the 1906 earthquake, and the strip became a refugee campground for thousands left homeless. The blocks north of the park stayed quietly residential for decades until the restaurant Nopa opened in 2006, sparking a dining revival and christening the NoPa neighborhood.",
+    facts: [
+      {
+        icon: "park",
+        title: "The park's original arm",
+        text:
+          "The one-block-wide, three-quarter-mile strip was designed in the 1870s as Golden Gate Park's eastern entrance — a green spine still lined with mature trees.",
+      },
+      {
+        icon: "quake",
+        title: "1906 refuge",
+        text:
+          "After the earthquake and fires, thousands of displaced San Franciscans camped along the Panhandle's lawns in tents and shacks.",
+      },
+      {
+        icon: "house",
+        title: "Grand Victorians",
+        text:
+          "Stately Victorian and Edwardian rowhouses line the surrounding streets, many spared by the 1906 disaster.",
+      },
+      {
+        icon: "road",
+        title: "Bike & jog path",
+        text:
+          "A paved multi-use path runs the length of the green strip — a key cross-town commuter and recreation route.",
+      },
+      {
+        icon: "star",
+        title: "NoPa was born here",
+        text:
+          "The restaurant Nopa opened in 2006 and gave the North-of-Panhandle area its now-ubiquitous nickname.",
+      },
+    ],
+    restaurants: [
+      { name: "Nopa", address: "560 Divisadero St", phone: "(415) 864-8643", url: "https://www.nopasf.com" },
+      { name: "Bar Crudo", address: "655 Divisadero St", phone: "(415) 409-0679", url: "https://www.barcrudo.com" },
+      { name: "Brenda's Meat & Three", address: "919 Divisadero St", phone: "(415) 926-8657", url: "https://brendasmeatandthree.com" },
+      { name: "The Mill", address: "736 Divisadero St", phone: "(415) 345-1953", url: "https://www.themillsf.com" },
+    ],
+    bars: [
+      { name: "Madrone Art Bar", address: "500 Divisadero St", phone: "(415) 241-0202", url: "https://madroneartbar.com" },
+      { name: "The Page", address: "298 Divisadero St", phone: "(415) 255-6101" },
+    ],
+    hospital: {
+      name: "CPMC Davies Campus",
+      address: "601 Duboce Ave",
+      dist: "about 1.5 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "Muni 5 Fulton, 7 Haight, and 21 Hayes run along the green strip; the 24 Divisadero and 43 Masonic cross it north–south.",
+  },
+
+  "West Portal": {
+    spirit:
+      "A village within the city: streetcars surface from the tunnel onto a walkable main street of family-owned trattorias, old-school pubs, and stroller-friendly sidewalks.",
+    reasons: [
+      "Walkable main-street shops",
+      "Streetcars from the tunnel",
+      "Family-friendly village feel",
+      "Beloved Italian restaurants",
+    ],
+    history:
+      "West Portal takes its name from the western mouth of the Twin Peaks Tunnel, which opened in February 1918 and finally let Muni streetcars reach the area. Trains emerging from the portal turned a stretch of sand-dune outskirts into a thriving streetcar suburb, and West Portal Avenue grew into its commercial spine. Today the avenue keeps its small-town, family-friendly character beside St. Francis Wood and Forest Hill.",
+    facts: [
+      {
+        icon: "tram",
+        title: "Out of the tunnel",
+        text:
+          "The neighborhood is named for the west portal of the Twin Peaks Tunnel, where Muni streetcars emerge into daylight at the foot of the avenue.",
+      },
+      {
+        icon: "subway",
+        title: "Opened 1918",
+        text:
+          "The Twin Peaks Tunnel opened in February 1918, connecting the area to downtown and sparking its build-out as a streetcar suburb.",
+      },
+      {
+        icon: "shopping",
+        title: "The avenue",
+        text:
+          "West Portal Avenue is the commercial spine — a low-rise strip of locally owned shops, cafés, and restaurants.",
+      },
+      {
+        icon: "stroller",
+        title: "Village by design",
+        text:
+          "Walkable and quiet, West Portal is known as one of the city's most family-friendly, village-like neighborhoods.",
+      },
+      {
+        icon: "movie",
+        title: "The old Empire",
+        text:
+          "The 1925 Portal Theatre, later the CineArts Empire, lit up the avenue for decades before closing in 2021.",
+      },
+    ],
+    restaurants: [
+      { name: "Trattoria da Vittorio", address: "150 W Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
+      { name: "Little Original Joe's", address: "393 W Portal Ave", phone: "(415) 759-1155", url: "https://www.littleoriginaljoes.com" },
+      { name: "Mozzarella di Bufala", address: "69 W Portal Ave", phone: "(415) 661-8900", url: "https://dibufala.com" },
+      { name: "Elena's Mexican Restaurant", address: "255 W Portal Ave", phone: "(415) 622-4440", url: "https://www.elenasmexican.com" },
+    ],
+    bars: [
+      { name: "The Dubliner", address: "328 W Portal Ave", phone: "(415) 566-9444", url: "https://dublinerwp.com" },
+      { name: "Philosopher's Club", address: "824 Ulloa St", phone: "(415) 753-0599" },
+      { name: "Bullshead Restaurant", address: "840 Ulloa St", url: "https://www.bullsheadsf.com" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 2 mi",
+      phone: "(415) 476-1000",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "West Portal Station is the hub — the K Ingleside, L Taraval, and M Ocean View lines run through the Twin Peaks Tunnel to downtown; the 48 bus crosses the south of the city.",
+  },
+
+  "Balboa Terrace": {
+    spirit:
+      "A hushed crescent of 1920s period-revival homes behind brick gateposts, where curving streets and mature gardens make this tiny residence park feel quietly grand.",
+    reasons: [
+      "Storybook 1920s residence park",
+      "Brick entry gateposts",
+      "Curving, leafy streets",
+      "Affluent & residential",
+    ],
+    history:
+      "Balboa Terrace was laid out in the early 1920s as one of San Francisco's planned \"residence parks\" west of Twin Peaks, in the Mason-McDuffie / Baldwin & Howell era of bespoke garden suburbs. Architects gave the enclave a cohesive look of Mediterranean, Tudor, and Spanish Colonial Revival homes on winding streets. Distinctive brick gateposts mark the entrances, and planted medians and mature landscaping reinforce the park-like feel that still defines the neighborhood a century later.",
+    facts: [
+      {
+        icon: "road",
+        title: "Planned residence park",
+        text:
+          "One of a cluster of 1920s residence parks west of Twin Peaks, designed as a unified garden suburb rather than a standard grid.",
+      },
+      {
+        icon: "house",
+        title: "Period-revival cohesion",
+        text:
+          "Single-family homes in coordinated Mediterranean, Tudor, and Spanish Colonial Revival styles give the small enclave unusual architectural unity.",
+      },
+      {
+        icon: "park",
+        title: "Gateposts and medians",
+        text:
+          "Brick entry gateposts and planted street medians signal the neighborhood's boundaries and lend it a private, park-like character.",
+      },
+      {
+        icon: "money",
+        title: "Quietly affluent",
+        text:
+          "A small, well-kept district of owner-occupied homes, consistently among the city's pricier and most stable residential pockets.",
+      },
+      {
+        icon: "tram",
+        title: "Streetcar-era suburb",
+        text:
+          "Developed alongside the Twin Peaks Tunnel and West Portal streetcar lines that opened the western neighborhoods to commuters.",
+      },
+    ],
+    nearby: ["West Portal", "Ocean Avenue"],
+    restaurants: [
+      { name: "Elena's Mexican Restaurant", address: "255 W Portal Ave", phone: "(415) 622-4440", url: "https://www.elenasmexican.com" },
+      { name: "Bursa", address: "60 W Portal Ave", phone: "(415) 564-4006", url: "https://bursasf.com" },
+      { name: "Beep's Burgers", address: "1051 Ocean Ave", phone: "(415) 584-2650", url: "https://www.beepsburgers.com" },
+    ],
+    bars: [
+      { name: "Binu Bonu", address: "230 W Portal Ave", phone: "(415) 742-4322", url: "https://www.binubonu.com" },
+      { name: "Philosopher's Club", address: "824 Ulloa St", phone: "(415) 753-0599" },
+      { name: "Ocean Ale House", address: "1314 Ocean Ave", phone: "(415) 988-7521", url: "https://oceanalehouse.com" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 3.5 mi",
+      phone: "(415) 476-1000",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "The K Ingleside runs along Ocean Avenue at the southern edge, and West Portal Station is a short hop away; the 48 bus connects across the city's south side.",
+  },
+
+  "Inner Richmond": {
+    spirit:
+      "Foggy, food-obsessed and gloriously diverse: Edwardian flats above Clement Street's Burmese, Chinese, and Russian kitchens, with Golden Gate Park and the Presidio on its doorstep.",
+    reasons: [
+      "\"New Chinatown\" food scene",
+      "Iconic Clement Street strip",
+      "Diverse immigrant heritage",
+      "Between park & Presidio",
+    ],
+    aka: "New Chinatown",
+    history:
+      "The Richmond rose from the windswept \"Outside Lands\" sand dunes the city annexed in the late 1800s. Local lore credits an Australian settler with naming the district for Richmond, Victoria. Streetcars opened the dunes to development, and successive waves of immigrants gave it character: a large Russian community fleeing revolution, then Chinese, Burmese, and other Asian families whose markets and restaurants made Clement Street the bustling corridor known today as the \"New Chinatown.\"",
+    facts: [
+      {
+        icon: "shop",
+        title: "New Chinatown",
+        text:
+          "Clement Street and Geary Boulevard pack in Chinese, Burmese, Russian, and pan-Asian restaurants and markets, earning the area its \"New Chinatown\" nickname.",
+      },
+      {
+        icon: "church",
+        title: "Gold-domed landmark",
+        text:
+          "Holy Virgin Cathedral (\"Joy of All Who Sorrow\"), the gold-domed Russian Orthodox cathedral on Geary, was completed in 1965 and holds the relics of St. John of Shanghai and San Francisco.",
+      },
+      {
+        icon: "book",
+        title: "Green Apple Books",
+        text:
+          "Open on Clement Street since 1967, Green Apple is one of the city's most beloved independent bookstores, famous for its creaky floors and labyrinth of new and used titles.",
+      },
+      {
+        icon: "sun",
+        title: "Fog factory",
+        text:
+          "Wedged between the Pacific and downtown, the Inner Richmond catches the marine layer that rolls through the Golden Gate, keeping summer days cool and gray.",
+      },
+      {
+        icon: "park",
+        title: "Green on both sides",
+        text:
+          "The neighborhood is framed by Golden Gate Park to the south and the Presidio to the north, putting thousands of acres of trails and trees within a short walk.",
+      },
+    ],
+    restaurants: [
+      { name: "Burma Superstar", address: "309 Clement St", phone: "(415) 387-2147", url: "https://www.burmasuperstar.com" },
+      { name: "B Star", address: "127 Clement St", phone: "(415) 933-9900", url: "https://www.bstarbar.com" },
+      { name: "Good Luck Dim Sum", address: "736 Clement St", phone: "(415) 386-3388" },
+    ],
+    bars: [
+      { name: "The Plough and the Stars", address: "116 Clement St", phone: "(415) 751-1122", url: "https://theploughandstars.com" },
+      { name: "540 Club", address: "540 Clement St", phone: "(415) 752-7276" },
+      { name: "Trad'r Sam", address: "6150 Geary Blvd", phone: "(415) 221-0773" },
+    ],
+    hospital: {
+      name: "UCSF Medical Center at Parnassus",
+      address: "505 Parnassus Ave",
+      dist: "about 1.5 mi",
+      phone: "(415) 476-1000",
+      url: "https://www.ucsfhealth.org/locations/parnassus-campus",
+    },
+    transit:
+      "Muni 1 California, 2 Clement, and the 38 Geary / 38R Geary Rapid carry the Richmond to downtown; the 44 O'Shaughnessy links to Golden Gate Park.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
