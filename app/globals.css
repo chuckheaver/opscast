@@ -3579,6 +3579,15 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   .nh-backdrop { padding: 0; }
   .nh-modal { max-width: none; min-height: 100%; border-radius: 0; }
 }
+/* Laptop / desktop: dock the pop-up to the left so the picked neighborhood
+   stays visible on the map, and lighten the backdrop so the map reads. */
+@media (min-width: 1024px) {
+  .nh-backdrop {
+    justify-content: flex-start;
+    padding: 24px;
+    background: rgba(10, 25, 41, 0.18);
+  }
+}
 
 /* Appellation-stack chips in the color box — smallest AVA first. */
 .wine-chips {
