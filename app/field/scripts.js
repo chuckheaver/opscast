@@ -20,15 +20,18 @@ export const SCRIPTS = {
     detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Castro)",
     sections: [
       {
-        label: "COLD OPEN / HOOK",
-        words: 55,
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
         script:
-          "YOU'RE STANDING AT 18TH AND CASTRO — RAINBOW CROSSWALKS UNDER YOUR FEET,\n" +
-          "THE GIANT PRIDE FLAG SNAPPING OVERHEAD, AND THE SUN ACTUALLY OUT.\n" +
-          "THIS IS THE CASTRO: SAN FRANCISCO'S RAINBOW HEART.\n" +
-          "TODAY I'M GOING TO SHOW YOU HOW YOU'D ACTUALLY LIVE HERE —\n" +
-          "AND HOW YOU'D GET EVERYWHERE WITHOUT A CAR. COME WALK IT WITH ME.",
-        broll: ["Hero shot: the 20-ft Pride flag at Harvey Milk Plaza", "You walking up Castro St into frame", "Rainbow crosswalk close-up"],
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF WALKING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M AT 18TH AND CASTRO, AND THE SUN IS OUT —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "LET ME WALK YOU THROUGH THE CASTRO THE WAY I'D WALK A FRIEND.",
+        broll: ["Two-shot idea: a foggy ridge in one frame, sunny Castro St in the next", "You walking up Castro St into frame", "The Pride flag / rainbow crosswalk to place us"],
       },
       {
         label: "1 · LOCATION & LAY OF THE LAND",
@@ -180,22 +183,22 @@ export const SCRIPTS = {
         broll: ["A painted Victorian, a flats building, a modern condo entry", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
       },
       {
-        label: "9 · WHY LIVE HERE + OUTRO",
-        words: 150,
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 135,
         script:
-          "SO WHO THRIVES IN THE CASTRO?\n" +
-          "ANYONE WHO WANTS LIGHT, WALKABILITY, AND A REAL SENSE OF COMMUNITY —\n" +
-          "DEAD-CENTER IN THE CITY, WITH THE WHOLE BAY AREA A TRAIN OR FERRY AWAY,\n" +
-          "AND NO CAR REQUIRED.\n" +
-          "GREAT LIGHT, GREAT BONES, AND A GREAT LOCATION.\n" +
-          "FOR EVERYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT,\n" +
-          "CURRENT LISTINGS, THE LATEST MARKET NUMBERS —\n" +
-          "MY CASTRO NEIGHBORHOOD PAGE KEEPS IT ALL LIVE, SO THIS STAYS YOUR EVERGREEN GUIDE.\n" +
-          "IF THE CASTRO FEELS LIKE YOUR KIND OF PLACE, DO TWO THINGS:\n" +
-          "CHECK THE LINKS BELOW, AND THEN SEND ME A MESSAGE —\n" +
-          "I'LL WALK YOU THROUGH WHAT'S FOR SALE AND GET YOU INSIDE.\n" +
-          "I'M CHUCK HEAVER — AND I'LL SEE YOU IN THE NEXT NEIGHBORHOOD.",
-        broll: ["Golden-hour lifestyle montage on Castro St", "You on camera for the close", "End card: name, contact, subscribe"],
+          "SO — WHO BELONGS IN THE CASTRO?\n" +
+          "SOMEONE WHO WANTS LIGHT, WALKABILITY, AND THE WHOLE BAY AREA\n" +
+          "A TRAIN OR A FERRY AWAY, WITHOUT EVER NEEDING A CAR.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY CASTRO NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "AND IF YOU'RE EVEN THINKING ABOUT CALLING THIS CITY HOME,\n" +
+          "I'D GENUINELY LOVE TO HELP YOU FIND THE CORNER THAT FITS YOU.\n" +
+          "I'M CHUCK HEAVER. I'LL SEE YOU IN THE NEXT NEIGHBORHOOD.",
+        broll: ["Golden-hour, unhurried walk down Castro St (you, relaxed, not pitching)", "A quiet look back up the hill toward Twin Peaks", "Soft end card: your name + how to reach you"],
       },
     ],
     schedule: [
