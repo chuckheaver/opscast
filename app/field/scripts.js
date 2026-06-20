@@ -3473,4 +3473,1314 @@ export const SCRIPTS = {
     ],
     batchTip: "Shoot adjacent hoods the same outing — e.g. South of Market + Rincon Hill + South Beach in one morning loop.",
   },
+"Presidio Heights": {
+    aka: "Presidio Terrace area",
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Presidio%20Heights&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Presidio Heights)",
+    route: {
+      // Route stays ENTIRELY within the Presidio Heights boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Sacramento St boutique strip", note: "Start — the discreet, upscale shopping-and-dining spine, sun out", coord: [-122.4520, 37.7884] },
+        { n: 2, name: "Spruce & Locust — mansion blocks", note: "The housing-stock segment: grand, tree-lined estate streets", coord: [-122.4540, 37.7895] },
+        { n: 3, name: "Temple Emanu-El edge", note: "The red-tiled landmark dome anchoring the neighborhood's skyline", coord: [-122.4567, 37.7882] },
+        { n: 4, name: "Presidio Gate / Julius Kahn playground edge", note: "Where the neighborhood steps almost directly into the Presidio greenbelt", coord: [-122.4556, 37.7898] },
+        { n: 5, name: "Walnut & California — leafy residential", note: "Quiet north-side blocks, classic flats and single-family homes", coord: [-122.4505, 37.7878] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ON SACRAMENTO STREET, AND THE SUN IS OUT —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE PRESIDIO HEIGHTS? LET'S GO.",
+        broll: ["Two-shot idea: a foggy ridge in one frame, sunny Sacramento St in the next", "You moving up Sacramento St into frame", "A grand tree-lined mansion block to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? PRESIDIO HEIGHTS SITS ON THE CITY'S NORTH SIDE,\n" +
+          "ON HIGH GROUND RIGHT BESIDE THE PRESIDIO,\n" +
+          "WITH PACIFIC HEIGHTS TO THE EAST, LAUREL HEIGHTS JUST SOUTH,\n" +
+          "AND THE RICHMOND OPENING UP TO THE WEST.\n" +
+          "THE MAIN SPINE IS SACRAMENTO STREET, A DISCREET, UPSCALE\n" +
+          "SHOPPING-AND-DINING STRIP RUNNING THROUGH A HUSHED, LEAFY ENCLAVE.\n" +
+          "THE LAND HERE RUNS FROM ABOUT 180 FEET UP TO AROUND 370 FEET,\n" +
+          "BUT IT SITS HIGH AND FAIRLY LEVEL — THE CORE IS FLAT AND EASY TO GET AROUND,\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR,\n" +
+          "WELL WITHIN WHAT THE A-D-A CONSIDERS AN ACCESSIBLE GRADE — ABOUT FIVE PERCENT.\n" +
+          "THIS IS ONE OF THE MORE STEP-FREE NEIGHBORHOODS YOU'LL FIND ON THE NORTH SIDE.\n" +
+          "THAT SAID, THE HOMES THEMSELVES STILL VARY —\n" +
+          "MANY OF THESE GRAND HOUSES SIT UP A FLIGHT OF STAIRS FROM THE SIDEWALK,\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.\n" +
+          "BUT AS A NEIGHBORHOOD TO MOVE THROUGH? HIGH, LEVEL, AND EASY.",
+        broll: ["Slow pan up Sacramento St; street signs at Sacramento & Spruce", "Wide establishing shot showing the leafy blocks + the Presidio treeline", "A genuinely grand mansion frontage on a level street"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. PRESIDIO HEIGHTS TAKES ITS NAME FROM ITS PERCH\n" +
+          "ON THE HIGH GROUND BESIDE THE PRESIDIO ARMY POST.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "THE DISTRICT FILLED IN DURING THE EARLY 1900s,\n" +
+          "AND IT REALLY TOOK OFF AFTER THE 1906 EARTHQUAKE AND FIRE,\n" +
+          "AS PROSPEROUS FAMILIES REBUILT WEST OF THE RUINED DOWNTOWN.\n" +
+          "ITS CENTERPIECE IS PRESIDIO TERRACE — A MASTER-PLANNED COMMUNITY\n" +
+          "BEGUN IN 1905 BY THE DEVELOPERS BALDWIN AND HOWELL,\n" +
+          "THIRTY-SIX LOTS RINGING A SINGLE PRIVATE OVAL STREET.\n" +
+          "IT WAS AMONG THE FIRST DEVELOPMENTS IN THE CITY WITH UNDERGROUND UTILITIES\n" +
+          "AND ELECTRIC STREET LIGHTS — UNUSUAL LUXURIES FOR THE EARLY 1900s.\n" +
+          "FOR OVER A CENTURY THIS HAS BEEN A PLACE WHERE OLD SAN FRANCISCO MONEY\n" +
+          "LIVES QUIETLY, IN GRAND MANSIONS ON TREE-LINED STREETS,\n" +
+          "JUST A STEP FROM THE PRESIDIO'S FORESTS.\n" +
+          "SO WHEN YOU SPEND TIME ON THESE BLOCKS, REMEMBER —\n" +
+          "YOU'RE EXPLORING ONE OF THE CITY'S MOST INTACT EARLY-1900s ENCLAVES,\n" +
+          "A QUIET CORNER THAT WAS BUILT TO LAST AND LARGELY HAS.",
+        broll: ["Grand mansion facades on Spruce and Locust", "The gated entrance to Presidio Terrace's private oval", "Wide shot of an unbroken row of estate homes"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "PRESIDIO TERRACE IS A SINGLE CIRCULAR PRIVATE STREET RINGED BY MANSIONS —\n" +
+          "AND IN 2015 A SAN JOSE COUPLE ACTUALLY BOUGHT THAT STREET\n" +
+          "AT A CITY TAX AUCTION FOR ABOUT NINETY THOUSAND DOLLARS,\n" +
+          "AFTER THE HOMEOWNERS LEFT A SMALL ANNUAL TAX BILL UNPAID FOR YEARS.\n" +
+          "THE CITY LATER VOTED TO REVERSE THE SALE.\n" +
+          "THE NEIGHBORHOOD'S SKYLINE IS ANCHORED BY CONGREGATION EMANU-EL,\n" +
+          "COMPLETED IN 1926 — ITS MASSIVE RED-TILED DOME WAS INSPIRED\n" +
+          "BY ISTANBUL'S HAGIA SOPHIA, AND IT'S A CITY LANDMARK.\n" +
+          "AND FOR SUCH A QUIET RESIDENTIAL DISTRICT, THE DINING IS SERIOUS —\n" +
+          "A FEW LOW-KEY SACRAMENTO STREET BLOCKS HAVE DRAWN MICHELIN RECOGNITION,\n" +
+          "PULLING DINERS FROM ACROSS THE CITY.\n" +
+          "THIS IS A NEIGHBORHOOD THAT KEEPS ITS BIGGEST STORIES BEHIND A HEDGE.",
+        broll: ["The Presidio Terrace gate / private oval", "Temple Emanu-El's red-tiled dome", "Sacramento St storefronts at a quiet hour"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "PRESIDIO HEIGHTS IS A BRIGHT, LEAFY NORTH-SIDE POCKET\n" +
+          "THAT CATCHES A GOOD DEAL OF SUN — PART OF WHY IT'S SO PRIZED.\n" +
+          "BUT IT SITS RIGHT ALONG THE PRESIDIO, SO IT CAN RUN BREEZY AND A TOUCH COOLER\n" +
+          "NEAR THAT GREEN EDGE WHEN THE OCEAN AIR DRIFTS THROUGH THE TREES.\n" +
+          "BRING A LIGHT LAYER FOR THE NORTHERN BLOCKS, EVEN ON A SUNNY DAY.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY PRESIDIO HEIGHTS PAGE BELOW.",
+        broll: ["Blue sky over Sacramento St; you in shirtsleeves", "Breeze in the Presidio treeline at the neighborhood's edge", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. THERE'S NO MUNI METRO IN PRESIDIO HEIGHTS —\n" +
+          "IT'S A BUS NEIGHBORHOOD, AND A WELL-CONNECTED ONE.\n" +
+          "THE 1 CALIFORNIA IS THE WORKHORSE, RUNNING ALONG SACRAMENTO AND CALIFORNIA\n" +
+          "EAST STRAIGHT TO DOWNTOWN AND WEST TOWARD THE RICHMOND.\n" +
+          "THE 33 ASHBURY AND 43 MASONIC ADD NORTH-SOUTH LINES VIA PRESIDIO AVENUE,\n" +
+          "AND THE 3 JACKSON THREADS THROUGH TOWARD THE EAST.\n" +
+          "THE NEAREST BART IS A TRANSFER DOWNTOWN, NOT A STATION YOU CAN SEE FROM HERE.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT THREE MILES EAST,\n" +
+          "A 1 CALIFORNIA RIDE AWAY, AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? FROM DOWNTOWN, HOP BART —\n" +
+          "OAKLAND IS ABOUT THIRTY TO THIRTY-FIVE MINUTES,\n" +
+          "OR BY CAR THE BAY BRIDGE GETS YOU THERE TOO.\n" +
+          "HEADING NORTH TO MARIN? YOU'RE RIGHT BY THE PRESIDIO AND THE GOLDEN GATE BRIDGE —\n" +
+          "IT'S ABOUT A TWENTY TO TWENTY-FIVE MINUTE DRIVE TO LARKSPUR,\n" +
+          "OR TAKE THE LARKSPUR FERRY FROM THE FERRY BUILDING AND CROSS ON THE WATER\n" +
+          "IN ABOUT THIRTY MINUTES.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE MUNI TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S 280 OR 101 BY CAR.\n" +
+          "BOTTOM LINE: BUSES TO DOWNTOWN, A FERRY ACROSS THE BAY,\n" +
+          "AND THE GOLDEN GATE BRIDGE RIGHT THERE — ALL WITHOUT OWNING A CAR.",
+        broll: [
+          "A 1 California trolleybus on Sacramento St",
+          "The Ferry Building / a departing ferry",
+          "A BART train; the Bay Bridge; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Presidio Heights → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: PRESIDIO HEIGHTS SITS HIGH AND INLAND, WELL ABOVE THE BAY,\n" +
+          "SO IT IS NOT IN A TSUNAMI HAZARD ZONE — CROSS THAT WORRY OFF THE LIST.\n" +
+          "AND HERE'S MORE GOOD NEWS: UNLIKE MUCH OF THE CITY,\n" +
+          "THIS NEIGHBORHOOD IS NOT MAPPED WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE,\n" +
+          "WHICH IS PART OF WHAT'S MADE ITS GROUND SO STABLE OVER THE DECADES.\n" +
+          "OF COURSE, THIS IS STILL CALIFORNIA, AND EVERY BUYER SHOULD\n" +
+          "REVIEW THE REPORTS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing to the high, level ground", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "SACRAMENTO STREET IS THE QUIET HEART OF IT —\n" +
+          "A DISCREET, UPSCALE STRIP OF BOUTIQUES, CAFES, AND A FEW SERIOUS KITCHENS,\n" +
+          "INCLUDING SOME OF THE MOST CELEBRATED DINING ON THE NORTH SIDE.\n" +
+          "AND THE PRESIDIO IS RIGHT THERE — FOREST, TRAILS, AND BAY OVERLOOKS\n" +
+          "AS A VAST GREEN BACKYARD.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEIGHBORHOOD'S BEST\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY PRESIDIO HEIGHTS DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: THIS IS A QUIET, LEAVE-THE-CAR-HOME, GREEN-AT-YOUR-DOOR KIND OF PLACE.",
+        broll: ["Sacramento St boutique windows; a calm cafe front", "The Presidio treeline / a trailhead at the edge", "A low-key upscale storefront (general, not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: PRESIDIO HEIGHTS IS CLASSIC NORTH-SIDE SAN FRANCISCO —\n" +
+          "GRAND EARLY-1900s MANSIONS AND ESTATE HOMES, ELEGANT FLATS,\n" +
+          "AND SINGLE-FAMILY HOUSES ON QUIET, TREE-LINED STREETS,\n" +
+          "WITH SOME CONDOS NEARER THE SACRAMENTO STREET STRIP.\n" +
+          "IT RUNS FROM A REFINED CONDO TO A FULLY RESTORED LANDMARK MANSION.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR PRESIDIO HEIGHTS ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES AND FOR CONDOS, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A grand mansion, an elegant flats building, a refined condo entry", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN PRESIDIO HEIGHTS?\n" +
+          "SOMEONE WHO WANTS QUIET, LEAFY, LEVEL STREETS, A DISCREET MAIN STREET,\n" +
+          "AND THE PRESIDIO AS A GREEN BACKYARD — WITH THE WHOLE BAY AREA\n" +
+          "A BUS, A TRAIN, OR A FERRY AWAY, AND NEVER NEEDING A CAR.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY PRESIDIO HEIGHTS NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING PRESIDIO HEIGHTS HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass down Sacramento St (you, relaxed, not pitching)", "A quiet look toward the Presidio treeline", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the Sacramento St strip, mansion blocks, Temple Emanu-El's dome, the Presidio edge, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, a 1 California bus, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Presidio Heights page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Presidio Heights + Laurel Heights + Pacific Heights in one morning loop.",
+  },
+"Telegraph Hill": {
+    aka: "Goat Hill",
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Telegraph%20Hill&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Telegraph Hill)",
+    route: {
+      // Route stays ENTIRELY within the Telegraph Hill boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Coit Tower & Pioneer Park", note: "Start — the hilltop crown, 360° views over the bay", coord: [-122.4058, 37.8024] },
+        { n: 2, name: "Top of the Greenwich Steps", note: "Where the garden stairway begins its drop down the eastern cliff", coord: [-122.4047, 37.8021] },
+        { n: 3, name: "Top of the Filbert Steps", note: "The signature garden stair street — Grace Marchant's gardens", coord: [-122.4046, 37.8015] },
+        { n: 4, name: "Montgomery Street — leafy residential lane", note: "A quiet, tree-lined stretch of hillside homes", coord: [-122.4051, 37.8010] },
+        { n: 5, name: "Pioneer Park bay overlook", note: "Viewpoint over the Embarcadero, the bay, and the bridges", coord: [-122.4061, 37.8027] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M BELOW COIT TOWER, AND THE SUN IS OUT —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE TELEGRAPH HILL? LET'S GO.",
+        broll: ["Two-shot idea: a foggy ridge in one frame, sunny Coit Tower in the next", "You moving up toward Coit Tower into frame", "The bay / Coit Tower to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? TELEGRAPH HILL RISES ON THE CITY'S NORTHEAST EDGE,\n" +
+          "JUST ABOVE NORTH BEACH, WITH THE EMBARCADERO AND THE BAY BELOW TO THE EAST\n" +
+          "AND CHINATOWN AND THE FINANCIAL DISTRICT OFF TO THE SOUTH.\n" +
+          "THE CROWN IS COIT TOWER, STANDING IN PIONEER PARK AT THE VERY TOP.\n" +
+          "AND HERE'S THE HEADLINE: THIS IS A STEEP HILL.\n" +
+          "THE LAND RUNS FROM ABOUT 10 FEET DOWN AT THE EASTERN BASE\n" +
+          "UP TO AROUND 300 FEET AT THE SUMMIT BY THE TOWER.\n" +
+          "THIS HILL IS FAMOUS FOR ITS GARDEN STAIR STREETS —\n" +
+          "THE FILBERT STEPS AND THE GREENWICH STEPS THAT CLIMB THE EASTERN CLIFF.\n" +
+          "SO LET'S BE HONEST ABOUT ACCESS: THE GRADES HERE RUN\n" +
+          "FAR PAST WHAT THE A-D-A CONSIDERS AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
+          "IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU,\n" +
+          "A ROUTE THROUGH THIS HILL TAKES REAL PLANNING.\n" +
+          "AND THE HOMES THEMSELVES MATTER TOO —\n" +
+          "MANY OF THESE HILLSIDE HOUSES ARE REACHED ONLY BY STAIRS,\n" +
+          "WITH NO STREET-LEVEL, STEP-FREE ENTRY AT ALL,\n" +
+          "SO IF THAT'S A MUST, IT'S WORTH CHECKING HOME BY HOME.",
+        broll: ["Slow pan up toward Coit Tower; the summit", "Wide establishing shot: the hill rising above North Beach and the bay", "The Filbert or Greenwich garden stairs climbing the cliff (show the grade)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. TELEGRAPH HILL TAKES ITS NAME FROM A SEMAPHORE SIGNAL STATION\n" +
+          "BUILT ON TOP IN 1849, WHICH FLAGGED ARRIVING SHIPS TO THE MERCHANTS BELOW.\n" +
+          "THE SPANISH CALLED IT LOMA ALTA — THE HIGH HILL —\n" +
+          "AND EARLY SETTLERS KNEW IT AS 'GOAT HILL.'\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "IT GREW UP AS A WORKING-CLASS ENCLAVE OF IRISH AND ITALIAN IMMIGRANTS,\n" +
+          "PACKED INTO COTTAGES CLINGING TO THE SLOPES.\n" +
+          "THEN CAME THE QUARRIES. CREWS BLASTED AWAY THE HILL'S EASTERN FACE\n" +
+          "FOR ROCK TO BALLAST SHIPS AND BUILD THE SEAWALL —\n" +
+          "WHICH IS WHY THAT SIDE DROPS AWAY IN SHEER CLIFFS TODAY.\n" +
+          "IN THE 1930s, THE HILL'S ARTISTS AND BOHEMIANS CEMENTED ITS REPUTATION,\n" +
+          "AND IN 1933 COIT TOWER ROSE AT THE SUMMIT.\n" +
+          "AND THERE'S A LEGEND WORTH TELLING: WHEN THE 1906 FIRE CAME,\n" +
+          "RESIDENTS ARE SAID TO HAVE SAVED HOMES ON THE EASTERN SLOPE\n" +
+          "BY DOUSING THEM WITH BARRELS OF RED WINE AFTER THE WATER MAINS FAILED.\n" +
+          "SPEND TIME ON THESE STAIRS, AND YOU'RE EXPLORING A SAN FRANCISCO\n" +
+          "THAT STILL WEARS A CENTURY AND A HALF OF HISTORY OUT LOUD.",
+        broll: ["Cottages clinging to the slope", "The sheer quarried eastern cliff", "Coit Tower against the sky"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "COIT TOWER WAS FUNDED BY A BEQUEST FROM HEIRESS LILLIE HITCHCOCK COIT,\n" +
+          "WHO ADORED THE CITY'S VOLUNTEER FIREFIGHTERS —\n" +
+          "AND DESPITE THE RESEMBLANCE, IT WAS NOT DESIGNED TO LOOK LIKE A FIRE-HOSE NOZZLE.\n" +
+          "STEP INSIDE AND THE LOBBY IS LINED WITH 1934 FRESCO MURALS,\n" +
+          "PAINTED BY 25 ARTISTS UNDER A NEW DEAL PROGRAM —\n" +
+          "THEIR SOCIAL-REALIST THEMES BRIEFLY STIRRED REAL POLITICAL CONTROVERSY.\n" +
+          "THOSE FAMOUS GARDEN STAIRWAYS — THE FILBERT AND GREENWICH STEPS —\n" +
+          "WERE LARGELY PLANTED AND TENDED FOR DECADES BY ONE RESIDENT, GRACE MARCHANT.\n" +
+          "AND LISTEN FOR THE SCREECHING: A FLOCK OF WILD CHERRY-HEADED PARROTS\n" +
+          "ROAMS THE HILL, DESCENDED FROM ESCAPED PETS,\n" +
+          "MADE FAMOUS BY A 2003 DOCUMENTARY.\n" +
+          "THIS IS A NEIGHBORHOOD FULL OF SECRETS YOU ONLY FIND AROUND-WORN STAIRS.",
+        broll: ["Coit Tower exterior + the WPA murals inside", "The garden stairs through lush planting", "Wild parrots in the trees"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "TELEGRAPH HILL SITS IN ONE OF THE CITY'S SUNNIER, NORTHEAST POCKETS,\n" +
+          "WELL AWAY FROM THE FOG THAT SWALLOWS THE WEST SIDE.\n" +
+          "BUT IT'S A BAYFRONT HILL, SO IT CAN BE BREEZY —\n" +
+          "THAT WIND COMES STRAIGHT OFF THE WATER AND OVER THE SUMMIT.\n" +
+          "BRING A LAYER IF YOU'RE HEADING UP TO THE TOWER.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY TELEGRAPH HILL PAGE BELOW.",
+        broll: ["Blue sky over Coit Tower; you in shirtsleeves", "Wind on the bay: whitecaps, flags snapping at the summit", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. THERE'S NO MUNI METRO ON TELEGRAPH HILL —\n" +
+          "IT'S A BUS-AND-CABLE-CAR NEIGHBORHOOD.\n" +
+          "THE 39 COIT BUS CLIMBS THE HILL RIGHT UP TO COIT TOWER\n" +
+          "AND CONNECTS DOWN TO WASHINGTON SQUARE.\n" +
+          "THE POWELL-MASON CABLE CAR RUNS NEARBY THROUGH NORTH BEACH,\n" +
+          "AND THE 8, 30, AND 12 BUSES THREAD ALONG COLUMBUS AND STOCKTON BELOW.\n" +
+          "THE NEAREST BART IS EMBARCADERO, DOWN AT THE FOOT OF THE HILL.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS VERY CLOSE — LESS THAN A MILE SOUTHEAST,\n" +
+          "A SHORT RIDE DOWN THE HILL, AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? FROM EMBARCADERO, HOP BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT THIRTY-FIVE MINUTES DOOR TO PLATFORM.\n" +
+          "BY CAR, THE BAY BRIDGE PUTS YOU IN OAKLAND IN A SIMILAR STRETCH.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE MUNI TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S 280 OR 101 BY CAR.\n" +
+          "BOTTOM LINE: WATER, RAIL, AND THREE BRIDGES — ALL WITHOUT OWNING A CAR.",
+        broll: [
+          "The 39 Coit bus climbing the hill; a Powell-Mason cable car in North Beach",
+          "Embarcadero Station + the Ferry Building / a departing ferry",
+          "A BART train; the Bay Bridge; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Telegraph Hill → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "FIRST, TSUNAMI: MOST OF TELEGRAPH HILL SITS HIGH AND SAFE ABOVE THE BAY,\n" +
+          "BUT THE LOW EASTERN BASE — DOWN NEAR THE EMBARCADERO —\n" +
+          "DOES FALL WITHIN A MAPPED TSUNAMI HAZARD ZONE,\n" +
+          "SO WHERE A HOME SITS ON THE SLOPE GENUINELY MATTERS HERE.\n" +
+          "SECOND, LIKE MUCH OF HILLY SAN FRANCISCO, PARTS OF THE NEIGHBORHOOD\n" +
+          "DO FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "THAT'S STANDARD FOR THE CITY'S SLOPES, AND IT'S SOMETHING\n" +
+          "EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing from the summit down to the Embarcadero base", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "JUST DOWNHILL, NORTH BEACH IS ONE OF THE LIVELIEST QUARTERS IN THE CITY —\n" +
+          "ITALIAN RESTAURANTS, CLASSIC CAFÉS, AND SOME OF THE OLDEST\n" +
+          "LANDMARK BARS IN SAN FRANCISCO, A SHORT TRIP FROM YOUR DOOR.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEIGHBORHOOD'S BEST\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY TELEGRAPH HILL DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: A QUIET, LEAFY HILLTOP PERCH\n" +
+          "WITH A WHOLE ITALIAN NEIGHBORHOOD WAITING AT THE BOTTOM OF THE STAIRS.",
+        broll: ["Café tables in North Beach at dusk", "A historic landmark bar sign (general, not a single endorsement)", "Washington Square with the hill rising behind"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: TELEGRAPH HILL IS CLASSIC SAN FRANCISCO —\n" +
+          "HILLSIDE COTTAGES AND PERIOD HOMES CLINGING TO THE SLOPE,\n" +
+          "VINTAGE FLATS, AND CONDOS WITH SOME OF THE BEST BAY VIEWS IN THE CITY.\n" +
+          "MANY OF THESE HOMES ARE REACHED BY STAIRS, AND VIEWS DRIVE VALUE HERE.\n" +
+          "IT RUNS FROM A FIRST CONDO TO A FULLY RESTORED HILLSIDE SHOWPIECE.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR TELEGRAPH HILL ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES AND FOR CONDOS, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A hillside cottage, a vintage flats building, a view condo entry", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS ON TELEGRAPH HILL?\n" +
+          "SOMEONE WHO WANTS VIEWS, QUIET, AND GARDEN STAIRS AT THE DOOR,\n" +
+          "WITH NORTH BEACH AND THE WHOLE BAY AREA JUST DOWNHILL, AND NEVER NEEDS A CAR.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY TELEGRAPH HILL NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING TELEGRAPH HILL HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass near Coit Tower (you, relaxed, not pitching)", "A quiet look down the garden stairs toward the bay", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot Coit Tower, the garden stairs, the bay views, street life, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, the garden stairs, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Telegraph Hill page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Telegraph Hill + North Beach + Chinatown in one morning loop.",
+  },
+"Seacliff": {
+    aka: "Sea Cliff",
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Seacliff&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Seacliff)",
+    route: {
+      // Route stays ENTIRELY within the Seacliff boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "China Beach overlook", note: "Start — the bluff above the sheltered cove, Golden Gate Bridge off to the right", coord: [-122.4905, 37.7878] },
+        { n: 2, name: "Sea Cliff Avenue mansion blocks", note: "The grand period-revival homes on the curving bluff-top streets", coord: [-122.4895, 37.7888] },
+        { n: 3, name: "El Camino del Mar — Golden Gate views", note: "The view street: Mediterranean homes oriented to the bridge and Marin Headlands", coord: [-122.4886, 37.789] },
+        { n: 4, name: "25th Avenue North — bluff edge", note: "The northern edge above the water; stairs lead down to China Beach", coord: [-122.4875, 37.7891] },
+        { n: 5, name: "Scenic Way — the western bluff", note: "South end; the quieter curving streets toward Lincoln Park", coord: [-122.4920, 37.7860] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ABOVE CHINA BEACH, AND THE FOG IS ROLLING IN —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE SEACLIFF? LET'S GO.",
+        broll: ["Two-shot idea: a foggy ridge in one frame, a sunny bluff-top street in the next", "You moving along the bluff into frame, the Pacific behind you", "China Beach / the Golden Gate Bridge through the fog to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? SEACLIFF SITS IN THE CITY'S NORTHWEST CORNER,\n" +
+          "PERCHED ON THE BLUFFS ABOVE THE PACIFIC, JUST WEST OF THE PRESIDIO,\n" +
+          "WITH LANDS END AND LINCOLN PARK WRAPPING ITS WESTERN EDGE\n" +
+          "AND THE INNER RICHMOND JUST INLAND TO THE SOUTH.\n" +
+          "THE SPINE IS SEA CLIFF AVENUE AND EL CAMINO DEL MAR,\n" +
+          "CURVING ALONG THE CLIFFTOP ABOVE CHINA BEACH AND BAKER BEACH.\n" +
+          "THE LAND RUNS FROM SEA LEVEL DOWN AT THE WATER\n" +
+          "UP TO ABOUT 220 FEET ON THE BLUFF-TOP STREETS,\n" +
+          "AND THE GRADE IS ROLLING — THE CURVING STREETS RISE AND DIP\n" +
+          "AS THEY FOLLOW THE EDGE OF THE CLIFF.\n" +
+          "SOME BLOCKS ARE GENTLE AND EASY TO GET AROUND,\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR,\n" +
+          "BUT OTHER STRETCHES PASS WHAT THE A-D-A CONSIDERS\n" +
+          "AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
+          "AND HERE'S THE HONEST PART: GETTING DOWN TO THE BEACHES\n" +
+          "MEANS STAIR-ACCESS PATHS DROPPING OFF THE BLUFF.\n" +
+          "THE GRAND HOMES THEMSELVES OFTEN SIT UP A FLIGHT FROM THE STREET TOO,\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.",
+        broll: ["Slow pan along Sea Cliff Ave; the curving bluff-top streets", "Wide establishing shot: the bluffs, China Beach, the Golden Gate beyond", "The stair-access path dropping from the bluff toward the beach (show the grade)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. SEACLIFF — OR SEA CLIFF — TAKES ITS NAME\n" +
+          "FROM ITS DRAMATIC PERCH ON THE BLUFFS ABOVE THE PACIFIC.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "THE ALLEN REAL-ESTATE GROUP BEGAN DEVELOPING THE ENCLAVE AROUND 1912\n" +
+          "AS ONE OF SAN FRANCISCO'S MASTER-PLANNED 'RESIDENCE PARKS' —\n" +
+          "LAID OUT AFTER THE 1906 EARTHQUAKE TO FEEL LIKE A GARDEN SUBURB.\n" +
+          "LANDSCAPE ARCHITECT MARK DANIELS DESIGNED THE CURVING STREETS,\n" +
+          "THE ORNATE ENTRY GATES, THE FOUNTAINS AND THE LARGE LOTS,\n" +
+          "ALL MEANT TO EVOKE GENTEEL, COUNTRY-STYLE LIVING ON THE COAST.\n" +
+          "THROUGH THE 1920s AND 1930s, MEDITERRANEAN AND PERIOD-REVIVAL HOMES\n" +
+          "FILLED IN THESE BLOCKS — STUCCO FACADES AND TILED ROOFS\n" +
+          "ORIENTED EXPRESSLY TO CAPTURE THE GOLDEN GATE AND THE MARIN HEADLANDS.\n" +
+          "AND IT HAS STAYED EXACTLY THAT WAY EVER SINCE:\n" +
+          "A QUIET, PURELY RESIDENTIAL ADDRESS, ONE OF THE CITY'S MOST EXCLUSIVE.\n" +
+          "SO WHEN YOU SPEND TIME ON THESE STREETS, REMEMBER —\n" +
+          "YOU'RE EXPLORING A CENTURY-OLD VISION OF THE GOOD LIFE BY THE SEA,\n" +
+          "BUILT ON A BLUFF AND BARELY CHANGED SINCE.",
+        broll: ["Mediterranean and period-revival facades along Sea Cliff Ave", "An ornate original entry gate or fountain", "A wide shot of the curving residence-park streets above the water"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "TUCKED BELOW THE BLUFFS, SHELTERED CHINA BEACH\n" +
+          "IS ONE OF THE CITY'S FEW GENUINELY SWIMMABLE COVES —\n" +
+          "AND JUST NORTH, LARGER BAKER BEACH STRETCHES TOWARD THE GOLDEN GATE BRIDGE\n" +
+          "WITH ONE OF THE BEST POSTCARD VIEWS IN SAN FRANCISCO.\n" +
+          "THIS ENCLAVE'S PRIVACY AND VIEWS HAVE LONG DRAWN THE WEALTHY AND FAMOUS —\n" +
+          "ROBIN WILLIAMS AND SHARON STONE BOTH OWNED HOMES HERE,\n" +
+          "ALONGSIDE TECH FOUNDERS AND OLD SAN FRANCISCO FAMILIES.\n" +
+          "BUT LIVING ON A BLUFF HAS ITS DRAMA: IN DECEMBER 1995,\n" +
+          "A RUPTURED SEWER ON SEA CLIFF AVENUE TRIGGERED AGGRESSIVE EROSION\n" +
+          "AND A SERIES OF SLOPE COLLAPSES ALONG EL CAMINO DEL MAR,\n" +
+          "DAMAGING SEVERAL HOMES IN ONE OF THE NEIGHBORHOOD'S MOST DRAMATIC INCIDENTS.\n" +
+          "THIS IS A PLACE WHERE THE VIEW AND THE GROUND IT SITS ON\n" +
+          "ARE PART OF THE SAME STORY.",
+        broll: ["China Beach cove from the bluff above", "Baker Beach stretching toward the Golden Gate Bridge", "El Camino del Mar along the bluff edge"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "SEACLIFF SITS RIGHT ON THE OCEAN IN THE CITY'S NORTHWEST CORNER,\n" +
+          "SO LET'S BE HONEST: IT IS FREQUENTLY FOGGY.\n" +
+          "THE SUMMER FOG ROLLS IN OFF THE PACIFIC AND THROUGH THE GOLDEN GATE,\n" +
+          "AND THIS BLUFF CATCHES IT FIRST.\n" +
+          "BUT WHEN IT CLEARS — AND ON THOSE DRAMATIC CLEARING DAYS IT REALLY CLEARS —\n" +
+          "THE LIGHT OFF THE WATER AND THE BRIDGE IS LIKE NOWHERE ELSE.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY SEACLIFF PAGE BELOW.",
+        broll: ["Fog pouring through the Golden Gate over the bluff", "A dramatic clearing day: the bridge and Marin Headlands wide open", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. AND I'LL BE STRAIGHT WITH YOU —\n" +
+          "SEACLIFF IS A QUIETER, MORE CAR-RELIANT CORNER OF THE CITY.\n" +
+          "THERE'S NO MUNI METRO AND NO BART NEARBY — THE NEAREST BART IS FAR,\n" +
+          "A LONG RIDE EAST ACROSS TOWN.\n" +
+          "BUT THE BUSES ARE HERE IF YOU WANT THEM:\n" +
+          "THE 1 CALIFORNIA RUNS ALONG THE SOUTHERN EDGE STRAIGHT DOWNTOWN,\n" +
+          "AND THE 18 46TH AVENUE AND THE 29 SUNSET SKIRT LINCOLN PARK TO THE WEST.\n" +
+          "NOW LET'S LEAVE THE CITY.\n" +
+          "THE FERRY BUILDING IS ABOUT FIVE MILES EAST,\n" +
+          "AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? TAKE THE 1 CALIFORNIA DOWNTOWN, HOP BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT THIRTY-FIVE MINUTES FROM THE DOWNTOWN PLATFORM.\n" +
+          "BY CAR, THE BAY BRIDGE PUTS YOU IN OAKLAND IN A SIMILAR STRETCH.\n" +
+          "HEADING NORTH TO MARIN? YOU'RE CLOSE TO THE GOLDEN GATE BRIDGE —\n" +
+          "JUST EAST ALONG THE COAST — AND ACROSS IT YOU'RE IN THE MARIN HEADLANDS\n" +
+          "AND SAUSALITO IN ABOUT TWENTY MINUTES BY CAR.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE A BUS TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S 280 OR 101 BY CAR.\n" +
+          "BOTTOM LINE: IT'S A CAR-FRIENDLY CORNER, BUT THE BUSES, THE WATER,\n" +
+          "AND THE GOLDEN GATE BRIDGE ARE ALL CLOSER THAN YOU'D THINK.",
+        broll: [
+          "A 1 California bus on the southern edge; the 18 or 29 near Lincoln Park",
+          "The Ferry Building / a departing ferry",
+          "A BART train; the Bay Bridge; the Golden Gate Bridge close by; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Seacliff → Oakland / Marin / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "SEACLIFF IS A COASTAL CLIFF NEIGHBORHOOD, SO THIS ONE MATTERS:\n" +
+          "PARTS OF THE SHORELINE — CHINA BEACH AND THE BLUFF BASE —\n" +
+          "DO FALL WITHIN A TSUNAMI EVACUATION ZONE.\n" +
+          "THE GOOD NEWS IS THAT THE BLUFF-TOP HOMES SIT WELL ABOVE THE WATER,\n" +
+          "HIGHER AND SAFER THAN THE BEACH BELOW —\n" +
+          "BUT IT'S WORTH KNOWING EXACTLY WHERE THE LINE FALLS ON YOUR BLOCK.\n" +
+          "AND LIKE MUCH OF THE COASTAL CITY, THE NEIGHBORHOOD\n" +
+          "DOES FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "STANDARD HERE, AND SOMETHING EVERY CALIFORNIA BUYER\n" +
+          "REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing from the bluff down to the beach and the water", "The shoreline evacuation-zone edge vs. the higher bluff homes", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "HERE'S THE HONEST TRADE-OFF: SEACLIFF IS ALMOST PURELY RESIDENTIAL.\n" +
+          "THERE'S NO COMMERCIAL STRIP INSIDE THE NEIGHBORHOOD ITSELF —\n" +
+          "WHAT YOU GET INSTEAD IS QUIET, PRIVACY, AND THE BEACHES RIGHT BELOW YOU.\n" +
+          "FOR COFFEE, DINNER, AND DAILY ERRANDS, THE NEAREST SHOPS\n" +
+          "ARE JUST INLAND IN THE RICHMOND — CLEMENT STREET ESPECIALLY,\n" +
+          "WHICH IS ONE OF THE BEST EATING STREETS IN THE WHOLE CITY.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE BEST NEARBY\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY SEACLIFF DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: COME HOME FOR THE CALM, DRIVE A FEW MINUTES FOR THE REST.",
+        broll: ["Quiet residential blocks; no storefronts, just homes and gardens", "Clement Street in the nearby Richmond: cafés and restaurant windows", "China Beach below — the real amenity at your door"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: SEACLIFF IS ONE OF SAN FRANCISCO'S MOST EXCLUSIVE ADDRESSES —\n" +
+          "GRAND MEDITERRANEAN AND PERIOD-REVIVAL MANSIONS ON LARGE LOTS,\n" +
+          "MANY ORIENTED EXPRESSLY TO CAPTURE THE GOLDEN GATE AND THE HEADLANDS.\n" +
+          "THIS IS A PURELY RESIDENTIAL, SINGLE-FAMILY ENCLAVE —\n" +
+          "FEWER HOMES CHANGE HANDS HERE THAN ALMOST ANYWHERE IN THE CITY.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES —\n" +
+          "AND IN A SMALL, HIGH-END MARKET LIKE THIS ONE, IT MOVES A LOT.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR SEACLIFF ON MY SITE,\n" +
+          "RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A grand cliffside mansion with a bridge view", "A curving residence-park street of large lots", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN SEACLIFF?\n" +
+          "SOMEONE WHO WANTS PRIVACY, GRAND HOMES, AND THE PACIFIC\n" +
+          "AND THE GOLDEN GATE RIGHT OUTSIDE THE WINDOW —\n" +
+          "AND DOESN'T MIND DRIVING A FEW MINUTES FOR THE BUSTLE.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY SEACLIFF NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING SEACLIFF HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass along the bluff (you, relaxed, not pitching)", "A quiet look out over China Beach toward the Golden Gate", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the bluff-top mansions, China Beach, El Camino del Mar views, and the Golden Gate in good light — and grab a clearing-day window if you can.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Street signs, the stair-access path to the beach, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Seacliff page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Seacliff + Lake Street + the Inner Richmond in one morning loop.",
+  },
+"Lake Street": {
+    aka: "Lake District",
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Lake%20Street&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Lake Street)",
+    route: {
+      // Route stays ENTIRELY within the Lake Street boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Lake St & 25th Ave", note: "Start — the leafy residential corridor along the Presidio wall, sun out", coord: [-122.484, 37.7857] },
+        { n: 2, name: "Lake St Edwardian blocks (24th Ave)", note: "The housing-stock segment: grand Mediterranean, Tudor, and period-revival homes", coord: [-122.4845, 37.7857] },
+        { n: 3, name: "Lake St & 21st Ave — Presidio edge", note: "The street running right along the Presidio's southern boundary", coord: [-122.4810, 37.7856] },
+        { n: 4, name: "Presidio gate at Lake St", note: "A walk-in gate into the national park's forested trails", coord: [-122.4775, 37.7861] },
+        { n: 5, name: "Mountain Lake Park edge", note: "The green park, playgrounds, and the trail into the Presidio", coord: [-122.4732, 37.7850] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ON LAKE STREET, AND THE FOG IS ROLLING IN —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE LAKE STREET? LET'S GO.",
+        broll: ["Two-shot idea: a foggy ridge in one frame, a brighter block in the next", "You moving along Lake St into frame", "The leafy Presidio-edge corridor to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? LAKE STREET RUNS ALONG THE NORTHERN EDGE OF THE RICHMOND,\n" +
+          "A LEAFY CORRIDOR TUCKED RIGHT UP AGAINST THE PRESIDIO'S SOUTHERN WALL,\n" +
+          "WITH MOUNTAIN LAKE PARK AT ITS EASTERN END\n" +
+          "AND THE AVENUES OF THE RICHMOND STRETCHING SOUTH.\n" +
+          "THE MAIN SPINE IS LAKE STREET ITSELF, A QUIET RESIDENTIAL RUN\n" +
+          "LINED WITH GRAND PERIOD HOMES UNDER MATURE STREET TREES.\n" +
+          "HERE'S THE HEADLINE ON THE LAND: IT'S MOSTLY LEVEL.\n" +
+          "ELEVATION RUNS FROM ABOUT 60 FEET UP TO AROUND 160,\n" +
+          "AND THIS IS THE FLAT RICHMOND GRID — GENUINELY EASY TO GET AROUND,\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR,\n" +
+          "WELL WITHIN WHAT THE A-D-A CONSIDERS AN ACCESSIBLE GRADE — ABOUT FIVE PERCENT.\n" +
+          "THE BLOCKS ARE ORDERLY AND THE SIDEWALKS ARE WIDE.\n" +
+          "THAT SAID, THE HOMES THEMSELVES STILL VARY —\n" +
+          "MANY OF THESE STATELY HOUSES SIT UP A FLIGHT OF STAIRS FROM THE SIDEWALK,\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.\n" +
+          "BUT AS A NEIGHBORHOOD TO MOVE THROUGH? LEVEL, ORDERLY, AND EASY.",
+        broll: ["Slow pan down Lake St; mature street trees and wide sidewalks", "Wide establishing shot: the Presidio wall on one side, homes on the other", "Someone with a stroller on the level Richmond grid"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. LAKE STREET TAKES ITS NAME FROM MOUNTAIN LAKE —\n" +
+          "ONE OF THE LAST NATURAL LAKES LEFT IN SAN FRANCISCO,\n" +
+          "FED BY A CHAIN OF DUNES AND SPRINGS ALONG THE PRESIDIO'S SOUTHERN BOUNDARY.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "IN MARCH OF 1776, THE SPANISH EXPLORER JUAN BAUTISTA DE ANZA\n" +
+          "MADE CAMP RIGHT HERE AT MOUNTAIN LAKE\n" +
+          "WHILE SCOUTING THE SITES FOR THE PRESIDIO AND MISSION DOLORES —\n" +
+          "SO IN A REAL SENSE, THE CITY WAS CHOSEN FROM THIS SPOT.\n" +
+          "FOR MORE THAN A CENTURY AFTER, THIS WAS OPEN SAND DUNES\n" +
+          "ON THE RICHMOND'S NORTHERN EDGE.\n" +
+          "THEN, IN THE EARLY 20TH CENTURY, THOSE DUNES WERE SUBDIVIDED AND DEVELOPED,\n" +
+          "AND BUILDERS RAISED THE LARGE, ARCHITECTURALLY RICH SINGLE-FAMILY HOMES\n" +
+          "THAT STILL DEFINE THIS PROSPEROUS CORRIDOR TODAY —\n" +
+          "MEDITERRANEAN, TUDOR, AND PERIOD-REVIVAL HOUSES, BLOCK AFTER BLOCK.\n" +
+          "SO WHEN YOU SPEND TIME ON THESE STREETS, REMEMBER —\n" +
+          "YOU'RE STANDING WHERE A SPANISH EXPEDITION ONCE CAMPED\n" +
+          "AND DECIDED WHERE SAN FRANCISCO WOULD BEGIN.",
+        broll: ["Mountain Lake and its restored shoreline", "Grand period-revival facades along Lake St", "The Anza Trail marker near the lake if you can find one"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "MOUNTAIN LAKE IS A GENUINELY RARE THING —\n" +
+          "ONE OF THE FEW REMAINING NATURAL LAKES IN ALL OF SAN FRANCISCO.\n" +
+          "IT WAS BADLY DEGRADED BY RUNOFF FOR DECADES,\n" +
+          "THEN UNDERWENT A MAJOR RESTORATION IN THE 2010s\n" +
+          "THAT BROUGHT NATIVE PLANTS AND WILDLIFE BACK TO ITS SHORES.\n" +
+          "THE LAKE ANCHORS MOUNTAIN LAKE PARK — PLAYGROUNDS, TENNIS COURTS,\n" +
+          "AND TRAILS THAT CONNECT STRAIGHT INTO THE PRESIDIO\n" +
+          "AND THE JUAN BAUTISTA DE ANZA NATIONAL HISTORIC TRAIL.\n" +
+          "AND LAKE STREET HAS A FRONT-DOOR RELATIONSHIP WITH THE PRESIDIO ITSELF —\n" +
+          "THE STREET RUNS RIGHT ALONG THE PARK'S SOUTHERN EDGE,\n" +
+          "SO RESIDENTS STEP STRAIGHT INTO FORESTED TRAILS AND SCENIC OVERLOOKS.\n" +
+          "THIS IS A NEIGHBORHOOD THAT SITS ON THE DOORSTEP OF A NATIONAL PARK.",
+        broll: ["Mountain Lake with birds / native plantings", "Mountain Lake Park playground and tennis courts", "A Presidio trailhead just off Lake St"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "LAKE STREET SITS ON THE NORTHERN RICHMOND, NEAR THE COAST,\n" +
+          "SO IT OFTEN CATCHES THE MARINE LAYER —\n" +
+          "THAT SUMMER FOG THAT ROLLS IN OFF THE PACIFIC AND THROUGH THE GOLDEN GATE.\n" +
+          "SOME DAYS ARE BRIGHT AND CLEAR; PLENTY OF MORNINGS AND EVENINGS ARE GREY AND COOL.\n" +
+          "IT'S A MIXED, FOG-LEANING POCKET — BRING A LAYER.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY LAKE STREET PAGE BELOW.",
+        broll: ["Fog drifting over the Presidio treeline", "A grey, cool morning on Lake St; you in a layer", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. THERE'S NO MUNI METRO ON LAKE STREET —\n" +
+          "IT'S A BUS NEIGHBORHOOD, AND A WELL-SERVED ONE.\n" +
+          "THE 1 CALIFORNIA RUNS A FEW BLOCKS SOUTH AND HEADS STRAIGHT DOWNTOWN,\n" +
+          "WITH THE 2 CLEMENT AND THE 33 ASHBURY-18TH CLOSE BY,\n" +
+          "AND THE 28 NINETEENTH AVENUE LINKING YOU NORTH TO THE BRIDGE AND SOUTH ACROSS THE CITY.\n" +
+          "THE NEAREST BART IS A TRANSFER DOWNTOWN, NOT A STATION YOU CAN SEE FROM HERE.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT FIVE MILES EAST,\n" +
+          "A MUNI RIDE AWAY, AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? TAKE MUNI TO THE NEAREST BART,\n" +
+          "AND DOWNTOWN OAKLAND IS ABOUT THIRTY-FIVE TO FORTY MINUTES —\n" +
+          "OR BY CAR, THE BAY BRIDGE GETS YOU THERE TOO.\n" +
+          "HEADING NORTH TO MARIN? YOU'RE CLOSE TO THE GOLDEN GATE BRIDGE —\n" +
+          "DRIVE OVER TO LARKSPUR IN ABOUT THIRTY MINUTES,\n" +
+          "OR TAKE THE LARKSPUR FERRY FROM THE FERRY BUILDING IN ABOUT THIRTY ON THE WATER.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE MUNI TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S 280 OR 101 BY CAR.\n" +
+          "BOTTOM LINE: WATER, RAIL, AND THREE BRIDGES — ALL WITHOUT OWNING A CAR.",
+        broll: [
+          "A 1 California or 2 Clement bus near Lake St",
+          "The Ferry Building / a departing ferry",
+          "A BART train; the Golden Gate Bridge; the Bay Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Lake Street → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: LAKE STREET SITS INLAND OF THE PRESIDIO BLUFF,\n" +
+          "UP ABOVE THE SHORELINE, SO IT IS TYPICALLY NOT IN A TSUNAMI HAZARD ZONE —\n" +
+          "STILL, ALWAYS FOLLOW THE OFFICIAL HAZARD FLAGS FOR ANY SPECIFIC ADDRESS.\n" +
+          "LIKE MUCH OF SAN FRANCISCO, PARTS OF THE NEIGHBORHOOD\n" +
+          "DO FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "THAT'S STANDARD FOR THE CITY, AND IT'S SOMETHING\n" +
+          "EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing toward the Presidio bluff and the shoreline beyond", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "LAKE STREET ITSELF IS QUIET AND RESIDENTIAL — THAT'S THE WHOLE APPEAL —\n" +
+          "BUT THE SHOPS, CAFÉS, AND RESTAURANTS ARE JUST A FEW BLOCKS SOUTH,\n" +
+          "OVER ON CLEMENT STREET AND CALIFORNIA STREET IN THE RICHMOND,\n" +
+          "ONE OF THE CITY'S BEST AND MOST DIVERSE DINING STRIPS.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE AREA'S BEST\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY LAKE STREET DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: A CALM, ELEGANT STREET WITH A LIVELY COMMERCIAL STRIP CLOSE BY.",
+        broll: ["A quiet, leafy Lake St block", "The Clement St shopping strip a few blocks south", "Café tables and storefronts (general, not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: LAKE STREET IS CLASSIC, AFFLUENT RICHMOND —\n" +
+          "LARGE, WELL-KEPT EARLY-20TH-CENTURY SINGLE-FAMILY HOMES\n" +
+          "IN MEDITERRANEAN, TUDOR, AND PERIOD-REVIVAL STYLES,\n" +
+          "WITH SOME FLATS AND CONDOS MIXED IN ON THE EDGES.\n" +
+          "IT'S ONE OF THE RICHMOND'S MOST DISTINGUISHED RESIDENTIAL STREETS.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR LAKE STREET ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES AND FOR CONDOS, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A grand period-revival home, a Tudor facade, a flats building", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS ON LAKE STREET?\n" +
+          "SOMEONE WHO WANTS CALM, GREEN, AND ARCHITECTURAL ELEGANCE,\n" +
+          "WITH A NATIONAL PARK AT THE DOORSTEP AND THE WHOLE BAY AREA WITHIN REACH.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY LAKE STREET NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING LAKE STREET HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass down Lake St (you, relaxed, not pitching)", "A quiet look toward the Presidio treeline", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the period homes, the Presidio edge, Mountain Lake Park, street life, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, a Presidio trailhead, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Lake Street page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Lake Street + Inner Richmond + Presidio Heights in one morning loop.",
+  },
+"Alamo Square": {
+    aka: "Postcard Row",
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Alamo%20Square&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Alamo Square)",
+    route: {
+      // Route stays ENTIRELY within the Alamo Square boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Alamo Square Park crown", note: "Start — the hilltop lawn looking across the Painted Ladies to the downtown skyline", coord: [-122.4350, 37.7765] },
+        { n: 2, name: "Postcard Row — 710–720 Steiner St", note: "The six matching 1890s 'Painted Ladies' Victorians", coord: [-122.4329, 37.7761] },
+        { n: 3, name: "Mansion row — Fulton St edge", note: "The grand Queen Anne homes anchoring the park's north edge", coord: [-122.4345, 37.7780] },
+        { n: 4, name: "Scott St — west park edge", note: "Stately Victorians and Edwardians lining the western slope", coord: [-122.4376, 37.7768] },
+        { n: 5, name: "Residential blocks — Pierce & Hayes", note: "Quieter residential streets on the park's south side", coord: [-122.4360, 37.7748] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M AT ALAMO SQUARE, LOOKING AT THE PAINTED LADIES, AND THE SUN IS OUT —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE ALAMO SQUARE? LET'S GO.",
+        broll: ["Two-shot idea: a foggy ridge in one frame, sunny Alamo Square in the next", "You moving up onto the park crown into frame", "The Painted Ladies row against the skyline to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? ALAMO SQUARE SITS RIGHT IN THE CENTER OF SAN FRANCISCO,\n" +
+          "IN THE WESTERN ADDITION, JUST NORTH OF THE DINING CORRIDOR LOCALS CALL NOPA,\n" +
+          "WITH THE PANHANDLE BELOW AND HAYES VALLEY OFF TO THE EAST.\n" +
+          "THE HEART OF IT IS THE FOUR-ACRE PARK ITSELF, A GRASSY HILLTOP\n" +
+          "RINGED BY GRAND VICTORIANS ON EVERY SIDE.\n" +
+          "AND IT REALLY IS A HILL — THE LAND RUNS FROM ABOUT 120 FEET\n" +
+          "UP TO AROUND 270 FEET AT THE CROWN OF THE SQUARE.\n" +
+          "THE PARK'S SLOPES CARRY REAL GRADE, AND THE BLOCKS AROUND IT VARY —\n" +
+          "SOME OF THE SURROUNDING FLATS ARE FAIRLY EASY TO GET AROUND,\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR,\n" +
+          "WHILE THE CLIMB UP TO THE PARK CROWN GETS STEEP FAST,\n" +
+          "QUICKLY PASSING WHAT THE A-D-A CONSIDERS AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
+          "AND THE PARK ITSELF HAS STAIRS IN PLACES AS THE PATHS RISE TO THE TOP.\n" +
+          "SO IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU, THE SURROUNDING FLATS ARE YOUR FRIEND;\n" +
+          "AND BECAUSE MANY OF THESE CLASSIC VICTORIANS SIT UP A FLIGHT OF STAIRS FROM THE SIDEWALK,\n" +
+          "IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.",
+        broll: ["Slow pan across the park crown; the lawn rising to the top", "Wide establishing shot: Painted Ladies in the foreground, downtown towers beyond", "A genuinely steep park path or cross-street (show the grade) and the park stairs"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. THE SQUARE WAS NAMED FOR A LONE COTTONWOOD TREE —\n" +
+          "'ÁLAMO' IN SPANISH — THAT MARKED A WATERING STOP\n" +
+          "ON THE OLD ROAD FROM MISSION DOLORES TO THE PRESIDIO.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "THE FOUR-ACRE PARK WAS RESERVED IN AN 1856 CITY SURVEY UNDER MAYOR JAMES VAN NESS,\n" +
+          "AS SAN FRANCISCO PLATTED THE WESTERN ADDITION.\n" +
+          "THROUGH THE 1890s THE SURROUNDING BLOCKS FILLED IN\n" +
+          "WITH GRAND VICTORIAN AND EDWARDIAN HOMES —\n" +
+          "AND HERE'S THE KEY: MANY OF THEM SURVIVED THE 1906 EARTHQUAKE AND FIRES\n" +
+          "THAT LEVELED SO MUCH OF THE CITY TO THE EAST.\n" +
+          "DEVELOPER MATTHEW KAVANAUGH BUILT THE SIX MATCHING VICTORIANS\n" +
+          "AT 710 TO 720 STEINER STREET BETWEEN 1892 AND 1896 —\n" +
+          "THE ROW THE WORLD NOW KNOWS AS THE 'PAINTED LADIES.'\n" +
+          "WITH THE DOWNTOWN SKYLINE RISING BEHIND THEM, THAT BLOCK BECAME\n" +
+          "ONE OF THE MOST PHOTOGRAPHED SIGHTS IN ALL OF SAN FRANCISCO.\n" +
+          "SO WHEN YOU SPEND TIME ON THESE STREETS, YOU'RE STANDING IN THE POSTCARD\n" +
+          "THAT EVERYONE PICTURES WHEN THEY PICTURE THIS CITY.",
+        broll: ["Victorian and Edwardian facades around the square", "The Steiner Street row with the towers beyond", "Wide shot of an unbroken row of original homes"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "THOSE SIX MATCHING VICTORIANS ON STEINER STREET — POSTCARD ROW —\n" +
+          "ARE FRAMED SO PERFECTLY AGAINST THE DOWNTOWN TOWERS BECAUSE THE PARK\n" +
+          "CLIMBS A RISE RIGHT BEHIND THEM, OPENING A SWEEPING SKYLINE VIEW.\n" +
+          "STAND ON THAT CROWN AND YOU GET THE EXACT SHOT YOU'VE SEEN A THOUSAND TIMES.\n" +
+          "THE STEINER STREET ROW APPEARS IN THE OPENING CREDITS OF THE SITCOM 'FULL HOUSE' —\n" +
+          "THOUGH THE HOUSE USED FOR THE EXTERIOR SHOTS ACTUALLY SITS ACROSS TOWN.\n" +
+          "ON THE SQUARE'S NORTHWEST CORNER STANDS THE WESTERFELD HOUSE,\n" +
+          "A TOWERING 1889 QUEEN ANNE AT 1198 FULTON STREET\n" +
+          "THAT HAS HOUSED RUSSIAN ÉMIGRÉS, A JAZZ CLUB, AND A COMMUNE OF ARTISTS AND FILMMAKERS.\n" +
+          "AND BECAUSE THE 1906 FIRES NEVER REACHED HERE,\n" +
+          "MANY OF THESE WOODEN HOMES PREDATE THE QUAKE.\n" +
+          "THIS IS A NEIGHBORHOOD THAT WEARS ITS POSTCARD FACE OUT LOUD.",
+        broll: ["The Painted Ladies framed against the skyline from the park crown", "The Westerfeld House on the northwest corner", "A pre-1906 Victorian detail or date plaque"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "ALAMO SQUARE SITS IN ONE OF THE CITY'S CENTRAL, GENERALLY SUNNIER POCKETS.\n" +
+          "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
+          "THIS HILLTOP — WELL INLAND OF THE COAST — CATCHES THE SUN\n" +
+          "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY ALAMO SQUARE PAGE BELOW.",
+        broll: ["Blue sky over the park crown; you in shirtsleeves", "Contrast: fog pouring over the western ridges", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. ALAMO SQUARE IS A BUS NEIGHBORHOOD, AND A WELL-CONNECTED ONE.\n" +
+          "THE 5-FULTON RUNS ALONG THE PARK'S NORTH EDGE STRAIGHT DOWNTOWN,\n" +
+          "WITH THE 21-HAYES, THE 22-FILLMORE, AND THE 24\n" +
+          "THREADING YOU TO HAYES VALLEY, THE MISSION, AND BEYOND.\n" +
+          "THE NEAREST BART AND MUNI METRO ARE AT CIVIC CENTER, JUST A FEW BLOCKS EAST.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT TWO AND A HALF MILES NORTHEAST, A SHORT TRANSIT RIDE,\n" +
+          "AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? TAKE A BUS THE FEW BLOCKS TO CIVIC CENTER,\n" +
+          "HOP BART, AND DOWNTOWN OAKLAND IS ABOUT THIRTY TO THIRTY-FIVE MINUTES —\n" +
+          "OR BY CAR, THE BAY BRIDGE PUTS YOU THERE IN A SIMILAR STRETCH.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE TRANSIT TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S ROUGHLY THE SAME BY CAR ON 280 OR 101.\n" +
+          "BOTTOM LINE: WATER, RAIL, AND THREE BRIDGES — ALL WITHOUT OWNING A CAR.",
+        broll: [
+          "A 5-Fulton or 21-Hayes bus along the park edge",
+          "The Civic Center BART/Muni Metro entrance a few blocks east; the Ferry Building / a departing ferry",
+          "A BART train; the Bay Bridge; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Alamo Square → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: ALAMO SQUARE SITS UP ON A HILLTOP, WELL INLAND AND ABOVE THE BAY,\n" +
+          "SO IT IS NOT IN A TSUNAMI HAZARD ZONE — CROSS THAT WORRY OFF THE LIST.\n" +
+          "LIKE MUCH OF HILLY SAN FRANCISCO, PARTS OF THE NEIGHBORHOOD\n" +
+          "DO FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "THAT'S STANDARD FOR THE CITY'S SLOPES, AND IT'S SOMETHING\n" +
+          "EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing across the hilltop and the city below", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "JUST DOWN THE HILL IS THE DINING CORRIDOR LOCALS CALL NOPA —\n" +
+          "FOR 'NORTH OF THE PANHANDLE' — ONE OF THE LIVELIEST FOOD SCENES IN THE CITY,\n" +
+          "WITH COFFEE, BRUNCH, RESTAURANTS, AND EASYGOING NEIGHBORHOOD BARS.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEIGHBORHOOD'S BEST\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY ALAMO SQUARE DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: THIS IS A POSTCARD-VIEW HILLTOP\n" +
+          "WITH A LIVELY DINING STRIP RIGHT AT ITS FOOT.",
+        broll: ["Café tables along Divisadero at dusk", "A busy restaurant window; people out on the strip", "A relaxed neighborhood bar (general, not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: ALAMO SQUARE IS CLASSIC SAN FRANCISCO —\n" +
+          "GRAND VICTORIAN AND EDWARDIAN HOMES RINGING THE PARK,\n" +
+          "MANY DIVIDED INTO FLATS, ALONGSIDE SINGLE-FAMILY SHOWPIECES\n" +
+          "AND SOME CONDOS AND T-I-C UNITS ON THE SURROUNDING BLOCKS.\n" +
+          "IT RUNS FROM A FIRST CONDO TO A FULLY RESTORED VICTORIAN SHOWPIECE.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR ALAMO SQUARE ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES AND FOR CONDOS, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A painted Victorian, a flats building, a modern condo entry", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN ALAMO SQUARE?\n" +
+          "SOMEONE WHO WANTS THE POSTCARD — LIGHT, A HILLTOP VIEW, AND GRAND VICTORIANS —\n" +
+          "WITH THE WHOLE BAY AREA A TRAIN OR A FERRY AWAY, AND NEVER NEEDS A CAR.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY ALAMO SQUARE NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING ALAMO SQUARE HOME, I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass across the park crown (you, relaxed, not pitching)", "A quiet look out over the Painted Ladies and the skyline", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the Painted Ladies + skyline, the park crown, the mansion rows, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, a bus along the park edge, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Alamo Square page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Alamo Square + Panhandle + Western Addition in one morning loop.",
+  },
+"St. Francis Wood": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=St.%20Francis%20Wood&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → St. Francis Wood)",
+    route: {
+      // Route stays ENTIRELY within the St. Francis Wood boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "St. Francis Wood fountain on San Anselmo Avenue", note: "Start — the lower Renaissance fountain on the central median", coord: [-122.4660, 37.7363] },
+        { n: 2, name: "The upper fountain & cascade, St. Francis Boulevard", note: "The monumental Gutterson fountain terracing up the green slope", coord: [-122.4665, 37.7345] },
+        { n: 3, name: "Grand terraced homes on Santa Ana Avenue", note: "Period-revival showpieces set up steps and terraces", coord: [-122.4680, 37.7350] },
+        { n: 4, name: "A curving garden-suburb street (Yerba Buena Ave)", note: "The Olmsted curvilinear plan following the hillside", coord: [-122.4684, 37.7368] },
+        { n: 5, name: "The West Portal-side entry gates", note: "John Galen Howard's gates at the downhill edge toward West Portal", coord: [-122.4635, 37.7390] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M AT THE ST. FRANCIS WOOD FOUNTAIN ON SAN ANSELMO AVENUE, AND THE FOG IS ROLLING IN —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE ST. FRANCIS WOOD? LET'S GO.",
+        broll: ["Two-shot idea: a sunny ridge in one frame, fog drifting over St. Francis Wood in the next", "You walking up to the lower fountain into frame", "The fountain / curving boulevard to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? ST. FRANCIS WOOD SITS WEST OF TWIN PEAKS,\n" +
+          "ON THE GREEN SLOPE BELOW MOUNT DAVIDSON,\n" +
+          "WITH WEST PORTAL JUST DOWNHILL AND FOREST HILL OVER THE RIDGE.\n" +
+          "THIS IS A PLANNED GARDEN SUBURB FROM 1912 — A 'RESIDENCE PARK' —\n" +
+          "WITH CURVING, TREE-LINED STREETS LAID OUT TO FOLLOW THE HILLSIDE\n" +
+          "AND TWO FORMAL FOUNTAINS TERRACING UP THE CENTRAL BOULEVARD.\n" +
+          "THE LAND RUNS FROM ABOUT 270 FEET DOWN HERE\n" +
+          "UP TO AROUND 520 FEET AT THE TOP BY MOUNT DAVIDSON.\n" +
+          "THE GRADE IS A GENTLE, ROLLING ONE — EASIER THAN MOST WEST-SIDE HILLS —\n" +
+          "BUT THESE CURVING STREETS STILL CLIMB,\n" +
+          "AND IN PLACES THEY PASS WHAT THE A-D-A CONSIDERS AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
+          "SO IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU,\n" +
+          "THE LOWER BOULEVARD IS YOUR FRIEND; THE UPPER BLOCKS ARE MORE OF A CLIMB.\n" +
+          "AND THE HOMES THEMSELVES MATTER TOO —\n" +
+          "MANY OF THESE GRAND HOUSES SIT UP A FLIGHT OF STEPS AND TERRACES FROM THE SIDEWALK,\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.",
+        broll: ["Slow pan up St. Francis Boulevard; the curving median", "Wide establishing shot showing the slope up toward Mount Davidson", "A grand home set up steps and terraces (show the grade)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. ST. FRANCIS WOOD IS A FAMOUS GARDEN ENCLAVE —\n" +
+          "ONE OF CALIFORNIA'S FIRST PLANNED 'RESIDENCE PARKS,'\n" +
+          "LAUNCHED IN 1912 BY THE MASON-MCDUFFIE COMPANY\n" +
+          "ON FORMER SUTRO LAND.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "DUNCAN MCDUFFIE HIRED THE FAMED OLMSTED BROTHERS FIRM\n" +
+          "TO LAY CURVING STREETS ALONG THE NATURAL TOPOGRAPHY,\n" +
+          "RATHER THAN FORCE A RIGID GRID ONTO THE HILLSIDE.\n" +
+          "ARCHITECT JOHN GALEN HOWARD DESIGNED THE ENTRY GATES, THE LAMPPOSTS,\n" +
+          "AND THE LOWER FOUNTAIN; HENRY GUTTERSON SUCCEEDED HIM\n" +
+          "AND SHAPED THE MONUMENTAL UPPER FOUNTAIN AND CASCADE\n" +
+          "ON THE CENTRAL MEDIAN — EVOKING ITALIAN RENAISSANCE GARDENS.\n" +
+          "MOST OF THE GRAND HOMES ROSE IN THE 1920s,\n" +
+          "MANY OF THEM DESIGNED BY GUTTERSON HIMSELF\n" +
+          "ACROSS THREE DECADES AS SUPERVISING ARCHITECT.\n" +
+          "IN 2022, AFTER A RESIDENT-LED CAMPAIGN,\n" +
+          "THE WHOLE DISTRICT JOINED THE NATIONAL REGISTER OF HISTORIC PLACES.\n" +
+          "SO WHEN YOU SPEND TIME ON THESE BLOCKS,\n" +
+          "YOU'RE EXPLORING A CENTURY-OLD PIECE OF CITY PLANNING THAT STILL WORKS.",
+        broll: ["The lower fountain and entry gates", "The upper fountain / cascade on the boulevard median", "A row of period-revival homes along Santa Ana Ave"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "THE WHOLE PLACE WAS MARKETED AS A 'RESIDENCE PARK,'\n" +
+          "WITH LOTS ROUGHLY TWICE THE SIZE OF AN ORDINARY CITY LOT,\n" +
+          "AND DEED RESTRICTIONS MEANT TO KEEP IT PARKLIKE IN PERPETUITY.\n" +
+          "THOSE TWO FORMAL FOUNTAINS ON THE BOULEVARD WEREN'T AN AFTERTHOUGHT —\n" +
+          "THEY WERE THE CENTERPIECE, EVOKING ITALIAN RENAISSANCE GARDENS,\n" +
+          "ONE BY JOHN GALEN HOWARD AND THE MONUMENTAL UPPER ONE BY HENRY GUTTERSON.\n" +
+          "EVEN THE SIDEWALKS WERE PART OF THE DESIGN —\n" +
+          "BRICK-DIAMOND PATTERNS AND LANDSCAPED MEDIANS THROUGHOUT.\n" +
+          "AND THOSE CURVING STREETS? THEY FOLLOW THE OLMSTED BROTHERS' PLAN\n" +
+          "TO TRACE THE HILLSIDE'S NATURAL CONTOURS, NOT A GRID.\n" +
+          "THIS IS A NEIGHBORHOOD THAT WAS DESIGNED, DOWN TO THE LAMPPOSTS,\n" +
+          "TO FEEL LIKE A PARK YOU GET TO LIVE INSIDE.",
+        broll: ["Brick-diamond sidewalk detail", "The Renaissance fountains tight shot", "A curving, tree-lined street following the slope"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "ST. FRANCIS WOOD SITS ON THE WEST SIDE OF TWIN PEAKS,\n" +
+          "SO IT OFTEN CATCHES THE FOG THAT ROLLS IN OFF THE PACIFIC —\n" +
+          "SOME MORNINGS AND EVENINGS ARE GRAY AND COOL,\n" +
+          "AND OTHER POCKETS OF THE DAY OPEN UP BRIGHT.\n" +
+          "IT'S A MIXED, FOG-LEANING SPOT — AND THAT GREEN, LEAFY FEEL\n" +
+          "IS PART OF WHAT THE COOLER, DAMPER AIR GIVES YOU.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY ST. FRANCIS WOOD PAGE BELOW.",
+        broll: ["Fog drifting over the slope toward Mount Davidson", "The green, leafy streets under gray light", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. ST. FRANCIS WOOD LEANS ON WEST PORTAL,\n" +
+          "JUST DOWNHILL, FOR ITS TRANSIT — AND IT'S A GOOD HUB.\n" +
+          "AT WEST PORTAL STATION YOU'VE GOT THE K-INGLESIDE AND M-OCEAN VIEW MUNI METRO LINES\n" +
+          "RUNNING THROUGH THE TWIN PEAKS TUNNEL STRAIGHT DOWNTOWN,\n" +
+          "PLUS THE 44 O'SHAUGHNESSY AND THE 17 PARKMERCED BUSES\n" +
+          "LINKING YOU ACROSS THE SOUTH AND WEST OF THE CITY.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT FIVE AND A HALF MILES NORTHEAST,\n" +
+          "A MUNI METRO RIDE AWAY THROUGH THE TUNNEL,\n" +
+          "AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? TAKE MUNI DOWNTOWN AND HOP BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT FORTY-FIVE MINUTES ALL TOLD,\n" +
+          "OR BY CAR THE BAY BRIDGE GETS YOU THERE.\n" +
+          "HEADING NORTH TO MARIN? TAKE MUNI TO THE FERRY BUILDING,\n" +
+          "AND THE LARKSPUR FERRY CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE MUNI TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S 280 OR 101 BY CAR.\n" +
+          "BOTTOM LINE: WATER, RAIL, AND THREE BRIDGES — ALL FROM A QUIET GARDEN SUBURB,\n" +
+          "WITHOUT OWNING A CAR.",
+        broll: [
+          "West Portal Station entrance; a Muni Metro train into the tunnel",
+          "The Ferry Building / a departing ferry",
+          "A BART train; the Bay Bridge; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: St. Francis Wood → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: ST. FRANCIS WOOD SITS HIGH ON THE INLAND SLOPE,\n" +
+          "WELL ABOVE THE BAY AND THE OCEAN,\n" +
+          "SO IT IS NOT IN A TSUNAMI HAZARD ZONE — CROSS THAT WORRY OFF THE LIST.\n" +
+          "LIKE MUCH OF HILLY SAN FRANCISCO, PARTS OF THE NEIGHBORHOOD\n" +
+          "DO FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "THAT'S STANDARD FOR THE CITY'S SLOPES, AND IT'S SOMETHING\n" +
+          "EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing up the slope toward Mount Davidson", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "ST. FRANCIS WOOD ITSELF IS PURELY RESIDENTIAL BY DESIGN —\n" +
+          "NO SHOPS, NO RESTAURANTS, JUST GREEN STREETS AND GRAND HOMES.\n" +
+          "BUT THE SHOPS ARE RIGHT DOWNHILL IN WEST PORTAL,\n" +
+          "A VILLAGE-Y AVENUE OF CAFÉS, RESTAURANTS, AND EVERYDAY ERRANDS.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE BEST NEARBY\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY ST. FRANCIS WOOD DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: THIS IS A QUIET, LEAFY RETREAT WITH A REAL MAIN STREET A FEW MINUTES DOWNHILL.",
+        broll: ["The quiet, green residential streets", "West Portal Avenue storefronts down the hill", "A café table on the avenue (general, not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: ST. FRANCIS WOOD IS A PLANNED ENCLAVE OF GRAND SINGLE-FAMILY HOMES —\n" +
+          "PERIOD-REVIVAL HOUSES FROM THE 1920s, MANY BY NOTABLE ARCHITECTS,\n" +
+          "ON LOTS ROUGHLY TWICE THE SIZE OF AN ORDINARY CITY LOT.\n" +
+          "IT'S ONE OF THE CITY'S MOST ARCHITECTURALLY DISTINCT NEIGHBORHOODS,\n" +
+          "AND THE HOMES RANGE FROM HANDSOME TO LANDMARK SHOWPIECE.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR ST. FRANCIS WOOD ON MY SITE —\n" +
+          "CURRENT MEDIANS, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A grand period-revival home; a terraced garden entry", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN ST. FRANCIS WOOD?\n" +
+          "SOMEONE WHO WANTS SPACE, QUIET, AND A GRAND ARCHITECT-DESIGNED HOME\n" +
+          "ON A GREEN, PARKLIKE STREET, WITH A MAIN STREET AND THE METRO A FEW MINUTES DOWNHILL.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY ST. FRANCIS WOOD NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING ST. FRANCIS WOOD HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass along the boulevard (you, relaxed, not pitching)", "A quiet look up the slope toward Mount Davidson", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the two fountains, the curving streets, the grand terraced homes, and the brick-diamond sidewalks in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "The entry gates, West Portal Station, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the St. Francis Wood page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. St. Francis Wood + West Portal + Forest Hill in one morning loop.",
+  },
 };
