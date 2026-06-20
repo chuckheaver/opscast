@@ -4,6 +4,7 @@
 
 import { nameForSlug } from "../lib";
 import { SCRIPTS } from "../scripts";
+import GEO from "../geo.json";
 import FieldScript from "../FieldScript";
 
 export async function generateMetadata({ params }) {
@@ -19,5 +20,6 @@ export default async function Page({ params }) {
   const { hood } = await params;
   const name = nameForSlug(hood);
   const data = name ? SCRIPTS[name] || null : null;
-  return <FieldScript name={name} data={data} />;
+  const geo = name ? GEO[name] || null : null;
+  return <FieldScript name={name} data={data} geo={geo} />;
 }

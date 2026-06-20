@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const WPM = 145; // assumed speaking pace for the runtime estimate
 
-export default function FieldScript({ name, data }) {
+export default function FieldScript({ name, data, geo }) {
   const [scroll, setScroll] = useState(false);
   const [speed, setSpeed] = useState(45); // px/sec
   const [big, setBig] = useState(true);
@@ -78,6 +78,8 @@ export default function FieldScript({ name, data }) {
         </a>
       )}
 
+      {geo && <GeoStrip geo={geo} />}
+
       {/* Script sections */}
       {data.sections.map((s, i) => (
         <section key={i} style={{ marginTop: 26 }}>
@@ -122,6 +124,28 @@ export default function FieldScript({ name, data }) {
 
       <p style={{ ...P, marginTop: 28 }}><Link href="/field" style={A}>← Back to the index</Link></p>
     </Shell>
+  );
+}
+
+// Quick field-reference facts computed from the DEM + hazard data (timeless).
+function GeoStrip({ geo }) {
+  const slopeLabel = { flat: "Flat / walkable", rolling: "Rolling", steep: "Steep — hilly" }[geo.slope] || geo.slope;
+  const facts = [
+    ["Elevation", `${geo.elevLow}–${geo.elevHigh} ft`],
+    ["Terrain", slopeLabel],
+    geo.summit ? ["Summit", `${geo.summit.ft} ft`] : null,
+    ["Seismic zone", geo.seismic ? "Yes — in a state seismic hazard zone" : "No"],
+    ["Tsunami zone", geo.tsunami ? "Yes" : "No"],
+    geo.ferryMi != null ? ["Ferry Building", `~${geo.ferryMi} mi`] : null,
+  ].filter(Boolean);
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 12, padding: "10px 12px", background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 10 }}>
+      {facts.map(([k, v]) => (
+        <span key={k} style={{ fontSize: 12, padding: "4px 9px", borderRadius: 7, background: "#fff", border: "1px solid #e2e8f0", color: "#334155" }}>
+          <strong style={{ color: "#0f172a" }}>{k}:</strong> {v}
+        </span>
+      ))}
+    </div>
   );
 }
 
