@@ -4395,6 +4395,30 @@ export const NEIGHBORHOODS = {
     hospital: { name: "CPMC Mission Bernal Campus", address: "3555 Cesar Chavez St", dist: "about 2.5 mi", phone: "(415) 641-6625", url: "https://www.sutterhealth.org/cpmc" },
     transit: "K-Ingleside Muni Metro runs along Ocean Avenue; M-Ocean View and Balboa Park BART meet at the neighborhood's eastern edge. Buses 29-Sunset, 49 Van Ness-Mission, 8-Bayshore and 54-Felton serve the area.",
   },
+
+  "Treasure Island": {
+    spirit: "A man-made island built for a 1939 World's Fair, now a fast-rising waterfront neighborhood with the most jaw-dropping head-on views of the San Francisco skyline in the city.",
+    reasons: ["Unmatched SF skyline views", "Brand-new waterfront homes", "8-minute ferry to the Ferry Building", "Bay-front parks & trails"],
+    aka: "TI",
+    history: "Treasure Island was built in 1936-37 atop the Yerba Buena Shoals to host the 1939-40 Golden Gate International Exposition, a World's Fair celebrating the new Bay and Golden Gate bridges. It was meant to become San Francisco's airport, but the U.S. Navy took it over during World War II as Naval Station Treasure Island, which it operated until the base closed in 1997. Since the Navy's departure it has been a modest residential community, and is now the site of one of the largest redevelopment projects in the country, adding thousands of new homes, high-rises, parks, and ferry service. The Art Deco Building One, the former Administration Building, remains a city landmark.",
+    facts: [
+      { icon: "fair", title: "Born from a World's Fair", text: "The island was created in 1936-37 to host the 1939-40 Golden Gate International Exposition." },
+      { icon: "flag", title: "A Navy base for 50 years", text: "Naval Station Treasure Island operated here from World War II until it closed in 1997." },
+      { icon: "star", title: "Head-on skyline views", text: "The island is famous for its straight-on panoramas of the downtown San Francisco skyline." },
+      { icon: "house", title: "A new waterfront district", text: "One of the country's largest redevelopment projects is building thousands of new homes, towers, and parks." },
+      { icon: "bridge", title: "On the Bay Bridge", text: "Treasure Island connects to SF and the East Bay via the Yerba Buena Island tunnel on the Bay Bridge." },
+    ],
+    restaurants: [
+      { name: "Mersea Restaurant & Bar", address: "699 Avenue of the Palms", phone: "(415) 999-9836", url: "https://www.mersea.restaurant" },
+      { name: "Aracely Cafe", address: "401 13th St", phone: "(415) 366-5091", url: "https://www.aracelysf.com" },
+    ],
+    bars: [
+      { name: "Gold Bar Distillery", address: "1 Avenue of the Palms", url: "https://goldbarwhiskey.com" },
+      { name: "Treasure Island Wines", address: "995 9th St", phone: "(415) 394-9463", url: "https://tiwines.net" },
+    ],
+    hospital: { name: "CPMC Van Ness Campus", address: "1101 Van Ness Ave (ER at 1260 Franklin St)", dist: "about 6 mi via the Bay Bridge", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "The 25-Treasure Island Muni bus runs every 20 minutes, 7 days a week, between the island and the Salesforce Transit Center in downtown SF. The Treasure Island Ferry connects the island to the SF Ferry Building in about 8 minutes, 7 days a week.",
+  },
 };
 
 // Some fog polygons split one colloquial neighborhood into two names —
@@ -4412,8 +4436,8 @@ const ALIASES = {
 // to "live," so the residential-style pop-up doesn't fit: Apparel City,
 // Aquatic Park / Ft. Mason, Candlestick Point SRA, Golden Gate Park,
 // Lincoln Park / Ft. Miley, McLaren Park, Presidio National Park, Produce Market.
-// Treasure Island and Yerba Buena Island are residential but mid-redevelopment;
-// they were deferred and could be added later.
+// Yerba Buena Island is residential but mid-redevelopment and was deferred;
+// it could be added later. (Treasure Island, its flat neighbor, is authored.)
 
 // Look up curated content for a neighborhood name (exact match on the fog
 // geojson `name`, then aliases). Returns null when we haven't authored it.
