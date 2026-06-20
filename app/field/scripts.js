@@ -48,7 +48,7 @@ export const SCRIPTS = {
       },
       {
         label: "1 · LOCATION & LAY OF THE LAND",
-        words: 165,
+        words: 195,
         script:
           "FIRST — WHERE ARE WE? THE CASTRO SITS DEAD-CENTER IN SAN FRANCISCO,\n" +
           "JUST WEST OF THE MISSION AND SOUTH OF DUBOCE TRIANGLE,\n" +
@@ -63,7 +63,10 @@ export const SCRIPTS = {
           "HEAD WEST TOWARD CORONA HEIGHTS AND TWIN PEAKS AND THE GRADE\n" +
           "QUICKLY PASSES WHAT THE A-D-A CONSIDERS AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
           "SO IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU,\n" +
-          "THE VALLEY FLOOR IS YOUR FRIEND; THE UPPER BLOCKS ARE A WORKOUT.",
+          "THE VALLEY FLOOR IS YOUR FRIEND; THE UPPER BLOCKS ARE A CLIMB.\n" +
+          "AND THE HOMES THEMSELVES MATTER TOO —\n" +
+          "MANY OF THESE CLASSIC VICTORIANS SIT UP A FLIGHT OF STAIRS FROM THE SIDEWALK,\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.",
         broll: ["Slow pan up Castro St; street signs at 18th & Castro", "Wide establishing shot showing the valley + Twin Peaks ridge", "A genuinely steep cross-street climbing west (show the grade)"],
       },
       {
