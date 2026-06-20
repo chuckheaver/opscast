@@ -6,6 +6,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import FieldMap from "./FieldMap";
 
 const WPM = 145; // assumed speaking pace for the runtime estimate
 
@@ -79,6 +80,8 @@ export default function FieldScript({ name, data, geo }) {
       )}
 
       {geo && <GeoStrip geo={geo} />}
+
+      {data.route && <FieldMap name={name} route={data.route} />}
 
       {/* Script sections */}
       {data.sections.map((s, i) => (
