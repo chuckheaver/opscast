@@ -132,7 +132,7 @@ export default function FieldScript({ name, data, geo }) {
 
 // Quick field-reference facts computed from the DEM + hazard data (timeless).
 function GeoStrip({ geo }) {
-  const slopeLabel = { flat: "Flat / walkable", rolling: "Rolling", steep: "Steep — hilly" }[geo.slope] || geo.slope;
+  const slopeLabel = { flat: "Flat / easy", rolling: "Rolling", steep: "Steep — hilly" }[geo.slope] || geo.slope;
   const facts = [
     ["Elevation", `${geo.elevLow}–${geo.elevHigh} ft`],
     ["Terrain", slopeLabel],

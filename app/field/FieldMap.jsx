@@ -127,7 +127,7 @@ export default function FieldMap({ name, route }) {
   return (
     <div style={{ marginTop: 14 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-        <span style={{ fontSize: 13, fontWeight: 700, color: "#854F0B" }}>🚶 Walking route</span>
+        <span style={{ fontSize: 13, fontWeight: 700, color: "#854F0B" }}>🗺️ Tour route</span>
         <button onClick={() => setSat(s => !s)} style={{ fontSize: 12, fontWeight: 600, padding: "4px 9px", borderRadius: 7, border: "1px solid #ddd8d0", background: "#fff", color: "#44403c", cursor: "pointer" }}>
           {sat ? "Streets" : "Satellite"}
         </button>

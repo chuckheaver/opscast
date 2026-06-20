@@ -16,7 +16,7 @@ export default function Page() {
   return (
     <main style={{ maxWidth: 760, minHeight: "100vh", margin: "0 auto", padding: "24px 18px 120px", background: "#fff", color: "#1c1917", fontFamily: "system-ui, -apple-system, sans-serif", boxShadow: "0 0 40px rgba(0,0,0,0.25)" }}>
       <h1 style={{ fontSize: 28, fontWeight: 800, color: "#1c1917", margin: "0 0 4px", letterSpacing: "-0.5px" }}>Field Kit</h1>
-      <p style={{ fontSize: 14, color: "#78716c", margin: "0 0 4px" }}>Walking-tour scripts, B-roll, and shoot schedules — private, just for you.</p>
+      <p style={{ fontSize: 14, color: "#78716c", margin: "0 0 4px" }}>Neighborhood-tour scripts, B-roll, and shoot schedules — private, just for you.</p>
       <p style={{ fontSize: 13, color: "#a8a29e", margin: "0 0 20px" }}>{ready.length} of {NAMES.length} scripts ready.</p>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 8 }}>

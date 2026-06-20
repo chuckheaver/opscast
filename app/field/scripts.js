@@ -38,13 +38,13 @@ export const SCRIPTS = {
         script:
           "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
           "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
-          "AFTER YEARS OF WALKING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
           "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
           "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
           "RIGHT NOW I'M AT 18TH AND CASTRO, AND THE SUN IS OUT —\n" +
           "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
           "SO — ARE YOU READY TO SEE THE CASTRO? LET'S GO.",
-        broll: ["Two-shot idea: a foggy ridge in one frame, sunny Castro St in the next", "You walking up Castro St into frame", "The Pride flag / rainbow crosswalk to place us"],
+        broll: ["Two-shot idea: a foggy ridge in one frame, sunny Castro St in the next", "You moving up Castro St into frame", "The Pride flag / rainbow crosswalk to place us"],
       },
       {
         label: "1 · LOCATION & LAY OF THE LAND",
@@ -57,8 +57,8 @@ export const SCRIPTS = {
           "DOWN TO THE QUIET, TREE-LINED BLOCKS BELOW 19TH.\n" +
           "ITS OLD NAME — EUREKA VALLEY — TELLS YOU THE SHAPE OF THE LAND.\n" +
           "THE HEART OF THE NEIGHBORHOOD SITS IN A GENTLE VALLEY,\n" +
-          "ROUGHLY 80 TO 180 FEET UP, AND IT'S GENUINELY WALKABLE —\n" +
-          "FLAT ENOUGH TO STROLL WITH A COFFEE OR PUSH A STROLLER.\n" +
+          "ROUGHLY 80 TO 180 FEET UP, AND THE CORE IS FLAT AND EASY TO GET AROUND —\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR.\n" +
           "BUT THIS IS SAN FRANCISCO, SO THE EDGES CLIMB FAST:\n" +
           "HEAD WEST TOWARD CORONA HEIGHTS AND TWIN PEAKS AND THE GRADE\n" +
           "QUICKLY PASSES WHAT THE A-D-A CONSIDERS AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
@@ -88,7 +88,7 @@ export const SCRIPTS = {
           "ONE OF THE FIRST OPENLY GAY ELECTED OFFICIALS IN THE COUNTRY —\n" +
           "AND WHERE, AFTER HIS ASSASSINATION IN 1978,\n" +
           "A CANDLELIGHT MARCH DOWN MARKET STREET STILL MARKS THE DAY EACH YEAR.\n" +
-          "WHEN YOU WALK THESE BLOCKS, YOU'RE WALKING THROUGH LIVING CIVIL-RIGHTS HISTORY.",
+          "SPEND TIME ON THESE BLOCKS, AND YOU'RE STANDING IN LIVING CIVIL-RIGHTS HISTORY.",
         broll: ["Victorian facades", "575 Castro St — the old Castro Camera storefront", "Harvey Milk Plaza sign / mural"],
       },
       {
@@ -174,14 +174,14 @@ export const SCRIPTS = {
         words: 120,
         script:
           "LET'S TALK DAILY LIFE.\n" +
-          "THE CASTRO'S COMMERCIAL STRIP IS ONE OF THE MOST WALKABLE IN THE CITY —\n" +
+          "THE CASTRO'S COMMERCIAL STRIP IS ONE OF THE LIVELIEST IN THE CITY —\n" +
           "COFFEE, BRUNCH, CLASSIC DINNER SPOTS, AND A NIGHTLIFE SCENE WITH REAL HISTORY,\n" +
           "INCLUDING SOME OF THE OLDEST LANDMARK BARS IN SAN FRANCISCO.\n" +
           "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
           "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
           "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEIGHBORHOOD'S BEST\n" +
           "RESTAURANTS AND BARS RIGHT ON MY CASTRO DETAILS PAGE — ALWAYS UP TO DATE.\n" +
-          "THE VIBE TO KNOW: THIS IS A WALK-OUT-YOUR-DOOR, LEAVE-THE-CAR-HOME KIND OF PLACE.",
+          "THE VIBE TO KNOW: THIS IS A RIGHT-OUTSIDE-YOUR-DOOR, LEAVE-THE-CAR-HOME KIND OF PLACE.",
         broll: ["Café tables; a busy restaurant window at dusk", "Castro Theatre lit up; people on the sidewalk", "A classic neon bar sign (general, not a single endorsement)"],
       },
       {
@@ -203,7 +203,7 @@ export const SCRIPTS = {
         words: 120,
         script:
           "SO — WHO BELONGS IN THE CASTRO?\n" +
-          "SOMEONE WHO WANTS LIGHT, WALKABILITY, AND THE WHOLE BAY AREA\n" +
+          "SOMEONE WHO WANTS LIGHT, EASE, AND THE WHOLE BAY AREA\n" +
           "A TRAIN OR A FERRY AWAY, WITHOUT EVER NEEDING A CAR.\n" +
           "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
           "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
@@ -213,13 +213,13 @@ export const SCRIPTS = {
           "STAYS CURRENT ON MY CASTRO NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
           "SO IF YOU'RE THINKING ABOUT CALLING THE CASTRO HOME,\n" +
           "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
-        broll: ["Golden-hour, unhurried walk down Castro St (you, relaxed, not pitching)", "A quiet look back up the hill toward Twin Peaks", "Soft end card: your name + how to reach you"],
+        broll: ["Golden-hour, unhurried pass down Castro St (you, relaxed, not pitching)", "A quiet look back up the hill toward Twin Peaks", "Soft end card: your name + how to reach you"],
       },
     ],
     schedule: [
-      { step: "Scout & lock script", detail: "Walk the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
       { step: "Golden-hour B-roll", detail: "Shoot the hero flag, theatre marquee, crosswalks, street life, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
-      { step: "Walk-and-talk takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
       { step: "Pickups & cutaways", detail: "Signs, the station entrance, and a screen-record of your live market page (capture at home).", time: "~15 min" },
       { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
       { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Castro page.", time: "~30 min" },
