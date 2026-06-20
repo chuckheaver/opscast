@@ -19,16 +19,16 @@ export const SCRIPTS = {
     marketLink: "https://www.ur4cast.com/listings?nbhd=Castro&layer=nbhd",
     detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Castro)",
     route: {
-      // Main walking spine down Castro St (approximate — fine for planning;
-      // I'll snap these to the sidewalk grid for the final cut).
-      path: [[-122.4351, 37.7627], [-122.4348, 37.7620], [-122.4350, 37.7609], [-122.4344, 37.7590], [-122.4338, 37.7574]],
+      // Route stays ENTIRELY within the Castro boundary (verified against the
+      // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
+      // grid for the final cut.
+      path: [[-122.4351, 37.7627], [-122.4348, 37.7620], [-122.4350, 37.7609], [-122.4350, 37.7596], [-122.4329, 37.7607]],
       spots: [
         { n: 1, name: "Harvey Milk Plaza & Castro Station", note: "Start — the giant Pride flag + the Muni Metro hub", coord: [-122.4351, 37.7627] },
         { n: 2, name: "Castro Theatre", note: "1922 movie palace, the neon marquee", coord: [-122.4348, 37.7620] },
         { n: 3, name: "18th & Castro", note: "Rainbow crosswalks — the heart of the neighborhood", coord: [-122.4350, 37.7609] },
-        { n: 4, name: "Liberty-Hill Victorians", note: "Walk the historic Victorian blocks (the housing-stock segment)", coord: [-122.4338, 37.7574] },
-        { n: 5, name: "Jane Warner Plaza", note: "17th & Castro — F-line streetcar stop; loop back up", coord: [-122.4343, 37.7628] },
-        { n: 6, name: "Corona Heights Park", note: "Optional side-trip west — the best skyline view near the Castro", coord: [-122.4383, 37.7654] },
+        { n: 4, name: "19th & Castro", note: "South end of the strip; the quieter, leafier blocks begin", coord: [-122.4350, 37.7596] },
+        { n: 5, name: "Collingwood & 18th — Victorian blocks", note: "The housing-stock segment: classic Castro Victorians", coord: [-122.4329, 37.7607] },
       ],
     },
     sections: [
