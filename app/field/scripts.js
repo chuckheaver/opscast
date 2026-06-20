@@ -43,7 +43,8 @@ export const SCRIPTS = {
           "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
           "RIGHT NOW I'M AT 18TH AND CASTRO, AND THE SUN IS OUT —\n" +
           "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
-          "LET ME WALK YOU THROUGH THE CASTRO THE WAY I'D WALK A FRIEND.",
+          "I'M GOING TO WALK YOU THROUGH IT THE WAY I'D WALK A FRIEND.\n" +
+          "SO — ARE YOU READY TO SEE THE CASTRO? LET'S GO.",
         broll: ["Two-shot idea: a foggy ridge in one frame, sunny Castro St in the next", "You walking up Castro St into frame", "The Pride flag / rainbow crosswalk to place us"],
       },
       {
