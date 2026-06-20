@@ -15109,4 +15109,1285 @@ export const SCRIPTS = {
     ],
     batchTip: "Shoot adjacent hoods the same outing — e.g. Midtown Terrace + Forest Hill + Clarendon Heights in one morning loop.",
   },
+"Mt. Davidson Manor": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Mt.%20Davidson%20Manor&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Mt. Davidson Manor)",
+    route: {
+      // Route stays ENTIRELY within the Mt. Davidson Manor boundary (verified
+      // against the neighborhood polygon). Coords approximate — I'll snap to the
+      // sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Monterey Blvd edge (north boundary)", note: "Start — the busy edge street and the bus stops along it", coord: [-122.463, 37.7299] },
+        { n: 2, name: "Mount Davidson approach (NE corner)", note: "The streets that climb toward the Mount Davidson trailhead and summit cross", coord: [-122.4617, 37.7296] },
+        { n: 3, name: "Single-family-home block", note: "The housing-stock segment: tidy 1920s tile-roofed homes, many up a few steps", coord: [-122.4640, 37.7290] },
+        { n: 4, name: "Slope viewpoint", note: "A higher-grade corner showing the western flank and the marine layer over the ridge", coord: [-122.4655, 37.7270] },
+        { n: 5, name: "Quiet residential street (south end)", note: "The calmer, leafier blocks where the tract settles down the slope", coord: [-122.4625, 37.7255] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ON THE WEST SLOPE BELOW MOUNT DAVIDSON, AND THE FOG IS DRIFTING OVER THE RIDGE —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE MT. DAVIDSON MANOR? LET'S GO.",
+        broll: ["Two-shot idea: fog over the Mount Davidson ridge in one frame, a calm sunny home block in the next", "You moving up a residential street into frame", "The tile-roofed homes to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? MT. DAVIDSON MANOR SITS WEST OF TWIN PEAKS,\n" +
+          "ON THE WESTERN FLANK OF MOUNT DAVIDSON, SAN FRANCISCO'S HIGHEST PEAK.\n" +
+          "IT'S TUCKED BETWEEN WESTWOOD PARK AND BALBOA TERRACE, NEAR ST. FRANCIS WOOD,\n" +
+          "WITH WEST PORTAL AND INGLESIDE THE NEIGHBORS YOU'LL GET TO KNOW.\n" +
+          "MONTEREY BOULEVARD RUNS ALONG THE NORTH EDGE,\n" +
+          "AND THE MOUNT DAVIDSON SUMMIT AND ITS CROSS RISE JUST TO THE NORTHEAST.\n" +
+          "THE LAND HERE CLIMBS FROM ROUGHLY 250 TO 500 FEET UP,\n" +
+          "AND IT'S A ROLLING SLOPE — NOT FLAT, BUT NOT THE CITY'S STEEPEST EITHER.\n" +
+          "AND I'LL BE HONEST WITH YOU ABOUT GETTING AROUND AROUND OR ON WHEELS:\n" +
+          "PARTS OF THIS SLOPE HIT MODERATE-TO-STEEP GRADES,\n" +
+          "PASSING WHAT THE A-D-A CONSIDERS AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
+          "SO IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU,\n" +
+          "THE LOWER, FLATTER BLOCKS ARE YOUR FRIEND; THE UPPER STREETS ARE MORE OF A CLIMB.\n" +
+          "AND THE HOMES THEMSELVES MATTER TOO —\n" +
+          "MANY OF THESE SINGLE-FAMILY HOMES SIT UP A FEW STEPS FROM THE SIDEWALK,\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME,\n" +
+          "AND NOTING THE GRADE OF THE STREET OUT FRONT WHILE YOU'RE THERE.",
+        broll: ["Slow pan up a residential street; street signs near Monterey Blvd", "Wide establishing shot showing the slope + the Mount Davidson ridge", "A genuinely steep cross-street climbing toward the summit (show the grade)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. MT. DAVIDSON MANOR IS A MID-CENTURY RESIDENTIAL TRACT —\n" +
+          "TIDY SINGLE-FAMILY HOMES ON THE WESTERN FLANK OF MOUNT DAVIDSON,\n" +
+          "NEAR MONTEREY BOULEVARD AND THE MOUNT DAVIDSON SUMMIT AND ITS CROSS.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "THE TRACT WAS LAID OUT IN THE 1920s AS THE CITY GREW WEST,\n" +
+          "FILLING THESE BLOCKS WITH AFFORDABLE, WELL-BUILT FAMILY HOMES\n" +
+          "IN A SPANISH-MEDITERRANEAN STYLE WITH TILE ROOFS.\n" +
+          "THE NEIGHBORHOOD TAKES ITS NAME FROM MOUNT DAVIDSON ITSELF,\n" +
+          "WHICH RISES JUST TO THE NORTHEAST AND, AT 928 FEET,\n" +
+          "IS THE HIGHEST NATURAL POINT IN ALL OF SAN FRANCISCO.\n" +
+          "IN 1929 THE CITY SET ASIDE ABOUT TWENTY ACRES AT THE SUMMIT AS PARKLAND,\n" +
+          "AND IN 1934 A 103-FOOT CONCRETE CROSS WENT UP AT THE PEAK —\n" +
+          "A LANDMARK STILL VISIBLE ACROSS THE SOUTHERN HALF OF THE CITY.\n" +
+          "SO WHILE THE HOMES HERE ARE QUIET AND UNASSUMING,\n" +
+          "THEY SIT IN THE SHADOW OF ONE OF SAN FRANCISCO'S GREAT LANDMARKS.\n" +
+          "SPEND TIME ON THESE BLOCKS, AND YOU FEEL THAT EARLY-CENTURY,\n" +
+          "BUILT-FOR-FAMILIES CALM THAT THE WEST-OF-TWIN-PEAKS TRACTS ARE KNOWN FOR.",
+        broll: ["Tile-roofed home facades", "A representative 1920s single-family block", "The Mount Davidson summit cross seen from below"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "THAT PEAK JUST NORTHEAST OF HERE — MOUNT DAVIDSON —\n" +
+          "IS THE HIGHEST NATURAL POINT IN SAN FRANCISCO, AT 928 FEET.\n" +
+          "THE 103-FOOT CONCRETE CROSS AT ITS SUMMIT WENT UP IN 1934,\n" +
+          "AND ABOUT TWENTY ACRES UP THERE HAVE BEEN CITY PARKLAND SINCE 1929.\n" +
+          "AND HERE'S THE FUN ONE: THAT SUMMIT CROSS HAS A BIG-SCREEN CAMEO —\n" +
+          "IT'S THE SETTING FOR THE CLIMACTIC SCENE OF THE 1971 FILM 'DIRTY HARRY.'\n" +
+          "THE HOMES DOWN HERE WERE BUILT IN A SPANISH-MEDITERRANEAN STYLE,\n" +
+          "PART OF THE WAVE OF EARLY-CENTURY TRACTS THAT FILLED THE WEST OF TWIN PEAKS.\n" +
+          "THIS IS A NEIGHBORHOOD THAT LIVES QUIETLY NEXT TO A CITY LANDMARK.",
+        broll: ["The summit cross tight shot", "Trailhead sign for Mount Davidson Park", "Tile roofs and Spanish-Mediterranean detailing"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "I'LL BE STRAIGHT WITH YOU: SITTING WEST OF TWIN PEAKS,\n" +
+          "MT. DAVIDSON MANOR CATCHES THE MARINE LAYER,\n" +
+          "SO YOU'LL SEE REAL FOG ROLLING OVER THE RIDGE ON SUMMER MORNINGS AND EVENINGS —\n" +
+          "IT'S A MIXED PICTURE HERE, NOT ONE OF THE CITY'S SUN POCKETS.\n" +
+          "SOME DAYS BURN OFF BRIGHT; OTHERS STAY GRAY AND COOL.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY MT. DAVIDSON MANOR PAGE BELOW.",
+        broll: ["Fog pouring over the Mount Davidson ridge", "A mixed sky over the home blocks", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. MT. DAVIDSON MANOR IS A QUIET RESIDENTIAL TRACT,\n" +
+          "BUT IT'S WELL CONNECTED FOR LIVING WITH ONE CAR OR NONE.\n" +
+          "ALONG AND NEAR MONTEREY BOULEVARD YOU'VE GOT MUNI BUS SERVICE —\n" +
+          "THE 36, THE 23, AND THE 43 THREAD THROUGH AND AROUND THE NEIGHBORHOOD.\n" +
+          "THE WEST PORTAL MUNI METRO STATION IS A BIT AWAY,\n" +
+          "AND THAT'S YOUR FAST RAIL RIDE STRAIGHT DOWNTOWN.\n" +
+          "THE NEAREST BART IS GLEN PARK OR BALBOA PARK, A SHORT HOP EAST.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT SIX MILES NORTHEAST;\n" +
+          "TAKE MUNI METRO FROM WEST PORTAL TO EMBARCADERO,\n" +
+          "AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? FROM GLEN PARK OR BALBOA PARK, TAKE BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT FORTY MINUTES DOOR TO PLATFORM.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR IN ABOUT THIRTY.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE MUNI TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S ROUGHLY FORTY-FIVE BY CAR ON 280 OR 101.\n" +
+          "BOTTOM LINE: BUSES AT THE DOOR, RAIL CLOSE BY, AND THE WHOLE BAY AREA WITHIN REACH\n" +
+          "WITHOUT LEANING ON A CAR.",
+        broll: [
+          "A Muni bus on Monterey Blvd; the West Portal station entrance",
+          "Embarcadero Station + the Ferry Building / a departing ferry",
+          "A BART train at Glen Park; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Mt. Davidson Manor → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: MT. DAVIDSON MANOR SITS HIGH AND INLAND,\n" +
+          "ON THE WESTERN FLANK OF THE CITY'S TALLEST PEAK, WELL AWAY FROM THE BAY,\n" +
+          "SO IT IS NOT IN A TSUNAMI HAZARD ZONE — CROSS THAT WORRY OFF THE LIST.\n" +
+          "AND ON SEISMIC: THIS NEIGHBORHOOD IS NOT MAPPED WITHIN A STATE-DESIGNATED\n" +
+          "SEISMIC HAZARD ZONE — WHICH IS REASSURING — THOUGH OF COURSE\n" +
+          "THIS IS STILL CALIFORNIA, AND EVERY BUYER SHOULD REVIEW THE GROUND\n" +
+          "WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing to the slope / the ridge above", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "MT. DAVIDSON MANOR ITSELF IS QUIET AND RESIDENTIAL —\n" +
+          "BUT THE WEST PORTAL SHOPPING STRIP IS RIGHT NEXT DOOR,\n" +
+          "WITH COFFEE, RESTAURANTS, GROCERS, AND THE EVERYDAY ERRANDS YOU NEED,\n" +
+          "PLUS THE TRAILS OF MOUNT DAVIDSON PARK A FEW BLOCKS AWAY.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEIGHBORHOOD'S BEST\n" +
+          "RESTAURANTS AND SPOTS RIGHT ON MY MT. DAVIDSON MANOR DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: THIS IS A CALM, FAMILY-FRIENDLY, COME-HOME-TO-QUIET KIND OF PLACE.",
+        broll: ["Café tables along West Portal Ave; a busy shop window", "A trailhead into Mount Davidson Park", "A quiet residential corner at dusk"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: MT. DAVIDSON MANOR IS CLASSIC WEST-OF-TWIN-PEAKS —\n" +
+          "TILE-ROOFED, SPANISH-MEDITERRANEAN SINGLE-FAMILY HOMES\n" +
+          "ON CALM, WELL-KEPT BLOCKS, BUILT FOR FAMILIES AND BUILT TO LAST.\n" +
+          "IT RUNS FROM A FIRST FAMILY HOME TO A FULLY UPDATED, MOVE-IN SHOWPIECE.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR MT. DAVIDSON MANOR ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A tile-roofed home, a few facades in a row, a updated entry", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN MT. DAVIDSON MANOR?\n" +
+          "SOMEONE WHO WANTS A QUIET FAMILY STREET, TRAILS AT THE DOOR,\n" +
+          "AND THE WHOLE BAY AREA STILL WITHIN REACH BY BUS, RAIL, AND FERRY.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY MT. DAVIDSON MANOR NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING MT. DAVIDSON MANOR HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass down a residential street (you, relaxed, not pitching)", "A quiet look up the slope toward the Mount Davidson ridge", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the tile-roofed homes, the Mount Davidson ridge and summit cross, the trailhead, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, the trailhead, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Mt. Davidson Manor page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Mt. Davidson Manor + Westwood Park + Balboa Terrace in one morning loop.",
+  },
+"Sherwood Forest": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Sherwood%20Forest&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Sherwood Forest)",
+    route: {
+      // Route stays ENTIRELY within the Sherwood Forest boundary (verified against the
+      // neighborhood polygon). Coords approximate — I'll snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Myra Way at Dalewood — Mount Davidson trailhead", note: "Start — the trailhead into Mount Davidson Park, at the city's highest bus stop", coord: [-122.457, 37.74] },
+        { n: 2, name: "Robinhood Drive", note: "The Robin-Hood-themed streets — often cited as the highest residential street in the city", coord: [-122.4585, 37.7385] },
+        { n: 3, name: "Idora Avenue", note: "A quiet, leafy block of large single-family homes", coord: [-122.4540, 37.7395] },
+        { n: 4, name: "Dalewood Way — large-home block", note: "Big mid-century homes terraced up the wooded slope", coord: [-122.4555, 37.7370] },
+        { n: 5, name: "Sherwood Court viewpoint", note: "A slope viewpoint opening onto the westside and bay", coord: [-122.4600, 37.7360] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ON THE WOODED SOUTH SLOPE OF MOUNT DAVIDSON, AND THE FOG IS ROLLING IN —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE SHERWOOD FOREST? LET'S GO.",
+        broll: ["Two-shot idea: a sunny ridge in one frame, fog sliding through the eucalyptus in the next", "You moving up a leafy slope street into frame", "The tree canopy / a Robin-Hood street sign to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? SHERWOOD FOREST IS A TINY ENCLAVE\n" +
+          "ON THE WOODED SOUTHERN SLOPE OF MOUNT DAVIDSON,\n" +
+          "THE HIGHEST NATURAL HILL IN SAN FRANCISCO.\n" +
+          "WEST PORTAL SITS DOWN THE HILL TO THE WEST,\n" +
+          "WITH MIRALOMA PARK OVER THE RIDGE AND THE PARK ITSELF RISING JUST ABOVE.\n" +
+          "THE STREETS WIND AND CLIMB — THIS IS A STEEP, WOODED SLOPE,\n" +
+          "ROUGHLY 460 FEET UP AT THE BOTTOM AND CLOSE TO 930 NEAR THE TOP.\n" +
+          "AND I'LL BE HONEST WITH YOU ABOUT ACCESS:\n" +
+          "MANY OF THESE LARGE HOMES ARE TERRACED UP A FLIGHT OF STEPS FROM THE STREET,\n" +
+          "AND THE GRADES HERE QUICKLY PASS WHAT THE A-D-A CONSIDERS\n" +
+          "AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
+          "SO IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU,\n" +
+          "A STEP-FREE ROUTE HERE TAKES SOME PLANNING —\n" +
+          "IT'S WORTH CHECKING HOME BY HOME, AND BLOCK BY BLOCK.\n" +
+          "BUT HERE'S THE TRADE YOU GET FOR THE CLIMB:\n" +
+          "BIG, OPEN VIEWS ACROSS THE WESTSIDE AND OUT TO THE BAY,\n" +
+          "AND A HUSH YOU JUST DON'T FIND DOWN ON THE FLATS.",
+        broll: ["Slow pan up a winding, tree-lined slope street", "Wide establishing shot showing the hillside + Mount Davidson above", "A genuinely steep block climbing the slope (show the grade); a home up a flight of steps"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. SHERWOOD FOREST IS A MID-CENTURY ENCLAVE,\n" +
+          "AN UPSCALE SUBDIVISION OF LARGE HOMES LAID OUT\n" +
+          "ACROSS THE WOODED SOUTHERN SLOPE OF MOUNT DAVIDSON.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "THE DEVELOPERS LEANED INTO A ROBIN HOOD THEME,\n" +
+          "GIVING THE WINDING STREETS NAMES LIKE SHERWOOD, MAYWOOD, AND IDORA —\n" +
+          "AND ROBINHOOD DRIVE, OFTEN CALLED THE HIGHEST RESIDENTIAL STREET IN THE CITY.\n" +
+          "THE HOMES ARE LARGE SINGLE-FAMILY RESIDENCES,\n" +
+          "SOME DATING BACK TO THE 1930s,\n" +
+          "SET AMONG THE EUCALYPTUS THAT ADOLPH SUTRO PLANTED DECADES EARLIER.\n" +
+          "AND RISING RIGHT ABOVE THE ROOFTOPS IS MOUNT DAVIDSON PARK —\n" +
+          "TWENTY HILLTOP ACRES THE CITY BOUGHT AS PARKLAND BACK IN 1929,\n" +
+          "CROWNED BY A CONCRETE CROSS YOU CAN SEE FROM ACROSS TOWN.\n" +
+          "SO WHAT YOU'RE STANDING IN IS A QUIET, LEAFY POCKET\n" +
+          "THAT WAS BUILT, FROM THE START, TO FEEL A LITTLE APART FROM THE CITY —\n" +
+          "BIG HOMES, BIG TREES, BIG VIEWS, AND A STORYBOOK NAME TO MATCH.",
+        broll: ["Eucalyptus canopy over the rooftops", "A Robin-Hood street sign — Robinhood Dr, Idora, Maywood", "The Mount Davidson cross seen from the slope"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "MOUNT DAVIDSON, RIGHT ABOVE YOU, RISES 928 FEET —\n" +
+          "THE HIGHEST NATURAL POINT IN ALL OF SAN FRANCISCO,\n" +
+          "TOPPED BY A 103-FOOT CONCRETE CROSS.\n" +
+          "THE STREETS HERE ALL CARRY THAT SHERWOOD THEME —\n" +
+          "ROBINHOOD DRIVE, SHERWOOD COURT, DALEWOOD WAY, LANSDALE AND IDORA.\n" +
+          "ROBINHOOD DRIVE IS FREQUENTLY DESCRIBED\n" +
+          "AS THE HIGHEST RESIDENTIAL STREET IN THE CITY.\n" +
+          "AND THE 36 BUS CLIMBS RIGHT UP THROUGH THE NEIGHBORHOOD\n" +
+          "TO MYRA AT DALEWOOD — THE HIGHEST MUNI BUS STOP IN SAN FRANCISCO.\n" +
+          "THE TWENTY HILLTOP ACRES OF PARK ABOVE YOU\n" +
+          "HAVE BEEN PUBLIC LAND SINCE 1929, WITH TRAILS WINDING JUST ABOVE THE HOMES.\n" +
+          "THIS IS A NEIGHBORHOOD FULL OF QUIET SUPERLATIVES.",
+        broll: ["The cross at the summit; the trails just above the homes", "Robinhood Dr street sign at altitude", "The 36 bus climbing to the Myra at Dalewood stop"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "SHERWOOD FOREST SITS HIGH ON THE WOODED SLOPE OF MOUNT DAVIDSON,\n" +
+          "RIGHT IN THE PATH OF THE MARINE LAYER.\n" +
+          "SO I'LL BE STRAIGHT WITH YOU: THIS IS A FOGGIER POCKET —\n" +
+          "SOME DAYS THE SUN BREAKS THROUGH, AND SOME DAYS\n" +
+          "THE FOG ROLLS UP THROUGH THE EUCALYPTUS AND STAYS.\n" +
+          "IT'S A MIXED, COOLER, GREENER FEEL — AND SOME PEOPLE LOVE EXACTLY THAT.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY SHERWOOD FOREST PAGE BELOW.",
+        broll: ["Fog sliding through the eucalyptus canopy", "Contrast: a sunny break over the slope vs. a gray afternoon", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. I'LL BE HONEST — THIS IS A QUIET,\n" +
+          "MORE CAR-RELIANT ENCLAVE THAN THE FLATS DOWNTOWN,\n" +
+          "BUT THE TRANSIT IS REAL, SO LET ME TAKE YOU THROUGH IT.\n" +
+          "THE 36 BUS CLIMBS RIGHT THROUGH THE NEIGHBORHOOD,\n" +
+          "AND THE 44 PASSES NEARBY ON ITS WAY ACROSS THE WESTSIDE.\n" +
+          "DOWN THE HILL, WEST PORTAL AND GLEN PARK PUT YOU ON MUNI METRO AND BART —\n" +
+          "BOTH A BIT AWAY, BUT BOTH A STRAIGHT SHOT DOWNTOWN ONCE YOU'RE ON.\n" +
+          "NOW LET'S LEAVE THE CITY.\n" +
+          "THE FERRY BUILDING IS ABOUT FIVE AND A HALF MILES NORTHEAST —\n" +
+          "TAKE MUNI METRO DOWN TO EMBARCADERO, AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? FROM GLEN PARK, TAKE BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT THIRTY-FIVE MINUTES DOOR TO PLATFORM.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR IN ABOUT THIRTY.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE MUNI TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S ROUGHLY FORTY-FIVE BY CAR ON 280 OR 101.\n" +
+          "BOTTOM LINE: YOU'LL LEAN ON A CAR MORE UP HERE,\n" +
+          "BUT WATER, RAIL, AND THE BRIDGES ARE ALL STILL WITHIN REACH.",
+        broll: [
+          "The 36 bus climbing through the slope; a 44 stop nearby",
+          "West Portal Station / Glen Park BART entrance",
+          "Embarcadero + the Ferry Building / a departing ferry; a BART train; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Sherwood Forest → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: SHERWOOD FOREST SITS HIGH ON THE SLOPE OF MOUNT DAVIDSON,\n" +
+          "WELL ABOVE THE BAY AND FAR INLAND,\n" +
+          "SO IT IS NOT IN A TSUNAMI HAZARD ZONE — CROSS THAT WORRY OFF THE LIST.\n" +
+          "LIKE MUCH OF HILLY SAN FRANCISCO, PARTS OF THE NEIGHBORHOOD\n" +
+          "DO FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "THAT'S STANDARD FOR THE CITY'S SLOPES, AND IT'S SOMETHING\n" +
+          "EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing to the wooded hillside / the slope below", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "SHERWOOD FOREST ITSELF IS PURELY RESIDENTIAL — QUIET, LEAFY, AND HUSHED —\n" +
+          "BUT WEST PORTAL IS JUST DOWN THE HILL,\n" +
+          "WITH A FRIENDLY LITTLE MAIN STREET OF CAFÉS, RESTAURANTS, AND SHOPS.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEIGHBORHOOD'S BEST\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY SHERWOOD FOREST DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: YOU COME HOME TO PEACE AND TREES UP HERE,\n" +
+          "AND DROP DOWN TO WEST PORTAL WHEN YOU WANT A LITTLE BUSTLE.",
+        broll: ["A quiet, tree-lined residential street up the slope", "West Portal Ave storefronts and café tables down the hill", "A classic neighborhood-main-street shot (general, not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: SHERWOOD FOREST IS AN ENCLAVE OF LARGE SINGLE-FAMILY HOMES,\n" +
+          "MANY OF THEM MID-CENTURY, TERRACED UP THE WOODED SLOPE\n" +
+          "WITH BIG VIEWS AND GENEROUS LOTS.\n" +
+          "SOME DATE BACK TO THE 1930s; OTHERS CAME LATER AS THE HILL FILLED IN.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR SHERWOOD FOREST ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR THESE SINGLE-FAMILY HOMES, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A large home terraced up the slope behind trees", "A 'For Sale' sign on a winding street", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN SHERWOOD FOREST?\n" +
+          "SOMEONE WHO WANTS HUSH, BIG TREES, AND BIG VIEWS,\n" +
+          "WITH A TRAILHEAD INTO MOUNT DAVIDSON PARK RIGHT ABOVE THE HOUSE.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY SHERWOOD FOREST NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING SHERWOOD FOREST HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass up a wooded slope street (you, relaxed, not pitching)", "A quiet look up the hill toward the Mount Davidson summit", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the wooded slope streets, Robin-Hood signs, the trailhead, big views, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Street signs, the trailhead, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Sherwood Forest page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Sherwood Forest + Miraloma Park + West Portal in one slope loop.",
+  },
+"Forest Knolls": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Forest%20Knolls&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Forest Knolls)",
+    route: {
+      // Route stays ENTIRELY within the Forest Knolls boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Crestmont & Christopher", note: "Start — the heart of the hillside, fog drifting through the trees", coord: [-122.4594, 37.7551] },
+        { n: 2, name: "Mount Sutro trailhead — Christopher Dr", note: "A way into the Interior Greenbelt eucalyptus woods", coord: [-122.4567, 37.7564] },
+        { n: 3, name: "Warren Drive — mid-century blocks", note: "Classic Eichler-era homes, living space stacked over the garage", coord: [-122.4582, 37.7548] },
+        { n: 4, name: "Crestmont hillside viewpoint", note: "Big westward views out over the Inner Sunset", coord: [-122.4598, 37.7553] },
+        { n: 5, name: "Oak Park Drive — leafy street", note: "The quiet, tree-shaded blocks curling down the slope", coord: [-122.4567, 37.7536] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ON THE FOREST KNOLLS HILLSIDE BY MOUNT SUTRO, AND THE FOG IS ROLLING IN —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE FOREST KNOLLS? LET'S GO.",
+        broll: ["Two-shot idea: a sunny ridge in one frame, fog pouring through the Forest Knolls eucalyptus in the next", "You moving up the hillside into frame", "Fog drifting through the Mount Sutro trees to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? FOREST KNOLLS IS A WOODED HILL\n" +
+          "TUCKED AGAINST THE MOUNT SUTRO FOREST, RIGHT IN THE CENTER OF SAN FRANCISCO,\n" +
+          "WITH THE INNER SUNSET BELOW TO THE WEST AND COLE VALLEY JUST OVER TO THE NORTH.\n" +
+          "THE STREETS WIND UP THE FLANK OF MOUNT SUTRO,\n" +
+          "CLIMBING FROM ABOUT 360 FEET UP TO ROUGHLY 770 AT THE TOP.\n" +
+          "LET ME BE HONEST WITH YOU: THIS IS A STEEP, WOODED HILL.\n" +
+          "MANY OF THE HOMES ARE TERRACED UP A FLIGHT OF STEPS FROM THE STREET,\n" +
+          "AND THE GRADES HERE QUICKLY PASS WHAT THE A-D-A CONSIDERS\n" +
+          "AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
+          "SO IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU,\n" +
+          "A STEP-FREE ROUTE UP HERE TAKES SOME PLANNING — IT'S WORTH MAPPING BLOCK BY BLOCK.\n" +
+          "BUT HERE'S WHAT YOU GET IN RETURN:\n" +
+          "BIG VIEWS OUT OVER THE WEST SIDE OF THE CITY,\n" +
+          "AND FOREST TRAILS LITERALLY AT THE TOP OF YOUR STREET.\n" +
+          "THIS IS A PLACE FOR PEOPLE WHO WANT QUIET, GREEN, AND ELEVATION —\n" +
+          "AND DON'T MIND A CLIMB TO GET IT.",
+        broll: ["Slow pan up a winding Forest Knolls street; the grade climbing into the trees", "Wide establishing shot showing the hill and the forest above", "A home terraced up steps from the sidewalk (show the stair-access)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. FOREST KNOLLS IS A 1960s HILLSIDE TRACT —\n" +
+          "BUILT OUT BETWEEN ROUGHLY 1959 AND 1963 AS A SUBDIVISION\n" +
+          "OF SINGLE-FAMILY HOMES IN THE MID-CENTURY MODERN STYLE,\n" +
+          "THAT EICHLER-ERA LOOK, WITH THE LIVING AREAS UPSTAIRS\n" +
+          "OVER A GROUND-FLOOR GARAGE.\n" +
+          "BUT THE HILL ABOVE IT IS MUCH OLDER. ALL OF THIS\n" +
+          "WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE.\n" +
+          "THEN, IN 1880, ADOLPH SUTRO BOUGHT HUNDREDS OF ACRES WEST OF TWIN PEAKS.\n" +
+          "BEGINNING AROUND SAN FRANCISCO'S FIRST ARBOR DAY IN 1886,\n" +
+          "HE PLANTED THESE SLOPES WITH BLUE GUM EUCALYPTUS,\n" +
+          "MONTEREY PINE, AND MONTEREY CYPRESS —\n" +
+          "AND THAT IS THE FOREST THAT STILL SHADES THE NEIGHBORHOOD TODAY.\n" +
+          "THAT WOODLAND IS NOW THE MOUNT SUTRO OPEN SPACE RESERVE,\n" +
+          "A CLOUD-FOREST ON THE HILL — THE UCSF INTERIOR GREENBELT —\n" +
+          "OWNED AND MANAGED BY UC SAN FRANCISCO,\n" +
+          "WHOSE PARNASSUS CAMPUS SITS JUST OVER THE RIDGE.\n" +
+          "SO YOU'VE GOT MID-CENTURY HOMES WRAPPED IN A VICTORIAN-ERA FOREST —\n" +
+          "THAT'S THE STORY OF FOREST KNOLLS.",
+        broll: ["Mid-century modern facades, living space stacked over the garage", "The eucalyptus canopy of the Mount Sutro reserve", "A wide look up the hill toward the forest"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "RIGHT AT THE TOP OF THESE STREETS ARE TRAILHEADS\n" +
+          "INTO THE MOUNT SUTRO CLOUD FOREST — THE UCSF INTERIOR GREENBELT —\n" +
+          "ROUGHLY SIXTY-ONE ACRES OF EUCALYPTUS CRISSCROSSED WITH THE TRAILS.\n" +
+          "THOSE TREES AREN'T NATIVE: ADOLPH SUTRO PLANTED THEM\n" +
+          "STARTING AROUND 1886, AND THEY'VE GROWN INTO A DENSE,\n" +
+          "FOG-CATCHING CANOPY THAT FEELS A WORLD AWAY FROM THE CITY BELOW.\n" +
+          "THE HOMES ARE A TIME CAPSULE TOO — MOST WENT UP\n" +
+          "IN A TIGHT WINDOW AROUND 1959 TO 1963,\n" +
+          "SO THE NEIGHBORHOOD HAS A REAL MID-CENTURY CONSISTENCY YOU RARELY SEE.\n" +
+          "AND BECAUSE THE FOG DRIFTS RIGHT THROUGH THE TREES,\n" +
+          "THE SLOPES TAKE ON A GENUINE CLOUD-FOREST FEEL — EVEN IN SUMMER.\n" +
+          "THIS IS ONE OF THE GREENEST, MOST HIDDEN CORNERS OF THE WHOLE CITY.",
+        broll: ["A trailhead sign / path into the eucalyptus", "Fog drifting through the canopy", "A run of consistent mid-century facades"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "AND I'LL BE STRAIGHT WITH YOU: FOREST KNOLLS CATCHES THE MARINE LAYER.\n" +
+          "SITTING HIGH ON THE FLANK OF MOUNT SUTRO,\n" +
+          "THE HILL PULLS IN FOG THAT DRIFTS THROUGH THE EUCALYPTUS —\n" +
+          "SO YOU GET A MIX: SOME BRIGHT, CLEAR HOURS, AND SOME GREY, MISTY ONES.\n" +
+          "THAT'S THE TRADE FOR THE TREES AND THE QUIET.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER POCKETS OF THE CITY — IT'S LINKED ON MY FOREST KNOLLS PAGE BELOW.",
+        broll: ["Fog pouring through the Mount Sutro eucalyptus", "Contrast: a clear hour with the view opening up", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. AND ON A HILL LIKE THIS, TRANSIT TAKES A LITTLE KNOW-HOW.\n" +
+          "THE 36-TERESITA BUS CLIMBS THE HILL ITSELF AND CONNECTS TO FOREST HILL STATION;\n" +
+          "THE 43-MASONIC RUNS NEARBY, AND DOWN THE SLOPE\n" +
+          "YOU'LL FIND THE 6 AND THE 66 THREADING THROUGH COLE VALLEY.\n" +
+          "BELOW IN COLE VALLEY, THE N-JUDAH MUNI METRO RUNS STRAIGHT DOWNTOWN.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT FOUR-AND-A-HALF MILES NORTHEAST;\n" +
+          "TAKE THE N-JUDAH DOWN THE HILL AND ON TOWARD THE EMBARCADERO,\n" +
+          "AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? FROM DOWNTOWN, TAKE BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT THIRTY-FIVE MINUTES DOOR TO PLATFORM.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR IN ABOUT THIRTY.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE MUNI TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN THE PENINSULA IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S ROUGHLY THE SAME BY CAR ON 280 OR 101.\n" +
+          "BOTTOM LINE: WATER, RAIL, AND THREE BRIDGES — ALL WITHOUT OWNING A CAR,\n" +
+          "ONCE YOU GET DOWN THE HILL TO THE LINE.",
+        broll: [
+          "The 36-Teresita climbing the hill; the N-Judah in Cole Valley below",
+          "Embarcadero Station + the Ferry Building / a departing ferry",
+          "A BART train; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Forest Knolls → Oakland / Larkspur / the Peninsula with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: FOREST KNOLLS SITS HIGH ON THE FLANK OF MOUNT SUTRO,\n" +
+          "WELL INLAND AND WELL ABOVE THE BAY,\n" +
+          "SO IT IS NOT IN A TSUNAMI HAZARD ZONE — CROSS THAT WORRY OFF THE LIST.\n" +
+          "LIKE MUCH OF HILLY SAN FRANCISCO, PARTS OF THE NEIGHBORHOOD\n" +
+          "DO FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "THAT'S STANDARD FOR THE CITY'S SLOPES, AND IT'S SOMETHING\n" +
+          "EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing to the hillside / the forest above", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "FOREST KNOLLS ITSELF IS QUIET AND RESIDENTIAL — THIS IS A HOMES-IN-THE-TREES\n" +
+          "KIND OF PLACE, NOT A COMMERCIAL STRIP.\n" +
+          "FOR COFFEE, BRUNCH, AND DINNER, YOU DROP DOWN THE HILL\n" +
+          "INTO COLE VALLEY OR THE INNER SUNSET, BOTH JUST MINUTES AWAY,\n" +
+          "WHERE THERE'S A REAL LINEUP OF CAFÉS, RESTAURANTS, AND SHOPS.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE BEST NEARBY\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY FOREST KNOLLS DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: PEACE AND TREES UP TOP, A LIVELY STRIP A SHORT HOP DOWNHILL.",
+        broll: ["The quiet, leafy residential streets", "Cole Valley / Inner Sunset café windows down the hill", "A trail disappearing into the eucalyptus"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: FOREST KNOLLS IS REMARKABLY CONSISTENT —\n" +
+          "MOSTLY SINGLE-FAMILY MID-CENTURY MODERN HOMES FROM THAT 1959-TO-1963 ERA,\n" +
+          "MANY WITH THE LIVING SPACE UPSTAIRS, A GARAGE BELOW, AND VIEWS OUT THE BACK.\n" +
+          "IT RUNS FROM AN ORIGINAL-CONDITION TIME CAPSULE TO A FULLY REIMAGINED SHOWPIECE.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR FOREST KNOLLS ON MY SITE —\n" +
+          "CURRENT MEDIANS, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A mid-century facade, a reimagined remodel, a view deck", "A 'For Sale' sign on a leafy block", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN FOREST KNOLLS?\n" +
+          "SOMEONE WHO WANTS QUIET, TREES, AND BIG VIEWS,\n" +
+          "WITH FOREST TRAILS AT THE TOP OF THE STREET\n" +
+          "AND THE CITY STILL JUST DOWN THE HILL.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY FOREST KNOLLS NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING FOREST KNOLLS HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass along a Forest Knolls street (you, relaxed, not pitching)", "A quiet look up toward the Mount Sutro forest", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the forest trailhead, mid-century facades, the hillside viewpoint, and the canopy in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Trailhead sign, a terraced-home entry, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Forest Knolls page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Forest Knolls + the Inner Sunset + Cole Valley in one morning loop.",
+  },
+"Westwood Park": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Westwood%20Park&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Westwood Park)",
+    route: {
+      // Route stays ENTIRELY within the Westwood Park boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Miramar & Monterey — gateway pillars", note: "Start — the 1916 Mullgardt brick entrance pillars, City Landmark No. 314", coord: [-122.4560, 37.7311] },
+        { n: 2, name: "Miramar Avenue spine", note: "The straight axis that bisects the curving oval plan", coord: [-122.4562, 37.7285] },
+        { n: 3, name: "Wildwood Way — curving oval street", note: "A concentric oval street where almost no block runs straight", coord: [-122.4575, 37.7268] },
+        { n: 4, name: "Eastwood Drive — bungalow block", note: "Classic 1920s craftsman and Mediterranean bungalows", coord: [-122.4548, 37.7262] },
+        { n: 5, name: "Greenwood Avenue curve", note: "The quieter inner curve; deed-restricted single-family blocks", coord: [-122.4570, 37.7248] },
+        { n: 6, name: "Monterey Blvd edge", note: "The transit-rich northern edge near City College", coord: [-122.4555, 37.7313] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 90,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ON THE CURVING STREETS OF WESTWOOD PARK, AND THE SUN IS OUT —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE WESTWOOD PARK? LET'S GO.",
+        broll: ["Two-shot idea: a foggy ridge in one frame, sunny Westwood Park street in the next", "You moving through the gateway pillars into frame", "A curving oval street sign to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? WESTWOOD PARK SITS IN SOUTH-CENTRAL SAN FRANCISCO,\n" +
+          "TUCKED JUST SOUTH OF MONTEREY BOULEVARD AND CITY COLLEGE,\n" +
+          "WITH BALBOA PARK AND THE OCEAN AVENUE STRIP A SHORT HOP AWAY.\n" +
+          "IT'S A SELF-CONTAINED OVAL OF CURVING, CONCENTRIC STREETS,\n" +
+          "BISECTED BY MIRAMAR AVENUE — AND ALMOST NOTHING RUNS STRAIGHT.\n" +
+          "THE LAND SITS ROUGHLY 260 TO 440 FEET UP, ON GENTLE, ROLLING GRADES —\n" +
+          "RELATIVELY EASY GROUND COMPARED WITH THE BIG HILLS NORTH AND WEST OF HERE.\n" +
+          "THE CURVING STREETS HOLD A FORGIVING SLOPE,\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR\n" +
+          "ALONG MOST OF THE SIDEWALKS.\n" +
+          "BUT THE HOMES THEMSELVES ARE WORTH A CLOSER LOOK —\n" +
+          "MANY OF THESE COMPACT BUNGALOWS SIT UP A FEW STEPS FROM THE SIDEWALK,\n" +
+          "WITH THE GARAGE TUCKED BELOW THE LIVING FLOOR.\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME —\n" +
+          "THE GRADES ARE KIND, BUT THE FRONT STAIRS ARE THE THING TO WATCH.\n" +
+          "OVERALL, THOUGH, THIS IS SOME OF THE MORE EASY-TO-GET-AROUND TERRAIN\n" +
+          "ON THE WEST SIDE OF THE CITY.",
+        broll: ["Slow pan along a curving oval street; the street signs", "Wide establishing shot showing the gentle rolling grade", "A bungalow front with steps up from the sidewalk (show the entry)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. WESTWOOD PARK OPENED IN 1916 —\n" +
+          "ONE OF SAN FRANCISCO'S EARLY PLANNED 'RESIDENCE PARKS,'\n" +
+          "LAID OUT BY THE REAL ESTATE FIRM BALDWIN AND HOWELL.\n" +
+          "THEY BUILT IT ON ABOUT NINETY ACRES OF FORMER SUTRO LAND,\n" +
+          "RIGHT BY THE OLD INGLESIDE RACETRACK — A LITERAL OVAL\n" +
+          "THAT YOU CAN STILL FEEL ECHOED IN THE STREET PLAN.\n" +
+          "INSTEAD OF THE CITY GRID, THE FIRM DREW CURVING, CONCENTRIC OVAL STREETS,\n" +
+          "BISECTED BY MIRAMAR AVENUE, WITH NEARLY EVERY BLOCK AVOIDING A STRAIGHT LINE.\n" +
+          "MORE THAN SIX HUNDRED AND FIFTY COMPACT CRAFTSMAN AND MEDITERRANEAN BUNGALOWS\n" +
+          "WENT UP, MOST OF THEM IN THE 1920s,\n" +
+          "MARKETED TO FAMILIES OF AVERAGE MEANS — NOT THE WEALTHY.\n" +
+          "RESIDENTS FORMED THE WESTWOOD PARK ASSOCIATION IN MARCH OF 1917,\n" +
+          "AND IT'S STILL ACTIVE OVER A CENTURY LATER.\n" +
+          "AT THE EDGES, ARCHITECT LOUIS CHRISTIAN MULLGARDT DESIGNED\n" +
+          "THE DISTINCTIVE BRICK GATEWAY PILLARS THAT MARK THE ENTRANCES —\n" +
+          "NOW CITY LANDMARK NUMBER 314.\n" +
+          "SPEND TIME ON THESE BLOCKS AND YOU'RE STANDING IN A FULLY PLANNED\n" +
+          "PIECE OF EARLY-TWENTIETH-CENTURY SAN FRANCISCO.",
+        broll: ["The Mullgardt brick gateway pillars", "An aerial-feel pan showing the oval street pattern", "A row of 1920s bungalows along a curve"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 150,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "THOSE CURVING OVAL STREETS AREN'T AN ACCIDENT —\n" +
+          "THE WHOLE NEIGHBORHOOD WAS BUILT ON THE OLD INGLESIDE RACETRACK LAND,\n" +
+          "AND THE PLAN STILL TRACES THOSE CONCENTRIC OVALS.\n" +
+          "THE BRICK GATEWAY PILLARS AT THE ENTRANCES WERE DESIGNED\n" +
+          "BY LOUIS CHRISTIAN MULLGARDT, A MAJOR BAY AREA ARCHITECT,\n" +
+          "AND THE CITY MADE THEM LANDMARK NUMBER 314 IN 2024.\n" +
+          "MANY OF THE BUNGALOWS CAME FROM JUST A HANDFUL OF DESIGNERS —\n" +
+          "INCLUDING IDA McCAIN, ONE OF THE RARE WOMEN DESIGNING HOMES IN HER ERA.\n" +
+          "AND THE WHOLE TRACT IS GOVERNED BY SINGLE-FAMILY DEED RESTRICTIONS\n" +
+          "THAT GO BACK TO 1916 — PART OF WHY IT STILL LOOKS SO CONSISTENT TODAY.\n" +
+          "THIS IS A NEIGHBORHOOD THAT WAS DESIGNED ALL AT ONCE, ON PURPOSE.",
+        broll: ["Tight shot of a gateway pillar and the landmark detail", "A curve where you can read the oval geometry", "Matching bungalow rooflines down a block"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "WESTWOOD PARK SITS INLAND ON THE SOUTH-CENTRAL SIDE OF THE CITY,\n" +
+          "SO IT LEANS SUNNIER AND MILDER THAN THE FOG-BOUND AVENUES OUT WEST.\n" +
+          "BUT I'LL BE HONEST — IT'S NOT GUARANTEED SUN.\n" +
+          "WHEN THE SUMMER FOG PUSHES IN OVER TWIN PEAKS AND MOUNT DAVIDSON,\n" +
+          "THIS POCKET CAN CATCH ITS EDGE, ESPECIALLY MORNINGS AND EVENINGS.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY WESTWOOD PARK PAGE BELOW.",
+        broll: ["Blue sky over a curving street; you in shirtsleeves", "Contrast: fog spilling over the Mount Davidson ridge", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. AND WESTWOOD PARK IS BETTER CONNECTED\n" +
+          "THAN A QUIET BUNGALOW TRACT MIGHT LOOK AT FIRST GLANCE.\n" +
+          "BALBOA PARK BART IS JUST OFF THE NORTHEAST EDGE,\n" +
+          "AND THE J, K, AND M MUNI METRO LINES ALL FEED THROUGH THAT SAME HUB\n" +
+          "STRAIGHT DOWNTOWN.\n" +
+          "ON THE STREET, THE 43, THE 49, AND THE 29 BUSES THREAD THE EDGES\n" +
+          "AND TIE YOU INTO THE REST OF THE CITY.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT SIX MILES NORTHEAST,\n" +
+          "ROUGHLY THIRTY-FIVE MINUTES ON BART AND METRO TO EMBARCADERO,\n" +
+          "AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? TAKE BART FROM BALBOA PARK —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT FORTY MINUTES, NO TRANSFER OUT OF THE CITY NEEDED.\n" +
+          "HEADING NORTH TO MARIN? RIDE IN TO THE FERRY BUILDING\n" +
+          "AND THE LARKSPUR FERRY CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR IN ABOUT THIRTY.\n" +
+          "HEADING SOUTH TO THE PENINSULA? CALTRAIN RUNS DOWN TO PALO ALTO\n" +
+          "IN ABOUT FIFTY MINUTES ONCE YOU'RE AT THE DEPOT —\n" +
+          "OR IT'S ROUGHLY THE SAME BY CAR ON 280 OR 101,\n" +
+          "AND 280 IS RIGHT THERE ON THE WEST EDGE.\n" +
+          "BOTTOM LINE: BART, METRO, FERRIES, AND THE FREEWAY —\n" +
+          "ALL WITHIN EASY REACH, AND ALL WITHOUT OWNING A CAR.",
+        broll: [
+          "Balboa Park BART entrance; a K-line car on Ocean Ave",
+          "Embarcadero Station + the Ferry Building / a departing ferry",
+          "A BART train; the Golden Gate Bridge; a Caltrain at the depot; the 280 on-ramp",
+          "Simple motion-graphic map: Westwood Park → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: WESTWOOD PARK SITS WELL INLAND AND UP ON ROLLING GROUND,\n" +
+          "FAR FROM THE BAY, SO IT IS NOT IN A TSUNAMI HAZARD ZONE —\n" +
+          "CROSS THAT WORRY OFF THE LIST.\n" +
+          "AND ON THE SEISMIC SIDE, THIS PARTICULAR TRACT IS NOT MAPPED\n" +
+          "INSIDE A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "WHICH IS A NICE EXCEPTION FOR A WEST-SIDE NEIGHBORHOOD.\n" +
+          "THAT SAID, THIS IS STILL CALIFORNIA, AND EVERY BUYER SHOULD REVIEW\n" +
+          "THE GROUND AND THE STRUCTURE WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing to the rolling ground and the inland setting", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "WESTWOOD PARK ITSELF IS ALL HOMES — THAT'S THE POINT OF A RESIDENCE PARK —\n" +
+          "BUT THE EVERYDAY STUFF IS RIGHT ON THE DOORSTEP.\n" +
+          "OCEAN AVENUE AND MONTEREY BOULEVARD WRAP THE NEIGHBORHOOD\n" +
+          "WITH COFFEE, BURGERS, SUSHI, A NEIGHBORHOOD ALE HOUSE, AND DAILY ERRANDS.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE BEST NEARBY\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY WESTWOOD PARK DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: QUIET, GREEN STREETS AT HOME, WITH A LIVELY STRIP A SHORT HOP AWAY.",
+        broll: ["Café tables on the Ocean Ave strip; a busy window at dusk", "A quiet residential curve at home for contrast", "A neighborhood ale-house sign (general, not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: WESTWOOD PARK IS REMARKABLY CONSISTENT —\n" +
+          "SIX HUNDRED-PLUS COMPACT CRAFTSMAN AND MEDITERRANEAN BUNGALOWS,\n" +
+          "MOST FROM THE 1920s, ON SINGLE-FAMILY DEED-RESTRICTED LOTS.\n" +
+          "YOU WON'T FIND TOWERS OR BIG FLATS BUILDINGS HERE —\n" +
+          "IT'S A NEIGHBORHOOD OF DETACHED AND SEMI-DETACHED HOMES,\n" +
+          "FROM ORIGINAL-CONDITION TIME CAPSULES TO FULLY MODERNIZED REMODELS.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR WESTWOOD PARK ON MY SITE —\n" +
+          "CURRENT MEDIANS RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A craftsman bungalow, a Mediterranean bungalow, a modernized remodel", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN WESTWOOD PARK?\n" +
+          "SOMEONE WHO WANTS A QUIET, GREEN, ALL-HOMES POCKET\n" +
+          "WITH BART, METRO, AND THE FREEWAY ALL WITHIN EASY REACH.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY WESTWOOD PARK NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING WESTWOOD PARK HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass along a curving street (you, relaxed, not pitching)", "A quiet look down an oval block through the gateway pillars", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the gateway pillars, oval streets, bungalow blocks, and the Monterey/Ocean edge in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Street signs, the pillars, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Westwood Park page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Westwood Park + Westwood Highlands + Balboa Terrace in one morning loop.",
+  },
+"Westwood Highlands": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Westwood%20Highlands&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Westwood Highlands)",
+    route: {
+      // Route stays ENTIRELY within the Westwood Highlands boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Mount Davidson approach — northeast edge", note: "Start — the trailhead foot of the summit slope, fog drifting over the top", coord: [-122.4552, 37.7336] },
+        { n: 2, name: "Curving hillside street", note: "The curvilinear street plan that breaks from the city grid", coord: [-122.4558, 37.7336] },
+        { n: 3, name: "Slope viewpoint", note: "A break in the homes looking out over the southwest hills", coord: [-122.4575, 37.7322] },
+        { n: 4, name: "Period-home block", note: "The housing-stock segment: 1920s English-cottage and Spanish-revival homes", coord: [-122.4583, 37.7316] },
+        { n: 5, name: "Upper curving street", note: "The higher blocks climbing back toward the Mount Davidson summit", coord: [-122.4553, 37.7337] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ON THE SLOPE BELOW MOUNT DAVIDSON IN WESTWOOD HIGHLANDS, AND THE FOG IS DRIFTING OVER THE TOP — WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE WESTWOOD HIGHLANDS? LET'S GO.",
+        broll: ["Two-shot idea: a foggy ridge in one frame, a sunny curving street in the next", "You moving up a curving slope street into frame", "Fog spilling over the Mount Davidson summit to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? WESTWOOD HIGHLANDS SITS ON THE SOUTHERN SLOPE\n" +
+          "OF MOUNT DAVIDSON, THE HIGHEST NATURAL POINT IN SAN FRANCISCO,\n" +
+          "JUST UPHILL FROM WESTWOOD PARK AND NEAR WEST PORTAL, INGLESIDE, AND SUNNYSIDE.\n" +
+          "IT'S A QUIET, PURELY RESIDENTIAL TRACT OF CURVING STREETS\n" +
+          "THAT WIND ACROSS THE HILLSIDE INSTEAD OF FOLLOWING THE CITY GRID.\n" +
+          "THE LAND HERE RUNS FROM ABOUT 390 FEET UP TO AROUND 570 FEET,\n" +
+          "SO THESE ARE GENUINELY HILLY BLOCKS — MODERATE-TO-STEEP GRADES\n" +
+          "ON CURVING STREETS, NOT A FLAT VALLEY FLOOR.\n" +
+          "PLENTY OF IT IS PLEASANT TO EXPLORE, BUT I WANT TO BE HONEST ABOUT THE GRADES:\n" +
+          "SOME STRETCHES PASS WHAT THE A-D-A CONSIDERS AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT —\n" +
+          "SO IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU,\n" +
+          "IT'S WORTH CHECKING BLOCK BY BLOCK BEFORE YOU FALL FOR A STREET.\n" +
+          "AND THE HOMES THEMSELVES MATTER TOO —\n" +
+          "MANY OF THESE HOUSES SIT UP A FLIGHT OF STEPS FROM THE SIDEWALK,\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.",
+        broll: ["Slow pan along a curving hillside street", "Wide establishing shot showing the slope rising to the Mount Davidson summit", "A genuinely steep block (show the grade)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. WESTWOOD HIGHLANDS WAS LAID OUT IN THE 1920s\n" +
+          "AS ONE OF SAN FRANCISCO'S EARLY 'RESIDENCE PARKS' —\n" +
+          "AN EXTENSION OF WESTWOOD PARK CLIMBING THE HIGHER SLOPE OF MOUNT DAVIDSON.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "THE REALTORS BALDWIN AND HOWELL BUILT OUT THE ORIGINAL TRACT\n" +
+          "OF 283 CUSTOM HOMES BETWEEN 1924 AND 1929.\n" +
+          "INSTEAD OF FOLLOWING THE CITY'S GRID, THEY LAID DOWN CURVING STREETS\n" +
+          "THAT FIT THE STEEP TERRAIN, WITH DETACHED SINGLE-FAMILY HOUSES\n" +
+          "AND GARAGES AND UTILITY POLES TUCKED BEHIND THE HOMES.\n" +
+          "AND THEY GAVE EACH HOUSE A DIFFERENT DESIGN FROM ITS NEIGHBOR —\n" +
+          "ENGLISH COTTAGES, SPANISH-INFLUENCED STUCCO, PERIOD-REVIVAL STYLES,\n" +
+          "WITH MID-CENTURY HOMES FILLING IN ON THE HIGHER BLOCKS LATER.\n" +
+          "IT WAS AMONG THE FIRST RESIDENTIAL COMMUNITIES IN THE COUNTRY\n" +
+          "TO ADOPT A SHARED SET OF COVENANTS AND RESTRICTIONS.\n" +
+          "AND IT SITS RIGHT BELOW THE MOUNT DAVIDSON SUMMIT —\n" +
+          "AT 928 FEET, THE HIGHEST NATURAL POINT IN THE WHOLE CITY.",
+        broll: ["Period-revival facades along a curving block", "An English-cottage and a Spanish-stucco home side by side", "The wooded Mount Davidson slope rising above the rooftops"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "THE HILL ABOVE YOU IS CROWNED BY A 103-FOOT CONCRETE CROSS —\n" +
+          "THE LANDMARK AT THE TOP OF MOUNT DAVIDSON PARK,\n" +
+          "ROUGHLY 40 ACRES OF WOODED OPEN SPACE AND TRAILS\n" +
+          "SITTING JUST NORTHEAST OF THE NEIGHBORHOOD.\n" +
+          "EVERY ONE OF THE 283 ORIGINAL HOMES WAS GIVEN A DIFFERENT DESIGN\n" +
+          "FROM THE HOUSE NEXT DOOR — SO NO TWO BLOCKS FEEL QUITE THE SAME.\n" +
+          "THOSE CURVING STREETS WEREN'T AN ACCIDENT EITHER —\n" +
+          "THEY WERE A DELIBERATE BREAK FROM THE CITY GRID TO FIT THE STEEP TERRAIN.\n" +
+          "AND THERE'S STILL AN ACTIVE WESTWOOD HIGHLANDS ASSOCIATION,\n" +
+          "PART OF THE WEST OF TWIN PEAKS CENTRAL COUNCIL,\n" +
+          "LOOKING AFTER THE NEIGHBORHOOD A CENTURY ON.\n" +
+          "THIS IS A PLACE BUILT QUIETLY, AND IT HAS STAYED THAT WAY.",
+        broll: ["The concrete cross at the Mount Davidson summit", "Trailhead into the wooded park", "Two very different homes on the same block"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "WESTWOOD HIGHLANDS SITS HIGH ON THE MOUNT DAVIDSON SLOPE,\n" +
+          "RIGHT WHERE THE HILL CATCHES THE MARINE LAYER ROLLING IN OFF THE OCEAN.\n" +
+          "SO BE HONEST WITH YOURSELF: THIS IS A MIXED MICROCLIMATE —\n" +
+          "SOME MORNINGS THE FOG DRIFTS OVER THE TOP AND SITS ON THESE BLOCKS,\n" +
+          "AND OTHER AFTERNOONS IT BURNS OFF AND THE SLOPE OPENS UP TO SUN.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY WESTWOOD HIGHLANDS PAGE BELOW.",
+        broll: ["Fog pouring over the Mount Davidson ridge onto the homes", "Contrast: the same slope in clear afternoon sun", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND.\n" +
+          "ON THE HILLSIDE ITSELF, MUNI'S 36 AND 43 BUSES THREAD THROUGH THE SLOPES,\n" +
+          "AND WEST PORTAL IS JUST OVER THE WAY — WITH THE MUNI METRO\n" +
+          "RUNNING UNDERGROUND STRAIGHT DOWNTOWN.\n" +
+          "GLEN PARK IS A SHORT RIDE OFF, AND IT GIVES YOU BOTH MUNI AND BART.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT FIVE AND A HALF MILES NORTHEAST,\n" +
+          "AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? TAKE MUNI TO GLEN PARK AND HOP BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT FORTY MINUTES THAT WAY.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR IN ABOUT THIRTY.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE MUNI TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S ROUGHLY THE SAME BY CAR ON 280 OR 101.\n" +
+          "BOTTOM LINE: WATER, RAIL, AND THREE BRIDGES — ALL WITHOUT OWNING A CAR.",
+        broll: [
+          "A 36 or 43 bus on a curving hillside street",
+          "West Portal Station entrance; the Ferry Building / a departing ferry",
+          "A BART train at Glen Park; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Westwood Highlands → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: WESTWOOD HIGHLANDS SITS HIGH ON THE MOUNT DAVIDSON SLOPE,\n" +
+          "WELL INLAND AND WELL ABOVE THE BAY,\n" +
+          "SO IT IS NOT IN A TSUNAMI HAZARD ZONE — CROSS THAT WORRY OFF THE LIST.\n" +
+          "AND ON THE SEISMIC SIDE, THIS PARTICULAR TRACT IS NOT MAPPED\n" +
+          "WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE EITHER —\n" +
+          "THOUGH OF COURSE THIS IS STILL CALIFORNIA, AND EVERY BUYER ANYWHERE\n" +
+          "REVIEWS EARTHQUAKE READINESS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing up the slope toward the summit", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "WESTWOOD HIGHLANDS ITSELF IS PURELY RESIDENTIAL — THAT'S THE POINT OF IT —\n" +
+          "BUT THE WEST PORTAL AND OCEAN AVENUE STRIPS ARE MINUTES AWAY,\n" +
+          "WITH COFFEE, FAMILY RESTAURANTS, AND A HANDFUL OF NEIGHBORHOOD BARS.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEAREST BEST\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY WESTWOOD HIGHLANDS DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: THIS IS A QUIET-STREETS-AT-HOME, SHOPS-A-SHORT-RIDE-AWAY KIND OF PLACE.",
+        broll: ["A quiet curving residential street at dusk", "The West Portal / Ocean Ave shops a short ride away", "A classic neighborhood storefront (general, not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: WESTWOOD HIGHLANDS IS CLASSIC RESIDENCE-PARK SAN FRANCISCO —\n" +
+          "DETACHED SINGLE-FAMILY HOMES ON CURVING HILLSIDE STREETS,\n" +
+          "EACH ONE GIVEN A DIFFERENT PERIOD-REVIVAL OR MID-CENTURY DESIGN.\n" +
+          "IT RUNS FROM AN ORIGINAL 1920s COTTAGE TO A FULLY UPDATED HILLSIDE HOME.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR WESTWOOD HIGHLANDS ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A period-revival single-family home; a curving block of detached houses", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN WESTWOOD HIGHLANDS?\n" +
+          "SOMEONE WHO WANTS QUIET, CURVING STREETS AND A REAL HILLSIDE HOME,\n" +
+          "WITH OPEN SPACE AT THE TOP OF THE BLOCK AND THE WHOLE BAY AREA\n" +
+          "A TRAIN OR A FERRY AWAY.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY WESTWOOD HIGHLANDS NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING WESTWOOD HIGHLANDS HOME, I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass along a curving slope street (you, relaxed, not pitching)", "A quiet look up toward the Mount Davidson summit", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the curving streets, period-home variety, the Mount Davidson slope, and a fog-over-the-top moment in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, the trailhead, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Westwood Highlands page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Westwood Highlands + Westwood Park + Monterey Heights in one morning loop.",
+  },
+"Merced Manor": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Merced%20Manor&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Merced Manor)",
+    route: {
+      // Route stays ENTIRELY within the Merced Manor boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Sloat & 21st Ave — Merced Manor Reservoir", note: "Start — the covered reservoir + classical valve house along the north edge", coord: [-122.4775, 37.7345] },
+        { n: 2, name: "Stern Grove / Pine Lake edge", note: "The eucalyptus-and-redwood canyon just off the neighborhood's north side", coord: [-122.4795, 37.7344] },
+        { n: 3, name: "Junipero Serra & Ocean — single-family blocks", note: "Classic 1930s Spanish- and Mediterranean-style homes", coord: [-122.4810, 37.7322] },
+        { n: 4, name: "A quiet, leafy interior street", note: "Tree-lined residential blocks — the heart of the tract", coord: [-122.4840, 37.7330] },
+        { n: 5, name: "19th Ave / St. Francis Circle edge", note: "The Muni Metro and 19th Ave gateway on the east side", coord: [-122.4720, 37.7335] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M IN MERCED MANOR NEAR STERN GROVE, AND THE FOG IS ROLLING IN OFF THE OCEAN — WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE MERCED MANOR? LET'S GO.",
+        broll: ["Two-shot idea: a sunny east-side frame, fog pouring in off the ocean in the next", "You moving along a leafy Merced Manor street into frame", "The reservoir valve house / Stern Grove canopy to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? MERCED MANOR SITS IN SAN FRANCISCO'S QUIET SOUTHWEST,\n" +
+          "TUCKED BETWEEN SIGMUND STERN GROVE TO THE NORTH AND LAKE MERCED TO THE WEST,\n" +
+          "WITH WEST PORTAL OVER TOWARD THE HILLS AND 19TH AVENUE ON THE EAST.\n" +
+          "IT'S A SMALL, TIDY TRACT OF SINGLE-FAMILY HOMES ON FORMER COASTAL SAND DUNES.\n" +
+          "THE LAND ROLLS GENTLY — ROUGHLY 100 TO 270 FEET UP —\n" +
+          "AND MOST OF THE STREETS ARE EASY, LOW GRADES THAT ARE FRIENDLY\n" +
+          "WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR.\n" +
+          "BUT THIS IS SAN FRANCISCO, SO A FEW BLOCKS DO TILT MORE THAN OTHERS —\n" +
+          "AND IT'S WORTH NOTING THE GRADES STREET BY STREET BEFORE YOU COMMIT.\n" +
+          "AND THE HOMES THEMSELVES MATTER TOO —\n" +
+          "MANY OF THESE 1930s SINGLE-FAMILY HOUSES SIT UP A FEW STEPS FROM THE SIDEWALK,\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.\n" +
+          "THE TAKEAWAY: A CALM, LEAFY, FAMILY-FRIENDLY POCKET\n" +
+          "WHERE THE GROUND IS MOSTLY GENTLE — BUT NEVER PERFECTLY FLAT.",
+        broll: ["Slow pan along a tree-lined Merced Manor street", "Wide establishing shot showing Stern Grove + the Lake Merced parkland", "A block with a few-step rise from sidewalk to front door (show the grade)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. MERCED MANOR WAS LAID OUT IN THE 1930s AND 40s\n" +
+          "AS A RESIDENTIAL SUBDIVISION ON FORMER RANCHO LAGUNA DE LA MERCED LANDS,\n" +
+          "ON TERRAIN THAT HAD ONCE BEEN WINDSWEPT COASTAL SAND DUNES.\n" +
+          "ALL OF THIS WAS OHLONE LAND LONG BEFORE THAT —\n" +
+          "FAMILIES ONCE SUMMERED NEAR LAKE MERCED, JUST TO THE WEST.\n" +
+          "THE TRACT FILLED IN WITH COMFORTABLE SPANISH- AND MEDITERRANEAN-STYLE\n" +
+          "SINGLE-FAMILY HOMES THAT STILL DEFINE THESE STREETS TODAY.\n" +
+          "IT GREW UP NEAR STERN GROVE, THE PINE LAKE AREA,\n" +
+          "AND THE OLD LAKE MERCED AND SUNSET RESERVOIR SYSTEM\n" +
+          "THAT BROUGHT WATER TO THIS CORNER OF THE CITY.\n" +
+          "ITS SIGNATURE LANDMARK IS THE MERCED MANOR RESERVOIR —\n" +
+          "A COVERED, NEARLY TEN-MILLION-GALLON CITY FACILITY ALONG SLOAT BOULEVARD,\n" +
+          "FRONTED BY A HANDSOME CLASSICAL VALVE HOUSE.\n" +
+          "AND JUST TO THE NORTH LIES SIGMUND STERN GROVE,\n" +
+          "THE EUCALYPTUS-AND-REDWOOD CANYON THAT HAS HOSTED\n" +
+          "THE FREE STERN GROVE FESTIVAL CONCERTS SINCE 1938.\n" +
+          "THIS IS A QUIET, TIDY, FAMILY-FRIENDLY NEIGHBORHOOD\n" +
+          "THAT HAS STAYED REMARKABLY TRUE TO ITS ORIGINAL CHARACTER.",
+        broll: ["Spanish- and Mediterranean-style facades", "The Merced Manor Reservoir valve house along Sloat", "Stern Grove canopy / a Pine Lake edge"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "THAT QUIET RESERVOIR ALONG SLOAT HOLDS NEARLY TEN MILLION GALLONS,\n" +
+          "TUCKED UNDER A GRASSY LID WITH A LITTLE CLASSICAL VALVE HOUSE OUT FRONT.\n" +
+          "JUST NORTH, SIGMUND STERN GROVE HIDES A REDWOOD-AND-EUCALYPTUS CANYON\n" +
+          "WHERE FREE SUNDAY CONCERTS HAVE PLAYED EVERY SUMMER SINCE 1938 —\n" +
+          "AND PINE LAKE, ONE OF THE CITY'S FEW NATURAL LAKES, SITS AT ITS WEST END.\n" +
+          "THE WHOLE TRACT WAS BUILT ON FORMER SAND DUNES OF RANCHO LAGUNA DE LA MERCED,\n" +
+          "WHICH IS WHY THE GROUND HERE IS SANDY BENEATH ALL THOSE TIDY LAWNS.\n" +
+          "AND THOUGH IT SITS RIGHT BESIDE BUSY 19TH AVENUE,\n" +
+          "STEP ONE BLOCK IN AND IT GOES SUDDENLY, SURPRISINGLY STILL.\n" +
+          "THIS IS A NEIGHBORHOOD THAT KEEPS ITS BEST PARTS QUIET.",
+        broll: ["Reservoir valve house tight shot", "Stern Grove concert meadow / Pine Lake", "A hushed interior street one block off 19th Ave"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "I'LL BE HONEST WITH YOU: MERCED MANOR IS ON THE FOGGY SIDE OF TOWN.\n" +
+          "OUT HERE NEAR THE OCEAN AND LAKE MERCED, THE SUMMER FOG ROLLS IN\n" +
+          "OFF THE PACIFIC AND CAN SIT FOR HOURS, ESPECIALLY MORNINGS AND EVENINGS.\n" +
+          "STERN GROVE'S CANYON HOLDS THAT COOL, GREEN, MISTY FEEL —\n" +
+          "IT'S PART OF THE NEIGHBORHOOD'S CHARM, BUT IT'S REAL.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY MERCED MANOR PAGE BELOW.",
+        broll: ["Fog rolling in off the ocean / over Lake Merced", "Cool green mist in the Stern Grove canyon", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. AND MERCED MANOR HAS SOLID TRANSIT RIGHT AT ITS EDGES.\n" +
+          "ALONG 19TH AVENUE AND ST. FRANCIS CIRCLE, THE M-OCEAN VIEW MUNI METRO RUNS\n" +
+          "STRAIGHT DOWNTOWN, WITH THE K-INGLESIDE LINE NEARBY TOO.\n" +
+          "THE 28 ON 19TH AVENUE, PLUS THE 23 AND THE 57 BUSES, THREAD THROUGH THE AREA,\n" +
+          "AND WEST PORTAL STATION — A FULL METRO HUB — IS A BIT AWAY TO THE EAST.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT SIX AND A HALF MILES NORTHEAST,\n" +
+          "ROUGHLY FORTY-FIVE MINUTES ON THE MUNI METRO TO EMBARCADERO,\n" +
+          "AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? FROM DOWNTOWN, HOP BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT FIFTY-FIVE MINUTES ALL TOLD.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR IN ABOUT THIRTY.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE MUNI TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S ROUGHLY FIFTY BY CAR ON 280 OR 101.\n" +
+          "BOTTOM LINE: WATER, RAIL, AND THREE BRIDGES — ALL WITHOUT OWNING A CAR.",
+        broll: [
+          "An M-line train on 19th Ave / St. Francis Circle; a 28 bus",
+          "Embarcadero Station + the Ferry Building / a departing ferry",
+          "A BART train; the Bay Bridge; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Merced Manor → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: MERCED MANOR SITS INLAND OF THE LAKE AND THE OCEAN,\n" +
+          "UP AWAY FROM THE SHORELINE, SO IT IS NOT IN A TSUNAMI HAZARD ZONE —\n" +
+          "CROSS THAT WORRY OFF THE LIST.\n" +
+          "NOW THE HONEST PART: THIS TRACT WAS BUILT ON FORMER COASTAL SAND DUNES,\n" +
+          "AND SANDY GROUND IS SOMETHING EVERY CALIFORNIA BUYER REVIEWS\n" +
+          "WITH THEIR INSPECTOR AND INSURER, ESPECIALLY FOR SEISMIC SHAKING.\n" +
+          "IT'S A STANDARD CHECK OUT HERE, NOT A REASON TO RULE THE TRACT OUT.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing toward Lake Merced / the inland rise", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "MERCED MANOR ITSELF IS PURELY RESIDENTIAL — QUIET, LEAFY, AND CALM —\n" +
+          "BUT THE SHOPS AND RESTAURANTS ARE JUST MINUTES AWAY.\n" +
+          "NEARBY WEST PORTAL AND TARAVAL GIVE YOU COFFEE, BRUNCH,\n" +
+          "CLASSIC DINNER SPOTS, AND A FRIENDLY NEIGHBORHOOD PUB OR TWO.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE AREA'S BEST\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY MERCED MANOR DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: A PEACEFUL HOME BASE, WITH A LIVELY MAIN STREET CLOSE BY.",
+        broll: ["Café tables on West Portal Ave; a busy restaurant window at dusk", "A quiet Merced Manor block at golden hour", "A classic neighborhood pub sign (general, not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: MERCED MANOR IS CLASSIC 1930s SAN FRANCISCO —\n" +
+          "COMFORTABLE SPANISH- AND MEDITERRANEAN-STYLE SINGLE-FAMILY HOMES,\n" +
+          "WELL-KEPT, ON TIDY, TREE-LINED LOTS.\n" +
+          "IT'S A FAMILY-FRIENDLY POCKET WHERE HOMES DON'T COME UP OFTEN,\n" +
+          "SO WHEN ONE DOES, IT'S WORTH MOVING THOUGHTFULLY.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR MERCED MANOR ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A 1930s Spanish-style single-family home; a tidy front garden", "A 'For Sale' sign on a leafy block", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN MERCED MANOR?\n" +
+          "SOMEONE WHO WANTS QUIET, GREEN, FAMILY-FRIENDLY STREETS —\n" +
+          "STERN GROVE AND LAKE MERCED AT THE DOORSTEP, AND REAL TRANSIT CLOSE BY.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY MERCED MANOR NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING MERCED MANOR HOME, I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass down a leafy Merced Manor street (you, relaxed, not pitching)", "A quiet look toward Stern Grove / Lake Merced", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the reservoir valve house, Stern Grove edge, single-family blocks, and leafy streets in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, the M-line stop, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Merced Manor page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Merced Manor + Stonestown + West Portal in one loop.",
+  },
 };
