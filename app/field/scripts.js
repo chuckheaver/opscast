@@ -16390,4 +16390,1286 @@ export const SCRIPTS = {
     ],
     batchTip: "Shoot adjacent hoods the same outing — e.g. Merced Manor + Stonestown + West Portal in one loop.",
   },
+"Merced Heights": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Merced%20Heights&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Merced Heights)",
+    route: {
+      // Route stays ENTIRELY within the Merced Heights boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Brooks Park hilltop viewpoint", note: "Start — the community-tended hilltop park, native plants, city + ocean views", coord: [-122.4658, 37.7128] },
+        { n: 2, name: "Shields & Victoria — single-family blocks", note: "Modest mid-century single-family homes, many up a few steps", coord: [-122.4672, 37.7134] },
+        { n: 3, name: "Holloway & Byxbee — SF State edge", note: "The northern edge near San Francisco State / CCSF Ocean campus", coord: [-122.4688, 37.7165] },
+        { n: 4, name: "Garfield & Beverly — leafy residential street", note: "Quiet, tree-lined hilltop block; the residential heart", coord: [-122.4700, 37.7146] },
+        { n: 5, name: "Head & Shields — south slope", note: "The grade falling away south; big southwest views toward the Pacific", coord: [-122.4665, 37.7100] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M UP ON MERCED HEIGHTS BY BROOKS PARK, AND THE FOG IS ROLLING IN —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE MERCED HEIGHTS? LET'S GO.",
+        broll: ["Two-shot idea: a sunny ridge in one frame, fog spilling over Merced Heights in the next", "You moving up to the Brooks Park hilltop into frame", "The city + ocean view from the top to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? MERCED HEIGHTS SITS IN THE SOUTHWEST CORNER OF SAN FRANCISCO,\n" +
+          "ONE OF THE THREE HILLTOP NEIGHBORHOODS OF THE OMI —\n" +
+          "OCEAN VIEW, MERCED HEIGHTS, AND INGLESIDE — WITH SAN FRANCISCO STATE JUST NORTH.\n" +
+          "THIS IS A HILLTOP, AND THE LAND SHOWS IT: IT RUNS FROM ABOUT 170 FEET\n" +
+          "UP TO AROUND 500 FEET ALONG THE RIDGE, WITH REAL GRADES BETWEEN.\n" +
+          "FROM THE TOP, ESPECIALLY AT BROOKS PARK, YOU GET BIG VIEWS —\n" +
+          "THE CITY ONE WAY, THE PACIFIC THE OTHER.\n" +
+          "BUT BE HONEST WITH YOURSELF ABOUT THE SLOPE:\n" +
+          "MANY BLOCKS CLIMB PAST WHAT THE A-D-A CONSIDERS AN ACCESSIBLE GRADE — ABOUT FIVE PERCENT —\n" +
+          "AND THE MODEST SINGLE-FAMILY HOMES HERE OFTEN SIT UP A FEW STEPS FROM THE SIDEWALK.\n" +
+          "SO IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU,\n" +
+          "IT'S WORTH CHECKING BLOCK BY BLOCK AND HOME BY HOME —\n" +
+          "SOME STREETS SIT FAIRLY LEVEL ALONG THE RIDGE, OTHERS ARE A CLIMB.\n" +
+          "THE TRADE-OFF FOR THE GRADE IS THE LIGHT AND THE VIEWS:\n" +
+          "WHEN THE TOP IS CLEAR, THERE ARE FEW BETTER OUTLOOKS IN THIS PART OF THE CITY.",
+        broll: ["Slow pan along the ridge; street signs up at Brooks Park", "Wide establishing shot showing the hilltop + the ocean beyond", "A genuinely steep cross-street (show the grade)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. MERCED HEIGHTS IS A HILLTOP PART OF THE OMI —\n" +
+          "OCEAN VIEW, MERCED HEIGHTS, AND INGLESIDE —\n" +
+          "ONE OF SAN FRANCISCO'S HISTORICALLY DIVERSE DISTRICTS.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE,\n" +
+          "WHOSE FAMILIES ONCE SUMMERED ON THIS HILL NEAR LAKE MERCED.\n" +
+          "THE NAME ITSELF DATES ONLY TO THE YEARS AFTER WORLD WAR TWO,\n" +
+          "WHEN OPEN HILLSIDE ON THE WESTERN SLOPES WAS SUBDIVIDED INTO NEW HOUSING.\n" +
+          "BEGINNING AT MIDCENTURY, AN INFLUX OF AFRICAN-AMERICAN FAMILIES SETTLED HERE,\n" +
+          "AND MERCED HEIGHTS EMERGED AS AN ISLAND OF BLACK HOME OWNERSHIP\n" +
+          "UPHILL FROM EARLIER RESIDENTIAL PARKS THAT HAD BARRED MINORITY BUYERS —\n" +
+          "HELPING MAKE THE OMI ONE OF THE CITY'S EARLY INTEGRATED NEIGHBORHOODS.\n" +
+          "THE HOMES ARE MOSTLY MODEST, SINGLE-FAMILY, AND TIGHT-KNIT,\n" +
+          "WITH SAN FRANCISCO STATE AND CITY COLLEGE'S OCEAN CAMPUS RIGHT AT THE EDGE.\n" +
+          "SPEND TIME ON THESE STREETS, AND YOU'RE STANDING IN A NEIGHBORLY,\n" +
+          "DEEP-ROOTED CORNER OF THE CITY THAT MOST PEOPLE NEVER THINK TO VISIT.",
+        broll: ["Modest single-family facades along the ridge", "Brooks Park signage / the community garden", "A wide look toward San Francisco State"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "RIGHT AT THE TOP OF THE NEIGHBORHOOD IS BROOKS PARK —\n" +
+          "A COMMUNITY-TENDED HILLTOP PARK WITH ROCKY OUTCROPS, NATIVE PLANTS,\n" +
+          "A LARGE COMMUNITY GARDEN, AND SWEEPING CITY-AND-OCEAN VIEWS.\n" +
+          "IT SITS ON LAND WHERE OHLONE FAMILIES ONCE SUMMERED NEAR LAKE MERCED.\n" +
+          "MERCED HEIGHTS IS THE 'M' IN THE OMI —\n" +
+          "OCEAN VIEW, MERCED HEIGHTS, AND INGLESIDE TOGETHER —\n" +
+          "AND IT WAS ONE OF THE CITY'S EARLY INTEGRATED NEIGHBORHOODS,\n" +
+          "A RARE HILLTOP ENCLAVE OF AFRICAN-AMERICAN HOME OWNERSHIP AFTER THE WAR.\n" +
+          "AND IT'S A COLLEGE NEIGHBORHOOD: SAN FRANCISCO STATE\n" +
+          "AND CITY COLLEGE'S LARGEST CAMPUS BOTH SIT RIGHT ON THE EDGE.\n" +
+          "THIS IS A QUIET CORNER WITH A LOT MORE HISTORY THAN ITS LOW PROFILE LETS ON.",
+        broll: ["Brooks Park native-plant garden tight shot", "The hilltop view, city one way and ocean the other", "A wide look toward San Francisco State"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "MERCED HEIGHTS SITS IN THE SOUTHWEST, NOT FAR FROM THE OCEAN,\n" +
+          "SO IT CATCHES ITS SHARE OF THE MARINE LAYER —\n" +
+          "THIS IS A FOG-AND-SUN MIX, NOT ONE OF THE CITY'S WARM POCKETS,\n" +
+          "AND I'D RATHER BE STRAIGHT WITH YOU ABOUT THAT.\n" +
+          "UP ON THE RIDGE THE FOG CAN BURN OFF WHILE LOWER STREETS STAY GRAY,\n" +
+          "OR ROLL IN OVER THE TOP WHILE THE EAST SIDE OF THE CITY SITS IN SUN.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS —\n" +
+          "IT'S LINKED ON MY MERCED HEIGHTS PAGE BELOW.",
+        broll: ["Fog rolling over the ridge; you in a light jacket", "Contrast: clear top vs. gray streets below", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. MERCED HEIGHTS IS RESIDENTIAL AND TUCKED-AWAY,\n" +
+          "BUT IT'S BETTER CONNECTED THAN IT LOOKS.\n" +
+          "THE 29, 54, 28, AND 57 BUSES SERVE THESE HILLTOP STREETS,\n" +
+          "AND THE M-OCEAN VIEW MUNI METRO RUNS NEARBY ALONG THE 19TH AVENUE CORRIDOR.\n" +
+          "A BIT EAST, BALBOA PARK BART AND MUNI STATION IS THE AREA'S BIG TRANSIT HUB.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT SEVEN MILES NORTHEAST,\n" +
+          "AND FROM BALBOA PARK YOU TAKE BART OR MUNI METRO STRAIGHT DOWNTOWN\n" +
+          "TO THE EMBARCADERO — YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? FROM BALBOA PARK, TAKE BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT FORTY MINUTES ON THE TRAIN.\n" +
+          "HEADING NORTH TO MARIN? RIDE IN TO THE FERRY BUILDING\n" +
+          "AND TAKE THE LARKSPUR FERRY, ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE TRANSIT TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S A STRAIGHT SHOT BY CAR ON 280 OR 101.\n" +
+          "AND BECAUSE YOU'RE OUT THIS WAY, THE 280 ON-RAMPS ARE CLOSE,\n" +
+          "SO A CAR IS EASY HERE TOO IF YOU WANT ONE.\n" +
+          "BOTTOM LINE: BART, MUNI METRO, FERRY, AND THE FREEWAY — ALL WITHIN REACH.",
+        broll: [
+          "A 29 or 54 bus on a hilltop street; the M-line on 19th Avenue",
+          "Balboa Park BART/Muni station; a departing train",
+          "A BART train; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Merced Heights → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: MERCED HEIGHTS SITS UP ON A HILLTOP, WELL INLAND,\n" +
+          "SO IT IS NOT IN A TSUNAMI HAZARD ZONE — CROSS THAT WORRY OFF THE LIST.\n" +
+          "LIKE MUCH OF HILLY SAN FRANCISCO, PARTS OF THE NEIGHBORHOOD\n" +
+          "DO FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "THAT'S STANDARD FOR THE CITY'S SLOPES, AND IT'S SOMETHING\n" +
+          "EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing to the hilltop / the slopes below", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "MERCED HEIGHTS ITSELF IS QUIET AND RESIDENTIAL,\n" +
+          "BUT THE OCEAN AVENUE STRIP IS RIGHT DOWNHILL —\n" +
+          "COFFEE, CASUAL DINNER SPOTS, AND THE EVERYDAY ERRANDS OF A REAL NEIGHBORHOOD.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE AREA'S BEST\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY MERCED HEIGHTS DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: A CALM HILLTOP TO COME HOME TO, WITH A WORKING MAIN STREET CLOSE BY.",
+        broll: ["Café tables down on Ocean Avenue", "A quiet hilltop residential street at dusk", "A general neighborhood storefront (not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: MERCED HEIGHTS IS MOSTLY MODEST, MID-CENTURY SINGLE-FAMILY HOMES\n" +
+          "ALONG THE RIDGE — THE KIND OF HONEST, LIVABLE STOCK\n" +
+          "THAT FIRST-TIME BUYERS AND FAMILIES STILL HAVE A SHOT AT.\n" +
+          "MANY SIT UP A FEW STEPS FROM THE STREET, AND VIEWS VARY A LOT BLOCK BY BLOCK.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR MERCED HEIGHTS ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A modest single-family home along the ridge", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN MERCED HEIGHTS?\n" +
+          "SOMEONE WHO WANTS A QUIET HILLTOP, BIG VIEWS, AND A NEIGHBORLY,\n" +
+          "DEEP-ROOTED COMMUNITY — WITH MORE HOME FOR THE MONEY THAN THE FLASHIER HILLS.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY MERCED HEIGHTS NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING MERCED HEIGHTS HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass along the ridge (you, relaxed, not pitching)", "A quiet look out toward the ocean from the hilltop", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the Brooks Park hilltop views, the community garden, ridge streets, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, the park, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Merced Heights page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Merced Heights + Ingleside + Ocean View in one OMI loop.",
+  },
+"Parkside": {
+    aka: "the Outer Sunset",
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Parkside&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Parkside)",
+    route: {
+      // Route stays ENTIRELY within the Parkside boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Taraval & 19th Ave — L-Taraval stop", note: "Start — Main Street on Taraval, the L-Taraval Muni Metro line", coord: [-122.4769, 37.7426] },
+        { n: 2, name: "Taraval & 30th Ave", note: "The working dining strip; classic Sunset storefronts", coord: [-122.4878, 37.7423] },
+        { n: 3, name: "Taraval & 40th Ave", note: "Flat avenue grid running west toward the ocean", coord: [-122.4929, 37.7412] },
+        { n: 4, name: "Wawona & 24th Ave — Stern Grove / Pine Lake edge", note: "Green breathing room at the neighborhood's southern rim", coord: [-122.4818, 37.7345] },
+        { n: 5, name: "28th Ave & Ulloa — flat avenue block", note: "The housing-stock segment: rows of stucco single-family homes", coord: [-122.4862, 37.7440] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ON TARAVAL STREET IN THE PARKSIDE, AND THE FOG IS ROLLING IN OFF THE OCEAN —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE THE PARKSIDE? LET'S GO.",
+        broll: ["Two-shot idea: a sunny inland ridge in one frame, foggy Taraval St in the next", "You moving down Taraval St into frame", "Fog drifting over the avenue grid to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? THE PARKSIDE SITS ON THE CITY'S WESTERN EDGE,\n" +
+          "A SUNSET-ADJACENT FLATLAND JUST SOUTH OF THE SUNSET PROPER,\n" +
+          "WITH STERN GROVE AND PINE LAKE ALONG ITS SOUTHERN RIM\n" +
+          "AND THE PACIFIC OCEAN OUT TO THE WEST.\n" +
+          "THE MAIN SPINE IS TARAVAL STREET, A WORKING MAIN STREET\n" +
+          "RUNNING STRAIGHT THROUGH THE HEART OF THE NEIGHBORHOOD.\n" +
+          "AND HERE'S THE THING ABOUT THE LAND: IT'S AN AVENUE GRID, AND IT'S FLAT.\n" +
+          "MILE AFTER MILE OF LEVEL, NUMBERED AVENUES, EASY TO GET AROUND —\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR,\n" +
+          "AND COMFORTABLY WITHIN WHAT THE A-D-A CONSIDERS AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
+          "THAT'S RARE IN SAN FRANCISCO, AND IT'S ONE OF THE PARKSIDE'S QUIET STRENGTHS.\n" +
+          "IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU,\n" +
+          "THESE FLAT AVENUES ARE ABOUT AS GOOD AS THE CITY GETS.\n" +
+          "BUT THE HOMES THEMSELVES STILL MATTER —\n" +
+          "MANY OF THESE CLASSIC SUNSET HOUSES SIT UP A FEW STEPS FROM THE SIDEWALK,\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.",
+        broll: ["Slow pan down Taraval St; street signs at 19th & Taraval", "Wide establishing shot showing the flat avenue grid toward the ocean", "A long, level avenue running straight west (show how flat it is)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. THE PARKSIDE IS A FLAT AVENUE-GRID NEIGHBORHOOD\n" +
+          "SOUTH OF THE SUNSET PROPER, LAID OUT ALONG THE TARAVAL STREET CORRIDOR —\n" +
+          "THE SAME LINE THE L-TARAVAL STREETCAR STILL RUNS TODAY.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "IT BEGAN IN 1905, WHEN A SYNDICATE QUIETLY BOUGHT FORMER OUTSIDE LANDS DUNES\n" +
+          "FROM THE ADOLPH SUTRO ESTATE TO LAUNCH A NEW SUBDIVISION AROUND TARAVAL.\n" +
+          "EARLY PIONEERS BUILT ON BARE SAND, FAR FROM CITY SERVICES,\n" +
+          "AND ORGANIZED THE PARKSIDE DISTRICT IMPROVEMENT CLUB IN 1908 TO DEMAND THEM.\n" +
+          "THE L-TARAVAL STREETCAR OPENED ALONG TARAVAL IN 1919,\n" +
+          "OPENING THE AREA TO WIDER SETTLEMENT.\n" +
+          "THEN, FROM THE 1920s THROUGH THE 40s, BUILDERS LIKE HENRY DOELGER,\n" +
+          "THE GELLERTS AND THE STONESON BROTHERS USED NEW F-H-A LOANS\n" +
+          "TO FILL THE DUNES WITH ROWS OF AFFORDABLE STUCCO SINGLE-FAMILY HOMES,\n" +
+          "NEXT TO STERN GROVE AND PINE LAKE.\n" +
+          "AND THOUGH IT WAS PLANNED AS ITS OWN NEIGHBORHOOD,\n" +
+          "THE PARKSIDE IS GENERALLY CONSIDERED PART OF THE LARGER SUNSET DISTRICT TODAY.",
+        broll: ["Rows of stucco Sunset row houses", "An L-Taraval streetcar running down Taraval", "The leafy edge of Stern Grove / Pine Lake"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "THOSE ENDLESS ROWS OF STUCCO HOUSES? MANY ARE DOELGER HOMES —\n" +
+          "BUILDER HENRY DOELGER'S COMPANY PUT UP ROUGHLY 26,000 BAY AREA HOMES,\n" +
+          "HELPING TURN THE PARKSIDE'S SAND DUNES INTO ROWS OF STUCCO.\n" +
+          "JUST OFF THE SOUTHERN EDGE IS SIGMUND STERN GROVE,\n" +
+          "GIFTED TO THE CITY BY ROSALIE STERN —\n" +
+          "IT'S HOSTED THE NATION'S OLDEST FREE SUMMER CONCERT SERIES SINCE 1938.\n" +
+          "TUCKED INSIDE IT IS PINE LAKE, ONE OF THE CITY'S FEW REMAINING NATURAL LAKES.\n" +
+          "AND JUST SOUTHWEST, AT SLOAT AND THE GREAT HIGHWAY,\n" +
+          "THE SAN FRANCISCO ZOO HAS SAT SINCE 1929.\n" +
+          "THE WHOLE PLACE WAS BORN FROM THE DUNES —\n" +
+          "A 1905 SYNDICATE BOUGHT FORMER OUTSIDE LANDS SAND TO MAKE IT.\n" +
+          "THIS IS A NEIGHBORHOOD THAT QUIETLY GREW UP OUT OF THE OCEAN'S OWN EDGE.",
+        broll: ["A long row of near-identical Doelger stucco facades", "Stern Grove concert meadow; Pine Lake", "The SF Zoo entrance / Great Highway"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "AND I'LL BE HONEST WITH YOU: THE PARKSIDE IS A FOGGY PLACE.\n" +
+          "IT SITS RIGHT BY THE OCEAN, SO ON A SUMMER AFTERNOON\n" +
+          "THE FOG ROLLS IN OFF THE WATER AND THE AVENUES GO GRAY AND COOL\n" +
+          "WHILE THE INLAND HILLS ARE STILL IN THE SUN.\n" +
+          "SOME PEOPLE LOVE THAT — THE QUIET, THE COOL AIR, THE SOFT LIGHT.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY PARKSIDE PAGE BELOW.",
+        broll: ["Fog pouring down a numbered avenue toward the ocean", "Contrast: a sunny inland ridge in the distance", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. AND THE PARKSIDE HAS REAL TRANSIT ON ITS SPINE.\n" +
+          "RIGHT DOWN TARAVAL RUNS THE L-TARAVAL MUNI METRO,\n" +
+          "CARRYING YOU STRAIGHT DOWNTOWN — IT IS THE NEIGHBORHOOD'S LIFELINE.\n" +
+          "ON TOP OF THAT, THE 18, THE 28, THE 29, AND THE 48 BUSES\n" +
+          "THREAD THE AVENUES NORTH, SOUTH, AND ACROSS TO THE REST OF THE WEST SIDE.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "I'LL BE STRAIGHT WITH YOU: THE FERRY BUILDING IS ABOUT SIX AND A HALF MILES NORTHEAST,\n" +
+          "SO IT IS GENUINELY FAR FROM OUT HERE — THE L IS YOUR LIFELINE TO IT.\n" +
+          "TAKE THE L-TARAVAL DOWNTOWN, AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? RIDE THE L DOWNTOWN AND HOP BART —\n" +
+          "DOWNTOWN OAKLAND IS A STRAIGHT SHOT UNDER THE BAY FROM THERE.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE TRANSIT TO THE CALTRAIN DEPOT,\n" +
+          "AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S ROUGHLY THE SAME BY CAR ON 280 OR 101.\n" +
+          "BOTTOM LINE: OUT HERE, THE L-TARAVAL IS THE BACKBONE —\n" +
+          "IT CONNECTS YOU TO WATER, RAIL, AND THREE BRIDGES WITHOUT OWNING A CAR.",
+        broll: [
+          "An L-Taraval train running down Taraval St; a bus on 19th Ave",
+          "Embarcadero / the Ferry Building / a departing ferry",
+          "A BART train; the Golden Gate Bridge; a Caltrain at the depot",
+          "Simple motion-graphic map: Parkside → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "THE PARKSIDE IS BUILT ON FORMER SAND DUNES, SO THE GROUND HERE IS SANDY,\n" +
+          "AND PARTS OF THE NEIGHBORHOOD FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "THAT'S SOMETHING EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "AND BECAUSE WE'RE RIGHT AT THE OCEAN'S EDGE,\n" +
+          "THE WESTERN EDGE OF THE AREA DOES FALL WITHIN A TSUNAMI HAZARD ZONE —\n" +
+          "SO THAT IS A REAL THING TO CHECK, BLOCK BY BLOCK, OUT NEAR THE GREAT HIGHWAY.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing toward the ocean / the avenue grid", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "THE PARKSIDE HAS A REAL NEIGHBORHOOD DINING STRIP ALONG TARAVAL —\n" +
+          "A WORKING MAIN STREET WITH COFFEE, FAMILY RESTAURANTS, AND A FEW GOOD BARS,\n" +
+          "THE KIND OF EVERYDAY PLACES YOU GET TO KNOW BY NAME.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEIGHBORHOOD'S BEST\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY PARKSIDE DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: THIS IS A QUIET, FAMILY-ANCHORED, KNOW-YOUR-NEIGHBORS KIND OF PLACE.",
+        broll: ["Café tables on Taraval; a busy restaurant window at dusk", "The Taraval strip with the L running past", "A classic neon bar sign (general, not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: THE PARKSIDE IS CLASSIC SUNSET —\n" +
+          "ROWS OF STUCCO SINGLE-FAMILY HOMES ON FLAT, LEVEL AVENUES,\n" +
+          "MANY BUILT IN THE 1930s AND 40s ON THE OLD DUNES,\n" +
+          "WITH SOME FLATS AND NEWER UNITS MIXED IN NEARER THE COMMERCIAL STRIP.\n" +
+          "IT RUNS FROM A STARTER HOME TO A FULLY UPDATED FAMILY HOUSE.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR THE PARKSIDE ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES AND FOR CONDOS, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A row of stucco Sunset houses; a flats building; a newer unit", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN THE PARKSIDE?\n" +
+          "SOMEONE WHO WANTS FLAT, EASY AVENUES, COOL OCEAN AIR,\n" +
+          "GREEN BREATHING ROOM AT STERN GROVE, AND A REAL MAIN STREET —\n" +
+          "WITH THE L-TARAVAL CARRYING YOU DOWNTOWN WHENEVER YOU NEED IT.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY PARKSIDE NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING THE PARKSIDE HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Unhurried pass down Taraval St (you, relaxed, not pitching)", "A quiet look west toward the fog and the ocean", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the Taraval strip, the L-Taraval, the flat avenues, Stern Grove's edge, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, the L-Taraval stop, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Parkside page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Parkside + Outer Sunset + Stonestown in one morning loop.",
+  },
+"Parkmerced": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Parkmerced&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Parkmerced)",
+    route: {
+      // Route stays ENTIRELY within the Parkmerced boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Oval green off Vidal Drive", note: "Start — one of the radiating oval lawns at the community's heart", coord: [-122.4790, 37.7196] },
+        { n: 2, name: "13-story tower cluster", note: "The 1950s high-rise towers rising above the gardens", coord: [-122.4805, 37.7210] },
+        { n: 3, name: "Lake Merced edge", note: "Where the neighborhood meets the lakeshore path", coord: [-122.4835, 37.7205] },
+        { n: 4, name: "Garden townhome row", note: "The original two-story garden apartments and townhomes", coord: [-122.4775, 37.7180] },
+        { n: 5, name: "SF State edge along 19th Avenue", note: "The northeast corner beside San Francisco State and the M-line", coord: [-122.476, 37.7217] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ON THE GREEN AT PARKMERCED, BY LAKE MERCED, AND THE FOG IS ROLLING IN OFF THE OCEAN — WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE PARKMERCED? LET'S GO.",
+        broll: ["Two-shot idea: a sunny ridge in one frame, fog rolling over Parkmerced's greens in the next", "You crossing one of the oval lawns into frame", "The towers + Lake Merced to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? PARKMERCED SITS ON THE FAR SOUTHWEST EDGE OF SAN FRANCISCO,\n" +
+          "TUCKED BETWEEN 19TH AVENUE AND LAKE MERCED,\n" +
+          "WITH SAN FRANCISCO STATE JUST TO THE NORTH AND STONESTOWN BEYOND IT.\n" +
+          "THIS IS A MASTER-PLANNED COMMUNITY OF RADIATING STREETS AND OVAL GREENS,\n" +
+          "WRAPPED AROUND LAWNS AND COURTYARDS RATHER THAN A SINGLE MAIN DRAG.\n" +
+          "AND HERE'S THE GOOD NEWS FOR GETTING AROUND:\n" +
+          "DOWN BY LAKE MERCED, PARKMERCED IS LARGELY FLAT AND LEVEL —\n" +
+          "ROUGHLY 40 TO 230 FEET, BUT THE CORE WHERE PEOPLE LIVE IS GENTLE GROUND,\n" +
+          "WELL WITHIN WHAT THE A-D-A CONSIDERS AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
+          "THAT MAKES IT EASY TO GET AROUND WHETHER YOU'RE PUSHING A STROLLER\n" +
+          "OR ROLLING A WHEELCHAIR.\n" +
+          "THE TOWERS HAVE ELEVATORS, WHICH MAKES THIS ONE OF THE MORE STEP-FREE\n" +
+          "COMMUNITIES YOU'LL FIND IN THE CITY.\n" +
+          "THE TOWNHOME ENTRIES VARY, THOUGH —\n" +
+          "SOME SIT LEVEL WITH THE SIDEWALK, OTHERS HAVE A STEP OR TWO —\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.",
+        broll: ["Slow pan across an oval green; the radiating street plan", "Wide establishing shot showing the towers + Lake Merced", "SF State and 19th Avenue on the neighborhood's edge"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. PARKMERCED IS ONE OF THE GREAT MID-CENTURY EXPERIMENTS\n" +
+          "IN HOW A CITY CAN HOUSE ITS PEOPLE.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "IN 1941, THE METROPOLITAN LIFE INSURANCE COMPANY ASSEMBLED NEARLY 200 ACRES\n" +
+          "OF FORMER WATER-COMPANY LAND TO BUILD A 'CITY WITHIN A CITY' —\n" +
+          "A WHOLE MASTER-PLANNED GARDEN COMMUNITY OF RENTAL HOUSING.\n" +
+          "THE TWO-STORY GARDEN APARTMENTS AND TOWNHOMES, RINGED AROUND OVAL GREENS,\n" +
+          "WENT UP BETWEEN 1941 AND 1951.\n" +
+          "THEN, IN THE 1950s, A RING OF THIRTEEN-STORY TOWERS ROSE ABOVE THEM —\n" +
+          "GIVING PARKMERCED ITS SIGNATURE SKYLINE OF TOWERS OVER LAWNS.\n" +
+          "ALL TOLD, ROUGHLY 3,200 UNITS, RIGHT NEXT TO LAKE MERCED\n" +
+          "AND SAN FRANCISCO STATE UNIVERSITY.\n" +
+          "AND THE STORY ISN'T FINISHED — IN 2011 THE CITY APPROVED A MAJOR,\n" +
+          "LONG-TERM REDEVELOPMENT THAT WILL RESHAPE THE COMMUNITY OVER SEVERAL DECADES,\n" +
+          "PHASING IN DENSER NEW HOUSING ALONGSIDE THE GREENS.\n" +
+          "SO PARKMERCED IS A PLACE WITH ONE FOOT IN ITS 1940s ROOTS\n" +
+          "AND ONE FOOT IN WHAT THE NEIGHBORHOOD IS STILL BECOMING.",
+        broll: ["The garden apartments and oval greens", "The 1950s towers from below", "Lake Merced + the SF State campus across 19th Avenue"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "PARKMERCED WAS BUILT AS A SINGLE, UNIFIED VISION —\n" +
+          "A GARDEN COMMUNITY OF APARTMENT TOWERS AND TOWNHOMES\n" +
+          "LAID OUT AROUND RADIATING STREETS AND OVAL GREENS,\n" +
+          "ALL OF IT MASTER-PLANNED FROM THE START BY METROPOLITAN LIFE.\n" +
+          "THAT'S WHY IT FEELS SO DIFFERENT FROM THE GRID AROUND IT.\n" +
+          "IT SITS RIGHT BESIDE LAKE MERCED AND A SHORT HOP FROM STERN GROVE,\n" +
+          "SO YOU'VE GOT WATER AND OPEN GREEN PRACTICALLY AT THE DOOR.\n" +
+          "AND BECAUSE SAN FRANCISCO STATE IS NEXT DOOR,\n" +
+          "THE NEIGHBORHOOD HAS LONG BEEN POPULAR WITH STUDENTS AND FACULTY.\n" +
+          "BUT THE BIGGEST THING TO KNOW: A MAJOR LONG-TERM REDEVELOPMENT IS UNDERWAY,\n" +
+          "SO THE PARKMERCED OF TWENTY YEARS FROM NOW WILL LOOK DIFFERENT FROM TODAY'S —\n" +
+          "AND THAT'S WORTH UNDERSTANDING BEFORE YOU PUT DOWN ROOTS.",
+        broll: ["Aerial-style look at the radiating street plan + oval greens", "Lake Merced shoreline; Stern Grove nearby", "The towers against the sky"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "PARKMERCED SITS ON THE FOGGY SOUTHWEST EDGE OF THE CITY,\n" +
+          "RIGHT BY LAKE MERCED AND NOT FAR FROM THE OCEAN.\n" +
+          "I'LL BE HONEST WITH YOU: THIS IS FOG COUNTRY.\n" +
+          "ON A SUMMER AFTERNOON THE FOG ROLLS IN OFF THE WATER\n" +
+          "AND THE GREENS GO COOL AND GRAY WHILE THE EAST SIDE OF THE CITY SITS IN SUN.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY PARKMERCED PAGE BELOW.",
+        broll: ["Fog rolling in over Lake Merced and the greens", "Contrast: a sunny east-side ridge", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. AND PARKMERCED HAS REAL TRANSIT RIGHT AT THE DOOR.\n" +
+          "THE M-OCEAN VIEW MUNI METRO RUNS THE 19TH AVENUE MEDIAN\n" +
+          "RIGHT THROUGH THE NEIGHBORHOOD AND PAST SF STATE, STRAIGHT DOWNTOWN.\n" +
+          "BUSES THREAD THE AREA TOO — THE 28 ON 19TH AVENUE,\n" +
+          "THE 18, THE 29, AND THE 57 RIGHT THROUGH PARKMERCED ITSELF —\n" +
+          "AND SAN FRANCISCO STATE IS LITERALLY NEXT DOOR.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT SEVEN MILES NORTHEAST — THAT'S A REAL HAUL\n" +
+          "FROM OUT HERE, SO PLAN ON THE M-LINE INTO DOWNTOWN FIRST.\n" +
+          "GOING TO THE EAST BAY? TAKE THE M DOWNTOWN AND HOP BART —\n" +
+          "DOWNTOWN OAKLAND IS YOUR DESTINATION FROM THERE.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR.\n" +
+          "HEADING SOUTH TO THE PENINSULA? CALTRAIN RUNS DOWN TO PALO ALTO\n" +
+          "IN ABOUT FIFTY MINUTES — OR IT'S A STRAIGHT SHOT BY CAR ON 280 OR 101.\n" +
+          "AND ONE BIG ADVANTAGE OUT HERE: YOU'RE CLOSE TO DALY CITY BART\n" +
+          "AND RIGHT BY 280, SO THE WHOLE PENINSULA IS EASY TO REACH.\n" +
+          "BOTTOM LINE: THE M-LINE, A HANDFUL OF BUSES, AND THE FREEWAY —\n" +
+          "PLENTY OF WAYS TO MOVE WITHOUT LEANING ON A CAR.",
+        broll: [
+          "The M-Ocean View in the 19th Avenue median; a 57 bus through Parkmerced",
+          "SF State campus next door; Daly City BART; the 280 on-ramp",
+          "A BART train; the Larkspur ferry; a Caltrain — for the leaving-town legs",
+          "Simple motion-graphic map: Parkmerced → Oakland / Larkspur / Palo Alto",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: PARKMERCED SITS BY LAKE MERCED, SET BACK FROM THE OPEN OCEAN,\n" +
+          "SO IT IS NOT IN A TSUNAMI HAZARD ZONE — CROSS THAT WORRY OFF THE LIST.\n" +
+          "BUT HERE'S THE HONEST PART ON SHAKING:\n" +
+          "THIS CORNER OF THE CITY DOES FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE.\n" +
+          "THE GROUND OUT HERE IS SANDY, AND SANDY SOIL CAN BEHAVE DIFFERENTLY\n" +
+          "IN A BIG QUAKE — IT'S SOMETHING EVERY CALIFORNIA BUYER REVIEWS\n" +
+          "WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing toward Lake Merced and the sandy ground", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "PARKMERCED ITSELF IS MOSTLY HOMES AND GREENS,\n" +
+          "BUT YOU'RE STEPS FROM STONESTOWN AND SF STATE,\n" +
+          "WHERE THERE'S COFFEE, CASUAL DINING, AND EVERYDAY SHOPPING CLOSE BY.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEIGHBORHOOD'S BEST\n" +
+          "RESTAURANTS AND SPOTS RIGHT ON MY PARKMERCED DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: THIS IS A QUIET, GREEN, LEAVE-THE-CAR-HOME KIND OF PLACE\n" +
+          "WITH THE BUSTLE OF A UNIVERSITY AND A MALL RIGHT NEXT DOOR.",
+        broll: ["The greens and courtyards; people out on the lawns", "Stonestown and SF State just up the street", "Edit: lower-third pointing to the details page"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: PARKMERCED IS DIFFERENT FROM MOST SAN FRANCISCO NEIGHBORHOODS.\n" +
+          "IT'S MOSTLY RENTAL HOUSING — THE GARDEN APARTMENTS, THE TOWNHOMES,\n" +
+          "AND THE THIRTEEN-STORY TOWERS — PLUS NEW DEVELOPMENT\n" +
+          "ARRIVING AS THE LONG-TERM REDEVELOPMENT MOVES FORWARD.\n" +
+          "SO THE OWNERSHIP PICTURE HERE IS ITS OWN ANIMAL,\n" +
+          "AND IT'S CHANGING AS NEW HOMES COME ONLINE.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES —\n" +
+          "AND OUT HERE THE MIX OF RENTAL AND NEW-BUILD MATTERS A LOT.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR PARKMERCED ON MY SITE,\n" +
+          "RIGHT UP TO TODAY. THE LINK IS BELOW —\n" +
+          "THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A garden apartment row, a townhome entry, a tower lobby", "New construction / redevelopment signage", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN PARKMERCED?\n" +
+          "SOMEONE WHO WANTS GREEN SPACE, LAKE AIR, AND REAL TRANSIT AT THE DOOR,\n" +
+          "WITH A UNIVERSITY AND THE PENINSULA EASY TO REACH.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, NEW DEVELOPMENT, WHAT'S AVAILABLE —\n" +
+          "STAYS CURRENT ON MY PARKMERCED NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING PARKMERCED HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass across a green (you, relaxed, not pitching)", "A quiet look out over Lake Merced", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the oval greens, the towers, the Lake Merced edge, and the garden townhomes in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "The M-line in the 19th Avenue median, SF State edge, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Parkmerced page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Parkmerced + Stonestown + Lakeshore in one loop.",
+  },
+"Stonestown": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Stonestown&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Stonestown)",
+    route: {
+      // Route stays ENTIRELY within the Stonestown boundary (verified against
+      // the neighborhood polygon). Coords approximate — I'll snap to the
+      // sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Stonestown Galleria", note: "Start — the 1952 mall, now a dining-and-shopping hub being reborn with new housing", coord: [-122.4755, 37.7280] },
+        { n: 2, name: "19th Ave & the M-line stop", note: "Muni Metro M-Ocean View in the median; SF State right across the street", coord: [-122.4768, 37.7262] },
+        { n: 3, name: "SF State campus edge", note: "The university across 19th Avenue — tens of thousands of students next door", coord: [-122.4766, 37.7258] },
+        { n: 4, name: "Lake Merced edge", note: "The open green and water on the neighborhood's western rim", coord: [-122.4794, 37.7257] },
+        { n: 5, name: "Garden-apartment & single-family blocks", note: "The housing-stock segment: mid-century garden apartments and single-family blocks near the lake", coord: [-122.4757, 37.7251] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M BY STONESTOWN GALLERIA AND SF STATE, AND THE FOG IS ROLLING IN OFF THE OCEAN —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE STONESTOWN? LET'S GO.",
+        broll: ["Two-shot idea: a clear ridge in one frame, fog pouring in off the ocean in the next", "You moving across the Galliera plaza into frame", "The mall sign / the M-line in the 19th Ave median to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? STONESTOWN SITS ON THE FOGGY SOUTHWEST EDGE\n" +
+          "OF SAN FRANCISCO, TUCKED BETWEEN LAKE MERCED AND SAN FRANCISCO STATE UNIVERSITY,\n" +
+          "WITH PARKMERCED TO THE SOUTH AND THE SUNSET STRETCHING NORTH.\n" +
+          "THE SPINE IS 19TH AVENUE, RUNNING PAST THE GALLERIA AND THE CAMPUS,\n" +
+          "WITH QUIET RESIDENTIAL BLOCKS FANNING OUT TOWARD THE LAKE.\n" +
+          "HERE'S THE GOOD NEWS ON THE LAND: STONESTOWN IS LARGELY FLAT AND LEVEL —\n" +
+          "ROUGHLY 100 TO 250 FEET UP, AND EASY TO GET AROUND,\n" +
+          "COMFORTABLY WITHIN WHAT THE A-D-A CONSIDERS AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR.\n" +
+          "THAT'S A REAL CONTRAST WITH SO MUCH OF HILLY SAN FRANCISCO.\n" +
+          "AND THE HOMES THEMSELVES MATTER TOO —\n" +
+          "MANY OF THE APARTMENTS HERE HAVE ELEVATORS, WHICH IS A GIFT FOR STEP-FREE ACCESS,\n" +
+          "WHILE THE SINGLE-FAMILY ENTRIES VARY —\n" +
+          "SOME ARE LEVEL, OTHERS SIT UP A FEW STEPS FROM THE SIDEWALK.\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.\n" +
+          "BUT AS A NEIGHBORHOOD TO MOVE THROUGH, THIS IS ABOUT AS LEVEL AS THE CITY GETS.",
+        broll: ["Slow pan up 19th Ave; the Galleria and the campus across the street", "Wide establishing shot showing the flat blocks toward Lake Merced", "A level sidewalk and a garden-apartment entry (show the easy grade)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE\n" +
+          "LONG BEFORE A SINGLE BLOCK WAS LAID OUT.\n" +
+          "STONESTOWN ITSELF WAS BUILT ON FORMER FARMLAND SOUTHWEST OF DOWNTOWN\n" +
+          "BY BROTHERS HENRY AND ELLIS STONESON, STARTING IN THE LATE 1940s.\n" +
+          "THE STONESTOWN SHOPPING CENTER OPENED IN 1952, ANCHORED BY THE EMPORIUM —\n" +
+          "ONE OF THE WEST'S FIRST LARGE REGIONAL MALLS,\n" +
+          "PAIRED WITH GARDEN APARTMENTS THAT HOUSED SEVERAL THOUSAND RESIDENTS.\n" +
+          "THE NEIGHBORHOOD GREW UP ALONGSIDE SAN FRANCISCO STATE UNIVERSITY,\n" +
+          "WHOSE CAMPUS SITS JUST ACROSS 19TH AVENUE.\n" +
+          "A 1980s RENOVATION ENCLOSED THE CENTER AND REBRANDED IT THE STONESTOWN GALLERIA.\n" +
+          "AND THE STORY IS STILL BEING WRITTEN: IN 2024 THE CITY APPROVED A MAJOR REDEVELOPMENT\n" +
+          "TO ADD ROUGHLY THREE THOUSAND FIVE HUNDRED NEW HOMES, PARKS,\n" +
+          "AND A NEW RETAIL MAIN STREET ON THE SURROUNDING PARKING LOTS.\n" +
+          "SO THIS IS A PLACE WITH MID-CENTURY ROOTS AND A FUTURE BEING BUILT RIGHT NOW —\n" +
+          "A GARDEN-APARTMENT-AND-SINGLE-FAMILY NEIGHBORHOOD ON THE EDGE OF A LAKE,\n" +
+          "ABOUT TO GROW INTO SOMETHING NEW.",
+        broll: ["The Galleria exterior; vintage-feel signage", "The SF State campus across 19th Ave", "The parking lots slated for redevelopment / construction staging"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "WHEN STONESTOWN OPENED IN 1952, IT WAS AMONG THE VERY FIRST LARGE REGIONAL\n" +
+          "SHOPPING CENTERS IN THE WESTERN UNITED STATES — A NEW IDEA AT THE TIME.\n" +
+          "THE WHOLE THING — MALL AND APARTMENTS ALIKE — WAS THE WORK OF TWO BROTHERS,\n" +
+          "HENRY AND ELLIS STONESON, WHO GAVE THE NEIGHBORHOOD ITS NAME.\n" +
+          "AND IT WASN'T ALWAYS 'THE GALLERIA' — THAT NAME ONLY ARRIVED\n" +
+          "WITH THE 1980s RENOVATION THAT PUT A ROOF OVER THE OPEN-AIR CENTER.\n" +
+          "ACROSS 19TH AVENUE, SAN FRANCISCO STATE BRINGS TENS OF THOUSANDS OF STUDENTS\n" +
+          "RIGHT TO THE DOORSTEP — SO THE RHYTHM OF THE PLACE FOLLOWS THE SCHOOL YEAR.\n" +
+          "AND THE NEXT CHAPTER IS BIG: ABOUT THREE THOUSAND FIVE HUNDRED NEW HOMES\n" +
+          "ARE COMING WHERE THE PARKING LOTS ARE NOW.\n" +
+          "THIS IS A NEIGHBORHOOD QUIETLY REINVENTING ITSELF.",
+        broll: ["The Galleria interior under its roof", "SF State students crossing 19th Ave", "Renderings or signage for the new housing plan"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "STONESTOWN SITS ON THE CITY'S COOL, FOGGY SOUTHWEST SIDE,\n" +
+          "NEAR THE OCEAN AND LAKE MERCED.\n" +
+          "WHEN SUMMER FOG ROLLS IN OFF THE PACIFIC, THIS IS WHERE IT LANDS FIRST —\n" +
+          "SO EXPECT COOLER, GRAYER MORNINGS THAN THE SUNNY EAST-SIDE VALLEYS.\n" +
+          "SOME PEOPLE LOVE THAT FRESH, QUIET OCEAN AIR; OTHERS WANT MORE SUN.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY STONESTOWN PAGE BELOW.",
+        broll: ["Fog rolling in off the ocean toward Lake Merced", "Contrast: gray morning here vs. sun on the east side", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. AND STONESTOWN IS GENUINELY EASY TO LIVE IN CAR-FREE.\n" +
+          "RIGHT AT THE GALLERIA IS THE M-OCEAN VIEW MUNI METRO,\n" +
+          "RUNNING IN THE 19TH AVENUE MEDIAN STRAIGHT DOWNTOWN.\n" +
+          "BUSES THREAD THROUGH TOO — THE 17, THE 28-19TH AVENUE, THE 29, AND THE 57 —\n" +
+          "AND SAN FRANCISCO STATE IS RIGHT ACROSS THE STREET.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT SIX AND A HALF MILES NORTHEAST;\n" +
+          "TAKE THE M DOWNTOWN AND CONNECT, AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? RIDE THE M DOWNTOWN AND HOP BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT FIFTY MINUTES ALL TOLD.\n" +
+          "AND YOU'RE CLOSE TO DALY CITY BART AND THE 280 FREEWAY JUST TO THE SOUTH,\n" +
+          "WHICH MAKES A LOT OF TRIPS QUICKER.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE.\n" +
+          "HEADING SOUTH TO THE PENINSULA? CALTRAIN RUNS DOWN TO PALO ALTO\n" +
+          "IN ABOUT FIFTY MINUTES ONCE YOU'RE AT THE DEPOT —\n" +
+          "OR IT'S A STRAIGHT SHOT BY CAR ON 280 OR 101.\n" +
+          "BOTTOM LINE: A LIGHT-RAIL LINE AT THE DOOR, BART AND THE FREEWAY MINUTES AWAY,\n" +
+          "AND WATER, RAIL, AND BRIDGES ALL WITHIN REACH — WITHOUT OWNING A CAR.",
+        broll: [
+          "The M-Ocean View in the 19th Ave median; the Stonestown stop",
+          "A BART train at Daly City; the 280 on-ramp",
+          "The Ferry Building / a departing Larkspur ferry; a Caltrain heading south",
+          "Simple motion-graphic map: Stonestown → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: STONESTOWN SITS BY LAKE MERCED, SET BACK FROM THE OCEAN\n" +
+          "AND UP OFF THE SHORELINE, SO IT IS NOT IN A TSUNAMI HAZARD ZONE —\n" +
+          "CROSS THAT WORRY OFF THE LIST.\n" +
+          "LIKE MUCH OF SAN FRANCISCO, PARTS OF THE NEIGHBORHOOD\n" +
+          "DO FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "THAT'S STANDARD GROUND NEAR THE LAKE, AND IT'S SOMETHING\n" +
+          "EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing toward Lake Merced and the level ground", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "STONESTOWN'S DAILY-LIFE HUB IS THE GALLERIA ITSELF —\n" +
+          "A REBORN MALL WITH A WIDE RANGE OF DINING, A GROCERY, AND EVERYDAY SHOPPING,\n" +
+          "ALL A FEW MINUTES FROM YOUR DOOR.\n" +
+          "WITH SF STATE NEXT DOOR, THERE'S A STEADY, STUDENT-FRIENDLY ENERGY TOO.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEIGHBORHOOD'S BEST\n" +
+          "RESTAURANTS RIGHT ON MY STONESTOWN DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: EVERYTHING-AT-HAND, EASY, LEAVE-THE-CAR-HOME KIND OF PLACE.",
+        broll: ["The Galleria's dining hall; people at café tables", "SF State students nearby at lunchtime", "A general storefront row (not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: STONESTOWN IS A MIX YOU DON'T SEE EVERYWHERE —\n" +
+          "MID-CENTURY GARDEN APARTMENTS, MANY WITH ELEVATORS,\n" +
+          "AND SINGLE-FAMILY BLOCKS ON THE QUIETER STREETS NEAR LAKE MERCED.\n" +
+          "AND THERE'S A WHOLE NEW LAYER COMING: THE MALL REDEVELOPMENT\n" +
+          "WILL ADD THOUSANDS OF BRAND-NEW HOMES AROUND THE GALLERIA.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR STONESTOWN ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES AND FOR CONDOS, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A garden-apartment building; a single-family block near the lake", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN STONESTOWN?\n" +
+          "SOMEONE WHO WANTS LEVEL, EASY STREETS, A LAKE AND A CAMPUS NEXT DOOR,\n" +
+          "AND A LIGHT-RAIL LINE THAT CARRIES THE WHOLE CITY TO THE DOOR.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY STONESTOWN NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING STONESTOWN HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass by Lake Merced (you, relaxed, not pitching)", "A quiet look toward the Galleria and the campus", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the Galleria, the M-line, the campus edge, Lake Merced, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, the M-line stop, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Stonestown page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Stonestown + Lakeshore + Parkmerced in one loop.",
+  },
+"Lakeshore": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Lakeshore&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Lakeshore)",
+    route: {
+      // Route stays ENTIRELY within the Lakeshore boundary (verified against the
+      // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
+      // grid for the final cut.
+      spots: [
+        { n: 1, name: "Lake Merced Boathouse", note: "Start — the boathouse, fishing pier, and boat launch on the water", coord: [-122.4928, 37.7270] },
+        { n: 2, name: "Lake Merced loop trail", note: "The paved path that circles the lake — runners, cyclists, birders", coord: [-122.4960, 37.7220] },
+        { n: 3, name: "Harding Park edge", note: "The municipal golf course along the lakeshore", coord: [-122.4940, 37.7160] },
+        { n: 4, name: "Lakeshore Plaza", note: "The neighborhood shopping center at Sloat & Lake Merced", coord: [-122.4891, 37.729] },
+        { n: 5, name: "Residential block off Sloat", note: "The housing-stock segment: single-family homes and apartments", coord: [-122.4820, 37.7300] },
+        { n: 6, name: "Great Highway / ocean edge", note: "The Pacific at the western edge of the neighborhood", coord: [-122.5070, 37.7290] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ALONG LAKE MERCED, AND THE FOG IS ROLLING IN OFF THE OCEAN —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE LAKESHORE? LET'S GO.",
+        broll: ["Two-shot idea: a sunny ridge in one frame, fog rolling over Lake Merced in the next", "You moving along the lake loop trail into frame", "Lake Merced + the boathouse to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? LAKESHORE SITS IN SAN FRANCISCO'S SOUTHWEST CORNER,\n" +
+          "WRAPPED AROUND LAKE MERCED — THE CITY'S FRESHWATER LAKE AND RESERVOIR —\n" +
+          "WITH STONESTOWN AND WEST PORTAL OVER TOWARD THE EAST.\n" +
+          "THE LAKE MERCED LOOP TRAIL RINGS THE WATER, HARDING PARK GOLF COURSE\n" +
+          "SITS ALONG ITS SHORES, AND THE LAKESHORE PLAZA SHOPS ANCHOR DAILY LIFE,\n" +
+          "WITH SF STATE AND THE SF ZOO NEARBY AND THE OCEAN AT THE WESTERN EDGE.\n" +
+          "THE LAND RUNS FROM SEA LEVEL UP TO ABOUT 250 FEET,\n" +
+          "AND THE GROUND AROUND THE LAKE IS LARGELY FLAT AND LEVEL —\n" +
+          "EASY TO GET AROUND, COMFORTABLY WITHIN WHAT THE A-D-A CONSIDERS\n" +
+          "AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT —\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR.\n" +
+          "THE HOMES ARE MOSTLY SINGLE-FAMILY HOUSES AND APARTMENTS,\n" +
+          "SET ON QUIET, CURVING STREETS THAT FOLLOW THE LAKE.\n" +
+          "ONE THING TO CHECK HOME BY HOME: SOME ENTRIES SIT UP A FLIGHT OF STEPS\n" +
+          "FROM THE SIDEWALK, SO IF STEP-FREE ENTRY IS A MUST,\n" +
+          "IT'S WORTH LOOKING AT EACH PLACE ON ITS OWN.",
+        broll: ["Slow pan around Lake Merced; the loop trail", "Wide establishing shot showing the lake + Harding Park greens", "Lakeshore Plaza storefronts; a quiet residential street"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. LAKESHORE WRAPS AROUND LAKE MERCED —\n" +
+          "THE CITY'S FRESHWATER LAKE AND RESERVOIR,\n" +
+          "AND ONE OF SAN FRANCISCO'S FEW NATURAL FRESHWATER LAKES.\n" +
+          "IT SUPPLIED THE CITY'S DRINKING WATER FROM THE LATE 1860s UNTIL 1934,\n" +
+          "WHEN THE HETCH HETCHY SYSTEM TOOK OVER.\n" +
+          "THE CITY-RUN HARDING PARK GOLF COURSE OPENED ALONG ITS SHORES IN 1925,\n" +
+          "DESIGNED BY WILLIE WATSON AND SAM WHITING.\n" +
+          "THE SURROUNDING LAKESHORE TRACTS WERE DEVELOPED MID-CENTURY\n" +
+          "AS PLANNED RESIDENTIAL SUBDIVISIONS —\n" +
+          "INCLUDING THE GELLERT BROTHERS' LAKESHORE PARK,\n" +
+          "MARKETED FROM 1939 AS A DELUXE SUBDIVISION SOUTH OF SLOAT BOULEVARD.\n" +
+          "LAKESHORE PLAZA, AT SLOAT AND LAKE MERCED BOULEVARDS,\n" +
+          "BECAME THE NEIGHBORHOOD'S MAIN SHOPPING CENTER\n" +
+          "AND STILL ANCHORS EVERYDAY COMMERCE HERE TODAY.\n" +
+          "WITH SF STATE AND THE SF ZOO NEARBY AND THE OCEAN AT THE WESTERN EDGE,\n" +
+          "THIS QUIET SOUTHWEST CORNER HAS LONG BEEN A PLACE\n" +
+          "WHERE THE CITY MEETS THE WATER AND THE OPEN GREEN.",
+        broll: ["Lake Merced from the trail", "Harding Park clubhouse / fairways", "Lakeshore Plaza sign at Sloat & Lake Merced"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "LAKE MERCED IS ONE OF SAN FRANCISCO'S FEW NATURAL FRESHWATER LAKES,\n" +
+          "AND A FLAT, PAVED LOOP TRAIL CIRCLES IT — ABOUT FOUR MILES AROUND —\n" +
+          "DRAWING RUNNERS, CYCLISTS, AND BIRDERS PAST GOLF COURSES AND EUCALYPTUS.\n" +
+          "HARDING PARK, OPENED IN 1925, HAS HOSTED PGA TOUR\n" +
+          "AND MAJOR CHAMPIONSHIP GOLF RIGHT ALONG THE LAKESHORE.\n" +
+          "THE LAKE MERCED BOATHOUSE ON THE WATER'S EDGE\n" +
+          "OFFERS PICNIC AREAS, A FISHING PIER, AND A BOAT LAUNCH.\n" +
+          "JUST NORTH, PINE LAKE IS ANOTHER OF THE CITY'S FEW REMAINING NATURAL LAKES,\n" +
+          "RINGED BY A BIRDING TRAIL THAT LEADS INTO STERN GROVE.\n" +
+          "AND THE LAKESHORE PLAZA SHOPS, SF STATE, AND THE SF ZOO\n" +
+          "ARE ALL RIGHT NEARBY, WITH THE OCEAN AT THE WESTERN EDGE.",
+        broll: ["The loop trail tight shot", "Harding Park fairway along the water", "The boathouse / fishing pier"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "LAKESHORE SITS IN THE CITY'S COOL, FOGGY WEST —\n" +
+          "RIGHT WHERE THE PACIFIC AIR COMES ASHORE.\n" +
+          "WHEN THE FOG ROLLS IN OFF THE OCEAN, IT SETTLES OVER LAKE MERCED,\n" +
+          "AND THE BREEZE OFF THE WATER KEEPS THINGS CRISP AND FRESH.\n" +
+          "IT'S A DIFFERENT FEEL FROM THE SUNNY POCKETS ON THE EAST SIDE OF TOWN.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY LAKESHORE PAGE BELOW.",
+        broll: ["Fog rolling in off the ocean over Lake Merced", "Breeze on the water; trees bending along the trail", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. LAKESHORE LEANS ON SOME SOLID TRANSIT\n" +
+          "FOR A CORNER THIS FAR FROM DOWNTOWN.\n" +
+          "THE M-OCEAN VIEW MUNI METRO RUNS NEARBY ALONG 19TH AVENUE,\n" +
+          "PAST SF STATE AND STONESTOWN, STRAIGHT TOWARD DOWNTOWN.\n" +
+          "BUSES INCLUDE THE 18, THE 23, THE 29, AND THE 57,\n" +
+          "AND DALY CITY BART IS A SHORT RIDE SOUTH.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT SEVEN AND A HALF MILES NORTHEAST,\n" +
+          "ROUGHLY FORTY-FIVE MINUTES BY MUNI METRO AND BART —\n" +
+          "AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? TAKE THE M TO DALY CITY OR DOWNTOWN AND HOP BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT AN HOUR DOOR TO PLATFORM.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR IN ABOUT THIRTY.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE MUNI TOWARD THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S ROUGHLY FORTY-FIVE BY CAR ON 280 OR 101.\n" +
+          "BOTTOM LINE: WATER, RAIL, AND THREE BRIDGES — ALL WITHIN REACH\n" +
+          "FROM THE CITY'S QUIET SOUTHWEST CORNER.",
+        broll: [
+          "An M-line train on 19th Ave; a bus along Sloat",
+          "Daly City BART platform; the Ferry Building / a departing ferry",
+          "A BART train; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Lakeshore → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "FIRST, THE WESTERN, OCEAN-FACING EDGE OF LAKESHORE\n" +
+          "DOES SIT WITHIN A TSUNAMI HAZARD ZONE —\n" +
+          "THAT'S THE LOW GROUND NEAREST THE PACIFIC.\n" +
+          "THE GOOD NEWS: THE INLAND LAKEFRONT HOMES SIT HIGHER, FARTHER FROM THE WATER.\n" +
+          "SECOND, THE SANDY SOIL OUT HERE MEANS PARTS OF THE NEIGHBORHOOD\n" +
+          "FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "SOMETHING EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "NONE OF THIS IS A DEAL-BREAKER — IT'S JUST WORTH KNOWING.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing from the higher inland blocks toward the ocean edge", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "LAKESHORE IS AN EVERYDAY-ERRANDS KIND OF PLACE —\n" +
+          "THE LAKESHORE PLAZA SHOPS COVER GROCERIES, COFFEE, AND QUICK BITES,\n" +
+          "WITH MORE DINING JUST OVER TOWARD STONESTOWN AND WEST PORTAL.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEIGHBORHOOD'S BEST\n" +
+          "RESTAURANTS AND SPOTS RIGHT ON MY LAKESHORE DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: THIS IS A QUIET, LAKESIDE, NEAR-SUBURBAN KIND OF PLACE,\n" +
+          "WHERE THE LOOP TRAIL AND THE OPEN GREEN ARE THE MAIN EVENT.",
+        broll: ["Lakeshore Plaza storefronts", "People on the loop trail at golden hour", "A quiet residential street"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: LAKESHORE IS MOSTLY SINGLE-FAMILY HOMES\n" +
+          "AND APARTMENTS, SET ON QUIET, CURVING STREETS AROUND THE LAKE —\n" +
+          "MANY FROM THE MID-CENTURY PLANNED SUBDIVISIONS THAT BUILT THE AREA.\n" +
+          "IT RUNS FROM A FIRST APARTMENT OR CONDO TO A LAKEFRONT FAMILY HOME.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR LAKESHORE ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES AND FOR CONDOS, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A single-family home, an apartment building, a lakefront block", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN LAKESHORE?\n" +
+          "SOMEONE WHO WANTS QUIET, GREEN, AND THE WATER AT THE DOORSTEP —\n" +
+          "THE LOOP TRAIL, THE GOLF, AND THE OCEAN BREEZE,\n" +
+          "WITH THE REST OF THE CITY STILL A TRAIN RIDE AWAY.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY LAKESHORE NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING LAKESHORE HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass along the lake loop trail (you, relaxed, not pitching)", "A quiet look out across Lake Merced toward the ocean", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the lake, the loop trail, the boathouse, the plaza, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, the transit stops, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Lakeshore page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Lakeshore + Stonestown + Parkmerced in one morning loop.",
+  },
+"Cayuga": {
+    aka: "Cayuga Terrace",
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Cayuga&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Cayuga)",
+    route: {
+      // Route stays ENTIRELY within the Cayuga boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
+      spots: [
+        { n: 1, name: "Cayuga Park & Playground", note: "Start — Braceros's carved folk-art sculptures, off Cayuga Ave", coord: [-122.4432, 37.7220] },
+        { n: 2, name: "Cayuga Ave corridor", note: "The street that names the neighborhood; quiet residential spine", coord: [-122.4438, 37.7205] },
+        { n: 3, name: "Cayuga Ave & Onondaga", note: "Native-named cross streets — the homestead-map grid", coord: [-122.4445, 37.7188] },
+        { n: 4, name: "Single-family-home block", note: "Detached early-1900s homes, front gardens, a few steps up", coord: [-122.4420, 37.7196] },
+        { n: 5, name: "Balboa Park edge", note: "The transit hub's western edge; BART + Muni Metro nearby", coord: [-122.4400, 37.7228] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ON CAYUGA AVENUE NEAR THE PARK, AND THE SUN IS OUT —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE CAYUGA? LET'S GO.",
+        broll: ["Two-shot idea: a foggy ridge in one frame, sunny Cayuga Ave in the next", "You moving along Cayuga Ave into frame", "A carved wooden sculpture at Cayuga Park to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? CAYUGA SITS IN SAN FRANCISCO'S DEEP SOUTH-CENTRAL EDGE,\n" +
+          "A SMALL QUIET POCKET KNOWN AS CAYUGA TERRACE,\n" +
+          "TUCKED ALONG THE CAYUGA AVENUE CORRIDOR NEAR BALBOA PARK AND THE I-280.\n" +
+          "THE MAIN SPINE IS CAYUGA AVENUE — THE STREET THAT GIVES THE PLACE ITS NAME —\n" +
+          "LINED WITH MODEST, DETACHED SINGLE-FAMILY HOMES.\n" +
+          "THE LAND HERE IS GENTLE: ROUGHLY 140 TO 260 FEET UP,\n" +
+          "WITH MOSTLY EASY, LOW GRADES AND A CORE THAT'S COMFORTABLE TO GET AROUND —\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR.\n" +
+          "BUT THIS IS STILL SAN FRANCISCO, SO A FEW BLOCKS DO TILT,\n" +
+          "AND SOME GRADES NUDGE PAST WHAT THE A-D-A CONSIDERS\n" +
+          "AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT — SO IT'S WORTH CHECKING BLOCK BY BLOCK.\n" +
+          "AND THE HOMES THEMSELVES MATTER TOO —\n" +
+          "MANY OF THESE SINGLE-FAMILY HOUSES SIT UP A FEW STEPS FROM THE SIDEWALK,\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.\n" +
+          "THE QUICK TAKE: A CALM, GENTLE, RESIDENTIAL POCKET —\n" +
+          "WITH A LITTLE STAIR-ACCESS HOMEWORK ON THE HOUSES THEMSELVES.",
+        broll: ["Slow pan up Cayuga Ave; the street sign", "Wide establishing shot showing the gentle grade and rooftops", "A home's front steps up from the sidewalk (show the stair access)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. CAYUGA TERRACE TOOK SHAPE IN THE EARLY 20TH CENTURY,\n" +
+          "WHEN HOMESTEAD-ASSOCIATION LAND IN THE CITY'S SOUTHERN REACHES\n" +
+          "WAS SUBDIVIDED FOR HOUSING ALONG THE CAYUGA AVENUE CORRIDOR.\n" +
+          "IT'S A SMALL, QUIET POCKET NEAR BALBOA PARK AND THE I-280,\n" +
+          "AND IT FILLED IN WITH THE MODEST, DETACHED SINGLE-FAMILY HOMES\n" +
+          "THAT STILL DEFINE IT TODAY.\n" +
+          "MANY OF ITS STREETS CARRY NATIVE-AMERICAN NAMES —\n" +
+          "CAYUGA, ONONDAGA, SENECA — DRAWN FROM OLD HOMESTEAD MAPS,\n" +
+          "A NAMING THEME IT SHARES WITH NEIGHBORING MISSION TERRACE AND THE OUTER MISSION.\n" +
+          "BUT THE THING THIS PLACE IS TRULY FAMOUS FOR IS CAYUGA PARK.\n" +
+          "STARTING IN 1986, ITS GARDENER, DEMETRIO BRACEROS,\n" +
+          "SPENT DECADES HAND-CARVING HUNDREDS OF WOODEN FOLK-ART SCULPTURES —\n" +
+          "TOTEMS, FIGURES AND STATUES — ON HIS BREAKS,\n" +
+          "TURNING AN ORDINARY PLAYGROUND INTO A CARVED WONDERLAND.\n" +
+          "THE CITY'S ARTS COMMISSION LATER INVENTORIED 376 OF THEM.\n" +
+          "SPEND TIME ON THESE BLOCKS, AND YOU'RE STANDING IN ONE PERSON'S\n" +
+          "QUIET, DECADES-LONG LABOR OF LOVE.",
+        broll: ["Cayuga Ave street sign; Onondaga / Seneca cross-street signs", "Carved wooden sculptures at Cayuga Park", "Modest single-family-home facades along the corridor"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "THAT CARVED WONDERLAND AT CAYUGA PARK WAS THE WORK OF ONE MAN —\n" +
+          "DEMETRIO BRACEROS, A FILIPINO IMMIGRANT GARDENER,\n" +
+          "WHO CARVED OVER THREE HUNDRED AND SEVENTY-FIVE WOODEN STATUES\n" +
+          "ON HIS LUNCH BREAKS FROM 1986 ONWARD.\n" +
+          "THE ROUGHLY FOUR-ACRE PLAYGROUND AT 301 NAGLEE AVENUE\n" +
+          "CLOSED IN 2011 FOR AN EIGHT-POINT-FOUR-MILLION-DOLLAR RENOVATION,\n" +
+          "AND REOPENED IN 2013 WITH MANY OF HIS SCULPTURES RESTORED.\n" +
+          "AND BEFORE 1918, A BODY OF WATER CALLED LAKE GENEVA\n" +
+          "SAT RIGHT NEAR WHAT IS NOW CAYUGA AVENUE —\n" +
+          "THE STREET THAT GIVES THE WHOLE NEIGHBORHOOD ITS NAME.\n" +
+          "THIS IS A QUIET POCKET WITH A SURPRISING AMOUNT OF STORY UNDER IT.",
+        broll: ["Tight shots of individual carved sculptures", "The 301 Naglee Ave playground entrance", "A wide look down Cayuga Ave"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "CAYUGA SITS IN THE CITY'S SOUTH-CENTRAL POCKET NEAR BALBOA PARK,\n" +
+          "WHICH TENDS TO BE RELATIVELY SUNNY —\n" +
+          "WARMER AND BRIGHTER THAN THE FOGGY WEST SIDE MOST DAYS.\n" +
+          "BUT I'LL BE HONEST: IT CAN STILL CATCH THE FOG\n" +
+          "WHEN IT ROLLS IN OFF THE OCEAN, SO IT'S A MIXED, MOSTLY-SUNNY READ.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY CAYUGA PAGE BELOW.",
+        broll: ["Blue sky over Cayuga Ave; you in shirtsleeves", "Contrast: fog drifting in from the west", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. AND CAYUGA IS REMARKABLY WELL-CONNECTED\n" +
+          "FOR SUCH A QUIET POCKET.\n" +
+          "RIGHT NEARBY IS BALBOA PARK STATION — ONE OF BART'S BUSIEST STOPS\n" +
+          "OUTSIDE DOWNTOWN — PLUS THE J, K, AND M MUNI METRO LINES,\n" +
+          "AND THE 29, 49, 8, AND 88 BUSES THREADING THROUGH THE AREA.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT SIX MILES NORTHEAST,\n" +
+          "AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? FROM BALBOA PARK, TAKE BART STRAIGHT THROUGH —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT FORTY MINUTES DOOR TO PLATFORM.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR IN ABOUT THIRTY.\n" +
+          "HEADING SOUTH TO THE PENINSULA? CALTRAIN RUNS DOWN TO PALO ALTO\n" +
+          "IN ABOUT FIFTY MINUTES — AND BY CAR YOU'RE RIGHT NEXT TO 280,\n" +
+          "SO IT'S A QUICK SHOT ONTO 280 OR 101.\n" +
+          "BOTTOM LINE: A MAJOR TRANSIT HUB AT THE DOORSTEP,\n" +
+          "PLUS WATER, RAIL, AND THE BRIDGES — ALL WITHOUT OWNING A CAR.",
+        broll: [
+          "Balboa Park Station entrance; a BART train and a Muni Metro car",
+          "The Ferry Building / a departing ferry",
+          "The Golden Gate Bridge; a Caltrain on the Peninsula line; the 280 on-ramp",
+          "Simple motion-graphic map: Cayuga → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: CAYUGA SITS WELL INLAND AND UP ABOVE THE BAY,\n" +
+          "SO IT IS NOT IN A TSUNAMI HAZARD ZONE — CROSS THAT WORRY OFF THE LIST.\n" +
+          "AND ON THE SEISMIC SIDE, THIS POCKET IS NOT MAPPED\n" +
+          "WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE EITHER —\n" +
+          "WHICH IS A LITTLE LESS COMMON FOR SAN FRANCISCO,\n" +
+          "THOUGH EVERY CALIFORNIA BUYER STILL REVIEWS THE GROUND\n" +
+          "WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing to the gentle terrain and rooftops", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "CAYUGA ITSELF IS QUIET AND RESIDENTIAL — THIS IS A FRONT-GARDEN,\n" +
+          "KNOW-YOUR-NEIGHBORS KIND OF PLACE — BUT THE OUTER MISSION'S\n" +
+          "FOOD CORRIDOR ALONG MISSION STREET IS JUST MINUTES AWAY,\n" +
+          "WITH A DEEP BENCH OF LATINO AND ASIAN SPOTS.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE AREA'S BEST\n" +
+          "RESTAURANTS AND SPOTS RIGHT ON MY CAYUGA DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: A CALM HOME BASE, WITH A LIVELY FOOD STRIP CLOSE BY.",
+        broll: ["Quiet residential street with front gardens", "The Mission St food corridor at dusk (general, not a single endorsement)", "Kids and dogs at Cayuga Park"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: CAYUGA IS MOSTLY MODEST, DETACHED SINGLE-FAMILY HOMES —\n" +
+          "EARLY-20TH-CENTURY HOUSES ON QUIET, GARDEN-FRONTED BLOCKS,\n" +
+          "THE KIND OF STOCK THAT'S BECOME RARE AND PRIZED IN THE CITY.\n" +
+          "IT'S A NEIGHBORHOOD WITH A STEADY, FAMILY-ORIENTED FEEL.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR CAYUGA ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A modest single-family home with a front garden", "A row of detached houses along Cayuga Ave", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN CAYUGA?\n" +
+          "SOMEONE WHO WANTS A CALM, GENTLE, RESIDENTIAL POCKET\n" +
+          "WITH A SINGLE-FAMILY HOME, FRONT GARDENS, A FOLK-ART PARK NEXT DOOR,\n" +
+          "AND A MAJOR TRANSIT HUB RIGHT AT THE DOORSTEP.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY CAYUGA NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING CAYUGA HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass down Cayuga Ave (you, relaxed, not pitching)", "A quiet look at the carved sculptures in the park", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the carved sculptures, Cayuga Ave, the quiet home blocks, and the Balboa Park edge in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Street signs, the park entrance, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Cayuga page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Cayuga + the Outer Mission + Mission Terrace in one southern loop.",
+  },
 };
