@@ -200,7 +200,7 @@ export const SCRIPTS = {
       },
       {
         label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
-        words: 135,
+        words: 120,
         script:
           "SO — WHO BELONGS IN THE CASTRO?\n" +
           "SOMEONE WHO WANTS LIGHT, WALKABILITY, AND THE WHOLE BAY AREA\n" +
@@ -211,9 +211,8 @@ export const SCRIPTS = {
           "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
           "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
           "STAYS CURRENT ON MY CASTRO NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
-          "AND IF YOU'RE EVEN THINKING ABOUT CALLING THIS CITY HOME,\n" +
-          "I'D GENUINELY LOVE TO HELP YOU FIND THE CORNER THAT FITS YOU.\n" +
-          "I'M CHUCK HEAVER. I'LL SEE YOU IN THE NEXT NEIGHBORHOOD.",
+          "SO IF YOU'RE THINKING ABOUT CALLING THE CASTRO HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
         broll: ["Golden-hour, unhurried walk down Castro St (you, relaxed, not pitching)", "A quiet look back up the hill toward Twin Peaks", "Soft end card: your name + how to reach you"],
       },
     ],
