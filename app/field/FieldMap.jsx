@@ -23,10 +23,31 @@ function allCoords(geom) {
   return [];
 }
 
+// Snap a walking route through the ordered spots to the actual street grid,
+// via the Mapbox Directions API (walking profile). Falls back to the straight
+// `path` (or a straight line through the spots) if the request fails.
+async function walkingGeometry(route) {
+  const pts = (route?.spots || []).map(s => s.coord);
+  const fallback = route?.path?.length > 1
+    ? { type: "LineString", coordinates: route.path }
+    : (pts.length > 1 ? { type: "LineString", coordinates: pts } : null);
+  if (pts.length < 2) return fallback;
+  try {
+    const coords = pts.map(c => `${c[0]},${c[1]}`).join(";");
+    const url = `https://api.mapbox.com/directions/v5/mapbox/walking/${coords}?geometries=geojson&overview=full&access_token=${TOKEN}`;
+    const r = await fetch(url);
+    const j = await r.json();
+    return j.routes?.[0]?.geometry || fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 export default function FieldMap({ name, route }) {
   const ref = useRef(null);
   const mapRef = useRef(null);
-  const featRef = useRef(null); // cached neighborhood polygon
+  const featRef = useRef(null);     // cached neighborhood polygon
+  const routeGeomRef = useRef(null); // cached street-snapped route geometry
   const [sat, setSat] = useState(false);
   const [err, setErr] = useState(null);
 
@@ -39,9 +60,13 @@ export default function FieldMap({ name, route }) {
       map.addLayer({ id: "hood-fill", type: "fill", source: "hood", paint: { "fill-color": "#2563eb", "fill-opacity": 0.06 } });
       map.addLayer({ id: "hood-line", type: "line", source: "hood", paint: { "line-color": "#2563eb", "line-width": 2, "line-dasharray": [2, 1] } });
     }
-    if (route?.path?.length > 1 && !map.getSource("route")) {
-      map.addSource("route", { type: "geojson", data: { type: "Feature", geometry: { type: "LineString", coordinates: route.path } } });
-      map.addLayer({ id: "route-line", type: "line", source: "route", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ef4444", "line-width": 4, "line-opacity": 0.9 } });
+    if (routeGeomRef.current && !map.getSource("route")) {
+      map.addSource("route", { type: "geojson", data: { type: "Feature", geometry: routeGeomRef.current } });
+      map.addLayer({
+        id: "route-line", type: "line", source: "route",
+        layout: { "line-cap": "round", "line-join": "round" },
+        paint: { "line-color": "#ef4444", "line-width": 4, "line-opacity": 0.95, "line-dasharray": [1.6, 1.4] },
+      });
     }
   }
 
@@ -63,6 +88,7 @@ export default function FieldMap({ name, route }) {
         const fc = await (await fetch("/data/sf-fog-neighborhoods.geojson")).json();
         featRef.current = fc.features.find(f => f.properties?.name === name) || null;
       } catch { featRef.current = null; }
+      routeGeomRef.current = await walkingGeometry(route);
       addOverlays(map);
       if (featRef.current) map.fitBounds(bboxOf(allCoords(featRef.current.geometry)), { padding: 30, duration: 0 });
 
