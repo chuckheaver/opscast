@@ -21540,4 +21540,861 @@ export const SCRIPTS = {
     ],
     batchTip: "Shoot adjacent hoods the same outing — e.g. Showplace Square + Potrero Hill + Mission Bay in one morning loop.",
   },
+"Mint Hill": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Mint%20Hill&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Mint Hill)",
+    route: {
+      // Route stays ENTIRELY within the Mint Hill boundary (verified against the
+      // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
+      // grid for the final cut.
+      spots: [
+        { n: 1, name: "Old U.S. Mint — the Granite Lady", note: "Start — the granite 1906 survivor this district is built around", coord: [-122.4262, 37.7712] },
+        { n: 2, name: "Mint Plaza", note: "The privately funded pedestrian square behind the Mint — dining, markets, events", coord: [-122.4258, 37.7710] },
+        { n: 3, name: "The central corner", note: "The transit-rich seam at SoMa, the Mission, and Mid-Market", coord: [-122.4251, 37.7718] },
+        { n: 4, name: "A quiet flat alley", note: "Older brick and flats just off the plaza", coord: [-122.4266, 37.7706] },
+        { n: 5, name: "Residential flat block", note: "The dense central spine — Powell BART/Muni within reach", coord: [-122.4272, 37.7715] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 90,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M BY THE OLD MINT ON THE HILL, AND THE SUN IS OUT —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE MINT HILL? LET'S GO.",
+        broll: ["Two-shot idea: a foggy ridge in one frame, sunny 5th & Mission in the next", "You walking up to the granite Old Mint into frame", "The Granite Lady's columns / Mint Plaza to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 190,
+        script:
+          "FIRST — WHERE ARE WE? MINT HILL IS A TINY WEDGE DEAD-CENTER IN SAN FRANCISCO,\n" +
+          "RIGHT AT THE SEAM OF SOMA, THE MISSION, AND MID-MARKET,\n" +
+          "ANCHORED BY THE GRANITE HULK OF THE OLD U.S. MINT AT 5TH AND MISSION.\n" +
+          "THIS IS A SMALL CENTRAL POCKET — DENSE, BUILT-UP, AND TRANSIT-RICH.\n" +
+          "THE LAND HERE IS GENTLE: A SMALL RISE, ROUGHLY 60 TO 180 FEET UP,\n" +
+          "AND THE CORE IS FLAT AND EASY TO GET AROUND —\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR.\n" +
+          "BUT BE HONEST WITH YOURSELF ABOUT THE EDGES: THIS IS STILL A HILL,\n" +
+          "AND A FEW OF THE CROSS-STREETS PICK UP MODERATE GRADES AS THEY CLIMB.\n" +
+          "WATCH THOSE GRADES IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU —\n" +
+          "THE FLAT BLOCKS NEAR THE PLAZA ARE YOUR FRIEND.\n" +
+          "AND THE HOMES THEMSELVES MATTER TOO —\n" +
+          "MANY OF THESE OLDER VICTORIAN AND FLAT BUILDINGS SIT UP A FLIGHT OF STAIRS\n" +
+          "FROM THE SIDEWALK, SO IF STEP-FREE ENTRY IS A MUST,\n" +
+          "IT'S WORTH CHECKING HOME BY HOME.",
+        broll: ["Slow pan up toward the Old Mint; street signs at 5th & Mission", "Wide establishing shot showing the central wedge and the surrounding towers", "A cross-street picking up a moderate grade (show the climb)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 195,
+        script:
+          "NOW THE STORY. THIS WHOLE LITTLE DISTRICT IS NAMED FOR THE SAN FRANCISCO MINT.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "THE OLD UNITED STATES MINT AT 5TH AND MISSION, FINISHED IN 1874,\n" +
+          "IS A NEOCLASSICAL FORTRESS NICKNAMED THE 'GRANITE LADY.'\n" +
+          "WHEN THE 1906 EARTHQUAKE AND FIRE LEVELED THE SURROUNDING SOUTH OF MARKET,\n" +
+          "SUPERINTENDENT FRANK LEACH AND HIS CREW FOUGHT BACK THE FLAMES,\n" +
+          "AND THE BUILDING SURVIVED AS ONE OF THE FEW LEFT STANDING FOR BLOCKS.\n" +
+          "AT THE TIME IT HELD ROUGHLY A THIRD OF THE NATION'S GOLD RESERVES,\n" +
+          "AND IT BRIEFLY SERVED AS THE CITY'S ONLY WORKING BANK DURING THE RECOVERY.\n" +
+          "THE MINT COINED GOLD AND SILVER UNTIL 1937.\n" +
+          "A CENTURY LATER, IN 2007, THE NEGLECTED ALLEY BEHIND IT WAS REBORN\n" +
+          "AS MINT PLAZA — A PRIVATELY FUNDED PEDESTRIAN SQUARE\n" +
+          "THAT NOW HOSTS DINING, MARKETS, AND EVENTS.\n" +
+          "AROUND THAT GRANITE RISE SIT THE OLDER VICTORIAN AND FLAT BLOCKS\n" +
+          "WEDGED BETWEEN SOMA, THE MISSION, AND MID-MARKET.\n" +
+          "SPEND TIME HERE, AND YOU'RE STANDING NEXT TO A TRUE 1906 SURVIVOR.",
+        broll: ["The granite Old Mint facade and columns", "Mint Plaza behind the building", "Older Victorian / flat facades on the surrounding blocks"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 150,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "THE OLD MINT WAS ONE OF THE FEW BUILDINGS LEFT STANDING FOR BLOCKS\n" +
+          "AFTER THE 1906 EARTHQUAKE AND FIRE — SAVED BY ITS OWN SUPERINTENDENT AND STAFF.\n" +
+          "AT THE TIME OF THAT FIRE IT HELD ABOUT 300 MILLION DOLLARS IN COIN AND BULLION —\n" +
+          "ROUGHLY ONE-THIRD OF THE ENTIRE NATION'S GOLD RESERVES.\n" +
+          "BUILT BETWEEN 1869 AND 1874 IN NEOCLASSICAL STYLE, IT EARNED ITS NICKNAME,\n" +
+          "THE 'GRANITE LADY,' AND COINED GOLD AND SILVER UNTIL 1937.\n" +
+          "AND THE ALLEY BEHIND IT? IN 2007 IT BECAME MINT PLAZA —\n" +
+          "SAN FRANCISCO'S FIRST PRIVATELY FUNDED CONVERSION\n" +
+          "OF A CITY STREET INTO A PUBLIC PEDESTRIAN PLAZA.\n" +
+          "THIS IS A NEIGHBORHOOD BUILT AROUND ONE REMARKABLE SURVIVOR.",
+        broll: ["The Granite Lady, tight on the columns", "Mint Plaza filled with market tables", "Old engraving or plaque marking 1874 / 1906"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 90,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "MINT HILL SITS IN ONE OF THE CITY'S SUNNIER, MILDER CENTRAL POCKETS.\n" +
+          "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
+          "THIS CENTRAL WEDGE TENDS TO CATCH MORE SUN AND STAY BRIGHTER.\n" +
+          "PEOPLE PAY FOR LIGHT.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY MINT HILL PAGE BELOW.",
+        broll: ["Blue sky over the Old Mint; you in shirtsleeves", "Contrast: fog pouring over the western ridges", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 285,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. AND MINT HILL IS ONE OF THE MOST TRANSIT-CONNECTED\n" +
+          "SPOTS IN THE WHOLE CITY — RIGHT AT THE CENTER OF EVERYTHING.\n" +
+          "POWELL STREET STATION IS ABOUT A BLOCK AWAY — BART AND MUNI METRO TOGETHER,\n" +
+          "WITH THE RED, YELLOW, GREEN, AND BLUE BART LINES\n" +
+          "AND MUNI METRO J, K, L, M, AND N ALL RUNNING UNDERGROUND.\n" +
+          "UP ON MARKET, THE HISTORIC F-LINE STREETCAR AND THE POWELL CABLE CARS RUN NEARBY,\n" +
+          "AND YOU'RE STEPS FROM THE MAJOR MISSION STREET AND MARKET STREET BUS LINES.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT TWO AND A HALF MILES NORTHEAST,\n" +
+          "ROUGHLY TWENTY MINUTES ON THE MUNI METRO TO EMBARCADERO,\n" +
+          "AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? FROM POWELL, JUST STAY ON BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT TWENTY MINUTES UNDER THE BAY.\n" +
+          "HEADING NORTH TO MARIN? TAKE THE METRO TO THE FERRY BUILDING\n" +
+          "AND THE LARKSPUR FERRY CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR IN ABOUT THIRTY.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE MUNI TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S ROUGHLY FORTY-FIVE BY CAR ON 280 OR 101.\n" +
+          "BOTTOM LINE: TWO RAIL SYSTEMS AT THE DOOR, WATER, AND THREE BRIDGES —\n" +
+          "ALL WITHOUT OWNING A CAR.",
+        broll: [
+          "Powell Street Station entrance; an F-line streetcar and a cable car on Market",
+          "Embarcadero Station + the Ferry Building / a departing ferry",
+          "A BART train; the Bay Bridge; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Mint Hill → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: MINT HILL SITS INLAND ON A CENTRAL RISE, WELL BACK FROM THE BAY,\n" +
+          "SO IT IS NOT IN A TSUNAMI HAZARD ZONE — CROSS THAT WORRY OFF THE LIST.\n" +
+          "ON THE OTHER SIDE, LIKE MUCH OF THE CITY'S MADE-GROUND CENTER,\n" +
+          "PARTS OF THIS AREA DO FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "THAT'S STANDARD FOR THIS PART OF SAN FRANCISCO, AND IT'S SOMETHING\n" +
+          "EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing to the central rise and the towers around it", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "MINT HILL PUTS YOU RIGHT ON TOP OF THE CITY'S CENTRAL DINING AND SHOPPING —\n" +
+          "MINT PLAZA RESTAURANTS, THE 5TH STREET SHOPS, AND ALL OF SOMA,\n" +
+          "UNION SQUARE, AND THE MISSION JUST BEYOND.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEIGHBORHOOD'S BEST\n" +
+          "RESTAURANTS AND BARS RIGHT ON MY MINT HILL DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: THIS IS A RIGHT-OUTSIDE-YOUR-DOOR, LEAVE-THE-CAR-HOME KIND OF PLACE.",
+        broll: ["Mint Plaza tables; a busy restaurant window at dusk", "The Old Mint lit up; people crossing the plaza", "A classic neon bar sign (general, not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 115,
+        script:
+          "ON HOUSING: MINT HILL IS DENSE, CENTRAL SAN FRANCISCO —\n" +
+          "OLDER VICTORIAN AND EDWARDIAN FLATS ON THE SIDE BLOCKS,\n" +
+          "ALONGSIDE LOFTS, CONDOS, AND T-I-C UNITS IN THE BUILT-UP CORE.\n" +
+          "IT RUNS FROM A FIRST CITY CONDO TO A RESTORED FLAT WITH REAL CHARACTER.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR MINT HILL ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR HOMES AND FOR CONDOS, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["An older flats building, a loft entry, a modern condo lobby", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN MINT HILL?\n" +
+          "SOMEONE WHO WANTS TO BE AT THE DEAD CENTER OF THE CITY,\n" +
+          "WITH TWO RAIL SYSTEMS AND THE WHOLE BAY AREA A TRAIN OR A FERRY AWAY,\n" +
+          "WITHOUT EVER NEEDING A CAR.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY MINT HILL NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING MINT HILL HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass by the Old Mint (you, relaxed, not pitching)", "A quiet look across Mint Plaza", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the Old Mint, Mint Plaza, the central-corridor streetscape, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, a transit stop, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Mint Hill page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Mint Hill + SoMa + the Mission in one flat, central loop.",
+  },
+"Bret Harte": {
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Bret%20Harte&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Bret Harte)",
+    route: {
+      // Route stays ENTIRELY within the Bret Harte boundary (verified against the
+      // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
+      // grid for the final cut.
+      spots: [
+        { n: 1, name: "Silver Ave / hilltop viewpoint", note: "Start — a high corner with bay views out over the southeast", coord: [-122.3935, 37.7232] },
+        { n: 2, name: "Quiet residential block", note: "Modest homes on hilly streets, many up a flight of steps", coord: [-122.3920, 37.7210] },
+        { n: 3, name: "Bayshore Blvd edge", note: "The freeway-corridor seam — where the pocket meets the 101/280 interchange", coord: [-122.3985, 37.7190] },
+        { n: 4, name: "The Old Clam House (Bayshore Blvd)", note: "Longtime landmark eatery on the neighborhood's industrial edge", coord: [-122.3990, 37.7218] },
+        { n: 5, name: "Third St edge (T-Third stop)", note: "End — the Muni Metro spine into the Bayview", coord: [-122.3915, 37.718] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 90,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M IN THE BRET HARTE POCKET ABOVE THE BAYVIEW, AND THE SUN IS OUT —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE BRET HARTE? LET'S GO.",
+        broll: ["Two-shot idea: a foggy ridge in one frame, sunny southeast blocks in the next", "You moving up a hilly residential street into frame", "A bay-view corner to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? BRET HARTE IS ONE OF THE CITY'S SMALLEST NEIGHBORHOODS,\n" +
+          "A TINY RESIDENTIAL POCKET IN SAN FRANCISCO'S FAR SOUTHEAST.\n" +
+          "IT'S TUCKED ABOVE THE BAYVIEW AND BELOW THE PORTOLA,\n" +
+          "WITH SILVER TERRACE ALONGSIDE AND THE BAYSHORE CORRIDOR JUST EAST.\n" +
+          "THIS IS A CLUSTER OF MODEST HOMES WEDGED AMONG THE FREEWAY CORRIDORS\n" +
+          "NEAR THE U.S. 101 AND INTERSTATE 280 INTERCHANGE.\n" +
+          "THE LAND HERE RUNS FROM ABOUT TEN FEET UP NEAR THE BAYSHORE FLATS\n" +
+          "TO AROUND TWO HUNDRED AND THIRTY FEET ON THE HIGHER BLOCKS —\n" +
+          "SO THIS IS A HILLY POCKET WITH SOME REAL GRADES.\n" +
+          "THE STREETS ROLL AND CLIMB, AND PARTS OF IT PASS WHAT THE A-D-A\n" +
+          "CONSIDERS AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
+          "SO IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU,\n" +
+          "THE LOWER BLOCKS NEAR BAYSHORE ARE YOUR FRIEND; THE UPPER ONES ARE A CLIMB.\n" +
+          "AND THE HOMES THEMSELVES MATTER TOO —\n" +
+          "MANY OF THESE MODEST HOUSES SIT UP A FLIGHT OF STAIRS FROM THE SIDEWALK,\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.\n" +
+          "THE PAYOFF FOR THE CLIMB: BAY VIEWS FROM THE HIGHER CORNERS.",
+        broll: ["Slow pan up a hilly residential street", "Wide establishing shot showing the pocket wedged among the freeways", "A genuinely steep cross-street climbing up (show the grade)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 190,
+        script:
+          "NOW THE STORY. THIS LITTLE NEIGHBORHOOD TAKES ITS NAME FROM BRET HARTE —\n" +
+          "THE GOLD RUSH-ERA WRITER WHO LIVED FROM 1836 TO 1902.\n" +
+          "HIS 1868 STORY, 'THE LUCK OF ROARING CAMP,'\n" +
+          "MADE HIM ONE OF THE FIRST CALIFORNIA AUTHORS\n" +
+          "TO WIN AN INTERNATIONAL FOLLOWING.\n" +
+          "THE POCKET ITSELF IS ONE OF SAN FRANCISCO'S SMALLEST NEIGHBORHOODS —\n" +
+          "A CLUSTER OF MODEST HOMES WEDGED AMONG THE FREEWAY CORRIDORS\n" +
+          "NEAR THE 101 AND 280 INTERCHANGE.\n" +
+          "IT SITS ALONG THE BAYVIEW'S INDUSTRIAL SOUTHEASTERN EDGE,\n" +
+          "BORDERED BY SILVER TERRACE, THE PORTOLA, AND THE BAYSHORE CORRIDOR.\n" +
+          "LARGELY RESIDENTIAL AND RINGED BY INDUSTRIAL BLOCKS,\n" +
+          "IT HAS STAYED QUIET AND OUT OF THE SPOTLIGHT FOR DECADES —\n" +
+          "OBSCURE EVEN TO MANY LIFELONG SAN FRANCISCANS.\n" +
+          "AND THAT'S PART OF ITS CHARACTER:\n" +
+          "A WORKING, UNSHOWY CORNER OF THE CITY THAT MOST PEOPLE\n" +
+          "DRIVE PAST WITHOUT EVER KNOWING ITS NAME.\n" +
+          "SPEND TIME ON THESE BLOCKS, AND YOU'RE SEEING A SIDE OF SAN FRANCISCO\n" +
+          "THAT ALMOST NEVER MAKES THE POSTCARDS.",
+        broll: ["Modest home facades on hilly streets", "A street sign placing us in the pocket", "Wide shot of the industrial edge ringing the homes"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 150,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "THIS IS ONE OF THE TINIEST NAMED NEIGHBORHOODS IN THE WHOLE CITY —\n" +
+          "SO SMALL THAT MOST SAN FRANCISCANS HAVE NEVER HEARD OF IT.\n" +
+          "IT'S NAMED FOR A WRITER, NOT A PLACE: BRET HARTE,\n" +
+          "WHOSE GOLD-COUNTRY TALES WERE READ AROUND THE WORLD.\n" +
+          "JUST TO THE WEST, ABOVE THE PORTOLA, SITS JOHN McLAREN PARK —\n" +
+          "SAN FRANCISCO'S SECOND-LARGEST PARK AT ROUGHLY 313 ACRES,\n" +
+          "A HUGE GREEN SPACE MOST VISITORS NEVER FIND.\n" +
+          "AND THE BAYSHORE CALTRAIN STATION, AT 400 TUNNEL AVENUE,\n" +
+          "IS A SHORT HOP SOUTH — A QUIET COMMUTER LINK DOWN THE PENINSULA\n" +
+          "HIDING RIGHT AT THE NEIGHBORHOOD'S DOORSTEP.\n" +
+          "THIS IS A POCKET THAT REWARDS THE PEOPLE WHO ACTUALLY LOOK.",
+        broll: ["Wide of McLaren Park's green hills to the west", "The Bayshore Caltrain platform", "A quiet, easy-to-miss residential corner"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "DOWN HERE IN THE SOUTHEAST, BRET HARTE SITS IN ONE OF THE CITY'S\n" +
+          "SUNNIER, WARMER CORNERS.\n" +
+          "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
+          "THIS SIDE OF TOWN — SHELTERED AND LOW — OFTEN CATCHES THE SUN\n" +
+          "AND STAYS BRIGHTER AND MILDER. PEOPLE PAY FOR LIGHT.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY BRET HARTE PAGE BELOW.",
+        broll: ["Blue sky over the southeast blocks; you in shirtsleeves", "Contrast: fog pouring over the western ridges", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND.\n" +
+          "RIGHT ALONG THIRD STREET IN THE BAYVIEW RUNS THE T-THIRD MUNI METRO,\n" +
+          "THE LIGHT-RAIL SPINE THAT CARRIES YOU NORTH TOWARD DOWNTOWN.\n" +
+          "ON THE NEARBY SAN BRUNO AND BAYSHORE CORRIDORS,\n" +
+          "THE 9-SAN BRUNO AND 8-BAYSHORE BUSES THREAD THROUGH THE AREA.\n" +
+          "AND THE BAYSHORE CALTRAIN STATION, AT 400 TUNNEL AVENUE,\n" +
+          "IS JUST SOUTH — A QUICK HOP TO THE COMMUTER RAIL.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT FIVE MILES NORTH,\n" +
+          "AND YOUR GATEWAY TO THE WATER IS THE T-THIRD UP TO DOWNTOWN,\n" +
+          "THEN A SHORT CONNECTION TO THE EMBARCADERO.\n" +
+          "GOING TO THE EAST BAY? FROM DOWNTOWN, HOP BART —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT THIRTY-FIVE MINUTES DOOR TO PLATFORM.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR IN ABOUT THIRTY.\n" +
+          "HEADING SOUTH TO THE PENINSULA? CALTRAIN FROM BAYSHORE\n" +
+          "RUNS DOWN TOWARD PALO ALTO IN ABOUT FORTY TO FIFTY MINUTES —\n" +
+          "OR IT'S ROUGHLY THE SAME BY CAR ON 280 OR 101,\n" +
+          "WHICH BOTH SIT RIGHT AT THE NEIGHBORHOOD'S EDGE.\n" +
+          "BOTTOM LINE: LIGHT RAIL, COMMUTER RAIL, AND THE FREEWAYS —\n" +
+          "A LOT OF WAYS OUT FOR SUCH A SMALL POCKET.",
+        broll: [
+          "A T-Third train on Third St; the 8 or 9 bus on Bayshore",
+          "Bayshore Caltrain station + a departing train",
+          "A BART train; the Golden Gate Bridge; the 101/280 interchange",
+          "Simple motion-graphic map: Bret Harte → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 115,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "FIRST, BECAUSE THIS POCKET SITS LOW AND CLOSE TO THE BAYSHORE FLATS,\n" +
+          "PARTS OF IT DO FALL WITHIN A STATE-DESIGNATED TSUNAMI HAZARD ZONE —\n" +
+          "SO THAT'S SOMETHING TO CHECK BLOCK BY BLOCK, ESPECIALLY ON THE LOWER GROUND.\n" +
+          "SECOND, LIKE MUCH OF SAN FRANCISCO, PARTS OF THE NEIGHBORHOOD\n" +
+          "ALSO FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "THAT'S STANDARD FOR THIS PART OF THE CITY, AND IT'S SOMETHING\n" +
+          "EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing toward the low Bayshore flats", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "BRET HARTE ITSELF IS SMALL AND QUIET — THIS IS A RESIDENTIAL POCKET,\n" +
+          "NOT A COMMERCIAL STRIP.\n" +
+          "BUT THE BAYVIEW AND THE PORTOLA ARE A SHORT RIDE AWAY,\n" +
+          "WITH LONGTIME LANDMARK EATERIES AND FAMILY SPOTS\n" +
+          "ALONG BAYSHORE BOULEVARD AND SAN BRUNO AVENUE.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE AREA'S BEST\n" +
+          "RESTAURANTS AND SPOTS RIGHT ON MY BRET HARTE DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: QUIET STREETS AT HOME, GOOD FOOD A SHORT HOP AWAY.",
+        broll: ["A landmark eatery window on Bayshore at dusk", "San Bruno Ave commercial life", "Quiet residential streets at home (general, not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 115,
+        script:
+          "ON HOUSING: BRET HARTE IS MODEST, DOWN-TO-EARTH SAN FRANCISCO —\n" +
+          "MOSTLY SMALLER SINGLE-FAMILY HOMES ON HILLY STREETS,\n" +
+          "SOME WITH BAY VIEWS FROM THE HIGHER BLOCKS,\n" +
+          "MANY SITTING UP A FLIGHT OF STEPS FROM THE SIDEWALK.\n" +
+          "IT'S ONE OF THE CITY'S MORE APPROACHABLE CORNERS TO GET INTO.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR BRET HARTE ON MY SITE —\n" +
+          "CURRENT MEDIANS RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A modest single-family home up a few steps", "A hilly block with bay views beyond", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 125,
+        script:
+          "SO — WHO BELONGS IN BRET HARTE?\n" +
+          "SOMEONE WHO WANTS A QUIET, UNSHOWY POCKET IN THE SUNNIER SOUTHEAST,\n" +
+          "WITH LIGHT, BAY VIEWS, AND RAIL AND FREEWAYS RIGHT AT THE EDGE.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY BRET HARTE NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING BRET HARTE HOME, I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass down a quiet residential street (you, relaxed, not pitching)", "A look out over the bay from a high corner", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the bay-view corners, hilly residential blocks, the Bayshore edge, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, the T-Third stop, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Bret Harte page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Bret Harte + Silver Terrace + the Portola in one southeast loop.",
+  },
+"Ingleside": {
+    aka: "OMI (Ocean View-Merced Heights-Ingleside)",
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Ingleside&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Ingleside)",
+    route: {
+      // Route stays ENTIRELY within the Ingleside boundary (verified against the
+      // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
+      // grid for the final cut.
+      spots: [
+        { n: 1, name: "Ocean & Phelan — City College gateway", note: "Start — the Ocean Ave corridor at the CCSF Ocean campus edge", coord: [-122.4564, 37.723] },
+        { n: 2, name: "Ocean Ave commercial strip", note: "The diverse working-family heart: taquerias, the brewery, daily-life shops", coord: [-122.4570, 37.7228] },
+        { n: 3, name: "Ingleside Branch Library — 1298 Ocean Ave", note: "Modern community branch right on the strip", coord: [-122.4595, 37.7222] },
+        { n: 4, name: "K-Ingleside streetcar on Ocean Ave", note: "The Muni Metro running down the middle of Ocean — straight downtown", coord: [-122.4630, 37.7215] },
+        { n: 5, name: "Single-family block off Ocean", note: "The housing-stock segment: classic OMI single-family homes on the side streets", coord: [-122.4625, 37.7213] },
+        { n: 6, name: "Balboa Park edge", note: "East end — near Balboa Park BART and the rail hub", coord: [-122.4547, 37.7194] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 85,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ON OCEAN AVENUE IN THE INGLESIDE, AND THE FOG IS ROLLING IN —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE THE INGLESIDE? LET'S GO.",
+        broll: ["Two-shot idea: a sunny ridge in one frame, fog drifting up Ocean Ave in the next", "You moving along Ocean Ave into frame", "The K-line streetcar / City College to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 195,
+        script:
+          "FIRST — WHERE ARE WE? THE INGLESIDE SITS IN THE SOUTHWEST CORNER OF SAN FRANCISCO,\n" +
+          "PART OF THE O-M-I — OCEAN VIEW, MERCED HEIGHTS, AND INGLESIDE —\n" +
+          "WITH CITY COLLEGE AT ITS SHOULDER AND BALBOA PARK ON THE EAST EDGE.\n" +
+          "THE MAIN SPINE IS OCEAN AVENUE, RUNNING THROUGH THE HEART OF THE STRIP\n" +
+          "FROM THE COLLEGE PAST THE SHOPS AND THE STREETCAR LINE.\n" +
+          "THE LAND HERE ROUGHLY RUNS FROM 210 TO 510 FEET UP.\n" +
+          "THE GOOD NEWS FOR GETTING AROUND: THE OCEAN AVENUE CORRIDOR ITSELF\n" +
+          "IS FAIRLY LEVEL AND EASY — FRIENDLY WHETHER YOU'RE PUSHING A STROLLER\n" +
+          "OR ROLLING A WHEELCHAIR ALONG THE MAIN STRETCH.\n" +
+          "BUT THIS IS SAN FRANCISCO, SO THE SURROUNDING STREETS ROLL OVER LOW HILLS:\n" +
+          "STEP OFF OCEAN ONTO THE SIDE BLOCKS AND THE GRADE CAN QUICKLY PASS\n" +
+          "WHAT THE A-D-A CONSIDERS AN ACCESSIBLE SLOPE — ABOUT FIVE PERCENT.\n" +
+          "SO IF STEP-FREE, LOW-GRADE ACCESS MATTERS TO YOU,\n" +
+          "THE CORRIDOR IS YOUR FRIEND; THE UPHILL BLOCKS ARE A CLIMB.\n" +
+          "AND THE HOMES THEMSELVES MATTER TOO —\n" +
+          "MANY OF THESE SINGLE-FAMILY HOUSES SIT UP A FLIGHT OF STAIRS FROM THE SIDEWALK,\n" +
+          "SO IF STEP-FREE ENTRY IS A MUST, IT'S WORTH CHECKING HOME BY HOME.",
+        broll: ["Slow pan up Ocean Ave; street signs at Ocean & Phelan", "Wide establishing shot showing City College + the low hills behind", "A genuinely rolling side street climbing off Ocean (show the grade)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. THE INGLESIDE IS A DIVERSE WORKING-FAMILY DISTRICT\n" +
+          "STRUNG ALONG THE OCEAN AVENUE CORRIDOR IN THE SOUTHWEST O-M-I.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "IT BEGAN WITH THE INGLESIDE RACETRACK, WHICH OPENED JUST OFF\n" +
+          "WHAT IS NOW OCEAN AVENUE IN 1895 — THE FIRST AMERICAN TRACK\n" +
+          "WITH A REAL STARTING GATE, DRAWING THOUSANDS BY SPECIAL RAIL LINE.\n" +
+          "STREETCAR SERVICE REACHED OCEAN AVENUE THE SAME YEAR,\n" +
+          "AND WHEN THE K-INGLESIDE OPENED THROUGH THE TWIN PEAKS TUNNEL IN 1918,\n" +
+          "SINGLE-FAMILY HOMES FILLED IN ALONG THE NEW LINES.\n" +
+          "THEN, IN 1940, CITY COLLEGE OF SAN FRANCISCO OPENED ITS PERMANENT\n" +
+          "OCEAN CAMPUS AT OCEAN AND PHELAN — AND IT HAS ANCHORED THE DISTRICT EVER SINCE.\n" +
+          "THE OLD RACETRACK OVAL STILL SURVIVES AS THE CURVING LOOP OF URBANO DRIVE\n" +
+          "IN NEIGHBORING INGLESIDE TERRACES, HOME TO A GIANT 1913 SUNDIAL.\n" +
+          "TODAY THE INGLESIDE IS A MIDDLE- AND WORKING-CLASS COMMUNITY\n" +
+          "KNOWN FOR ITS DIVERSITY, WITH THE OCEAN AVENUE STRIP AS ITS COMMERCIAL HEART.\n" +
+          "SPEND TIME ON THESE BLOCKS, AND YOU FEEL A REAL, LIVED-IN NEIGHBORHOOD.",
+        broll: ["The City College Ocean campus / Science Hall", "Ocean Ave streetcar tracks down the middle of the street", "Single-family blocks off the corridor"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 160,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "THE WHOLE NEIGHBORHOOD GREW UP AROUND A HORSE TRACK —\n" +
+          "THE 1895 INGLESIDE RACETRACK WAS THE FIRST IN AMERICA WITH A REAL STARTING GATE,\n" +
+          "AND ITS OVAL STILL LIVES ON AS THE CURVING LOOP OF URBANO DRIVE NEXT DOOR.\n" +
+          "CITY COLLEGE'S OCEAN CAMPUS OPENED HERE IN 1940,\n" +
+          "ITS TIMOTHY PFLUEGER-DESIGNED SCIENCE HALL A SHOWPIECE OF MONUMENTAL ARCHITECTURE.\n" +
+          "THE K-INGLESIDE HAS BEEN ROLLING DOWN THE MIDDLE OF OCEAN AVENUE\n" +
+          "SINCE FEBRUARY 1918, THROUGH THE TWIN PEAKS TUNNEL.\n" +
+          "AND THE OLD INGLESIDE JAIL ONCE STOOD NEAR THIS OCEAN AVENUE STRIP\n" +
+          "IN THE SOUTHWEST CORNER OF THE O-M-I.\n" +
+          "THE COMMUNITY LIBRARY SITS RIGHT ON THE STRIP AT 1298 OCEAN AVENUE.\n" +
+          "THIS IS A NEIGHBORHOOD WITH MORE HISTORY THAN ITS QUIET STREETS LET ON.",
+        broll: ["Urbano Drive's racetrack curve / the 1913 sundial nearby", "City College Science Hall facade", "The K-line on Ocean Ave; the Ingleside Branch Library"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "THE INGLESIDE SITS IN THE SOUTHWEST PART OF THE CITY,\n" +
+          "CLOSE ENOUGH TO THE OCEAN THAT IT CATCHES THE MARINE LAYER.\n" +
+          "SO BE HONEST WITH YOURSELF: THIS IS A FOG-AND-SUN MIX,\n" +
+          "NOT ONE OF THE CITY'S WARM SUN POCKETS — SOME MORNINGS START GRAY\n" +
+          "BEFORE THE AFTERNOON BURNS OFF. IT'S COOLER AND MISTIER THAN THE EAST SIDE.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY INGLESIDE PAGE BELOW.",
+        broll: ["Fog drifting up Ocean Ave in the morning", "Contrast: a bright afternoon once the marine layer lifts", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND — CAR-FREE",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND. AND THE INGLESIDE IS GENUINELY TRANSIT-RICH.\n" +
+          "RIGHT DOWN THE MIDDLE OF OCEAN AVENUE RUNS THE K-INGLESIDE MUNI METRO,\n" +
+          "CARRYING YOU STRAIGHT DOWNTOWN THROUGH THE TWIN PEAKS TUNNEL.\n" +
+          "AT THE EASTERN EDGE, BALBOA PARK BART IS RIGHT THERE,\n" +
+          "ALONG WITH THE M-OCEAN VIEW METRO LINE.\n" +
+          "AND THE 29-SUNSET, 49 VAN NESS-MISSION, 8-BAYSHORE, AND 54-FELTON BUSES\n" +
+          "THREAD THROUGH THE NEIGHBORHOOD AND OUT TO THE REST OF THE CITY.\n" +
+          "NOW LET'S LEAVE THE CITY — CAR-FREE.\n" +
+          "THE FERRY BUILDING IS ABOUT SIX AND A HALF MILES NORTHEAST,\n" +
+          "AND THAT'S YOUR GATEWAY TO THE WATER.\n" +
+          "GOING TO THE EAST BAY? TAKE BART FROM BALBOA PARK —\n" +
+          "DOWNTOWN OAKLAND IS ABOUT THIRTY-FIVE MINUTES DOOR TO PLATFORM.\n" +
+          "HEADING NORTH TO MARIN? THE LARKSPUR FERRY LEAVES FROM THE FERRY BUILDING\n" +
+          "AND CROSSES IN ABOUT THIRTY MINUTES ON THE WATER —\n" +
+          "OR DRIVE THE GOLDEN GATE BRIDGE TO LARKSPUR IN ABOUT THIRTY.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE THE TRAIN TO THE CALTRAIN DEPOT\n" +
+          "AT 4TH AND KING, AND CALTRAIN RUNS DOWN TO PALO ALTO IN ABOUT FIFTY MINUTES —\n" +
+          "OR IT'S ROUGHLY FIFTY BY CAR ON 280 OR 101.\n" +
+          "BOTTOM LINE: TWO RAIL SYSTEMS AT THE DOOR, PLUS WATER AND THREE BRIDGES —\n" +
+          "ALL WITHOUT OWNING A CAR.",
+        broll: [
+          "The K-Ingleside streetcar on Ocean Ave; Balboa Park BART entrance",
+          "Embarcadero / the Ferry Building / a departing ferry",
+          "A BART train; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: Ingleside → Oakland / Larkspur / Palo Alto with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 110,
+        script:
+          "TWO QUICK, HONEST NOTES ON THE GROUND ITSELF.\n" +
+          "GOOD NEWS FIRST: THE INGLESIDE SITS INLAND, UP ABOVE THE BAY,\n" +
+          "SO IT IS NOT IN A TSUNAMI HAZARD ZONE — CROSS THAT WORRY OFF THE LIST.\n" +
+          "LIKE MUCH OF HILLY SAN FRANCISCO, PARTS OF THE NEIGHBORHOOD\n" +
+          "DO FALL WITHIN A STATE-DESIGNATED SEISMIC HAZARD ZONE —\n" +
+          "THAT'S STANDARD FOR THE CITY'S SLOPES, AND IT'S SOMETHING\n" +
+          "EVERY CALIFORNIA BUYER REVIEWS WITH THEIR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK ANY SPECIFIC BLOCK BEFORE YOU WRITE AN OFFER.",
+        broll: ["You gesturing to the rolling streets off Ocean Ave", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 120,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "THE OCEAN AVENUE STRIP IS A REAL, WORKING COMMERCIAL CORRIDOR —\n" +
+          "AND ONE OF THE MOST DIVERSE FOOD SCENES IN THE CITY:\n" +
+          "FAMILY TAQUERIAS, A CLASSIC BURGER DRIVE-IN, SUSHI, PAKISTANI AND LAOTIAN COOKING,\n" +
+          "AN ALL-AGES BREWERY, AND THE COFFEE SHOPS WHERE THE COLLEGE CROWD LANDS.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND I NEVER WANT TO SEND YOU SOMEWHERE THAT'S CLOSED.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE NEIGHBORHOOD'S BEST\n" +
+          "RESTAURANTS AND SPOTS RIGHT ON MY INGLESIDE DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: THIS IS AN EVERYDAY, NEIGHBORLY, LEAVE-THE-CAR-HOME KIND OF PLACE.",
+        broll: ["Café tables along Ocean Ave; a busy taqueria window", "The brewery / a coffee shop with the college crowd", "The general bustle of the strip (general, not a single endorsement)"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 120,
+        script:
+          "ON HOUSING: THE INGLESIDE IS CLASSIC SOUTHWEST SAN FRANCISCO —\n" +
+          "MOSTLY SINGLE-FAMILY HOMES ON THE ROLLING SIDE STREETS,\n" +
+          "WITH FLATS AND SMALLER BUILDINGS NEARER THE OCEAN AVENUE CORRIDOR.\n" +
+          "IT'S LONG BEEN ONE OF THE CITY'S MORE ATTAINABLE FAMILY DISTRICTS.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR THE INGLESIDE ON MY SITE —\n" +
+          "CURRENT MEDIANS FOR SINGLE-FAMILY HOMES AND FOR CONDOS, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["A single-family home block, a flats building near Ocean Ave", "A 'For Sale' sign", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 120,
+        script:
+          "SO — WHO BELONGS IN THE INGLESIDE?\n" +
+          "SOMEONE WHO WANTS A REAL, DIVERSE, DOWN-TO-EARTH NEIGHBORHOOD\n" +
+          "WITH TWO RAIL SYSTEMS AT THE DOOR AND THE WHOLE BAY AREA WITHIN REACH.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY INGLESIDE NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING THE INGLESIDE HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass down Ocean Ave (you, relaxed, not pitching)", "A quiet look down a single-family side street", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the City College gateway, the Ocean Ave strip, the K-line, street life, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, the BART/streetcar, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Ingleside page.", time: "~30 min" },
+    ],
+    batchTip: "Shoot adjacent hoods the same outing — e.g. Ingleside + Ingleside Terraces + Oceanview in one morning loop.",
+  },
+"Treasure Island": {
+    aka: "TI",
+    runtime: "~10 min (8–10 target)",
+    marketLink: "https://www.ur4cast.com/listings?nbhd=Treasure%20Island&layer=nbhd",
+    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Treasure Island)",
+    route: {
+      // Route stays ENTIRELY within the Treasure Island boundary (verified against the
+      // neighborhood polygon). Coords approximate — snap to the path grid for the final cut.
+      spots: [
+        { n: 1, name: "Western shoreline skyline viewpoint", note: "Start — the head-on San Francisco skyline across the water", coord: [-122.3735, 37.8210] },
+        { n: 2, name: "Treasure Island waterfront parks & green", note: "The new bay-front parks and the shoreline path", coord: [-122.3705, 37.8230] },
+        { n: 3, name: "Building One — former fairgrounds / Administration Building", note: "Art Deco landmark from the 1939 World's Fair", coord: [-122.3690, 37.8195] },
+        { n: 4, name: "Marina & ferry landing", note: "The ferry terminal — your 10–15 minute ride to the Ferry Building", coord: [-122.3665, 37.8205] },
+        { n: 5, name: "New master-planned housing cluster", note: "The new condos, apartments, and townhomes rising on the island", coord: [-122.3700, 37.8255] },
+      ],
+    },
+    sections: [
+      {
+        label: "COLD OPEN / SIGNATURE INTRO",
+        words: 90,
+        script:
+          "IN SAN FRANCISCO, THE WEATHER CAN CHANGE IN THE SPACE OF A SINGLE BLOCK —\n" +
+          "ONE STREET BURIED IN FOG, THE NEXT ONE SITTING IN THE SUN.\n" +
+          "AFTER YEARS OF EXPLORING THESE HILLS, I'VE LEARNED THAT THE BEST HOMES\n" +
+          "AREN'T FOUND IN A LISTING — THEY'RE IN THE DETAILS YOU ONLY KNOW\n" +
+          "ONCE YOU'VE STOOD ON THE CORNER AT DIFFERENT TIMES OF DAY.\n" +
+          "RIGHT NOW I'M ON TREASURE ISLAND, WITH THE WHOLE CITY SKYLINE ACROSS THE WATER,\n" +
+          "AND THE FOG IS DRIFTING THROUGH THE GOLDEN GATE —\n" +
+          "WHICH IS ALREADY THE FIRST THING WORTH KNOWING ABOUT THIS PLACE.\n" +
+          "SO — ARE YOU READY TO SEE TREASURE ISLAND? LET'S GO.",
+        broll: ["Two-shot idea: fog drifting through the Golden Gate in one frame, the skyline in the next", "You with the head-on SF skyline behind you", "A wide pass of the open, flat island to place us"],
+      },
+      {
+        label: "1 · LOCATION & LAY OF THE LAND",
+        words: 190,
+        script:
+          "FIRST — WHERE ARE WE? TREASURE ISLAND SITS RIGHT IN THE MIDDLE OF THE BAY,\n" +
+          "A MAN-MADE ISLAND HALFWAY BETWEEN SAN FRANCISCO AND OAKLAND,\n" +
+          "CONNECTED TO YERBA BUENA ISLAND AND THE BAY BRIDGE.\n" +
+          "AND HERE'S THE FIRST THING TO KNOW ABOUT THE LAND:\n" +
+          "THE WHOLE ISLAND IS DEAD FLAT — IT RUNS FROM ABOUT SEA LEVEL\n" +
+          "UP TO ONLY AROUND SEVENTY FEET, AND THE LIVED-IN PART IS FULLY LEVEL.\n" +
+          "THAT MAKES IT ABOUT AS ACCESSIBLE TO GET AROUND AS ANYWHERE IN THE CITY —\n" +
+          "COMFORTABLY WITHIN WHAT THE A-D-A CONSIDERS AN ACCESSIBLE SLOPE, ABOUT FIVE PERCENT.\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR.\n" +
+          "AND BECAUSE THE NEW DEVELOPMENT IS BEING BUILT FROM SCRATCH,\n" +
+          "IT'S STEP-FREE BY DESIGN — LEVEL ENTRIES, RAMPS, AND SMOOTH SHORELINE PATHS.\n" +
+          "BUT BE HONEST WITH YOURSELF ABOUT ONE THING: THIS IS AN ISLAND IN THE MIDDLE OF THE BAY,\n" +
+          "SO IT IS WINDY, AND THE FOG BLOWS THROUGH.\n" +
+          "ON A GRAY SUMMER DAY YOU'LL FEEL THE MARINE LAYER PUSH RIGHT ACROSS THE WATER —\n" +
+          "SO COME OUT AND STAND HERE BEFORE YOU FALL IN LOVE WITH A FLOOR PLAN.",
+        broll: ["Slow pan across the flat island; the level shoreline path", "Wide establishing shot: the island, the skyline, the Bay Bridge", "Fog and wind moving across the water (show the marine layer)"],
+      },
+      {
+        label: "2 · HISTORY",
+        words: 200,
+        script:
+          "NOW THE STORY. TREASURE ISLAND ISN'T NATURAL AT ALL —\n" +
+          "IT'S A FLAT, ARTIFICIAL ISLAND, BUILT IN 1936 AND 37\n" +
+          "FROM BAY FILL DUMPED ONTO THE SHOALS NEXT TO YERBA BUENA ISLAND.\n" +
+          "IT WAS BUILT FOR ONE BIG REASON: THE 1939 GOLDEN GATE INTERNATIONAL EXPOSITION —\n" +
+          "A WORLD'S FAIR CELEBRATING THE BRAND-NEW BAY AND GOLDEN GATE BRIDGES.\n" +
+          "FOR A COUPLE OF DAZZLING YEARS THIS WAS A FAIRGROUNDS OF TOWERS,\n" +
+          "FOUNTAINS, AND LIGHTS OUT IN THE MIDDLE OF THE BAY.\n" +
+          "THEN CAME THE WAR. THE U.S. NAVY TOOK THE ISLAND OVER,\n" +
+          "AND IT BECAME NAVAL STATION TREASURE ISLAND —\n" +
+          "A WORKING NAVAL BASE FOR ROUGHLY FIFTY YEARS, UNTIL IT CLOSED IN 1997.\n" +
+          "AND NOW IT'S TURNING INTO SOMETHING NEW AGAIN:\n" +
+          "ONE OF THE LARGEST MASTER-PLANNED COMMUNITIES IN THE COUNTRY,\n" +
+          "WITH THOUSANDS OF NEW HOMES, BAY-FRONT PARKS, WINERIES,\n" +
+          "THE LEGACY OF THOSE FAIRGROUNDS, AND SKYLINE VIEWS NOWHERE ELSE CAN MATCH.\n" +
+          "STAND HERE TODAY, AND YOU'RE STANDING ON A WORLD'S FAIR, A NAVY BASE,\n" +
+          "AND A BRAND-NEW NEIGHBORHOOD — ALL ON THE SAME PIECE OF MADE GROUND.",
+        broll: ["Archival-style cards: the 1939 fair towers", "Building One — the Art Deco Administration Building", "The Bay Bridge tunnel to Yerba Buena Island"],
+      },
+      {
+        label: "3 · HIDDEN FACTS",
+        words: 150,
+        script:
+          "HERE'S WHAT MOST PEOPLE DON'T KNOW.\n" +
+          "THE ENTIRE ISLAND WAS HAND-MADE — POURED OUT OF BAY FILL IN THE 1930s\n" +
+          "ON TOP OF THE OLD YERBA BUENA SHOALS, WHERE NO LAND EXISTED BEFORE.\n" +
+          "IT WAS ORIGINALLY MEANT TO BECOME SAN FRANCISCO'S AIRPORT\n" +
+          "AFTER THE FAIR — BUT THE NAVY HAD OTHER PLANS, AND IT NEVER FLEW.\n" +
+          "THAT ART DECO BUILDING ONE — THE OLD FAIR ADMINISTRATION BUILDING —\n" +
+          "IS A CITY LANDMARK THAT SURVIVED BOTH THE FAIR AND THE NAVY YEARS.\n" +
+          "AND THE ISLAND CONNECTS STRAIGHT TO YERBA BUENA ISLAND AND THE BAY BRIDGE,\n" +
+          "SO YOU'RE LITERALLY LIVING ON THE SPINE OF THE BAY.\n" +
+          "TODAY THERE ARE EVEN WINERIES OUT HERE, AND THE NEW PARKS TRACE\n" +
+          "THE OLD FAIRGROUNDS — A NEIGHBORHOOD BUILT FROM NOTHING, TWICE OVER.",
+        broll: ["The flat made-land shoreline", "Building One landmark tight shot", "A winery tasting room; the new parks"],
+      },
+      {
+        label: "4 · MICROCLIMATE",
+        words: 95,
+        script:
+          "QUICK WORD ON WEATHER — BECAUSE IN SAN FRANCISCO, MICROCLIMATE IS EVERYTHING.\n" +
+          "TREASURE ISLAND SITS OUT IN THE OPEN BAY, RIGHT IN THE PATH\n" +
+          "OF THE WIND AND THE FOG THAT POUR IN THROUGH THE GOLDEN GATE.\n" +
+          "SO BE HONEST: THIS IS A BREEZY, FOG-KISSED SPOT —\n" +
+          "THE MARINE LAYER DRIFTS ACROSS THE WATER AND THE WIND IS PART OF LIFE HERE.\n" +
+          "ON A CLEAR EVENING, THOUGH, THAT SAME OPEN AIR GIVES YOU\n" +
+          "THE BEST HEAD-ON SKYLINE VIEW IN THE WHOLE CITY.\n" +
+          "I KEEP A LIVE FOG MAP THAT SHOWS THIS ISLAND'S EXACT SUMMER-FOG HOURS —\n" +
+          "IT'S LINKED ON MY TREASURE ISLAND PAGE BELOW.",
+        broll: ["Wind moving across the water; flags snapping", "Fog through the Golden Gate at distance", "Edit: screen-cap of the Ur4cast fog map"],
+      },
+      {
+        label: "5 · GETTING AROUND",
+        words: 290,
+        script:
+          "NOW THE PART THAT REALLY MATTERS IF YOU'RE BUYING HERE:\n" +
+          "HOW YOU GET AROUND — BECAUSE THIS IS AN ISLAND.\n" +
+          "AND THE STANDOUT, THE HEADLINE, IS THE WATER.\n" +
+          "THE TREASURE ISLAND FERRY RUNS STRAIGHT TO THE FERRY BUILDING DOWNTOWN —\n" +
+          "ABOUT TEN TO FIFTEEN MINUTES ACROSS THE WATER, SEVEN DAYS A WEEK.\n" +
+          "THAT IS THE WAY TO COMMUTE FROM HERE: NO BRIDGE TRAFFIC, JUST THE BAY.\n" +
+          "RIGHT ALONGSIDE IT, THE 25-TREASURE ISLAND BUS RUNS OVER THE BAY BRIDGE\n" +
+          "TO THE SALESFORCE TRANSIT CENTER DOWNTOWN — A QUICK HOP INTO THE CITY.\n" +
+          "SO YOU'VE GOT BOTH A BOAT AND A BUS TO DOWNTOWN. NOW LET'S LEAVE THE ISLAND.\n" +
+          "THE FERRY BUILDING IS JUST OVER TWO MILES SOUTHWEST ACROSS THE WATER —\n" +
+          "AND THE FERRY IS THE HEADLINE, ROUGHLY TEN TO FIFTEEN MINUTES DOCK TO DOCK.\n" +
+          "GOING TO THE EAST BAY? OAKLAND IS RIGHT THERE OVER THE BAY BRIDGE —\n" +
+          "TAKE THE 25 BUS OR DRIVE, AND YOU'RE IN OAKLAND IN ABOUT FIFTEEN TO TWENTY MINUTES.\n" +
+          "HEADING NORTH TO MARIN? TAKE THE FERRY OR THE BUS DOWNTOWN,\n" +
+          "THEN DRIVE THE GOLDEN GATE BRIDGE TO MARIN IN ABOUT THIRTY MINUTES.\n" +
+          "HEADING SOUTH TO THE PENINSULA? TAKE THE FERRY OR BUS TO DOWNTOWN,\n" +
+          "TRANSFER TO CALTRAIN AT 4TH AND KING, AND YOU'RE ON THE PENINSULA FROM THERE.\n" +
+          "BOTTOM LINE: A TEN-MINUTE FERRY, A BUS OVER THE BRIDGE, AND THE WHOLE BAY\n" +
+          "WITHIN EASY REACH — JUST REMEMBER YOU'RE TIMING A BOAT, NOT A SUBWAY.",
+        broll: [
+          "The ferry landing; a Treasure Island ferry departing for the Ferry Building",
+          "The 25-Treasure Island bus crossing the Bay Bridge",
+          "The Bay Bridge; the Golden Gate Bridge; a Caltrain at 4th & King",
+          "Simple motion-graphic map: TI → Ferry Building / Oakland / Marin / Caltrain with the times",
+        ],
+      },
+      {
+        label: "6 · THE GROUND UNDER YOU (HAZARDS)",
+        words: 120,
+        script:
+          "NOW THE MOST IMPORTANT HONEST NOTE, AND I WON'T SOFT-PEDAL IT.\n" +
+          "THE ENTIRE ISLAND IS ARTIFICIAL BAY FILL — MADE GROUND OUT IN THE WATER.\n" +
+          "THAT PUTS IT IN A STATE-DESIGNATED SEISMIC HAZARD ZONE FOR LIQUEFACTION,\n" +
+          "AND ALSO IN A TSUNAMI HAZARD AND EVACUATION ZONE.\n" +
+          "I'M TELLING YOU THAT CALMLY, BECAUSE IT'S KNOWABLE AND IT'S MANAGEABLE:\n" +
+          "THE NEW DEVELOPMENT IS BEING ENGINEERED WITH MODERN GROUND IMPROVEMENT\n" +
+          "DESIGNED EXACTLY FOR THIS KIND OF SITE.\n" +
+          "BUT YOU SHOULD GO IN WITH EYES OPEN — READ THE DISCLOSURES CAREFULLY\n" +
+          "AND TALK THEM THROUGH WITH YOUR INSPECTOR AND INSURER.\n" +
+          "I PUT THE SEISMIC AND TSUNAMI STATUS RIGHT ON EACH NEIGHBORHOOD'S\n" +
+          "DETAILS PAGE, SO YOU CAN CHECK IT BEFORE YOU EVER WRITE AN OFFER.",
+        broll: ["You gesturing to the made-land shoreline / the water's edge", "Edit: the seismic + tsunami toggles on your fog map"],
+      },
+      {
+        label: "7 · DINING, NIGHTLIFE & DAILY LIFE",
+        words: 115,
+        script:
+          "LET'S TALK DAILY LIFE.\n" +
+          "TREASURE ISLAND IS STILL EARLY IN ITS REINVENTION, SO THE SCENE IS GROWING —\n" +
+          "THERE ARE WATERFRONT RESTAURANTS, WINERIES, AND TASTING ROOMS OUT HERE,\n" +
+          "WITH MORE ARRIVING AS THE NEW DISTRICT FILLS IN.\n" +
+          "I'M NOT GOING TO NAME SPECIFIC PLACES ON CAMERA, BECAUSE THE LINEUP CHANGES —\n" +
+          "AND ON A FAST-BUILDING ISLAND IT CHANGES FAST.\n" +
+          "INSTEAD, I KEEP A CURRENT, HAND-CHECKED LIST OF THE ISLAND'S BEST\n" +
+          "RESTAURANTS AND TASTING ROOMS RIGHT ON MY TREASURE ISLAND DETAILS PAGE — ALWAYS UP TO DATE.\n" +
+          "THE VIBE TO KNOW: OPEN SKY, BIG WATER, AND A BRAND-NEW NEIGHBORHOOD FINDING ITS FEET.",
+        broll: ["A waterfront restaurant patio; a winery tasting room", "The new parks and shoreline path at golden hour", "People out by the water with the skyline behind"],
+      },
+      {
+        label: "8 · REAL ESTATE",
+        words: 115,
+        script:
+          "ON HOUSING: TREASURE ISLAND IS A NEW KIND OF SAN FRANCISCO ADDRESS —\n" +
+          "MOSTLY BRAND-NEW, MASTER-PLANNED CONDOS, APARTMENTS, AND TOWNHOMES,\n" +
+          "BUILT FROM THE GROUND UP ON THE WATER, WITH SOME LEGACY UNITS MIXED IN.\n" +
+          "IT RUNS FROM A FIRST CONDO TO A VIEW HOME LOOKING STRAIGHT AT THE SKYLINE.\n" +
+          "I'M NOT GOING TO QUOTE A MEDIAN PRICE ON CAMERA, BECAUSE THAT NUMBER MOVES —\n" +
+          "AND ON A NEW-CONSTRUCTION ISLAND IT MOVES AS NEW PHASES COME ONLINE.\n" +
+          "INSTEAD, I KEEP A LIVE MARKET UPDATE FOR TREASURE ISLAND ON MY SITE —\n" +
+          "CURRENT NUMBERS, RIGHT UP TO TODAY.\n" +
+          "THE LINK IS BELOW. THAT'S YOUR SMARTEST FIRST STEP BEFORE YOU EVEN TOUR.",
+        broll: ["New condo and townhome entries; a modern lobby", "A 'For Sale' sign with the skyline behind", "Edit: lower-third + screen-record of your live market page"],
+      },
+      {
+        label: "9 · WHO BELONGS HERE + SIGNATURE OUTRO",
+        words: 125,
+        script:
+          "SO — WHO BELONGS ON TREASURE ISLAND?\n" +
+          "SOMEONE WHO WANTS BRAND-NEW, LEVEL, EASY-TO-GET-AROUND LIVING,\n" +
+          "THE BEST SKYLINE VIEW IN THE CITY, AND A TEN-MINUTE FERRY TO DOWNTOWN —\n" +
+          "AND WHO DOESN'T MIND A LITTLE WIND AND FOG OFF THE BAY.\n" +
+          "BUT HERE'S THE THING I'VE LEARNED AFTER ALL THESE YEARS:\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY HAS A STORY LIKE THIS ONE,\n" +
+          "AND KNOWING THEM ALL IS THE WORK — THE MICROCLIMATES,\n" +
+          "THE STREETS THAT HOLD THEIR VALUE, THE THINGS THAT NEVER SHOW UP IN A SEARCH.\n" +
+          "ANYTHING THAT CHANGES — PRICES, THE NEWEST RESTAURANT, WHAT'S FOR SALE —\n" +
+          "STAYS CURRENT ON MY TREASURE ISLAND NEIGHBORHOOD PAGE, SO THIS GUIDE NEVER GOES STALE.\n" +
+          "SO IF YOU'RE THINKING ABOUT CALLING TREASURE ISLAND HOME,\n" +
+          "I'D LOVE TO SHOW YOU AROUND AND HELP CREATE YOUR NEXT LIFE ADVENTURE.",
+        broll: ["Golden-hour, unhurried pass along the shoreline path (you, relaxed, not pitching)", "A quiet look back across the water at the skyline", "Soft end card: your name + how to reach you"],
+      },
+    ],
+    schedule: [
+      { step: "Scout & lock script", detail: "Take the route, mark the 6–8 B-roll stops, finalize edits to this script.", time: "~45 min (day before)" },
+      { step: "Golden-hour B-roll", detail: "Shoot the skyline viewpoint, the parks, Building One, the ferry landing, and housing variety in good light.", time: "30–45 min (early AM or ~1 hr before sunset)" },
+      { step: "Talk-to-camera takes", detail: "Shoot each section as its own clip at the relevant spot; 2 takes each; teleprompter on your phone.", time: "60–90 min" },
+      { step: "Pickups & cutaways", detail: "Signs, the ferry landing, and a screen-record of your live market page (capture at home).", time: "~15 min" },
+      { step: "Edit & caption", detail: "Assemble, add lower-thirds (market URL), burned-in captions, light music bed; export.", time: "2–3 hrs" },
+      { step: "Publish & link", detail: "Upload to YouTube, paste the market link in the description — then I add the 'Watch the tour' button to the Treasure Island page.", time: "~30 min" },
+    ],
+    batchTip: "Treasure Island is its own outing — pair the shoot with a Ferry Building / Embarcadero capture on the same ferry trip in and out.",
+  },
 };
