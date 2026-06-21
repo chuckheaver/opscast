@@ -119,7 +119,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS VALLEY — SHELTERED BY TWIN PEAKS — CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY CASTRO PAGE BELOW.",
         broll: ["Blue sky over Castro St; you in shirtsleeves", "Contrast: fog pouring over the Twin Peaks ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -335,7 +335,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS VALLEY — SHELTERED BY TWIN PEAKS — CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY NOE VALLEY PAGE BELOW.",
         broll: ["Blue sky over 24th St; you in shirtsleeves", "Contrast: fog pouring over the Twin Peaks ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -549,7 +549,7 @@ export const SCRIPTS = {
           "BUT IT SITS RIGHT ON THE WATER, SO IT CAN BE BREEZY AND COOL —\n" +
           "THAT WIND COMES STRAIGHT OFF THE BAY THROUGH THE GOLDEN GATE.\n" +
           "BRING A LAYER FOR THE PROMENADE, EVEN ON A SUNNY DAY.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY MARINA PAGE BELOW.",
         broll: ["Blue sky over Chestnut St; you in shirtsleeves", "Wind on the bay: whitecaps, kites, flags snapping on the Green", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -765,7 +765,7 @@ export const SCRIPTS = {
           "TUCKED INTO THE CENTER OF TOWN, AWAY FROM THE OCEAN,\n" +
           "IT MISSES THE WORST OF THE SUMMER FOG THAT SWALLOWS THE WEST SIDE\n" +
           "AND TENDS TO STAY BRIGHTER AND A LITTLE WARMER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY HAYES VALLEY PAGE BELOW.",
         broll: ["Blue sky over Hayes St; you in shirtsleeves", "Contrast: fog pouring over the west-side ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -988,7 +988,7 @@ export const SCRIPTS = {
           "THIS HIGH GROUND ON THE NORTH SIDE OF THE CITY\n" +
           "OFTEN CATCHES THE SUN AND STAYS BRIGHTER —\n" +
           "WITH THE BAY GLITTERING BELOW. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY PACIFIC HEIGHTS PAGE BELOW.",
         broll: ["Blue sky over Fillmore St; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -1209,7 +1209,7 @@ export const SCRIPTS = {
           "TWIN PEAKS ACTS LIKE A WALL — THE FOG STOPS SHORT OF THE MISSION,\n" +
           "AND THIS VALLEY FLOOR CAN RUN TEN DEGREES WARMER THAN THE WEST SIDE.\n" +
           "PEOPLE PAY FOR LIGHT, AND THIS IS WHERE THE LIGHT LIVES.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS EXACTLY WHERE THE FOG STOPS —\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS WHERE THE FOG STOPS —\n" +
           "IT'S LINKED ON MY MISSION PAGE BELOW.",
         broll: ["Blue sky over Valencia St; you in shirtsleeves", "Contrast: fog pouring over the Twin Peaks ridge but stopping short", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -1424,7 +1424,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS CORNER — TUCKED ON THE BAY SIDE BELOW TELEGRAPH HILL — OFTEN CATCHES THE SUN.\n" +
           "JUST KNOW IT CAN GET BREEZY HERE, WITH THE WIND FUNNELING IN OFF THE WATER.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY NORTH BEACH PAGE BELOW.",
         broll: ["Blue sky over Washington Square; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -1643,7 +1643,7 @@ export const SCRIPTS = {
           "THIS CREST CATCHES THE LIGHT AND THE BAY VIEWS\n" +
           "AND STAYS WARMER AND BRIGHTER THAN THE FOGGY WEST SIDE.\n" +
           "PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY RUSSIAN HILL PAGE BELOW.",
         broll: ["Blue sky over the crest; you in shirtsleeves", "Contrast: fog sitting out over the west side / the avenues", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -1859,7 +1859,7 @@ export const SCRIPTS = {
           "THIS SUMMIT — UP ABOVE IT ALL — TENDS TO CATCH THE LIGHT\n" +
           "AND STAY BRIGHTER, EVEN AS THE FOG STREAMS PAST BELOW.\n" +
           "PEOPLE PAY FOR LIGHT — AND FOR THE VIEWS THAT COME WITH THE HEIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY NOB HILL PAGE BELOW.",
         broll: ["Blue sky over the crest; you in shirtsleeves", "Contrast: fog streaming past below the hilltop", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -2078,7 +2078,7 @@ export const SCRIPTS = {
           "IN OVER THE RIDGE, THE WAY IT'S DOING RIGHT NOW.\n" +
           "THE UPSIDE? THAT KEEPS THE VILLAGE COOL, GREEN, AND FRESH —\n" +
           "AND IT'S STILL SUNNIER THAN THE FOG-BOUND AVENUES FARTHER WEST.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS —\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS —\n" +
           "IT'S LINKED ON MY COLE VALLEY PAGE BELOW, SO YOU CAN SEE IT FOR YOURSELF.",
         broll: ["Fog spilling over Tank Hill / the Sutro ridge into the village", "Green, leafy, slightly misty Cole St", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -2298,7 +2298,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS HILL — TUCKED IN THE CITY'S WARM SOUTHEAST QUADRANT — CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY BERNAL HEIGHTS PAGE BELOW.",
         broll: ["Blue sky over Cortland Ave; you in shirtsleeves", "Contrast: fog pouring over the western ridges in the distance", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -2516,7 +2516,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS HILL — SHELTERED IN THE LEE OF TWIN PEAKS — CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY POTRERO HILL PAGE BELOW.",
         broll: ["Blue sky over 18th St; you in shirtsleeves", "Contrast: fog pouring over the Twin Peaks ridge to the west", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -2738,7 +2738,7 @@ export const SCRIPTS = {
           "THIS VALLEY — TUCKED EAST OF TWIN PEAKS — CATCHES MORE SUN AND LESS WIND.\n" +
           "IT RUNS A TOUCH COOLER AND GREENER THAN THE MISSION JUST DOWNHILL,\n" +
           "BUT IT STAYS BRIGHT WHEN THE WEST SIDE IS GREY. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY GLEN PARK PAGE BELOW.",
         broll: ["Blue sky over Diamond St; you in shirtsleeves", "Contrast: fog pouring over the Twin Peaks ridge to the west", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -2953,7 +2953,7 @@ export const SCRIPTS = {
           "BUT IT SITS JUST INLAND FROM THE BAY, SO IT CAN BE BREEZY —\n" +
           "THAT WIND COMES STRAIGHT OFF THE WATER THROUGH THE GOLDEN GATE.\n" +
           "BRING A LIGHT LAYER, EVEN ON A SUNNY DAY.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY COW HOLLOW PAGE BELOW.",
         broll: ["Blue sky over Union St; you in shirtsleeves", "Wind off the bay: flags snapping, leaves moving on the side streets", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -3174,7 +3174,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS WEDGE — TUCKED IN THE LEE OF THE HILLS — CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY DUBOCE TRIANGLE PAGE BELOW.",
         broll: ["Blue sky over Duboce Park; you in shirtsleeves", "Contrast: fog pouring over the Twin Peaks ridge to the west", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -3393,7 +3393,7 @@ export const SCRIPTS = {
           "BUT IT SITS LOW AND OPEN NEAR THE BAY, SO IT CAN BE BREEZY,\n" +
           "AND THE AFTERNOON WIND FUNNELS RIGHT DOWN THESE WIDE STREETS.\n" +
           "BRING A LAYER FOR A LATE-DAY STROLL, EVEN ON A SUNNY ONE.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY SOMA PAGE BELOW.",
         broll: ["Blue sky over a SoMa block; you in shirtsleeves", "Afternoon wind down a wide street: flags, awnings", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -3611,7 +3611,7 @@ export const SCRIPTS = {
           "BUT IT SITS RIGHT ALONG THE PRESIDIO, SO IT CAN RUN BREEZY AND A TOUCH COOLER\n" +
           "NEAR THAT GREEN EDGE WHEN THE OCEAN AIR DRIFTS THROUGH THE TREES.\n" +
           "BRING A LIGHT LAYER FOR THE NORTHERN BLOCKS, EVEN ON A SUNNY DAY.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY PRESIDIO HEIGHTS PAGE BELOW.",
         broll: ["Blue sky over Sacramento St; you in shirtsleeves", "Breeze in the Presidio treeline at the neighborhood's edge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -3834,7 +3834,7 @@ export const SCRIPTS = {
           "BUT IT'S A BAYFRONT HILL, SO IT CAN BE BREEZY —\n" +
           "THAT WIND COMES STRAIGHT OFF THE WATER AND OVER THE SUMMIT.\n" +
           "BRING A LAYER IF YOU'RE HEADING UP TO THE TOWER.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY TELEGRAPH HILL PAGE BELOW.",
         broll: ["Blue sky over Coit Tower; you in shirtsleeves", "Wind on the bay: whitecaps, flags snapping at the summit", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -4057,7 +4057,7 @@ export const SCRIPTS = {
           "AND THIS BLUFF CATCHES IT FIRST.\n" +
           "BUT WHEN IT CLEARS — AND ON THOSE DRAMATIC CLEARING DAYS IT REALLY CLEARS —\n" +
           "THE LIGHT OFF THE WATER AND THE BRIDGE IS LIKE NOWHERE ELSE.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY SEACLIFF PAGE BELOW.",
         broll: ["Fog pouring through the Golden Gate over the bluff", "A dramatic clearing day: the bridge and Marin Headlands wide open", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -4283,7 +4283,7 @@ export const SCRIPTS = {
           "THAT SUMMER FOG THAT ROLLS IN OFF THE PACIFIC AND THROUGH THE GOLDEN GATE.\n" +
           "SOME DAYS ARE BRIGHT AND CLEAR; PLENTY OF MORNINGS AND EVENINGS ARE GREY AND COOL.\n" +
           "IT'S A MIXED, FOG-LEANING POCKET — BRING A LAYER.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY LAKE STREET PAGE BELOW.",
         broll: ["Fog drifting over the Presidio treeline", "A grey, cool morning on Lake St; you in a layer", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -4499,7 +4499,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS HILLTOP — WELL INLAND OF THE COAST — CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY ALAMO SQUARE PAGE BELOW.",
         broll: ["Blue sky over the park crown; you in shirtsleeves", "Contrast: fog pouring over the western ridges", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -4715,7 +4715,7 @@ export const SCRIPTS = {
           "AND OTHER POCKETS OF THE DAY OPEN UP BRIGHT.\n" +
           "IT'S A MIXED, FOG-LEANING SPOT — AND THAT GREEN, LEAFY FEEL\n" +
           "IS PART OF WHAT THE COOLER, DAMPER AIR GIVES YOU.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY ST. FRANCIS WOOD PAGE BELOW.",
         broll: ["Fog drifting over the slope toward Mount Davidson", "The green, leafy streets under gray light", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -4933,7 +4933,7 @@ export const SCRIPTS = {
           "THAT ROLLS IN OFF THE OCEAN ON SUMMER DAYS.\n" +
           "MORNINGS CAN BREAK BRIGHT AND CLEAR, THEN GREY OVER BY MID-AFTERNOON.\n" +
           "IT'S A MIXED, HONEST READ — NOT THE SUNNIEST POCKET IN TOWN.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY HAIGHT PAGE BELOW.",
         broll: ["Fog spilling over the Sutro ridge toward the strip", "Bright morning light on Haight St vs. grey afternoon", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -5146,7 +5146,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THESE CENTRAL BLOCKS CATCH MORE SUN AND STAY BRIGHTER AND WARMER.\n" +
           "PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY JAPANTOWN PAGE BELOW.",
         broll: ["Blue sky over Peace Plaza; you in shirtsleeves", "Contrast: fog pouring over the west-side ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -5363,7 +5363,7 @@ export const SCRIPTS = {
           "THAN THE AVENUES OUT WEST THAT DISAPPEAR INTO SUMMER FOG.\n" +
           "IT'S NOT THE WARMEST POCKET IN TOWN, BUT IT CATCHES PLENTY OF LIGHT —\n" +
           "AND PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY WESTERN ADDITION PAGE BELOW.",
         broll: ["Blue sky over Fillmore St; you in shirtsleeves", "Contrast: fog pouring over the west-side ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -5575,7 +5575,7 @@ export const SCRIPTS = {
           "BUT IT SITS ON HIGH GROUND OPEN TOWARD THE RICHMOND AND THE OCEAN,\n" +
           "SO IT CAN RUN BREEZY AND A TOUCH COOLER WHEN THE WEST-SIDE AIR DRIFTS THROUGH.\n" +
           "BRING A LIGHT LAYER FOR A BREEZY AFTERNOON, EVEN ON A SUNNY DAY.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY LAUREL HEIGHTS / JORDAN PARK PAGE BELOW.",
         broll: ["Blue sky over California St; you in shirtsleeves", "A breeze moving the trees on a Jordan Park block", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -5801,7 +5801,7 @@ export const SCRIPTS = {
           "WHILE THE FOG SITS LOWER, OUT TOWARD THE OCEAN AND THE AVENUES.\n" +
           "BUT SOMETIMES THAT SAME RIDGE IS EXACTLY WHERE THE FOG ROLLS IN FIRST —\n" +
           "SO IT'S GENUINELY VARIABLE UP HERE, AND THAT'S WORTH KNOWING HONESTLY.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY ASHBURY HEIGHTS PAGE BELOW.",
         broll: ["You above the fog line, sun on the ridge", "Contrast: fog rolling up over the hill toward you", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -6019,7 +6019,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS CENTRAL SHELF — DOWN OFF THE HIGH RIDGE — CATCHES THE SUN\n" +
           "AND STAYS GENERALLY SUNNIER AND MILDER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY LOWER PACIFIC HEIGHTS PAGE BELOW.",
         broll: ["Blue sky over Fillmore St; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -6235,7 +6235,7 @@ export const SCRIPTS = {
           "WHILE THE FOG ROLLS IN AND POOLS IN THE STREETS BELOW,\n" +
           "THE TOP OF THIS HILL OFTEN SITS ABOVE IT — IN CLEAR SUN.\n" +
           "IT CAN ALSO CATCH WIND OFF THE OCEAN ON A GREY DAY, SO IT CUTS BOTH WAYS.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY BUENA VISTA PAGE BELOW.",
         broll: ["Sun on the summit with fog pooling below; you in shirtsleeves", "Contrast: fog pouring over a nearby ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -6454,7 +6454,7 @@ export const SCRIPTS = {
           "WHILE FOG BLANKETS NEIGHBORHOODS JUST TO THE WEST.\n" +
           "IT'S THE SAME SHELTERED LIGHT THAT FILLS DOLORES PARK BELOW —\n" +
           "AND IT STAYS WARMER AND BRIGHTER UP HERE. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY DOLORES HEIGHTS PAGE BELOW.",
         broll: ["Blue sky over the hilltop; you in shirtsleeves", "Contrast: fog pouring over the Twin Peaks ridge to the west", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -6671,7 +6671,7 @@ export const SCRIPTS = {
           "IT CATCHES THE SUMMER FOG THAT ROLLS IN OFF THE OCEAN —\n" +
           "WHICH IS EXACTLY WHAT KEEPS THAT EUCALYPTUS FOREST SO LUSH AND COOL.\n" +
           "SOME DAYS THE UPPER STREETS SIT RIGHT ABOVE THE FOG IN BRIGHT SUN.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY PARNASSUS HEIGHTS PAGE BELOW.",
         broll: ["Fog pouring over the Mount Sutro ridge; you in a jacket", "Contrast: an upper street in sun above the fog line", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -6887,7 +6887,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS POCKET CATCHES MORE LIGHT AND STAYS WARMER AND BRIGHTER.\n" +
           "PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY LOWER HAIGHT PAGE BELOW.",
         broll: ["Blue sky over Haight St; you in shirtsleeves", "Contrast: fog pouring over the ridge to the west", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -7104,7 +7104,7 @@ export const SCRIPTS = {
           "THE FOG THAT ROLLS IN OFF THE OCEAN AND OVER THESE HILLS.\n" +
           "SOME DAYS YOU'RE IN THE SUN UP HERE; OTHER DAYS THE FOG SETTLES IN COOL AND GREY.\n" +
           "IT'S A FOG-AND-MIXED NEIGHBORHOOD, AND I WON'T PRETEND OTHERWISE.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY MONTEREY HEIGHTS PAGE BELOW.",
         broll: ["Fog pouring over the Mount Davidson ridge", "A grey, cool morning on a curving street", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -7322,7 +7322,7 @@ export const SCRIPTS = {
           "IT CAN CATCH AFTERNOON FOG ROLLING IN OFF THE PARK FROM THE WEST,\n" +
           "EVEN WHEN THE BLOCKS A FEW STREETS EAST STAY BRIGHT.\n" +
           "IT'S A MIXED, HONEST PICTURE — SOME SUN, SOME GREY.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY PANHANDLE PAGE BELOW.",
         broll: ["Fog drifting up the green strip from the park", "Contrast: brighter sky over the Divisadero blocks to the east", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -7539,7 +7539,7 @@ export const SCRIPTS = {
           "SO IT'S OFTEN BRIGHTER THAN THE OUTER AVENUES —\n" +
           "BUT IT STILL CATCHES ITS SHARE OF THE SUMMER MARINE LAYER\n" +
           "THAT ROLLS IN OFF THE OCEAN. SOME MORNINGS ARE GRAY; SOME BURN OFF BY NOON.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY WEST PORTAL PAGE BELOW.",
         broll: ["The avenue in flat gray morning light", "Contrast: fog spilling over the Twin Peaks ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -7751,7 +7751,7 @@ export const SCRIPTS = {
           "ON A SUMMER AFTERNOON THE FOG CAN ROLL IN OFF THE OCEAN\n" +
           "AND SETTLE OVER THESE STREETS WHILE THE EAST SIDE STAYS BRIGHT —\n" +
           "THOUGH BEING TUCKED BELOW THE RIDGE TAKES SOME OF THE EDGE OFF.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY BALBOA TERRACE PAGE BELOW.",
         broll: ["Fog easing over the curving streets in the afternoon", "Contrast: bright sun on the east-side hills", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -7974,7 +7974,7 @@ export const SCRIPTS = {
           "THAT ROLLS THROUGH THE GOLDEN GATE, SO SUMMER DAYS RUN COOL AND GRAY.\n" +
           "BUT HERE'S THE NUANCE THAT MATTERS — IT'S SUNNIER THAN THE OUTER RICHMOND\n" +
           "JUST WEST OF IT; THE FOG OFTEN BURNS OFF HERE A LITTLE SOONER.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS —\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS —\n" +
           "IT'S LINKED ON MY INNER RICHMOND PAGE BELOW.",
         broll: ["Fog pouring in over the avenue grid from the west", "Contrast: the foggier Outer Richmond beyond", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -8188,7 +8188,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS SHELTERED, MISSION-ADJACENT POCKET CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER — IT'S WHY DOLORES PARK FILLS UP. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY MISSION DOLORES PAGE BELOW.",
         broll: ["Blue sky over Dolores St; you in shirtsleeves", "Contrast: fog pouring over the Twin Peaks ridge to the west", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -8401,7 +8401,7 @@ export const SCRIPTS = {
           "FOG DRIFTS THROUGH THE EUCALYPTUS HERE — THIS IS A FOG-LEANING,\n" +
           "MIXED POCKET, COOLER AND GREENER THAN THE SUNNY EAST-SIDE VALLEYS.\n" +
           "SOME DAYS THE SUN BREAKS THROUGH; MANY DAYS THE LAYER LINGERS.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY LAGUNA HONDA PAGE BELOW.",
         broll: ["Fog pouring through the eucalyptus", "Contrast: a sunny break over the ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -8619,7 +8619,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THESE BLOCKS — TUCKED BELOW THE TWIN PEAKS RIDGE — CATCH THE SUN\n" +
           "AND STAY WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY UPPER MARKET PAGE BELOW.",
         broll: ["Blue sky over Market St; you in shirtsleeves", "Contrast: fog pouring over the Twin Peaks ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -8833,7 +8833,7 @@ export const SCRIPTS = {
           "ON A SUMMER AFTERNOON, THE FOG OFTEN SPILLS OVER MOUNT SUTRO\n" +
           "AND SETTLES INTO THESE WOODED STREETS WHILE THE EAST SIDE STAYS SUNNY.\n" +
           "IT'S COOLER, GREENER, AND MORE OFTEN MIXED THAN THE VALLEYS DOWNTOWN.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY FOREST HILL PAGE BELOW.",
         broll: ["Fog drifting through the treetops over the slope", "Contrast: fog pouring over the Mount Sutro / Twin Peaks ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -9051,7 +9051,7 @@ export const SCRIPTS = {
           "ON A LOT OF DAYS YOU'RE UP IN THE SUN WHILE THE FOG POOLS IN THE VALLEYS BELOW —\n" +
           "BUT THE SAME HEIGHT THAT BUYS YOU LIGHT CAN ALSO CATCH THE WIND,\n" +
           "SO IT RUNS BREEZIER AND COOLER THAN THE SHELTERED HOODS DOWN THE HILL.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY DIAMOND HEIGHTS PAGE BELOW.",
         broll: ["Sun on the hilltop with fog pouring through the valleys below", "Wind moving the grasses on the canyon rim", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -9269,7 +9269,7 @@ export const SCRIPTS = {
           "THE FOG THAT ROLLS IN OFF THE PACIFIC ON SUMMER AFTERNOONS.\n" +
           "IT'S NOT THE FOGGIEST CORNER OF THE CITY, BUT IT'S NO SUN-BELT POCKET EITHER —\n" +
           "EXPECT A MIX, LEANING GRAY ON THE CLASSIC FOGGY-SEASON DAYS.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY INGLESIDE TERRACES PAGE BELOW.",
         broll: ["Fog settling over the rooftops", "Contrast: a bright break in the clouds over the sundial", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -9483,7 +9483,7 @@ export const SCRIPTS = {
           "THE SUMMER FOG ROLLING OVER TWIN PEAKS CAN SETTLE RIGHT ON THIS HILL\n" +
           "WHILE THE VALLEYS BELOW STAY CLEAR. THE LIGHT CHANGES HOUR TO HOUR.\n" +
           "THAT'S THE HONEST TRADE FOR THE ELEVATION AND THE VIEWS.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER POCKETS BELOW — IT'S LINKED ON MY CLARENDON HEIGHTS PAGE BELOW.",
         broll: ["Fog pouring over the Twin Peaks ridge onto the homes", "Wind in the eucalyptus; you with a jacket on", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -9703,7 +9703,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG.\n" +
           "THAT SAID, IT CAN STILL TURN COOL AND BREEZY,\n" +
           "ESPECIALLY WHEN THE WIND FUNNELS DOWN THESE NARROW STREETS.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY CHINATOWN PAGE BELOW.",
         broll: ["Blue sky over Grant Ave; lanterns lit by sun", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -9922,7 +9922,7 @@ export const SCRIPTS = {
           "THE ONE THING TO KNOW: WIND.\n" +
           "THOSE TALL TOWERS TURN THE STREETS INTO CANYONS,\n" +
           "AND ON A BREEZY AFTERNOON THE GUSTS CAN FUNNEL RIGHT THROUGH THEM.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY FINANCIAL DISTRICT PAGE BELOW.",
         broll: ["Blue sky over the towers; you in shirtsleeves", "Contrast: fog out west vs. sun on Montgomery St", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -10135,7 +10135,7 @@ export const SCRIPTS = {
           "TUCKED IN THE LEE OF NOB HILL AND WELL EAST OF THE FOG'S FRONT LINE.\n" +
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THESE BLOCKS STAY GENERALLY SUNNIER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY TENDERLOIN PAGE BELOW.",
         broll: ["Blue sky over a Tenderloin block; you in shirtsleeves", "Contrast: fog pouring over the hills to the west", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -10348,7 +10348,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS LOW, SHELTERED DOWNTOWN BASIN CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER MORE OFTEN. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY CIVIC CENTER PAGE BELOW.",
         broll: ["Blue sky over the plaza; you in shirtsleeves", "Contrast: fog pouring over a distant west-side ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -10562,7 +10562,7 @@ export const SCRIPTS = {
           "THAN THE FOG-BOUND WEST SIDE OF THE CITY — BUT IT'S A BAYFRONT,\n" +
           "SO IT'S ALSO BREEZY AND COOL OFF THE WATER, AND THE FOG AND WIND\n" +
           "CAN SWEEP IN FAST ON A SUMMER AFTERNOON. BRING A LAYER.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY FISHERMAN'S WHARF PAGE BELOW.",
         broll: ["Sun on the water, you in a light jacket; flags snapping in the wind", "Contrast: fog rolling in across the bay toward the piers", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -10784,7 +10784,7 @@ export const SCRIPTS = {
           "THESE AVENUES CAN GO GRAY AND COOL FOR A STRETCH OF THE AFTERNOON.\n" +
           "THE GOOD NEWS — IT'S NOTICEABLY SUNNIER HERE THAN THE OUTER SUNSET,\n" +
           "BECAUSE YOU'RE FARTHER FROM THE BEACH AND TUCKED CLOSER TO THE PARK AND THE HILLS.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS —\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS —\n" +
           "IT'S LINKED ON MY INNER SUNSET PAGE BELOW.",
         broll: ["Fog rolling in over the avenues; you in a jacket", "Contrast: a brighter pocket near the park edge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -11003,7 +11003,7 @@ export const SCRIPTS = {
           "ARE BASKING IN SUN.\n" +
           "FOR SOME PEOPLE THAT COOL, MISTY, MOODY EDGE IS EXACTLY THE DRAW.\n" +
           "FOR OTHERS IT'S A DEALBREAKER — SO YOU SHOULD KNOW IT GOING IN.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY OUTER SUNSET PAGE BELOW.",
         broll: ["Fog pouring over the avenues off the ocean", "Contrast: sunny inland ridge versus grey beachside grid", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -11229,7 +11229,7 @@ export const SCRIPTS = {
           "THIS IS THE OCEANFRONT EDGE — WHEN SUMMER FOG ROLLS IN OFF THE PACIFIC,\n" +
           "THE AVENUES CAN SIT GRAY AND COOL WHILE THE EAST SIDE BAKES IN SUN.\n" +
           "FOR SOME PEOPLE THAT COOL, MISTY CALM IS EXACTLY THE DRAW.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY OUTER RICHMOND PAGE BELOW.",
         broll: ["Fog pouring in over the avenues off the ocean", "Contrast: gray coast vs. a sunny east-side reference shot", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -11449,7 +11449,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS EASTERN BAYFRONT — LOW, SHELTERED, AND FACING THE WATER — CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY DOGPATCH PAGE BELOW.",
         broll: ["Blue sky over Third St; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -11664,7 +11664,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS BAYSIDE FLAT IS GENERALLY SUNNY — SHELTERED FROM THE WORST OF IT\n" +
           "AND OFTEN BRIGHT WHEN THE OCEAN SIDE IS GREY. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY MISSION BAY PAGE BELOW.",
         broll: ["Blue sky over the bayfront; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -11883,7 +11883,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS BAYFRONT — DOWN ON THE SHELTERED SOUTHEAST EDGE — CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY SOUTH BEACH PAGE BELOW.",
         broll: ["Blue sky over the waterfront; you in shirtsleeves", "Contrast: fog pouring over the hills to the west", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -12100,7 +12100,7 @@ export const SCRIPTS = {
           "WELL EAST OF THE FOG BELT THAT SWALLOWS THE AVENUES OUT WEST.\n" +
           "THE ONE THING TO KNOW IS THE WIND: RIGHT BY THE BRIDGE AND THE OPEN WATER,\n" +
           "IT CAN GET BREEZY, ESPECIALLY ON THE HIGHER FLOORS AND THE BAYFRONT EDGE.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY RINCON HILL PAGE BELOW.",
         broll: ["Blue sky over the towers; you in shirtsleeves", "Contrast: fog far off over the western ridges", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -12311,7 +12311,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS HILL — SHELTERED ON THE EAST SIDE OF THE TWIN PEAKS RIDGE —\n" +
           "OFTEN CATCHES THE SUN AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY CORONA HEIGHTS PAGE BELOW.",
         broll: ["Blue sky over the red summit; you in shirtsleeves", "Contrast: fog pouring over the Twin Peaks ridge to the west", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -12523,7 +12523,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS SOUTHEAST CORNER — TUCKED IN THE BAY'S RAIN SHADOW — CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY BAYVIEW PAGE BELOW.",
         broll: ["Blue sky over Third St; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -12742,7 +12742,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS POINT — OUT ON THE FAR SOUTHEAST EDGE, OPEN TO THE BAY —\n" +
           "CATCHES THE SUN AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY HUNTERS POINT PAGE BELOW.",
         broll: ["Blue sky over the ridge; you in shirtsleeves", "Contrast: fog pouring over the west-side ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -12959,7 +12959,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS SOUTHEAST HILLTOP CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY EXCELSIOR PAGE BELOW.",
         broll: ["Blue sky over Mission St; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -13174,7 +13174,7 @@ export const SCRIPTS = {
           "THIS CORNER CATCHES THE SUN WHILE THE AVENUES OUT WEST\n" +
           "DISAPPEAR INTO SUMMER GRAY. IT'S NO ACCIDENT THE FLOWER GROWERS\n" +
           "CHOSE THESE SLOPES — THEY FOLLOWED THE LIGHT. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY PORTOLA PAGE BELOW.",
         broll: ["Blue sky over San Bruno Ave; you in shirtsleeves", "Contrast: fog pouring over the western hills", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -13393,7 +13393,7 @@ export const SCRIPTS = {
           "THE ONE THING TO KNOW IS WIND: THIS CORNER OF THE CITY\n" +
           "CAN CATCH A REAL BREEZE OFF THE BAY AND OVER THE RIDGES,\n" +
           "SO BRIGHT DAYS CAN STILL COME WITH A GUST.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY VISITACION VALLEY PAGE BELOW.",
         broll: ["Blue sky over Leland Ave; you in shirtsleeves", "Wind moving through trees on the McLaren Park slope", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -13616,7 +13616,7 @@ export const SCRIPTS = {
           "OF THE OCEAN FOG ROLLING IN OFF THE WEST SIDE.\n" +
           "IT'S NOT FOG-PROOF — IT CAN STILL CATCH SOME GREY ON A DEEP SUMMER MORNING —\n" +
           "BUT IT LEANS BRIGHTER AND WARMER THAN THE AVENUES. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY SUNNYSIDE PAGE BELOW.",
         broll: ["Blue sky over Monterey Blvd; you in shirtsleeves", "Contrast: fog pouring over the Mount Davidson ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -13833,7 +13833,7 @@ export const SCRIPTS = {
           "I'LL BE HONEST WITH YOU: THIS IS A FOGGIER, MORE MIXED POCKET\n" +
           "THAN THE SUNNY EAST-SIDE VALLEYS — SOME MORNINGS BURN OFF, SOME DON'T.\n" +
           "THAT'S PART OF THE TRADE FOR THE VALUE YOU FIND OUT HERE.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER SIDE OF TOWN — IT'S LINKED ON MY OCEANVIEW PAGE BELOW.",
         broll: ["Fog drifting over the southwest ridge", "A mixed sky — sun and marine layer together", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -14050,7 +14050,7 @@ export const SCRIPTS = {
           "BUT BECAUSE IT'S DOWN NEAR THE DALY CITY GAP,\n" +
           "IT RUNS A TOUCH COOLER AND BREEZIER THAN THE INNER MISSION —\n" +
           "THE WIND FINDS ITS WAY THROUGH. SO: MOSTLY SUNNY, OFTEN BREEZY.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY OUTER MISSION PAGE BELOW.",
         broll: ["Blue sky over Mission St; you in shirtsleeves with a light breeze", "Contrast: fog spilling through the Daly City gap nearby", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -14261,7 +14261,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS SOUTH-CENTRAL POCKET — SHELTERED FROM THE COAST — CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY MISSION TERRACE PAGE BELOW.",
         broll: ["Blue sky over a bungalow block; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -14479,7 +14479,7 @@ export const SCRIPTS = {
           "BUT I'LL BE HONEST: THIS IS THE FAR SOUTHERN EDGE BY DALY CITY,\n" +
           "SO IT CAN BE WINDY, AND IT CAN CATCH FOG SPILLING OVER THE RIDGE —\n" +
           "IT LEANS MIXED, NOT GUARANTEED SUN.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY CROCKER AMAZON PAGE BELOW.",
         broll: ["Sun on the playground fields; you in shirtsleeves", "Contrast: fog spilling over the McLaren Park ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -14699,7 +14699,7 @@ export const SCRIPTS = {
           "THE RIDGE CATCHES THE FOG THAT ROLLS IN OFF THE OCEAN,\n" +
           "SO THIS IS MORE OF A FOGGY, MIXED-WEATHER HILL THAN A SUNNY POCKET —\n" +
           "SOME BLOCKS BURN OFF BY MIDDAY, SOME STAY COOL AND GRAY.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS —\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS —\n" +
           "IT'S LINKED ON MY MIRALOMA PARK PAGE BELOW.",
         broll: ["Fog pouring over the Mount Davidson ridge", "Contrast: a sunny block versus a gray one the same morning", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -14920,8 +14920,8 @@ export const SCRIPTS = {
           "THAT ROLLS IN OFF THE PACIFIC — THIS IS THE FOGGY WEST SIDE.\n" +
           "BUT ON THE BEST DAYS, THE SUMMIT ACTUALLY SITS ABOVE THE FOG,\n" +
           "WITH THE GRAY POOLING IN THE AVENUES BELOW YOU.\n" +
-          "IT'S A MIXED, HONEST PICTURE — SO I KEEP A LIVE FOG MAP\n" +
-          "THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS,\n" +
+          "IT'S A MIXED, HONEST PICTURE — SO HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY\n" +
+          "THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS,\n" +
           "LINKED ON MY GOLDEN GATE HEIGHTS PAGE BELOW.",
         broll: ["The marine layer rolling in over the hill", "Contrast: the summit in sun with fog pooling in the avenues below", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -15136,7 +15136,7 @@ export const SCRIPTS = {
           "ON A SUMMER AFTERNOON THE MARINE LAYER CAN POUR RIGHT OVER THE RIDGE —\n" +
           "ONE BLOCK CLEAR, THE NEXT WRAPPED IN GRAY — THEN BURN OFF BY MIDDAY.\n" +
           "IT'S A MIXED, BREEZY HILLTOP, NOT A SUN POCKET, AND THAT'S WORTH KNOWING.\n" +
-          "I KEEP A LIVE FOG MAP WITH THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS —\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY WITH THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS —\n" +
           "IT'S LINKED ON MY MIDTOWN TERRACE PAGE BELOW.",
         broll: ["Fog pouring over the Twin Peaks / Sutro ridge", "Wind moving the eucalyptus; you with a jacket on", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -15354,7 +15354,7 @@ export const SCRIPTS = {
           "SO YOU'LL SEE REAL FOG ROLLING OVER THE RIDGE ON SUMMER MORNINGS AND EVENINGS —\n" +
           "IT'S A MIXED PICTURE HERE, NOT ONE OF THE CITY'S SUN POCKETS.\n" +
           "SOME DAYS BURN OFF BRIGHT; OTHERS STAY GRAY AND COOL.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY MT. DAVIDSON MANOR PAGE BELOW.",
         broll: ["Fog pouring over the Mount Davidson ridge", "A mixed sky over the home blocks", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -15572,7 +15572,7 @@ export const SCRIPTS = {
           "SOME DAYS THE SUN BREAKS THROUGH, AND SOME DAYS\n" +
           "THE FOG ROLLS UP THROUGH THE EUCALYPTUS AND STAYS.\n" +
           "IT'S A MIXED, COOLER, GREENER FEEL — AND SOME PEOPLE LOVE EXACTLY THAT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY SHERWOOD FOREST PAGE BELOW.",
         broll: ["Fog sliding through the eucalyptus canopy", "Contrast: a sunny break over the slope vs. a gray afternoon", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -15789,7 +15789,7 @@ export const SCRIPTS = {
           "THE HILL PULLS IN FOG THAT DRIFTS THROUGH THE EUCALYPTUS —\n" +
           "SO YOU GET A MIX: SOME BRIGHT, CLEAR HOURS, AND SOME GREY, MISTY ONES.\n" +
           "THAT'S THE TRADE FOR THE TREES AND THE QUIET.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER POCKETS OF THE CITY — IT'S LINKED ON MY FOREST KNOLLS PAGE BELOW.",
         broll: ["Fog pouring through the Mount Sutro eucalyptus", "Contrast: a clear hour with the view opening up", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -16008,7 +16008,7 @@ export const SCRIPTS = {
           "BUT I'LL BE HONEST — IT'S NOT GUARANTEED SUN.\n" +
           "WHEN THE SUMMER FOG PUSHES IN OVER TWIN PEAKS AND MOUNT DAVIDSON,\n" +
           "THIS POCKET CAN CATCH ITS EDGE, ESPECIALLY MORNINGS AND EVENINGS.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY WESTWOOD PARK PAGE BELOW.",
         broll: ["Blue sky over a curving street; you in shirtsleeves", "Contrast: fog spilling over the Mount Davidson ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -16226,7 +16226,7 @@ export const SCRIPTS = {
           "SO BE HONEST WITH YOURSELF: THIS IS A MIXED MICROCLIMATE —\n" +
           "SOME MORNINGS THE FOG DRIFTS OVER THE TOP AND SITS ON THESE BLOCKS,\n" +
           "AND OTHER AFTERNOONS IT BURNS OFF AND THE SLOPE OPENS UP TO SUN.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY WESTWOOD HIGHLANDS PAGE BELOW.",
         broll: ["Fog pouring over the Mount Davidson ridge onto the homes", "Contrast: the same slope in clear afternoon sun", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -16434,7 +16434,7 @@ export const SCRIPTS = {
           "OFF THE PACIFIC AND CAN SIT FOR HOURS, ESPECIALLY MORNINGS AND EVENINGS.\n" +
           "STERN GROVE'S CANYON HOLDS THAT COOL, GREEN, MISTY FEEL —\n" +
           "IT'S PART OF THE NEIGHBORHOOD'S CHARM, BUT IT'S REAL.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY MERCED MANOR PAGE BELOW.",
         broll: ["Fog rolling in off the ocean / over Lake Merced", "Cool green mist in the Stern Grove canyon", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -16645,7 +16645,7 @@ export const SCRIPTS = {
           "AND I'D RATHER BE STRAIGHT WITH YOU ABOUT THAT.\n" +
           "UP ON THE RIDGE THE FOG CAN BURN OFF WHILE LOWER STREETS STAY GRAY,\n" +
           "OR ROLL IN OVER THE TOP WHILE THE EAST SIDE OF THE CITY SITS IN SUN.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS —\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS —\n" +
           "IT'S LINKED ON MY MERCED HEIGHTS PAGE BELOW.",
         broll: ["Fog rolling over the ridge; you in a light jacket", "Contrast: clear top vs. gray streets below", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -16859,7 +16859,7 @@ export const SCRIPTS = {
           "THE FOG ROLLS IN OFF THE WATER AND THE AVENUES GO GRAY AND COOL\n" +
           "WHILE THE INLAND HILLS ARE STILL IN THE SUN.\n" +
           "SOME PEOPLE LOVE THAT — THE QUIET, THE COOL AIR, THE SOFT LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY PARKSIDE PAGE BELOW.",
         broll: ["Fog pouring down a numbered avenue toward the ocean", "Contrast: a sunny inland ridge in the distance", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -17073,7 +17073,7 @@ export const SCRIPTS = {
           "I'LL BE HONEST WITH YOU: THIS IS FOG COUNTRY.\n" +
           "ON A SUMMER AFTERNOON THE FOG ROLLS IN OFF THE WATER\n" +
           "AND THE GREENS GO COOL AND GRAY WHILE THE EAST SIDE OF THE CITY SITS IN SUN.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY PARKMERCED PAGE BELOW.",
         broll: ["Fog rolling in over Lake Merced and the greens", "Contrast: a sunny east-side ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -17291,7 +17291,7 @@ export const SCRIPTS = {
           "WHEN SUMMER FOG ROLLS IN OFF THE PACIFIC, THIS IS WHERE IT LANDS FIRST —\n" +
           "SO EXPECT COOLER, GRAYER MORNINGS THAN THE SUNNY EAST-SIDE VALLEYS.\n" +
           "SOME PEOPLE LOVE THAT FRESH, QUIET OCEAN AIR; OTHERS WANT MORE SUN.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY STONESTOWN PAGE BELOW.",
         broll: ["Fog rolling in off the ocean toward Lake Merced", "Contrast: gray morning here vs. sun on the east side", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -17509,7 +17509,7 @@ export const SCRIPTS = {
           "WHEN THE FOG ROLLS IN OFF THE OCEAN, IT SETTLES OVER LAKE MERCED,\n" +
           "AND THE BREEZE OFF THE WATER KEEPS THINGS CRISP AND FRESH.\n" +
           "IT'S A DIFFERENT FEEL FROM THE SUNNY POCKETS ON THE EAST SIDE OF TOWN.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY LAKESHORE PAGE BELOW.",
         broll: ["Fog rolling in off the ocean over Lake Merced", "Breeze on the water; trees bending along the trail", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -17727,7 +17727,7 @@ export const SCRIPTS = {
           "WARMER AND BRIGHTER THAN THE FOGGY WEST SIDE MOST DAYS.\n" +
           "BUT I'LL BE HONEST: IT CAN STILL CATCH THE FOG\n" +
           "WHEN IT ROLLS IN OFF THE OCEAN, SO IT'S A MIXED, MOSTLY-SUNNY READ.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY CAYUGA PAGE BELOW.",
         broll: ["Blue sky over Cayuga Ave; you in shirtsleeves", "Contrast: fog drifting in from the west", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -17943,7 +17943,7 @@ export const SCRIPTS = {
           "SO IT'S GENERALLY ONE OF THE SUNNIER POCKETS OF THE CITY.\n" +
           "I'LL BE HONEST, THOUGH: IT CAN GET BREEZY UP HERE NEAR THE RIDGE,\n" +
           "AND SOME DAYS THE FOG DOES PUSH THROUGH — IT'S A MIXED PICTURE.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY SUNNYDALE PAGE BELOW.",
         broll: ["Blue sky over the rooftops; you in shirtsleeves", "Contrast: fog off to the west; a breeze in the trees on the ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -18159,7 +18159,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS LITTLE BAYSIDE ENCLAVE — TUCKED LOW AND AWAY FROM THE OCEAN —\n" +
           "TENDS TO CATCH THE SUN AND STAY WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY LITTLE HOLLYWOOD PAGE BELOW.",
         broll: ["Blue sky over the cottages; you in shirtsleeves", "Contrast: fog pouring over the western ridges", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -18380,7 +18380,7 @@ export const SCRIPTS = {
           "THAT ROLLS IN OFF THE OCEAN AND OVER THE AVENUES,\n" +
           "OR IT CAN SIT IN THE SUN WHILE THE WEST SIDE STAYS GRAY.\n" +
           "I'LL BE HONEST: THIS ONE IS A MIXED BAG, NOT A GUARANTEED SUN POCKET.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY LONE MOUNTAIN PAGE BELOW.",
         broll: ["Fog drifting over the slope; you noting the change", "Contrast: sun on the hilltop, gray to the west", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -18594,7 +18594,7 @@ export const SCRIPTS = {
           "ONE OF THE MILDER, GENERALLY SUNNIER POCKETS ON THIS SIDE OF TOWN.\n" +
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS RISE OFTEN CATCHES THE SUN AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY ANZA VISTA PAGE BELOW.",
         broll: ["Blue sky over the rise; you in shirtsleeves", "Contrast: fog pouring in over the western avenues", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -18812,7 +18812,7 @@ export const SCRIPTS = {
           "AND IT'S GENERALLY ONE OF THE SUNNIER, MILDER POCKETS.\n" +
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS CORRIDOR TENDS TO STAY BRIGHTER AND WARMER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY CATHEDRAL HILL PAGE BELOW.",
         broll: ["Blue sky over Van Ness; you in shirtsleeves", "Contrast: fog pouring over the west-side ridges", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -19028,7 +19028,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS LOW VALLEY — SHELTERED BY NOB HILL AND RUSSIAN HILL — STAYS\n" +
           "MILDER, WARMER, AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY POLK GULCH PAGE BELOW.",
         broll: ["Blue sky over Polk St; you in shirtsleeves", "Contrast: fog pouring over the western ridges", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -19247,7 +19247,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THESE SHELTERED DOWNTOWN BLOCKS TEND TO CATCH MORE SUN\n" +
           "AND STAY WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY LOWER NOB HILL PAGE BELOW.",
         broll: ["Blue sky over Sutter St; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -19461,7 +19461,7 @@ export const SCRIPTS = {
           "THESE LOW, SHELTERED DOWNTOWN BLOCKS CATCH MORE SUN —\n" +
           "THOUGH THE TALL TOWERS CAN FUNNEL A BRISK WIND DOWN THE CANYONS,\n" +
           "SO AN AFTERNOON GUST IS PART OF THE DEAL.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY DOWNTOWN / UNION SQUARE PAGE BELOW.",
         broll: ["Blue sky over the plaza; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -19682,7 +19682,7 @@ export const SCRIPTS = {
           "THAT IT CAN TURN BREEZY, OR CATCH A FINGER OF FOG,\n" +
           "WHEN THE MARINE LAYER PUSHES IN OFF THE GOLDEN GATE.\n" +
           "SO CALL IT SUN-LEANING AND MIXED, NOT GUARANTEED BLUE SKY.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS —\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS —\n" +
           "IT'S LINKED ON MY PRESIDIO TERRACE PAGE BELOW.",
         broll: ["Blue sky over the oval; mansions in good light", "Contrast: fog feathering through the Presidio treeline", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -19906,7 +19906,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS SIDE OF TOWN — IN BERNAL'S RAIN SHADOW — CATCHES THE SUN\n" +
           "AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY HOLLY PARK PAGE BELOW.",
         broll: ["Blue sky over the park; you in shirtsleeves", "Contrast: fog pouring over the western ridges", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -20124,7 +20124,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS SLOPE — TUCKED ABOVE GLEN PARK AND SHELTERED BY THE HILLS —\n" +
           "OFTEN CATCHES THE SUN AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY FAIRMOUNT PAGE BELOW.",
         broll: ["Blue sky over a Fairmount block; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -20337,7 +20337,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS EAST-FACING HILLSIDE — SHELTERED BY BERNAL HILL —\n" +
           "OFTEN CATCHES THE MORNING SUN AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY PERALTA HEIGHTS PAGE BELOW.",
         broll: ["Blue sky over the east slope; you in shirtsleeves", "Contrast: fog pouring over the western ridges", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -20553,7 +20553,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS INLAND HILLSIDE — TUCKED IN THE CITY'S SOUTH-CENTRAL CORE —\n" +
           "CATCHES THE SUN AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY ST. MARYS PARK PAGE BELOW.",
         broll: ["Blue sky over the park; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -20763,7 +20763,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS HILLTOP — TUCKED AWAY ON THE BAY SIDE OF THE CITY —\n" +
           "CATCHES THE SUN AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY UNIVERSITY MOUND PAGE BELOW.",
         broll: ["Blue sky over the hilltop; you in shirtsleeves", "Contrast: fog pouring over the western ridges", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -20976,7 +20976,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS SOUTHEAST-FACING SLOPE — TUCKED IN THE ELBOW OF THE FREEWAYS —\n" +
           "CATCHES THE SUN AND STAYS BRIGHTER AND WARMER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY SILVER TERRACE PAGE BELOW.",
         broll: ["Blue sky over the slope; you in shirtsleeves", "Contrast: fog pouring over the west-side ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -21190,7 +21190,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS SHORELINE — FACING THE BAY, SHELTERED FROM THE OCEAN SIDE —\n" +
           "CATCHES THE SUN AND STAYS BRIGHTER AND WARMER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY INDIA BASIN PAGE BELOW.",
         broll: ["Blue sky over the basin; you in shirtsleeves on the shore", "Contrast: fog pouring over the hills to the west", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -21407,7 +21407,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS EASTERN BAYSHORE — LOW, FLAT, AND SHELTERED FROM THE OCEAN —\n" +
           "CATCHES THE SUN AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY CENTRAL WATERFRONT PAGE BELOW.",
         broll: ["Blue sky over the bayshore; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -21628,7 +21628,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS LOW-LYING POCKET — SHELTERED BY POTRERO HILL —\n" +
           "CATCHES THE SUN AND STAYS WARMER AND BRIGHTER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY SHOWPLACE SQUARE PAGE BELOW.",
         broll: ["Blue sky over Henry Adams St; you in shirtsleeves", "Contrast: fog pouring over the western ridge", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -21842,7 +21842,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS CENTRAL WEDGE TENDS TO CATCH MORE SUN AND STAY BRIGHTER.\n" +
           "PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY MINT HILL PAGE BELOW.",
         broll: ["Blue sky over the Old Mint; you in shirtsleeves", "Contrast: fog pouring over the western ridges", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -22060,7 +22060,7 @@ export const SCRIPTS = {
           "WHILE THE AVENUES OUT WEST DISAPPEAR INTO SUMMER FOG,\n" +
           "THIS SIDE OF TOWN — SHELTERED AND LOW — OFTEN CATCHES THE SUN\n" +
           "AND STAYS BRIGHTER AND MILDER. PEOPLE PAY FOR LIGHT.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE FOGGY WEST SIDE — IT'S LINKED ON MY BRET HARTE PAGE BELOW.",
         broll: ["Blue sky over the southeast blocks; you in shirtsleeves", "Contrast: fog pouring over the western ridges", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -22281,7 +22281,7 @@ export const SCRIPTS = {
           "SO BE HONEST WITH YOURSELF: THIS IS A FOG-AND-SUN MIX,\n" +
           "NOT ONE OF THE CITY'S WARM SUN POCKETS — SOME MORNINGS START GRAY\n" +
           "BEFORE THE AFTERNOON BURNS OFF. IT'S COOLER AND MISTIER THAN THE EAST SIDE.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS NEIGHBORHOOD'S EXACT SUMMER-FOG HOURS\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS NEIGHBORHOOD'S AVERAGE DAILY SUMMER-FOG HOURS\n" +
           "VERSUS THE SUNNIER EAST SIDE — IT'S LINKED ON MY INGLESIDE PAGE BELOW.",
         broll: ["Fog drifting up Ocean Ave in the morning", "Contrast: a bright afternoon once the marine layer lifts", "Edit: screen-cap of the Ur4cast fog map"],
       },
@@ -22495,7 +22495,7 @@ export const SCRIPTS = {
           "THE MARINE LAYER DRIFTS ACROSS THE WATER AND THE WIND IS PART OF LIFE HERE.\n" +
           "ON A CLEAR EVENING, THOUGH, THAT SAME OPEN AIR GIVES YOU\n" +
           "THE BEST HEAD-ON SKYLINE VIEW IN THE WHOLE CITY.\n" +
-          "I KEEP A LIVE FOG MAP THAT SHOWS THIS ISLAND'S EXACT SUMMER-FOG HOURS —\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS THIS ISLAND'S AVERAGE DAILY SUMMER-FOG HOURS —\n" +
           "IT'S LINKED ON MY TREASURE ISLAND PAGE BELOW.",
         broll: ["Wind moving across the water; flags snapping", "Fog through the Golden Gate at distance", "Edit: screen-cap of the Ur4cast fog map"],
       },
