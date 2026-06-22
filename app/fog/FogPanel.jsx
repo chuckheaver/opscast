@@ -40,6 +40,7 @@ export default function FogPanel({
   showTsunami, onToggleTsunami,
   showRealtor, onToggleRealtor,
   showCBD, onToggleCBD,
+  showBuildings, onToggleBuildings,
 }) {
   // Compute the per-location lookups inline so we don't double-store them.
   const point = picked?.point;
@@ -205,6 +206,11 @@ export default function FogPanel({
           onChange={onToggleCBD}
           label="CBD/Mello-Roos Districts"
         />
+        <ToggleSwitch
+          checked={showBuildings}
+          onChange={onToggleBuildings}
+          label="Tall Buildings"
+        />
       </div>
 
       <div className="fog-legend-row-wrap">
@@ -216,6 +222,16 @@ export default function FogPanel({
             ["#65a30d", "200 ft"],
             ["#ca8a04", "300 ft"],
             ["#b91c1c", "600 ft"],
+          ]}
+        />
+        <LayerLegend
+          title="Tall Buildings"
+          items={[
+            ["#87CEFA", "Residential"],
+            ["#FBF1C7", "Office / cultural"],
+            ["#87CEFA/#FBF1C7", "Mixed use", "split"],
+            ["#BBF7D0", "Hotel"],
+            ["#FECACA", "Medical"],
           ]}
         />
         <LayerLegend
@@ -258,11 +274,20 @@ function LayerLegend({ title, items }) {
       <div className="fog-layer-legend-items">
         {items.map(([color, label, style]) => {
           const dashed = style === "dashed";
+          // A "split" swatch shows a diagonal two-tone fill (used for the
+          // mixed-use buildings, which are painted blue/cream on the map).
+          // `color` is "blueHex/creamHex" for this style.
+          const split = style === "split";
+          const swatchStyle = dashed
+            ? { color }
+            : split
+            ? { background: `linear-gradient(135deg, ${color.split("/")[0]} 50%, ${color.split("/")[1]} 50%)` }
+            : { background: color };
           return (
             <div key={label} className="fog-layer-legend-item">
               <span
                 className={`fog-layer-legend-swatch${dashed ? " fog-layer-legend-swatch-dashed" : ""}`}
-                style={dashed ? { color } : { background: color }}
+                style={swatchStyle}
               />
               <span className="fog-layer-legend-label">{label}</span>
             </div>

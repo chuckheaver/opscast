@@ -61,6 +61,7 @@ export default function FogMap({
   showZoning,
   showRealtor,
   showCBD,
+  showBuildings,
   showNeighborhoods,
   picked,
   onPickFeature,
@@ -76,6 +77,13 @@ export default function FogMap({
   useEffect(() => {
     showContoursRef.current = showContours;
   }, [showContours]);
+  // Mirrors `showBuildings` so the always-bound neighborhood click handler
+  // can check the latest toggle state and step aside when the Tall Buildings
+  // layer is on (so a building click shows only its own pop-up).
+  const showBuildingsRef = useRef(showBuildings);
+  useEffect(() => {
+    showBuildingsRef.current = showBuildings;
+  }, [showBuildings]);
   const dataAppliedRef = useRef(false);
   const onPickRef = useRef(onPickFeature);
 
@@ -595,6 +603,166 @@ export default function FogMap({
           .addTo(map);
       });
 
+      // SF Tall Building Inventory (DataSF) — every high-rise as a filled
+      // footprint, coloured by primary occupancy: residential = light sky
+      // blue, office = light cream, and mixed-use buildings get a half
+      // blue / half cream diagonal pattern. Click any footprint for a
+      // pop-up listing the full structural / seismic record for that
+      // building. Toggleable; off until the "Tall Buildings" switch is on.
+      //
+      // The mixed-use split can't be expressed as a flat fill-color, so we
+      // generate a 16×16 diagonal two-tone tile once and paint it with
+      // fill-pattern on a second layer filtered to just the mixed-use rows.
+      const BLDG_BLUE = "#87CEFA"; // light sky blue
+      const BLDG_CREAM = "#FBF1C7"; // light cream
+      const tile = 16;
+      const cnv = document.createElement("canvas");
+      cnv.width = tile;
+      cnv.height = tile;
+      const ctx = cnv.getContext("2d");
+      // Lower-left triangle cream, upper-right triangle blue (anti-diagonal).
+      ctx.fillStyle = BLDG_CREAM;
+      ctx.fillRect(0, 0, tile, tile);
+      ctx.fillStyle = BLDG_BLUE;
+      ctx.beginPath();
+      ctx.moveTo(tile, 0);
+      ctx.lineTo(tile, tile);
+      ctx.lineTo(0, 0);
+      ctx.closePath();
+      ctx.fill();
+      if (!map.hasImage("mixed-use-split")) {
+        map.addImage("mixed-use-split", ctx.getImageData(0, 0, tile, tile), { pixelRatio: 2 });
+      }
+
+      map.addSource("buildings", {
+        type: "geojson",
+        data: "/data/sf-tall-buildings.geojson",
+      });
+      // Base fill: solid colour by occupancy. Mixed-use rows get a blue base
+      // here that the pattern layer below paints over, so partial-pattern
+      // edges still read as "mixed" rather than bare.
+      map.addLayer({
+        id: "buildings-fill",
+        type: "fill",
+        source: "buildings",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": [
+            "match",
+            ["get", "occupancy"],
+            "Residential", BLDG_BLUE,
+            // Cultural/institutional/educational rides along with Office (cream).
+            ["Office (Management, Information, Professional Services)", "Cultural, Institutional, Educational"], BLDG_CREAM,
+            "Hotels, Visitor Services", "#BBF7D0", // light green
+            "Medical", "#FECACA", // light red
+            "Mixed Uses (With Residential)", BLDG_BLUE,
+            "Mixed Uses (Without Residential)", BLDG_BLUE,
+            /* anything else */ "#d6d3d1",
+          ],
+          "fill-opacity": 0.78,
+        },
+      });
+      // Mixed-use overlay: the diagonal blue/cream tile, only on mixed rows.
+      map.addLayer({
+        id: "buildings-mixed",
+        type: "fill",
+        source: "buildings",
+        layout: { visibility: "none" },
+        filter: [
+          "in",
+          ["get", "occupancy"],
+          ["literal", ["Mixed Uses (With Residential)", "Mixed Uses (Without Residential)"]],
+        ],
+        paint: {
+          "fill-pattern": "mixed-use-split",
+          "fill-opacity": 0.9,
+        },
+      });
+      map.addLayer({
+        id: "buildings-outline",
+        type: "line",
+        source: "buildings",
+        layout: { visibility: "none", "line-join": "round" },
+        paint: {
+          "line-color": "#57534e",
+          "line-width": 0.8,
+          "line-opacity": 0.9,
+        },
+      });
+
+      // Click a footprint → pop-up with the building's full record. We list
+      // every populated attribute from the export (skipping the DataSF
+      // housekeeping/system columns and projection artefacts), with friendly
+      // labels and units where it helps.
+      const BLDG_FIELDS = [
+        ["occupancy", "Occupancy", null],
+        ["height_ft", "Height", " ft"],
+        ["stories_above_grade", "Stories above grade", null],
+        ["stories_below_grade", "Stories below grade", null],
+        ["date", "Year built", null],
+        ["completion_date", "Completion date", null],
+        ["retrofit_date", "Retrofit date", null],
+        ["building_code_year", "Building code year", null],
+        ["square_footage", "Square footage", " sq ft"],
+        ["structural_material", "Structural material", null],
+        ["structural_system", "Structural system", null],
+        ["structural_types", "Structural type", null],
+        ["facade_material", "Facade material", null],
+        ["foundation_system", "Foundation system", null],
+        ["foundation_info", "Foundation info", null],
+        ["fire_resistence_type", "Fire-resistance type", null],
+        ["percent_sprinklered", "Sprinklered", "%"],
+        ["borp_report", "BORP report", null],
+        ["instrumented", "Instrumented", null],
+        ["liquefaction_potential", "Liquefaction potential", null],
+        ["site_class", "Site class", null],
+        ["bedrockdepth_mean", "Bedrock depth (mean)", " ft"],
+        ["bedrockdepth_min", "Bedrock depth (min)", " ft"],
+        ["bedrockdepth_max", "Bedrock depth (max)", " ft"],
+        ["base_plan_size", "Base plan size", null],
+        ["tower_plan_size", "Tower plan size", null],
+        ["typ_story_height", "Typical story height", null],
+        ["attyp_story_height", "Atypical story height", null],
+        ["mep_levels", "MEP levels", null],
+        ["atrium_location", "Atrium location", null],
+        ["mapblocklot", "Block / lot", null],
+        ["permit_date_1", "Permit date 1", null],
+        ["permit_date_2", "Permit date 2", null],
+        ["permit_date_3", "Permit date 3", null],
+        ["architectural_notes", "Architectural notes", null],
+        ["description", "Description", null],
+        ["primary_source", "Primary source", null],
+        ["collected_on", "Data collected", null],
+      ];
+      const blank = v => v == null || v === "" || /^(null|unknown|n\/?a)$/i.test(String(v).trim());
+      const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+      let bldgPopup = null;
+      map.on("mouseenter", "buildings-fill", () => { map.getCanvas().style.cursor = "pointer"; });
+      map.on("mouseleave", "buildings-fill", () => { map.getCanvas().style.cursor = ""; });
+      map.on("click", "buildings-fill", e => {
+        if (!e.features?.length) return;
+        const p = e.features[0].properties;
+        const name = !blank(p.name) ? p.name : "Tall building";
+        const addr = !blank(p.address) ? `<div style="color:#6b7280;margin-bottom:6px">${esc(p.address)}</div>` : "";
+        const rows = BLDG_FIELDS
+          .filter(([k]) => !blank(p[k]))
+          .map(([k, label, unit]) => {
+            const val = esc(p[k]) + (unit ? unit : "");
+            return `<div class="bldg-row"><span style="color:#6b7280">${label}:</span> ${val}</div>`;
+          })
+          .join("");
+        const html = `<div class="bldg-popup" style="font-size:12.5px;line-height:1.5;max-height:300px;overflow-y:auto">`
+          + `<strong style="font-size:13.5px">${esc(name)}</strong>`
+          + addr
+          + rows
+          + `</div>`;
+        if (bldgPopup) bldgPopup.remove();
+        bldgPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "300px" })
+          .setLngLat(e.lngLat)
+          .setHTML(html)
+          .addTo(map);
+      });
+
       // Seismic hazard zones (CA Geological Survey, via DataSF). Toggleable
       // overlay separate from the fog data. Painted between the fog layers
       // and the neighborhood outlines so the hazard zones sit on top of
@@ -1045,6 +1213,13 @@ export default function FogMap({
       });
       map.on("click", "fog-click-target", e => {
         if (!e.features?.length) return;
+        // When Tall Buildings is on, a click on a building footprint should
+        // open only the building pop-up — suppress the neighborhood pick if
+        // the click landed on a building.
+        if (showBuildingsRef.current && map.getLayer("buildings-fill")) {
+          const hits = map.queryRenderedFeatures(e.point, { layers: ["buildings-fill"] });
+          if (hits.length) return;
+        }
         onPickRef.current(e.features[0], [e.lngLat.lng, e.lngLat.lat]);
       });
     });
@@ -1250,6 +1425,20 @@ export default function FogMap({
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showCBD]);
+
+  // Toggle the Tall Buildings overlay (fill + mixed-use pattern + outline).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showBuildings ? "visible" : "none";
+      ["buildings-fill", "buildings-mixed", "buildings-outline"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showBuildings]);
 
   // Toggle the zoning overlay (color-coded fills + thin outline).
   useEffect(() => {
