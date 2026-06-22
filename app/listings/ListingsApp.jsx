@@ -11,8 +11,10 @@ import ListingsMap from "./ListingsMap";
 import { computeStats, groupStats, GROUP_BY, fogZoneLabel, daysBetween } from "./lib/stats";
 import { elevationAtPoint } from "../fog/lib/geocode";
 import { findNeighborhoodForPoint } from "../fog/lib/spatial";
+import { normalizeStreetAddress } from "../lib/buildingMatch";
 
 const DATA_URL = "/data/sf-listings.geojson";
+const LISTING_BUILDINGS_URL = "/data/listing-buildings.json";
 const SUPERVISOR_URL = "/data/sf-supervisor-districts.geojson";
 const REALTOR_NBHD_URL = "/data/sf-realtor-neighborhoods.geojson";
 
@@ -92,22 +94,35 @@ export default function ListingsApp() {
   const searchParams = useSearchParams();
   const initialNbhd = searchParams?.get("nbhd") || "";
   const deepLinked = !!initialNbhd || searchParams?.get("layer") === "nbhd";
+  // Deep-link from a Tall Building pop-up's "See all market activity" link:
+  //   /listings?building=<objectid> → show every listing in that one building,
+  //   all statuses / types / dates, so the full sales history is visible.
+  const initialBuilding = searchParams?.get("building") || "";
 
   const [features, setFeatures] = useState([]);
   const [supDistricts, setSupDistricts] = useState(null);
   const [reNbhds, setReNbhds] = useState(null);
+  // Reverse lookup (normalized address → tall-building record) powering the
+  // "View building structure" link in the property detail card.
+  const [buildingsByAddr, setBuildingsByAddr] = useState(null);
   const [err, setErr] = useState("");
 
   // Filters
   // Default view: completed (Closed + Sold Off MLS) single-family sales this year.
-  const [statuses, setStatuses] = useState(() => new Set(["Closed", "Sold Off MLS"]));
-  const [subtypes, setSubtypes] = useState(() => deepLinked
+  // A building deep-link wants the FULL history for that one address — so it
+  // opens with no status / subtype / date constraints (empty set = all).
+  const [statuses, setStatuses] = useState(() => initialBuilding
+    ? new Set()
+    : new Set(["Closed", "Sold Off MLS"]));
+  const [subtypes, setSubtypes] = useState(() => initialBuilding
+    ? new Set()
+    : deepLinked
     ? new Set(["Single Family Residence", "Condominium", "Tenancy in Common"])
     : new Set(["Single Family Residence"]));
   const [district, setDistrict] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [fogHrs, setFogHrs] = useState(""); // exact fog-hours value, "" = all
-  const [closedFrom, setClosedFrom] = useState("2026-01-01");
+  const [closedFrom, setClosedFrom] = useState(initialBuilding ? "" : "2026-01-01");
   const [closedTo, setClosedTo] = useState(""); // set to the last close date once data loads
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
@@ -141,7 +156,28 @@ export default function ListingsApp() {
   useEffect(() => {
     fetch(SUPERVISOR_URL).then(r => (r.ok ? r.json() : null)).then(d => d && setSupDistricts(d)).catch(() => {});
     fetch(REALTOR_NBHD_URL).then(r => (r.ok ? r.json() : null)).then(d => d && setReNbhds(d)).catch(() => {});
+    fetch(LISTING_BUILDINGS_URL).then(r => (r.ok ? r.json() : null)).then(d => d && setBuildingsByAddr(d)).catch(() => {});
   }, []);
+
+  // Resolve a listing's address to a tall-building record (if any).
+  const buildingForAddress = useCallback(
+    addr => {
+      if (!buildingsByAddr) return null;
+      const key = normalizeStreetAddress(addr);
+      return key ? buildingsByAddr[key] || null : null;
+    },
+    [buildingsByAddr]
+  );
+
+  // The active building deep-link, resolved to its normalized address key +
+  // display name (by reversing the address→building lookup on objectid).
+  const buildingFilter = useMemo(() => {
+    if (!initialBuilding || !buildingsByAddr) return null;
+    for (const [key, b] of Object.entries(buildingsByAddr)) {
+      if (String(b.objectid) === String(initialBuilding)) return { key, name: b.name };
+    }
+    return null;
+  }, [initialBuilding, buildingsByAddr]);
 
   // Tag each listing's supervisor district and realtor neighborhood via
   // point-in-polygon, once the listings + each boundary set are loaded.
@@ -224,6 +260,7 @@ export default function ListingsApp() {
     const hi = maxPrice ? Number(maxPrice) : null;
     return features.filter(f => {
       const p = f.properties;
+      if (buildingFilter && normalizeStreetAddress(p.address) !== buildingFilter.key) return false;
       if (statuses.size && !statuses.has(p.status)) return false;
       if (subtypes.size && !subtypes.has(p.propType)) return false;
       if (district && p.areaDesc !== district) return false;
@@ -239,7 +276,7 @@ export default function ListingsApp() {
       if (hi != null && (price == null || price > hi)) return false;
       return true;
     });
-  }, [features, statuses, subtypes, district, neighborhood, fogHrs, closedFrom, closedTo, minPrice, maxPrice]);
+  }, [features, buildingFilter, statuses, subtypes, district, neighborhood, fogHrs, closedFrom, closedTo, minPrice, maxPrice]);
 
   const filteredProps = useMemo(() => filtered.map(f => f.properties), [filtered]);
   const stats = useMemo(() => computeStats(filteredProps), [filteredProps]);
@@ -536,6 +573,18 @@ export default function ListingsApp() {
               <Field k="Listing Agent" v={selected.agent} />
               <Field k="Selling Agent" v={selected.sellingAgent} />
             </dl>
+            {(() => {
+              const b = buildingForAddress(selected.address);
+              if (!b) return null;
+              const href = `/fog?preset=buildings&bz=1`
+                + `&lat=${b.lat}&lng=${b.lng}`
+                + `&name=${encodeURIComponent(b.name)}`;
+              return (
+                <a className="re-detail-link" href={href}>
+                  🏢 View building structure — {b.name} ›
+                </a>
+              );
+            })()}
           </div>
         )}
       </div>

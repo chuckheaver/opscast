@@ -62,6 +62,7 @@ export default function FogMap({
   showRealtor,
   showCBD,
   showBuildings,
+  buildingSales,
   showNeighborhoods,
   picked,
   onPickFeature,
@@ -84,6 +85,11 @@ export default function FogMap({
   useEffect(() => {
     showBuildingsRef.current = showBuildings;
   }, [showBuildings]);
+  // Latest building→sales lookup, reachable from the once-bound click handler.
+  const buildingSalesRef = useRef(buildingSales);
+  useEffect(() => {
+    buildingSalesRef.current = buildingSales;
+  }, [buildingSales]);
   const dataAppliedRef = useRef(false);
   const onPickRef = useRef(onPickFeature);
 
@@ -736,6 +742,41 @@ export default function FogMap({
       ];
       const blank = v => v == null || v === "" || /^(null|unknown|n\/?a)$/i.test(String(v).trim());
       const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+      const usd = n => (Number.isFinite(n) ? "$" + Math.round(n).toLocaleString("en-US") : null);
+      const usdShort = n => {
+        if (!Number.isFinite(n)) return "—";
+        if (n >= 1e6) return "$" + (n / 1e6).toFixed(2) + "M";
+        if (n >= 1e3) return "$" + Math.round(n / 1e3) + "K";
+        return "$" + Math.round(n);
+      };
+      const shortDate = iso => {
+        const m = iso && /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+        return m ? `${+m[2]}/${+m[3]}/${m[1].slice(2)}` : (iso || "");
+      };
+      // Builds the "Market activity" block from the building→sales lookup, when
+      // this building has matching MLS listings. Summary line + recent sales +
+      // a link into the full filtered listings view.
+      const marketHtml = objectid => {
+        const rec = buildingSalesRef.current?.[objectid];
+        if (!rec || !rec.total) return "";
+        const summary = [
+          `${rec.total} listing${rec.total === 1 ? "" : "s"} on record`,
+          rec.closedCount ? `${rec.closedCount} sold` : null,
+          rec.medianSale ? `median ${usdShort(rec.medianSale)}` : null,
+        ].filter(Boolean).join(" · ");
+        const items = (rec.recent || []).slice(0, 6).map(s => {
+          const left = [s.unit ? `#${esc(s.unit)}` : null, s.status ? esc(s.status) : null].filter(Boolean).join(" · ");
+          const right = [usd(s.price), s.date ? shortDate(s.date) : null].filter(Boolean).join(" · ");
+          return `<div style="display:flex;justify-content:space-between;gap:10px"><span style="color:#6b7280">${left || "—"}</span><span>${right}</span></div>`;
+        }).join("");
+        const link = `<a href="/listings?building=${encodeURIComponent(objectid)}" style="display:inline-block;margin-top:6px">See all market activity ↗</a>`;
+        return `<div style="margin-top:8px;padding-top:8px;border-top:1px solid #e5e7eb">`
+          + `<strong style="font-size:12.5px">🏢 Market activity</strong>`
+          + `<div style="color:#374151;margin:2px 0 6px">${summary}</div>`
+          + items
+          + link
+          + `</div>`;
+      };
       let bldgPopup = null;
       map.on("mouseenter", "buildings-fill", () => { map.getCanvas().style.cursor = "pointer"; });
       map.on("mouseleave", "buildings-fill", () => { map.getCanvas().style.cursor = ""; });
@@ -751,10 +792,11 @@ export default function FogMap({
             return `<div class="bldg-row"><span style="color:#6b7280">${label}:</span> ${val}</div>`;
           })
           .join("");
-        const html = `<div class="bldg-popup" style="font-size:12.5px;line-height:1.5;max-height:300px;overflow-y:auto">`
+        const html = `<div class="bldg-popup" style="font-size:12.5px;line-height:1.5;max-height:340px;overflow-y:auto">`
           + `<strong style="font-size:13.5px">${esc(name)}</strong>`
           + addr
           + rows
+          + marketHtml(p.objectid)
           + `</div>`;
         if (bldgPopup) bldgPopup.remove();
         bldgPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "300px" })
@@ -1515,7 +1557,13 @@ export default function FogMap({
       markerRef.current = new mapboxgl.Marker({ color: "#2563eb" })
         .setLngLat(picked.point)
         .addTo(map);
-      map.fitBounds(SF_BOUNDS, { padding: 24, duration: 800 });
+      // A building deep-link (picked.zoom set) flies in to the footprint;
+      // every other pick keeps the city-wide frame.
+      if (picked.zoom) {
+        map.flyTo({ center: picked.point, zoom: picked.zoom, duration: 1000 });
+      } else {
+        map.fitBounds(SF_BOUNDS, { padding: 24, duration: 800 });
+      }
     }
   }, [picked]);
 
