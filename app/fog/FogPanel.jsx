@@ -8,6 +8,7 @@
 //      pop-up (NeighborhoodModal).
 //   2) The layer toggles + map legends.
 
+import { useState, useRef, useEffect } from "react";
 import { findNeighborhoodForPoint, featureIntersectsAny } from "./lib/spatial";
 import { fogLabel } from "./lib/risk";
 import { getNeighborhood, listNeighborhoods } from "./lib/neighborhoods";
@@ -15,6 +16,11 @@ import NeighborhoodModal from "./NeighborhoodModal";
 
 // Alphabetical index of authored neighborhoods — stable across renders.
 const NBHD_INDEX = listNeighborhoods();
+
+// Collapsed height for the panel's two boxes — roughly five ~20px rows, so the
+// layer toggles below stay visible without scrolling. Both the CSS cap
+// (.fog-collapsed max-height) and the overflow check use this value.
+const COLLAPSE_CAP = 112;
 
 export default function FogPanel({
   picked,
@@ -42,6 +48,16 @@ export default function FogPanel({
   showCBD, onToggleCBD,
   showBuildings, onToggleBuildings,
 }) {
+  // Each box shows ~5 lines by default and expands on the header caret. The
+  // caret only appears when the content actually overflows the cap (measured
+  // below), so the short "selected point" strip won't get a dead arrow.
+  const [nbhdOpen, setNbhdOpen] = useState(false);
+  const [pointOpen, setPointOpen] = useState(false);
+  const pointBodyRef = useRef(null);
+  // The 105-name list always exceeds the 5-row cap, so its caret is always on.
+  // The point strip is short, so we only show its caret when it overflows.
+  const [pointOverflow, setPointOverflow] = useState(false);
+
   // Compute the per-location lookups inline so we don't double-store them.
   const point = picked?.point;
   const zipFeat = point && zips ? findNeighborhoodForPoint(zips, point) : null;
@@ -85,6 +101,19 @@ export default function FogPanel({
   const openData = openHood ? getNeighborhood(openHood) : null;
   const factsMatch = neighborhoodName === openHood;
 
+  // Decide whether each box's content exceeds the 5-line cap (so its caret is
+  // worth showing). scrollHeight is the full content height in either state.
+  // Re-measure when the selected point or its facts change, and on resize.
+  useEffect(() => {
+    const measure = () => {
+      const p = pointBodyRef.current;
+      setPointOverflow(p ? p.scrollHeight > COLLAPSE_CAP + 4 : false);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [point, neighborhoodName, hoodData, elevationFt, zipCode, seismicYN, tsunamiYN]);
+
   return (
     <div className="fog-panel">
       {openHood && openData && (
@@ -103,10 +132,11 @@ export default function FogPanel({
         {/* A–Z index of every neighborhood we've written highlights for.
             Click a name to drop a pin at its centre and open the pop-up. */}
         <div className="fog-nbhd-index">
-          <div className="fog-keybox-h">
-            Neighborhoods <span className="fog-nbhd-count">({NBHD_INDEX.length})</span>
+          <div className="fog-keybox-h fog-collapse-h">
+            <span>Neighborhoods <span className="fog-nbhd-count">({NBHD_INDEX.length})</span></span>
+            <CollapseCaret open={nbhdOpen} onToggle={() => setNbhdOpen(o => !o)} label="neighborhood list" />
           </div>
-          <div className="fog-nbhd-list">
+          <div className={"fog-nbhd-list" + (nbhdOpen ? "" : " fog-collapsed")}>
             {NBHD_INDEX.map(n => (
               <button
                 key={n.key}
@@ -124,16 +154,23 @@ export default function FogPanel({
         <div className="fog-keybox fog-point-strip">
           {point ? (
             <>
-              <div className="fog-keybox-h">{picked?.address || neighborhoodName || "Selected point"}</div>
-              <KeyRow label="Zip Code" value={zipCode} />
-              <KeyRow label="Elevation" value={Number.isFinite(elevationFt) ? `${elevationFt} ft` : null} />
-              <ToggleKeyRow label="Seismic Zone" value={seismicYN} active={showSeismic} onToggle={() => onToggleSeismic(!showSeismic)} />
-              <ToggleKeyRow label="Tsunami Zone" value={tsunamiYN} active={showTsunami} onToggle={() => onToggleTsunami(!showTsunami)} />
-              {hoodData && (
-                <button type="button" className="fog-hood-link fog-point-cta" onClick={() => onOpenHood(neighborhoodName)}>
-                  View {neighborhoodName} details ›
-                </button>
-              )}
+              <div className="fog-keybox-h fog-collapse-h">
+                <span>{picked?.address || neighborhoodName || "Selected point"}</span>
+                {pointOverflow && (
+                  <CollapseCaret open={pointOpen} onToggle={() => setPointOpen(o => !o)} label="point details" />
+                )}
+              </div>
+              <div className={"fog-point-body" + (pointOpen ? "" : " fog-collapsed")} ref={pointBodyRef}>
+                <KeyRow label="Zip Code" value={zipCode} />
+                <KeyRow label="Elevation" value={Number.isFinite(elevationFt) ? `${elevationFt} ft` : null} />
+                <ToggleKeyRow label="Seismic Zone" value={seismicYN} active={showSeismic} onToggle={() => onToggleSeismic(!showSeismic)} />
+                <ToggleKeyRow label="Tsunami Zone" value={tsunamiYN} active={showTsunami} onToggle={() => onToggleTsunami(!showTsunami)} />
+                {hoodData && (
+                  <button type="button" className="fog-hood-link fog-point-cta" onClick={() => onOpenHood(neighborhoodName)}>
+                    View {neighborhoodName} details ›
+                  </button>
+                )}
+              </div>
             </>
           ) : (
             <div className="fog-point-empty">
@@ -304,6 +341,23 @@ function KeyRow({ label, value, dark }) {
       <span className="fog-key-label">{label}</span>
       <span className="fog-key-value">{value || "—"}</span>
     </div>
+  );
+}
+
+// Header caret that expands/collapses a panel box. Points down when collapsed
+// ("show more"), rotates up when expanded.
+function CollapseCaret({ open, onToggle, label }) {
+  return (
+    <button
+      type="button"
+      className="fog-collapse-btn"
+      onClick={onToggle}
+      aria-expanded={open}
+      aria-label={`${open ? "Collapse" : "Expand"} the ${label}`}
+      title={open ? "Show less" : "Show all"}
+    >
+      <span className={"fog-collapse-caret" + (open ? " open" : "")} aria-hidden="true">▾</span>
+    </button>
   );
 }
 
