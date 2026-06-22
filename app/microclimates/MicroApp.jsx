@@ -34,7 +34,10 @@ export default function MicroApp() {
   const [showSun, setShowSun] = useState(true);
   const [showCool, setShowCool] = useState(true);
   const [showWind, setShowWind] = useState(true);
-  const [showFog, setShowFog] = useState(true);
+  // "Fog path & bands" layer — its sidebar toggle is currently hidden (see
+  // MicroSidebar), so default it off rather than leaving it stuck on with no
+  // control. Flip back to true and un-hide the toggle to bring it back.
+  const [showFog, setShowFog] = useState(false);
   const [showSolar, setShowSolar] = useState(false);
   const [showTerrain, setShowTerrain] = useState(false);
   const [showContours, setShowContours] = useState(false);
