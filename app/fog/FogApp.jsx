@@ -62,6 +62,9 @@ export default function FogApp() {
   const [showRealtor, setShowRealtor] = useState(false);
   // SF Community Benefit Districts (purple fill + outline + name labels).
   const [showCBD, setShowCBD] = useState(false);
+  // SF Tall Building Inventory — footprints coloured by occupancy, click
+  // for the full structural/seismic record.
+  const [showBuildings, setShowBuildings] = useState(preset === "buildings");
   // Background layers kept off — used for lookups, not for the UI toggle set.
   const [showZoning] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
@@ -317,6 +320,7 @@ export default function FogApp() {
           showZoning={showZoning}
           showRealtor={showRealtor}
           showCBD={showCBD}
+          showBuildings={showBuildings}
           showNeighborhoods={showNeighborhoods}
           picked={picked}
           onPickFeature={pickFromMap}
@@ -358,6 +362,8 @@ export default function FogApp() {
         onToggleRealtor={setShowRealtor}
         showCBD={showCBD}
         onToggleCBD={setShowCBD}
+        showBuildings={showBuildings}
+        onToggleBuildings={setShowBuildings}
       />
     </div>
   );
