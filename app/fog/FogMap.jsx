@@ -695,6 +695,36 @@ export default function FogMap({
           "line-opacity": 0.9,
         },
       });
+      // Building name labels — placed at each footprint's centroid but only
+      // from zoom 14.5 up (minzoom), so the city-wide view stays clean and the
+      // names fade in as you zoom into a block. Part of the buildings layer
+      // group, so the "Tall Buildings" toggle controls them too.
+      map.addLayer({
+        id: "buildings-labels",
+        type: "symbol",
+        source: "buildings",
+        minzoom: 14.5,
+        layout: {
+          visibility: "none",
+          "text-field": ["get", "name"],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": [
+            "interpolate", ["linear"], ["zoom"],
+            14.5, 10,
+            16, 12.5,
+          ],
+          "text-max-width": 9,
+          "text-padding": 6,
+          "text-allow-overlap": false,
+          "text-optional": true,
+        },
+        paint: {
+          "text-color": "#1c1917",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.6,
+          "text-halo-blur": 0.4,
+        },
+      });
 
       // Click a footprint → pop-up with the building's full record. We list
       // every populated attribute from the export (skipping the DataSF
@@ -1474,7 +1504,7 @@ export default function FogMap({
     if (!map) return;
     const apply = () => {
       const vis = showBuildings ? "visible" : "none";
-      ["buildings-fill", "buildings-mixed", "buildings-outline"].forEach(id => {
+      ["buildings-fill", "buildings-mixed", "buildings-outline", "buildings-labels"].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
