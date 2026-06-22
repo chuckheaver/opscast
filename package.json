@@ -11,7 +11,8 @@
     "micro:build": "node scripts/process-microclimates.mjs",
     "contours:build": "node scripts/build-elevation-contours.mjs",
     "muni:build": "node scripts/build-muni-stops.mjs",
-    "solar:build": "node scripts/build-solar-irradiation.mjs"
+    "solar:build": "node scripts/build-solar-irradiation.mjs",
+    "buildings:build": "node scripts/build-building-sales.mjs"
   },
   "dependencies": {
     "geotiff": "^3.0.5",

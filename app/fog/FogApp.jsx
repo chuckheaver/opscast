@@ -28,6 +28,10 @@ export default function FogApp() {
   const preset = searchParams?.get("preset") || "";
   const [geojson, setGeojson] = useState(null);
   const [contours, setContours] = useState(null);
+  // Building → MLS sales lookup (keyed by building objectid). Tiny file, so we
+  // load it once on mount and hand it to the map for the pop-up's "Market
+  // activity" section.
+  const [buildingSales, setBuildingSales] = useState(null);
   const [zips, setZips] = useState(null);
   const [supervisorDistricts, setSupervisorDistricts] = useState(null);
   const [realtorNeighborhoods, setRealtorNeighborhoods] = useState(null);
@@ -78,7 +82,10 @@ export default function FogApp() {
     const lat = Number(searchParams?.get("lat"));
     const lng = Number(searchParams?.get("lng"));
     if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
-    return { point: [lng, lat], name: searchParams.get("name") || "" };
+    // ?bz=1 (building zoom) — from a "View building structure" link — flies in
+    // to the footprint instead of framing the whole city.
+    const zoom = searchParams?.get("bz") ? 15.5 : null;
+    return { point: [lng, lat], name: searchParams.get("name") || "", zoom };
   })();
   // Holds the latest contours/geojson for use inside async callbacks that
   // were captured before the data finished loading.
@@ -116,6 +123,7 @@ export default function FogApp() {
         .then(r => (r.ok ? r.json() : null))
         .then(d => { if (!cancelled && d) setter(d); })
         .catch(() => {});
+    loadLookup("/data/building-sales.json", setBuildingSales);
     loadLookup("/data/sf-zip-codes.geojson", setZips);
     loadLookup("/data/sf-supervisor-districts.geojson", setSupervisorDistricts);
     loadLookup("/data/sf-realtor-neighborhoods.geojson", setRealtorNeighborhoods);
@@ -216,6 +224,7 @@ export default function FogApp() {
     setPicked({
       point: urlLoc.point,
       address: urlLoc.name || null,
+      zoom: urlLoc.zoom,
       feature,
       contour,
     });
@@ -321,6 +330,7 @@ export default function FogApp() {
           showRealtor={showRealtor}
           showCBD={showCBD}
           showBuildings={showBuildings}
+          buildingSales={buildingSales}
           showNeighborhoods={showNeighborhoods}
           picked={picked}
           onPickFeature={pickFromMap}

@@ -22,6 +22,7 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
 import {
   findNeighborhoodForPoint,
   findContourForPoint,
@@ -495,6 +496,16 @@ async function main() {
     console.log(`\n${unmatched.length} unmatched address(es):`);
     unmatched.slice(0, 20).forEach(a => console.log("  -", a));
     if (unmatched.length > 20) console.log(`  …and ${unmatched.length - 20} more`);
+  }
+
+  // Refresh the Tall Building ↔ sales join off the listings we just wrote, so
+  // the building pop-ups and the building/market cross-links stay in sync with
+  // every data refresh — no separate command to remember.
+  console.log(`\nRefreshing building↔sales links…`);
+  try {
+    execFileSync("node", [join(__dirname, "build-building-sales.mjs")], { stdio: "inherit" });
+  } catch (e) {
+    console.warn("  (building↔sales join failed — run `npm run buildings:build` manually)", e.message);
   }
 }
 
