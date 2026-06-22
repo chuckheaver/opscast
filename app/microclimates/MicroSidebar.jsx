@@ -10,7 +10,9 @@ const ZONES = [
   ["☀️", "#fdba74", "Sun Pockets", "≥20° SE/S/SW-facing inclines — the warmest, sunniest slopes."],
   ["❄️", "#7dd3fc", "Cool / Shade", "≥20° NW/N/NE-facing inclines — far less direct sun, so cooler."],
   ["🌬️", "#2dd4bf", "Wind Corridors", "Valley floors & gaps that funnel and accelerate wind."],
-  ["🌫️", "#64748b", "Fog Path & Bands", "Graduated grey by fog density: darkest in the ≤200 ft path fog floods through, lightening up the slopes (200–350, 350–500, 500–1000 ft) as fog thins."],
+  // "Fog Path & Bands" legend row hidden along with its toggle — may not need
+  // this layer. Restore this line to bring the legend entry back.
+  // ["🌫️", "#64748b", "Fog Path & Bands", "Graduated grey by fog density: darkest in the ≤200 ft path fog floods through, lightening up the slopes (200–350, 350–500, 500–1000 ft) as fog thins."],
 ];
 
 // Two-colour solar exposure ramp: light yellow above the flat-ground
@@ -217,7 +219,10 @@ export default function MicroSidebar({
       <ToggleSwitch checked={showSun} onChange={onToggleSun} label="Sun pockets" help="≥20° south-facing warm slopes." />
       <ToggleSwitch checked={showCool} onChange={onToggleCool} label="Cool / shade" help="≥20° north-facing cooler slopes." />
       <ToggleSwitch checked={showWind} onChange={onToggleWind} label="Wind corridors" help="Wind-channeling valleys." />
-      <ToggleSwitch checked={showFog} onChange={onToggleFog} label="Fog path & bands" help="Grey by density: dense in the lows, thinning up the slopes." />
+      {/* "Fog path & bands" toggle hidden for now — may not need this layer.
+          The layer + state stay wired (showFog defaults off in MicroApp); restore
+          this line to bring the control back.
+      <ToggleSwitch checked={showFog} onChange={onToggleFog} label="Fog path & bands" help="Grey by density: dense in the lows, thinning up the slopes." /> */}
       <ToggleSwitch checked={showSolar} onChange={onToggleSolar} label="Solar exposure" help="Light yellow = above flat-ground sun, light brown = below. Switch seasons to see how aspect matters more in winter than summer." />
       {showSolar && (
         <div className="fog-legend" style={{ padding: "10px 12px", marginTop: 0 }}>
