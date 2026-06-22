@@ -1377,24 +1377,29 @@ input[type=range]::-webkit-slider-thumb:hover {
   background: #fff;
 }
 .fog-nbhd-count { color: #a8a29e; font-weight: 600; }
+/* Plain-text newspaper-column index — names flow A→Z down narrow columns,
+   no pills, so the whole list fits in a fraction of the height. */
 .fog-nbhd-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 10px;
+  column-width: 150px;
+  column-gap: 24px;
 }
 .fog-nbhd-link {
-  background: #f5f3ef;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 4px 9px;
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 2.5px 0;
   font-size: 12.5px;
-  font-weight: 600;
+  font-weight: 500;
   color: #1c1917;
   cursor: pointer;
-  transition: background 0.12s, border-color 0.12s;
+  break-inside: avoid;
+  transition: color 0.12s;
 }
-.fog-nbhd-link:hover { background: #E6F1FB; border-color: #93c5fd; color: #042C53; }
-.fog-nbhd-link.on { background: #2563eb; border-color: #2563eb; color: #fff; }
+.fog-nbhd-link:hover { color: #185FA5; text-decoration: underline; }
+.fog-nbhd-link.on { color: #2563eb; font-weight: 700; }
 
 /* Slim point-level strip (right column) */
 .fog-point-strip { display: flex; flex-direction: column; }
