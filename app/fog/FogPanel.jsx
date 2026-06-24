@@ -12,7 +12,9 @@ import { useState, useRef, useEffect } from "react";
 import { findNeighborhoodForPoint, featureIntersectsAny } from "./lib/spatial";
 import { fogLabel } from "./lib/risk";
 import { getNeighborhood, listNeighborhoods } from "./lib/neighborhoods";
+import { getBuilding } from "./lib/buildings";
 import NeighborhoodModal from "./NeighborhoodModal";
+import BuildingModal from "./BuildingModal";
 
 // Alphabetical index of authored neighborhoods — stable across renders.
 const NBHD_INDEX = listNeighborhoods();
@@ -47,7 +49,15 @@ export default function FogPanel({
   showRealtor, onToggleRealtor,
   showCBD, onToggleCBD,
   showBuildings, onToggleBuildings,
+  buildingProfiles, openBuilding, onOpenBuilding, onCloseBuilding,
 }) {
+  // Sorted residential-building index (the "Tall Buildings" list). Cheap to
+  // recompute; 57 items.
+  const buildingList = buildingProfiles
+    ? Object.values(buildingProfiles).sort((a, b) => a.name.localeCompare(b.name))
+    : [];
+  const [bldgOpen, setBldgOpen] = useState(false);
+
   // Each box shows ~5 lines by default and expands on the header caret. The
   // caret only appears when the content actually overflows the cap (measured
   // below), so the short "selected point" strip won't get a dead arrow.
@@ -128,6 +138,13 @@ export default function FogPanel({
           onClose={onCloseHood}
         />
       )}
+      {openBuilding && buildingProfiles?.[openBuilding] && (
+        <BuildingModal
+          profile={buildingProfiles[openBuilding]}
+          authored={getBuilding(openBuilding)}
+          onClose={onCloseBuilding}
+        />
+      )}
       <div className="fog-panel-row">
         {/* A–Z index of every neighborhood we've written highlights for.
             Click a name to drop a pin at its centre and open the pop-up. */}
@@ -179,6 +196,31 @@ export default function FogPanel({
           )}
         </div>
       </div>
+
+      {/* Tall Buildings index — residential high-rises, each a "community
+          within a community." Click a name to open its homebuyer profile. */}
+      {buildingList.length > 0 && (
+        <div className="fog-buildings-index-wrap">
+          <div className="fog-nbhd-index">
+            <div className="fog-keybox-h fog-collapse-h">
+              <span>Tall Buildings <span className="fog-nbhd-count">({buildingList.length} residential)</span></span>
+              <CollapseCaret open={bldgOpen} onToggle={() => setBldgOpen(o => !o)} label="tall buildings list" />
+            </div>
+            <div className={"fog-nbhd-list" + (bldgOpen ? "" : " fog-collapsed")}>
+              {buildingList.map(b => (
+                <button
+                  key={b.objectid}
+                  type="button"
+                  className={"fog-nbhd-link" + (b.objectid === openBuilding ? " on" : "")}
+                  onClick={() => onOpenBuilding(b.objectid)}
+                >
+                  {b.name}{b.rental && <span className="fog-bldg-rental"> · rental</span>}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="fog-toggles-row">
         <ToggleSwitch

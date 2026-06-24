@@ -17,6 +17,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { normalizeStreetAddress } from "../app/lib/buildingMatch.js";
+import { RENTAL_OBJECTIDS } from "../app/fog/lib/buildings.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(ROOT, "public", "data");
@@ -104,8 +105,97 @@ for (const f of buildings.features) {
 writeFileSync(join(DATA, "building-sales.json"), JSON.stringify(buildingSales));
 writeFileSync(join(DATA, "listing-buildings.json"), JSON.stringify(listingBuildings));
 
+// ── Building profiles ─────────────────────────────────────────────────────
+// Richer per-building data for the homebuyer-facing "Tall Buildings" index +
+// profile modal: the structural facts (so the modal works without a map click)
+// plus market stats derived from the matched listings. Residential and
+// mixed-with-residential buildings only.
+const RESIDENTIAL_OCC = new Set(["Residential", "Mixed Uses (With Residential)"]);
+const FOR_SALE = new Set(["Active", "Coming Soon"]);
+const PENDING = new Set(["Pending", "Contingent"]);
+// Structural fields surfaced in the profile (same set the map pop-up shows).
+const STRUCT_FIELDS = [
+  "height_ft", "stories_above_grade", "stories_below_grade", "date",
+  "completion_date", "retrofit_date", "building_code_year", "square_footage",
+  "structural_material", "structural_system", "facade_material",
+  "foundation_system", "fire_resistence_type", "percent_sprinklered",
+  "liquefaction_potential",
+];
+
+const num = v => {
+  const n = parseFloat(v);
+  return Number.isFinite(n) ? n : null;
+};
+const range = nums => {
+  const v = nums.filter(n => Number.isFinite(n));
+  return v.length ? [Math.min(...v), Math.max(...v)] : null;
+};
+// HOA dues aren't in the export yet; read whatever key it lands under when the
+// MLS column is added, so the average lights up automatically with no code change.
+const hoaOf = h => num(h.hoa ?? h.hoaDues ?? h.hoa_dues ?? h.associationFee ?? h.hoaFee);
+
+const buildingProfiles = {};
+for (const f of buildings.features) {
+  const p = f.properties;
+  if (!RESIDENTIAL_OCC.has(p.occupancy)) continue;
+  const key = normalizeStreetAddress(p.address);
+  const hits = (key && listingsByAddr.get(key)) || [];
+  const sold = hits.filter(h => CLOSED.has(h.status) && num(h.sellingPrice));
+  const active = hits.filter(h => FOR_SALE.has(h.status));
+  const pending = hits.filter(h => PENDING.has(h.status));
+  const ppsf = sold.map(h => (num(h.sqft) ? num(h.sellingPrice) / num(h.sqft) : null)).filter(Boolean);
+  const pctList = sold.map(h => (num(h.listPrice) ? (num(h.sellingPrice) / num(h.listPrice)) * 100 : null)).filter(Boolean);
+  const hoaVals = hits.map(hoaOf).filter(v => Number.isFinite(v) && v > 0);
+
+  const struct = {};
+  for (const k of STRUCT_FIELDS) {
+    if (p[k] != null && p[k] !== "" && !/^(null|unknown)$/i.test(String(p[k]))) struct[k] = p[k];
+  }
+
+  buildingProfiles[p.objectid] = {
+    objectid: p.objectid,
+    name: p.name || p.address,
+    address: p.address,
+    occupancy: p.occupancy,
+    rental: RENTAL_OBJECTIDS.has(String(p.objectid)),
+    centroid: centroid(f.geometry),
+    struct,
+    market: {
+      active: active.length,
+      pending: pending.length,
+      sold: sold.length,
+      medianSale: median(sold.map(h => num(h.sellingPrice))),
+      priceRange: range(sold.map(h => num(h.sellingPrice))),
+      activeMedian: median(active.map(h => num(h.listPrice ?? h.price))),
+      medianPpsf: median(ppsf),
+      medianDom: median(sold.map(h => num(h.dom))),
+      medianPctList: median(pctList),
+      bedsRange: range(hits.map(h => num(h.bedrooms))),
+      sqftRange: range(hits.map(h => num(h.sqft))),
+      hoaAvg: hoaVals.length ? Math.round(hoaVals.reduce((a, b) => a + b, 0) / hoaVals.length) : null,
+      hoaRange: range(hoaVals),
+      recent: [...hits]
+        .sort((a, b) => {
+          const da = a.sellingDate || a.statusDate || a.listDate || "";
+          const db = b.sellingDate || b.statusDate || b.listDate || "";
+          return db.localeCompare(da);
+        })
+        .slice(0, 12)
+        .map(h => ({
+          unit: h.unit || (h.address?.match(/#\s*([\w-]+)/)?.[1] ?? null),
+          status: h.status || null,
+          price: h.sellingPrice ?? h.listPrice ?? h.price ?? null,
+          date: h.sellingDate || h.statusDate || h.listDate || null,
+          url: h.url || null,
+        })),
+    },
+  };
+}
+writeFileSync(join(DATA, "building-profiles.json"), JSON.stringify(buildingProfiles));
+
 console.log(`Buildings: ${buildings.features.length}`);
 console.log(`Listings: ${listings.features.length}`);
 console.log(`Buildings with sales matched: ${matched}`);
 console.log(`Reverse address keys: ${Object.keys(listingBuildings).length}`);
 console.log(`Wrote building-sales.json (${Object.keys(buildingSales).length} buildings) + listing-buildings.json`);
+console.log(`Wrote building-profiles.json (${Object.keys(buildingProfiles).length} residential buildings)`);

@@ -1430,6 +1430,17 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 .fog-nbhd-link:hover { color: #185FA5; text-decoration: underline; }
 .fog-nbhd-link.on { color: #2563eb; font-weight: 700; }
+/* Tall Buildings index — same box/columns as the neighborhood index, full
+   width below the panel row. */
+.fog-buildings-index-wrap {
+  max-width: 1280px;
+  margin: 12px auto 0;
+}
+.fog-bldg-rental {
+  color: #a8a29e;
+  font-weight: 400;
+  font-size: 11px;
+}
 
 /* Slim point-level strip (right column) */
 .fog-point-strip { display: flex; flex-direction: column; }

@@ -32,6 +32,10 @@ export default function FogApp() {
   // load it once on mount and hand it to the map for the pop-up's "Market
   // activity" section.
   const [buildingSales, setBuildingSales] = useState(null);
+  // Residential building profiles (homebuyer index + profile modal). Tiny file.
+  const [buildingProfiles, setBuildingProfiles] = useState(null);
+  // objectid of the building whose profile modal is open (from the index).
+  const [openBuilding, setOpenBuilding] = useState(null);
   const [zips, setZips] = useState(null);
   const [supervisorDistricts, setSupervisorDistricts] = useState(null);
   const [realtorNeighborhoods, setRealtorNeighborhoods] = useState(null);
@@ -124,6 +128,7 @@ export default function FogApp() {
         .then(d => { if (!cancelled && d) setter(d); })
         .catch(() => {});
     loadLookup("/data/building-sales.json", setBuildingSales);
+    loadLookup("/data/building-profiles.json", setBuildingProfiles);
     loadLookup("/data/sf-zip-codes.geojson", setZips);
     loadLookup("/data/sf-supervisor-districts.geojson", setSupervisorDistricts);
     loadLookup("/data/sf-realtor-neighborhoods.geojson", setRealtorNeighborhoods);
@@ -374,6 +379,10 @@ export default function FogApp() {
         onToggleCBD={setShowCBD}
         showBuildings={showBuildings}
         onToggleBuildings={setShowBuildings}
+        buildingProfiles={buildingProfiles}
+        openBuilding={openBuilding}
+        onOpenBuilding={setOpenBuilding}
+        onCloseBuilding={() => setOpenBuilding(null)}
       />
     </div>
   );
