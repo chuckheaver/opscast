@@ -102,7 +102,62 @@ const BUILDINGS = {
   },
 };
 
-// Look up the authored supplement for a building, or null if none yet.
+// ── Off-inventory buildings ─────────────────────────────────────────────────
+// Residential condo buildings that AREN'T in the city's Tall Building Inventory
+// (the inventory is a seismic dataset that misses many notable condo towers —
+// e.g. the Four Seasons Private Residences). We carry them here with their own
+// synthetic id, location, and structural facts so they slot into the same
+// index + profile + market-link system. Scope: residential condo buildings
+// with > 40 units. Market stats are still computed at build time by matching
+// `address` to the MLS listings, exactly like the inventory buildings.
+//
+// Each entry holds BOTH the build-time fields (id, name, address, lat, lng,
+// occupancy, struct) and the authored layer (units, narrative, amenities,
+// thingsToKnow, hoaApprox) — getBuilding() returns the authored layer, and
+// scripts/build-building-sales.mjs reads the rest.
+export const EXTRA_BUILDINGS = [
+  {
+    id: "x-765-market",
+    name: "Four Seasons Private Residences",
+    address: "765 Market Street",
+    lat: 37.78577,
+    lng: -122.40543,
+    occupancy: "Mixed Uses (With Residential)",
+    struct: {
+      stories_above_grade: "40",
+      date: "2001",
+      completion_date: "2001",
+    },
+    units: 142,
+    narrative:
+      "Rising above the Four Seasons Hotel on Market Street at Yerba Buena, the " +
+      "Private Residences occupy the tower's upper floors — 142 condominiums " +
+      "that live like nothing else in the city because they come wrapped in a " +
+      "five-star hotel. Ownership here is a service: a 24-hour doorman and " +
+      "concierge, valet, and Four Seasons housekeeping and in-residence dining " +
+      "on call, plus membership to the 100,000-sq-ft Equinox Sports Club " +
+      "downstairs. Homes range from roughly 790-sq-ft pied-à-terres to " +
+      "4,600-sq-ft full-floor residences, many with head-on views straight down " +
+      "Market Street and out to the Bay. It is the definition of a community " +
+      "within a community — a doorman who knows your name and a building that " +
+      "runs like a hotel — in the heart of Yerba Buena's museum-and-shopping " +
+      "district. The trade-off is cost: HOA dues are high and reflect that " +
+      "hotel-grade service level, well above a standard condo.",
+    amenities: [
+      "Four Seasons 24-hour doorman & concierge",
+      "Valet parking",
+      "In-residence dining & housekeeping (Four Seasons)",
+      "Equinox Sports Club (100k sq ft) in-building",
+      "Hotel spa & service access",
+      "Earthquake insurance included in HOA",
+    ],
+    thingsToKnow: [],
+  },
+];
+const EXTRA_BY_ID = Object.fromEntries(EXTRA_BUILDINGS.map(b => [b.id, b]));
+
+// Look up the authored supplement for a building (inventory or off-inventory),
+// or null if none yet.
 export function getBuilding(objectid) {
-  return BUILDINGS[String(objectid)] || null;
+  return BUILDINGS[String(objectid)] || EXTRA_BY_ID[String(objectid)] || null;
 }
