@@ -171,12 +171,20 @@ export default function ListingsApp() {
 
   // The active building deep-link, resolved to its normalized address key +
   // display name (by reversing the address→building lookup on objectid).
+  // A building can span several addresses (e.g. The Beacon at 250 + 260 King),
+  // so collect ALL normalized-address keys mapped to this building id — the
+  // filter then matches a listing at any of them.
   const buildingFilter = useMemo(() => {
     if (!initialBuilding || !buildingsByAddr) return null;
+    const keys = new Set();
+    let name = null;
     for (const [key, b] of Object.entries(buildingsByAddr)) {
-      if (String(b.objectid) === String(initialBuilding)) return { key, name: b.name };
+      if (String(b.objectid) === String(initialBuilding)) {
+        keys.add(key);
+        name = name || b.name;
+      }
     }
-    return null;
+    return keys.size ? { keys, name } : null;
   }, [initialBuilding, buildingsByAddr]);
 
   // Tag each listing's supervisor district and realtor neighborhood via
@@ -260,7 +268,7 @@ export default function ListingsApp() {
     const hi = maxPrice ? Number(maxPrice) : null;
     return features.filter(f => {
       const p = f.properties;
-      if (buildingFilter && normalizeStreetAddress(p.address) !== buildingFilter.key) return false;
+      if (buildingFilter && !buildingFilter.keys.has(normalizeStreetAddress(p.address))) return false;
       if (statuses.size && !statuses.has(p.status)) return false;
       if (subtypes.size && !subtypes.has(p.propType)) return false;
       if (district && p.areaDesc !== district) return false;

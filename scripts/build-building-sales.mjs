@@ -206,8 +206,13 @@ for (const f of buildings.features) {
 // listing→building entry so the listings deep-link resolves them.
 let extraMatched = 0;
 for (const b of EXTRA_BUILDINGS) {
-  const key = normalizeStreetAddress(b.address);
-  const hits = (key && listingsByAddr.get(key)) || [];
+  // A building can span several street addresses (e.g. The Beacon at 250 + 260
+  // King). Aggregate listings across all of them for the market stats, and
+  // register every address in the reverse map so any unit links back.
+  const keys = [b.address, ...(b.altAddresses || [])]
+    .map(normalizeStreetAddress)
+    .filter(Boolean);
+  const hits = keys.flatMap(k => listingsByAddr.get(k) || []);
   if (hits.length) extraMatched++;
   buildingProfiles[b.id] = {
     objectid: b.id,
@@ -219,8 +224,8 @@ for (const b of EXTRA_BUILDINGS) {
     struct: b.struct || {},
     market: computeMarket(hits),
   };
-  if (key) {
-    listingBuildings[key] = { objectid: b.id, name: b.name, lng: b.lng, lat: b.lat };
+  for (const k of keys) {
+    listingBuildings[k] = { objectid: b.id, name: b.name, lng: b.lng, lat: b.lat };
   }
 }
 writeFileSync(join(DATA, "building-profiles.json"), JSON.stringify(buildingProfiles));
