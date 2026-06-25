@@ -203,7 +203,7 @@ export default function FogPanel({
         <div className="fog-buildings-index-wrap">
           <div className="fog-nbhd-index">
             <div className="fog-keybox-h fog-collapse-h">
-              <span>Tall Buildings <span className="fog-nbhd-count">({buildingList.length} residential)</span></span>
+              <span>Condo Buildings <span className="fog-nbhd-count">({buildingList.length} residential)</span></span>
               <CollapseCaret open={bldgOpen} onToggle={() => setBldgOpen(o => !o)} label="tall buildings list" />
             </div>
             <div className={"fog-nbhd-list" + (bldgOpen ? "" : " fog-collapsed")}>
@@ -288,7 +288,7 @@ export default function FogPanel({
         <ToggleSwitch
           checked={showBuildings}
           onChange={onToggleBuildings}
-          label="Tall Buildings"
+          label="Condo Buildings"
         />
       </div>
 
@@ -304,7 +304,7 @@ export default function FogPanel({
           ]}
         />
         <LayerLegend
-          title="Tall Buildings"
+          title="Condo Buildings"
           items={[
             ["#87CEFA", "Residential"],
             ["#FBF1C7", "Office / cultural"],
