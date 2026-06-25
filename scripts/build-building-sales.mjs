@@ -17,7 +17,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { normalizeStreetAddress } from "../app/lib/buildingMatch.js";
-import { RENTAL_OBJECTIDS } from "../app/fog/lib/buildings.js";
+import { RENTAL_OBJECTIDS, EXTRA_BUILDINGS } from "../app/fog/lib/buildings.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(ROOT, "public", "data");
@@ -103,7 +103,9 @@ for (const f of buildings.features) {
 }
 
 writeFileSync(join(DATA, "building-sales.json"), JSON.stringify(buildingSales));
-writeFileSync(join(DATA, "listing-buildings.json"), JSON.stringify(listingBuildings));
+// listing-buildings.json is written further down, AFTER the off-inventory
+// EXTRA_BUILDINGS loop adds their reverse entries (so their listings deep-link
+// resolves too).
 
 // ── Building profiles ─────────────────────────────────────────────────────
 // Richer per-building data for the homebuyer-facing "Tall Buildings" index +
@@ -134,18 +136,52 @@ const range = nums => {
 // MLS column is added, so the average lights up automatically with no code change.
 const hoaOf = h => num(h.hoa ?? h.hoaDues ?? h.hoa_dues ?? h.associationFee ?? h.hoaFee);
 
-const buildingProfiles = {};
-for (const f of buildings.features) {
-  const p = f.properties;
-  if (!RESIDENTIAL_OCC.has(p.occupancy)) continue;
-  const key = normalizeStreetAddress(p.address);
-  const hits = (key && listingsByAddr.get(key)) || [];
+// Market stats for one building, from its matched MLS listings. Shared by the
+// inventory buildings (geojson) and the off-inventory EXTRA_BUILDINGS.
+function computeMarket(hits) {
   const sold = hits.filter(h => CLOSED.has(h.status) && num(h.sellingPrice));
   const active = hits.filter(h => FOR_SALE.has(h.status));
   const pending = hits.filter(h => PENDING.has(h.status));
   const ppsf = sold.map(h => (num(h.sqft) ? num(h.sellingPrice) / num(h.sqft) : null)).filter(Boolean);
   const pctList = sold.map(h => (num(h.listPrice) ? (num(h.sellingPrice) / num(h.listPrice)) * 100 : null)).filter(Boolean);
   const hoaVals = hits.map(hoaOf).filter(v => Number.isFinite(v) && v > 0);
+  return {
+    active: active.length,
+    pending: pending.length,
+    sold: sold.length,
+    medianSale: median(sold.map(h => num(h.sellingPrice))),
+    priceRange: range(sold.map(h => num(h.sellingPrice))),
+    activeMedian: median(active.map(h => num(h.listPrice ?? h.price))),
+    medianPpsf: median(ppsf),
+    medianDom: median(sold.map(h => num(h.dom))),
+    medianPctList: median(pctList),
+    bedsRange: range(hits.map(h => num(h.bedrooms))),
+    sqftRange: range(hits.map(h => num(h.sqft))),
+    hoaAvg: hoaVals.length ? Math.round(hoaVals.reduce((a, b) => a + b, 0) / hoaVals.length) : null,
+    hoaRange: range(hoaVals),
+    recent: [...hits]
+      .sort((a, b) => {
+        const da = a.sellingDate || a.statusDate || a.listDate || "";
+        const db = b.sellingDate || b.statusDate || b.listDate || "";
+        return db.localeCompare(da);
+      })
+      .slice(0, 12)
+      .map(h => ({
+        unit: h.unit || (h.address?.match(/#\s*([\w-]+)/)?.[1] ?? null),
+        status: h.status || null,
+        price: h.sellingPrice ?? h.listPrice ?? h.price ?? null,
+        date: h.sellingDate || h.statusDate || h.listDate || null,
+        url: h.url || null,
+      })),
+  };
+}
+
+const buildingProfiles = {};
+for (const f of buildings.features) {
+  const p = f.properties;
+  if (!RESIDENTIAL_OCC.has(p.occupancy)) continue;
+  const key = normalizeStreetAddress(p.address);
+  const hits = (key && listingsByAddr.get(key)) || [];
 
   const struct = {};
   for (const k of STRUCT_FIELDS) {
@@ -160,42 +196,41 @@ for (const f of buildings.features) {
     rental: RENTAL_OBJECTIDS.has(String(p.objectid)),
     centroid: centroid(f.geometry),
     struct,
-    market: {
-      active: active.length,
-      pending: pending.length,
-      sold: sold.length,
-      medianSale: median(sold.map(h => num(h.sellingPrice))),
-      priceRange: range(sold.map(h => num(h.sellingPrice))),
-      activeMedian: median(active.map(h => num(h.listPrice ?? h.price))),
-      medianPpsf: median(ppsf),
-      medianDom: median(sold.map(h => num(h.dom))),
-      medianPctList: median(pctList),
-      bedsRange: range(hits.map(h => num(h.bedrooms))),
-      sqftRange: range(hits.map(h => num(h.sqft))),
-      hoaAvg: hoaVals.length ? Math.round(hoaVals.reduce((a, b) => a + b, 0) / hoaVals.length) : null,
-      hoaRange: range(hoaVals),
-      recent: [...hits]
-        .sort((a, b) => {
-          const da = a.sellingDate || a.statusDate || a.listDate || "";
-          const db = b.sellingDate || b.statusDate || b.listDate || "";
-          return db.localeCompare(da);
-        })
-        .slice(0, 12)
-        .map(h => ({
-          unit: h.unit || (h.address?.match(/#\s*([\w-]+)/)?.[1] ?? null),
-          status: h.status || null,
-          price: h.sellingPrice ?? h.listPrice ?? h.price ?? null,
-          date: h.sellingDate || h.statusDate || h.listDate || null,
-          url: h.url || null,
-        })),
-    },
+    market: computeMarket(hits),
   };
 }
+
+// Off-inventory residential condo buildings (Four Seasons Residences, etc.) —
+// not in the city geojson, so they bring their own id/location/struct. Market
+// stats come from the same address→listings match. They also need a reverse
+// listing→building entry so the listings deep-link resolves them.
+let extraMatched = 0;
+for (const b of EXTRA_BUILDINGS) {
+  const key = normalizeStreetAddress(b.address);
+  const hits = (key && listingsByAddr.get(key)) || [];
+  if (hits.length) extraMatched++;
+  buildingProfiles[b.id] = {
+    objectid: b.id,
+    name: b.name,
+    address: b.address,
+    occupancy: b.occupancy || "Residential",
+    rental: false,
+    centroid: [b.lng, b.lat],
+    struct: b.struct || {},
+    market: computeMarket(hits),
+  };
+  if (key) {
+    listingBuildings[key] = { objectid: b.id, name: b.name, lng: b.lng, lat: b.lat };
+  }
+}
 writeFileSync(join(DATA, "building-profiles.json"), JSON.stringify(buildingProfiles));
+// Now that EXTRA_BUILDINGS have contributed their reverse entries, write it.
+writeFileSync(join(DATA, "listing-buildings.json"), JSON.stringify(listingBuildings));
 
 console.log(`Buildings: ${buildings.features.length}`);
 console.log(`Listings: ${listings.features.length}`);
 console.log(`Buildings with sales matched: ${matched}`);
 console.log(`Reverse address keys: ${Object.keys(listingBuildings).length}`);
 console.log(`Wrote building-sales.json (${Object.keys(buildingSales).length} buildings) + listing-buildings.json`);
+console.log(`Off-inventory buildings: ${EXTRA_BUILDINGS.length} (${extraMatched} with sales matched)`);
 console.log(`Wrote building-profiles.json (${Object.keys(buildingProfiles).length} residential buildings)`);
