@@ -17,7 +17,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { normalizeStreetAddress } from "../app/lib/buildingMatch.js";
-import { RENTAL_OBJECTIDS, EXTRA_BUILDINGS } from "../app/fog/lib/buildings.js";
+import { RENTAL_OBJECTIDS, EXCLUDED_OBJECTIDS, EXTRA_BUILDINGS } from "../app/fog/lib/buildings.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(ROOT, "public", "data");
@@ -180,6 +180,9 @@ const buildingProfiles = {};
 for (const f of buildings.features) {
   const p = f.properties;
   if (!RESIDENTIAL_OCC.has(p.occupancy)) continue;
+  // Drop office towers the city's broad "mixed-residential" tag swept in, plus
+  // inventory duplicates already covered by an off-inventory EXTRA entry.
+  if (EXCLUDED_OBJECTIDS.has(String(p.objectid))) continue;
   const key = normalizeStreetAddress(p.address);
   const hits = (key && listingsByAddr.get(key)) || [];
 
