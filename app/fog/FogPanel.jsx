@@ -48,7 +48,8 @@ export default function FogPanel({
   showTsunami, onToggleTsunami,
   showRealtor, onToggleRealtor,
   showCBD, onToggleCBD,
-  showBuildings, onToggleBuildings,
+  showResBuildings, onToggleResBuildings,
+  showComBuildings, onToggleComBuildings,
   buildingProfiles, openBuilding, onOpenBuilding, onCloseBuilding,
 }) {
   // Sorted residential-building index (the "Tall Buildings" list). Cheap to
@@ -286,9 +287,14 @@ export default function FogPanel({
           label="CBD/Mello-Roos Districts"
         />
         <ToggleSwitch
-          checked={showBuildings}
-          onChange={onToggleBuildings}
-          label="Larger Buildings"
+          checked={showResBuildings}
+          onChange={onToggleResBuildings}
+          label="Large Residential/Mixed"
+        />
+        <ToggleSwitch
+          checked={showComBuildings}
+          onChange={onToggleComBuildings}
+          label="Commercial/Office/Hotel/Hospital"
         />
       </div>
 
@@ -304,13 +310,18 @@ export default function FogPanel({
           ]}
         />
         <LayerLegend
-          title="Larger Buildings"
+          title="Residential / Mixed"
           items={[
             ["#87CEFA", "Residential"],
-            ["#FBF1C7", "Office / cultural"],
             ["#87CEFA/#FBF1C7", "Mixed use", "split"],
+          ]}
+        />
+        <LayerLegend
+          title="Commercial / Office / Hotel / Hospital"
+          items={[
+            ["#FBF1C7", "Office / cultural"],
             ["#BBF7D0", "Hotel"],
-            ["#FECACA", "Medical"],
+            ["#FECACA", "Medical / hospital"],
           ]}
         />
         <LayerLegend
