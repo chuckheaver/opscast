@@ -16,7 +16,7 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { NAME_OVERRIDES, getBuilding, RENTAL_OBJECTIDS } from "./lib/buildings";
+import { NAME_OVERRIDES, getBuilding, RENTAL_OBJECTIDS, FORCE_COMMERCIAL_OBJECTIDS } from "./lib/buildings";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
@@ -655,24 +655,36 @@ export default function FogMap({
       // which footprints each draws. Rentals (a tenure, not in the geojson) are
       // matched by objectid, so they shade orange regardless of occupancy.
       const RENTAL_IDS = [...RENTAL_OBJECTIDS];
+      // Office towers the city mistagged as residential — forced to the
+      // Commercial group so they don't masquerade as homebuyer properties.
+      const FORCE_COM_IDS = [...FORCE_COMMERCIAL_OBJECTIDS];
       const BLDG_FILL_COLOR = [
         "case",
         ["in", ["get", "objectid"], ["literal", RENTAL_IDS]], BLDG_ORANGE,
+        ["in", ["get", "objectid"], ["literal", FORCE_COM_IDS]], BLDG_CREAM,
         [
           "match",
           ["get", "occupancy"],
           "Residential", BLDG_BLUE,
           "Mixed Uses (With Residential)", BLDG_BLUE,
-          "Mixed Uses (Without Residential)", BLDG_BLUE,
-          // All commercial (office, cultural, hotel, medical) → cream.
-          ["Office (Management, Information, Professional Services)", "Cultural, Institutional, Educational", "Hotels, Visitor Services", "Medical"], BLDG_CREAM,
+          // Commercial: office, cultural, hotel, medical, and mixed-WITHOUT-
+          // residential (those have no homes) → cream.
+          ["Office (Management, Information, Professional Services)", "Cultural, Institutional, Educational", "Hotels, Visitor Services", "Medical", "Mixed Uses (Without Residential)"], BLDG_CREAM,
           /* anything else */ "#c9c6bd",
         ],
       ];
-      const RES_OCC = ["Residential", "Mixed Uses (With Residential)", "Mixed Uses (Without Residential)"];
-      const COM_OCC = ["Office (Management, Information, Professional Services)", "Hotels, Visitor Services", "Medical", "Cultural, Institutional, Educational"];
-      const resFilter = ["in", ["get", "occupancy"], ["literal", RES_OCC]];
-      const comFilter = ["in", ["get", "occupancy"], ["literal", COM_OCC]];
+      // Residential/Mixed group = has homes; Commercial = everything else
+      // (incl. mixed-without-residential and the mistagged office towers).
+      const RES_OCC = ["Residential", "Mixed Uses (With Residential)"];
+      const COM_OCC = ["Office (Management, Information, Professional Services)", "Hotels, Visitor Services", "Medical", "Cultural, Institutional, Educational", "Mixed Uses (Without Residential)"];
+      const resFilter = ["all",
+        ["in", ["get", "occupancy"], ["literal", RES_OCC]],
+        ["!", ["in", ["get", "objectid"], ["literal", FORCE_COM_IDS]]],
+      ];
+      const comFilter = ["any",
+        ["in", ["get", "occupancy"], ["literal", COM_OCC]],
+        ["in", ["get", "objectid"], ["literal", FORCE_COM_IDS]],
+      ];
       // Footprint label = the building name, with display-name overrides applied
       // (e.g. objectid 333 "450 Folsom [Transbay Block 8]" → "The Avery").
       const nameOverridePairs = Object.entries(NAME_OVERRIDES).flat();
@@ -713,8 +725,9 @@ export default function FogMap({
         source: "buildings",
         layout: { visibility: "none" },
         filter: ["all",
-          ["in", ["get", "occupancy"], ["literal", ["Mixed Uses (With Residential)", "Mixed Uses (Without Residential)"]]],
-          ["!", ["in", ["get", "objectid"], ["literal", RENTAL_IDS]]], // rentals stay solid orange
+          ["==", ["get", "occupancy"], "Mixed Uses (With Residential)"], // residential-mixed only
+          ["!", ["in", ["get", "objectid"], ["literal", RENTAL_IDS]]],    // rentals stay solid orange
+          ["!", ["in", ["get", "objectid"], ["literal", FORCE_COM_IDS]]], // mistagged offices stay cream
         ],
         paint: { "fill-pattern": "mixed-use-split", "fill-opacity": 0.95 },
       });

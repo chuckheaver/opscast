@@ -28,6 +28,7 @@
 export const NAME_OVERRIDES = {
   "333": "The Avery", // 450 Folsom [Transbay Block 8]
   "239": "Four Seasons Hotel & Residences", // 757 Market — hotel below, residences above
+  "490": "Mira", // 160 Folsom — the city calls it "Folsom Bay Tower"; it's Mira (Transbay Block 1)
 };
 
 export const RENTAL_OBJECTIDS = new Set([
@@ -57,6 +58,20 @@ export const RENTAL_OBJECTIDS = new Set([
 // "(Rental/Condo)". A pure rental gets "(Rental)"; a pure condo gets no label.
 export const RENTAL_AND_CONDO_OBJECTIDS = new Set([
   "333", // The Avery — 118 for-sale condos above market-rate + affordable rentals
+]);
+
+// Office / commercial towers the city's data tagged "Residential" or "Mixed
+// (With Residential)" but that have no homes. Force them into the Commercial
+// map group (cream) so they don't sit in the Residential/Mixed group looking
+// like they should have a homebuyer profile. (These are also EXCLUDED below.)
+export const FORCE_COMMERCIAL_OBJECTIDS = new Set([
+  "622", // 235 Pine — office
+  "399", // 345 California — office
+  "593", // One Maritime Plaza (300 Clay) — office
+  "17",  // 601 Montgomery — office
+  "551", // 121 Spear — office
+  "365", // 50 First (Oceanwide Center I) — stalled, no homes
+  "430", // 526 Mission (Oceanwide Center II) — stalled, no homes
 ]);
 
 // Buildings dropped from the residential homebuyer index. Two reasons:
@@ -955,10 +970,19 @@ export const WEBSITES = {
   "x-631-folsom": "https://bluhoa.org/",
 };
 
+// Duplicate inventory footprints whose authored profile lives on an off-
+// inventory EXTRA entry — clicking the map footprint resolves to that profile.
+const DUP_ALIAS = {
+  "490": "x-280-spear",  // Folsom Bay Tower footprint = Mira
+  "81": "x-201-folsom",  // LUMINA I footprint = Lumina
+  "611": "x-201-folsom", // LUMINA II footprint = Lumina
+};
+
 // Look up the authored supplement for a building (inventory or off-inventory),
-// or null if none yet. Merges in the verified property website.
+// or null if none yet. Resolves duplicate footprints to their canonical
+// profile and merges in the verified property website.
 export function getBuilding(objectid) {
-  const id = String(objectid);
+  const id = DUP_ALIAS[String(objectid)] || String(objectid);
   const base = BUILDINGS[id] || MORE_BUILDINGS[id] || EXTRA_BY_ID[id] || null;
   if (!base) return null;
   const website = base.website || WEBSITES[id] || null;
