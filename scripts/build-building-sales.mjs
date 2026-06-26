@@ -17,7 +17,10 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { normalizeStreetAddress } from "../app/lib/buildingMatch.js";
-import { RENTAL_OBJECTIDS, EXCLUDED_OBJECTIDS, EXTRA_BUILDINGS } from "../app/fog/lib/buildings.js";
+import { RENTAL_OBJECTIDS, EXCLUDED_OBJECTIDS, EXTRA_BUILDINGS, NAME_OVERRIDES } from "../app/fog/lib/buildings.js";
+
+// Preferred display name for an inventory feature (name override → city name → address).
+const nameOf = p => NAME_OVERRIDES[String(p.objectid)] || p.name || p.address;
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(ROOT, "public", "data");
@@ -66,7 +69,7 @@ for (const f of buildings.features) {
   // listing in ANY of the 180 towers can link back to the building record.
   listingBuildings[key] = {
     objectid: p.objectid,
-    name: p.name || p.address,
+    name: nameOf(p),
     lng: center?.[0] ?? null,
     lat: center?.[1] ?? null,
   };
@@ -92,7 +95,7 @@ for (const f of buildings.features) {
     }));
 
   buildingSales[p.objectid] = {
-    name: p.name || p.address,
+    name: nameOf(p),
     address: p.address,
     centroid: center,
     total: hits.length,
@@ -193,7 +196,7 @@ for (const f of buildings.features) {
 
   buildingProfiles[p.objectid] = {
     objectid: p.objectid,
-    name: p.name || p.address,
+    name: nameOf(p),
     address: p.address,
     occupancy: p.occupancy,
     rental: RENTAL_OBJECTIDS.has(String(p.objectid)),

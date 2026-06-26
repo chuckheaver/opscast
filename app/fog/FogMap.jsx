@@ -16,6 +16,7 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { NAME_OVERRIDES } from "./lib/buildings";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
@@ -666,9 +667,15 @@ export default function FogMap({
       const COM_OCC = ["Office (Management, Information, Professional Services)", "Hotels, Visitor Services", "Medical", "Cultural, Institutional, Educational"];
       const resFilter = ["in", ["get", "occupancy"], ["literal", RES_OCC]];
       const comFilter = ["in", ["get", "occupancy"], ["literal", COM_OCC]];
+      // Footprint label = the building name, with display-name overrides applied
+      // (e.g. objectid 333 "450 Folsom [Transbay Block 8]" → "The Avery").
+      const nameOverridePairs = Object.entries(NAME_OVERRIDES).flat();
+      const bldgNameExpr = nameOverridePairs.length
+        ? ["match", ["get", "objectid"], ...nameOverridePairs, ["get", "name"]]
+        : ["get", "name"];
       const bldgLabelLayout = {
         visibility: "none",
-        "text-field": ["get", "name"],
+        "text-field": bldgNameExpr,
         "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
         "text-size": ["interpolate", ["linear"], ["zoom"], 14.5, 10, 16, 12.5],
         "text-max-width": 9,
@@ -836,7 +843,7 @@ export default function FogMap({
       const onBldgClick = e => {
         if (!e.features?.length) return;
         const p = e.features[0].properties;
-        const name = !blank(p.name) ? p.name : "Tall building";
+        const name = NAME_OVERRIDES[String(p.objectid)] || (!blank(p.name) ? p.name : "Tall building");
         const addr = !blank(p.address) ? `<div style="color:#6b7280;margin-bottom:6px">${esc(p.address)}</div>` : "";
         const rows = BLDG_FIELDS
           .filter(([k]) => !blank(p[k]))

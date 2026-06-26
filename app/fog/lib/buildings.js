@@ -21,6 +21,14 @@
 // RENTAL apartment towers — you can't buy a unit, so the index labels them
 // "Rental" and the profile hides the buy-side stats. Objectids from the
 // inventory; refine this list as needed.
+// Display-name overrides for inventory buildings the city labels by address
+// (e.g. "450 Folsom [Transbay Block 8]") but that are known by a building name.
+// Keyed by objectid → preferred name; applied to the index, the profile modal,
+// and the map footprint label.
+export const NAME_OVERRIDES = {
+  "333": "The Avery", // 450 Folsom [Transbay Block 8]
+};
+
 export const RENTAL_OBJECTIDS = new Set([
   "196", // NEMA North Tower — 1411 Market
   "55",  // Ava 55 Ninth — 55 9th St
