@@ -27,6 +27,7 @@
 // and the map footprint label.
 export const NAME_OVERRIDES = {
   "333": "The Avery", // 450 Folsom [Transbay Block 8]
+  "239": "Four Seasons Hotel & Residences", // 757 Market — hotel below, residences above
 };
 
 export const RENTAL_OBJECTIDS = new Set([
@@ -60,6 +61,7 @@ export const EXCLUDED_OBJECTIDS = new Set([
   "490", // 160 Folsom (Folsom Bay Tower) = Mira — duplicate of EXTRA x-280-spear
   "81",  // 301 Beale (LUMINA I) — duplicate of EXTRA x-201-folsom
   "611", // 338 Main (LUMINA II) — duplicate of EXTRA x-201-folsom
+  "239", // 757 Market (Four Seasons) — residences covered by EXTRA x-765-market
 ]);
 
 const BUILDINGS = {
@@ -571,6 +573,16 @@ export const EXTRA_BUILDINGS = [
 // Keyed by objectid. Published red flags are well-sourced; uncertain items
 // were held back for review.
 const MORE_BUILDINGS = {
+  // Four Seasons at 757 Market — one mixed-use tower (hotel below, residences
+  // above). Excluded from the index (the residences are the EXTRA x-765-market
+  // entry), but its map footprint pop-up shows this story.
+  "239": {
+    units: 142,
+    narrative:
+      "The Four Seasons at 757 Market is one tower with two lives — the Four Seasons Hotel on the lower floors and 142 Private Residences (luxury condominiums) on the floors above. Residents live over a five-star hotel with full Four Seasons service — doorman, concierge, valet, housekeeping and in-residence dining on call — plus membership to the 100,000-sq-ft Equinox Sports Club in the building, in the heart of Yerba Buena at Market and Third. (See \"Four Seasons Private Residences\" in the building list for unit sales and details.)",
+    amenities: ["Four Seasons 24-hour doorman & concierge", "Valet parking", "In-residence dining & housekeeping", "Equinox Sports Club (100k sq ft) in-building", "Hotel spa & service access"],
+    thingsToKnow: [],
+  },
   "105": {
     units: 102,
     narrative:
@@ -894,9 +906,47 @@ const MORE_BUILDINGS = {
 
 const EXTRA_BY_ID = Object.fromEntries(EXTRA_BUILDINGS.map(b => [b.id, b]));
 
+// Official "property website" per building (objectid → URL), researched and
+// verified to resolve to a real building/developer/operator page (not a listing
+// aggregator). Merged into getBuilding() and rendered as a link in the pop-up +
+// modal. Buildings with no verified site simply show no link.
+export const WEBSITES = {
+  "16": "https://www.rentjasper.com/",
+  "55": "https://www.avaloncommunities.com/california/san-francisco-apartments/ava-55-ninth/",
+  "196": "https://www.rentnema.com/",
+  "211": "https://www.udr.com/san-francisco-bay-area-apartments/san-francisco/388-beale/",
+  "220": "https://1188missionapts.com/",
+  "239": "https://www.fourseasons.com/residences/private_residences/sanfrancisco/",
+  "261": "https://181fremont.com/",
+  "274": "https://infinitysf.org/",
+  "293": "https://www.sperasf.com/",
+  "341": "https://sequoialiving.org/san-francisco/",
+  "350": "https://www.relatedrentals.com/apartment-rentals/san-francisco/mission/fifteen-fifty",
+  "358": "https://solairesf.com/",
+  "425": "https://706sf.com/",
+  "443": "https://1190missionapts.com/",
+  "451": "https://millenniumtower-sf.com/",
+  "452": "https://infinitysf.org/",
+  "468": "https://www.relatedrentals.com/apartment-rentals/san-francisco/soma/the-paramount",
+  "507": "https://sfwatermark.com/",
+  "588": "https://www.udr.com/san-francisco-bay-area-apartments/san-francisco/399-fremont/",
+  "617": "https://www.essexapartmenthomes.com/apartments/san-francisco/fox-plaza",
+  "618": "https://www.essexapartmenthomes.com/apartments/san-francisco/500-folsom",
+  "624": "https://www.equityapartments.com/san-francisco/rincon-hill/340-fremont-apartments",
+  "626": "https://hillsplazasf.com/",
+  "x-765-market": "https://www.fourseasons.com/residences/private_residences/sanfrancisco/",
+  "x-280-spear": "https://mirasf.com/",
+  "x-250-king": "https://www.beaconsf.com/",
+  "x-219-brannan": "https://www.thebrannan.com/",
+  "x-631-folsom": "https://bluhoa.org/",
+};
+
 // Look up the authored supplement for a building (inventory or off-inventory),
-// or null if none yet.
+// or null if none yet. Merges in the verified property website.
 export function getBuilding(objectid) {
   const id = String(objectid);
-  return BUILDINGS[id] || MORE_BUILDINGS[id] || EXTRA_BY_ID[id] || null;
+  const base = BUILDINGS[id] || MORE_BUILDINGS[id] || EXTRA_BY_ID[id] || null;
+  if (!base) return null;
+  const website = base.website || WEBSITES[id] || null;
+  return website ? { ...base, website } : base;
 }
