@@ -17,10 +17,15 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { normalizeStreetAddress } from "../app/lib/buildingMatch.js";
-import { RENTAL_OBJECTIDS, EXCLUDED_OBJECTIDS, EXTRA_BUILDINGS, NAME_OVERRIDES } from "../app/fog/lib/buildings.js";
+import { RENTAL_OBJECTIDS, RENTAL_AND_CONDO_OBJECTIDS, EXCLUDED_OBJECTIDS, EXTRA_BUILDINGS, NAME_OVERRIDES } from "../app/fog/lib/buildings.js";
 
 // Preferred display name for an inventory feature (name override → city name → address).
 const nameOf = p => NAME_OVERRIDES[String(p.objectid)] || p.name || p.address;
+
+// Tenure label: "rental" (pure rental, buy-side stats hidden), "both" (condo +
+// rental — keeps stats, labeled "(Rental/Condo)"), or "condo".
+const tenureOf = id => RENTAL_AND_CONDO_OBJECTIDS.has(String(id)) ? "both"
+  : RENTAL_OBJECTIDS.has(String(id)) ? "rental" : "condo";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(ROOT, "public", "data");
@@ -200,6 +205,7 @@ for (const f of buildings.features) {
     address: p.address,
     occupancy: p.occupancy,
     rental: RENTAL_OBJECTIDS.has(String(p.objectid)),
+    tenure: tenureOf(p.objectid),
     centroid: centroid(f.geometry),
     struct,
     market: computeMarket(hits),
@@ -226,6 +232,7 @@ for (const b of EXTRA_BUILDINGS) {
     address: b.address,
     occupancy: b.occupancy || "Residential",
     rental: false,
+    tenure: tenureOf(b.id),
     centroid: [b.lng, b.lat],
     struct: b.struct || {},
     market: computeMarket(hits),

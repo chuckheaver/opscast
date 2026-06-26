@@ -45,6 +45,14 @@ export const RENTAL_OBJECTIDS = new Set([
   // 454 (Nob Hill Community Apartments — actually condos), 490 (excluded duplicate).
 ]);
 
+// Buildings that are BOTH for-sale condos AND rental apartments (e.g. The Avery
+// — condos on the upper floors, rentals below). These keep their buy-side
+// market stats (they're not in RENTAL_OBJECTIDS) but the index labels them
+// "(Rental/Condo)". A pure rental gets "(Rental)"; a pure condo gets no label.
+export const RENTAL_AND_CONDO_OBJECTIDS = new Set([
+  "333", // The Avery — 118 for-sale condos above market-rate + affordable rentals
+]);
+
 // Buildings dropped from the residential homebuyer index. Two reasons:
 //   • office — the city's "mixed-residential" tag swept in pure office towers
 //     with no homes (still drawn on the map, just not a homebuyer profile).
