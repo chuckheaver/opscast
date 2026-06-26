@@ -194,6 +194,12 @@ export default function BuildingModal({ profile, authored, onClose }) {
           </section>
         )}
 
+        {authored?.website && (
+          <section style={SEC}>
+            <a style={LINK} href={authored.website} target="_blank" rel="noopener noreferrer">🌐 Building website ↗</a>
+          </section>
+        )}
+
         {/* Structural record from the city Tall Building Inventory. */}
         {Object.keys(s).length > 0 && (
           <section style={SEC}>
