@@ -16,7 +16,7 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { NAME_OVERRIDES } from "./lib/buildings";
+import { NAME_OVERRIDES, getBuilding } from "./lib/buildings";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
@@ -837,6 +837,36 @@ export default function FogMap({
           + link
           + `</div>`;
       };
+      // Authored homebuyer layer (narrative / amenities / things-to-know /
+      // website) for buildings that have a profile — rendered in the pop-up so a
+      // map click shows the same story as the index card.
+      const whyLiveHtml = a => {
+        if (!a?.narrative) return "";
+        const am = a.amenities?.length
+          ? `<div style="margin-top:6px"><strong style="font-size:12px">Amenities</strong>`
+            + `<div style="color:#374151;margin-top:2px">${a.amenities.map(x => `• ${esc(x)}`).join("<br>")}</div></div>`
+          : "";
+        return `<div style="margin:6px 0 8px;padding:8px;background:#FEF9EC;border-radius:6px">`
+          + `<strong style="font-size:12.5px;color:#92400e">✨ Why live here</strong>`
+          + `<div style="color:#412402;margin-top:3px">${esc(a.narrative)}</div>`
+          + am
+          + `</div>`;
+      };
+      const knowHtml = a => {
+        if (!a?.thingsToKnow?.length) return "";
+        const items = a.thingsToKnow.map(t =>
+          `<div style="background:#FCEBEB;border:1px solid #F7C1C1;border-radius:6px;padding:6px 8px;margin-top:4px">`
+          + `${esc(t.text)}`
+          + (t.source ? ` <span style="color:#6b7280">— ${esc(t.source)}${t.date ? `, ${esc(t.date)}` : ""}</span>` : "")
+          + `</div>`).join("");
+        return `<div style="margin-top:8px;padding-top:8px;border-top:1px solid #e5e7eb">`
+          + `<strong style="font-size:12.5px">⚠️ Good to know</strong>${items}</div>`;
+      };
+      const websiteHtml = a => {
+        if (!a?.website) return "";
+        return `<div style="margin-top:8px;padding-top:8px;border-top:1px solid #e5e7eb">`
+          + `<a href="${esc(a.website)}" target="_blank" rel="noopener noreferrer">🌐 Building website ↗</a></div>`;
+      };
       let bldgPopup = null;
       const onBldgEnter = () => { map.getCanvas().style.cursor = "pointer"; };
       const onBldgLeave = () => { map.getCanvas().style.cursor = ""; };
@@ -845,6 +875,7 @@ export default function FogMap({
         const p = e.features[0].properties;
         const name = NAME_OVERRIDES[String(p.objectid)] || (!blank(p.name) ? p.name : "Tall building");
         const addr = !blank(p.address) ? `<div style="color:#6b7280;margin-bottom:6px">${esc(p.address)}</div>` : "";
+        const a = getBuilding(p.objectid);
         const rows = BLDG_FIELDS
           .filter(([k]) => !blank(p[k]))
           .map(([k, label, unit]) => {
@@ -852,11 +883,14 @@ export default function FogMap({
             return `<div class="bldg-row"><span style="color:#6b7280">${label}:</span> ${val}</div>`;
           })
           .join("");
-        const html = `<div class="bldg-popup" style="font-size:12.5px;line-height:1.5;max-height:340px;overflow-y:auto">`
+        const html = `<div class="bldg-popup" style="font-size:12.5px;line-height:1.5;max-height:360px;overflow-y:auto">`
           + `<strong style="font-size:13.5px">${esc(name)}</strong>`
           + addr
+          + whyLiveHtml(a)
           + rows
+          + knowHtml(a)
           + marketHtml(p.objectid)
+          + websiteHtml(a)
           + `</div>`;
         if (bldgPopup) bldgPopup.remove();
         bldgPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "300px" })
