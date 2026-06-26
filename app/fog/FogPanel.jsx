@@ -215,7 +215,9 @@ export default function FogPanel({
                   className={"fog-nbhd-link" + (b.objectid === openBuilding ? " on" : "")}
                   onClick={() => onOpenBuilding(b.objectid)}
                 >
-                  {b.name}{b.rental && <span className="fog-bldg-rental"> · rental</span>}
+                  {b.name}
+                  {b.tenure === "rental" && <span className="fog-bldg-rental"> (Rental)</span>}
+                  {b.tenure === "both" && <span className="fog-bldg-rental"> (Rental/Condo)</span>}
                 </button>
               ))}
             </div>
