@@ -314,16 +314,15 @@ export default function FogPanel({
         <LayerLegend
           title="Residential / Mixed"
           items={[
-            ["#87CEFA", "Residential"],
-            ["#87CEFA/#FBF1C7", "Mixed use", "split"],
+            ["#5B9BD5", "Residential (condo)"],
+            ["#F59E0B", "Rental"],
+            ["#5B9BD5/#F5C518", "Mixed use", "split"],
           ]}
         />
         <LayerLegend
           title="Commercial / Office / Hotel / Hospital"
           items={[
-            ["#FBF1C7", "Office / cultural"],
-            ["#BBF7D0", "Hotel"],
-            ["#FECACA", "Medical / hospital"],
+            ["#E6CE78", "Commercial"],
           ]}
         />
         <LayerLegend

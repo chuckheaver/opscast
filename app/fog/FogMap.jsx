@@ -16,7 +16,7 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { NAME_OVERRIDES, getBuilding } from "./lib/buildings";
+import { NAME_OVERRIDES, getBuilding, RENTAL_OBJECTIDS } from "./lib/buildings";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
@@ -621,15 +621,17 @@ export default function FogMap({
       // The mixed-use split can't be expressed as a flat fill-color, so we
       // generate a 16×16 diagonal two-tone tile once and paint it with
       // fill-pattern on a second layer filtered to just the mixed-use rows.
-      const BLDG_BLUE = "#87CEFA"; // light sky blue
-      const BLDG_CREAM = "#FBF1C7"; // light cream
+      const BLDG_BLUE = "#5B9BD5";   // residential (condo) — medium blue
+      const BLDG_CREAM = "#E6CE78";  // commercial — darker cream / tan
+      const BLDG_ORANGE = "#F59E0B"; // rentals — orange
+      const BLDG_YELLOW = "#F5C518"; // mixed-use pattern — yellow (paired with blue)
       const tile = 16;
       const cnv = document.createElement("canvas");
       cnv.width = tile;
       cnv.height = tile;
       const ctx = cnv.getContext("2d");
-      // Lower-left triangle cream, upper-right triangle blue (anti-diagonal).
-      ctx.fillStyle = BLDG_CREAM;
+      // Mixed-use tile: lower-left triangle yellow, upper-right triangle blue.
+      ctx.fillStyle = BLDG_YELLOW;
       ctx.fillRect(0, 0, tile, tile);
       ctx.fillStyle = BLDG_BLUE;
       ctx.beginPath();
@@ -647,21 +649,25 @@ export default function FogMap({
         data: "/data/sf-tall-buildings.geojson",
       });
       // The layer is split into two independently-toggleable occupancy groups:
-      //   • Residential / Mixed   (blue + the mixed-use blue/cream pattern)
-      //   • Commercial            (office/cultural cream, hotel green, medical red)
+      //   • Residential / Mixed   (condo blue, rental orange, mixed blue/yellow)
+      //   • Commercial            (office/hotel/medical/cultural all cream)
       // Both groups share one fill-colour expression; a per-group filter decides
-      // which footprints each draws.
+      // which footprints each draws. Rentals (a tenure, not in the geojson) are
+      // matched by objectid, so they shade orange regardless of occupancy.
+      const RENTAL_IDS = [...RENTAL_OBJECTIDS];
       const BLDG_FILL_COLOR = [
-        "match",
-        ["get", "occupancy"],
-        "Residential", BLDG_BLUE,
-        // Cultural/institutional/educational rides along with Office (cream).
-        ["Office (Management, Information, Professional Services)", "Cultural, Institutional, Educational"], BLDG_CREAM,
-        "Hotels, Visitor Services", "#BBF7D0", // light green
-        "Medical", "#FECACA", // light red
-        "Mixed Uses (With Residential)", BLDG_BLUE,
-        "Mixed Uses (Without Residential)", BLDG_BLUE,
-        /* anything else */ "#d6d3d1",
+        "case",
+        ["in", ["get", "objectid"], ["literal", RENTAL_IDS]], BLDG_ORANGE,
+        [
+          "match",
+          ["get", "occupancy"],
+          "Residential", BLDG_BLUE,
+          "Mixed Uses (With Residential)", BLDG_BLUE,
+          "Mixed Uses (Without Residential)", BLDG_BLUE,
+          // All commercial (office, cultural, hotel, medical) → cream.
+          ["Office (Management, Information, Professional Services)", "Cultural, Institutional, Educational", "Hotels, Visitor Services", "Medical"], BLDG_CREAM,
+          /* anything else */ "#c9c6bd",
+        ],
       ];
       const RES_OCC = ["Residential", "Mixed Uses (With Residential)", "Mixed Uses (Without Residential)"];
       const COM_OCC = ["Office (Management, Information, Professional Services)", "Hotels, Visitor Services", "Medical", "Cultural, Institutional, Educational"];
@@ -697,7 +703,7 @@ export default function FogMap({
         source: "buildings",
         filter: resFilter,
         layout: { visibility: "none" },
-        paint: { "fill-color": BLDG_FILL_COLOR, "fill-opacity": 0.78 },
+        paint: { "fill-color": BLDG_FILL_COLOR, "fill-opacity": 0.9 },
       });
       // Mixed-use overlay: the diagonal blue/cream tile, only on mixed rows (a
       // subset of the residential group).
@@ -706,8 +712,11 @@ export default function FogMap({
         type: "fill",
         source: "buildings",
         layout: { visibility: "none" },
-        filter: ["in", ["get", "occupancy"], ["literal", ["Mixed Uses (With Residential)", "Mixed Uses (Without Residential)"]]],
-        paint: { "fill-pattern": "mixed-use-split", "fill-opacity": 0.9 },
+        filter: ["all",
+          ["in", ["get", "occupancy"], ["literal", ["Mixed Uses (With Residential)", "Mixed Uses (Without Residential)"]]],
+          ["!", ["in", ["get", "objectid"], ["literal", RENTAL_IDS]]], // rentals stay solid orange
+        ],
+        paint: { "fill-pattern": "mixed-use-split", "fill-opacity": 0.95 },
       });
       map.addLayer({
         id: "buildings-res-outline",
@@ -736,7 +745,7 @@ export default function FogMap({
         source: "buildings",
         filter: comFilter,
         layout: { visibility: "none" },
-        paint: { "fill-color": BLDG_FILL_COLOR, "fill-opacity": 0.78 },
+        paint: { "fill-color": BLDG_FILL_COLOR, "fill-opacity": 0.9 },
       });
       map.addLayer({
         id: "buildings-com-outline",
