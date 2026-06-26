@@ -61,7 +61,8 @@ export default function FogMap({
   showZoning,
   showRealtor,
   showCBD,
-  showBuildings,
+  showResBuildings,
+  showComBuildings,
   buildingSales,
   showNeighborhoods,
   picked,
@@ -78,13 +79,13 @@ export default function FogMap({
   useEffect(() => {
     showContoursRef.current = showContours;
   }, [showContours]);
-  // Mirrors `showBuildings` so the always-bound neighborhood click handler
-  // can check the latest toggle state and step aside when the Tall Buildings
-  // layer is on (so a building click shows only its own pop-up).
-  const showBuildingsRef = useRef(showBuildings);
+  // Mirrors whether EITHER buildings layer is on, so the always-bound
+  // neighborhood click handler can step aside when a building is clicked
+  // (showing only the building pop-up).
+  const showBuildingsRef = useRef(showResBuildings || showComBuildings);
   useEffect(() => {
-    showBuildingsRef.current = showBuildings;
-  }, [showBuildings]);
+    showBuildingsRef.current = showResBuildings || showComBuildings;
+  }, [showResBuildings, showComBuildings]);
   // Latest building→sales lookup, reachable from the once-bound click handler.
   const buildingSalesRef = useRef(buildingSales);
   useEffect(() => {
@@ -644,86 +645,108 @@ export default function FogMap({
         type: "geojson",
         data: "/data/sf-tall-buildings.geojson",
       });
-      // Base fill: solid colour by occupancy. Mixed-use rows get a blue base
-      // here that the pattern layer below paints over, so partial-pattern
-      // edges still read as "mixed" rather than bare.
+      // The layer is split into two independently-toggleable occupancy groups:
+      //   • Residential / Mixed   (blue + the mixed-use blue/cream pattern)
+      //   • Commercial            (office/cultural cream, hotel green, medical red)
+      // Both groups share one fill-colour expression; a per-group filter decides
+      // which footprints each draws.
+      const BLDG_FILL_COLOR = [
+        "match",
+        ["get", "occupancy"],
+        "Residential", BLDG_BLUE,
+        // Cultural/institutional/educational rides along with Office (cream).
+        ["Office (Management, Information, Professional Services)", "Cultural, Institutional, Educational"], BLDG_CREAM,
+        "Hotels, Visitor Services", "#BBF7D0", // light green
+        "Medical", "#FECACA", // light red
+        "Mixed Uses (With Residential)", BLDG_BLUE,
+        "Mixed Uses (Without Residential)", BLDG_BLUE,
+        /* anything else */ "#d6d3d1",
+      ];
+      const RES_OCC = ["Residential", "Mixed Uses (With Residential)", "Mixed Uses (Without Residential)"];
+      const COM_OCC = ["Office (Management, Information, Professional Services)", "Hotels, Visitor Services", "Medical", "Cultural, Institutional, Educational"];
+      const resFilter = ["in", ["get", "occupancy"], ["literal", RES_OCC]];
+      const comFilter = ["in", ["get", "occupancy"], ["literal", COM_OCC]];
+      const bldgLabelLayout = {
+        visibility: "none",
+        "text-field": ["get", "name"],
+        "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+        "text-size": ["interpolate", ["linear"], ["zoom"], 14.5, 10, 16, 12.5],
+        "text-max-width": 9,
+        "text-padding": 6,
+        "text-allow-overlap": false,
+        "text-optional": true,
+      };
+      const bldgLabelPaint = {
+        "text-color": "#1c1917",
+        "text-halo-color": "#ffffff",
+        "text-halo-width": 1.6,
+        "text-halo-blur": 0.4,
+      };
+
+      // ── Residential / Mixed group ──
       map.addLayer({
-        id: "buildings-fill",
+        id: "buildings-res-fill",
         type: "fill",
         source: "buildings",
+        filter: resFilter,
         layout: { visibility: "none" },
-        paint: {
-          "fill-color": [
-            "match",
-            ["get", "occupancy"],
-            "Residential", BLDG_BLUE,
-            // Cultural/institutional/educational rides along with Office (cream).
-            ["Office (Management, Information, Professional Services)", "Cultural, Institutional, Educational"], BLDG_CREAM,
-            "Hotels, Visitor Services", "#BBF7D0", // light green
-            "Medical", "#FECACA", // light red
-            "Mixed Uses (With Residential)", BLDG_BLUE,
-            "Mixed Uses (Without Residential)", BLDG_BLUE,
-            /* anything else */ "#d6d3d1",
-          ],
-          "fill-opacity": 0.78,
-        },
+        paint: { "fill-color": BLDG_FILL_COLOR, "fill-opacity": 0.78 },
       });
-      // Mixed-use overlay: the diagonal blue/cream tile, only on mixed rows.
+      // Mixed-use overlay: the diagonal blue/cream tile, only on mixed rows (a
+      // subset of the residential group).
       map.addLayer({
         id: "buildings-mixed",
         type: "fill",
         source: "buildings",
         layout: { visibility: "none" },
-        filter: [
-          "in",
-          ["get", "occupancy"],
-          ["literal", ["Mixed Uses (With Residential)", "Mixed Uses (Without Residential)"]],
-        ],
-        paint: {
-          "fill-pattern": "mixed-use-split",
-          "fill-opacity": 0.9,
-        },
+        filter: ["in", ["get", "occupancy"], ["literal", ["Mixed Uses (With Residential)", "Mixed Uses (Without Residential)"]]],
+        paint: { "fill-pattern": "mixed-use-split", "fill-opacity": 0.9 },
       });
       map.addLayer({
-        id: "buildings-outline",
+        id: "buildings-res-outline",
         type: "line",
         source: "buildings",
+        filter: resFilter,
         layout: { visibility: "none", "line-join": "round" },
-        paint: {
-          "line-color": "#57534e",
-          "line-width": 0.8,
-          "line-opacity": 0.9,
-        },
+        paint: { "line-color": "#57534e", "line-width": 0.8, "line-opacity": 0.9 },
       });
-      // Building name labels — placed at each footprint's centroid but only
-      // from zoom 14.5 up (minzoom), so the city-wide view stays clean and the
-      // names fade in as you zoom into a block. Part of the buildings layer
-      // group, so the "Tall Buildings" toggle controls them too.
+      // Building name labels fade in from zoom 14.5 so the city-wide view stays
+      // clean; one labels layer per group so each toggle controls its own.
       map.addLayer({
-        id: "buildings-labels",
+        id: "buildings-res-labels",
         type: "symbol",
         source: "buildings",
+        filter: resFilter,
         minzoom: 14.5,
-        layout: {
-          visibility: "none",
-          "text-field": ["get", "name"],
-          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-          "text-size": [
-            "interpolate", ["linear"], ["zoom"],
-            14.5, 10,
-            16, 12.5,
-          ],
-          "text-max-width": 9,
-          "text-padding": 6,
-          "text-allow-overlap": false,
-          "text-optional": true,
-        },
-        paint: {
-          "text-color": "#1c1917",
-          "text-halo-color": "#ffffff",
-          "text-halo-width": 1.6,
-          "text-halo-blur": 0.4,
-        },
+        layout: bldgLabelLayout,
+        paint: bldgLabelPaint,
+      });
+
+      // ── Commercial / Office / Hotel / Hospital group ──
+      map.addLayer({
+        id: "buildings-com-fill",
+        type: "fill",
+        source: "buildings",
+        filter: comFilter,
+        layout: { visibility: "none" },
+        paint: { "fill-color": BLDG_FILL_COLOR, "fill-opacity": 0.78 },
+      });
+      map.addLayer({
+        id: "buildings-com-outline",
+        type: "line",
+        source: "buildings",
+        filter: comFilter,
+        layout: { visibility: "none", "line-join": "round" },
+        paint: { "line-color": "#57534e", "line-width": 0.8, "line-opacity": 0.9 },
+      });
+      map.addLayer({
+        id: "buildings-com-labels",
+        type: "symbol",
+        source: "buildings",
+        filter: comFilter,
+        minzoom: 14.5,
+        layout: bldgLabelLayout,
+        paint: bldgLabelPaint,
       });
 
       // Click a footprint → pop-up with the building's full record. We list
@@ -808,9 +831,9 @@ export default function FogMap({
           + `</div>`;
       };
       let bldgPopup = null;
-      map.on("mouseenter", "buildings-fill", () => { map.getCanvas().style.cursor = "pointer"; });
-      map.on("mouseleave", "buildings-fill", () => { map.getCanvas().style.cursor = ""; });
-      map.on("click", "buildings-fill", e => {
+      const onBldgEnter = () => { map.getCanvas().style.cursor = "pointer"; };
+      const onBldgLeave = () => { map.getCanvas().style.cursor = ""; };
+      const onBldgClick = e => {
         if (!e.features?.length) return;
         const p = e.features[0].properties;
         const name = !blank(p.name) ? p.name : "Tall building";
@@ -833,6 +856,11 @@ export default function FogMap({
           .setLngLat(e.lngLat)
           .setHTML(html)
           .addTo(map);
+      };
+      ["buildings-res-fill", "buildings-com-fill"].forEach(id => {
+        map.on("mouseenter", id, onBldgEnter);
+        map.on("mouseleave", id, onBldgLeave);
+        map.on("click", id, onBldgClick);
       });
 
       // Seismic hazard zones (CA Geological Survey, via DataSF). Toggleable
@@ -1288,9 +1316,9 @@ export default function FogMap({
         // When Tall Buildings is on, a click on a building footprint should
         // open only the building pop-up — suppress the neighborhood pick if
         // the click landed on a building.
-        if (showBuildingsRef.current && map.getLayer("buildings-fill")) {
-          const hits = map.queryRenderedFeatures(e.point, { layers: ["buildings-fill"] });
-          if (hits.length) return;
+        if (showBuildingsRef.current) {
+          const fillLayers = ["buildings-res-fill", "buildings-com-fill"].filter(id => map.getLayer(id));
+          if (fillLayers.length && map.queryRenderedFeatures(e.point, { layers: fillLayers }).length) return;
         }
         onPickRef.current(e.features[0], [e.lngLat.lng, e.lngLat.lat]);
       });
@@ -1498,19 +1526,34 @@ export default function FogMap({
     else map.once("load", apply);
   }, [showCBD]);
 
-  // Toggle the Tall Buildings overlay (fill + mixed-use pattern + outline).
+  // Toggle the Residential / Mixed buildings group (fill + mixed pattern +
+  // outline + labels).
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
-      const vis = showBuildings ? "visible" : "none";
-      ["buildings-fill", "buildings-mixed", "buildings-outline", "buildings-labels"].forEach(id => {
+      const vis = showResBuildings ? "visible" : "none";
+      ["buildings-res-fill", "buildings-mixed", "buildings-res-outline", "buildings-res-labels"].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
-  }, [showBuildings]);
+  }, [showResBuildings]);
+
+  // Toggle the Commercial / Office / Hotel / Hospital buildings group.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showComBuildings ? "visible" : "none";
+      ["buildings-com-fill", "buildings-com-outline", "buildings-com-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showComBuildings]);
 
   // Toggle the zoning overlay (color-coded fills + thin outline).
   useEffect(() => {
