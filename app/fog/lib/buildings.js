@@ -610,7 +610,7 @@ const MORE_BUILDINGS = {
     narrative:
       "Pacific Heights Towers at 2200 Sacramento is a 17-story condominium from 1964 with 127 homes on the corner of Sacramento and Laguna, directly across from Lafayette Park. Floor plans range from one to four bedrooms, many with floor-to-ceiling windows and views toward the Golden Gate. It's a full-service, doorman building in one of the city's most established residential neighborhoods, a short walk from the Upper Fillmore shopping corridor, with HOA dues that include earthquake insurance.",
     amenities: ["24-hour doorman", "Fitness center", "Penthouse club room with views", "Elevator service", "Earthquake insurance included in HOA", "Across from Lafayette Park"],
-    thingsToKnow: [],
+    thingsToKnow: [{ text: "The building has appeared on a preliminary, unofficial city inventory of older concrete buildings that may warrant seismic evaluation — a screening list, not a finding that the building is unsafe. Treat it as a prompt to review the building's seismic records and any voluntary retrofits with the HOA.", source: "SF non-ductile concrete building screening list (preliminary)", date: "2024" }],
   },
   "560": {
     units: 49,
@@ -666,7 +666,7 @@ const MORE_BUILDINGS = {
     narrative:
       "Despite its historic name, 1170 Sacramento is today a residential condominium atop Nob Hill, with roughly 71 homes across 19 stories (built 1963). Units are notably large — about 1,750 to over 5,000 sq ft — drawing buyers who want space, views, and a prestigious address. It's a full-service building with a landscaped drive-in entry, 24-hour door attendants, and on-site management; HOA dues are high but bundle most utilities and services.",
     amenities: ["24-hour door attendants", "On-site management", "Landscaped drive-in entry", "Guest / valet parking", "Elevator", "Most utilities included in HOA"],
-    thingsToKnow: [],
+    thingsToKnow: [{ text: "HOA dues here are among the highest in the city — reported roughly in the $3,200–$4,200/month range — reflecting full-service staffing and bundled utilities. Confirm current dues and exactly what they cover before budgeting.", source: "MLS / building listings", date: "2026" }],
   },
   "503": {
     units: 48,
@@ -806,7 +806,7 @@ const MORE_BUILDINGS = {
     narrative:
       "The One Rincon Hill North Tower at 401 Harrison (also marketed as The Harrison) is a 49-story for-sale condominium completed in 2014 — the second tower of the One Rincon Hill complex. Owners enjoy sweeping bay and city views from a hilltop perch above the Bay Bridge approach, with resort-style shared amenities and doorman/concierge service. The Rincon Hill location is highly walkable and close to the Embarcadero, Financial District, and transit.",
     amenities: ["Outdoor pool", "Fitness center", "Resident lounge", "24-hour doorman / concierge", "Valet / garage parking", "Sky terrace & views"],
-    thingsToKnow: [],
+    thingsToKnow: [{ text: "One Rincon Hill's construction-defect litigation centered on the South Tower; public records don't make clear whether the North Tower (this building) was included. Ask the HOA whether this tower had defect claims, repairs, or special assessments.", source: "Public reporting on One Rincon Hill litigation", date: "2026" }],
   },
   "482": {
     units: 45,
@@ -869,7 +869,10 @@ const MORE_BUILDINGS = {
     narrative:
       "Fox Plaza is a 29-story mixed-use tower at 1390 Market in the Civic Center / Mid-Market area, built in 1966 on the site of the old Fox Theatre. The lower floors are office and retail; the upper floors hold about 444 rental apartments (mostly studios, plus one- and two-bedrooms), operated by Essex after a multi-year renovation. On-site conveniences include ground-floor retail (a Starbucks, a post office, a credit union) and a resident fitness center.",
     amenities: ["Fitness center", "Building laundry", "On-site paid parking garage", "Pet-friendly (restrictions)", "Package receiving", "On-site retail (Starbucks, USPS)"],
-    thingsToKnow: [{ text: "Built in 1966 with pre-Northridge welded steel moment frames; the owner performed a voluntary seismic retrofit (fluid viscous dampers and connection upgrades) to reduce collapse risk — indicating the original structure didn't meet modern seismic standards.", source: "Taylor Devices (structural case study)", date: "2024" }],
+    thingsToKnow: [
+      { text: "Built in 1966 with pre-Northridge welded steel moment frames; the owner performed a voluntary seismic retrofit (fluid viscous dampers and connection upgrades) to reduce collapse risk — indicating the original structure didn't meet modern seismic standards.", source: "Taylor Devices (structural case study)", date: "2024" },
+      { text: "Tenant reviews recurringly cite building-management and maintenance issues — elevators out of service, pest complaints, package theft, and slow staff response. These are renter-reported, so weigh them against a personal tour.", source: "ApartmentRatings / Yelp tenant reviews", date: "2026" },
+    ],
   },
   "76": {
     units: null,
