@@ -41,6 +41,12 @@ export const RENTAL_OBJECTIDS = new Set([
   "31",  // BridgeView — 400 Beale
   "76",  // The Gateway (Macondray House) — 405 Davis Court (rent-controlled rental, not a co-op)
   "302", // The Gateway (Buckelew House) — 155 Jackson (rent-controlled rental)
+  "16",  // Jasper — 45 Lansing
+  "350", // Fifteen Fifty — 1500 Mission
+  "468", // The Paramount — 680 Mission
+  "588", // 399 Fremont
+  "618", // 500 Folsom
+  "624", // 340 Fremont
   // Removed on research: 386 (Cathedral Apartments — actually a co-op),
   // 454 (Nob Hill Community Apartments — actually condos), 490 (excluded duplicate).
 ]);
