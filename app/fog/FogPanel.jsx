@@ -1,75 +1,31 @@
 'use client';
 
-// Bottom panel under the map. Two stacked sections:
-//   1) A–Z index of authored neighborhoods (click a name → open its pop-up)
-//      alongside a slim "selected point" strip with the point-level facts
-//      that depend on the exact spot clicked (ZIP, elevation, seismic,
-//      tsunami). Neighborhood-level facts + the editorial story live in the
-//      pop-up (NeighborhoodModal).
-//   2) The layer toggles + map legends.
+// Modal host for the map. Renders the Neighborhood-highlights pop-up and the
+// Building profile pop-up — there is no longer a visible bottom panel; the
+// point-level facts (ZIP, elevation, seismic, tsunami) that used to live in a
+// bottom strip are now folded into the neighborhood summary modal. The
+// Neighborhoods / Buildings lists and layer toggles live in the on-map toolbar
+// (FogMapTools).
 
-import { useState, useRef, useEffect } from "react";
 import { findNeighborhoodForPoint, featureIntersectsAny } from "./lib/spatial";
 import { fogLabel } from "./lib/risk";
-import { getNeighborhood, listNeighborhoods } from "./lib/neighborhoods";
+import { getNeighborhood } from "./lib/neighborhoods";
 import { getBuilding } from "./lib/buildings";
 import NeighborhoodModal from "./NeighborhoodModal";
 import BuildingModal from "./BuildingModal";
 
-// Alphabetical index of authored neighborhoods — stable across renders.
-const NBHD_INDEX = listNeighborhoods();
-
-// Collapsed height for the panel's two boxes — roughly five ~20px rows, so the
-// layer toggles below stay visible without scrolling. Both the CSS cap
-// (.fog-collapsed max-height) and the overflow check use this value.
-const COLLAPSE_CAP = 112;
-
 export default function FogPanel({
   picked,
   openHood,
-  onOpenHood,
   onCloseHood,
-  onPickNeighborhood,
   zips,
   supervisorDistricts,
   realtorNeighborhoods,
   seismicHazards,
   tsunamiHazard,
-  showNeighborhoods, onToggleNeighborhoods,
-  showContours, onToggleContours,
-  contoursAvailable,
-  showMuni, onToggleMuni,
-  showBikes, onToggleBikes,
-  showDistricts, onToggleDistricts,
-  showZips, onToggleZips,
-  showTerrain, onToggleTerrain,
-  showElevation, onToggleElevation,
-  showSeismic, onToggleSeismic,
-  showTsunami, onToggleTsunami,
-  showRealtor, onToggleRealtor,
-  showCBD, onToggleCBD,
-  showResBuildings, onToggleResBuildings,
-  showComBuildings, onToggleComBuildings,
-  buildingProfiles, openBuilding, onOpenBuilding, onCloseBuilding,
+  buildingProfiles, openBuilding, onCloseBuilding,
 }) {
-  // Sorted residential-building index (the "Tall Buildings" list). Cheap to
-  // recompute; 57 items.
-  const buildingList = buildingProfiles
-    ? Object.values(buildingProfiles).sort((a, b) => a.name.localeCompare(b.name))
-    : [];
-  const [bldgOpen, setBldgOpen] = useState(false);
-
-  // Each box shows ~5 lines by default and expands on the header caret. The
-  // caret only appears when the content actually overflows the cap (measured
-  // below), so the short "selected point" strip won't get a dead arrow.
-  const [nbhdOpen, setNbhdOpen] = useState(false);
-  const [pointOpen, setPointOpen] = useState(false);
-  const pointBodyRef = useRef(null);
-  // The 105-name list always exceeds the 5-row cap, so its caret is always on.
-  // The point strip is short, so we only show its caret when it overflows.
-  const [pointOverflow, setPointOverflow] = useState(false);
-
-  // Compute the per-location lookups inline so we don't double-store them.
+  // Per-location lookups for the picked point.
   const point = picked?.point;
   const zipFeat = point && zips ? findNeighborhoodForPoint(zips, point) : null;
   const supFeat = point && supervisorDistricts
@@ -78,25 +34,18 @@ export default function FogPanel({
     ? findNeighborhoodForPoint(realtorNeighborhoods, point) : null;
 
   const neighborhoodName = picked?.feature?.properties?.name;
-  const hoodData = getNeighborhood(neighborhoodName);
   const zipCode = zipFeat?.properties?.zip;
   const elevationFt = picked?.elevation_ft;
   const realtorLabel = realtorFeat
     ? `${realtorFeat.properties.nbrhood} (${realtorFeat.properties.nid})`
     : null;
-  const supervisorLabel = supFeat
-    ? `District ${supFeat.properties.district}${supFeat.properties.supervisor ? ` — ${supFeat.properties.supervisor}` : ""}`
-    : null;
-  // Microclimate Zone derives from the USGS fog contour at the picked
-  // point — same source as the hours value below, just bucketed.
+  // Microclimate Zone derives from the USGS fog contour at the picked point.
   const fogHrs = picked?.contour?.properties?.hours;
   const microZoneLabel = Number.isFinite(fogHrs) ? fogLabel(fogHrs) : null;
 
-  // Hazard checks — Y/N only resolve once the location AND the hazard
-  // dataset have both arrived; until then show the "—" placeholder.
-  //   • Neighborhood pick (clicked a name): "Yes" if ANY part of the
-  //     neighborhood polygon overlaps the hazard zone.
-  //   • Exact point (map click / address): "Yes" if that point sits in one.
+  // Hazard checks — "Yes"/"No" once the location AND the hazard dataset have
+  // both arrived. A neighborhood pick tests polygon overlap; an exact point
+  // tests containment.
   const isNeighborhoodScope = picked?.scope === "neighborhood" && !!picked?.feature;
   const hazardYN = fc => {
     if (!fc) return null;
@@ -106,27 +55,13 @@ export default function FogPanel({
   const seismicYN = hazardYN(seismicHazards);
   const tsunamiYN = hazardYN(tsunamiHazard);
 
-  // The neighborhood whose pop-up is open. Point-derived facts (fog,
-  // supervisor, realtor district) only apply when the picked point is
-  // actually inside the open neighborhood.
+  // The neighborhood whose pop-up is open. Point-derived facts only apply when
+  // the picked point is actually inside the open neighborhood.
   const openData = openHood ? getNeighborhood(openHood) : null;
   const factsMatch = neighborhoodName === openHood;
 
-  // Decide whether each box's content exceeds the 5-line cap (so its caret is
-  // worth showing). scrollHeight is the full content height in either state.
-  // Re-measure when the selected point or its facts change, and on resize.
-  useEffect(() => {
-    const measure = () => {
-      const p = pointBodyRef.current;
-      setPointOverflow(p ? p.scrollHeight > COLLAPSE_CAP + 4 : false);
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [point, neighborhoodName, hoodData, elevationFt, zipCode, seismicYN, tsunamiYN]);
-
   return (
-    <div className="fog-panel">
+    <>
       {openHood && openData && (
         <NeighborhoodModal
           name={openHood}
@@ -135,6 +70,10 @@ export default function FogPanel({
           zoneLabel={factsMatch ? microZoneLabel : null}
           supervisorDistrict={factsMatch ? supFeat?.properties?.district : null}
           realtorDistrict={factsMatch ? realtorLabel : null}
+          zipCode={factsMatch ? zipCode : null}
+          elevationFt={factsMatch && Number.isFinite(elevationFt) ? elevationFt : null}
+          seismicYN={factsMatch ? seismicYN : null}
+          tsunamiYN={factsMatch ? tsunamiYN : null}
           loc={factsMatch ? picked : null}
           onClose={onCloseHood}
         />
@@ -146,304 +85,6 @@ export default function FogPanel({
           onClose={onCloseBuilding}
         />
       )}
-      <div className="fog-panel-row">
-        {/* A–Z index of every neighborhood we've written highlights for.
-            Click a name to drop a pin at its centre and open the pop-up. */}
-        <div className="fog-nbhd-index">
-          <div className="fog-keybox-h fog-collapse-h">
-            <span>Neighborhoods <span className="fog-nbhd-count">({NBHD_INDEX.length})</span></span>
-            <CollapseCaret open={nbhdOpen} onToggle={() => setNbhdOpen(o => !o)} label="neighborhood list" />
-          </div>
-          <div className={"fog-nbhd-list" + (nbhdOpen ? "" : " fog-collapsed")}>
-            {NBHD_INDEX.map(n => (
-              <button
-                key={n.key}
-                type="button"
-                className={"fog-nbhd-link" + (n.key === openHood ? " on" : "")}
-                onClick={() => onPickNeighborhood(n.key)}
-              >
-                {n.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Slim point-level strip: facts that depend on the exact spot. */}
-        <div className="fog-keybox fog-point-strip">
-          {point ? (
-            <>
-              <div className="fog-keybox-h fog-collapse-h">
-                <span>{picked?.address || neighborhoodName || "Selected point"}</span>
-                {pointOverflow && (
-                  <CollapseCaret open={pointOpen} onToggle={() => setPointOpen(o => !o)} label="point details" />
-                )}
-              </div>
-              <div className={"fog-point-body" + (pointOpen ? "" : " fog-collapsed")} ref={pointBodyRef}>
-                <KeyRow label="Zip Code" value={zipCode} />
-                <KeyRow label="Elevation" value={Number.isFinite(elevationFt) ? `${elevationFt} ft` : null} />
-                <ToggleKeyRow label="Seismic Zone" value={seismicYN} active={showSeismic} onToggle={() => onToggleSeismic(!showSeismic)} />
-                <ToggleKeyRow label="Tsunami Zone" value={tsunamiYN} active={showTsunami} onToggle={() => onToggleTsunami(!showTsunami)} />
-                {hoodData && (
-                  <button type="button" className="fog-hood-link fog-point-cta" onClick={() => onOpenHood(neighborhoodName)}>
-                    View {neighborhoodName} details ›
-                  </button>
-                )}
-              </div>
-            </>
-          ) : (
-            <div className="fog-point-empty">
-              Click a neighborhood name, or anywhere on the map, to see its details.
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Tall Buildings index — residential high-rises, each a "community
-          within a community." Click a name to open its homebuyer profile. */}
-      {buildingList.length > 0 && (
-        <div className="fog-buildings-index-wrap">
-          <div className="fog-nbhd-index">
-            <div className="fog-keybox-h fog-collapse-h">
-              <span>Larger Buildings <span className="fog-nbhd-count">({buildingList.length} residential)</span></span>
-              <CollapseCaret open={bldgOpen} onToggle={() => setBldgOpen(o => !o)} label="tall buildings list" />
-            </div>
-            <div className={"fog-nbhd-list" + (bldgOpen ? "" : " fog-collapsed")}>
-              {buildingList.map(b => (
-                <button
-                  key={b.objectid}
-                  type="button"
-                  className={"fog-nbhd-link" + (b.objectid === openBuilding ? " on" : "")}
-                  onClick={() => onOpenBuilding(b.objectid)}
-                >
-                  {b.name}
-                  {b.tenure === "rental" && <span className="fog-bldg-rental"> (Rental)</span>}
-                  {b.tenure === "both" && <span className="fog-bldg-rental"> (Rental/Condo)</span>}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      <div className="fog-toggles-row">
-        <ToggleSwitch
-          checked={showNeighborhoods}
-          onChange={onToggleNeighborhoods}
-          label="Neighborhoods"
-        />
-        {contoursAvailable && (
-          <ToggleSwitch
-            checked={showContours}
-            onChange={onToggleContours}
-            label="Summer Fog"
-          />
-        )}
-        <ToggleSwitch
-          checked={showMuni}
-          onChange={onToggleMuni}
-          label="Transit"
-        />
-        <ToggleSwitch
-          checked={showBikes}
-          onChange={onToggleBikes}
-          label="Bike Paths"
-        />
-        <ToggleSwitch
-          checked={showDistricts}
-          onChange={onToggleDistricts}
-          label="Districts"
-        />
-        <ToggleSwitch
-          checked={showZips}
-          onChange={onToggleZips}
-          label="Zip Codes"
-        />
-        <ToggleSwitch
-          checked={showElevation}
-          onChange={onToggleElevation}
-          label="Elevation"
-        />
-        <ToggleSwitch
-          checked={showTerrain}
-          onChange={onToggleTerrain}
-          label="Terrain"
-        />
-        <ToggleSwitch
-          checked={showSeismic}
-          onChange={onToggleSeismic}
-          label="Seismic"
-        />
-        <ToggleSwitch
-          checked={showTsunami}
-          onChange={onToggleTsunami}
-          label="Tsunami Zone"
-        />
-        <ToggleSwitch
-          checked={showRealtor}
-          onChange={onToggleRealtor}
-          label="Realtor Districts"
-        />
-        <ToggleSwitch
-          checked={showCBD}
-          onChange={onToggleCBD}
-          label="CBD/Mello-Roos Districts"
-        />
-        <ToggleSwitch
-          checked={showResBuildings}
-          onChange={onToggleResBuildings}
-          label="Large Residential/Mixed"
-        />
-        <ToggleSwitch
-          checked={showComBuildings}
-          onChange={onToggleComBuildings}
-          label="Commercial/Office/Hotel/Hospital"
-        />
-      </div>
-
-      <div className="fog-legend-row-wrap">
-        <LayerLegend
-          title="Elevation Contours"
-          items={[
-            ["#0ea5e9", "50 ft"],
-            ["#0d9488", "100 ft"],
-            ["#65a30d", "200 ft"],
-            ["#ca8a04", "300 ft"],
-            ["#b91c1c", "600 ft"],
-          ]}
-        />
-        <LayerLegend
-          title="Residential / Mixed"
-          items={[
-            ["#5B9BD5", "Residential (condo)"],
-            ["#F59E0B", "Rental"],
-            ["#5B9BD5/#F5C518", "Mixed use", "split"],
-          ]}
-        />
-        <LayerLegend
-          title="Commercial / Office / Hotel / Hospital"
-          items={[
-            ["#E6CE78", "Commercial"],
-          ]}
-        />
-        <LayerLegend
-          title="Bike Paths"
-          items={[
-            ["#15803d", "Class I · off-street path", "solid"],
-            ["#06b6d4", "Class II · striped lane", "solid"],
-            ["#22c55e", "Class IV · separated", "solid"],
-            ["#6b7280", "Class III · shared / sharrows", "dashed"],
-          ]}
-        />
-        <LayerLegend
-          title="Transit"
-          items={[
-            ["#D85F2A", "J Church"],
-            ["#5B6770", "K Ingleside"],
-            ["#92278F", "L Taraval"],
-            ["#007749", "M Ocean View"],
-            ["#005DAA", "N Judah"],
-            ["#BC1E2D", "T Third"],
-            ["#C99729", "F Heritage"],
-            ["#B11116", "Cable car"],
-            ["#EA580C", "Rapid (R)"],
-            ["#6D28D9", "Express (X)"],
-            ["#1E3A8A", "Owl (90 · 91)"],
-            ["#6B7280", "Bus route"],
-          ]}
-        />
-      </div>
-    </div>
-  );
-}
-
-// Inline color/line key used under the toggle row to document what the
-// elevation contour colours and bike-network colours mean on the map.
-function LayerLegend({ title, items }) {
-  return (
-    <div className="fog-layer-legend">
-      <div className="fog-layer-legend-title">{title}</div>
-      <div className="fog-layer-legend-items">
-        {items.map(([color, label, style]) => {
-          const dashed = style === "dashed";
-          // A "split" swatch shows a diagonal two-tone fill (used for the
-          // mixed-use buildings, which are painted blue/cream on the map).
-          // `color` is "blueHex/creamHex" for this style.
-          const split = style === "split";
-          const swatchStyle = dashed
-            ? { color }
-            : split
-            ? { background: `linear-gradient(135deg, ${color.split("/")[0]} 50%, ${color.split("/")[1]} 50%)` }
-            : { background: color };
-          return (
-            <div key={label} className="fog-layer-legend-item">
-              <span
-                className={`fog-layer-legend-swatch${dashed ? " fog-layer-legend-swatch-dashed" : ""}`}
-                style={swatchStyle}
-              />
-              <span className="fog-layer-legend-label">{label}</span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-function KeyRow({ label, value, dark }) {
-  return (
-    <div className={`fog-key-row${dark ? " fog-key-row-dark" : ""}`}>
-      <span className="fog-key-label">{label}</span>
-      <span className="fog-key-value">{value || "—"}</span>
-    </div>
-  );
-}
-
-// Header caret that expands/collapses a panel box. Points down when collapsed
-// ("show more"), rotates up when expanded.
-function CollapseCaret({ open, onToggle, label }) {
-  return (
-    <button
-      type="button"
-      className="fog-collapse-btn"
-      onClick={onToggle}
-      aria-expanded={open}
-      aria-label={`${open ? "Collapse" : "Expand"} the ${label}`}
-      title={open ? "Show less" : "Show all"}
-    >
-      <span className={"fog-collapse-caret" + (open ? " open" : "")} aria-hidden="true">▾</span>
-    </button>
-  );
-}
-
-// A KeyRow whose label is a link that toggles a map layer on/off; `active`
-// reflects whether that layer is currently shown.
-function ToggleKeyRow({ label, value, active, onToggle }) {
-  return (
-    <div className="fog-key-row">
-      <button
-        type="button"
-        className={`fog-key-toggle${active ? " on" : ""}`}
-        onClick={onToggle}
-        aria-pressed={active}
-        title={`${active ? "Hide" : "Show"} the ${label} layer`}
-      >
-        {label}
-      </button>
-      <span className="fog-key-value">{value || "—"}</span>
-    </div>
-  );
-}
-
-function ToggleSwitch({ checked, onChange, label }) {
-  return (
-    <label className="fog-switch fog-switch-compact">
-      <input type="checkbox" checked={checked} onChange={e => onChange(e.target.checked)} />
-      <span className="fog-switch-track" aria-hidden="true">
-        <span className="fog-switch-knob" />
-      </span>
-      <span className="fog-switch-copy">
-        <span className="fog-switch-label">{label}</span>
-      </span>
-    </label>
+    </>
   );
 }

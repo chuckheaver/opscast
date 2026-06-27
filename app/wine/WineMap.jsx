@@ -184,6 +184,7 @@ export default function WineMap({
   showElevation,
   selectedId,
   picked,
+  flyTo,
   onPickPoint,
   onGrapeClick,
 }) {
@@ -233,7 +234,9 @@ export default function WineMap({
         minZoom: 7.5,
         maxZoom: 15,
       });
-      map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
+      // Zoom +/- in the bottom-left (above the Mapbox logo); the top-right and
+      // bottom-right corners belong to our own controls (Layers / find-me).
+      map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "bottom-left");
       setMapObj(map);
       // Dev-only escape hatch so the map can be driven from the console /
       // browser automation (synthetic DOM clicks don't reach mapbox).
@@ -812,6 +815,15 @@ export default function WineMap({
       .setLngLat(picked.point)
       .addTo(map);
   }, [mapObj, picked]);
+
+  // Fly the camera to a requested target (address search, "find me", or a
+  // chip-picked AVA / winery). Keyed on the object identity so each request
+  // animates once.
+  useEffect(() => {
+    const map = mapObj;
+    if (!map || !flyTo?.center) return;
+    map.easeTo({ center: flyTo.center, zoom: flyTo.zoom ?? map.getZoom(), duration: 1200 });
+  }, [mapObj, flyTo]);
 
   if (!TOKEN) {
     return (

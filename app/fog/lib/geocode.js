@@ -1,10 +1,22 @@
-// Address search for the fog map now shares ONE geocoder with the rest
-// of the app — the Mapbox-backed geoSuggest in app/lib/weather-api.js.
-// Its results carry both shapes (id/text/center for the map here, and
-// name/latitude/longitude/timezone for the forecast pages), so a single
-// implementation drives every location field. The fog-specific helpers
-// below (elevation + reverse geocode) still live here.
-export { geoSuggest as geocodeSuggest } from "../../lib/weather-api";
+// Address search for the fog map shares the app-wide Mapbox geocoder
+// (geoSuggest in app/lib/weather-api.js) but biases it to San Francisco:
+// this is an SF-only app, so SF results should come first. We pass SF's
+// centre as the proximity hint and then float any San Francisco results to
+// the top of the list (proximity alone biases by distance; the explicit
+// sort guarantees SF addresses lead even when a closer non-SF match exists).
+import { geoSuggest } from "../../lib/weather-api";
+
+// San Francisco city centre — the proximity bias point.
+const SF_CENTER = [-122.4194, 37.7749];
+const isSF = r =>
+  /san francisco/i.test(r?.place_name || "") || /san francisco/i.test(r?.label || "");
+
+export async function geocodeSuggest(q) {
+  const results = await geoSuggest(q, SF_CENTER);
+  // Stable sort: SF results first, original (relevance) order preserved within
+  // each group.
+  return [...results].sort((a, b) => (isSF(b) ? 1 : 0) - (isSF(a) ? 1 : 0));
+}
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 

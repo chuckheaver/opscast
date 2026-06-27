@@ -93,6 +93,9 @@ export default function FogMap({
     buildingSalesRef.current = buildingSales;
   }, [buildingSales]);
   const dataAppliedRef = useRef(false);
+  // Cached parsed tall-buildings GeoJSON, fetched once the first time a
+  // buildings layer is toggled on so we can frame the footprints.
+  const buildingsGeoRef = useRef(null);
   const onPickRef = useRef(onPickFeature);
 
   // Keep latest click handler reachable from the map's event listener
@@ -114,7 +117,9 @@ export default function FogMap({
       minZoom: 10,
       maxZoom: 16,
     });
-    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
+    // Zoom +/- in the bottom-left (above the Mapbox logo); the top-right and
+    // bottom-right corners belong to our own controls (Layers / find-me).
+    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "bottom-left");
     mapRef.current = map;
 
     map.on("load", () => {
@@ -915,10 +920,16 @@ export default function FogMap({
           + websiteHtml(a)
           + `</div>`;
         if (bldgPopup) bldgPopup.remove();
-        bldgPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "300px" })
+        // focusAfterOpen:false stops Mapbox from focusing a control inside the
+        // scrollable body on open — that focus made tall pop-ups open scrolled
+        // part-way down. We also reset scrollTop so every pop-up starts at the
+        // first row of data (the building name/header), not mid-list.
+        bldgPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "300px", focusAfterOpen: false })
           .setLngLat(e.lngLat)
           .setHTML(html)
           .addTo(map);
+        const body = bldgPopup.getElement()?.querySelector(".bldg-popup");
+        if (body) body.scrollTop = 0;
       };
       ["buildings-res-fill", "buildings-com-fill"].forEach(id => {
         map.on("mouseenter", id, onBldgEnter);
@@ -1617,6 +1628,57 @@ export default function FogMap({
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showComBuildings]);
+
+  // When a buildings layer turns on, zoom from the city-wide frame in to
+  // the footprints. We frame "most" of the active group(s) — trimming the
+  // few outlier towers via a 2.5–97.5 percentile box on the footprint
+  // centroids — so the view isn't stretched far out by one stray building.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    if (!showResBuildings && !showComBuildings) return;
+
+    // Same occupancy split the layer filters use (see the buildings layer
+    // setup above); rentals/force-com only affect colour, not membership.
+    const RES_OCC = ["Residential", "Mixed Uses (With Residential)"];
+    const FORCE_COM = new Set([...FORCE_COMMERCIAL_OBJECTIDS]);
+
+    const fit = geo => {
+      const lngs = [];
+      const lats = [];
+      for (const f of geo.features || []) {
+        const p = f.properties || {};
+        const isRes = RES_OCC.includes(p.occupancy) && !FORCE_COM.has(p.objectid);
+        const wanted = (isRes && showResBuildings) || (!isRes && showComBuildings);
+        if (!wanted) continue;
+        // Footprint centroid = mean of the exterior ring vertices.
+        const ring = f.geometry?.coordinates?.[0];
+        if (!ring || !ring.length) continue;
+        let sx = 0, sy = 0;
+        for (const [x, y] of ring) { sx += x; sy += y; }
+        lngs.push(sx / ring.length);
+        lats.push(sy / ring.length);
+      }
+      if (lngs.length < 2) return;
+      lngs.sort((a, b) => a - b);
+      lats.sort((a, b) => a - b);
+      const pct = (arr, q) => arr[Math.min(arr.length - 1, Math.max(0, Math.round((arr.length - 1) * q)))];
+      const bounds = [
+        [pct(lngs, 0.025), pct(lats, 0.025)],
+        [pct(lngs, 0.975), pct(lats, 0.975)],
+      ];
+      map.fitBounds(bounds, { padding: 60, maxZoom: 14.5, duration: 800 });
+    };
+
+    if (buildingsGeoRef.current) {
+      fit(buildingsGeoRef.current);
+    } else {
+      fetch("/data/sf-tall-buildings.geojson")
+        .then(r => r.json())
+        .then(geo => { buildingsGeoRef.current = geo; fit(geo); })
+        .catch(() => {});
+    }
+  }, [showResBuildings, showComBuildings]);
 
   // Toggle the zoning overlay (color-coded fills + thin outline).
   useEffect(() => {

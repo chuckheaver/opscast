@@ -1303,6 +1303,288 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 .fog-map-wrap .fog-map { position: absolute; inset: 0; }
 
+/* ── Google-Maps-style on-map controls ─────────────────────────────────────
+   Search bar across the top, quick-link chips under it, a round Layers button
+   top-right, and a round "find me" arrow bottom-right — all floating over a
+   full-bleed map. .fog-maptools is a zero-size static wrapper so its absolutely
+   positioned children anchor to the relatively-positioned .fog-map-wrap. */
+.fog-maptools { position: static; }
+
+/* Search bar */
+.fog-search {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  max-width: 640px;
+  margin: 0 auto;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fog-search-back {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: #5f6368;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+.fog-search-back:hover { background: #faf6ec; }
+.fog-search-field {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+  padding: 0 14px;
+}
+.fog-search-icon { flex: 0 0 auto; color: #5f6368; }
+/* The shared search component renders inside the pill — strip its chrome. */
+.fog-search-field .fog-topbar-search { position: static; flex: 1 1 auto; gap: 0; }
+.fog-search-field .zip-wrap { flex: 1 1 auto; }
+.fog-search-field .fog-input {
+  background: transparent;
+  border: none;
+  padding: 11px 0;
+  font-size: 15px;
+}
+.fog-search-field .fog-input:focus { border: none; }
+.fog-search-field .fog-autocomplete {
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+}
+.fog-search-err {
+  position: absolute;
+  top: 60px;
+  left: 12px;
+  right: 12px;
+  max-width: 640px;
+  margin: 0 auto;
+  z-index: 6;
+  background: #fff;
+  border: 1px solid #f3c4c4;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #b91c1c;
+  display: flex;
+  gap: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* Quick-link chips under the search bar */
+.fog-chips {
+  position: absolute;
+  top: 64px;
+  left: 12px;
+  max-width: calc(100% - 80px);
+  z-index: 4;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.fog-chips::-webkit-scrollbar { display: none; }
+.fog-chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1c1917;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.fog-chip:hover { background: #faf6ec; }
+.fog-chip.on { background: #eaf1fd; border-color: #bcd2f7; color: #1d4ed8; }
+.fog-chip svg { width: 14px; height: 14px; color: #5f6368; flex: 0 0 auto; }
+.fog-chip.on svg { color: #1d4ed8; }
+
+/* Round floating buttons (Layers top-right, Find-me bottom-right) */
+.fog-fab {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: #5f6368;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  z-index: 5;
+}
+.fog-fab:hover:not(:disabled) { background: #faf6ec; }
+.fog-fab:active:not(:disabled) { transform: scale(0.94); }
+.fog-fab:disabled { opacity: 0.55; cursor: default; }
+.fog-fab-layers { top: 64px; right: 12px; }
+.fog-fab-layers.on { background: #eaf1fd; border-color: #bcd2f7; color: #1d4ed8; }
+.fog-fab-locate { bottom: 36px; right: 12px; }
+.fog-fab-locate svg { color: #2563eb; }
+.fog-fab-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 17px;
+  text-align: center;
+  border: 1.5px solid #fff;
+}
+
+/* Floating dropdown cards (chip lists open left; layers panel opens right). */
+.fog-float-panel {
+  position: absolute;
+  top: 108px;
+  z-index: 6;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+  max-height: min(440px, calc(100% - 130px));
+  overflow-y: auto;
+}
+.fog-float-panel.left { left: 12px; }
+.fog-float-panel.right { right: 12px; }
+.fog-layers-panel {
+  width: 220px;
+  padding: 9px 11px 10px;
+}
+/* Scrollable alphabetical list (Buildings / Neighborhoods). */
+.fog-list-panel {
+  width: 240px;
+  padding: 5px;
+}
+.fog-list-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  color: #1c1917;
+  cursor: pointer;
+  line-height: 1.25;
+}
+.fog-list-link:hover { background: #f5f5f4; }
+.fog-list-link.on { background: #eaf1fd; color: #1d4ed8; font-weight: 600; }
+.fog-list-empty {
+  padding: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+/* Type-to-filter box at the top of a long list panel (e.g. Wineries). */
+.fog-list-filter {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 2px 0 6px;
+  padding: 7px 9px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #f7f5ef;
+  outline: none;
+  position: sticky;
+  top: 0;
+}
+.fog-list-filter:focus { border-color: var(--accent); }
+/* Appellation-stack chips inside the wine detail modal (clickable). */
+.wine-stack-chip {
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #f1ede5;
+  border: 1px solid #ece8df;
+  color: #57534e;
+  cursor: pointer;
+}
+.wine-stack-chip:hover { background: #e9e3d7; }
+.wine-stack-chip.on { background: #eaf1fd; border-color: #bcd2f7; color: #1d4ed8; font-weight: 600; }
+.fog-layers-group + .fog-layers-group {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.fog-layers-group-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #78716c;
+  margin-bottom: 2px;
+}
+/* Tighter toggle rows inside the layers panel so more fits in a small box. */
+.fog-layers-panel .fog-switch-compact {
+  padding: 3px 0;
+  grid-template-columns: 30px auto;
+  column-gap: 8px;
+}
+.fog-layers-panel .fog-switch-track { width: 28px; height: 16px; }
+.fog-layers-panel .fog-switch-knob { width: 12px; height: 12px; top: 2px; left: 2px; }
+.fog-layers-panel .fog-switch input:checked ~ .fog-switch-track .fog-switch-knob {
+  transform: translateX(12px);
+}
+.fog-layers-panel .fog-switch-compact .fog-switch-label {
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.2;
+  min-width: 0;
+}
+/* Compact, on-map color key for whichever layers are currently on. Floats
+   below the chips on the left; only shown while no dropdown is open. */
+.fog-active-legends {
+  position: absolute;
+  top: 108px;
+  left: 12px;
+  z-index: 3;
+  width: 210px;
+  max-height: min(360px, calc(100% - 150px));
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+  padding: 10px 12px;
+}
+.fog-active-legends .fog-layer-legend + .fog-layer-legend {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
 /* ── Top bar (location search above the map) ───────────────────────────── */
 .fog-topbar {
   background: linear-gradient(180deg, #ffffff 0%, #faf6ec 100%);
@@ -1443,7 +1725,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 
 /* Slim point-level strip (right column) */
-.fog-point-strip { display: flex; flex-direction: column; }
+.fog-point-strip { display: flex; flex-direction: column; max-width: 1280px; margin: 0 auto; }
 /* Seismic / Tsunami label rendered as a layer toggle link */
 .fog-key-toggle {
   background: none;

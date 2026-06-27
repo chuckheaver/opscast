@@ -10,8 +10,8 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import FogMap from "./FogMap";
-import FogTopBar from "./FogTopBar";
 import FogPanel from "./FogPanel";
+import FogMapTools from "./FogMapTools";
 import { findNeighborhoodForPoint, findContourForPoint, findFeatureByName, centroidOfFeature } from "./lib/spatial";
 import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
 
@@ -151,6 +151,10 @@ export default function FogApp() {
       const feature = findNeighborhoodForPoint(geojson, point);
       const contour = findContourForPoint(contours, point);
       setPicked({ point, address, feature, contour });
+      // Surface the neighborhood summary (with the point-level facts) for the
+      // address the user entered — that pop-up is now the only place details
+      // show, since there's no bottom panel.
+      setOpenHood(feature?.properties?.name || null);
     },
     [geojson, contours]
   );
@@ -201,6 +205,7 @@ export default function FogApp() {
         const feature = g ? findNeighborhoodForPoint(g, point) : null;
         const contour = findContourForPoint(c, point);
         setPicked({ point, address, feature, contour });
+        setOpenHood(feature?.properties?.name || null);
         setGeoLoading(false);
       },
       err => {
@@ -307,19 +312,22 @@ export default function FogApp() {
     }
   }, [requestGeoLocation, urlLoc]);
 
+  // Turning on either buildings layer hides the neighborhood outlines/labels
+  // so the tall-building footprints read cleanly (the two overlays clutter
+  // each other). Turning a buildings layer off leaves neighborhoods as-is —
+  // the user can switch them back on manually.
+  const handleToggleResBuildings = useCallback(next => {
+    setShowResBuildings(next);
+    if (next) setShowNeighborhoods(false);
+  }, []);
+  const handleToggleComBuildings = useCallback(next => {
+    setShowComBuildings(next);
+    if (next) setShowNeighborhoods(false);
+  }, []);
+
   return (
     <div className="fog-app fog-app-vertical">
-      <FogTopBar
-        title={{ fog: "Summer Fog", transit: "Transit", bikes: "Bike Paths", districts: "Districts", neighborhoods: "Neighborhoods" }[preset] || "Summer Fog"}
-        onPickFromAddress={pickFromAddress}
-        onUseGeoLocation={requestGeoLocation}
-        ready={!!geojson}
-        geoLoading={geoLoading}
-        picked={picked}
-        dataErr={dataErr}
-        geoErr={geoErr}
-      />
-      <div className="fog-map-wrap">
+      <div className="fog-map-wrap fog-map-wrap-full">
         <FogMap
           geojson={geojson}
           contours={contours}
@@ -342,50 +350,61 @@ export default function FogApp() {
           picked={picked}
           onPickFeature={pickFromMap}
         />
+        <FogMapTools
+          contoursAvailable={!!contours}
+          showNeighborhoods={showNeighborhoods}
+          onToggleNeighborhoods={setShowNeighborhoods}
+          showContours={showContours}
+          onToggleContours={setShowContours}
+          showMuni={showMuni}
+          onToggleMuni={setShowMuni}
+          showBikes={showBikes}
+          onToggleBikes={setShowBikes}
+          showDistricts={showDistricts}
+          onToggleDistricts={setShowDistricts}
+          showZips={showZips}
+          onToggleZips={setShowZips}
+          showTerrain={showTerrain}
+          onToggleTerrain={setShowTerrain}
+          showElevation={showElevation}
+          onToggleElevation={setShowElevation}
+          showSeismic={showSeismic}
+          onToggleSeismic={setShowSeismic}
+          showTsunami={showTsunami}
+          onToggleTsunami={setShowTsunami}
+          showRealtor={showRealtor}
+          onToggleRealtor={setShowRealtor}
+          showCBD={showCBD}
+          onToggleCBD={setShowCBD}
+          showResBuildings={showResBuildings}
+          onToggleResBuildings={handleToggleResBuildings}
+          showComBuildings={showComBuildings}
+          onToggleComBuildings={handleToggleComBuildings}
+          buildingProfiles={buildingProfiles}
+          openBuilding={openBuilding}
+          onOpenBuilding={setOpenBuilding}
+          onPickNeighborhood={pickFromNeighborhood}
+          openHood={openHood}
+          onPickFromAddress={pickFromAddress}
+          onUseGeoLocation={requestGeoLocation}
+          ready={!!geojson}
+          geoLoading={geoLoading}
+          picked={picked}
+          dataErr={dataErr}
+          geoErr={geoErr}
+        />
       </div>
       <FogPanel
         picked={picked}
         openHood={openHood}
-        onOpenHood={setOpenHood}
         onCloseHood={() => setOpenHood(null)}
-        onPickNeighborhood={pickFromNeighborhood}
         zips={zips}
         supervisorDistricts={supervisorDistricts}
         realtorNeighborhoods={realtorNeighborhoods}
         seismicHazards={seismicHazards}
         tsunamiHazard={tsunamiHazard}
-        showNeighborhoods={showNeighborhoods}
-        onToggleNeighborhoods={setShowNeighborhoods}
-        showContours={showContours}
-        onToggleContours={setShowContours}
-        contoursAvailable={!!contours}
-        showMuni={showMuni}
-        onToggleMuni={setShowMuni}
-        showBikes={showBikes}
-        onToggleBikes={setShowBikes}
-        showDistricts={showDistricts}
-        onToggleDistricts={setShowDistricts}
-        showZips={showZips}
-        onToggleZips={setShowZips}
-        showTerrain={showTerrain}
-        onToggleTerrain={setShowTerrain}
-        showElevation={showElevation}
-        onToggleElevation={setShowElevation}
-        showSeismic={showSeismic}
-        onToggleSeismic={setShowSeismic}
-        showTsunami={showTsunami}
-        onToggleTsunami={setShowTsunami}
-        showRealtor={showRealtor}
-        onToggleRealtor={setShowRealtor}
-        showCBD={showCBD}
-        onToggleCBD={setShowCBD}
-        showResBuildings={showResBuildings}
-        onToggleResBuildings={setShowResBuildings}
-        showComBuildings={showComBuildings}
-        onToggleComBuildings={setShowComBuildings}
         buildingProfiles={buildingProfiles}
         openBuilding={openBuilding}
-        onOpenBuilding={setOpenBuilding}
         onCloseBuilding={() => setOpenBuilding(null)}
       />
     </div>

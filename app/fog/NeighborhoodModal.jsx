@@ -121,7 +121,8 @@ function PlaceRow({ p, first }) {
 }
 
 export default function NeighborhoodModal({
-  name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict, loc, onClose,
+  name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict,
+  zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose,
 }) {
   const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
 
@@ -187,12 +188,30 @@ export default function NeighborhoodModal({
         <div style={{ fontSize: 22, fontWeight: 800, color: "#1c1917", lineHeight: 1.1, letterSpacing: "-0.5px" }}>{heading}</div>
         <div style={{ fontSize: 13, color: "#78716c", marginTop: 3 }}>Neighborhood highlights</div>
 
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, margin: "12px 0 2px" }}>
-          {data.aka && <span style={{ fontSize: 12, padding: "3px 9px", borderRadius: 8, background: "#f1ede5", color: "#78716c" }}>{data.aka}</span>}
-          {realtorDistrict && <span style={{ fontSize: 12, padding: "3px 9px", borderRadius: 8, background: "#f1ede5", color: "#78716c" }}>RE District {realtorDistrict}</span>}
-          {supervisorDistrict != null && <span style={{ fontSize: 12, padding: "3px 9px", borderRadius: 8, background: "#f1ede5", color: "#78716c" }}>Supervisor District {supervisorDistrict}</span>}
-          {zoneLabel && <span style={{ fontSize: 12, padding: "3px 9px", borderRadius: 8, background: "#FAEEDA", color: "#854F0B" }}>{zoneLabel} zone</span>}
-        </div>
+        {(() => {
+          // At-a-glance facts as a simple bulleted list under the name — both
+          // the neighborhood context (AKA, districts, fog zone) and the
+          // point-level facts (ZIP, elevation, seismic, tsunami) that used to
+          // live in the bottom panel.
+          const bullets = [
+            data.aka,
+            realtorDistrict && `RE District ${realtorDistrict}`,
+            supervisorDistrict != null && `Supervisor District ${supervisorDistrict}`,
+            zoneLabel && `${zoneLabel} zone`,
+            zipCode && `ZIP code ${zipCode}`,
+            Number.isFinite(elevationFt) && `Elevation ${elevationFt} ft`,
+            seismicYN && `Seismic zone: ${seismicYN}`,
+            tsunamiYN && `Tsunami zone: ${tsunamiYN}`,
+          ].filter(Boolean);
+          if (!bullets.length) return null;
+          return (
+            <ul style={{ margin: "10px 0 2px", padding: "0 0 0 18px", listStyle: "disc" }}>
+              {bullets.map(b => (
+                <li key={b} style={{ fontSize: 13, color: "#57534e", lineHeight: 1.5, marginBottom: 2 }}>{b}</li>
+              ))}
+            </ul>
+          );
+        })()}
 
         <div style={{ background: "#FAEEDA", borderRadius: 12, padding: "14px 16px", marginTop: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>

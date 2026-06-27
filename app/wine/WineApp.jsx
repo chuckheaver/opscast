@@ -10,12 +10,25 @@
 // Renders a slim title bar, WineMap, and WinePanel, reusing the /fog
 // page's layout CSS.
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import WineMap from "./WineMap";
-import WinePanel from "./WinePanel";
+import WineMapTools from "./WineMapTools";
+import WineDetailModal from "./WineDetailModal";
 import GrapeModal from "./GrapeModal";
 import { mergeAvaCollections, buildLabelPoints, avasAtPoint, fogHoursAtPoint } from "./lib/avas";
 import { getWineProfile } from "./lib/grapes";
+
+// Average a feature's outer-ring coordinates → a rough centroid for fly-to.
+function featureCenter(feature) {
+  const g = feature?.geometry;
+  if (!g) return null;
+  const polys = g.type === "Polygon" ? [g.coordinates] : g.coordinates;
+  let sx = 0, sy = 0, n = 0;
+  for (const poly of polys) {
+    for (const [x, y] of poly[0]) { sx += x; sy += y; n++; }
+  }
+  return n ? [sx / n, sy / n] : null;
+}
 
 const NAPA_URL = "/data/avas/napa_avas.geojson";
 const SONOMA_URL = "/data/avas/sonoma_avas.geojson";
@@ -56,8 +69,12 @@ export default function WineApp() {
   const [wineries, setWineries] = useState(null);
   const [fog, setFog] = useState(null);
   const [dataErr, setDataErr] = useState("");
-  const [picked, setPicked] = useState(null); // { point, stack, winery }
+  const [picked, setPicked] = useState(null); // { point, stack, winery, soil, address }
   const [selected, setSelected] = useState(null); // feature from merged
+  const [detailOpen, setDetailOpen] = useState(false); // detail modal visibility
+  const [flyTo, setFlyTo] = useState(null); // { center, zoom } → WineMap eases there
+  const [geoLoading, setGeoLoading] = useState(false);
+  const [geoErr, setGeoErr] = useState("");
   const [showNapa, setShowNapa] = useState(true);
   const [showSonoma, setShowSonoma] = useState(true);
   const [showRegions, setShowRegions] = useState(true);
@@ -171,19 +188,72 @@ export default function WineApp() {
     return out;
   }, [wineries, fog]);
 
+  // Latest merged dataset, reachable from async (geolocation) callbacks.
+  const mergedRef = useRef(merged);
+  useEffect(() => { mergedRef.current = merged; }, [merged]);
+
   // Map click → exact point-in-polygon stack over the full dataset.
   // The smallest (most specific) AVA becomes the selection; North Coast
   // only wins when nothing more specific contains the point. When the
   // click landed on a winery dot, its properties ride along and the
-  // panel leads with the winery card.
+  // detail leads with the winery card. Opens the detail modal.
   const pickPoint = useCallback(
-    (point, winery = null, soil = null) => {
-      const stack = avasAtPoint(merged, point);
-      setPicked({ point, stack, winery, soil });
+    (point, winery = null, soil = null, extra = {}) => {
+      const stack = avasAtPoint(mergedRef.current, point);
+      setPicked({ point, stack, winery, soil, ...extra });
       setSelected(stack[0] || null);
+      setDetailOpen(true);
     },
-    [merged]
+    []
   );
+
+  // Address search result → pick that point + fly there.
+  const pickFromAddress = useCallback((center, address) => {
+    pickPoint(center, null, null, { address });
+    setFlyTo({ center, zoom: 11 });
+  }, [pickPoint]);
+
+  // "Find me" → geolocate, pick that point, fly there.
+  const requestGeoLocation = useCallback(() => {
+    if (typeof navigator === "undefined" || !navigator.geolocation) {
+      setGeoErr("Geolocation isn't available in this browser.");
+      return;
+    }
+    setGeoLoading(true);
+    setGeoErr("");
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const point = [pos.coords.longitude, pos.coords.latitude];
+        pickPoint(point);
+        setFlyTo({ center: point, zoom: 11 });
+        setGeoLoading(false);
+      },
+      err => {
+        setGeoErr(err.code === err.PERMISSION_DENIED
+          ? "Location access denied. Search an address instead."
+          : "Couldn't get your location. Search an address instead.");
+        setGeoLoading(false);
+      },
+      { enableHighAccuracy: false, timeout: 8000, maximumAge: 60000 }
+    );
+  }, [pickPoint]);
+
+  // Pick an AVA from the toolbar list → select + fly to its centre + open detail.
+  const pickAvaFromList = useCallback(feature => {
+    setSelected(feature);
+    const center = featureCenter(feature);
+    setPicked({ point: center, stack: [feature], winery: null, soil: null });
+    setDetailOpen(true);
+    if (center) setFlyTo({ center, zoom: 10.5 });
+  }, []);
+
+  // Pick a winery from the toolbar list → pick its point + fly + open detail.
+  const pickWineryFromList = useCallback(feature => {
+    const point = feature.geometry?.coordinates;
+    if (!point) return;
+    pickPoint(point, feature.properties);
+    setFlyTo({ center: point, zoom: 12 });
+  }, [pickPoint]);
 
   // Grape encyclopedia modal — opened from any clickable grape name
   // (winery popup varietals, AVA Known-For / Typical grapes).
@@ -193,8 +263,8 @@ export default function WineApp() {
     if (profile) setGrape(profile);
   }, []);
 
-  // Choosing an appellation chip switches the detail card from the
-  // winery (if any) to that AVA.
+  // Choosing an appellation chip (in the detail's stack) switches the card
+  // from the winery (if any) to that AVA.
   const selectAva = useCallback(feature => {
     setSelected(feature);
     setPicked(p => (p && p.winery ? { ...p, winery: null } : p));
@@ -202,17 +272,7 @@ export default function WineApp() {
 
   return (
     <div className="fog-app fog-app-vertical">
-      <div className="fog-topbar">
-        <div className="fog-topbar-inner">
-          <a className="fog-topbar-lbl" href="/">← UrMicroLife</a>
-          <h1 className="fog-brand fog-topbar-brand">SF <em>Wine AVAs</em></h1>
-          <span className="wine-topbar-hint">
-            Click anywhere to see every appellation at that spot
-          </span>
-          {dataErr && <span className="fog-topbar-err">{dataErr}</span>}
-        </div>
-      </div>
-      <div className="fog-map-wrap">
+      <div className="fog-map-wrap fog-map-wrap-full">
         <WineMap
           merged={merged}
           labels={labels}
@@ -231,39 +291,56 @@ export default function WineApp() {
           showElevation={showElevation}
           selectedId={selected?.properties?.ava_id || null}
           picked={picked}
+          flyTo={flyTo}
           onPickPoint={pickPoint}
           onGrapeClick={openGrape}
         />
+        <WineMapTools
+          showNapa={showNapa}
+          onToggleNapa={setShowNapa}
+          showSonoma={showSonoma}
+          onToggleSonoma={setShowSonoma}
+          showRegions={showRegions}
+          onToggleRegions={setShowRegions}
+          showLabels={showLabels}
+          onToggleLabels={setShowLabels}
+          showWineries={showWineries}
+          onToggleWineries={setShowWineries}
+          showVineyards={showVineyards}
+          onToggleVineyards={setShowVineyards}
+          showFog={showFog}
+          onToggleFog={setShowFog}
+          showSoils={showSoils}
+          onToggleSoils={setShowSoils}
+          showElevation={showElevation}
+          onToggleElevation={setShowElevation}
+          showTerrain={showTerrain}
+          onToggleTerrain={setShowTerrain}
+          merged={merged}
+          wineries={wineries}
+          selectedId={selected?.properties?.ava_id || null}
+          onSelectAva={pickAvaFromList}
+          onPickWinery={pickWineryFromList}
+          onPickFromAddress={pickFromAddress}
+          onUseGeoLocation={requestGeoLocation}
+          ready={!!merged}
+          geoLoading={geoLoading}
+          picked={picked}
+          dataErr={dataErr || geoErr}
+        />
       </div>
-      <WinePanel
-        picked={picked}
-        selected={selected}
-        onSelect={selectAva}
-        varietalsByAva={varietalsByAva}
-        fogByAva={fogByAva}
-        wineriesByAva={wineriesByAva}
-        showNapa={showNapa}
-        onToggleNapa={setShowNapa}
-        showSonoma={showSonoma}
-        onToggleSonoma={setShowSonoma}
-        showRegions={showRegions}
-        onToggleRegions={setShowRegions}
-        showLabels={showLabels}
-        onToggleLabels={setShowLabels}
-        showWineries={showWineries}
-        onToggleWineries={setShowWineries}
-        showVineyards={showVineyards}
-        onToggleVineyards={setShowVineyards}
-        showFog={showFog}
-        onToggleFog={setShowFog}
-        showSoils={showSoils}
-        onToggleSoils={setShowSoils}
-        showTerrain={showTerrain}
-        onToggleTerrain={setShowTerrain}
-        showElevation={showElevation}
-        onToggleElevation={setShowElevation}
-        onGrapeClick={openGrape}
-      />
+      {detailOpen && (
+        <WineDetailModal
+          picked={picked}
+          selected={selected}
+          onSelect={selectAva}
+          varietalsByAva={varietalsByAva}
+          fogByAva={fogByAva}
+          wineriesByAva={wineriesByAva}
+          onGrapeClick={openGrape}
+          onClose={() => setDetailOpen(false)}
+        />
+      )}
       <GrapeModal grape={grape} onClose={() => setGrape(null)} />
     </div>
   );
