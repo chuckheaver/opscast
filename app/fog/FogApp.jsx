@@ -410,12 +410,7 @@ export default function FogApp() {
         openBuilding={openBuilding}
         onCloseBuilding={() => setOpenBuilding(null)}
       />
-      {marketOpen && (
-        <MarketModal
-          neighborhood={picked?.feature?.properties?.name || openHood || null}
-          onClose={() => setMarketOpen(false)}
-        />
-      )}
+      {marketOpen && <MarketModal onClose={() => setMarketOpen(false)} />}
     </div>
   );
 }

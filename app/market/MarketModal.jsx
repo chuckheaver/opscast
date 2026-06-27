@@ -56,9 +56,12 @@ function loadFeatures() {
   return featuresPromise;
 }
 
-export default function MarketModal({ neighborhood, onClose }) {
+export default function MarketModal({ onClose }) {
   const [features, setFeatures] = useState(null);
   const [month, setMonth] = useState("");
+  // Always opens on the all-neighborhoods view; drill into one by clicking a
+  // row in the breakdown. `drill` is the neighborhood name or null (all).
+  const [drill, setDrill] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -66,22 +69,26 @@ export default function MarketModal({ neighborhood, onClose }) {
     return () => { cancelled = true; };
   }, []);
 
+  // Esc closes the drilled neighborhood first, then the whole pop-up.
   useEffect(() => {
-    const onKey = e => { if (e.key === "Escape") onClose(); };
+    const onKey = e => {
+      if (e.key !== "Escape") return;
+      if (drill) setDrill(null); else onClose();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  }, [onClose, drill]);
 
-  // Scope to the selected neighborhood (matching either the MLS name or the
-  // fog-map name), else the whole city.
+  // Scope to the drilled neighborhood (matching the MLS or fog-map name), else
+  // the whole city.
   const scoped = useMemo(() => {
     if (!features) return [];
-    if (!neighborhood) return features;
+    if (!drill) return features;
     return features.filter(f => {
       const p = f.properties;
-      return p.neighborhood === neighborhood || p.fogNeighborhood === neighborhood;
+      return p.neighborhood === drill || p.fogNeighborhood === drill;
     });
-  }, [features, neighborhood]);
+  }, [features, drill]);
 
   const { bySegMonth, months } = useMemo(() => {
     const idx = {};
@@ -119,7 +126,7 @@ export default function MarketModal({ neighborhood, onClose }) {
   const statsFor = (segKey, ym) => computeStats(bySegMonth[segKey]?.[ym] || []);
   const propsFor = (segKey, ym) => bySegMonth[segKey]?.[ym] || [];
 
-  const heading = neighborhood || "San Francisco";
+  const heading = drill || "San Francisco";
   const loading = features === null;
 
   return (
@@ -127,14 +134,19 @@ export default function MarketModal({ neighborhood, onClose }) {
       <div className="nh-modal" onClick={e => e.stopPropagation()} role="dialog" aria-label={`${heading} house market stats`}>
         <button className="nh-x" onClick={onClose} aria-label="Close">×</button>
 
+        {drill && (
+          <button type="button" className="mk-back" onClick={() => setDrill(null)}>‹ All neighborhoods</button>
+        )}
         <div style={{ fontSize: 22, fontWeight: 800, color: "#1c1917", lineHeight: 1.1, letterSpacing: "-0.5px" }}>{heading}</div>
-        <div style={{ fontSize: 13, color: "#78716c", marginTop: 3 }}>House market stats</div>
+        <div style={{ fontSize: 13, color: "#78716c", marginTop: 3 }}>
+          House market stats{drill ? "" : " · all neighborhoods"}
+        </div>
 
         {loading ? (
           <p style={{ marginTop: 16, color: "#78716c" }}>Loading market data…</p>
         ) : !selected ? (
           <p style={{ marginTop: 16, color: "#78716c" }}>
-            No closed sales on record{neighborhood ? ` for ${neighborhood}` : ""} yet.
+            No closed sales on record{drill ? ` for ${drill}` : ""} yet.
           </p>
         ) : (
           <>
@@ -148,7 +160,12 @@ export default function MarketModal({ neighborhood, onClose }) {
             </div>
             <p style={{ fontSize: 12, color: "#78716c", margin: "0 0 8px", lineHeight: 1.5 }}>
               SFAR MLS closed sales · MoM vs prior month · YoY vs same month last year.
+              {!drill && " Tap a neighborhood to drill in."}
             </p>
+
+            {/* All-neighborhoods view leads with the clickable breakdown. */}
+            {!drill && <NeighborhoodBreakdown bySegMonth={bySegMonth} selected={selected} onDrill={setDrill} />}
+            {!drill && <h3 className="mk-h3" style={{ marginTop: 20 }}>Citywide totals</h3>}
 
             {SEGMENTS.map(seg => {
               const cur = statsFor(seg.key, selected);
@@ -209,9 +226,6 @@ export default function MarketModal({ neighborhood, onClose }) {
               );
             })}
 
-            {/* City-wide view adds the by-neighborhood breakdown. */}
-            {!neighborhood && <NeighborhoodBreakdown bySegMonth={bySegMonth} selected={selected} />}
-
             <p style={{ fontSize: 11, color: "#a8a29e", marginTop: 14, lineHeight: 1.5 }}>
               Source: SFAR MLS closed sales, geocoded. $/sq ft fills in once the export includes square footage.
             </p>
@@ -224,7 +238,7 @@ export default function MarketModal({ neighborhood, onClose }) {
 
 // City-wide neighborhood breakdown for the selected month (Single-Family +
 // Condo pooled), sorted by median sale price.
-function NeighborhoodBreakdown({ bySegMonth, selected }) {
+function NeighborhoodBreakdown({ bySegMonth, selected, onDrill }) {
   const nbRows = useMemo(() => {
     const map = new Map();
     for (const seg of Object.keys(bySegMonth)) {
@@ -248,8 +262,12 @@ function NeighborhoodBreakdown({ bySegMonth, selected }) {
         </thead>
         <tbody>
           {nbRows.map(r => (
-            <tr key={r.n}>
-              <td>{r.n}{r.count < 50 ? <span className="mk-star" title="Small sample (n<50)">*</span> : null}</td>
+            <tr key={r.n} className="mk-nb-row" onClick={() => onDrill(r.n)} title={`Drill into ${r.n}`}>
+              <td>
+                <span className="mk-nb-name">{r.n}</span>
+                {r.count < 50 ? <span className="mk-star" title="Small sample (n<50)">*</span> : null}
+                <span className="mk-nb-arrow" aria-hidden="true">›</span>
+              </td>
               <td className="mk-num">{usdShort(r.stats.medianSale)}</td>
               <td className="mk-num">{r.stats.avgPctOfList == null ? "—" : Math.round(r.stats.avgPctOfList) + "%"}</td>
               <td className="mk-num">{r.count}</td>

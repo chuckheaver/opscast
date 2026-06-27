@@ -3788,6 +3788,27 @@ body {
 .mk-trend tbody tr.mk-sel { background: #fef9c3; }
 .mk-trend td:first-child, .mk-nb td:first-child { font-weight: 600; }
 
+/* Clickable neighborhood rows in the House Market Stats pop-up. */
+.mk-nb-row { cursor: pointer; }
+.mk-nb-row:hover { background: #f5f5f4; }
+.mk-nb-row:hover .mk-nb-name { color: #1d4ed8; }
+.mk-nb-arrow { float: right; color: #a8a29e; font-weight: 700; padding-left: 8px; }
+.mk-nb-row:hover .mk-nb-arrow { color: #1d4ed8; }
+/* "‹ All neighborhoods" back link in the drilled view. */
+.mk-back {
+  display: inline-block;
+  margin-bottom: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+}
+.mk-back:hover { text-decoration: underline; }
+
 .mk-foot { margin-top: 24px; font-size: 11px; color: var(--muted); font-style: italic; line-height: 1.5; }
 
 @media (max-width: 640px) {
