@@ -7,7 +7,8 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import MicroMap from "./MicroMap";
-import MicroSidebar from "./MicroSidebar";
+import MicroMapTools from "./MicroMapTools";
+import MicroDetailModal from "./MicroDetailModal";
 import { reverseGeocode } from "../fog/lib/geocode";
 
 const NEIGH_URL = "/data/sf-fog-neighborhoods.geojson";
@@ -46,6 +47,8 @@ export default function MicroApp() {
 
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
+  const [detailOpen, setDetailOpen] = useState(false); // detail modal visibility
+  const [flyTo, setFlyTo] = useState(null); // { center, zoom } → MicroMap eases there
   const urlLocAppliedRef = useRef(false);
 
   const urlLoc = (() => {
@@ -78,6 +81,15 @@ export default function MicroApp() {
 
   const pickFromAddress = useCallback((point, address) => {
     setPicked({ point, address });
+    setDetailOpen(true);
+    setFlyTo({ center: point, zoom: 13 });
+  }, []);
+
+  // Click anywhere on the map → mark that spot and open its detail pop-up
+  // (like the neighborhoods map). No address for a raw click.
+  const pickFromMap = useCallback(point => {
+    setPicked({ point, address: null });
+    setDetailOpen(true);
   }, []);
 
   const requestGeoLocation = useCallback(() => {
@@ -92,6 +104,8 @@ export default function MicroApp() {
         const point = [pos.coords.longitude, pos.coords.latitude];
         const address = await reverseGeocode(point);
         setPicked({ point, address });
+        setDetailOpen(true);
+        setFlyTo({ center: point, zoom: 13 });
         setGeoLoading(false);
       },
       err => {
@@ -149,41 +163,47 @@ export default function MicroApp() {
   }, [urlLoc, neighborhoods]);
 
   return (
-    <div className="fog-app">
-      <MicroSidebar
-        picked={picked}
-        onPickFromAddress={pickFromAddress}
-        dataErr={dataErr}
-        ready={!!neighborhoods}
-        showSun={showSun} onToggleSun={setShowSun}
-        showCool={showCool} onToggleCool={setShowCool}
-        showWind={showWind} onToggleWind={setShowWind}
-        showFog={showFog} onToggleFog={setShowFog}
-        showSolar={showSolar} onToggleSolar={setShowSolar}
-        solarSeason={solarSeason} onSelectSolarSeason={setSolarSeason}
-        showTerrain={showTerrain} onToggleTerrain={setShowTerrain}
-        showContours={showContours} onToggleContours={setShowContours}
-        showFogLine={showFogLine} onToggleFogLine={setShowFogLine}
-        showNeighborhoods={showNeighborhoods} onToggleNeighborhoods={setShowNeighborhoods}
-        onUseGeoLocation={requestGeoLocation}
-        geoLoading={geoLoading}
-        geoErr={geoErr}
-      />
-      <MicroMap
-        neighborhoods={neighborhoods}
-        zones={zones}
-        solar={solarBySeason[solarSeason] || null}
-        showSun={showSun}
-        showCool={showCool}
-        showWind={showWind}
-        showFog={showFog}
-        showSolar={showSolar}
-        showTerrain={showTerrain}
-        showContours={showContours}
-        showFogLine={showFogLine}
-        showNeighborhoods={showNeighborhoods}
-        picked={picked}
-      />
+    <div className="fog-app fog-app-vertical">
+      <div className="fog-map-wrap fog-map-wrap-full">
+        <MicroMap
+          neighborhoods={neighborhoods}
+          zones={zones}
+          solar={solarBySeason[solarSeason] || null}
+          showSun={showSun}
+          showCool={showCool}
+          showWind={showWind}
+          showFog={showFog}
+          showSolar={showSolar}
+          showTerrain={showTerrain}
+          showContours={showContours}
+          showFogLine={showFogLine}
+          showNeighborhoods={showNeighborhoods}
+          picked={picked}
+          flyTo={flyTo}
+          onPickPoint={pickFromMap}
+        />
+        <MicroMapTools
+          showSun={showSun} onToggleSun={setShowSun}
+          showCool={showCool} onToggleCool={setShowCool}
+          showWind={showWind} onToggleWind={setShowWind}
+          showSolar={showSolar} onToggleSolar={setShowSolar}
+          solarSeason={solarSeason} onSelectSolarSeason={setSolarSeason}
+          showTerrain={showTerrain} onToggleTerrain={setShowTerrain}
+          showContours={showContours} onToggleContours={setShowContours}
+          showFogLine={showFogLine} onToggleFogLine={setShowFogLine}
+          showNeighborhoods={showNeighborhoods} onToggleNeighborhoods={setShowNeighborhoods}
+          onPickFromAddress={pickFromAddress}
+          onUseGeoLocation={requestGeoLocation}
+          ready={!!neighborhoods}
+          geoLoading={geoLoading}
+          picked={picked}
+          dataErr={dataErr}
+          geoErr={geoErr}
+        />
+      </div>
+      {detailOpen && (
+        <MicroDetailModal picked={picked} onClose={() => setDetailOpen(false)} />
+      )}
     </div>
   );
 }

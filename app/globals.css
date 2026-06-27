@@ -1503,6 +1503,27 @@ input[type=range]::-webkit-slider-thumb:hover {
   font-size: 12px;
   color: var(--muted);
 }
+/* Season selector inside the Microclimates layers panel (under Solar exposure). */
+.micro-season-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 4px 0 2px 38px;
+}
+.micro-season-btn {
+  flex: 1 1 auto;
+  padding: 4px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #57534e;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.micro-season-btn:hover { background: #faf6ec; }
+.micro-season-btn.on { background: #fef3c7; border-color: #f0d68a; color: #92400e; }
 /* Type-to-filter box at the top of a long list panel (e.g. Wineries). */
 .fog-list-filter {
   width: 100%;
@@ -1960,11 +1981,6 @@ input[type=range]::-webkit-slider-thumb:hover {
   color: var(--muted);
   letter-spacing: 1.4px;
   text-transform: uppercase;
-}
-.fog-search { position: relative; }
-.fog-search-row {
-  display: flex;
-  gap: 6px;
 }
 .fog-input {
   flex: 1;

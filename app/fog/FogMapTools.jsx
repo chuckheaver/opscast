@@ -35,6 +35,8 @@ export default function FogMapTools({
   buildingProfiles, openBuilding, onOpenBuilding,
   // Neighborhoods list
   onPickNeighborhood, openHood,
+  // House market stats pop-up
+  onOpenMarket,
   // Location / search
   onPickFromAddress, onUseGeoLocation, ready, geoLoading, picked,
   dataErr, geoErr,
@@ -167,6 +169,14 @@ export default function FogMapTools({
         >
           <GridIcon /> Neighborhoods
         </button>
+        <button
+          type="button"
+          className="fog-chip"
+          onClick={() => { setMenu(null); onOpenMarket?.(); }}
+          title="House market stats"
+        >
+          <ChartIcon /> House Market Stats
+        </button>
       </div>
 
       {menu === "buildings" && (
@@ -288,6 +298,17 @@ function GridIcon() {
       <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2" />
       <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2" />
       <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  );
+}
+function ChartIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 20V4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M4 20h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <rect x="7" y="12" width="3" height="5" rx="0.5" fill="currentColor" />
+      <rect x="12" y="8" width="3" height="9" rx="0.5" fill="currentColor" />
+      <rect x="17" y="5" width="3" height="12" rx="0.5" fill="currentColor" />
     </svg>
   );
 }

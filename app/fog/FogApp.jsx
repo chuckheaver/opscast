@@ -12,6 +12,7 @@ import { useSearchParams } from "next/navigation";
 import FogMap from "./FogMap";
 import FogPanel from "./FogPanel";
 import FogMapTools from "./FogMapTools";
+import MarketModal from "../market/MarketModal";
 import { findNeighborhoodForPoint, findContourForPoint, findFeatureByName, centroidOfFeature } from "./lib/spatial";
 import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
 
@@ -44,6 +45,7 @@ export default function FogApp() {
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { feature, point, address, contour, elevation_ft, zip, supervisor, realtor, microZone }
   const [openHood, setOpenHood] = useState(null); // neighborhood name whose highlights pop-up is open
+  const [marketOpen, setMarketOpen] = useState(false); // "House Market Stats" pop-up
   // Summer fog overlay — on for the "Fog Map" preset; off otherwise.
   const [showContours, setShowContours] = useState(preset === "fog");
   // Transit (Muni stops) — on for the "Transit" preset.
@@ -385,6 +387,7 @@ export default function FogApp() {
           onOpenBuilding={setOpenBuilding}
           onPickNeighborhood={pickFromNeighborhood}
           openHood={openHood}
+          onOpenMarket={() => setMarketOpen(true)}
           onPickFromAddress={pickFromAddress}
           onUseGeoLocation={requestGeoLocation}
           ready={!!geojson}
@@ -407,6 +410,12 @@ export default function FogApp() {
         openBuilding={openBuilding}
         onCloseBuilding={() => setOpenBuilding(null)}
       />
+      {marketOpen && (
+        <MarketModal
+          neighborhood={picked?.feature?.properties?.name || openHood || null}
+          onClose={() => setMarketOpen(false)}
+        />
+      )}
     </div>
   );
 }

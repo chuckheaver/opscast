@@ -86,11 +86,12 @@ export function formatSoil(soil) {
   return series ? `${head} (${series})` : head;
 }
 
-// Frames both valleys — Sonoma's coast at Fort Ross across to Napa's
-// eastern hills, Carneros up to the Mendocino county line.
+// Default frame: tight on the Napa + Sonoma wine country — the Sonoma coast
+// near Tomales across to Napa's eastern hills (Chiles Valley / Lake Berryessa),
+// Carneros/Petaluma up to the north end of Alexander Valley.
 const WINE_BOUNDS = [
-  [-123.65, 38.05], // SW
-  [-122.00, 38.95], // NE
+  [-123.15, 38.10], // SW
+  [-122.00, 38.78], // NE
 ];
 
 // Build the winery popup DOM. Constructed with createElement (not an

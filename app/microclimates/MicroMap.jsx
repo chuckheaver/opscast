@@ -47,11 +47,16 @@ export default function MicroMap({
   showFogLine,
   showNeighborhoods,
   picked,
+  flyTo,
+  onPickPoint,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const readyRef = useRef(false);
+  // Latest map-click handler, reachable from the once-bound listener.
+  const onPickRef = useRef(onPickPoint);
+  useEffect(() => { onPickRef.current = onPickPoint; }, [onPickPoint]);
 
   // Latest data + toggle state, readable from the stable callbacks below.
   const dataRef = useRef({ neighborhoods, zones, solar });
@@ -332,8 +337,13 @@ export default function MicroMap({
       minZoom: 10,
       maxZoom: 16,
     });
-    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
+    // Zoom +/- in the bottom-left; the top-right and bottom-right corners
+    // belong to our own floating controls (Layers / find-me).
+    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "bottom-left");
     mapRef.current = map;
+    map.getCanvas().style.cursor = "crosshair";
+    // Click anywhere → pick that point (opens the detail pop-up).
+    map.on("click", e => onPickRef.current?.([e.lngLat.lng, e.lngLat.lat]));
     map.on("load", () => {
       readyRef.current = true;
       addLayers();
@@ -359,15 +369,21 @@ export default function MicroMap({
     applyVisibility();
   }, [showSun, showCool, showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods, applyVisibility]);
 
-  // Picked address → drop a marker, keep the city framed.
+  // Picked point → drop a marker (no auto-recenter, so map clicks don't jump).
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     if (markerRef.current) { markerRef.current.remove(); markerRef.current = null; }
     if (!picked?.point) return;
     markerRef.current = new mapboxgl.Marker({ color: "#2563eb" }).setLngLat(picked.point).addTo(map);
-    map.fitBounds(SF_BOUNDS, { padding: 24, duration: 800 });
   }, [picked]);
+
+  // Fly to a requested target (address search / "find me").
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !flyTo?.center) return;
+    map.easeTo({ center: flyTo.center, zoom: flyTo.zoom ?? map.getZoom(), duration: 1000 });
+  }, [flyTo]);
 
   if (!TOKEN) {
     return (
