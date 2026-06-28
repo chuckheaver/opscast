@@ -74,7 +74,7 @@ export default function FogMap({
   showMicroCool,
   showMicroWind,
   flyTo,
-  transitLine,
+  transitRoutes,
   bikeClass,
 }) {
   const containerRef = useRef(null);
@@ -1626,7 +1626,7 @@ export default function FogMap({
     if (!map) return;
     const apply = () => {
       const linesVis = showMuni ? "visible" : "none";
-      const specific = !!transitLine; // a single line letter ("" / null = all)
+      const specific = !!transitRoutes; // a subset of lines (null = all)
       const dotsVis = showMuni && !specific ? "visible" : "none";
       ["muni-routes-lines", "muni-routes-bus-substitutes"].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", linesVis);
@@ -1637,7 +1637,7 @@ export default function FogMap({
     };
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
-  }, [showMuni, transitLine]);
+  }, [showMuni, transitRoutes]);
 
   // Toggle the SF neighborhood outlines + name labels. The invisible
   // click-target layer stays visible always so map clicks still resolve
@@ -1827,30 +1827,31 @@ export default function FogMap({
     map.flyTo({ center: flyTo.center, zoom: flyTo.zoom ?? map.getZoom(), duration: 1000 });
   }, [flyTo]);
 
-  // Transit: filter the route lines to one route_name (e.g. "N" for N Judah),
-  // or show all when transitLine is "" / null.
+  // Transit: filter the route lines to the selected categories' route_names
+  // (e.g. N + NBUS for "N Judah"), or show all when transitRoutes is null.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
       if (!map.getLayer("muni-routes-lines")) return;
-      // route_name(s) for the chosen line: rail letter + its bus-substitute.
       // NB: use a `match` expression — the `["in", ["get",…], ["literal",…]]`
       // form is misread as a legacy filter and doesn't restrict.
-      const names = transitLine ? [transitLine, `${transitLine}BUS`] : null;
+      const names = transitRoutes && transitRoutes.length ? transitRoutes : null;
       const subs = ["KBUS", "NBUS", "TBUS", "FBUS"];
       const inNames = arr => ["match", ["get", "route_name"], arr, true, false];
-      map.setFilter("muni-routes-lines", names ? inNames(names) : null);
+      // An empty selection (no categories) hides everything.
+      const hideAll = ["==", ["get", "route_name"], " "];
+      map.setFilter("muni-routes-lines", transitRoutes ? (names ? inNames(names) : hideAll) : null);
       if (map.getLayer("muni-routes-bus-substitutes")) {
         map.setFilter("muni-routes-bus-substitutes",
-          names ? ["all", inNames(subs), inNames(names)] : inNames(subs));
+          transitRoutes ? (names ? ["all", inNames(subs), inNames(names)] : hideAll) : inNames(subs));
       }
     };
     // Call directly (setFilter on an existing layer is safe even mid-style-
     // update); also bind once to the first load for the initial mount.
     apply();
     map.once("load", apply);
-  }, [transitLine]);
+  }, [transitRoutes]);
 
   // Bikes: when a specific class is chosen show only that class (solid for
   // I/II/IV, dashed for III); "" / null shows the normal full network.

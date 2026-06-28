@@ -17,7 +17,10 @@ import { loadListingsGeo } from "../listings/lib/load";
 import { defaultFilter, matchesFilter, deriveOptions, isSoldStatus } from "../listings/lib/filter";
 import { findNeighborhoodForPoint, findContourForPoint, findFeatureByName, centroidOfFeature } from "./lib/spatial";
 import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
+import { ALL_TRANSIT_KEYS, isAllSelected, routesForSelection } from "./lib/transit";
 
+// Where the user's saved default transit selection is stored.
+const TRANSIT_PREF_KEY = "mysf.transit.v1";
 const DATA_URL = "/data/sf-fog-neighborhoods.geojson";
 const CONTOURS_URL = "/data/sf-fog-contours.geojson";
 // Geographic centre of San Francisco — the default placeholder for the
@@ -63,9 +66,34 @@ export default function FogApp() {
   const [showMicroWind, setShowMicroWind] = useState(false);
   // Camera fly-to target (e.g. zoom to a building picked from the Bldgs list).
   const [flyTo, setFlyTo] = useState(null); // { center: [lng,lat], zoom } | null
-  // Transit line / bike class filters (null = all).
-  const [transitLine, setTransitLine] = useState(null);
+  // Transit: which line categories are shown (a Set of TRANSIT_CATS keys).
+  // Defaults to all; a saved default (localStorage) is loaded on mount.
+  const [transitSel, setTransitSel] = useState(() => new Set(ALL_TRANSIT_KEYS));
+  // Bike class filter (null = all).
   const [bikeClass, setBikeClass] = useState(null);
+
+  // Load the user's saved default transit selection once on the client.
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(TRANSIT_PREF_KEY);
+      if (raw) {
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr) && arr.length) setTransitSel(new Set(arr.filter(k => ALL_TRANSIT_KEYS.includes(k))));
+      }
+    } catch {}
+  }, []);
+
+  // The route_name allow-list for the map (null = show every route).
+  const transitRoutes = useMemo(
+    () => (isAllSelected(transitSel) ? null : routesForSelection(transitSel)),
+    [transitSel]
+  );
+  const toggleTransitCat = key =>
+    setTransitSel(s => { const n = new Set(s); n.has(key) ? n.delete(key) : n.add(key); return n; });
+  const showAllTransit = () => setTransitSel(new Set(ALL_TRANSIT_KEYS));
+  const saveTransitDefault = () => {
+    try { localStorage.setItem(TRANSIT_PREF_KEY, JSON.stringify([...transitSel])); } catch {}
+  };
   // Summer fog overlay — on for the "Fog Map" preset; off otherwise.
   const [showContours, setShowContours] = useState(preset === "fog");
   // Transit (Muni stops) — on for the "Transit" preset.
@@ -439,7 +467,7 @@ export default function FogApp() {
           showMicroCool={showMicroCool}
           showMicroWind={showMicroWind}
           flyTo={flyTo}
-          transitLine={transitLine}
+          transitRoutes={transitRoutes}
           bikeClass={bikeClass}
         />
         <FogMapTools
@@ -477,14 +505,17 @@ export default function FogApp() {
           onOpenBuilding={setOpenBuilding}
           onZoomBuilding={zoomToBuilding}
           onShowResBuildings={() => handleToggleResBuildings(true)}
-          transitLine={transitLine}
-          onSelectTransitLine={line => { setTransitLine(line); setShowMuni(line !== null); }}
+          transitSel={transitSel}
+          onToggleTransitCat={toggleTransitCat}
+          onShowAllTransit={showAllTransit}
+          onSaveTransitDefault={saveTransitDefault}
+          onTransitOpen={() => setShowMuni(true)}
           bikeClass={bikeClass}
           onSelectBikeClass={cls => { setBikeClass(cls); setShowBikes(cls !== null); }}
           onPickNeighborhood={pickFromNeighborhood}
           openHood={openHood}
           onOpenMarket={() => setMarketOpen(true)}
-          initialMenu={preset === "homes" ? "activity" : undefined}
+          initialMenu={preset === "homes" ? "activity" : preset === "transit" ? "transit" : undefined}
           activityOn={activityWanted}
           homesFilter={homesFilter}
           homesOptions={homesOptions}

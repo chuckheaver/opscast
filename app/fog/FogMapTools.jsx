@@ -11,6 +11,7 @@ import { useState, useRef, useEffect } from "react";
 import { listNeighborhoods } from "./lib/neighborhoods";
 import FogLocationSearch from "./FogLocationSearch";
 import ListingFilter from "../components/ListingFilter";
+import { TRANSIT_CATS_ALPHA } from "./lib/transit";
 
 // Alphabetical neighborhood index (already sorted by listNeighborhoods).
 const NBHD_INDEX = listNeighborhoods();
@@ -34,8 +35,9 @@ export default function FogMapTools({
   showComBuildings, onToggleComBuildings,
   // Buildings list
   buildingProfiles, openBuilding, onOpenBuilding, onZoomBuilding, onShowResBuildings,
-  // Transit + Bikes line/class selection
-  transitLine, onSelectTransitLine, bikeClass, onSelectBikeClass,
+  // Transit (multi-select line categories) + Bikes class selection
+  transitSel, onToggleTransitCat, onShowAllTransit, onSaveTransitDefault, onTransitOpen,
+  bikeClass, onSelectBikeClass,
   // Neighborhoods list
   onPickNeighborhood, openHood,
   // House market stats pop-up
@@ -131,12 +133,16 @@ export default function FogMapTools({
     showSeismic && ["#dc2626", "Seismic zone"],
     showTsunami && ["#0ea5e9", "Tsunami zone"],
   ].filter(Boolean);
+  // Transit legend mirrors the user's current line selection.
+  const transitItems = TRANSIT_CATS_ALPHA
+    .filter(c => transitSel?.has(c.key))
+    .map(c => [c.color, c.label]);
   const legends = [
     showElevation && ELEVATION_LEGEND,
     showResBuildings && RES_LEGEND,
     showComBuildings && COM_LEGEND,
     showBikes && BIKE_LEGEND,
-    showMuni && TRANSIT_LEGEND,
+    showMuni && transitItems.length && { title: "Transit", items: transitItems },
     microItems.length && { title: "Microclimate zones", items: microItems },
     hazardItems.length && { title: "Hazards", items: hazardItems },
   ].filter(Boolean);
@@ -260,7 +266,7 @@ export default function FogMapTools({
         <button
           type="button"
           className={"fog-chip" + (menu === "transit" ? " on" : "") + (showMuni ? " active" : "")}
-          onClick={() => setMenu(menu === "transit" ? null : "transit")}
+          onClick={() => { const open = menu !== "transit"; setMenu(open ? "transit" : null); if (open) onTransitOpen?.(); }}
           aria-expanded={menu === "transit"}
           title="Transit lines"
         >
@@ -340,19 +346,34 @@ export default function FogMapTools({
       )}
 
       {menu === "transit" && (
-        <div className="fog-float-panel left fog-list-panel">
-          {TRANSIT_LINES.map(([val, label, color]) => (
-            <button
-              key={label}
-              type="button"
-              className={"fog-list-link" + (transitLine === val ? " on" : "")}
-              onClick={() => { onSelectTransitLine?.(val); setMenu(null); }}
-            >
-              {color && <span className="fog-activity-dot" style={{ background: color, marginRight: 8 }} />}
-              {label}
-            </button>
-          ))}
-          <button type="button" className="fog-list-link fog-list-off" onClick={() => { onSelectTransitLine?.(null); setMenu(null); }}>Hide transit</button>
+        <div className="fog-float-panel left fog-transit-panel">
+          <div className="fog-transit-head">
+            <span>Transit</span>
+            <div className="fog-transit-head-btns">
+              <button type="button" className="fog-transit-act" onClick={() => onShowAllTransit?.()}>Show all</button>
+              <button type="button" className="fog-transit-act save" onClick={() => onSaveTransitDefault?.()}>Save default</button>
+            </div>
+          </div>
+          <p className="fog-transit-hint">Tap a line to show or hide it. “Save default” keeps your picks for next time.</p>
+          <div className="fog-transit-list">
+            {TRANSIT_CATS_ALPHA.map(c => {
+              const on = transitSel?.has(c.key);
+              return (
+                <button
+                  key={c.key}
+                  type="button"
+                  className={"fog-transit-row" + (on ? " on" : "")}
+                  onClick={() => onToggleTransitCat?.(c.key)}
+                  aria-pressed={!!on}
+                >
+                  <span className="fog-transit-sw" style={{ background: c.color }} />
+                  <span className="fog-transit-label">{c.label}</span>
+                  <span className="fog-transit-check">{on ? "✓" : ""}</span>
+                </button>
+              );
+            })}
+          </div>
+          <button type="button" className="fog-list-link fog-list-off" onClick={() => { onToggleMuni?.(false); setMenu(null); }}>Hide transit</button>
         </div>
       )}
 
@@ -522,18 +543,6 @@ function BikeIcon() {
   );
 }
 
-// Curated Muni lines (rail + cable + historic) mapped to their route_name.
-// "" = all lines; the value is the route_name letter passed to the map filter.
-const TRANSIT_LINES = [
-  ["", "All lines", null],
-  ["N", "N Judah", "#005DAA"],
-  ["J", "J Church", "#D85F2A"],
-  ["K", "K Ingleside", "#5B6770"],
-  ["L", "L Taraval", "#92278F"],
-  ["M", "M Ocean View", "#007749"],
-  ["T", "T Third", "#BC1E2D"],
-  ["F", "F Market & Wharves", "#C99729"],
-];
 // Bike facility classes; "" = all. dashed flag drives the legend swatch shape.
 const BIKE_CLASSES = [
   ["", "All bike lanes", null, false],
@@ -615,22 +624,5 @@ const BIKE_LEGEND = {
     ["#06b6d4", "Class II · striped lane", "solid"],
     ["#22c55e", "Class IV · separated", "solid"],
     ["#6b7280", "Class III · shared / sharrows", "dashed"],
-  ],
-};
-const TRANSIT_LEGEND = {
-  title: "Transit",
-  items: [
-    ["#D85F2A", "J Church"],
-    ["#5B6770", "K Ingleside"],
-    ["#92278F", "L Taraval"],
-    ["#007749", "M Ocean View"],
-    ["#005DAA", "N Judah"],
-    ["#BC1E2D", "T Third"],
-    ["#C99729", "F Heritage"],
-    ["#B11116", "Cable car"],
-    ["#EA580C", "Rapid (R)"],
-    ["#6D28D9", "Express (X)"],
-    ["#1E3A8A", "Owl (90 · 91)"],
-    ["#6B7280", "Bus route"],
   ],
 };
