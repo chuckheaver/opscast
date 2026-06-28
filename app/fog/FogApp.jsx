@@ -7,12 +7,13 @@
 //     or a click on the map)
 // Renders FogMap (the actual map canvas) and FogSidebar (search + result card).
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import FogMap from "./FogMap";
 import FogPanel from "./FogPanel";
 import FogMapTools from "./FogMapTools";
 import MarketModal from "../market/MarketModal";
+import { loadListingsGeo, isSfr, isCondo } from "../listings/lib/load";
 import { findNeighborhoodForPoint, findContourForPoint, findFeatureByName, centroidOfFeature } from "./lib/spatial";
 import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
 
@@ -46,6 +47,10 @@ export default function FogApp() {
   const [picked, setPicked] = useState(null); // { feature, point, address, contour, elevation_ft, zip, supervisor, realtor, microZone }
   const [openHood, setOpenHood] = useState(null); // neighborhood name whose highlights pop-up is open
   const [marketOpen, setMarketOpen] = useState(false); // "House Market Stats" pop-up
+  // "Housing Activity" map overlay: listings GeoJSON + the active filter.
+  const [listingsGeo, setListingsGeo] = useState(null);
+  const [activityWanted, setActivityWanted] = useState(false); // user opened the panel
+  const [activity, setActivity] = useState(null); // { segment: "all"|"sfr"|"condo", month: "YYYY-MM" } | null
   // Summer fog overlay — on for the "Fog Map" preset; off otherwise.
   const [showContours, setShowContours] = useState(preset === "fog");
   // Transit (Muni stops) — on for the "Transit" preset.
@@ -327,6 +332,58 @@ export default function FogApp() {
     if (next) setShowNeighborhoods(false);
   }, []);
 
+  // ── Housing Activity overlay ──
+  // Lazy-load the listings GeoJSON the first time the user opens the panel.
+  useEffect(() => {
+    if (!activityWanted || listingsGeo) return;
+    let cancelled = false;
+    loadListingsGeo().then(g => { if (!cancelled) setListingsGeo(g); });
+    return () => { cancelled = true; };
+  }, [activityWanted, listingsGeo]);
+
+  // Months with closed sales (trailing 18 from the latest), newest data first.
+  const activityMonths = useMemo(() => {
+    if (!listingsGeo) return [];
+    const set = new Set();
+    for (const f of listingsGeo.features) {
+      const p = f.properties;
+      if (p.sellingDate && p.sellingPrice > 0) set.add(p.sellingDate.slice(0, 7));
+    }
+    const sorted = [...set].sort();
+    const latest = sorted[sorted.length - 1];
+    if (!latest) return [];
+    const [ly, lm] = latest.split("-").map(Number);
+    const cutoff = ly * 12 + (lm - 1) - 18;
+    return sorted.filter(m => { const [y, mm] = m.split("-").map(Number); return y * 12 + (mm - 1) > cutoff; });
+  }, [listingsGeo]);
+
+  // Once data is in and the user has asked for activity, seed a default filter
+  // (all segments, latest complete month) so dots appear immediately.
+  useEffect(() => {
+    if (!activityWanted || activity || !activityMonths.length) return;
+    const d = new Date();
+    const cur = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+    const complete = activityMonths.filter(m => m < cur);
+    const month = complete.length ? complete[complete.length - 1] : activityMonths[activityMonths.length - 1];
+    setActivity({ segment: "all", month });
+  }, [activityWanted, activity, activityMonths]);
+
+  // Filter the listings to the active segment + month → a FeatureCollection of
+  // dots for the map. Null when activity is off.
+  const activityData = useMemo(() => {
+    if (!listingsGeo || !activity) return null;
+    const feats = listingsGeo.features.filter(f => {
+      const p = f.properties;
+      if (!(p.sellingPrice > 0) || !p.sellingDate) return false;
+      if (p.sellingDate.slice(0, 7) !== activity.month) return false;
+      const sfr = isSfr(p.propType), condo = isCondo(p.propType);
+      if (activity.segment === "sfr") return sfr;
+      if (activity.segment === "condo") return condo;
+      return sfr || condo; // "all" — exclude multi-unit/other
+    });
+    return { type: "FeatureCollection", features: feats };
+  }, [listingsGeo, activity]);
+
   return (
     <div className="fog-app fog-app-vertical">
       <div className="fog-map-wrap fog-map-wrap-full">
@@ -351,6 +408,7 @@ export default function FogApp() {
           showNeighborhoods={showNeighborhoods}
           picked={picked}
           onPickFeature={pickFromMap}
+          activityData={activityData}
         />
         <FogMapTools
           contoursAvailable={!!contours}
@@ -388,6 +446,11 @@ export default function FogApp() {
           onPickNeighborhood={pickFromNeighborhood}
           openHood={openHood}
           onOpenMarket={() => setMarketOpen(true)}
+          activity={activity}
+          activityMonths={activityMonths}
+          onActivityOpen={() => setActivityWanted(true)}
+          onActivityChange={setActivity}
+          onClearActivity={() => { setActivity(null); setActivityWanted(false); }}
           onPickFromAddress={pickFromAddress}
           onUseGeoLocation={requestGeoLocation}
           ready={!!geojson}

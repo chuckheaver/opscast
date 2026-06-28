@@ -7,8 +7,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { computeStats } from "../listings/lib/stats";
-
-const DATA_URL = "/data/sf-listings.geojson";
+import { loadListingsFeatures } from "../listings/lib/load";
 
 const SEGMENTS = [
   { key: "sfr", label: "Single-Family", types: ["Single Family Residence"] },
@@ -44,17 +43,13 @@ function deltaPct(cur, prev) {
 const fmtDelta = d => (d == null ? "n/a" : (d >= 0 ? "+" : "") + d.toFixed(1) + "%");
 const deltaClass = d => (d == null ? "" : d >= 0 ? "up" : "down");
 
-// Cache the (largish) listings fetch so re-opening the pop-up is instant.
-let featuresPromise = null;
-function loadFeatures() {
-  if (!featuresPromise) {
-    featuresPromise = fetch(DATA_URL)
-      .then(r => (r.ok ? r.json() : { features: [] }))
-      .then(d => d.features || [])
-      .catch(() => []);
-  }
-  return featuresPromise;
-}
+// "4117 Judah St, San Francisco, CA 94122" → "4117 Judah St"
+const shortAddr = a => (a ? a.replace(/,\s*San Francisco.*$/i, "") : "—");
+// "2025-02-18" → "2/18/25"
+const fmtDate = iso => {
+  const m = iso && /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+  return m ? `${+m[2]}/${+m[3]}/${m[1].slice(2)}` : "—";
+};
 
 export default function MarketModal({ onClose }) {
   const [features, setFeatures] = useState(null);
@@ -62,22 +57,30 @@ export default function MarketModal({ onClose }) {
   // Always opens on the all-neighborhoods view; drill into one by clicking a
   // row in the breakdown. `drill` is the neighborhood name or null (all).
   const [drill, setDrill] = useState(null);
+  // Per-segment property grid (the list of individual sales by address).
+  // { segKey, segLabel } or null.
+  const [propsView, setPropsView] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
-    loadFeatures().then(f => { if (!cancelled) setFeatures(f); });
+    loadListingsFeatures().then(f => { if (!cancelled) setFeatures(f); });
     return () => { cancelled = true; };
   }, []);
 
-  // Esc closes the drilled neighborhood first, then the whole pop-up.
+  // Esc steps back: property grid → neighborhood → close the pop-up.
   useEffect(() => {
     const onKey = e => {
       if (e.key !== "Escape") return;
-      if (drill) setDrill(null); else onClose();
+      if (propsView) setPropsView(null);
+      else if (drill) setDrill(null);
+      else onClose();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onClose, drill]);
+  }, [onClose, drill, propsView]);
+
+  // Leaving a neighborhood also closes any open property grid.
+  useEffect(() => { setPropsView(null); }, [drill]);
 
   // Scope to the drilled neighborhood (matching the MLS or fog-map name), else
   // the whole city.
@@ -134,12 +137,16 @@ export default function MarketModal({ onClose }) {
       <div className="nh-modal" onClick={e => e.stopPropagation()} role="dialog" aria-label={`${heading} house market stats`}>
         <button className="nh-x" onClick={onClose} aria-label="Close">×</button>
 
-        {drill && (
+        {propsView ? (
+          <button type="button" className="mk-back" onClick={() => setPropsView(null)}>‹ Back to stats</button>
+        ) : drill ? (
           <button type="button" className="mk-back" onClick={() => setDrill(null)}>‹ All neighborhoods</button>
-        )}
+        ) : null}
         <div style={{ fontSize: 22, fontWeight: 800, color: "#1c1917", lineHeight: 1.1, letterSpacing: "-0.5px" }}>{heading}</div>
         <div style={{ fontSize: 13, color: "#78716c", marginTop: 3 }}>
-          House market stats{drill ? "" : " · all neighborhoods"}
+          {propsView
+            ? `${propsView.segLabel} · sold ${monthLabel(selected)}`
+            : `House market stats${drill ? "" : " · all neighborhoods"}`}
         </div>
 
         {loading ? (
@@ -148,6 +155,8 @@ export default function MarketModal({ onClose }) {
           <p style={{ marginTop: 16, color: "#78716c" }}>
             No closed sales on record{drill ? ` for ${drill}` : ""} yet.
           </p>
+        ) : propsView ? (
+          <PropertiesGrid rows={propsFor(propsView.segKey, selected)} />
         ) : (
           <>
             <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "14px 0 6px" }}>
@@ -180,9 +189,17 @@ export default function MarketModal({ onClose }) {
                 { label: "% Sold Over List", get: s => s.pctOverList, fmt: pct },
                 { label: "% of List Received", get: s => s.avgPctOfList, fmt: pct },
               ];
+              const soldThisMonth = propsFor(seg.key, selected).length;
               return (
                 <section key={seg.key} style={{ marginTop: 16 }}>
-                  <h2 className="mk-seg-title" style={{ fontSize: 16, marginBottom: 8 }}>{seg.label}</h2>
+                  <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 8, marginBottom: 8 }}>
+                    <h2 className="mk-seg-title" style={{ fontSize: 16, margin: 0, border: "none", padding: 0 }}>{seg.label}</h2>
+                    {soldThisMonth > 0 && (
+                      <button type="button" className="mk-props-link" onClick={() => setPropsView({ segKey: seg.key, segLabel: seg.label })}>
+                        Properties ({soldThisMonth}) ›
+                      </button>
+                    )}
+                  </div>
                   <table className="mk-table">
                     <thead>
                       <tr><th>Metric</th><th>{monthLabelShort(selected)}</th><th>MoM Δ</th><th>YoY Δ</th></tr>
@@ -232,6 +249,51 @@ export default function MarketModal({ onClose }) {
           </>
         )}
       </div>
+    </div>
+  );
+}
+
+// The individual closed sales behind a segment's stats, by address — the same
+// grid as the listings page. Reuses the .re-modal-table styling.
+function PropertiesGrid({ rows }) {
+  const sorted = useMemo(
+    () => [...rows].sort((a, b) => (b.sellingPrice || 0) - (a.sellingPrice || 0)),
+    [rows]
+  );
+  if (!sorted.length) {
+    return <div className="re-modal-empty">No closed sales this month.</div>;
+  }
+  return (
+    <div className="re-modal-scroll mk-props" style={{ marginTop: 14 }}>
+      <table className="re-modal-table">
+        <thead>
+          <tr>
+            <th>Address</th><th>Bd/Ba</th><th>Sq Ft</th><th>List</th>
+            <th>Sale</th><th>$/SF</th><th>vs list</th><th>DOM</th><th>Sold</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sorted.map(p => {
+            const delta = p.listPrice ? (p.sellingPrice / p.listPrice - 1) * 100 : null;
+            const ppsf = p.sqft > 0 ? p.sellingPrice / p.sqft : null;
+            return (
+              <tr key={p.id}>
+                <td className="re-m-addr">{shortAddr(p.address)}{p.unit ? ` #${p.unit}` : ""}</td>
+                <td className="re-m-num">{p.bedrooms ?? "—"}/{(p.bathrooms || "—").toString().split(" ")[0]}</td>
+                <td className="re-m-num">{p.sqft ? Math.round(p.sqft).toLocaleString("en-US") : "—"}</td>
+                <td className="re-m-num">{usd(p.listPrice)}</td>
+                <td className="re-m-num">{usd(p.sellingPrice)}</td>
+                <td className="re-m-num">{usd(ppsf)}</td>
+                <td className={"re-m-num " + (delta == null ? "" : delta >= 0 ? "up" : "down")}>
+                  {delta == null ? "—" : (delta >= 0 ? "+" : "") + delta.toFixed(1) + "%"}
+                </td>
+                <td className="re-m-num">{p.dom ?? "—"}</td>
+                <td className="re-m-num">{fmtDate(p.sellingDate)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }

@@ -37,11 +37,13 @@ export default function FogMapTools({
   onPickNeighborhood, openHood,
   // House market stats pop-up
   onOpenMarket,
+  // Housing Activity map overlay
+  activity, activityMonths, onActivityOpen, onActivityChange, onClearActivity,
   // Location / search
   onPickFromAddress, onUseGeoLocation, ready, geoLoading, picked,
   dataErr, geoErr,
 }) {
-  const [menu, setMenu] = useState(null); // "layers" | "buildings" | "neighborhoods" | null
+  const [menu, setMenu] = useState(null); // "layers" | "buildings" | "neighborhoods" | "activity" | null
   const wrapRef = useRef(null);
 
   // Close the open menu on an outside click or the Escape key.
@@ -177,6 +179,19 @@ export default function FogMapTools({
         >
           <ChartIcon /> House Market Stats
         </button>
+        <button
+          type="button"
+          className={"fog-chip" + (menu === "activity" ? " on" : "") + (activity ? " active" : "")}
+          onClick={() => {
+            if (menu === "activity") { setMenu(null); return; }
+            setMenu("activity");
+            onActivityOpen?.();
+          }}
+          aria-expanded={menu === "activity"}
+          title="Housing activity on the map"
+        >
+          <DotsIcon /> Housing Activity
+        </button>
       </div>
 
       {menu === "buildings" && (
@@ -213,6 +228,15 @@ export default function FogMapTools({
             </button>
           ))}
         </div>
+      )}
+
+      {menu === "activity" && (
+        <ActivityPanel
+          activity={activity}
+          months={activityMonths}
+          onChange={onActivityChange}
+          onClear={() => { onClearActivity?.(); setMenu(null); }}
+        />
       )}
 
       {/* Round Layers button (top-right) */}
@@ -310,6 +334,66 @@ function ChartIcon() {
       <rect x="12" y="8" width="3" height="9" rx="0.5" fill="currentColor" />
       <rect x="17" y="5" width="3" height="12" rx="0.5" fill="currentColor" />
     </svg>
+  );
+}
+function DotsIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="6" cy="7" r="2.2" fill="currentColor" />
+      <circle cx="16" cy="6" r="2.2" fill="currentColor" />
+      <circle cx="9" cy="16" r="2.2" fill="currentColor" />
+      <circle cx="18" cy="15" r="2.2" fill="currentColor" />
+    </svg>
+  );
+}
+
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const monthLabel = ym => { const [y, m] = ym.split("-").map(Number); return `${MON[m - 1]} ${y}`; };
+
+// Housing Activity filters: segment + month, mirroring the House Market Stats
+// pop-up. Changing either re-plots the dots on the map live.
+function ActivityPanel({ activity, months, onChange, onClear }) {
+  if (!activity) {
+    return (
+      <div className="fog-float-panel left fog-activity-panel">
+        <div className="fog-list-empty">Loading sales…</div>
+      </div>
+    );
+  }
+  const setSeg = segment => onChange({ ...activity, segment });
+  const SEGS = [["all", "All"], ["sfr", "Single-Family"], ["condo", "Condo / TIC"]];
+  return (
+    <div className="fog-float-panel left fog-activity-panel">
+      <div className="fog-layers-group-title">Activity type</div>
+      <div className="fog-activity-segs">
+        {SEGS.map(([key, label]) => (
+          <button
+            key={key}
+            type="button"
+            className={"fog-activity-seg" + (activity.segment === key ? " on" : "")}
+            onClick={() => setSeg(key)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      <div className="fog-layers-group-title" style={{ marginTop: 10 }}>Sold in</div>
+      <select
+        className="mk-select fog-activity-month"
+        value={activity.month}
+        onChange={e => onChange({ ...activity, month: e.target.value })}
+      >
+        {[...months].reverse().map(m => <option key={m} value={m}>{monthLabel(m)}</option>)}
+      </select>
+
+      <div className="fog-activity-legend">
+        <span><span className="fog-activity-dot" style={{ background: "#2563eb" }} /> Single-Family</span>
+        <span><span className="fog-activity-dot" style={{ background: "#ea580c" }} /> Condo / TIC</span>
+      </div>
+
+      <button type="button" className="fog-activity-clear" onClick={onClear}>Hide dots</button>
+    </div>
   );
 }
 

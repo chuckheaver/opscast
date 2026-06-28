@@ -1419,6 +1419,58 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-chip.on { background: #eaf1fd; border-color: #bcd2f7; color: #1d4ed8; }
 .fog-chip svg { width: 14px; height: 14px; color: #5f6368; flex: 0 0 auto; }
 .fog-chip.on svg { color: #1d4ed8; }
+/* Housing Activity chip shows an "active dots on the map" accent. */
+.fog-chip.active { border-color: #f0b48a; }
+.fog-chip.active svg { color: #ea580c; }
+
+/* Housing Activity filter panel. */
+.fog-activity-panel { width: 230px; padding: 11px 13px 13px; }
+.fog-activity-segs { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.fog-activity-seg {
+  flex: 1 1 auto;
+  padding: 5px 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #57534e;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.fog-activity-seg:hover { background: #faf6ec; }
+.fog-activity-seg.on { background: #eaf1fd; border-color: #bcd2f7; color: #1d4ed8; }
+.fog-activity-month { width: 100%; margin-top: 2px; }
+.fog-activity-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #57534e;
+}
+.fog-activity-legend span { display: flex; align-items: center; gap: 7px; }
+.fog-activity-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+  flex: 0 0 auto;
+}
+.fog-activity-clear {
+  margin-top: 12px;
+  width: 100%;
+  padding: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #b91c1c;
+  cursor: pointer;
+}
+.fog-activity-clear:hover { background: #fef2f2; }
 
 /* Round floating buttons (Layers top-right, Find-me bottom-right) */
 .fog-fab {
@@ -3794,6 +3846,22 @@ body {
 .mk-nb-row:hover .mk-nb-name { color: #1d4ed8; }
 .mk-nb-arrow { float: right; color: #a8a29e; font-weight: 700; padding-left: 8px; }
 .mk-nb-row:hover .mk-nb-arrow { color: #1d4ed8; }
+/* "Properties (N) ›" link next to a segment title. */
+.mk-props-link {
+  flex: 0 0 auto;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #2563eb;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.mk-props-link:hover { text-decoration: underline; }
+/* The property grid in the market pop-up isn't clickable (no map to jump to). */
+.mk-props .re-modal-table tbody tr { cursor: default; }
 /* "‹ All neighborhoods" back link in the drilled view. */
 .mk-back {
   display: inline-block;

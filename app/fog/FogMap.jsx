@@ -68,6 +68,7 @@ export default function FogMap({
   showNeighborhoods,
   picked,
   onPickFeature,
+  activityData,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
@@ -967,6 +968,50 @@ export default function FogMap({
         },
       });
 
+      // Housing Activity dots — closed sales for the chosen segment + month.
+      // Empty until the FogApp filter feeds setData (see the activityData
+      // effect). Coloured by occupancy: blue = Single-Family, orange = condo.
+      const ACT_SFR = ["Single Family Residence"];
+      const ACT_CONDO = ["Condominium", "Loft Condominium", "Loft", "Tenancy in Common", "Stock Cooperative", "Co-Ownership"];
+      map.addSource("activity", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
+      map.addLayer({
+        id: "activity-dots",
+        type: "circle",
+        source: "activity",
+        paint: {
+          "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 3, 14, 5, 16, 7],
+          "circle-color": [
+            "case",
+            ["in", ["get", "propType"], ["literal", ACT_SFR]], "#2563eb",
+            ["in", ["get", "propType"], ["literal", ACT_CONDO]], "#ea580c",
+            "#6b7280",
+          ],
+          "circle-stroke-color": "#ffffff",
+          "circle-stroke-width": 1,
+          "circle-opacity": 0.9,
+        },
+      });
+      let actPopup = null;
+      map.on("mouseenter", "activity-dots", () => { map.getCanvas().style.cursor = "pointer"; });
+      map.on("mouseleave", "activity-dots", () => { map.getCanvas().style.cursor = ""; });
+      map.on("click", "activity-dots", e => {
+        const p = e.features?.[0]?.properties;
+        if (!p) return;
+        const addr = esc((p.address || "").replace(/,\s*San Francisco.*$/i, "")) + (p.unit ? ` #${esc(p.unit)}` : "");
+        const price = p.sellingPrice ? "$" + Math.round(p.sellingPrice).toLocaleString("en-US") : "—";
+        const dm = p.sellingDate && /^(\d{4})-(\d{2})-(\d{2})/.exec(p.sellingDate);
+        const date = dm ? `${+dm[2]}/${+dm[3]}/${dm[1].slice(2)}` : "";
+        const bb = [p.bedrooms != null ? `${p.bedrooms} bd` : null, p.sqft ? `${Math.round(p.sqft).toLocaleString("en-US")} sqft` : null].filter(Boolean).join(" · ");
+        const html = `<div style="font-size:12.5px;line-height:1.5">`
+          + `<strong>${addr}</strong><br>`
+          + `<span style="font-weight:600">${price}</span>${date ? ` · sold ${date}` : ""}`
+          + (bb ? `<br><span style="color:#6b7280">${bb}</span>` : "")
+          + `</div>`;
+        if (actPopup) actPopup.remove();
+        actPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "240px", focusAfterOpen: false })
+          .setLngLat(e.lngLat).setHTML(html).addTo(map);
+      });
+
       // Tsunami inundation hazard zone — CGS 2021 update. Marks the
       // low-lying coastal area that an emergency-planning tsunami would
       // reach. Cool blue fill so it reads as "water-related hazard"
@@ -1394,6 +1439,8 @@ export default function FogMap({
           const fillLayers = ["buildings-res-fill", "buildings-com-fill"].filter(id => map.getLayer(id));
           if (fillLayers.length && map.queryRenderedFeatures(e.point, { layers: fillLayers }).length) return;
         }
+        // Likewise, a click on a Housing Activity dot opens only its pop-up.
+        if (map.getLayer("activity-dots") && map.queryRenderedFeatures(e.point, { layers: ["activity-dots"] }).length) return;
         onPickRef.current(e.features[0], [e.lngLat.lng, e.lngLat.lat]);
       });
     });
@@ -1693,6 +1740,19 @@ export default function FogMap({
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showZoning]);
+
+  // Feed the Housing Activity dots — the filtered FeatureCollection from
+  // FogApp (or empty when the overlay is off).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const src = map.getSource("activity");
+      if (src) src.setData(activityData || { type: "FeatureCollection", features: [] });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [activityData]);
 
   // Toggle the supervisor district outlines + labels.
   useEffect(() => {
