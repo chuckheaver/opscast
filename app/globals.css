@@ -1356,8 +1356,8 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-search-field .fog-input {
   background: transparent;
   border: none;
-  padding: 11px 0;
-  font-size: 15px;
+  padding: 10px 0;
+  font-size: 13.5px;
 }
 .fog-search-field .fog-input:focus { border: none; }
 .fog-search-field .fog-autocomplete {
@@ -1389,12 +1389,12 @@ input[type=range]::-webkit-slider-thumb:hover {
 /* Quick-link chips under the search bar */
 .fog-chips {
   position: absolute;
-  top: 64px;
+  top: 62px;
   left: 12px;
-  max-width: calc(100% - 80px);
+  right: 12px;
   z-index: 4;
   display: flex;
-  gap: 8px;
+  gap: 6px;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -1403,12 +1403,12 @@ input[type=range]::-webkit-slider-thumb:hover {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 7px 13px;
-  font-size: 12.5px;
+  padding: 5px 9px;
+  font-size: 11px;
   font-weight: 600;
   color: #1c1917;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
@@ -1417,7 +1417,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 .fog-chip:hover { background: #faf6ec; }
 .fog-chip.on { background: #eaf1fd; border-color: #bcd2f7; color: #1d4ed8; }
-.fog-chip svg { width: 14px; height: 14px; color: #5f6368; flex: 0 0 auto; }
+.fog-chip svg { width: 12px; height: 12px; color: #5f6368; flex: 0 0 auto; }
 .fog-chip.on svg { color: #1d4ed8; }
 /* Housing Activity chip shows an "active dots on the map" accent. */
 .fog-chip.active { border-color: #f0b48a; }
@@ -1441,6 +1441,9 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-activity-seg:hover { background: #faf6ec; }
 .fog-activity-seg.on { background: #eaf1fd; border-color: #bcd2f7; color: #1d4ed8; }
 .fog-activity-month { width: 100%; margin-top: 2px; }
+.fog-activity-period { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+.fog-activity-period .mk-select { flex: 1 1 auto; min-width: 0; font-size: 12px; padding: 6px 7px; }
+.fog-activity-dash { color: #78716c; flex: 0 0 auto; }
 .fog-activity-legend {
   display: flex;
   flex-direction: column;
@@ -1491,7 +1494,9 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-fab:hover:not(:disabled) { background: #faf6ec; }
 .fog-fab:active:not(:disabled) { transform: scale(0.94); }
 .fog-fab:disabled { opacity: 0.55; cursor: default; }
-.fog-fab-layers { top: 64px; right: 12px; }
+/* Layers button sits below the chip row (right side) so the chips get the
+   full width on a phone; its panel opens just beneath it. */
+.fog-fab-layers { top: 108px; right: 12px; }
 .fog-fab-layers.on { background: #eaf1fd; border-color: #bcd2f7; color: #1d4ed8; }
 .fog-fab-locate { bottom: 36px; right: 12px; }
 .fog-fab-locate svg { color: #2563eb; }
@@ -1525,7 +1530,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   overflow-y: auto;
 }
 .fog-float-panel.left { left: 12px; }
-.fog-float-panel.right { right: 12px; }
+.fog-float-panel.right { right: 12px; top: 160px; }
 .fog-layers-panel {
   width: 220px;
   padding: 9px 11px 10px;

@@ -968,11 +968,9 @@ export default function FogMap({
         },
       });
 
-      // Housing Activity dots — closed sales for the chosen segment + month.
+      // Housing Activity dots — listings for the chosen status / type / period.
       // Empty until the FogApp filter feeds setData (see the activityData
-      // effect). Coloured by occupancy: blue = Single-Family, orange = condo.
-      const ACT_SFR = ["Single Family Residence"];
-      const ACT_CONDO = ["Condominium", "Loft Condominium", "Loft", "Tenancy in Common", "Stock Cooperative", "Co-Ownership"];
+      // effect). Each feature is tagged actKind: blue = sold, green = active.
       map.addSource("activity", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
       map.addLayer({
         id: "activity-dots",
@@ -980,12 +978,7 @@ export default function FogMap({
         source: "activity",
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 3, 14, 5, 16, 7],
-          "circle-color": [
-            "case",
-            ["in", ["get", "propType"], ["literal", ACT_SFR]], "#2563eb",
-            ["in", ["get", "propType"], ["literal", ACT_CONDO]], "#ea580c",
-            "#6b7280",
-          ],
+          "circle-color": ["case", ["==", ["get", "actKind"], "sold"], "#2563eb", "#16a34a"],
           "circle-stroke-color": "#ffffff",
           "circle-stroke-width": 1,
           "circle-opacity": 0.9,
@@ -994,17 +987,23 @@ export default function FogMap({
       let actPopup = null;
       map.on("mouseenter", "activity-dots", () => { map.getCanvas().style.cursor = "pointer"; });
       map.on("mouseleave", "activity-dots", () => { map.getCanvas().style.cursor = ""; });
+      const fmtMDY = iso => { const m = iso && /^(\d{4})-(\d{2})-(\d{2})/.exec(iso); return m ? `${+m[2]}/${+m[3]}/${m[1].slice(2)}` : ""; };
       map.on("click", "activity-dots", e => {
         const p = e.features?.[0]?.properties;
         if (!p) return;
+        const sold = p.actKind === "sold";
         const addr = esc((p.address || "").replace(/,\s*San Francisco.*$/i, "")) + (p.unit ? ` #${esc(p.unit)}` : "");
-        const price = p.sellingPrice ? "$" + Math.round(p.sellingPrice).toLocaleString("en-US") : "—";
-        const dm = p.sellingDate && /^(\d{4})-(\d{2})-(\d{2})/.exec(p.sellingDate);
-        const date = dm ? `${+dm[2]}/${+dm[3]}/${dm[1].slice(2)}` : "";
+        // Sold: close price + date. Active: list price + status since status date.
+        const price = sold
+          ? (p.sellingPrice ? "$" + Math.round(p.sellingPrice).toLocaleString("en-US") : "—")
+          : (p.listPrice ? "$" + Math.round(p.listPrice).toLocaleString("en-US") : "—");
+        const when = sold
+          ? (fmtMDY(p.sellingDate) ? ` · sold ${fmtMDY(p.sellingDate)}` : "")
+          : (fmtMDY(p.statusDate) ? ` · ${esc(p.status)} ${fmtMDY(p.statusDate)}` : ` · ${esc(p.status || "")}`);
         const bb = [p.bedrooms != null ? `${p.bedrooms} bd` : null, p.sqft ? `${Math.round(p.sqft).toLocaleString("en-US")} sqft` : null].filter(Boolean).join(" · ");
         const html = `<div style="font-size:12.5px;line-height:1.5">`
           + `<strong>${addr}</strong><br>`
-          + `<span style="font-weight:600">${price}</span>${date ? ` · sold ${date}` : ""}`
+          + `<span style="font-weight:600">${price}</span>${when}`
           + (bb ? `<br><span style="color:#6b7280">${bb}</span>` : "")
           + `</div>`;
         if (actPopup) actPopup.remove();

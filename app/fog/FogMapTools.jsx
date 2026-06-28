@@ -38,7 +38,7 @@ export default function FogMapTools({
   // House market stats pop-up
   onOpenMarket,
   // Housing Activity map overlay
-  activity, activityMonths, onActivityOpen, onActivityChange, onClearActivity,
+  activity, activityBounds, onActivityOpen, onActivityChange, onClearActivity,
   // Location / search
   onPickFromAddress, onUseGeoLocation, ready, geoLoading, picked,
   dataErr, geoErr,
@@ -157,27 +157,12 @@ export default function FogMapTools({
       <div className="fog-chips">
         <button
           type="button"
-          className={"fog-chip" + (menu === "buildings" ? " on" : "")}
-          onClick={() => toggleMenu("buildings")}
-          aria-expanded={menu === "buildings"}
-        >
-          <BuildingIcon /> Buildings
-        </button>
-        <button
-          type="button"
           className={"fog-chip" + (menu === "neighborhoods" ? " on" : "")}
           onClick={() => toggleMenu("neighborhoods")}
           aria-expanded={menu === "neighborhoods"}
+          title="Neighborhoods"
         >
-          <GridIcon /> Neighborhoods
-        </button>
-        <button
-          type="button"
-          className="fog-chip"
-          onClick={() => { setMenu(null); onOpenMarket?.(); }}
-          title="House market stats"
-        >
-          <ChartIcon /> House Market Stats
+          <GridIcon /> Hoods
         </button>
         <button
           type="button"
@@ -190,7 +175,24 @@ export default function FogMapTools({
           aria-expanded={menu === "activity"}
           title="Housing activity on the map"
         >
-          <DotsIcon /> Housing Activity
+          <DotsIcon /> Homes
+        </button>
+        <button
+          type="button"
+          className={"fog-chip" + (menu === "buildings" ? " on" : "")}
+          onClick={() => toggleMenu("buildings")}
+          aria-expanded={menu === "buildings"}
+          title="Buildings"
+        >
+          <BuildingIcon /> Bldgs
+        </button>
+        <button
+          type="button"
+          className="fog-chip"
+          onClick={() => { setMenu(null); onOpenMarket?.(); }}
+          title="House market stats"
+        >
+          <ChartIcon /> Stats
         </button>
       </div>
 
@@ -233,7 +235,7 @@ export default function FogMapTools({
       {menu === "activity" && (
         <ActivityPanel
           activity={activity}
-          months={activityMonths}
+          bounds={activityBounds}
           onChange={onActivityChange}
           onClear={() => { onClearActivity?.(); setMenu(null); }}
         />
@@ -347,49 +349,75 @@ function DotsIcon() {
   );
 }
 
-const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const monthLabel = ym => { const [y, m] = ym.split("-").map(Number); return `${MON[m - 1]} ${y}`; };
-
-// Housing Activity filters: segment + month, mirroring the House Market Stats
-// pop-up. Changing either re-plots the dots on the map live.
-function ActivityPanel({ activity, months, onChange, onClear }) {
+// Housing Activity filters: status + property type + a flexible start/end
+// period. Changing anything re-plots the dots on the map live.
+function ActivityPanel({ activity, bounds, onChange, onClear }) {
   if (!activity) {
     return (
       <div className="fog-float-panel left fog-activity-panel">
-        <div className="fog-list-empty">Loading sales…</div>
+        <div className="fog-list-empty">Loading listings…</div>
       </div>
     );
   }
-  const setSeg = segment => onChange({ ...activity, segment });
+  const set = patch => onChange({ ...activity, ...patch });
+  const STATUS = [["sold", "Sold"], ["active", "Active"], ["both", "Both"]];
   const SEGS = [["all", "All"], ["sfr", "Single-Family"], ["condo", "Condo / TIC"]];
+  const showSold = activity.status !== "active";
+  const showActive = activity.status !== "sold";
   return (
     <div className="fog-float-panel left fog-activity-panel">
-      <div className="fog-layers-group-title">Activity type</div>
+      <div className="fog-layers-group-title">Status</div>
       <div className="fog-activity-segs">
-        {SEGS.map(([key, label]) => (
+        {STATUS.map(([key, label]) => (
           <button
             key={key}
             type="button"
-            className={"fog-activity-seg" + (activity.segment === key ? " on" : "")}
-            onClick={() => setSeg(key)}
+            className={"fog-activity-seg" + (activity.status === key ? " on" : "")}
+            onClick={() => set({ status: key })}
           >
             {label}
           </button>
         ))}
       </div>
 
-      <div className="fog-layers-group-title" style={{ marginTop: 10 }}>Sold in</div>
-      <select
-        className="mk-select fog-activity-month"
-        value={activity.month}
-        onChange={e => onChange({ ...activity, month: e.target.value })}
-      >
-        {[...months].reverse().map(m => <option key={m} value={m}>{monthLabel(m)}</option>)}
-      </select>
+      <div className="fog-layers-group-title" style={{ marginTop: 10 }}>Property type</div>
+      <div className="fog-activity-segs">
+        {SEGS.map(([key, label]) => (
+          <button
+            key={key}
+            type="button"
+            className={"fog-activity-seg" + (activity.segment === key ? " on" : "")}
+            onClick={() => set({ segment: key })}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      <div className="fog-layers-group-title" style={{ marginTop: 10 }}>Period</div>
+      <div className="fog-activity-period">
+        <input
+          type="month"
+          className="mk-select"
+          value={activity.start}
+          min={bounds?.min}
+          max={activity.end}
+          onChange={e => e.target.value && set({ start: e.target.value })}
+        />
+        <span className="fog-activity-dash">–</span>
+        <input
+          type="month"
+          className="mk-select"
+          value={activity.end}
+          min={activity.start}
+          max={bounds?.max}
+          onChange={e => e.target.value && set({ end: e.target.value })}
+        />
+      </div>
 
       <div className="fog-activity-legend">
-        <span><span className="fog-activity-dot" style={{ background: "#2563eb" }} /> Single-Family</span>
-        <span><span className="fog-activity-dot" style={{ background: "#ea580c" }} /> Condo / TIC</span>
+        {showSold && <span><span className="fog-activity-dot" style={{ background: "#2563eb" }} /> Sold</span>}
+        {showActive && <span><span className="fog-activity-dot" style={{ background: "#16a34a" }} /> Active / pending</span>}
       </div>
 
       <button type="button" className="fog-activity-clear" onClick={onClear}>Hide dots</button>

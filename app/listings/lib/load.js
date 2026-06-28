@@ -30,3 +30,11 @@ export const CONDO_TYPES = [
 ];
 export const isSfr = t => SFR_TYPES.includes(t);
 export const isCondo = t => CONDO_TYPES.includes(t);
+
+// Sold vs still-on-market (active/pending/coming-soon/contingent/hold).
+export const SOLD_STATUSES = ["Closed", "Sold Off MLS"];
+export const isSold = status => SOLD_STATUSES.includes(status);
+
+// The date a listing "happened" for period filtering: the close date for sold
+// homes, the status date (went active/pending/etc) for everything else.
+export const activityDate = p => (isSold(p.status) ? p.sellingDate : p.statusDate);
