@@ -960,7 +960,9 @@ export default function FogMap({
         layout: { visibility: "none" },
         paint: {
           "fill-color": "#dc2626",
-          "fill-opacity": 0.28,
+          // Light fill so the zone reads without going dark, and so the
+          // tsunami layer stays visible where the two overlap.
+          "fill-opacity": 0.15,
         },
       });
       map.addLayer({
@@ -1058,7 +1060,8 @@ export default function FogMap({
         layout: { visibility: "none" },
         paint: {
           "fill-color": "#0ea5e9",
-          "fill-opacity": 0.28,
+          // Light fill so it layers readably over the seismic zone.
+          "fill-opacity": 0.18,
         },
       });
       map.addLayer({

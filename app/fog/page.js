@@ -6,9 +6,9 @@ import { Suspense } from "react";
 import FogApp from "./FogApp";
 
 export const metadata = {
-  title: "Summer Fog Map · Jun–Aug",
+  title: "MySFMap",
   description:
-    "Enter a San Francisco address and see the average summer (Jun–Aug) fog hours for that neighborhood.",
+    "An interactive San Francisco map — neighborhoods, buildings, housing market activity, fog, microclimates, hazards, transit and bikes.",
 };
 
 export default function Page() {
