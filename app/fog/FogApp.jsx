@@ -19,6 +19,9 @@ import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
 
 const DATA_URL = "/data/sf-fog-neighborhoods.geojson";
 const CONTOURS_URL = "/data/sf-fog-contours.geojson";
+// Geographic centre of San Francisco — the default placeholder for the
+// "Neighborhoods" entry, so the map opens centred on the city for browsing.
+const SF_CENTER = [-122.4376, 37.7577];
 
 export default function FogApp() {
   const searchParams = useSearchParams();
@@ -57,6 +60,11 @@ export default function FogApp() {
   const [showMicroSun, setShowMicroSun] = useState(false);
   const [showMicroCool, setShowMicroCool] = useState(false);
   const [showMicroWind, setShowMicroWind] = useState(false);
+  // Camera fly-to target (e.g. zoom to a building picked from the Bldgs list).
+  const [flyTo, setFlyTo] = useState(null); // { center: [lng,lat], zoom } | null
+  // Transit line / bike class filters (null = all).
+  const [transitLine, setTransitLine] = useState(null);
+  const [bikeClass, setBikeClass] = useState(null);
   // Summer fog overlay — on for the "Fog Map" preset; off otherwise.
   const [showContours, setShowContours] = useState(preset === "fog");
   // Transit (Muni stops) — on for the "Transit" preset.
@@ -233,6 +241,20 @@ export default function FogApp() {
     );
   }, []);
 
+  // The "Neighborhoods" entry opens the map centred on SF with the placeholder
+  // pin at the city's geographic centre (for browsing all neighborhoods),
+  // rather than geolocating or using a passed point.
+  useEffect(() => {
+    if (urlLocAppliedRef.current) return;
+    if (preset !== "neighborhoods") return;
+    if (!geojson || !contours) return;
+    urlLocAppliedRef.current = true;
+    autoGeoTriedRef.current = true;
+    const feature = findNeighborhoodForPoint(geojson, SF_CENTER);
+    const contour = findContourForPoint(contours, SF_CENTER);
+    setPicked({ point: SF_CENTER, address: null, feature, contour });
+  }, [preset, geojson, contours]);
+
   // If a URL location was provided (e.g. linked from Ur4cast with
   // ?lat=&lng=&name=), apply it as the initial pick as soon as the data
   // loads. This pre-empts the auto-geolocation prompt — the user can
@@ -336,6 +358,13 @@ export default function FogApp() {
   const handleToggleComBuildings = useCallback(next => {
     setShowComBuildings(next);
     if (next) setShowNeighborhoods(false);
+  }, []);
+
+  // Zoom the map to a building chosen from the Bldgs list (the residential
+  // layer is already on from opening that list).
+  const zoomToBuilding = useCallback(b => {
+    const lng = Number(b?.lng), lat = Number(b?.lat);
+    if (Number.isFinite(lng) && Number.isFinite(lat)) setFlyTo({ center: [lng, lat], zoom: 16 });
   }, []);
 
   // ── Housing Activity overlay ──
@@ -442,6 +471,9 @@ export default function FogApp() {
           showMicroSun={showMicroSun}
           showMicroCool={showMicroCool}
           showMicroWind={showMicroWind}
+          flyTo={flyTo}
+          transitLine={transitLine}
+          bikeClass={bikeClass}
         />
         <FogMapTools
           contoursAvailable={!!contours}
@@ -476,6 +508,12 @@ export default function FogApp() {
           buildingProfiles={buildingProfiles}
           openBuilding={openBuilding}
           onOpenBuilding={setOpenBuilding}
+          onZoomBuilding={zoomToBuilding}
+          onShowResBuildings={() => handleToggleResBuildings(true)}
+          transitLine={transitLine}
+          onSelectTransitLine={line => { setTransitLine(line); setShowMuni(line !== null); }}
+          bikeClass={bikeClass}
+          onSelectBikeClass={cls => { setBikeClass(cls); setShowBikes(cls !== null); }}
           onPickNeighborhood={pickFromNeighborhood}
           openHood={openHood}
           onOpenMarket={() => setMarketOpen(true)}

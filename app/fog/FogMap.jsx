@@ -73,6 +73,9 @@ export default function FogMap({
   showMicroSun,
   showMicroCool,
   showMicroWind,
+  flyTo,
+  transitLine,
+  bikeClass,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
@@ -1402,8 +1405,8 @@ export default function FogMap({
         source: "fog",
         paint: {
           "line-color": "#1c1917",
-          "line-opacity": 0.7,
-          "line-width": 0.6,
+          "line-opacity": 0.8,
+          "line-width": 1.3,
         },
       });
       map.addLayer({
@@ -1612,24 +1615,26 @@ export default function FogMap({
     else map.once("load", apply);
   }, [showTsunami]);
 
-  // Toggle the Muni stops overlay (dots + zoom-in labels).
+  // Muni visibility + line filter, in one place. The route lines show whenever
+  // transit is on; the stop dots/labels show only in "all lines" mode — when a
+  // single line is picked we show just that route, not every stop in the city.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
-      const vis = showMuni ? "visible" : "none";
-      [
-        "muni-routes-lines",
-        "muni-routes-bus-substitutes",
-        "muni-dots",
-        "muni-labels",
-      ].forEach(id => {
-        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      const linesVis = showMuni ? "visible" : "none";
+      const specific = !!transitLine; // a single line letter ("" / null = all)
+      const dotsVis = showMuni && !specific ? "visible" : "none";
+      ["muni-routes-lines", "muni-routes-bus-substitutes"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", linesVis);
+      });
+      ["muni-dots", "muni-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", dotsVis);
       });
     };
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
-  }, [showMuni]);
+  }, [showMuni, transitLine]);
 
   // Toggle the SF neighborhood outlines + name labels. The invisible
   // click-target layer stays visible always so map clicks still resolve
@@ -1810,6 +1815,62 @@ export default function FogMap({
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [showMicroSun, showMicroCool, showMicroWind]);
+
+  // Fly the camera to a requested target (e.g. a building chosen from the
+  // Bldgs list). Keyed on identity so each request animates once.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !flyTo?.center) return;
+    map.flyTo({ center: flyTo.center, zoom: flyTo.zoom ?? map.getZoom(), duration: 1000 });
+  }, [flyTo]);
+
+  // Transit: filter the route lines to one route_name (e.g. "N" for N Judah),
+  // or show all when transitLine is "" / null.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      if (!map.getLayer("muni-routes-lines")) return;
+      // route_name(s) for the chosen line: rail letter + its bus-substitute.
+      // NB: use a `match` expression — the `["in", ["get",…], ["literal",…]]`
+      // form is misread as a legacy filter and doesn't restrict.
+      const names = transitLine ? [transitLine, `${transitLine}BUS`] : null;
+      const subs = ["KBUS", "NBUS", "TBUS", "FBUS"];
+      const inNames = arr => ["match", ["get", "route_name"], arr, true, false];
+      map.setFilter("muni-routes-lines", names ? inNames(names) : null);
+      if (map.getLayer("muni-routes-bus-substitutes")) {
+        map.setFilter("muni-routes-bus-substitutes",
+          names ? ["all", inNames(subs), inNames(names)] : inNames(subs));
+      }
+    };
+    // Call directly (setFilter on an existing layer is safe even mid-style-
+    // update); also bind once to the first load for the initial mount.
+    apply();
+    map.once("load", apply);
+  }, [transitLine]);
+
+  // Bikes: when a specific class is chosen show only that class (solid for
+  // I/II/IV, dashed for III); "" / null shows the normal full network.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const solid = map.getLayer("bikes-solid");
+      const dashed = map.getLayer("bikes-dashed");
+      if (!solid || !dashed) return;
+      if (!bikeClass) {
+        map.setFilter("bikes-solid", ["match", ["get", "facility"], ["CLASS I", "CLASS II", "CLASS IV"], true, false]);
+        map.setFilter("bikes-dashed", ["==", ["get", "facility"], "CLASS III"]);
+        return;
+      }
+      // A specific class — point the right layer at it, blank the other.
+      const isDashed = bikeClass === "CLASS III";
+      map.setFilter("bikes-solid", isDashed ? ["==", ["get", "facility"], "__none__"] : ["==", ["get", "facility"], bikeClass]);
+      map.setFilter("bikes-dashed", isDashed ? ["==", ["get", "facility"], "CLASS III"] : ["==", ["get", "facility"], "__none__"]);
+    };
+    apply();
+    map.once("load", apply);
+  }, [bikeClass]);
 
   // Toggle the supervisor district outlines + labels.
   useEffect(() => {

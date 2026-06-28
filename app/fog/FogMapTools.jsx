@@ -32,7 +32,9 @@ export default function FogMapTools({
   showResBuildings, onToggleResBuildings,
   showComBuildings, onToggleComBuildings,
   // Buildings list
-  buildingProfiles, openBuilding, onOpenBuilding,
+  buildingProfiles, openBuilding, onOpenBuilding, onZoomBuilding, onShowResBuildings,
+  // Transit + Bikes line/class selection
+  transitLine, onSelectTransitLine, bikeClass, onSelectBikeClass,
   // Neighborhoods list
   onPickNeighborhood, openHood,
   // House market stats pop-up
@@ -194,7 +196,11 @@ export default function FogMapTools({
         <button
           type="button"
           className={"fog-chip" + (menu === "buildings" ? " on" : "")}
-          onClick={() => toggleMenu("buildings")}
+          onClick={() => {
+            if (menu === "buildings") { setMenu(null); return; }
+            setMenu("buildings");
+            onShowResBuildings?.(); // show the residential footprints with the list
+          }}
           aria-expanded={menu === "buildings"}
           title="Buildings"
         >
@@ -242,6 +248,24 @@ export default function FogMapTools({
         >
           <HazardIcon /> Hazards
         </button>
+        <button
+          type="button"
+          className={"fog-chip" + (menu === "transit" ? " on" : "") + (showMuni ? " active" : "")}
+          onClick={() => setMenu(menu === "transit" ? null : "transit")}
+          aria-expanded={menu === "transit"}
+          title="Transit lines"
+        >
+          <TransitIcon /> Transit
+        </button>
+        <button
+          type="button"
+          className={"fog-chip" + (menu === "bikes" ? " on" : "") + (showBikes ? " active" : "")}
+          onClick={() => setMenu(menu === "bikes" ? null : "bikes")}
+          aria-expanded={menu === "bikes"}
+          title="Bike network"
+        >
+          <BikeIcon /> Bikes
+        </button>
       </div>
 
       {menu === "buildings" && (
@@ -254,7 +278,7 @@ export default function FogMapTools({
                 key={b.objectid}
                 type="button"
                 className={"fog-list-link" + (b.objectid === openBuilding ? " on" : "")}
-                onClick={() => { onOpenBuilding(b.objectid); setMenu(null); }}
+                onClick={() => { onZoomBuilding?.(b); setMenu(null); }}
               >
                 {b.name}
                 {b.tenure === "rental" && <span className="fog-bldg-rental"> (Rental)</span>}
@@ -300,6 +324,40 @@ export default function FogMapTools({
             <span><span className="fog-activity-dot" style={{ background: "#7dd3fc" }} /> Cool / shade</span>
             <span><span className="fog-activity-dot" style={{ background: "#2dd4bf" }} /> Wind corridors</span>
           </div>
+        </div>
+      )}
+
+      {menu === "transit" && (
+        <div className="fog-float-panel left fog-list-panel">
+          {TRANSIT_LINES.map(([val, label, color]) => (
+            <button
+              key={label}
+              type="button"
+              className={"fog-list-link" + (transitLine === val ? " on" : "")}
+              onClick={() => { onSelectTransitLine?.(val); setMenu(null); }}
+            >
+              {color && <span className="fog-activity-dot" style={{ background: color, marginRight: 8 }} />}
+              {label}
+            </button>
+          ))}
+          <button type="button" className="fog-list-link fog-list-off" onClick={() => { onSelectTransitLine?.(null); setMenu(null); }}>Hide transit</button>
+        </div>
+      )}
+
+      {menu === "bikes" && (
+        <div className="fog-float-panel left fog-list-panel">
+          {BIKE_CLASSES.map(([val, label, color, dashed]) => (
+            <button
+              key={label}
+              type="button"
+              className={"fog-list-link" + (bikeClass === val ? " on" : "")}
+              onClick={() => { onSelectBikeClass?.(val); setMenu(null); }}
+            >
+              {color && <span className="fog-activity-dot" style={{ background: color, marginRight: 8, borderRadius: dashed ? 2 : "50%" }} />}
+              {label}
+            </button>
+          ))}
+          <button type="button" className="fog-list-link fog-list-off" onClick={() => { onSelectBikeClass?.(null); setMenu(null); }}>Hide bike lanes</button>
         </div>
       )}
 
@@ -433,6 +491,45 @@ function HazardIcon() {
     </svg>
   );
 }
+function TransitIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="6" y="3" width="12" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
+      <path d="M6 11h12" stroke="currentColor" strokeWidth="2" />
+      <circle cx="9" cy="14" r="1" fill="currentColor" /><circle cx="15" cy="14" r="1" fill="currentColor" />
+      <path d="M8 17l-2 4M16 17l2 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+function BikeIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" stroke="currentColor" strokeWidth="2">
+      <circle cx="6" cy="17" r="3.5" /><circle cx="18" cy="17" r="3.5" />
+      <path d="M6 17l4-7h5l-3 7M10 10l-1-3H7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+// Curated Muni lines (rail + cable + historic) mapped to their route_name.
+// "" = all lines; the value is the route_name letter passed to the map filter.
+const TRANSIT_LINES = [
+  ["", "All lines", null],
+  ["N", "N Judah", "#005DAA"],
+  ["J", "J Church", "#D85F2A"],
+  ["K", "K Ingleside", "#5B6770"],
+  ["L", "L Taraval", "#92278F"],
+  ["M", "M Ocean View", "#007749"],
+  ["T", "T Third", "#BC1E2D"],
+  ["F", "F Market & Wharves", "#C99729"],
+];
+// Bike facility classes; "" = all. dashed flag drives the legend swatch shape.
+const BIKE_CLASSES = [
+  ["", "All bike lanes", null, false],
+  ["CLASS I", "Class I · off-street path", "#15803d", false],
+  ["CLASS II", "Class II · striped lane", "#06b6d4", false],
+  ["CLASS IV", "Class IV · separated", "#22c55e", false],
+  ["CLASS III", "Class III · shared / sharrows", "#6b7280", true],
+];
 
 // Housing Activity filters: status + property type + a flexible start/end
 // period. Changing anything re-plots the dots on the map live.
