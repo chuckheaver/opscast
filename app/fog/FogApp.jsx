@@ -51,6 +51,12 @@ export default function FogApp() {
   const [listingsGeo, setListingsGeo] = useState(null);
   const [activityWanted, setActivityWanted] = useState(false); // user opened the panel
   const [activity, setActivity] = useState(null); // { segment: "all"|"sfr"|"condo", month: "YYYY-MM" } | null
+  // "MicroClimates" overlay: terrain-derived sun/cool/wind zones (lazy-loaded).
+  const [microWanted, setMicroWanted] = useState(false);
+  const [microZones, setMicroZones] = useState(null);
+  const [showMicroSun, setShowMicroSun] = useState(false);
+  const [showMicroCool, setShowMicroCool] = useState(false);
+  const [showMicroWind, setShowMicroWind] = useState(false);
   // Summer fog overlay — on for the "Fog Map" preset; off otherwise.
   const [showContours, setShowContours] = useState(preset === "fog");
   // Transit (Muni stops) — on for the "Transit" preset.
@@ -341,6 +347,18 @@ export default function FogApp() {
     return () => { cancelled = true; };
   }, [activityWanted, listingsGeo]);
 
+  // ── MicroClimates overlay ──
+  // Lazy-load the terrain-derived sun/cool/wind zones on first panel open.
+  useEffect(() => {
+    if (!microWanted || microZones) return;
+    let cancelled = false;
+    fetch("/data/sf-microclimates.geojson")
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { if (!cancelled && d) setMicroZones(d); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [microWanted, microZones]);
+
   // Earliest / latest month with any activity — a sale date (sold) or an
   // on-market status date (active). Spans both so the period covers all data.
   const activityBounds = useMemo(() => {
@@ -420,6 +438,10 @@ export default function FogApp() {
           picked={picked}
           onPickFeature={pickFromMap}
           activityData={activityData}
+          microZones={microZones}
+          showMicroSun={showMicroSun}
+          showMicroCool={showMicroCool}
+          showMicroWind={showMicroWind}
         />
         <FogMapTools
           contoursAvailable={!!contours}
@@ -462,6 +484,13 @@ export default function FogApp() {
           onActivityOpen={() => setActivityWanted(true)}
           onActivityChange={setActivity}
           onClearActivity={() => { setActivity(null); setActivityWanted(false); }}
+          showMicroSun={showMicroSun}
+          onToggleMicroSun={setShowMicroSun}
+          showMicroCool={showMicroCool}
+          onToggleMicroCool={setShowMicroCool}
+          showMicroWind={showMicroWind}
+          onToggleMicroWind={setShowMicroWind}
+          onMicroOpen={() => setMicroWanted(true)}
           onPickFromAddress={pickFromAddress}
           onUseGeoLocation={requestGeoLocation}
           ready={!!geojson}

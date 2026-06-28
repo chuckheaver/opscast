@@ -39,6 +39,9 @@ export default function FogMapTools({
   onOpenMarket,
   // Housing Activity map overlay
   activity, activityBounds, onActivityOpen, onActivityChange, onClearActivity,
+  // MicroClimates overlay
+  showMicroSun, onToggleMicroSun, showMicroCool, onToggleMicroCool,
+  showMicroWind, onToggleMicroWind, onMicroOpen,
   // Location / search
   onPickFromAddress, onUseGeoLocation, ready, geoLoading, picked,
   dataErr, geoErr,
@@ -108,12 +111,23 @@ export default function FogMapTools({
   const activeCount = groups.reduce((n, g) => n + g.items.filter(([, on]) => on).length, 0);
 
   // Legends for the currently-active color-coded layers only.
+  const microItems = [
+    showMicroSun && ["#fdba74", "Sun pockets"],
+    showMicroCool && ["#7dd3fc", "Cool / shade"],
+    showMicroWind && ["#2dd4bf", "Wind corridors"],
+  ].filter(Boolean);
+  const hazardItems = [
+    showSeismic && ["#dc2626", "Seismic zone"],
+    showTsunami && ["#0ea5e9", "Tsunami zone"],
+  ].filter(Boolean);
   const legends = [
     showElevation && ELEVATION_LEGEND,
     showResBuildings && RES_LEGEND,
     showComBuildings && COM_LEGEND,
     showBikes && BIKE_LEGEND,
     showMuni && TRANSIT_LEGEND,
+    microItems.length && { title: "Microclimate zones", items: microItems },
+    hazardItems.length && { title: "Hazards", items: hazardItems },
   ].filter(Boolean);
 
   // ── Buildings: alphanumeric residential index ──
@@ -194,6 +208,40 @@ export default function FogMapTools({
         >
           <ChartIcon /> Stats
         </button>
+        <button
+          type="button"
+          className={"fog-chip" + (showContours ? " active" : "")}
+          onClick={() => { setMenu(null); onToggleContours(!showContours); }}
+          title="Summer fog"
+        >
+          <FogIcon /> Fog
+        </button>
+        <button
+          type="button"
+          className={"fog-chip" + (menu === "micro" ? " on" : "") + ((showMicroSun || showMicroCool || showMicroWind) ? " active" : "")}
+          onClick={() => {
+            if (menu === "micro") { setMenu(null); return; }
+            setMenu("micro");
+            onMicroOpen?.();
+          }}
+          aria-expanded={menu === "micro"}
+          title="Microclimate zones"
+        >
+          <MicroIcon /> MicroClimates
+        </button>
+        <button
+          type="button"
+          className={"fog-chip" + ((showSeismic || showTsunami) ? " active" : "")}
+          onClick={() => {
+            setMenu(null);
+            const on = showSeismic || showTsunami;
+            onToggleSeismic(!on);
+            onToggleTsunami(!on);
+          }}
+          title="Hazards — seismic + tsunami"
+        >
+          <HazardIcon /> Hazards
+        </button>
       </div>
 
       {menu === "buildings" && (
@@ -239,6 +287,20 @@ export default function FogMapTools({
           onChange={onActivityChange}
           onClear={() => { onClearActivity?.(); setMenu(null); }}
         />
+      )}
+
+      {menu === "micro" && (
+        <div className="fog-float-panel left fog-activity-panel">
+          <div className="fog-layers-group-title">Microclimate zones</div>
+          <ToggleSwitch label="Sun pockets" checked={showMicroSun} onChange={onToggleMicroSun} />
+          <ToggleSwitch label="Cool / shade" checked={showMicroCool} onChange={onToggleMicroCool} />
+          <ToggleSwitch label="Wind corridors" checked={showMicroWind} onChange={onToggleMicroWind} />
+          <div className="fog-activity-legend">
+            <span><span className="fog-activity-dot" style={{ background: "#fdba74" }} /> Sun pockets</span>
+            <span><span className="fog-activity-dot" style={{ background: "#7dd3fc" }} /> Cool / shade</span>
+            <span><span className="fog-activity-dot" style={{ background: "#2dd4bf" }} /> Wind corridors</span>
+          </div>
+        </div>
       )}
 
       {/* Round Layers button (top-right) */}
@@ -345,6 +407,29 @@ function DotsIcon() {
       <circle cx="16" cy="6" r="2.2" fill="currentColor" />
       <circle cx="9" cy="16" r="2.2" fill="currentColor" />
       <circle cx="18" cy="15" r="2.2" fill="currentColor" />
+    </svg>
+  );
+}
+function FogIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <path d="M4 9h16M6 13h12M4 17h16" />
+    </svg>
+  );
+}
+function MicroIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="4" fill="currentColor" />
+      <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+function HazardIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3 2 20h20L12 3Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M12 10v4M12 17h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }

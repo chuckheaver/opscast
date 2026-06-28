@@ -69,6 +69,10 @@ export default function FogMap({
   picked,
   onPickFeature,
   activityData,
+  microZones,
+  showMicroSun,
+  showMicroCool,
+  showMicroWind,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
@@ -984,6 +988,31 @@ export default function FogMap({
           "circle-opacity": 0.9,
         },
       });
+      // MicroClimates zones — terrain-derived sun / cool / wind areas, fed by
+      // the microZones prop. Each zone is a fill + matching outline, hidden
+      // until its toggle turns on.
+      const MZ_COLOR = { sun: "#fdba74", cool: "#7dd3fc", wind: "#2dd4bf" };
+      const MZ_OPACITY = { sun: 0.55, cool: 0.55, wind: 0.45 };
+      map.addSource("micro-zones", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
+      ["sun", "cool", "wind"].forEach(z => {
+        map.addLayer({
+          id: `fmicro-${z}-fill`,
+          type: "fill",
+          source: "micro-zones",
+          filter: ["==", ["get", "zone"], z],
+          layout: { visibility: "none" },
+          paint: { "fill-color": MZ_COLOR[z], "fill-opacity": MZ_OPACITY[z] },
+        });
+        map.addLayer({
+          id: `fmicro-${z}-line`,
+          type: "line",
+          source: "micro-zones",
+          filter: ["==", ["get", "zone"], z],
+          layout: { visibility: "none", "line-join": "round" },
+          paint: { "line-color": MZ_COLOR[z], "line-width": 1, "line-opacity": 0.85 },
+        });
+      });
+
       let actPopup = null;
       map.on("mouseenter", "activity-dots", () => { map.getCanvas().style.cursor = "pointer"; });
       map.on("mouseleave", "activity-dots", () => { map.getCanvas().style.cursor = ""; });
@@ -1752,6 +1781,35 @@ export default function FogMap({
     if (map.isStyleLoaded()) apply();
     else map.once("load", apply);
   }, [activityData]);
+
+  // Feed the MicroClimates zones once loaded.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const src = map.getSource("micro-zones");
+      if (src) src.setData(microZones || { type: "FeatureCollection", features: [] });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [microZones]);
+
+  // Toggle the MicroClimates sun / cool / wind zone overlays.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const set = (z, on) => ["fill", "line"].forEach(t => {
+        const id = `fmicro-${z}-${t}`;
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", on ? "visible" : "none");
+      });
+      set("sun", showMicroSun);
+      set("cool", showMicroCool);
+      set("wind", showMicroWind);
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showMicroSun, showMicroCool, showMicroWind]);
 
   // Toggle the supervisor district outlines + labels.
   useEffect(() => {
