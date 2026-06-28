@@ -307,7 +307,7 @@ export default function NeighborhoodModal({
           ) : (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>Market data unavailable.</span></div>
           )}
-          <a style={LINK} href={`/listings?nbhd=${encodeURIComponent(name)}&layer=nbhd`}>↗ See Market data</a>
+          <a style={LINK} href="/fog?preset=homes">↗ See Market data</a>
         </section>
 
         {microText && (

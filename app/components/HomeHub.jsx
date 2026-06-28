@@ -122,7 +122,7 @@ export default function HomeHub() {
   const tiles = [
     { emoji: "🌤️", label: "Weather",       href: "/weather" },
     { emoji: "🌍", label: "Micro-Climate", href: buildLocUrl("/microclimates", selectedLoc, { layer: "solar" }) },
-    { emoji: "🏡", label: "Market",        href: "/listings" },
+    { emoji: "🏡", label: "Market",        href: buildFogUrl(selectedLoc, "homes") },
     { emoji: "🌁", label: "MySFMap",       href: buildFogUrl(selectedLoc, "fog") },
     { emoji: "🚃", label: "Transit",       href: buildFogUrl(selectedLoc, "transit") },
     { emoji: "🚲", label: "Bike Paths",    href: buildFogUrl(selectedLoc, "bikes") },

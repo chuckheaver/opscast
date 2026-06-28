@@ -1425,6 +1425,45 @@ input[type=range]::-webkit-slider-thumb:hover {
 
 /* Housing Activity filter panel. */
 .fog-activity-panel { width: 230px; padding: 11px 13px 13px; }
+/* Homes panel hosts the full shared market filter, so it's a bit wider. */
+.fog-homes-panel { width: 290px; padding: 12px 14px 14px; }
+
+/* Shared market filter (Homes overlay + Stats pop-up). */
+.lf-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.lf-head > span { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #78716c; }
+.lf-reset { background: none; border: none; padding: 0; font: inherit; font-size: 12.5px; font-weight: 600; color: #2563eb; cursor: pointer; }
+.lf-reset:hover { text-decoration: underline; }
+.lf-section { margin-top: 11px; }
+.lf-label { font-size: 11px; font-weight: 700; color: #57534e; margin-bottom: 5px; }
+.lf-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.lf-chip {
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #57534e;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.lf-chip:hover { background: #faf6ec; }
+.lf-chip.on { background: #2563eb; border-color: #2563eb; color: #fff; }
+.lf-row { display: flex; align-items: center; gap: 6px; }
+.lf-input, .lf-select {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 7px 9px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #fff;
+  color: #1c1917;
+  outline: none;
+}
+.lf-input:focus, .lf-select:focus { border-color: var(--accent); }
 .fog-activity-segs { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
 .fog-activity-seg {
   flex: 1 1 auto;

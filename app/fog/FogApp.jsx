@@ -13,7 +13,8 @@ import FogMap from "./FogMap";
 import FogPanel from "./FogPanel";
 import FogMapTools from "./FogMapTools";
 import MarketModal from "../market/MarketModal";
-import { loadListingsGeo, isSfr, isCondo, isSold } from "../listings/lib/load";
+import { loadListingsGeo } from "../listings/lib/load";
+import { defaultFilter, matchesFilter, deriveOptions, isSoldStatus } from "../listings/lib/filter";
 import { findNeighborhoodForPoint, findContourForPoint, findFeatureByName, centroidOfFeature } from "./lib/spatial";
 import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
 
@@ -52,8 +53,8 @@ export default function FogApp() {
   const [marketOpen, setMarketOpen] = useState(false); // "House Market Stats" pop-up
   // "Housing Activity" map overlay: listings GeoJSON + the active filter.
   const [listingsGeo, setListingsGeo] = useState(null);
-  const [activityWanted, setActivityWanted] = useState(false); // user opened the panel
-  const [activity, setActivity] = useState(null); // { segment: "all"|"sfr"|"condo", month: "YYYY-MM" } | null
+  const [activityWanted, setActivityWanted] = useState(preset === "homes"); // Homes dots on
+  const [homesFilter, setHomesFilter] = useState(defaultFilter); // shared market filter
   // "MicroClimates" overlay: terrain-derived sun/cool/wind zones (lazy-loaded).
   const [microWanted, setMicroWanted] = useState(false);
   const [microZones, setMicroZones] = useState(null);
@@ -388,59 +389,25 @@ export default function FogApp() {
     return () => { cancelled = true; };
   }, [microWanted, microZones]);
 
-  // Earliest / latest month with any activity — a sale date (sold) or an
-  // on-market status date (active). Spans both so the period covers all data.
-  const activityBounds = useMemo(() => {
-    if (!listingsGeo) return null;
-    let min = "9999-99", max = "0000-00";
-    const seen = ym => { if (ym < min) min = ym; if (ym > max) max = ym; };
-    for (const f of listingsGeo.features) {
-      const p = f.properties;
-      if (p.sellingPrice > 0 && p.sellingDate) seen(p.sellingDate.slice(0, 7));
-      if (!isSold(p.status) && p.statusDate) seen(p.statusDate.slice(0, 7));
-    }
-    return max === "0000-00" ? null : { min, max };
-  }, [listingsGeo]);
+  // Option lists for the shared filter, derived from the listings data.
+  const homesOptions = useMemo(() => deriveOptions(listingsGeo?.features), [listingsGeo]);
 
-  // Once data is in and the user has asked for activity, seed the default
-  // filter: sold homes, all types, current year January → latest data.
-  useEffect(() => {
-    if (!activityWanted || activity || !activityBounds) return;
-    const year = new Date().getFullYear();
-    let start = `${year}-01`;
-    if (start < activityBounds.min || start > activityBounds.max) start = activityBounds.min;
-    setActivity({ status: "sold", segment: "all", start, end: activityBounds.max });
-  }, [activityWanted, activity, activityBounds]);
-
-  // Filter the listings to the chosen status + segment + period → a
-  // FeatureCollection of dots, each tagged actKind ("sold"|"active") for
-  // colouring. "Sold" = a sale dated in the period (matches the market report);
-  // "Active" = an on-market listing whose status date falls in the period.
-  // Null when activity is off.
+  // Filter the listings with the shared filter → a FeatureCollection of dots,
+  // each tagged actKind ("sold"|"active") for colouring. Null when Homes is off.
   const activityData = useMemo(() => {
-    if (!listingsGeo || !activity) return null;
-    const { status, segment, start, end } = activity;
-    const inRange = ym => ym && ym >= start && ym <= end;
+    if (!listingsGeo || !activityWanted) return null;
     const feats = [];
     for (const f of listingsGeo.features) {
       const p = f.properties;
-      const sfr = isSfr(p.propType), condo = isCondo(p.propType);
-      if (segment === "sfr" && !sfr) continue;
-      if (segment === "condo" && !condo) continue;
-      if (segment === "all" && !sfr && !condo) continue; // skip multi-unit/other
-      const soldYM = (p.sellingPrice > 0 && p.sellingDate) ? p.sellingDate.slice(0, 7) : null;
-      const activeYM = (!isSold(p.status) && p.statusDate) ? p.statusDate.slice(0, 7) : null;
-      const soldHit = (status === "sold" || status === "both") && inRange(soldYM);
-      const activeHit = (status === "active" || status === "both") && inRange(activeYM);
-      if (!soldHit && !activeHit) continue;
+      if (!matchesFilter(p, homesFilter)) continue;
       feats.push({
         type: "Feature",
         geometry: f.geometry,
-        properties: { ...p, actKind: soldHit ? "sold" : "active" },
+        properties: { ...p, actKind: isSoldStatus(p.status) ? "sold" : "active" },
       });
     }
     return { type: "FeatureCollection", features: feats };
-  }, [listingsGeo, activity]);
+  }, [listingsGeo, activityWanted, homesFilter]);
 
   return (
     <div className="fog-app fog-app-vertical">
@@ -517,11 +484,14 @@ export default function FogApp() {
           onPickNeighborhood={pickFromNeighborhood}
           openHood={openHood}
           onOpenMarket={() => setMarketOpen(true)}
-          activity={activity}
-          activityBounds={activityBounds}
+          initialMenu={preset === "homes" ? "activity" : undefined}
+          activityOn={activityWanted}
+          homesFilter={homesFilter}
+          homesOptions={homesOptions}
           onActivityOpen={() => setActivityWanted(true)}
-          onActivityChange={setActivity}
-          onClearActivity={() => { setActivity(null); setActivityWanted(false); }}
+          onHomesFilterChange={setHomesFilter}
+          onHomesReset={() => setHomesFilter(defaultFilter())}
+          onClearActivity={() => setActivityWanted(false)}
           showMicroSun={showMicroSun}
           onToggleMicroSun={setShowMicroSun}
           showMicroCool={showMicroCool}

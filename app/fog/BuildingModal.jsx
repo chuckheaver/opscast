@@ -163,7 +163,7 @@ export default function BuildingModal({ profile, authored, onClose }) {
                 ))}
               </div>
             )}
-            <a style={LINK} href={`/listings?building=${encodeURIComponent(profile.objectid)}`}>↗ See all sold / active activity</a>
+            <a style={LINK} href="/fog?preset=homes">↗ See all sold / active activity</a>
           </section>
         )}
 

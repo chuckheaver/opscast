@@ -864,7 +864,7 @@ export default function FogMap({
           const right = [usd(s.price), s.date ? shortDate(s.date) : null].filter(Boolean).join(" · ");
           return `<div style="display:flex;justify-content:space-between;gap:10px"><span style="color:#6b7280">${left || "—"}</span><span>${right}</span></div>`;
         }).join("");
-        const link = `<a href="/listings?building=${encodeURIComponent(objectid)}" style="display:inline-block;margin-top:6px">See all market activity ↗</a>`;
+        const link = `<a href="/fog?preset=homes" style="display:inline-block;margin-top:6px">See all market activity ↗</a>`;
         return `<div style="margin-top:8px;padding-top:8px;border-top:1px solid #e5e7eb">`
           + `<strong style="font-size:12.5px">🏢 Market activity</strong>`
           + `<div style="color:#374151;margin:2px 0 6px">${summary}</div>`

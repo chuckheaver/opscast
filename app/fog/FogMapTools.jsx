@@ -10,6 +10,7 @@
 import { useState, useRef, useEffect } from "react";
 import { listNeighborhoods } from "./lib/neighborhoods";
 import FogLocationSearch from "./FogLocationSearch";
+import ListingFilter from "../components/ListingFilter";
 
 // Alphabetical neighborhood index (already sorted by listNeighborhoods).
 const NBHD_INDEX = listNeighborhoods();
@@ -39,17 +40,25 @@ export default function FogMapTools({
   onPickNeighborhood, openHood,
   // House market stats pop-up
   onOpenMarket,
-  // Housing Activity map overlay
-  activity, activityBounds, onActivityOpen, onActivityChange, onClearActivity,
+  // Housing Activity (Homes) map overlay — shared market filter drives the dots
+  activityOn, homesFilter, homesOptions, onActivityOpen, onHomesFilterChange, onHomesReset, onClearActivity,
   // MicroClimates overlay
   showMicroSun, onToggleMicroSun, showMicroCool, onToggleMicroCool,
   showMicroWind, onToggleMicroWind, onMicroOpen,
   // Location / search
   onPickFromAddress, onUseGeoLocation, ready, geoLoading, picked,
   dataErr, geoErr,
+  // Optional menu to open on first load (e.g. "activity" from the Market entry)
+  initialMenu,
 }) {
-  const [menu, setMenu] = useState(null); // "layers" | "buildings" | "neighborhoods" | "activity" | null
+  const [menu, setMenu] = useState(initialMenu || null); // "layers" | "buildings" | "neighborhoods" | "activity" | null
   const wrapRef = useRef(null);
+
+  // The Market entry lands with the Homes filter open + dots on.
+  useEffect(() => {
+    if (initialMenu === "activity") onActivityOpen?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Close the open menu on an outside click or the Escape key.
   useEffect(() => {
@@ -182,7 +191,7 @@ export default function FogMapTools({
         </button>
         <button
           type="button"
-          className={"fog-chip" + (menu === "activity" ? " on" : "") + (activity ? " active" : "")}
+          className={"fog-chip" + (menu === "activity" ? " on" : "") + (activityOn ? " active" : "")}
           onClick={() => {
             if (menu === "activity") { setMenu(null); return; }
             setMenu("activity");
@@ -305,12 +314,15 @@ export default function FogMapTools({
       )}
 
       {menu === "activity" && (
-        <ActivityPanel
-          activity={activity}
-          bounds={activityBounds}
-          onChange={onActivityChange}
-          onClear={() => { onClearActivity?.(); setMenu(null); }}
-        />
+        <div className="fog-float-panel left fog-homes-panel">
+          <ListingFilter
+            filter={homesFilter}
+            options={homesOptions}
+            onChange={onHomesFilterChange}
+            onReset={onHomesReset}
+          />
+          <button type="button" className="fog-activity-clear" onClick={() => { onClearActivity?.(); setMenu(null); }}>Hide dots</button>
+        </div>
       )}
 
       {menu === "micro" && (
@@ -530,82 +542,6 @@ const BIKE_CLASSES = [
   ["CLASS IV", "Class IV · separated", "#22c55e", false],
   ["CLASS III", "Class III · shared / sharrows", "#6b7280", true],
 ];
-
-// Housing Activity filters: status + property type + a flexible start/end
-// period. Changing anything re-plots the dots on the map live.
-function ActivityPanel({ activity, bounds, onChange, onClear }) {
-  if (!activity) {
-    return (
-      <div className="fog-float-panel left fog-activity-panel">
-        <div className="fog-list-empty">Loading listings…</div>
-      </div>
-    );
-  }
-  const set = patch => onChange({ ...activity, ...patch });
-  const STATUS = [["sold", "Sold"], ["active", "Active"], ["both", "Both"]];
-  const SEGS = [["all", "All"], ["sfr", "Single-Family"], ["condo", "Condo / TIC"]];
-  const showSold = activity.status !== "active";
-  const showActive = activity.status !== "sold";
-  return (
-    <div className="fog-float-panel left fog-activity-panel">
-      <div className="fog-layers-group-title">Status</div>
-      <div className="fog-activity-segs">
-        {STATUS.map(([key, label]) => (
-          <button
-            key={key}
-            type="button"
-            className={"fog-activity-seg" + (activity.status === key ? " on" : "")}
-            onClick={() => set({ status: key })}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-
-      <div className="fog-layers-group-title" style={{ marginTop: 10 }}>Property type</div>
-      <div className="fog-activity-segs">
-        {SEGS.map(([key, label]) => (
-          <button
-            key={key}
-            type="button"
-            className={"fog-activity-seg" + (activity.segment === key ? " on" : "")}
-            onClick={() => set({ segment: key })}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-
-      <div className="fog-layers-group-title" style={{ marginTop: 10 }}>Period</div>
-      <div className="fog-activity-period">
-        <input
-          type="month"
-          className="mk-select"
-          value={activity.start}
-          min={bounds?.min}
-          max={activity.end}
-          onChange={e => e.target.value && set({ start: e.target.value })}
-        />
-        <span className="fog-activity-dash">–</span>
-        <input
-          type="month"
-          className="mk-select"
-          value={activity.end}
-          min={activity.start}
-          max={bounds?.max}
-          onChange={e => e.target.value && set({ end: e.target.value })}
-        />
-      </div>
-
-      <div className="fog-activity-legend">
-        {showSold && <span><span className="fog-activity-dot" style={{ background: "#2563eb" }} /> Sold</span>}
-        {showActive && <span><span className="fog-activity-dot" style={{ background: "#16a34a" }} /> Active / pending</span>}
-      </div>
-
-      <button type="button" className="fog-activity-clear" onClick={onClear}>Hide dots</button>
-    </div>
-  );
-}
 
 function ToggleSwitch({ checked, onChange, label }) {
   return (
