@@ -6,7 +6,7 @@
 // report" expands to the by-neighborhood breakdown and the sales list. The map
 // stays visible above — no backdrop.
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { computeStats } from "../listings/lib/stats";
 import { isSoldStatus } from "../listings/lib/filter";
 
@@ -22,6 +22,7 @@ const shortAddr = a => (a ? a.replace(/,\s*San Francisco.*$/i, "") : "—");
 const fmtDate = iso => { const m = iso && /^(\d{4})-(\d{2})-(\d{2})/.exec(iso); return m ? `${+m[2]}/${+m[3]}/${m[1].slice(2)}` : "—"; };
 
 export default function HomesStats({ props, count, expanded, onToggleExpand, onClose, onDownload, downloading }) {
+  const [drill, setDrill] = useState(null); // neighborhood drilled into, or null
   const stats = useMemo(() => computeStats(props || []), [props]);
   const sold = useMemo(() => (props || []).filter(p => isSoldStatus(p.status) && p.sellingPrice > 0), [props]);
 
@@ -37,7 +38,11 @@ export default function HomesStats({ props, count, expanded, onToggleExpand, onC
       .sort((a, b) => (b.stats.medianSale ?? 0) - (a.stats.medianSale ?? 0));
   }, [sold]);
 
-  const grid = useMemo(() => [...sold].sort((a, b) => (b.sellingPrice || 0) - (a.sellingPrice || 0)), [sold]);
+  // Address grid — all sold, or just the drilled-into neighborhood.
+  const grid = useMemo(() => {
+    const base = drill ? sold.filter(p => p.neighborhood === drill || p.fogNeighborhood === drill) : sold;
+    return [...base].sort((a, b) => (b.sellingPrice || 0) - (a.sellingPrice || 0));
+  }, [sold, drill]);
 
   const metrics = [
     { v: usdShort(stats.medianSale), l: "Median" },
@@ -64,15 +69,18 @@ export default function HomesStats({ props, count, expanded, onToggleExpand, onC
 
       {expanded && (
         <div className="fog-stats-body">
-          {nbRows.length > 0 && (
+          {drill ? (
+            <button type="button" className="fog-stats-back" onClick={() => setDrill(null)}>‹ All neighborhoods</button>
+          ) : nbRows.length > 0 && (
             <>
               <h4 className="fog-stats-h">By neighborhood</h4>
+              <p className="fog-stats-hint">Tap a neighborhood to see its sales by address.</p>
               <table className="mk-table mk-nb">
                 <thead><tr><th>Neighborhood</th><th>Median</th><th>%ofList</th><th># Sold</th></tr></thead>
                 <tbody>
                   {nbRows.map(r => (
-                    <tr key={r.n}>
-                      <td>{r.n}{r.count < 50 ? <span className="mk-star" title="Small sample (n<50)">*</span> : null}</td>
+                    <tr key={r.n} className="fog-stats-nbrow" onClick={() => setDrill(r.n)} title={`See ${r.n} sales`}>
+                      <td>{r.n}{r.count < 50 ? <span className="mk-star" title="Small sample (n<50)">*</span> : null}<span className="fog-stats-arrow" aria-hidden="true">›</span></td>
                       <td className="mk-num">{usdShort(r.stats.medianSale)}</td>
                       <td className="mk-num">{r.stats.avgPctOfList == null ? "—" : Math.round(r.stats.avgPctOfList) + "%"}</td>
                       <td className="mk-num">{r.count}</td>
@@ -83,7 +91,7 @@ export default function HomesStats({ props, count, expanded, onToggleExpand, onC
             </>
           )}
 
-          <h4 className="fog-stats-h">Sales ({grid.length.toLocaleString("en-US")})</h4>
+          <h4 className="fog-stats-h">{drill ? `${drill} — sales` : "Sales"} ({grid.length.toLocaleString("en-US")})</h4>
           <div className="re-modal-scroll">
             <table className="re-modal-table">
               <thead><tr><th>Address</th><th>Bd/Ba</th><th>Sq Ft</th><th>List</th><th>Sale</th><th>$/SF</th><th>DOM</th><th>Sold</th></tr></thead>

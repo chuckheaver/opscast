@@ -1498,6 +1498,11 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-stats-l { font-size: 10.5px; color: #78716c; margin-top: 1px; }
 .fog-stats-body { margin-top: 12px; overflow-y: auto; flex: 1 1 auto; }
 .fog-stats-h { font-size: 12px; font-weight: 700; color: #57534e; margin: 12px 0 5px; }
+.fog-stats-hint { font-size: 11px; color: #a8a29e; margin: 0 0 6px; }
+.fog-stats-nbrow { cursor: pointer; }
+.fog-stats-nbrow:hover { background: #eff6ff; }
+.fog-stats-arrow { color: #2563eb; font-weight: 800; margin-left: 5px; }
+.fog-stats-back { background: none; border: none; padding: 4px 0; font: inherit; font-size: 12.5px; font-weight: 600; color: #2563eb; cursor: pointer; }
 .fog-stats-src { font-size: 11px; color: #a8a29e; margin-top: 10px; line-height: 1.5; }
 
 /* Transit panel: the legend doubles as a multi-select line picker. */
