@@ -3,19 +3,20 @@
 // map (to filter routes) and the Transit panel (the legend that doubles as the
 // selector).
 
-// Named categories (everything that isn't a plain numbered bus).
+// Named categories (everything that isn't a plain numbered bus). `short` is the
+// tiny label used in the compact one-line selector bar.
 const NAMED = [
-  { key: "J", label: "J Church", color: "#D85F2A", routes: ["J"] },
-  { key: "K", label: "K Ingleside", color: "#5B6770", routes: ["K", "KBUS"] },
-  { key: "L", label: "L Taraval", color: "#92278F", routes: ["L"] },
-  { key: "M", label: "M Ocean View", color: "#007749", routes: ["M"] },
-  { key: "N", label: "N Judah", color: "#005DAA", routes: ["N", "NBUS"] },
-  { key: "T", label: "T Third", color: "#BC1E2D", routes: ["T", "TBUS"] },
-  { key: "F", label: "F Heritage", color: "#C99729", routes: ["F", "FBUS"] },
-  { key: "cable", label: "Cable car", color: "#B11116", routes: ["C", "PH", "PM"] },
-  { key: "rapid", label: "Rapid (R)", color: "#EA580C", routes: ["5R", "9R", "14R", "28R", "38R"] },
-  { key: "express", label: "Express (X)", color: "#6D28D9", routes: ["1X", "8AX", "8BX", "30X"] },
-  { key: "owl", label: "Owl (90 · 91)", color: "#1E3A8A", routes: ["90", "91"] },
+  { key: "J", label: "J Church", short: "J", color: "#D85F2A", routes: ["J"] },
+  { key: "K", label: "K Ingleside", short: "K", color: "#5B6770", routes: ["K", "KBUS"] },
+  { key: "L", label: "L Taraval", short: "L", color: "#92278F", routes: ["L"] },
+  { key: "M", label: "M Ocean View", short: "M", color: "#007749", routes: ["M"] },
+  { key: "N", label: "N Judah", short: "N", color: "#005DAA", routes: ["N", "NBUS"] },
+  { key: "T", label: "T Third", short: "T", color: "#BC1E2D", routes: ["T", "TBUS"] },
+  { key: "F", label: "F Heritage", short: "F", color: "#C99729", routes: ["F", "FBUS"] },
+  { key: "cable", label: "Cable car", short: "CC", color: "#B11116", routes: ["C", "PH", "PM"] },
+  { key: "rapid", label: "Rapid (R)", short: "Rpd", color: "#EA580C", routes: ["5R", "9R", "14R", "28R", "38R"] },
+  { key: "express", label: "Express (X)", short: "Exp", color: "#6D28D9", routes: ["1X", "8AX", "8BX", "30X"] },
+  { key: "owl", label: "Owl (90 · 91)", short: "Owl", color: "#1E3A8A", routes: ["90", "91"] },
 ];
 
 // Every route_name in the data, so "Bus route" can be the catch-all remainder.
@@ -31,7 +32,7 @@ const BUS_ROUTES = ALL_ROUTE_NAMES.filter(r => !namedSet.has(r));
 
 export const TRANSIT_CATS = [
   ...NAMED,
-  { key: "bus", label: "Bus route", color: "#6B7280", routes: BUS_ROUTES },
+  { key: "bus", label: "Bus route", short: "Bus", color: "#6B7280", routes: BUS_ROUTES },
 ];
 
 // Categories in alphabetical order by label (for the selector list).

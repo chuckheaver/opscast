@@ -106,13 +106,16 @@ export default function FogApp() {
     () => (isAllSelected(transitSel) ? null : routesForSelection(transitSel)),
     [transitSel]
   );
-  const toggleTransitCat = key =>
-    setTransitSel(s => { const n = new Set(s); n.has(key) ? n.delete(key) : n.add(key); return n; });
-  const showAllTransit = () => setTransitSel(new Set(ALL_TRANSIT_KEYS));
-  const selectNoneTransit = () => setTransitSel(new Set());
-  const saveTransitDefault = () => {
-    try { localStorage.setItem(TRANSIT_PREF_KEY, JSON.stringify([...transitSel])); } catch {}
+  // The current selection IS the saved default — persist on every change.
+  const persistTransit = n => { try { localStorage.setItem(TRANSIT_PREF_KEY, JSON.stringify([...n])); } catch {} };
+  const applyTransit = n => { setTransitSel(n); persistTransit(n); };
+  const toggleTransitCat = key => {
+    const n = new Set(transitSel);
+    n.has(key) ? n.delete(key) : n.add(key);
+    applyTransit(n);
   };
+  const showAllTransit = () => applyTransit(new Set(ALL_TRANSIT_KEYS));
+  const selectNoneTransit = () => applyTransit(new Set());
 
   // Bikes selector handlers.
   const toggleBikeClass = key =>
@@ -568,7 +571,6 @@ export default function FogApp() {
           onToggleTransitCat={toggleTransitCat}
           onShowAllTransit={showAllTransit}
           onSelectNoneTransit={selectNoneTransit}
-          onSaveTransitDefault={saveTransitDefault}
           onTransitOpen={() => setShowMuni(true)}
           bikeSel={bikeSel}
           onToggleBikeClass={toggleBikeClass}

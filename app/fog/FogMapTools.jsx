@@ -12,7 +12,8 @@ import { listNeighborhoods } from "./lib/neighborhoods";
 import FogLocationSearch from "./FogLocationSearch";
 import ListingFilter from "../components/ListingFilter";
 import LayerSelector from "../components/LayerSelector";
-import { TRANSIT_CATS_ALPHA } from "./lib/transit";
+import LayerBar from "../components/LayerBar";
+import { TRANSIT_CATS, TRANSIT_CATS_ALPHA } from "./lib/transit";
 import { BIKE_CLASSES } from "./lib/bikes";
 
 // Alphabetical neighborhood index (already sorted by listNeighborhoods).
@@ -408,14 +409,11 @@ export default function FogMapTools({
       )}
 
       {menu === "transit" && (
-        <LayerSelector
-          title="Transit"
-          hint="Tap a line to show or hide it. “Save default” keeps your picks for next time."
-          items={TRANSIT_CATS_ALPHA.map(c => ({ key: c.key, label: c.label, color: c.color, on: !!transitSel?.has(c.key) }))}
+        <LayerBar
+          items={TRANSIT_CATS.map(c => ({ key: c.key, short: c.short, color: c.color, on: !!transitSel?.has(c.key) }))}
           onToggle={onToggleTransitCat}
           onAll={onShowAllTransit}
           onNone={onSelectNoneTransit}
-          onSaveDefault={onSaveTransitDefault}
         />
       )}
 
