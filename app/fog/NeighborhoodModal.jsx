@@ -218,14 +218,7 @@ export default function NeighborhoodModal({
             <span style={ICON} aria-hidden="true">✨</span>
             <span style={{ fontSize: 13, fontWeight: 700, color: "#854F0B" }}>Why live here?</span>
           </div>
-          <p style={{ fontStyle: "italic", fontSize: 16, lineHeight: 1.5, color: "#412402", margin: "0 0 10px" }}>{data.spirit}</p>
-          {data.reasons?.length > 0 && (
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-              {data.reasons.map(r => (
-                <span key={r} style={{ fontSize: 12, padding: "3px 9px", borderRadius: 8, background: "#fff", border: "1px solid #ece8df", color: "#78716c" }}>{r}</span>
-              ))}
-            </div>
-          )}
+          <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: 0 }}>{data.spirit}</p>
         </div>
 
         {data.history && (
