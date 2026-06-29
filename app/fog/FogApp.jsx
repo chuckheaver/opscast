@@ -18,9 +18,13 @@ import { defaultFilter, matchesFilter, deriveOptions, isSoldStatus } from "../li
 import { findNeighborhoodForPoint, findContourForPoint, findFeatureByName, centroidOfFeature } from "./lib/spatial";
 import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
 import { ALL_TRANSIT_KEYS, isAllSelected, routesForSelection } from "./lib/transit";
+import { ALL_BIKE_KEYS } from "./lib/bikes";
 
-// Where the user's saved default transit selection is stored.
+// Where each overlay's saved default selection is stored.
 const TRANSIT_PREF_KEY = "mysf.transit.v1";
+const BIKE_PREF_KEY = "mysf.bikes.v1";
+const HAZARD_PREF_KEY = "mysf.hazards.v1";
+const MICRO_PREF_KEY = "mysf.micro.v1";
 const DATA_URL = "/data/sf-fog-neighborhoods.geojson";
 const CONTOURS_URL = "/data/sf-fog-contours.geojson";
 // Geographic centre of San Francisco — the default placeholder for the
@@ -69,17 +73,31 @@ export default function FogApp() {
   // Transit: which line categories are shown (a Set of TRANSIT_CATS keys).
   // Defaults to all; a saved default (localStorage) is loaded on mount.
   const [transitSel, setTransitSel] = useState(() => new Set(ALL_TRANSIT_KEYS));
-  // Bike class filter (null = all).
-  const [bikeClass, setBikeClass] = useState(null);
+  // Bikes: which facility classes are shown (a Set of BIKE_CLASSES keys).
+  const [bikeSel, setBikeSel] = useState(() => new Set(ALL_BIKE_KEYS));
+  // Hazards: which hazard layers are shown when the overlay is on.
+  const [hazardDefault, setHazardDefault] = useState({ seismic: true, tsunami: true });
+  // Microclimates: which zones are shown when the overlay is on.
+  const [microDefault, setMicroDefault] = useState({ sun: true, cool: true, wind: true });
 
-  // Load the user's saved default transit selection once on the client.
+  // Load saved overlay defaults once on the client.
   useEffect(() => {
+    const loadSet = (key, all) => {
+      try {
+        const arr = JSON.parse(localStorage.getItem(key) || "null");
+        if (Array.isArray(arr)) return new Set(arr.filter(k => all.includes(k)));
+      } catch {}
+      return null;
+    };
+    const t = loadSet(TRANSIT_PREF_KEY, ALL_TRANSIT_KEYS); if (t) setTransitSel(t);
+    const b = loadSet(BIKE_PREF_KEY, ALL_BIKE_KEYS); if (b) setBikeSel(b);
     try {
-      const raw = localStorage.getItem(TRANSIT_PREF_KEY);
-      if (raw) {
-        const arr = JSON.parse(raw);
-        if (Array.isArray(arr) && arr.length) setTransitSel(new Set(arr.filter(k => ALL_TRANSIT_KEYS.includes(k))));
-      }
+      const h = JSON.parse(localStorage.getItem(HAZARD_PREF_KEY) || "null");
+      if (h && typeof h === "object") setHazardDefault({ seismic: !!h.seismic, tsunami: !!h.tsunami });
+    } catch {}
+    try {
+      const m = JSON.parse(localStorage.getItem(MICRO_PREF_KEY) || "null");
+      if (m && typeof m === "object") setMicroDefault({ sun: !!m.sun, cool: !!m.cool, wind: !!m.wind });
     } catch {}
   }, []);
 
@@ -91,8 +109,18 @@ export default function FogApp() {
   const toggleTransitCat = key =>
     setTransitSel(s => { const n = new Set(s); n.has(key) ? n.delete(key) : n.add(key); return n; });
   const showAllTransit = () => setTransitSel(new Set(ALL_TRANSIT_KEYS));
+  const selectNoneTransit = () => setTransitSel(new Set());
   const saveTransitDefault = () => {
     try { localStorage.setItem(TRANSIT_PREF_KEY, JSON.stringify([...transitSel])); } catch {}
+  };
+
+  // Bikes selector handlers.
+  const toggleBikeClass = key =>
+    setBikeSel(s => { const n = new Set(s); n.has(key) ? n.delete(key) : n.add(key); return n; });
+  const showAllBikes = () => setBikeSel(new Set(ALL_BIKE_KEYS));
+  const selectNoneBikes = () => setBikeSel(new Set());
+  const saveBikeDefault = () => {
+    try { localStorage.setItem(BIKE_PREF_KEY, JSON.stringify([...bikeSel])); } catch {}
   };
   // Summer fog overlay — on for the "Fog Map" preset; off otherwise.
   const [showContours, setShowContours] = useState(preset === "fog");
@@ -116,6 +144,29 @@ export default function FogApp() {
   const [showSeismic, setShowSeismic] = useState(false);
   // CGS Tsunami Hazard Area for Emergency Planning, 2021 update.
   const [showTsunami, setShowTsunami] = useState(false);
+
+  // Hazards selector handlers (opening the overlay applies the saved default).
+  const openHazards = () => { setShowSeismic(hazardDefault.seismic); setShowTsunami(hazardDefault.tsunami); };
+  const toggleHazard = key => (key === "seismic" ? setShowSeismic(v => !v) : setShowTsunami(v => !v));
+  const showAllHazards = () => { setShowSeismic(true); setShowTsunami(true); };
+  const selectNoneHazards = () => { setShowSeismic(false); setShowTsunami(false); };
+  const saveHazardDefault = () => {
+    const d = { seismic: showSeismic, tsunami: showTsunami };
+    setHazardDefault(d);
+    try { localStorage.setItem(HAZARD_PREF_KEY, JSON.stringify(d)); } catch {}
+  };
+
+  // Microclimates selector handlers.
+  const toggleMicro = key =>
+    key === "sun" ? setShowMicroSun(v => !v) : key === "cool" ? setShowMicroCool(v => !v) : setShowMicroWind(v => !v);
+  const showAllMicro = () => { setShowMicroSun(true); setShowMicroCool(true); setShowMicroWind(true); };
+  const selectNoneMicro = () => { setShowMicroSun(false); setShowMicroCool(false); setShowMicroWind(false); };
+  const saveMicroDefault = () => {
+    const d = { sun: showMicroSun, cool: showMicroCool, wind: showMicroWind };
+    setMicroDefault(d);
+    try { localStorage.setItem(MICRO_PREF_KEY, JSON.stringify(d)); } catch {}
+  };
+
   // SFAR Realtor neighborhoods (blue outlines + nbrhood (nid) labels).
   const [showRealtor, setShowRealtor] = useState(false);
   // SF Community Benefit Districts (purple fill + outline + name labels).
@@ -468,7 +519,7 @@ export default function FogApp() {
           showMicroWind={showMicroWind}
           flyTo={flyTo}
           transitRoutes={transitRoutes}
-          bikeClass={bikeClass}
+          bikeSel={bikeSel}
         />
         <FogMapTools
           contoursAvailable={!!contours}
@@ -508,10 +559,24 @@ export default function FogApp() {
           transitSel={transitSel}
           onToggleTransitCat={toggleTransitCat}
           onShowAllTransit={showAllTransit}
+          onSelectNoneTransit={selectNoneTransit}
           onSaveTransitDefault={saveTransitDefault}
           onTransitOpen={() => setShowMuni(true)}
-          bikeClass={bikeClass}
-          onSelectBikeClass={cls => { setBikeClass(cls); setShowBikes(cls !== null); }}
+          bikeSel={bikeSel}
+          onToggleBikeClass={toggleBikeClass}
+          onShowAllBikes={showAllBikes}
+          onSelectNoneBikes={selectNoneBikes}
+          onSaveBikeDefault={saveBikeDefault}
+          onBikesOpen={() => setShowBikes(true)}
+          onHazardsOpen={openHazards}
+          onToggleHazard={toggleHazard}
+          onShowAllHazards={showAllHazards}
+          onSelectNoneHazards={selectNoneHazards}
+          onSaveHazardDefault={saveHazardDefault}
+          onToggleMicroZone={toggleMicro}
+          onShowAllMicro={showAllMicro}
+          onSelectNoneMicro={selectNoneMicro}
+          onSaveMicroDefault={saveMicroDefault}
           onPickNeighborhood={pickFromNeighborhood}
           openHood={openHood}
           onOpenMarket={() => setMarketOpen(true)}
@@ -529,7 +594,7 @@ export default function FogApp() {
           onToggleMicroCool={setShowMicroCool}
           showMicroWind={showMicroWind}
           onToggleMicroWind={setShowMicroWind}
-          onMicroOpen={() => setMicroWanted(true)}
+          onMicroOpen={() => { setMicroWanted(true); setShowMicroSun(microDefault.sun); setShowMicroCool(microDefault.cool); setShowMicroWind(microDefault.wind); }}
           onPickFromAddress={pickFromAddress}
           onUseGeoLocation={requestGeoLocation}
           ready={!!geojson}

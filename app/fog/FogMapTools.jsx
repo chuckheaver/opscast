@@ -11,7 +11,9 @@ import { useState, useRef, useEffect } from "react";
 import { listNeighborhoods } from "./lib/neighborhoods";
 import FogLocationSearch from "./FogLocationSearch";
 import ListingFilter from "../components/ListingFilter";
+import LayerSelector from "../components/LayerSelector";
 import { TRANSIT_CATS_ALPHA } from "./lib/transit";
+import { BIKE_CLASSES } from "./lib/bikes";
 
 // Alphabetical neighborhood index (already sorted by listNeighborhoods).
 const NBHD_INDEX = listNeighborhoods();
@@ -35,9 +37,14 @@ export default function FogMapTools({
   showComBuildings, onToggleComBuildings,
   // Buildings list
   buildingProfiles, openBuilding, onOpenBuilding, onZoomBuilding, onShowResBuildings,
-  // Transit (multi-select line categories) + Bikes class selection
-  transitSel, onToggleTransitCat, onShowAllTransit, onSaveTransitDefault, onTransitOpen,
-  bikeClass, onSelectBikeClass,
+  // Transit (multi-select line categories)
+  transitSel, onToggleTransitCat, onShowAllTransit, onSelectNoneTransit, onSaveTransitDefault, onTransitOpen,
+  // Bikes (multi-select facility classes)
+  bikeSel, onToggleBikeClass, onShowAllBikes, onSelectNoneBikes, onSaveBikeDefault, onBikesOpen,
+  // Hazards (seismic + tsunami) selector
+  onHazardsOpen, onToggleHazard, onShowAllHazards, onSelectNoneHazards, onSaveHazardDefault,
+  // Microclimate zones selector
+  onToggleMicroZone, onShowAllMicro, onSelectNoneMicro, onSaveMicroDefault,
   // Neighborhoods list
   onPickNeighborhood, openHood,
   // House market stats pop-up
@@ -133,15 +140,18 @@ export default function FogMapTools({
     showSeismic && ["#dc2626", "Seismic zone"],
     showTsunami && ["#0ea5e9", "Tsunami zone"],
   ].filter(Boolean);
-  // Transit legend mirrors the user's current line selection.
+  // Transit + Bikes legends mirror the user's current selection.
   const transitItems = TRANSIT_CATS_ALPHA
     .filter(c => transitSel?.has(c.key))
     .map(c => [c.color, c.label]);
+  const bikeItems = BIKE_CLASSES
+    .filter(c => bikeSel?.has(c.key))
+    .map(c => [c.color, c.label, c.dashed ? "dashed" : undefined]);
   const legends = [
     showElevation && ELEVATION_LEGEND,
     showResBuildings && RES_LEGEND,
     showComBuildings && COM_LEGEND,
-    showBikes && BIKE_LEGEND,
+    showBikes && bikeItems.length && { title: "Bikes", items: bikeItems },
     showMuni && transitItems.length && { title: "Transit", items: transitItems },
     microItems.length && { title: "Microclimate zones", items: microItems },
     hazardItems.length && { title: "Hazards", items: hazardItems },
@@ -255,28 +265,21 @@ export default function FogMapTools({
           className={"fog-chip" + ((showMicroSun || showMicroCool || showMicroWind) ? " on" : "")}
           onClick={() => {
             const on = showMicroSun || showMicroCool || showMicroWind;
-            if (on) {
-              onToggleMicroSun(false); onToggleMicroCool(false); onToggleMicroWind(false);
-              if (menu === "micro") setMenu(null);
-            } else {
-              onMicroOpen?.();
-              onToggleMicroSun(true); onToggleMicroCool(true); onToggleMicroWind(true);
-              setMenu("micro");
-            }
+            if (on) { onSelectNoneMicro?.(); if (menu === "micro") setMenu(null); }
+            else { onMicroOpen?.(); setMenu("micro"); }
           }}
           aria-pressed={showMicroSun || showMicroCool || showMicroWind}
           title="Microclimate zones"
         >
           <MicroIcon /> MicroClimates
         </button>
-        {/* Hazards — seismic + tsunami together */}
+        {/* Hazards — seismic + tsunami selector */}
         <button
           type="button"
           className={"fog-chip" + ((showSeismic || showTsunami) ? " on" : "")}
           onClick={() => {
-            const on = showSeismic || showTsunami;
-            onToggleSeismic(!on);
-            onToggleTsunami(!on);
+            if (showSeismic || showTsunami) { onSelectNoneHazards?.(); if (menu === "hazards") setMenu(null); }
+            else { onHazardsOpen?.(); setMenu("hazards"); }
           }}
           aria-pressed={showSeismic || showTsunami}
           title="Hazards — seismic + tsunami"
@@ -296,13 +299,13 @@ export default function FogMapTools({
         >
           <TransitIcon /> Transit
         </button>
-        {/* Bikes — bike network + type selector */}
+        {/* Bikes — bike network + class selector */}
         <button
           type="button"
           className={"fog-chip" + (showBikes ? " on" : "")}
           onClick={() => {
-            if (showBikes) { onSelectBikeClass?.(null); if (menu === "bikes") setMenu(null); }
-            else { onSelectBikeClass?.(""); setMenu("bikes"); }
+            if (showBikes) { onToggleBikes?.(false); if (menu === "bikes") setMenu(null); }
+            else { onBikesOpen?.(); setMenu("bikes"); }
           }}
           aria-pressed={!!showBikes}
           title="Bike network"
@@ -360,66 +363,58 @@ export default function FogMapTools({
       )}
 
       {menu === "micro" && (
-        <div className="fog-float-panel left fog-activity-panel">
-          <div className="fog-layers-group-title">Microclimate zones</div>
-          <ToggleSwitch label="Sun pockets" checked={showMicroSun} onChange={onToggleMicroSun} />
-          <ToggleSwitch label="Cool / shade" checked={showMicroCool} onChange={onToggleMicroCool} />
-          <ToggleSwitch label="Wind corridors" checked={showMicroWind} onChange={onToggleMicroWind} />
-          <div className="fog-activity-legend">
-            <span><span className="fog-activity-dot" style={{ background: "#fdba74" }} /> Sun pockets</span>
-            <span><span className="fog-activity-dot" style={{ background: "#7dd3fc" }} /> Cool / shade</span>
-            <span><span className="fog-activity-dot" style={{ background: "#2dd4bf" }} /> Wind corridors</span>
-          </div>
-        </div>
+        <LayerSelector
+          title="Microclimates"
+          hint="Tap a zone to show or hide it. “Save default” keeps your picks for next time."
+          items={[
+            { key: "sun", label: "Sun pockets", color: "#fdba74", on: showMicroSun },
+            { key: "cool", label: "Cool / shade", color: "#7dd3fc", on: showMicroCool },
+            { key: "wind", label: "Wind corridors", color: "#2dd4bf", on: showMicroWind },
+          ]}
+          onToggle={onToggleMicroZone}
+          onAll={onShowAllMicro}
+          onNone={onSelectNoneMicro}
+          onSaveDefault={onSaveMicroDefault}
+        />
+      )}
+
+      {menu === "hazards" && (
+        <LayerSelector
+          title="Hazards"
+          hint="Tap a hazard to show or hide it. “Save default” keeps your picks for next time."
+          items={[
+            { key: "seismic", label: "Seismic zone", color: "#dc2626", on: showSeismic },
+            { key: "tsunami", label: "Tsunami zone", color: "#0ea5e9", on: showTsunami },
+          ]}
+          onToggle={onToggleHazard}
+          onAll={onShowAllHazards}
+          onNone={onSelectNoneHazards}
+          onSaveDefault={onSaveHazardDefault}
+        />
       )}
 
       {menu === "transit" && (
-        <div className="fog-float-panel left fog-transit-panel">
-          <div className="fog-transit-head">
-            <span>Transit</span>
-            <div className="fog-transit-head-btns">
-              <button type="button" className="fog-transit-act" onClick={() => onShowAllTransit?.()}>Show all</button>
-              <button type="button" className="fog-transit-act save" onClick={() => onSaveTransitDefault?.()}>Save default</button>
-            </div>
-          </div>
-          <p className="fog-transit-hint">Tap a line to show or hide it. “Save default” keeps your picks for next time.</p>
-          <div className="fog-transit-list">
-            {TRANSIT_CATS_ALPHA.map(c => {
-              const on = transitSel?.has(c.key);
-              return (
-                <button
-                  key={c.key}
-                  type="button"
-                  className={"fog-transit-row" + (on ? " on" : "")}
-                  onClick={() => onToggleTransitCat?.(c.key)}
-                  aria-pressed={!!on}
-                >
-                  <span className="fog-transit-sw" style={{ background: c.color }} />
-                  <span className="fog-transit-label">{c.label}</span>
-                  <span className="fog-transit-check">{on ? "✓" : ""}</span>
-                </button>
-              );
-            })}
-          </div>
-          <button type="button" className="fog-list-link fog-list-off" onClick={() => { onToggleMuni?.(false); setMenu(null); }}>Hide transit</button>
-        </div>
+        <LayerSelector
+          title="Transit"
+          hint="Tap a line to show or hide it. “Save default” keeps your picks for next time."
+          items={TRANSIT_CATS_ALPHA.map(c => ({ key: c.key, label: c.label, color: c.color, on: !!transitSel?.has(c.key) }))}
+          onToggle={onToggleTransitCat}
+          onAll={onShowAllTransit}
+          onNone={onSelectNoneTransit}
+          onSaveDefault={onSaveTransitDefault}
+        />
       )}
 
       {menu === "bikes" && (
-        <div className="fog-float-panel left fog-list-panel">
-          {BIKE_CLASSES.map(([val, label, color, dashed]) => (
-            <button
-              key={label}
-              type="button"
-              className={"fog-list-link" + (bikeClass === val ? " on" : "")}
-              onClick={() => { onSelectBikeClass?.(val); setMenu(null); }}
-            >
-              {color && <span className="fog-activity-dot" style={{ background: color, marginRight: 8, borderRadius: dashed ? 2 : "50%" }} />}
-              {label}
-            </button>
-          ))}
-          <button type="button" className="fog-list-link fog-list-off" onClick={() => { onSelectBikeClass?.(null); setMenu(null); }}>Hide bike lanes</button>
-        </div>
+        <LayerSelector
+          title="Bikes"
+          hint="Tap a class to show or hide it. “Save default” keeps your picks for next time."
+          items={BIKE_CLASSES.map(c => ({ key: c.key, label: c.label, color: c.color, dashed: c.dashed, on: !!bikeSel?.has(c.key) }))}
+          onToggle={onToggleBikeClass}
+          onAll={onShowAllBikes}
+          onNone={onSelectNoneBikes}
+          onSaveDefault={onSaveBikeDefault}
+        />
       )}
 
       {/* Round Layers button (top-right) */}
@@ -571,15 +566,6 @@ function BikeIcon() {
   );
 }
 
-// Bike facility classes; "" = all. dashed flag drives the legend swatch shape.
-const BIKE_CLASSES = [
-  ["", "All bike lanes", null, false],
-  ["CLASS I", "Class I · off-street path", "#15803d", false],
-  ["CLASS II", "Class II · striped lane", "#06b6d4", false],
-  ["CLASS IV", "Class IV · separated", "#22c55e", false],
-  ["CLASS III", "Class III · shared / sharrows", "#6b7280", true],
-];
-
 function ToggleSwitch({ checked, onChange, label }) {
   return (
     <label className="fog-switch fog-switch-compact">
@@ -644,13 +630,4 @@ const RES_LEGEND = {
 const COM_LEGEND = {
   title: "Commercial / Office / Hotel / Hospital",
   items: [["#E6CE78", "Commercial"]],
-};
-const BIKE_LEGEND = {
-  title: "Bike Paths",
-  items: [
-    ["#15803d", "Class I · off-street path", "solid"],
-    ["#06b6d4", "Class II · striped lane", "solid"],
-    ["#22c55e", "Class IV · separated", "solid"],
-    ["#6b7280", "Class III · shared / sharrows", "dashed"],
-  ],
 };

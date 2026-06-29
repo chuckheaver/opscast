@@ -1435,7 +1435,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   background: none; border: none; padding: 0; font: inherit;
   font-size: 12px; font-weight: 600; color: #2563eb; cursor: pointer;
 }
-.fog-transit-act.save { color: #16a34a; }
+.fog-transit-act.none { color: #6b7280; }
 .fog-transit-act:hover { text-decoration: underline; }
 .fog-transit-hint { font-size: 11px; color: #a8a29e; line-height: 1.4; margin: 4px 0 8px; }
 .fog-transit-list { display: flex; flex-direction: column; gap: 2px; max-height: 320px; overflow-y: auto; }
@@ -1452,6 +1452,14 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-transit-label { flex: 1 1 auto; }
 .fog-transit-check { flex: 0 0 auto; color: #2563eb; font-weight: 800; width: 14px; text-align: center; }
 .fog-transit-panel .fog-list-off { margin-top: 8px; }
+/* "Save default" pinned at the bottom of every overlay selector. */
+.fog-transit-save-btn {
+  display: block; width: 100%; margin-top: 10px; padding: 8px 10px;
+  border: 1px solid #bbf7d0; border-radius: 8px; background: #f0fdf4;
+  font: inherit; font-size: 12.5px; font-weight: 700; color: #16a34a;
+  cursor: pointer;
+}
+.fog-transit-save-btn:hover { background: #dcfce7; }
 
 /* Shared market filter (Homes overlay + Stats pop-up). */
 .lf-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }

@@ -75,7 +75,7 @@ export default function FogMap({
   showMicroWind,
   flyTo,
   transitRoutes,
-  bikeClass,
+  bikeSel,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
@@ -1853,8 +1853,8 @@ export default function FogMap({
     map.once("load", apply);
   }, [transitRoutes]);
 
-  // Bikes: when a specific class is chosen show only that class (solid for
-  // I/II/IV, dashed for III); "" / null shows the normal full network.
+  // Bikes: show only the selected facility classes. Solid layer carries
+  // Class I/II/IV, the dashed layer Class III. An empty selection blanks both.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
@@ -1862,19 +1862,15 @@ export default function FogMap({
       const solid = map.getLayer("bikes-solid");
       const dashed = map.getLayer("bikes-dashed");
       if (!solid || !dashed) return;
-      if (!bikeClass) {
-        map.setFilter("bikes-solid", ["match", ["get", "facility"], ["CLASS I", "CLASS II", "CLASS IV"], true, false]);
-        map.setFilter("bikes-dashed", ["==", ["get", "facility"], "CLASS III"]);
-        return;
-      }
-      // A specific class — point the right layer at it, blank the other.
-      const isDashed = bikeClass === "CLASS III";
-      map.setFilter("bikes-solid", isDashed ? ["==", ["get", "facility"], "__none__"] : ["==", ["get", "facility"], bikeClass]);
-      map.setFilter("bikes-dashed", isDashed ? ["==", ["get", "facility"], "CLASS III"] : ["==", ["get", "facility"], "__none__"]);
+      const has = c => !bikeSel || bikeSel.has(c); // no set = show all
+      const NONE = ["==", ["get", "facility"], "__none__"];
+      const solidClasses = ["CLASS I", "CLASS II", "CLASS IV"].filter(has);
+      map.setFilter("bikes-solid", solidClasses.length ? ["match", ["get", "facility"], solidClasses, true, false] : NONE);
+      map.setFilter("bikes-dashed", has("CLASS III") ? ["==", ["get", "facility"], "CLASS III"] : NONE);
     };
     apply();
     map.once("load", apply);
-  }, [bikeClass]);
+  }, [bikeSel]);
 
   // Toggle the supervisor district outlines + labels.
   useEffect(() => {
