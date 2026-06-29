@@ -76,7 +76,7 @@ export default function FogApp() {
   // Bikes: which facility classes are shown (a Set of BIKE_CLASSES keys).
   const [bikeSel, setBikeSel] = useState(() => new Set(ALL_BIKE_KEYS));
   // Hazards: which hazard layers are shown when the overlay is on.
-  const [hazardDefault, setHazardDefault] = useState({ seismic: true, tsunami: true });
+  const [hazardDefault, setHazardDefault] = useState({ seismic: true, tsunami: true, faults: true });
   // Microclimates: which zones are shown when the overlay is on.
   const [microDefault, setMicroDefault] = useState({ sun: true, cool: true, wind: true });
 
@@ -93,7 +93,7 @@ export default function FogApp() {
     const b = loadSet(BIKE_PREF_KEY, ALL_BIKE_KEYS); if (b) setBikeSel(b);
     try {
       const h = JSON.parse(localStorage.getItem(HAZARD_PREF_KEY) || "null");
-      if (h && typeof h === "object") setHazardDefault({ seismic: !!h.seismic, tsunami: !!h.tsunami });
+      if (h && typeof h === "object") setHazardDefault({ seismic: !!h.seismic, tsunami: !!h.tsunami, faults: !!h.faults });
     } catch {}
     try {
       const m = JSON.parse(localStorage.getItem(MICRO_PREF_KEY) || "null");
@@ -144,14 +144,16 @@ export default function FogApp() {
   const [showSeismic, setShowSeismic] = useState(false);
   // CGS Tsunami Hazard Area for Emergency Planning, 2021 update.
   const [showTsunami, setShowTsunami] = useState(false);
+  // USGS active fault traces (San Andreas, Hayward, Calaveras, …).
+  const [showFaults, setShowFaults] = useState(false);
 
   // Hazards selector handlers (opening the overlay applies the saved default).
-  const openHazards = () => { setShowSeismic(hazardDefault.seismic); setShowTsunami(hazardDefault.tsunami); };
-  const toggleHazard = key => (key === "seismic" ? setShowSeismic(v => !v) : setShowTsunami(v => !v));
-  const showAllHazards = () => { setShowSeismic(true); setShowTsunami(true); };
-  const selectNoneHazards = () => { setShowSeismic(false); setShowTsunami(false); };
+  const openHazards = () => { setShowSeismic(hazardDefault.seismic); setShowTsunami(hazardDefault.tsunami); setShowFaults(hazardDefault.faults); };
+  const toggleHazard = key => (key === "seismic" ? setShowSeismic(v => !v) : key === "tsunami" ? setShowTsunami(v => !v) : setShowFaults(v => !v));
+  const showAllHazards = () => { setShowSeismic(true); setShowTsunami(true); setShowFaults(true); };
+  const selectNoneHazards = () => { setShowSeismic(false); setShowTsunami(false); setShowFaults(false); };
   const saveHazardDefault = () => {
-    const d = { seismic: showSeismic, tsunami: showTsunami };
+    const d = { seismic: showSeismic, tsunami: showTsunami, faults: showFaults };
     setHazardDefault(d);
     try { localStorage.setItem(HAZARD_PREF_KEY, JSON.stringify(d)); } catch {}
   };
@@ -502,6 +504,7 @@ export default function FogApp() {
           showElevation={showElevation}
           showSeismic={showSeismic}
           showTsunami={showTsunami}
+          showFaults={showFaults}
           showMuni={showMuni}
           showBikes={showBikes}
           showZips={showZips}
@@ -547,6 +550,7 @@ export default function FogApp() {
           onToggleSeismic={setShowSeismic}
           showTsunami={showTsunami}
           onToggleTsunami={setShowTsunami}
+          showFaults={showFaults}
           showRealtor={showRealtor}
           onToggleRealtor={setShowRealtor}
           showCBD={showCBD}

@@ -31,6 +31,7 @@ export default function FogMapTools({
   showElevation, onToggleElevation,
   showSeismic, onToggleSeismic,
   showTsunami, onToggleTsunami,
+  showFaults,
   showRealtor, onToggleRealtor,
   showCBD, onToggleCBD,
   showResBuildings, onToggleResBuildings,
@@ -139,6 +140,7 @@ export default function FogMapTools({
   const hazardItems = [
     showSeismic && ["#dc2626", "Seismic zone"],
     showTsunami && ["#0ea5e9", "Tsunami zone"],
+    showFaults && ["#b91c1c", "Fault lines"],
   ].filter(Boolean);
   // Transit + Bikes legends mirror the user's current selection.
   const transitItems = TRANSIT_CATS_ALPHA
@@ -273,16 +275,16 @@ export default function FogMapTools({
         >
           <MicroIcon /> MicroClimates
         </button>
-        {/* Hazards — seismic + tsunami selector */}
+        {/* Hazards — seismic + tsunami + fault lines selector */}
         <button
           type="button"
-          className={"fog-chip" + ((showSeismic || showTsunami) ? " on" : "")}
+          className={"fog-chip" + ((showSeismic || showTsunami || showFaults) ? " on" : "")}
           onClick={() => {
-            if (showSeismic || showTsunami) { onSelectNoneHazards?.(); if (menu === "hazards") setMenu(null); }
+            if (showSeismic || showTsunami || showFaults) { onSelectNoneHazards?.(); if (menu === "hazards") setMenu(null); }
             else { onHazardsOpen?.(); setMenu("hazards"); }
           }}
-          aria-pressed={showSeismic || showTsunami}
-          title="Hazards — seismic + tsunami"
+          aria-pressed={showSeismic || showTsunami || showFaults}
+          title="Hazards — seismic, tsunami + fault lines"
         >
           <HazardIcon /> Hazards
         </button>
@@ -385,6 +387,7 @@ export default function FogMapTools({
           items={[
             { key: "seismic", label: "Seismic zone", color: "#dc2626", on: showSeismic },
             { key: "tsunami", label: "Tsunami zone", color: "#0ea5e9", on: showTsunami },
+            { key: "faults", label: "Fault lines", color: "#b91c1c", on: showFaults },
           ]}
           onToggle={onToggleHazard}
           onAll={onShowAllHazards}

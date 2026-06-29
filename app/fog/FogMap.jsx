@@ -55,6 +55,7 @@ export default function FogMap({
   showElevation,
   showSeismic,
   showTsunami,
+  showFaults,
   showMuni,
   showBikes,
   showZips,
@@ -1078,6 +1079,63 @@ export default function FogMap({
         },
       });
 
+      // Active fault traces (USGS — San Andreas, Hayward, Calaveras, etc.).
+      // A white casing under a bold dark-red line so the trace reads on any
+      // basemap and stays distinct from the translucent seismic fill.
+      map.addSource("faults", { type: "geojson", data: "/data/sf-faults.geojson" });
+      map.addLayer({
+        id: "faults-casing",
+        type: "line",
+        source: "faults",
+        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": "#ffffff",
+          "line-width": ["interpolate", ["linear"], ["zoom"], 9, 3, 13, 5, 16, 7],
+          "line-opacity": 0.7,
+        },
+      });
+      map.addLayer({
+        id: "faults-line",
+        type: "line",
+        source: "faults",
+        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": "#b91c1c",
+          "line-width": ["interpolate", ["linear"], ["zoom"], 9, 1.2, 13, 2.2, 16, 3.4],
+          "line-opacity": 0.95,
+        },
+      });
+      map.addLayer({
+        id: "faults-labels",
+        type: "symbol",
+        source: "faults",
+        layout: {
+          visibility: "none",
+          "symbol-placement": "line",
+          "text-field": ["concat", ["get", "fault"], " Fault"],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": ["interpolate", ["linear"], ["zoom"], 10, 10, 14, 13],
+          "text-letter-spacing": 0.04,
+          "symbol-spacing": 350,
+        },
+        paint: {
+          "text-color": "#7f1d1d",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.4,
+        },
+      });
+      // Click a fault trace for its name + USGS description.
+      map.on("mouseenter", "faults-line", () => { map.getCanvas().style.cursor = "pointer"; });
+      map.on("mouseleave", "faults-line", () => { map.getCanvas().style.cursor = ""; });
+      map.on("click", "faults-line", e => {
+        const p = e.features?.[0]?.properties;
+        if (!p) return;
+        const desc = p.description ? `<div style="margin-top:4px;color:#57534e;line-height:1.45">${esc(p.description)}</div>` : "";
+        const html = `<div style="font-weight:700;color:#7f1d1d">${esc(p.fault)} Fault</div>${desc}`;
+        new mapboxgl.Popup({ closeButton: true, maxWidth: "260px", focusAfterOpen: false })
+          .setLngLat(e.lngLat).setHTML(html).addTo(map);
+      });
+
       // Dashed outline ONLY on the 8.0 polygon — it's the "edge of Sun"
       // SFMTA bike network — 5,455 segments from DataSF. Color-coded by
       // facility class:
@@ -1630,6 +1688,20 @@ export default function FogMap({
     apply();
     map.once("load", apply);
   }, [showTsunami]);
+
+  // Toggle the fault traces (casing + line + labels).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showFaults ? "visible" : "none";
+      ["faults-casing", "faults-line", "faults-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    apply();
+    map.once("load", apply);
+  }, [showFaults]);
 
   // Muni visibility + line filter, in one place. The route lines show whenever
   // transit is on; the stop dots/labels are tied to the "Bus route" category —
