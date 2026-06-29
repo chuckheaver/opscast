@@ -43,8 +43,8 @@ export default function FogMapTools({
   transitSel, onToggleTransitCat, onShowAllTransit, onSelectNoneTransit, onSaveTransitDefault, onTransitOpen,
   // Bikes (multi-select facility classes)
   bikeSel, onToggleBikeClass, onShowAllBikes, onSelectNoneBikes, onSaveBikeDefault, onBikesOpen,
-  // Hazards (seismic + tsunami) selector
-  onHazardsOpen, onToggleHazard, onShowAllHazards, onSelectNoneHazards, onSaveHazardDefault,
+  // Hazards (seismic + tsunami + faults) selector
+  onHazardsOpen, onHazardsHide, onToggleHazard, onShowAllHazards, onSelectNoneHazards,
   // Microclimate zones selector
   onToggleMicroZone, onShowAllMicro, onSelectNoneMicro, onSaveMicroDefault,
   // Neighborhoods list
@@ -285,7 +285,7 @@ export default function FogMapTools({
           type="button"
           className={"fog-chip" + ((showSeismic || showTsunami || showFaults) ? " on" : "")}
           onClick={() => {
-            if (showSeismic || showTsunami || showFaults) { onSelectNoneHazards?.(); if (menu === "hazards") setMenu(null); }
+            if (showSeismic || showTsunami || showFaults) { onHazardsHide?.(); if (menu === "hazards") setMenu(null); }
             else { onHazardsOpen?.(); setMenu("hazards"); }
           }}
           aria-pressed={showSeismic || showTsunami || showFaults}
@@ -393,18 +393,15 @@ export default function FogMapTools({
       )}
 
       {menu === "hazards" && (
-        <LayerSelector
-          title="Hazards"
-          hint="Tap a hazard to show or hide it. “Save default” keeps your picks for next time."
+        <LayerBar
           items={[
-            { key: "seismic", label: "Seismic zone", color: "#dc2626", on: showSeismic },
-            { key: "tsunami", label: "Tsunami zone", color: "#0ea5e9", on: showTsunami },
-            { key: "faults", label: "Fault lines", color: "#b91c1c", on: showFaults },
+            { key: "seismic", short: "Seismic", color: "#dc2626", on: showSeismic },
+            { key: "tsunami", short: "Tsunami", color: "#0ea5e9", on: showTsunami },
+            { key: "faults", short: "Faults", color: "#b91c1c", on: showFaults },
           ]}
           onToggle={onToggleHazard}
           onAll={onShowAllHazards}
           onNone={onSelectNoneHazards}
-          onSaveDefault={onSaveHazardDefault}
         />
       )}
 

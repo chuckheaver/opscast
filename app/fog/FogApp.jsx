@@ -152,16 +152,15 @@ export default function FogApp() {
   // USGS active fault traces (San Andreas, Hayward, Calaveras, …).
   const [showFaults, setShowFaults] = useState(false);
 
-  // Hazards selector handlers (opening the overlay applies the saved default).
-  const openHazards = () => { setShowSeismic(hazardDefault.seismic); setShowTsunami(hazardDefault.tsunami); setShowFaults(hazardDefault.faults); };
-  const toggleHazard = key => (key === "seismic" ? setShowSeismic(v => !v) : key === "tsunami" ? setShowTsunami(v => !v) : setShowFaults(v => !v));
-  const showAllHazards = () => { setShowSeismic(true); setShowTsunami(true); setShowFaults(true); };
-  const selectNoneHazards = () => { setShowSeismic(false); setShowTsunami(false); setShowFaults(false); };
-  const saveHazardDefault = () => {
-    const d = { seismic: showSeismic, tsunami: showTsunami, faults: showFaults };
-    setHazardDefault(d);
-    try { localStorage.setItem(HAZARD_PREF_KEY, JSON.stringify(d)); } catch {}
-  };
+  // Hazards selector handlers. The bar's picks ARE the saved default; opening
+  // restores them, and turning the chip off hides without clobbering them.
+  const applyHaz = d => { setShowSeismic(d.seismic); setShowTsunami(d.tsunami); setShowFaults(d.faults); };
+  const persistHaz = d => { setHazardDefault(d); try { localStorage.setItem(HAZARD_PREF_KEY, JSON.stringify(d)); } catch {} };
+  const openHazards = () => applyHaz(hazardDefault);
+  const hideHazards = () => applyHaz({ seismic: false, tsunami: false, faults: false });
+  const toggleHazard = key => { const d = { seismic: showSeismic, tsunami: showTsunami, faults: showFaults }; d[key] = !d[key]; applyHaz(d); persistHaz(d); };
+  const showAllHazards = () => { const d = { seismic: true, tsunami: true, faults: true }; applyHaz(d); persistHaz(d); };
+  const selectNoneHazards = () => { const d = { seismic: false, tsunami: false, faults: false }; applyHaz(d); persistHaz(d); };
 
   // Microclimates selector handlers.
   const toggleMicro = key =>
@@ -580,10 +579,10 @@ export default function FogApp() {
           onSelectNoneBikes={selectNoneBikes}
           onBikesOpen={() => setShowBikes(true)}
           onHazardsOpen={openHazards}
+          onHazardsHide={hideHazards}
           onToggleHazard={toggleHazard}
           onShowAllHazards={showAllHazards}
           onSelectNoneHazards={selectNoneHazards}
-          onSaveHazardDefault={saveHazardDefault}
           onToggleMicroZone={toggleMicro}
           onShowAllMicro={showAllMicro}
           onSelectNoneMicro={selectNoneMicro}
