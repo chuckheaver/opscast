@@ -15,7 +15,7 @@ import FogMapTools from "./FogMapTools";
 import MarketModal from "../market/MarketModal";
 import { loadListingsGeo } from "../listings/lib/load";
 import { defaultFilter, matchesFilter, deriveOptions, isSoldStatus } from "../listings/lib/filter";
-import { findNeighborhoodForPoint, findContourForPoint, findFeatureByName, centroidOfFeature } from "./lib/spatial";
+import { findNeighborhoodForPoint, findContourForPoint, findFeatureByName, centroidOfFeature, bboxOfFeature } from "./lib/spatial";
 import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
 import { ALL_TRANSIT_KEYS, isAllSelected, routesForSelection } from "./lib/transit";
 import { ALL_BIKE_KEYS } from "./lib/bikes";
@@ -282,7 +282,10 @@ export default function FogApp() {
       if (!feature) return;
       const point = centroidOfFeature(feature);
       const contour = point ? findContourForPoint(contours, point) : null;
-      setPicked({ point, address: null, feature, contour, scope: "neighborhood" });
+      // Frame the whole neighborhood polygon so the map zooms to it while the
+      // info pop-up opens.
+      const bounds = bboxOfFeature(feature);
+      setPicked({ point, address: null, feature, contour, scope: "neighborhood", bounds });
       setOpenHood(name);
     },
     [geojson, contours]

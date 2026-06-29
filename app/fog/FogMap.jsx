@@ -1495,8 +1495,13 @@ export default function FogMap({
       src.setData(geojson);
       dataAppliedRef.current = true;
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [geojson]);
 
   // Flip the entire fog-data layer group on/off (sidebar checkbox).
@@ -1509,8 +1514,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showContours]);
 
   // Weather-emoji DOM markers at hand-picked SF locations. Mounted as
@@ -1565,8 +1575,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showTerrain]);
 
   // Toggle the elevation contour lines + ft labels + peak labels +
@@ -1586,8 +1601,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showElevation]);
 
   // Toggle the seismic hazard overlay (fill + outline).
@@ -1600,8 +1620,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showSeismic]);
 
   // Toggle the CGS tsunami hazard zone (fill + dashed outline).
@@ -1614,8 +1639,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showTsunami]);
 
   // Muni visibility + line filter, in one place. The route lines show whenever
@@ -1635,8 +1665,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", dotsVis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showMuni, transitRoutes]);
 
   // Toggle the SF neighborhood outlines + name labels. The invisible
@@ -1651,8 +1686,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showNeighborhoods]);
 
   // Toggle the Realtor Neighborhoods overlay (fill + outline + labels).
@@ -1665,8 +1705,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showRealtor]);
 
   // Toggle the Community Benefit Districts overlay (fill + outline + labels).
@@ -1679,8 +1724,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showCBD]);
 
   // Toggle the Residential / Mixed buildings group (fill + mixed pattern +
@@ -1694,8 +1744,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showResBuildings]);
 
   // Toggle the Commercial / Office / Hotel / Hospital buildings group.
@@ -1708,8 +1763,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showComBuildings]);
 
   // When a buildings layer turns on, zoom from the city-wide frame in to
@@ -1773,8 +1833,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showZoning]);
 
   // Feed the Housing Activity dots — the filtered FeatureCollection from
@@ -1786,8 +1851,13 @@ export default function FogMap({
       const src = map.getSource("activity");
       if (src) src.setData(activityData || { type: "FeatureCollection", features: [] });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [activityData]);
 
   // Feed the MicroClimates zones once loaded.
@@ -1798,8 +1868,13 @@ export default function FogMap({
       const src = map.getSource("micro-zones");
       if (src) src.setData(microZones || { type: "FeatureCollection", features: [] });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [microZones]);
 
   // Toggle the MicroClimates sun / cool / wind zone overlays.
@@ -1815,8 +1890,13 @@ export default function FogMap({
       set("cool", showMicroCool);
       set("wind", showMicroWind);
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showMicroSun, showMicroCool, showMicroWind]);
 
   // Fly the camera to a requested target (e.g. a building chosen from the
@@ -1882,8 +1962,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showDistricts]);
 
   // Toggle the ZIP code outlines + labels.
@@ -1896,8 +1981,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showZips]);
 
   // Toggle the bike network overlay (solid + dashed line layers).
@@ -1910,8 +2000,13 @@ export default function FogMap({
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
-    if (map.isStyleLoaded()) apply();
-    else map.once("load", apply);
+    // Call apply() directly (each apply is guarded by getLayer/getSource, so
+    // it's a no-op before the layers exist) and also bind once to first load.
+    // NB: don't gate on map.isStyleLoaded() — a sibling effect's setLayoutProperty
+    // in the same render flips it to false, so a second simultaneous toggle would
+    // defer to a "load" event that already fired and never apply.
+    apply();
+    map.once("load", apply);
   }, [showBikes]);
 
   // Sync picked state: drop a marker at the address and frame the
@@ -1933,9 +2028,12 @@ export default function FogMap({
       markerRef.current = new mapboxgl.Marker({ color: "#2563eb" })
         .setLngLat(picked.point)
         .addTo(map);
-      // A building deep-link (picked.zoom set) flies in to the footprint;
-      // every other pick keeps the city-wide frame.
-      if (picked.zoom) {
+      // A neighborhood pick (picked.bounds) frames that polygon; a building
+      // deep-link (picked.zoom) flies in to the footprint; every other pick
+      // keeps the city-wide frame.
+      if (picked.bounds) {
+        map.fitBounds(picked.bounds, { padding: 60, maxZoom: 15, duration: 900 });
+      } else if (picked.zoom) {
         map.flyTo({ center: picked.point, zoom: picked.zoom, duration: 1000 });
       } else {
         map.fitBounds(SF_BOUNDS, { padding: 24, duration: 800 });

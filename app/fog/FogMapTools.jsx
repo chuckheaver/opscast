@@ -199,16 +199,16 @@ export default function FogMapTools({
           Layers with a selector (Hoods, Homes, Bldgs, Transit, Bikes,
           MicroClimates) also open their panel when switched on. */}
       <div className="fog-chips">
-        {/* Hoods — neighborhood outlines + jump-to list */}
+        {/* Hoods — opens the jump-to list (outlines are the always-on anchor
+            layer). Pick a neighborhood to zoom to it + open its info pop-up. */}
         <button
           type="button"
-          className={"fog-chip" + (showNeighborhoods ? " on" : "")}
+          className={"fog-chip" + (menu === "neighborhoods" ? " on" : "")}
           onClick={() => {
-            const on = !showNeighborhoods;
-            onToggleNeighborhoods(on);
-            setMenu(on ? "neighborhoods" : (menu === "neighborhoods" ? null : menu));
+            if (menu === "neighborhoods") { setMenu(null); }
+            else { onToggleNeighborhoods(true); setMenu("neighborhoods"); }
           }}
-          aria-pressed={!!showNeighborhoods}
+          aria-expanded={menu === "neighborhoods"}
           title="Neighborhoods"
         >
           <GridIcon /> Hoods

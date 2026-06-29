@@ -66,6 +66,26 @@ export function centroidOfFeature(feature) {
   return [x / (3 * area2), y / (3 * area2)];
 }
 
+// Bounding box of a feature's geometry as [[west, south], [east, north]],
+// suitable for map.fitBounds. Returns null if there are no coordinates.
+export function bboxOfFeature(feature) {
+  const g = feature?.geometry;
+  if (!g) return null;
+  let w = Infinity, s = Infinity, e = -Infinity, n = -Infinity;
+  const polys = g.type === "Polygon" ? [g.coordinates] : g.type === "MultiPolygon" ? g.coordinates : [];
+  for (const poly of polys) {
+    for (const ring of poly) {
+      for (const [lng, lat] of ring) {
+        if (lng < w) w = lng;
+        if (lng > e) e = lng;
+        if (lat < s) s = lat;
+        if (lat > n) n = lat;
+      }
+    }
+  }
+  return e === -Infinity ? null : [[w, s], [e, n]];
+}
+
 // Does `feature`'s geometry intersect ANY feature in collection `fc`?
 // Answers "is any part of this neighborhood inside a hazard zone?" for the
 // neighborhood-level Seismic / Tsunami readouts. Polygon–polygon test:
