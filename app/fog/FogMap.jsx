@@ -1408,8 +1408,8 @@ export default function FogMap({
         source: "fog",
         paint: {
           "line-color": "#1c1917",
-          "line-opacity": 0.8,
-          "line-width": 1.3,
+          "line-opacity": 0.55,
+          "line-width": 0.9,
         },
       });
       map.addLayer({
