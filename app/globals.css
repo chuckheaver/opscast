@@ -1415,13 +1415,11 @@ input[type=range]::-webkit-slider-thumb:hover {
   cursor: pointer;
   white-space: nowrap;
 }
-.fog-chip:hover { background: #faf6ec; }
-.fog-chip.on { background: #eaf1fd; border-color: #bcd2f7; color: #1d4ed8; }
+.fog-chip:hover { background: #f3f7fe; }
+/* On = the chip's layer is showing on the map (light blue); off = white. */
+.fog-chip.on { background: #dbe8fd; border-color: #93b4f5; color: #1d4ed8; }
 .fog-chip svg { width: 12px; height: 12px; color: #5f6368; flex: 0 0 auto; }
 .fog-chip.on svg { color: #1d4ed8; }
-/* Housing Activity chip shows an "active dots on the map" accent. */
-.fog-chip.active { border-color: #f0b48a; }
-.fog-chip.active svg { color: #ea580c; }
 
 /* Housing Activity filter panel. */
 .fog-activity-panel { width: 230px; padding: 11px 13px 13px; }

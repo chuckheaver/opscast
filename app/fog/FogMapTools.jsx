@@ -184,43 +184,53 @@ export default function FogMapTools({
         </div>
       )}
 
-      {/* Quick-link chips under the search bar */}
+      {/* Quick-link chips under the search bar. Each chip toggles its own map
+          layer on/off (blue = on, white = off); any number can be on at once.
+          Layers with a selector (Hoods, Homes, Bldgs, Transit, Bikes,
+          MicroClimates) also open their panel when switched on. */}
       <div className="fog-chips">
+        {/* Hoods — neighborhood outlines + jump-to list */}
         <button
           type="button"
-          className={"fog-chip" + (menu === "neighborhoods" ? " on" : "")}
-          onClick={() => toggleMenu("neighborhoods")}
-          aria-expanded={menu === "neighborhoods"}
+          className={"fog-chip" + (showNeighborhoods ? " on" : "")}
+          onClick={() => {
+            const on = !showNeighborhoods;
+            onToggleNeighborhoods(on);
+            setMenu(on ? "neighborhoods" : (menu === "neighborhoods" ? null : menu));
+          }}
+          aria-pressed={!!showNeighborhoods}
           title="Neighborhoods"
         >
           <GridIcon /> Hoods
         </button>
+        {/* Homes — sale dots driven by the market filter */}
         <button
           type="button"
-          className={"fog-chip" + (menu === "activity" ? " on" : "") + (activityOn ? " active" : "")}
+          className={"fog-chip" + (activityOn ? " on" : "")}
           onClick={() => {
-            if (menu === "activity") { setMenu(null); return; }
-            setMenu("activity");
-            onActivityOpen?.();
+            if (activityOn) { onClearActivity?.(); if (menu === "activity") setMenu(null); }
+            else { onActivityOpen?.(); setMenu("activity"); }
           }}
-          aria-expanded={menu === "activity"}
-          title="Housing activity on the map"
+          aria-pressed={!!activityOn}
+          title="Home sale dots"
         >
           <DotsIcon /> Homes
         </button>
+        {/* Bldgs — residential footprints + index */}
         <button
           type="button"
-          className={"fog-chip" + (menu === "buildings" ? " on" : "")}
+          className={"fog-chip" + (showResBuildings ? " on" : "")}
           onClick={() => {
-            if (menu === "buildings") { setMenu(null); return; }
-            setMenu("buildings");
-            onShowResBuildings?.(); // show the residential footprints with the list
+            const on = !showResBuildings;
+            onToggleResBuildings?.(on);
+            setMenu(on ? "buildings" : (menu === "buildings" ? null : menu));
           }}
-          aria-expanded={menu === "buildings"}
+          aria-pressed={!!showResBuildings}
           title="Buildings"
         >
           <BuildingIcon /> Bldgs
         </button>
+        {/* Stats — market report pop-up (no map layer) */}
         <button
           type="button"
           className="fog-chip"
@@ -229,54 +239,72 @@ export default function FogMapTools({
         >
           <ChartIcon /> Stats
         </button>
+        {/* Fog — summer fog contours */}
         <button
           type="button"
-          className={"fog-chip" + (showContours ? " active" : "")}
-          onClick={() => { setMenu(null); onToggleContours(!showContours); }}
+          className={"fog-chip" + (showContours ? " on" : "")}
+          onClick={() => onToggleContours(!showContours)}
+          aria-pressed={!!showContours}
           title="Summer fog"
         >
           <FogIcon /> Fog
         </button>
+        {/* MicroClimates — terrain micro-zones */}
         <button
           type="button"
-          className={"fog-chip" + (menu === "micro" ? " on" : "") + ((showMicroSun || showMicroCool || showMicroWind) ? " active" : "")}
+          className={"fog-chip" + ((showMicroSun || showMicroCool || showMicroWind) ? " on" : "")}
           onClick={() => {
-            if (menu === "micro") { setMenu(null); return; }
-            setMenu("micro");
-            onMicroOpen?.();
+            const on = showMicroSun || showMicroCool || showMicroWind;
+            if (on) {
+              onToggleMicroSun(false); onToggleMicroCool(false); onToggleMicroWind(false);
+              if (menu === "micro") setMenu(null);
+            } else {
+              onMicroOpen?.();
+              onToggleMicroSun(true); onToggleMicroCool(true); onToggleMicroWind(true);
+              setMenu("micro");
+            }
           }}
-          aria-expanded={menu === "micro"}
+          aria-pressed={showMicroSun || showMicroCool || showMicroWind}
           title="Microclimate zones"
         >
           <MicroIcon /> MicroClimates
         </button>
+        {/* Hazards — seismic + tsunami together */}
         <button
           type="button"
-          className={"fog-chip" + ((showSeismic || showTsunami) ? " active" : "")}
+          className={"fog-chip" + ((showSeismic || showTsunami) ? " on" : "")}
           onClick={() => {
-            setMenu(null);
             const on = showSeismic || showTsunami;
             onToggleSeismic(!on);
             onToggleTsunami(!on);
           }}
+          aria-pressed={showSeismic || showTsunami}
           title="Hazards — seismic + tsunami"
         >
           <HazardIcon /> Hazards
         </button>
+        {/* Transit — Muni lines + line selector */}
         <button
           type="button"
-          className={"fog-chip" + (menu === "transit" ? " on" : "") + (showMuni ? " active" : "")}
-          onClick={() => { const open = menu !== "transit"; setMenu(open ? "transit" : null); if (open) onTransitOpen?.(); }}
-          aria-expanded={menu === "transit"}
+          className={"fog-chip" + (showMuni ? " on" : "")}
+          onClick={() => {
+            if (showMuni) { onToggleMuni?.(false); if (menu === "transit") setMenu(null); }
+            else { onTransitOpen?.(); setMenu("transit"); }
+          }}
+          aria-pressed={!!showMuni}
           title="Transit lines"
         >
           <TransitIcon /> Transit
         </button>
+        {/* Bikes — bike network + type selector */}
         <button
           type="button"
-          className={"fog-chip" + (menu === "bikes" ? " on" : "") + (showBikes ? " active" : "")}
-          onClick={() => setMenu(menu === "bikes" ? null : "bikes")}
-          aria-expanded={menu === "bikes"}
+          className={"fog-chip" + (showBikes ? " on" : "")}
+          onClick={() => {
+            if (showBikes) { onSelectBikeClass?.(null); if (menu === "bikes") setMenu(null); }
+            else { onSelectBikeClass?.(""); setMenu("bikes"); }
+          }}
+          aria-pressed={!!showBikes}
           title="Bike network"
         >
           <BikeIcon /> Bikes
