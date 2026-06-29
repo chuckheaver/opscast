@@ -63,6 +63,10 @@ export default function FogMapTools({
 }) {
   const [menu, setMenu] = useState(initialMenu || null); // "layers" | "buildings" | "neighborhoods" | "activity" | null
   const wrapRef = useRef(null);
+  // Collapse the open list/Homes panel down to its header so it stops covering
+  // the map on small screens. Resets whenever a different panel opens.
+  const [panelCollapsed, setPanelCollapsed] = useState(false);
+  useEffect(() => { setPanelCollapsed(false); }, [menu]);
 
   // The Market entry lands with the Homes filter open + dots on.
   useEffect(() => {
@@ -317,8 +321,9 @@ export default function FogMapTools({
       </div>
 
       {menu === "buildings" && (
-        <div className="fog-float-panel left fog-list-panel">
-          {buildingList.length === 0 ? (
+        <div className={"fog-float-panel left fog-list-panel" + (panelCollapsed ? " collapsed" : "")}>
+          <CollapseHead title="Buildings" collapsed={panelCollapsed} onToggle={() => setPanelCollapsed(c => !c)} />
+          {!panelCollapsed && (buildingList.length === 0 ? (
             <div className="fog-list-empty">No buildings loaded yet.</div>
           ) : (
             buildingList.map(b => (
@@ -333,13 +338,14 @@ export default function FogMapTools({
                 {b.tenure === "both" && <span className="fog-bldg-rental"> (Rental/Condo)</span>}
               </button>
             ))
-          )}
+          ))}
         </div>
       )}
 
       {menu === "neighborhoods" && (
-        <div className="fog-float-panel left fog-list-panel">
-          {NBHD_INDEX.map(n => (
+        <div className={"fog-float-panel left fog-list-panel" + (panelCollapsed ? " collapsed" : "")}>
+          <CollapseHead title="Neighborhoods" collapsed={panelCollapsed} onToggle={() => setPanelCollapsed(c => !c)} />
+          {!panelCollapsed && NBHD_INDEX.map(n => (
             <button
               key={n.key}
               type="button"
@@ -353,14 +359,19 @@ export default function FogMapTools({
       )}
 
       {menu === "activity" && (
-        <div className="fog-float-panel left fog-homes-panel">
-          <ListingFilter
-            filter={homesFilter}
-            options={homesOptions}
-            onChange={onHomesFilterChange}
-            onReset={onHomesReset}
-          />
-          <button type="button" className="fog-activity-clear" onClick={() => { onClearActivity?.(); setMenu(null); }}>Hide dots</button>
+        <div className={"fog-float-panel left fog-homes-panel" + (panelCollapsed ? " collapsed" : "")}>
+          <CollapseHead title="Homes" collapsed={panelCollapsed} onToggle={() => setPanelCollapsed(c => !c)} />
+          {!panelCollapsed && (
+            <>
+              <ListingFilter
+                filter={homesFilter}
+                options={homesOptions}
+                onChange={onHomesFilterChange}
+                onReset={onHomesReset}
+              />
+              <button type="button" className="fog-activity-clear" onClick={() => { onClearActivity?.(); setMenu(null); }}>Hide dots</button>
+            </>
+          )}
         </div>
       )}
 
@@ -566,6 +577,25 @@ function BikeIcon() {
       <circle cx="6" cy="17" r="3.5" /><circle cx="18" cy="17" r="3.5" />
       <path d="M6 17l4-7h5l-3 7M10 10l-1-3H7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  );
+}
+
+// Collapse/expand header for the list + Homes panels (taps fold the panel to
+// just this bar so it stops covering the map on small screens).
+function CollapseHead({ title, collapsed, onToggle }) {
+  return (
+    <div className="fog-transit-head fog-panel-head">
+      <button
+        type="button"
+        className="fog-transit-collapse"
+        onClick={onToggle}
+        aria-expanded={!collapsed}
+        aria-label={(collapsed ? "Expand " : "Collapse ") + title}
+      >
+        <span className="fog-transit-caret" aria-hidden="true">{collapsed ? "▸" : "▾"}</span>
+        <span>{title}</span>
+      </button>
+    </div>
   );
 }
 

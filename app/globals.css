@@ -1428,9 +1428,26 @@ input[type=range]::-webkit-slider-thumb:hover {
 
 /* Transit panel: the legend doubles as a multi-select line picker. */
 .fog-transit-panel { width: 248px; padding: 11px 13px 12px; }
+.fog-transit-panel.collapsed { padding-bottom: 11px; }
 .fog-transit-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .fog-transit-head > span { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #78716c; }
+/* Title doubles as the collapse toggle. */
+.fog-transit-collapse {
+  display: flex; align-items: center; gap: 5px;
+  background: none; border: none; padding: 0; font: inherit; cursor: pointer;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #78716c;
+}
+.fog-transit-caret { font-size: 10px; color: #a8a29e; }
+.fog-transit-count { font-size: 11px; font-weight: 600; color: #2563eb; }
 .fog-transit-head-btns { display: flex; gap: 8px; }
+/* Collapse header for the list + Homes panels — sticky so it stays put while
+   the list scrolls; folds the panel to just this bar when collapsed. */
+.fog-panel-head {
+  position: sticky; top: 0; z-index: 1; background: #fff;
+  padding: 3px 4px 7px; margin-bottom: 5px; border-bottom: 1px solid var(--border);
+}
+.collapsed .fog-panel-head { margin-bottom: 0; padding-bottom: 3px; border-bottom: none; }
+.fog-homes-panel.collapsed, .fog-list-panel.collapsed { overflow: hidden; }
 .fog-transit-act {
   background: none; border: none; padding: 0; font: inherit;
   font-size: 12px; font-weight: 600; color: #2563eb; cursor: pointer;
