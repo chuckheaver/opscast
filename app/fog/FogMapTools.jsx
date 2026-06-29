@@ -11,7 +11,6 @@ import { useState, useRef, useEffect } from "react";
 import { listNeighborhoods } from "./lib/neighborhoods";
 import FogLocationSearch from "./FogLocationSearch";
 import ListingFilter from "../components/ListingFilter";
-import LayerSelector from "../components/LayerSelector";
 import LayerBar from "../components/LayerBar";
 import { TRANSIT_CATS, TRANSIT_CATS_ALPHA } from "./lib/transit";
 import { BIKE_CLASSES } from "./lib/bikes";
@@ -46,7 +45,7 @@ export default function FogMapTools({
   // Hazards (seismic + tsunami + faults) selector
   onHazardsOpen, onHazardsHide, onToggleHazard, onShowAllHazards, onSelectNoneHazards,
   // Microclimate zones selector
-  onToggleMicroZone, onShowAllMicro, onSelectNoneMicro, onSaveMicroDefault,
+  onToggleMicroZone, onShowAllMicro, onSelectNoneMicro, onMicroHide,
   // Neighborhoods list
   onPickNeighborhood, openHood,
   // House market stats pop-up
@@ -272,7 +271,7 @@ export default function FogMapTools({
           className={"fog-chip" + ((showMicroSun || showMicroCool || showMicroWind) ? " on" : "")}
           onClick={() => {
             const on = showMicroSun || showMicroCool || showMicroWind;
-            if (on) { onSelectNoneMicro?.(); if (menu === "micro") setMenu(null); }
+            if (on) { onMicroHide?.(); if (menu === "micro") setMenu(null); }
             else { onMicroOpen?.(); setMenu("micro"); }
           }}
           aria-pressed={showMicroSun || showMicroCool || showMicroWind}
@@ -377,18 +376,15 @@ export default function FogMapTools({
       )}
 
       {menu === "micro" && (
-        <LayerSelector
-          title="Microclimates"
-          hint="Tap a zone to show or hide it. “Save default” keeps your picks for next time."
+        <LayerBar
           items={[
-            { key: "sun", label: "Sun pockets", color: "#fdba74", on: showMicroSun },
-            { key: "cool", label: "Cool / shade", color: "#7dd3fc", on: showMicroCool },
-            { key: "wind", label: "Wind corridors", color: "#2dd4bf", on: showMicroWind },
+            { key: "sun", short: "Sun pockets", color: "#fdba74", on: showMicroSun },
+            { key: "cool", short: "Cool / shade", color: "#7dd3fc", on: showMicroCool },
+            { key: "wind", short: "Wind corridors", color: "#2dd4bf", on: showMicroWind },
           ]}
           onToggle={onToggleMicroZone}
           onAll={onShowAllMicro}
           onNone={onSelectNoneMicro}
-          onSaveDefault={onSaveMicroDefault}
         />
       )}
 

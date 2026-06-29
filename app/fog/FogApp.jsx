@@ -162,16 +162,15 @@ export default function FogApp() {
   const showAllHazards = () => { const d = { seismic: true, tsunami: true, faults: true }; applyHaz(d); persistHaz(d); };
   const selectNoneHazards = () => { const d = { seismic: false, tsunami: false, faults: false }; applyHaz(d); persistHaz(d); };
 
-  // Microclimates selector handlers.
-  const toggleMicro = key =>
-    key === "sun" ? setShowMicroSun(v => !v) : key === "cool" ? setShowMicroCool(v => !v) : setShowMicroWind(v => !v);
-  const showAllMicro = () => { setShowMicroSun(true); setShowMicroCool(true); setShowMicroWind(true); };
-  const selectNoneMicro = () => { setShowMicroSun(false); setShowMicroCool(false); setShowMicroWind(false); };
-  const saveMicroDefault = () => {
-    const d = { sun: showMicroSun, cool: showMicroCool, wind: showMicroWind };
-    setMicroDefault(d);
-    try { localStorage.setItem(MICRO_PREF_KEY, JSON.stringify(d)); } catch {}
-  };
+  // Microclimates selector handlers — bar picks are the saved default; opening
+  // loads the zones + restores them, chip-off hides without clobbering them.
+  const applyMicro = d => { setShowMicroSun(d.sun); setShowMicroCool(d.cool); setShowMicroWind(d.wind); };
+  const persistMicro = d => { setMicroDefault(d); try { localStorage.setItem(MICRO_PREF_KEY, JSON.stringify(d)); } catch {} };
+  const openMicro = () => { setMicroWanted(true); applyMicro(microDefault); };
+  const hideMicro = () => applyMicro({ sun: false, cool: false, wind: false });
+  const toggleMicro = key => { const d = { sun: showMicroSun, cool: showMicroCool, wind: showMicroWind }; d[key] = !d[key]; applyMicro(d); persistMicro(d); };
+  const showAllMicro = () => { const d = { sun: true, cool: true, wind: true }; applyMicro(d); persistMicro(d); };
+  const selectNoneMicro = () => { const d = { sun: false, cool: false, wind: false }; applyMicro(d); persistMicro(d); };
 
   // SFAR Realtor neighborhoods (blue outlines + nbrhood (nid) labels).
   const [showRealtor, setShowRealtor] = useState(false);
@@ -586,7 +585,7 @@ export default function FogApp() {
           onToggleMicroZone={toggleMicro}
           onShowAllMicro={showAllMicro}
           onSelectNoneMicro={selectNoneMicro}
-          onSaveMicroDefault={saveMicroDefault}
+          onMicroHide={hideMicro}
           onPickNeighborhood={pickFromNeighborhood}
           openHood={openHood}
           onOpenMarket={() => setMarketOpen(true)}
@@ -604,7 +603,7 @@ export default function FogApp() {
           onToggleMicroCool={setShowMicroCool}
           showMicroWind={showMicroWind}
           onToggleMicroWind={setShowMicroWind}
-          onMicroOpen={() => { setMicroWanted(true); setShowMicroSun(microDefault.sun); setShowMicroCool(microDefault.cool); setShowMicroWind(microDefault.wind); }}
+          onMicroOpen={openMicro}
           onPickFromAddress={pickFromAddress}
           onUseGeoLocation={requestGeoLocation}
           ready={!!geojson}
