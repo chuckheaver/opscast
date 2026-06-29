@@ -1211,24 +1211,6 @@ export default function FogMap({
           "line-opacity": 0.85,
         },
       });
-      // Dash the temporary BUS substitutes (KBUS/NBUS/TBUS/FBUS) so they
-      // read as "bus replacing rail" rather than the actual metro line.
-      map.addLayer({
-        id: "muni-routes-bus-substitutes",
-        type: "line",
-        source: "muni-routes",
-        filter: ["in", ["get", "route_name"], ["literal", ["KBUS", "NBUS", "TBUS", "FBUS"]]],
-        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
-        paint: {
-          "line-color": "#ffffff",
-          "line-width": [
-            "interpolate", ["linear"], ["zoom"],
-            11, 0.5, 14, 1.0, 17, 1.6,
-          ],
-          "line-dasharray": [2, 2.5],
-          "line-opacity": 0.95,
-        },
-      });
       map.addLayer({
         id: "muni-dots",
         type: "circle",
@@ -1659,9 +1641,7 @@ export default function FogMap({
     const apply = () => {
       const linesVis = showMuni ? "visible" : "none";
       const dotsVis = showMuni && transitStops ? "visible" : "none";
-      ["muni-routes-lines", "muni-routes-bus-substitutes"].forEach(id => {
-        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", linesVis);
-      });
+      if (map.getLayer("muni-routes-lines")) map.setLayoutProperty("muni-routes-lines", "visibility", linesVis);
       ["muni-dots", "muni-labels"].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", dotsVis);
       });
@@ -1908,25 +1888,33 @@ export default function FogMap({
     map.flyTo({ center: flyTo.center, zoom: flyTo.zoom ?? map.getZoom(), duration: 1000 });
   }, [flyTo]);
 
-  // Transit: filter the route lines to the selected categories' route_names
-  // (e.g. N + NBUS for "N Judah"), or show all when transitRoutes is null.
+  // Transit: filter the route lines to the selected categories' route_names,
+  // or show all when transitRoutes is null.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
       if (!map.getLayer("muni-routes-lines")) return;
-      // NB: use a `match` expression — the `["in", ["get",…], ["literal",…]]`
-      // form is misread as a legacy filter and doesn't restrict.
-      const names = transitRoutes && transitRoutes.length ? transitRoutes : null;
-      const subs = ["KBUS", "NBUS", "TBUS", "FBUS"];
       const inNames = arr => ["match", ["get", "route_name"], arr, true, false];
-      // An empty selection (no categories) hides everything.
-      const hideAll = ["==", ["get", "route_name"], " "];
-      map.setFilter("muni-routes-lines", transitRoutes ? (names ? inNames(names) : hideAll) : null);
-      if (map.getLayer("muni-routes-bus-substitutes")) {
-        map.setFilter("muni-routes-bus-substitutes",
-          transitRoutes ? (names ? ["all", inNames(subs), inNames(names)] : hideAll) : inNames(subs));
-      }
+      // Canonical service only: regular (pattern "F") routes, minus the *BUS
+      // rail-replacement shuttles; plus the Owl routes 90/91, which exist only
+      // as pattern "N". Drops the bus substitutes and owl variants that follow
+      // different surface streets (e.g. the N shuttle down Haight/Cole), so each
+      // rail line draws just its real route.
+      const base = ["any",
+        inNames(["90", "91"]),
+        ["all",
+          ["==", ["get", "pattern_type"], "F"],
+          ["!", inNames(["KBUS", "NBUS", "TBUS", "FBUS"])],
+        ],
+      ];
+      const names = transitRoutes && transitRoutes.length ? transitRoutes : null;
+      const filter = !transitRoutes
+        ? base
+        : names
+        ? ["all", base, inNames(names)]
+        : ["==", ["get", "route_name"], "__none__"];
+      map.setFilter("muni-routes-lines", filter);
     };
     // Call directly (setFilter on an existing layer is safe even mid-style-
     // update); also bind once to the first load for the initial mount.
