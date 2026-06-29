@@ -15,6 +15,7 @@ import FogMapTools from "./FogMapTools";
 import HomesStats from "../components/HomesStats";
 import { loadListingsGeo } from "../listings/lib/load";
 import { defaultFilter, matchesFilter, deriveOptions, isSoldStatus } from "../listings/lib/filter";
+import { buildReportData } from "../listings/lib/report";
 import { findNeighborhoodForPoint, findContourForPoint, findFeatureByName, centroidOfFeature, bboxOfFeature } from "./lib/spatial";
 import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
 import { ALL_TRANSIT_KEYS, isAllSelected, routesForSelection } from "./lib/transit";
@@ -59,6 +60,7 @@ export default function FogApp() {
   const [openHood, setOpenHood] = useState(null); // neighborhood name whose highlights pop-up is open
   const [statsOpen, setStatsOpen] = useState(false);     // Homes Stats bottom-sheet
   const [statsExpanded, setStatsExpanded] = useState(false);
+  const [reporting, setReporting] = useState(false);     // PDF report generating
   // "Housing Activity" map overlay: listings GeoJSON + the active filter.
   const [listingsGeo, setListingsGeo] = useState(null);
   const [activityWanted, setActivityWanted] = useState(preset === "homes"); // Homes dots on
@@ -489,6 +491,22 @@ export default function FogApp() {
   const homesCount = homesMatches.length;
   const homesProps = useMemo(() => homesMatches.map(f => f.properties), [homesMatches]);
 
+  // Generate + download the market-update PDF for the current filter. The PDF
+  // renderer is dynamically imported so it only loads on demand.
+  const downloadReport = useCallback(async () => {
+    if (!listingsGeo) return;
+    setReporting(true);
+    try {
+      const data = buildReportData(listingsGeo.features, homesFilter);
+      const { downloadReport: dl } = await import("../listings/lib/reportPdf");
+      const slug = data.periodLabel.replace(/[^a-z0-9]+/gi, "_").replace(/^_|_$/g, "");
+      await dl(data, `SF_Market_Update_${slug}.pdf`);
+    } catch (e) {
+      console.error("report failed", e);
+    }
+    setReporting(false);
+  }, [listingsGeo, homesFilter]);
+
   // The matching listings as map dots, each tagged actKind ("sold"|"active").
   const activityData = useMemo(() => {
     if (!activityWanted) return null;
@@ -625,6 +643,8 @@ export default function FogApp() {
             expanded={statsExpanded}
             onToggleExpand={() => setStatsExpanded(e => !e)}
             onClose={() => setStatsOpen(false)}
+            onDownload={downloadReport}
+            downloading={reporting}
           />
         )}
       </div>

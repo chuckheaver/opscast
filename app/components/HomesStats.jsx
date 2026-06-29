@@ -21,7 +21,7 @@ const pct = n => (n == null ? "—" : Math.round(n) + "%");
 const shortAddr = a => (a ? a.replace(/,\s*San Francisco.*$/i, "") : "—");
 const fmtDate = iso => { const m = iso && /^(\d{4})-(\d{2})-(\d{2})/.exec(iso); return m ? `${+m[2]}/${+m[3]}/${m[1].slice(2)}` : "—"; };
 
-export default function HomesStats({ props, count, expanded, onToggleExpand, onClose }) {
+export default function HomesStats({ props, count, expanded, onToggleExpand, onClose, onDownload, downloading }) {
   const stats = useMemo(() => computeStats(props || []), [props]);
   const sold = useMemo(() => (props || []).filter(p => isSoldStatus(p.status) && p.sellingPrice > 0), [props]);
 
@@ -53,6 +53,9 @@ export default function HomesStats({ props, count, expanded, onToggleExpand, onC
         <span className="fog-stats-title">Stats · {(count || 0).toLocaleString("en-US")} match · {sold.length.toLocaleString("en-US")} sold</span>
         <button type="button" className="fog-stats-exp" onClick={onToggleExpand}>{expanded ? "Less ↓" : "Full report ↑"}</button>
       </div>
+      <button type="button" className="fog-stats-pdf" onClick={onDownload} disabled={downloading}>
+        {downloading ? "Preparing PDF…" : "⤓ Download report (PDF)"}
+      </button>
       <div className="fog-stats-metrics">
         {metrics.map(m => (
           <div className="fog-stats-met" key={m.l}><div className="fog-stats-v">{m.v}</div><div className="fog-stats-l">{m.l}</div></div>

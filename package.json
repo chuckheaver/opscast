@@ -15,6 +15,7 @@
     "buildings:build": "node scripts/build-building-sales.mjs"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.5.1",
     "geotiff": "^3.0.5",
     "mapbox-gl": "^3.24.0",
     "next": "16.2.6",
