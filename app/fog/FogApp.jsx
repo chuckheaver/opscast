@@ -117,14 +117,16 @@ export default function FogApp() {
   const showAllTransit = () => applyTransit(new Set(ALL_TRANSIT_KEYS));
   const selectNoneTransit = () => applyTransit(new Set());
 
-  // Bikes selector handlers.
-  const toggleBikeClass = key =>
-    setBikeSel(s => { const n = new Set(s); n.has(key) ? n.delete(key) : n.add(key); return n; });
-  const showAllBikes = () => setBikeSel(new Set(ALL_BIKE_KEYS));
-  const selectNoneBikes = () => setBikeSel(new Set());
-  const saveBikeDefault = () => {
-    try { localStorage.setItem(BIKE_PREF_KEY, JSON.stringify([...bikeSel])); } catch {}
+  // Bikes selector handlers — the current selection is the saved default.
+  const persistBike = n => { try { localStorage.setItem(BIKE_PREF_KEY, JSON.stringify([...n])); } catch {} };
+  const applyBike = n => { setBikeSel(n); persistBike(n); };
+  const toggleBikeClass = key => {
+    const n = new Set(bikeSel);
+    n.has(key) ? n.delete(key) : n.add(key);
+    applyBike(n);
   };
+  const showAllBikes = () => applyBike(new Set(ALL_BIKE_KEYS));
+  const selectNoneBikes = () => applyBike(new Set());
   // Summer fog overlay — on for the "Fog Map" preset; off otherwise.
   const [showContours, setShowContours] = useState(preset === "fog");
   // Transit (Muni stops) — on for the "Transit" preset.
@@ -576,7 +578,6 @@ export default function FogApp() {
           onToggleBikeClass={toggleBikeClass}
           onShowAllBikes={showAllBikes}
           onSelectNoneBikes={selectNoneBikes}
-          onSaveBikeDefault={saveBikeDefault}
           onBikesOpen={() => setShowBikes(true)}
           onHazardsOpen={openHazards}
           onToggleHazard={toggleHazard}

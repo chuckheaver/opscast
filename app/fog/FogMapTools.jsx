@@ -418,14 +418,11 @@ export default function FogMapTools({
       )}
 
       {menu === "bikes" && (
-        <LayerSelector
-          title="Bikes"
-          hint="Tap a class to show or hide it. “Save default” keeps your picks for next time."
-          items={BIKE_CLASSES.map(c => ({ key: c.key, label: c.label, color: c.color, dashed: c.dashed, on: !!bikeSel?.has(c.key) }))}
+        <LayerBar
+          items={BIKE_CLASSES.map(c => ({ key: c.key, short: c.short, color: c.color, on: !!bikeSel?.has(c.key) }))}
           onToggle={onToggleBikeClass}
           onAll={onShowAllBikes}
           onNone={onSelectNoneBikes}
-          onSaveDefault={onSaveBikeDefault}
         />
       )}
 
