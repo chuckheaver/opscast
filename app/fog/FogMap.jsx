@@ -75,6 +75,7 @@ export default function FogMap({
   showMicroWind,
   flyTo,
   transitRoutes,
+  transitStops,
   bikeSel,
 }) {
   const containerRef = useRef(null);
@@ -1649,15 +1650,15 @@ export default function FogMap({
   }, [showTsunami]);
 
   // Muni visibility + line filter, in one place. The route lines show whenever
-  // transit is on; the stop dots/labels show only in "all lines" mode — when a
-  // single line is picked we show just that route, not every stop in the city.
+  // transit is on; the stop dots/labels are tied to the "Bus route" category —
+  // they show whenever transit is on and that category is selected, regardless
+  // of which rail lines are also on.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
       const linesVis = showMuni ? "visible" : "none";
-      const specific = !!transitRoutes; // a subset of lines (null = all)
-      const dotsVis = showMuni && !specific ? "visible" : "none";
+      const dotsVis = showMuni && transitStops ? "visible" : "none";
       ["muni-routes-lines", "muni-routes-bus-substitutes"].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", linesVis);
       });
@@ -1672,7 +1673,7 @@ export default function FogMap({
     // defer to a "load" event that already fired and never apply.
     apply();
     map.once("load", apply);
-  }, [showMuni, transitRoutes]);
+  }, [showMuni, transitRoutes, transitStops]);
 
   // Toggle the SF neighborhood outlines + name labels. The invisible
   // click-target layer stays visible always so map clicks still resolve

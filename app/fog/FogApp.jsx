@@ -522,6 +522,7 @@ export default function FogApp() {
           showMicroWind={showMicroWind}
           flyTo={flyTo}
           transitRoutes={transitRoutes}
+          transitStops={transitSel.has("bus")}
           bikeSel={bikeSel}
         />
         <FogMapTools
