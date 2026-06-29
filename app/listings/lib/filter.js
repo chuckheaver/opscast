@@ -27,10 +27,57 @@ const SUBTYPE_ORDER = ["Single Family Residence", "Condominium", "Tenancy in Com
 export const SOLD_STATUSES = new Set(["Closed", "Sold Off MLS"]);
 export const isSoldStatus = s => SOLD_STATUSES.has(s);
 
+// ── Grouped chips for the compact Homes filter bar ──
+export const ALL_STATUSES = ["Active", "Pending", "Coming Soon", "Contingent - Show", "Contingent - No Show", "Hold", "Closed", "Sold Off MLS"];
+
+// Status groups (CTG folds Pending + both Contingent + Hold into one chip).
+export const STATUS_GROUPS = [
+  { key: "CSN", statuses: ["Coming Soon"] },
+  { key: "ACT", statuses: ["Active"] },
+  { key: "CTG", statuses: ["Pending", "Contingent - Show", "Contingent - No Show", "Hold"] },
+  { key: "SLD", statuses: ["Closed"] },
+  { key: "SOM", statuses: ["Sold Off MLS"] },
+];
+
+// Type groups; OTH = every subtype that isn't one of the three named ones.
+const NAMED_TYPES = ["Single Family Residence", "Condominium", "Tenancy in Common"];
+export const TYPE_GROUPS = [
+  { key: "SFH", types: ["Single Family Residence"] },
+  { key: "CND", types: ["Condominium"] },
+  { key: "TIC", types: ["Tenancy in Common"] },
+  { key: "OTH", other: true },
+];
+export const otherTypes = universe => (universe || []).filter(t => !NAMED_TYPES.includes(t));
+
+// A group chip is "on" when nothing is selected (empty Set = all) or all its
+// members are in the Set.
+export function groupOn(set, members) {
+  if (!set || set.size === 0) return true;
+  return members.every(m => set.has(m));
+}
+
+// Toggle a group within a Set, treating empty as "all selected": the first
+// removal materializes the full universe minus the group; a full Set collapses
+// back to empty (so matchesFilter reads it as "all").
+export function toggleGroup(set, members, universe) {
+  let s = new Set(set);
+  if (s.size === 0) universe.forEach(m => s.add(m));
+  const allIn = members.every(m => s.has(m));
+  if (allIn) members.forEach(m => s.delete(m));
+  else members.forEach(m => s.add(m));
+  if (universe.length && universe.every(m => s.has(m))) s = new Set();
+  return s;
+}
+
 // Default filter: all statuses / all types (empty Set = no restriction),
-// current calendar year so far.
+// January of the current year through the end of the current month (≈ latest
+// data feed).
 export function defaultFilter() {
-  const y = new Date().getFullYear();
+  const d = new Date();
+  const y = d.getFullYear();
+  const mo = d.getMonth() + 1;
+  const lastDay = new Date(y, mo, 0).getDate();
+  const mm = String(mo).padStart(2, "0");
   return {
     statuses: new Set(),
     subtypes: new Set(),
@@ -38,7 +85,7 @@ export function defaultFilter() {
     neighborhood: "",
     fogHrs: "",
     closedFrom: `${y}-01-01`,
-    closedTo: "",
+    closedTo: `${y}-${mm}-${String(lastDay).padStart(2, "0")}`,
     minPrice: "",
     maxPrice: "",
   };

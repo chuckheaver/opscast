@@ -12,7 +12,7 @@ import { useSearchParams } from "next/navigation";
 import FogMap from "./FogMap";
 import FogPanel from "./FogPanel";
 import FogMapTools from "./FogMapTools";
-import MarketModal from "../market/MarketModal";
+import HomesStats from "../components/HomesStats";
 import { loadListingsGeo } from "../listings/lib/load";
 import { defaultFilter, matchesFilter, deriveOptions, isSoldStatus } from "../listings/lib/filter";
 import { findNeighborhoodForPoint, findContourForPoint, findFeatureByName, centroidOfFeature, bboxOfFeature } from "./lib/spatial";
@@ -57,7 +57,8 @@ export default function FogApp() {
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { feature, point, address, contour, elevation_ft, zip, supervisor, realtor, microZone }
   const [openHood, setOpenHood] = useState(null); // neighborhood name whose highlights pop-up is open
-  const [marketOpen, setMarketOpen] = useState(false); // "House Market Stats" pop-up
+  const [statsOpen, setStatsOpen] = useState(false);     // Homes Stats bottom-sheet
+  const [statsExpanded, setStatsExpanded] = useState(false);
   // "Housing Activity" map overlay: listings GeoJSON + the active filter.
   const [listingsGeo, setListingsGeo] = useState(null);
   const [activityWanted, setActivityWanted] = useState(preset === "homes"); // Homes dots on
@@ -479,22 +480,27 @@ export default function FogApp() {
   // Option lists for the shared filter, derived from the listings data.
   const homesOptions = useMemo(() => deriveOptions(listingsGeo?.features), [listingsGeo]);
 
-  // Filter the listings with the shared filter → a FeatureCollection of dots,
-  // each tagged actKind ("sold"|"active") for colouring. Null when Homes is off.
+  // Properties matching the shared Homes filter — feeds the live count, the
+  // map dots, and the Stats sheet (all from one filter). Empty when Homes off.
+  const homesMatches = useMemo(() => {
+    if (!listingsGeo || !activityWanted) return [];
+    return listingsGeo.features.filter(f => matchesFilter(f.properties, homesFilter));
+  }, [listingsGeo, activityWanted, homesFilter]);
+  const homesCount = homesMatches.length;
+  const homesProps = useMemo(() => homesMatches.map(f => f.properties), [homesMatches]);
+
+  // The matching listings as map dots, each tagged actKind ("sold"|"active").
   const activityData = useMemo(() => {
-    if (!listingsGeo || !activityWanted) return null;
-    const feats = [];
-    for (const f of listingsGeo.features) {
-      const p = f.properties;
-      if (!matchesFilter(p, homesFilter)) continue;
-      feats.push({
+    if (!activityWanted) return null;
+    return {
+      type: "FeatureCollection",
+      features: homesMatches.map(f => ({
         type: "Feature",
         geometry: f.geometry,
-        properties: { ...p, actKind: isSoldStatus(p.status) ? "sold" : "active" },
-      });
-    }
-    return { type: "FeatureCollection", features: feats };
-  }, [listingsGeo, activityWanted, homesFilter]);
+        properties: { ...f.properties, actKind: isSoldStatus(f.properties.status) ? "sold" : "active" },
+      })),
+    };
+  }, [homesMatches, activityWanted]);
 
   return (
     <div className="fog-app fog-app-vertical">
@@ -588,15 +594,15 @@ export default function FogApp() {
           onMicroHide={hideMicro}
           onPickNeighborhood={pickFromNeighborhood}
           openHood={openHood}
-          onOpenMarket={() => setMarketOpen(true)}
           initialMenu={preset === "homes" ? "activity" : preset === "transit" ? "transit" : undefined}
           activityOn={activityWanted}
           homesFilter={homesFilter}
           homesOptions={homesOptions}
+          homesCount={homesCount}
           onActivityOpen={() => setActivityWanted(true)}
           onHomesFilterChange={setHomesFilter}
-          onHomesReset={() => setHomesFilter(defaultFilter())}
           onClearActivity={() => setActivityWanted(false)}
+          onOpenStats={() => setStatsOpen(true)}
           showMicroSun={showMicroSun}
           onToggleMicroSun={setShowMicroSun}
           showMicroCool={showMicroCool}
@@ -612,6 +618,15 @@ export default function FogApp() {
           dataErr={dataErr}
           geoErr={geoErr}
         />
+        {statsOpen && activityWanted && (
+          <HomesStats
+            props={homesProps}
+            count={homesCount}
+            expanded={statsExpanded}
+            onToggleExpand={() => setStatsExpanded(e => !e)}
+            onClose={() => setStatsOpen(false)}
+          />
+        )}
       </div>
       <FogPanel
         picked={picked}
@@ -626,7 +641,6 @@ export default function FogApp() {
         openBuilding={openBuilding}
         onCloseBuilding={() => setOpenBuilding(null)}
       />
-      {marketOpen && <MarketModal onClose={() => setMarketOpen(false)} />}
     </div>
   );
 }

@@ -1447,6 +1447,52 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 .fog-lk-all.on { color: #2563eb; }
 
+/* Compact Homes filter bar (grouped chips + month range + price + Stats). */
+.fog-homesbar {
+  display: flex; align-items: center; gap: 6px;
+  width: max-content; max-width: calc(100% - 76px);
+  padding: 4px 5px 4px 8px; border-radius: 999px; overflow: hidden;
+}
+.fog-homesbar-row { display: flex; align-items: center; gap: 4px; overflow-x: auto; min-width: 0; scrollbar-width: none; }
+.fog-homesbar-row::-webkit-scrollbar { display: none; }
+.fog-fchip {
+  flex: 0 0 auto; padding: 1px 7px; border: 0.5px solid var(--border); border-radius: 999px;
+  background: transparent; color: #a8a29e; font-size: 10px; font-weight: 600; line-height: 1.6; cursor: pointer; white-space: nowrap;
+}
+.fog-fchip.on { color: #1d4ed8; border-color: #93b4f5; background: #eaf1fd; }
+.fog-fsep { flex: 0 0 auto; width: 0; border-left: 0.5px solid var(--border); align-self: stretch; margin: 2px 1px; }
+.fog-ffld {
+  flex: 0 0 auto; font-size: 10px; color: #1c1917; background: #fff;
+  border: 0.5px solid var(--border); border-radius: 6px; padding: 1px 4px; line-height: 1.5;
+}
+.fog-fprice { width: 56px; }
+.fog-farr { flex: 0 0 auto; color: #a8a29e; font-size: 10px; }
+.fog-homesbar-end { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; border-left: 0.5px solid var(--border); padding-left: 7px; }
+.fog-fcount { font-size: 10px; font-weight: 700; color: #1c1917; white-space: nowrap; }
+.fog-statsbtn {
+  flex: 0 0 auto; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 999px;
+  background: #2563eb; color: #fff; border: none; cursor: pointer; white-space: nowrap;
+}
+
+/* Stats bottom-sheet (driven by the Homes filter; map stays visible above). */
+.fog-stats-sheet {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 7;
+  background: #fff; border-top: 0.5px solid var(--border); border-radius: 16px 16px 0 0;
+  box-shadow: 0 -6px 22px rgba(0, 0, 0, 0.16); padding: 7px 14px 14px;
+  display: flex; flex-direction: column; max-height: 78%;
+}
+.fog-stats-grab { width: 38px; height: 4px; border-radius: 2px; background: var(--border); border: none; margin: 0 auto 9px; cursor: pointer; flex: 0 0 auto; }
+.fog-stats-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px; flex: 0 0 auto; }
+.fog-stats-title { font-size: 13px; font-weight: 700; color: #1c1917; }
+.fog-stats-exp { background: none; border: none; padding: 0; font: inherit; font-size: 12.5px; font-weight: 600; color: #2563eb; cursor: pointer; }
+.fog-stats-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; flex: 0 0 auto; }
+.fog-stats-met { background: #f5f3ee; border-radius: 8px; padding: 7px 8px; text-align: center; }
+.fog-stats-v { font-size: 15px; font-weight: 800; color: #1c1917; letter-spacing: -0.3px; }
+.fog-stats-l { font-size: 10.5px; color: #78716c; margin-top: 1px; }
+.fog-stats-body { margin-top: 12px; overflow-y: auto; flex: 1 1 auto; }
+.fog-stats-h { font-size: 12px; font-weight: 700; color: #57534e; margin: 12px 0 5px; }
+.fog-stats-src { font-size: 11px; color: #a8a29e; margin-top: 10px; line-height: 1.5; }
+
 /* Transit panel: the legend doubles as a multi-select line picker. */
 .fog-transit-panel { width: 248px; padding: 11px 13px 12px; }
 .fog-transit-panel.collapsed { padding-bottom: 11px; }

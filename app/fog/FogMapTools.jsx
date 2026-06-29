@@ -10,7 +10,7 @@
 import { useState, useRef, useEffect } from "react";
 import { listNeighborhoods } from "./lib/neighborhoods";
 import FogLocationSearch from "./FogLocationSearch";
-import ListingFilter from "../components/ListingFilter";
+import HomesFilterBar from "../components/HomesFilterBar";
 import LayerBar from "../components/LayerBar";
 import { TRANSIT_CATS, TRANSIT_CATS_ALPHA } from "./lib/transit";
 import { BIKE_CLASSES } from "./lib/bikes";
@@ -48,10 +48,8 @@ export default function FogMapTools({
   onToggleMicroZone, onShowAllMicro, onSelectNoneMicro, onMicroHide,
   // Neighborhoods list
   onPickNeighborhood, openHood,
-  // House market stats pop-up
-  onOpenMarket,
-  // Housing Activity (Homes) map overlay — shared market filter drives the dots
-  activityOn, homesFilter, homesOptions, onActivityOpen, onHomesFilterChange, onHomesReset, onClearActivity,
+  // Homes overlay — compact filter bar drives the dots + the shared Stats sheet
+  activityOn, homesFilter, homesOptions, homesCount, onActivityOpen, onHomesFilterChange, onClearActivity, onOpenStats,
   // MicroClimates overlay
   showMicroSun, onToggleMicroSun, showMicroCool, onToggleMicroCool,
   showMicroWind, onToggleMicroWind, onMicroOpen,
@@ -246,15 +244,6 @@ export default function FogMapTools({
         >
           <BuildingIcon /> Bldgs
         </button>
-        {/* Stats — market report pop-up (no map layer) */}
-        <button
-          type="button"
-          className="fog-chip"
-          onClick={() => { setMenu(null); onOpenMarket?.(); }}
-          title="House market stats"
-        >
-          <ChartIcon /> Stats
-        </button>
         {/* Fog — summer fog contours */}
         <button
           type="button"
@@ -359,20 +348,13 @@ export default function FogMapTools({
       )}
 
       {menu === "activity" && (
-        <div className={"fog-float-panel left fog-homes-panel" + (panelCollapsed ? " collapsed" : "")}>
-          <CollapseHead title="Homes" collapsed={panelCollapsed} onToggle={() => setPanelCollapsed(c => !c)} />
-          {!panelCollapsed && (
-            <>
-              <ListingFilter
-                filter={homesFilter}
-                options={homesOptions}
-                onChange={onHomesFilterChange}
-                onReset={onHomesReset}
-              />
-              <button type="button" className="fog-activity-clear" onClick={() => { onClearActivity?.(); setMenu(null); }}>Hide dots</button>
-            </>
-          )}
-        </div>
+        <HomesFilterBar
+          filter={homesFilter}
+          options={homesOptions}
+          count={homesCount}
+          onChange={onHomesFilterChange}
+          onOpenStats={onOpenStats}
+        />
       )}
 
       {menu === "micro" && (
