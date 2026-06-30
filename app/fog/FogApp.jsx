@@ -457,7 +457,9 @@ export default function FogApp() {
   // layer is already on from opening that list).
   const zoomToBuilding = useCallback(b => {
     const lng = Number(b?.lng), lat = Number(b?.lat);
-    if (Number.isFinite(lng) && Number.isFinite(lat)) setFlyTo({ center: [lng, lat], zoom: 16 });
+    const center = Number.isFinite(lng) && Number.isFinite(lat) ? [lng, lat] : null;
+    // Frame the building's footprint polygon (falls back to its centre).
+    setFlyTo({ buildingId: b?.objectid, center, zoom: 17 });
   }, []);
 
   // ── Housing Activity overlay ──
