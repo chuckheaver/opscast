@@ -28,6 +28,7 @@ export default function FogMapTools({
   showDistricts, onToggleDistricts,
   showZips, onToggleZips,
   showTerrain, onToggleTerrain,
+  showSatellite, onToggleSatellite,
   showElevation, onToggleElevation,
   showSeismic, onToggleSeismic,
   showTsunami, onToggleTsunami,
@@ -91,6 +92,12 @@ export default function FogMapTools({
 
   // ── Layers: grouped toggles ──
   const groups = [
+    {
+      title: "Base map",
+      items: [
+        ["Satellite", showSatellite, onToggleSatellite],
+      ],
+    },
     {
       title: "Boundaries",
       items: [

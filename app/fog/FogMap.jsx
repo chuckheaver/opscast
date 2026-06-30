@@ -56,6 +56,7 @@ export default function FogMap({
   showSeismic,
   showTsunami,
   showFaults,
+  showSatellite,
   showMuni,
   showBikes,
   showZips,
@@ -176,6 +177,21 @@ export default function FogMap({
             "hillshade-accent-color": "rgba(28, 25, 23, 0.5)",
             "hillshade-highlight-color": "rgba(168, 162, 158, 0)",
           },
+        },
+        firstLabelLayer?.id
+      );
+
+      // Satellite imagery (Mapbox Satellite raster). Inserted below the basemap
+      // labels so place names stay legible over the imagery; all our data
+      // overlays still draw on top. Hidden until toggled on.
+      map.addSource("satellite", { type: "raster", url: "mapbox://mapbox.satellite", tileSize: 256 });
+      map.addLayer(
+        {
+          id: "satellite",
+          type: "raster",
+          source: "satellite",
+          layout: { visibility: "none" },
+          paint: { "raster-opacity": 1 },
         },
         firstLabelLayer?.id
       );
@@ -1605,6 +1621,17 @@ export default function FogMap({
       if (el) el.style.display = showContours ? "" : "none";
     });
   }, [showContours]);
+
+  // Toggle the satellite imagery base.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      if (map.getLayer("satellite")) map.setLayoutProperty("satellite", "visibility", showSatellite ? "visible" : "none");
+    };
+    apply();
+    map.once("load", apply);
+  }, [showSatellite]);
 
   // Toggle the hillshade terrain overlay.
   useEffect(() => {

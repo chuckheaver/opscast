@@ -145,6 +145,8 @@ export default function FogApp() {
   const [showZips, setShowZips] = useState(false);
   // Topographic hillshade overlay.
   const [showTerrain, setShowTerrain] = useState(false);
+  // Satellite imagery base.
+  const [showSatellite, setShowSatellite] = useState(false);
   // Elevation contour lines + ft labels + peak labels — the layer set
   // pulled in from /microclimates.
   const [showElevation, setShowElevation] = useState(false);
@@ -528,6 +530,7 @@ export default function FogApp() {
           contours={contours}
           showContours={showContours}
           showTerrain={showTerrain}
+          showSatellite={showSatellite}
           showElevation={showElevation}
           showSeismic={showSeismic}
           showTsunami={showTsunami}
@@ -571,6 +574,8 @@ export default function FogApp() {
           onToggleZips={setShowZips}
           showTerrain={showTerrain}
           onToggleTerrain={setShowTerrain}
+          showSatellite={showSatellite}
+          onToggleSatellite={setShowSatellite}
           showElevation={showElevation}
           onToggleElevation={setShowElevation}
           showSeismic={showSeismic}
