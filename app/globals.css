@@ -1708,6 +1708,10 @@ input[type=range]::-webkit-slider-thumb:hover {
   width: 240px;
   padding: 5px;
 }
+.fog-list-grouphead {
+  font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  color: #a8a29e; padding: 9px 8px 3px;
+}
 .fog-list-link {
   display: block;
   width: 100%;

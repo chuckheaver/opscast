@@ -168,11 +168,13 @@ export default function FogMapTools({
     hazardItems.length && { title: "Hazards", items: hazardItems },
   ].filter(Boolean);
 
-  // ── Buildings: alphanumeric residential index ──
-  const buildingList = buildingProfiles
-    ? Object.values(buildingProfiles).sort((a, b) =>
-        a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }))
-    : [];
+  // ── Buildings: index split into Condos (for-sale + mixed) and Rentals,
+  //    each sorted alphanumerically. Condos lead the list. ──
+  const byName = arr => arr.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
+  const allBuildings = buildingProfiles ? Object.values(buildingProfiles) : [];
+  const condoBuildings = byName(allBuildings.filter(b => b.tenure !== "rental"));
+  const rentalBuildings = byName(allBuildings.filter(b => b.tenure === "rental"));
+  const hasBuildings = allBuildings.length > 0;
 
   return (
     <div className="fog-maptools" ref={wrapRef}>
@@ -319,21 +321,27 @@ export default function FogMapTools({
       {menu === "buildings" && (
         <div className={"fog-float-panel left fog-list-panel" + (panelCollapsed ? " collapsed" : "")}>
           <CollapseHead title="Buildings" collapsed={panelCollapsed} onToggle={() => setPanelCollapsed(c => !c)} />
-          {!panelCollapsed && (buildingList.length === 0 ? (
+          {!panelCollapsed && (!hasBuildings ? (
             <div className="fog-list-empty">No buildings loaded yet.</div>
           ) : (
-            buildingList.map(b => (
-              <button
-                key={b.objectid}
-                type="button"
-                className={"fog-list-link" + (b.objectid === openBuilding ? " on" : "")}
-                onClick={() => { onZoomBuilding?.(b); setMenu(null); }}
-              >
-                {b.name}
-                {b.tenure === "rental" && <span className="fog-bldg-rental"> (Rental)</span>}
-                {b.tenure === "both" && <span className="fog-bldg-rental"> (Rental/Condo)</span>}
-              </button>
-            ))
+            [["Condos", condoBuildings], ["Rentals", rentalBuildings]].map(([groupName, list]) =>
+              list.length === 0 ? null : (
+                <div key={groupName}>
+                  <div className="fog-list-grouphead">{groupName}</div>
+                  {list.map(b => (
+                    <button
+                      key={b.objectid}
+                      type="button"
+                      className={"fog-list-link" + (b.objectid === openBuilding ? " on" : "")}
+                      onClick={() => { onZoomBuilding?.(b); onOpenBuilding?.(b.objectid); setMenu(null); }}
+                    >
+                      {b.name}
+                      {b.tenure === "both" && <span className="fog-bldg-rental"> (Rental/Condo)</span>}
+                    </button>
+                  ))}
+                </div>
+              )
+            )
           ))}
         </div>
       )}
