@@ -14,6 +14,20 @@ const monthEnd = ym => {
   return `${ym}-${String(d).padStart(2, "0")}`;
 };
 
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const fmtMon = ym => { if (!ym) return "—"; const [y, m] = ym.split("-"); return `${MON[Number(m) - 1]} '${y.slice(2)}`; };
+
+// A month field that shows the compact "Jan '26" label but still opens the
+// native month picker (the real input sits transparent on top).
+function MonthField({ value, min, max, onChange, label }) {
+  return (
+    <span className="fog-month">
+      <span className="fog-month-label">{fmtMon(value)}</span>
+      <input type="month" className="fog-month-input" aria-label={label} value={value} min={min} max={max} onChange={onChange} />
+    </span>
+  );
+}
+
 export default function HomesFilterBar({ filter, options, count, onChange, onOpenStats }) {
   const subUniverse = options?.subtypes || [];
   const set = patch => onChange({ ...filter, ...patch });
@@ -41,15 +55,15 @@ export default function HomesFilterBar({ filter, options, count, onChange, onOpe
           );
         })}
         <span className="fog-fsep" aria-hidden="true" />
-        <input
-          type="month" className="fog-ffld" aria-label="Sold from month"
+        <MonthField
+          label="Sold from month"
           value={filter.closedFrom ? filter.closedFrom.slice(0, 7) : ""}
           max={filter.closedTo ? filter.closedTo.slice(0, 7) : undefined}
           onChange={e => set({ closedFrom: e.target.value ? `${e.target.value}-01` : "" })}
         />
         <span className="fog-farr" aria-hidden="true">→</span>
-        <input
-          type="month" className="fog-ffld" aria-label="Sold to month"
+        <MonthField
+          label="Sold to month"
           value={filter.closedTo ? filter.closedTo.slice(0, 7) : ""}
           min={filter.closedFrom ? filter.closedFrom.slice(0, 7) : undefined}
           onChange={e => set({ closedTo: monthEnd(e.target.value) })}
