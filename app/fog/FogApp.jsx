@@ -456,10 +456,11 @@ export default function FogApp() {
   // Zoom the map to a building chosen from the Bldgs list (the residential
   // layer is already on from opening that list).
   const zoomToBuilding = useCallback(b => {
-    const lng = Number(b?.lng), lat = Number(b?.lat);
-    const center = Number.isFinite(lng) && Number.isFinite(lat) ? [lng, lat] : null;
-    // Frame the building's footprint polygon (falls back to its centre).
-    setFlyTo({ buildingId: b?.objectid, center, zoom: 17 });
+    // Each building profile carries its centre point — fly there and zoom in.
+    const c = b?.centroid;
+    if (Array.isArray(c) && Number.isFinite(c[0]) && Number.isFinite(c[1])) {
+      setFlyTo({ center: [c[0], c[1]], zoom: 17.5 });
+    }
   }, []);
 
   // ── Housing Activity overlay ──

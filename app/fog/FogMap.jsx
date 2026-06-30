@@ -17,7 +17,6 @@ import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { NAME_OVERRIDES, getBuilding, RENTAL_OBJECTIDS, FORCE_COMMERCIAL_OBJECTIDS } from "./lib/buildings";
-import { bboxOfFeature } from "./lib/spatial";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
@@ -1984,21 +1983,8 @@ export default function FogMap({
   // Bldgs list). Keyed on identity so each request animates once.
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !flyTo) return;
-    const flyCenter = () => { if (flyTo.center) map.flyTo({ center: flyTo.center, zoom: flyTo.zoom ?? map.getZoom(), duration: 1000 }); };
-    // A building chosen from the Bldgs list → frame its footprint polygon.
-    if (flyTo.buildingId != null) {
-      const fit = geo => {
-        const feat = geo?.features?.find(f => String(f.properties?.objectid) === String(flyTo.buildingId));
-        const bb = feat && bboxOfFeature(feat);
-        if (bb) map.fitBounds(bb, { padding: 120, maxZoom: 18.5, duration: 1000 });
-        else flyCenter();
-      };
-      if (buildingsGeoRef.current) fit(buildingsGeoRef.current);
-      else fetch("/data/sf-tall-buildings.geojson").then(r => r.json()).then(geo => { buildingsGeoRef.current = geo; fit(geo); }).catch(flyCenter);
-      return;
-    }
-    flyCenter();
+    if (!map || !flyTo?.center) return;
+    map.flyTo({ center: flyTo.center, zoom: flyTo.zoom ?? map.getZoom(), duration: 1000 });
   }, [flyTo]);
 
   // Transit: filter the route lines to the selected categories' route_names,
