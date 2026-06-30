@@ -31,6 +31,22 @@ export const NAME_OVERRIDES = {
   "490": "Mira", // 160 Folsom — the city calls it "Folsom Bay Tower"; it's Mira (Transbay Block 1)
 };
 
+// Address overrides (objectid → corrected street address). The MLS sales are
+// matched by this address, and it's the address shown for the building.
+export const ADDRESS_OVERRIDES = {
+  // Montgomery Washington Tower: the city tags it by the commercial side (655
+  // Montgomery); its residential condos trade as 611 Washington.
+  "615": "611 Washington Street",
+};
+
+// Occupancy overrides (objectid → corrected occupancy). Use to force a
+// building's classification when the city tag is wrong for our purposes.
+export const OCCUPANCY_OVERRIDES = {
+  // 706 Mission (Four Seasons Private Residences) is fully residential — it
+  // only shares amenities with the Four Seasons hotel at 765 Market.
+  "425": "Residential",
+};
+
 export const RENTAL_OBJECTIDS = new Set([
   "196", // NEMA North Tower — 1411 Market
   "55",  // Ava 55 Ninth — 55 9th St

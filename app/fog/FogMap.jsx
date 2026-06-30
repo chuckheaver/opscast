@@ -16,7 +16,7 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { NAME_OVERRIDES, getBuilding, RENTAL_OBJECTIDS, FORCE_COMMERCIAL_OBJECTIDS } from "./lib/buildings";
+import { NAME_OVERRIDES, getBuilding, RENTAL_OBJECTIDS, FORCE_COMMERCIAL_OBJECTIDS, OCCUPANCY_OVERRIDES, ADDRESS_OVERRIDES } from "./lib/buildings";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
@@ -689,6 +689,9 @@ export default function FogMap({
       // Office towers the city mistagged as residential — forced to the
       // Commercial group so they don't masquerade as homebuyer properties.
       const FORCE_COM_IDS = [...FORCE_COMMERCIAL_OBJECTIDS];
+      // Buildings overridden to "Residential" → render as solid residential
+      // (no mixed-use pattern) even though the city geojson tags them mixed.
+      const FORCE_RES_IDS = Object.entries(OCCUPANCY_OVERRIDES).filter(([, o]) => o === "Residential").map(([id]) => id);
       const BLDG_FILL_COLOR = [
         "case",
         ["in", ["get", "objectid"], ["literal", RENTAL_IDS]], BLDG_ORANGE,
@@ -759,6 +762,7 @@ export default function FogMap({
           ["==", ["get", "occupancy"], "Mixed Uses (With Residential)"], // residential-mixed only
           ["!", ["in", ["get", "objectid"], ["literal", RENTAL_IDS]]],    // rentals stay solid orange
           ["!", ["in", ["get", "objectid"], ["literal", FORCE_COM_IDS]]], // mistagged offices stay cream
+          ["!", ["in", ["get", "objectid"], ["literal", FORCE_RES_IDS]]], // forced-residential stay solid blue
         ],
         paint: { "fill-pattern": "mixed-use-split", "fill-opacity": 0.95 },
       });
@@ -925,7 +929,13 @@ export default function FogMap({
       const onBldgLeave = () => { map.getCanvas().style.cursor = ""; };
       const onBldgClick = e => {
         if (!e.features?.length) return;
-        const p = e.features[0].properties;
+        const raw = e.features[0].properties;
+        // Apply the address / occupancy overrides (same as the profile build).
+        const p = {
+          ...raw,
+          address: ADDRESS_OVERRIDES[String(raw.objectid)] || raw.address,
+          occupancy: OCCUPANCY_OVERRIDES[String(raw.objectid)] || raw.occupancy,
+        };
         const name = NAME_OVERRIDES[String(p.objectid)] || (!blank(p.name) ? p.name : "Tall building");
         const addr = !blank(p.address) ? `<div style="color:#6b7280;margin-bottom:6px">${esc(p.address)}</div>` : "";
         const a = getBuilding(p.objectid);

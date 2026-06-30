@@ -17,10 +17,14 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { normalizeStreetAddress } from "../app/lib/buildingMatch.js";
-import { RENTAL_OBJECTIDS, RENTAL_AND_CONDO_OBJECTIDS, EXCLUDED_OBJECTIDS, EXTRA_BUILDINGS, NAME_OVERRIDES } from "../app/fog/lib/buildings.js";
+import { RENTAL_OBJECTIDS, RENTAL_AND_CONDO_OBJECTIDS, EXCLUDED_OBJECTIDS, EXTRA_BUILDINGS, NAME_OVERRIDES, ADDRESS_OVERRIDES, OCCUPANCY_OVERRIDES } from "../app/fog/lib/buildings.js";
 
 // Preferred display name for an inventory feature (name override → city name → address).
 const nameOf = p => NAME_OVERRIDES[String(p.objectid)] || p.name || p.address;
+// Corrected address / occupancy (override → city value). The address drives the
+// MLS match, so an override pulls sales from the right building.
+const addrOf = p => ADDRESS_OVERRIDES[String(p.objectid)] || p.address;
+const occOf = p => OCCUPANCY_OVERRIDES[String(p.objectid)] || p.occupancy;
 
 // Tenure label: "rental" (pure rental, buy-side stats hidden), "both" (condo +
 // rental — keeps stats, labeled "(Rental/Condo)"), or "condo".
@@ -67,7 +71,7 @@ let matched = 0;
 
 for (const f of buildings.features) {
   const p = f.properties;
-  const key = normalizeStreetAddress(p.address);
+  const key = normalizeStreetAddress(addrOf(p));
   if (!key) continue;
   const center = centroid(f.geometry);
   // Reverse lookup is keyed by address regardless of whether sales exist, so a
@@ -101,7 +105,7 @@ for (const f of buildings.features) {
 
   buildingSales[p.objectid] = {
     name: nameOf(p),
-    address: p.address,
+    address: addrOf(p),
     centroid: center,
     total: hits.length,
     closedCount: closed.length,
@@ -187,11 +191,11 @@ function computeMarket(hits) {
 const buildingProfiles = {};
 for (const f of buildings.features) {
   const p = f.properties;
-  if (!RESIDENTIAL_OCC.has(p.occupancy)) continue;
+  if (!RESIDENTIAL_OCC.has(occOf(p))) continue;
   // Drop office towers the city's broad "mixed-residential" tag swept in, plus
   // inventory duplicates already covered by an off-inventory EXTRA entry.
   if (EXCLUDED_OBJECTIDS.has(String(p.objectid))) continue;
-  const key = normalizeStreetAddress(p.address);
+  const key = normalizeStreetAddress(addrOf(p));
   const hits = (key && listingsByAddr.get(key)) || [];
 
   const struct = {};
@@ -202,8 +206,8 @@ for (const f of buildings.features) {
   buildingProfiles[p.objectid] = {
     objectid: p.objectid,
     name: nameOf(p),
-    address: p.address,
-    occupancy: p.occupancy,
+    address: addrOf(p),
+    occupancy: occOf(p),
     rental: RENTAL_OBJECTIDS.has(String(p.objectid)),
     tenure: tenureOf(p.objectid),
     centroid: centroid(f.geometry),
