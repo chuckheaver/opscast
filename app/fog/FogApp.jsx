@@ -440,17 +440,14 @@ export default function FogApp() {
     }
   }, [requestGeoLocation, urlLoc]);
 
-  // Turning on either buildings layer hides the neighborhood outlines/labels
-  // so the tall-building footprints read cleanly (the two overlays clutter
-  // each other). Turning a buildings layer off leaves neighborhoods as-is —
-  // the user can switch them back on manually.
+  // Buildings are the primary layer (floated above the neighborhood outlines
+  // in FogMap), so the hoods stay visible underneath — a click off any
+  // building footprint still pops the neighborhood.
   const handleToggleResBuildings = useCallback(next => {
     setShowResBuildings(next);
-    if (next) setShowNeighborhoods(false);
   }, []);
   const handleToggleComBuildings = useCallback(next => {
     setShowComBuildings(next);
-    if (next) setShowNeighborhoods(false);
   }, []);
 
   // Zoom the map to a building chosen from the Bldgs list (the residential

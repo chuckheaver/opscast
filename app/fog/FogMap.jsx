@@ -1820,9 +1820,11 @@ export default function FogMap({
     if (!map) return;
     const apply = () => {
       const vis = showResBuildings ? "visible" : "none";
-      ["buildings-res-fill", "buildings-mixed", "buildings-res-outline", "buildings-res-labels"].forEach(id => {
-        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
-      });
+      const ids = ["buildings-res-fill", "buildings-mixed", "buildings-res-outline", "buildings-res-labels"];
+      ids.forEach(id => { if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis); });
+      // Buildings are the primary layer — float them above the neighborhood
+      // outlines/labels so footprints read on top (labels stay topmost).
+      if (showResBuildings) ids.forEach(id => { if (map.getLayer(id)) map.moveLayer(id); });
     };
     // Call apply() directly (each apply is guarded by getLayer/getSource, so
     // it's a no-op before the layers exist) and also bind once to first load.
@@ -1839,9 +1841,9 @@ export default function FogMap({
     if (!map) return;
     const apply = () => {
       const vis = showComBuildings ? "visible" : "none";
-      ["buildings-com-fill", "buildings-com-outline", "buildings-com-labels"].forEach(id => {
-        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
-      });
+      const ids = ["buildings-com-fill", "buildings-com-outline", "buildings-com-labels"];
+      ids.forEach(id => { if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis); });
+      if (showComBuildings) ids.forEach(id => { if (map.getLayer(id)) map.moveLayer(id); });
     };
     // Call apply() directly (each apply is guarded by getLayer/getSource, so
     // it's a no-op before the layers exist) and also bind once to first load.
