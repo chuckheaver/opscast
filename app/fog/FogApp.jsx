@@ -493,6 +493,17 @@ export default function FogApp() {
   const homesCount = homesMatches.length;
   const homesProps = useMemo(() => homesMatches.map(f => f.properties), [homesMatches]);
 
+  // From a neighborhood pop-up's "N sold" link → focus the Homes overlay on
+  // that neighborhood + segment and open the Stats sheet (the address grid).
+  const SEG_TYPES = { sfh: ["Single Family Residence"], condo: ["Condominium", "Tenancy in Common"] };
+  const showNeighborhoodProperties = useCallback((nbhd, seg) => {
+    setHomesFilter({ ...defaultFilter(), neighborhood: nbhd, subtypes: new Set(SEG_TYPES[seg] || []) });
+    setActivityWanted(true);
+    setOpenHood(null);
+    setStatsOpen(true);
+    setStatsExpanded(true);
+  }, []);
+
   // Generate + download the market-update PDF for the current filter. The PDF
   // renderer is dynamically imported so it only loads on demand.
   const downloadReport = useCallback(async () => {
@@ -657,6 +668,7 @@ export default function FogApp() {
         picked={picked}
         openHood={openHood}
         onCloseHood={() => setOpenHood(null)}
+        onShowProperties={showNeighborhoodProperties}
         zips={zips}
         supervisorDistricts={supervisorDistricts}
         realtorNeighborhoods={realtorNeighborhoods}

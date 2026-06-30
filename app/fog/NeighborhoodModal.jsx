@@ -56,11 +56,19 @@ function fmtList(arr) {
 // One median line in the Home-prices section. Always renders (so the condo
 // row shows even with no sales), dashing the price and showing "0 sold" when
 // `data` is null. `data` is { value, n } or null.
-function PriceLine({ data, label, gap }) {
+function PriceLine({ data, label, gap, onShow }) {
+  const n = data ? data.n : 0;
   return (
     <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: gap ? 6 : 0 }}>
       <span style={{ fontSize: 24, fontWeight: 700, color: data ? "#1c1917" : "#a8a29e" }}>{data ? data.value : "—"}</span>
-      <span style={{ fontSize: 13, color: "#78716c" }}>median {label}, {CUR_YEAR} YTD ({data ? data.n : 0} sold)</span>
+      <span style={{ fontSize: 13, color: "#78716c" }}>
+        median {label}, {CUR_YEAR} YTD (
+        {n > 0 && onShow ? (
+          <a role="button" tabIndex={0} onClick={onShow} onKeyDown={e => (e.key === "Enter" || e.key === " ") && onShow()}
+            style={{ color: "#2563eb", fontWeight: 600, textDecoration: "underline", cursor: "pointer" }}>{n} sold ↗</a>
+        ) : `${n} sold`}
+        )
+      </span>
     </div>
   );
 }
@@ -122,7 +130,7 @@ function PlaceRow({ p, first }) {
 
 export default function NeighborhoodModal({
   name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict,
-  zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose,
+  zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties,
 }) {
   const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
 
@@ -201,14 +209,13 @@ export default function NeighborhoodModal({
           {prices === "loading" ? (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#78716c" }}>Loading…</span></div>
           ) : prices ? (
-            <div style={{ marginBottom: 8 }}>
-              <PriceLine data={prices.sfh} label="single-family" gap />
-              <PriceLine data={prices.condo} label="condo/TIC" />
+            <div style={{ marginBottom: 2 }}>
+              <PriceLine data={prices.sfh} label="single-family" gap onShow={() => onShowProperties?.(name, "sfh")} />
+              <PriceLine data={prices.condo} label="condo/TIC" onShow={() => onShowProperties?.(name, "condo")} />
             </div>
           ) : (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>Market data unavailable.</span></div>
           )}
-          <a style={LINK} href="/fog?preset=homes">↗ See Market data</a>
         </section>
 
         {microText && (

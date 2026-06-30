@@ -18,6 +18,7 @@ export default function FogPanel({
   picked,
   openHood,
   onCloseHood,
+  onShowProperties,
   zips,
   supervisorDistricts,
   realtorNeighborhoods,
@@ -76,6 +77,7 @@ export default function FogPanel({
           tsunamiYN={factsMatch ? tsunamiYN : null}
           loc={factsMatch ? picked : null}
           onClose={onCloseHood}
+          onShowProperties={onShowProperties}
         />
       )}
       {openBuilding && buildingProfiles?.[openBuilding] && (
