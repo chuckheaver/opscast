@@ -188,31 +188,6 @@ export default function NeighborhoodModal({
         <div style={{ fontSize: 22, fontWeight: 800, color: "#1c1917", lineHeight: 1.1, letterSpacing: "-0.5px" }}>{heading}</div>
         <div style={{ fontSize: 13, color: "#78716c", marginTop: 3 }}>Neighborhood highlights</div>
 
-        {(() => {
-          // At-a-glance facts as a simple bulleted list under the name — both
-          // the neighborhood context (AKA, districts, fog zone) and the
-          // point-level facts (ZIP, elevation, seismic, tsunami) that used to
-          // live in the bottom panel.
-          const bullets = [
-            data.aka,
-            realtorDistrict && `RE District ${realtorDistrict}`,
-            supervisorDistrict != null && `Supervisor District ${supervisorDistrict}`,
-            zoneLabel && `${zoneLabel} zone`,
-            zipCode && `ZIP code ${zipCode}`,
-            Number.isFinite(elevationFt) && `Elevation ${elevationFt} ft`,
-            seismicYN && `Seismic zone: ${seismicYN}`,
-            tsunamiYN && `Tsunami zone: ${tsunamiYN}`,
-          ].filter(Boolean);
-          if (!bullets.length) return null;
-          return (
-            <ul style={{ margin: "10px 0 2px", padding: "0 0 0 18px", listStyle: "disc" }}>
-              {bullets.map(b => (
-                <li key={b} style={{ fontSize: 13, color: "#57534e", lineHeight: 1.5, marginBottom: 2 }}>{b}</li>
-              ))}
-            </ul>
-          );
-        })()}
-
         <div style={{ background: "#FAEEDA", borderRadius: 12, padding: "14px 16px", marginTop: 14 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
             <span style={ICON} aria-hidden="true">✨</span>
@@ -221,16 +196,42 @@ export default function NeighborhoodModal({
           <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: 0 }}>{data.spirit}</p>
         </div>
 
+        <section style={SEC}>
+          <Banner emoji="🏠">1 · Home prices</Banner>
+          {prices === "loading" ? (
+            <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#78716c" }}>Loading…</span></div>
+          ) : prices ? (
+            <div style={{ marginBottom: 8 }}>
+              <PriceLine data={prices.sfh} label="single-family" gap />
+              <PriceLine data={prices.condo} label="condo/TIC" />
+            </div>
+          ) : (
+            <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>Market data unavailable.</span></div>
+          )}
+          <a style={LINK} href="/fog?preset=homes">↗ See Market data</a>
+        </section>
+
+        {microText && (
+          <section style={SEC}>
+            <Banner emoji="☀️">2 · Microclimate</Banner>
+            <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: "0 0 10px" }}>{microText}</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              <a style={LINK} href={buildUrl("/fog", loc, { preset: "fog" })}>↗ Open Fog Map</a>
+              <a style={LINK} href={buildUrl("/microclimates", loc, { layer: "solar" })}>↗ Micro-Climate map</a>
+            </div>
+          </section>
+        )}
+
         {data.history && (
           <section style={SEC}>
-            <Banner emoji="📜">1 · Name &amp; origins</Banner>
+            <Banner emoji="📜">3 · Name &amp; origins</Banner>
             <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: 0 }}>{data.history}</p>
           </section>
         )}
 
         {data.facts?.length > 0 && (
           <section style={SEC}>
-            <Banner emoji="💡">2 · Did you know?</Banner>
+            <Banner emoji="💡">4 · Did you know?</Banner>
             {data.facts.map((f, i) => (
               <div key={f.title} style={{ display: "flex", gap: 10, marginBottom: i < data.facts.length - 1 ? 12 : 0 }}>
                 <span style={{ fontSize: 16, marginTop: 1 }} aria-hidden="true">{FACT_EMOJI[f.icon] || "•"}</span>
@@ -245,7 +246,7 @@ export default function NeighborhoodModal({
 
         {data.restaurants?.length > 0 && (
           <section style={SEC}>
-            <Banner emoji="🍽️">3 · {data.nearby ? "Nearby" : "Top"} {data.restaurants.length} restaurant{data.restaurants.length === 1 ? "" : "s"}</Banner>
+            <Banner emoji="🍽️">5 · {data.nearby ? "Nearby" : "Top"} {data.restaurants.length} restaurant{data.restaurants.length === 1 ? "" : "s"}</Banner>
             {data.nearby && (
               <p style={NEARBY_NOTE}>Primarily a residential neighborhood — the closest restaurants are nearby in {fmtList(data.nearby)}.</p>
             )}
@@ -255,7 +256,7 @@ export default function NeighborhoodModal({
 
         {data.bars?.length > 0 && (
           <section style={SEC}>
-            <Banner emoji="🍸">4 · {data.nearby ? "Nearby" : "Top"} {data.bars.length} bar{data.bars.length === 1 ? "" : "s"}</Banner>
+            <Banner emoji="🍸">6 · {data.nearby ? "Nearby" : "Top"} {data.bars.length} bar{data.bars.length === 1 ? "" : "s"}</Banner>
             {data.nearby && (
               <p style={NEARBY_NOTE}>Primarily a residential neighborhood — the closest bars are nearby in {fmtList(data.nearby)}.</p>
             )}
@@ -265,7 +266,7 @@ export default function NeighborhoodModal({
 
         {data.hospital && (
           <section style={SEC}>
-            <Banner emoji="🏥">5 · Nearest hospital</Banner>
+            <Banner emoji="🏥">7 · Nearest hospital</Banner>
             <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
               <div>
                 <a href={data.hospital.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, fontWeight: 600, color: "#1c1917", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 5 }}>
@@ -282,35 +283,9 @@ export default function NeighborhoodModal({
 
         {data.transit && (
           <section style={SEC}>
-            <Banner emoji="🚊">6 · Getting around</Banner>
+            <Banner emoji="🚊">8 · Getting around</Banner>
             <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: "0 0 8px" }}>{data.transit}</p>
             <a style={LINK} href={buildUrl("/fog", loc, { preset: "transit" })}>↗ Open Transit map</a>
-          </section>
-        )}
-
-        <section style={SEC}>
-          <Banner emoji="🏠">7 · Home prices</Banner>
-          {prices === "loading" ? (
-            <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#78716c" }}>Loading…</span></div>
-          ) : prices ? (
-            <div style={{ marginBottom: 8 }}>
-              <PriceLine data={prices.sfh} label="single-family" gap />
-              <PriceLine data={prices.condo} label="condo/TIC" />
-            </div>
-          ) : (
-            <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>Market data unavailable.</span></div>
-          )}
-          <a style={LINK} href="/fog?preset=homes">↗ See Market data</a>
-        </section>
-
-        {microText && (
-          <section style={SEC}>
-            <Banner emoji="☀️">8 · Microclimate</Banner>
-            <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: "0 0 10px" }}>{microText}</p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-              <a style={LINK} href={buildUrl("/fog", loc, { preset: "fog" })}>↗ Open Fog Map</a>
-              <a style={LINK} href={buildUrl("/microclimates", loc, { layer: "solar" })}>↗ Micro-Climate map</a>
-            </div>
           </section>
         )}
       </div>
