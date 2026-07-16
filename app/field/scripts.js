@@ -19,16 +19,15 @@ export const SCRIPTS = {
     marketLink: "https://www.ur4cast.com/listings?nbhd=Castro&layer=nbhd",
     detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Castro)",
     route: {
-      // Route stays ENTIRELY within the Castro boundary (verified against the
-      // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
-      // grid for the final cut.
-      path: [[-122.4351, 37.7627], [-122.4348, 37.7620], [-122.4350, 37.7609], [-122.4350, 37.7596], [-122.4329, 37.7607]],
+      // Landmark stops tied to the hidden facts, numbered to match the map pins
+      // and the "STOP N" callouts in the script. In-boundary (verified against
+      // the neighborhood polygon); coords approximate — snap to the sidewalk for the final cut.
       spots: [
-        { n: 1, name: "Harvey Milk Plaza & Castro Station", note: "Start — the giant Pride flag + the Muni Metro hub", coord: [-122.4351, 37.7627] },
-        { n: 2, name: "Castro Theatre", note: "1922 movie palace, the neon marquee", coord: [-122.4348, 37.7620] },
-        { n: 3, name: "18th & Castro", note: "Rainbow crosswalks — the heart of the neighborhood", coord: [-122.4350, 37.7609] },
-        { n: 4, name: "19th & Castro", note: "South end of the strip; the quieter, leafier blocks begin", coord: [-122.4350, 37.7596] },
-        { n: 5, name: "Collingwood & 18th — Victorian blocks", note: "The housing-stock segment: classic Castro Victorians", coord: [-122.4329, 37.7607] },
+        { n: 1, name: "Harvey Milk Plaza & the giant Pride flag", note: "Castro Station (Muni Metro) — and where the rainbow flag was born, sewn by hand by Gilbert Baker in 1978", coord: [-122.4351, 37.7627] },
+        { n: 2, name: "The Castro Theatre", note: "1922 movie palace — a 'Mighty Wurlitzer' organ still rises from the floor before screenings", coord: [-122.4348, 37.7620] },
+        { n: 3, name: "18th & Castro — the rainbow crosswalks", note: "The heart of the neighborhood; the permanent rainbow crosswalks went in in 2014", coord: [-122.4350, 37.7609] },
+        { n: 4, name: "575 Castro St — Castro Camera", note: "Harvey Milk's shop and campaign HQ — he won a seat on the Board of Supervisors in 1977", coord: [-122.4350, 37.7604] },
+        { n: 5, name: "Collingwood & 18th — Castro Victorians", note: "The modest pre-1900 wooden Victorians the whole story hinges on", coord: [-122.4329, 37.7607] },
       ],
     },
     sections: [
