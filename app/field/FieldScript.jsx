@@ -10,10 +10,11 @@ import FieldMap from "./FieldMap";
 
 const WPM = 145; // assumed speaking pace for the runtime estimate
 
-export default function FieldScript({ name, data, geo }) {
+export default function FieldScript({ name, data, geo, variant }) {
   const [scroll, setScroll] = useState(false);
   const [speed, setSpeed] = useState(45); // px/sec
   const [big, setBig] = useState(true);
+  const [alt, setAlt] = useState(false); // show the alternate structure (variants.js)
   const posRef = useRef(0);
   const rafRef = useRef(null);
 
@@ -50,7 +51,10 @@ export default function FieldScript({ name, data, geo }) {
     );
   }
 
-  const totalWords = data.sections.reduce((n, s) => n + (s.words || 0), 0);
+  // A variant only supplies `sections`; route/schedule/links stay from scripts.js.
+  const showAlt = alt && !!variant;
+  const sections = showAlt ? variant.sections : data.sections;
+  const totalWords = sections.reduce((n, s) => n + (s.words || 0), 0);
   const estMin = Math.round(totalWords / WPM);
   const scriptSize = big ? 26 : 18;
 
@@ -65,6 +69,11 @@ export default function FieldScript({ name, data, geo }) {
         <button style={BTN(false)} onClick={() => setSpeed(s => Math.max(15, s - 10))} aria-label="Slower">– speed</button>
         <button style={BTN(false)} onClick={() => setSpeed(s => Math.min(120, s + 10))} aria-label="Faster">+ speed</button>
         <button style={BTN(big)} onClick={() => setBig(b => !b)}>{big ? "A− text" : "A+ text"}</button>
+        {variant && (
+          <button style={BTN(showAlt)} onClick={() => setAlt(a => !a)}>
+            {showAlt ? "↩ Original cut" : "⚡ " + variant.label}
+          </button>
+        )}
       </div>
 
       <h1 style={H1}>{name}</h1>
@@ -72,7 +81,11 @@ export default function FieldScript({ name, data, geo }) {
         {data.aka && <span style={CHIP}>{data.aka}</span>}
         <span style={CHIP}>{data.runtime}</span>
         <span style={CHIP}>{totalWords} words · ~{estMin} min</span>
+        {showAlt && <span style={{ ...CHIP, background: "#2563eb", color: "#fff" }}>{variant.label}</span>}
       </div>
+      {showAlt && variant.note && (
+        <p style={{ fontSize: 13, color: "#78716c", fontStyle: "italic", margin: "6px 0 0" }}>{variant.note}</p>
+      )}
       {data.marketLink && (
         <a href={data.marketLink} target="_blank" rel="noopener noreferrer" style={{ ...A, fontSize: 14 }}>
           ↗ Open the live market update for this neighborhood
@@ -84,7 +97,7 @@ export default function FieldScript({ name, data, geo }) {
       {data.route && <FieldMap name={name} route={data.route} />}
 
       {/* Script sections */}
-      {data.sections.map((s, i) => (
+      {sections.map((s, i) => (
         <section key={i} style={{ marginTop: 26 }}>
           <div style={SECLBL}>
             <span>{s.label}</span>

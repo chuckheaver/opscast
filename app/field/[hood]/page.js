@@ -4,6 +4,7 @@
 
 import { nameForSlug } from "../lib";
 import { SCRIPTS } from "../scripts";
+import { VARIANTS } from "../variants";
 import GEO from "../geo.json";
 import FieldScript from "../FieldScript";
 
@@ -21,5 +22,6 @@ export default async function Page({ params }) {
   const name = nameForSlug(hood);
   const data = name ? SCRIPTS[name] || null : null;
   const geo = name ? GEO[name] || null : null;
-  return <FieldScript name={name} data={data} geo={geo} />;
+  const variant = name ? VARIANTS[name] || null : null;
+  return <FieldScript name={name} data={data} geo={geo} variant={variant} />;
 }
