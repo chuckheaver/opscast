@@ -13,6 +13,195 @@
 //   7 a small landing + a joke tip — deliberately no forced inspiration
 
 export const VARIANTS = {
+  "Hayes Valley": {
+    label: "Viral cut",
+    note: "Experience hook → cause-and-effect chain → the click → small landing + joke tip. Same facts as the original; different shape.",
+    sections: [
+      {
+        label: "1 · COLD OPEN — THE THING YOU'VE ALREADY FELT",
+        words: 95,
+        script:
+          "YOU'VE PROBABLY DONE THIS WITHOUT EVER THINKING ABOUT IT.\n" +
+          "YOU GOT A COFFEE. YOU SAT DOWN IN A LITTLE PARK\n" +
+          "WITH SOME ENORMOUS, SLIGHTLY RIDICULOUS SCULPTURE IN THE MIDDLE OF IT.\n" +
+          "AND AT SOME POINT YOU LOOKED UP AND THOUGHT —\n" +
+          "HUH. THERE'S A LOT OF SKY HERE.\n" +
+          "MORE THAN THE REST OF SAN FRANCISCO, SOMEHOW.\n" +
+          "THAT'S NOT AN ACCIDENT. AND IT ISN'T GOOD PLANNING, EITHER.\n" +
+          "YOU WERE SITTING UNDERNEATH WHERE A DOUBLE-DECKER FREEWAY USED TO RUN.\n" +
+          "AND THE ONLY REASON IT'S GONE IS THAT THE GROUND SHOOK\n" +
+          "FOR ABOUT FIFTEEN SECONDS IN 1989.\n" +
+          "SO — ARE YOU READY TO SEE HAYES VALLEY? LET'S GO.",
+        broll: [
+          "You sitting at Patricia's Green, coffee, looking up",
+          "Tilt up from the bench to a wide open sky",
+          "The current sculpture on the Green",
+        ],
+      },
+      {
+        label: "2 · THE CAUSE",
+        words: 115,
+        script:
+          "START WITH A STREETCAR.\n" +
+          "HAYES VALLEY IS NAMED FOR THOMAS HAYES — A COUNTY OFFICIAL\n" +
+          "WHO RAN A PRIVATE STREETCAR OUT HAYES STREET IN THE 1860s.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE LONG BEFORE THAT.\n" +
+          "THAT LINE IS WHAT OPENED THE VALLEY. HOUSES WENT UP ALONG IT —\n" +
+          "AND THEY'RE STILL STANDING.\n" +
+          "THAT'S STOP 4 ON THE MAP, LINDEN AT OCTAVIA:\n" +
+          "STREETCAR-ERA VICTORIAN AND EDWARDIAN FLATS.\n" +
+          "SO FOR ABOUT NINETY YEARS, THIS WAS JUST A NEIGHBORHOOD.\n" +
+          "PEOPLE LIVED HERE. NOTHING DRAMATIC.\n" +
+          "AND THEN THE CITY BUILT A FREEWAY OVER THE TOP OF IT.",
+          broll: [
+          "Victorian and Edwardian flats on Linden / the alley blocks",
+          "A 21-Hayes bus running the old streetcar route",
+          "Archival-style beat: the old elevated Central Freeway, if you can license one",
+        ],
+      },
+      {
+        label: "3 · WHAT A FREEWAY DOES TO A PLACE",
+        words: 185,
+        script:
+          "HERE'S THE THING ABOUT AN ELEVATED FREEWAY.\n" +
+          "IT ISN'T JUST UGLY. IT CHANGES WHAT A PLACE IS FOR.\n" +
+          "THE CENTRAL FREEWAY RAN RIGHT OVERHEAD — TWO DECKS OF CONCRETE.\n" +
+          "AND UNDERNEATH IT, THESE BLOCKS STOPPED BEING A DESTINATION\n" +
+          "AND TURNED INTO SOMETHING YOU DROVE OVER ON YOUR WAY SOMEWHERE ELSE.\n" +
+          "IT WAS DARK. IT WAS LOUD.\n" +
+          "NOBODY OPENS A NICE RESTAURANT UNDER AN OVERPASS.\n" +
+          "NOBODY SITS OUTSIDE. NOBODY LINGERS.\n" +
+          "SO THE RENTS FELL, AND THIS NEIGHBORHOOD SAT IN THAT SHADOW FOR DECADES —\n" +
+          "A PLACE TO PASS THROUGH.\n" +
+          "AND HOLD ONTO THAT, BECAUSE IT'S THE SETUP FOR EVERYTHING NEXT.\n" +
+          "A NEIGHBORHOOD NOBODY WANTS IS A NEIGHBORHOOD THAT STAYS CHEAP.\n" +
+          "AND CHEAP MEANS IT'S STILL STANDING — STILL INTACT, STILL WAITING —\n" +
+          "WHENEVER THE LUCK FINALLY TURNS.",
+        broll: [
+          "Low angle under any overpass for the shadow feeling",
+          "The Victorians that survived the freeway years",
+          "A quiet side street that still feels leftover",
+        ],
+      },
+      {
+        label: "4 · FIFTEEN SECONDS",
+        words: 210,
+        script:
+          "OCTOBER 1989. LOMA PRIETA.\n" +
+          "THE GROUND MOVES FOR ABOUT FIFTEEN SECONDS,\n" +
+          "AND THE CENTRAL FREEWAY IS DAMAGED.\n" +
+          "NOW — HERE'S THE PART PEOPLE FORGET.\n" +
+          "IT DIDN'T JUST FALL DOWN AND THAT WAS THAT.\n" +
+          "WHAT FOLLOWED WAS YEARS OF ARGUING ABOUT WHETHER TO REBUILD IT.\n" +
+          "OF COURSE THERE WAS. IT'S SAN FRANCISCO.\n" +
+          "AND IN THE END, THE CITY TORE IT DOWN INSTEAD.\n" +
+          "IN ITS PLACE THEY PUT A TREE-LINED SURFACE BOULEVARD —\n" +
+          "THAT'S STOP 3, OCTAVIA —\n" +
+          "AND THEY PUT A POCKET PARK RIGHT IN THE FOOTPRINT OF THE OVERPASS.\n" +
+          "THAT'S STOP 1: PATRICIA'S GREEN.\n" +
+          "THE PARK YOU'VE SAT IN. THE ONE WITH ALL THAT SKY.\n" +
+          "AND IT ROTATES ENORMOUS PUBLIC ART —\n" +
+          "BURNING MAN SCULPTURES, TOWERING INSTALLATIONS, WHATEVER'S NEXT.\n" +
+          "AND A BLOCK AWAY, ON ANOTHER LEFTOVER FREEWAY PARCEL — THAT'S STOP 2 —\n" +
+          "A PROJECT CALLED PROXY TURNED SHIPPING CONTAINERS\n" +
+          "INTO A VILLAGE OF SHOPS, FOOD, AND A BEER GARDEN.\n" +
+          "CITIES ALL OVER THE WORLD COPIED THAT IDEA.",
+        broll: [
+          "Patricia's Green wide — the sculpture and the sky",
+          "Octavia Blvd's tree-lined median looking down the corridor",
+          "The PROXY containers",
+        ],
+      },
+      {
+        label: "5 · THE CLICK",
+        words: 140,
+        script:
+          "SO HERE'S THE PART THAT GETS ME.\n" +
+          "THE FREEWAY WAS BUILT TO MOVE PEOPLE THROUGH HERE AS FAST AS POSSIBLE.\n" +
+          "AND THE SECOND IT CAME DOWN, THIS STOPPED BEING A ROUTE\n" +
+          "AND STARTED BEING A PLACE.\n" +
+          "THE LIGHT CAME BACK. PEOPLE SAT OUTSIDE.\n" +
+          "AND THE BOUTIQUES AND THE KITCHENS FILLED IN, BLOCK BY BLOCK —\n" +
+          "THAT'S STOP 5, HAYES STREET.\n" +
+          "A DESIGNER MAIN STREET THAT EXISTS FOR EXACTLY ONE REASON:\n" +
+          "AN OVERPASS STOPPED BLOCKING THE SUN.\n" +
+          "AN EARTHQUAKE DID IN FIFTEEN SECONDS\n" +
+          "WHAT DECADES OF CITY POLITICS COULDN'T.\n" +
+          "AND YOU CAN STILL TRACE THE GHOST OF IT.\n" +
+          "THE BOULEVARD, THE PARK, AND THAT LINE OF SLEEK NEW CONDOS —\n" +
+          "THOSE ARE ALL BUILT ON THE OLD FREEWAY PARCELS.\n" +
+          "THE BEST THINGS ABOUT THIS NEIGHBORHOOD ARE SCAR TISSUE.\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY IS A CHAIN LIKE THAT. MOST PEOPLE NEVER SEE IT.",
+        broll: [
+          "Slow pan down Hayes St — shops, tables, people outside",
+          "Cut: the shadow shot, then the sunlit street",
+          "The new condos that sit on the old freeway parcels",
+        ],
+      },
+      {
+        label: "6 · SO WHAT DOES THAT MEAN IF YOU LIVE HERE",
+        words: 330,
+        script:
+          "NOW THE PRACTICAL SIDE — BECAUSE THAT SAME CHAIN IS YOUR DAILY LIFE HERE.\n" +
+          "THE HOUSING IS LITERALLY THE STORY.\n" +
+          "VICTORIAN AND EDWARDIAN FLATS ON THE LEAFY SIDE STREETS — THE SURVIVORS —\n" +
+          "AND A WAVE OF SLEEK NEW CONDOS THAT ROSE ON THE OLD FREEWAY PARCELS\n" +
+          "AFTER THE OVERPASS CAME DOWN.\n" +
+          "IT RUNS FROM A FIRST CONDO TO A FULLY RESTORED VICTORIAN FLAT.\n" +
+          "THE GROUND HERE IS ROUGHLY 60 TO 200 FEET UP, AND THE CORE IS GENUINELY FLAT —\n" +
+          "LEVEL, EASY TO GET AROUND, FRIENDLY WHETHER YOU'RE PUSHING A STROLLER\n" +
+          "OR ROLLING A WHEELCHAIR — WELL WITHIN THE FIVE PERCENT\n" +
+          "THE A-D-A CONSIDERS AN ACCESSIBLE GRADE.\n" +
+          "ONE HONEST NOTE: SAN FRANCISCO FLATS OFTEN SIT UP A FEW STEPS FROM THE SIDEWALK,\n" +
+          "SO EVEN ON FLAT GROUND, STEP-FREE ENTRY VARIES HOME TO HOME. ALWAYS ASK.\n" +
+          "GETTING AROUND — THIS IS ONE OF THE MOST TRANSIT-RICH SPOTS IN THE ENTIRE CITY.\n" +
+          "THAT'S STOP 6: VAN NESS AND CIVIC CENTER STATIONS ARE RIGHT AROUND THE CORNER —\n" +
+          "THE FULL MUNI METRO, THE J, K, L, M, N, AND T, PLUS BART.\n" +
+          "THE 21-HAYES RUNS THE LENGTH OF THE NEIGHBORHOOD,\n" +
+          "AND THE VAN NESS BUS RAPID TRANSIT LINE IS RIGHT ALONGSIDE.\n" +
+          "LEAVING THE CITY WITHOUT A CAR: THE FERRY BUILDING IS ABOUT TWO MILES NORTHEAST,\n" +
+          "A SHORT MUNI METRO HOP TO EMBARCADERO.\n" +
+          "EAST BAY IS THE STANDOUT — TAKE BART FROM CIVIC CENTER AND YOU'RE IN\n" +
+          "DOWNTOWN OAKLAND IN ABOUT TWENTY TO TWENTY-FIVE MINUTES. NO TRANSFER.\n" +
+          "MARIN — THE LARKSPUR FERRY FROM THE FERRY BUILDING, ABOUT THIRTY MINUTES ON THE WATER.\n" +
+          "SOUTH — CALTRAIN FROM 4TH AND KING, PALO ALTO IN ABOUT FIFTY.\n" +
+          "AND THE GROUND ITSELF IS GOOD NEWS TWICE:\n" +
+          "HAYES VALLEY IS NOT IN A TSUNAMI HAZARD ZONE — IT'S HIGHER, STABLE GROUND,\n" +
+          "WELL BACK FROM THE BAY. AND IT IS NOT IN A STATE-DESIGNATED SEISMIC HAZARD ZONE EITHER.\n" +
+          "WHICH IS A LITTLE IRONIC, GIVEN HOW THIS STORY STARTED.\n" +
+          "STANDARD CALIFORNIA INSPECTIONS STILL APPLY — EVERY BUYER DOES THOSE.\n" +
+          "THE FOOD AND THE SHOPS ARE GENUINELY SOME OF THE CITY'S BEST,\n" +
+          "BUT I WON'T NAME NAMES ON CAMERA — THAT LINEUP CHANGES.\n" +
+          "THE CURRENT LIST, AND THE CURRENT MEDIANS, LIVE ON MY HAYES VALLEY PAGE. LINK BELOW.",
+        broll: [
+          "A Victorian flat with its entry steps; a new condo entrance",
+          "Van Ness / Civic Center station entrance; a 21-Hayes bus; the BRT lane",
+          "Flat, level sidewalk — someone with a stroller",
+          "Edit: lower-third + screen-record of your live market page",
+        ],
+      },
+      {
+        label: "7 · THE LANDING + THE TIP",
+        words: 105,
+        script:
+          "THAT'S HAYES VALLEY.\n" +
+          "I'M NOT GOING TO TELL YOU IT'LL CHANGE YOUR LIFE. IT'S A FEW BLOCKS AND A PARK.\n" +
+          "IF YOU WANT THE REAL TEST, COME SIT AT PATRICIA'S GREEN ON A WEDNESDAY MORNING.\n" +
+          "NOT SATURDAY. SATURDAY IS EVERYBODY.\n" +
+          "WEDNESDAY IS WHO ACTUALLY LIVES HERE.\n" +
+          "AND ONE LAST TIP, LEARNED THE HARD WAY:\n" +
+          "DO NOT TRY TO TURN ONTO OCTAVIA AT FIVE FIFTEEN ON A WEEKDAY.\n" +
+          "THEY TOOK THE FREEWAY DOWN — BUT THAT BOULEVARD STILL FEEDS THE 101,\n" +
+          "AND THE TRAFFIC NEVER GOT THE MEMO.\n" +
+          "TAKE THE 21. LET THE FREEWAY'S GHOST SIT IN TRAFFIC WITHOUT YOU.",
+        broll: [
+          "A quiet Wednesday-morning Patricia's Green — the real version",
+          "Comedic beat: Octavia backed up solid at rush hour",
+          "A 21-Hayes pulling away — end on that",
+        ],
+      },
+    ],
+  },
   "Castro": {
     label: "Viral cut",
     note: "Experience hook → cause-and-effect chain → the click → small landing + joke tip. Same facts as the original; different shape.",

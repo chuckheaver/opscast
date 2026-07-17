@@ -668,12 +668,12 @@ export const SCRIPTS = {
       // Route stays ENTIRELY within the Hayes Valley boundary (verified against
       // the neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
       spots: [
-        { n: 1, name: "Hayes & Octavia", note: "Start — top of the Hayes St strip, steps from Patricia's Green", coord: [-122.4263, 37.7765] },
-        { n: 2, name: "Patricia's Green", note: "The central pocket park; rotating public art where the freeway once stood", coord: [-122.4258, 37.7761] },
-        { n: 3, name: "Hayes St boutique & restaurant strip", note: "The design-and-dining spine — independent shops, kitchens, cocktail rooms", coord: [-122.4248, 37.7768] },
-        { n: 4, name: "Octavia Blvd corridor", note: "The tree-lined surface boulevard that replaced the Central Freeway", coord: [-122.4267, 37.7755] },
-        { n: 5, name: "SFJAZZ / Civic Center edge", note: "The performing-arts shoulder at the east end of the neighborhood", coord: [-122.4231, 37.7770] },
-        { n: 6, name: "Linden & Octavia — Victorian block", note: "The housing-stock segment: classic flats and alley Victorians", coord: [-122.4255, 37.7748] },
+        { n: 1, name: "Patricia's Green", note: "The pocket park built in the footprint of the old Central Freeway — rotates Burning-Man-scale public art", coord: [-122.4258, 37.7761] },
+        { n: 2, name: "PROXY — the container village", note: "A leftover freeway parcel turned into shipping-container shops, food, and a beer garden — temporary urbanism cities copied worldwide", coord: [-122.4262, 37.7768] },
+        { n: 3, name: "Octavia Boulevard", note: "The tree-lined surface boulevard that replaced the double-decker freeway", coord: [-122.4267, 37.7755] },
+        { n: 4, name: "Linden & Octavia — streetcar-era Victorians", note: "The 1860s-streetcar flats that sat in the freeway's shadow and survived it", coord: [-122.4255, 37.7748] },
+        { n: 5, name: "Hayes Street strip", note: "The designer main street that filled in block by block once the overpass stopped blocking the light", coord: [-122.4248, 37.7768] },
+        { n: 6, name: "SFJAZZ / Civic Center edge", note: "The arts shoulder — and the Van Ness & Civic Center BART + Muni Metro hub", coord: [-122.4231, 37.7770] },
       ],
     },
     sections: [
