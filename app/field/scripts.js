@@ -1107,12 +1107,12 @@ export const SCRIPTS = {
       // Route stays ENTIRELY within the Mission boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
       spots: [
-        { n: 1, name: "Valencia Street (at 18th)", note: "Start — the sunny, café-and-boutique spine of the Mission", coord: [-122.4214, 37.7615] },
-        { n: 2, name: "16th Street Mission BART & plaza", note: "Transit-and-cultural hub — murals, taquerias, panaderias (Mission Dolores is two blocks west)", coord: [-122.4197, 37.7649] },
-        { n: 3, name: "Clarion Alley murals", note: "Open-air gallery of Latino & political street art", coord: [-122.4197, 37.7634] },
-        { n: 4, name: "24th Street / Calle 24 Latino Cultural District", note: "Taquerias, panaderias, the heart of Latino Mission", coord: [-122.4148, 37.7524] },
+        { n: 1, name: "16th & Mission BART & plaza", note: "Start — a transit-and-cultural hub; Mission Dolores, the city's oldest building (1791), sits two blocks west", coord: [-122.4197, 37.7649] },
+        { n: 2, name: "Clarion Alley murals", note: "An open-air gallery of Latino and political street art, renewed by community artists since the 1970s", coord: [-122.4197, 37.7634] },
+        { n: 3, name: "Valencia Street (at 18th)", note: "The sunny café-and-boutique spine — the newer, destination-dining Mission", coord: [-122.4214, 37.7615] },
+        { n: 4, name: "24th Street — Calle 24 Latino Cultural District", note: "The protected Latino heart: taquerias, panaderias, family shops — and where the Mission burrito was born", coord: [-122.4148, 37.7524] },
         { n: 5, name: "Balmy Alley murals", note: "The oldest, deepest concentration of murals in the city", coord: [-122.4121, 37.7522] },
-        { n: 6, name: "24th St Mission BART", note: "End — the transit anchor; trains straight to the East Bay", coord: [-122.4185, 37.7524] },
+        { n: 6, name: "24th St Mission BART", note: "The transit anchor — trains straight to the East Bay in about 20 minutes", coord: [-122.4185, 37.7524] },
       ],
     },
     sections: [

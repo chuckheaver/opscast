@@ -13,6 +13,189 @@
 //   7 a small landing + a joke tip — deliberately no forced inspiration
 
 export const VARIANTS = {
+  "Mission": {
+    label: "Viral cut",
+    note: "Experience hook → cause-and-effect chain → the click → small landing + joke tip. Same facts as the original; different shape.",
+    sections: [
+      {
+        label: "1 · COLD OPEN — THE THING YOU'VE ALREADY FELT",
+        words: 80,
+        script:
+          "YOU'VE ALREADY EATEN THIS NEIGHBORHOOD.\n" +
+          "THAT BURRITO — FOIL-WRAPPED, TOO BIG TO FINISH, RICE AND BEANS PACKED INSIDE —\n" +
+          "YOU'VE HAD ONE. MAYBE IN A COMPLETELY DIFFERENT CITY.\n" +
+          "HERE'S WHAT YOU PROBABLY DIDN'T KNOW: THAT BURRITO HAS AN ADDRESS.\n" +
+          "IT WAS INVENTED ON THESE EXACT BLOCKS, IN THE LATE 1960s.\n" +
+          "AND THE REASON IT WAS BORN HERE, AND NOT ANYWHERE ELSE,\n" +
+          "COMES DOWN TO SOMETHING YOU'D NEVER GUESS: THE FOG.\n" +
+          "SO — ARE YOU READY TO SEE THE MISSION? LET'S GO.",
+        broll: [
+          "A foil-wrapped burrito, unwrapped on a taqueria counter (general, not one shop)",
+          "You on a sunny Mission corner, sleeves up",
+          "Quick cut: fog on the west side, sun here",
+        ],
+      },
+      {
+        label: "2 · THE CAUSE",
+        words: 120,
+        script:
+          "START WITH THE FOG.\n" +
+          "EVERY SUMMER AFTERNOON IT ROLLS IN OFF THE PACIFIC\n" +
+          "AND SWALLOWS THE WEST SIDE OF THE CITY.\n" +
+          "BUT TWIN PEAKS STANDS RIGHT IN THE WAY,\n" +
+          "AND THE FOG PILES UP AGAINST IT AND STOPS.\n" +
+          "WHAT SITS ON THE OTHER SIDE IS THIS: A WIDE, FLAT VALLEY FLOOR\n" +
+          "THAT IS THE SUNNIEST, WARMEST GROUND IN A COLD, FOGGY, HILLY CITY.\n" +
+          "AND THAT IS NOT A NEW DISCOVERY.\n" +
+          "IN 1776, THE SPANISH PICKED THIS EXACT WARM, FLAT SPOT\n" +
+          "TO BUILD A MISSION — MISSION SAN FRANCISCO DE ASÍS.\n" +
+          "THAT LITTLE ADOBE CHURCH, FINISHED IN 1791, IS STILL STANDING —\n" +
+          "TWO BLOCKS WEST OF STOP 1 — THE OLDEST BUILDING IN SAN FRANCISCO.\n" +
+          "THE CITY LITERALLY STARTED ON THE SUNNY SPOT.",
+        broll: [
+          "Wide: fog stacking on the Twin Peaks ridge and stopping",
+          "The sunny, flat valley floor stretching out",
+          "Mission Dolores adobe facade",
+        ],
+      },
+      {
+        label: "3 · WHAT THE SUN BUILT",
+        words: 175,
+        script:
+          "NOW WATCH WHAT THAT WARM, FLAT GROUND DID.\n" +
+          "ALL OF THIS WAS THE ANCESTRAL LAND OF THE RAMAYTUSH OHLONE\n" +
+          "LONG BEFORE ANY OF THE REST.\n" +
+          "A FLAT, SUNNY, AFFORDABLE VALLEY IN THE MIDDLE OF A HARD CITY\n" +
+          "IS EXACTLY WHERE WORKING FAMILIES GO.\n" +
+          "IRISH AND GERMAN FAMILIES EARLY ON —\n" +
+          "AND THEN A DEEP, LASTING MEXICAN AND CENTRAL AMERICAN COMMUNITY\n" +
+          "THAT SETTLED IN AND SHAPED THE SOUL OF THE PLACE.\n" +
+          "NOT A SHOWPIECE NEIGHBORHOOD. NOT MANSIONS.\n" +
+          "A HOME FOR PEOPLE WITH JOBS, IN THE ONE PART OF TOWN\n" +
+          "WHERE THE SUN ACTUALLY SHOWED UP.\n" +
+          "AND THAT COMMUNITY — THAT SPECIFIC COMMUNITY, ON THIS SPECIFIC SUNNY GROUND —\n" +
+          "MADE TWO THINGS THE ENTIRE WORLD NOW KNOWS.\n" +
+          "HOLD ONTO THAT, BECAUSE IT'S THE HINGE THE WHOLE STORY TURNS ON.",
+        broll: [
+          "Rows of colorful Victorian flats on a side street",
+          "Family shops, panaderias, everyday street life",
+          "A mural of the neighborhood's Latino history",
+        ],
+      },
+      {
+        label: "4 · WHAT THE COMMUNITY MADE",
+        words: 200,
+        script:
+          "FIRST, THE FOOD.\n" +
+          "IN THE LATE 1960s, IN THE TAQUERIAS ALONG 24TH STREET —\n" +
+          "THAT'S STOP 4, CALLE VEINTICUATRO —\n" +
+          "SOMEBODY WRAPPED A BIGGER, HEARTIER BURRITO IN FOIL,\n" +
+          "AND THE MISSION-STYLE BURRITO WAS BORN.\n" +
+          "FROM THESE BLOCKS IT WENT AROUND THE WORLD.\n" +
+          "SECOND, THE WALLS.\n" +
+          "THIS IS THE MURAL CAPITAL OF THE CITY.\n" +
+          "COMMUNITY ARTISTS HAVE BEEN PAINTING AND REPAINTING THESE ALLEYS SINCE THE 1970s —\n" +
+          "STOP 2, CLARION ALLEY, NEAR THE TOP OF THE NEIGHBORHOOD,\n" +
+          "AND STOP 5, BALMY ALLEY, DOWN BY 24TH:\n" +
+          "THE OLDEST, DEEPEST CONCENTRATION OF STREET ART IN SAN FRANCISCO.\n" +
+          "LATINO HISTORY, POLITICS, AND MEMORY — PAINTED RIGHT ONTO THE BLOCKS.\n" +
+          "AND 24TH STREET ISN'T JUST A STREET NAME.\n" +
+          "IT CARRIES AN OFFICIAL ONE — CALLE 24, A DESIGNATED LATINO CULTURAL DISTRICT\n" +
+          "THAT EXISTS TO PROTECT THE PANADERIAS, THE MURALS, AND THE FAMILY SHOPS.\n" +
+          "HOLD ONTO THAT WORD — PROTECT. WE'RE COMING BACK TO IT.",
+        broll: [
+          "Tight shots of Balmy Alley and Clarion Alley murals",
+          "A taqueria counter; foil going around a burrito",
+          "Calle 24 banners / street signs",
+        ],
+      },
+      {
+        label: "5 · THE CLICK",
+        words: 165,
+        script:
+          "SO HERE'S THE PART THAT GETS ME.\n" +
+          "EVERYTHING THAT MADE THIS A PLACE WORKING FAMILIES COULD AFFORD —\n" +
+          "THE SUN, THE FLAT GROUND, THE DEAD-CENTER LOCATION,\n" +
+          "TWO BART STATIONS SITTING RIGHT ON TOP OF IT —\n" +
+          "IS THE EXACT SAME LIST THAT MAKES IT\n" +
+          "THE MOST DESIRABLE FLAT LAND IN SAN FRANCISCO TODAY.\n" +
+          "THE WARMTH THAT ONCE TOOK EVERYBODY IN\n" +
+          "IS NOW THE THING PEOPLE PAY A PREMIUM TO STAND IN.\n" +
+          "AND THAT'S WHY YOU CAN SEE TWO MISSIONS AT ONCE.\n" +
+          "STOP 3, VALENCIA STREET — THE NEW ONE, ACCLAIMED KITCHENS AND BOUTIQUES.\n" +
+          "AND STOP 4, 24TH STREET — THE OLD ONE, HOLDING THE LINE.\n" +
+          "THAT'S WHY THAT WORD WAS 'PROTECT.'\n" +
+          "THE CULTURAL DISTRICT ISN'T DECORATION — IT'S A NEIGHBORHOOD\n" +
+          "FIGHTING TO STAY THE THING THE WEATHER MADE IT.\n" +
+          "THE BURRITO AND THE MURAL AREN'T JUST CHARMING. THEY'RE THE FLAG IT PLANTED.\n" +
+          "EVERY NEIGHBORHOOD IN THIS CITY IS A CHAIN LIKE THAT. MOST PEOPLE NEVER SEE IT.",
+        broll: [
+          "Cut back and forth: sleek Valencia storefront, then a 24th St panaderia",
+          "A mural, tight, held a beat longer than you'd expect",
+          "Sun on the street, people out",
+        ],
+      },
+      {
+        label: "6 · SO WHAT DOES THAT MEAN IF YOU LIVE HERE",
+        words: 335,
+        script:
+          "NOW THE PRACTICAL SIDE — BECAUSE THAT SAME CHAIN IS YOUR DAILY LIFE HERE.\n" +
+          "AND IT STARTS WITH THE THING THAT STARTED EVERYTHING: THE SUN.\n" +
+          "THE MISSION IS THE SUNNIEST, WARMEST POCKET IN THE ENTIRE CITY —\n" +
+          "IT CAN RUN TEN DEGREES WARMER THAN THE FOGGY WEST SIDE.\n" +
+          "HERE IS A SUMMER FOG MAP BASED ON SATELLITE HISTORY THAT SHOWS WHERE THE FOG STOPS —\n" +
+          "IT'S LINKED ON MY MISSION PAGE BELOW.\n" +
+          "THE HOUSING IS CLASSIC, COLORFUL SAN FRANCISCO:\n" +
+          "VICTORIAN AND EDWARDIAN FLATS, SINGLE-FAMILY HOMES ON THE QUIETER SIDE STREETS,\n" +
+          "AND MODERN CONDOS AND T-I-C UNITS ALONG THE BUSIER CORRIDORS NEAR BART.\n" +
+          "IT RUNS FROM A FIRST CONDO TO A FULLY RESTORED VICTORIAN SHOWPIECE.\n" +
+          "THE GROUND IS FLAT — TWENTY TO A HUNDRED AND TWENTY FEET, LEVEL —\n" +
+          "ABOUT AS EASY TO MOVE THROUGH AS SAN FRANCISCO GETS,\n" +
+          "FRIENDLY WHETHER YOU'RE PUSHING A STROLLER OR ROLLING A WHEELCHAIR.\n" +
+          "ONE HONEST NOTE: THOSE VICTORIAN FLATS OFTEN SIT UP A FLIGHT OF STEPS,\n" +
+          "SO EVEN ON LEVEL GROUND, STEP-FREE ENTRY VARIES HOME BY HOME. ALWAYS ASK.\n" +
+          "GETTING AROUND MIGHT BE THE BEST IN THE CITY.\n" +
+          "YOU'VE GOT TWO BART STATIONS — STOP 1 AT 16TH, STOP 6 AT 24TH —\n" +
+          "PLUS THE 14 AND THE 14R RAPID, THE 49, AND THE J-CHURCH ON THE WESTERN EDGE.\n" +
+          "THE EAST BAY IS THE STANDOUT: BART STRAIGHT FROM 16TH OR 24TH,\n" +
+          "AND YOU'RE IN DOWNTOWN OAKLAND IN ABOUT TWENTY MINUTES — NO CAR, NO BRIDGE TRAFFIC.\n" +
+          "THE FERRY BUILDING IS A QUICK HOP NORTHEAST FOR THE LARKSPUR FERRY TO MARIN;\n" +
+          "CALTRAIN AT 4TH AND KING RUNS SOUTH TO PALO ALTO IN ABOUT FIFTY.\n" +
+          "ONE HONEST NOTE ON THE GROUND: THE MISSION IS INLAND, SO NO TSUNAMI ZONE —\n" +
+          "BUT PARTS OF THIS FLAT VALLEY FLOOR DO FALL IN A STATE SEISMIC AND LIQUEFACTION ZONE.\n" +
+          "THAT'S STANDARD FOR LOW, LEVEL GROUND, AND EVERY BUYER REVIEWS IT WITH AN INSPECTOR.\n" +
+          "AND THE FOOD IS, HONESTLY, ONE OF THE GREAT REASONS TO BE HERE —\n" +
+          "BUT I WON'T NAME NAMES ON CAMERA; THAT LINEUP CHANGES.\n" +
+          "THE CURRENT LIST, AND THE CURRENT MEDIANS, LIVE ON MY MISSION PAGE. LINK BELOW.",
+        broll: [
+          "A Victorian flat with its stoop of entry steps; a condo entrance near BART",
+          "24th St Mission BART entrance; a 14R rolling up Mission St",
+          "Flat, sunlit sidewalk — someone with a stroller",
+          "Edit: lower-third + screen-record of your live market page",
+        ],
+      },
+      {
+        label: "7 · THE LANDING + THE TIP",
+        words: 105,
+        script:
+          "THAT'S THE MISSION.\n" +
+          "I'M NOT GOING TO TELL YOU IT'LL CHANGE YOUR LIFE. IT'S A VALLEY WITH GOOD LIGHT AND GOOD FOOD.\n" +
+          "IF YOU WANT THE REAL TEST, COME DOWN 24TH STREET ON A TUESDAY MORNING —\n" +
+          "PANADERIAS OPENING, NOT A BRUNCH LINE IN SIGHT.\n" +
+          "THAT'S THE MISSION PEOPLE ACTUALLY LIVE IN.\n" +
+          "AND ONE LAST TIP, LEARNED THE HARD WAY:\n" +
+          "THE SECOND THE SUN COMES OUT, EVERY SINGLE PERSON IN SAN FRANCISCO\n" +
+          "DECIDES THE MISSION BELONGS TO THEM.\n" +
+          "DO NOT GO HUNTING FOR PARKING ON A WARM SATURDAY. YOU WILL AGE.\n" +
+          "TAKE BART TO 24TH, STEP OUT INTO THE SUN, AND SKIP THE WHOLE THING.",
+        broll: [
+          "A quiet Tuesday-morning 24th St — panaderias opening",
+          "Comedic beat: you circling for parking on a packed sunny block",
+          "You stepping up out of the 24th St BART into the sun — end on that",
+        ],
+      },
+    ],
+  },
   "Hayes Valley": {
     label: "Viral cut",
     note: "Experience hook → cause-and-effect chain → the click → small landing + joke tip. Same facts as the original; different shape.",
