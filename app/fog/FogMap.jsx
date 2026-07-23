@@ -1055,21 +1055,51 @@ export default function FogMap({
         if (!p) return;
         const sold = p.actKind === "sold";
         const addr = esc((p.address || "").replace(/,\s*San Francisco.*$/i, "")) + (p.unit ? ` #${esc(p.unit)}` : "");
-        // Sold: close price + date. Active: list price + status since status date.
-        const price = sold
-          ? (p.sellingPrice ? "$" + Math.round(p.sellingPrice).toLocaleString("en-US") : "—")
-          : (p.listPrice ? "$" + Math.round(p.listPrice).toLocaleString("en-US") : "—");
+        const usd = n => (Number.isFinite(+n) && +n > 0) ? "$" + Math.round(+n).toLocaleString("en-US") : "—";
+        const headPrice = sold ? usd(p.sellingPrice) : usd(p.listPrice);
+        // Sold: close date. Active: status + status date.
         const when = sold
-          ? (fmtMDY(p.sellingDate) ? ` · sold ${fmtMDY(p.sellingDate)}` : "")
-          : (fmtMDY(p.statusDate) ? ` · ${esc(p.status)} ${fmtMDY(p.statusDate)}` : ` · ${esc(p.status || "")}`);
-        const bb = [p.bedrooms != null ? `${p.bedrooms} bd` : null, p.sqft ? `${Math.round(p.sqft).toLocaleString("en-US")} sqft` : null].filter(Boolean).join(" · ");
-        const html = `<div style="font-size:12.5px;line-height:1.5">`
-          + `<strong>${addr}</strong><br>`
-          + `<span style="font-weight:600">${price}</span>${when}`
-          + (bb ? `<br><span style="color:#6b7280">${bb}</span>` : "")
+          ? (fmtMDY(p.sellingDate) ? `sold ${fmtMDY(p.sellingDate)}` : "")
+          : `${esc(p.status || "")}${fmtMDY(p.statusDate) ? ` ${fmtMDY(p.statusDate)}` : ""}`;
+        const basis = sold ? p.sellingPrice : p.listPrice;
+        const ppsf = (p.sqft > 0 && basis > 0) ? "$" + Math.round(basis / p.sqft).toLocaleString("en-US") : "—";
+        const baths = p.bathrooms ? String(p.bathrooms).replace(/\s*\(.*$/, "").trim() : "";
+        // Full detail — the same fields the old listing card carried.
+        const rows = [
+          ["Type", p.propType],
+          ["Beds / baths", [p.bedrooms, baths].filter(v => v != null && v !== "").join(" / ")],
+          ["Sq ft", p.sqft ? Math.round(p.sqft).toLocaleString("en-US") : ""],
+          ["$ / sq ft", ppsf],
+          ["List price", usd(p.listPrice)],
+          ...(sold ? [["Sale price", usd(p.sellingPrice)]] : []),
+          ["Listed", fmtMDY(p.listDate)],
+          ...(sold ? [["Closed", fmtMDY(p.sellingDate)]] : []),
+          ["Days on market", p.dom != null && p.dom !== "" ? p.dom : ""],
+          ["Neighborhood", p.fogNeighborhood || p.neighborhood],
+          ["District", p.areaDesc],
+          ["RE district", p.district],
+          ["Zip", p.zip],
+          ["Fog exposure", p.fogHours != null ? `${p.fogHours} hrs/day` : ""],
+          ["APN", p.apn],
+          ["MLS #", p.id],
+          ["Listing agent", p.agent],
+          ["Selling agent", p.sellingAgent],
+        ];
+        const grid = rows
+          .filter(([, v]) => v != null && String(v).trim() !== "")
+          .map(([k, v]) => `<div style="display:flex;justify-content:space-between;gap:12px;padding:1.5px 0"><span style="color:#6b7280;white-space:nowrap">${k}</span><span style="text-align:right;font-weight:500">${esc(String(v))}</span></div>`)
+          .join("");
+        const photoLink = p.photo
+          ? `<a href="${esc(p.photo)}" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:6px;color:#2563eb;text-decoration:none;font-weight:500">📷 Listing photo ↗</a>`
+          : "";
+        const html = `<div style="font-size:12px;line-height:1.5;max-height:340px;overflow-y:auto;padding-right:2px">`
+          + `<strong style="font-size:13px">${addr}</strong><br>`
+          + `<span style="font-weight:600;font-size:13px">${headPrice}</span>${when ? ` · <span style="color:#6b7280">${when}</span>` : ""}`
+          + photoLink
+          + `<div style="margin-top:8px;border-top:1px solid #eee;padding-top:6px">${grid}</div>`
           + `</div>`;
         if (actPopup) actPopup.remove();
-        actPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "240px", focusAfterOpen: false })
+        actPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "300px", focusAfterOpen: false })
           .setLngLat(e.lngLat).setHTML(html).addTo(map);
       });
 

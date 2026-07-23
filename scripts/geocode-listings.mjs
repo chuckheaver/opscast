@@ -144,6 +144,7 @@ function loadOneFile(path) {
   const lngKey = pick(["Longitude", "Lng", "Long", "GeoLon"]);
   const nbhdKey = pick(["Neighborhood", "Subdivision Name"]);
   const contractKey = pick(["Pending Date", "Contract Date", "Under Contract Date", "Contingent Date"]);
+  const photoKey = pick(["Photo URL", "Photo", "Full Picture URL", "Picture URL"]);
 
   return rows
     .slice(1)
@@ -194,6 +195,8 @@ function loadOneFile(path) {
         dom: g("DOM") === "" ? null : Number(g("DOM")),
         office: g("Listing Office Name / ID"),
         url: g("Listing URL"),
+        // First listing photo (MLS media), used for the map pop-up link/thumb.
+        photo: photoKey ? (g(photoKey).split(";")[0].trim() || null) : null,
       };
     });
 }
@@ -464,6 +467,7 @@ async function main() {
         sellingAgent: l.sellingAgent || null,
         office: l.office,
         url: l.url,
+        photo: l.photo || null,
         // Coordinates so the UI can look up elevation on demand.
         lng: point[0],
         lat: point[1],
