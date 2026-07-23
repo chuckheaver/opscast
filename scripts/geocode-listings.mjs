@@ -455,7 +455,10 @@ async function main() {
         statusDate: l.statusDate,
         dom: l.dom ?? null,
         zip: l.zip || null,
-        areaDesc: l.areaDesc,
+        // "SF District N". Prefer the MLS "Area Desc" column; when an export
+        // omits it, derive it from the realtor district polygon so the
+        // District filter/labels still work.
+        areaDesc: l.areaDesc || (tags.districtNum != null ? `SF District ${tags.districtNum}` : null),
         apn: l.apn,
         agent: l.agent,
         sellingAgent: l.sellingAgent || null,
