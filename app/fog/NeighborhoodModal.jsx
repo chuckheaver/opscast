@@ -12,13 +12,15 @@ const LISTINGS_URL = "/data/sf-listings.geojson";
 const RES_COUNTS_URL = "/data/parcel-res-by-neighborhood.json";
 const CUR_YEAR = "2026";
 
-// Residential parcel-count buckets (by units) — colors match the map's
-// "Residential parcels (by units)" legend.
-const RES_BUCKETS = [
-  ["u1", "#7fb3dd", "1 unit (single-family)"],
-  ["u2_4", "#4287c9", "2–4 units (flats / TICs)"],
-  ["u5_9", "#275e9e", "5–9 units"],
-  ["u10", "#123a70", "10+ units (apartments)"],
+// Parcel-count rows for the "By the Numbers" section. The four residential
+// bucket colors match the map's "Residential parcels (by units)" legend;
+// OTHR (all non-residential parcels) gets a neutral grey.
+const PARCEL_ROWS = [
+  ["u1", "#7fb3dd", "1 Unit - SFH"],
+  ["u2_4", "#4287c9", "2-4 (CND/TIC)"],
+  ["u5_9", "#275e9e", "5-9 (MULTI)"],
+  ["u10", "#123a70", "10+ (APTS)"],
+  ["othr", "#9ca3af", "OTHR"],
 ];
 
 // Section / fact icons. The app is emoji-forward (see the home hub), so we
@@ -226,6 +228,26 @@ export default function NeighborhoodModal({
           <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: 0 }}>{data.spirit}</p>
         </div>
 
+        {resCounts && resCounts.total > 0 && (
+          <section style={SEC}>
+            <Banner emoji="📊">By the Numbers</Banner>
+            <div style={{ marginBottom: 2 }}>
+              {PARCEL_ROWS.map(([key, color, label]) => (
+                <div key={key} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, lineHeight: 1.9 }}>
+                  <span style={{ width: 11, height: 11, borderRadius: 2, background: color, flex: "0 0 auto" }} />
+                  <span style={{ color: "#44403c", flex: 1 }}>{label}</span>
+                  <span style={{ fontWeight: 700, color: "#1c1917" }}>{(resCounts[key] || 0).toLocaleString("en-US")}</span>
+                </div>
+              ))}
+              <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, lineHeight: 1.9, borderTop: "1px solid #f0ece6", marginTop: 4, paddingTop: 4 }}>
+                <span style={{ width: 11, flex: "0 0 auto" }} />
+                <span style={{ color: "#57534e", flex: 1, fontWeight: 700 }}>Total parcels</span>
+                <span style={{ fontWeight: 800, color: "#1c1917" }}>{resCounts.total.toLocaleString("en-US")}</span>
+              </div>
+            </div>
+          </section>
+        )}
+
         <section style={SEC}>
           <Banner emoji="🏠">1 · Home prices</Banner>
           {prices === "loading" ? (
@@ -237,21 +259,6 @@ export default function NeighborhoodModal({
             </div>
           ) : (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>Market data unavailable.</span></div>
-          )}
-
-          {resCounts && resCounts.total > 0 && (
-            <div style={{ marginTop: 12, borderTop: "1px solid #f0ece6", paddingTop: 10 }}>
-              <div style={{ fontSize: 12.5, fontWeight: 700, color: "#57534e", marginBottom: 6 }}>
-                Residential parcels · {resCounts.total.toLocaleString("en-US")} total
-              </div>
-              {RES_BUCKETS.map(([key, color, label]) => (
-                <div key={key} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, lineHeight: 1.7 }}>
-                  <span style={{ width: 11, height: 11, borderRadius: 2, background: color, flex: "0 0 auto" }} />
-                  <span style={{ color: "#44403c", flex: 1 }}>{label}</span>
-                  <span style={{ fontWeight: 700, color: "#1c1917" }}>{(resCounts[key] || 0).toLocaleString("en-US")}</span>
-                </div>
-              ))}
-            </div>
           )}
         </section>
 
