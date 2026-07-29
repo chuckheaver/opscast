@@ -485,6 +485,13 @@ export default function FogMap({
         minzoom: 14,
         maxzoom: 16,
       });
+      // Vector-tile sources can finish loading a batch of tiles without the
+      // map scheduling a repaint of a fill that was toggled visible earlier —
+      // so the parcels render as blank until the user pans. Force a repaint
+      // whenever a batch of parcel tiles settles.
+      map.on("sourcedata", e => {
+        if (e.sourceId === "parcels" && e.isSourceLoaded) map.triggerRepaint();
+      });
       // Residential parcels — one clear soft-blue fill (default on).
       map.addLayer({
         id: "parcels-res-fill",
@@ -2091,6 +2098,7 @@ export default function FogMap({
     const apply = () => {
       if (map.getLayer("parcels-res-fill")) map.setLayoutProperty("parcels-res-fill", "visibility", showParcelsRes ? "visible" : "none");
       if (map.getLayer("parcels-com-fill")) map.setLayoutProperty("parcels-com-fill", "visibility", showParcelsCom ? "visible" : "none");
+      map.triggerRepaint();
     };
     apply();
     map.once("load", apply);
