@@ -495,8 +495,8 @@ export default function FogMap({
         filter: ["==", ["get", "t"], "RES"],
         layout: { visibility: "none" },
         paint: {
-          "fill-color": "#6aa0d8",
-          "fill-opacity": 0.5,
+          "fill-color": "#5b9bd5",
+          "fill-opacity": 0.6,
         },
       });
       // Commercial & other parcels — colored by use (default off).
@@ -721,7 +721,7 @@ export default function FogMap({
         VACANT: "Vacant / no recorded use",
       };
       const PARCEL_COLOR = {
-        RES: "#6aa0d8", MIX: "#fb923c", RETAIL: "#ef4444", OFFICE: "#1e40af", MED: "#14b8a6",
+        RES: "#5b9bd5", MIX: "#fb923c", RETAIL: "#ef4444", OFFICE: "#1e40af", MED: "#14b8a6",
         CIE: "#a855f7", PDR: "#b45309", VISITOR: "#ec4899", OPENSPACE: "#22c55e",
         PARKING: "#6b7280", VACANT: "#e5c07b",
       };

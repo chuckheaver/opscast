@@ -666,7 +666,7 @@ const COM_LEGEND = {
 const PARCEL_RES_LEGEND = {
   title: "Residential parcels",
   items: [
-    ["#6aa0d8", "Residential"],
+    ["#5b9bd5", "Residential"],
   ],
 };
 const PARCEL_COM_LEGEND = {
