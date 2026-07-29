@@ -664,9 +664,12 @@ const COM_LEGEND = {
 // two toggleable layers so the ~88%-residential majority and the rarer
 // commercial uses can be shown independently.
 const PARCEL_RES_LEGEND = {
-  title: "Residential parcels",
+  title: "Residential parcels (by units)",
   items: [
-    ["#5b9bd5", "Residential"],
+    ["#7fb3dd", "1 unit (single-family)"],
+    ["#4287c9", "2–4 units (flats / TICs)"],
+    ["#275e9e", "5–9 units"],
+    ["#123a70", "10+ units (apartments)"],
   ],
 };
 const PARCEL_COM_LEGEND = {

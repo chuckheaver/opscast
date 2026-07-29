@@ -502,7 +502,15 @@ export default function FogMap({
         filter: ["==", ["get", "t"], "RES"],
         layout: { visibility: "none" },
         paint: {
-          "fill-color": "#5b9bd5",
+          // Shade residential by unit count (light → dark blue): 1 unit
+          // (single-family) / 2–4 (flats & TICs) / 5–9 / 10+ (apartments).
+          "fill-color": [
+            "step", ["to-number", ["get", "units"]],
+            "#7fb3dd",       // 1 unit
+            2, "#4287c9",    // 2–4 units
+            5, "#275e9e",    // 5–9 units
+            10, "#123a70",   // 10+ units
+          ],
           "fill-opacity": 0.6,
         },
       });
@@ -751,13 +759,23 @@ export default function FogMap({
         if (Number(p.os) === 1) rows.push(["Open space", "Yes"]);
         if (p.blklot) rows.push(["Block / lot", escp(String(p.blklot))]);
         const t = p.t || "VACANT";
+        // Residential gets a unit-count sub-label + matching ramp color.
+        let swatch = PARCEL_COLOR[t] || "#d4d4d8";
+        let heading = PARCEL_LABEL[t] || "Parcel";
+        if (t === "RES") {
+          const u = units;
+          if (u >= 10) { swatch = "#123a70"; heading = "Residential · 10+ units"; }
+          else if (u >= 5) { swatch = "#275e9e"; heading = "Residential · 5–9 units"; }
+          else if (u >= 2) { swatch = "#4287c9"; heading = "Residential · 2–4 units"; }
+          else { swatch = "#7fb3dd"; heading = "Residential · single-family"; }
+        }
         const details = rows.length
           ? rows.map(([k, v]) => `<div><span style="color:#6b7280">${k}:</span> ${v}</div>`).join("")
           : `<div style="color:#6b7280">No recorded use on file.</div>`;
         const html = `<div style="font-size:12.5px;line-height:1.5">`
           + `<strong style="font-size:13.5px;display:inline-flex;align-items:center;gap:6px">`
-          + `<span style="width:10px;height:10px;border-radius:2px;background:${PARCEL_COLOR[t] || "#d4d4d8"};display:inline-block"></span>`
-          + `${escp(PARCEL_LABEL[t] || "Parcel")}</strong>`
+          + `<span style="width:10px;height:10px;border-radius:2px;background:${swatch};display:inline-block"></span>`
+          + `${escp(heading)}</strong>`
           + `<div style="margin:5px 0 0">${details}</div>`
           + `</div>`;
         if (parcelPopup) parcelPopup.remove();
