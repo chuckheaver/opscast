@@ -34,7 +34,8 @@ export default function FogMapTools({
   showTsunami, onToggleTsunami,
   showFaults,
   showRealtor, onToggleRealtor,
-  showParcels, onToggleParcels,
+  showParcelsRes, onToggleParcelsRes,
+  showParcelsCom, onToggleParcelsCom,
   showCBD, onToggleCBD,
   showResBuildings, onToggleResBuildings,
   showComBuildings, onToggleComBuildings,
@@ -110,9 +111,10 @@ export default function FogMapTools({
       ],
     },
     {
-      title: "Land Use",
+      title: "Land Use (parcels)",
       items: [
-        ["Parcel Type", showParcels, onToggleParcels],
+        ["Residential", showParcelsRes, onToggleParcelsRes],
+        ["Commercial & other", showParcelsCom, onToggleParcelsCom],
       ],
     },
     {
@@ -166,7 +168,8 @@ export default function FogMapTools({
     .filter(c => bikeSel?.has(c.key))
     .map(c => [c.color, c.label, c.dashed ? "dashed" : undefined]);
   const legends = [
-    showParcels && PARCEL_LEGEND,
+    showParcelsRes && PARCEL_RES_LEGEND,
+    showParcelsCom && PARCEL_COM_LEGEND,
     showElevation && ELEVATION_LEGEND,
     showResBuildings && RES_LEGEND,
     showComBuildings && COM_LEGEND,
@@ -657,15 +660,21 @@ const COM_LEGEND = {
   title: "Commercial / Office / Hotel / Hospital",
   items: [["#E6CE78", "Commercial"]],
 };
-// Parcel Type (SF Land Use) — actual current use of every parcel. Residential
-// dominates (~88%) so it's shown pale; the rarer non-residential uses pop.
-const PARCEL_LEGEND = {
-  title: "Parcel Type (current use)",
+// Parcel Type (SF Land Use) — actual current use of every parcel, split into
+// two toggleable layers so the ~88%-residential majority and the rarer
+// commercial uses can be shown independently.
+const PARCEL_RES_LEGEND = {
+  title: "Residential parcels",
   items: [
-    ["#9db4c9", "Residential"],
+    ["#6aa0d8", "Residential"],
+  ],
+};
+const PARCEL_COM_LEGEND = {
+  title: "Commercial & other parcels",
+  items: [
     ["#fb923c", "Mixed use"],
     ["#ef4444", "Retail / entertainment"],
-    ["#3b82f6", "Office"],
+    ["#1e40af", "Office"],
     ["#14b8a6", "Medical"],
     ["#a855f7", "Civic / institutional"],
     ["#b45309", "Industrial (PDR)"],

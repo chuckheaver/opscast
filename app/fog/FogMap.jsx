@@ -62,7 +62,8 @@ export default function FogMap({
   showZips,
   showDistricts,
   showZoning,
-  showParcels,
+  showParcelsRes,
+  showParcelsCom,
   showRealtor,
   showCBD,
   showResBuildings,
@@ -472,28 +473,47 @@ export default function FogMap({
       // commercial square footage per use). Served as local vector tiles
       // (public/tiles/parcels, zoom 14–16) so the citywide 150k-polygon set
       // streams only the parcels on screen instead of a single huge GeoJSON.
-      // Residential is kept pale + translucent so the commercial / mixed /
-      // industrial pockets read at a glance. Toggleable; off by default.
+      //
+      // Split into two independently toggleable fill layers off the SAME
+      // tiles: "Residential" (t === RES) is on by default, and "Commercial
+      // & other" (everything else, colored by use) is a separate toggle.
+      // Residential is ~88% of parcels, so it gets one clear, calm color;
+      // the rarer non-residential uses each get a distinct vivid color.
       map.addSource("parcels", {
         type: "vector",
         tiles: [`${typeof window !== "undefined" ? window.location.origin : ""}/tiles/parcels/{z}/{x}/{y}.pbf`],
         minzoom: 14,
         maxzoom: 16,
       });
+      // Residential parcels — one clear soft-blue fill (default on).
       map.addLayer({
-        id: "parcels-fill",
+        id: "parcels-res-fill",
         type: "fill",
         source: "parcels",
         "source-layer": "parcels",
         minzoom: 14,
+        filter: ["==", ["get", "t"], "RES"],
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": "#6aa0d8",
+          "fill-opacity": 0.5,
+        },
+      });
+      // Commercial & other parcels — colored by use (default off).
+      map.addLayer({
+        id: "parcels-com-fill",
+        type: "fill",
+        source: "parcels",
+        "source-layer": "parcels",
+        minzoom: 14,
+        filter: ["!=", ["get", "t"], "RES"],
         layout: { visibility: "none" },
         paint: {
           "fill-color": [
             "match", ["get", "t"],
-            "RES",       "#9db4c9",  // Residential (muted blue-grey)
             "MIX",       "#fb923c",  // Mixed use
             "RETAIL",    "#ef4444",  // Retail / entertainment
-            "OFFICE",    "#3b82f6",  // Office (MIPS)
+            "OFFICE",    "#1e40af",  // Office (MIPS) — deep blue vs residential's light blue
             "MED",       "#14b8a6",  // Medical
             "CIE",       "#a855f7",  // Civic / institutional / education
             "PDR",       "#b45309",  // Production / distribution / repair
@@ -503,21 +523,7 @@ export default function FogMap({
             "VACANT",    "#e5c07b",  // Vacant / no data
             "#d4d4d8",
           ],
-          // Residential recedes; every other (rarer) use pops.
-          "fill-opacity": ["match", ["get", "t"], "RES", 0.22, 0.55],
-        },
-      });
-      map.addLayer({
-        id: "parcels-outline",
-        type: "line",
-        source: "parcels",
-        "source-layer": "parcels",
-        minzoom: 15,
-        layout: { visibility: "none" },
-        paint: {
-          "line-color": "#ffffff",
-          "line-width": 0.4,
-          "line-opacity": 0.45,
+          "fill-opacity": 0.6,
         },
       });
 
@@ -699,9 +705,13 @@ export default function FogMap({
 
       // Parcel Type — click any parcel for its actual use breakdown (units +
       // commercial sqft by type + block/lot). Fields absent for that parcel
-      // are simply skipped.
-      map.on("mouseenter", "parcels-fill", () => { map.getCanvas().style.cursor = "pointer"; });
-      map.on("mouseleave", "parcels-fill", () => { map.getCanvas().style.cursor = ""; });
+      // are simply skipped. Both the Residential and Commercial fills share
+      // the same handler.
+      const PARCEL_LAYERS = ["parcels-res-fill", "parcels-com-fill"];
+      PARCEL_LAYERS.forEach(id => {
+        map.on("mouseenter", id, () => { map.getCanvas().style.cursor = "pointer"; });
+        map.on("mouseleave", id, () => { map.getCanvas().style.cursor = ""; });
+      });
       let parcelPopup = null;
       const PARCEL_LABEL = {
         RES: "Residential", MIX: "Mixed use (residential + commercial)",
@@ -711,11 +721,11 @@ export default function FogMap({
         VACANT: "Vacant / no recorded use",
       };
       const PARCEL_COLOR = {
-        RES: "#9db4c9", MIX: "#fb923c", RETAIL: "#ef4444", OFFICE: "#3b82f6", MED: "#14b8a6",
+        RES: "#6aa0d8", MIX: "#fb923c", RETAIL: "#ef4444", OFFICE: "#1e40af", MED: "#14b8a6",
         CIE: "#a855f7", PDR: "#b45309", VISITOR: "#ec4899", OPENSPACE: "#22c55e",
         PARKING: "#6b7280", VACANT: "#e5c07b",
       };
-      map.on("click", "parcels-fill", e => {
+      const onParcelClick = e => {
         const p = e.features?.[0]?.properties;
         if (!p) return;
         const escp = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -748,7 +758,8 @@ export default function FogMap({
           .setLngLat(e.lngLat)
           .setHTML(html)
           .addTo(map);
-      });
+      };
+      PARCEL_LAYERS.forEach(id => map.on("click", id, onParcelClick));
 
       // SF Tall Building Inventory (DataSF) — every high-rise as a filled
       // footprint, coloured by primary occupancy: residential = light sky
@@ -2072,19 +2083,18 @@ export default function FogMap({
     map.once("load", apply);
   }, [showZoning]);
 
-  // Toggle the Parcel Type overlay (colored fills + thin outline at high zoom).
+  // Toggle the Parcel Type overlays — Residential and Commercial are
+  // independent fills off the same tiles.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     const apply = () => {
-      const vis = showParcels ? "visible" : "none";
-      ["parcels-fill", "parcels-outline"].forEach(id => {
-        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
-      });
+      if (map.getLayer("parcels-res-fill")) map.setLayoutProperty("parcels-res-fill", "visibility", showParcelsRes ? "visible" : "none");
+      if (map.getLayer("parcels-com-fill")) map.setLayoutProperty("parcels-com-fill", "visibility", showParcelsCom ? "visible" : "none");
     };
     apply();
     map.once("load", apply);
-  }, [showParcels]);
+  }, [showParcelsRes, showParcelsCom]);
 
   // Feed the Housing Activity dots — the filtered FeatureCollection from
   // FogApp (or empty when the overlay is off).

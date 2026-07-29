@@ -187,8 +187,11 @@ export default function FogApp() {
   const [showComBuildings, setShowComBuildings] = useState(false);
   // Background layers kept off — used for lookups, not for the UI toggle set.
   const [showZoning] = useState(false);
-  // Parcel Type overlay (SF Land Use) — off by default; toggled from the map tools.
-  const [showParcels, setShowParcels] = useState(false);
+  // Parcel Type overlay (SF Land Use) — split into Residential (on by
+  // default) and Commercial & other (off by default). Both toggled from
+  // the map tools; both drive the same vector tiles.
+  const [showParcelsRes, setShowParcelsRes] = useState(true);
+  const [showParcelsCom, setShowParcelsCom] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
   const autoGeoTriedRef = useRef(false);
@@ -553,7 +556,8 @@ export default function FogApp() {
           showZips={showZips}
           showDistricts={showDistricts}
           showZoning={showZoning}
-          showParcels={showParcels}
+          showParcelsRes={showParcelsRes}
+          showParcelsCom={showParcelsCom}
           showRealtor={showRealtor}
           showCBD={showCBD}
           showResBuildings={showResBuildings}
@@ -599,8 +603,10 @@ export default function FogApp() {
           showFaults={showFaults}
           showRealtor={showRealtor}
           onToggleRealtor={setShowRealtor}
-          showParcels={showParcels}
-          onToggleParcels={setShowParcels}
+          showParcelsRes={showParcelsRes}
+          onToggleParcelsRes={setShowParcelsRes}
+          showParcelsCom={showParcelsCom}
+          onToggleParcelsCom={setShowParcelsCom}
           showCBD={showCBD}
           onToggleCBD={setShowCBD}
           showResBuildings={showResBuildings}
