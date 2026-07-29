@@ -34,6 +34,7 @@ export default function FogMapTools({
   showTsunami, onToggleTsunami,
   showFaults,
   showRealtor, onToggleRealtor,
+  showParcels, onToggleParcels,
   showCBD, onToggleCBD,
   showResBuildings, onToggleResBuildings,
   showComBuildings, onToggleComBuildings,
@@ -109,6 +110,12 @@ export default function FogMapTools({
       ],
     },
     {
+      title: "Land Use",
+      items: [
+        ["Parcel Type", showParcels, onToggleParcels],
+      ],
+    },
+    {
       title: "Weather & Terrain",
       items: [
         ...(contoursAvailable ? [["Summer Fog", showContours, onToggleContours]] : []),
@@ -159,6 +166,7 @@ export default function FogMapTools({
     .filter(c => bikeSel?.has(c.key))
     .map(c => [c.color, c.label, c.dashed ? "dashed" : undefined]);
   const legends = [
+    showParcels && PARCEL_LEGEND,
     showElevation && ELEVATION_LEGEND,
     showResBuildings && RES_LEGEND,
     showComBuildings && COM_LEGEND,
@@ -648,4 +656,22 @@ const RES_LEGEND = {
 const COM_LEGEND = {
   title: "Commercial / Office / Hotel / Hospital",
   items: [["#E6CE78", "Commercial"]],
+};
+// Parcel Type (SF Land Use) — actual current use of every parcel. Residential
+// dominates (~88%) so it's shown pale; the rarer non-residential uses pop.
+const PARCEL_LEGEND = {
+  title: "Parcel Type (current use)",
+  items: [
+    ["#9db4c9", "Residential"],
+    ["#fb923c", "Mixed use"],
+    ["#ef4444", "Retail / entertainment"],
+    ["#3b82f6", "Office"],
+    ["#14b8a6", "Medical"],
+    ["#a855f7", "Civic / institutional"],
+    ["#b45309", "Industrial (PDR)"],
+    ["#ec4899", "Hotel / visitor"],
+    ["#22c55e", "Open space"],
+    ["#6b7280", "Parking / garage"],
+    ["#e5c07b", "Vacant / no data"],
+  ],
 };

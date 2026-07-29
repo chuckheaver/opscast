@@ -62,6 +62,7 @@ export default function FogMap({
   showZips,
   showDistricts,
   showZoning,
+  showParcels,
   showRealtor,
   showCBD,
   showResBuildings,
@@ -466,6 +467,60 @@ export default function FogMap({
         },
       });
 
+      // Parcel Type (SF Land Use, DataSF) — every one of the ~153k parcels,
+      // colored by its actual current use (derived from residential units +
+      // commercial square footage per use). Served as local vector tiles
+      // (public/tiles/parcels, zoom 14–16) so the citywide 150k-polygon set
+      // streams only the parcels on screen instead of a single huge GeoJSON.
+      // Residential is kept pale + translucent so the commercial / mixed /
+      // industrial pockets read at a glance. Toggleable; off by default.
+      map.addSource("parcels", {
+        type: "vector",
+        tiles: [`${typeof window !== "undefined" ? window.location.origin : ""}/tiles/parcels/{z}/{x}/{y}.pbf`],
+        minzoom: 14,
+        maxzoom: 16,
+      });
+      map.addLayer({
+        id: "parcels-fill",
+        type: "fill",
+        source: "parcels",
+        "source-layer": "parcels",
+        minzoom: 14,
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": [
+            "match", ["get", "t"],
+            "RES",       "#9db4c9",  // Residential (muted blue-grey)
+            "MIX",       "#fb923c",  // Mixed use
+            "RETAIL",    "#ef4444",  // Retail / entertainment
+            "OFFICE",    "#3b82f6",  // Office (MIPS)
+            "MED",       "#14b8a6",  // Medical
+            "CIE",       "#a855f7",  // Civic / institutional / education
+            "PDR",       "#b45309",  // Production / distribution / repair
+            "VISITOR",   "#ec4899",  // Visitor / hotel
+            "OPENSPACE", "#22c55e",  // Open space
+            "PARKING",   "#6b7280",  // Parking / garage
+            "VACANT",    "#e5c07b",  // Vacant / no data
+            "#d4d4d8",
+          ],
+          // Residential recedes; every other (rarer) use pops.
+          "fill-opacity": ["match", ["get", "t"], "RES", 0.22, 0.55],
+        },
+      });
+      map.addLayer({
+        id: "parcels-outline",
+        type: "line",
+        source: "parcels",
+        "source-layer": "parcels",
+        minzoom: 15,
+        layout: { visibility: "none" },
+        paint: {
+          "line-color": "#ffffff",
+          "line-width": 0.4,
+          "line-opacity": 0.45,
+        },
+      });
+
       // Realtor Neighborhoods (DataSF) — 92 neighborhoods grouped into
       // 10 SFAR districts. Each feature has a per-neighborhood `color`
       // baked into properties by the slimming pass: the district number
@@ -637,6 +692,59 @@ export default function FogMap({
           + `</div>`;
         if (cbdPopup) cbdPopup.remove();
         cbdPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "260px" })
+          .setLngLat(e.lngLat)
+          .setHTML(html)
+          .addTo(map);
+      });
+
+      // Parcel Type — click any parcel for its actual use breakdown (units +
+      // commercial sqft by type + block/lot). Fields absent for that parcel
+      // are simply skipped.
+      map.on("mouseenter", "parcels-fill", () => { map.getCanvas().style.cursor = "pointer"; });
+      map.on("mouseleave", "parcels-fill", () => { map.getCanvas().style.cursor = ""; });
+      let parcelPopup = null;
+      const PARCEL_LABEL = {
+        RES: "Residential", MIX: "Mixed use (residential + commercial)",
+        RETAIL: "Retail / entertainment", OFFICE: "Office (MIPS)", MED: "Medical",
+        CIE: "Civic / institutional / education", PDR: "PDR (industrial)",
+        VISITOR: "Visitor / hotel", OPENSPACE: "Open space", PARKING: "Parking / garage",
+        VACANT: "Vacant / no recorded use",
+      };
+      const PARCEL_COLOR = {
+        RES: "#9db4c9", MIX: "#fb923c", RETAIL: "#ef4444", OFFICE: "#3b82f6", MED: "#14b8a6",
+        CIE: "#a855f7", PDR: "#b45309", VISITOR: "#ec4899", OPENSPACE: "#22c55e",
+        PARKING: "#6b7280", VACANT: "#e5c07b",
+      };
+      map.on("click", "parcels-fill", e => {
+        const p = e.features?.[0]?.properties;
+        if (!p) return;
+        const escp = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+        const sf = n => { const v = Math.round(Number(n) || 0); return v > 0 ? `${v.toLocaleString("en-US")} sq ft` : null; };
+        const rows = [];
+        const units = Math.round(Number(p.units) || 0);
+        if (units > 0) rows.push(["Residential units", units.toLocaleString("en-US")]);
+        const resSub = (p.res || "").trim();
+        if (resSub && resSub !== "dwelling") {
+          rows.push(["Housing type", resSub.replace(/\b\w/g, c => c.toUpperCase())]);
+        }
+        [["Retail / entertainment", p.retail], ["Office", p.office], ["Medical", p.med],
+         ["Civic / institutional", p.cie], ["Industrial (PDR)", p.pdr], ["Hotel / visitor", p.visitor]]
+          .forEach(([label, v]) => { const s = sf(v); if (s) rows.push([label, s]); });
+        if (Number(p.park) === 1) rows.push(["Parking / garage", "Yes"]);
+        if (Number(p.os) === 1) rows.push(["Open space", "Yes"]);
+        if (p.blklot) rows.push(["Block / lot", escp(String(p.blklot))]);
+        const t = p.t || "VACANT";
+        const details = rows.length
+          ? rows.map(([k, v]) => `<div><span style="color:#6b7280">${k}:</span> ${v}</div>`).join("")
+          : `<div style="color:#6b7280">No recorded use on file.</div>`;
+        const html = `<div style="font-size:12.5px;line-height:1.5">`
+          + `<strong style="font-size:13.5px;display:inline-flex;align-items:center;gap:6px">`
+          + `<span style="width:10px;height:10px;border-radius:2px;background:${PARCEL_COLOR[t] || "#d4d4d8"};display:inline-block"></span>`
+          + `${escp(PARCEL_LABEL[t] || "Parcel")}</strong>`
+          + `<div style="margin:5px 0 0">${details}</div>`
+          + `</div>`;
+        if (parcelPopup) parcelPopup.remove();
+        parcelPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "250px", focusAfterOpen: false })
           .setLngLat(e.lngLat)
           .setHTML(html)
           .addTo(map);
@@ -1963,6 +2071,20 @@ export default function FogMap({
     apply();
     map.once("load", apply);
   }, [showZoning]);
+
+  // Toggle the Parcel Type overlay (colored fills + thin outline at high zoom).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showParcels ? "visible" : "none";
+      ["parcels-fill", "parcels-outline"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    apply();
+    map.once("load", apply);
+  }, [showParcels]);
 
   // Feed the Housing Activity dots — the filtered FeatureCollection from
   // FogApp (or empty when the overlay is off).
