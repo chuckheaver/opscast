@@ -1716,6 +1716,12 @@ export default function FogMap({
         }
         // Likewise, a click on a Housing Activity dot opens only its pop-up.
         if (map.getLayer("activity-dots") && map.queryRenderedFeatures(e.point, { layers: ["activity-dots"] }).length) return;
+        // A click on a visible Parcel Type fill opens only the parcel pop-up —
+        // suppress the neighborhood pick so the map stays at the current zoom
+        // instead of reframing to the neighborhood/city.
+        const parcelLayers = ["parcels-res-fill", "parcels-com-fill"]
+          .filter(id => map.getLayer(id) && map.getLayoutProperty(id, "visibility") !== "none");
+        if (parcelLayers.length && map.queryRenderedFeatures(e.point, { layers: parcelLayers }).length) return;
         onPickRef.current(e.features[0], [e.lngLat.lng, e.lngLat.lat]);
       });
     });
