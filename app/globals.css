@@ -1349,10 +1349,26 @@ input[type=range]::-webkit-slider-thumb:hover {
   font-weight: 600;
 }
 .fog-brand-contact a:hover { text-decoration: underline; }
-@media (max-width: 720px) {
-  .fog-brand { padding: 4px 10px 5px; border-radius: 14px; }
-  .fog-brand-logo img { height: 18px; }
-  .fog-brand-contact a { font-size: 9.5px; }
+/* On phones/small tablets the email is too wide to sit beside the search
+   field, so drop the brand onto its own full-width line below the bar. */
+@media (max-width: 760px) {
+  .fog-search { flex-wrap: wrap; }
+  .fog-brand {
+    flex-basis: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 14px;
+    margin-top: 4px;
+    border-radius: 14px;
+  }
+  .fog-brand-logo img { height: 22px; }
+  .fog-brand-contact { align-items: flex-start; }
+  .fog-brand-contact a { font-size: 11.5px; }
+  /* Higher specificity so it wins over the base .fog-chips top regardless
+     of source order; clears the wrapped brand line. */
+  .fog-maptools .fog-chips { top: 122px; }
 }
 .fog-search-back {
   flex: 0 0 auto;
