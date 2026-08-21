@@ -33,6 +33,15 @@ export default function FieldScript({ name, data, geo, variant }) {
     return () => cancelAnimationFrame(rafRef.current);
   }, [scroll, speed]);
 
+  // Print / Save-as-PDF: expand every B-roll block first so nothing is hidden
+  // behind a toggle on paper, then open the browser print dialog.
+  const onPrint = () => {
+    if (typeof document !== "undefined") {
+      document.querySelectorAll("details").forEach(d => { d.open = true; });
+    }
+    window.print();
+  };
+
   if (!name) {
     return (
       <Shell>
@@ -60,8 +69,10 @@ export default function FieldScript({ name, data, geo, variant }) {
 
   return (
     <Shell>
+      <style>{PRINT_CSS}</style>
+
       {/* Sticky control bar */}
-      <div style={BAR}>
+      <div style={BAR} className="fk-noprint">
         <Link href="/field" style={{ ...A, fontSize: 13 }}>← Index</Link>
         <button style={BTN(scroll)} onClick={() => setScroll(s => !s)}>
           {scroll ? "⏸ Pause" : "▶ Auto-scroll"}
@@ -74,6 +85,7 @@ export default function FieldScript({ name, data, geo, variant }) {
             {showAlt ? "↩ Original cut" : "⚡ " + variant.label}
           </button>
         )}
+        <button style={BTN(false)} onClick={onPrint}>🖨 Print / PDF</button>
       </div>
 
       <h1 style={H1}>{name}</h1>
@@ -94,7 +106,27 @@ export default function FieldScript({ name, data, geo, variant }) {
 
       {geo && <GeoStrip geo={geo} />}
 
-      {data.route && <FieldMap name={name} route={data.route} />}
+      {data.route && (
+        <div className="fk-noprint">
+          <FieldMap name={name} route={data.route} />
+        </div>
+      )}
+
+      {/* Print-only walking route — the interactive map doesn't print, so the
+          numbered stops go on paper as a checklist to follow in the field. */}
+      {data.route?.spots?.length > 0 && (
+        <div className="fk-printonly" style={{ marginTop: 16 }}>
+          <div style={SECLBL}><span>📍 WALKING ROUTE</span></div>
+          <ol style={{ margin: "10px 0 0", paddingLeft: 22 }}>
+            {data.route.spots.map(s => (
+              <li key={s.n} style={{ fontSize: 13, lineHeight: 1.5, color: "#1c1917", marginBottom: 8 }}>
+                <strong>{s.name}</strong>
+                {s.note ? <div style={{ color: "#44403c" }}>{s.note}</div> : null}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
 
       {/* Script sections */}
       {sections.map((s, i) => (
@@ -103,7 +135,7 @@ export default function FieldScript({ name, data, geo, variant }) {
             <span>{s.label}</span>
             {s.words ? <span style={{ color: "#a8a29e", fontWeight: 400 }}>~{s.words} words</span> : null}
           </div>
-          <p style={{ whiteSpace: "pre-wrap", fontSize: scriptSize, lineHeight: 1.5, color: "#111", margin: "8px 0 0", fontWeight: 600, letterSpacing: "0.01em" }}>
+          <p className="fk-script" style={{ whiteSpace: "pre-wrap", fontSize: scriptSize, lineHeight: 1.5, color: "#111", margin: "8px 0 0", fontWeight: 600, letterSpacing: "0.01em" }}>
             {s.script}
           </p>
           {s.broll?.length > 0 && (
@@ -138,7 +170,7 @@ export default function FieldScript({ name, data, geo, variant }) {
         </section>
       )}
 
-      <p style={{ ...P, marginTop: 28 }}><Link href="/field" style={A}>← Back to the index</Link></p>
+      <p className="fk-noprint" style={{ ...P, marginTop: 28 }}><Link href="/field" style={A}>← Back to the index</Link></p>
     </Shell>
   );
 }
@@ -172,6 +204,26 @@ function Shell({ children }) {
     </main>
   );
 }
+
+// Print / Save-as-PDF stylesheet. Hides the interactive chrome (control bar,
+// map, nav links), reveals the print-only walking-route list, expands the
+// B-roll, and sets a compact script size so a neighborhood fits cleanly on
+// paper regardless of the on-screen teleprompter size.
+const PRINT_CSS = `
+.fk-printonly { display: none; }
+@media print {
+  .fk-noprint { display: none !important; }
+  .fk-printonly { display: block !important; }
+  main { box-shadow: none !important; max-width: none !important; padding: 0 12px !important; }
+  section { break-inside: avoid; }
+  .fk-script { font-size: 12.5pt !important; }
+  details summary { cursor: default !important; }
+  a { color: #000 !important; text-decoration: none !important; }
+  html, body { background: #fff !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@page { margin: 14mm; }
+`;
 
 const H1 = { fontSize: 30, fontWeight: 800, color: "#1c1917", margin: "10px 0 8px", letterSpacing: "-0.5px" };
 const P = { fontSize: 15, lineHeight: 1.6, color: "#1c1917" };
