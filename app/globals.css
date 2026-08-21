@@ -1316,12 +1316,33 @@ input[type=range]::-webkit-slider-thumb:hover {
   top: 12px;
   left: 12px;
   right: 12px;
-  max-width: 640px;
+  max-width: 812px;
   margin: 0 auto;
   z-index: 6;
   display: flex;
   align-items: center;
   gap: 8px;
+}
+/* Brand mark to the right of the search bar — a white pill matching the
+   search chrome, so people always see whose service this is. */
+.fog-brand {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+.fog-brand img { height: 26px; width: auto; display: block; }
+@media (max-width: 640px) {
+  .fog-brand { height: 38px; padding: 0 9px; }
+  .fog-brand img { height: 19px; }
+}
+@media (max-width: 380px) {
+  .fog-brand img { height: 16px; }
 }
 .fog-search-back {
   flex: 0 0 auto;
