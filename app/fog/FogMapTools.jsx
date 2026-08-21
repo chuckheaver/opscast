@@ -210,9 +210,17 @@ export default function FogMapTools({
             showGeoButton={false}
           />
         </div>
-        {/* Brand mark — this service is offered by Chuck Heaver / Vanguard Properties. */}
-        <div className="fog-brand" title="Chuck Heaver · Vanguard Properties">
-          <img src="/brand/vanguard-ch.svg" alt="Vanguard Properties — Chuck Heaver, REALTOR" />
+        {/* Brand mark — this service is offered by Chuck Heaver / Vanguard
+            Properties. The logo links to email; email + phone sit beneath. */}
+        <div className="fog-brand">
+          <a className="fog-brand-logo" href="mailto:chuck.heaver@vanguardproperties.com"
+             title="Email Chuck Heaver · Vanguard Properties">
+            <img src="/brand/vanguard-ch.svg" alt="Vanguard Properties — Chuck Heaver, REALTOR" />
+          </a>
+          <div className="fog-brand-contact">
+            <a href="mailto:chuck.heaver@vanguardproperties.com">chuck.heaver@vanguardproperties.com</a>
+            <a href="tel:+14155491777">415.549.1777</a>
+          </div>
         </div>
       </div>
       {(dataErr || geoErr) && (
