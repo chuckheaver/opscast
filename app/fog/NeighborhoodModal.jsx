@@ -221,7 +221,7 @@ export default function NeighborhoodModal({
                 sold: p.sellingDate || null,
               };
             })
-            .sort((a, b) => String(b.sold).localeCompare(String(a.sold)));
+            .sort((a, b) => b.sale - a.sale); // highest sold price first
           if (!homes.length) return null;
           const prices = homes.map(h => h.sale).sort((a, b) => a - b);
           const median = prices[Math.floor((prices.length - 1) / 2)];
