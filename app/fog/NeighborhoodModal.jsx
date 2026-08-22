@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 const LISTINGS_URL = "/data/sf-listings.geojson";
 const RES_COUNTS_URL = "/data/parcel-res-by-neighborhood.json";
-const CUR_YEAR = "2026";
+const CUR_YEAR = String(new Date().getFullYear()); // always the current calendar year
 
 // Parcel-count rows for the "By the Numbers" section. The four residential
 // bucket colors match the map's "Residential parcels (by units)" legend;
@@ -97,14 +97,25 @@ function PriceLine({ data, label, gap, onShow }) {
     {open && homes.length > 0 && (
       <div style={{ marginTop: 6, borderTop: "1px solid #f0ece6" }}>
         {homes.map((h, i) => (
-          <div key={i} style={{ padding: "7px 0", borderBottom: i < homes.length - 1 ? "1px solid #f5f2ec" : "none" }}>
-            <div style={{ fontSize: 13, fontWeight: 600, color: "#1c1917" }}>{h.addr || "—"}</div>
-            <div style={{ fontSize: 12, color: "#57534e", marginTop: 2, display: "flex", flexWrap: "wrap", gap: "2px 10px" }}>
-              <span>List {usd(h.list)}</span>
-              <span>Sale <strong style={{ color: "#1c1917" }}>{usd(h.sale)}</strong></span>
-              <span>{h.ppsf ? "$" + h.ppsf.toLocaleString("en-US") + "/sf" : "—/sf"}</span>
-              <span>{h.dom != null ? h.dom + " DOM" : "— DOM"}</span>
-              <span>sold {mdy(h.sold)}</span>
+          <div key={i} style={{ padding: "8px 0", borderBottom: i < homes.length - 1 ? "1px solid #f5f2ec" : "none" }}>
+            <div style={{ fontSize: 13, fontWeight: 600, color: "#1c1917" }}>
+              {h.addr || "—"}{h.sqft ? ` - ${h.sqft.toLocaleString("en-US")} sf` : ""}
+            </div>
+            <div style={{ fontSize: 12.5, color: "#57534e", marginTop: 3 }}>
+              <div style={{ lineHeight: 1.7 }}>
+                <span style={{ display: "inline-block", width: 34, color: "#a8a29e", fontWeight: 700 }}>L</span>
+                <span>{usd(h.list)}</span>
+              </div>
+              <div style={{ lineHeight: 1.7 }}>
+                <span style={{ display: "inline-block", width: 34, color: "#a8a29e", fontWeight: 700 }}>S</span>
+                <span style={{ fontWeight: 700, color: "#1c1917" }}>{usd(h.sale)}</span>
+                {h.ppsf ? <span style={{ color: "#a8a29e", marginLeft: 8 }}>${h.ppsf.toLocaleString("en-US")}/sf</span> : null}
+              </div>
+              <div style={{ lineHeight: 1.7 }}>
+                <span style={{ display: "inline-block", width: 34, color: "#a8a29e", fontWeight: 700 }}>SLD</span>
+                <span>{mdy(h.sold)}</span>
+                {h.dom != null ? <span style={{ color: "#a8a29e", marginLeft: 8 }}>{h.dom} DOM</span> : null}
+              </div>
             </div>
           </div>
         ))}
@@ -214,6 +225,7 @@ export default function NeighborhoodModal({
               const sqft = Number(p.sqft) || 0;
               return {
                 addr: (p.address || "").replace(/,\s*San Francisco.*$/i, "").trim() + (p.unit ? ` #${p.unit}` : ""),
+                sqft: sqft > 0 ? sqft : null,
                 list: Number(p.listPrice) || null,
                 sale,
                 ppsf: sqft > 0 ? Math.round(sale / sqft) : null,
@@ -295,7 +307,7 @@ export default function NeighborhoodModal({
         )}
 
         <section style={SEC}>
-          <Banner emoji="🏠">1 · Home prices</Banner>
+          <Banner emoji="🏠">1 · Home Prices - {CUR_YEAR}</Banner>
           {prices === "loading" ? (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#78716c" }}>Loading…</span></div>
           ) : prices ? (
