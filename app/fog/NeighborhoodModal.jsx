@@ -117,9 +117,11 @@ function PriceLine({ data, label, gap }) {
           </Fragment>
         ))}
         {summaries.map(([lbl, s], si) => (
-          <Fragment key={lbl}>
-            <div style={{ gridColumn: "1 / -1", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.3px", color: "#78716c",
-              marginTop: si ? 4 : 9, paddingTop: si ? 0 : 6, borderTop: si ? "none" : "1px solid #e7e2da" }}>{lbl}</div>
+          <div key={lbl} style={{ gridColumn: "1 / -1", display: "grid", gridTemplateColumns: "subgrid",
+            columnGap: 8, alignItems: "baseline", padding: "5px 0", borderRadius: 6,
+            marginTop: si ? 3 : 9,
+            background: lbl === "Average" ? "#e8f1fc" : "#fdf7e0" }}>
+            <div style={{ gridColumn: "1 / -1", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", color: "#57534e", marginBottom: 2 }}>{lbl}</div>
             <div style={{ fontWeight: 700, color: "#1c1917" }}>{s.list != null ? usd(s.list) : "—"}</div>
             <div style={{ fontWeight: 700, color: "#1c1917" }}>{s.sale != null ? usd(s.sale) : "—"}</div>
             <div>{s.sqft != null ? Math.round(s.sqft).toLocaleString("en-US") : "—"}</div>
@@ -127,7 +129,7 @@ function PriceLine({ data, label, gap }) {
             <div style={{ textAlign: "right" }}>{s.pctList != null ? Math.round(s.pctList) + "%" : "—"}</div>
             <div style={{ textAlign: "right" }}>—</div>
             <div style={{ textAlign: "right" }}>{s.dom != null ? Math.round(s.dom) : "—"}</div>
-          </Fragment>
+          </div>
         ))}
       </div>
     )}
