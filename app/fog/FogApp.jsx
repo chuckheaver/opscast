@@ -267,7 +267,10 @@ export default function FogApp() {
       if (!geojson) return;
       const feature = findNeighborhoodForPoint(geojson, point);
       const contour = findContourForPoint(contours, point);
-      setPicked({ point, address, feature, contour });
+      // Zoom down to the address: frame its neighborhood polygon (with a pin at
+      // the exact spot), or — if the address is outside SF — fly to the point.
+      const bounds = feature ? bboxOfFeature(feature) : null;
+      setPicked({ point, address, feature, contour, bounds, zoom: bounds ? undefined : 15 });
       // Surface the neighborhood summary (with the point-level facts) for the
       // address the user entered — that pop-up is now the only place details
       // show, since there's no bottom panel.
@@ -330,7 +333,10 @@ export default function FogApp() {
         const { geojson: g, contours: c } = dataRef.current;
         const feature = g ? findNeighborhoodForPoint(g, point) : null;
         const contour = findContourForPoint(c, point);
-        setPicked({ point, address, feature, contour });
+        // Zoom down to where they are: frame the neighborhood (pin at the exact
+        // spot), or fly to the point if it's outside SF.
+        const bounds = feature ? bboxOfFeature(feature) : null;
+        setPicked({ point, address, feature, contour, bounds, zoom: bounds ? undefined : 15 });
         setOpenHood(feature?.properties?.name || null);
         setGeoLoading(false);
       },
