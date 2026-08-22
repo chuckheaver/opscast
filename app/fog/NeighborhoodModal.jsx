@@ -301,8 +301,8 @@ export default function NeighborhoodModal({
   const heading = data.title || name;
 
   return (
-    <div className="nh-backdrop" onClick={onClose}>
-      <div className="nh-modal" onClick={e => e.stopPropagation()} role="dialog" aria-label={`${heading} neighborhood highlights`}>
+    <div className="nh-backdrop">
+      <div className="nh-modal" role="dialog" aria-label={`${heading} neighborhood highlights`}>
         <button className="nh-x" onClick={onClose} aria-label="Close">×</button>
 
         <div style={{ fontSize: 22, fontWeight: 800, color: "#1c1917", lineHeight: 1.1, letterSpacing: "-0.5px" }}>{heading}</div>
