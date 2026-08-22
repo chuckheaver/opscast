@@ -83,19 +83,20 @@ function PriceLine({ data, label, gap, sect, reportComps }) {
   const [open, setOpen] = useState(false);
   const homes = data?.homes || [];
   const summaries = homes.length ? [["Average", summarize(homes, _mean)], ["Median", summarize(homes, _median)]] : [];
-  // Show this list's homes as map dots while expanded; clear them when
-  // collapsed or when the pop-up closes.
-  useEffect(() => {
-    reportComps?.(sect, open ? homes.map(h => h.feat).filter(Boolean) : null);
-    return () => reportComps?.(sect, null);
-  }, [open, homes, reportComps, sect]);
+  const toggle = () => {
+    const nx = !open;
+    setOpen(nx);
+    // Expanding plots this list's homes as map dots; collapsing removes them.
+    // (Dots persist if the pop-up is simply closed, so they stay clickable.)
+    reportComps?.(sect, nx ? homes.map(h => h.feat).filter(Boolean) : null);
+  };
   return (
     <div style={{ marginBottom: gap ? 10 : 2 }}>
     <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
       <span style={{ fontSize: 24, fontWeight: 700, color: data ? "#1c1917" : "#a8a29e" }}>{data ? data.value : "—"}</span>
       <span style={{ fontSize: 13.5, fontWeight: 700, color: "#1c1917" }}>{label}</span>
       {homes.length > 0 && (
-        <button type="button" onClick={() => setOpen(o => !o)}
+        <button type="button" onClick={toggle}
           style={{ marginLeft: "auto", background: "none", border: "none", padding: 0, font: "inherit", fontSize: 12.5, fontWeight: 600, color: "#2563eb", cursor: "pointer" }}>
           {open ? "Hide details ▲" : "Details ▼"}
         </button>
@@ -211,8 +212,6 @@ export default function NeighborhoodModal({
     const all = [...(compsRef.current.sfh || []), ...(compsRef.current.condo || [])];
     onComps?.(all.length ? { type: "FeatureCollection", features: all } : null);
   }, [onComps]);
-  // Clear the dots when the pop-up closes.
-  useEffect(() => () => onComps?.(null), [onComps]);
   const [dataThrough, setDataThrough] = useState(""); // M/D/YY of the last data load
   const [resCounts, setResCounts] = useState(undefined); // undefined loading | counts obj | null
 

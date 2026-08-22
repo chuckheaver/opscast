@@ -58,6 +58,7 @@ export default function FogApp() {
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { feature, point, address, contour, elevation_ft, zip, supervisor, realtor, microZone }
   const [compFeatures, setCompFeatures] = useState(null); // dots for the expanded neighborhood Details list
+  const prevHoodRef = useRef(null);
   const [openHood, setOpenHood] = useState(null); // neighborhood name whose highlights pop-up is open
   const [statsOpen, setStatsOpen] = useState(false);     // Homes Stats bottom-sheet
   const [statsExpanded, setStatsExpanded] = useState(false);
@@ -442,6 +443,14 @@ export default function FogApp() {
   // for the visitor's location on mount (it would recenter the view off the
   // city). Users can still tap the 📍 button to locate themselves.
 
+  // Clear the neighborhood "Details" comp dots when a DIFFERENT neighborhood
+  // opens. Closing the pop-up (openHood → null) leaves them, so they stay
+  // clickable on the map.
+  useEffect(() => {
+    if (openHood && openHood !== prevHoodRef.current) setCompFeatures(null);
+    prevHoodRef.current = openHood;
+  }, [openHood]);
+
   // Buildings are the primary layer (floated above the neighborhood outlines
   // in FogMap), so the hoods stay visible underneath — a click off any
   // building footprint still pops the neighborhood.
@@ -467,6 +476,7 @@ export default function FogApp() {
     setShowMicroSun(false); setShowMicroCool(false); setShowMicroWind(false);
     setActivityWanted(false); setMicroWanted(false);
     setPicked(null); setOpenHood(null); setOpenBuilding(null); setStatsOpen(false);
+    setCompFeatures(null);
     setRecenter(c => c + 1);
   }, []);
 
