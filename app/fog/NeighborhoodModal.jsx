@@ -68,10 +68,16 @@ function fmtList(arr) {
 // One median line in the Home-prices section. Always renders (so the condo
 // row shows even with no sales), dashing the price and showing "0 sold" when
 // `data` is null. `data` is { value, n } or null.
+const usd = n => (Number.isFinite(n) ? "$" + Math.round(n).toLocaleString("en-US") : "—");
+const mdy = iso => { const m = iso && /^(\d{4})-(\d{2})-(\d{2})/.exec(iso); return m ? `${+m[2]}/${+m[3]}/${m[1].slice(2)}` : "—"; };
+
 function PriceLine({ data, label, gap, onShow }) {
+  const [open, setOpen] = useState(false);
   const n = data ? data.n : 0;
+  const homes = data?.homes || [];
   return (
-    <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: gap ? 6 : 0 }}>
+    <div style={{ marginBottom: gap ? 10 : 2 }}>
+    <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
       <span style={{ fontSize: 24, fontWeight: 700, color: data ? "#1c1917" : "#a8a29e" }}>{data ? data.value : "—"}</span>
       <span style={{ fontSize: 13, color: "#78716c" }}>
         median {label}, {CUR_YEAR} YTD (
@@ -81,6 +87,29 @@ function PriceLine({ data, label, gap, onShow }) {
         ) : `${n} sold`}
         )
       </span>
+      {homes.length > 0 && (
+        <button type="button" onClick={() => setOpen(o => !o)}
+          style={{ marginLeft: "auto", background: "none", border: "none", padding: 0, font: "inherit", fontSize: 12.5, fontWeight: 600, color: "#2563eb", cursor: "pointer" }}>
+          {open ? "Hide details ▲" : "Details ▼"}
+        </button>
+      )}
+    </div>
+    {open && homes.length > 0 && (
+      <div style={{ marginTop: 6, borderTop: "1px solid #f0ece6" }}>
+        {homes.map((h, i) => (
+          <div key={i} style={{ padding: "7px 0", borderBottom: i < homes.length - 1 ? "1px solid #f5f2ec" : "none" }}>
+            <div style={{ fontSize: 13, fontWeight: 600, color: "#1c1917" }}>{h.addr || "—"}</div>
+            <div style={{ fontSize: 12, color: "#57534e", marginTop: 2, display: "flex", flexWrap: "wrap", gap: "2px 10px" }}>
+              <span>List {usd(h.list)}</span>
+              <span>Sale <strong style={{ color: "#1c1917" }}>{usd(h.sale)}</strong></span>
+              <span>{h.ppsf ? "$" + h.ppsf.toLocaleString("en-US") + "/sf" : "—/sf"}</span>
+              <span>{h.dom != null ? h.dom + " DOM" : "— DOM"}</span>
+              <span>sold {mdy(h.sold)}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
     </div>
   );
 }
@@ -168,23 +197,37 @@ export default function NeighborhoodModal({
       .then(g => {
         if (cancelled) return;
         const feats = g.features || [];
-        const medianFor = typeRe => {
-          const sales = feats
+        // Only homes physically IN this neighborhood (strict point-in-polygon
+        // fogNeighborhood match) — not ones merely MLS-tagged to it.
+        const collectFor = typeRe => {
+          const homes = feats
             .filter(f => {
               const p = f.properties || {};
-              const inHood = p.neighborhood === name || p.fogNeighborhood === name;
-              return inHood
+              return p.fogNeighborhood === name
                 && typeRe.test(p.propType || "")
                 && Number(p.sellingPrice) > 0
                 && String(p.sellingDate || "").slice(0, 4) === CUR_YEAR;
             })
-            .map(f => Number(f.properties.sellingPrice))
-            .sort((a, b) => a - b);
-          if (!sales.length) return null;
-          const median = sales[Math.floor((sales.length - 1) / 2)];
-          return { value: fmtPrice(median), n: sales.length };
+            .map(f => {
+              const p = f.properties;
+              const sale = Number(p.sellingPrice) || 0;
+              const sqft = Number(p.sqft) || 0;
+              return {
+                addr: (p.address || "").replace(/,\s*San Francisco.*$/i, "").trim() + (p.unit ? ` #${p.unit}` : ""),
+                list: Number(p.listPrice) || null,
+                sale,
+                ppsf: sqft > 0 ? Math.round(sale / sqft) : null,
+                dom: Number.isFinite(Number(p.dom)) ? Math.round(Number(p.dom)) : null,
+                sold: p.sellingDate || null,
+              };
+            })
+            .sort((a, b) => String(b.sold).localeCompare(String(a.sold)));
+          if (!homes.length) return null;
+          const prices = homes.map(h => h.sale).sort((a, b) => a - b);
+          const median = prices[Math.floor((prices.length - 1) / 2)];
+          return { value: fmtPrice(median), n: homes.length, homes };
         };
-        setPrices({ sfh: medianFor(/single family/i), condo: medianFor(/condo|tenancy in common/i) });
+        setPrices({ sfh: collectFor(/single family/i), condo: collectFor(/condo|tenancy in common/i) });
       })
       .catch(() => { if (!cancelled) setPrices(null); });
     return () => { cancelled = true; };
@@ -231,6 +274,9 @@ export default function NeighborhoodModal({
         {resCounts && resCounts.total > 0 && (
           <section style={SEC}>
             <Banner emoji="📊">By the Numbers</Banner>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.5px", textTransform: "uppercase", color: "#a8a29e", margin: "0 0 4px" }}>
+              Inventory Types
+            </div>
             <div style={{ marginBottom: 2 }}>
               {PARCEL_ROWS.map(([key, color, label]) => (
                 <div key={key} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, lineHeight: 1.9 }}>

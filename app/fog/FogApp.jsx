@@ -510,7 +510,7 @@ export default function FogApp() {
   // that neighborhood + segment and open the Stats sheet (the address grid).
   const SEG_TYPES = { sfh: ["Single Family Residence"], condo: ["Condominium", "Tenancy in Common"] };
   const showNeighborhoodProperties = useCallback((nbhd, seg) => {
-    setHomesFilter({ ...defaultFilter(), neighborhood: nbhd, subtypes: new Set(SEG_TYPES[seg] || []) });
+    setHomesFilter({ ...defaultFilter(), fogNeighborhood: nbhd, subtypes: new Set(SEG_TYPES[seg] || []) });
     setActivityWanted(true);
     setOpenHood(null);
     setStatsOpen(true);

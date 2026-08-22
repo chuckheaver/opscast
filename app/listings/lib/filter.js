@@ -83,6 +83,7 @@ export function defaultFilter() {
     subtypes: new Set(),
     district: "",
     neighborhood: "",
+    fogNeighborhood: "",
     fogHrs: "",
     closedFrom: `${y}-01-01`,
     closedTo: `${y}-${mm}-${String(lastDay).padStart(2, "0")}`,
@@ -98,7 +99,13 @@ export function matchesFilter(p, f) {
   if (f.statuses.size && !f.statuses.has(p.status)) return false;
   if (f.subtypes.size && !f.subtypes.has(p.propType)) return false;
   if (f.district && p.areaDesc !== f.district) return false;
-  if (f.neighborhood && p.neighborhood !== f.neighborhood && p.fogNeighborhood !== f.neighborhood) return false;
+  // MLS-neighborhood filter (from the Homes filter-bar dropdown) is a strict
+  // match on the listing's MLS neighborhood.
+  if (f.neighborhood && p.neighborhood !== f.neighborhood) return false;
+  // Geographic-neighborhood filter (from clicking a neighborhood polygon) is a
+  // strict match on the point-in-polygon fogNeighborhood, so ONLY properties
+  // physically inside that polygon appear — not ones merely MLS-tagged to it.
+  if (f.fogNeighborhood && p.fogNeighborhood !== f.fogNeighborhood) return false;
   if (f.fogHrs && String(p.fogHours) !== f.fogHrs) return false;
   if (f.closedFrom && p.sellingDate && p.sellingDate < f.closedFrom) return false;
   if (f.closedTo && p.sellingDate && p.sellingDate > f.closedTo) return false;
