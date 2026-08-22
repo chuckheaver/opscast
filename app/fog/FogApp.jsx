@@ -57,6 +57,7 @@ export default function FogApp() {
   const [tsunamiHazard, setTsunamiHazard] = useState(null);
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { feature, point, address, contour, elevation_ft, zip, supervisor, realtor, microZone }
+  const [compFeatures, setCompFeatures] = useState(null); // dots for the expanded neighborhood Details list
   const [openHood, setOpenHood] = useState(null); // neighborhood name whose highlights pop-up is open
   const [statsOpen, setStatsOpen] = useState(false);     // Homes Stats bottom-sheet
   const [statsExpanded, setStatsExpanded] = useState(false);
@@ -581,6 +582,7 @@ export default function FogApp() {
           picked={picked}
           onPickFeature={pickFromMap}
           activityData={activityData}
+          comps={compFeatures}
           microZones={microZones}
           showMicroSun={showMicroSun}
           showMicroCool={showMicroCool}
@@ -696,6 +698,7 @@ export default function FogApp() {
         openHood={openHood}
         onCloseHood={() => setOpenHood(null)}
         onShowProperties={showNeighborhoodProperties}
+        onComps={setCompFeatures}
         zips={zips}
         supervisorDistricts={supervisorDistricts}
         realtorNeighborhoods={realtorNeighborhoods}

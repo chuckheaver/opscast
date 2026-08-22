@@ -73,6 +73,7 @@ export default function FogMap({
   picked,
   onPickFeature,
   activityData,
+  comps,
   microZones,
   showMicroSun,
   showMicroCool,
@@ -1166,6 +1167,22 @@ export default function FogMap({
           "circle-opacity": 0.9,
         },
       });
+      // Comp dots — the homes in an expanded neighborhood "Details" list. Fed
+      // by the `comps` prop; larger amber dots so they stand out from the
+      // Homes overlay. Click opens the same full property pop-up.
+      map.addSource("comps", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
+      map.addLayer({
+        id: "comp-dots",
+        type: "circle",
+        source: "comps",
+        paint: {
+          "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 5, 14, 8, 16, 11],
+          "circle-color": "#f59e0b",
+          "circle-stroke-color": "#ffffff",
+          "circle-stroke-width": 2,
+          "circle-opacity": 0.95,
+        },
+      });
       // MicroClimates zones — terrain-derived sun / cool / wind areas, fed by
       // the microZones prop. Each zone is a fill + matching outline, hidden
       // until its toggle turns on.
@@ -1192,10 +1209,12 @@ export default function FogMap({
       });
 
       let actPopup = null;
-      map.on("mouseenter", "activity-dots", () => { map.getCanvas().style.cursor = "pointer"; });
-      map.on("mouseleave", "activity-dots", () => { map.getCanvas().style.cursor = ""; });
+      ["activity-dots", "comp-dots"].forEach(id => {
+        map.on("mouseenter", id, () => { map.getCanvas().style.cursor = "pointer"; });
+        map.on("mouseleave", id, () => { map.getCanvas().style.cursor = ""; });
+      });
       const fmtMDY = iso => { const m = iso && /^(\d{4})-(\d{2})-(\d{2})/.exec(iso); return m ? `${+m[2]}/${+m[3]}/${m[1].slice(2)}` : ""; };
-      map.on("click", "activity-dots", e => {
+      const openPropPopup = e => {
         const p = e.features?.[0]?.properties;
         if (!p) return;
         const sold = p.actKind === "sold";
@@ -1246,7 +1265,9 @@ export default function FogMap({
         if (actPopup) actPopup.remove();
         actPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "300px", focusAfterOpen: false })
           .setLngLat(e.lngLat).setHTML(html).addTo(map);
-      });
+      };
+      map.on("click", "activity-dots", openPropPopup);
+      map.on("click", "comp-dots", openPropPopup);
 
       // Tsunami inundation hazard zone — CGS 2021 update. Marks the
       // low-lying coastal area that an emergency-planning tsunami would
@@ -1725,7 +1746,8 @@ export default function FogMap({
           if (fillLayers.length && map.queryRenderedFeatures(e.point, { layers: fillLayers }).length) return;
         }
         // Likewise, a click on a Housing Activity dot opens only its pop-up.
-        if (map.getLayer("activity-dots") && map.queryRenderedFeatures(e.point, { layers: ["activity-dots"] }).length) return;
+        const dotLayers = ["activity-dots", "comp-dots"].filter(id => map.getLayer(id));
+        if (dotLayers.length && map.queryRenderedFeatures(e.point, { layers: dotLayers }).length) return;
         // A click on a visible Parcel Type fill opens only the parcel pop-up —
         // suppress the neighborhood pick so the map stays at the current zoom
         // instead of reframing to the neighborhood/city.
@@ -2155,6 +2177,19 @@ export default function FogMap({
     apply();
     map.once("load", apply);
   }, [activityData]);
+
+  // Feed the comp dots — the homes in an expanded neighborhood Details list
+  // (empty when nothing is expanded).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const src = map.getSource("comps");
+      if (src) src.setData(comps || { type: "FeatureCollection", features: [] });
+    };
+    apply();
+    map.once("load", apply);
+  }, [comps]);
 
   // Feed the MicroClimates zones once loaded.
   useEffect(() => {

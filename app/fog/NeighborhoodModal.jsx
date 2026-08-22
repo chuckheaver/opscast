@@ -6,7 +6,7 @@
 // from the listings GeoJSON and the microclimate line (section 8) is
 // derived from the picked fog contour, so neither goes stale.
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 
 const LISTINGS_URL = "/data/sf-listings.geojson";
 const RES_COUNTS_URL = "/data/parcel-res-by-neighborhood.json";
@@ -79,10 +79,16 @@ function summarize(homes, fn) {
   return { list: col("list"), sale: col("sale"), sqft: col("sqft"), ppsf: col("ppsf"), pctList: col("pctList"), dom: col("dom") };
 }
 
-function PriceLine({ data, label, gap }) {
+function PriceLine({ data, label, gap, sect, reportComps }) {
   const [open, setOpen] = useState(false);
   const homes = data?.homes || [];
   const summaries = homes.length ? [["Average", summarize(homes, _mean)], ["Median", summarize(homes, _median)]] : [];
+  // Show this list's homes as map dots while expanded; clear them when
+  // collapsed or when the pop-up closes.
+  useEffect(() => {
+    reportComps?.(sect, open ? homes.map(h => h.feat).filter(Boolean) : null);
+    return () => reportComps?.(sect, null);
+  }, [open, homes, reportComps, sect]);
   return (
     <div style={{ marginBottom: gap ? 10 : 2 }}>
     <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
@@ -194,9 +200,19 @@ function PlaceRow({ p, first }) {
 
 export default function NeighborhoodModal({
   name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict,
-  zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties,
+  zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties, onComps,
 }) {
   const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
+  // Which Details lists are expanded → map dots. Each PriceLine reports its
+  // features here; we merge them and hand the set to the map.
+  const compsRef = useRef({ sfh: null, condo: null });
+  const reportComps = useCallback((sect, feats) => {
+    compsRef.current[sect] = feats && feats.length ? feats : null;
+    const all = [...(compsRef.current.sfh || []), ...(compsRef.current.condo || [])];
+    onComps?.(all.length ? { type: "FeatureCollection", features: all } : null);
+  }, [onComps]);
+  // Clear the dots when the pop-up closes.
+  useEffect(() => () => onComps?.(null), [onComps]);
   const [dataThrough, setDataThrough] = useState(""); // M/D/YY of the last data load
   const [resCounts, setResCounts] = useState(undefined); // undefined loading | counts obj | null
 
@@ -247,6 +263,8 @@ export default function NeighborhoodModal({
                 ppsf: sqft > 0 ? Math.round(sale / sqft) : null,
                 dom: Number.isFinite(Number(p.dom)) ? Math.round(Number(p.dom)) : null,
                 sold: p.sellingDate || null,
+                // Map-dot feature (sold → blue-style handled by the map layer).
+                feat: f.geometry ? { type: "Feature", geometry: f.geometry, properties: { ...p, actKind: "sold" } } : null,
               };
             })
             .sort((a, b) => b.sale - a.sale); // highest sold price first
@@ -328,8 +346,8 @@ export default function NeighborhoodModal({
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#78716c" }}>Loading…</span></div>
           ) : prices ? (
             <div style={{ marginBottom: 2 }}>
-              <PriceLine data={prices.sfh} label="Median Single-Family" gap />
-              <PriceLine data={prices.condo} label="Median Condo/TIC" />
+              <PriceLine data={prices.sfh} label="Median Single-Family" gap sect="sfh" reportComps={reportComps} />
+              <PriceLine data={prices.condo} label="Median Condo/TIC" sect="condo" reportComps={reportComps} />
             </div>
           ) : (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>Market data unavailable.</span></div>

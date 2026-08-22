@@ -19,6 +19,7 @@ export default function FogPanel({
   openHood,
   onCloseHood,
   onShowProperties,
+  onComps,
   zips,
   supervisorDistricts,
   realtorNeighborhoods,
@@ -78,6 +79,7 @@ export default function FogPanel({
           loc={factsMatch ? picked : null}
           onClose={onCloseHood}
           onShowProperties={onShowProperties}
+          onComps={onComps}
         />
       )}
       {openBuilding && buildingProfiles?.[openBuilding] && (
