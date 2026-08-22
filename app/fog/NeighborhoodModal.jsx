@@ -6,7 +6,7 @@
 // from the listings GeoJSON and the microclimate line (section 8) is
 // derived from the picked fog contour, so neither goes stale.
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 const LISTINGS_URL = "/data/sf-listings.geojson";
 const RES_COUNTS_URL = "/data/parcel-res-by-neighborhood.json";
@@ -95,33 +95,24 @@ function PriceLine({ data, label, gap, onShow }) {
       )}
     </div>
     {open && homes.length > 0 && (
-      <div style={{ marginTop: 6, borderTop: "1px solid #f0ece6" }}>
+      <div style={{ marginTop: 6, borderTop: "1px solid #f0ece6", paddingTop: 6,
+        display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr) auto auto auto auto",
+        columnGap: 8, rowGap: 1, fontSize: 11.5, color: "#44403c", alignItems: "baseline" }}>
+        {["List", "Sale", "$/sf", "%L", "Sold", "DM"].map((hd, k) => (
+          <div key={"h" + k} style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.3px", textTransform: "uppercase", color: "#a8a29e", textAlign: k >= 2 ? "right" : "left" }}>{hd}</div>
+        ))}
         {homes.map((h, i) => (
-          <div key={i} style={{ padding: "8px 0", borderBottom: i < homes.length - 1 ? "1px solid #f5f2ec" : "none" }}>
-            <div style={{ fontSize: 13, fontWeight: 600, color: "#1c1917" }}>
-              {h.addr || "—"}{h.sqft ? ` - ${h.sqft.toLocaleString("en-US")} sf` : ""}
+          <Fragment key={i}>
+            <div style={{ gridColumn: "1 / -1", fontSize: 13, fontWeight: 600, color: "#1c1917", marginTop: i ? 9 : 5 }}>
+              {h.addr || "—"}{h.sqft ? ` – ${h.sqft.toLocaleString("en-US")} sf` : ""}
             </div>
-            <div style={{ fontSize: 12.5, color: "#57534e", marginTop: 3 }}>
-              <div style={{ lineHeight: 1.7 }}>
-                <span style={{ display: "inline-block", width: 34, color: "#a8a29e", fontWeight: 700 }}>L</span>
-                <span>{usd(h.list)}</span>
-              </div>
-              <div style={{ lineHeight: 1.7 }}>
-                <span style={{ display: "inline-block", width: 34, color: "#a8a29e", fontWeight: 700 }}>S</span>
-                <span style={{ fontWeight: 700, color: "#1c1917" }}>{usd(h.sale)}</span>
-                {h.ppsf ? <span style={{ color: "#a8a29e", marginLeft: 8 }}>${h.ppsf.toLocaleString("en-US")}/sf</span> : null}
-              </div>
-              <div style={{ lineHeight: 1.7 }}>
-                <span style={{ display: "inline-block", width: 34, color: "#a8a29e", fontWeight: 700 }}>%L</span>
-                <span>{h.pctList != null ? h.pctList + "%" : "—"}</span>
-              </div>
-              <div style={{ lineHeight: 1.7 }}>
-                <span style={{ display: "inline-block", width: 34, color: "#a8a29e", fontWeight: 700 }}>SLD</span>
-                <span>{mdy(h.sold)}</span>
-                {h.dom != null ? <span style={{ color: "#a8a29e", marginLeft: 8 }}>{h.dom} DOM</span> : null}
-              </div>
-            </div>
-          </div>
+            <div>{usd(h.list)}</div>
+            <div style={{ fontWeight: 700, color: "#1c1917" }}>{usd(h.sale)}</div>
+            <div style={{ textAlign: "right" }}>{h.ppsf ? "$" + h.ppsf.toLocaleString("en-US") : "—"}</div>
+            <div style={{ textAlign: "right" }}>{h.pctList != null ? h.pctList + "%" : "—"}</div>
+            <div style={{ textAlign: "right" }}>{mdy(h.sold)}</div>
+            <div style={{ textAlign: "right" }}>{h.dom != null ? h.dom : "—"}</div>
+          </Fragment>
         ))}
       </div>
     )}
