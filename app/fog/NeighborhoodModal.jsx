@@ -96,18 +96,19 @@ function PriceLine({ data, label, gap, onShow }) {
     </div>
     {open && homes.length > 0 && (
       <div style={{ marginTop: 6, borderTop: "1px solid #f0ece6", paddingTop: 6,
-        display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr) auto auto auto auto",
+        display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr) auto auto auto auto auto",
         columnGap: 8, rowGap: 1, fontSize: 11.5, color: "#44403c", alignItems: "baseline" }}>
-        {["List", "Sale", "$/sf", "%L", "Sold", "DM"].map((hd, k) => (
-          <div key={"h" + k} style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.3px", textTransform: "uppercase", color: "#a8a29e", textAlign: k >= 2 ? "right" : "left" }}>{hd}</div>
+        {["List", "Sale", "SF", "$/sf", "%L", "Sold", "DM"].map((hd, k) => (
+          <div key={"h" + k} style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.3px", textTransform: "uppercase", color: "#a8a29e", textAlign: k >= 3 ? "right" : "left" }}>{hd}</div>
         ))}
         {homes.map((h, i) => (
           <Fragment key={i}>
             <div style={{ gridColumn: "1 / -1", fontSize: 13, fontWeight: 600, color: "#1c1917", marginTop: i ? 9 : 5 }}>
-              {h.addr || "—"}{h.sqft ? ` – ${h.sqft.toLocaleString("en-US")} sf` : ""}
+              {h.addr || "—"}
             </div>
             <div>{usd(h.list)}</div>
             <div style={{ fontWeight: 700, color: "#1c1917" }}>{usd(h.sale)}</div>
+            <div>{h.sqft ? h.sqft.toLocaleString("en-US") : "—"}</div>
             <div style={{ textAlign: "right" }}>{h.ppsf ? "$" + h.ppsf.toLocaleString("en-US") : "—"}</div>
             <div style={{ textAlign: "right" }}>{h.pctList != null ? h.pctList + "%" : "—"}</div>
             <div style={{ textAlign: "right" }}>{mdy(h.sold)}</div>
