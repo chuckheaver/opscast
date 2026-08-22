@@ -299,7 +299,7 @@ export default function NeighborhoodModal({
 
         {resCounts && resCounts.total > 0 && (
           <section style={SEC}>
-            <Banner emoji="📊">By the Numbers</Banner>
+            <Banner emoji="📊">By the Numbers - Inventory Count</Banner>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.5px", textTransform: "uppercase", color: "#a8a29e", margin: "0 0 4px" }}>
               Inventory Types
             </div>
