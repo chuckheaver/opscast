@@ -71,9 +71,18 @@ function fmtList(arr) {
 const usd = n => (Number.isFinite(n) ? "$" + Math.round(n).toLocaleString("en-US") : "—");
 const mdy = iso => { const m = iso && /^(\d{4})-(\d{2})-(\d{2})/.exec(iso); return m ? `${+m[2]}/${+m[3]}/${m[1].slice(2)}` : "—"; };
 
+const _mean = a => a.reduce((s, x) => s + x, 0) / a.length;
+const _median = a => { const s = [...a].sort((x, y) => x - y); return s[Math.floor((s.length - 1) / 2)]; };
+// Average / Median across the comps for each numeric column (skips blanks).
+function summarize(homes, fn) {
+  const col = k => { const c = homes.map(h => h[k]).filter(v => typeof v === "number" && Number.isFinite(v)); return c.length ? fn(c) : null; };
+  return { list: col("list"), sale: col("sale"), sqft: col("sqft"), ppsf: col("ppsf"), pctList: col("pctList"), dom: col("dom") };
+}
+
 function PriceLine({ data, label, gap }) {
   const [open, setOpen] = useState(false);
   const homes = data?.homes || [];
+  const summaries = homes.length ? [["Average", summarize(homes, _mean)], ["Median", summarize(homes, _median)]] : [];
   return (
     <div style={{ marginBottom: gap ? 10 : 2 }}>
     <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
@@ -105,6 +114,19 @@ function PriceLine({ data, label, gap }) {
             <div style={{ textAlign: "right" }}>{h.pctList != null ? h.pctList + "%" : "—"}</div>
             <div style={{ textAlign: "right" }}>{mdy(h.sold)}</div>
             <div style={{ textAlign: "right" }}>{h.dom != null ? h.dom : "—"}</div>
+          </Fragment>
+        ))}
+        {summaries.map(([lbl, s], si) => (
+          <Fragment key={lbl}>
+            <div style={{ gridColumn: "1 / -1", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.3px", color: "#78716c",
+              marginTop: si ? 4 : 9, paddingTop: si ? 0 : 6, borderTop: si ? "none" : "1px solid #e7e2da" }}>{lbl}</div>
+            <div style={{ fontWeight: 700, color: "#1c1917" }}>{s.list != null ? usd(s.list) : "—"}</div>
+            <div style={{ fontWeight: 700, color: "#1c1917" }}>{s.sale != null ? usd(s.sale) : "—"}</div>
+            <div>{s.sqft != null ? Math.round(s.sqft).toLocaleString("en-US") : "—"}</div>
+            <div style={{ textAlign: "right" }}>{s.ppsf != null ? "$" + Math.round(s.ppsf).toLocaleString("en-US") : "—"}</div>
+            <div style={{ textAlign: "right" }}>{s.pctList != null ? Math.round(s.pctList) + "%" : "—"}</div>
+            <div style={{ textAlign: "right" }}>—</div>
+            <div style={{ textAlign: "right" }}>{s.dom != null ? Math.round(s.dom) : "—"}</div>
           </Fragment>
         ))}
       </div>
