@@ -112,6 +112,10 @@ function PriceLine({ data, label, gap, onShow }) {
                 {h.ppsf ? <span style={{ color: "#a8a29e", marginLeft: 8 }}>${h.ppsf.toLocaleString("en-US")}/sf</span> : null}
               </div>
               <div style={{ lineHeight: 1.7 }}>
+                <span style={{ display: "inline-block", width: 34, color: "#a8a29e", fontWeight: 700 }}>%L</span>
+                <span>{h.pctList != null ? h.pctList + "%" : "—"}</span>
+              </div>
+              <div style={{ lineHeight: 1.7 }}>
                 <span style={{ display: "inline-block", width: 34, color: "#a8a29e", fontWeight: 700 }}>SLD</span>
                 <span>{mdy(h.sold)}</span>
                 {h.dom != null ? <span style={{ color: "#a8a29e", marginLeft: 8 }}>{h.dom} DOM</span> : null}
@@ -223,11 +227,13 @@ export default function NeighborhoodModal({
               const p = f.properties;
               const sale = Number(p.sellingPrice) || 0;
               const sqft = Number(p.sqft) || 0;
+              const list = Number(p.listPrice) || null;
               return {
                 addr: (p.address || "").replace(/,\s*San Francisco.*$/i, "").trim() + (p.unit ? ` #${p.unit}` : ""),
                 sqft: sqft > 0 ? sqft : null,
-                list: Number(p.listPrice) || null,
+                list,
                 sale,
+                pctList: list > 0 ? Math.round((sale / list) * 100) : null, // sold ÷ list
                 ppsf: sqft > 0 ? Math.round(sale / sqft) : null,
                 dom: Number.isFinite(Number(p.dom)) ? Math.round(Number(p.dom)) : null,
                 sold: p.sellingDate || null,
