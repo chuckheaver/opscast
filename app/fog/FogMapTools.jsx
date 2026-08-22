@@ -57,7 +57,7 @@ export default function FogMapTools({
   showMicroSun, onToggleMicroSun, showMicroCool, onToggleMicroCool,
   showMicroWind, onToggleMicroWind, onMicroOpen,
   // Location / search
-  onPickFromAddress, onUseGeoLocation, ready, geoLoading, picked,
+  onPickFromAddress, onUseGeoLocation, onResetView, ready, geoLoading, picked,
   dataErr, geoErr,
   // Optional menu to open on first load (e.g. "activity" from the Market entry)
   initialMenu,
@@ -183,8 +183,9 @@ export default function FogMapTools({
   //    each sorted alphanumerically. Condos lead the list. ──
   const byName = arr => arr.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
   const allBuildings = buildingProfiles ? Object.values(buildingProfiles) : [];
-  const condoBuildings = byName(allBuildings.filter(b => b.tenure !== "rental"));
-  const rentalBuildings = byName(allBuildings.filter(b => b.tenure === "rental"));
+  // Single alphabetical index (Condos + Rentals together) — the Buildings
+  // pill now behaves like the Hoods pill: one A–Z list, pick one to zoom to it.
+  const allBuildingsSorted = byName([...allBuildings]);
   const hasBuildings = allBuildings.length > 0;
 
   return (
@@ -347,24 +348,18 @@ export default function FogMapTools({
           {!panelCollapsed && (!hasBuildings ? (
             <div className="fog-list-empty">No buildings loaded yet.</div>
           ) : (
-            [["Condos", condoBuildings], ["Rentals", rentalBuildings]].map(([groupName, list]) =>
-              list.length === 0 ? null : (
-                <div key={groupName}>
-                  <div className="fog-list-grouphead">{groupName}</div>
-                  {list.map(b => (
-                    <button
-                      key={b.objectid}
-                      type="button"
-                      className={"fog-list-link" + (b.objectid === openBuilding ? " on" : "")}
-                      onClick={() => { onZoomBuilding?.(b); onOpenBuilding?.(b.objectid); setMenu(null); }}
-                    >
-                      {b.name}
-                      {b.tenure === "both" && <span className="fog-bldg-rental"> (Rental/Condo)</span>}
-                    </button>
-                  ))}
-                </div>
-              )
-            )
+            allBuildingsSorted.map(b => (
+              <button
+                key={b.objectid}
+                type="button"
+                className={"fog-list-link" + (b.objectid === openBuilding ? " on" : "")}
+                onClick={() => { onZoomBuilding?.(b); onOpenBuilding?.(b.objectid); setMenu(null); }}
+              >
+                {b.name}
+                {b.tenure === "rental" && <span className="fog-bldg-rental"> (Rental)</span>}
+                {b.tenure === "both" && <span className="fog-bldg-rental"> (Rental/Condo)</span>}
+              </button>
+            ))
           ))}
         </div>
       )}
@@ -465,6 +460,17 @@ export default function FogMapTools({
         </div>
       )}
 
+      {/* Reset — back to the default view (Neighborhoods only) + re-frame SF */}
+      <button
+        type="button"
+        className="fog-fab fog-fab-reset"
+        onClick={() => { setMenu(null); onResetView?.(); }}
+        aria-label="Reset map"
+        title="Reset map — Neighborhoods only, framed on San Francisco"
+      >
+        <ResetIcon />
+      </button>
+
       {/* Round "find me" arrow (bottom-right) */}
       <button
         type="button"
@@ -503,6 +509,14 @@ function LocateIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M3 11 21 3l-8 18-2-7-8-3Z" fill="currentColor" />
+    </svg>
+  );
+}
+function ResetIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M20 11a8 8 0 1 0-.6 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+      <path d="M20 4v5h-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
     </svg>
   );
 }

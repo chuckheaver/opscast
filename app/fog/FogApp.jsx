@@ -73,6 +73,7 @@ export default function FogApp() {
   const [showMicroWind, setShowMicroWind] = useState(false);
   // Camera fly-to target (e.g. zoom to a building picked from the Bldgs list).
   const [flyTo, setFlyTo] = useState(null); // { center: [lng,lat], zoom } | null
+  const [recenter, setRecenter] = useState(0); // bump to re-frame San Francisco
   // Transit: which line categories are shown (a Set of TRANSIT_CATS keys).
   // Defaults to all; a saved default (localStorage) is loaded on mount.
   const [transitSel, setTransitSel] = useState(() => new Set(ALL_TRANSIT_KEYS));
@@ -187,10 +188,10 @@ export default function FogApp() {
   const [showComBuildings, setShowComBuildings] = useState(false);
   // Background layers kept off — used for lookups, not for the UI toggle set.
   const [showZoning] = useState(false);
-  // Parcel Type overlay (SF Land Use) — split into Residential (on by
-  // default) and Commercial & other (off by default). Both toggled from
-  // the map tools; both drive the same vector tiles.
-  const [showParcelsRes, setShowParcelsRes] = useState(true);
+  // Parcel Type overlay (SF Land Use) — both off by default; the map opens
+  // showing only Neighborhoods. Toggled from the map tools; both drive the
+  // same vector tiles.
+  const [showParcelsRes, setShowParcelsRes] = useState(false);
   const [showParcelsCom, setShowParcelsCom] = useState(false);
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
@@ -280,10 +281,16 @@ export default function FogApp() {
   const pickFromMap = useCallback(
     (feature, point) => {
       const contour = findContourForPoint(contours, point);
-      setPicked({ point, address: null, feature, contour });
-      setOpenHood(feature?.properties?.name || null);
+      const name = feature?.properties?.name || null;
+      // Frame the whole neighborhood polygon (zoom in close-up) and flag the
+      // pick as neighborhood-scoped so the map highlights it in blue — same
+      // behavior as choosing a name from the A–Z index.
+      const full = name && geojson ? findFeatureByName(geojson, name) : null;
+      const bounds = full ? bboxOfFeature(full) : null;
+      setPicked({ point, address: null, feature: full || feature, contour, scope: bounds ? "neighborhood" : undefined, bounds });
+      setOpenHood(name);
     },
-    [contours]
+    [contours, geojson]
   );
 
   // User clicked a neighborhood name in the A–Z index — treat it like
@@ -424,26 +431,9 @@ export default function FogApp() {
     };
   }, [picked?.point]);
 
-  // Auto-prompt for location on first mount, but only if permission isn't
-  // already denied — otherwise we'd just be re-asking for a no. Skipped
-  // entirely when a URL location was provided.
-  useEffect(() => {
-    if (autoGeoTriedRef.current) return;
-    if (urlLoc) return; // URL-provided location takes precedence
-    autoGeoTriedRef.current = true;
-    if (typeof navigator === "undefined" || !navigator.geolocation) return;
-    const trigger = () => queueMicrotask(requestGeoLocation);
-    if (navigator.permissions?.query) {
-      navigator.permissions
-        .query({ name: "geolocation" })
-        .then(res => {
-          if (res.state !== "denied") trigger();
-        })
-        .catch(trigger);
-    } else {
-      trigger();
-    }
-  }, [requestGeoLocation, urlLoc]);
+  // The map always opens framed on San Francisco — we no longer auto-prompt
+  // for the visitor's location on mount (it would recenter the view off the
+  // city). Users can still tap the 📍 button to locate themselves.
 
   // Buildings are the primary layer (floated above the neighborhood outlines
   // in FogMap), so the hoods stay visible underneath — a click off any
@@ -453,6 +443,24 @@ export default function FogApp() {
   }, []);
   const handleToggleComBuildings = useCallback(next => {
     setShowComBuildings(next);
+  }, []);
+
+  // Reset button (next to 📍): return to the default view — only the
+  // Neighborhoods layer on, all pop-ups closed, and the map re-framed on
+  // all of San Francisco.
+  const resetView = useCallback(() => {
+    setShowNeighborhoods(true);
+    setShowParcelsRes(false); setShowParcelsCom(false);
+    setShowContours(false); setShowMuni(false); setShowBikes(false);
+    setShowDistricts(false); setShowZips(false); setShowTerrain(false);
+    setShowSatellite(false); setShowElevation(false);
+    setShowSeismic(false); setShowTsunami(false); setShowFaults(false);
+    setShowRealtor(false); setShowCBD(false);
+    setShowResBuildings(false); setShowComBuildings(false);
+    setShowMicroSun(false); setShowMicroCool(false); setShowMicroWind(false);
+    setActivityWanted(false); setMicroWanted(false);
+    setPicked(null); setOpenHood(null); setOpenBuilding(null); setStatsOpen(false);
+    setRecenter(c => c + 1);
   }, []);
 
   // Zoom the map to a building chosen from the Bldgs list (the residential
@@ -572,6 +580,7 @@ export default function FogApp() {
           showMicroCool={showMicroCool}
           showMicroWind={showMicroWind}
           flyTo={flyTo}
+          recenter={recenter}
           transitRoutes={transitRoutes}
           transitStops={transitSel.has("bus")}
           bikeSel={bikeSel}
@@ -657,6 +666,7 @@ export default function FogApp() {
           onMicroOpen={openMicro}
           onPickFromAddress={pickFromAddress}
           onUseGeoLocation={requestGeoLocation}
+          onResetView={resetView}
           ready={!!geojson}
           geoLoading={geoLoading}
           picked={picked}

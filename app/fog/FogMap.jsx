@@ -78,6 +78,7 @@ export default function FogMap({
   showMicroCool,
   showMicroWind,
   flyTo,
+  recenter,
   transitRoutes,
   transitStops,
   bikeSel,
@@ -1649,9 +1650,18 @@ export default function FogMap({
         source: "fog",
         paint: {
           "line-color": "#1c1917",
-          "line-opacity": 0.55,
-          "line-width": 0.9,
+          "line-opacity": 0.6,
+          "line-width": 1.3,
         },
+      });
+      // Selected-neighborhood highlight — a soft blue fill under the outlines,
+      // driven by the picked neighborhood id (set in an effect below).
+      map.addLayer({
+        id: "fog-selected",
+        type: "fill",
+        source: "fog",
+        paint: { "fill-color": "#2563eb", "fill-opacity": 0.15 },
+        filter: ["==", ["get", "id"], ""],
       });
       map.addLayer({
         id: "fog-hover",
@@ -1952,7 +1962,7 @@ export default function FogMap({
     if (!map) return;
     const apply = () => {
       const vis = showNeighborhoods ? "visible" : "none";
-      ["fog-outline", "fog-hover", "fog-labels"].forEach(id => {
+      ["fog-outline", "fog-selected", "fog-hover", "fog-labels"].forEach(id => {
         if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
       });
     };
@@ -2193,6 +2203,26 @@ export default function FogMap({
     map.flyTo({ center: flyTo.center, zoom: flyTo.zoom ?? map.getZoom(), duration: 1000 });
   }, [flyTo]);
 
+  // Reset button → re-frame all of San Francisco. Bumped counter animates once.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !recenter) return;
+    map.fitBounds(SF_BOUNDS, { padding: 24, duration: 800 });
+  }, [recenter]);
+
+  // Highlight the picked neighborhood in blue (fill + outline). Cleared when
+  // nothing is picked or the pick isn't a neighborhood.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const id = picked?.feature?.properties?.id ?? "";
+    const apply = () => {
+      if (map.getLayer("fog-selected")) map.setFilter("fog-selected", ["==", ["get", "id"], id]);
+    };
+    apply();
+    map.once("load", apply);
+  }, [picked]);
+
   // Transit: filter the route lines to the selected categories' route_names,
   // or show all when transitRoutes is null.
   useEffect(() => {
@@ -2319,9 +2349,13 @@ export default function FogMap({
     if (!picked) return;
 
     if (picked.point) {
-      markerRef.current = new mapboxgl.Marker({ color: "#2563eb" })
-        .setLngLat(picked.point)
-        .addTo(map);
+      // Neighborhood picks are shown by the blue polygon highlight, so skip
+      // the pin there; address / current-location picks still drop a pin.
+      if (picked.scope !== "neighborhood") {
+        markerRef.current = new mapboxgl.Marker({ color: "#2563eb" })
+          .setLngLat(picked.point)
+          .addTo(map);
+      }
       // A neighborhood pick (picked.bounds) frames that polygon; a building
       // deep-link (picked.zoom) flies in to the footprint; every other pick
       // keeps the city-wide frame.

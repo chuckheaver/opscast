@@ -57,6 +57,7 @@ export default function HomesStats({ props, count, expanded, onToggleExpand, onC
       <div className="fog-stats-head">
         <span className="fog-stats-title">Stats · {(count || 0).toLocaleString("en-US")} match · {sold.length.toLocaleString("en-US")} sold</span>
         <button type="button" className="fog-stats-exp" onClick={onToggleExpand}>{expanded ? "Less ↓" : "Full report ↑"}</button>
+        <button type="button" className="fog-stats-close" onClick={onClose} aria-label="Close stats" title="Close">×</button>
       </div>
       <button type="button" className="fog-stats-pdf" onClick={onDownload} disabled={downloading}>
         {downloading ? "Preparing PDF…" : "⤓ Download report (PDF)"}

@@ -1389,7 +1389,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-search-field .fog-input {
   background: transparent;
   border: none;
-  padding: 10px 0;
+  padding: 10px 24px 10px 0; /* right room for the clear (×) button */
   font-size: 13.5px;
 }
 .fog-search-field .fog-input:focus { border: none; }
@@ -1526,6 +1526,13 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-stats-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px; flex: 0 0 auto; }
 .fog-stats-title { font-size: 13px; font-weight: 700; color: #1c1917; }
 .fog-stats-exp { background: none; border: none; padding: 0; font: inherit; font-size: 12.5px; font-weight: 600; color: #2563eb; cursor: pointer; }
+.fog-stats-close {
+  align-self: center; flex: 0 0 auto; width: 26px; height: 26px; margin-left: 2px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); border-radius: 999px; background: #fff;
+  color: #57534e; font-size: 18px; line-height: 1; cursor: pointer;
+}
+.fog-stats-close:hover { background: #faf6ec; color: #1c1917; }
 .fog-stats-pdf {
   flex: 0 0 auto; width: 100%; margin: 0 0 10px; padding: 8px 10px;
   border: 1px solid #bcd2f7; border-radius: 8px; background: #eaf1fd;
@@ -1709,6 +1716,9 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-fab-layers.on { background: #eaf1fd; border-color: #bcd2f7; color: #1d4ed8; }
 .fog-fab-locate { bottom: 36px; right: 12px; }
 .fog-fab-locate svg { color: #2563eb; }
+/* Reset button sits just left of the locate button. */
+.fog-fab-reset { bottom: 36px; right: 64px; }
+.fog-fab-reset svg { color: #5f6368; }
 .fog-fab-badge {
   position: absolute;
   top: -3px;
