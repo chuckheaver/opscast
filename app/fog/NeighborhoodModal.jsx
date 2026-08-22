@@ -71,22 +71,14 @@ function fmtList(arr) {
 const usd = n => (Number.isFinite(n) ? "$" + Math.round(n).toLocaleString("en-US") : "—");
 const mdy = iso => { const m = iso && /^(\d{4})-(\d{2})-(\d{2})/.exec(iso); return m ? `${+m[2]}/${+m[3]}/${m[1].slice(2)}` : "—"; };
 
-function PriceLine({ data, label, gap, onShow }) {
+function PriceLine({ data, label, gap }) {
   const [open, setOpen] = useState(false);
-  const n = data ? data.n : 0;
   const homes = data?.homes || [];
   return (
     <div style={{ marginBottom: gap ? 10 : 2 }}>
     <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
       <span style={{ fontSize: 24, fontWeight: 700, color: data ? "#1c1917" : "#a8a29e" }}>{data ? data.value : "—"}</span>
-      <span style={{ fontSize: 13, color: "#78716c" }}>
-        median {label}, {CUR_YEAR} YTD (
-        {n > 0 && onShow ? (
-          <a role="button" tabIndex={0} onClick={onShow} onKeyDown={e => (e.key === "Enter" || e.key === " ") && onShow()}
-            style={{ color: "#2563eb", fontWeight: 600, textDecoration: "underline", cursor: "pointer" }}>{n} sold ↗</a>
-        ) : `${n} sold`}
-        )
-      </span>
+      <span style={{ fontSize: 13.5, fontWeight: 700, color: "#1c1917" }}>{label}</span>
       {homes.length > 0 && (
         <button type="button" onClick={() => setOpen(o => !o)}
           style={{ marginLeft: "auto", background: "none", border: "none", padding: 0, font: "inherit", fontSize: 12.5, fontWeight: 600, color: "#2563eb", cursor: "pointer" }}>
@@ -310,8 +302,8 @@ export default function NeighborhoodModal({
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#78716c" }}>Loading…</span></div>
           ) : prices ? (
             <div style={{ marginBottom: 2 }}>
-              <PriceLine data={prices.sfh} label="single-family" gap onShow={() => onShowProperties?.(name, "sfh")} />
-              <PriceLine data={prices.condo} label="condo/TIC" onShow={() => onShowProperties?.(name, "condo")} />
+              <PriceLine data={prices.sfh} label="Median Single-Family" gap />
+              <PriceLine data={prices.condo} label="Median Condo/TIC" />
             </div>
           ) : (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>Market data unavailable.</span></div>
