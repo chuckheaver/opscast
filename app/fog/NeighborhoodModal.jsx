@@ -195,6 +195,7 @@ export default function NeighborhoodModal({
   zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties,
 }) {
   const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
+  const [dataThrough, setDataThrough] = useState(""); // M/D/YY of the last data load
   const [resCounts, setResCounts] = useState(undefined); // undefined loading | counts obj | null
 
   // Residential parcel counts for this neighborhood, by unit bucket
@@ -217,6 +218,7 @@ export default function NeighborhoodModal({
       .then(r => (r.ok ? r.json() : Promise.reject()))
       .then(g => {
         if (cancelled) return;
+        setDataThrough(g.metadata?.builtAt ? mdy(g.metadata.builtAt) : "");
         const feats = g.features || [];
         // Only homes physically IN this neighborhood (strict point-in-polygon
         // fogNeighborhood match) — not ones merely MLS-tagged to it.
@@ -319,7 +321,7 @@ export default function NeighborhoodModal({
         )}
 
         <section style={SEC}>
-          <Banner emoji="🏠">1 · Home Prices - {CUR_YEAR}</Banner>
+          <Banner emoji="🏠">{dataThrough ? `1 · Home Prices - YTD Through ${dataThrough}` : "1 · Home Prices - YTD"}</Banner>
           {prices === "loading" ? (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#78716c" }}>Loading…</span></div>
           ) : prices ? (
