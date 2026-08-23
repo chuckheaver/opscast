@@ -12,7 +12,7 @@ import { useEffect } from "react";
 const ZONES = [
   ["☀️", "#d97706", "Sun Pockets", "≥20° SE/S/SW-facing inclines — the warmest, sunniest slopes."],
   ["❄️", "#0ea5e9", "Cool / Shade", "≥20° NW/N/NE-facing inclines — far less direct sun, so cooler."],
-  ["🌬️", "#0d9488", "Wind Corridors", "Valley floors & gaps that funnel and accelerate wind."],
+  ["🌬️", "#0d9488", "Wind Corridors", "Areas most exposed to the prevailing W/NW wind — the open coast, windward faces & crests, gaps between the hills, the Golden Gate, and the Van Ness/Market corridor."],
 ];
 
 const SOLAR_BANDS = [
