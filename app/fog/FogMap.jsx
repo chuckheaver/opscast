@@ -75,9 +75,12 @@ export default function FogMap({
   activityData,
   comps,
   microZones,
+  microSolar,
   showMicroSun,
   showMicroCool,
   showMicroWind,
+  showMicroSolar,
+  showMicroFogLine,
   flyTo,
   recenter,
   transitRoutes,
@@ -1183,6 +1186,65 @@ export default function FogMap({
           "circle-opacity": 0.95,
         },
       });
+      // Solar "sun exposure" wash — the graduated background layer from the
+      // /microclimates page (cream = more sun than flat ground, brown = more
+      // shaded). Fed by the microSolar prop (the active season's polygons) and
+      // added FIRST so it sits UNDER the sun/cool/wind zone fills below.
+      map.addSource("micro-solar", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
+      map.addLayer({
+        id: "fmicro-solar-fill",
+        type: "fill",
+        source: "micro-solar",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": [
+            "match", ["get", "level"],
+            "sun", "#fef3c7",   // light yellow — more sun than flat
+            "shade", "#c4a574", // light brown  — less sun than flat
+            "#c4a574",
+          ],
+          "fill-opacity": 0.6,
+        },
+      });
+
+      // Fog inversion line — the ~500 ft (150 m) contour drawn as a bold blue
+      // dash, marking where marine fog pushing in from the west usually stops.
+      // Rides the existing Mapbox Terrain v2 contour source.
+      if (map.getSource("terrain-v2")) {
+        map.addLayer({
+          id: "fmicro-fog-inversion",
+          type: "line",
+          source: "terrain-v2",
+          "source-layer": "contour",
+          filter: ["==", ["get", "ele"], 150],
+          layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
+          paint: { "line-color": "#1d4ed8", "line-width": 3, "line-dasharray": [2, 1.4], "line-opacity": 0.92 },
+        });
+        map.addLayer({
+          id: "fmicro-fog-inversion-label",
+          type: "symbol",
+          source: "terrain-v2",
+          "source-layer": "contour",
+          filter: ["==", ["get", "ele"], 150],
+          layout: {
+            visibility: "none",
+            "text-field": "Fog inversion ≈500 ft",
+            "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+            "text-size": 11,
+            "symbol-placement": "line",
+            "symbol-spacing": 600,
+            "text-padding": 20,
+            "text-allow-overlap": false,
+          },
+          paint: {
+            "text-color": "#1d4ed8",
+            "text-halo-color": "#ffffff",
+            "text-halo-width": 2,
+            "text-opacity": ["interpolate", ["linear"], ["zoom"], 12, 0, 13, 1],
+          },
+        });
+      }
+
       // MicroClimates zones — terrain-derived sun / cool / wind areas, fed by
       // the microZones prop. Each zone is a fill + matching outline, hidden
       // until its toggle turns on.
@@ -2208,7 +2270,20 @@ export default function FogMap({
     map.once("load", apply);
   }, [microZones]);
 
-  // Toggle the MicroClimates sun / cool / wind zone overlays.
+  // Feed the Solar "sun exposure" polygons for the active season.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const src = map.getSource("micro-solar");
+      if (src) src.setData(microSolar || { type: "FeatureCollection", features: [] });
+    };
+    apply();
+    map.once("load", apply);
+  }, [microSolar]);
+
+  // Toggle the MicroClimates sun / cool / wind zone overlays + the solar
+  // wash + the fog inversion line.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
@@ -2220,6 +2295,10 @@ export default function FogMap({
       set("sun", showMicroSun);
       set("cool", showMicroCool);
       set("wind", showMicroWind);
+      if (map.getLayer("fmicro-solar-fill")) map.setLayoutProperty("fmicro-solar-fill", "visibility", showMicroSolar ? "visible" : "none");
+      ["fmicro-fog-inversion", "fmicro-fog-inversion-label"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", showMicroFogLine ? "visible" : "none");
+      });
     };
     // Call apply() directly (each apply is guarded by getLayer/getSource, so
     // it's a no-op before the layers exist) and also bind once to first load.
@@ -2228,7 +2307,7 @@ export default function FogMap({
     // defer to a "load" event that already fired and never apply.
     apply();
     map.once("load", apply);
-  }, [showMicroSun, showMicroCool, showMicroWind]);
+  }, [showMicroSun, showMicroCool, showMicroWind, showMicroSolar, showMicroFogLine]);
 
   // Fly the camera to a requested target (e.g. a building chosen from the
   // Bldgs list). Keyed on identity so each request animates once.

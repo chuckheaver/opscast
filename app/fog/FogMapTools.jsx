@@ -18,6 +18,14 @@ import { BIKE_CLASSES } from "./lib/bikes";
 // Alphabetical neighborhood index (already sorted by listNeighborhoods).
 const NBHD_INDEX = listNeighborhoods();
 
+// Solar "sun exposure" seasons, matching the /microclimates page.
+const MICRO_SEASONS = [
+  { key: "annual", label: "Annual" },
+  { key: "winter", label: "Winter" },
+  { key: "equinox", label: "Spring / Fall" },
+  { key: "summer", label: "Summer" },
+];
+
 export default function FogMapTools({
   // Layers
   contoursAvailable,
@@ -56,6 +64,8 @@ export default function FogMapTools({
   // MicroClimates overlay
   showMicroSun, onToggleMicroSun, showMicroCool, onToggleMicroCool,
   showMicroWind, onToggleMicroWind, onMicroOpen,
+  showMicroSolar, onToggleMicroSolar, solarSeason, onSelectSolarSeason,
+  showMicroFogLine, onToggleMicroFogLine,
   // Location / search
   onPickFromAddress, onUseGeoLocation, onResetView, ready, geoLoading, picked,
   dataErr, geoErr,
@@ -91,6 +101,12 @@ export default function FogMapTools({
   }, [menu]);
 
   const toggleMenu = id => setMenu(m => (m === id ? null : id));
+
+  // The MicroClimates pill lights up when any of its own overlays are on —
+  // the sun/cool/wind zones, the solar wash, or the fog-inversion line.
+  // (Terrain + Elevation are shared with the Layers gear, so they don't drive
+  // the pill's on-state.)
+  const microOn = showMicroSun || showMicroCool || showMicroWind || showMicroSolar || showMicroFogLine;
 
   // ── Layers: grouped toggles ──
   const groups = [
@@ -154,6 +170,9 @@ export default function FogMapTools({
     showMicroSun && ["#fdba74", "Sun pockets"],
     showMicroCool && ["#7dd3fc", "Cool / shade"],
     showMicroWind && ["#2dd4bf", "Wind corridors"],
+    showMicroSolar && ["#fef3c7", "More sun than flat"],
+    showMicroSolar && ["#c4a574", "Shaded vs flat"],
+    showMicroFogLine && ["#1d4ed8", "Fog inversion ≈500 ft"],
   ].filter(Boolean);
   const hazardItems = [
     showSeismic && ["#dc2626", "Seismic zone"],
@@ -287,17 +306,16 @@ export default function FogMapTools({
         >
           <FogIcon /> Fog
         </button>
-        {/* MicroClimates — terrain micro-zones */}
+        {/* MicroClimates — terrain micro-zones + sun exposure */}
         <button
           type="button"
-          className={"fog-chip" + ((showMicroSun || showMicroCool || showMicroWind) ? " on" : "")}
+          className={"fog-chip" + (microOn ? " on" : "")}
           onClick={() => {
-            const on = showMicroSun || showMicroCool || showMicroWind;
-            if (on) { onMicroHide?.(); if (menu === "micro") setMenu(null); }
+            if (microOn) { onMicroHide?.(); if (menu === "micro") setMenu(null); }
             else { onMicroOpen?.(); setMenu("micro"); }
           }}
-          aria-pressed={showMicroSun || showMicroCool || showMicroWind}
-          title="Microclimate zones"
+          aria-pressed={microOn}
+          title="Microclimate zones + sun exposure"
         >
           <MicroIcon /> MicroClimates
         </button>
@@ -391,16 +409,35 @@ export default function FogMapTools({
       )}
 
       {menu === "micro" && (
-        <LayerBar
-          items={[
-            { key: "sun", short: "Sun pockets", color: "#fdba74", on: showMicroSun },
-            { key: "cool", short: "Cool / shade", color: "#7dd3fc", on: showMicroCool },
-            { key: "wind", short: "Wind corridors", color: "#2dd4bf", on: showMicroWind },
-          ]}
-          onToggle={onToggleMicroZone}
-          onAll={onShowAllMicro}
-          onNone={onSelectNoneMicro}
-        />
+        <div className="fog-float-panel left fog-layers-panel" role="menu">
+          <div className="fog-layers-group">
+            <div className="fog-layers-group-title">Microclimate Zones</div>
+            <ToggleSwitch label="Sun pockets" checked={showMicroSun} onChange={() => onToggleMicroZone?.("sun")} />
+            <ToggleSwitch label="Cool / shade" checked={showMicroCool} onChange={() => onToggleMicroZone?.("cool")} />
+            <ToggleSwitch label="Wind corridors" checked={showMicroWind} onChange={() => onToggleMicroZone?.("wind")} />
+            <ToggleSwitch label="Sun exposure" checked={showMicroSolar} onChange={onToggleMicroSolar} />
+            {showMicroSolar && (
+              <div className="micro-season-row">
+                {MICRO_SEASONS.map(s => (
+                  <button
+                    key={s.key}
+                    type="button"
+                    className={"micro-season-btn" + (solarSeason === s.key ? " on" : "")}
+                    onClick={() => onSelectSolarSeason?.(s.key)}
+                  >
+                    {s.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="fog-layers-group">
+            <div className="fog-layers-group-title">Terrain &amp; Reference</div>
+            <ToggleSwitch label="Terrain" checked={showTerrain} onChange={onToggleTerrain} />
+            <ToggleSwitch label="Elevation contours" checked={showElevation} onChange={onToggleElevation} />
+            <ToggleSwitch label="Fog inversion line" checked={showMicroFogLine} onChange={onToggleMicroFogLine} />
+          </div>
+        </div>
       )}
 
       {menu === "hazards" && (

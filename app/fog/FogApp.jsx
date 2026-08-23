@@ -26,6 +26,13 @@ const TRANSIT_PREF_KEY = "mysf.transit.v1";
 const BIKE_PREF_KEY = "mysf.bikes.v1";
 const HAZARD_PREF_KEY = "mysf.hazards.v1";
 const MICRO_PREF_KEY = "mysf.micro.v1";
+// Per-season solar "sun exposure" polygons (lazy-loaded on first need).
+const SOLAR_URLS = {
+  annual:  "/data/sf-solar-annual.geojson",
+  winter:  "/data/sf-solar-winter.geojson",
+  equinox: "/data/sf-solar-equinox.geojson",
+  summer:  "/data/sf-solar-summer.geojson",
+};
 const DATA_URL = "/data/sf-fog-neighborhoods.geojson";
 const CONTOURS_URL = "/data/sf-fog-contours.geojson";
 // Geographic centre of San Francisco — the default placeholder for the
@@ -73,6 +80,11 @@ export default function FogApp() {
   const [showMicroSun, setShowMicroSun] = useState(false);
   const [showMicroCool, setShowMicroCool] = useState(false);
   const [showMicroWind, setShowMicroWind] = useState(false);
+  // Solar "sun exposure" wash + its season, and the fog-inversion line.
+  const [showMicroSolar, setShowMicroSolar] = useState(false);
+  const [solarSeason, setSolarSeason] = useState("annual");
+  const [solarBySeason, setSolarBySeason] = useState({}); // season → geojson cache
+  const [showMicroFogLine, setShowMicroFogLine] = useState(false);
   // Camera fly-to target (e.g. zoom to a building picked from the Bldgs list).
   const [flyTo, setFlyTo] = useState(null); // { center: [lng,lat], zoom } | null
   const [recenter, setRecenter] = useState(0); // bump to re-frame San Francisco
@@ -175,7 +187,10 @@ export default function FogApp() {
   const applyMicro = d => { setShowMicroSun(d.sun); setShowMicroCool(d.cool); setShowMicroWind(d.wind); };
   const persistMicro = d => { setMicroDefault(d); try { localStorage.setItem(MICRO_PREF_KEY, JSON.stringify(d)); } catch {} };
   const openMicro = () => { setMicroWanted(true); applyMicro(microDefault); };
-  const hideMicro = () => applyMicro({ sun: false, cool: false, wind: false });
+  const hideMicro = () => { applyMicro({ sun: false, cool: false, wind: false }); setShowMicroSolar(false); setShowMicroFogLine(false); };
+  // Solar exposure needs its season data — mark the overlay wanted so the
+  // lazy-load effect fetches it, then flip the layer on/off.
+  const toggleMicroSolar = on => { if (on) setMicroWanted(true); setShowMicroSolar(on); };
   const toggleMicro = key => { const d = { sun: showMicroSun, cool: showMicroCool, wind: showMicroWind }; d[key] = !d[key]; applyMicro(d); persistMicro(d); };
   const showAllMicro = () => { const d = { sun: true, cool: true, wind: true }; applyMicro(d); persistMicro(d); };
   const selectNoneMicro = () => { const d = { sun: false, cool: false, wind: false }; applyMicro(d); persistMicro(d); };
@@ -474,6 +489,7 @@ export default function FogApp() {
     setShowRealtor(false); setShowCBD(false);
     setShowResBuildings(false); setShowComBuildings(false);
     setShowMicroSun(false); setShowMicroCool(false); setShowMicroWind(false);
+    setShowMicroSolar(false); setShowMicroFogLine(false);
     setActivityWanted(false); setMicroWanted(false);
     setPicked(null); setOpenHood(null); setOpenBuilding(null); setStatsOpen(false);
     setCompFeatures(null);
@@ -510,6 +526,21 @@ export default function FogApp() {
       .catch(() => {});
     return () => { cancelled = true; };
   }, [microWanted, microZones]);
+
+  // Lazy-load the Solar "sun exposure" polygons for the active season, cached
+  // in solarBySeason so switching seasons only pays the fetch once each. Only
+  // fetches while the Solar overlay is on (the seasonal files are ~1.5 MB).
+  useEffect(() => {
+    if (!showMicroSolar || solarBySeason[solarSeason]) return;
+    const url = SOLAR_URLS[solarSeason];
+    if (!url) return;
+    let cancelled = false;
+    fetch(url)
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { if (!cancelled && d) setSolarBySeason(prev => ({ ...prev, [solarSeason]: d })); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [showMicroSolar, solarSeason, solarBySeason]);
 
   // Option lists for the shared filter, derived from the listings data.
   const homesOptions = useMemo(() => deriveOptions(listingsGeo?.features), [listingsGeo]);
@@ -594,9 +625,12 @@ export default function FogApp() {
           activityData={activityData}
           comps={compFeatures}
           microZones={microZones}
+          microSolar={solarBySeason[solarSeason] || null}
           showMicroSun={showMicroSun}
           showMicroCool={showMicroCool}
           showMicroWind={showMicroWind}
+          showMicroSolar={showMicroSolar}
+          showMicroFogLine={showMicroFogLine}
           flyTo={flyTo}
           recenter={recenter}
           transitRoutes={transitRoutes}
@@ -681,6 +715,12 @@ export default function FogApp() {
           onToggleMicroCool={setShowMicroCool}
           showMicroWind={showMicroWind}
           onToggleMicroWind={setShowMicroWind}
+          showMicroSolar={showMicroSolar}
+          onToggleMicroSolar={toggleMicroSolar}
+          solarSeason={solarSeason}
+          onSelectSolarSeason={setSolarSeason}
+          showMicroFogLine={showMicroFogLine}
+          onToggleMicroFogLine={setShowMicroFogLine}
           onMicroOpen={openMicro}
           onPickFromAddress={pickFromAddress}
           onUseGeoLocation={requestGeoLocation}
