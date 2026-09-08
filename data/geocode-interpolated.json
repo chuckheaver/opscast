@@ -1,0 +1,479 @@
+{
+ "1 federal st #44|san francisco|ca|94107": {
+  "address": "1 Federal St #44",
+  "from": [
+   "425059268"
+  ],
+  "id": "82056199",
+  "method": "same-building",
+  "point": [
+   -122.391114,
+   37.783966
+  ],
+  "zip": "94107"
+ },
+ "1 steuart ln #1003|san francisco|ca|94105": {
+  "address": "1 Steuart Ln #1003",
+  "from": [
+   "425002209"
+  ],
+  "id": "426135225",
+  "method": "same-building",
+  "point": [
+   -122.391586,
+   37.791672
+  ],
+  "zip": "94105"
+ },
+ "1 steuart ln #803|san francisco|ca|94105": {
+  "address": "1 Steuart Ln #803",
+  "from": [
+   "425002209"
+  ],
+  "id": "426138709",
+  "method": "same-building",
+  "point": [
+   -122.391586,
+   37.791672
+  ],
+  "zip": "94105"
+ },
+ "10 hillview ct|san francisco|ca|94124": {
+  "address": "10 Hillview Ct",
+  "from": [
+   "424063885"
+  ],
+  "id": "82049752",
+  "method": "nearest",
+  "point": [
+   -122.384552,
+   37.735606
+  ],
+  "zip": "94124"
+ },
+ "101 crescent way #2112|san francisco|ca|94134": {
+  "address": "101 Crescent Way #2112",
+  "from": [
+   "425007143"
+  ],
+  "id": "82038353",
+  "method": "same-building",
+  "point": [
+   -122.389267,
+   37.710903
+  ],
+  "zip": "94134"
+ },
+ "1042 plymouth ave|san francisco|ca|94112": {
+  "address": "1042 Plymouth Ave",
+  "from": [
+   "426128705",
+   "425090068"
+  ],
+  "id": "82058480",
+  "method": "interpolated",
+  "point": [
+   -122.456399,
+   37.720851
+  ],
+  "zip": "94112"
+ },
+ "118 w crystal cove ter|san francisco|ca|94134": {
+  "address": "118 W Crystal Cove Ter",
+  "from": [
+   "425010600"
+  ],
+  "id": "82030915",
+  "method": "nearest",
+  "point": [
+   -122.394837,
+   37.712238
+  ],
+  "zip": "94134"
+ },
+ "1180 fitzgerald ave|san francisco|ca|94124": {
+  "address": "1180 Fitzgerald Ave",
+  "from": [
+   "424079978",
+   "426113723"
+  ],
+  "id": "82024556",
+  "method": "extrapolated",
+  "point": [
+   -122.390777,
+   37.720934
+  ],
+  "zip": "94124"
+ },
+ "1279 gilman ave|san francisco|ca|94124": {
+  "address": "1279 Gilman Ave",
+  "from": [
+   "425083750",
+   "426118611"
+  ],
+  "id": "82056169",
+  "method": "interpolated",
+  "point": [
+   -122.393498,
+   37.721007
+  ],
+  "zip": "94124"
+ },
+ "137 divisadero st|san francisco|ca|94117": {
+  "address": "137 Divisadero St",
+  "from": [
+   "425039090",
+   "425080973"
+  ],
+  "id": "82057086",
+  "method": "interpolated",
+  "point": [
+   -122.437002,
+   37.769411
+  ],
+  "zip": "94117"
+ },
+ "1474 30th ave|san francisco|ca|94122": {
+  "address": "1474 30th Ave",
+  "from": [
+   "426127562",
+   "426143400"
+  ],
+  "id": "82057514",
+  "method": "interpolated",
+  "point": [
+   -122.488985,
+   37.759801
+  ],
+  "zip": "94122"
+ },
+ "152 ordway st|san francisco|ca|94134": {
+  "address": "152 Ordway St",
+  "from": [
+   "425045264",
+   "426109099"
+  ],
+  "id": "82043391",
+  "method": "interpolated",
+  "point": [
+   -122.402394,
+   37.719871
+  ],
+  "zip": "94134"
+ },
+ "163 peabody st|san francisco|ca|94134": {
+  "address": "163 Peabody St",
+  "from": [
+   "426135883"
+  ],
+  "id": "82038348",
+  "method": "nearest",
+  "point": [
+   -122.407594,
+   37.710502
+  ],
+  "zip": "94134"
+ },
+ "188 mary teresa st|san francisco|ca|94134": {
+  "address": "188 Mary Teresa St",
+  "from": [
+   "425002912"
+  ],
+  "id": "82041528",
+  "method": "nearest",
+  "point": [
+   -122.398998,
+   37.713804
+  ],
+  "zip": "94134"
+ },
+ "231 ottawa ave|san francisco|ca|94112": {
+  "address": "231 Ottawa Ave",
+  "from": [
+   "82022335",
+   "426133537"
+  ],
+  "id": "82043322",
+  "method": "interpolated",
+  "point": [
+   -122.447506,
+   37.7168
+  ],
+  "zip": "94112"
+ },
+ "240 santa rosa ave|san francisco|ca|94112": {
+  "address": "240 Santa Rosa Ave",
+  "from": [
+   "426140377",
+   "425006052"
+  ],
+  "id": "82040546",
+  "method": "interpolated",
+  "point": [
+   -122.438854,
+   37.728301
+  ],
+  "zip": "94112"
+ },
+ "241 sawyer st|san francisco|ca|94134": {
+  "address": "241 Sawyer St",
+  "from": [
+   "426115989",
+   "425085325"
+  ],
+  "id": "82042619",
+  "method": "interpolated",
+  "point": [
+   -122.413674,
+   37.714439
+  ],
+  "zip": "94134"
+ },
+ "247 madrid st|san francisco|ca|94112": {
+  "address": "247 Madrid St",
+  "from": [
+   "41105025",
+   "426113311"
+  ],
+  "id": "82044531",
+  "method": "interpolated",
+  "point": [
+   -122.429744,
+   37.72552
+  ],
+  "zip": "94112"
+ },
+ "248 roosevelt way|san francisco|ca|94114": {
+  "address": "248 Roosevelt Way",
+  "from": [
+   "425034134",
+   "425028776"
+  ],
+  "id": "82057947",
+  "method": "interpolated",
+  "point": [
+   -122.440139,
+   37.765835
+  ],
+  "zip": "94114"
+ },
+ "255 munich st|san francisco|ca|94112": {
+  "address": "255 Munich St",
+  "from": [
+   "424079858",
+   "82019052"
+  ],
+  "id": "82049662",
+  "method": "interpolated",
+  "point": [
+   -122.42618,
+   37.721428
+  ],
+  "zip": "94112"
+ },
+ "29 jennings ct|san francisco|ca|94124": {
+  "address": "29 Jennings Ct",
+  "from": [
+   "425058730",
+   "426093804"
+  ],
+  "id": "82031141",
+  "method": "extrapolated",
+  "point": [
+   -122.397754,
+   37.71687
+  ],
+  "zip": "94124"
+ },
+ "315 college ave|san francisco|ca|94112": {
+  "address": "315 College Ave",
+  "from": [
+   "426094886",
+   "82035512"
+  ],
+  "id": "82038475",
+  "method": "interpolated",
+  "point": [
+   -122.423998,
+   37.734335
+  ],
+  "zip": "94112"
+ },
+ "318 topeka ave|san francisco|ca|94124": {
+  "address": "318 Topeka Ave",
+  "from": [
+   "41098463",
+   "425066978"
+  ],
+  "id": "82033859",
+  "method": "interpolated",
+  "point": [
+   -122.395376,
+   37.731655
+  ],
+  "zip": "94124"
+ },
+ "335 chicago way|san francisco|ca|94112": {
+  "address": "335 Chicago Way",
+  "from": [
+   "425037746"
+  ],
+  "id": "82034542",
+  "method": "nearest",
+  "point": [
+   -122.43277,
+   37.709286
+  ],
+  "zip": "94112"
+ },
+ "3375 17th st #311|san francisco|ca|94110": {
+  "address": "3375 17th St #311",
+  "from": [
+   "426129702"
+  ],
+  "id": "82057066",
+  "method": "same-building",
+  "point": [
+   -122.421296,
+   37.763095
+  ],
+  "zip": "94110"
+ },
+ "401 crescent ct #4203|san francisco|ca|94134": {
+  "address": "401 Crescent Ct #4203",
+  "from": [
+   "41065505"
+  ],
+  "id": "82040101",
+  "method": "same-building",
+  "point": [
+   -122.388084,
+   37.711178
+  ],
+  "zip": "94134"
+ },
+ "406 goettingen st|san francisco|ca|94134": {
+  "address": "406 Goettingen St",
+  "from": [
+   "426136314",
+   "425016976"
+  ],
+  "id": "82008361",
+  "method": "interpolated",
+  "point": [
+   -122.406689,
+   37.72664
+  ],
+  "zip": "94134"
+ },
+ "457 oxford st|san francisco|ca|94134": {
+  "address": "457 Oxford St",
+  "from": [
+   "425052293",
+   "424067393"
+  ],
+  "id": "82039198",
+  "method": "interpolated",
+  "point": [
+   -122.41849,
+   37.724304
+  ],
+  "zip": "94134"
+ },
+ "501 crescent way #5407|san francisco|ca|94134": {
+  "address": "501 Crescent Way #5407",
+  "from": [
+   "426109541"
+  ],
+  "id": "82030659",
+  "method": "same-building",
+  "point": [
+   -122.388558,
+   37.711872
+  ],
+  "zip": "94134"
+ },
+ "570 innes ave #204|san francisco|ca|94124": {
+  "address": "570 Innes Ave #204",
+  "from": [
+   "41088474",
+   "425056672"
+  ],
+  "id": "82039579",
+  "method": "interpolated",
+  "point": [
+   -122.369569,
+   37.728261
+  ],
+  "zip": "94124"
+ },
+ "611 miramar ave|san francisco|ca|94112": {
+  "address": "611 Miramar Ave",
+  "from": [
+   "426102980",
+   "425044236"
+  ],
+  "id": "82025600",
+  "method": "interpolated",
+  "point": [
+   -122.457882,
+   37.727615
+  ],
+  "zip": "94112"
+ },
+ "631 london st|san francisco|ca|94112": {
+  "address": "631 London St",
+  "from": [
+   "425025295",
+   "425056799"
+  ],
+  "id": "82031361",
+  "method": "interpolated",
+  "point": [
+   -122.437743,
+   37.71905
+  ],
+  "zip": "94112"
+ },
+ "78 lapham way|san francisco|ca|94112": {
+  "address": "78 Lapham Way",
+  "from": [
+   "426111575",
+   "425044235"
+  ],
+  "id": "82043486",
+  "method": "extrapolated",
+  "point": [
+   -122.42851,
+   37.709571
+  ],
+  "zip": "94112"
+ },
+ "80 vienna st|san francisco|ca|94112": {
+  "address": "80 Vienna St",
+  "from": [
+   "426108853",
+   "425056977"
+  ],
+  "id": "82037416",
+  "method": "interpolated",
+  "point": [
+   -122.425565,
+   37.72717
+  ],
+  "zip": "94112"
+ },
+ "808 red leaf ct|san francisco|ca|94134": {
+  "address": "808 Red Leaf Ct",
+  "from": [
+   "41099833"
+  ],
+  "id": "82031971",
+  "method": "nearest",
+  "point": [
+   -122.410672,
+   37.800428
+  ],
+  "zip": "94134"
+ }
+}

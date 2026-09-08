@@ -42,6 +42,10 @@ const listCsvFiles = () =>
 const PUBLIC_DATA = join(ROOT, "public", "data");
 const OUT_PATH = join(PUBLIC_DATA, "sf-listings.geojson");
 const CACHE_PATH = join(ROOT, "data", "tmp", "geocode-cache.json");
+// Estimated points for addresses the export left un-geocoded, written by
+// scripts/interpolate-unmapped.py from same-building / same-street
+// neighbors. Loaded as a fallback tier (see loadInterpolated).
+const INTERP_PATH = join(ROOT, "data", "geocode-interpolated.json");
 
 const CONTOURS = JSON.parse(
   readFileSync(join(PUBLIC_DATA, "sf-fog-contours.geojson"), "utf8")
@@ -302,7 +306,35 @@ function seedCacheFromPublished(cache) {
     if (!street) continue;
     const key = addrKey({ street, city: "San Francisco", state: "CA", zip: p.zip || "" });
     if (cache[key] || OVERRIDES[key]) continue;
-    cache[key] = { point: pt, seededFrom: "published" };
+    // A published point that was itself only estimated stays in the
+    // estimate tier so a reachable geocoder still gets to replace it.
+    cache[key] = p.geoSource === "interpolated"
+      ? { point: pt, source: "interpolated", seededFrom: "published" }
+      : { point: pt, seededFrom: "published" };
+    n++;
+  }
+  return n;
+}
+
+// Load the estimates from interpolate-unmapped.py as the LOWEST tier: only
+// fills keys with no usable point (absent, a recorded Census miss, or an
+// older estimate). Export lat/lng, a real cached geocode, and OVERRIDES all
+// beat it in the main loop, and these keys are still sent to Census whenever
+// it is reachable, so a true geocode replaces the estimate automatically.
+function loadInterpolated(cache) {
+  if (!existsSync(INTERP_PATH)) return 0;
+  let est;
+  try {
+    est = JSON.parse(readFileSync(INTERP_PATH, "utf8"));
+  } catch {
+    return 0;
+  }
+  let n = 0;
+  for (const [key, e] of Object.entries(est)) {
+    if (!Array.isArray(e?.point) || OVERRIDES[key]) continue;
+    const cur = cache[key];
+    if (cur?.point && cur.source !== "interpolated") continue;
+    cache[key] = { point: e.point, source: "interpolated", method: e.method, from: e.from };
     n++;
   }
   return n;
@@ -429,9 +461,16 @@ async function main() {
   const cache = loadCache();
   const seeded = seedCacheFromPublished(cache);
   if (seeded) console.log(`Seeded ${seeded} address(es) from the published sf-listings.geojson.`);
+  const estimated = loadInterpolated(cache);
+  if (estimated) console.log(`Loaded ${estimated} estimated point(s) from data/geocode-interpolated.json (fallback tier).`);
   // Listings that already carry lat/long don't need geocoding at all.
+  // Estimated points are still retried so a real geocode can replace them.
   const hasLatLng = l => Number.isFinite(l.lat) && Number.isFinite(l.lng);
-  const need = listings.filter(l => !hasLatLng(l) && !cache[addrKey(l)]);
+  const need = listings.filter(l => {
+    if (hasLatLng(l)) return false;
+    const c = cache[addrKey(l)];
+    return !c || c.source === "interpolated";
+  });
   console.log(
     `${listings.length - need.length} cached, ${need.length} to geocode.`
   );
@@ -455,9 +494,11 @@ async function main() {
       }
       for (const l of slice) {
         const r = res[l.id];
-        cache[addrKey(l)] = r
+        const key = addrKey(l);
+        // A Census miss must not erase an estimate we already hold.
+        cache[key] = r
           ? { point: r.point, matchedAddress: r.matchedAddress }
-          : { point: null };
+          : cache[key]?.source === "interpolated" ? cache[key] : { point: null };
       }
     }
     writeFileSync(CACHE_PATH, JSON.stringify(cache));
@@ -475,6 +516,11 @@ async function main() {
   for (const l of listings) {
     const c = cache[addrKey(l)];
     const point = (hasLatLng(l) ? [l.lng, l.lat] : null) || c?.point || OVERRIDES[addrKey(l)];
+    // Provenance of the coordinate, mirroring the precedence above, so the
+    // map can flag estimates as approximate.
+    const geoSource = hasLatLng(l) ? "export"
+      : c?.point ? (c.source === "interpolated" ? "interpolated" : c.seededFrom === "published" ? "published" : "census")
+      : OVERRIDES[addrKey(l)] ? "override" : null;
     if (!point) {
       unmatched.push(l.address);
       continue;
@@ -518,6 +564,7 @@ async function main() {
         statusDate: l.statusDate,
         dom: l.dom ?? null,
         zip: l.zip || null,
+        geoSource,
         // "SF District N". Prefer the MLS "Area Desc" column; when an export
         // omits it, derive it from the realtor district polygon so the
         // District filter/labels still work.
