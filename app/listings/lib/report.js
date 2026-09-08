@@ -2,13 +2,13 @@
 // features + the current Homes filter. Splits into Single-Family and Condo/TIC
 // segments (per the type chips), over the filter's date range + price, and
 // computes the same metrics as the printed report plus year-over-year vs the
-// same period a year earlier. Status chips are intentionally ignored here — the
-// report itself breaks down by status (sold / for sale / into contract).
+// same period a year earlier. Status chips are intentionally ignored here: the
+// site is sold-comps-only, so the report reads sold rows regardless of which
+// sold pill is selected.
 
 import { computeStats } from "./stats";
 
 const SOLD = new Set(["Closed", "Sold Off MLS"]);
-const PENDING = new Set(["Pending", "Contingent - Show", "Contingent - No Show"]);
 const SFH_TYPES = ["Single Family Residence"];
 const CONDO_TYPES = ["Condominium", "Tenancy in Common", "Stock Cooperative", "Co-Ownership", "Loft Condominium", "Loft"];
 
@@ -36,8 +36,6 @@ function segment(name, typesCovered, segTypes, props, from, to, lo, hi) {
   const inPeriod = (p, f, t) => p.sellingDate && (!f || p.sellingDate >= f) && (!t || p.sellingDate <= t);
   const sold = pool.filter(p => SOLD.has(p.status) && inPeriod(p, from, to));
   const priorSold = pool.filter(p => SOLD.has(p.status) && inPeriod(p, shiftYear(from, -1), shiftYear(to, -1)));
-  const active = pool.filter(p => p.status === "Active");
-  const pending = pool.filter(p => PENDING.has(p.status));
 
   const s = computeStats(sold);
   const ps = computeStats(priorSold);
@@ -64,7 +62,7 @@ function segment(name, typesCovered, segTypes, props, from, to, lo, hi) {
 
   return {
     name, typesCovered,
-    summary: { median: s.medianSale, dom: s.medianDom, ppsf: s.medianPpsf, forSale: active.length, intoContract: pending.length, sold: sold.length },
+    summary: { median: s.medianSale, dom: s.medianDom, ppsf: s.medianPpsf, sold: sold.length },
     compare,
     neighborhoods,
     yoy: {

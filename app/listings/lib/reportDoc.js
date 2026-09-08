@@ -33,7 +33,7 @@ const s = StyleSheet.create({
   segName: { fontSize: 13, fontFamily: "Helvetica-Bold", marginBottom: 6, marginTop: 4 },
   // summary metric boxes
   boxRow: { flexDirection: "row", flexWrap: "wrap", marginHorizontal: -4 },
-  box: { width: "33.33%", padding: 4 },
+  box: { width: "25%", padding: 4 },
   boxInner: { backgroundColor: BOX, borderRadius: 5, padding: "8 9" },
   boxV: { fontSize: 15, fontFamily: "Helvetica-Bold" },
   boxL: { fontSize: 8, color: MUTED, marginTop: 2 },
@@ -76,8 +76,6 @@ function summaryBoxes(seg) {
     ["Median sale price", usdShort(m.median)],
     ["Days on market", intf(m.dom)],
     ["$ / sq. ft.", usd(m.ppsf)],
-    ["For sale (active)", intf(m.forSale)],
-    ["Into contract", intf(m.intoContract)],
     ["Properties sold", intf(m.sold)],
   ];
   return h(View, { style: { marginBottom: 16 } }, [

@@ -20,21 +20,22 @@ export const SUBTYPE_ABBREV = {
 };
 export const subtypeAbbrev = t => SUBTYPE_ABBREV[t] || (t || "").slice(0, 3).toUpperCase();
 
-// Display order for the chips.
-const STATUS_ORDER = ["Active", "Pending", "Coming Soon", "Contingent - Show", "Contingent - No Show", "Hold", "Closed", "Sold Off MLS"];
+// Display order for the chips. Only sold statuses exist in the UI now.
+const STATUS_ORDER = ["Closed", "Sold Off MLS"];
 const SUBTYPE_ORDER = ["Single Family Residence", "Condominium", "Tenancy in Common", "Townhouse", "3+ Houses on Lot", "Other", "2 Houses on Lot", "Co-Ownership", "Halfplex", "Stock Cooperative"];
 
 export const SOLD_STATUSES = new Set(["Closed", "Sold Off MLS"]);
 export const isSoldStatus = s => SOLD_STATUSES.has(s);
 
 // ── Grouped chips for the compact Homes filter bar ──
-export const ALL_STATUSES = ["Active", "Pending", "Coming Soon", "Contingent - Show", "Contingent - No Show", "Hold", "Closed", "Sold Off MLS"];
+// The site shows sold comps only, for every period: the status universe is
+// the two sold statuses, so an empty selection (= "all") means both pills on.
+// On-market statuses (Active / Pending / Coming Soon / Contingent / Hold)
+// still exist in older rows of the data file but are never surfaced —
+// matchesFilter enforces that as a hard floor below the pill selection.
+export const ALL_STATUSES = ["Closed", "Sold Off MLS"];
 
-// Status groups (CTG folds Pending + both Contingent + Hold into one chip).
 export const STATUS_GROUPS = [
-  { key: "CSN", statuses: ["Coming Soon"] },
-  { key: "ACT", statuses: ["Active"] },
-  { key: "CTG", statuses: ["Pending", "Contingent - Show", "Contingent - No Show", "Hold"] },
   { key: "SLD", statuses: ["Closed"] },
   { key: "SOM", statuses: ["Sold Off MLS"] },
 ];
@@ -69,9 +70,9 @@ export function toggleGroup(set, members, universe) {
   return s;
 }
 
-// Default filter: all statuses / all types (empty Set = no restriction),
-// January of the current year through the end of the current month (≈ latest
-// data feed).
+// Default filter: both sold statuses / all types (empty Set = no restriction
+// within the sold-only universe), January of the current year through the end
+// of the current month (≈ latest data feed).
 export function defaultFilter() {
   const d = new Date();
   const y = d.getFullYear();
@@ -93,9 +94,11 @@ export function defaultFilter() {
 }
 
 // Does a listing's properties pass the filter? (Empty Set = match all; empty
-// string = no constraint. Date range only constrains rows that have a sale
-// date, so active/pending listings aren't dropped by it.)
+// string = no constraint.) Sold-only is a hard floor applied before the pill
+// selection, so on-market rows never render no matter how the filter is built
+// (default, neighborhood click, or a pill toggle).
 export function matchesFilter(p, f) {
+  if (!isSoldStatus(p.status)) return false;
   if (f.statuses.size && !f.statuses.has(p.status)) return false;
   if (f.subtypes.size && !f.subtypes.has(p.propType)) return false;
   if (f.district && p.areaDesc !== f.district) return false;
@@ -122,7 +125,7 @@ export function deriveOptions(features) {
   const statuses = new Set(), subtypes = new Set(), districts = new Set(), neighborhoods = new Set(), fogHrs = new Set();
   for (const f of features || []) {
     const p = f.properties;
-    if (p.status) statuses.add(p.status);
+    if (isSoldStatus(p.status)) statuses.add(p.status);
     if (p.propType) subtypes.add(p.propType);
     if (p.areaDesc) districts.add(p.areaDesc);
     if (p.neighborhood) neighborhoods.add(p.neighborhood);
