@@ -565,6 +565,16 @@ export default function FogApp() {
     setStatsExpanded(true);
   }, []);
 
+  // From a neighborhood pop-up's "Show … layer" button → switch that overlay
+  // on right here (same neighborhood view, like the Home Sales link) instead
+  // of navigating to a separate map page.
+  const showLayerInPlace = layer => {
+    if (layer === "fog") setShowContours(true);
+    else if (layer === "micro") openMicro();
+    else if (layer === "transit") setShowMuni(true);
+    setOpenHood(null);
+  };
+
   // Generate + download the market-update PDF for the current filter. The PDF
   // renderer is dynamically imported so it only loads on demand.
   const downloadReport = useCallback(async () => {
@@ -748,6 +758,7 @@ export default function FogApp() {
         openHood={openHood}
         onCloseHood={() => setOpenHood(null)}
         onShowProperties={showNeighborhoodProperties}
+        onShowLayer={showLayerInPlace}
         onComps={setCompFeatures}
         zips={zips}
         supervisorDistricts={supervisorDistricts}

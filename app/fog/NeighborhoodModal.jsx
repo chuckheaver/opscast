@@ -36,20 +36,6 @@ const FACT_EMOJI = {
   music: "🎷",
 };
 
-function buildUrl(base, loc, extra = {}) {
-  const qs = new URLSearchParams();
-  const lng = loc?.point?.[0];
-  const lat = loc?.point?.[1];
-  if (Number.isFinite(lat) && Number.isFinite(lng)) {
-    qs.set("lat", String(lat));
-    qs.set("lng", String(lng));
-    if (loc?.address) qs.set("name", loc.address);
-  }
-  for (const [k, v] of Object.entries(extra)) if (v) qs.set(k, v);
-  const s = qs.toString();
-  return s ? `${base}?${s}` : base;
-}
-
 function fmtPrice(n) {
   if (!Number.isFinite(n)) return null;
   if (n >= 1e6) return `$${(n / 1e6).toFixed(2)}M`;
@@ -161,6 +147,16 @@ const NEARBY_NOTE = {
   margin: "0 0 9px", lineHeight: 1.5,
 };
 
+// "Show … layer" action: stays on this neighborhood view and switches the
+// overlay on (mirrors the Home Sales link) rather than opening another map.
+function LayerButton({ onClick, children }) {
+  return (
+    <button type="button" onClick={onClick} style={{ ...LINK, background: "none", cursor: "pointer", font: "inherit", fontSize: 13 }}>
+      <span aria-hidden="true">◉</span> {children}
+    </button>
+  );
+}
+
 function Banner({ emoji, children }) {
   return (
     <div style={BANNER}>
@@ -201,7 +197,7 @@ function PlaceRow({ p, first }) {
 
 export default function NeighborhoodModal({
   name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict,
-  zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties, onComps,
+  zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties, onShowLayer, onComps,
 }) {
   const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
   // Which Details lists are expanded → map dots. Each PriceLine reports its
@@ -358,8 +354,8 @@ export default function NeighborhoodModal({
             <Banner emoji="☀️">2 · Microclimate</Banner>
             <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: "0 0 10px" }}>{microText}</p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-              <a style={LINK} href={buildUrl("/fog", loc, { preset: "fog" })}>↗ Open Fog Map</a>
-              <a style={LINK} href={buildUrl("/microclimates", loc, { layer: "solar" })}>↗ Micro-Climate map</a>
+              <LayerButton onClick={() => onShowLayer?.("fog")}>Show fog layer</LayerButton>
+              <LayerButton onClick={() => onShowLayer?.("micro")}>Show microclimate layer</LayerButton>
             </div>
           </section>
         )}
@@ -427,7 +423,7 @@ export default function NeighborhoodModal({
           <section style={SEC}>
             <Banner emoji="🚊">8 · Getting around</Banner>
             <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: "0 0 8px" }}>{data.transit}</p>
-            <a style={LINK} href={buildUrl("/fog", loc, { preset: "transit" })}>↗ Open Transit map</a>
+            <LayerButton onClick={() => onShowLayer?.("transit")}>Show transit layer</LayerButton>
           </section>
         )}
       </div>
