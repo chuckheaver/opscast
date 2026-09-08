@@ -302,6 +302,9 @@ function seedCacheFromPublished(cache) {
     const p = f.properties || {};
     const pt = f.geometry?.coordinates;
     if (!p.address || !Array.isArray(pt) || pt.length < 2) continue;
+    // A placeholder pinned to a neighborhood anchor is not a position for
+    // that address — never seed it, so the listing stays geocode-eligible.
+    if (p.geoSource === "neighborhood") continue;
     const street = String(p.address).split(",")[0].replace(/\s+/g, " ").trim();
     if (!street) continue;
     const key = addrKey({ street, city: "San Francisco", state: "CA", zip: p.zip || "" });
@@ -338,6 +341,71 @@ function loadInterpolated(cache) {
     n++;
   }
   return n;
+}
+
+// ── Neighborhood placeholders for unmappable listings ──────────────────────
+// A sold listing with no findable position (no export lat/lng, no geocode,
+// no close neighbor to estimate from) must still exist as a feature so it
+// counts in the filter total and the Stats report. Infer its neighborhood
+// from placed listings — same street + ZIP first, else the ZIP's majority
+// neighborhood — and pin it to that neighborhood's anchor: the placed
+// listing nearest the neighborhood's centroid, so it sits on real estate
+// inside the polygon. Every such listing in a neighborhood shares one point;
+// the map draws them as a single grey dot whose pop-up lists all of them.
+// Tagged geoSource "neighborhood" + placeholder: <name>. Never cached, so a
+// reachable geocoder still gets to place them properly on a later run.
+function loadPublished() {
+  if (!existsSync(OUT_PATH)) return null;
+  try {
+    return JSON.parse(readFileSync(OUT_PATH, "utf8"));
+  } catch {
+    return null;
+  }
+}
+function streetName(address) {
+  const s = String(address || "").split(",")[0].replace(/\s+(#|unit\s+|apt\s+)\S+$/i, "").trim();
+  const m = /^\d+\s+(.+)$/.exec(s);
+  return m ? m[1].toLowerCase() : null;
+}
+function buildNeighborhoodIndex(fc) {
+  const byStreet = new Map(), byZip = new Map(), pts = new Map(), areaByNbhd = new Map();
+  const bump = (map, key, val) => {
+    const m = map.get(key) || new Map();
+    m.set(val, (m.get(val) || 0) + 1);
+    map.set(key, m);
+  };
+  for (const f of fc?.features || []) {
+    const p = f.properties || {};
+    // Only real positions feed the index — never estimates or placeholders.
+    if (!p.neighborhood || p.geoSource === "interpolated" || p.geoSource === "neighborhood") continue;
+    const st = streetName(p.address), zip = String(p.zip || "").trim();
+    if (st) bump(byStreet, `${st}|${zip}`, p.neighborhood);
+    bump(byZip, zip, p.neighborhood);
+    if (p.areaDesc) bump(areaByNbhd, p.neighborhood, p.areaDesc);
+    (pts.get(p.neighborhood) || pts.set(p.neighborhood, []).get(p.neighborhood)).push(f.geometry.coordinates);
+  }
+  const top = m => (m ? [...m.entries()].sort((a, b) => b[1] - a[1])[0][0] : null);
+  const anchors = new Map();
+  for (const [nb, list] of pts) {
+    const cx = list.reduce((s, p) => s + p[0], 0) / list.length;
+    const cy = list.reduce((s, p) => s + p[1], 0) / list.length;
+    let best = list[0], bd = Infinity;
+    for (const p of list) {
+      const d = ((p[0] - cx) * KX) ** 2 + (p[1] - cy) ** 2;
+      if (d < bd) { bd = d; best = p; }
+    }
+    anchors.set(nb, best);
+  }
+  return { byStreet, byZip, anchors, areaByNbhd, top };
+}
+function placeholderFor(l, idx) {
+  if (!idx) return null;
+  const zip = String(l.zip || "").trim();
+  const st = streetName(l.address || l.street);
+  const nb = idx.top(st ? idx.byStreet.get(`${st}|${zip}`) : null) || idx.top(idx.byZip.get(zip));
+  const point = nb && idx.anchors.get(nb);
+  if (!point) return null;
+  return { neighborhood: nb, areaDesc: idx.top(idx.areaByNbhd.get(nb)), point };
 }
 
 async function geocodeBatch(listings) {
@@ -463,6 +531,9 @@ async function main() {
   if (seeded) console.log(`Seeded ${seeded} address(es) from the published sf-listings.geojson.`);
   const estimated = loadInterpolated(cache);
   if (estimated) console.log(`Loaded ${estimated} estimated point(s) from data/geocode-interpolated.json (fallback tier).`);
+  // Neighborhood inference for listings nothing above can place (built from
+  // real positions in the previously published file).
+  const nbhdIndex = buildNeighborhoodIndex(loadPublished());
   // Listings that already carry lat/long don't need geocoding at all.
   // Estimated points are still retried so a real geocode can replace them.
   const hasLatLng = l => Number.isFinite(l.lat) && Number.isFinite(l.lng);
@@ -510,20 +581,30 @@ async function main() {
     lon >= -122.53 && lon <= -122.34 && lat >= 37.69 && lat <= 37.84;
 
   let matched = 0;
+  let placeholders = 0;
   let unmatched = [];
   let outside = [];
   const features = [];
   for (const l of listings) {
     const c = cache[addrKey(l)];
-    const point = (hasLatLng(l) ? [l.lng, l.lat] : null) || c?.point || OVERRIDES[addrKey(l)];
+    let point = (hasLatLng(l) ? [l.lng, l.lat] : null) || c?.point || OVERRIDES[addrKey(l)];
     // Provenance of the coordinate, mirroring the precedence above, so the
     // map can flag estimates as approximate.
-    const geoSource = hasLatLng(l) ? "export"
+    let geoSource = hasLatLng(l) ? "export"
       : c?.point ? (c.source === "interpolated" ? "interpolated" : c.seededFrom === "published" ? "published" : "census")
       : OVERRIDES[addrKey(l)] ? "override" : null;
+    // Last resort: pin an unmappable listing to its neighborhood so it still
+    // exists as a feature and counts. Only truly unresolvable rows fall out.
+    let placeholder = null;
     if (!point) {
-      unmatched.push(l.address);
-      continue;
+      placeholder = placeholderFor(l, nbhdIndex);
+      if (!placeholder) {
+        unmatched.push(l.address);
+        continue;
+      }
+      point = placeholder.point;
+      geoSource = "neighborhood";
+      placeholders++;
     }
     const tags = tag(point);
     // San Francisco only. Drop by city name — catches Daly City / San Ramon,
@@ -541,6 +622,14 @@ async function main() {
     if (l.nbhd) tags.neighborhood = l.nbhd;
     const nbOverride = NEIGHBORHOOD_OVERRIDES[addrKey(l)];
     if (nbOverride) tags.neighborhood = nbOverride;
+    // A placeholder files under the neighborhood it was inferred from (the
+    // anchor point's polygon should agree, but the inference is the truth
+    // here), and borrows that neighborhood's SF district when the row has
+    // none of its own.
+    if (placeholder) {
+      tags.neighborhood = placeholder.neighborhood;
+      if (!l.areaDesc && placeholder.areaDesc) l.areaDesc = placeholder.areaDesc;
+    }
     matched++;
     features.push({
       type: "Feature",
@@ -565,6 +654,7 @@ async function main() {
         dom: l.dom ?? null,
         zip: l.zip || null,
         geoSource,
+        placeholder: placeholder ? placeholder.neighborhood : null,
         // "SF District N". Prefer the MLS "Area Desc" column; when an export
         // omits it, derive it from the realtor district polygon so the
         // District filter/labels still work.
@@ -592,6 +682,7 @@ async function main() {
       total: listings.length,
       matched,
       droppedOutsideSF: outside.length,
+      neighborhoodPlaceholders: placeholders,
     },
     features,
   };
@@ -602,6 +693,9 @@ async function main() {
   console.log(`\n✓ wrote ${OUT_PATH}`);
   console.log(`  ${matched}/${listings.length} geocoded`);
   console.log(`  ${withFog} tagged with fog-hours, ${withNbhd} with a neighborhood/district`);
+  if (placeholders) {
+    console.log(`  ${placeholders} pinned to a neighborhood placeholder (no mappable address; still counted)`);
+  }
   if (outside.length) {
     console.log(`\n${outside.length} dropped as outside SF:`);
     outside.slice(0, 10).forEach(a => console.log("  -", a));

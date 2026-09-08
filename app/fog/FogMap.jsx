@@ -1163,10 +1163,18 @@ export default function FogMap({
         type: "circle",
         source: "activity",
         paint: {
-          "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 3, 14, 5, 16, 7],
-          "circle-color": ["case", ["==", ["get", "actKind"], "sold"], "#2563eb", "#16a34a"],
+          // Neighborhood placeholders — listings with no mappable address,
+          // pinned to their neighborhood so they still count — draw larger
+          // and grey with a heavier ring. Otherwise blue = sold, green = active.
+          "circle-radius": ["case", ["==", ["get", "geoSource"], "neighborhood"],
+            ["interpolate", ["linear"], ["zoom"], 10, 5, 14, 8, 16, 11],
+            ["interpolate", ["linear"], ["zoom"], 10, 3, 14, 5, 16, 7]],
+          "circle-color": ["case",
+            ["==", ["get", "geoSource"], "neighborhood"], "#6b7280",
+            ["==", ["get", "actKind"], "sold"], "#2563eb",
+            "#16a34a"],
           "circle-stroke-color": "#ffffff",
-          "circle-stroke-width": 1,
+          "circle-stroke-width": ["case", ["==", ["get", "geoSource"], "neighborhood"], 2, 1],
           "circle-opacity": 0.9,
         },
       });
@@ -1279,6 +1287,38 @@ export default function FogMap({
       const openPropPopup = e => {
         const p = e.features?.[0]?.properties;
         if (!p) return;
+        // Neighborhood placeholder: every unmappable listing pinned to this
+        // spot shares the dot, and Mapbox hands us all of them in e.features —
+        // list them in one pop-up instead of showing only the top one.
+        if (p.geoSource === "neighborhood") {
+          const usd0 = n => (Number.isFinite(+n) && +n > 0) ? "$" + Math.round(+n).toLocaleString("en-US") : "—";
+          const group = (e.features || []).map(f => f.properties)
+            .filter(q => q.geoSource === "neighborhood" && q.placeholder === p.placeholder);
+          const items = [...new Map(group.map(q => [q.id, q])).values()]
+            .sort((a, b) => String(b.sellingDate || "").localeCompare(String(a.sellingDate || "")))
+            .map(q => {
+              const a = esc((q.address || "").replace(/,\s*San Francisco.*$/i, ""));
+              const price = q.actKind === "sold" ? usd0(q.sellingPrice) : usd0(q.listPrice);
+              const when = fmtMDY(q.sellingDate) ? `sold ${fmtMDY(q.sellingDate)}` : esc(q.status || "");
+              const meta = [
+                q.propType,
+                q.bedrooms != null && q.bedrooms !== "" ? `${q.bedrooms} bd` : "",
+                q.sqft > 0 ? `${Math.round(q.sqft).toLocaleString("en-US")} sf` : "",
+              ].filter(Boolean).join(" · ");
+              return `<div style="padding:5px 0;border-top:1px solid #eee"><strong>${a}</strong><br>`
+                + `<span style="font-weight:600">${price}</span> · <span style="color:#6b7280">${when}</span>`
+                + (meta ? `<br><span style="color:#6b7280">${esc(meta)}</span>` : "")
+                + `<br><span style="color:#9ca3af;font-size:11px">MLS # ${esc(String(q.id ?? ""))}</span></div>`;
+            }).join("");
+          const html = `<div style="font-size:12px;line-height:1.45;max-height:340px;overflow-y:auto;padding-right:2px">`
+            + `<strong style="font-size:13px">${items.length} listing${items.length === 1 ? "" : "s"} · ${esc(p.placeholder || p.neighborhood || "")}</strong><br>`
+            + `<span style="color:#6b7280">Exact address couldn't be mapped — pinned to the neighborhood so they still count in the totals and Stats.</span>`
+            + `<div style="margin-top:6px">${items}</div></div>`;
+          if (actPopup) actPopup.remove();
+          actPopup = new mapboxgl.Popup({ closeButton: true, maxWidth: "340px", focusAfterOpen: false })
+            .setLngLat(e.lngLat).setHTML(html).addTo(map);
+          return;
+        }
         const sold = p.actKind === "sold";
         const addr = esc((p.address || "").replace(/,\s*San Francisco.*$/i, "")) + (p.unit ? ` #${esc(p.unit)}` : "");
         const usd = n => (Number.isFinite(+n) && +n > 0) ? "$" + Math.round(+n).toLocaleString("en-US") : "—";

@@ -74,8 +74,8 @@ def main():
         p = f["properties"]
         placed_ids.add(str(p.get("id", "")).strip())
         num, st = parse(p.get("address") or "")
-        if num is None or p.get("geoSource") == "interpolated":
-            continue  # never chain estimates off other estimates
+        if num is None or p.get("geoSource") in ("interpolated", "neighborhood"):
+            continue  # never chain estimates off other estimates or placeholder dots
         by_street[(st, (p.get("zip") or "").strip())].append((num, f["geometry"]["coordinates"], p["id"]))
 
     def fnum(s):

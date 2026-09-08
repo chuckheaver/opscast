@@ -58,3 +58,16 @@ The geocoder merges every `.csv` sitting directly in this folder (de-duped
 by listing number, newest status date wins). Subfolders are not read, so
 move superseded exports into e.g. `data/raw/_archive/` rather than leaving
 them beside the current set.
+
+### Coordinate provenance (`geoSource` on every feature)
+
+In order of precedence: `export` (lat/lng in the MLS file) · `census` /
+`published` (a real geocode — from the Census batch geocoder, or carried
+over from the previously published file) · `override` (a hand-placed
+coordinate in `OVERRIDES`) · `interpolated` (estimated from same-building
+or same-street neighbors by `scripts/interpolate-unmapped.py`) ·
+`neighborhood` (no findable position at all — pinned to the inferred
+neighborhood's anchor point so the sale still counts; the map draws these
+as one grey dot per neighborhood whose pop-up lists every listing).
+Estimates and placeholders are never cached, so a run with the Census
+geocoder reachable replaces them with real positions automatically.
