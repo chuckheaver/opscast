@@ -351,7 +351,7 @@ function loadInterpolated(cache) {
 // neighborhood — and pin it to that neighborhood's anchor: the placed
 // listing nearest the neighborhood's centroid, so it sits on real estate
 // inside the polygon. Every such listing in a neighborhood shares one point;
-// the map draws them as a single grey dot whose pop-up lists all of them.
+// the map draws them as a single larger blue dot whose pop-up lists all of them.
 // Tagged geoSource "neighborhood" + placeholder: <name>. Never cached, so a
 // reachable geocoder still gets to place them properly on a later run.
 function loadPublished() {

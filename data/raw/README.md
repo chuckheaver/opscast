@@ -68,6 +68,6 @@ coordinate in `OVERRIDES`) · `interpolated` (estimated from same-building
 or same-street neighbors by `scripts/interpolate-unmapped.py`) ·
 `neighborhood` (no findable position at all — pinned to the inferred
 neighborhood's anchor point so the sale still counts; the map draws these
-as one grey dot per neighborhood whose pop-up lists every listing).
+as one larger blue dot per neighborhood whose pop-up lists every listing).
 Estimates and placeholders are never cached, so a run with the Census
 geocoder reachable replaces them with real positions automatically.
