@@ -21,9 +21,10 @@ aliases). Mapping notes:
     so the geocode step skips the Census round-trip.
   - Subdistrict -> Neighborhood ; Area/District -> Area Desc (district).
   - SqFt of 0/blank is written blank (treated as "unknown").
-  - --sold-only drops any row whose Status isn't sold ("S" / "Closed" /
-    "Sold Off MLS") and normalizes the surviving Status to "Closed" so the
-    app's SOLD_STATUSES filter recognizes them.
+  - --sold-only drops any row that isn't a sale and normalizes the survivors
+    to the app's two sold statuses: S / Closed -> "Closed", O / Sold Off MLS
+    -> "Sold Off MLS" (O rows are off-MLS sales: they carry a selling price
+    and date but were never exposed as listings).
 """
 import sys, os, csv, datetime
 
@@ -62,13 +63,26 @@ SRC = {
     "photo": ["Full Picture URL", "Photo URL", "Photo", "Picture URL"],
 }
 
-# Statuses that count as "sold" for --sold-only, matching the app's
-# SOLD_STATUSES set in app/listings/lib/filter.js. All are normalized to
-# "Closed" on write so the two shortcuts ("S" from BrokerMetrics,
-# "Closed" from SFAR) unify.
-SOLD_STATUSES = {"S", "SOLD", "CLOSED", "SOLD OFF MLS", "CLS", "CLOSD"}
-def is_sold(status):
-    return str(status or "").strip().upper() in SOLD_STATUSES
+# Sold-status normalization, matching the app's SOLD_STATUSES set in
+# app/listings/lib/filter.js ("Closed" / "Sold Off MLS"). Two export flavors:
+# SFAR / BrokerMetrics history exports spell the status out; the RESI export
+# uses one-letter codes — S = sold on the MLS, O = sold OFF the MLS (the row
+# still carries a selling price + date; it's a real sale that was never
+# exposed as a listing). "O" is only treated as a sale when the row has a
+# selling price, so an export that uses O for withdrawn listings can't leak
+# non-sales through.
+SOLD_MAP = {
+    "S": "Closed", "SOLD": "Closed", "CLOSED": "Closed", "CLS": "Closed", "CLOSD": "Closed",
+    "O": "Sold Off MLS", "SOM": "Sold Off MLS", "SOLD OFF MLS": "Sold Off MLS", "OFF MLS": "Sold Off MLS",
+}
+def normalize_status(status, has_price=True):
+    """Canonical sold status for a row, or None when it isn't a sale."""
+    code = str(status or "").strip().upper()
+    if code == "O" and not has_price:
+        return None
+    return SOLD_MAP.get(code)
+def is_sold(status, has_price=True):
+    return normalize_status(status, has_price) is not None
 
 # Property-subtype code translation. Some MLS exports emit 4-letter codes
 # (BrokerMetrics: HSL1/CNDO/TWNH/…) instead of the display names the app's
@@ -204,12 +218,14 @@ def main():
         w.writerow(CANON)
         for r in data:
             raw_status = g(r, "status")
-            if sold_only and not is_sold(raw_status):
+            has_price = as_num(g(r, "salePrice")) is not None
+            norm = normalize_status(raw_status, has_price)
+            if sold_only and norm is None:
                 dropped_non_sold += 1
                 continue
-            # Normalize "S" and other sold shorthand to "Closed" so the
-            # app's SOLD_STATUSES set matches.
-            status_out = "Closed" if sold_only or is_sold(raw_status) else raw_status
+            # Sold shorthand -> the app's canonical status ("Closed" or
+            # "Sold Off MLS"); anything else passes through as exported.
+            status_out = norm if norm is not None else raw_status
             close = as_date(g(r, "closeDate"))
             dom_num = as_num(g(r, "dom"))
             list_date = ""
