@@ -117,6 +117,13 @@ function parseCSV(text) {
 }
 
 // Parse one MLS CSV file → array of listing objects.
+// Agent fields can arrive with the agent's MLS ID + phone numbers baked in
+// ("Jane Doe (ID:811150)  Primary:415-555-0100 …"). This file is the last
+// stop before a PUBLIC GeoJSON, so reduce to the name here regardless of
+// which export format landed in data/raw/. Plain names pass through.
+const AGENT_TAIL = /\s*\(ID:|\s+(?:Primary|Secondary|Cell|Other|Office|Home|Fax|Mobile|Direct|Phone)\s*:/;
+const cleanAgent = s => String(s || "").split(AGENT_TAIL)[0].trim();
+
 function loadOneFile(path) {
   const rows = parseCSV(readFileSync(path, "utf8"));
   const header = rows[0];
@@ -197,8 +204,8 @@ function loadOneFile(path) {
         statusDate: usDate(g("Status Date")),
         areaDesc: g("Area Desc"),
         apn: g("APN"),
-        agent: g("Listing Agent Name"),
-        sellingAgent: g("Selling Agent Name"),
+        agent: cleanAgent(g("Listing Agent Name")),
+        sellingAgent: cleanAgent(g("Selling Agent Name")),
         dom: g("DOM") === "" ? null : Number(g("DOM")),
         office: g("Listing Office Name / ID"),
         url: g("Listing URL"),

@@ -92,6 +92,15 @@ def normalize_subtype(s):
     key = str(s or "").strip().upper()
     return SUBTYPE_CODES.get(key, s)
 
+# Agent columns in some exports embed the agent's MLS ID and phone numbers:
+#   "Jane Doe (ID:811150)  Primary:415-555-0100 Secondary:415-555-0101"
+# The canonical CSV feeds a PUBLIC GeoJSON, so keep only the name. Split at
+# the first "(ID:" or contact label; plain names pass through untouched.
+import re
+_AGENT_TAIL = re.compile(r"\s*\(ID:|\s+(?:Primary|Secondary|Cell|Other|Office|Home|Fax|Mobile|Direct|Phone)\s*:")
+def clean_agent(s):
+    return _AGENT_TAIL.split(str(s or ""), maxsplit=1)[0].strip()
+
 
 def read_rows(path):
     """Return (header list, list-of-row-tuples) from .xlsx or .csv."""
@@ -220,8 +229,8 @@ def main():
                 g(r, "neighborhood"), g(r, "district"), g(r, "apn"),
                 g(r, "bd"), g(r, "ba"), sqft_out,
                 g(r, "listPrice"), g(r, "salePrice"), list_date,
-                mdy(g(r, "pendingDate")), mdy(g(r, "closeDate")), g(r, "agent"),
-                g(r, "sellingAgent"),
+                mdy(g(r, "pendingDate")), mdy(g(r, "closeDate")), clean_agent(g(r, "agent")),
+                clean_agent(g(r, "sellingAgent")),
                 (int(dom_num) if dom_num is not None else ""),
                 photo,
             ])
