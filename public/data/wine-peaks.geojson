@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature", "properties": { "name": "Mount St. Helena", "ele_ft": 4341 }, "geometry": { "type": "Point", "coordinates": [-122.628, 38.671] } },
+    { "type": "Feature", "properties": { "name": "Cobb Mountain", "ele_ft": 4724 }, "geometry": { "type": "Point", "coordinates": [-122.740, 38.822] } },
+    { "type": "Feature", "properties": { "name": "Mount Veeder", "ele_ft": 2677 }, "geometry": { "type": "Point", "coordinates": [-122.469, 38.437] } },
+    { "type": "Feature", "properties": { "name": "Atlas Peak", "ele_ft": 2663 }, "geometry": { "type": "Point", "coordinates": [-122.256, 38.418] } },
+    { "type": "Feature", "properties": { "name": "Diamond Mountain", "ele_ft": 2375 }, "geometry": { "type": "Point", "coordinates": [-122.601, 38.590] } },
+    { "type": "Feature", "properties": { "name": "Spring Mountain", "ele_ft": 2200 }, "geometry": { "type": "Point", "coordinates": [-122.555, 38.525] } },
+    { "type": "Feature", "properties": { "name": "Howell Mountain", "ele_ft": 1900 }, "geometry": { "type": "Point", "coordinates": [-122.435, 38.578] } },
+    { "type": "Feature", "properties": { "name": "Sonoma Mountain", "ele_ft": 2295 }, "geometry": { "type": "Point", "coordinates": [-122.593, 38.320] } },
+    { "type": "Feature", "properties": { "name": "Pritchard Hill", "ele_ft": 1400 }, "geometry": { "type": "Point", "coordinates": [-122.310, 38.505] } },
+    { "type": "Feature", "properties": { "name": "Bennett Peak", "ele_ft": 1887 }, "geometry": { "type": "Point", "coordinates": [-122.610, 38.400] } },
+    { "type": "Feature", "properties": { "name": "Geyser Peak", "ele_ft": 3467 }, "geometry": { "type": "Point", "coordinates": [-122.878, 38.760] } }
+  ],
+  "metadata": {
+    "source": "USGS place names, elevations rounded to nearest ft",
+    "note": "Named peaks that define the wine-country microclimate walls — Mayacamas Range (west of Napa) + Vaca Range (east of Napa)."
+  }
+}

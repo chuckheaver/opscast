@@ -1,0 +1,47 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature", "properties": { "zone": "sun", "label": "Rutherford Bench" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.435, 38.463], [-122.410, 38.463], [-122.410, 38.500], [-122.435, 38.500], [-122.435, 38.463]]] } },
+    { "type": "Feature", "properties": { "zone": "sun", "label": "Oakville East" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.395, 38.425], [-122.360, 38.425], [-122.360, 38.463], [-122.395, 38.463], [-122.395, 38.425]]] } },
+    { "type": "Feature", "properties": { "zone": "sun", "label": "Howell Mtn SW face" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.435, 38.540], [-122.400, 38.540], [-122.400, 38.590], [-122.435, 38.590], [-122.435, 38.540]]] } },
+    { "type": "Feature", "properties": { "zone": "sun", "label": "Spring Mtn E face" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.560, 38.500], [-122.525, 38.500], [-122.525, 38.555], [-122.560, 38.555], [-122.560, 38.500]]] } },
+    { "type": "Feature", "properties": { "zone": "sun", "label": "Mt Veeder E face" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.500, 38.380], [-122.470, 38.380], [-122.470, 38.460], [-122.500, 38.460], [-122.500, 38.380]]] } },
+    { "type": "Feature", "properties": { "zone": "sun", "label": "Atlas Peak SW face" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.280, 38.360], [-122.240, 38.360], [-122.240, 38.430], [-122.280, 38.430], [-122.280, 38.360]]] } },
+    { "type": "Feature", "properties": { "zone": "sun", "label": "Diamond Mtn SW face" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.610, 38.575], [-122.578, 38.575], [-122.578, 38.615], [-122.610, 38.615], [-122.610, 38.575]]] } },
+    { "type": "Feature", "properties": { "zone": "sun", "label": "Sonoma Mtn E face" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.590, 38.310], [-122.555, 38.310], [-122.555, 38.400], [-122.590, 38.400], [-122.590, 38.310]]] } },
+    { "type": "Feature", "properties": { "zone": "sun", "label": "Chalk Hill SW face" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.830, 38.640], [-122.780, 38.640], [-122.780, 38.700], [-122.830, 38.700], [-122.830, 38.640]]] } },
+
+    { "type": "Feature", "properties": { "zone": "cool", "label": "Mayacamas W face" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.640, 38.480], [-122.600, 38.480], [-122.600, 38.620], [-122.640, 38.620], [-122.640, 38.480]]] } },
+    { "type": "Feature", "properties": { "zone": "cool", "label": "Mt Veeder W face" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.560, 38.360], [-122.525, 38.360], [-122.525, 38.470], [-122.560, 38.470], [-122.560, 38.360]]] } },
+    { "type": "Feature", "properties": { "zone": "cool", "label": "Vaca E face (Chiles)" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.340, 38.500], [-122.280, 38.500], [-122.280, 38.620], [-122.340, 38.620], [-122.340, 38.500]]] } },
+    { "type": "Feature", "properties": { "zone": "cool", "label": "Atlas NE face" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.240, 38.420], [-122.200, 38.420], [-122.200, 38.470], [-122.240, 38.470], [-122.240, 38.420]]] } },
+    { "type": "Feature", "properties": { "zone": "cool", "label": "Sonoma Mtn W face" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.655, 38.320], [-122.625, 38.320], [-122.625, 38.400], [-122.655, 38.400], [-122.655, 38.320]]] } },
+    { "type": "Feature", "properties": { "zone": "cool", "label": "Sonoma Coast Ridge W" }, "geometry": { "type": "Polygon", "coordinates": [[[-123.030, 38.400], [-122.950, 38.400], [-122.950, 38.620], [-123.030, 38.620], [-123.030, 38.400]]] } },
+
+    { "type": "Feature", "properties": { "zone": "wind", "label": "Petaluma Gap" }, "geometry": { "type": "Polygon", "coordinates": [[[-123.010, 38.240], [-122.560, 38.240], [-122.560, 38.320], [-123.010, 38.320], [-123.010, 38.240]]] } },
+    { "type": "Feature", "properties": { "zone": "wind", "label": "Napa Valley floor" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.410, 38.320], [-122.290, 38.320], [-122.290, 38.360], [-122.410, 38.360], [-122.410, 38.320]]] } },
+    { "type": "Feature", "properties": { "zone": "wind", "label": "Chalk Hill Gap" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.870, 38.560], [-122.780, 38.560], [-122.780, 38.620], [-122.870, 38.620], [-122.870, 38.560]]] } },
+    { "type": "Feature", "properties": { "zone": "wind", "label": "Russian River gap" }, "geometry": { "type": "Polygon", "coordinates": [[[-123.070, 38.450], [-122.950, 38.450], [-122.950, 38.510], [-123.070, 38.510], [-123.070, 38.450]]] } },
+    { "type": "Feature", "properties": { "zone": "wind", "label": "Van Duzer of Napa (S bay pull)" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.400, 38.180], [-122.240, 38.180], [-122.240, 38.260], [-122.400, 38.260], [-122.400, 38.180]]] } },
+
+    { "type": "Feature", "properties": { "zone": "fog_marine", "label": "Golden Gate → San Pablo Bay → Carneros" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.480, 38.150], [-122.220, 38.150], [-122.220, 38.280], [-122.480, 38.280], [-122.480, 38.150]]] } },
+    { "type": "Feature", "properties": { "zone": "fog_marine", "label": "Petaluma Gap fog finger" }, "geometry": { "type": "Polygon", "coordinates": [[[-123.010, 38.250], [-122.480, 38.250], [-122.480, 38.310], [-123.010, 38.310], [-123.010, 38.250]]] } },
+    { "type": "Feature", "properties": { "zone": "fog_marine", "label": "Russian River fog corridor" }, "geometry": { "type": "Polygon", "coordinates": [[[-123.100, 38.440], [-122.870, 38.440], [-122.870, 38.520], [-123.100, 38.520], [-123.100, 38.440]]] } },
+    { "type": "Feature", "properties": { "zone": "fog_marine", "label": "Sonoma Coast marine layer" }, "geometry": { "type": "Polygon", "coordinates": [[[-123.100, 38.320], [-122.940, 38.320], [-122.940, 38.700], [-123.100, 38.700], [-123.100, 38.320]]] } },
+
+    { "type": "Feature", "properties": { "zone": "fog_valley", "label": "Napa Valley morning fog" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.470, 38.360], [-122.320, 38.360], [-122.320, 38.640], [-122.470, 38.640], [-122.470, 38.360]]] } },
+    { "type": "Feature", "properties": { "zone": "fog_valley", "label": "Sonoma Valley morning fog" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.540, 38.280], [-122.440, 38.280], [-122.440, 38.440], [-122.540, 38.440], [-122.540, 38.280]]] } },
+    { "type": "Feature", "properties": { "zone": "fog_valley", "label": "Alexander Valley morning fog" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.870, 38.590], [-122.740, 38.590], [-122.740, 38.760], [-122.870, 38.760], [-122.870, 38.590]]] } },
+    { "type": "Feature", "properties": { "zone": "fog_valley", "label": "Dry Creek Valley morning fog" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.970, 38.610], [-122.880, 38.610], [-122.880, 38.740], [-122.970, 38.740], [-122.970, 38.610]]] } },
+
+    { "type": "Feature", "properties": { "zone": "temp", "band": 1, "label": "Region I — Carneros (coolest)" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.410, 38.180], [-122.290, 38.180], [-122.290, 38.290], [-122.410, 38.290], [-122.410, 38.180]]] } },
+    { "type": "Feature", "properties": { "zone": "temp", "band": 2, "label": "Region II — Yountville" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.410, 38.290], [-122.320, 38.290], [-122.320, 38.425], [-122.410, 38.425], [-122.410, 38.290]]] } },
+    { "type": "Feature", "properties": { "zone": "temp", "band": 3, "label": "Region III — Oakville / Rutherford" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.445, 38.425], [-122.360, 38.425], [-122.360, 38.500], [-122.445, 38.500], [-122.445, 38.425]]] } },
+    { "type": "Feature", "properties": { "zone": "temp", "band": 4, "label": "Region III — St. Helena" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.500, 38.490], [-122.410, 38.490], [-122.410, 38.560], [-122.500, 38.560], [-122.500, 38.490]]] } },
+    { "type": "Feature", "properties": { "zone": "temp", "band": 5, "label": "Region IV — Calistoga (warmest)" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.610, 38.560], [-122.520, 38.560], [-122.520, 38.650], [-122.610, 38.650], [-122.610, 38.560]]] } }
+  ],
+  "metadata": {
+    "source": "curated (illustrative)",
+    "note": "Schematic microclimate polygons for Napa+Sonoma. `zone` = sun | cool | wind | fog_marine | fog_valley | temp. Temp bands 1..5 map to a south→north Winkler-style gradient across the Napa Valley axis (cool to hot). Boundaries follow the physical logic (valley orientation, gap wind, fog corridors, slope aspect on the Mayacamas + Vaca ranges) rather than parcel-accurate lines."
+  }
+}

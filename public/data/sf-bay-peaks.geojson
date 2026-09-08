@@ -1,0 +1,21 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "source": "Hand-curated Bay Area peaks. Elevations in feet (USGS/USGS-derived).",
+    "purpose": "Shown alongside the hillshade overlay on /fog."
+  },
+  "features": [
+    { "type": "Feature", "properties": { "name": "Mt Tamalpais", "elevation_ft": 2572 }, "geometry": { "type": "Point", "coordinates": [-122.5797, 37.9235] } },
+    { "type": "Feature", "properties": { "name": "Mt Wittenberg", "elevation_ft": 1407 }, "geometry": { "type": "Point", "coordinates": [-122.7838, 38.0432] } },
+    { "type": "Feature", "properties": { "name": "San Bruno Mtn", "elevation_ft": 1314 }, "geometry": { "type": "Point", "coordinates": [-122.4358, 37.6911] } },
+    { "type": "Feature", "properties": { "name": "Sweeney Ridge", "elevation_ft": 1260 }, "geometry": { "type": "Point", "coordinates": [-122.4530, 37.6122] } },
+    { "type": "Feature", "properties": { "name": "Mt Davidson", "elevation_ft": 928 }, "geometry": { "type": "Point", "coordinates": [-122.4544, 37.7383] } },
+    { "type": "Feature", "properties": { "name": "Twin Peaks", "elevation_ft": 922 }, "geometry": { "type": "Point", "coordinates": [-122.4477, 37.7544] } },
+    { "type": "Feature", "properties": { "name": "Mt Sutro", "elevation_ft": 909 }, "geometry": { "type": "Point", "coordinates": [-122.4567, 37.7596] } },
+    { "type": "Feature", "properties": { "name": "Tank Hill", "elevation_ft": 654 }, "geometry": { "type": "Point", "coordinates": [-122.4488, 37.7616] } },
+    { "type": "Feature", "properties": { "name": "Mt Olympus", "elevation_ft": 570 }, "geometry": { "type": "Point", "coordinates": [-122.4475, 37.7647] } },
+    { "type": "Feature", "properties": { "name": "Buena Vista Hill", "elevation_ft": 569 }, "geometry": { "type": "Point", "coordinates": [-122.4406, 37.7689] } },
+    { "type": "Feature", "properties": { "name": "Bernal Heights", "elevation_ft": 433 }, "geometry": { "type": "Point", "coordinates": [-122.4131, 37.7411] } },
+    { "type": "Feature", "properties": { "name": "Telegraph Hill", "elevation_ft": 275 }, "geometry": { "type": "Point", "coordinates": [-122.4058, 37.8024] } }
+  ]
+}

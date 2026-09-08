@@ -1,0 +1,1222 @@
+'use client';
+
+// Mapbox GL JS map. Renders:
+//   - SF neighborhood polygons as OUTLINES ONLY (no fill colour) so streets
+//     and labels stay visible underneath.
+//   - The USGS fog-contour polygons as the primary data layer, in three
+//     solid-colour bands by hours/day value:
+//       • < 8.5  → bright yellow
+//       • = 8.5  → warm grey-yellow (transition)
+//       • ≥ 9    → grey gradient (darker for higher fog hours)
+//
+// Click and hover detection sit on an invisible "fog-click-target" fill
+// over the neighborhoods, so the user can pick anywhere inside SF
+// regardless of which (if any) contour layer the cursor is on.
+
+import { useEffect, useRef } from "react";
+import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+
+const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+const SF_CENTER = [-122.447, 37.7649];
+// Bounding box that frames just SF — Ocean Beach / Daly City to the
+// Embarcadero / Bayview — so the city fills the map without the
+// surrounding Bay competing for attention.
+const SF_BOUNDS = [
+  [-122.520, 37.708], // SW
+  [-122.355, 37.812], // NE
+];
+
+// Three large weather glyphs placed at the same latitude across the
+// east-west fog gradient so a user can read the three zones at a
+// glance: ☀️ in the Sun band (east), 🌤️ in the Transition belt (mid),
+// ☁️ in the Fog band (west). The hand-picked emoji-per-neighborhood
+// pins from the original markup are gone — they were doing more visual
+// noise than information.
+const FOG_PIN_GROUPS = [
+  { emoji: "☀️", points: [[-122.425, 37.762]] },   // Sun        — Mission / Castro flats
+  { emoji: "🌤️", points: [[-122.460, 37.762]] },   // Transition — Inner Sunset / Cole Valley
+  { emoji: "☁️", points: [[-122.495, 37.762]] },   // Fog        — Outer Sunset
+];
+
+// Layer IDs the "Show fog data" toggle flips on and off as a group.
+const CONTOUR_LAYER_IDS = [
+  "fog-contours-sun",
+  "fog-contours-fog",
+  "fog-contours-transition-outline",
+];
+
+export default function FogMap({
+  geojson,
+  contours,
+  showContours,
+  showTerrain,
+  showElevation,
+  showSeismic,
+  showTsunami,
+  showMuni,
+  showBikes,
+  showZips,
+  showDistricts,
+  showZoning,
+  showRealtor,
+  showNeighborhoods,
+  picked,
+  onPickFeature,
+}) {
+  const containerRef = useRef(null);
+  const mapRef = useRef(null);
+  const markerRef = useRef(null);
+  const transitionMarkersRef = useRef([]);
+  // Mirrors `showContours` for the once-only marker create effect — so
+  // newly-spawned markers respect the latest toggle state even if the
+  // map's load event fires long after mount.
+  const showContoursRef = useRef(showContours);
+  useEffect(() => {
+    showContoursRef.current = showContours;
+  }, [showContours]);
+  const dataAppliedRef = useRef(false);
+  const onPickRef = useRef(onPickFeature);
+
+  // Keep latest click handler reachable from the map's event listener
+  // without re-binding on every render.
+  useEffect(() => {
+    onPickRef.current = onPickFeature;
+  }, [onPickFeature]);
+
+  // Mount the map exactly once.
+  useEffect(() => {
+    if (!TOKEN) return;
+    if (mapRef.current) return;
+    mapboxgl.accessToken = TOKEN;
+    const map = new mapboxgl.Map({
+      container: containerRef.current,
+      style: "mapbox://styles/mapbox/streets-v12",
+      bounds: SF_BOUNDS,
+      fitBoundsOptions: { padding: 24 },
+      minZoom: 10,
+      maxZoom: 16,
+    });
+    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
+    mapRef.current = map;
+
+    map.on("load", () => {
+      // Hillshade overlay (toggleable). Lives between the basemap land/
+      // water and the basemap labels, so SF's hills (Twin Peaks, Mt Tam,
+      // San Bruno Mtn) shade visibly while street and place names stay
+      // legible on top. A second hillshade pass from the opposite
+      // illumination angle stacks on top to deepen the shadows on slopes
+      // the primary light leaves flat.
+      map.addSource("mapbox-dem", {
+        type: "raster-dem",
+        url: "mapbox://mapbox.mapbox-terrain-dem-v1",
+        tileSize: 512,
+        maxzoom: 14,
+      });
+      const firstLabelLayer = map.getStyle().layers.find(l => l.type === "symbol");
+      map.addLayer(
+        {
+          id: "hillshade",
+          type: "hillshade",
+          source: "mapbox-dem",
+          layout: { visibility: "none" },
+          paint: {
+            "hillshade-exaggeration": 1,
+            "hillshade-shadow-color": "#000000",
+            "hillshade-accent-color": "#1c1917",
+            "hillshade-highlight-color": "#a8a29e",
+          },
+        },
+        firstLabelLayer?.id
+      );
+      // Second hillshade pass from the SE (155°) lights the slopes the
+      // default 335° leaves shadowed, doubling up the relief feel.
+      map.addLayer(
+        {
+          id: "hillshade-2",
+          type: "hillshade",
+          source: "mapbox-dem",
+          layout: { visibility: "none" },
+          paint: {
+            "hillshade-exaggeration": 1,
+            "hillshade-illumination-direction": 155,
+            "hillshade-shadow-color": "rgba(0, 0, 0, 0.6)",
+            "hillshade-accent-color": "rgba(28, 25, 23, 0.5)",
+            "hillshade-highlight-color": "rgba(168, 162, 158, 0)",
+          },
+        },
+        firstLabelLayer?.id
+      );
+
+      // Mapbox Terrain v2 vector tileset — provides true topographic
+      // contour lines (every 10m fine / 100m major). Combined with the
+      // hillshade below, this gives the /fog map a proper USGS feel
+      // when the user toggles terrain on.
+      map.addSource("terrain-v2", {
+        type: "vector",
+        url: "mapbox://mapbox.mapbox-terrain-v2",
+      });
+      map.addLayer(
+        {
+          id: "contour-lines",
+          type: "line",
+          source: "terrain-v2",
+          "source-layer": "contour",
+          layout: { visibility: "none", "line-cap": "round" },
+          paint: {
+            "line-color": "#4b5563",
+            "line-width": [
+              "match", ["get", "index"],
+              10, 1.1,   // major contours (every 100m) — bolder
+              5,  0.7,   // medium contours
+              0.35,       // fine 10m contours
+            ],
+            "line-opacity": [
+              "match", ["get", "index"],
+              10, 0.85,
+              5,  0.55,
+              0.3,
+            ],
+          },
+        },
+        firstLabelLayer?.id
+      );
+      // Elevation labels along major contour lines, only at street zoom
+      // so the map doesn't fill with numbers when you're zoomed out.
+      map.addLayer({
+        id: "contour-labels",
+        type: "symbol",
+        source: "terrain-v2",
+        "source-layer": "contour",
+        filter: ["==", ["get", "index"], 10],
+        layout: {
+          visibility: "none",
+          "text-field": [
+            "concat",
+            ["to-string", ["round", ["*", ["get", "ele"], 3.28084]]],
+            " ft",
+          ],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": 10,
+          "text-padding": 12,
+          "symbol-placement": "line",
+          "text-allow-overlap": false,
+        },
+        paint: {
+          "text-color": "#374151",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.5,
+          "text-opacity": [
+            "interpolate", ["linear"], ["zoom"],
+            13, 0,
+            14, 1,
+          ],
+        },
+      });
+
+      // Curated Bay Area peaks — labelled with name + elevation. Same
+      // toggle as the hillshade so they appear and hide together.
+      map.addSource("peaks", {
+        type: "geojson",
+        data: "/data/sf-bay-peaks.geojson",
+      });
+      map.addLayer({
+        id: "peaks-labels",
+        type: "symbol",
+        source: "peaks",
+        layout: {
+          visibility: "none",
+          "text-field": [
+            "format",
+            "▲ ", { "font-scale": 0.9 },
+            ["get", "name"], {},
+            "\n", {},
+            ["concat", ["to-string", ["get", "elevation_ft"]], " ft"],
+            { "font-scale": 0.85 },
+          ],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": 12,
+          "text-anchor": "left",
+          "text-offset": [0.7, 0],
+          "text-allow-overlap": false,
+          "text-padding": 4,
+        },
+        paint: {
+          "text-color": "#1c1917",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.6,
+          "text-halo-blur": 0.5,
+        },
+      });
+
+      // Precise 50 ft and 100 ft contour lines derived from the local
+      // USGS NED 10 m DEM (scripts/build-elevation-contours.mjs). These
+      // land exactly on imperial heights — Mapbox's terrain-v2 grid is
+      // in 10 m steps and can't hit them — so they're visually distinct
+      // from the metric contours and useful for reading the fog floor.
+      map.addSource("ft-contours", {
+        type: "geojson",
+        data: "/data/sf-contours-50-100ft.geojson",
+      });
+      // Hypsometric colour ramp — lowland cool, summit warm. Matches
+      // the colours surfaced in the panel legend so the on-map ramp
+      // and the legend agree.
+      const FT_COLOR = [
+        "match", ["get", "ft"],
+        50,  "#0ea5e9",  // sky blue   — sea-level fog floor
+        100, "#0d9488",  // teal       — low corridor
+        200, "#65a30d",  // lime       — mid slope
+        300, "#ca8a04",  // gold       — ridge
+        600, "#b91c1c",  // red        — summit
+        "#1c1917",
+      ];
+      map.addLayer({
+        id: "ft-contour-lines",
+        type: "line",
+        source: "ft-contours",
+        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": FT_COLOR,
+          "line-width": [
+            "match", ["get", "ft"],
+            50,  1.1,
+            100, 1.4,
+            200, 1.4,
+            300, 1.6,
+            600, 1.8,
+            1.2,
+          ],
+          "line-opacity": 0.9,
+        },
+      });
+      map.addLayer({
+        id: "ft-contour-labels",
+        type: "symbol",
+        source: "ft-contours",
+        layout: {
+          visibility: "none",
+          "text-field": ["concat", ["to-string", ["get", "ft"]], " ft"],
+          "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+          "text-size": 10,
+          "text-padding": 28,
+          "symbol-placement": "line",
+          "text-allow-overlap": false,
+        },
+        paint: {
+          "text-color": FT_COLOR,
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.6,
+          "text-opacity": [
+            "interpolate", ["linear"], ["zoom"],
+            13, 0,
+            14, 1,
+          ],
+        },
+      });
+
+      // ── Neighborhood source ─────────────────────────────────────────
+      map.addSource("fog", {
+        type: "geojson",
+        data: { type: "FeatureCollection", features: [] },
+        promoteId: "id",
+      });
+
+      // Invisible fill — exists purely to catch click/hover events anywhere
+      // inside an SF neighborhood. fill-opacity 0 still registers hits.
+      map.addLayer({
+        id: "fog-click-target",
+        type: "fill",
+        source: "fog",
+        paint: { "fill-color": "#000", "fill-opacity": 0 },
+      });
+
+      // ── Contour source (USGS fog isolines clipped to SF) ────────────
+      // Mapbox fetches the GeoJSON directly so the polygons render
+      // independent of FogApp's parallel fetch (which still happens so
+      // findContourForPoint can answer point-in-polygon queries).
+      map.addSource("fog-contours", {
+        type: "geojson",
+        data: "/data/sf-fog-contours.geojson",
+      });
+
+      // Sun band (< 8.5 hrs/day): a very light yellow wash so the
+      // lowest-fog corner of the city reads as "sunny", instead of
+      // sitting transparent against the basemap. Covers both the
+      // < 8 polygons and the 8.0 boundary polygon.
+      map.addLayer({
+        id: "fog-contours-sun",
+        type: "fill",
+        source: "fog-contours",
+        filter: ["<", ["coalesce", ["get", "hours"], 0], 8.5],
+        paint: {
+          "fill-color": "#fef9c3",
+          "fill-opacity": 0.45,
+        },
+      });
+
+      // Grey gradient band (≥8.5 hrs): light grey at 8.5 → near-black
+      // at 12.5. The 8.5 polygon is the lightest step in the sequence;
+      // each darker shade above signals more daily fog hours.
+      map.addLayer({
+        id: "fog-contours-fog",
+        type: "fill",
+        source: "fog-contours",
+        filter: [">=", ["coalesce", ["get", "hours"], 0], 8.5],
+        paint: {
+          "fill-color": [
+            "interpolate", ["linear"], ["get", "hours"],
+            8.5,  "#e5e5e4",
+            11,   "#78716c",
+            12.5, "#292524",
+          ],
+          "fill-opacity": 0.5,
+        },
+      });
+
+      // (Sun band — < 8.5 hrs — intentionally has no fill layer. Polygons
+      //  in that band are left transparent so the basemap reads through.
+      //  The 8.0 contour still gets a dashed outline below as a visible
+      //  boundary cue.)
+
+
+      // SF Zoning Districts (DataSF) — 1,647 simplified polygons. Toggleable
+      // colored fill by generalized category so the user can see at a
+      // glance how Mission Bay reads as Mixed Use, the Marina as Residential,
+      // etc. Outline kept very thin so it doesn't compete with other layers.
+      map.addSource("zoning", {
+        type: "geojson",
+        data: "/data/sf-zoning.geojson",
+      });
+      map.addLayer({
+        id: "zoning-fill",
+        type: "fill",
+        source: "zoning",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": [
+            "match", ["get", "gen"],
+            "Residential", "#a3e635",
+            "Public",      "#06b6d4",
+            "Mixed Use",   "#fb923c",
+            "Mixed",       "#fb923c",
+            "Industrial",  "#71717a",
+            "Commercial",  "#fbbf24",
+            "#d4d4d8",
+          ],
+          "fill-opacity": 0.3,
+        },
+      });
+      map.addLayer({
+        id: "zoning-outline",
+        type: "line",
+        source: "zoning",
+        layout: { visibility: "none" },
+        paint: {
+          "line-color": "#52525b",
+          "line-width": 0.3,
+          "line-opacity": 0.5,
+        },
+      });
+
+      // Realtor Neighborhoods (DataSF) — 92 neighborhoods grouped into
+      // 10 SFAR districts. Each feature has a per-neighborhood `color`
+      // baked into properties by the slimming pass: the district number
+      // (1–10) picks a base hue, and the sub-letter (a, b, c, …) shifts
+      // lightness so e.g. 5a/5b/5c are all greens but visibly distinct
+      // from each other. Mapbox reads the property directly.
+      map.addSource("realtor", {
+        type: "geojson",
+        data: "/data/sf-realtor-neighborhoods.geojson",
+      });
+      // (Realtor fill removed by request — boundary lines + labels carry
+      //  the boundary line is a single solid blue so the realtor
+      //  districts read distinctly against the black neighborhood
+      //  outlines.)
+      map.addLayer({
+        id: "realtor-outline",
+        type: "line",
+        source: "realtor",
+        layout: { visibility: "none", "line-join": "round" },
+        paint: {
+          "line-color": "#1d4ed8",
+          "line-width": 1.8,
+          "line-opacity": 0.95,
+        },
+      });
+      map.addLayer({
+        id: "realtor-labels",
+        type: "symbol",
+        source: "realtor",
+        layout: {
+          visibility: "none",
+          // `display_label` is pre-baked into the GeoJSON as
+          // "<nbrhood>\n<nid>" so the renderer sees a single string
+          // with an embedded newline — bypasses any quirks with
+          // multi-section format expressions.
+          "text-field": ["coalesce", ["get", "display_label"], ["get", "nbrhood"]],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": [
+            "interpolate", ["linear"], ["zoom"],
+            11, 9,
+            13, 11,
+            15, 13,
+          ],
+          "text-line-height": 1.1,
+          "text-max-width": 9,
+          "text-padding": 3,
+          "text-allow-overlap": false,
+          "symbol-placement": "point",
+        },
+        paint: {
+          "text-color": "#1d4ed8",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.4,
+          "text-halo-blur": 0.5,
+          "text-opacity": [
+            "interpolate", ["linear"], ["zoom"],
+            10.5, 0,
+            11.5, 0.9,
+            14, 1,
+          ],
+        },
+      });
+
+      // Seismic hazard zones (CA Geological Survey, via DataSF). Toggleable
+      // overlay separate from the fog data. Painted between the fog layers
+      // and the neighborhood outlines so the hazard zones sit on top of
+      // the fog colour but underneath the boundary lines and labels.
+      map.addSource("seismic", {
+        type: "geojson",
+        data: "/data/sf-seismic-hazards.geojson",
+      });
+      map.addLayer({
+        id: "seismic-fill",
+        type: "fill",
+        source: "seismic",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": "#dc2626",
+          "fill-opacity": 0.28,
+        },
+      });
+      map.addLayer({
+        id: "seismic-outline",
+        type: "line",
+        source: "seismic",
+        layout: { visibility: "none", "line-join": "round" },
+        paint: {
+          "line-color": "#991b1b",
+          "line-width": 0.8,
+          "line-opacity": 0.7,
+        },
+      });
+
+      // Tsunami inundation hazard zone — CGS 2021 update. Marks the
+      // low-lying coastal area that an emergency-planning tsunami would
+      // reach. Cool blue fill so it reads as "water-related hazard"
+      // distinct from the warm-red seismic zones above.
+      map.addSource("tsunami", {
+        type: "geojson",
+        data: "/data/sf-tsunami-hazard.geojson",
+      });
+      map.addLayer({
+        id: "tsunami-fill",
+        type: "fill",
+        source: "tsunami",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": "#0ea5e9",
+          "fill-opacity": 0.28,
+        },
+      });
+      map.addLayer({
+        id: "tsunami-outline",
+        type: "line",
+        source: "tsunami",
+        layout: { visibility: "none", "line-join": "round" },
+        paint: {
+          "line-color": "#0369a1",
+          "line-width": 1.2,
+          "line-dasharray": [3, 2],
+          "line-opacity": 0.85,
+        },
+      });
+
+      // Dashed outline ONLY on the 8.0 polygon — it's the "edge of Sun"
+      // SFMTA bike network — 5,455 segments from DataSF. Color-coded by
+      // facility class:
+      //   CLASS I   (BIKE PATH)         → dark green, solid    — off-street, gold standard
+      //   CLASS IV  (SEPARATED BIKEWAY) → green, solid          — protected lane
+      //   CLASS II  (BIKE LANE)         → cyan, solid           — striped lane
+      //   CLASS III (BIKE ROUTE)        → grey, dashed          — sharrow / shared route
+      map.addSource("bikes", {
+        type: "geojson",
+        data: "/data/sf-bike-network.geojson",
+      });
+      // Solid lines for Class I / II / IV (the real infrastructure).
+      map.addLayer({
+        id: "bikes-solid",
+        type: "line",
+        source: "bikes",
+        layout: {
+          visibility: "none",
+          "line-cap": "round",
+          "line-join": "round",
+        },
+        filter: ["in", ["get", "facility"], ["literal", ["CLASS I", "CLASS II", "CLASS IV"]]],
+        paint: {
+          "line-color": [
+            "match", ["get", "facility"],
+            "CLASS I",  "#15803d",
+            "CLASS IV", "#22c55e",
+            "CLASS II", "#06b6d4",
+            "#06b6d4",
+          ],
+          "line-width": [
+            "interpolate", ["linear"], ["zoom"],
+            10, 1,
+            13, 2,
+            16, 3.5,
+          ],
+          "line-opacity": 0.9,
+        },
+      });
+      // Dashed lines for Class III (shared routes / sharrows).
+      map.addLayer({
+        id: "bikes-dashed",
+        type: "line",
+        source: "bikes",
+        layout: {
+          visibility: "none",
+          "line-cap": "round",
+          "line-join": "round",
+        },
+        filter: ["==", ["get", "facility"], "CLASS III"],
+        paint: {
+          "line-color": "#6b7280",
+          "line-width": [
+            "interpolate", ["linear"], ["zoom"],
+            10, 0.8,
+            13, 1.6,
+            16, 2.4,
+          ],
+          "line-dasharray": [2, 2.5],
+          "line-opacity": 0.75,
+        },
+      });
+
+      // Muni stops — 3,260 points from DataSF/SFMTA. Small dots that
+      // densify the city grid when toggled on; names appear at zoom 14+.
+      map.addSource("muni", {
+        type: "geojson",
+        data: "/data/sf-muni-stops.geojson",
+      });
+      // Muni routes — 135 service patterns from DataSF "Muni Simple
+      // Routes." Drawn under the dots so the markers stay on top.
+      // Coloured by route_name using SFMTA's brand palette for the
+      // metro letters / cable lines; buses fall through to a neutral
+      // grey, with Rapid (R suffix) / Express (X suffix) / Owl (90, 91)
+      // picking up distinct accents.
+      map.addSource("muni-routes", {
+        type: "geojson",
+        data: "/data/sf-muni-routes.geojson",
+      });
+      const MUNI_ROUTE_COLOR = [
+        "match", ["get", "route_name"],
+        "J", "#D85F2A",
+        "K", "#5B6770",
+        "KBUS", "#5B6770",
+        "L", "#92278F",
+        "M", "#007749",
+        "N", "#005DAA",
+        "NBUS", "#005DAA",
+        "T", "#BC1E2D",
+        "TBUS", "#BC1E2D",
+        "F", "#C99729",
+        "FBUS", "#C99729",
+        "C", "#B11116",
+        "PH", "#B11116",
+        "PM", "#B11116",
+        "5R", "#EA580C",
+        "9R", "#EA580C",
+        "14R", "#EA580C",
+        "28R", "#EA580C",
+        "38R", "#EA580C",
+        "1X", "#6D28D9",
+        "8AX", "#6D28D9",
+        "8BX", "#6D28D9",
+        "30X", "#6D28D9",
+        "90", "#1E3A8A",
+        "91", "#1E3A8A",
+        "#6B7280",
+      ];
+      const MUNI_ROUTE_WIDTH = [
+        "match", ["get", "route_name"],
+        "J", 3,
+        "K", 3, "KBUS", 3,
+        "L", 3,
+        "M", 3,
+        "N", 3, "NBUS", 3,
+        "T", 3, "TBUS", 3,
+        "F", 3, "FBUS", 3,
+        "C", 3, "PH", 3, "PM", 3,
+        "5R", 2.2, "9R", 2.2, "14R", 2.2, "28R", 2.2, "38R", 2.2,
+        "1X", 2.2, "8AX", 2.2, "8BX", 2.2, "30X", 2.2,
+        1.4,
+      ];
+      map.addLayer({
+        id: "muni-routes-lines",
+        type: "line",
+        source: "muni-routes",
+        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": MUNI_ROUTE_COLOR,
+          "line-width": MUNI_ROUTE_WIDTH,
+          "line-opacity": 0.85,
+        },
+      });
+      // Dash the temporary BUS substitutes (KBUS/NBUS/TBUS/FBUS) so they
+      // read as "bus replacing rail" rather than the actual metro line.
+      map.addLayer({
+        id: "muni-routes-bus-substitutes",
+        type: "line",
+        source: "muni-routes",
+        filter: ["in", ["get", "route_name"], ["literal", ["KBUS", "NBUS", "TBUS", "FBUS"]]],
+        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": "#ffffff",
+          "line-width": [
+            "interpolate", ["linear"], ["zoom"],
+            11, 0.5, 14, 1.0, 17, 1.6,
+          ],
+          "line-dasharray": [2, 2.5],
+          "line-opacity": 0.95,
+        },
+      });
+      map.addLayer({
+        id: "muni-dots",
+        type: "circle",
+        source: "muni",
+        layout: { visibility: "none" },
+        paint: {
+          "circle-radius": [
+            "interpolate", ["linear"], ["zoom"],
+            10, 1.5,
+            13, 3,
+            16, 5,
+          ],
+          "circle-color": "#dc2626",
+          "circle-stroke-width": 1,
+          "circle-stroke-color": "#fff",
+          "circle-stroke-opacity": 0.9,
+          "circle-opacity": 0.85,
+        },
+      });
+      map.addLayer({
+        id: "muni-labels",
+        type: "symbol",
+        source: "muni",
+        layout: {
+          visibility: "none",
+          // Two lines: cross-street name on top, route list below in a
+          // smaller font. When `routes` is missing the second line stays
+          // empty and the label collapses to just the name.
+          "text-field": [
+            "format",
+            ["get", "name"], {},
+            ["case",
+              ["has", "routes"], ["concat", "\n", ["get", "routes"]],
+              "",
+            ],
+            { "font-scale": 0.85, "text-color": "#2563eb" },
+          ],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": 10,
+          "text-anchor": "top",
+          "text-offset": [0, 0.5],
+          "text-allow-overlap": false,
+          "text-padding": 2,
+          "text-optional": true,
+        },
+        paint: {
+          "text-color": "#1c1917",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.4,
+          "text-opacity": [
+            "interpolate", ["linear"], ["zoom"],
+            13.5, 0,
+            14.5, 1,
+          ],
+        },
+      });
+
+      // Supervisor Districts (DataSF, 2022 boundaries) — 11 polygons,
+      // outlined with bold lines and labelled with the district number
+      // inside a pill so the political map reads cleanly when on.
+      map.addSource("districts", {
+        type: "geojson",
+        data: "/data/sf-supervisor-districts.geojson",
+      });
+      // Per-district colour ramp so each Supervisor district reads as a
+      // distinct boundary. Same key (district number) drives both the
+      // outline and the matching label colour so the two read as a pair.
+      const districtColorMatch = [
+        "match", ["get", "district"],
+        1,  "#dc2626", // D1 — Richmond
+        2,  "#ea580c", // D2 — Marina / Pac Heights
+        3,  "#ca8a04", // D3 — North Beach / Russian Hill
+        4,  "#16a34a", // D4 — Sunset
+        5,  "#0891b2", // D5 — Western Addition / Haight
+        6,  "#2563eb", // D6 — SoMa / Tenderloin
+        7,  "#7c3aed", // D7 — West of Twin Peaks
+        8,  "#c026d3", // D8 — Castro / Noe
+        9,  "#db2777", // D9 — Mission / Bernal
+        10, "#475569", // D10 — Bayview / Hunters Point
+        11, "#65a30d", // D11 — Excelsior / OMI
+        "#525252",
+      ];
+      map.addLayer({
+        id: "districts-line",
+        type: "line",
+        source: "districts",
+        layout: { visibility: "none", "line-join": "round" },
+        paint: {
+          "line-color": districtColorMatch,
+          "line-width": 2.6,
+          "line-opacity": 0.95,
+        },
+      });
+      map.addLayer({
+        id: "districts-labels",
+        type: "symbol",
+        source: "districts",
+        layout: {
+          visibility: "none",
+          "text-field": ["concat", "D", ["to-string", ["get", "district"]]],
+          "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+          "text-size": 18,
+          "text-allow-overlap": false,
+          "symbol-placement": "point",
+        },
+        paint: {
+          "text-color": districtColorMatch,
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 2,
+          "text-halo-blur": 0.5,
+        },
+      });
+
+      // ZIP codes (DataSF) — 32 polygons. Just outlines + the 5-digit ZIP
+      // label centered in each so the user can see which ZIP a picked
+      // address falls in without obscuring everything else.
+      map.addSource("zips", {
+        type: "geojson",
+        data: "/data/sf-zip-codes.geojson",
+      });
+      map.addLayer({
+        id: "zips-line",
+        type: "line",
+        source: "zips",
+        layout: { visibility: "none", "line-join": "round", "line-cap": "round" },
+        paint: {
+          "line-color": ["get", "color"],
+          "line-width": 2,
+          "line-dasharray": [3, 1.5],
+          "line-opacity": 0.9,
+        },
+      });
+      map.addLayer({
+        id: "zips-labels",
+        type: "symbol",
+        source: "zips",
+        layout: {
+          visibility: "none",
+          "text-field": ["to-string", ["get", "zip"]],
+          "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+          "text-size": 13,
+          "text-allow-overlap": false,
+          "symbol-placement": "point",
+        },
+        paint: {
+          "text-color": ["get", "color"],
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 2,
+          "text-halo-blur": 0.5,
+        },
+      });
+
+      // Dashed outline on the entire 8.5 (Transition) polygon boundary.
+      // Reads natively off the contour source, no LineString preprocessing
+      // needed — so the dashes stay continuous wherever the contour goes.
+      map.addLayer({
+        id: "fog-contours-transition-outline",
+        type: "line",
+        source: "fog-contours",
+        filter: ["==", ["coalesce", ["get", "hours"], 0], 8.5],
+        layout: {
+          visibility: "none",
+          "line-cap": "round",
+          "line-join": "round",
+        },
+        paint: {
+          "line-color": "#9ca3af",
+          "line-width": 1.2,
+          "line-dasharray": [2, 2.6],
+          "line-opacity": 0.45,
+        },
+      });
+
+      // ── Neighborhood outlines + hover highlight (on top of contours) ─
+      map.addLayer({
+        id: "fog-outline",
+        type: "line",
+        source: "fog",
+        paint: {
+          "line-color": "#1c1917",
+          "line-opacity": 0.7,
+          "line-width": 0.6,
+        },
+      });
+      map.addLayer({
+        id: "fog-hover",
+        type: "line",
+        source: "fog",
+        paint: { "line-color": "#2563eb", "line-width": 2 },
+        filter: ["==", ["get", "id"], ""],
+      });
+
+      // Neighborhood name labels — same as before, fade in past zoom 11.5.
+      map.addLayer({
+        id: "fog-labels",
+        type: "symbol",
+        source: "fog",
+        layout: {
+          "text-field": ["get", "name"],
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-size": [
+            "interpolate", ["linear"], ["zoom"],
+            11, 9,
+            13, 11,
+            15, 13,
+          ],
+          "text-max-width": 8,
+          "text-padding": 2,
+          "text-allow-overlap": false,
+          "symbol-placement": "point",
+        },
+        paint: {
+          "text-color": "#1c1917",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.4,
+          "text-halo-blur": 0.4,
+          "text-opacity": [
+            "interpolate", ["linear"], ["zoom"],
+            10.5, 0,
+            11.5, 0.85,
+            14, 1,
+          ],
+        },
+      });
+
+      // Click + hover handlers ride the invisible fog-click-target so they
+      // fire regardless of which contour layer the cursor is over.
+      map.on("mousemove", "fog-click-target", e => {
+        if (!e.features?.length) return;
+        map.getCanvas().style.cursor = "pointer";
+        map.setFilter("fog-hover", ["==", ["get", "id"], e.features[0].properties.id]);
+      });
+      map.on("mouseleave", "fog-click-target", () => {
+        map.getCanvas().style.cursor = "";
+        map.setFilter("fog-hover", ["==", ["get", "id"], ""]);
+      });
+      map.on("click", "fog-click-target", e => {
+        if (!e.features?.length) return;
+        onPickRef.current(e.features[0], [e.lngLat.lng, e.lngLat.lat]);
+      });
+    });
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+    };
+  }, []);
+
+  // Push neighborhood GeoJSON into its source once the style loads.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !geojson || dataAppliedRef.current) return;
+    const apply = () => {
+      const src = map.getSource("fog");
+      if (!src) return;
+      src.setData(geojson);
+      dataAppliedRef.current = true;
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [geojson]);
+
+  // Flip the entire fog-data layer group on/off (sidebar checkbox).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showContours ? "visible" : "none";
+      CONTOUR_LAYER_IDS.forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showContours]);
+
+  // Weather-emoji DOM markers at hand-picked SF locations. Mounted as
+  // mapboxgl.Markers so the system emoji font renders natively. Each
+  // group in FOG_PIN_GROUPS contributes a different emoji at its own
+  // list of coordinates. Markers are created once and their CSS
+  // visibility is toggled in lockstep with the Fog-data layer — so the
+  // emojis turn on and off with the contour polygons.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const create = () => {
+      transitionMarkersRef.current.forEach(m => m.remove());
+      transitionMarkersRef.current = [];
+      const visible = showContoursRef.current;
+      FOG_PIN_GROUPS.forEach(({ emoji, points }) => {
+        points.forEach(pt => {
+          const el = document.createElement("div");
+          el.className = "fog-cloud-marker";
+          el.textContent = emoji;
+          if (!visible) el.style.display = "none";
+          const marker = new mapboxgl.Marker({ element: el, anchor: "center" })
+            .setLngLat(pt)
+            .addTo(map);
+          transitionMarkersRef.current.push(marker);
+        });
+      });
+    };
+    if (map.isStyleLoaded()) create();
+    else map.once("load", create);
+    return () => {
+      transitionMarkersRef.current.forEach(m => m.remove());
+      transitionMarkersRef.current = [];
+    };
+  }, []);
+
+  // Show/hide the emoji markers alongside the Fog-data toggle.
+  useEffect(() => {
+    transitionMarkersRef.current.forEach(m => {
+      const el = m.getElement();
+      if (el) el.style.display = showContours ? "" : "none";
+    });
+  }, [showContours]);
+
+  // Toggle the hillshade terrain overlay.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showTerrain ? "visible" : "none";
+      ["hillshade", "hillshade-2"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showTerrain]);
+
+  // Toggle the elevation contour lines + ft labels + peak labels +
+  // the precise 50/100 ft USGS-derived overlay.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showElevation ? "visible" : "none";
+      [
+        "contour-lines",
+        "contour-labels",
+        "peaks-labels",
+        "ft-contour-lines",
+        "ft-contour-labels",
+      ].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showElevation]);
+
+  // Toggle the seismic hazard overlay (fill + outline).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showSeismic ? "visible" : "none";
+      ["seismic-fill", "seismic-outline"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showSeismic]);
+
+  // Toggle the CGS tsunami hazard zone (fill + dashed outline).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showTsunami ? "visible" : "none";
+      ["tsunami-fill", "tsunami-outline"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showTsunami]);
+
+  // Toggle the Muni stops overlay (dots + zoom-in labels).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showMuni ? "visible" : "none";
+      [
+        "muni-routes-lines",
+        "muni-routes-bus-substitutes",
+        "muni-dots",
+        "muni-labels",
+      ].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showMuni]);
+
+  // Toggle the SF neighborhood outlines + name labels. The invisible
+  // click-target layer stays visible always so map clicks still resolve
+  // to a neighborhood regardless of whether the boundary is on screen.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showNeighborhoods ? "visible" : "none";
+      ["fog-outline", "fog-hover", "fog-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showNeighborhoods]);
+
+  // Toggle the Realtor Neighborhoods overlay (fill + outline + labels).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showRealtor ? "visible" : "none";
+      ["realtor-outline", "realtor-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showRealtor]);
+
+  // Toggle the zoning overlay (color-coded fills + thin outline).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showZoning ? "visible" : "none";
+      ["zoning-fill", "zoning-outline"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showZoning]);
+
+  // Toggle the supervisor district outlines + labels.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showDistricts ? "visible" : "none";
+      ["districts-line", "districts-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showDistricts]);
+
+  // Toggle the ZIP code outlines + labels.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showZips ? "visible" : "none";
+      ["zips-line", "zips-labels"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showZips]);
+
+  // Toggle the bike network overlay (solid + dashed line layers).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showBikes ? "visible" : "none";
+      ["bikes-solid", "bikes-dashed"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    if (map.isStyleLoaded()) apply();
+    else map.once("load", apply);
+  }, [showBikes]);
+
+  // Sync picked state: drop a marker at the address and frame the
+  // whole city. The map deliberately stays at the city-wide view so the
+  // pin reads in context — no zoom-in, no neighborhood polygon
+  // highlight (the marker alone marks the spot).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    if (markerRef.current) {
+      markerRef.current.remove();
+      markerRef.current = null;
+    }
+
+    if (!picked) return;
+
+    if (picked.point) {
+      markerRef.current = new mapboxgl.Marker({ color: "#2563eb" })
+        .setLngLat(picked.point)
+        .addTo(map);
+      map.fitBounds(SF_BOUNDS, { padding: 24, duration: 800 });
+    }
+  }, [picked]);
+
+  if (!TOKEN) {
+    return (
+      <div className="fog-map-missing-token">
+        <div>
+          <h2>Mapbox token missing</h2>
+          <p>
+            <code>NEXT_PUBLIC_MAPBOX_TOKEN</code> isn&apos;t set in this
+            environment. Add it (get one at{" "}
+            <a href="https://account.mapbox.com/access-tokens/" target="_blank" rel="noreferrer">mapbox.com</a>),
+            then redeploy (or restart the dev server if running locally).
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  return <div ref={containerRef} className="fog-map" />;
+}

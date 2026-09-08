@@ -1,0 +1,30 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature", "properties": { "name": "Napa Valley", "county": "Napa", "kind": "parent" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.610, 38.180], [-122.220, 38.180], [-122.220, 38.720], [-122.610, 38.720], [-122.610, 38.180]]] } },
+    { "type": "Feature", "properties": { "name": "Los Carneros (Napa)", "county": "Napa", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.400, 38.180], [-122.240, 38.180], [-122.240, 38.260], [-122.400, 38.260], [-122.400, 38.180]]] } },
+    { "type": "Feature", "properties": { "name": "Los Carneros (Sonoma)", "county": "Sonoma", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.560, 38.180], [-122.400, 38.180], [-122.400, 38.280], [-122.560, 38.280], [-122.560, 38.180]]] } },
+    { "type": "Feature", "properties": { "name": "Yountville", "county": "Napa", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.410, 38.360], [-122.320, 38.360], [-122.320, 38.425], [-122.410, 38.425], [-122.410, 38.360]]] } },
+    { "type": "Feature", "properties": { "name": "Oakville", "county": "Napa", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.430, 38.425], [-122.350, 38.425], [-122.350, 38.463], [-122.430, 38.463], [-122.430, 38.425]]] } },
+    { "type": "Feature", "properties": { "name": "Rutherford", "county": "Napa", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.450, 38.463], [-122.370, 38.463], [-122.370, 38.500], [-122.450, 38.500], [-122.450, 38.463]]] } },
+    { "type": "Feature", "properties": { "name": "St. Helena", "county": "Napa", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.500, 38.490], [-122.410, 38.490], [-122.410, 38.550], [-122.500, 38.550], [-122.500, 38.490]]] } },
+    { "type": "Feature", "properties": { "name": "Calistoga", "county": "Napa", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.610, 38.560], [-122.520, 38.560], [-122.520, 38.640], [-122.610, 38.640], [-122.610, 38.560]]] } },
+    { "type": "Feature", "properties": { "name": "Howell Mountain", "county": "Napa", "kind": "mountain" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.460, 38.540], [-122.380, 38.540], [-122.380, 38.620], [-122.460, 38.620], [-122.460, 38.540]]] } },
+    { "type": "Feature", "properties": { "name": "Diamond Mountain", "county": "Napa", "kind": "mountain" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.630, 38.560], [-122.570, 38.560], [-122.570, 38.620], [-122.630, 38.620], [-122.630, 38.560]]] } },
+    { "type": "Feature", "properties": { "name": "Spring Mountain", "county": "Napa", "kind": "mountain" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.600, 38.490], [-122.520, 38.490], [-122.520, 38.560], [-122.600, 38.560], [-122.600, 38.490]]] } },
+    { "type": "Feature", "properties": { "name": "Mount Veeder", "county": "Napa", "kind": "mountain" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.560, 38.360], [-122.470, 38.360], [-122.470, 38.470], [-122.560, 38.470], [-122.560, 38.360]]] } },
+    { "type": "Feature", "properties": { "name": "Atlas Peak", "county": "Napa", "kind": "mountain" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.290, 38.360], [-122.200, 38.360], [-122.200, 38.450], [-122.290, 38.450], [-122.290, 38.360]]] } },
+    { "type": "Feature", "properties": { "name": "Sonoma Valley", "county": "Sonoma", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.560, 38.280], [-122.430, 38.280], [-122.430, 38.450], [-122.560, 38.450], [-122.560, 38.280]]] } },
+    { "type": "Feature", "properties": { "name": "Sonoma Coast", "county": "Sonoma", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-123.100, 38.320], [-122.860, 38.320], [-122.860, 38.700], [-123.100, 38.700], [-123.100, 38.320]]] } },
+    { "type": "Feature", "properties": { "name": "Russian River Valley", "county": "Sonoma", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.980, 38.420], [-122.780, 38.420], [-122.780, 38.590], [-122.980, 38.590], [-122.980, 38.420]]] } },
+    { "type": "Feature", "properties": { "name": "Green Valley", "county": "Sonoma", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.940, 38.400], [-122.860, 38.400], [-122.860, 38.470], [-122.940, 38.470], [-122.940, 38.400]]] } },
+    { "type": "Feature", "properties": { "name": "Dry Creek Valley", "county": "Sonoma", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.990, 38.590], [-122.870, 38.590], [-122.870, 38.750], [-122.990, 38.750], [-122.990, 38.590]]] } },
+    { "type": "Feature", "properties": { "name": "Alexander Valley", "county": "Sonoma", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.880, 38.560], [-122.720, 38.560], [-122.720, 38.780], [-122.880, 38.780], [-122.880, 38.560]]] } },
+    { "type": "Feature", "properties": { "name": "Chalk Hill", "county": "Sonoma", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.860, 38.620], [-122.760, 38.620], [-122.760, 38.720], [-122.860, 38.720], [-122.860, 38.620]]] } },
+    { "type": "Feature", "properties": { "name": "Bennett Valley", "county": "Sonoma", "kind": "sub" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.660, 38.380], [-122.560, 38.380], [-122.560, 38.450], [-122.660, 38.450], [-122.660, 38.380]]] } }
+  ],
+  "metadata": {
+    "source": "curated (illustrative, not TTB survey-grade)",
+    "note": "Simplified AVA polygons for the Napa+Sonoma wine-country microclimate map. `kind` = parent | sub | mountain. Real AVA boundaries follow watershed + elevation lines; these rectangles approximate footprint + orientation."
+  }
+}

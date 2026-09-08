@@ -1,0 +1,35 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature", "properties": { "soil": "volcanic", "label": "Howell Mtn volcanic" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.460, 38.540], [-122.380, 38.540], [-122.380, 38.620], [-122.460, 38.620], [-122.460, 38.540]]] } },
+    { "type": "Feature", "properties": { "soil": "volcanic", "label": "Diamond Mtn volcanic" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.630, 38.560], [-122.570, 38.560], [-122.570, 38.620], [-122.630, 38.620], [-122.630, 38.560]]] } },
+    { "type": "Feature", "properties": { "soil": "volcanic", "label": "Mt Veeder volcanic" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.560, 38.360], [-122.470, 38.360], [-122.470, 38.470], [-122.560, 38.470], [-122.560, 38.360]]] } },
+    { "type": "Feature", "properties": { "soil": "volcanic", "label": "Atlas Peak volcanic" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.290, 38.360], [-122.200, 38.360], [-122.200, 38.450], [-122.290, 38.450], [-122.290, 38.360]]] } },
+    { "type": "Feature", "properties": { "soil": "volcanic", "label": "Sonoma Mtn volcanic" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.655, 38.290], [-122.555, 38.290], [-122.555, 38.400], [-122.655, 38.400], [-122.655, 38.290]]] } },
+    { "type": "Feature", "properties": { "soil": "volcanic", "label": "Chalk Hill volcanic ash" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.860, 38.620], [-122.760, 38.620], [-122.760, 38.720], [-122.860, 38.720], [-122.860, 38.620]]] } },
+
+    { "type": "Feature", "properties": { "soil": "alluvial_gravel", "label": "Rutherford Bench" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.435, 38.463], [-122.395, 38.463], [-122.395, 38.500], [-122.435, 38.500], [-122.435, 38.463]]] } },
+    { "type": "Feature", "properties": { "soil": "alluvial_gravel", "label": "Oakville alluvial fan" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.430, 38.425], [-122.365, 38.425], [-122.365, 38.463], [-122.430, 38.463], [-122.430, 38.425]]] } },
+    { "type": "Feature", "properties": { "soil": "alluvial_gravel", "label": "St. Helena bench" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.500, 38.490], [-122.440, 38.490], [-122.440, 38.540], [-122.500, 38.540], [-122.500, 38.490]]] } },
+
+    { "type": "Feature", "properties": { "soil": "alluvial_fan", "label": "Yountville alluvial fan" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.410, 38.360], [-122.320, 38.360], [-122.320, 38.425], [-122.410, 38.425], [-122.410, 38.360]]] } },
+    { "type": "Feature", "properties": { "soil": "alluvial_fan", "label": "Calistoga valley floor" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.610, 38.560], [-122.520, 38.560], [-122.520, 38.640], [-122.610, 38.640], [-122.610, 38.560]]] } },
+    { "type": "Feature", "properties": { "soil": "alluvial_fan", "label": "Alexander Valley floor" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.880, 38.560], [-122.720, 38.560], [-122.720, 38.780], [-122.880, 38.780], [-122.880, 38.560]]] } },
+    { "type": "Feature", "properties": { "soil": "alluvial_fan", "label": "Dry Creek Valley fan" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.990, 38.590], [-122.870, 38.590], [-122.870, 38.750], [-122.990, 38.750], [-122.990, 38.590]]] } },
+
+    { "type": "Feature", "properties": { "soil": "clay", "label": "Napa Carneros — Diablo clay loam" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.400, 38.180], [-122.240, 38.180], [-122.240, 38.260], [-122.400, 38.260], [-122.400, 38.180]]] } },
+    { "type": "Feature", "properties": { "soil": "clay", "label": "Sonoma Carneros clay loam" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.560, 38.180], [-122.400, 38.180], [-122.400, 38.280], [-122.560, 38.280], [-122.560, 38.180]]] } },
+    { "type": "Feature", "properties": { "soil": "clay", "label": "Sonoma Valley south clay" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.560, 38.280], [-122.470, 38.280], [-122.470, 38.360], [-122.560, 38.360], [-122.560, 38.280]]] } },
+
+    { "type": "Feature", "properties": { "soil": "marine_sed", "label": "Russian River Valley — Goldridge sandy loam" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.980, 38.420], [-122.780, 38.420], [-122.780, 38.590], [-122.980, 38.590], [-122.980, 38.420]]] } },
+    { "type": "Feature", "properties": { "soil": "marine_sed", "label": "Green Valley Goldridge" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.940, 38.400], [-122.860, 38.400], [-122.860, 38.470], [-122.940, 38.470], [-122.940, 38.400]]] } },
+    { "type": "Feature", "properties": { "soil": "marine_sed", "label": "Sonoma Coast marine seabed" }, "geometry": { "type": "Polygon", "coordinates": [[[-123.100, 38.320], [-122.940, 38.320], [-122.940, 38.700], [-123.100, 38.700], [-123.100, 38.320]]] } },
+    { "type": "Feature", "properties": { "soil": "marine_sed", "label": "Spring Mtn marine shale" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.600, 38.490], [-122.520, 38.490], [-122.520, 38.560], [-122.600, 38.560], [-122.600, 38.490]]] } },
+
+    { "type": "Feature", "properties": { "soil": "limestone_chalk", "label": "Chalk Hill chalky ash" }, "geometry": { "type": "Polygon", "coordinates": [[[-122.855, 38.625], [-122.765, 38.625], [-122.765, 38.715], [-122.855, 38.715], [-122.855, 38.625]]] } }
+  ],
+  "metadata": {
+    "source": "curated (illustrative)",
+    "note": "Simplified soil-archetype polygons for the Napa+Sonoma wine-country microclimate map. `soil` = volcanic | alluvial_gravel | alluvial_fan | clay | marine_sed | limestone_chalk (keyed to app/lib/education-content.js SOILS)."
+  }
+}
