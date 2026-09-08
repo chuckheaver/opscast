@@ -123,6 +123,20 @@ def mdy(v):
     return d.strftime("%m/%d/%y") if d else ""
 
 
+def as_coord(v):
+    """Latitude/longitude pass-through. Some MLS feeds (MLSListings rows in
+    a BrokerMetrics export) emit 0.000000 for listings they never geocoded;
+    treat 0/blank/non-numeric as missing so the geocoder's Census fallback
+    fills them in instead of mapping the listing to the Gulf of Guinea."""
+    if v is None or v == "":
+        return ""
+    try:
+        f = float(str(v).strip())
+    except (TypeError, ValueError):
+        return ""
+    return "" if f == 0 or f != f else v  # 0 or NaN → missing
+
+
 def as_num(v):
     """CSV cells arrive as strings; xlsx cells as ints/floats. Return an int
     if the value cleanly parses to a positive number, else None."""
@@ -202,7 +216,7 @@ def main():
             photo = str(g(r, "photo") or "").strip()
             w.writerow([
                 g(r, "id"), status_out, mdy(g(r, "statusDate")), normalize_subtype(g(r, "subtype")),
-                address, city, "CA", zip5, g(r, "lat"), g(r, "lng"),
+                address, city, "CA", zip5, as_coord(g(r, "lat")), as_coord(g(r, "lng")),
                 g(r, "neighborhood"), g(r, "district"), g(r, "apn"),
                 g(r, "bd"), g(r, "ba"), sqft_out,
                 g(r, "listPrice"), g(r, "salePrice"), list_date,

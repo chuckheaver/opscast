@@ -153,7 +153,13 @@ function loadOneFile(path) {
       const g = name => (r[idx[name]] || "").trim();
       // Build a clean street line from components (drops the unit — Census
       // geocodes to the building, which is all we need for mapping).
-      const street = [
+      // Canonical CSVs from convert-mls-history.py carry only a full
+      // "Address" ("<street>, City, CA zip"), not the split street columns
+      // a raw export has. Fall back to the segment before the first comma
+      // so the geocode cache key and the Census batch input both get a real
+      // street line instead of an empty string (which collapsed every
+      // listing in a zip onto one cache key).
+      const street = ([
         g("Street Number"),
         g("Street Direction"),
         g("Street Name"),
@@ -161,8 +167,9 @@ function loadOneFile(path) {
         g("Street Post Direction"),
       ]
         .filter(Boolean)
-        .join(" ")
-        .replace(/\s+/g, " ");
+        .join(" ") || g("Address").split(",")[0])
+        .replace(/\s+/g, " ")
+        .trim();
       return {
         id: g("Listing Number"),
         street,
@@ -392,7 +399,17 @@ async function main() {
     for (let i = 0; i < need.length; i += CHUNK) {
       const slice = need.slice(i, i + CHUNK);
       console.log(`Geocoding ${i + 1}-${i + slice.length} of ${need.length}…`);
-      const res = await geocodeBatch(slice);
+      let res;
+      try {
+        res = await geocodeBatch(slice);
+      } catch (err) {
+        // Census unreachable (offline, egress-blocked, or an outage). Don't
+        // abort — everything already cached or carrying lat/lng still gets
+        // written below; these rows simply land in the unmatched list so
+        // the run is re-tryable later without losing the rest.
+        console.warn(`Census geocoder failed (${err.message}); leaving ${slice.length} address(es) unmatched for this run.`);
+        continue;
+      }
       for (const l of slice) {
         const r = res[l.id];
         cache[addrKey(l)] = r
