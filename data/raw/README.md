@@ -32,3 +32,29 @@ If yours are named differently, edit `FOG_HOURS_FIELD` and
 Shapefiles can be large (and may have licensing constraints). The repo
 ignores `data/raw/*.shp` and friends — see `.gitignore`. The processed
 output GeoJSON in `public/data/` is small and IS committed.
+
+## MLS listing exports (the `/listings` + Homes overlay data)
+
+Raw MLS exports (BrokerMetrics / SFAR `.csv` or `.xlsx`, as downloaded)
+are NOT committed. Drop one anywhere and run the converter:
+
+```
+python3 scripts/convert-mls-history.py --sold-only <export.csv> sold_2026_<label>.csv
+```
+
+That writes a canonical, sanitized CSV here as `data/raw/sold_*.csv` —
+agent columns reduced to names (no phone numbers or MLS IDs), subtype
+codes expanded, and only sold rows when `--sold-only` is given. Those
+`sold_*.csv` files ARE committed (see `.gitignore`) so that
+
+```
+node scripts/geocode-listings.mjs
+```
+
+is reproducible from a clean clone and rebuilds the same
+`public/data/sf-listings.geojson` on any machine.
+
+The geocoder merges every `.csv` sitting directly in this folder (de-duped
+by listing number, newest status date wins). Subfolders are not read, so
+move superseded exports into e.g. `data/raw/_archive/` rather than leaving
+them beside the current set.

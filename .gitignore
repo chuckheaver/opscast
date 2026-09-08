@@ -41,7 +41,11 @@ yarn-error.log*
 next-env.d.ts
 
 # raw shapefile inputs — processed output (public/data/) IS committed
-# Ignore everything in data/raw/ except the README that documents the layout.
+# Ignore everything in data/raw/ except the README that documents the layout
+# and the canonical sold_*.csv files the converter writes (--sold-only). Those
+# are committed so `node scripts/geocode-listings.mjs` is reproducible from a
+# clean clone and any machine can rebuild from the same inputs.
 /data/raw/*
 !/data/raw/README.md
+!/data/raw/sold_*.csv
 /data/tmp/

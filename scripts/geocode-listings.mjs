@@ -274,6 +274,40 @@ function addrKey(l) {
   return `${l.street}|${l.city}|${l.state}|${l.zip}`.toLowerCase();
 }
 
+// Seed the cache from the already-published GeoJSON. Coordinates that a
+// Census run finds on one machine live only in that machine's (ignored)
+// data/tmp cache — the published file is the one place they persist. Seeding
+// from it lets a rebuild anywhere, including where Census is unreachable,
+// keep every previously placed address instead of dropping it again.
+//
+// Fills only keys the cache lacks; export-supplied lat/lng still wins in the
+// main loop, and addresses with a manual OVERRIDES entry are skipped so the
+// override stays authoritative. Keys are derived exactly as loadOneFile does
+// for canonical rows: the address segment before the first comma + city /
+// state / zip (published rows are SF-only by construction).
+function seedCacheFromPublished(cache) {
+  if (!existsSync(OUT_PATH)) return 0;
+  let fc;
+  try {
+    fc = JSON.parse(readFileSync(OUT_PATH, "utf8"));
+  } catch {
+    return 0;
+  }
+  let n = 0;
+  for (const f of fc.features || []) {
+    const p = f.properties || {};
+    const pt = f.geometry?.coordinates;
+    if (!p.address || !Array.isArray(pt) || pt.length < 2) continue;
+    const street = String(p.address).split(",")[0].replace(/\s+/g, " ").trim();
+    if (!street) continue;
+    const key = addrKey({ street, city: "San Francisco", state: "CA", zip: p.zip || "" });
+    if (cache[key] || OVERRIDES[key]) continue;
+    cache[key] = { point: pt, seededFrom: "published" };
+    n++;
+  }
+  return n;
+}
+
 async function geocodeBatch(listings) {
   // Census batch input is headerless CSV: id, street, city, state, zip.
   const csv = listings
@@ -393,6 +427,8 @@ async function main() {
   );
 
   const cache = loadCache();
+  const seeded = seedCacheFromPublished(cache);
+  if (seeded) console.log(`Seeded ${seeded} address(es) from the published sf-listings.geojson.`);
   // Listings that already carry lat/long don't need geocoding at all.
   const hasLatLng = l => Number.isFinite(l.lat) && Number.isFinite(l.lng);
   const need = listings.filter(l => !hasLatLng(l) && !cache[addrKey(l)]);
