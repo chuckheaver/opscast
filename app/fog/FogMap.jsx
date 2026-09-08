@@ -1166,9 +1166,13 @@ export default function FogMap({
           // Neighborhood placeholders — listings with no mappable address,
           // pinned to their neighborhood so they still count — draw larger
           // and grey with a heavier ring. Otherwise blue = sold, green = active.
-          "circle-radius": ["case", ["==", ["get", "geoSource"], "neighborhood"],
-            ["interpolate", ["linear"], ["zoom"], 10, 5, 14, 8, 16, 11],
-            ["interpolate", ["linear"], ["zoom"], 10, 3, 14, 5, 16, 7]],
+          // NB: ["zoom"] must feed a TOP-LEVEL interpolate — a zoom curve
+          // nested inside a case is a style error that silently drops the
+          // whole layer. Data-driven branching goes inside the stops instead.
+          "circle-radius": ["interpolate", ["linear"], ["zoom"],
+            10, ["case", ["==", ["get", "geoSource"], "neighborhood"], 5, 3],
+            14, ["case", ["==", ["get", "geoSource"], "neighborhood"], 8, 5],
+            16, ["case", ["==", ["get", "geoSource"], "neighborhood"], 11, 7]],
           "circle-color": ["case",
             ["==", ["get", "geoSource"], "neighborhood"], "#6b7280",
             ["==", ["get", "actKind"], "sold"], "#2563eb",
