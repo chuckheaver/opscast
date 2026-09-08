@@ -19,7 +19,8 @@ export default function FogPanel({
   openHood,
   onCloseHood,
   onShowProperties,
-  onShowLayer,
+  onToggleLayer,
+  layerStates,
   onComps,
   zips,
   supervisorDistricts,
@@ -80,7 +81,8 @@ export default function FogPanel({
           loc={factsMatch ? picked : null}
           onClose={onCloseHood}
           onShowProperties={onShowProperties}
-          onShowLayer={onShowLayer}
+          onToggleLayer={onToggleLayer}
+          layerStates={layerStates}
           onComps={onComps}
         />
       )}

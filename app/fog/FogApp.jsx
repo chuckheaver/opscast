@@ -565,14 +565,14 @@ export default function FogApp() {
     setStatsExpanded(true);
   }, []);
 
-  // From a neighborhood pop-up's "Show … layer" button → switch that overlay
-  // on right here (same neighborhood view, like the Home Sales link) instead
-  // of navigating to a separate map page.
-  const showLayerInPlace = layer => {
-    if (layer === "fog") setShowContours(true);
-    else if (layer === "micro") openMicro();
-    else if (layer === "transit") setShowMuni(true);
-    setOpenHood(null);
+  // Neighborhood pop-up "Show … layer" toggles: flip that overlay on/off in
+  // place — the pop-up stays open (like the Details lists), no navigation.
+  const microOn = showMicroSun || showMicroCool || showMicroWind || showMicroSolar || showMicroFogLine;
+  const layerStates = { fog: showContours, micro: microOn, transit: showMuni };
+  const toggleLayerInPlace = layer => {
+    if (layer === "fog") setShowContours(v => !v);
+    else if (layer === "micro") (microOn ? hideMicro : openMicro)();
+    else if (layer === "transit") setShowMuni(v => !v);
   };
 
   // Generate + download the market-update PDF for the current filter. The PDF
@@ -758,7 +758,8 @@ export default function FogApp() {
         openHood={openHood}
         onCloseHood={() => setOpenHood(null)}
         onShowProperties={showNeighborhoodProperties}
-        onShowLayer={showLayerInPlace}
+        onToggleLayer={toggleLayerInPlace}
+        layerStates={layerStates}
         onComps={setCompFeatures}
         zips={zips}
         supervisorDistricts={supervisorDistricts}

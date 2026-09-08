@@ -147,12 +147,14 @@ const NEARBY_NOTE = {
   margin: "0 0 9px", lineHeight: 1.5,
 };
 
-// "Show … layer" action: stays on this neighborhood view and switches the
-// overlay on (mirrors the Home Sales link) rather than opening another map.
-function LayerButton({ onClick, children }) {
+// "Show … layer" toggle: switches the overlay on/off in place while this
+// pop-up stays open (like the Details lists). Filled dot = layer is on.
+function LayerButton({ on, onClick, children }) {
   return (
-    <button type="button" onClick={onClick} style={{ ...LINK, background: "none", cursor: "pointer", font: "inherit", fontSize: 13 }}>
-      <span aria-hidden="true">◉</span> {children}
+    <button type="button" onClick={onClick} aria-pressed={!!on}
+      style={{ ...LINK, cursor: "pointer", font: "inherit", fontSize: 13,
+        background: on ? "#eff6ff" : "none", borderColor: on ? "#2563eb" : LINK.border.split(" ").pop(), fontWeight: on ? 600 : 400 }}>
+      <span aria-hidden="true">{on ? "◉" : "○"}</span> {on ? "Hide" : "Show"} {children}
     </button>
   );
 }
@@ -197,7 +199,7 @@ function PlaceRow({ p, first }) {
 
 export default function NeighborhoodModal({
   name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict,
-  zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties, onShowLayer, onComps,
+  zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties, onToggleLayer, layerStates, onComps,
 }) {
   const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
   // Which Details lists are expanded → map dots. Each PriceLine reports its
@@ -354,8 +356,8 @@ export default function NeighborhoodModal({
             <Banner emoji="☀️">2 · Microclimate</Banner>
             <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: "0 0 10px" }}>{microText}</p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-              <LayerButton onClick={() => onShowLayer?.("fog")}>Show fog layer</LayerButton>
-              <LayerButton onClick={() => onShowLayer?.("micro")}>Show microclimate layer</LayerButton>
+              <LayerButton on={layerStates?.fog} onClick={() => onToggleLayer?.("fog")}>fog layer</LayerButton>
+              <LayerButton on={layerStates?.micro} onClick={() => onToggleLayer?.("micro")}>microclimate layer</LayerButton>
             </div>
           </section>
         )}
@@ -423,7 +425,7 @@ export default function NeighborhoodModal({
           <section style={SEC}>
             <Banner emoji="🚊">8 · Getting around</Banner>
             <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: "0 0 8px" }}>{data.transit}</p>
-            <LayerButton onClick={() => onShowLayer?.("transit")}>Show transit layer</LayerButton>
+            <LayerButton on={layerStates?.transit} onClick={() => onToggleLayer?.("transit")}>transit layer</LayerButton>
           </section>
         )}
       </div>
