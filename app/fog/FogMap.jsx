@@ -1165,7 +1165,8 @@ export default function FogMap({
         paint: {
           // Neighborhood placeholders — listings with no mappable address,
           // pinned to their neighborhood so they still count — draw larger
-          // and grey with a heavier ring. Otherwise blue = sold, green = active.
+          // with a heavier ring; colour stays the same blue for consistency.
+          // Blue = sold, green = active.
           // NB: ["zoom"] must feed a TOP-LEVEL interpolate — a zoom curve
           // nested inside a case is a style error that silently drops the
           // whole layer. Data-driven branching goes inside the stops instead.
@@ -1173,18 +1174,16 @@ export default function FogMap({
             10, ["case", ["==", ["get", "geoSource"], "neighborhood"], 5, 3],
             14, ["case", ["==", ["get", "geoSource"], "neighborhood"], 8, 5],
             16, ["case", ["==", ["get", "geoSource"], "neighborhood"], 11, 7]],
-          "circle-color": ["case",
-            ["==", ["get", "geoSource"], "neighborhood"], "#6b7280",
-            ["==", ["get", "actKind"], "sold"], "#2563eb",
-            "#16a34a"],
+          "circle-color": ["case", ["==", ["get", "actKind"], "sold"], "#2563eb", "#16a34a"],
           "circle-stroke-color": "#ffffff",
           "circle-stroke-width": ["case", ["==", ["get", "geoSource"], "neighborhood"], 2, 1],
           "circle-opacity": 0.9,
         },
       });
       // Comp dots — the homes in an expanded neighborhood "Details" list. Fed
-      // by the `comps` prop; larger amber dots so they stand out from the
-      // Homes overlay. Click opens the same full property pop-up.
+      // by the `comps` prop; same blue as the Homes overlay (one colour for
+      // listings everywhere), set apart by size and a heavier ring. Click
+      // opens the same full property pop-up.
       map.addSource("comps", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
       map.addLayer({
         id: "comp-dots",
@@ -1192,7 +1191,7 @@ export default function FogMap({
         source: "comps",
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 5, 14, 8, 16, 11],
-          "circle-color": "#f59e0b",
+          "circle-color": "#2563eb",
           "circle-stroke-color": "#ffffff",
           "circle-stroke-width": 2,
           "circle-opacity": 0.95,
