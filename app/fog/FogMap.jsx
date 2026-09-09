@@ -6,8 +6,8 @@
 //   - The USGS fog-contour polygons as the primary data layer, in three
 //     solid-colour bands by hours/day value:
 //       • < 8.5  → bright yellow
-//       • 8.5–9  → one light grey (transition + first fog step)
-//       • > 9    → grey gradient (darker for higher fog hours)
+//       • 8.5–9.5 → one light grey (transition + first fog steps)
+//       • > 9.5   → grey gradient (darker for higher fog hours)
 //
 // Click and hover detection sit on an invisible "fog-click-target" fill
 // over the neighborhoods, so the user can pick anywhere inside SF
@@ -415,8 +415,8 @@ export default function FogMap({
         },
       });
 
-      // Grey gradient band (≥8.5 hrs): the 8.5 and 9 polygons share one
-      // light grey (flat segment), then the ramp darkens from 9 to
+      // Grey gradient band (≥8.5 hrs): the 8.5, 9 and 9.5 polygons share one
+      // light grey (flat segment), then the ramp darkens from 9.5 to
       // near-black at 12.5 — each darker shade signals more daily fog hours.
       map.addLayer({
         id: "fog-contours-fog",
@@ -427,7 +427,7 @@ export default function FogMap({
           "fill-color": [
             "interpolate", ["linear"], ["get", "hours"],
             8.5,  "#e5e5e4",
-            9,    "#e5e5e4",
+            9.5,  "#e5e5e4",
             11,   "#78716c",
             12.5, "#292524",
           ],
