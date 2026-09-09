@@ -4232,7 +4232,9 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   position: fixed; inset: 0; z-index: 1000;
   background: rgba(10, 25, 41, 0.5);
   display: flex; align-items: flex-start; justify-content: center;
-  padding: 24px 16px;
+  /* Top padding clears the search bar + layer-chip row (chips sit at
+     top: 80px, ~34px tall) so the chips stay usable while the pop-up is open. */
+  padding: 128px 16px 24px;
   /* Let clicks pass THROUGH the dimmed area to the map, so the amber comp
      dots stay clickable while the pop-up is open. The card re-enables
      pointer events for itself below. */
@@ -4243,24 +4245,29 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   background: #fff; border-radius: 16px; padding: 20px 20px 28px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   pointer-events: auto;
-  max-height: calc(100vh - 48px); overflow-y: auto;
+  max-height: calc(100vh - 152px); overflow-y: auto;
 }
+/* Close (×) rides along as the card scrolls: sticky to the top of the
+   scrolling card, floated right so it never displaces the heading. */
 .nh-x {
-  position: absolute; top: 12px; right: 14px;
-  width: 30px; height: 30px; border: none; background: transparent;
+  position: sticky; top: 0; float: right; z-index: 3;
+  margin: -8px -6px -30px 0;
+  width: 30px; height: 30px; border: none; background: rgba(255, 255, 255, 0.92);
   font-size: 24px; line-height: 1; color: #78716c; cursor: pointer; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
 }
 .nh-x:hover { background: rgba(0, 0, 0, 0.06); color: #1c1917; }
 @media (max-width: 520px) {
   .nh-backdrop { padding: 0; }
   .nh-modal { max-width: none; min-height: 100%; max-height: 100vh; border-radius: 0; }
+  .nh-x { margin-top: 0; }
 }
 /* Laptop / desktop: dock the pop-up to the left so the picked neighborhood
    stays visible on the map, and lighten the backdrop so the map reads. */
 @media (min-width: 1024px) {
   .nh-backdrop {
     justify-content: flex-start;
-    padding: 24px;
+    padding: 128px 24px 24px;
     background: rgba(10, 25, 41, 0.18);
   }
 }
