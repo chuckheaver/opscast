@@ -133,7 +133,9 @@ export default function FogMap({
       bounds: SF_BOUNDS,
       fitBoundsOptions: { padding: 24 },
       minZoom: 10,
-      maxZoom: 16,
+      // 19 lets a user zoom past the block down to a single parcel / building
+      // footprint (the parcel tiles stop at z16 and over-zoom cleanly).
+      maxZoom: 19,
     });
     // Zoom +/- in the bottom-left (above the Mapbox logo); the top-right and
     // bottom-right corners belong to our own controls (Layers / find-me).

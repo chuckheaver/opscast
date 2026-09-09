@@ -72,7 +72,7 @@ export default function FogMapTools({
   // Optional menu to open on first load (e.g. "activity" from the Market entry)
   initialMenu,
 }) {
-  const [menu, setMenu] = useState(initialMenu || null); // "layers" | "buildings" | "neighborhoods" | "activity" | null
+  const [menu, setMenu] = useState(initialMenu || null); // "layers" | "buildings" | "neighborhoods" | "activity" | "micro" | "terrain" | "hazards" | "transit" | "bikes" | null
   const wrapRef = useRef(null);
   // Collapse the open list/Homes panel down to its header so it stops covering
   // the map on small screens. Resets whenever a different panel opens.
@@ -107,6 +107,8 @@ export default function FogMapTools({
   // (Terrain + Elevation are shared with the Layers gear, so they don't drive
   // the pill's on-state.)
   const microOn = showMicroSun || showMicroCool || showMicroWind || showMicroSolar || showMicroFogLine;
+  const terrainOn = !!(showTerrain || showElevation);
+  const bldgsOn = !!(showResBuildings || showComBuildings);
 
   // ── Layers: grouped toggles ──
   const groups = [
@@ -252,8 +254,10 @@ export default function FogMapTools({
 
       {/* Quick-link chips under the search bar. Each chip toggles its own map
           layer on/off (blue = on, white = off); any number can be on at once.
-          Layers with a selector (Hoods, Homes, Bldgs, Transit, Bikes,
-          MicroClimates) also open their panel when switched on. */}
+          Layers with a selector (Hoods, Homes, MicroClimates, Terrain, Hazards,
+          Transit, Bikes, Bldgs) also open their panel when switched on.
+          Order (left→right): Hoods · Homes · Fog · MicroClimates · Terrain ·
+          Hazards · Transit · Bikes · Bldgs. */}
       <div className="fog-chips">
         {/* Hoods — opens the jump-to list (outlines are the always-on anchor
             layer). Pick a neighborhood to zoom to it + open its info pop-up. */}
@@ -282,20 +286,6 @@ export default function FogMapTools({
         >
           <DotsIcon /> Homes
         </button>
-        {/* Bldgs — residential footprints + index */}
-        <button
-          type="button"
-          className={"fog-chip" + (showResBuildings ? " on" : "")}
-          onClick={() => {
-            const on = !showResBuildings;
-            onToggleResBuildings?.(on);
-            setMenu(on ? "buildings" : (menu === "buildings" ? null : menu));
-          }}
-          aria-pressed={!!showResBuildings}
-          title="Buildings"
-        >
-          <BuildingIcon /> Bldgs
-        </button>
         {/* Fog — summer fog contours */}
         <button
           type="button"
@@ -318,6 +308,19 @@ export default function FogMapTools({
           title="Microclimate zones + sun exposure"
         >
           <MicroIcon /> MicroClimates
+        </button>
+        {/* Terrain — 3D relief + elevation contours selector */}
+        <button
+          type="button"
+          className={"fog-chip" + (terrainOn ? " on" : "")}
+          onClick={() => {
+            if (terrainOn) { onToggleTerrain?.(false); onToggleElevation?.(false); if (menu === "terrain") setMenu(null); }
+            else { onToggleTerrain?.(true); onToggleElevation?.(true); setMenu("terrain"); }
+          }}
+          aria-pressed={terrainOn}
+          title="Terrain — 3D relief + elevation contours"
+        >
+          <TerrainIcon /> Terrain
         </button>
         {/* Hazards — seismic + tsunami + fault lines selector */}
         <button
@@ -358,11 +361,47 @@ export default function FogMapTools({
         >
           <BikeIcon /> Bikes
         </button>
+        {/* Bldgs — residential + commercial/office footprints, with the A–Z
+            index and a Residential / Comm-Off selector in the panel */}
+        <button
+          type="button"
+          className={"fog-chip" + (bldgsOn ? " on" : "")}
+          onClick={() => {
+            if (bldgsOn) { onToggleResBuildings?.(false); onToggleComBuildings?.(false); if (menu === "buildings") setMenu(null); }
+            else { onToggleResBuildings?.(true); onToggleComBuildings?.(true); setMenu("buildings"); }
+          }}
+          aria-pressed={bldgsOn}
+          title="Buildings — residential + commercial/office"
+        >
+          <BuildingIcon /> Bldgs
+        </button>
       </div>
 
       {menu === "buildings" && (
         <div className={"fog-float-panel left fog-list-panel" + (panelCollapsed ? " collapsed" : "")}>
           <CollapseHead title="Buildings" collapsed={panelCollapsed} onToggle={() => setPanelCollapsed(c => !c)} />
+          {!panelCollapsed && (
+            <div className="fog-layerbar-row fog-list-sublayers">
+              <button
+                type="button"
+                className={"fog-lk" + (showResBuildings ? " on" : "")}
+                style={showResBuildings ? { color: "#5B9BD5", borderColor: "#5B9BD5" } : undefined}
+                onClick={() => onToggleResBuildings?.(!showResBuildings)}
+                aria-pressed={!!showResBuildings}
+              >
+                Residential / Mixed
+              </button>
+              <button
+                type="button"
+                className={"fog-lk" + (showComBuildings ? " on" : "")}
+                style={showComBuildings ? { color: "#b8860b", borderColor: "#E6CE78" } : undefined}
+                onClick={() => onToggleComBuildings?.(!showComBuildings)}
+                aria-pressed={!!showComBuildings}
+              >
+                Comm / Office
+              </button>
+            </div>
+          )}
           {!panelCollapsed && (!hasBuildings ? (
             <div className="fog-list-empty">No buildings loaded yet.</div>
           ) : (
@@ -438,6 +477,18 @@ export default function FogMapTools({
             <ToggleSwitch label="Fog inversion line" checked={showMicroFogLine} onChange={onToggleMicroFogLine} />
           </div>
         </div>
+      )}
+
+      {menu === "terrain" && (
+        <LayerBar
+          items={[
+            { key: "terrain", short: "3D relief", color: "#8b5e34", on: !!showTerrain },
+            { key: "elevation", short: "Elevation contours", color: "#0d9488", on: !!showElevation },
+          ]}
+          onToggle={k => (k === "terrain" ? onToggleTerrain?.(!showTerrain) : onToggleElevation?.(!showElevation))}
+          onAll={() => { onToggleTerrain?.(true); onToggleElevation?.(true); }}
+          onNone={() => { onToggleTerrain?.(false); onToggleElevation?.(false); }}
+        />
       )}
 
       {menu === "hazards" && (
@@ -609,6 +660,14 @@ function MicroIcon() {
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <circle cx="12" cy="12" r="4" fill="currentColor" />
       <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+function TerrainIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="m2 20 6-10 4 6 3-4 7 8H2Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M8 10l2-3 2 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

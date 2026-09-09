@@ -1763,6 +1763,9 @@ input[type=range]::-webkit-slider-thumb:hover {
   width: 240px;
   padding: 5px;
 }
+/* Residential / Comm-Off selector at the top of the Buildings list panel. */
+.fog-list-sublayers { padding: 4px 6px 6px; border-bottom: 1px solid var(--border); margin-bottom: 3px; }
+.fog-list-sublayers .fog-lk { font-size: 10.5px; line-height: 1.9; border-width: 1px; }
 .fog-list-grouphead {
   font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
   color: #a8a29e; padding: 9px 8px 3px;
