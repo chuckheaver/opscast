@@ -186,7 +186,14 @@ export default function FogApp() {
   // loads the zones + restores them, chip-off hides without clobbering them.
   const applyMicro = d => { setShowMicroSun(d.sun); setShowMicroCool(d.cool); setShowMicroWind(d.wind); };
   const persistMicro = d => { setMicroDefault(d); try { localStorage.setItem(MICRO_PREF_KEY, JSON.stringify(d)); } catch {} };
-  const openMicro = () => { setMicroWanted(true); applyMicro(microDefault); };
+  // Opening restores the saved zone selection — but a saved "none" (every
+  // chip toggled off in the layers menu) would open an empty overlay, so
+  // fall back to all three zones in that case.
+  const openMicro = () => {
+    setMicroWanted(true);
+    const d = microDefault.sun || microDefault.cool || microDefault.wind ? microDefault : { sun: true, cool: true, wind: true };
+    applyMicro(d);
+  };
   const hideMicro = () => { applyMicro({ sun: false, cool: false, wind: false }); setShowMicroSolar(false); setShowMicroFogLine(false); };
   // Solar exposure needs its season data — mark the overlay wanted so the
   // lazy-load effect fetches it, then flip the layer on/off.
