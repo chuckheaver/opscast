@@ -87,6 +87,10 @@ export default function FogApp() {
   const [showMicroFogLine, setShowMicroFogLine] = useState(false);
   // Camera fly-to target (e.g. zoom to a building picked from the Bldgs list).
   const [flyTo, setFlyTo] = useState(null); // { center: [lng,lat], zoom } | null
+  // A sale clicked in a neighborhood pop-up's Details list → the map flies
+  // to it, rings its dot and opens its pop-up. { feature, n } (n = nonce so a
+  // repeat click on the same row still fires).
+  const [focusComp, setFocusComp] = useState(null);
   const [recenter, setRecenter] = useState(0); // bump to re-frame San Francisco
   // Transit: which line categories are shown (a Set of TRANSIT_CATS keys).
   // Defaults to all; a saved default (localStorage) is loaded on mount.
@@ -649,6 +653,7 @@ export default function FogApp() {
           showMicroSolar={showMicroSolar}
           showMicroFogLine={showMicroFogLine}
           flyTo={flyTo}
+          focusComp={focusComp}
           recenter={recenter}
           transitRoutes={transitRoutes}
           transitStops={transitSel.has("bus")}
@@ -767,6 +772,7 @@ export default function FogApp() {
         onShowProperties={showNeighborhoodProperties}
         onToggleLayer={toggleLayerInPlace}
         layerStates={layerStates}
+        onFocusComp={f => setFocusComp({ feature: f, n: Date.now() })}
         onComps={setCompFeatures}
         zips={zips}
         supervisorDistricts={supervisorDistricts}

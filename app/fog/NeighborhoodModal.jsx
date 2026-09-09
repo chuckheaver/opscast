@@ -65,7 +65,7 @@ function summarize(homes, fn) {
   return { list: col("list"), sale: col("sale"), sqft: col("sqft"), ppsf: col("ppsf"), pctList: col("pctList"), dom: col("dom") };
 }
 
-function PriceLine({ data, label, gap, sect, reportComps }) {
+function PriceLine({ data, label, gap, sect, reportComps, onFocusComp }) {
   const [open, setOpen] = useState(false);
   const homes = data?.homes || [];
   const summaries = homes.length ? [["Average", summarize(homes, _mean)], ["Median", summarize(homes, _median)]] : [];
@@ -97,9 +97,17 @@ function PriceLine({ data, label, gap, sect, reportComps }) {
         ))}
         {homes.map((h, i) => (
           <Fragment key={i}>
-            <div style={{ gridColumn: "1 / -1", fontSize: 13, fontWeight: 600, color: "#1c1917", marginTop: i ? 9 : 5 }}>
-              {h.addr || "—"}
-            </div>
+            <button
+              type="button"
+              onClick={() => h.feat && onFocusComp?.(h.feat)}
+              title="Show this sale on the map"
+              style={{ gridColumn: "1 / -1", display: "flex", alignItems: "baseline", gap: 8, marginTop: i ? 9 : 5,
+                background: "none", border: "none", padding: 0, font: "inherit", textAlign: "left",
+                fontSize: 13, fontWeight: 600, color: "#1c1917", cursor: h.feat ? "pointer" : "default" }}
+            >
+              <span>{h.addr || "—"}</span>
+              {h.feat && <span style={{ fontSize: 11, fontWeight: 600, color: "#2563eb", whiteSpace: "nowrap" }}>◉ map</span>}
+            </button>
             <div>{usd(h.list)}</div>
             <div style={{ fontWeight: 700, color: "#1c1917" }}>{usd(h.sale)}</div>
             <div>{h.sqft ? h.sqft.toLocaleString("en-US") : "—"}</div>
@@ -199,7 +207,7 @@ function PlaceRow({ p, first }) {
 
 export default function NeighborhoodModal({
   name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict,
-  zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties, onToggleLayer, layerStates, onComps,
+  zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties, onToggleLayer, layerStates, onComps, onFocusComp,
 }) {
   const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
   // Which Details lists are expanded → map dots. Each PriceLine reports its
@@ -343,8 +351,8 @@ export default function NeighborhoodModal({
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#78716c" }}>Loading…</span></div>
           ) : prices ? (
             <div style={{ marginBottom: 2 }}>
-              <PriceLine data={prices.sfh} label="Median Single-Family" gap sect="sfh" reportComps={reportComps} />
-              <PriceLine data={prices.condo} label="Median Condo/TIC" sect="condo" reportComps={reportComps} />
+              <PriceLine data={prices.sfh} label="Median Single-Family" gap sect="sfh" reportComps={reportComps} onFocusComp={onFocusComp} />
+              <PriceLine data={prices.condo} label="Median Condo/TIC" sect="condo" reportComps={reportComps} onFocusComp={onFocusComp} />
             </div>
           ) : (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>Market data unavailable.</span></div>

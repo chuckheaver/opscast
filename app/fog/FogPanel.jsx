@@ -21,6 +21,7 @@ export default function FogPanel({
   onShowProperties,
   onToggleLayer,
   layerStates,
+  onFocusComp,
   onComps,
   zips,
   supervisorDistricts,
@@ -83,6 +84,7 @@ export default function FogPanel({
           onShowProperties={onShowProperties}
           onToggleLayer={onToggleLayer}
           layerStates={layerStates}
+          onFocusComp={onFocusComp}
           onComps={onComps}
         />
       )}

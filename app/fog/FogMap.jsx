@@ -82,12 +82,16 @@ export default function FogMap({
   showMicroSolar,
   showMicroFogLine,
   flyTo,
+  focusComp,
   recenter,
   transitRoutes,
   transitStops,
   bikeSel,
 }) {
   const containerRef = useRef(null);
+  // The listing pop-up opener lives inside the map-load closure; exposed via
+  // a ref so the focusComp effect can open the same pop-up programmatically.
+  const openPropPopupRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const transitionMarkersRef = useRef([]);
@@ -1187,6 +1191,20 @@ export default function FogMap({
       // listings everywhere), set apart by size and a heavier ring. Click
       // opens the same full property pop-up.
       map.addSource("comps", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
+      // Focus ring — drawn under the comp dot whose row was clicked in the
+      // neighborhood pop-up's Details list (filter set by the focusComp effect).
+      map.addLayer({
+        id: "comp-focus",
+        type: "circle",
+        source: "comps",
+        filter: ["==", ["get", "id"], ""],
+        paint: {
+          "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 11, 14, 16, 16, 22],
+          "circle-color": "rgba(37, 99, 235, 0.18)",
+          "circle-stroke-color": "#1d4ed8",
+          "circle-stroke-width": 3,
+        },
+      });
       map.addLayer({
         id: "comp-dots",
         type: "circle",
@@ -1375,6 +1393,7 @@ export default function FogMap({
       };
       map.on("click", "activity-dots", openPropPopup);
       map.on("click", "comp-dots", openPropPopup);
+      openPropPopupRef.current = openPropPopup;
 
       // Tsunami inundation hazard zone — CGS 2021 update. Marks the
       // low-lying coastal area that an emergency-planning tsunami would
@@ -2374,6 +2393,25 @@ export default function FogMap({
     if (!map || !flyTo?.center) return;
     map.flyTo({ center: flyTo.center, zoom: flyTo.zoom ?? map.getZoom(), duration: 1000 });
   }, [flyTo]);
+
+  // A Details-list row was clicked: ring that comp's dot, glide to it (never
+  // zooming out; at least street level) and open its property pop-up once the
+  // move settles. Clearing focusComp / the comps feed drops the ring.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const feat = focusComp?.feature;
+    const setRing = () => { if (map.getLayer("comp-focus")) map.setFilter("comp-focus", ["==", ["get", "id"], feat?.properties?.id ?? ""]); };
+    setRing();
+    if (!feat) return;
+    const c = feat.geometry?.coordinates;
+    if (!Array.isArray(c) || !Number.isFinite(c[0]) || !Number.isFinite(c[1])) return;
+    map.once("moveend", () => {
+      setRing();
+      openPropPopupRef.current?.({ features: [feat], lngLat: { lng: c[0], lat: c[1] } });
+    });
+    map.easeTo({ center: c, zoom: Math.max(map.getZoom(), 15.5), duration: 900 });
+  }, [focusComp]);
 
   // Reset button → re-frame all of San Francisco. Bumped counter animates once.
   useEffect(() => {

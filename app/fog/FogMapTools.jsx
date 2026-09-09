@@ -109,6 +109,7 @@ export default function FogMapTools({
   const microOn = showMicroSun || showMicroCool || showMicroWind || showMicroSolar || showMicroFogLine;
   const terrainOn = !!(showTerrain || showElevation);
   const bldgsOn = !!(showResBuildings || showComBuildings);
+  const landUseOn = !!(showParcelsRes || showParcelsCom);
 
   // ── Layers: grouped toggles ──
   const groups = [
@@ -258,7 +259,7 @@ export default function FogMapTools({
           Layers with a selector (Hoods, Homes, MicroClimates, Terrain, Hazards,
           Transit, Bikes, Bldgs) also open their panel when switched on.
           Order (left→right): Hoods · Homes · Fog · MicroClimates · Terrain ·
-          Hazards · Transit · Bikes · Bldgs. */}
+          Hazards · Transit · Bikes · Bldgs · Land Use. */}
       <div className="fog-chips">
         {/* Hoods — opens the jump-to list (outlines are the always-on anchor
             layer). Pick a neighborhood to zoom to it + open its info pop-up. */}
@@ -376,6 +377,20 @@ export default function FogMapTools({
         >
           <BuildingIcon /> Bldgs
         </button>
+        {/* Land Use — residential + commercial/other parcel fills (block level
+            in), with a selector for either fill */}
+        <button
+          type="button"
+          className={"fog-chip" + (landUseOn ? " on" : "")}
+          onClick={() => {
+            if (landUseOn) { onToggleParcelsRes?.(false); onToggleParcelsCom?.(false); if (menu === "landuse") setMenu(null); }
+            else { onToggleParcelsRes?.(true); onToggleParcelsCom?.(true); setMenu("landuse"); }
+          }}
+          aria-pressed={landUseOn}
+          title="Land Use — parcel fills by use (zooms to block level)"
+        >
+          <ParcelIcon /> Land Use
+        </button>
       </div>
 
       {menu === "buildings" && (
@@ -489,6 +504,18 @@ export default function FogMapTools({
           onToggle={k => (k === "terrain" ? onToggleTerrain?.(!showTerrain) : onToggleElevation?.(!showElevation))}
           onAll={() => { onToggleTerrain?.(true); onToggleElevation?.(true); }}
           onNone={() => { onToggleTerrain?.(false); onToggleElevation?.(false); }}
+        />
+      )}
+
+      {menu === "landuse" && (
+        <LayerBar
+          items={[
+            { key: "res", short: "Residential", color: "#4287c9", on: !!showParcelsRes },
+            { key: "com", short: "Commercial & other", color: "#fb923c", on: !!showParcelsCom },
+          ]}
+          onToggle={k => (k === "res" ? onToggleParcelsRes?.(!showParcelsRes) : onToggleParcelsCom?.(!showParcelsCom))}
+          onAll={() => { onToggleParcelsRes?.(true); onToggleParcelsCom?.(true); }}
+          onNone={() => { onToggleParcelsRes?.(false); onToggleParcelsCom?.(false); }}
         />
       )}
 
@@ -670,6 +697,14 @@ function TerrainIcon() {
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="m2 20 6-10 4 6 3-4 7 8H2Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
       <path d="M8 10l2-3 2 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function ParcelIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2" />
+      <path d="M3 12h18M12 3v9M8 12v9M16 12v9" stroke="currentColor" strokeWidth="2" />
     </svg>
   );
 }
