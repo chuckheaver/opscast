@@ -10,7 +10,7 @@ import { useState, useRef, useEffect } from "react";
 import FogLocationSearch from "../fog/FogLocationSearch";
 
 const SEASONS = [
-  { key: "annual", label: "Annual" },
+  { key: "annual", label: "Ann Avg" },
   { key: "winter", label: "Winter" },
   { key: "equinox", label: "Spring / Fall" },
   { key: "summer", label: "Summer" },

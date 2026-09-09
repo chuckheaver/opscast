@@ -20,7 +20,7 @@ const NBHD_INDEX = listNeighborhoods();
 
 // Solar "sun exposure" seasons, matching the /microclimates page.
 const MICRO_SEASONS = [
-  { key: "annual", label: "Annual" },
+  { key: "annual", label: "Ann Avg" },
   { key: "winter", label: "Winter" },
   { key: "equinox", label: "Spring / Fall" },
   { key: "summer", label: "Summer" },
@@ -56,7 +56,7 @@ export default function FogMapTools({
   // Hazards (seismic + tsunami + faults) selector
   onHazardsOpen, onHazardsHide, onToggleHazard, onShowAllHazards, onSelectNoneHazards,
   // Microclimate zones selector
-  onToggleMicroZone, onShowAllMicro, onSelectNoneMicro, onMicroHide,
+  onToggleMicroZone, onMicroHide,
   // Neighborhoods list
   onPickNeighborhood, openHood,
   // Homes overlay — compact filter bar drives the dots + the shared Stats sheet
@@ -171,8 +171,6 @@ export default function FogMapTools({
 
   // Legends for the currently-active color-coded layers only.
   const microItems = [
-    showMicroSun && ["#fdba74", "Sun pockets"],
-    showMicroCool && ["#7dd3fc", "Cool / shade"],
     showMicroWind && ["#2dd4bf", "Wind corridors"],
     showMicroSolar && ["#fef3c7", "More sun than flat"],
     showMicroSolar && ["#c4a574", "Shaded vs flat"],
@@ -464,33 +462,52 @@ export default function FogMapTools({
       )}
 
       {menu === "micro" && (
-        <div className="fog-float-panel left fog-layers-panel" role="menu">
-          <div className="fog-layers-group">
-            <div className="fog-layers-group-title">Microclimate Zones</div>
-            <ToggleSwitch label="Sun pockets" checked={showMicroSun} onChange={() => onToggleMicroZone?.("sun")} />
-            <ToggleSwitch label="Cool / shade" checked={showMicroCool} onChange={() => onToggleMicroZone?.("cool")} />
-            <ToggleSwitch label="Wind corridors" checked={showMicroWind} onChange={() => onToggleMicroZone?.("wind")} />
-            <ToggleSwitch label="Sun exposure" checked={showMicroSolar} onChange={onToggleMicroSolar} />
+        <div className="fog-float-panel left fog-layerbar" role="menu">
+          <div className="fog-layerbar-row">
+            <button
+              type="button"
+              className={"fog-lk" + (showMicroWind ? " on" : "")}
+              style={showMicroWind ? { color: "#0d9488", borderColor: "#0d9488" } : undefined}
+              onClick={() => onToggleMicroZone?.("wind")}
+              aria-pressed={!!showMicroWind}
+            >
+              Wind corridors
+            </button>
+            <button
+              type="button"
+              className={"fog-lk" + (showMicroSolar ? " on" : "")}
+              style={showMicroSolar ? { color: "#b45309", borderColor: "#d97706" } : undefined}
+              onClick={() => onToggleMicroSolar?.(!showMicroSolar)}
+              aria-pressed={!!showMicroSolar}
+            >
+              Sun exposure
+            </button>
+            <button
+              type="button"
+              className={"fog-lk" + (showMicroFogLine ? " on" : "")}
+              style={showMicroFogLine ? { color: "#1d4ed8", borderColor: "#1d4ed8" } : undefined}
+              onClick={() => onToggleMicroFogLine?.(!showMicroFogLine)}
+              aria-pressed={!!showMicroFogLine}
+            >
+              Fog line
+            </button>
             {showMicroSolar && (
-              <div className="micro-season-row">
+              <>
+                <span className="fog-lk-divider" aria-hidden="true" />
                 {MICRO_SEASONS.map(s => (
                   <button
                     key={s.key}
                     type="button"
-                    className={"micro-season-btn" + (solarSeason === s.key ? " on" : "")}
+                    className={"fog-lk" + (solarSeason === s.key ? " on" : "")}
+                    style={solarSeason === s.key ? { color: "#b45309", borderColor: "#f59e0b", background: "#fef3c7" } : undefined}
                     onClick={() => onSelectSolarSeason?.(s.key)}
+                    aria-pressed={solarSeason === s.key}
                   >
                     {s.label}
                   </button>
                 ))}
-              </div>
+              </>
             )}
-          </div>
-          <div className="fog-layers-group">
-            <div className="fog-layers-group-title">Terrain &amp; Reference</div>
-            <ToggleSwitch label="Terrain" checked={showTerrain} onChange={onToggleTerrain} />
-            <ToggleSwitch label="Elevation contours" checked={showElevation} onChange={onToggleElevation} />
-            <ToggleSwitch label="Fog inversion line" checked={showMicroFogLine} onChange={onToggleMicroFogLine} />
           </div>
         </div>
       )}

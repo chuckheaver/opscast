@@ -186,25 +186,22 @@ export default function FogApp() {
   const showAllHazards = () => { const d = { seismic: true, tsunami: true, faults: true }; applyHaz(d); persistHaz(d); };
   const selectNoneHazards = () => { const d = { seismic: false, tsunami: false, faults: false }; applyHaz(d); persistHaz(d); };
 
-  // Microclimates selector handlers — bar picks are the saved default; opening
-  // loads the zones + restores them, chip-off hides without clobbering them.
-  const applyMicro = d => { setShowMicroSun(d.sun); setShowMicroCool(d.cool); setShowMicroWind(d.wind); };
+  // Microclimates selector handlers. The overlay is Wind corridors + Sun
+  // exposure (+ optional fog-inversion line); the older sun-pocket / cool-
+  // shade zone fills are retired and always stay off. Opening turns on wind
+  // + sun exposure; the bar chips toggle each one; the chip-off hides all.
+  const applyMicro = d => { setShowMicroSun(false); setShowMicroCool(false); setShowMicroWind(!!d.wind); };
   const persistMicro = d => { setMicroDefault(d); try { localStorage.setItem(MICRO_PREF_KEY, JSON.stringify(d)); } catch {} };
-  // Opening restores the saved zone selection — but a saved "none" (every
-  // chip toggled off in the layers menu) would open an empty overlay, so
-  // fall back to all three zones in that case.
   const openMicro = () => {
     setMicroWanted(true);
-    const d = microDefault.sun || microDefault.cool || microDefault.wind ? microDefault : { sun: true, cool: true, wind: true };
-    applyMicro(d);
+    applyMicro({ wind: true });
+    setShowMicroSolar(true);
   };
-  const hideMicro = () => { applyMicro({ sun: false, cool: false, wind: false }); setShowMicroSolar(false); setShowMicroFogLine(false); };
+  const hideMicro = () => { applyMicro({ wind: false }); setShowMicroSolar(false); setShowMicroFogLine(false); };
   // Solar exposure needs its season data — mark the overlay wanted so the
   // lazy-load effect fetches it, then flip the layer on/off.
   const toggleMicroSolar = on => { if (on) setMicroWanted(true); setShowMicroSolar(on); };
-  const toggleMicro = key => { const d = { sun: showMicroSun, cool: showMicroCool, wind: showMicroWind }; d[key] = !d[key]; applyMicro(d); persistMicro(d); };
-  const showAllMicro = () => { const d = { sun: true, cool: true, wind: true }; applyMicro(d); persistMicro(d); };
-  const selectNoneMicro = () => { const d = { sun: false, cool: false, wind: false }; applyMicro(d); persistMicro(d); };
+  const toggleMicro = key => { const d = { sun: false, cool: false, wind: showMicroWind }; d[key] = !d[key]; applyMicro(d); persistMicro(d); };
 
   // SFAR Realtor neighborhoods (blue outlines + nbrhood (nid) labels).
   const [showRealtor, setShowRealtor] = useState(false);
@@ -717,8 +714,6 @@ export default function FogApp() {
           onShowAllHazards={showAllHazards}
           onSelectNoneHazards={selectNoneHazards}
           onToggleMicroZone={toggleMicro}
-          onShowAllMicro={showAllMicro}
-          onSelectNoneMicro={selectNoneMicro}
           onMicroHide={hideMicro}
           onPickNeighborhood={pickFromNeighborhood}
           openHood={openHood}

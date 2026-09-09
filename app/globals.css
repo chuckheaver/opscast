@@ -1477,6 +1477,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   line-height: 1.7; cursor: pointer; white-space: nowrap;
 }
 .fog-lk.on { font-weight: 700; }
+.fog-lk-divider { flex: 0 0 auto; width: 1px; align-self: stretch; margin: 3px 4px; background: var(--border); }
 .fog-lk-all {
   flex: 0 0 auto; border: none; border-left: 0.5px solid var(--border); background: transparent;
   color: #6b7280; font-size: 9.5px; font-weight: 600; line-height: 1.7;
