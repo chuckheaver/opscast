@@ -220,6 +220,9 @@ export default function NeighborhoodModal({
   }, [onComps]);
   const [dataThrough, setDataThrough] = useState(""); // M/D/YY of the last data load
   const [resCounts, setResCounts] = useState(undefined); // undefined loading | counts obj | null
+  // "By the Numbers" starts collapsed to save space; the header shows the
+  // parcel total so the headline number is visible without expanding.
+  const [invOpen, setInvOpen] = useState(false);
 
   // Residential parcel counts for this neighborhood, by unit bucket
   // (precomputed from the SF Land Use dataset).
@@ -324,7 +327,19 @@ export default function NeighborhoodModal({
 
         {resCounts && resCounts.total > 0 && (
           <section style={SEC}>
-            <Banner emoji="📊">By the Numbers - Inventory Count</Banner>
+            <button
+              type="button"
+              onClick={() => setInvOpen(o => !o)}
+              aria-expanded={invOpen}
+              style={{ ...BANNER, width: "100%", border: "none", cursor: "pointer", font: "inherit", textAlign: "left", marginBottom: invOpen ? 10 : 0 }}
+            >
+              <span style={ICON} aria-hidden="true">📊</span>
+              <span style={SECLBL}>By the Numbers - Inventory Count</span>
+              <span style={{ marginLeft: "auto", fontSize: 12, fontWeight: 600, color: "#2563eb", whiteSpace: "nowrap" }}>
+                {invOpen ? "Hide ▲" : `${resCounts.total.toLocaleString("en-US")} parcels ▼`}
+              </span>
+            </button>
+            {invOpen && (<>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.5px", textTransform: "uppercase", color: "#a8a29e", margin: "0 0 4px" }}>
               Inventory Types
             </div>
@@ -342,6 +357,7 @@ export default function NeighborhoodModal({
                 <span style={{ fontWeight: 800, color: "#1c1917" }}>{resCounts.total.toLocaleString("en-US")}</span>
               </div>
             </div>
+            </>)}
           </section>
         )}
 
