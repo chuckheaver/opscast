@@ -2254,10 +2254,16 @@ export default function FogMap({
   }, [showZoning]);
 
   // Toggle the Parcel Type overlays — Residential and Commercial are
-  // independent fills off the same tiles.
+  // independent fills off the same tiles. The parcel tiles only exist from
+  // z14 in (block level), so switching a fill on while the map is framed on
+  // the whole city drew nothing and looked broken: when a parcel layer goes
+  // from off to on below z14, ease in to z14.5 around the picked point (or
+  // the current centre) so the fills are actually on screen.
+  const parcelsWereOnRef = useRef(false);
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
+    const anyOn = !!(showParcelsRes || showParcelsCom);
     const apply = () => {
       if (map.getLayer("parcels-res-fill")) map.setLayoutProperty("parcels-res-fill", "visibility", showParcelsRes ? "visible" : "none");
       if (map.getLayer("parcels-com-fill")) map.setLayoutProperty("parcels-com-fill", "visibility", showParcelsCom ? "visible" : "none");
@@ -2265,6 +2271,13 @@ export default function FogMap({
     };
     apply();
     map.once("load", apply);
+    if (anyOn && !parcelsWereOnRef.current && map.getZoom() < 14) {
+      const pt = picked?.point;
+      const center = Array.isArray(pt) && Number.isFinite(pt[0]) && Number.isFinite(pt[1]) ? pt : map.getCenter();
+      map.easeTo({ center, zoom: 14.5, duration: 900 });
+    }
+    parcelsWereOnRef.current = anyOn;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showParcelsRes, showParcelsCom]);
 
   // Feed the Housing Activity dots — the filtered FeatureCollection from

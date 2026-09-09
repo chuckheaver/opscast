@@ -130,6 +130,7 @@ export default function FogMapTools({
     },
     {
       title: "Land Use (parcels)",
+      note: "Parcel fills draw from block level in (zoom 14+). Turning one on zooms the map in.",
       items: [
         ["Residential", showParcelsRes, onToggleParcelsRes],
         ["Commercial & other", showParcelsCom, onToggleParcelsCom],
@@ -540,6 +541,7 @@ export default function FogMapTools({
           {groups.map(g => (
             <div key={g.title} className="fog-layers-group">
               <div className="fog-layers-group-title">{g.title}</div>
+              {g.note && <div className="fog-layers-group-note">{g.note}</div>}
               {g.items.map(([label, checked, onChange]) => (
                 <ToggleSwitch key={label} label={label} checked={checked} onChange={onChange} />
               ))}
