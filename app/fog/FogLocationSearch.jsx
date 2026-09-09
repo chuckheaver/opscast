@@ -18,6 +18,7 @@ export default function FogLocationSearch({
   // Geocoder to use — defaults to the SF-biased fog one; pass a different
   // `suggest(query)` (e.g. the wine-country geocoder) to reuse this UI.
   suggest = defaultSuggest,
+  placeholder = "Where do you wanna go?",
 }) {
   const [q, setQ] = useState("");
   const [sugs, setSugs] = useState([]);
@@ -77,7 +78,7 @@ export default function FogLocationSearch({
         <input
           ref={inputRef}
           className="fog-input"
-          placeholder="Address, ZIP code, or city…"
+          placeholder={placeholder}
           value={q}
           onChange={e => setQ(e.target.value)}
           onFocus={() => { if (blurTimerRef.current) clearTimeout(blurTimerRef.current); if (sugs.length) setOpen(true); }}
@@ -89,7 +90,7 @@ export default function FogLocationSearch({
             type="button"
             className="clear-btn"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => { setQ(""); setSugs([]); setOpen(false); }}
+            onClick={() => { setQ(""); setSugs([]); setOpen(false); inputRef.current?.focus(); }}
             aria-label="Clear location"
             title="Clear"
           >

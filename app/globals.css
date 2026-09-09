@@ -1393,6 +1393,10 @@ input[type=range]::-webkit-slider-thumb:hover {
   font-size: 13.5px;
 }
 .fog-search-field .fog-input:focus { border: none; }
+/* The clear (×) button appears as soon as there's text; give it enough
+   weight to read as a control inside the pill. */
+.fog-search-field .clear-btn { width: 24px; height: 24px; right: 0; color: #57534e; font-size: 22px; }
+.fog-search-field .clear-btn:hover { color: #1c1917; background: rgba(28, 25, 23, 0.08); }
 .fog-search-field .fog-autocomplete {
   top: calc(100% + 8px);
   left: 0;

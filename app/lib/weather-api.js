@@ -117,14 +117,19 @@ export const geoCode = async (q, proximity) => {
 // Autocomplete: up to 5 suggestions for a partial query. Mapbox first
 // (street-address aware), Open-Meteo as a graceful fallback.
 // `proximity` ([lng, lat]) surfaces the closest matching addresses first.
-export const geoSuggest = async (q, proximity) => {
+// `opts.bbox` ([west, south, east, north]) RESTRICTS Mapbox results to that
+// box (an SF-only map wants SF matches, not the same street name in Ohio);
+// with a bbox the Open-Meteo fallback is skipped, since it can't be boxed —
+// an empty list tells the caller nothing matched inside the box.
+export const geoSuggest = async (q, proximity, opts = {}) => {
   if (!q || q.trim().length < 2) return [];
+  const bbox = Array.isArray(opts.bbox) && opts.bbox.length === 4 ? `&bbox=${opts.bbox.join(",")}` : "";
   if (MAPBOX_TOKEN) {
     try {
       const url =
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json` +
-        `?access_token=${MAPBOX_TOKEN}&autocomplete=true&country=us&types=address,postcode,place,locality,neighborhood,poi&limit=5` +
-        proximityParam(proximity);
+        `?access_token=${MAPBOX_TOKEN}&autocomplete=true&country=us&types=address,postcode,place,locality,neighborhood,poi&limit=${opts.limit || 5}` +
+        proximityParam(proximity) + bbox;
       const r = await fetch(url);
       if (r.ok) {
         const d = await r.json();
@@ -132,6 +137,7 @@ export const geoSuggest = async (q, proximity) => {
       }
     } catch {}
   }
+  if (bbox) return [];
   try {
     const r = await fetch(
       `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=5&language=en&format=json`

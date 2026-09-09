@@ -1,17 +1,23 @@
 // Address search for the fog map shares the app-wide Mapbox geocoder
-// (geoSuggest in app/lib/weather-api.js) but biases it to San Francisco:
-// this is an SF-only app, so SF results should come first. We pass SF's
-// centre as the proximity hint and then float any San Francisco results to
-// the top of the list (proximity alone biases by distance; the explicit
-// sort guarantees SF addresses lead even when a closer non-SF match exists).
+// (geoSuggest in app/lib/weather-api.js) but is San Francisco-first: this
+// is an SF-only app, so a query is resolved INSIDE the city limits before
+// anything else. Only when nothing in SF matches do we fall back to a
+// proximity-biased national search (so a Daly City or Oakland address a
+// user really wants still resolves), and even then SF-labelled results
+// float to the top.
 import { geoSuggest } from "../../lib/weather-api";
 
 // San Francisco city centre — the proximity bias point.
 const SF_CENTER = [-122.4194, 37.7749];
+// City limits, [west, south, east, north]: Ocean Beach to the Bay, Daly City
+// line to the Golden Gate, Treasure Island included.
+const SF_BBOX = [-122.53, 37.70, -122.35, 37.84];
 const isSF = r =>
   /san francisco/i.test(r?.place_name || "") || /san francisco/i.test(r?.label || "");
 
 export async function geocodeSuggest(q) {
+  const inSF = await geoSuggest(q, SF_CENTER, { bbox: SF_BBOX, limit: 6 });
+  if (inSF.length) return inSF;
   const results = await geoSuggest(q, SF_CENTER);
   // Stable sort: SF results first, original (relevance) order preserved within
   // each group.
