@@ -241,8 +241,17 @@ function loadAllListings() {
     console.log(`  ${f.split("/").pop()}: ${rows.length} rows`);
   }
   if (dupes) console.log(`  (skipped ${dupes} duplicate listing numbers across files)`);
-  return [...byId.values()];
+  // The site shows SOLD comps only (Closed / Sold Off MLS — the same set as
+  // SOLD_STATUSES in app/listings/lib/filter.js). Older exports left in
+  // data/raw/ carry Active / Pending / Hold / Coming Soon rows; drop them here
+  // so they never reach the public file. Applied after de-dupe so a newer
+  // export's status change (e.g. Closed → Withdrawn) is honoured.
+  const all = [...byId.values()];
+  const sold = all.filter(l => SOLD_STATUSES.has(l.status));
+  if (sold.length !== all.length) console.log(`  (dropped ${all.length - sold.length} non-sold rows — the site publishes sold comps only)`);
+  return sold;
 }
+const SOLD_STATUSES = new Set(["Closed", "Sold Off MLS"]);
 
 function num(s) {
   const n = Number(String(s).replace(/[^0-9.]/g, ""));
@@ -250,9 +259,12 @@ function num(s) {
 }
 
 // Signed decimal parse for coordinates (num() would strip the minus sign).
+// Some MLS feeds emit 0.000000 for listings they never geocoded — treat 0
+// as missing so the row falls through to the geocoder instead of mapping to
+// the Gulf of Guinea (and then being dropped as "outside SF").
 function coord(s) {
   const v = parseFloat(s);
-  return Number.isFinite(v) ? v : null;
+  return Number.isFinite(v) && Math.abs(v) > 1 ? v : null;
 }
 
 // MLS exports dates as MM/DD/YY. Normalize to ISO YYYY-MM-DD so the map can
@@ -628,7 +640,9 @@ async function main() {
   const nbhdIndex = buildNeighborhoodIndex(loadPublished());
   // Listings that already carry lat/long don't need geocoding at all.
   // Estimated points are still retried so a real geocode can replace them.
-  const hasLatLng = l => Number.isFinite(l.lat) && Number.isFinite(l.lng);
+  // Export coordinates are only trusted inside the SF bbox; a bogus pair
+  // (wrong city, swapped axes) falls through to the geocoder like a blank.
+  const hasLatLng = l => Number.isFinite(l.lat) && Number.isFinite(l.lng) && inBBox([l.lng, l.lat]);
   const ESTIMATE = new Set(["interpolated", "nearest"]);
   const need = listings.filter(l => {
     if (hasLatLng(l)) return false;
