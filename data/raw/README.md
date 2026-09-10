@@ -64,7 +64,10 @@ them beside the current set.
 In order of precedence: `export` (lat/lng in the MLS file) · `census` /
 `published` (a real geocode — from the Census batch geocoder, or carried
 over from the previously published file) · `override` (a hand-placed
-coordinate in `OVERRIDES`) · `interpolated` (estimated from same-building
+coordinate in `OVERRIDES`) · `nearest` (the true number isn't in any address range — e.g. 192 Museum
+Way — so the listing sits at the closest house number on that street that
+does geocode, same side of the street preferred; `geoVia` names it) ·
+`interpolated` (estimated from same-building
 or same-street neighbors by `scripts/interpolate-unmapped.py`) ·
 `neighborhood` (no findable position at all — pinned to the inferred
 neighborhood's anchor point so the sale still counts; the map draws these

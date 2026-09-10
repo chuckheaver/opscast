@@ -313,7 +313,9 @@ function seedCacheFromPublished(cache) {
     // estimate tier so a reachable geocoder still gets to replace it.
     cache[key] = p.geoSource === "interpolated"
       ? { point: pt, source: "interpolated", seededFrom: "published" }
-      : { point: pt, seededFrom: "published" };
+      : p.geoSource === "nearest"
+        ? { point: pt, source: "nearest", via: p.geoVia || null, seededFrom: "published" }
+        : { point: pt, seededFrom: "published" };
     n++;
   }
   return n;
@@ -406,6 +408,96 @@ function placeholderFor(l, idx) {
   const point = nb && idx.anchors.get(nb);
   if (!point) return null;
   return { neighborhood: nb, areaDesc: idx.top(idx.areaByNbhd.get(nb)), point };
+}
+
+// ── Nearest-address fallback ────────────────────────────────────────────────
+// Some addresses are real but sit outside every geocoder's address ranges
+// (new construction, a lot split, an in-fill number): 192 Museum Way misses
+// while 190 Museum Way matches. When an address misses, try its neighbours
+// on the same street out to ±NEAREST_MAX_OFFSET house numbers and pin the
+// listing to the closest number that geocodes — same-parity numbers (same
+// side of the street) are preferred over the opposite side. Tagged
+// geoSource "nearest" + geoVia = the address actually matched, and kept in
+// the retry set so a later run that can geocode the true address replaces it.
+const NEAREST_MAX_OFFSET = 30;
+const UNIT_RE = /\s+(?:#|unit\s+|apt\.?\s+|ste\.?\s+|suite\s+)\S+$/i;
+const HOUSE_RE = /^(\d+)\s+(.+)$/;
+export function neighborCandidates(street, max = NEAREST_MAX_OFFSET) {
+  const m = HOUSE_RE.exec(String(street || "").replace(UNIT_RE, "").trim());
+  if (!m) return [];
+  const n = Number(m[1]);
+  const rest = m[2];
+  const out = [];
+  for (let d = 1; d <= max; d++) {
+    for (const sgn of [-1, 1]) {
+      const k = n + sgn * d;
+      if (k <= 0) continue;
+      out.push({ street: `${k} ${rest}`, offset: sgn * d, sameSide: d % 2 === 0 });
+    }
+  }
+  return out;
+}
+// Closest number wins; the opposite side of the street costs a few numbers,
+// so 190 beats 191 for 192, but 191 still beats 200.
+export const nearestRank = c => Math.abs(c.offset) + (c.sameSide ? 0 : 6);
+
+// SF bounding box (includes Treasure Island) — a fast first filter for
+// gross mis-geocodes to same-named streets in other cities.
+const inBBox = ([lon, lat]) =>
+  lon >= -122.53 && lon <= -122.34 && lat >= 37.69 && lat <= 37.84;
+
+async function nearestAddressPass(need, cache, geocode) {
+  const retry = need.filter(l => {
+    const c = cache[addrKey(l)];
+    return !c?.point || c.source === "interpolated" || c.source === "nearest";
+  });
+  if (!retry.length) return 0;
+  const rows = [];
+  const byRow = new Map();
+  for (const l of retry) {
+    for (const c of neighborCandidates(l.street)) {
+      const id = `${l.id}#${c.offset}`;
+      rows.push({ id, street: c.street, city: l.city, state: l.state, zip: l.zip });
+      byRow.set(id, { l, c });
+    }
+  }
+  if (!rows.length) return 0;
+  console.log(`Nearest-address fallback: ${retry.length} unmatched address(es) → trying ${rows.length} neighbouring house numbers…`);
+  const best = new Map();
+  const CHUNK = 1000;
+  for (let i = 0; i < rows.length; i += CHUNK) {
+    let res;
+    try {
+      res = await geocode(rows.slice(i, i + CHUNK));
+    } catch (err) {
+      console.warn(`  nearest-address lookup failed (${err.message}); skipping for this run.`);
+      return 0;
+    }
+    for (const [id, r] of Object.entries(res)) {
+      const hit = byRow.get(id);
+      if (!hit || !inBBox(r.point)) continue;
+      const key = addrKey(hit.l);
+      const cur = best.get(key);
+      if (!cur || nearestRank(hit.c) < nearestRank(cur.c)) best.set(key, { c: hit.c, r });
+    }
+  }
+  for (const [key, { c, r }] of best) {
+    cache[key] = { point: r.point, matchedAddress: r.matchedAddress, source: "nearest", via: c.street, offset: c.offset };
+  }
+  console.log(`  placed ${best.size} of ${retry.length} at the nearest geocodable house number.`);
+  return best.size;
+}
+
+// Offline test hook: GEOCODE_MOCK_FILE=<json> answers batches from a map of
+// "<street>|<zip>" (lower-case) → [lng, lat] instead of calling Census.
+async function mockGeocodeBatch(listings) {
+  const table = JSON.parse(readFileSync(process.env.GEOCODE_MOCK_FILE, "utf8"));
+  const out = {};
+  for (const l of listings) {
+    const pt = table[`${l.street}|${l.zip}`.toLowerCase()];
+    if (pt) out[l.id] = { point: pt, matchedAddress: `${l.street}, ${l.city}, ${l.state}, ${l.zip}`.toUpperCase() };
+  }
+  return out;
 }
 
 async function geocodeBatch(listings) {
@@ -537,11 +629,13 @@ async function main() {
   // Listings that already carry lat/long don't need geocoding at all.
   // Estimated points are still retried so a real geocode can replace them.
   const hasLatLng = l => Number.isFinite(l.lat) && Number.isFinite(l.lng);
+  const ESTIMATE = new Set(["interpolated", "nearest"]);
   const need = listings.filter(l => {
     if (hasLatLng(l)) return false;
     const c = cache[addrKey(l)];
-    return !c || c.source === "interpolated";
+    return !c || ESTIMATE.has(c.source);
   });
+  const geocode = process.env.GEOCODE_MOCK_FILE ? mockGeocodeBatch : geocodeBatch;
   console.log(
     `${listings.length - need.length} cached, ${need.length} to geocode.`
   );
@@ -554,7 +648,7 @@ async function main() {
       console.log(`Geocoding ${i + 1}-${i + slice.length} of ${need.length}…`);
       let res;
       try {
-        res = await geocodeBatch(slice);
+        res = await geocode(slice);
       } catch (err) {
         // Census unreachable (offline, egress-blocked, or an outage). Don't
         // abort — everything already cached or carrying lat/lng still gets
@@ -569,16 +663,14 @@ async function main() {
         // A Census miss must not erase an estimate we already hold.
         cache[key] = r
           ? { point: r.point, matchedAddress: r.matchedAddress }
-          : cache[key]?.source === "interpolated" ? cache[key] : { point: null };
+          : ESTIMATE.has(cache[key]?.source) ? cache[key] : { point: null };
       }
     }
+    // Whatever Census still couldn't place: try the neighbouring house
+    // numbers and pin to the closest one that resolves.
+    await nearestAddressPass(need, cache, geocode);
     writeFileSync(CACHE_PATH, JSON.stringify(cache));
   }
-
-  // SF bounding box (includes Treasure Island) — a fast first filter for
-  // gross mis-geocodes to same-named streets in other cities.
-  const inBBox = ([lon, lat]) =>
-    lon >= -122.53 && lon <= -122.34 && lat >= 37.69 && lat <= 37.84;
 
   let matched = 0;
   let placeholders = 0;
@@ -587,12 +679,18 @@ async function main() {
   const features = [];
   for (const l of listings) {
     const c = cache[addrKey(l)];
-    let point = (hasLatLng(l) ? [l.lng, l.lat] : null) || c?.point || OVERRIDES[addrKey(l)];
+    // Precedence: export lat/lng > a real geocode (Census / carried over from
+    // the published file) > a hand-placed OVERRIDE > nearest-address pin >
+    // same-street interpolation > neighborhood placeholder.
+    const real = c?.point && !ESTIMATE.has(c.source) ? c.point : null;
+    let point = (hasLatLng(l) ? [l.lng, l.lat] : null) || real || OVERRIDES[addrKey(l)] || c?.point || null;
     // Provenance of the coordinate, mirroring the precedence above, so the
     // map can flag estimates as approximate.
     let geoSource = hasLatLng(l) ? "export"
-      : c?.point ? (c.source === "interpolated" ? "interpolated" : c.seededFrom === "published" ? "published" : "census")
-      : OVERRIDES[addrKey(l)] ? "override" : null;
+      : real ? (c.seededFrom === "published" ? "published" : "census")
+      : OVERRIDES[addrKey(l)] ? "override"
+      : c?.point ? c.source : null;
+    const geoVia = geoSource === "nearest" ? c.via || null : null;
     // Last resort: pin an unmappable listing to its neighborhood so it still
     // exists as a feature and counts. Only truly unresolvable rows fall out.
     let placeholder = null;
@@ -654,6 +752,8 @@ async function main() {
         dom: l.dom ?? null,
         zip: l.zip || null,
         geoSource,
+        // For "nearest": the neighbouring address whose position this is.
+        geoVia,
         placeholder: placeholder ? placeholder.neighborhood : null,
         // "SF District N". Prefer the MLS "Area Desc" column; when an export
         // omits it, derive it from the realtor district polygon so the
@@ -673,16 +773,29 @@ async function main() {
     });
   }
 
+  // Carry over published listings that aren't in any CSV in data/raw/ (the
+  // 2022–2025 comps were built from exports that are no longer on disk).
+  // Without this a rebuild would publish only the current CSVs' rows.
+  const ids = new Set(listings.map(l => String(l.id)));
+  const carried = (loadPublished()?.features || []).filter(f => !ids.has(String(f.properties?.id)));
+  if (carried.length) {
+    console.log(`Carrying over ${carried.length} published listing(s) not present in data/raw/ CSVs.`);
+    features.push(...carried);
+  }
+
   const fc = {
     type: "FeatureCollection",
     metadata: {
       source: "data/raw/*.csv (combined MLS exports)",
       builtAt: new Date().toISOString(),
       geocoder: "US Census batch geocoder (Public_AR_Current)",
-      total: listings.length,
+      total: features.length,
+      rebuilt: listings.length,
+      carriedOver: carried.length,
       matched,
       droppedOutsideSF: outside.length,
       neighborhoodPlaceholders: placeholders,
+      nearestAddress: features.filter(f => f.properties.geoSource === "nearest").length,
     },
     features,
   };
@@ -693,6 +806,10 @@ async function main() {
   console.log(`\n✓ wrote ${OUT_PATH}`);
   console.log(`  ${matched}/${listings.length} geocoded`);
   console.log(`  ${withFog} tagged with fog-hours, ${withNbhd} with a neighborhood/district`);
+  const nearestN = fc.metadata.nearestAddress;
+  if (nearestN) {
+    console.log(`  ${nearestN} pinned to the nearest geocodable house number (geoSource "nearest")`);
+  }
   if (placeholders) {
     console.log(`  ${placeholders} pinned to a neighborhood placeholder (no mappable address; still counted)`);
   }
@@ -717,7 +834,9 @@ async function main() {
   }
 }
 
-main().catch(e => {
-  console.error(e);
-  process.exit(1);
-});
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  main().catch(e => {
+    console.error(e);
+    process.exit(1);
+  });
+}

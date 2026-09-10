@@ -1370,6 +1370,7 @@ export default function FogMap({
           ["RE district", p.district],
           ["Zip", p.zip],
           ["Fog exposure", p.fogHours != null ? `${p.fogHours} hrs/day` : ""],
+          ["Map position", p.geoVia ? `nearest address (${p.geoVia})` : ""],
           ["APN", p.apn],
           ["MLS #", p.id],
           ["Listing agent", p.agent],

@@ -12,7 +12,8 @@
     "contours:build": "node scripts/build-elevation-contours.mjs",
     "muni:build": "node scripts/build-muni-stops.mjs",
     "solar:build": "node scripts/build-solar-irradiation.mjs",
-    "buildings:build": "node scripts/build-building-sales.mjs"
+    "buildings:build": "node scripts/build-building-sales.mjs",
+    "listings:geocode": "node scripts/geocode-listings.mjs"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.5.1",
