@@ -6,8 +6,8 @@
 //   - The USGS fog-contour polygons as the primary data layer, in three
 //     solid-colour bands by hours/day value:
 //       • < 8.5  → bright yellow
-//       • 8.5–9.5 → one light grey (transition + first fog steps)
-//       • > 9.5   → grey gradient (darker for higher fog hours)
+//       • 8.5    → lightest grey (transition band; lightly dashed outline)
+//       • > 8.5  → grey gradient (darker for higher fog hours)
 //
 // Click and hover detection sit on an invisible "fog-click-target" fill
 // over the neighborhoods, so the user can pick anywhere inside SF
@@ -415,9 +415,9 @@ export default function FogMap({
         },
       });
 
-      // Grey gradient band (≥8.5 hrs): the 8.5, 9 and 9.5 polygons share one
-      // light grey (flat segment), then the ramp darkens from 9.5 to
-      // near-black at 12.5 — each darker shade signals more daily fog hours.
+      // Grey gradient band (≥8.5 hrs): the 8.5 (Transition) polygon is the
+      // lightest grey; each band above it steps darker along one smooth
+      // ramp to near-black at 12.5 — darker = more daily fog hours.
       map.addLayer({
         id: "fog-contours-fog",
         type: "fill",
@@ -426,8 +426,9 @@ export default function FogMap({
         paint: {
           "fill-color": [
             "interpolate", ["linear"], ["get", "hours"],
-            8.5,  "#e5e5e4",
-            9.5,  "#e5e5e4",
+            8.5,  "#e7e5e4",
+            9,    "#d6d3d1",
+            10,   "#a8a29e",
             11,   "#78716c",
             12.5, "#292524",
           ],
@@ -437,8 +438,7 @@ export default function FogMap({
 
       // (Sun band — < 8.5 hrs — intentionally has no fill layer. Polygons
       //  in that band are left transparent so the basemap reads through.
-      //  The 8.0 contour still gets a dashed outline below as a visible
-      //  boundary cue.)
+      //  The 8.5 polygon's lightly dashed outline below marks the edge.)
 
 
       // SF Zoning Districts (DataSF) — 1,647 simplified polygons. Toggleable
@@ -1485,7 +1485,6 @@ export default function FogMap({
           .setLngLat(e.lngLat).setHTML(html).addTo(map);
       });
 
-      // Dashed outline ONLY on the 8.0 polygon — it's the "edge of Sun"
       // SFMTA bike network — 5,455 segments from DataSF. Color-coded by
       // facility class:
       //   CLASS I   (BIKE PATH)         → dark green, solid    — off-street, gold standard
@@ -1770,9 +1769,11 @@ export default function FogMap({
         },
       });
 
-      // Dashed outline on the entire 8.5 (Transition) polygon boundary.
-      // Reads natively off the contour source, no LineString preprocessing
-      // needed — so the dashes stay continuous wherever the contour goes.
+      // Lightly dashed outline on the 8.5 (Transition) polygon ONLY — both of
+      // its edges (the 8→8.5 line and the 8.5→9 line) — so the transition
+      // band reads as the boundary between Sun and Fog. No other contour is
+      // outlined. Reads natively off the contour source, so the dashes stay
+      // continuous wherever the contour goes.
       map.addLayer({
         id: "fog-contours-transition-outline",
         type: "line",
@@ -1784,10 +1785,10 @@ export default function FogMap({
           "line-join": "round",
         },
         paint: {
-          "line-color": "#9ca3af",
-          "line-width": 1.2,
-          "line-dasharray": [2, 2.6],
-          "line-opacity": 0.45,
+          "line-color": "#78716c",
+          "line-width": ["interpolate", ["linear"], ["zoom"], 10, 1, 13, 1.4, 16, 2],
+          "line-dasharray": [1.5, 3],
+          "line-opacity": 0.6,
         },
       });
 
