@@ -1439,6 +1439,21 @@ input[type=range]::-webkit-slider-thumb:hover {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
+/* Touch layouts: every field in the map UI sits at or above iOS's 16px
+   auto-zoom threshold. Anything smaller makes Safari zoom on focus, which
+   pans the page and clips the chrome. */
+@media (max-width: 820px) {
+  .fog-app input,
+  .fog-app select,
+  .fog-app textarea,
+  .fog-search-field .fog-input {
+    font-size: 16px;
+  }
+  /* 16px type needs the room back — trim the brand card on phones. */
+  .fog-brand { padding: 4px 8px 5px; }
+  .fog-brand-contact a { font-size: 10px; }
+}
+
 /* Quick-link chips under the search bar */
 .fog-chips {
   position: absolute;
@@ -4299,6 +4314,12 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
     height: var(--fog-sheet-h, 52vh);
     min-height: 0;
     max-height: var(--fog-sheet-h, 52vh);
+  }
+  @supports (height: 1dvh) {
+    .nh-modal.nh-sheet {
+      height: var(--fog-sheet-dh, 52dvh);
+      max-height: var(--fog-sheet-dh, 52dvh);
+    }
     border-radius: 18px 18px 0 0;
     padding: 8px 16px calc(20px + env(safe-area-inset-bottom, 0px));
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.26);

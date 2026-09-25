@@ -114,6 +114,20 @@ export default function FogApp() {
     mq.addEventListener("change", sync);
     return () => mq.removeEventListener("change", sync);
   }, []);
+  // Viewport height, tracked live: on iOS the URL bar collapsing changes it
+  // mid-scroll, and the map's bottom inset is derived from it.
+  const [vpH, setVpH] = useState(0);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const sync = () => setVpH(window.innerHeight);
+    sync();
+    window.addEventListener("resize", sync);
+    window.visualViewport?.addEventListener("resize", sync);
+    return () => {
+      window.removeEventListener("resize", sync);
+      window.visualViewport?.removeEventListener("resize", sync);
+    };
+  }, []);
   // Transit: which line categories are shown (a Set of TRANSIT_CATS keys).
   // Defaults to all; a saved default (localStorage) is loaded on mount.
   const [transitSel, setTransitSel] = useState(() => new Set(ALL_TRANSIT_KEYS));
@@ -650,12 +664,10 @@ export default function FogApp() {
   // On a phone the open pop-up is a bottom sheet, so the map has to frame
   // its marker into the half above it rather than the middle of the canvas.
   const sheetMode = isPhone && !!openHood;
-  const mapInset = sheetMode && typeof window !== "undefined"
-    ? Math.round(window.innerHeight * SHEET_VH / 100)
-    : 0;
+  const mapInset = sheetMode && vpH ? Math.round(vpH * SHEET_VH / 100) : 0;
 
   return (
-    <div className="fog-app fog-app-vertical" style={{ "--fog-sheet-h": `${SHEET_VH}vh` }}>
+    <div className="fog-app fog-app-vertical" style={{ "--fog-sheet-h": `${SHEET_VH}vh`, "--fog-sheet-dh": `${SHEET_VH}dvh` }}>
       <div className="fog-map-wrap fog-map-wrap-full">
         <FogMap
           geojson={geojson}
