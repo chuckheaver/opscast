@@ -1404,6 +1404,17 @@ input[type=range]::-webkit-slider-thumb:hover {
   border-radius: 10px;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
 }
+/* "Recent searches" header above the remembered picks. */
+.fog-ac-head {
+  padding: 7px 12px 5px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #a8a29e;
+}
+.fog-ac-clock { margin-right: 7px; font-size: 11px; opacity: 0.75; }
+
 .fog-search-err {
   position: absolute;
   top: 60px;
@@ -4259,9 +4270,54 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 }
 .nh-x:hover { background: rgba(0, 0, 0, 0.06); color: #1c1917; }
 @media (max-width: 520px) {
-  .nh-backdrop { padding: 0; }
-  .nh-modal { max-width: none; min-height: 100%; max-height: 100vh; border-radius: 0; }
+  .nh-backdrop:not(.nh-backdrop-sheet) { padding: 0; }
+  .nh-modal:not(.nh-sheet) { max-width: none; min-height: 100%; max-height: 100vh; border-radius: 0; }
   .nh-x { margin-top: 0; }
+}
+
+/* Phone split screen. The pop-up drops to a bottom sheet over the lower
+   ~half of the screen, so the map keeps the top half: the blue location
+   marker stays in view (the map re-frames to put it there) and the layer
+   chips stay reachable, which is the whole point of the split. Height is
+   set by --fog-sheet-h, which FogApp also converts to the map's bottom
+   padding — one number, so the two can't drift apart. */
+@media (max-width: 640px) {
+  .nh-backdrop-sheet {
+    padding: 0;
+    align-items: flex-end;
+    /* No dimming: the map above the sheet has to stay fully legible. */
+    background: transparent;
+  }
+  .nh-modal.nh-sheet {
+    width: 100%;
+    max-width: none;
+    height: var(--fog-sheet-h, 52vh);
+    min-height: 0;
+    max-height: var(--fog-sheet-h, 52vh);
+    border-radius: 18px 18px 0 0;
+    padding: 8px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.26);
+    /* Scrolling the sheet must not drag the page or the map behind it. */
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Grab handle — signals "this scrolls" and marks the top edge. */
+  .nh-grip {
+    position: sticky; top: 0; z-index: 4;
+    width: 40px; height: 4px; margin: 0 auto 2px;
+    border-radius: 999px; background: #d6d3d1;
+  }
+  /* Bigger, higher-contrast close target on the sheet: it sits at the very
+     top-right of a half-height surface, reachable with one thumb. */
+  .nh-sheet .nh-x {
+    margin: -22px -4px -26px 0;
+    width: 38px; height: 38px;
+    font-size: 27px;
+    color: #44403c;
+    background: #f5f5f4;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  }
+  .nh-sheet .nh-x:hover { background: #e7e5e4; color: #1c1917; }
 }
 /* Laptop / desktop: dock the pop-up to the left so the picked neighborhood
    stays visible on the map, and lighten the backdrop so the map reads. */

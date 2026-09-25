@@ -35,6 +35,12 @@ const SOLAR_URLS = {
 };
 const DATA_URL = "/data/sf-fog-neighborhoods.geojson";
 const CONTOURS_URL = "/data/sf-fog-contours.geojson";
+// On a phone the neighborhood pop-up becomes a bottom sheet covering this
+// much of the screen, leaving the map (and the blue location marker on it)
+// in the half above. The same number reaches CSS as --fog-sheet-h and the
+// map as a bottom padding, so the two can never drift apart.
+const SHEET_VH = 52;
+
 // Geographic centre of San Francisco — the default placeholder for the
 // "Neighborhoods" entry, so the map opens centred on the city for browsing.
 const SF_CENTER = [-122.4376, 37.7577];
@@ -92,6 +98,18 @@ export default function FogApp() {
   // repeat click on the same row still fires).
   const [focusComp, setFocusComp] = useState(null);
   const [recenter, setRecenter] = useState(0); // bump to re-frame San Francisco
+  // Phone layout? Drives the split-screen sheet. matchMedia rather than a
+  // width guess, and it starts false so the server and first client render
+  // agree before the listener settles it.
+  const [isPhone, setIsPhone] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(max-width: 640px)");
+    const sync = () => setIsPhone(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
   // Transit: which line categories are shown (a Set of TRANSIT_CATS keys).
   // Defaults to all; a saved default (localStorage) is loaded on mount.
   const [transitSel, setTransitSel] = useState(() => new Set(ALL_TRANSIT_KEYS));
@@ -295,7 +313,7 @@ export default function FogApp() {
       // Zoom down to the address: frame its neighborhood polygon (with a pin at
       // the exact spot), or — if the address is outside SF — fly to the point.
       const bounds = feature ? bboxOfFeature(feature) : null;
-      setPicked({ point, address, feature, contour, bounds, zoom: bounds ? undefined : 15 });
+      setPicked({ point, address, feature, contour, bounds, source: "address", zoom: bounds ? undefined : 15 });
       // Surface the neighborhood summary (with the point-level facts) for the
       // address the user entered — that pop-up is now the only place details
       // show, since there's no bottom panel.
@@ -303,6 +321,15 @@ export default function FogApp() {
     },
     [geojson, contours]
   );
+
+  // The (×) in the search field. The blue marker survives panning, layer
+  // toggles and closing the info sheet — this is the only thing that takes
+  // it off the map.
+  const clearLocation = useCallback(() => {
+    setPicked(null);
+    setOpenHood(null);
+    setCompFeatures(null);
+  }, []);
 
   // User clicked a neighborhood directly on the map — pick the point and
   // open that neighborhood's highlights pop-up.
@@ -361,7 +388,7 @@ export default function FogApp() {
         // Zoom down to where they are: frame the neighborhood (pin at the exact
         // spot), or fly to the point if it's outside SF.
         const bounds = feature ? bboxOfFeature(feature) : null;
-        setPicked({ point, address, feature, contour, bounds, zoom: bounds ? undefined : 15 });
+        setPicked({ point, address, feature, contour, bounds, source: "address", zoom: bounds ? undefined : 15 });
         setOpenHood(feature?.properties?.name || null);
         setGeoLoading(false);
       },
@@ -612,8 +639,15 @@ export default function FogApp() {
     };
   }, [homesMatches, activityWanted]);
 
+  // On a phone the open pop-up is a bottom sheet, so the map has to frame
+  // its marker into the half above it rather than the middle of the canvas.
+  const sheetMode = isPhone && !!openHood;
+  const mapInset = sheetMode && typeof window !== "undefined"
+    ? Math.round(window.innerHeight * SHEET_VH / 100)
+    : 0;
+
   return (
-    <div className="fog-app fog-app-vertical">
+    <div className="fog-app fog-app-vertical" style={{ "--fog-sheet-h": `${SHEET_VH}vh` }}>
       <div className="fog-map-wrap fog-map-wrap-full">
         <FogMap
           geojson={geojson}
@@ -655,6 +689,7 @@ export default function FogApp() {
           transitRoutes={transitRoutes}
           transitStops={transitSel.has("bus")}
           bikeSel={bikeSel}
+          bottomInset={mapInset}
         />
         <FogMapTools
           contoursAvailable={!!contours}
@@ -740,6 +775,7 @@ export default function FogApp() {
           onToggleMicroFogLine={setShowMicroFogLine}
           onMicroOpen={openMicro}
           onPickFromAddress={pickFromAddress}
+          onClearLocation={clearLocation}
           onUseGeoLocation={requestGeoLocation}
           onResetView={resetView}
           ready={!!geojson}
@@ -762,6 +798,7 @@ export default function FogApp() {
       </div>
       <FogPanel
         picked={picked}
+        sheet={sheetMode}
         openHood={openHood}
         onCloseHood={() => setOpenHood(null)}
         onShowProperties={showNeighborhoodProperties}

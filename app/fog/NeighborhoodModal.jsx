@@ -206,7 +206,9 @@ function PlaceRow({ p, first }) {
 }
 
 export default function NeighborhoodModal({
-  name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict,
+  // Phone: render as a bottom sheet over the lower half of the screen so the
+  // map, its marker and the layer chips all stay visible and usable above.
+  sheet, name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict,
   zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties, onToggleLayer, layerStates, onComps, onFocusComp,
 }) {
   const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
@@ -310,8 +312,13 @@ export default function NeighborhoodModal({
   const heading = data.title || name;
 
   return (
-    <div className="nh-backdrop">
-      <div className="nh-modal" role="dialog" aria-label={`${heading} neighborhood highlights`}>
+    <div className={"nh-backdrop" + (sheet ? " nh-backdrop-sheet" : "")}>
+      <div
+        className={"nh-modal" + (sheet ? " nh-sheet" : "")}
+        role="dialog"
+        aria-label={`${heading} neighborhood highlights`}
+      >
+        {sheet && <div className="nh-grip" aria-hidden="true" />}
         <button className="nh-x" onClick={onClose} aria-label="Close">×</button>
 
         <div style={{ fontSize: 22, fontWeight: 800, color: "#1c1917", lineHeight: 1.1, letterSpacing: "-0.5px" }}>{heading}</div>

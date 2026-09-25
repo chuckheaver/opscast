@@ -16,6 +16,7 @@ import BuildingModal from "./BuildingModal";
 
 export default function FogPanel({
   picked,
+  sheet,
   openHood,
   onCloseHood,
   onShowProperties,
@@ -69,6 +70,7 @@ export default function FogPanel({
     <>
       {openHood && openData && (
         <NeighborhoodModal
+          sheet={sheet}
           name={openHood}
           data={openData}
           fogHrs={factsMatch && Number.isFinite(fogHrs) ? fogHrs : null}

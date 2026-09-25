@@ -6,9 +6,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { geocodeSuggest as defaultSuggest } from "./lib/geocode";
+import { readRecents, pushRecent } from "./lib/recent";
 
 export default function FogLocationSearch({
   onPickFromAddress,
+  // Called when the field is emptied via the (×). The app uses this to drop
+  // the blue marker — the marker otherwise stays put through panning,
+  // layer toggles and closing the info sheet.
+  onClear,
   onUseGeoLocation,
   ready,
   geoLoading,
@@ -23,6 +28,11 @@ export default function FogLocationSearch({
   const [q, setQ] = useState("");
   const [sugs, setSugs] = useState([]);
   const [open, setOpen] = useState(false);
+  // The last few picks, offered as soon as the field is focused and empty.
+  // Read on mount rather than at module scope so the server render and the
+  // first client render agree.
+  const [recents, setRecents] = useState([]);
+  useEffect(() => { setRecents(readRecents()); }, []);
   const debounceRef = useRef(null);
   const blurTimerRef = useRef(null);
   const inputRef = useRef(null);
@@ -63,12 +73,18 @@ export default function FogLocationSearch({
     return () => clearTimeout(debounceRef.current);
   }, [q, suggest]);
 
+  const offerRecents = () => {
+    if (blurTimerRef.current) clearTimeout(blurTimerRef.current);
+    if (sugs.length || (q.trim().length < 3 && recents.length)) setOpen(true);
+  };
+
   const pick = sug => {
     const display = sug.label || sug.place_name;
     suppressNextFetchRef.current = true;
     setQ(display);
     setSugs([]);
     setOpen(false);
+    setRecents(pushRecent(display, sug.center));
     onPickFromAddress(sug.center, display);
   };
 
@@ -81,7 +97,8 @@ export default function FogLocationSearch({
           placeholder={placeholder}
           value={q}
           onChange={e => setQ(e.target.value)}
-          onFocus={() => { if (blurTimerRef.current) clearTimeout(blurTimerRef.current); if (sugs.length) setOpen(true); }}
+          onFocus={offerRecents}
+          onClick={offerRecents}
           onBlur={() => { blurTimerRef.current = setTimeout(() => setOpen(false), 150); }}
           disabled={!ready}
         />
@@ -90,7 +107,14 @@ export default function FogLocationSearch({
             type="button"
             className="clear-btn"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => { setQ(""); setSugs([]); setOpen(false); inputRef.current?.focus(); }}
+            onClick={() => {
+            setQ(""); setSugs([]);
+            onClear?.();
+            inputRef.current?.focus();
+            // Straight from "cleared" to the recent list, so the next trip is
+            // one tap rather than retyping an address just visited.
+            setOpen(recents.length > 0);
+          }}
             aria-label="Clear location"
             title="Clear"
           >
@@ -108,6 +132,23 @@ export default function FogLocationSearch({
         >
           {geoLoading ? "⏳" : "📍"}
         </button>
+      )}
+      {open && sugs.length === 0 && q.trim().length < 3 && recents.length > 0 && (
+        <div className="fog-autocomplete">
+          <div className="fog-ac-head">Recent searches</div>
+          {recents.map(r => (
+            <div
+              key={r.label}
+              className="fog-autocomplete-item"
+              onMouseDown={e => { e.preventDefault(); pick({ label: r.label, center: r.center }); }}
+            >
+              <div className="fog-ac-name">
+                <span className="fog-ac-clock" aria-hidden="true">🕘</span>
+                {r.label}
+              </div>
+            </div>
+          ))}
+        </div>
       )}
       {open && sugs.length > 0 && (
         <div className="fog-autocomplete">

@@ -67,7 +67,8 @@ export default function FogMapTools({
   showMicroSolar, onToggleMicroSolar, solarSeason, onSelectSolarSeason,
   showMicroFogLine, onToggleMicroFogLine,
   // Location / search
-  onPickFromAddress, onUseGeoLocation, onResetView, ready, geoLoading, picked,
+  onPickFromAddress,
+  onClearLocation, onUseGeoLocation, onResetView, ready, geoLoading, picked,
   dataErr, geoErr,
   // Optional menu to open on first load (e.g. "activity" from the Market entry)
   initialMenu,
@@ -225,6 +226,7 @@ export default function FogMapTools({
           </svg>
           <FogLocationSearch
             onPickFromAddress={onPickFromAddress}
+            onClear={onClearLocation}
             onUseGeoLocation={onUseGeoLocation}
             ready={ready}
             geoLoading={geoLoading}

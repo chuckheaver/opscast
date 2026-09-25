@@ -71,6 +71,9 @@ export default function FogMap({
   buildingSales,
   showNeighborhoods,
   picked,
+  // Pixels of the map hidden behind the phone bottom sheet. Picks are framed
+  // into the strip above it so the marker never lands under the sheet.
+  bottomInset = 0,
   onPickFeature,
   activityData,
   comps,
@@ -2561,6 +2564,12 @@ export default function FogMap({
 
     if (!picked) return;
 
+    // Keep the pick clear of the bottom sheet (phone) and of the search bar
+    // and chip row along the top. With no sheet this is the old even padding.
+    const pad = bottomInset > 0
+      ? { top: 128, right: 24, bottom: bottomInset + 24, left: 24 }
+      : null;
+
     if (picked.point) {
       // Neighborhood picks are shown by the blue polygon highlight, so skip
       // the pin there; address / current-location picks still drop a pin.
@@ -2573,14 +2582,16 @@ export default function FogMap({
       // deep-link (picked.zoom) flies in to the footprint; every other pick
       // keeps the city-wide frame.
       if (picked.bounds) {
-        map.fitBounds(picked.bounds, { padding: 60, maxZoom: 15, duration: 900 });
+        map.fitBounds(picked.bounds, { padding: pad || 60, maxZoom: 15, duration: 900 });
       } else if (picked.zoom) {
-        map.flyTo({ center: picked.point, zoom: picked.zoom, duration: 1000 });
+        map.flyTo({ center: picked.point, zoom: picked.zoom, padding: pad || undefined, duration: 1000 });
       } else {
-        map.fitBounds(SF_BOUNDS, { padding: 24, duration: 800 });
+        map.fitBounds(SF_BOUNDS, { padding: pad || 24, duration: 800 });
       }
     }
-  }, [picked]);
+    // bottomInset is a dependency so opening or closing the sheet re-frames
+    // the same pick instead of leaving the marker stranded underneath it.
+  }, [picked, bottomInset]);
 
   if (!TOKEN) {
     return (
