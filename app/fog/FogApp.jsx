@@ -69,6 +69,10 @@ export default function FogApp() {
   const [seismicHazards, setSeismicHazards] = useState(null);
   const [tsunamiHazard, setTsunamiHazard] = useState(null);
   const [dataErr, setDataErr] = useState("");
+  // The address in the search bar, and its pin. Deliberately separate from
+  // `picked`: tapping a neighborhood or the map changes `picked`, but the
+  // searched address stays on the map and in the field until the (×).
+  const [addressPin, setAddressPin] = useState(null); // { point, address }
   const [picked, setPicked] = useState(null); // { feature, point, address, contour, elevation_ft, zip, supervisor, realtor, microZone }
   const [compFeatures, setCompFeatures] = useState(null); // dots for the expanded neighborhood Details list
   const prevHoodRef = useRef(null);
@@ -313,6 +317,7 @@ export default function FogApp() {
       // Zoom down to the address: frame its neighborhood polygon (with a pin at
       // the exact spot), or — if the address is outside SF — fly to the point.
       const bounds = feature ? bboxOfFeature(feature) : null;
+      setAddressPin({ point, address });
       setPicked({ point, address, feature, contour, bounds, source: "address", zoom: bounds ? undefined : 15 });
       // Surface the neighborhood summary (with the point-level facts) for the
       // address the user entered — that pop-up is now the only place details
@@ -326,6 +331,7 @@ export default function FogApp() {
   // toggles and closing the info sheet — this is the only thing that takes
   // it off the map.
   const clearLocation = useCallback(() => {
+    setAddressPin(null);
     setPicked(null);
     setOpenHood(null);
     setCompFeatures(null);
@@ -388,6 +394,7 @@ export default function FogApp() {
         // Zoom down to where they are: frame the neighborhood (pin at the exact
         // spot), or fly to the point if it's outside SF.
         const bounds = feature ? bboxOfFeature(feature) : null;
+        setAddressPin({ point, address });
         setPicked({ point, address, feature, contour, bounds, source: "address", zoom: bounds ? undefined : 15 });
         setOpenHood(feature?.properties?.name || null);
         setGeoLoading(false);
@@ -526,6 +533,7 @@ export default function FogApp() {
     setShowMicroSun(false); setShowMicroCool(false); setShowMicroWind(false);
     setShowMicroSolar(false); setShowMicroFogLine(false);
     setActivityWanted(false); setMicroWanted(false);
+    setAddressPin(null);
     setPicked(null); setOpenHood(null); setOpenBuilding(null); setStatsOpen(false);
     setCompFeatures(null);
     setRecenter(c => c + 1);
@@ -673,6 +681,7 @@ export default function FogApp() {
           buildingSales={buildingSales}
           showNeighborhoods={showNeighborhoods}
           picked={picked}
+          addressPin={addressPin}
           onPickFeature={pickFromMap}
           activityData={activityData}
           comps={compFeatures}
@@ -780,7 +789,7 @@ export default function FogApp() {
           onResetView={resetView}
           ready={!!geojson}
           geoLoading={geoLoading}
-          picked={picked}
+          picked={addressPin}
           dataErr={dataErr}
           geoErr={geoErr}
         />

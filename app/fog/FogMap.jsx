@@ -71,6 +71,10 @@ export default function FogMap({
   buildingSales,
   showNeighborhoods,
   picked,
+  // The address currently in the search bar, if any. Drives the blue pin on
+  // its own so that tapping a neighborhood — which replaces `picked` — does
+  // not take the searched address off the map.
+  addressPin,
   // Pixels of the map hidden behind the phone bottom sheet. Picks are framed
   // into the strip above it so the marker never lands under the sheet.
   bottomInset = 0,
@@ -2553,14 +2557,26 @@ export default function FogMap({
   // whole city. The map deliberately stays at the city-wide view so the
   // pin reads in context — no zoom-in, no neighborhood polygon
   // highlight (the marker alone marks the spot).
+  // The blue address pin. Its own effect, keyed only to the searched
+  // address: it survives panning, layer toggles, closing the info sheet and
+  // tapping other neighborhoods, and comes off only when the search field is
+  // cleared (or the view is reset).
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-
     if (markerRef.current) {
       markerRef.current.remove();
       markerRef.current = null;
     }
+    if (!addressPin?.point) return;
+    markerRef.current = new mapboxgl.Marker({ color: "#2563eb" })
+      .setLngLat(addressPin.point)
+      .addTo(map);
+  }, [addressPin?.point?.[0], addressPin?.point?.[1]]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
 
     if (!picked) return;
 
@@ -2571,13 +2587,6 @@ export default function FogMap({
       : null;
 
     if (picked.point) {
-      // Neighborhood picks are shown by the blue polygon highlight, so skip
-      // the pin there; address / current-location picks still drop a pin.
-      if (picked.scope !== "neighborhood") {
-        markerRef.current = new mapboxgl.Marker({ color: "#2563eb" })
-          .setLngLat(picked.point)
-          .addTo(map);
-      }
       // A neighborhood pick (picked.bounds) frames that polygon; a building
       // deep-link (picked.zoom) flies in to the footprint; every other pick
       // keeps the city-wide frame.

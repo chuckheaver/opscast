@@ -47,11 +47,20 @@ export default function FogLocationSearch({
 
   // Seed the input with whatever address is currently picked so the user sees
   // "where they are" without having to click anything.
+  // Tracks the address the field is currently showing, so a pin that goes
+  // away (Reset view, say) empties the field too — without wiping what the
+  // user is part-way through typing, which is also an "no address" state.
+  const shownAddrRef = useRef(null);
   useEffect(() => {
-    if (picked?.address) {
+    const addr = picked?.address || null;
+    if (addr) {
       suppressNextFetchRef.current = true;
-      setQ(picked.address);
+      setQ(addr);
+    } else if (shownAddrRef.current) {
+      suppressNextFetchRef.current = true;
+      setQ("");
     }
+    shownAddrRef.current = addr;
   }, [picked?.address]);
 
   useEffect(() => {

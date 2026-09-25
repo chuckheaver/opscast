@@ -1285,6 +1285,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-app {
   position: fixed;
   inset: 0;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 360px 1fr;
   font-family: 'DM Sans', sans-serif;
@@ -1373,6 +1374,8 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-search-field {
   position: relative;
   flex: 1 1 auto;
+  /* Without this the input's intrinsic width wins and the row overflows. */
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1385,8 +1388,10 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-search-icon { flex: 0 0 auto; color: #5f6368; }
 /* The shared search component renders inside the pill — strip its chrome. */
 .fog-search-field .fog-topbar-search { position: static; flex: 1 1 auto; gap: 0; }
-.fog-search-field .zip-wrap { flex: 1 1 auto; }
+.fog-search-field .zip-wrap { flex: 1 1 auto; min-width: 0; }
 .fog-search-field .fog-input {
+  width: 100%;
+  min-width: 0;
   background: transparent;
   border: none;
   padding: 10px 24px 10px 0; /* right room for the clear (×) button */
@@ -4290,7 +4295,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   }
   .nh-modal.nh-sheet {
     width: 100%;
-    max-width: none;
+    max-width: 100%;
     height: var(--fog-sheet-h, 52vh);
     min-height: 0;
     max-height: var(--fog-sheet-h, 52vh);
