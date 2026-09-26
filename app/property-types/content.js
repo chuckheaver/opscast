@@ -97,6 +97,7 @@ export const TYPES = [
 export const SECTIONS = [
   {
     id: "units",
+    nav: "3R & Unit Count",
     kicker: "Multi-unit, read this twice",
     title: "The 3R Report and the legal unit count",
     lead:
@@ -126,6 +127,7 @@ export const SECTIONS = [
   },
   {
     id: "disclosure",
+    nav: "Disclosures",
     kicker: "Before you remove contingencies",
     title: "The disclosure package",
     lead:
@@ -146,7 +148,50 @@ export const SECTIONS = [
     ],
   },
   {
+    id: "insurance",
+    nav: "Insurance",
+    kicker: "Do this in week one",
+    title: "Insurance, and the three things that stop a policy",
+    lead:
+      "An uninsurable house is an unbuyable house. Your lender will not fund without a bound policy — so find out while you still have a contingency, not the week before closing.",
+    body: [
+      {
+        h: "Call an agent the day you go into contract",
+        p: "Not after the inspections, not once you have removed contingencies. Give them the address, the year built, the square footage, the roof age, the panel type and the wiring. A verbal indication comes back in about a day. If a carrier declines, or quotes three times what you budgeted, that is information you need while you can still act on it.",
+      },
+      {
+        h: "What the California market looks like right now",
+        p: "Hard, and only recently improving. Carriers pulled back sharply \u2014 State Farm non-renewed tens of thousands of California policies in 2024 and others left the state entirely \u2014 and the FAIR Plan, the insurer of last resort, roughly doubled to well over half a million homes. The Department of Insurance\u2019s Sustainable Insurance Strategy has since brought carriers back: several groups have committed to writing again, Farmers expanded in 2026, and FAIR Plan growth has slowed sharply. The honest summary for 2026 is that availability is recovering and price is not. Expect more choice than two years ago, at premiums that stay high.",
+      },
+      {
+        h: "The electrical panel",
+        p: "The first thing an underwriter looks for. Federal Pacific Stab-Lok and Zinsco panels \u2014 the latter sometimes branded Sylvania \u2014 have documented histories of breakers failing to trip or of heating at the bus connection. Most major carriers now require replacement before they will write or renew. If either name is on the panel door, budget for a replacement and price it into your offer rather than discovering it in escrow. Aluminum branch wiring from the 1960s and early 1970s draws the same scrutiny.",
+      },
+      {
+        h: "Knob and tube wiring",
+        p: "San Francisco\u2019s housing stock is overwhelmingly pre-war, and knob and tube was standard until roughly the 1940s. Plenty of it is still live behind the plaster. Some carriers decline any home that has it outright; others will write with a surcharge, conditions, and a deadline to remove it. \u201cPartially remediated\u201d is a phrase you will hear, and it is the insurer who decides whether that counts \u2014 not the seller and not the listing. Get the scope in writing, and have an electrician confirm what is actually still energised.",
+      },
+      {
+        h: "The roof",
+        p: "Age and remaining useful life. A roof with under three to five years left in it gets flagged, and some carriers will not bind at all until it is replaced. Ask for the age, the material, and any permit for the last replacement \u2014 which is also a line on the 3R report. On a flat roof, which is most of San Francisco, ask when it was last recoated as well.",
+      },
+      {
+        h: "Earthquake is a separate policy",
+        p: "A standard homeowners policy does not cover earthquake damage, and in this city that is not a footnote. Earthquake cover is bought separately, commonly through the California Earthquake Authority via a participating carrier. The deductible is a percentage of the dwelling limit rather than a flat figure, so on an expensive home it is a large number \u2014 run the arithmetic before you assume you are covered. Soft-story status and any completed retrofit affect both eligibility and price.",
+      },
+      {
+        h: "What changes by ownership type",
+        p: "On a condo the HOA\u2019s master policy covers the building and you buy an HO-6 for the interior, your contents and your liability \u2014 read the master policy\u2019s deductible, because a large one can come back to owners as an assessment after a claim. On a TIC the building carries one policy that the group holds, plus your own contents and liability; confirm who carries what and that the limits are current. On a multi-unit you are buying a landlord or dwelling-fire policy rather than a homeowners policy, with liability and loss-of-rents cover alongside it.",
+      },
+      {
+        h: "Two documents worth asking for",
+        p: "The CLUE report, which lists the property\u2019s claims history for the past five years \u2014 a couple of old water claims is one of the more common reasons a carrier declines a house that looks fine. And the permit history, because unpermitted work can be excluded from coverage even on a policy that gets written.",
+      },
+    ],
+  },
+  {
     id: "taxes",
+    nav: "Taxes",
     kicker: "What you will actually pay",
     title: "Property taxes, and the bill nobody expects",
     lead:
@@ -172,6 +217,7 @@ export const SECTIONS = [
   },
   {
     id: "districts",
+    nav: "Mello-Roos",
     kicker: "The line item under the tax bill",
     title: "Special districts and Mello-Roos",
     lead:
