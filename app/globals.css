@@ -4624,6 +4624,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.13em;
   text-transform: uppercase; color: var(--lp-gold-lt); margin-top: 2px;
 }
+.lp-logo-sub i { font-style: normal; }
 .lp-nav-links { display: flex; align-items: center; gap: 26px; }
 .lp-nav-links a { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.84); }
 .lp-nav-links a:hover { color: #fff; }
@@ -4636,44 +4637,67 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 /* Hero --------------------------------------------------------------- */
 .lp-hero {
   position: relative; overflow: hidden;
-  background: radial-gradient(120% 110% at 68% 45%, var(--lp-navy-2) 0%, var(--lp-navy) 66%), var(--lp-navy);
-  padding: clamp(104px, 13vh, 140px) clamp(18px, 5vw, 56px) clamp(40px, 6vh, 64px);
+  background: radial-gradient(120% 120% at 50% 20%, var(--lp-navy-2) 0%, var(--lp-navy) 68%), var(--lp-navy);
+  padding: clamp(88px, 11vh, 118px) clamp(18px, 5vw, 56px) clamp(28px, 4vh, 44px);
 }
-.lp-hero-grid {
-  position: relative; z-index: 2; max-width: 1240px; margin: 0 auto;
-  display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
-  gap: clamp(22px, 4vw, 54px); align-items: center;
-}
-/* The city, set as large as the column allows. */
+.lp-hero-head { max-width: 1240px; margin: 0 auto clamp(14px, 2vw, 24px); }
+
+/* The city always sits on one line: the size tracks the viewport and the
+   line is never allowed to break. */
 .lp-city {
-  font-size: clamp(46px, 6.6vw, 92px); line-height: 0.94; font-weight: 800;
-  color: #fff; letter-spacing: -0.045em;
+  font-size: clamp(38px, 8vw, 108px); line-height: 0.94; font-weight: 800;
+  color: #fff; letter-spacing: -0.045em; white-space: nowrap;
 }
 .lp-claim {
-  margin-top: 14px; font-family: Georgia, 'Times New Roman', serif; font-style: italic;
-  font-size: clamp(19px, 2.3vw, 30px); line-height: 1.25; color: var(--lp-gold-lt);
-  letter-spacing: -0.01em;
+  margin-top: clamp(6px, 1vw, 12px);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(17px, 2.6vw, 34px); line-height: 1.2;
+  color: var(--lp-gold-lt); letter-spacing: -0.005em;
 }
-.lp-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 
-/* Byline: the portrait is a credential here, not the subject. */
-.lp-byline {
-  display: flex; align-items: center; gap: 13px; margin-top: 30px;
-  padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.13);
-}
-.lp-byline img {
-  width: 58px; height: 58px; flex: 0 0 auto; border-radius: 50%;
-  object-fit: cover; object-position: 50% 12%;
+/* Explore — the one call to action, phrased as the map's own question. */
+.lp-explore {
+  display: inline-flex; align-items: center; gap: 12px;
+  margin-top: clamp(14px, 1.8vw, 22px);
+  padding: 13px 22px; border-radius: 999px;
   background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(232,184,75,0.45);
+  transition: background .15s, border-color .15s, transform .15s;
 }
-.lp-byline b { display: block; font-size: 15px; color: #fff; font-weight: 700; }
-.lp-byline span { display: block; font-size: 12.5px; color: rgba(255,255,255,0.62); margin-top: 2px; }
+.lp-explore:hover {
+  background: rgba(232,184,75,0.14); border-color: var(--lp-gold-lt);
+  transform: translateY(-1px);
+}
+.lp-explore-k {
+  font-size: 12px; font-weight: 800; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--lp-gold-lt);
+}
+.lp-explore-q { font-size: clamp(15px, 1.5vw, 19px); font-weight: 600; color: #fff; }
+.lp-explore-go { color: var(--lp-gold-lt); font-size: 18px; }
 
-/* The map, at full strength — it is the point of the page. */
+.lp-hero-grid {
+  position: relative; z-index: 2; max-width: 1240px; margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0, 0.56fr) minmax(0, 1.44fr);
+  gap: clamp(16px, 2.5vw, 36px); align-items: end;
+}
+
+/* Portrait: cut out, standing on the navy, with its own byline. */
+.lp-portrait { margin: 0; }
+.lp-portrait img {
+  width: 100%; height: auto; max-width: 320px; max-height: 40vh;
+  object-fit: contain; object-position: bottom;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.46));
+  -webkit-mask-image: linear-gradient(to bottom, #000 86%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 86%, transparent 100%);
+}
+.lp-portrait figcaption { margin-top: 6px; }
+.lp-portrait figcaption b { display: block; font-size: 16px; color: #fff; font-weight: 700; }
+.lp-portrait figcaption span { display: block; font-size: 12.5px; color: rgba(255,255,255,0.62); margin-top: 2px; }
+
+/* The map, at full strength. */
 .lp-hero-map { margin: 0; }
 .lp-hero-map img {
-  width: 100%; height: auto;
-  /* Shadow follows the coastline, not a bounding box. */
+  width: 100%; height: auto; max-height: 50vh; object-fit: contain;
   filter: drop-shadow(0 16px 34px rgba(0,0,0,0.42));
 }
 .lp-hero-map figcaption {
@@ -4778,11 +4802,19 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 
 /* Phone ------------------------------------------------------------------ */
 @media (max-width: 720px) {
-  .lp-hero-grid { grid-template-columns: 1fr; gap: 22px; }
-  .lp-hero { padding-top: 92px; }
-  /* Map sits under the headline, still full strength. */
-  .lp-hero-map { margin-top: 4px; }
-  .lp-byline { margin-top: 22px; }
+  .lp-hero { padding-top: 88px; }
+  /* Phone: map first (it is the point), portrait beneath it at half width. */
+  .lp-hero-grid { grid-template-columns: 1fr; gap: 18px; }
+  .lp-hero-map { order: -1; }
+  .lp-portrait { display: flex; align-items: flex-end; gap: 14px; }
+  .lp-portrait img { max-width: 132px; }
+  .lp-portrait figcaption { margin-bottom: 8px; }
+  /* Keep the pill on one line and stop the lockup stealing a second row
+     from the headline — the H1 already says San Francisco. */
+  .lp-explore { padding: 11px 17px; gap: 9px; }
+  .lp-explore-k { font-size: 10.5px; letter-spacing: 0.12em; }
+  .lp-explore-q { font-size: 14.5px; }
+  .lp-logo-sub i { display: none; }
   .lp-nav { padding-top: 16px; }
   .lp-nav-links a:not(.lp-nav-cta) { display: none; }
   .lp-nav-cta { padding: 8px 15px; font-size: 13.5px; }

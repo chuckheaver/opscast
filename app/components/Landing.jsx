@@ -50,7 +50,7 @@ export default function Landing() {
       <header className="lp-nav">
         <Link href="/" className="lp-logo">
           <span className="lp-logo-name">Chuck Heaver</span>
-          <span className="lp-logo-sub">San Francisco Realtor · Meteorologist</span>
+          <span className="lp-logo-sub"><i>San Francisco </i>Realtor · Meteorologist</span>
         </Link>
         <nav className="lp-nav-links">
           <Link href="/fog?preset=fog">The Map</Link>
@@ -64,22 +64,23 @@ export default function Landing() {
       {/* Hero — the map is the subject. The city is the headline, the
           portrait is a byline, and there is no paragraph at all. */}
       <section className="lp-hero">
+        <div className="lp-hero-head">
+          <h1 className="lp-city">San Francisco</h1>
+          <p className="lp-claim">Real Estate &amp; Microclimates</p>
+          <Link className="lp-explore" href="/fog?preset=fog">
+            <span className="lp-explore-k">Explore</span>
+            <span className="lp-explore-q">Where do you want to go?</span>
+            <span className="lp-explore-go" aria-hidden="true">&rarr;</span>
+          </Link>
+        </div>
         <div className="lp-hero-grid">
-          <div className="lp-hero-copy">
-            <h1 className="lp-city">San Francisco</h1>
-            <p className="lp-claim">where every block is its own microclimate</p>
-            <div className="lp-cta-row">
-              <Link className="lp-btn lp-btn-gold" href="/fog?preset=fog">Explore the map</Link>
-              <a className="lp-btn lp-btn-ghost" href={`mailto:${EMAIL}?subject=Run%20my%20street`}>Run my street</a>
-            </div>
-            <div className="lp-byline">
-              <img src="/brand/chuck-heaver-cutout.png" alt="Chuck Heaver" width="1566" height="1784" />
-              <div>
-                <b>Chuck Heaver</b>
-                <span>Realtor &amp; Meteorologist · Vanguard Properties</span>
-              </div>
-            </div>
-          </div>
+          <figure className="lp-portrait">
+            <img src="/brand/chuck-heaver-cutout.png" alt="Chuck Heaver" width="1566" height="1784" />
+            <figcaption>
+              <b>Chuck Heaver</b>
+              <span>Realtor &amp; Meteorologist · Vanguard Properties</span>
+            </figcaption>
+          </figure>
           <figure className="lp-hero-map">
             <img src="/brand/sf-fog-hero.svg"
                  alt="San Francisco split into its microclimate zones, one dot per home sold this year"
