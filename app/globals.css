@@ -4636,48 +4636,49 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 /* Hero --------------------------------------------------------------- */
 .lp-hero {
   position: relative; overflow: hidden;
-  background: radial-gradient(130% 100% at 50% 8%, var(--lp-navy-2) 0%, var(--lp-navy) 64%), var(--lp-navy);
-  padding: clamp(112px, 14vh, 156px) clamp(18px, 5vw, 56px) clamp(52px, 7vh, 80px);
-}
-/* The map sits behind everything, low and wide, as texture not as content. */
-.lp-hero-map {
-  position: absolute; left: 50%; bottom: -30%; transform: translateX(-50%);
-  width: min(1180px, 116%); opacity: 0.20; pointer-events: none;
-  -webkit-mask-image: radial-gradient(70% 70% at 50% 45%, #000 40%, transparent 100%);
-          mask-image: radial-gradient(70% 70% at 50% 45%, #000 40%, transparent 100%);
+  background: radial-gradient(120% 110% at 68% 45%, var(--lp-navy-2) 0%, var(--lp-navy) 66%), var(--lp-navy);
+  padding: clamp(104px, 13vh, 140px) clamp(18px, 5vw, 56px) clamp(40px, 6vh, 64px);
 }
 .lp-hero-grid {
-  position: relative; z-index: 2;
-  max-width: 1240px; margin: 0 auto;
-  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: clamp(24px, 5vw, 64px); align-items: center;
+  position: relative; z-index: 2; max-width: 1240px; margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: clamp(22px, 4vw, 54px); align-items: center;
 }
-.lp-eyebrow {
-  font-size: 12px; font-weight: 700; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--lp-gold-lt); margin-bottom: 16px;
+/* The city, set as large as the column allows. */
+.lp-city {
+  font-size: clamp(46px, 6.6vw, 92px); line-height: 0.94; font-weight: 800;
+  color: #fff; letter-spacing: -0.045em;
 }
-.lp-h1 {
-  font-size: clamp(40px, 5.8vw, 76px); line-height: 1.02; font-weight: 800;
-  color: #fff; letter-spacing: -0.035em;
+.lp-claim {
+  margin-top: 14px; font-family: Georgia, 'Times New Roman', serif; font-style: italic;
+  font-size: clamp(19px, 2.3vw, 30px); line-height: 1.25; color: var(--lp-gold-lt);
+  letter-spacing: -0.01em;
 }
-.lp-h1 em {
-  font-style: italic; color: var(--lp-gold-lt);
-  font-family: Georgia, 'Times New Roman', serif; font-weight: 400;
-}
-.lp-lede {
-  margin-top: 20px; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.6;
-  color: rgba(255,255,255,0.82); max-width: 46ch;
-}
-.lp-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.lp-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 
-/* Portrait: cut out, floating straight on the navy. The base fades so he
-   sits in the page rather than on top of it. */
-.lp-portrait { margin: 0; align-self: end; }
-.lp-portrait img {
+/* Byline: the portrait is a credential here, not the subject. */
+.lp-byline {
+  display: flex; align-items: center; gap: 13px; margin-top: 30px;
+  padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.13);
+}
+.lp-byline img {
+  width: 58px; height: 58px; flex: 0 0 auto; border-radius: 50%;
+  object-fit: cover; object-position: 50% 12%;
+  background: rgba(255,255,255,0.06);
+}
+.lp-byline b { display: block; font-size: 15px; color: #fff; font-weight: 700; }
+.lp-byline span { display: block; font-size: 12.5px; color: rgba(255,255,255,0.62); margin-top: 2px; }
+
+/* The map, at full strength — it is the point of the page. */
+.lp-hero-map { margin: 0; }
+.lp-hero-map img {
   width: 100%; height: auto;
-  filter: drop-shadow(0 22px 44px rgba(0,0,0,0.45));
-  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 99%);
-          mask-image: linear-gradient(to bottom, #000 82%, transparent 99%);
+  /* Shadow follows the coastline, not a bounding box. */
+  filter: drop-shadow(0 16px 34px rgba(0,0,0,0.42));
+}
+.lp-hero-map figcaption {
+  margin-top: 10px; text-align: center;
+  font-size: 12.5px; color: rgba(255,255,255,0.58);
 }
 
 /* By the Numbers ------------------------------------------------------ */
@@ -4722,17 +4723,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-layer-d { font-size: 14.5px; line-height: 1.6; color: #46525F; }
 
 /* The map, given room -------------------------------------------------- */
-.lp-mapshow {
-  background: #fff; border-top: 1px solid var(--lp-line); border-bottom: 1px solid var(--lp-line);
-  padding: clamp(54px, 8vw, 92px) clamp(18px, 5vw, 56px);
-  display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(26px, 5vw, 64px); align-items: center;
-  max-width: 1240px; margin-inline: auto;
-}
 .lp-mapshow-body { margin-top: 16px; font-size: 15.5px; line-height: 1.75; color: #46525F; }
-.lp-mapshow-copy .lp-h2 { margin-top: 10px; }
-.lp-mapshow-art { background: var(--lp-navy); border-radius: 18px; padding: 18px 18px 12px; }
-.lp-mapshow-art .lp-fine { color: rgba(255,255,255,0.55); margin-top: 10px; text-align: center; }
 
 /* About ---------------------------------------------------------------- */
 .lp-about { padding: clamp(54px, 8vw, 92px) clamp(18px, 5vw, 56px); }
@@ -4782,21 +4773,19 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   .lp-stat:nth-child(3) { padding-left: 0; }
   .lp-stat:nth-child(1), .lp-stat:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.09); padding-bottom: 20px; }
   .lp-stat:nth-child(3), .lp-stat:nth-child(4) { padding-top: 20px; }
-  .lp-mapshow, .lp-about-inner { grid-template-columns: 1fr; }
-  .lp-mapshow-art { order: -1; }
+  .lp-about-inner { grid-template-columns: 1fr; }
 }
 
 /* Phone ------------------------------------------------------------------ */
 @media (max-width: 720px) {
-  /* Portrait leads on a phone: face first, then the claim. */
-  .lp-hero-grid { grid-template-columns: 1fr; gap: 26px; }
-  .lp-portrait { order: -1; max-width: 260px; }
-  .lp-hero { padding-top: 96px; }
-  .lp-hero-map { bottom: -14%; opacity: 0.16; }
+  .lp-hero-grid { grid-template-columns: 1fr; gap: 22px; }
+  .lp-hero { padding-top: 92px; }
+  /* Map sits under the headline, still full strength. */
+  .lp-hero-map { margin-top: 4px; }
+  .lp-byline { margin-top: 22px; }
   .lp-nav { padding-top: 16px; }
   .lp-nav-links a:not(.lp-nav-cta) { display: none; }
   .lp-nav-cta { padding: 8px 15px; font-size: 13.5px; }
-  .lp-eyebrow { letter-spacing: 0.10em; font-size: 11px; }
   .lp-logo-sub { letter-spacing: 0.09em; }
   .lp-layer-grid { grid-template-columns: 1fr; }
   .lp-stats-row { grid-template-columns: 1fr; }

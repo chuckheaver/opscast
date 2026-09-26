@@ -42,13 +42,11 @@ const path = geom => {
   return d;
 };
 
+// No backdrop of any kind: the landmass sits straight on whatever it is
+// placed over. A glow behind it reads as a visible box once the graphic is
+// shown at full strength.
 const out = [
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="San Francisco divided into four summer-fog zones, with one dot for each home sold this year">`,
-  `<defs><radialGradient id="glow" cx="50%" cy="45%" r="62%">`,
-  `<stop offset="0%" stop-color="#ffffff" stop-opacity="0.10"/>`,
-  `<stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></radialGradient></defs>`,
-  `<rect width="${W}" height="${H}" fill="none"/>`,
-  `<circle cx="${W / 2}" cy="${H * 0.45}" r="${W * 0.55}" fill="url(#glow)"/>`,
 ];
 
 for (const [name, fill, op] of ZONES) {

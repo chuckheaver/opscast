@@ -8,6 +8,12 @@
 
 import Link from "next/link";
 import stats from "../lib/landing-stats.json";
+import hoodStats from "../lib/neighborhood-stats.json";
+
+// Two different counts, and they are not interchangeable: 116 neighborhoods
+// are MAPPED (the parcel dataset covers them), 105 are WRITTEN UP in the
+// guide. The page must not claim the larger number for the smaller thing.
+const GUIDE_COUNT = Object.keys(hoodStats.hoods || {}).length;
 
 const EMAIL = "chuck.heaver@vanguardproperties.com";
 const PHONE_DISPLAY = "415.549.1777";
@@ -55,28 +61,32 @@ export default function Landing() {
         </nav>
       </header>
 
-      {/* Hero — one claim, one sentence, the face, the map behind it. */}
+      {/* Hero — the map is the subject. The city is the headline, the
+          portrait is a byline, and there is no paragraph at all. */}
       <section className="lp-hero">
-        <div className="lp-hero-map" aria-hidden="true">
-          <img src="/brand/sf-fog-hero.svg" alt="" width="1000" height="780" />
-        </div>
         <div className="lp-hero-grid">
           <div className="lp-hero-copy">
-            <p className="lp-eyebrow">San Francisco · Vanguard Properties</p>
-            <h1 className="lp-h1">
-              Every San Francisco block has its own <em>microclimate</em>.
-            </h1>
-            <p className="lp-lede">
-              Sun, wind, fog, hazard, transit — mapped street by street.
-              Twenty years forecasting this coastline, thirty-five selling homes on it.
-            </p>
+            <h1 className="lp-city">San Francisco</h1>
+            <p className="lp-claim">where every block is its own microclimate</p>
             <div className="lp-cta-row">
               <Link className="lp-btn lp-btn-gold" href="/fog?preset=fog">Explore the map</Link>
               <a className="lp-btn lp-btn-ghost" href={`mailto:${EMAIL}?subject=Run%20my%20street`}>Run my street</a>
             </div>
+            <div className="lp-byline">
+              <img src="/brand/chuck-heaver-cutout.png" alt="Chuck Heaver" width="1566" height="1784" />
+              <div>
+                <b>Chuck Heaver</b>
+                <span>Realtor &amp; Meteorologist · Vanguard Properties</span>
+              </div>
+            </div>
           </div>
-          <figure className="lp-portrait">
-            <img src="/brand/chuck-heaver-cutout.png" alt="Chuck Heaver" width="1566" height="1784" />
+          <figure className="lp-hero-map">
+            <img src="/brand/sf-fog-hero.svg"
+                 alt="San Francisco split into its microclimate zones, one dot per home sold this year"
+                 width="1000" height="780" />
+            <figcaption>
+              {num(stats.salesThisYear)} homes sold in {stats.year}, each on the microclimate it sits in
+            </figcaption>
           </figure>
         </div>
       </section>
@@ -97,7 +107,7 @@ export default function Landing() {
           </div>
           <div className="lp-stat">
             <div className="lp-stat-v">{num(stats.neighborhoods)}</div>
-            <div className="lp-stat-l">Neighborhoods mapped and profiled</div>
+            <div className="lp-stat-l">Neighborhoods mapped across the city</div>
           </div>
           <div className="lp-stat">
             <div className="lp-stat-v">{money(stats.houses.sun.median)}</div>
@@ -128,33 +138,11 @@ export default function Landing() {
       <section className="lp-guide-promo">
         <div>
           <p className="lp-kicker">The guide</p>
-          <h2 className="lp-h2">All {num(stats.neighborhoods)} San Francisco neighborhoods, written up.</h2>
+          <h2 className="lp-h2">All {num(GUIDE_COUNT)} San Francisco neighborhoods, written up.</h2>
           <p className="lp-mapshow-body">
-            What each one is actually like, what homes are selling for right now,
-            and the microclimate it sits in. Not a ZIP-code summary — the real thing,
-            block by block.
+            What each one is like, what homes are selling for, and the microclimate it sits in.
           </p>
           <Link className="lp-btn lp-btn-navy" href="/neighborhoods">Open the neighborhood guide</Link>
-        </div>
-      </section>
-
-      {/* The map, given room. */}
-      <section className="lp-mapshow">
-        <div className="lp-mapshow-copy">
-          <p className="lp-kicker">The map</p>
-          <h2 className="lp-h2">I built it because nobody else had.</h2>
-          <p className="lp-mapshow-body">
-            Every closed sale in San Francisco, geocoded and laid over the
-            microclimate it sits in — beside the parcel stock, the terrain, the
-            transit and the hazards. I use it on every listing and every offer I write.
-          </p>
-          <Link className="lp-btn lp-btn-navy" href="/fog?preset=fog">Open the map</Link>
-        </div>
-        <div className="lp-mapshow-art">
-          <img src="/brand/sf-fog-hero.svg" alt="San Francisco split into its microclimate zones, with a dot for every home sold this year" width="1000" height="780" />
-          <p className="lp-fine">
-            {num(stats.salesThisYear)} closings, {stats.year}. Gold is the sun belt, grey the fog belt.
-          </p>
         </div>
       </section>
 
@@ -165,10 +153,9 @@ export default function Landing() {
             <p className="lp-kicker">About</p>
             <h2 className="lp-h2">Two careers, one job.</h2>
             <p>
-              I forecast weather on television for over twenty years before I sold a
-              house here, and I have been in real estate for thirty-five. In a city
-              where the temperature swings fifteen degrees across three miles, those
-              turned out to be the same job.
+              Twenty years forecasting weather on television, thirty-five selling homes here.
+              In a city where the temperature swings fifteen degrees across three miles,
+              those turned out to be the same job.
             </p>
             <ul className="lp-creds">
               <li><b>Vanguard Properties</b> — San Francisco</li>
@@ -184,8 +171,8 @@ export default function Landing() {
           <aside className="lp-about-card">
             <h3>Send me an address.</h3>
             <p>
-              I will come back with its sun, wind and fog, what is under it, what has
-              closed on the block, and what I think it is worth.
+              I will come back with its sun, wind and fog, what has closed on the block,
+              and what I think it is worth.
             </p>
             <a className="lp-btn lp-btn-gold lp-btn-block" href={`mailto:${EMAIL}?subject=Run%20my%20street`}>
               Run my street
