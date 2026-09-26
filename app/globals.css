@@ -4735,7 +4735,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-stats-when { color: rgba(255,255,255,0.45); font-weight: 600; letter-spacing: 0.06em; }
 .lp-stats-row {
   max-width: 1240px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(6, 1fr);
+  display: grid; grid-template-columns: repeat(4, 1fr);
 }
 .lp-stat-l b { color: #fff; font-weight: 700; }
 /* Last year, beside this year — a space between them, never a slash. The
@@ -4746,9 +4746,14 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   color: rgba(255,255,255,0.50);
 }
 .lp-stats-key { color: rgba(255,255,255,0.50); }
-.lp-stat { padding: 4px clamp(10px, 1.3vw, 18px) 24px; border-right: 1px solid rgba(255,255,255,0.09); }
-.lp-stat:first-child { padding-left: 0; }
-.lp-stat:last-child { border-right: none; }
+.lp-stat {
+  padding: 14px clamp(12px, 1.6vw, 22px) 16px;
+  border-right: 1px solid rgba(255,255,255,0.09);
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+}
+.lp-stat:nth-child(4n) { border-right: none; }
+.lp-stat:nth-child(4n + 1) { padding-left: 0; }
+.lp-stat:nth-last-child(-n + 4) { border-bottom: none; padding-bottom: 22px; }
 .lp-stat-v {
   font-family: Georgia, 'Times New Roman', serif; line-height: 1.05;
   font-size: clamp(22px, 2.2vw, 29px); font-weight: 700; color: var(--lp-gold-lt);

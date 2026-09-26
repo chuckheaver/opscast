@@ -65,8 +65,15 @@ export default function Landing() {
       chg: days(m.sfh.dom, p.sfh.dom) },
     { label: "Condo DOM", now: r(m.condo.dom), then: r(p.condo.dom),
       chg: days(m.condo.dom, p.condo.dom) },
-    { label: "SFH Over Asking", now: `${r(m.sfh.overAsk)}%`, then: `${r(p.sfh.overAsk)}%`,
+    // "% of SFH" up front, because "SFH Over Asking: 84%" reads as though
+    // houses sell for 84% above list. It is the share of sales that closed
+    // over list; the premium itself is the sale-to-list tile below.
+    { label: "% of SFH Over List", now: `${r(m.sfh.overAsk)}%`, then: `${r(p.sfh.overAsk)}%`,
       chg: `${pts(m.sfh.overAsk, p.sfh.overAsk)} pts` },
+    { label: "% of Condo Over List", now: `${r(m.condo.overAsk)}%`, then: `${r(p.condo.overAsk)}%`,
+      chg: `${pts(m.condo.overAsk, p.condo.overAsk)} pts` },
+    { label: "SFH Sale Price vs List", now: `${r(m.sfh.saleToList)}%`, then: `${r(p.sfh.saleToList)}%`,
+      chg: `${pts(m.sfh.saleToList, p.sfh.saleToList)} pts` },
   ];
 
   return (

@@ -99,7 +99,11 @@ const seg = (rows, pick) => {
     median: median(v.map(r => r.price)),
     avg: mean(v.map(r => r.price)),
     dom: median(doms),
+    // Two different things, and they get confused for each other:
+    // overAsk is the SHARE of sales that closed above list; saleToList is
+    // the typical sale as a percentage OF list, i.e. the actual premium.
     overAsk: withList.length ? (100 * withList.filter(r => r.price > r.list).length) / withList.length : null,
+    saleToList: withList.length ? median(withList.map(r => (100 * r.price) / r.list)) : null,
   };
 };
 const marketFor = rows => ({
