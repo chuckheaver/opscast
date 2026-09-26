@@ -40,11 +40,34 @@ const LAYERS = [
 ];
 
 export default function Landing() {
+  // "Sept 10, 2026" — toLocaleDateString gives "Sep", so September is spelled
+  // the way it is asked for and every other month keeps its short form.
   const through = stats.dataThrough
-    ? new Date(stats.dataThrough).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+    ? new Date(stats.dataThrough)
+        .toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+        .replace(/^Sep /, "Sept ")
     : null;
   const m = stats.market.current;
   const p = stats.market.prior;
+  const r = v => Math.round(v);
+  const days = (a, b) => {
+    const d = pts(a, b);
+    return `${d} ${Math.abs(r(a) - r(b)) === 1 ? "day" : "days"}`;
+  };
+  const KPIS = [
+    { label: "SFH Median Sale", now: money(m.sfh.median), then: money(p.sfh.median),
+      chg: pct(m.sfh.median, p.sfh.median) },
+    { label: "Condo Median Sale", now: money(m.condo.median), then: money(p.condo.median),
+      chg: pct(m.condo.median, p.condo.median) },
+    { label: "Total Sales Volume", now: `$${(m.volume / 1e9).toFixed(2)}B`, then: `$${(p.volume / 1e9).toFixed(2)}B`,
+      chg: pct(m.volume, p.volume) },
+    { label: "SFH Days to Sell", now: r(m.sfh.dom), then: r(p.sfh.dom),
+      chg: days(m.sfh.dom, p.sfh.dom) },
+    { label: "Condo Days to Sell", now: r(m.condo.dom), then: r(p.condo.dom),
+      chg: days(m.condo.dom, p.condo.dom) },
+    { label: "SFH Over Asking", now: `${r(m.sfh.overAsk)}%`, then: `${r(p.sfh.overAsk)}%`,
+      chg: `${pts(m.sfh.overAsk, p.sfh.overAsk)} pts` },
+  ];
 
   return (
     <div className="lp">
@@ -89,34 +112,23 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* By the Numbers — the same figures the monthly briefing leads with. */}
+      {/* By the Numbers — the briefing's front page. Each tile shows this
+          year then last, separated by a space, with the metric and the
+          change beneath it. */}
       <section className="lp-stats" aria-label="By the numbers">
         <p className="lp-stats-head">
-          By the Numbers
-          {through ? <span className="lp-stats-when"> · through {through}</span> : null}
-          <span className="lp-stats-sub"> · {stats.market.year} year to date vs {stats.market.priorYear}</span>
+          By the Numbers: &rsquo;25 vs &rsquo;26 YTD{through ? ` (${through})` : ""}
         </p>
         <div className="lp-stats-row">
-          <div className="lp-stat">
-            <div className="lp-stat-v">{money(m.sfh.median)}</div>
-            <div className="lp-stat-l">Median house <b>{pct(m.sfh.median, p.sfh.median)}</b></div>
-          </div>
-          <div className="lp-stat">
-            <div className="lp-stat-v">{money(m.condo.median)}</div>
-            <div className="lp-stat-l">Median condo / TIC <b>{pct(m.condo.median, p.condo.median)}</b></div>
-          </div>
-          <div className="lp-stat">
-            <div className="lp-stat-v">${(m.volume / 1e9).toFixed(2)}B</div>
-            <div className="lp-stat-l">Sold, every home type <b>{pct(m.volume, p.volume)}</b></div>
-          </div>
-          <div className="lp-stat">
-            <div className="lp-stat-v">{Math.round(m.sfh.dom)}<span className="lp-stat-u"> / {Math.round(m.condo.dom)}</span></div>
-            <div className="lp-stat-l">Days to sell, house / condo <b>{pts(m.sfh.dom, p.sfh.dom)} / {pts(m.condo.dom, p.condo.dom)} days</b></div>
-          </div>
-          <div className="lp-stat">
-            <div className="lp-stat-v">{Math.round(m.sfh.overAsk)}<span className="lp-stat-u"> / {Math.round(m.condo.overAsk)}%</span></div>
-            <div className="lp-stat-l">Sold over asking <b>{pts(m.sfh.overAsk, p.sfh.overAsk)} / {pts(m.condo.overAsk, p.condo.overAsk)} pts</b></div>
-          </div>
+          {KPIS.map(k => (
+            <div className="lp-stat" key={k.label}>
+              <div className="lp-stat-v">
+                {k.now}
+                <span className="lp-stat-prior">{k.then}<i>&rsquo;25</i></span>
+              </div>
+              <div className="lp-stat-l">{k.label}: <b>{k.chg}</b></div>
+            </div>
+          ))}
         </div>
       </section>
 

@@ -4735,19 +4735,27 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-stats-when { color: rgba(255,255,255,0.45); font-weight: 600; letter-spacing: 0.06em; }
 .lp-stats-row {
   max-width: 1240px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(5, 1fr);
+  display: grid; grid-template-columns: repeat(6, 1fr);
 }
-.lp-stats-sub { color: rgba(255,255,255,0.42); font-weight: 600; letter-spacing: 0.06em; }
-.lp-stat-u { font-size: 0.62em; color: rgba(232,184,75,0.72); }
 .lp-stat-l b { color: #fff; font-weight: 700; }
+/* Last year, beside this year — a space between them, never a slash. */
+.lp-stat-prior {
+  margin-left: 0.42em; font-size: 0.66em; font-weight: 600;
+  color: rgba(255,255,255,0.50);
+}
+.lp-stat-prior i {
+  font-style: normal; margin-left: 0.28em; font-size: 0.8em;
+  color: rgba(255,255,255,0.34);
+}
 .lp-stat { padding: 4px clamp(12px, 2vw, 26px) 26px; border-right: 1px solid rgba(255,255,255,0.09); }
 .lp-stat:first-child { padding-left: 0; }
 .lp-stat:last-child { border-right: none; }
 .lp-stat-v {
-  font-family: Georgia, 'Times New Roman', serif; line-height: 1;
-  font-size: clamp(27px, 3.2vw, 38px); font-weight: 700; color: var(--lp-gold-lt);
+  font-family: Georgia, 'Times New Roman', serif; line-height: 1.05;
+  font-size: clamp(22px, 2.2vw, 29px); font-weight: 700; color: var(--lp-gold-lt);
+  white-space: nowrap;
 }
-.lp-stat-l { margin-top: 9px; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.72); }
+.lp-stat-l { margin-top: 8px; font-size: 12.5px; line-height: 1.45; color: rgba(255,255,255,0.72); }
 
 /* Six layers ---------------------------------------------------------- */
 .lp-layers { padding: clamp(54px, 8vw, 92px) clamp(18px, 5vw, 56px); }
@@ -4812,7 +4820,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 /* Tablet ----------------------------------------------------------------- */
 @media (max-width: 1000px) {
   .lp-layer-grid { grid-template-columns: repeat(2, 1fr); }
-  .lp-stats-row { grid-template-columns: repeat(2, 1fr); }
+  .lp-stats-row { grid-template-columns: repeat(3, 1fr); }
   .lp-stat:nth-child(even) { border-right: none; }
   .lp-stat:nth-child(odd) { padding-left: 0; }
   .lp-stat { border-bottom: 1px solid rgba(255,255,255,0.09); padding-top: 16px; padding-bottom: 18px; }
