@@ -61,9 +61,9 @@ export default function Landing() {
       chg: pct(m.condo.median, p.condo.median) },
     { label: "Total Sales Volume", now: `$${(m.volume / 1e9).toFixed(2)}B`, then: `$${(p.volume / 1e9).toFixed(2)}B`,
       chg: pct(m.volume, p.volume) },
-    { label: "SFH Days to Sell", now: r(m.sfh.dom), then: r(p.sfh.dom),
+    { label: "SFH DOM", now: r(m.sfh.dom), then: r(p.sfh.dom),
       chg: days(m.sfh.dom, p.sfh.dom) },
-    { label: "Condo Days to Sell", now: r(m.condo.dom), then: r(p.condo.dom),
+    { label: "Condo DOM", now: r(m.condo.dom), then: r(p.condo.dom),
       chg: days(m.condo.dom, p.condo.dom) },
     { label: "SFH Over Asking", now: `${r(m.sfh.overAsk)}%`, then: `${r(p.sfh.overAsk)}%`,
       chg: `${pts(m.sfh.overAsk, p.sfh.overAsk)} pts` },
@@ -117,14 +117,14 @@ export default function Landing() {
           change beneath it. */}
       <section className="lp-stats" aria-label="By the numbers">
         <p className="lp-stats-head">
-          By the Numbers: &rsquo;25 vs &rsquo;26 YTD{through ? ` (${through})` : ""}
+          By the Numbers: <span className="lp-stats-key">&rsquo;25</span> vs &rsquo;26 YTD{through ? ` (${through})` : ""}
         </p>
         <div className="lp-stats-row">
           {KPIS.map(k => (
             <div className="lp-stat" key={k.label}>
               <div className="lp-stat-v">
                 {k.now}
-                <span className="lp-stat-prior">{k.then}<i>&rsquo;25</i></span>
+                <span className="lp-stat-prior">{k.then}</span>
               </div>
               <div className="lp-stat-l">{k.label}: <b>{k.chg}</b></div>
             </div>

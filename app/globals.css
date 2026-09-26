@@ -4738,16 +4738,15 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   display: grid; grid-template-columns: repeat(6, 1fr);
 }
 .lp-stat-l b { color: #fff; font-weight: 700; }
-/* Last year, beside this year — a space between them, never a slash. */
+/* Last year, beside this year — a space between them, never a slash. The
+   '25 in the band heading is set in this same grey and is the only label;
+   matching the two is what tells the reader which figure is which. */
 .lp-stat-prior {
-  margin-left: 0.42em; font-size: 0.66em; font-weight: 600;
+  margin-left: 0.44em; font-size: 0.66em; font-weight: 600;
   color: rgba(255,255,255,0.50);
 }
-.lp-stat-prior i {
-  font-style: normal; margin-left: 0.28em; font-size: 0.8em;
-  color: rgba(255,255,255,0.34);
-}
-.lp-stat { padding: 4px clamp(12px, 2vw, 26px) 26px; border-right: 1px solid rgba(255,255,255,0.09); }
+.lp-stats-key { color: rgba(255,255,255,0.50); }
+.lp-stat { padding: 4px clamp(10px, 1.3vw, 18px) 24px; border-right: 1px solid rgba(255,255,255,0.09); }
 .lp-stat:first-child { padding-left: 0; }
 .lp-stat:last-child { border-right: none; }
 .lp-stat-v {
@@ -4755,7 +4754,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   font-size: clamp(22px, 2.2vw, 29px); font-weight: 700; color: var(--lp-gold-lt);
   white-space: nowrap;
 }
-.lp-stat-l { margin-top: 8px; font-size: 12.5px; line-height: 1.45; color: rgba(255,255,255,0.72); }
+.lp-stat-l { margin-top: 8px; font-size: 12px; line-height: 1.45; color: rgba(255,255,255,0.72); }
 
 /* Six layers ---------------------------------------------------------- */
 .lp-layers { padding: clamp(54px, 8vw, 92px) clamp(18px, 5vw, 56px); }
