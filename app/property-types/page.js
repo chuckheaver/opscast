@@ -9,7 +9,7 @@ import { TYPES, SECTIONS, DISCLAIMER } from "./content";
 export const metadata = {
   title: "Types of Real Estate in San Francisco — Chuck Heaver",
   description:
-    "Single family, condo, TIC, co-op and multi-unit in San Francisco: how each one is owned, how each one is financed, and what to check before you write. Plus the 3R report and legal unit counts, the disclosure package, getting an insurance quote, property taxes and Mello-Roos districts.",
+    "Single family, condo, TIC, co-op and multi-unit in San Francisco: how each one is owned, how each one is financed, and what to check before you write. Plus pre-qualification vs pre-approval, the 3R report and legal unit counts, the disclosure package, getting an insurance quote, property taxes and Mello-Roos districts.",
 };
 
 export default function Page() {

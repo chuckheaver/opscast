@@ -96,6 +96,48 @@ export const TYPES = [
 
 export const SECTIONS = [
   {
+    id: "financing",
+    nav: "Financing Steps",
+    kicker: "Before you look at a single house",
+    title: "Financing, stage by stage",
+    lead:
+      "Every type above finances differently \u2014 but the process of getting the money is the same, and where you are in it decides how seriously your offer is taken.",
+    body: [
+      {
+        h: "Pre-qualification is a conversation",
+        p: "You tell a lender what you earn, what you owe and what you have saved. They do the arithmetic and give you a number, sometimes without pulling credit and almost always without seeing a document. It is useful for setting expectations and worth nothing in an offer, because nothing in it has been checked. Treat it as a starting point, not a credential.",
+      },
+      {
+        h: "Pre-approval means someone verified it",
+        p: "You complete an application, your credit is pulled, and you hand over the paperwork \u2014 two years of returns and W-2s, recent pay stubs, two months of bank and investment statements, and an explanation for anything unusual. The lender reviews it and issues a letter stating what you can borrow. This is what a listing agent expects to see attached to an offer, and an offer without one tends not to be counted.",
+      },
+      {
+        h: "Fully underwritten approval is the one that wins",
+        p: "A step further, and the one worth asking your lender for in this market. A human underwriter reviews your file and issues a credit approval with the property left blank \u2014 income, assets and credit already cleared, with only the house still to be determined. It is the closest thing to cash a financed buyer can carry, and it is what makes shortening a loan contingency defensible rather than reckless. It takes longer to get, so start before you are in contract, not after.",
+      },
+      {
+        h: "What happens once you are in contract",
+        p: "The file moves to the specific property. The lender orders an appraisal and title, sends disclosures on a clock, and underwriting issues a conditions list \u2014 almost always longer than you expect and almost always routine. You clear the conditions, the file goes back, and the lender issues loan documents. Signing is with a notary, funding follows, and in California the sale is final when the deed records, not when you sign.",
+      },
+      {
+        h: "Where the property type re-enters",
+        p: "Your approval is about you; the property still has to qualify on its own. A condo building has to clear the lender\u2019s HOA review. A TIC needs a lender who writes fractional loans at all. Five units or more is commercial underwriting on the building\u2019s income rather than your salary. Tell your lender which type you are shopping before you shop \u2014 an approval built for a single-family house does not automatically carry to a TIC.",
+      },
+      {
+        h: "Jumbo is normal here",
+        p: "With a median house above two million, most San Francisco purchases exceed the conforming limit and land in jumbo territory. Expect tighter underwriting, a larger down payment, and a reserves requirement \u2014 months of payments still in the bank after closing. Ask your lender what the reserve figure is early, because it is the part buyers most often fail to plan for.",
+      },
+      {
+        h: "Rate locks",
+        p: "A lock fixes your rate for a set window, typically thirty to sixty days, and a longer lock costs more. Locking too early on a slow escrow can mean paying to extend; locking too late leaves you exposed. Decide with your lender against the actual closing date rather than a default.",
+      },
+      {
+        h: "Change nothing until you have the keys",
+        p: "Between approval and funding, do not open a credit card, finance a car, change jobs, or move large sums between accounts without telling your lender first. Underwriting re-checks credit and employment before funding, and an unexplained deposit or a new debt can unwind an approval days before closing. If something has to change, say so early \u2014 it is almost always solvable in advance and almost never solvable at the end.",
+      },
+    ],
+  },
+  {
     id: "units",
     nav: "3R & Unit Count",
     kicker: "Multi-unit, read this twice",
