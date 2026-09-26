@@ -199,18 +199,18 @@ export default function FogApp() {
   // ZIP code boundaries — independent toggle.
   const [showZips, setShowZips] = useState(false);
   // Topographic hillshade overlay.
-  const [showTerrain, setShowTerrain] = useState(false);
+  const [showTerrain, setShowTerrain] = useState(preset === "terrain");
   // Satellite imagery base.
   const [showSatellite, setShowSatellite] = useState(false);
   // Elevation contour lines + ft labels + peak labels — the layer set
   // pulled in from /microclimates.
-  const [showElevation, setShowElevation] = useState(false);
+  const [showElevation, setShowElevation] = useState(preset === "terrain");
   // CA Geological Survey seismic hazard zones.
-  const [showSeismic, setShowSeismic] = useState(false);
+  const [showSeismic, setShowSeismic] = useState(preset === "hazards");
   // CGS Tsunami Hazard Area for Emergency Planning, 2021 update.
-  const [showTsunami, setShowTsunami] = useState(false);
+  const [showTsunami, setShowTsunami] = useState(preset === "hazards");
   // USGS active fault traces (San Andreas, Hayward, Calaveras, …).
-  const [showFaults, setShowFaults] = useState(false);
+  const [showFaults, setShowFaults] = useState(preset === "hazards");
 
   // Hazards selector handlers. The bar's picks ARE the saved default; opening
   // restores them, and turning the chip off hides without clobbering them.
@@ -252,8 +252,8 @@ export default function FogApp() {
   // Parcel Type overlay (SF Land Use) — both off by default; the map opens
   // showing only Neighborhoods. Toggled from the map tools; both drive the
   // same vector tiles.
-  const [showParcelsRes, setShowParcelsRes] = useState(false);
-  const [showParcelsCom, setShowParcelsCom] = useState(false);
+  const [showParcelsRes, setShowParcelsRes] = useState(preset === "landuse");
+  const [showParcelsCom, setShowParcelsCom] = useState(preset === "landuse");
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoErr, setGeoErr] = useState("");
   const autoGeoTriedRef = useRef(false);
@@ -451,13 +451,20 @@ export default function FogApp() {
     autoGeoTriedRef.current = true; // suppress the auto-geo prompt below
     const feature = findNeighborhoodForPoint(geojson, urlLoc.point);
     const contour = findContourForPoint(contours, urlLoc.point);
+    // The marker and the search field both read addressPin, not picked, so a
+    // deep-link has to set it or the map opens with no pin and an empty box.
+    setAddressPin({ point: urlLoc.point, address: urlLoc.name || null });
     setPicked({
       point: urlLoc.point,
       address: urlLoc.name || null,
       zoom: urlLoc.zoom,
+      source: "address",
       feature,
       contour,
     });
+    // Arriving from the site's address box should behave like searching on
+    // the map itself: pin down, neighborhood summary open.
+    setOpenHood(feature?.properties?.name || null);
   }, [urlLoc, geojson, contours]);
 
   // Fallback initial pick from localStorage when no URL params present.
@@ -482,9 +489,11 @@ export default function FogApp() {
     const point = [lng, lat];
     const feature = findNeighborhoodForPoint(geojson, point);
     const contour = findContourForPoint(contours, point);
+    setAddressPin({ point, address: stored.name || null });
     setPicked({
       point,
       address: stored.name || null,
+      source: "address",
       feature,
       contour,
     });

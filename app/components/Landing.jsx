@@ -16,6 +16,8 @@ import hoodStats from "../lib/neighborhood-stats.json";
 const GUIDE_COUNT = Object.keys(hoodStats.hoods || {}).length;
 
 import SiteFooter, { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "./SiteFooter";
+import HeroSearch from "./HeroSearch";
+import WeatherChip from "./WeatherChip";
 
 const money = v => `$${(v / 1e6).toFixed(2)}M`;
 const pct = (a, b) => (a == null || !b ? null : `${a / b - 1 >= 0 ? "+" : ""}${Math.round((a / b - 1) * 100)}%`);
@@ -27,7 +29,7 @@ const num = v => v.toLocaleString("en-US");
 const LAYERS = [
   { k: "Sun", href: "/microclimates?layer=solar",
     d: "Hours of direct sun the property gets, season by season." },
-  { k: "Wind", href: "/microclimates?layer=wind",
+  { k: "Wind", href: "/microclimates",
     d: "Which side of the hill takes the wind and which sits sheltered." },
   { k: "Fog", href: "/fog?preset=fog",
     d: "Average summer fog hours, drawn to the contour, not the ZIP code." },
@@ -37,6 +39,10 @@ const LAYERS = [
     d: "Every Muni line and stop, and the walk you would really make." },
   { k: "Terrain", href: "/fog?preset=terrain",
     d: "Elevation and slope — the hill you climb carrying groceries." },
+  { k: "Bikes", href: "/fog?preset=bikes",
+    d: "Protected lanes and bike routes, and the climb between you and them." },
+  { k: "Land Use", href: "/fog?preset=landuse",
+    d: "What every parcel around you is zoned and built for, residential or commercial." },
 ];
 
 export default function Landing() {
@@ -81,6 +87,7 @@ export default function Landing() {
       {/* No logo lockup here — the name and title sit under the portrait a
           few inches below, and dropping it lets the map start higher. */}
       <header className="lp-nav lp-nav-bare">
+        <WeatherChip />
         <nav className="lp-nav-links">
           <Link href="/fog?preset=fog">The Map</Link>
           <Link href="/neighborhoods">Neighborhoods</Link>
@@ -106,14 +113,16 @@ export default function Landing() {
             </figcaption>
           </figure>
           <figure className="lp-hero-map">
-            <img src="/brand/sf-fog-hero.svg"
-                 alt="San Francisco split into its microclimate zones, one dot per home sold this year"
-                 width="1000" height="780" />
+            <Link href="/fog?preset=fog" className="lp-map-link" aria-label="Open the interactive microclimate map">
+              <img src="/brand/sf-fog-hero.svg"
+                   alt="San Francisco split into its microclimate zones, one dot per home sold this year"
+                   width="1000" height="780" />
+              <span className="lp-map-hint">Open the live map &rarr;</span>
+            </Link>
             <figcaption>
-              <Link className="lp-explore" href="/fog?preset=fog">
-                <span className="lp-explore-q">Where do you want to go?</span>
-                <span className="lp-explore-go" aria-hidden="true">&rarr;</span>
-              </Link>
+              {/* Typing an address goes to the same map, with the pin already
+                  dropped on it, via the ?lat=&lng=&name= deep-link. */}
+              <HeroSearch />
             </figcaption>
           </figure>
         </div>
@@ -143,7 +152,7 @@ export default function Landing() {
       <section className="lp-layers">
         <div className="lp-section-head">
           <p className="lp-kicker">Street level, not ZIP code level</p>
-          <h2 className="lp-h2">Six things I can tell you about your block.</h2>
+          <h2 className="lp-h2">What&rsquo;s on your block.</h2>
         </div>
         <div className="lp-layer-grid">
           {LAYERS.map(l => (
