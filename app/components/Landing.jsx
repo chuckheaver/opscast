@@ -13,6 +13,7 @@ const EMAIL = "chuck.heaver@vanguardproperties.com";
 const PHONE_DISPLAY = "415.549.1777";
 const PHONE_HREF = "+14155491777";
 const MAIN_SITE = "https://www.chuckheaver.com";
+const DRE = "02252640";
 
 const money = v => `$${(v / 1e6).toFixed(2)}M`;
 const num = v => v.toLocaleString("en-US");
@@ -44,10 +45,11 @@ export default function Landing() {
       <header className="lp-nav">
         <Link href="/" className="lp-logo">
           <span className="lp-logo-name">Chuck Heaver</span>
-          <span className="lp-logo-sub">Realtor · Meteorologist</span>
+          <span className="lp-logo-sub">San Francisco Realtor · Meteorologist</span>
         </Link>
         <nav className="lp-nav-links">
           <Link href="/fog?preset=fog">The Map</Link>
+          <Link href="/neighborhoods">Neighborhoods</Link>
           <Link href="/market">Market</Link>
           <Link href="/tools">All Tools</Link>
           <a className="lp-nav-cta" href={`mailto:${EMAIL}`}>Work With Me</a>
@@ -63,7 +65,7 @@ export default function Landing() {
           <div className="lp-hero-copy">
             <p className="lp-eyebrow">San Francisco · Vanguard Properties</p>
             <h1 className="lp-h1">
-              Every block has its own <em>weather</em>.
+              Every San Francisco block has its own <em>microclimate</em>.
             </h1>
             <p className="lp-lede">
               Sun, wind, fog, hazard, transit — mapped street by street.
@@ -75,7 +77,7 @@ export default function Landing() {
             </div>
           </div>
           <figure className="lp-portrait">
-            <img src="/brand/chuck-heaver.webp" alt="Chuck Heaver" width="760" height="760" />
+            <img src="/brand/chuck-heaver-cutout.png" alt="Chuck Heaver" width="1566" height="1784" />
           </figure>
         </div>
       </section>
@@ -120,6 +122,20 @@ export default function Landing() {
               <span className="lp-layer-d">{l.d}</span>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* The neighborhood guide. */}
+      <section className="lp-guide-promo">
+        <div>
+          <p className="lp-kicker">The guide</p>
+          <h2 className="lp-h2">All {num(stats.neighborhoods)} San Francisco neighborhoods, written up.</h2>
+          <p className="lp-mapshow-body">
+            What each one is actually like, what homes are selling for right now,
+            and the microclimate it sits in. Not a ZIP-code summary — the real thing,
+            block by block.
+          </p>
+          <Link className="lp-btn lp-btn-navy" href="/neighborhoods">Open the neighborhood guide</Link>
         </div>
       </section>
 
@@ -189,6 +205,7 @@ export default function Landing() {
           </div>
           <div className="lp-foot-links">
             <Link href="/fog?preset=fog">Map</Link>
+            <Link href="/neighborhoods">Neighborhoods</Link>
             <Link href="/market">Market</Link>
             <Link href="/tools">All tools</Link>
             <a href={MAIN_SITE} target="_blank" rel="noopener noreferrer">chuckheaver.com</a>
@@ -196,6 +213,7 @@ export default function Landing() {
           </div>
         </div>
         <p className="lp-fine lp-foot-fine">
+          Chuck Heaver · DRE #{DRE} · Vanguard Properties, San Francisco.
           Sale figures are closed transactions from SFAR MLS geocoded to USGS-derived
           microclimate contours{updated ? `, data through ${updated}` : ""}. Sun-belt and
           fog-belt price comparisons are single-family homes only. Deemed reliable, not guaranteed.

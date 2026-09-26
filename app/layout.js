@@ -14,35 +14,32 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const TITLE = "Chuck Heaver — San Francisco Realtor & Meteorologist";
+const DESC =
+  "Every San Francisco block has its own microclimate. Twenty years forecasting this coastline, "
+  + "thirty-five selling homes on it — with every closed sale in the city mapped to the sun, wind and fog it sits in.";
+
 export const metadata = {
   // Production canonical domain. Relative URLs in metadata (like
   // /og-image.png) resolve against this when rendered on any deploy.
   metadataBase: new URL("https://www.ur4cast.com"),
-  title: "Ur4cast — Local Intelligence For You",
-  description:
-    "Weather forecasting built for outdoor business operations. Set your ideal conditions and get operational guidance hour by hour.",
+  title: { default: TITLE, template: "%s" },
+  description: DESC,
   openGraph: {
-    title: "Ur4cast — Local Intelligence For You",
-    description:
-      "Weather forecasting built for outdoor business operations. Set your ideal conditions and get operational guidance hour by hour.",
+    title: TITLE,
+    description: DESC,
     type: "website",
     url: "https://www.ur4cast.com",
-    siteName: "Ur4cast",
+    siteName: "Chuck Heaver · San Francisco",
     locale: "en_US",
     images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Ur4cast — Local Intelligence For You",
-      },
+      { url: "/og-image.png", width: 1200, height: 630, alt: TITLE },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ur4cast — Local Intelligence For You",
-    description:
-      "Weather forecasting built for outdoor business operations. Set your ideal conditions and get operational guidance hour by hour.",
+    title: TITLE,
+    description: DESC,
     images: ["/og-image.png"],
   },
 };
