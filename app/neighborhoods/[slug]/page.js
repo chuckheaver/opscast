@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   NAMES, slugify, nameForSlug, contentFor, statsFor,
-  money, ZONE_COLOR, windowLabel,
+  money, ZONE_COLOR, windowLabel, statsYear,
 } from "../lib";
 
 export function generateStaticParams() {
@@ -25,26 +25,15 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// A median needs a few sales behind it to mean anything. Under three it is
-// not reported at all; three or four is shown but flagged, so a thin month in
-// a small neighborhood can never read as a market rate.
-const MIN_MEDIAN_N = 3;
-const THIN_N = 5;
-
-const Stat = ({ label, value, sub, n }) => {
-  if (value == null) return null;
-  if (n != null && n < MIN_MEDIAN_N) return null;
-  const thin = n != null && n < THIN_N;
-  return (
+// Every figure is reported, however few sales are behind it. The sale count
+// rides with each median so the reader can weigh it themselves.
+const Stat = ({ label, value, sub }) =>
+  value == null ? null : (
     <div className="lp-nstat">
       <div className="lp-nstat-v">{value}</div>
-      <div className="lp-nstat-l">
-        {label}{sub ? <span className="lp-fine"> {sub}</span> : null}
-        {thin ? <span className="lp-thin"> small sample</span> : null}
-      </div>
+      <div className="lp-nstat-l">{label}{sub ? <span className="lp-fine"> {sub}</span> : null}</div>
     </div>
   );
-};
 
 export default async function Page({ params }) {
   const { slug } = await params;
@@ -86,12 +75,12 @@ export default async function Page({ params }) {
 
         {s && s.n > 0 && (
           <section className="lp-nstats">
-            <Stat label="Median house" value={money(s.sfhMedian)} n={s.sfhN} sub={s.sfhN ? `${s.sfhN} sold` : null} />
-            <Stat label="Median condo / TIC" value={money(s.condoMedian)} n={s.condoN} sub={s.condoN ? `${s.condoN} sold` : null} />
-            <Stat label="Per square foot" value={s.ppsf ? `$${Math.round(s.ppsf).toLocaleString("en-US")}` : null} n={s.n} />
-            <Stat label="Days to sell" value={s.dom != null ? Math.round(s.dom) : null} n={s.n} sub="median" />
+            <Stat label="Median house" value={money(s.sfhMedian)} sub={s.sfhN ? `${s.sfhN} sold` : null} />
+            <Stat label="Median condo / TIC" value={money(s.condoMedian)} sub={s.condoN ? `${s.condoN} sold` : null} />
+            <Stat label="Per square foot" value={s.ppsf ? `$${Math.round(s.ppsf).toLocaleString("en-US")}` : null} />
+            <Stat label="Days to sell" value={s.dom != null ? Math.round(s.dom) : null} sub="median" />
             <Stat label="Summer fog" value={Number.isFinite(s.fogHours) ? `${s.fogHours.toFixed(1)}h` : null} sub="a day" />
-            <Stat label="Homes sold" value={s.n} sub="12 months" />
+            <Stat label="Homes sold" value={s.n} sub={statsYear} />
           </section>
         )}
 
@@ -194,11 +183,11 @@ export default async function Page({ params }) {
           </div>
         </div>
         <p className="lp-fine lp-foot-fine">
-          Prices are closed sales from SFAR MLS over the trailing twelve months
-          {windowLabel ? ` (${windowLabel})` : ""}, matched to the neighborhood each home
-          physically sits in. A median is not shown where fewer than three homes of that
-          type sold, and is flagged below five. Fog hours are the median daily summer
-          figure from USGS-derived contours. Deemed reliable, not guaranteed.
+          Prices are {statsYear} closed sales from SFAR MLS{windowLabel ? ` (${windowLabel})` : ""},
+          matched to the neighborhood each home physically sits in. Every sale is included,
+          and the &ldquo;sold&rdquo; count beside each median says how many it is drawn from.
+          Fog hours are the median daily summer figure from USGS-derived contours.
+          Deemed reliable, not guaranteed.
         </p>
       </footer>
     </div>

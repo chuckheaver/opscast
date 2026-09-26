@@ -2,7 +2,7 @@
 // each carrying its live median price and its microclimate zone.
 
 import Link from "next/link";
-import { allHoods, money, ZONE_COLOR, windowLabel } from "./lib";
+import { allHoods, money, ZONE_COLOR, windowLabel, statsYear } from "./lib";
 
 export const metadata = {
   title: "San Francisco Neighborhood Guide — Chuck Heaver",
@@ -33,8 +33,8 @@ export default function Page() {
         <h1 className="lp-guide-h1">All {hoods.length} of them, and the microclimate each one gets.</h1>
         <p className="lp-guide-lede">
           What it is like to live there, what homes are selling for, and the
-          microclimate it sits in. Prices are closed sales over the last twelve
-          months{windowLabel ? ` (${windowLabel})` : ""}.
+          microclimate it sits in. Prices are {statsYear} closed sales
+          {windowLabel ? ` — ${windowLabel}` : ""}; the figure in brackets is how many sold.
         </p>
       </section>
 
@@ -51,9 +51,9 @@ export default function Page() {
             </div>
             <p className="lp-hood-spirit">{h.content.spirit}</p>
             <div className="lp-hood-nums">
-              {/* Three sales is the floor for quoting a median — see the detail page. */}
-              {h.stats?.sfhMedian && h.stats.sfhN >= 3 ? <span><b>{money(h.stats.sfhMedian)}</b> house</span> : null}
-              {h.stats?.condoMedian && h.stats.condoN >= 3 ? <span><b>{money(h.stats.condoMedian)}</b> condo</span> : null}
+              {/* Every median is shown, with its sale count beside it. */}
+              {h.stats?.sfhMedian ? <span><b>{money(h.stats.sfhMedian)}</b> house <i>({h.stats.sfhN})</i></span> : null}
+              {h.stats?.condoMedian ? <span><b>{money(h.stats.condoMedian)}</b> condo <i>({h.stats.condoN})</i></span> : null}
               {Number.isFinite(h.stats?.fogHours) ? <span><b>{h.stats.fogHours.toFixed(1)}h</b> fog</span> : null}
             </div>
           </Link>
@@ -62,11 +62,11 @@ export default function Page() {
 
       <footer className="lp-foot">
         <p className="lp-fine lp-foot-fine">
-          Prices are closed sales from SFAR MLS over the trailing twelve months
-          {windowLabel ? `(${windowLabel})` : ""}, matched to the neighborhood each home
-          physically sits in. A median is not shown where fewer than three homes of that
-          type sold. Fog hours are the median daily summer figure from USGS-derived
-          contours. Deemed reliable, not guaranteed.
+          Prices are {statsYear} closed sales from SFAR MLS{windowLabel ? ` (${windowLabel})` : ""},
+          matched to the neighborhood each home physically sits in. Every sale is included;
+          where a neighborhood had few of a type, the count in brackets says so. Fog hours
+          are the median daily summer figure from USGS-derived contours. Deemed reliable,
+          not guaranteed.
         </p>
       </footer>
     </div>

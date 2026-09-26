@@ -4912,8 +4912,5 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   .lp-facts, .lp-venues { grid-template-columns: 1fr; }
   .lp-nav-solid { flex-wrap: wrap; }
 }
-.lp-thin {
-  display: inline-block; margin-left: 6px; font-size: 10.5px; font-weight: 700;
-  letter-spacing: 0.04em; text-transform: uppercase; color: #9A7B1F;
-  background: #FBF3DC; border-radius: 4px; padding: 1px 5px;
-}
+/* Sale count beside a median on the guide cards. */
+.lp-hood-nums i { font-style: normal; color: var(--lp-muted); }

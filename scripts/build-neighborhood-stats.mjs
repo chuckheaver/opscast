@@ -5,10 +5,9 @@
 // Sales are matched on fogNeighborhood — the point-in-polygon result — not on
 // the MLS text field, so a home counts toward the area it physically sits in.
 //
-// The window is a ROLLING 12 MONTHS, not year-to-date. At neighborhood level a
-// calendar year leaves quieter areas with two or three sales early in the year,
-// too thin to quote a median from; twelve months keeps every area comparable
-// and stops the figures lurching each January.
+// The window is YEAR TO DATE. Every sale in it is reported, however few a
+// neighborhood had — the sale count sits beside each median so the reader can
+// weigh it themselves rather than having the figure withheld.
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { listNeighborhoods } from "../app/fog/lib/neighborhoods.js";
@@ -32,10 +31,9 @@ const zoneOf = h => {
 
 const geo = JSON.parse(readFileSync(LISTINGS, "utf8"));
 const end = new Date(geo.metadata?.builtAt || Date.now());
-const start = new Date(end);
-start.setFullYear(start.getFullYear() - 1);
+const YEAR = String(end.getFullYear());
 const iso = d => d.toISOString().slice(0, 10);
-const FROM = iso(start), TO = iso(end);
+const FROM = `${YEAR}-01-01`, TO = iso(end);
 
 const byHood = new Map();
 for (const f of geo.features || []) {
@@ -60,6 +58,7 @@ for (const f of geo.features || []) {
 const out = {
   generatedAt: new Date().toISOString(),
   dataThrough: geo.metadata?.builtAt || null,
+  year: YEAR,
   window: { from: FROM, to: TO },
   hoods: {},
 };
@@ -87,4 +86,4 @@ for (const { key } of listNeighborhoods()) {
 
 writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
 console.log(`wrote ${OUT}`);
-console.log(`  ${Object.keys(out.hoods).length} neighborhoods, ${withSales} with sales in ${FROM} to ${TO}`);
+console.log(`  ${Object.keys(out.hoods).length} neighborhoods, ${withSales} with ${YEAR} sales (${FROM} to ${TO})`);
