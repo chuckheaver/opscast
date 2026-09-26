@@ -4751,9 +4751,11 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   border-right: 1px solid rgba(255,255,255,0.09);
   border-bottom: 1px solid rgba(255,255,255,0.09);
 }
+/* Seven tiles: four across, then three. */
 .lp-stat:nth-child(4n) { border-right: none; }
 .lp-stat:nth-child(4n + 1) { padding-left: 0; }
-.lp-stat:nth-last-child(-n + 4) { border-bottom: none; padding-bottom: 22px; }
+.lp-stat:nth-child(n + 5) { border-bottom: none; padding-bottom: 22px; }
+.lp-stat:last-child { border-right: none; }
 .lp-stat-v {
   font-family: Georgia, 'Times New Roman', serif; line-height: 1.05;
   font-size: clamp(22px, 2.2vw, 29px); font-weight: 700; color: var(--lp-gold-lt);

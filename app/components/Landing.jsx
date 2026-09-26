@@ -50,10 +50,10 @@ export default function Landing() {
   const m = stats.market.current;
   const p = stats.market.prior;
   const r = v => Math.round(v);
-  const days = (a, b) => {
-    const d = pts(a, b);
-    return `${d} ${Math.abs(r(a) - r(b)) === 1 ? "day" : "days"}`;
-  };
+  const unit = (a, b, one, many) =>
+    `${pts(a, b)} ${Math.abs(r(a) - r(b)) === 1 ? one : many}`;
+  const days = (a, b) => unit(a, b, "day", "days");
+  const ptsOf = (a, b) => unit(a, b, "pt", "pts");
   const KPIS = [
     { label: "SFH Median Sale", now: money(m.sfh.median), then: money(p.sfh.median),
       chg: pct(m.sfh.median, p.sfh.median) },
@@ -65,15 +65,13 @@ export default function Landing() {
       chg: days(m.sfh.dom, p.sfh.dom) },
     { label: "Condo DOM", now: r(m.condo.dom), then: r(p.condo.dom),
       chg: days(m.condo.dom, p.condo.dom) },
-    // "% of SFH" up front, because "SFH Over Asking: 84%" reads as though
-    // houses sell for 84% above list. It is the share of sales that closed
-    // over list; the premium itself is the sale-to-list tile below.
-    { label: "% of SFH Over List", now: `${r(m.sfh.overAsk)}%`, then: `${r(p.sfh.overAsk)}%`,
-      chg: `${pts(m.sfh.overAsk, p.sfh.overAsk)} pts` },
-    { label: "% of Condo Over List", now: `${r(m.condo.overAsk)}%`, then: `${r(p.condo.overAsk)}%`,
-      chg: `${pts(m.condo.overAsk, p.condo.overAsk)} pts` },
+    // The typical sale as a percentage OF list — the actual premium, not
+    // the share of sales that went over. overAsk is still computed in the
+    // stats file if it is ever wanted back.
     { label: "SFH Sale Price vs List", now: `${r(m.sfh.saleToList)}%`, then: `${r(p.sfh.saleToList)}%`,
-      chg: `${pts(m.sfh.saleToList, p.sfh.saleToList)} pts` },
+      chg: ptsOf(m.sfh.saleToList, p.sfh.saleToList) },
+    { label: "Condo Sale Price vs List", now: `${r(m.condo.saleToList)}%`, then: `${r(p.condo.saleToList)}%`,
+      chg: ptsOf(m.condo.saleToList, p.condo.saleToList) },
   ];
 
   return (
