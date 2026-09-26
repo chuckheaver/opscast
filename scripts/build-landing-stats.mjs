@@ -64,6 +64,53 @@ const parcelTotal = Object.values(parcels).reduce((a, v) => a + (v.total || 0), 
 const sun = zoneStat(houses, "sun");
 const pfog = zoneStat(houses, "persistentFog");
 
+// ── The market KPIs, matching the monthly briefing's front page ─────────
+// Year to date against the identical stretch of the prior year, so the site
+// and the PDF report never disagree.
+const endDate = new Date(built || Date.now());
+const md = `${String(endDate.getMonth() + 1).padStart(2, "0")}-${String(endDate.getDate()).padStart(2, "0")}`;
+const prevYear = String(Number(year) - 1);
+
+const inWindow = (d, yr) => d >= `${yr}-01-01` && d <= `${yr}-${md}`;
+const bucket = yr => {
+  const rows = [];
+  for (const f of geo.features || []) {
+    const p = f.properties || {};
+    const price = Number(p.sellingPrice) || 0;
+    const d = String(p.sellingDate || "").slice(0, 10);
+    if (price <= 0 || !d || !inWindow(d, yr)) continue;
+    rows.push({
+      price,
+      list: Number(p.listPrice) || 0,
+      dom: Number.isFinite(Number(p.dom)) ? Number(p.dom) : null,
+      house: /single family/i.test(p.propType || ""),
+      condo: /condo|tenancy in common/i.test(p.propType || ""),
+    });
+  }
+  return rows;
+};
+const mean = xs => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null);
+const seg = (rows, pick) => {
+  const v = rows.filter(pick);
+  const doms = v.map(r => r.dom).filter(x => x != null);
+  const withList = v.filter(r => r.list > 0);
+  return {
+    n: v.length,
+    median: median(v.map(r => r.price)),
+    avg: mean(v.map(r => r.price)),
+    dom: median(doms),
+    overAsk: withList.length ? (100 * withList.filter(r => r.price > r.list).length) / withList.length : null,
+  };
+};
+const marketFor = rows => ({
+  sfh: seg(rows, r => r.house),
+  condo: seg(rows, r => r.condo),
+  volume: rows.reduce((a, r) => a + r.price, 0),
+  n: rows.length,
+});
+const cur = marketFor(bucket(year));
+const prior = marketFor(bucket(prevYear));
+
 const out = {
   generatedAt: new Date().toISOString(),
   dataThrough: built,
@@ -74,6 +121,8 @@ const out = {
   salesThisYear: sales.length,
   neighborhoods: Object.keys(parcels).length,
   parcels: parcelTotal,
+  // The briefing's front-page KPIs, this year against last.
+  market: { year, priorYear: prevYear, through: `${year}-${md}`, current: cur, prior },
   // Houses only — see the note at the top of this file.
   houses: {
     sun, fog: zoneStat(houses, "fog"), persistentFog: pfog,

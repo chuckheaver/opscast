@@ -11,6 +11,7 @@ import { useState, useEffect, useRef } from "react";
 import SetupView from "../components/SetupView";
 import ForecastView from "../components/ForecastView";
 import MicroLifeHeader from "../components/MicroLifeHeader";
+import LegalLine from "../components/LegalLine";
 import { buildDefaults } from "../lib/thresholds";
 import { geoCode, getWx, getAQ, buildFcData, reverseCityState } from "../lib/weather-api";
 
@@ -293,6 +294,7 @@ export default function WeatherPage() {
           />
         </div>
       )}
+      <LegalLine />
     </div>
   );
 }

@@ -2,6 +2,7 @@
 // is computed from the live sales file, so the two never drift apart.
 
 import Link from "next/link";
+import SiteFooter from "../../components/SiteFooter";
 import { notFound } from "next/navigation";
 import {
   NAMES, slugify, nameForSlug, contentFor, statsFor,
@@ -170,26 +171,15 @@ export default async function Page({ params }) {
         </section>
       </article>
 
-      <footer className="lp-foot">
-        <div className="lp-foot-inner">
-          <div>
-            <div className="lp-logo-name">Chuck Heaver</div>
-            <p className="lp-fine">Realtor, Vanguard Properties · San Francisco</p>
-          </div>
-          <div className="lp-foot-links">
-            <Link href="/neighborhoods">All neighborhoods</Link>
-            <Link href="/fog?preset=fog">Map</Link>
-            <Link href="/market">Market</Link>
-          </div>
-        </div>
-        <p className="lp-fine lp-foot-fine">
+      <SiteFooter note={
+        <>
           Prices are {statsYear} closed sales from SFAR MLS{windowLabel ? ` (${windowLabel})` : ""},
           matched to the neighborhood each home physically sits in. Every sale is included,
           and the &ldquo;sold&rdquo; count beside each median says how many it is drawn from.
           Fog hours are the median daily summer figure from USGS-derived contours.
           Deemed reliable, not guaranteed.
-        </p>
-      </footer>
+        </>
+      } />
     </div>
   );
 }

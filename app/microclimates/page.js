@@ -3,6 +3,7 @@
 // reads useSearchParams() for the optional ?lat=&lng=&name= deep-link.
 import { Suspense } from "react";
 import MicroApp from "./MicroApp";
+import LegalLine from "../components/LegalLine";
 
 export const metadata = {
   title: "SF Micro-Climate Zones",
@@ -14,6 +15,7 @@ export default function Page() {
   return (
     <Suspense fallback={null}>
       <MicroApp />
+      <LegalLine fixed />
     </Suspense>
   );
 }

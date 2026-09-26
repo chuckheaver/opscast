@@ -15,12 +15,11 @@ import hoodStats from "../lib/neighborhood-stats.json";
 // guide. The page must not claim the larger number for the smaller thing.
 const GUIDE_COUNT = Object.keys(hoodStats.hoods || {}).length;
 
-const EMAIL = "chuck.heaver@vanguardproperties.com";
-const PHONE_DISPLAY = "415.549.1777";
-const PHONE_HREF = "+14155491777";
-const DRE = "02252640";
+import SiteFooter, { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "./SiteFooter";
 
 const money = v => `$${(v / 1e6).toFixed(2)}M`;
+const pct = (a, b) => (a == null || !b ? null : `${a / b - 1 >= 0 ? "+" : ""}${Math.round((a / b - 1) * 100)}%`);
+const pts = (a, b) => (a == null || b == null ? null : `${a - b >= 0 ? "+" : ""}${Math.round(a - b)}`);
 const num = v => v.toLocaleString("en-US");
 
 // Each of these is a layer that actually exists on the map, so the page
@@ -41,9 +40,11 @@ const LAYERS = [
 ];
 
 export default function Landing() {
-  const updated = stats.dataThrough
+  const through = stats.dataThrough
     ? new Date(stats.dataThrough).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
     : null;
+  const m = stats.market.current;
+  const p = stats.market.prior;
 
   return (
     <div className="lp">
@@ -68,11 +69,6 @@ export default function Landing() {
           <div className="lp-hero-copy">
             <h1 className="lp-city">San Francisco</h1>
             <p className="lp-claim">Real Estate &amp; Microclimates</p>
-            <Link className="lp-explore" href="/fog?preset=fog">
-              <span className="lp-explore-k">Explore</span>
-              <span className="lp-explore-q">Where do you want to go?</span>
-              <span className="lp-explore-go" aria-hidden="true">&rarr;</span>
-            </Link>
           </div>
           <figure className="lp-portrait">
             <img src="/brand/chuck-heaver-cutout.png" alt="Chuck Heaver" width="1566" height="1784" />
@@ -86,35 +82,42 @@ export default function Landing() {
                  alt="San Francisco split into its microclimate zones, one dot per home sold this year"
                  width="1000" height="780" />
             <figcaption>
-              {num(stats.salesThisYear)} homes sold in {stats.year}, each on the microclimate it sits in
+              <Link className="lp-explore" href="/fog?preset=fog">
+                <span className="lp-explore-q">Where do you want to go?</span>
+                <span className="lp-explore-go" aria-hidden="true">&rarr;</span>
+              </Link>
             </figcaption>
           </figure>
         </div>
       </section>
 
-      {/* By the Numbers — refreshed on every data load. */}
+      {/* By the Numbers — the same figures the monthly briefing leads with. */}
       <section className="lp-stats" aria-label="By the numbers">
         <p className="lp-stats-head">
-          By the Numbers{updated ? <span className="lp-stats-when"> · updated {updated}</span> : null}
+          By the Numbers
+          {through ? <span className="lp-stats-when"> · through {through}</span> : null}
+          <span className="lp-stats-sub"> · {stats.market.year} year to date vs {stats.market.priorYear}</span>
         </p>
         <div className="lp-stats-row">
           <div className="lp-stat">
-            <div className="lp-stat-v">{num(stats.salesThisYear)}</div>
-            <div className="lp-stat-l">{stats.year} closings, each placed on its microclimate</div>
+            <div className="lp-stat-v">{money(m.sfh.median)}</div>
+            <div className="lp-stat-l">Median house <b>{pct(m.sfh.median, p.sfh.median)}</b></div>
           </div>
           <div className="lp-stat">
-            <div className="lp-stat-v">{num(stats.parcels)}</div>
-            <div className="lp-stat-l">Residential parcels tracked citywide</div>
+            <div className="lp-stat-v">{money(m.condo.median)}</div>
+            <div className="lp-stat-l">Median condo / TIC <b>{pct(m.condo.median, p.condo.median)}</b></div>
           </div>
           <div className="lp-stat">
-            <div className="lp-stat-v">{num(stats.neighborhoods)}</div>
-            <div className="lp-stat-l">Neighborhoods mapped across the city</div>
+            <div className="lp-stat-v">${(m.volume / 1e9).toFixed(2)}B</div>
+            <div className="lp-stat-l">Sold, every home type <b>{pct(m.volume, p.volume)}</b></div>
           </div>
           <div className="lp-stat">
-            <div className="lp-stat-v">{money(stats.houses.sun.median)}</div>
-            <div className="lp-stat-l">
-              Median house in the sun vs {money(stats.houses.persistentFog.median)} in the fog
-            </div>
+            <div className="lp-stat-v">{Math.round(m.sfh.dom)}<span className="lp-stat-u"> / {Math.round(m.condo.dom)}</span></div>
+            <div className="lp-stat-l">Days to sell, house / condo <b>{pts(m.sfh.dom, p.sfh.dom)} / {pts(m.condo.dom, p.condo.dom)} days</b></div>
+          </div>
+          <div className="lp-stat">
+            <div className="lp-stat-v">{Math.round(m.sfh.overAsk)}<span className="lp-stat-u"> / {Math.round(m.condo.overAsk)}%</span></div>
+            <div className="lp-stat-l">Sold over asking <b>{pts(m.sfh.overAsk, p.sfh.overAsk)} / {pts(m.condo.overAsk, p.condo.overAsk)} pts</b></div>
           </div>
         </div>
       </section>
@@ -184,27 +187,14 @@ export default function Landing() {
         </div>
       </section>
 
-      <footer className="lp-foot">
-        <div className="lp-foot-inner">
-          <div>
-            <div className="lp-logo-name">Chuck Heaver</div>
-            <p className="lp-fine">Realtor, Vanguard Properties · Broadcast meteorologist · San Francisco</p>
-          </div>
-          <div className="lp-foot-links">
-            <Link href="/fog?preset=fog">Map</Link>
-            <Link href="/neighborhoods">Neighborhoods</Link>
-            <Link href="/market">Market</Link>
-            <Link href="/tools">All tools</Link>
-            <a href={`mailto:${EMAIL}`}>Email</a>
-          </div>
-        </div>
-        <p className="lp-fine lp-foot-fine">
-          Chuck Heaver · DRE #{DRE} · Vanguard Properties, San Francisco.
-          Sale figures are closed transactions from SFAR MLS geocoded to USGS-derived
-          microclimate contours{updated ? `, data through ${updated}` : ""}. Sun-belt and
-          fog-belt price comparisons are single-family homes only. Deemed reliable, not guaranteed.
-        </p>
-      </footer>
+      <SiteFooter note={
+        <>
+          Market figures are {stats.market.year} closed sales from SFAR MLS through{" "}
+          {through}, against the same stretch of {stats.market.priorYear}. Sun-belt and
+          fog-belt price comparisons are single-family homes only. Deemed reliable,
+          not guaranteed.
+        </>
+      } />
     </div>
   );
 }

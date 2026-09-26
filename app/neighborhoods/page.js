@@ -2,6 +2,7 @@
 // each carrying its live median price and its microclimate zone.
 
 import Link from "next/link";
+import SiteFooter from "../components/SiteFooter";
 import { allHoods, money, ZONE_COLOR, windowLabel, statsYear } from "./lib";
 
 export const metadata = {
@@ -60,15 +61,15 @@ export default function Page() {
         ))}
       </section>
 
-      <footer className="lp-foot">
-        <p className="lp-fine lp-foot-fine">
+      <SiteFooter note={
+        <>
           Prices are {statsYear} closed sales from SFAR MLS{windowLabel ? ` (${windowLabel})` : ""},
           matched to the neighborhood each home physically sits in. Every sale is included;
           where a neighborhood had few of a type, the count in brackets says so. Fog hours
           are the median daily summer figure from USGS-derived contours. Deemed reliable,
           not guaranteed.
-        </p>
-      </footer>
+        </>
+      } />
     </div>
   );
 }

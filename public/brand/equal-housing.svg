@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Equal Housing Opportunity">
+  <title>Equal Housing Opportunity</title>
+  <!-- House silhouette with the equals sign knocked out, the standard
+       Equal Housing Opportunity mark. currentColor so it can be tinted. -->
+  <path fill="currentColor" fill-rule="evenodd"
+        d="M32 5 61 29v7h-8v23H11V36H3v-7L32 5Zm0 9.4L12 30.9V52h40V30.9L32 14.4Z"/>
+  <rect fill="currentColor" x="20" y="32" width="24" height="5.4" rx="1"/>
+  <rect fill="currentColor" x="20" y="41" width="24" height="5.4" rx="1"/>
+</svg>

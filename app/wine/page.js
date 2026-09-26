@@ -1,6 +1,7 @@
 // Wine Country AVA Map — server-rendered shell.
 // WineApp is the client component that owns the map + appellation panel.
 import WineApp from "./WineApp";
+import LegalLine from "../components/LegalLine";
 
 export const metadata = {
   title: "Wine Country AVA Map · Napa & Sonoma",
@@ -9,5 +10,10 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <WineApp />;
+  return (
+    <>
+      <WineApp />
+      <LegalLine fixed />
+    </>
+  );
 }

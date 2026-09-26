@@ -4678,8 +4678,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 /* Explore — the one call to action, phrased as the map's own question. */
 .lp-explore {
   display: inline-flex; align-items: center; gap: 11px;
-  margin-top: clamp(12px, 1.5vw, 18px);
-  padding: 12px 20px; border-radius: 999px;
+  padding: 12px 22px; border-radius: 999px;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(232,184,75,0.45);
   transition: background .15s, border-color .15s, transform .15s;
@@ -4688,25 +4687,28 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   background: rgba(232,184,75,0.14); border-color: var(--lp-gold-lt);
   transform: translateY(-1px);
 }
-.lp-explore-k {
-  font-size: 11.5px; font-weight: 800; letter-spacing: 0.15em;
-  text-transform: uppercase; color: var(--lp-gold-lt);
-}
 .lp-explore-q { font-size: clamp(14px, 1.25vw, 17px); font-weight: 600; color: #fff; }
 .lp-explore-go { color: var(--lp-gold-lt); font-size: 17px; }
 
 /* Portrait: cut out, standing on the navy, close under the Explore pill. */
-.lp-portrait { margin: 10px 0 0; }
-.lp-portrait img {
-  width: 100%; height: auto; max-width: 290px; max-height: 38vh;
-  object-fit: contain; object-position: bottom;
-  filter: drop-shadow(0 18px 36px rgba(0,0,0,0.46));
-  -webkit-mask-image: linear-gradient(to bottom, #000 88%, transparent 100%);
-          mask-image: linear-gradient(to bottom, #000 88%, transparent 100%);
+.lp-portrait {
+  margin: 14px 0 0; min-width: 0;
+  /* Fills whatever height row two has, so no dead navy under the headline. */
+  display: flex; flex-direction: column; justify-content: flex-start;
 }
-.lp-portrait figcaption { margin-top: 4px; }
-.lp-portrait figcaption b { display: block; font-size: 15px; color: #fff; font-weight: 700; }
-.lp-portrait figcaption span { display: block; font-size: 12px; color: rgba(255,255,255,0.62); margin-top: 2px; }
+.lp-portrait img {
+  width: auto; max-width: 100%; height: auto; flex: 0 1 auto; min-height: 0;
+  object-fit: contain; object-position: top left;
+  filter: drop-shadow(0 18px 36px rgba(0,0,0,0.46));
+  -webkit-mask-image: linear-gradient(to bottom, #000 90%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 90%, transparent 100%);
+}
+.lp-portrait figcaption { margin-top: 8px; flex: 0 0 auto; }
+.lp-portrait figcaption b {
+  display: block; font-size: clamp(19px, 1.9vw, 26px); color: #fff;
+  font-weight: 800; letter-spacing: -0.02em;
+}
+.lp-portrait figcaption span { display: block; font-size: 13px; color: rgba(255,255,255,0.68); margin-top: 3px; }
 
 /* The map: top-aligned with the headline, filling the column. */
 .lp-hero-map { margin: 0; display: flex; flex-direction: column; }
@@ -4716,8 +4718,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   filter: drop-shadow(0 16px 34px rgba(0,0,0,0.42));
 }
 .lp-hero-map figcaption {
-  margin-top: 8px; text-align: center; flex: 0 0 auto;
-  font-size: 12.5px; color: rgba(255,255,255,0.58);
+  margin-top: 12px; text-align: center; flex: 0 0 auto;
 }
 
 /* By the Numbers ------------------------------------------------------ */
@@ -4733,8 +4734,11 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-stats-when { color: rgba(255,255,255,0.45); font-weight: 600; letter-spacing: 0.06em; }
 .lp-stats-row {
   max-width: 1240px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(5, 1fr);
 }
+.lp-stats-sub { color: rgba(255,255,255,0.42); font-weight: 600; letter-spacing: 0.06em; }
+.lp-stat-u { font-size: 0.62em; color: rgba(232,184,75,0.72); }
+.lp-stat-l b { color: #fff; font-weight: 700; }
 .lp-stat { padding: 4px clamp(12px, 2vw, 26px) 26px; border-right: 1px solid rgba(255,255,255,0.09); }
 .lp-stat:first-child { padding-left: 0; }
 .lp-stat:last-child { border-right: none; }
@@ -4808,10 +4812,10 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 @media (max-width: 1000px) {
   .lp-layer-grid { grid-template-columns: repeat(2, 1fr); }
   .lp-stats-row { grid-template-columns: repeat(2, 1fr); }
-  .lp-stat:nth-child(2) { border-right: none; }
-  .lp-stat:nth-child(3) { padding-left: 0; }
-  .lp-stat:nth-child(1), .lp-stat:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.09); padding-bottom: 20px; }
-  .lp-stat:nth-child(3), .lp-stat:nth-child(4) { padding-top: 20px; }
+  .lp-stat:nth-child(even) { border-right: none; }
+  .lp-stat:nth-child(odd) { padding-left: 0; }
+  .lp-stat { border-bottom: 1px solid rgba(255,255,255,0.09); padding-top: 16px; padding-bottom: 18px; }
+  .lp-stat:last-child { border-bottom: none; }
   .lp-about-inner { grid-template-columns: 1fr; }
 }
 
@@ -4824,9 +4828,17 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
     grid-template-areas: "copy" "map" "portrait";
     grid-template-rows: auto auto auto;
   }
-  .lp-portrait { display: flex; align-items: flex-end; gap: 14px; margin-top: 2px; }
-  .lp-portrait img { max-width: 124px; max-height: none; }
-  .lp-portrait figcaption { margin-bottom: 8px; }
+  /* Back to a row here — the desktop rule sets a column, and without this
+     reset align-items:flex-end pushed the portrait to the right edge. */
+  .lp-portrait {
+    flex-direction: row; align-items: flex-end; gap: 14px; margin-top: 2px;
+  }
+  .lp-portrait img { max-width: 124px; max-height: none; object-position: bottom left; }
+  /* min-width:0 lets the caption shrink inside the flex row so the title
+     wraps instead of running past the edge. */
+  .lp-portrait figcaption { margin-bottom: 6px; min-width: 0; flex: 1 1 auto; }
+  .lp-portrait figcaption b { font-size: 20px; }
+  .lp-portrait figcaption span { font-size: 12.5px; line-height: 1.45; }
   /* Keep the pill on one line and stop the lockup stealing a second row
      from the headline — the H1 already says San Francisco. */
   .lp-explore { padding: 11px 17px; gap: 9px; }
@@ -4953,3 +4965,40 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 }
 /* Sale count beside a median on the guide cards. */
 .lp-hood-nums i { font-style: normal; color: var(--lp-muted); }
+
+/* Footer legal strip — Equal Housing mark and licence, on every page. */
+.lp-foot-legal {
+  max-width: 1240px; margin: 22px auto 0; padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px;
+  font-size: 12.5px; color: rgba(255,255,255,0.62);
+}
+.lp-eho { display: inline-flex; align-items: center; gap: 8px; }
+.lp-eho img { width: 22px; height: 22px; filter: brightness(0) invert(1); opacity: 0.78; }
+.lp-foot-legal + .lp-foot-fine { margin-top: 14px; padding-top: 0; border-top: none; }
+
+/* Equal Housing mark + licence inside the map's brand card. */
+.fog-brand-legal {
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  margin-top: 3px; font-size: 9px; font-weight: 600; color: #6b7280;
+  letter-spacing: 0.02em; white-space: nowrap;
+}
+.fog-brand-legal img { opacity: 0.72; flex: 0 0 auto; }
+@media (max-width: 640px) {
+  .fog-brand-legal { font-size: 8.5px; gap: 4px; }
+}
+
+/* Equal Housing + licence line for pages without a site footer. */
+.legal-line {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 4px 8px; padding: 14px 16px 18px;
+  font: 500 11.5px 'DM Sans', sans-serif; color: #6b7280; text-align: center;
+}
+.legal-line img { opacity: 0.7; flex: 0 0 auto; }
+.legal-sep { opacity: 0.5; }
+.legal-line-fixed {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 5;
+  padding: 6px 12px;
+  background: linear-gradient(to top, rgba(255,255,255,0.92), rgba(255,255,255,0));
+  pointer-events: none; font-size: 10.5px;
+}

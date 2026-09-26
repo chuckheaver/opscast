@@ -2,6 +2,7 @@
 // landing page at /, so the tile grid lives here and is linked from it.
 
 import HomeHub from "../components/HomeHub";
+import LegalLine from "../components/LegalLine";
 
 export const metadata = {
   title: "All Tools — Chuck Heaver",
@@ -19,6 +20,7 @@ export default function Page() {
         </div>
       </div>
       <HomeHub />
+      <LegalLine />
     </div>
   );
 }

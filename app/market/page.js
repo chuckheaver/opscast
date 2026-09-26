@@ -1,5 +1,6 @@
 // SF Market Update — data-only, rolling-12-month market stats.
 import MarketApp from "./MarketApp";
+import LegalLine from "../components/LegalLine";
 
 export const metadata = {
   title: "SF Market Update",
@@ -8,5 +9,10 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <MarketApp />;
+  return (
+    <>
+      <MarketApp />
+      <LegalLine />
+    </>
+  );
 }

@@ -245,6 +245,13 @@ export default function FogMapTools({
             <a href="mailto:chuck.heaver@vanguardproperties.com">Email Me</a>
             <a href="tel:+14155491777">415.549.1777</a>
           </div>
+          {/* The map pages are full-screen apps with no footer, so the
+              Equal Housing mark and licence ride in the brand card. */}
+          <div className="fog-brand-legal">
+            <img src="/brand/equal-housing.svg" width="13" height="13"
+                 alt="Equal Housing Opportunity" title="Equal Housing Opportunity" />
+            <span>DRE #02252640</span>
+          </div>
         </div>
       </div>
       {(dataErr || geoErr) && (
