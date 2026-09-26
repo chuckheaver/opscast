@@ -49,3 +49,6 @@ next-env.d.ts
 !/data/raw/README.md
 !/data/raw/sold_*.csv
 /data/tmp/
+
+# Full-res portrait cutout — the shipped asset is the .webp beside it
+public/brand/chuck-heaver-cutout.png

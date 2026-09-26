@@ -106,7 +106,7 @@ export default function Landing() {
             <p className="lp-claim">Real Estate &amp; Microclimates</p>
           </div>
           <figure className="lp-portrait">
-            <img src="/brand/chuck-heaver-cutout.png" alt="Chuck Heaver" width="1566" height="1784" />
+            <img src="/brand/chuck-heaver-cutout.webp" alt="Chuck Heaver" width="760" height="866" />
             <figcaption>
               <b>Chuck Heaver</b>
               <span>Realtor &amp; Meteorologist · Vanguard Properties</span>
