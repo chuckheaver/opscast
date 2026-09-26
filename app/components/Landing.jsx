@@ -48,11 +48,9 @@ export default function Landing() {
 
   return (
     <div className="lp">
-      <header className="lp-nav">
-        <Link href="/" className="lp-logo">
-          <span className="lp-logo-name">Chuck Heaver</span>
-          <span className="lp-logo-sub"><i>San Francisco </i>Realtor · Meteorologist</span>
-        </Link>
+      {/* No logo lockup here — the name and title sit under the portrait a
+          few inches below, and dropping it lets the map start higher. */}
+      <header className="lp-nav lp-nav-bare">
         <nav className="lp-nav-links">
           <Link href="/fog?preset=fog">The Map</Link>
           <Link href="/neighborhoods">Neighborhoods</Link>

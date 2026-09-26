@@ -4641,11 +4641,13 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-hero {
   position: relative; overflow: hidden;
   background: radial-gradient(120% 120% at 42% 18%, var(--lp-navy-2) 0%, var(--lp-navy) 70%), var(--lp-navy);
-  padding: clamp(84px, 10.5vh, 112px) clamp(18px, 5vw, 56px) clamp(26px, 4vh, 40px);
+  padding: clamp(62px, 8vh, 84px) clamp(18px, 5vw, 56px) clamp(26px, 4vh, 40px);
 }
+/* Bare nav: links only, pushed right. */
+.lp-nav-bare { justify-content: flex-end; }
 .lp-hero-grid {
   position: relative; z-index: 2; max-width: 1240px; margin: 0 auto;
-  display: grid; grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
+  display: grid; grid-template-columns: minmax(0, 0.66fr) minmax(0, 1.34fr);
   column-gap: clamp(14px, 2.2vw, 30px); row-gap: 0;
   grid-template-areas: "copy map" "portrait map";
   /* Row 1 is exactly the copy's height and row 2 absorbs the slack. Without
@@ -4660,7 +4662,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   display: flex; flex-direction: column; align-items: flex-start;
 }
 .lp-portrait { grid-area: portrait; }
-.lp-hero-map { grid-area: map; align-self: stretch; }
+.lp-hero-map { grid-area: map; align-self: start; }
 
 /* The city always sits on one line: the size tracks the viewport and the
    line is never allowed to break. */
@@ -4711,15 +4713,14 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-portrait figcaption span { display: block; font-size: 13px; color: rgba(255,255,255,0.68); margin-top: 3px; }
 
 /* The map: top-aligned with the headline, filling the column. */
-.lp-hero-map { margin: 0; display: flex; flex-direction: column; }
+.lp-hero-map { margin: 0; }
 .lp-hero-map img {
-  width: 100%; height: auto; flex: 1 1 auto; min-height: 0;
-  object-fit: contain; object-position: top;
+  display: block; width: 100%; height: auto;
   filter: drop-shadow(0 16px 34px rgba(0,0,0,0.42));
 }
-.lp-hero-map figcaption {
-  margin-top: 12px; text-align: center; flex: 0 0 auto;
-}
+/* Sits straight under the coastline — the map no longer letterboxes, so
+   there is no dead space between the two. */
+.lp-hero-map figcaption { margin-top: -6px; text-align: center; }
 
 /* By the Numbers ------------------------------------------------------ */
 .lp-stats {
@@ -4828,6 +4829,9 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
     grid-template-areas: "copy" "map" "portrait";
     grid-template-rows: auto auto auto;
   }
+  /* The pill tucks under the coastline on desktop; at this width the map's
+     own edge is already close, so drop the negative pull. */
+  .lp-hero-map figcaption { margin-top: 6px; }
   /* Back to a row here — the desktop rule sets a column, and without this
      reset align-items:flex-end pushed the portrait to the right edge. */
   .lp-portrait {
