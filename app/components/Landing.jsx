@@ -84,8 +84,8 @@ export default function Landing() {
         <nav className="lp-nav-links">
           <Link href="/fog?preset=fog">The Map</Link>
           <Link href="/neighborhoods">Neighborhoods</Link>
+          <Link href="/property-types">Buyer Guide</Link>
           <Link href="/market">Market</Link>
-          <Link href="/tools">All Tools</Link>
           <a className="lp-nav-cta" href={`mailto:${EMAIL}`}>Work With Me</a>
         </nav>
       </header>

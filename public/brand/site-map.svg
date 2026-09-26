@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 1012" width="1180" height="1012" font-family="'DM Sans',system-ui,sans-serif">
+<rect width="1180" height="1012" fill="#0A1A30"/>
+<text x="34" y="46" fill="#fff" font-size="26" font-weight="800" letter-spacing="-0.5">Site map</text>
+<text x="34" y="70" fill="rgba(255,255,255,0.55)" font-size="13">chuckheaver.com — every route, and what lives on it</text>
+<line x1="34" y1="82" x2="1146" y2="82" stroke="#C9A227" stroke-width="2"/>
+<text x="34" y="110" fill="#E8B84B" font-size="11" font-weight="700" letter-spacing="1.6">FRONT DOOR</text>
+<rect x="24" y="120" width="1132" height="28" fill="#11294A" rx="6" opacity="0.85"/>
+<text x="34" y="141" fill="#E7ECF3" font-size="13" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/</text>
+<text x="300" y="141" fill="#fff" font-size="13" font-weight="600">Landing</text>
+<text x="510" y="141" fill="rgba(255,255,255,0.55)" font-size="12">hero · by the numbers · six layers · guide promo · about</text>
+<text x="34" y="198" fill="#E8B84B" font-size="11" font-weight="700" letter-spacing="1.6">CONTENT — INDEXED, THE SEO SURFACE</text>
+<rect x="24" y="208" width="1132" height="28" fill="#11294A" rx="6" opacity="0.85"/>
+<text x="34" y="229" fill="#E7ECF3" font-size="13" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/neighborhoods</text>
+<text x="300" y="229" fill="#fff" font-size="13" font-weight="600">Neighborhood guide</text>
+<text x="510" y="229" fill="rgba(255,255,255,0.55)" font-size="12">index of 105</text>
+<rect x="24" y="242" width="1132" height="28" fill="#11294A" rx="6" opacity="0.85"/>
+<text x="34" y="263" fill="#E7ECF3" font-size="13" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/neighborhoods/[slug]</text>
+<text x="300" y="263" fill="#fff" font-size="13" font-weight="600">One neighborhood</text>
+<text x="510" y="263" fill="rgba(255,255,255,0.55)" font-size="12">105 static pages · story, facts, food, transit, live medians</text>
+<rect x="24" y="276" width="1132" height="28" fill="#11294A" rx="6" opacity="0.85"/>
+<text x="34" y="297" fill="#E7ECF3" font-size="13" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/property-types</text>
+<text x="300" y="297" fill="#fff" font-size="13" font-weight="600">Buyer &amp; seller guide</text>
+<text x="510" y="297" fill="rgba(255,255,255,0.55)" font-size="12">5 ownership types · 3R · disclosures · taxes · Mello-Roos</text>
+<text x="34" y="354" fill="#E8B84B" font-size="11" font-weight="700" letter-spacing="1.6">THE MAP — ONE APP, MANY LAYERS</text>
+<rect x="24" y="364" width="1132" height="28" fill="#11294A" rx="6" opacity="0.85"/>
+<text x="34" y="385" fill="#E7ECF3" font-size="13" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/fog</text>
+<text x="300" y="385" fill="#fff" font-size="13" font-weight="600">Microclimate map</text>
+<text x="510" y="385" fill="rgba(255,255,255,0.55)" font-size="12">address search + layer chips</text>
+<rect x="24" y="398" width="1132" height="28" fill="#11294A" rx="6" opacity="0.45"/>
+<text x="56" y="419" fill="rgba(255,255,255,0.55)" font-size="13" font-weight="500" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/fog?preset=fog</text>
+<text x="300" y="419" fill="rgba(255,255,255,0.55)" font-size="13" font-weight="500">→ Fog</text>
+<text x="510" y="419" fill="rgba(255,255,255,0.55)" font-size="12">summer fog contours</text>
+<rect x="24" y="432" width="1132" height="28" fill="#11294A" rx="6" opacity="0.45"/>
+<text x="56" y="453" fill="rgba(255,255,255,0.55)" font-size="13" font-weight="500" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/fog?preset=homes</text>
+<text x="300" y="453" fill="rgba(255,255,255,0.55)" font-size="13" font-weight="500">→ Homes</text>
+<text x="510" y="453" fill="rgba(255,255,255,0.55)" font-size="12">every closed sale, filterable</text>
+<rect x="24" y="466" width="1132" height="28" fill="#11294A" rx="6" opacity="0.45"/>
+<text x="56" y="487" fill="rgba(255,255,255,0.55)" font-size="13" font-weight="500" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/fog?preset=neighborhoods</text>
+<text x="300" y="487" fill="rgba(255,255,255,0.55)" font-size="13" font-weight="500">→ Hoods</text>
+<text x="510" y="487" fill="rgba(255,255,255,0.55)" font-size="12">boundaries + pop-up</text>
+<rect x="24" y="500" width="1132" height="28" fill="#11294A" rx="6" opacity="0.45"/>
+<text x="56" y="521" fill="rgba(255,255,255,0.55)" font-size="13" font-weight="500" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/fog?preset=transit</text>
+<text x="300" y="521" fill="rgba(255,255,255,0.55)" font-size="13" font-weight="500">→ Transit</text>
+<text x="510" y="521" fill="rgba(255,255,255,0.55)" font-size="12">Muni lines &amp; stops</text>
+<rect x="24" y="534" width="1132" height="28" fill="#11294A" rx="6" opacity="0.45"/>
+<text x="56" y="555" fill="rgba(255,255,255,0.55)" font-size="13" font-weight="500" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/fog?preset=hazards</text>
+<text x="300" y="555" fill="rgba(255,255,255,0.55)" font-size="13" font-weight="500">→ Hazards</text>
+<text x="510" y="555" fill="rgba(255,255,255,0.55)" font-size="12">seismic · tsunami · faults</text>
+<rect x="24" y="568" width="1132" height="28" fill="#11294A" rx="6" opacity="0.45"/>
+<text x="56" y="589" fill="rgba(255,255,255,0.55)" font-size="13" font-weight="500" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/fog?preset=terrain</text>
+<text x="300" y="589" fill="rgba(255,255,255,0.55)" font-size="13" font-weight="500">→ Terrain</text>
+<text x="510" y="589" fill="rgba(255,255,255,0.55)" font-size="12">elevation &amp; slope</text>
+<text x="34" y="646" fill="#E8B84B" font-size="11" font-weight="700" letter-spacing="1.6">OTHER TOOLS</text>
+<rect x="24" y="656" width="1132" height="28" fill="#11294A" rx="6" opacity="0.85"/>
+<text x="34" y="677" fill="#E7ECF3" font-size="13" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/microclimates</text>
+<text x="300" y="677" fill="#fff" font-size="13" font-weight="600">Sun &amp; exposure</text>
+<text x="510" y="677" fill="rgba(255,255,255,0.55)" font-size="12">solar · wind · fog line</text>
+<rect x="24" y="690" width="1132" height="28" fill="#11294A" rx="6" opacity="0.85"/>
+<text x="34" y="711" fill="#E7ECF3" font-size="13" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/market</text>
+<text x="300" y="711" fill="#fff" font-size="13" font-weight="600">Market stats</text>
+<text x="510" y="711" fill="rgba(255,255,255,0.55)" font-size="12">rolling 12-month by neighborhood</text>
+<rect x="24" y="724" width="1132" height="28" fill="#11294A" rx="6" opacity="0.85"/>
+<text x="34" y="745" fill="#E7ECF3" font-size="13" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/weather</text>
+<text x="300" y="745" fill="#fff" font-size="13" font-weight="600">Forecast</text>
+<text x="510" y="745" fill="rgba(255,255,255,0.55)" font-size="12">block-level</text>
+<rect x="24" y="758" width="1132" height="28" fill="#11294A" rx="6" opacity="0.85"/>
+<text x="34" y="779" fill="#E7ECF3" font-size="13" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/wine</text>
+<text x="300" y="779" fill="#fff" font-size="13" font-weight="600">Wine country AVAs</text>
+<text x="510" y="779" fill="rgba(255,255,255,0.55)" font-size="12">Napa &amp; Sonoma</text>
+<rect x="24" y="792" width="1132" height="28" fill="#11294A" rx="6" opacity="0.85"/>
+<text x="34" y="813" fill="#E7ECF3" font-size="13" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/tools</text>
+<text x="300" y="813" fill="#fff" font-size="13" font-weight="600">All tools</text>
+<text x="510" y="813" fill="rgba(255,255,255,0.55)" font-size="12">the old facet hub</text>
+<text x="34" y="870" fill="#E8B84B" font-size="11" font-weight="700" letter-spacing="1.6">MACHINE-READABLE</text>
+<rect x="24" y="880" width="1132" height="28" fill="#11294A" rx="6" opacity="0.85"/>
+<text x="34" y="901" fill="#E7ECF3" font-size="13" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/sitemap.xml</text>
+<text x="300" y="901" fill="#fff" font-size="13" font-weight="600">sitemap.xml</text>
+<text x="510" y="901" fill="rgba(255,255,255,0.55)" font-size="12">113 URLs</text>
+<rect x="24" y="914" width="1132" height="28" fill="#11294A" rx="6" opacity="0.85"/>
+<text x="34" y="935" fill="#E7ECF3" font-size="13" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">/robots.txt</text>
+<text x="300" y="935" fill="#fff" font-size="13" font-weight="600">robots.txt</text>
+<text x="510" y="935" fill="rgba(255,255,255,0.55)" font-size="12">/field disallowed</text>
+<line x1="34" y1="986" x2="1146" y2="986" stroke="rgba(255,255,255,0.20)"/>
+<text x="34" y="1004" fill="rgba(255,255,255,0.55)" font-size="11">Equal Housing Opportunity · Chuck Heaver DRE #02252640 · Vanguard Properties — every page carries the mark and the licence</text>
+</svg>
