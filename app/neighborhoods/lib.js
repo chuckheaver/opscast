@@ -19,7 +19,11 @@ export const nameForSlug = slug => SLUG_TO_NAME[slug] || null;
 export const statsFor = name => STATS.hoods?.[name] || null;
 export const contentFor = name => getNeighborhood(name);
 export const dataThrough = STATS.dataThrough;
-export const statsYear = STATS.year;
+// Figures cover a rolling twelve months, so the guide reads the same in
+// January as in December. { from, to } are ISO dates.
+export const statsWindow = STATS.window;
+const fmt = d => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { month: "short", year: "numeric" });
+export const windowLabel = STATS.window ? `${fmt(STATS.window.from)} – ${fmt(STATS.window.to)}` : "";
 
 export const money = v =>
   v == null ? null : v >= 1e6 ? `$${(v / 1e6).toFixed(2)}M` : `$${Math.round(v / 1000)}K`;

@@ -12,7 +12,6 @@ import stats from "../lib/landing-stats.json";
 const EMAIL = "chuck.heaver@vanguardproperties.com";
 const PHONE_DISPLAY = "415.549.1777";
 const PHONE_HREF = "+14155491777";
-const MAIN_SITE = "https://www.chuckheaver.com";
 const DRE = "02252640";
 
 const money = v => `$${(v / 1e6).toFixed(2)}M`;
@@ -178,9 +177,9 @@ export default function Landing() {
               <li><b>B.S. Finance</b>, The Ohio State University</li>
               <li>English, German, Portuguese</li>
             </ul>
-            <a className="lp-inline-link" href={MAIN_SITE} target="_blank" rel="noopener noreferrer">
-              My full practice at chuckheaver.com &rarr;
-            </a>
+            <Link className="lp-inline-link" href="/neighborhoods">
+              Start with the neighborhood guide &rarr;
+            </Link>
           </div>
           <aside className="lp-about-card">
             <h3>Send me an address.</h3>
@@ -208,7 +207,6 @@ export default function Landing() {
             <Link href="/neighborhoods">Neighborhoods</Link>
             <Link href="/market">Market</Link>
             <Link href="/tools">All tools</Link>
-            <a href={MAIN_SITE} target="_blank" rel="noopener noreferrer">chuckheaver.com</a>
             <a href={`mailto:${EMAIL}`}>Email</a>
           </div>
         </div>

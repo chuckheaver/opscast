@@ -4,6 +4,11 @@
 //
 // Sales are matched on fogNeighborhood — the point-in-polygon result — not on
 // the MLS text field, so a home counts toward the area it physically sits in.
+//
+// The window is a ROLLING 12 MONTHS, not year-to-date. At neighborhood level a
+// calendar year leaves quieter areas with two or three sales early in the year,
+// too thin to quote a median from; twelve months keeps every area comparable
+// and stops the figures lurching each January.
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { listNeighborhoods } from "../app/fog/lib/neighborhoods.js";
@@ -26,7 +31,11 @@ const zoneOf = h => {
 };
 
 const geo = JSON.parse(readFileSync(LISTINGS, "utf8"));
-const year = String(new Date(geo.metadata?.builtAt || Date.now()).getFullYear());
+const end = new Date(geo.metadata?.builtAt || Date.now());
+const start = new Date(end);
+start.setFullYear(start.getFullYear() - 1);
+const iso = d => d.toISOString().slice(0, 10);
+const FROM = iso(start), TO = iso(end);
 
 const byHood = new Map();
 for (const f of geo.features || []) {
@@ -35,7 +44,8 @@ for (const f of geo.features || []) {
   if (!hood) continue;
   const price = Number(p.sellingPrice) || 0;
   if (price <= 0) continue;
-  if (!String(p.sellingDate || "").startsWith(year)) continue;
+  const sold = String(p.sellingDate || "").slice(0, 10);
+  if (!sold || sold < FROM || sold > TO) continue;
   if (!byHood.has(hood)) byHood.set(hood, []);
   byHood.get(hood).push({
     price,
@@ -47,7 +57,12 @@ for (const f of geo.features || []) {
   });
 }
 
-const out = { generatedAt: new Date().toISOString(), dataThrough: geo.metadata?.builtAt || null, year, hoods: {} };
+const out = {
+  generatedAt: new Date().toISOString(),
+  dataThrough: geo.metadata?.builtAt || null,
+  window: { from: FROM, to: TO },
+  hoods: {},
+};
 let withSales = 0;
 
 for (const { key } of listNeighborhoods()) {
@@ -72,4 +87,4 @@ for (const { key } of listNeighborhoods()) {
 
 writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
 console.log(`wrote ${OUT}`);
-console.log(`  ${Object.keys(out.hoods).length} neighborhoods, ${withSales} with ${year} sales`);
+console.log(`  ${Object.keys(out.hoods).length} neighborhoods, ${withSales} with sales in ${FROM} to ${TO}`);

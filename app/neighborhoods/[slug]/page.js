@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   NAMES, slugify, nameForSlug, contentFor, statsFor,
-  money, ZONE_COLOR, statsYear,
+  money, ZONE_COLOR, windowLabel,
 } from "../lib";
 
 export function generateStaticParams() {
@@ -91,7 +91,7 @@ export default async function Page({ params }) {
             <Stat label="Per square foot" value={s.ppsf ? `$${Math.round(s.ppsf).toLocaleString("en-US")}` : null} n={s.n} />
             <Stat label="Days to sell" value={s.dom != null ? Math.round(s.dom) : null} n={s.n} sub="median" />
             <Stat label="Summer fog" value={Number.isFinite(s.fogHours) ? `${s.fogHours.toFixed(1)}h` : null} sub="a day" />
-            <Stat label="Homes sold" value={s.n} sub={statsYear} />
+            <Stat label="Homes sold" value={s.n} sub="12 months" />
           </section>
         )}
 
@@ -194,9 +194,11 @@ export default async function Page({ params }) {
           </div>
         </div>
         <p className="lp-fine lp-foot-fine">
-          Prices are {statsYear} closed sales from SFAR MLS matched to the neighborhood each
-          home physically sits in. Fog hours are the median daily summer figure from
-          USGS-derived contours. Deemed reliable, not guaranteed.
+          Prices are closed sales from SFAR MLS over the trailing twelve months
+          {windowLabel ? ` (${windowLabel})` : ""}, matched to the neighborhood each home
+          physically sits in. A median is not shown where fewer than three homes of that
+          type sold, and is flagged below five. Fog hours are the median daily summer
+          figure from USGS-derived contours. Deemed reliable, not guaranteed.
         </p>
       </footer>
     </div>

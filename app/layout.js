@@ -19,17 +19,22 @@ const DESC =
   "Every San Francisco block has its own microclimate. Twenty years forecasting this coastline, "
   + "thirty-five selling homes on it — with every closed sale in the city mapped to the sun, wind and fog it sits in.";
 
+// The site's canonical home. chuckheaver.com is being pointed here; when the
+// DNS cuts over, change this one line (and the openGraph url below) and every
+// canonical, OG and relative metadata URL follows.
+const SITE = "https://www.ur4cast.com";
+
 export const metadata = {
-  // Production canonical domain. Relative URLs in metadata (like
-  // /og-image.png) resolve against this when rendered on any deploy.
-  metadataBase: new URL("https://www.ur4cast.com"),
+  // Relative URLs in metadata (like /og-image.png) resolve against this
+  // when rendered on any deploy.
+  metadataBase: new URL(SITE),
   title: { default: TITLE, template: "%s" },
   description: DESC,
   openGraph: {
     title: TITLE,
     description: DESC,
     type: "website",
-    url: "https://www.ur4cast.com",
+    url: SITE,
     siteName: "Chuck Heaver · San Francisco",
     locale: "en_US",
     images: [

@@ -2,7 +2,7 @@
 // each carrying its live median price and its microclimate zone.
 
 import Link from "next/link";
-import { allHoods, money, ZONE_COLOR, statsYear, dataThrough } from "./lib";
+import { allHoods, money, ZONE_COLOR, windowLabel } from "./lib";
 
 export const metadata = {
   title: "San Francisco Neighborhood Guide — Chuck Heaver",
@@ -12,9 +12,6 @@ export const metadata = {
 
 export default function Page() {
   const hoods = allHoods();
-  const updated = dataThrough
-    ? new Date(dataThrough).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
-    : null;
 
   return (
     <div className="lp">
@@ -36,7 +33,8 @@ export default function Page() {
         <h1 className="lp-guide-h1">All {hoods.length} of them, and the microclimate each one gets.</h1>
         <p className="lp-guide-lede">
           What it is like to live there, what homes are selling for, and the
-          microclimate it sits in. {statsYear} closings{updated ? `, updated ${updated}` : ""}.
+          microclimate it sits in. Prices are closed sales over the last twelve
+          months{windowLabel ? ` (${windowLabel})` : ""}.
         </p>
       </section>
 
@@ -64,9 +62,11 @@ export default function Page() {
 
       <footer className="lp-foot">
         <p className="lp-fine lp-foot-fine">
-          Prices are {statsYear} closed sales from SFAR MLS, matched to the neighborhood
-          each home physically sits in. Fog hours are the median daily summer figure from
-          USGS-derived contours. Deemed reliable, not guaranteed.
+          Prices are closed sales from SFAR MLS over the trailing twelve months
+          {windowLabel ? `(${windowLabel})` : ""}, matched to the neighborhood each home
+          physically sits in. A median is not shown where fewer than three homes of that
+          type sold. Fog hours are the median daily summer figure from USGS-derived
+          contours. Deemed reliable, not guaranteed.
         </p>
       </footer>
     </div>
