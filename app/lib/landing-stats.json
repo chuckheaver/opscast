@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-09-26T18:49:57.207Z",
+  "dataThrough": "2026-09-10T00:58:54.295Z",
+  "year": "2026",
+  "salesTracked": 8585,
+  "salesThisYear": 3541,
+  "neighborhoods": 116,
+  "parcels": 152454,
+  "houses": {
+    "sun": {
+      "n": 207,
+      "median": 4200000,
+      "ppsf": 1648.1321701338957
+    },
+    "fog": {
+      "n": 829,
+      "median": 1960000,
+      "ppsf": 1145.5239711497666
+    },
+    "persistentFog": {
+      "n": 393,
+      "median": 1610000,
+      "ppsf": 984.7567434581451
+    },
+    "n": 1554,
+    "priceRatio": 2.608695652173913,
+    "ppsfRatio": 1.673643954288845
+  }
+}

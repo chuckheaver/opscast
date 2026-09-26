@@ -4568,3 +4568,250 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   margin-bottom: 4px;
   line-height: 1.35;
 }
+
+/* ── Landing page (/) ──────────────────────────────────────────────────────
+   The site's front door. Scoped under .lp so none of it reaches the map
+   or report UIs, which have their own long-standing styles. */
+.lp {
+  --lp-navy: #0A1A30;
+  --lp-navy-2: #11294A;
+  --lp-gold: #C9A227;
+  --lp-gold-lt: #E8B84B;
+  --lp-cream: #F7F4EE;
+  --lp-ink: #16202E;
+  --lp-muted: #6B7787;
+  --lp-line: #E2DED5;
+  font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  color: var(--lp-ink);
+  background: var(--lp-cream);
+  min-height: 100%;
+}
+.lp *, .lp *::before, .lp *::after { box-sizing: border-box; }
+.lp h1, .lp h2, .lp h3 { margin: 0; letter-spacing: -0.02em; }
+.lp p { margin: 0; }
+.lp a { color: inherit; text-decoration: none; }
+
+.lp-kicker {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--lp-gold);
+}
+.lp-fine { font-size: 12.5px; color: var(--lp-muted); line-height: 1.6; }
+.lp-h2 {
+  font-size: clamp(26px, 3.4vw, 40px); line-height: 1.12; font-weight: 800;
+  max-width: 20ch;
+}
+.lp-section-head { margin-bottom: 30px; display: grid; gap: 10px; }
+
+/* Nav ---------------------------------------------------------------- */
+.lp-nav {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 3;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; padding: 20px clamp(18px, 5vw, 56px);
+}
+.lp-logo-name {
+  display: block; font-size: 19px; font-weight: 800; color: #fff;
+  letter-spacing: -0.01em;
+}
+.lp-logo-sub {
+  display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.13em;
+  text-transform: uppercase; color: var(--lp-gold-lt); margin-top: 2px;
+}
+.lp-nav-links { display: flex; align-items: center; gap: 26px; }
+.lp-nav-links a { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.84); }
+.lp-nav-links a:hover { color: #fff; }
+.lp-nav-cta {
+  border: 1px solid rgba(255,255,255,0.4); border-radius: 999px;
+  padding: 9px 18px; color: #fff !important; white-space: nowrap;
+}
+.lp-nav-cta:hover { background: var(--lp-gold); border-color: var(--lp-gold); color: var(--lp-navy) !important; }
+
+/* Hero --------------------------------------------------------------- */
+.lp-hero {
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 78% 40%, var(--lp-navy-2) 0%, var(--lp-navy) 62%),
+    var(--lp-navy);
+  padding: clamp(120px, 15vh, 180px) clamp(18px, 5vw, 56px) clamp(64px, 9vh, 104px);
+}
+.lp-hero-map {
+  position: absolute; top: 50%; right: -6%; transform: translateY(-50%);
+  width: min(58vw, 780px); pointer-events: none;
+  opacity: 0.96;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 26%, #000 100%);
+          mask-image: linear-gradient(to right, transparent 0%, #000 26%, #000 100%);
+}
+.lp-hero-map img { display: block; width: 100%; height: auto; }
+.lp-hero-inner { position: relative; z-index: 2; max-width: 660px; }
+.lp-eyebrow {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--lp-gold-lt); margin-bottom: 18px;
+}
+.lp-h1 {
+  font-size: clamp(38px, 6.2vw, 74px); line-height: 1.03; font-weight: 800;
+  color: #fff; letter-spacing: -0.03em;
+}
+.lp-h1 em {
+  font-style: italic; color: var(--lp-gold-lt);
+  font-family: Georgia, 'Times New Roman', serif; font-weight: 400;
+}
+.lp-lede {
+  margin-top: 22px; font-size: clamp(15px, 1.6vw, 18px); line-height: 1.66;
+  color: rgba(255,255,255,0.80); max-width: 54ch;
+}
+.lp-lede b { color: #fff; font-weight: 700; }
+.lp-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.lp-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px; padding: 14px 26px; font-size: 15px; font-weight: 700;
+  border: 1px solid transparent; transition: background .15s, color .15s, border-color .15s;
+}
+/* Two classes deep so these beat `.lp a { color: inherit }` — otherwise a
+   button takes its colour from whatever section it sits in, which left the
+   ghost button invisible on the hero. */
+.lp .lp-btn-gold { background: var(--lp-gold); color: var(--lp-navy); }
+.lp .lp-btn-gold:hover { background: var(--lp-gold-lt); }
+.lp .lp-btn-ghost { border-color: rgba(255,255,255,0.42); color: #fff; }
+.lp .lp-btn-ghost:hover { background: rgba(255,255,255,0.10); }
+.lp-btn-block { width: 100%; }
+.lp-hero-note { margin-top: 34px; font-size: 12.5px; color: rgba(255,255,255,0.52); }
+
+/* Stat strip --------------------------------------------------------- */
+.lp-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: var(--lp-navy-2); border-top: 1px solid rgba(255,255,255,0.08);
+}
+.lp-stat {
+  padding: 26px clamp(14px, 2.4vw, 30px);
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.lp-stat:last-child { border-right: none; }
+.lp-stat-v {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(28px, 3.4vw, 40px); font-weight: 700; color: var(--lp-gold-lt);
+  line-height: 1;
+}
+.lp-stat-l { margin-top: 9px; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.72); }
+.lp-stat-fine { color: rgba(255,255,255,0.45); }
+
+/* Why ---------------------------------------------------------------- */
+.lp-why { padding: clamp(56px, 9vw, 96px) clamp(18px, 5vw, 56px); }
+.lp-why-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+}
+.lp-why-card {
+  background: #fff; border: 1px solid var(--lp-line); border-radius: 14px;
+  padding: 26px 24px 28px;
+}
+.lp-why-n {
+  font-family: Georgia, serif; font-size: 13px; font-weight: 700;
+  color: var(--lp-gold); letter-spacing: 0.1em; margin-bottom: 14px;
+}
+.lp-why-card h3 { font-size: 19px; line-height: 1.25; margin-bottom: 10px; }
+.lp-why-card p { font-size: 14.5px; line-height: 1.7; color: #46525F; }
+
+/* Tools -------------------------------------------------------------- */
+.lp-tools {
+  padding: clamp(56px, 9vw, 96px) clamp(18px, 5vw, 56px);
+  background: #fff; border-top: 1px solid var(--lp-line); border-bottom: 1px solid var(--lp-line);
+}
+.lp-tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.lp-tool {
+  display: block; border: 1px solid var(--lp-line); border-radius: 14px;
+  padding: 24px 22px 22px; background: var(--lp-cream);
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+}
+.lp-tool:hover {
+  transform: translateY(-3px); border-color: var(--lp-gold);
+  box-shadow: 0 12px 30px rgba(16,26,48,0.10);
+}
+.lp-tool-kicker {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--lp-gold); margin-bottom: 9px;
+}
+.lp-tool h3 { font-size: 20px; margin-bottom: 9px; }
+.lp-tool-body { font-size: 14px; line-height: 1.65; color: #46525F; }
+.lp-tool-go {
+  display: inline-block; margin-top: 14px; font-size: 13.5px;
+  font-weight: 700; color: var(--lp-navy-2);
+}
+
+/* About -------------------------------------------------------------- */
+.lp-about { padding: clamp(56px, 9vw, 96px) clamp(18px, 5vw, 56px); }
+.lp-about-inner {
+  display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr);
+  gap: clamp(24px, 4vw, 56px); align-items: start;
+}
+.lp-about-copy p { font-size: 15.5px; line-height: 1.75; color: #46525F; margin-top: 16px; }
+.lp-about-copy .lp-h2 { margin-top: 10px; }
+.lp-creds { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 9px; }
+.lp-creds li {
+  font-size: 14.5px; color: #46525F; padding-left: 18px; position: relative;
+}
+.lp-creds li::before {
+  content: ""; position: absolute; left: 0; top: 8px;
+  width: 7px; height: 7px; border-radius: 2px; background: var(--lp-gold);
+}
+.lp-inline-link {
+  display: inline-block; margin-top: 22px; font-weight: 700; font-size: 15px;
+  color: var(--lp-navy-2); border-bottom: 2px solid var(--lp-gold); padding-bottom: 2px;
+}
+.lp-about-card {
+  background: var(--lp-navy); color: #fff; border-radius: 16px;
+  padding: 30px 26px; position: sticky; top: 24px;
+}
+.lp-about-card h3 { font-size: 22px; line-height: 1.2; }
+.lp-about-card p { margin-top: 12px; font-size: 14.5px; line-height: 1.7; color: rgba(255,255,255,0.78); }
+.lp-about-card .lp-btn { margin-top: 14px; }
+.lp-about-card .lp-fine { color: rgba(255,255,255,0.55); margin-top: 14px; word-break: break-all; }
+
+/* Footer ------------------------------------------------------------- */
+.lp-foot {
+  background: var(--lp-navy); color: #fff;
+  padding: clamp(36px, 6vw, 56px) clamp(18px, 5vw, 56px) 30px;
+}
+.lp-foot-inner {
+  display: flex; flex-wrap: wrap; gap: 24px;
+  justify-content: space-between; align-items: flex-start;
+}
+.lp-foot .lp-fine { color: rgba(255,255,255,0.55); margin-top: 6px; }
+.lp-foot-links { display: flex; flex-wrap: wrap; gap: 20px; }
+.lp-foot-links a { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.82); }
+.lp-foot-links a:hover { color: var(--lp-gold-lt); }
+.lp-foot-fine {
+  margin-top: 30px; padding-top: 18px; max-width: 92ch;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Tablet ------------------------------------------------------------- */
+@media (max-width: 1000px) {
+  .lp-why-grid, .lp-tool-grid { grid-template-columns: repeat(2, 1fr); }
+  .lp-stats { grid-template-columns: repeat(2, 1fr); }
+  .lp-stat:nth-child(2) { border-right: none; }
+  .lp-stat:nth-child(1), .lp-stat:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .lp-about-inner { grid-template-columns: 1fr; }
+  .lp-about-card { position: static; }
+}
+
+/* Phone -------------------------------------------------------------- */
+@media (max-width: 720px) {
+  /* The map moves behind the copy and dims, so the headline always wins. */
+  .lp-hero-map {
+    top: auto; bottom: -4%; right: -22%; transform: none;
+    width: 130%; opacity: 0.30;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 40%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 40%);
+  }
+  .lp-hero { padding-top: 104px; }
+  .lp-nav-links { gap: 14px; }
+  /* Secondary nav items would wrap into two lines on a phone; the hero and
+     footer carry the same links, so they step aside here. */
+  .lp-nav-links a:not(.lp-nav-cta) { display: none; }
+  .lp-nav { padding-top: 16px; }
+  .lp-nav-cta { padding: 8px 15px; font-size: 13.5px; }
+  /* Wide tracking pushes these onto a second line on a narrow screen. */
+  .lp-eyebrow { letter-spacing: 0.10em; font-size: 11px; }
+  .lp-logo-sub { letter-spacing: 0.09em; }
+  .lp-hero-note { color: rgba(255,255,255,0.70); }
+  .lp-why-grid, .lp-tool-grid { grid-template-columns: 1fr; }
+  .lp-h2 { max-width: none; }
+}

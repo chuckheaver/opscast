@@ -1,20 +1,15 @@
-// Ur4cast home — a clean hub of facet tiles. The location bar sits at the
-// top; tapping a tile jumps to its feature (Weather forecast, Micro-Climate,
-// Market, the /fog map layers, Wine AVAs). The forecast + ideal-weather
-// setup that used to live here moved to its own page at /weather.
+// Site front door — the agent landing page. The original facet hub lives at
+// /tools and is linked from the nav and footer.
 
-import HomeHub from "./components/HomeHub";
+import Landing from "./components/Landing";
+
+export const metadata = {
+  title: "Chuck Heaver — San Francisco Realtor & Meteorologist",
+  description:
+    "The only San Francisco realtor who is also a broadcast meteorologist. Every closed sale in the city mapped to its microclimate, so you can see what the fog is worth before you buy or sell.",
+  alternates: { canonical: "https://www.ur4cast.com/" },
+};
 
 export default function Page() {
-  return (
-    <div className="app">
-      <div className="topbar">
-        <div>
-          <div className="brand-name">Ur<em>4cast</em></div>
-          <div className="brand-tag">Local Intelligence For You</div>
-        </div>
-      </div>
-      <HomeHub />
-    </div>
-  );
+  return <Landing />;
 }
