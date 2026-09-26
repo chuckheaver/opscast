@@ -64,16 +64,16 @@ export default function Landing() {
       {/* Hero — the map is the subject. The city is the headline, the
           portrait is a byline, and there is no paragraph at all. */}
       <section className="lp-hero">
-        <div className="lp-hero-head">
-          <h1 className="lp-city">San Francisco</h1>
-          <p className="lp-claim">Real Estate &amp; Microclimates</p>
-          <Link className="lp-explore" href="/fog?preset=fog">
-            <span className="lp-explore-k">Explore</span>
-            <span className="lp-explore-q">Where do you want to go?</span>
-            <span className="lp-explore-go" aria-hidden="true">&rarr;</span>
-          </Link>
-        </div>
         <div className="lp-hero-grid">
+          <div className="lp-hero-copy">
+            <h1 className="lp-city">San Francisco</h1>
+            <p className="lp-claim">Real Estate &amp; Microclimates</p>
+            <Link className="lp-explore" href="/fog?preset=fog">
+              <span className="lp-explore-k">Explore</span>
+              <span className="lp-explore-q">Where do you want to go?</span>
+              <span className="lp-explore-go" aria-hidden="true">&rarr;</span>
+            </Link>
+          </div>
           <figure className="lp-portrait">
             <img src="/brand/chuck-heaver-cutout.png" alt="Chuck Heaver" width="1566" height="1784" />
             <figcaption>
