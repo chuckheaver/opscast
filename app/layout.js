@@ -22,7 +22,8 @@ const DESC =
 // The site's canonical home. chuckheaver.com is being pointed here; when the
 // DNS cuts over, change this one line (and the openGraph url below) and every
 // canonical, OG and relative metadata URL follows.
-const SITE = "https://www.ur4cast.com";
+export const SITE_URL = "https://www.ur4cast.com";
+const SITE = SITE_URL;
 
 export const metadata = {
   // Relative URLs in metadata (like /og-image.png) resolve against this
