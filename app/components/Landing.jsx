@@ -59,6 +59,8 @@ export default function Landing() {
       chg: pct(m.sfh.median, p.sfh.median) },
     { label: "Condo Median Sale", now: money(m.condo.median), then: money(p.condo.median),
       chg: pct(m.condo.median, p.condo.median) },
+    { label: "Total Units Sold — All", now: num(m.n), then: num(p.n),
+      chg: pct(m.n, p.n) },
     { label: "Total Sales Volume", now: `$${(m.volume / 1e9).toFixed(2)}B`, then: `$${(p.volume / 1e9).toFixed(2)}B`,
       chg: pct(m.volume, p.volume) },
     { label: "SFH DOM", now: r(m.sfh.dom), then: r(p.sfh.dom),
