@@ -9,7 +9,7 @@ import { useSearchParams } from "next/navigation";
 import MicroMap from "./MicroMap";
 import MicroMapTools from "./MicroMapTools";
 import MicroDetailModal from "./MicroDetailModal";
-import { reverseGeocode } from "../fog/lib/geocode";
+import { reverseGeocode } from "../../fog/lib/geocode";
 
 const NEIGH_URL = "/data/sf-fog-neighborhoods.geojson";
 const ZONES_URL = "/data/sf-microclimates.geojson";

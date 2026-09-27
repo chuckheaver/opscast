@@ -22,6 +22,7 @@ export default function SiteFooter({ note = null }) {
         </div>
         <div className="lp-foot-links">
           <Link href="/fog?preset=fog">Map</Link>
+          <Link href="/microclimates">Microclimates</Link>
           <Link href="/neighborhoods">Neighborhoods</Link>
           <Link href="/property-types">Buyer guide</Link>
           <Link href="/market">Market</Link>

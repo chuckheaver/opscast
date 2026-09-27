@@ -22,6 +22,7 @@ export default function Page() {
           <span className="lp-logo-sub">San Francisco Realtor · Meteorologist</span>
         </Link>
         <nav className="lp-nav-links">
+          <Link href="/microclimates">Microclimates</Link>
           <Link href="/fog?preset=fog">The Map</Link>
           <Link href="/market">Market</Link>
           <Link href="/tools">All Tools</Link>

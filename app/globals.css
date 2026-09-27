@@ -5191,3 +5191,148 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 /* Vanguard mark in the site footer — white on navy, as supplied. */
 .lp-foot-logo { width: 168px; height: auto; margin-top: 12px; opacity: 0.92; }
 @media (max-width: 720px) { .lp-foot-logo { width: 140px; } }
+
+/* Microclimates guide (/microclimates) ---------------------------------- */
+
+/* Köppen's three letters. */
+.mc-letters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
+.mc-letter {
+  background: #fff; border: 1px solid var(--lp-line); border-radius: 14px;
+  padding: 18px 18px 20px;
+}
+.mc-letter-k {
+  font-family: Georgia, serif; font-size: 40px; font-weight: 700; line-height: 1;
+  color: var(--lp-accent); margin-bottom: 8px;
+}
+.mc-letter h3 {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--lp-muted); margin-bottom: 8px;
+}
+.mc-letter p { font-size: 14.5px; line-height: 1.7; color: var(--lp-body); }
+.mc-code-note {
+  margin-top: 14px; font-size: 14.5px; color: var(--lp-body);
+  padding-left: 14px; border-left: 3px solid var(--lp-accent);
+}
+
+/* The four-part regional engine. */
+.mc-engine { display: grid; gap: 4px; margin-top: 20px; }
+.mc-part { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--lp-line); }
+.mc-part:last-child { border-bottom: 0; }
+.mc-part-n {
+  flex: 0 0 34px; height: 34px; border-radius: 50%;
+  background: var(--lp-navy); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700;
+}
+.mc-part h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.mc-part p { font-size: 15.5px; line-height: 1.75; color: var(--lp-body); }
+
+/* Tables — the Bay Area sub-climates and the climate normals. Both scroll
+   sideways on a phone rather than squeezing the columns to nothing. */
+.mc-table-wrap { margin-top: 22px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.mc-table {
+  width: 100%; border-collapse: collapse; font-size: 14.5px;
+  background: #fff; border: 1px solid var(--lp-line); border-radius: 14px;
+}
+.mc-table caption { caption-side: bottom; text-align: left; padding-top: 8px; }
+.mc-table th, .mc-table td { padding: 11px 14px; text-align: left; vertical-align: top; }
+.mc-table thead th {
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--lp-muted); border-bottom: 1px solid var(--lp-line); white-space: nowrap;
+}
+.mc-table thead th .lp-fine { text-transform: none; letter-spacing: 0; font-size: 11px; }
+.mc-table tbody tr + tr th, .mc-table tbody tr + tr td { border-top: 1px solid var(--lp-line); }
+.mc-table tbody th { font-weight: 700; color: var(--lp-ink); }
+.mc-table tbody td { color: var(--lp-body); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.mc-bay tbody th { min-width: 240px; }
+.mc-bay tbody td { font-weight: 700; color: var(--lp-ink); }
+.mc-zone-name { display: block; }
+.mc-zone-eg { display: block; font-size: 12.5px; font-weight: 600; color: var(--lp-accent); margin-top: 2px; }
+.mc-zone-why { display: block; font-size: 13px; font-weight: 400; line-height: 1.6; color: var(--lp-muted); margin-top: 5px; max-width: 46ch; }
+.mc-row-sf th, .mc-row-sf td { background: #FBF7EC; }
+
+.mc-note { margin-top: 12px; font-size: 13px; line-height: 1.7; color: var(--lp-muted); }
+.mc-note-lead { margin-top: 6px; }
+
+/* The three belts. The zone colour is the same one the map uses. */
+.mc-belts { display: grid; gap: 14px; margin-top: 22px; }
+.mc-belt {
+  background: #fff; border: 1px solid var(--lp-line); border-left: 5px solid var(--b);
+  border-radius: 14px; padding: 18px 20px 20px;
+}
+.mc-belt-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.mc-belt-head h3 { font-size: 21px; font-weight: 800; }
+.mc-belt-hours { font-size: 14px; font-weight: 700; color: var(--lp-ink); }
+.mc-belt-where { margin-top: 6px; font-size: 13px; font-weight: 600; color: var(--lp-accent); line-height: 1.6; }
+.mc-belt p { margin-top: 10px; font-size: 15px; line-height: 1.75; color: var(--lp-body); }
+
+/* Callouts. Navy by default because both carry buttons; the light variant is
+   for the ones that are purely an aside. */
+.mc-callout {
+  margin-top: 26px; background: var(--lp-navy); color: #fff;
+  border-radius: 16px; padding: 24px 26px 26px;
+}
+.mc-callout h3 { font-size: 19px; font-weight: 800; }
+.mc-callout p { margin-top: 10px; font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.84); }
+.mc-callout b { color: #fff; }
+.mc-callout .lp-fine { color: rgba(255,255,255,0.58); }
+.mc-callout .lp-btn { margin-top: 18px; }
+.mc-callout-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.mc-callout-light { background: var(--lp-cream); color: var(--lp-ink); border: 1px solid var(--lp-line); }
+.mc-callout-light p { color: var(--lp-body); }
+
+.mc-sub {
+  margin-top: 32px; font-size: 13px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--lp-accent);
+}
+
+/* The marine layer's day. */
+.mc-day { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 1px; background: var(--lp-line); border: 1px solid var(--lp-line); border-radius: 14px; overflow: hidden; }
+.mc-day li { background: #fff; padding: 14px 18px; display: grid; grid-template-columns: 150px 1fr; gap: 4px 18px; }
+.mc-day-t { font-size: 13px; font-weight: 700; color: var(--lp-accent); }
+.mc-day-p { font-size: 15px; line-height: 1.7; color: var(--lp-body); }
+
+/* Climograph. */
+.mc-chart { margin: 24px 0 0; }
+.mc-chart-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.mc-chart-svg { display: block; width: 100%; min-width: 640px; height: auto; }
+.mc-grid { stroke: var(--lp-line); stroke-width: 1; }
+.mc-base { stroke: #C6C8CB; stroke-width: 1; }
+.mc-axis { font-size: 12px; fill: var(--lp-muted); }
+.mc-rain { fill: #CEE2E6; }
+.mc-ribbon { fill: rgba(232, 184, 75, 0.30); }
+.mc-line-high { fill: none; stroke: #C9902B; stroke-width: 2.5; }
+.mc-line-low { fill: none; stroke: var(--lp-navy); stroke-width: 2.5; }
+.mc-dot-high { fill: #C9902B; }
+.mc-dot-low { fill: var(--lp-navy); }
+.mc-val { font-size: 12.5px; font-weight: 700; fill: #8A6415; }
+.mc-val-low { fill: var(--lp-navy); }
+.mc-month { font-size: 13px; font-weight: 700; fill: var(--lp-ink); }
+.mc-rain-val { font-size: 12px; fill: #3E6874; font-variant-numeric: tabular-nums; }
+/* Only meaningful where the drawing is wider than the screen. */
+.mc-scroll-hint { display: none; margin-top: 6px; font-size: 12px; color: var(--lp-muted); }
+@media (max-width: 700px) { .mc-scroll-hint { display: block; } }
+.mc-chart-key { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 6px; font-size: 13px; color: var(--lp-body); }
+.mc-chart-key i { display: inline-block; width: 22px; height: 10px; border-radius: 3px; margin-right: 7px; vertical-align: middle; }
+.mc-k-temp { background: rgba(232, 184, 75, 0.45); border: 1px solid #C9902B; }
+.mc-k-rain { background: #CEE2E6; }
+.mc-chart-cap { margin-top: 12px; font-size: 13px; line-height: 1.7; color: var(--lp-muted); }
+
+/* Records. */
+.mc-extremes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 22px; }
+.mc-extreme { background: var(--lp-cream); border: 1px solid var(--lp-line); border-radius: 14px; padding: 16px 18px; }
+.mc-extreme-v { font-family: Georgia, serif; font-size: 23px; font-weight: 700; color: var(--lp-navy-2); line-height: 1.2; }
+.mc-extreme-k { margin-top: 6px; font-size: 12.5px; font-weight: 600; color: var(--lp-body); }
+
+/* Month-per-row, so the normals need no sideways scrolling on a phone. */
+.mc-climate-table tbody th { width: 30%; }
+.mc-climate-table td { font-weight: 600; color: var(--lp-ink); }
+
+@media (max-width: 720px) {
+  .mc-letters, .mc-extremes { grid-template-columns: 1fr; }
+  .mc-day li { grid-template-columns: 1fr; }
+  .mc-bay tbody th { min-width: 200px; }
+  .mc-zone-why { max-width: none; }
+  .mc-callout, .mc-belt { padding-left: 18px; padding-right: 18px; }
+}

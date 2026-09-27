@@ -53,6 +53,7 @@ export default async function Page({ params }) {
           <span className="lp-logo-sub">San Francisco Realtor · Meteorologist</span>
         </Link>
         <nav className="lp-nav-links">
+          <Link href="/microclimates">Microclimates</Link>
           <Link href="/neighborhoods">All Neighborhoods</Link>
           <Link href="/fog?preset=fog">The Map</Link>
           <a className="lp-nav-cta" href={`mailto:chuck.heaver@vanguardproperties.com?subject=${encodeURIComponent(name)}`}>Ask About {name}</a>

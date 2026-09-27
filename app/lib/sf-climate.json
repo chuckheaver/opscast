@@ -1,0 +1,25 @@
+{
+  "station": "San Francisco Downtown",
+  "period": "1991-2020 normals",
+  "source": "NOAA/NWS monthly climate normals for the downtown San Francisco station, rounded to whole degrees Fahrenheit and tenths of an inch.",
+  "note": "Normals are a thirty-year average, not a forecast. Any single month can land well outside them.",
+  "months": [
+    { "m": "Jan", "high": 57, "low": 46, "precip": 4.4 },
+    { "m": "Feb", "high": 61, "low": 48, "precip": 4.4 },
+    { "m": "Mar", "high": 62, "low": 49, "precip": 3.2 },
+    { "m": "Apr", "high": 63, "low": 50, "precip": 1.5 },
+    { "m": "May", "high": 64, "low": 52, "precip": 0.6 },
+    { "m": "Jun", "high": 67, "low": 53, "precip": 0.2 },
+    { "m": "Jul", "high": 67, "low": 55, "precip": 0.0 },
+    { "m": "Aug", "high": 68, "low": 56, "precip": 0.1 },
+    { "m": "Sep", "high": 70, "low": 56, "precip": 0.2 },
+    { "m": "Oct", "high": 69, "low": 54, "precip": 1.1 },
+    { "m": "Nov", "high": 63, "low": 50, "precip": 2.6 },
+    { "m": "Dec", "high": 58, "low": 47, "precip": 4.5 }
+  ],
+  "extremes": [
+    { "k": "Hottest day on record", "v": "106°F", "when": "September 1, 2017" },
+    { "k": "Coldest day on record", "v": "27°F", "when": "December 11, 1932" },
+    { "k": "Last measurable snow, on the hilltops", "v": "About 5 inches", "when": "February 5, 1976" }
+  ]
+}

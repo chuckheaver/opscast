@@ -27,9 +27,9 @@ const num = v => v.toLocaleString("en-US");
 // Each of these is a layer that actually exists on the map, so the page
 // never promises a reading the site cannot produce.
 const LAYERS = [
-  { k: "Sun", href: "/microclimates?layer=solar",
+  { k: "Sun", href: "/microclimates/zones?layer=solar",
     d: "Hours of direct sun the property gets, season by season." },
-  { k: "Wind", href: "/microclimates",
+  { k: "Wind", href: "/microclimates/zones",
     d: "Which side of the hill takes the wind and which sits sheltered." },
   { k: "Fog", href: "/fog?preset=fog",
     d: "Average summer fog hours, drawn to the contour." },
@@ -89,6 +89,7 @@ export default function Landing() {
       <header className="lp-nav lp-nav-bare">
         <nav className="lp-nav-links">
           <Link href="/fog?preset=fog">The Map</Link>
+          <Link href="/microclimates">Microclimates</Link>
           <Link href="/neighborhoods">Neighborhoods</Link>
           <Link href="/property-types">Buyer Guide</Link>
           <Link href="/market">Market</Link>

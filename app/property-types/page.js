@@ -21,6 +21,7 @@ export default function Page() {
           <span className="lp-logo-sub">San Francisco Realtor · Meteorologist</span>
         </Link>
         <nav className="lp-nav-links">
+          <Link href="/microclimates">Microclimates</Link>
           <Link href="/neighborhoods">Neighborhoods</Link>
           <Link href="/fog?preset=fog">The Map</Link>
           <a className="lp-nav-cta" href={`mailto:${EMAIL}`}>Work With Me</a>

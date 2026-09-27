@@ -7,7 +7,7 @@
 // CSS (.fog-search, .fog-fab, .fog-float-panel, .fog-layers-panel, …).
 
 import { useState, useRef, useEffect } from "react";
-import FogLocationSearch from "../fog/FogLocationSearch";
+import FogLocationSearch from "../../fog/FogLocationSearch";
 
 const SEASONS = [
   { key: "annual", label: "Ann Avg" },
