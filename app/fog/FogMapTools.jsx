@@ -239,7 +239,7 @@ export default function FogMapTools({
         <div className="fog-brand">
           <a className="fog-brand-logo" href="mailto:chuck.heaver@vanguardproperties.com"
              title="Email Chuck Heaver · Vanguard Properties">
-            <img src="/brand/vanguard-ch.svg" alt="Vanguard Properties — Chuck Heaver, REALTOR" />
+            <img src="/brand/vanguard-properties.webp" alt="Vanguard Properties" width="2000" height="401" />
           </a>
           <div className="fog-brand-contact">
             <a href="mailto:chuck.heaver@vanguardproperties.com">Email Me</a>

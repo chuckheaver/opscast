@@ -2,6 +2,22 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+
+/* ── Vanguard brand faces, self-hosted ───────────────────────────────────
+   Montserrat for display (the logo wordmark is a wide-tracked geometric
+   sans, so headings sit in the same voice as the mark); Lato for body.
+   WOFF2, 352 KB for all five weights, no third-party request. */
+@font-face { font-family:'Montserrat'; src:url('/fonts/Montserrat-SemiBold.woff2') format('woff2');
+             font-weight:600; font-style:normal; font-display:swap; }
+@font-face { font-family:'Montserrat'; src:url('/fonts/Montserrat-Bold.woff2') format('woff2');
+             font-weight:700; font-style:normal; font-display:swap; }
+@font-face { font-family:'Montserrat'; src:url('/fonts/Montserrat-ExtraBold.woff2') format('woff2');
+             font-weight:800; font-style:normal; font-display:swap; }
+@font-face { font-family:'Lato'; src:url('/fonts/Lato-Regular.woff2') format('woff2');
+             font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Lato'; src:url('/fonts/Lato-Bold.woff2') format('woff2');
+             font-weight:700; font-style:normal; font-display:swap; }
+
 /* ── Ur4cast app styles (v2) ────────────────────────────────────────────── */
 
 * {
@@ -1340,7 +1356,9 @@ input[type=range]::-webkit-slider-thumb:hover {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
 }
 .fog-brand-logo { display: block; line-height: 0; }
-.fog-brand-logo img { height: 22px; width: auto; display: block; }
+/* The supplied mark is white on transparent; the brand card is a white
+   pill, so it is inverted to near-navy to sit on it. */
+.fog-brand-logo img { height: 15px; width: auto; display: block; filter: invert(1) brightness(0.18); }
 .fog-brand-contact { display: flex; flex-direction: column; align-items: center; line-height: 1.3; }
 .fog-brand-contact a {
   font-size: 11px;
@@ -1354,7 +1372,7 @@ input[type=range]::-webkit-slider-thumb:hover {
    width; just trim it a touch on phones so the search field keeps room. */
 @media (max-width: 640px) {
   .fog-brand { padding: 4px 10px 5px; }
-  .fog-brand-logo img { height: 20px; }
+  .fog-brand-logo img { height: 13px; }
   .fog-brand-contact a { font-size: 10.5px; }
 }
 .fog-search-back {
@@ -4572,27 +4590,33 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 /* ── Landing page (/) ──────────────────────────────────────────────────────
    Scoped under .lp so none of it reaches the map or report UIs. */
 .lp {
-  --lp-navy: #0A1A30;
-  --lp-navy-2: #11294A;
-  --lp-gold: #C9A227;
-  --lp-gold-lt: #E8B84B;
-  --lp-cream: #F7F4EE;
-  --lp-ink: #16202E;
-  --lp-muted: #6B7787;
-  --lp-line: #E2DED5;
-  font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  /* Vanguard brand palette. The accent splits by ground: baby blue carries
+     the dark sections, navy the light ones — baby blue on soft white is
+     1.21:1 and unusable. */
+  --lp-navy: #203C5F;        /* Vanguard Navy — the field */
+  --lp-navy-2: #131A25;      /* Vanguard Dark Blue — gradient core, stat band */
+  --lp-accent: #203C5F;      /* accent ON LIGHT grounds */
+  --lp-accent-dk: #CEE2E6;   /* Vanguard Baby Blue — accent ON DARK grounds */
+  --lp-cream: #F2F3F2;       /* Vanguard Soft White */
+  --lp-ink: #131A25;
+  --lp-body: #505050;        /* Vanguard Dark Grey — running text */
+  --lp-muted: #6B6F75;       /* Vanguard Grey, stepped down — the brand
+                                value is 2.96:1 on Soft White and fails AA */
+  --lp-grey: #8A8E93;        /* Vanguard Grey as supplied — decorative only */
+  --lp-line: #DCDDDE;
+  font-family: 'Lato', ui-sans-serif, system-ui, sans-serif;
   color: var(--lp-ink);
   background: var(--lp-cream);
 }
 .lp *, .lp *::before, .lp *::after { box-sizing: border-box; }
-.lp h1, .lp h2, .lp h3 { margin: 0; letter-spacing: -0.025em; }
+.lp h1, .lp h2, .lp h3 { font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif; margin: 0; letter-spacing: -0.025em; }
 .lp p { margin: 0; }
 .lp a { color: inherit; text-decoration: none; }
 .lp img { display: block; max-width: 100%; }
 
 .lp-kicker {
   font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--lp-gold);
+  text-transform: uppercase; color: var(--lp-accent);
 }
 .lp-fine { font-size: 12.5px; color: var(--lp-muted); line-height: 1.6; }
 .lp-h2 { font-size: clamp(27px, 3.6vw, 42px); line-height: 1.1; font-weight: 800; }
@@ -4605,8 +4629,8 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   border: 1px solid transparent; white-space: nowrap;
   transition: background .15s, color .15s, border-color .15s, transform .15s;
 }
-.lp .lp-btn-gold { background: var(--lp-gold); color: var(--lp-navy); }
-.lp .lp-btn-gold:hover { background: var(--lp-gold-lt); }
+.lp .lp-btn-gold { background: var(--lp-accent-dk); color: var(--lp-navy-2); }
+.lp .lp-btn-gold:hover { background: #fff; }
 .lp .lp-btn-ghost { border-color: rgba(255,255,255,0.45); color: #fff; }
 .lp .lp-btn-ghost:hover { background: rgba(255,255,255,0.10); }
 .lp .lp-btn-navy { background: var(--lp-navy); color: #fff; margin-top: 22px; }
@@ -4619,10 +4643,10 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   display: flex; align-items: center; justify-content: space-between;
   gap: 20px; padding: 20px clamp(18px, 5vw, 56px);
 }
-.lp-logo-name { display: block; font-size: 19px; font-weight: 800; color: #fff; }
+.lp-logo-name { display: block; font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif; font-size: 19px; font-weight: 800; color: #fff; }
 .lp-logo-sub {
   display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.13em;
-  text-transform: uppercase; color: var(--lp-gold-lt); margin-top: 2px;
+  text-transform: uppercase; color: var(--lp-accent-dk); margin-top: 2px;
 }
 .lp-logo-sub i { font-style: normal; }
 .lp-nav-links { display: flex; align-items: center; gap: 26px; }
@@ -4632,7 +4656,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   border: 1px solid rgba(255,255,255,0.4); border-radius: 999px;
   padding: 9px 18px; color: #fff !important; white-space: nowrap;
 }
-.lp-nav-cta:hover { background: var(--lp-gold); border-color: var(--lp-gold); color: var(--lp-navy) !important; }
+.lp-nav-cta:hover { background: var(--lp-accent-dk); border-color: var(--lp-accent-dk); color: var(--lp-navy-2) !important; }
 
 /* Hero --------------------------------------------------------------- */
 /* Two columns the full height of the hero: the copy and portrait stack on
@@ -4671,6 +4695,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 /* The city always sits on one line: the size tracks the viewport and the
    line is never allowed to break. */
 .lp-city {
+  font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(34px, 5.2vw, 78px); line-height: 0.95; font-weight: 800;
   color: #fff; letter-spacing: -0.045em; white-space: nowrap;
 }
@@ -4687,7 +4712,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-claim {
   font-family: Georgia, 'Times New Roman', serif;
   font-size: clamp(18px, 2.3vw, 32px); line-height: 1.2;
-  color: var(--lp-gold-lt); letter-spacing: -0.005em;
+  color: var(--lp-accent-dk); letter-spacing: -0.005em;
 }
 
 /* Explore — the one call to action, phrased as the map's own question. */
@@ -4695,15 +4720,15 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   display: inline-flex; align-items: center; gap: 11px;
   padding: 12px 22px; border-radius: 999px;
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(232,184,75,0.45);
+  border: 1px solid rgba(206,226,230,0.45);
   transition: background .15s, border-color .15s, transform .15s;
 }
 .lp-explore:hover {
-  background: rgba(232,184,75,0.14); border-color: var(--lp-gold-lt);
+  background: rgba(206,226,230,0.14); border-color: var(--lp-accent-dk);
   transform: translateY(-1px);
 }
 .lp-explore-q { font-size: clamp(14px, 1.25vw, 17px); font-weight: 600; color: #fff; }
-.lp-explore-go { color: var(--lp-gold-lt); font-size: 17px; }
+.lp-explore-go { color: var(--lp-accent-dk); font-size: 17px; }
 
 /* Portrait: cut out, standing on the navy, close under the Explore pill. */
 .lp-portrait {
@@ -4743,7 +4768,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-stats-head {
   max-width: 1240px; margin: 0 auto 14px;
   font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--lp-gold);
+  text-transform: uppercase; color: var(--lp-accent-dk);
 }
 .lp-stats-when { color: rgba(255,255,255,0.45); font-weight: 600; letter-spacing: 0.06em; }
 .lp-stats-row {
@@ -4770,7 +4795,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-stat:nth-child(n + 5) { border-bottom: none; padding-bottom: 22px; }
 .lp-stat-v {
   font-family: Georgia, 'Times New Roman', serif; line-height: 1.05;
-  font-size: clamp(22px, 2.2vw, 29px); font-weight: 700; color: var(--lp-gold-lt);
+  font-size: clamp(22px, 2.2vw, 29px); font-weight: 700; color: var(--lp-accent-dk);
   white-space: nowrap;
 }
 .lp-stat-l { margin-top: 8px; font-size: 12px; line-height: 1.45; color: rgba(255,255,255,0.72); }
@@ -4786,14 +4811,14 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   transition: transform .15s, box-shadow .15s, border-color .15s;
 }
 .lp-layer:hover {
-  transform: translateY(-3px); border-color: var(--lp-gold);
+  transform: translateY(-3px); border-color: var(--lp-accent);
   box-shadow: 0 12px 30px rgba(16,26,48,0.10);
 }
 .lp-layer-k { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; }
-.lp-layer-d { font-size: 14.5px; line-height: 1.6; color: #46525F; }
+.lp-layer-d { font-size: 14.5px; line-height: 1.6; color: var(--lp-body); }
 
 /* The map, given room -------------------------------------------------- */
-.lp-mapshow-body { margin-top: 16px; font-size: 15.5px; line-height: 1.75; color: #46525F; }
+.lp-mapshow-body { margin-top: 16px; font-size: 15.5px; line-height: 1.75; color: var(--lp-body); }
 
 /* About ---------------------------------------------------------------- */
 .lp-about { padding: clamp(54px, 8vw, 92px) clamp(18px, 5vw, 56px); }
@@ -4802,17 +4827,17 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr);
   gap: clamp(24px, 4vw, 56px); align-items: start;
 }
-.lp-about-copy p { font-size: 15.5px; line-height: 1.75; color: #46525F; margin-top: 16px; }
+.lp-about-copy p { font-size: 15.5px; line-height: 1.75; color: var(--lp-body); margin-top: 16px; }
 .lp-about-copy .lp-h2 { margin-top: 10px; }
 .lp-creds { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 9px; }
-.lp-creds li { font-size: 14.5px; color: #46525F; padding-left: 18px; position: relative; }
+.lp-creds li { font-size: 14.5px; color: var(--lp-body); padding-left: 18px; position: relative; }
 .lp-creds li::before {
   content: ""; position: absolute; left: 0; top: 8px;
-  width: 7px; height: 7px; border-radius: 2px; background: var(--lp-gold);
+  width: 7px; height: 7px; border-radius: 2px; background: var(--lp-accent);
 }
 .lp-inline-link {
   display: inline-block; margin-top: 22px; font-weight: 700; font-size: 15px;
-  color: var(--lp-navy-2); border-bottom: 2px solid var(--lp-gold); padding-bottom: 2px;
+  color: var(--lp-navy-2); border-bottom: 2px solid var(--lp-accent); padding-bottom: 2px;
 }
 .lp-about-card { background: var(--lp-navy); color: #fff; border-radius: 16px; padding: 30px 26px; }
 .lp-about-card h3 { font-size: 23px; line-height: 1.2; }
@@ -4829,7 +4854,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-foot .lp-fine { color: rgba(255,255,255,0.55); margin-top: 6px; }
 .lp-foot-links { display: flex; flex-wrap: wrap; gap: 20px; }
 .lp-foot-links a { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.82); }
-.lp-foot-links a:hover { color: var(--lp-gold-lt); }
+.lp-foot-links a:hover { color: var(--lp-accent-dk); }
 .lp-foot-fine {
   max-width: 1240px; margin: 28px auto 0; padding-top: 18px;
   border-top: 1px solid rgba(255,255,255,0.12);
@@ -4894,6 +4919,9 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   padding: clamp(28px, 5vw, 48px) clamp(18px, 5vw, 56px) clamp(34px, 5vw, 52px);
 }
 .lp-guide-head > * { max-width: 1240px; margin-inline: auto; }
+/* This header is navy, so the kicker takes the dark-ground accent — the
+   light-ground one is the same navy and would vanish into it. */
+.lp-guide-head .lp-kicker { color: var(--lp-accent-dk); }
 .lp-guide-h1 {
   font-size: clamp(30px, 4.4vw, 50px); line-height: 1.06; font-weight: 800;
   color: #fff; margin-top: 10px; letter-spacing: -0.03em;
@@ -4914,17 +4942,17 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   transition: transform .15s, box-shadow .15s, border-color .15s;
 }
 .lp-hood:hover {
-  transform: translateY(-3px); border-color: var(--lp-gold);
+  transform: translateY(-3px); border-color: var(--lp-accent);
   box-shadow: 0 12px 30px rgba(16,26,48,0.10);
 }
 .lp-hood-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .lp-hood-top h2 { font-size: 19px; font-weight: 800; }
 .lp-zone {
   flex: 0 0 auto; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em;
-  text-transform: uppercase; color: #3B4655; white-space: nowrap;
+  text-transform: uppercase; color: var(--lp-ink); white-space: nowrap;
   background: var(--z, #ddd); border-radius: 999px; padding: 4px 9px;
 }
-.lp-hood-spirit { font-size: 14px; line-height: 1.6; color: #46525F; }
+.lp-hood-spirit { font-size: 14px; line-height: 1.6; color: var(--lp-body); }
 .lp-hood-nums {
   display: flex; flex-wrap: wrap; gap: 4px 14px;
   font-size: 12.5px; color: var(--lp-muted); padding-top: 3px;
@@ -4938,10 +4966,10 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-nh-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
 .lp-nh-head h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; }
 .lp-aka { font-size: 14px; color: var(--lp-muted); font-style: italic; }
-.lp-nh-spirit { margin-top: 14px; font-size: clamp(17px, 2vw, 21px); line-height: 1.55; color: #2C3846; }
+.lp-nh-spirit { margin-top: 14px; font-size: clamp(17px, 2vw, 21px); line-height: 1.55; color: var(--lp-body); }
 .lp-reasons { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; }
 .lp-reasons li {
-  font-size: 13px; font-weight: 600; color: #46525F;
+  font-size: 13px; font-weight: 600; color: var(--lp-body);
   background: #fff; border: 1px solid var(--lp-line); border-radius: 999px; padding: 6px 13px;
 }
 .lp-nstats {
@@ -4955,9 +4983,9 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-nsec { margin-top: 34px; }
 .lp-nsec h2 {
   font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--lp-gold); margin-bottom: 12px;
+  color: var(--lp-accent); margin-bottom: 12px;
 }
-.lp-nsec p { font-size: 15.5px; line-height: 1.75; color: #46525F; }
+.lp-nsec p { font-size: 15.5px; line-height: 1.75; color: var(--lp-body); }
 .lp-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .lp-fact { background: #fff; border: 1px solid var(--lp-line); border-radius: 12px; padding: 16px 18px; }
 .lp-fact h3 { font-size: 16px; margin-bottom: 6px; }
@@ -4965,7 +4993,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-venues { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 12px; }
 .lp-venues h3 { font-size: 15px; margin-bottom: 8px; }
 .lp-venues ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
-.lp-venues li { font-size: 14px; color: #46525F; }
+.lp-venues li { font-size: 14px; color: var(--lp-body); }
 .lp-venues a { color: var(--lp-navy-2); font-weight: 600; border-bottom: 1px solid var(--lp-line); }
 .lp-nh-cta {
   margin-top: 40px; background: var(--lp-navy); color: #fff; border-radius: 16px;
@@ -5043,7 +5071,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px;
 }
 .pt-toc a { font-size: 13px; font-weight: 600; color: var(--lp-navy-2); }
-.pt-toc a:hover { color: var(--lp-gold); }
+.pt-toc a:hover { color: var(--lp-accent); }
 .pt-toc-sep { width: 1px; height: 14px; background: var(--lp-line); }
 
 .pt-body { max-width: 900px; margin: 0 auto; padding: clamp(26px, 4vw, 44px) clamp(18px, 5vw, 32px) 24px; }
@@ -5051,16 +5079,16 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .pt-type { padding: clamp(22px, 3vw, 30px) 0; border-bottom: 1px solid var(--lp-line); scroll-margin-top: 16px; }
 .pt-type-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
 .pt-type-head h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 800; }
-.pt-type-short { font-size: 15px; color: var(--lp-gold); font-weight: 600; }
-.pt-what { margin-top: 12px; font-size: 16px; line-height: 1.75; color: #3B4655; }
+.pt-type-short { font-size: 15px; color: var(--lp-accent); font-weight: 600; }
+.pt-what { margin-top: 12px; font-size: 16px; line-height: 1.75; color: var(--lp-body); }
 .pt-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 28px; margin-top: 20px; }
 .pt-cols h3 {
   font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--lp-gold); margin-bottom: 8px;
+  color: var(--lp-accent); margin-bottom: 8px;
 }
 .pt-cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
 .pt-cols li {
-  font-size: 14.5px; line-height: 1.65; color: #46525F;
+  font-size: 14.5px; line-height: 1.65; color: var(--lp-body);
   padding-left: 16px; position: relative;
 }
 .pt-cols li::before {
@@ -5072,11 +5100,11 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .pt-sec h2 { font-size: clamp(25px, 3.2vw, 34px); font-weight: 800; margin-top: 8px; }
 .pt-lead {
   margin-top: 12px; font-size: clamp(16px, 1.8vw, 19px); line-height: 1.6;
-  color: #2C3846; font-weight: 500;
+  color: var(--lp-body); font-weight: 500;
 }
 .pt-block { margin-top: 20px; }
 .pt-block h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
-.pt-block p { font-size: 15.5px; line-height: 1.75; color: #46525F; }
+.pt-block p { font-size: 15.5px; line-height: 1.75; color: var(--lp-body); }
 
 .pt-cta {
   margin-top: 38px; background: var(--lp-navy); color: #fff; border-radius: 16px;
@@ -5087,7 +5115,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .pt-cta p { margin-top: 8px; font-size: 14.5px; line-height: 1.65; color: rgba(255,255,255,0.78); max-width: 52ch; }
 
 .pt-disclaimer {
-  margin-top: 28px; padding: 14px 16px; border-left: 3px solid var(--lp-gold);
+  margin-top: 28px; padding: 14px 16px; border-left: 3px solid var(--lp-accent);
   background: #fff; border-radius: 0 8px 8px 0;
   font-size: 12.5px; line-height: 1.7; color: var(--lp-muted);
 }
@@ -5103,24 +5131,24 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-map-hint {
   position: absolute; left: 50%; bottom: 5%; transform: translateX(-50%);
   padding: 8px 17px; border-radius: 999px; white-space: nowrap;
-  background: rgba(10,26,48,0.9); border: 1px solid rgba(232,184,75,0.55);
-  color: var(--lp-gold-lt); font-size: 12.5px; font-weight: 700;
+  background: rgba(10,26,48,0.9); border: 1px solid rgba(206,226,230,0.55);
+  color: var(--lp-accent-dk); font-size: 12.5px; font-weight: 700;
   transition: background .18s, border-color .18s; pointer-events: none;
 }
 .lp-map-link:hover .lp-map-hint, .lp-map-link:focus-visible .lp-map-hint {
-  background: var(--lp-gold); border-color: var(--lp-gold); color: var(--lp-navy);
+  background: var(--lp-accent-dk); border-color: var(--lp-accent-dk); color: var(--lp-navy-2);
 }
 
 .hero-search {
   display: flex; align-items: center; gap: 9px;
   max-width: 460px; margin: 0 auto;
   background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(232,184,75,0.45); border-radius: 999px;
+  border: 1px solid rgba(206,226,230,0.45); border-radius: 999px;
   padding: 3px 16px 3px 17px;
   transition: border-color .15s, background .15s;
 }
-.hero-search:focus-within { border-color: var(--lp-gold-lt); background: rgba(255,255,255,0.11); }
-.hero-search-icon { flex: 0 0 auto; color: var(--lp-gold-lt); }
+.hero-search:focus-within { border-color: var(--lp-accent-dk); background: rgba(255,255,255,0.11); }
+.hero-search-icon { flex: 0 0 auto; color: var(--lp-accent-dk); }
 /* Strip the shared component's own chrome and set it on the dark hero. */
 .hero-search .fog-topbar-search { position: static; flex: 1 1 auto; min-width: 0; gap: 0; }
 .hero-search .zip-wrap { flex: 1 1 auto; min-width: 0; }
@@ -5144,8 +5172,8 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.16);
   transition: background .15s, border-color .15s;
 }
-.wx-chip:hover { background: rgba(232,184,75,0.14); border-color: rgba(232,184,75,0.55); }
-.wx-icon { flex: 0 0 auto; color: var(--lp-gold-lt); }
+.wx-chip:hover { background: rgba(206,226,230,0.14); border-color: rgba(206,226,230,0.55); }
+.wx-icon { flex: 0 0 auto; color: var(--lp-accent-dk); }
 .wx-text { display: flex; flex-direction: column; line-height: 1.15; }
 .wx-text b { font-size: 15px; font-weight: 800; color: #fff; }
 .wx-text span { font-size: 11px; color: rgba(255,255,255,0.62); }
@@ -5156,3 +5184,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   .wx-chip { padding: 6px 12px 6px 10px; gap: 7px; }
   .wx-text b { font-size: 14px; }
 }
+
+/* Vanguard mark in the site footer — white on navy, as supplied. */
+.lp-foot-logo { width: 168px; height: auto; margin-top: 12px; opacity: 0.92; }
+@media (max-width: 720px) { .lp-foot-logo { width: 140px; } }
