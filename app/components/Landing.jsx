@@ -32,12 +32,12 @@ const LAYERS = [
   { k: "Wind", href: "/microclimates",
     d: "Which side of the hill takes the wind and which sits sheltered." },
   { k: "Fog", href: "/fog?preset=fog",
-    d: "Average summer fog hours, drawn to the contour, not the ZIP code." },
+    d: "Average summer fog hours, drawn to the contour." },
   { k: "Hazard", href: "/fog?preset=hazards",
     d: "Seismic, liquefaction, tsunami and fault lines under the address." },
   { k: "Transit", href: "/fog?preset=transit",
     d: "Every Muni line and stop, and the walk you would really make." },
-  { k: "Terrain", href: "/fog?preset=terrain",
+  { k: "Terrain/Elevation", href: "/fog?preset=terrain",
     d: "Elevation and slope — the hill you climb carrying groceries." },
   { k: "Bikes", href: "/fog?preset=bikes",
     d: "Protected lanes and bike routes, and the climb between you and them." },
@@ -87,7 +87,6 @@ export default function Landing() {
       {/* No logo lockup here — the name and title sit under the portrait a
           few inches below, and dropping it lets the map start higher. */}
       <header className="lp-nav lp-nav-bare">
-        <WeatherChip />
         <nav className="lp-nav-links">
           <Link href="/fog?preset=fog">The Map</Link>
           <Link href="/neighborhoods">Neighborhoods</Link>
@@ -103,13 +102,14 @@ export default function Landing() {
         <div className="lp-hero-grid">
           <div className="lp-hero-copy">
             <h1 className="lp-city">San Francisco</h1>
-            <p className="lp-claim">Real Estate &amp; Microclimates</p>
+            <p className="lp-claim">Microclimate Real Estate</p>
           </div>
           <figure className="lp-portrait">
             <img src="/brand/chuck-heaver-cutout.webp" alt="Chuck Heaver" width="760" height="866" />
             <figcaption>
               <b>Chuck Heaver</b>
               <span>Realtor &amp; Meteorologist · Vanguard Properties</span>
+              <WeatherChip />
             </figcaption>
           </figure>
           <figure className="lp-hero-map">
@@ -117,7 +117,7 @@ export default function Landing() {
               <img src="/brand/sf-fog-hero.svg"
                    alt="San Francisco split into its microclimate zones, one dot per home sold this year"
                    width="1000" height="780" />
-              <span className="lp-map-hint">Open the live map &rarr;</span>
+              <span className="lp-map-hint">Open the Summer Fog Map &rarr;</span>
             </Link>
             <figcaption>
               {/* Typing an address goes to the same map, with the pin already
@@ -151,7 +151,7 @@ export default function Landing() {
       {/* The actual differentiator: what can be read about one address. */}
       <section className="lp-layers">
         <div className="lp-section-head">
-          <p className="lp-kicker">Street level, not ZIP code level</p>
+          <p className="lp-kicker">Street level</p>
           <h2 className="lp-h2">What&rsquo;s on your block.</h2>
         </div>
         <div className="lp-layer-grid">
@@ -183,14 +183,14 @@ export default function Landing() {
             <p className="lp-kicker">About</p>
             <h2 className="lp-h2">Two careers, one job.</h2>
             <p>
-              Twenty years forecasting weather on television, thirty-five selling homes here.
-              In a city where the temperature swings fifteen degrees across three miles,
-              those turned out to be the same job.
+              Twenty years forecasting weather. 35 years forecasting real estate. In a city
+              where climate zones vary by block and housing costs vary by lot, I am your best
+              option for secure guidance to your dream home in San Francisco.
             </p>
             <ul className="lp-creds">
               <li><b>Vanguard Properties</b> — San Francisco</li>
               <li><b>35 years</b> residential, commercial and investment</li>
-              <li><b>20+ years</b> broadcast meteorologist</li>
+              <li><b>20+ years</b> meteorologist</li>
               <li><b>B.S. Finance</b>, The Ohio State University</li>
               <li>English, German, Portuguese</li>
             </ul>

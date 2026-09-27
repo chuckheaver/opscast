@@ -5088,13 +5088,15 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-map-link img { transition: transform .2s, filter .2s; }
 .lp-map-link:hover img { transform: translateY(-2px); filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); }
 .lp-map-hint {
-  position: absolute; left: 50%; bottom: 6%; transform: translateX(-50%);
-  padding: 7px 15px; border-radius: 999px; white-space: nowrap;
-  background: rgba(10,26,48,0.88); border: 1px solid rgba(232,184,75,0.5);
+  position: absolute; left: 50%; bottom: 5%; transform: translateX(-50%);
+  padding: 8px 17px; border-radius: 999px; white-space: nowrap;
+  background: rgba(10,26,48,0.9); border: 1px solid rgba(232,184,75,0.55);
   color: var(--lp-gold-lt); font-size: 12.5px; font-weight: 700;
-  opacity: 0; transition: opacity .18s; pointer-events: none;
+  transition: background .18s, border-color .18s; pointer-events: none;
 }
-.lp-map-link:hover .lp-map-hint, .lp-map-link:focus-visible .lp-map-hint { opacity: 1; }
+.lp-map-link:hover .lp-map-hint, .lp-map-link:focus-visible .lp-map-hint {
+  background: var(--lp-gold); border-color: var(--lp-gold); color: var(--lp-navy);
+}
 
 .hero-search {
   display: flex; align-items: center; gap: 9px;
@@ -5123,6 +5125,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 }
 
 /* Live conditions chip, top-left of the hero ------------------------- */
+.lp-portrait figcaption .wx-chip { margin-top: 10px; }
 .wx-chip {
   display: inline-flex; align-items: center; gap: 9px;
   padding: 7px 15px 7px 12px; border-radius: 999px;
@@ -5137,7 +5140,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 
 @media (max-width: 720px) {
   .hero-search { max-width: none; }
-  .lp-map-hint { display: none; }
+  .lp-map-hint { font-size: 11.5px; padding: 7px 13px; }
   .wx-chip { padding: 6px 12px 6px 10px; gap: 7px; }
   .wx-text b { font-size: 14px; }
 }

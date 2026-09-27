@@ -15,7 +15,7 @@ export default function SiteFooter({ note = null }) {
       <div className="lp-foot-inner">
         <div>
           <div className="lp-logo-name">Chuck Heaver</div>
-          <p className="lp-fine">Realtor, Vanguard Properties · Broadcast meteorologist · San Francisco</p>
+          <p className="lp-fine">Realtor &amp; Meteorologist · Vanguard Properties · San Francisco</p>
         </div>
         <div className="lp-foot-links">
           <Link href="/fog?preset=fog">Map</Link>

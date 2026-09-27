@@ -6,7 +6,7 @@ import Landing from "./components/Landing";
 export const metadata = {
   title: "Chuck Heaver — San Francisco Realtor & Meteorologist",
   description:
-    "The only San Francisco realtor who is also a broadcast meteorologist. Every closed sale in the city mapped to its microclimate, so you can see what the fog is worth before you buy or sell.",
+    "Microclimate real estate in San Francisco. The only realtor here who is also a meteorologist, with every closed sale in the city mapped to the microclimate it sits in.",
   alternates: { canonical: "https://www.ur4cast.com/" },
 };
 
