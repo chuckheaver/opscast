@@ -166,7 +166,7 @@ export default async function Page({ params }) {
           </div>
           <div className="lp-nh-cta-btns">
             <a className="lp-btn lp-btn-gold" href={`mailto:chuck.heaver@vanguardproperties.com?subject=${encodeURIComponent(name)}`}>Ask me about {name}</a>
-            <Link className="lp-btn lp-btn-ghost" href="/fog?preset=fog">See it on the map</Link>
+            <Link className="lp-btn lp-btn-ghost" href={`/fog?hood=${encodeURIComponent(name)}`}>See it on the map</Link>
           </div>
         </section>
       </article>

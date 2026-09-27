@@ -4974,10 +4974,13 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 }
 .lp-nstats {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-  background: var(--lp-line); border: 1px solid var(--lp-line);
+  background: #fff; border: 1px solid var(--lp-line);
   border-radius: 14px; overflow: hidden; margin-top: 26px;
 }
-.lp-nstat { background: #fff; padding: 16px 18px 18px; }
+/* The divider lines are drawn by each tile, not by the container background:
+   a neighborhood missing a median renders fewer than a full row, and a grey
+   container would show through the leftover cells as an empty block. */
+.lp-nstat { background: #fff; padding: 16px 18px 18px; box-shadow: 0 0 0 1px var(--lp-line); }
 .lp-nstat-v { font-family: Georgia, serif; font-size: 25px; font-weight: 700; color: var(--lp-navy-2); }
 .lp-nstat-l { margin-top: 4px; font-size: 12.5px; color: var(--lp-muted); }
 .lp-nsec { margin-top: 34px; }

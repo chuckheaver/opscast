@@ -388,6 +388,24 @@ export default function FogApp() {
     [geojson, contours]
   );
 
+  // ?hood=<name> — a neighborhood guide page linking to "See it on the map".
+  // Selects that neighborhood the same way clicking its name in the A–Z index
+  // does: polygon highlighted, framed, summary open. Claims urlLocAppliedRef
+  // so the stored-location fallback below does not overwrite it.
+  const urlHood = searchParams?.get("hood") || "";
+  const urlHoodAppliedRef = useRef(false);
+  useEffect(() => {
+    if (urlHoodAppliedRef.current) return;
+    if (!urlHood || !geojson || !contours) return;
+    // An unrecognised name leaves the map on its defaults rather than
+    // clearing the view.
+    if (!findFeatureByName(geojson, urlHood)) return;
+    urlHoodAppliedRef.current = true;
+    urlLocAppliedRef.current = true;
+    autoGeoTriedRef.current = true;
+    pickFromNeighborhood(urlHood);
+  }, [urlHood, geojson, contours, pickFromNeighborhood]);
+
   // Browser geolocation → reverse-geocoded address → pick. The dataRef
   // dance lets us run the spatial lookups against the latest data even
   // if the user triggers geo before contours / neighborhoods finish loading.
