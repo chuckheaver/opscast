@@ -18,8 +18,8 @@
     { "m": "Dec", "high": 58, "low": 47, "precip": 4.5 }
   ],
   "extremes": [
-    { "k": "Hottest day on record", "v": "106°F", "when": "September 1, 2017" },
-    { "k": "Coldest day on record", "v": "27°F", "when": "December 11, 1932" },
-    { "k": "Last measurable snow, on the hilltops", "v": "About 5 inches", "when": "February 5, 1976" }
+    { "k": "Hottest day on record", "v": "106°F", "when": "Sep 1, 2017" },
+    { "k": "Coldest day on record", "v": "27°F", "when": "Dec 11, 1932" },
+    { "k": "Last measurable snow downtown", "v": "1976", "when": "February 5" }
   ]
 }

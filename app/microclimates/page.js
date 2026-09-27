@@ -1,40 +1,77 @@
-// San Francisco microclimates, top down: the Köppen classification, the ocean
-// that causes it, the Bay Area's sub-climates, the city's three belts, what
-// changes block to block, fog in full, and the year in numbers.
+// San Francisco microclimates, top down: classification, the ocean, the Bay,
+// the city's three belts, the block, fog, the year. One graphic per section,
+// facts as bullets, no paragraphs.
 //
-// Layout only — the writing lives in content.js and the climate figures in
-// app/lib/sf-climate.json, so neither can drift out of sync with the other.
+// Words live in content.js, drawings in charts.jsx, climate figures in
+// app/lib/sf-climate.json.
 
 import Link from "next/link";
 import SiteFooter, { EMAIL } from "../components/SiteFooter";
-import ClimateChart, { ClimateTable, ClimateExtremes } from "./ClimateChart";
 import STATS from "../lib/landing-stats.json";
+import CLIMATE from "../lib/sf-climate.json";
+import NSTATS from "../lib/neighborhood-stats.json";
 import {
-  LEDE, KOPPEN, ENGINE, BAY_LEAD, BAY_ZONES, BAY_NOTE,
-  BELTS_LEAD, BELTS, BELTS_DATA_NOTE, BLOCK_LEAD, BLOCK,
-  FOG, YEAR_LEAD, YEAR_NOTES, DISCLAIMER,
+  BarRows, OceanSection, CityProfile, SunAngle, FogClock, DeckHeights, TempChart, RainChart,
+  ClimateTable, ClimateExtremes,
+} from "./charts";
+import {
+  LEDE, KOPPEN, LATITUDE, ENGINE, ENGINE_BULLETS,
+  BAY_ZONES, BAY_BULLETS, BAY_NOTE, BELTS_LEAD, BELTS, FOG_HOURS, FOG_HOURS_NOTE,
+  BLOCK, FOG_WHAT, DECK, FOG_TOPO, YEAR_BULLETS, DISCLAIMER,
 } from "./content";
 
 export const metadata = {
-  title: "San Francisco Microclimates: Fog, Wind and Why the Weather Changes by Block",
+  title: "San Francisco Microclimates: Fog, Wind, Sun and Climate | Chuck Heaver",
   description:
-    "Why San Francisco's weather changes block by block — the Köppen classification, " +
-    "the cold Pacific and the North Pacific High, the Bay Area's sub-climates from Napa " +
-    "to San Jose, the city's three fog belts, and how fog forms, moves and burns off. " +
-    "With monthly temperature and rainfall normals.",
+    "San Francisco's microclimates in graphics: the Köppen classification, how the " +
+    "Pacific drives Bay Area weather, sub-climates from Napa to San Jose, the city's " +
+    "three fog belts, block-level wind, sun and elevation, how fog forms and moves, " +
+    "and monthly temperature and rainfall.",
 };
 
 const TOC = [
   ["koppen", "Classification"],
-  ["ocean", "The Ocean"],
-  ["bay", "Around the Bay"],
-  ["belts", "The Three Belts"],
+  ["ocean", "Ocean"],
+  ["bay", "The Bay"],
+  ["belts", "Three Belts"],
   ["block", "Your Block"],
   ["fog", "Fog"],
   ["year", "The Year"],
 ];
 
 const money = v => (v >= 1e6 ? `$${(v / 1e6).toFixed(2)}M` : `$${Math.round(v / 1e3)}K`);
+
+const Bullets = ({ items }) => (
+  <ul className="mc-bullets">{items.map(b => <li key={b}>{b}</li>)}</ul>
+);
+
+const Cards = ({ items, cols = 2 }) => (
+  <div className={`mc-cards mc-cards-${cols}`}>
+    {items.map(c => (
+      <div className="mc-card" key={c.h}>
+        <h3>{c.h}</h3>
+        <Bullets items={c.bullets} />
+      </div>
+    ))}
+  </div>
+);
+
+// The four headline numbers, computed so they move with the data.
+function topline() {
+  const m = CLIMATE.months;
+  const highs = m.map(d => d.high);
+  const rain = m.reduce((a, d) => a + d.precip, 0);
+  const wet = m.filter(d => ["Nov", "Dec", "Jan", "Feb", "Mar"].includes(d.m))
+    .reduce((a, d) => a + d.precip, 0);
+  const fog = Object.values(NSTATS.hoods).map(x => x.fogHours).filter(Number.isFinite);
+  const h = STATS.houses;
+  return [
+    { v: `${Math.min(...fog)} – ${Math.max(...fog)}`, k: "hours of summer fog a day", s: "bayside → southwest" },
+    { v: `${Math.max(...highs) - Math.min(...highs)}°F`, k: "between our coolest and warmest month", s: "most US cities: 40+" },
+    { v: `${Math.round((wet / rain) * 100)}%`, k: "of the year's rain falls Nov – Mar", s: "July: none" },
+    { v: `${(h.sun.median / h.persistentFog.median).toFixed(1)}×`, k: "house price, sunbelt vs persistent fog", s: `single-family, ${STATS.year}` },
+  ];
+}
 
 export default function Page() {
   const h = STATS.houses;
@@ -55,9 +92,18 @@ export default function Page() {
       </header>
 
       <section className="lp-guide-head">
-        <p className="lp-kicker">San Francisco Microclimates</p>
-        <h1 className="lp-guide-h1">Why the Weather Changes Block by Block</h1>
+        <p className="lp-kicker">San Francisco</p>
+        <h1 className="lp-guide-h1">Microclimates</h1>
         <p className="lp-guide-lede">{LEDE}</p>
+        <div className="mc-topline">
+          {topline().map(t => (
+            <div className="mc-top" key={t.k}>
+              <div className="mc-top-v">{t.v}</div>
+              <div className="mc-top-k">{t.k}</div>
+              <div className="mc-top-s">{t.s}</div>
+            </div>
+          ))}
+        </div>
       </section>
 
       <div className="pt-toc">
@@ -66,43 +112,32 @@ export default function Page() {
         </nav>
       </div>
 
-      <article className="pt-body">
+      <article className="pt-body mc-body">
 
-        {/* 1 — Classification ------------------------------------------- */}
+        {/* 1 — Classification */}
         <section className="pt-sec" id="koppen">
-          <p className="lp-kicker">Start at the top</p>
-          <h2>The Climate San Francisco Is Filed Under</h2>
-          <p className="pt-lead">{KOPPEN.lead}</p>
-
+          <h2>Köppen: {KOPPEN.code}</h2>
           <div className="mc-letters">
             {KOPPEN.letters.map(l => (
               <div className="mc-letter" key={l.k}>
                 <div className="mc-letter-k" aria-hidden="true">{l.k}</div>
-                <h3>{l.label}</h3>
-                <p>{l.p}</p>
+                <div>
+                  <h3>{l.label}</h3>
+                  <p>{l.p}</p>
+                </div>
               </div>
             ))}
           </div>
-          <p className="mc-code-note">
-            <b>{KOPPEN.code}</b> — {KOPPEN.name}. Three letters, in that order.
-          </p>
-
-          {KOPPEN.body.map(b => (
-            <div className="pt-block" key={b.h}>
-              <h3>{b.h}</h3>
-              <p>{b.p}</p>
-            </div>
-          ))}
+          <BarRows rows={LATITUDE} max={100} unit="°F" head="July afternoon, same latitude" labelW={190} />
+          <Bullets items={KOPPEN.bullets} />
         </section>
 
-        {/* 2 — The ocean ------------------------------------------------ */}
+        {/* 2 — The ocean */}
         <section className="pt-sec" id="ocean">
-          <p className="lp-kicker">The cause</p>
-          <h2>The Ocean Runs the Bay Area</h2>
-          <p className="pt-lead">{ENGINE.lead}</p>
-
+          <h2>Why It&rsquo;s Cold</h2>
+          <OceanSection />
           <div className="mc-engine">
-            {ENGINE.parts.map(p => (
+            {ENGINE.map(p => (
               <div className="mc-part" key={p.n}>
                 <span className="mc-part-n" aria-hidden="true">{p.n}</span>
                 <div>
@@ -112,182 +147,106 @@ export default function Page() {
               </div>
             ))}
           </div>
-
-          <div className="pt-block">
-            <h3>{ENGINE.winter.h}</h3>
-            <p>{ENGINE.winter.p}</p>
-          </div>
+          <Bullets items={ENGINE_BULLETS} />
         </section>
 
-        {/* 3 — Around the Bay ------------------------------------------- */}
+        {/* 3 — Around the Bay */}
         <section className="pt-sec" id="bay">
-          <p className="lp-kicker">Drill down: the region</p>
-          <h2>One Bay, Fourteen Climates</h2>
-          <p className="pt-lead">{BAY_LEAD}</p>
-
-          <div className="mc-table-wrap">
-            <table className="mc-table mc-bay">
-              <thead>
-                <tr>
-                  <th scope="col">Sub-climate</th>
-                  <th scope="col">July<span className="lp-fine"> afternoon</span></th>
-                  <th scope="col">January<span className="lp-fine"> night</span></th>
-                  <th scope="col">Rain<span className="lp-fine"> a year</span></th>
-                </tr>
-              </thead>
-              <tbody>
-                {BAY_ZONES.map(z => (
-                  <tr key={z.name} className={z.sf ? "mc-row-sf" : undefined}>
-                    <th scope="row">
-                      <span className="mc-zone-name">{z.name}</span>
-                      <span className="mc-zone-eg">{z.eg}</span>
-                      <span className="mc-zone-why">{z.why}</span>
-                    </th>
-                    <td>{z.jul}</td>
-                    <td>{z.jan}</td>
-                    <td>{z.rain}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="mc-note">{BAY_NOTE}</p>
+          <h2>Around the Bay</h2>
+          <BarRows
+            rows={BAY_ZONES.map(z => ({ k: z.k, eg: z.eg, v: z.jul, v2: z.rain, hi: z.hi }))}
+            max={95} unit="°" head="July afternoon"
+            max2={48} unit2={'"'} head2="Rain a year"
+            rowH={34} caption={BAY_NOTE}
+          />
+          <Bullets items={BAY_BULLETS} />
         </section>
 
-        {/* 4 — The three belts ------------------------------------------ */}
+        {/* 4 — The three belts */}
         <section className="pt-sec" id="belts">
-          <p className="lp-kicker">Drill down: the city</p>
-          <h2>San Francisco&rsquo;s Three Microclimates</h2>
-          <p className="pt-lead">{BELTS_LEAD}</p>
+          <h2>Three Belts</h2>
+          <p className="mc-lead">{BELTS_LEAD}</p>
+          <CityProfile />
 
           <div className="mc-belts">
             {BELTS.map(b => (
               <div className="mc-belt" key={b.key} style={{ "--b": b.color }}>
-                <div className="mc-belt-head">
+                <div className="mc-belt-top">
+                  <span className="mc-belt-swatch" aria-hidden="true" />
                   <h3>{b.name}</h3>
-                  <span className="mc-belt-hours">{b.hours}<span className="lp-fine"> of fog a day</span></span>
                 </div>
+                <div className="mc-belt-stats">
+                  <div><b>{b.hours}</b><span>fog hrs / day</span></div>
+                  <div><b>{b.count}</b><span>neighborhoods</span></div>
+                </div>
+                <Bullets items={b.bullets} />
                 <p className="mc-belt-where">{b.where}</p>
-                <p>{b.p}</p>
               </div>
             ))}
           </div>
-          <p className="mc-note">{BELTS_DATA_NOTE}</p>
 
-          <div className="mc-callout">
-            <h3>And it shows up in the price</h3>
-            <p>
-              Single-family homes sold in {STATS.year} so far: a median of{" "}
-              <b>{money(h.sun.median)}</b> in the sunbelt ({h.sun.n} sales),{" "}
-              <b>{money(h.fog.median)}</b> in the fog belt ({h.fog.n}), and{" "}
-              <b>{money(h.persistentFog.median)}</b> in the persistent-fog southwest ({h.persistentFog.n}).
-              Per square foot that is ${Math.round(h.sun.ppsf).toLocaleString("en-US")} against $
-              {Math.round(h.persistentFog.ppsf).toLocaleString("en-US")} — a{" "}
-              {h.ppsfRatio.toFixed(2)}× spread for the same city.
-            </p>
-            <p className="lp-fine">
-              Houses only, deliberately. Compare all property types across the belts and the
-              answer flips, because the sunny bayside is heavily condo and the foggy west side
-              is heavily house — a mix difference, not a price difference.
-            </p>
-            <Link className="lp-btn lp-btn-ghost" href="/fog?preset=fog">See the fog map</Link>
+          <BarRows rows={FOG_HOURS.map(r => ({ ...r, v: r.v.toFixed(1) * 1 }))}
+                   max={13} unit="h" head="Summer fog, hours a day" labelW={150}
+                   caption={FOG_HOURS_NOTE} />
+
+          <p className="mc-fig-h mc-price-h">Single-family median, {STATS.year}</p>
+          <div className="mc-price">
+            <div className="mc-price-t" style={{ "--b": "#E8B84B" }}>
+              <b>{money(h.sun.median)}</b><span>Sunbelt · {h.sun.n} sales</span>
+              <i>${Math.round(h.sun.ppsf).toLocaleString("en-US")}/sq ft</i>
+            </div>
+            <div className="mc-price-t" style={{ "--b": "#A8BCCD" }}>
+              <b>{money(h.fog.median)}</b><span>Fog · {h.fog.n} sales</span>
+              <i>${Math.round(h.fog.ppsf).toLocaleString("en-US")}/sq ft</i>
+            </div>
+            <div className="mc-price-t" style={{ "--b": "#8DA2B5" }}>
+              <b>{money(h.persistentFog.median)}</b><span>Persistent fog · {h.persistentFog.n} sales</span>
+              <i>${Math.round(h.persistentFog.ppsf).toLocaleString("en-US")}/sq ft</i>
+            </div>
           </div>
+          <p className="mc-cap">Houses only. Across all property types the order flips, because the sunbelt is mostly condos.</p>
         </section>
 
-        {/* 5 — Your block ----------------------------------------------- */}
+        {/* 5 — Your block */}
         <section className="pt-sec" id="block">
-          <p className="lp-kicker">Drill down: the block</p>
-          <h2>Wind, Sun Angle, Elevation and Grade</h2>
-          <p className="pt-lead">{BLOCK_LEAD}</p>
-
-          {BLOCK.map(b => (
-            <div className="pt-block" key={b.h}>
-              <h3>{b.h}</h3>
-              <p>{b.p}</p>
-            </div>
-          ))}
-
-          <div className="mc-callout">
-            <h3>This is measurable, one address at a time</h3>
-            <p>
-              Sun by season, wind exposure, elevation, slope, the fog contour your parcel
-              sits inside — the map on this site draws all of it for a specific address
-              rather than for a ZIP code.
-            </p>
-            <div className="mc-callout-btns">
-              <Link className="lp-btn lp-btn-gold" href="/fog?preset=fog">Open the map</Link>
-              <Link className="lp-btn lp-btn-ghost" href="/microclimates/zones?layer=solar">Sun &amp; wind zones</Link>
-            </div>
+          <h2>Block by Block</h2>
+          <SunAngle />
+          <Cards items={BLOCK} />
+          <div className="mc-btns">
+            <Link className="lp-btn lp-btn-navy" href="/fog?preset=fog">Open the map</Link>
+            <Link className="lp-btn mc-btn-line" href="/microclimates/zones?layer=solar">Sun &amp; wind zones</Link>
           </div>
         </section>
 
-        {/* 6 — Fog ------------------------------------------------------- */}
+        {/* 6 — Fog */}
         <section className="pt-sec" id="fog">
-          <p className="lp-kicker">The main event</p>
-          <h2>Fog: How It Forms, Where It Goes, Why It Stays</h2>
-          <p className="pt-lead">{FOG.lead}</p>
-
-          {FOG.what.map(b => (
-            <div className="pt-block" key={b.h}>
-              <h3>{b.h}</h3>
-              <p>{b.p}</p>
-            </div>
-          ))}
-
-          <div className="mc-callout mc-callout-light">
-            <h3>{FOG.pacific.h}</h3>
-            <p>{FOG.pacific.p}</p>
-          </div>
-
-          <h3 className="mc-sub">A day in the life of the marine layer</h3>
-          <p className="mc-note mc-note-lead">{FOG.dayLead}</p>
-          <ol className="mc-day">
-            {FOG.day.map(d => (
-              <li key={d.t}>
-                <span className="mc-day-t">{d.t}</span>
-                <span className="mc-day-p">{d.p}</span>
-              </li>
-            ))}
-          </ol>
-
-          <h3 className="mc-sub">Fog meets the hills</h3>
-          {FOG.topo.map(b => (
-            <div className="pt-block" key={b.h}>
-              <h3>{b.h}</h3>
-              <p>{b.p}</p>
-            </div>
-          ))}
-          <p className="mc-note">{FOG.karl}</p>
+          <h2>Fog</h2>
+          <FogClock />
+          <Cards items={FOG_WHAT} />
+          <DeckHeights decks={DECK} />
+          <Cards items={FOG_TOPO} cols={3} />
         </section>
 
-        {/* 7 — The year -------------------------------------------------- */}
+        {/* 7 — The year */}
         <section className="pt-sec" id="year">
-          <p className="lp-kicker">What to expect</p>
-          <h2>San Francisco&rsquo;s Year, in Numbers</h2>
-          <p className="pt-lead">{YEAR_LEAD}</p>
-
-          <ClimateChart />
-          <ClimateTable />
+          <h2>The Year</h2>
+          <TempChart months={CLIMATE.months} />
+          <RainChart months={CLIMATE.months} />
           <ClimateExtremes />
-
-          {YEAR_NOTES.map(b => (
-            <div className="pt-block" key={b.h}>
-              <h3>{b.h}</h3>
-              <p>{b.p}</p>
-            </div>
-          ))}
+          <Bullets items={YEAR_BULLETS} />
+          <details className="mc-details">
+            <summary>Month-by-month table</summary>
+            <ClimateTable />
+          </details>
         </section>
 
         <section className="pt-cta">
           <div>
-            <h2>Want to know what your block gets?</h2>
-            <p>
-              Send me an address and I will come back with its sun by season, its wind,
-              the fog contour it sits in, what is under it, and what has sold around it.
-            </p>
+            <h2>What does your block get?</h2>
+            <p>Send an address. I&rsquo;ll send back its sun, wind, fog and sales.</p>
           </div>
           <a className="lp-btn lp-btn-gold" href={`mailto:${EMAIL}?subject=Microclimate%20question`}>
-            Ask me about an address
+            Ask about an address
           </a>
         </section>
 

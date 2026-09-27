@@ -5192,147 +5192,226 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-foot-logo { width: 168px; height: auto; margin-top: 12px; opacity: 0.92; }
 @media (max-width: 720px) { .lp-foot-logo { width: 140px; } }
 
-/* Microclimates guide (/microclimates) ---------------------------------- */
+/* Microclimates (/microclimates) ------------------------------------------- */
+/* Graphic-first: one figure per section, facts as bullets, no paragraphs.   */
 
-/* Köppen's three letters. */
-.mc-letters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
+/* Headline numbers in the navy header. */
+.mc-topline {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  margin-top: 26px; background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; overflow: hidden;
+}
+.mc-top { background: var(--lp-navy); padding: 16px 18px 18px; }
+.mc-top-v { font-family: 'Montserrat', sans-serif; font-size: clamp(24px, 3vw, 32px); font-weight: 800; color: #fff; line-height: 1.1; }
+.mc-top-k { margin-top: 6px; font-size: 13.5px; line-height: 1.45; color: rgba(255,255,255,0.86); }
+.mc-top-s { margin-top: 4px; font-size: 12px; color: var(--lp-accent-dk); }
+
+.mc-body .pt-sec { border-top: 1px solid var(--lp-line); }
+.mc-body .pt-sec:first-child { border-top: 0; }
+.mc-body .pt-sec h2 { margin-top: 0; }
+.mc-lead { margin-top: 10px; font-size: 16px; line-height: 1.6; color: var(--lp-body); }
+
+/* Bullets — the page's only prose. */
+.mc-bullets { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; }
+.mc-bullets li {
+  position: relative; padding-left: 18px;
+  font-size: 15px; line-height: 1.6; color: var(--lp-body);
+}
+.mc-bullets li::before {
+  content: ""; position: absolute; left: 2px; top: 9px;
+  width: 7px; height: 7px; border-radius: 2px; background: var(--lp-navy);
+}
+
+/* Figures. */
+.mc-fig { margin: 22px 0 0; }
+.mc-fig-h {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--lp-muted); margin-bottom: 10px;
+}
+.mc-cap { margin-top: 8px; font-size: 12.5px; line-height: 1.6; color: var(--lp-muted); }
+.mc-svg { display: block; width: 100%; height: auto; }
+.mc-key { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; font-size: 12.5px; color: var(--lp-body); }
+.mc-key i { display: inline-block; width: 14px; height: 10px; border-radius: 3px; }
+.mc-key span + i { margin-left: 10px; }
+.mc-key i + i { margin-left: -4px; }
+
+/* Diagrams: fixed drawing, scrolls sideways on a phone rather than shrinking. */
+.mc-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 14px; }
+.mc-t-l { font-size: 15px; font-weight: 700; fill: var(--lp-ink); }
+.mc-t-s { font-size: 13px; fill: #505050; }
+.mc-t-k { font-size: 13px; font-weight: 800; letter-spacing: 0.12em; }
+.mc-t-v { font-size: 15px; font-weight: 800; fill: var(--lp-navy); }
+.mc-t-big { font-size: 20px; font-weight: 800; fill: var(--lp-navy); }
+
+/* Bar rows (HTML): label | track [| track]. */
+.mc-bars-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.mc-bars-row { display: grid; grid-template-columns: minmax(130px, 30%) 1fr; gap: 14px; align-items: center; }
+.mc-bars-2 .mc-bars-row { grid-template-columns: minmax(150px, 32%) 1.5fr 1fr; }
+.mc-bars-head span {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lp-muted);
+}
+.mc-bars-head { margin-bottom: 4px; }
+.mc-bars-k { font-size: 14px; font-weight: 600; color: var(--lp-ink); text-align: right; line-height: 1.25; }
+.mc-bars-k em { display: block; font-style: normal; font-size: 12px; font-weight: 400; color: var(--lp-muted); }
+.is-hi .mc-bars-k { font-weight: 800; }
+.mc-bars-track { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.mc-bars-track i {
+  display: block; height: 14px; border-radius: 4px; background: #9CB3C6;
+  width: calc((100% - 52px) * var(--p)); min-width: 2px; flex: none;
+}
+.is-hi .mc-bars-track i { background: var(--lp-navy); }
+.mc-bars-track b { font-size: 13.5px; font-weight: 700; color: var(--lp-ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Column charts (temperature, rain). */
+.mc-cols { position: relative; display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; padding-left: 34px; }
+.mc-col { display: flex; flex-direction: column; align-items: center; min-width: 0; }
+.mc-col-plot { position: relative; width: 100%; height: 190px; }
+.mc-cols-rain { padding-top: 22px; }
+.mc-cols-rain .mc-col-plot { height: 150px; border-bottom: 1px solid #C6C8CB; }
+.mc-col-m { margin-top: 6px; font-size: 12px; font-weight: 700; color: var(--lp-ink); }
+.mc-col-v {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  font-size: 12.5px; font-weight: 700; color: var(--lp-ink); white-space: nowrap;
+}
+.mc-range {
+  position: absolute; left: 50%; width: 8px; margin-left: -4px;
+  border-radius: 4px; background: #9CB3C6;
+}
+.mc-dot {
+  position: absolute; left: 50%; width: 11px; height: 11px; margin: 0 0 -5.5px -5.5px;
+  border-radius: 50%; box-shadow: 0 0 0 2px var(--lp-cream);
+}
+.mc-rain {
+  position: absolute; bottom: 0; left: 50%; width: min(30px, 70%); transform: translateX(-50%);
+  border-radius: 4px 4px 0 0; background: #9CB3C6;
+}
+.mc-grid { position: absolute; left: 0; right: 0; top: 0; height: 190px; pointer-events: none; }
+.mc-grid span { position: absolute; left: 34px; right: 0; border-top: 1px solid var(--lp-line); }
+.mc-grid em {
+  position: absolute; left: -34px; top: -8px; width: 28px; text-align: right;
+  font-style: normal; font-size: 11.5px; color: var(--lp-muted);
+}
+
+/* Fog clock. */
+.mc-clock { display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px; }
+.mc-clock span { height: 44px; border-radius: 3px; }
+.mc-clock-hours { display: flex; justify-content: space-between; margin-top: 6px; font-size: 11.5px; color: var(--lp-muted); }
+.mc-clock-phases { display: flex; gap: 2px; margin-top: 8px; }
+.mc-clock-phases span {
+  text-align: center; font-size: 12.5px; font-weight: 700; color: var(--lp-ink); line-height: 1.25;
+  padding-top: 6px; border-top: 2px solid var(--lp-line);
+}
+
+/* Fog depth panels. */
+.mc-deck { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.mc-deck-p b { display: block; margin-top: 8px; font-size: 15px; font-weight: 800; color: var(--lp-ink); }
+.mc-deck-p b span { font-size: 13px; font-weight: 600; color: var(--lp-muted); margin-left: 4px; }
+.mc-deck-p i { display: block; margin-top: 2px; font-style: normal; font-size: 13.5px; color: var(--lp-body); }
+
+/* Köppen letters. */
+.mc-letters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
 .mc-letter {
-  background: #fff; border: 1px solid var(--lp-line); border-radius: 14px;
-  padding: 18px 18px 20px;
+  display: flex; gap: 14px; align-items: flex-start;
+  background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; padding: 16px;
 }
 .mc-letter-k {
-  font-family: Georgia, serif; font-size: 40px; font-weight: 700; line-height: 1;
-  color: var(--lp-accent); margin-bottom: 8px;
+  flex: none; width: 48px; height: 48px; border-radius: 12px; background: var(--lp-navy); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 800;
 }
-.mc-letter h3 {
-  font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--lp-muted); margin-bottom: 8px;
-}
-.mc-letter p { font-size: 14.5px; line-height: 1.7; color: var(--lp-body); }
-.mc-code-note {
-  margin-top: 14px; font-size: 14.5px; color: var(--lp-body);
-  padding-left: 14px; border-left: 3px solid var(--lp-accent);
-}
+.mc-letter h3 { font-size: 15px; font-weight: 800; }
+.mc-letter p { margin-top: 4px; font-size: 13.5px; line-height: 1.5; color: var(--lp-body); }
 
-/* The four-part regional engine. */
-.mc-engine { display: grid; gap: 4px; margin-top: 20px; }
-.mc-part { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--lp-line); }
-.mc-part:last-child { border-bottom: 0; }
+/* The four drivers. */
+.mc-engine { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 18px; }
+.mc-part { display: flex; gap: 12px; background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; padding: 14px 16px; }
 .mc-part-n {
-  flex: 0 0 34px; height: 34px; border-radius: 50%;
-  background: var(--lp-navy); color: #fff;
-  display: inline-flex; align-items: center; justify-content: center;
-  font-size: 15px; font-weight: 700;
+  flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--lp-navy); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800;
 }
-.mc-part h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
-.mc-part p { font-size: 15.5px; line-height: 1.75; color: var(--lp-body); }
+.mc-part h3 { font-size: 15px; font-weight: 800; }
+.mc-part p { margin-top: 4px; font-size: 13.5px; line-height: 1.5; color: var(--lp-body); }
 
-/* Tables — the Bay Area sub-climates and the climate normals. Both scroll
-   sideways on a phone rather than squeezing the columns to nothing. */
-.mc-table-wrap { margin-top: 22px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.mc-table {
-  width: 100%; border-collapse: collapse; font-size: 14.5px;
-  background: #fff; border: 1px solid var(--lp-line); border-radius: 14px;
-}
+/* Cards of bullets. */
+.mc-cards { display: grid; gap: 12px; margin-top: 18px; }
+.mc-cards-2 { grid-template-columns: repeat(2, 1fr); }
+.mc-cards-3 { grid-template-columns: repeat(3, 1fr); }
+.mc-card { background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; padding: 16px 18px 18px; }
+.mc-card h3 { font-size: 16px; font-weight: 800; }
+.mc-card .mc-bullets { margin-top: 10px; gap: 7px; }
+.mc-card .mc-bullets li { font-size: 14px; line-height: 1.55; }
+
+/* The three belts. Swatch colours are the map's. */
+.mc-belts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+.mc-belt { background: #fff; border: 1px solid var(--lp-line); border-top: 5px solid var(--b); border-radius: 14px; padding: 16px 18px 18px; }
+.mc-belt-top { display: flex; align-items: center; gap: 9px; }
+.mc-belt-swatch { width: 14px; height: 14px; border-radius: 4px; background: var(--b); }
+.mc-belt-top h3 { font-size: 18px; font-weight: 800; }
+.mc-belt-stats { display: flex; gap: 22px; margin-top: 12px; }
+.mc-belt-stats b { display: block; font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800; color: var(--lp-navy-2); line-height: 1.1; }
+.mc-belt-stats span { font-size: 12px; color: var(--lp-muted); }
+.mc-belt .mc-bullets { margin-top: 12px; gap: 7px; }
+.mc-belt .mc-bullets li { font-size: 14px; line-height: 1.55; }
+.mc-belt-where { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--lp-line); font-size: 12.5px; line-height: 1.55; color: var(--lp-muted); }
+
+/* Price tiles. */
+.mc-price-h { margin-top: 28px; }
+.mc-price { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.mc-price-t { background: #fff; border: 1px solid var(--lp-line); border-left: 5px solid var(--b); border-radius: 14px; padding: 14px 16px; }
+.mc-price-t b { display: block; font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 800; color: var(--lp-navy-2); }
+.mc-price-t span { display: block; margin-top: 2px; font-size: 13px; font-weight: 600; color: var(--lp-body); }
+.mc-price-t i { display: block; margin-top: 4px; font-style: normal; font-size: 12.5px; color: var(--lp-muted); }
+
+/* Record tiles. */
+.mc-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px; }
+.mc-tile { background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; padding: 14px 16px; }
+.mc-tile b { display: block; font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 800; color: var(--lp-navy-2); }
+.mc-tile span { display: block; margin-top: 4px; font-size: 13px; font-weight: 600; color: var(--lp-body); }
+.mc-tile i { display: block; margin-top: 2px; font-style: normal; font-size: 12.5px; color: var(--lp-muted); }
+
+/* Buttons on a light ground. */
+.mc-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.mc-btns .lp-btn { margin-top: 0; }
+.lp .mc-btn-line { border-color: var(--lp-navy); color: var(--lp-navy); }
+.lp .mc-btn-line:hover { background: var(--lp-navy); color: #fff; }
+
+/* The normals table, folded away by default. */
+.mc-details { margin-top: 20px; }
+.mc-details summary { cursor: pointer; font-size: 14px; font-weight: 700; color: var(--lp-navy); }
+.mc-table-wrap { margin-top: 12px; }
+.mc-table { width: 100%; max-width: 420px; border-collapse: collapse; font-size: 14px; background: #fff; border: 1px solid var(--lp-line); }
 .mc-table caption { caption-side: bottom; text-align: left; padding-top: 8px; }
-.mc-table th, .mc-table td { padding: 11px 14px; text-align: left; vertical-align: top; }
-.mc-table thead th {
-  font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--lp-muted); border-bottom: 1px solid var(--lp-line); white-space: nowrap;
+.mc-table th, .mc-table td { padding: 8px 12px; text-align: left; }
+.mc-table thead th { font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lp-muted); border-bottom: 1px solid var(--lp-line); }
+.mc-table tbody tr + tr > * { border-top: 1px solid var(--lp-line); }
+.mc-table td { font-weight: 600; color: var(--lp-ink); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 860px) {
+  .mc-topline { grid-template-columns: repeat(2, 1fr); }
+  .mc-belts, .mc-cards-3 { grid-template-columns: 1fr; }
 }
-.mc-table thead th .lp-fine { text-transform: none; letter-spacing: 0; font-size: 11px; }
-.mc-table tbody tr + tr th, .mc-table tbody tr + tr td { border-top: 1px solid var(--lp-line); }
-.mc-table tbody th { font-weight: 700; color: var(--lp-ink); }
-.mc-table tbody td { color: var(--lp-body); font-variant-numeric: tabular-nums; white-space: nowrap; }
-
-.mc-bay tbody th { min-width: 240px; }
-.mc-bay tbody td { font-weight: 700; color: var(--lp-ink); }
-.mc-zone-name { display: block; }
-.mc-zone-eg { display: block; font-size: 12.5px; font-weight: 600; color: var(--lp-accent); margin-top: 2px; }
-.mc-zone-why { display: block; font-size: 13px; font-weight: 400; line-height: 1.6; color: var(--lp-muted); margin-top: 5px; max-width: 46ch; }
-.mc-row-sf th, .mc-row-sf td { background: #FBF7EC; }
-
-.mc-note { margin-top: 12px; font-size: 13px; line-height: 1.7; color: var(--lp-muted); }
-.mc-note-lead { margin-top: 6px; }
-
-/* The three belts. The zone colour is the same one the map uses. */
-.mc-belts { display: grid; gap: 14px; margin-top: 22px; }
-.mc-belt {
-  background: #fff; border: 1px solid var(--lp-line); border-left: 5px solid var(--b);
-  border-radius: 14px; padding: 18px 20px 20px;
-}
-.mc-belt-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
-.mc-belt-head h3 { font-size: 21px; font-weight: 800; }
-.mc-belt-hours { font-size: 14px; font-weight: 700; color: var(--lp-ink); }
-.mc-belt-where { margin-top: 6px; font-size: 13px; font-weight: 600; color: var(--lp-accent); line-height: 1.6; }
-.mc-belt p { margin-top: 10px; font-size: 15px; line-height: 1.75; color: var(--lp-body); }
-
-/* Callouts. Navy by default because both carry buttons; the light variant is
-   for the ones that are purely an aside. */
-.mc-callout {
-  margin-top: 26px; background: var(--lp-navy); color: #fff;
-  border-radius: 16px; padding: 24px 26px 26px;
-}
-.mc-callout h3 { font-size: 19px; font-weight: 800; }
-.mc-callout p { margin-top: 10px; font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.84); }
-.mc-callout b { color: #fff; }
-.mc-callout .lp-fine { color: rgba(255,255,255,0.58); }
-.mc-callout .lp-btn { margin-top: 18px; }
-.mc-callout-btns { display: flex; flex-wrap: wrap; gap: 10px; }
-.mc-callout-light { background: var(--lp-cream); color: var(--lp-ink); border: 1px solid var(--lp-line); }
-.mc-callout-light p { color: var(--lp-body); }
-
-.mc-sub {
-  margin-top: 32px; font-size: 13px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase; color: var(--lp-accent);
-}
-
-/* The marine layer's day. */
-.mc-day { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 1px; background: var(--lp-line); border: 1px solid var(--lp-line); border-radius: 14px; overflow: hidden; }
-.mc-day li { background: #fff; padding: 14px 18px; display: grid; grid-template-columns: 150px 1fr; gap: 4px 18px; }
-.mc-day-t { font-size: 13px; font-weight: 700; color: var(--lp-accent); }
-.mc-day-p { font-size: 15px; line-height: 1.7; color: var(--lp-body); }
-
-/* Climograph. */
-.mc-chart { margin: 24px 0 0; }
-.mc-chart-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.mc-chart-svg { display: block; width: 100%; min-width: 640px; height: auto; }
-.mc-grid { stroke: var(--lp-line); stroke-width: 1; }
-.mc-base { stroke: #C6C8CB; stroke-width: 1; }
-.mc-axis { font-size: 12px; fill: var(--lp-muted); }
-.mc-rain { fill: #CEE2E6; }
-.mc-ribbon { fill: rgba(232, 184, 75, 0.30); }
-.mc-line-high { fill: none; stroke: #C9902B; stroke-width: 2.5; }
-.mc-line-low { fill: none; stroke: var(--lp-navy); stroke-width: 2.5; }
-.mc-dot-high { fill: #C9902B; }
-.mc-dot-low { fill: var(--lp-navy); }
-.mc-val { font-size: 12.5px; font-weight: 700; fill: #8A6415; }
-.mc-val-low { fill: var(--lp-navy); }
-.mc-month { font-size: 13px; font-weight: 700; fill: var(--lp-ink); }
-.mc-rain-val { font-size: 12px; fill: #3E6874; font-variant-numeric: tabular-nums; }
-/* Only meaningful where the drawing is wider than the screen. */
-.mc-scroll-hint { display: none; margin-top: 6px; font-size: 12px; color: var(--lp-muted); }
-@media (max-width: 700px) { .mc-scroll-hint { display: block; } }
-.mc-chart-key { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 6px; font-size: 13px; color: var(--lp-body); }
-.mc-chart-key i { display: inline-block; width: 22px; height: 10px; border-radius: 3px; margin-right: 7px; vertical-align: middle; }
-.mc-k-temp { background: rgba(232, 184, 75, 0.45); border: 1px solid #C9902B; }
-.mc-k-rain { background: #CEE2E6; }
-.mc-chart-cap { margin-top: 12px; font-size: 13px; line-height: 1.7; color: var(--lp-muted); }
-
-/* Records. */
-.mc-extremes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 22px; }
-.mc-extreme { background: var(--lp-cream); border: 1px solid var(--lp-line); border-radius: 14px; padding: 16px 18px; }
-.mc-extreme-v { font-family: Georgia, serif; font-size: 23px; font-weight: 700; color: var(--lp-navy-2); line-height: 1.2; }
-.mc-extreme-k { margin-top: 6px; font-size: 12.5px; font-weight: 600; color: var(--lp-body); }
-
-/* Month-per-row, so the normals need no sideways scrolling on a phone. */
-.mc-climate-table tbody th { width: 30%; }
-.mc-climate-table td { font-weight: 600; color: var(--lp-ink); }
-
 @media (max-width: 720px) {
-  .mc-letters, .mc-extremes { grid-template-columns: 1fr; }
-  .mc-day li { grid-template-columns: 1fr; }
-  .mc-bay tbody th { min-width: 200px; }
-  .mc-zone-why { max-width: none; }
-  .mc-callout, .mc-belt { padding-left: 18px; padding-right: 18px; }
+  .mc-letters, .mc-engine, .mc-cards-2, .mc-price { grid-template-columns: 1fr; }
+  .mc-tiles { gap: 8px; }
+  .mc-tile { padding: 12px; }
+  .mc-tile b { font-size: 19px; }
+  .mc-tile span { font-size: 11.5px; line-height: 1.35; }
+  .mc-tile i { font-size: 11px; }
+  .mc-deck { gap: 8px; }
+  .mc-deck-p b { font-size: 13px; }
+  .mc-deck-p b span { display: block; margin-left: 0; font-size: 11.5px; }
+  .mc-deck-p i { font-size: 12px; line-height: 1.4; }
+  .mc-diagram { min-width: 620px; }
+  .mc-bars-row { grid-template-columns: minmax(96px, 36%) 1fr; gap: 10px; }
+  .mc-bars-2 .mc-bars-row { grid-template-columns: 1fr 1fr; row-gap: 3px; }
+  .mc-bars-2 .mc-bars-k { grid-column: 1 / -1; text-align: left; }
+  .mc-bars-2 .mc-bars-k em { display: inline; margin-left: 6px; }
+  .mc-bars-2 .mc-bars-head span:first-child { display: none; }
+  .mc-bars-2 .mc-bars-list { gap: 12px; }
+  .mc-col-v { font-size: 11px; }
+  .mc-cols { padding-left: 28px; }
+  .mc-grid span { left: 28px; }
+  .mc-grid em { left: -28px; width: 24px; }
+  .mc-clock span { height: 36px; }
+  .mc-clock-phases span { font-size: 11px; }
 }
