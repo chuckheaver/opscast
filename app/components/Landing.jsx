@@ -135,7 +135,7 @@ export default function Landing() {
           change beneath it. */}
       <section className="lp-stats" aria-label="By the numbers">
         <p className="lp-stats-head">
-          By the Numbers: <span className="lp-stats-key">&rsquo;25</span> vs &rsquo;26 YTD{through ? ` (${through})` : ""}
+          By the Numbers: &rsquo;26 vs <span className="lp-stats-key">&rsquo;25</span> YTD{through ? ` (${through})` : ""}
         </p>
         <div className="lp-stats-row">
           {KPIS.map(k => (
