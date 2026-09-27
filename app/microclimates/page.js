@@ -172,7 +172,20 @@ export default function Page() {
           <p className="lp-kicker mc-group-k">SF Micro</p>
         </section>
         <section className="pt-sec" id="belts">
-          <h2>Three Belts</h2>
+          <h2>San Francisco Primary Microclimates</h2>
+
+          {/* Fog first — it is what draws the city's lines. The menu's
+              "Fog Map" item lands here. */}
+          <div className="mc-sub-sec" id="fog">
+            <h3 className="mc-h3">Fog</h3>
+            <FogMapCard />
+            <FogClock />
+            <Cards items={FOG_WHAT} />
+            <DeckHeights decks={DECK} />
+            <Cards items={FOG_TOPO} cols={3} />
+          </div>
+
+          <h3 className="mc-h3">The Ridge</h3>
           <p className="mc-lead">{BELTS_LEAD}</p>
           <CityProfile />
 
@@ -242,16 +255,6 @@ export default function Page() {
           </div>
         </section>
 
-        {/* FOG MAP */}
-        <section className="pt-sec" id="fog">
-          <p className="lp-kicker mc-group-k">Fog Map</p>
-          <h2>Fog</h2>
-          <FogMapCard />
-          <FogClock />
-          <Cards items={FOG_WHAT} />
-          <DeckHeights decks={DECK} />
-          <Cards items={FOG_TOPO} cols={3} />
-        </section>
 
 
         <section className="pt-cta">

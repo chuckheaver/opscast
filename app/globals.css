@@ -5643,3 +5643,5 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .mc-body .mc-group + .pt-sec { border-top: 0; padding-top: 6px; }
 .mc-group-k { color: #8A5F12 !important; }
 .pt-sec, .pt-type, .mc-h3 { scroll-margin-top: 84px; }
+.mc-sub-sec { scroll-margin-top: 84px; }
+.mc-sub-sec > .mc-h3:first-child { margin-top: 18px; }
