@@ -5364,7 +5364,9 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .bm-place text { font-size: 19px; font-weight: 700; fill: var(--lp-ink); paint-order: stroke; stroke: rgba(255,255,255,0.85); stroke-width: 3px; }
 .bm-n { font-family: 'Montserrat', sans-serif; font-size: 23px; font-weight: 800; fill: var(--lp-ink); }
 .bm-n-w { fill: #fff; }
-.bm-ocean { font-size: 20px; font-style: italic; fill: #4E7398; }
+.bm-water { font-size: 19px; font-style: italic; font-weight: 600; fill: #3E6874; letter-spacing: 0.04em; }
+.bm-peak path { fill: #5A4A36; }
+.bm-peak text { font-size: 16px; font-weight: 600; fill: #5A4A36; paint-order: stroke; stroke: rgba(255,255,255,0.8); stroke-width: 3px; }
 .bm-key { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .bm-key li { display: flex; gap: 10px; align-items: flex-start; }
 .bm-sw {

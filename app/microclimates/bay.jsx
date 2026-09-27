@@ -11,10 +11,21 @@ import { BAY_MAP } from "./content";
 
 // Nine steps, blue through a neutral to amber, ordered by July high.
 const HEAT = ["#4E7398", "#7292AF", "#9CB3C6", "#C5D2DB", "#E6DCC4", "#E8C987", "#DDAE5B", "#CC913A", "#BA7D2C"];
+const LAND = "#F5F1E6", WATER = "#BCD3E1", COAST = "#6F93AB";
+const ALPHA = 0.6;                                  // how much of the base map shows through
+
+// The colour a zone actually renders at over land, for the key and badges.
+const over = (hex, a = ALPHA, bg = LAND) => {
+  const c = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const [f, b] = [c(hex), c(bg)];
+  return "#" + f.map((v, i) => Math.round(a * v + (1 - a) * b[i]).toString(16).padStart(2, "0")).join("");
+};
 
 export function BayMap() {
-  const zones = [...BAY_MAP].sort((a, b) => a.jul - b.jul).map((z, i) => ({ ...z, fill: HEAT[i], n: i + 1 }));
-  const dark = i => i === 0;                          // only the deepest blue needs white numbers
+  const zones = [...BAY_MAP].sort((a, b) => a.jul - b.jul)
+    .map((z, i) => ({ ...z, fill: HEAT[i], tint: over(HEAT[i]), n: i + 1 }));
+  // Paint in the build script's order, so its precedence holds.
+  const paint = Object.keys(GEO.zones).map(k => zones.find(z => z.key === k)).filter(Boolean);
   return (
     <figure className="mc-fig">
       <p className="mc-fig-h">The Bay Area&rsquo;s nine microclimates</p>
@@ -23,12 +34,37 @@ export function BayMap() {
           <svg viewBox={`0 0 ${GEO.W} ${GEO.H}`} className="mc-svg" role="img"
             aria-label={"Map of the Bay Area divided into nine microclimates, coolest to warmest: " +
               zones.map(z => `${z.name}, July high about ${z.jul} degrees`).join("; ") + "."}>
-            <rect width={GEO.W} height={GEO.H} fill="#DCE7EE" />
-            <path d={GEO.land} fill="#EEF0F1" />
-            {zones.map(z => (
-              <path key={z.key} d={GEO.zones[z.key].d} fill={z.fill} stroke="#fff" strokeWidth="1.2">
-                <title>{`${z.n}. ${z.name} — July ${z.jul}°F`}</title>
-              </path>
+            <defs>
+              <clipPath id="bm-land"><path d={GEO.land} /></clipPath>
+              <filter id="bm-soft" x="-5%" y="-5%" width="110%" height="110%">
+                <feGaussianBlur stdDeviation="11" />
+              </filter>
+              <filter id="bm-shore" x="-5%" y="-5%" width="110%" height="110%">
+                <feGaussianBlur stdDeviation="6" />
+              </filter>
+            </defs>
+
+            <rect width={GEO.W} height={GEO.H} fill={WATER} />
+            {/* a soft light halo off the shore, so the coastline reads at a glance */}
+            <path d={GEO.land} fill="none" stroke="#E4EEF4" strokeWidth="14" filter="url(#bm-shore)" />
+            <path d={GEO.land} fill={LAND} />
+
+            <g clipPath="url(#bm-land)">
+              <g filter="url(#bm-soft)" opacity={ALPHA}>
+                {paint.map(z => <path key={z.key} d={GEO.zones[z.key].d} fill={z.fill} />)}
+              </g>
+            </g>
+            <path d={GEO.land} fill="none" stroke={COAST} strokeWidth="1.3" strokeLinejoin="round" />
+
+            {GEO.water.map(w => <text key={w.k} x={w.x} y={w.y} textAnchor="middle" className="bm-water">{w.k}</text>)}
+            {GEO.peaks.map(p => (
+              <g key={p.k} className="bm-peak">
+                <title>{`${p.k}, ${p.ft.toLocaleString("en-US")} ft`}</title>
+                <path d={`M${p.x},${p.y - 9} L${p.x + 8},${p.y + 5} L${p.x - 8},${p.y + 5} Z`} />
+                {p.side === "below"
+                  ? <text x={p.x} y={p.y + 24} textAnchor="middle">{p.k}</text>
+                  : <text x={p.x + 12} y={p.y + 5}>{p.k}</text>}
+              </g>
             ))}
             {GEO.places.map(p => (
               <g key={p.k} className="bm-place">
@@ -36,16 +72,16 @@ export function BayMap() {
                 <text x={p.x + 8} y={p.y + 6}>{p.k}</text>
               </g>
             ))}
-            {zones.map((z, i) => {
+            {zones.map(z => {
               const [x, y] = GEO.zones[z.key].at;
               return (
                 <g key={z.key}>
+                  <title>{`${z.n}. ${z.name} — July ${z.jul}°F`}</title>
                   <circle cx={x} cy={y} r="21" fill={z.fill} stroke="#fff" strokeWidth="3" />
-                  <text x={x} y={y + 8} textAnchor="middle" className={`bm-n${dark(i) ? " bm-n-w" : ""}`}>{z.n}</text>
+                  <text x={x} y={y + 8} textAnchor="middle" className={`bm-n${z.n === 1 ? " bm-n-w" : ""}`}>{z.n}</text>
                 </g>
               );
             })}
-            <text x={GEO.W - 14} y={GEO.H - 14} textAnchor="end" className="bm-ocean">Pacific Ocean</text>
           </svg>
         </div>
         <ol className="bm-key">
@@ -62,7 +98,7 @@ export function BayMap() {
         </ol>
       </div>
       <figcaption className="mc-cap">
-        Typical July afternoon high. Zone lines are generalized — real edges follow ridgelines and shift day to day.
+        Typical July afternoon high. Zones blend into each other on purpose — real edges follow ridgelines and move day to day.
       </figcaption>
     </figure>
   );

@@ -25,7 +25,7 @@ const Y = lat => ((BBOX[3] - lat) / (BBOX[3] - BBOX[1])) * H;
 // Painted in this order; later zones take precedence where outlines overlap.
 const ZONES = {
   tunnel: [[-122.36, 38.17], [-122.36, 38.08], [-122.26, 38.06], [-122.20, 37.98], [-122.17, 37.88], [-122.12, 37.80],
-           [-122.03, 37.72], [-121.95, 37.62], [-121.85, 37.5], [-121.5, 37.5], [-121.5, 38.70], [-122.12, 38.70],
+           [-122.03, 37.72], [-121.95, 37.62], [-121.85, 37.5], [-121.5, 37.5], [-121.5, 38.70], [-122.40, 38.78],
            [-122.15, 38.25]],
   sunbowl: [[-122.10, 37.44], [-121.90, 37.47], [-121.85, 37.50], [-121.5, 37.5], [-121.5, 37.0],
             [-121.93, 37.10], [-121.98, 37.20], [-122.06, 37.29], [-122.14, 37.37]],
@@ -106,8 +106,11 @@ const toPath = mp => mp.map(poly => poly.map(ring => {
 // ---------------------------------------------------------------- zones
 const order = Object.keys(ZONES);
 const clipped = {};
+// Zones are NOT clipped to land here: the page clips them to the shoreline
+// after blurring, so the colour stays full-strength right up to the coast
+// instead of fading into the water.
 order.forEach((k, i) => {
-  let z = pc.intersection([[...ZONES[k], ZONES[k][0]]], landClip);
+  let z = [[[...ZONES[k], ZONES[k][0]]]];
   const later = order.slice(i + 1).filter(j => (MERGE[j] || j) !== (MERGE[k] || k)).map(j => [[...ZONES[j], ZONES[j][0]]]);
   if (later.length) z = pc.difference(z, ...later);
   const key = MERGE[k] || k;
@@ -133,7 +136,7 @@ const anchor = mp => {
 const LABELS = {
   coast: [-122.93, 38.06], city: [-122.45, 37.765], bayshore: [-122.19, 37.70], ridges: [-122.22, 37.23],
   gap: [-122.82, 38.20], tam: [-122.60, 38.03], sunbowl: [-121.80, 37.24], vines: [-122.47, 38.53],
-  tunnel: [-121.90, 37.80],
+  tunnel: [-121.74, 37.98],
 };
 
 const PLACES = [
@@ -143,15 +146,47 @@ const PLACES = [
   ["Half Moon Bay", -122.43, 37.46], ["San Rafael", -122.53, 37.97],
 ].map(([k, lon, lat]) => ({ k, x: Math.round(X(lon)), y: Math.round(Y(lat)) }));
 
+// Softening happens on the page (a blur before clipping to the shoreline),
+// which keeps adjacent zones touching. Chaikin is kept for reference but
+// unused — rounding each zone separately opens slivers between neighbors.
+function chaikin(ring, n = 3) {
+  let pts = ring.slice(0, -1);
+  for (let k = 0; k < n; k++) {
+    const next = [];
+    pts.forEach((p, i) => {
+      const q = pts[(i + 1) % pts.length];
+      next.push([0.75 * p[0] + 0.25 * q[0], 0.75 * p[1] + 0.25 * q[1]],
+                [0.25 * p[0] + 0.75 * q[0], 0.25 * p[1] + 0.75 * q[1]]);
+    });
+    pts = next;
+  }
+  return pts;
+}
+const smoothPath = mp => mp.map(poly => poly.map(ring => {
+  const pts = chaikin(ring.map(([lon, lat]) => [X(lon), Y(lat)]));
+  return "M" + pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join("L") + "Z";
+}).join("")).join("");
+
+const PEAKS = [
+  ["Mt Tamalpais", 2572, -122.5797, 37.9235, "right"], ["Mt Diablo", 3849, -121.9142, 37.8816, "below"],
+  ["Loma Prieta", 3786, -121.8428, 37.1114, "right"],
+].map(([k, ft, lon, lat, side]) => ({ k, ft, side, x: Math.round(X(lon)), y: Math.round(Y(lat)) }));
+
+const WATER = [
+  ["Pacific Ocean", -122.93, 37.40], ["San Francisco Bay", -122.28, 37.63], ["San Pablo Bay", -122.40, 38.055],
+].map(([k, lon, lat]) => ({ k, x: Math.round(X(lon)), y: Math.round(Y(lat)) }));
+
 const out = {
   W, H,
-  source: "Shoreline: geo-maps earth-lands 1 km (MIT). Zones: generalized, hand-drawn.",
+  source: "Shoreline: geo-maps earth-lands 1 km (MIT). Zones: generalized, hand-drawn, smoothed.",
   land: toPath(landClip),
   zones: Object.fromEntries(Object.entries(clipped).map(([k, mp]) => [k, {
     d: toPath(mp),
     at: LABELS[k] ? [Math.round(X(LABELS[k][0])), Math.round(Y(LABELS[k][1]))] : anchor(mp),
   }])),
   places: PLACES,
+  peaks: PEAKS,
+  water: WATER,
 };
 writeFileSync(new URL("../app/microclimates/bay-zones.json", import.meta.url), JSON.stringify(out));
 console.log(`wrote bay-zones.json  ${W}×${H}  ${(JSON.stringify(out).length / 1024).toFixed(0)} KB`,
