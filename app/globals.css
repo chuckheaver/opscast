@@ -5357,6 +5357,40 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .mc-callout-sun span { display: block; margin-top: 2px; font-size: 14px; color: var(--lp-body); max-width: 52ch; }
 .mc-callout-sun .mc-btns { margin-top: 0; }
 
+/* Bay Area map (bay.jsx). */
+.bm { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+.bm-map svg { border-radius: 14px; }
+.bm-place circle { fill: var(--lp-ink); }
+.bm-place text { font-size: 19px; font-weight: 700; fill: var(--lp-ink); paint-order: stroke; stroke: rgba(255,255,255,0.85); stroke-width: 3px; }
+.bm-n { font-family: 'Montserrat', sans-serif; font-size: 23px; font-weight: 800; fill: var(--lp-ink); }
+.bm-n-w { fill: #fff; }
+.bm-ocean { font-size: 20px; font-style: italic; fill: #4E7398; }
+.bm-key { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.bm-key li { display: flex; gap: 10px; align-items: flex-start; }
+.bm-sw {
+  flex: none; width: 26px; height: 26px; border-radius: 7px; margin-top: 1px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; color: var(--lp-ink);
+}
+.bm-key li:first-child .bm-sw { color: #fff; }
+.bm-key b { display: block; font-size: 14.5px; font-weight: 800; color: var(--lp-ink); }
+.bm-key b em { font-style: normal; font-weight: 700; color: var(--lp-muted); margin-left: 4px; font-size: 13px; }
+.bm-key div > span { display: block; font-size: 13px; line-height: 1.45; color: var(--lp-body); }
+.bm-key i { display: block; font-style: normal; font-size: 12px; color: var(--lp-muted); margin-top: 1px; }
+
+/* The fog map, as on the home page, on its navy ground. */
+.mc-fogmap { background: var(--lp-navy); border-radius: 16px; padding: 18px 18px 16px; }
+.mc-fogmap img { display: block; width: 100%; height: auto; }
+.mc-fogmap-key { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; margin-top: 6px; font-size: 12.5px; color: rgba(255,255,255,0.86); }
+.mc-fogmap-key i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.mc-fogmap-key .mc-fogmap-dot { width: 7px; height: 7px; border-radius: 50%; background: #0F1B2A; box-shadow: 0 0 0 2px #E8B84B; vertical-align: 1px; }
+.mc-fogmap-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 12px; }
+.lp .mc-fogmap-btns a {
+  font-size: 13px; font-weight: 700; color: var(--lp-accent-dk);
+  border: 1px solid rgba(206,226,230,0.45); border-radius: 999px; padding: 6px 14px;
+}
+.lp .mc-fogmap-btns a:hover { background: var(--lp-accent-dk); color: var(--lp-navy-2); }
+
 /* Köppen scorecard. */
 .mc-tests { background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; overflow: hidden; }
 .mc-test {
@@ -5464,7 +5498,8 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 @media (max-width: 720px) {
   .mc-letters, .mc-engine, .mc-cards-2, .mc-price { grid-template-columns: 1fr; }
   .mc-tiles { gap: 8px; }
-  .sn-lots, .sn-rules, .sn-sky { grid-template-columns: 1fr; }
+  .sn-lots, .sn-rules, .sn-sky, .bm { grid-template-columns: 1fr; }
+  .mc-fogmap { padding: 12px 10px; }
   .sn-slopes { gap: 8px; }
   .sn-slope > b { font-size: 12.5px; }
   .sn-slope-v { font-size: 11.5px; }

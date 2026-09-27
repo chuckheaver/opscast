@@ -67,6 +67,19 @@ export const BAY_ZONES = [
   { k: "Inland East Bay", eg: "Walnut Creek, Livermore", jul: 90, rain: 16 },
 ];
 
+// The nine zones on the Bay Area map. Keys match scripts/build-bay-map.mjs.
+export const BAY_MAP = [
+  { key: "coast", name: "The Fog Coast", jul: 63, eg: "Bodega Bay · Point Reyes · Pacifica · Half Moon Bay", p: "First land the marine layer touches. Grey summers, green winters." },
+  { key: "city", name: "The City", jul: 67, eg: "San Francisco", p: "All three belts in seven miles — see below." },
+  { key: "bayshore", name: "The Bayshore", jul: 76, eg: "Berkeley · Oakland · San Mateo · Palo Alto", p: "Marine air softened by the crossing. The region's mildest strip." },
+  { key: "ridges", name: "The Redwood Ridges", jul: 78, eg: "Skyline · La Honda · Oakland & Berkeley hills", p: "Fog-catching crests. Up to 45 inches of rain on the Santa Cruz Mountains." },
+  { key: "gap", name: "The Wind Gap", jul: 81, eg: "Petaluma · Sears Point", p: "A low break in the Coast Range. One of the windiest corridors in California." },
+  { key: "tam", name: "Tam's Shadow", jul: 82, eg: "San Rafael · Mill Valley · Novato", p: "Mount Tamalpais blocks the direct marine push." },
+  { key: "sunbowl", name: "The Sun Bowl", jul: 84, eg: "San Jose · Santa Clara · Los Gatos", p: "Far from every gap and in the mountains' rain shadow. Driest and sunniest." },
+  { key: "vines", name: "Wine Country", jul: 88, eg: "Santa Rosa · Sonoma · Napa · Calistoga", p: "Hot afternoons, fog-cooled nights — the swing that grows the grapes." },
+  { key: "tunnel", name: "Beyond the Tunnel", jul: 91, eg: "Walnut Creek · Concord · Livermore · Fairfield", p: "Past the Caldecott, 90°F+ afternoons; the Delta breeze cools the nights." },
+];
+
 export const BAY_BULLETS = [
   "28°F separates Bodega Bay from Livermore on the same July afternoon, 80 miles apart.",
   "Skyline collects three times the rain San Jose does — storms are forced up and over the Santa Cruz Mountains.",

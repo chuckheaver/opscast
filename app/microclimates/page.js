@@ -14,6 +14,7 @@ import {
   BarRows, KoppenTests, OceanSection, CityProfile, SunAngle, FogClock, DeckHeights, TempChart, RainChart,
   ClimateTable, ClimateExtremes,
 } from "./charts";
+import { BayMap, FogMapCard } from "./bay";
 import { LotPlan, NeighborShadow, SlopeCompare, FieldRules, SkyChart } from "./sun";
 import {
   LEDE, KOPPEN, LATITUDE, ENGINE, ENGINE_BULLETS,
@@ -156,6 +157,7 @@ export default function Page() {
         {/* 3 — Around the Bay */}
         <section className="pt-sec" id="bay">
           <h2>Around the Bay</h2>
+          <BayMap />
           <BarRows
             rows={BAY_ZONES.map(z => ({ k: z.k, eg: z.eg, v: z.jul, v2: z.rain, hi: z.hi }))}
             max={95} unit="°" head="July afternoon"
@@ -240,6 +242,7 @@ export default function Page() {
         {/* 6 — Fog */}
         <section className="pt-sec" id="fog">
           <h2>Fog</h2>
+          <FogMapCard />
           <FogClock />
           <Cards items={FOG_WHAT} />
           <DeckHeights decks={DECK} />
