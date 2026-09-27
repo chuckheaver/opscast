@@ -2,6 +2,7 @@
 // plus the three things that cost people money: what is in the disclosure
 // package, how the tax bill actually works, and special tax districts.
 
+import SiteNav from "../components/SiteNav";
 import Link from "next/link";
 import SiteFooter, { EMAIL } from "../components/SiteFooter";
 import { TYPES, SECTIONS, DISCLAIMER } from "./content";
@@ -15,18 +16,7 @@ export const metadata = {
 export default function Page() {
   return (
     <div className="lp">
-      <header className="lp-nav lp-nav-solid">
-        <Link href="/" className="lp-logo">
-          <span className="lp-logo-name">Chuck Heaver</span>
-          <span className="lp-logo-sub">San Francisco Realtor · Meteorologist</span>
-        </Link>
-        <nav className="lp-nav-links">
-          <Link href="/microclimates">Microclimates</Link>
-          <Link href="/neighborhoods">Neighborhoods</Link>
-          <Link href="/fog?preset=fog">The Map</Link>
-          <a className="lp-nav-cta" href={`mailto:${EMAIL}`}>Work With Me</a>
-        </nav>
-      </header>
+      <SiteNav />
 
       <section className="lp-guide-head">
         <p className="lp-kicker">San Francisco Buyer &amp; Seller Guide</p>

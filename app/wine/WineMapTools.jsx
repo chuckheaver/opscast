@@ -121,7 +121,7 @@ export default function WineMapTools({
     <div className="fog-maptools" ref={wrapRef}>
       {/* Search bar */}
       <div className="fog-search">
-        <a className="fog-search-back" href="/" aria-label="Back to UrMicroLife" title="UrMicroLife">
+        <a className="fog-search-back" href="/" aria-label="Home" title="Home">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M15 5l-7 7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>

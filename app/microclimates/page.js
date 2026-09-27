@@ -5,6 +5,7 @@
 // Words live in content.js, drawings in charts.jsx, climate figures in
 // app/lib/sf-climate.json.
 
+import SiteNav from "../components/SiteNav";
 import Link from "next/link";
 import SiteFooter, { EMAIL } from "../components/SiteFooter";
 import STATS from "../lib/landing-stats.json";
@@ -31,14 +32,12 @@ export const metadata = {
     "and monthly temperature and rainfall.",
 };
 
+// Matches the Microclimates menu: Climate, Bay Micro, SF Micro, Fog Map.
 const TOC = [
-  ["koppen", "Classification"],
-  ["ocean", "Ocean"],
-  ["bay", "The Bay"],
-  ["belts", "Three Belts"],
-  ["block", "Your Block"],
-  ["fog", "Fog"],
-  ["year", "The Year"],
+  ["climate", "Climate"],
+  ["bay", "Bay Micro"],
+  ["sf", "SF Micro"],
+  ["fog", "Fog Map"],
 ];
 
 const money = v => (v >= 1e6 ? `$${(v / 1e6).toFixed(2)}M` : `$${Math.round(v / 1e3)}K`);
@@ -80,18 +79,7 @@ export default function Page() {
 
   return (
     <div className="lp">
-      <header className="lp-nav lp-nav-solid">
-        <Link href="/" className="lp-logo">
-          <span className="lp-logo-name">Chuck Heaver</span>
-          <span className="lp-logo-sub">San Francisco Realtor · Meteorologist</span>
-        </Link>
-        <nav className="lp-nav-links">
-          <Link href="/microclimates">Microclimates</Link>
-          <Link href="/neighborhoods">Neighborhoods</Link>
-          <Link href="/fog?preset=fog">The Map</Link>
-          <a className="lp-nav-cta" href={`mailto:${EMAIL}`}>Work With Me</a>
-        </nav>
-      </header>
+      <SiteNav />
 
       <section className="lp-guide-head">
         <p className="lp-kicker">San Francisco</p>
@@ -116,7 +104,10 @@ export default function Page() {
 
       <article className="pt-body mc-body">
 
-        {/* 1 — Classification */}
+        {/* CLIMATE — classification, the ocean, the year */}
+        <section className="pt-sec mc-group" id="climate">
+          <p className="lp-kicker mc-group-k">Climate</p>
+        </section>
         <section className="pt-sec" id="koppen">
           <h2>Köppen: {KOPPEN.code}</h2>
           <p className="mc-lead">{KOPPEN.name}</p>
@@ -154,15 +145,32 @@ export default function Page() {
           <Bullets items={ENGINE_BULLETS} />
         </section>
 
-        {/* 3 — Around the Bay */}
+        {/* the year closes Climate */}
+        <section className="pt-sec" id="year">
+          <h2>The Year</h2>
+          <TempChart months={CLIMATE.months} />
+          <RainChart months={CLIMATE.months} />
+          <ClimateExtremes />
+          <Bullets items={YEAR_BULLETS} />
+          <details className="mc-details">
+            <summary>Month-by-month table</summary>
+            <ClimateTable />
+          </details>
+        </section>
+
+        {/* BAY MICRO */}
         <section className="pt-sec" id="bay">
+          <p className="lp-kicker mc-group-k">Bay Micro</p>
           <h2>Around the Bay</h2>
           <BayMap />
           <SeasonRows rows={BAY_ZONES} caption={BAY_NOTE} />
           <Bullets items={BAY_BULLETS} />
         </section>
 
-        {/* 4 — The three belts */}
+        {/* SF MICRO — the belts, the block, and sun on the lot last */}
+        <section className="pt-sec" id="sf">
+          <p className="lp-kicker mc-group-k">SF Micro</p>
+        </section>
         <section className="pt-sec" id="belts">
           <h2>Three Belts</h2>
           <p className="mc-lead">{BELTS_LEAD}</p>
@@ -207,7 +215,7 @@ export default function Page() {
           <p className="mc-cap">Houses only. Across all property types the order flips, because the sunbelt is mostly condos.</p>
         </section>
 
-        {/* 5 — Your block */}
+        {/* the block, ending on sun */}
         <section className="pt-sec" id="block">
           <h2>Block by Block</h2>
           <Cards items={BLOCK} />
@@ -234,8 +242,9 @@ export default function Page() {
           </div>
         </section>
 
-        {/* 6 — Fog */}
+        {/* FOG MAP */}
         <section className="pt-sec" id="fog">
+          <p className="lp-kicker mc-group-k">Fog Map</p>
           <h2>Fog</h2>
           <FogMapCard />
           <FogClock />
@@ -244,18 +253,6 @@ export default function Page() {
           <Cards items={FOG_TOPO} cols={3} />
         </section>
 
-        {/* 7 — The year */}
-        <section className="pt-sec" id="year">
-          <h2>The Year</h2>
-          <TempChart months={CLIMATE.months} />
-          <RainChart months={CLIMATE.months} />
-          <ClimateExtremes />
-          <Bullets items={YEAR_BULLETS} />
-          <details className="mc-details">
-            <summary>Month-by-month table</summary>
-            <ClimateTable />
-          </details>
-        </section>
 
         <section className="pt-cta">
           <div>

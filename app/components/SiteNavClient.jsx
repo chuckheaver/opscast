@@ -1,0 +1,110 @@
+"use client";
+
+// Site menu. Desktop: a row of links with two dropdowns (Microclimates and
+// Neighborhoods) that open on hover or click. Phone: a ☰ button that opens a
+// full-width panel with the same items, dropdowns expanding in place.
+// Escape, a click outside, or following a link closes everything.
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { EMAIL } from "./SiteFooter";
+
+const MICRO = [
+  { href: "/microclimates#climate", label: "Climate", sub: "Köppen, the ocean, the year" },
+  { href: "/microclimates#bay", label: "Bay Micro", sub: "The Bay Area's microclimates" },
+  { href: "/microclimates#sf", label: "SF Micro", sub: "Three belts, your block, sun on the lot" },
+  { href: "/microclimates#fog", label: "Fog Map", sub: "How fog forms and moves" },
+];
+
+export default function SiteNavClient({ hoods, bare }) {
+  const [open, setOpen] = useState(null);          // "micro" | "hoods" | null
+  const [mobile, setMobile] = useState(false);     // phone panel
+  const ref = useRef(null);
+  const path = usePathname();
+
+  useEffect(() => { setOpen(null); setMobile(false); }, [path]);
+  useEffect(() => {
+    const key = e => { if (e.key === "Escape") { setOpen(null); setMobile(false); } };
+    const click = e => { if (ref.current && !ref.current.contains(e.target)) setOpen(null); };
+    document.addEventListener("keydown", key);
+    document.addEventListener("pointerdown", click);
+    return () => { document.removeEventListener("keydown", key); document.removeEventListener("pointerdown", click); };
+  }, []);
+
+  // Group the neighborhoods by first letter for the A–Z panel.
+  const letters = [];
+  for (const h of hoods) {
+    const L = h.name[0].toUpperCase();
+    if (!letters.length || letters[letters.length - 1].L !== L) letters.push({ L, items: [] });
+    letters[letters.length - 1].items.push(h);
+  }
+
+  const closeAll = () => { setOpen(null); setMobile(false); };
+  const hover = key => ({
+    onMouseEnter: () => window.matchMedia("(hover: hover)").matches && setOpen(key),
+    onMouseLeave: () => window.matchMedia("(hover: hover)").matches && setOpen(null),
+  });
+  const toggle = key => () => setOpen(o => (o === key ? null : key));
+
+  return (
+    <header ref={ref} className={`nv${bare ? " nv-bare" : ""}${mobile ? " is-mobile-open" : ""}`}>
+      <div className="nv-bar">
+        {!bare && (
+          <Link href="/" className="nv-logo" onClick={closeAll}>
+            <span className="nv-logo-name">Chuck Heaver</span>
+            <span className="nv-logo-sub">San Francisco Realtor · Meteorologist</span>
+          </Link>
+        )}
+        <button type="button" className="nv-burger" aria-expanded={mobile} aria-controls="nv-menu"
+                onClick={() => setMobile(m => !m)}>
+          <span aria-hidden="true">{mobile ? "✕" : "☰"}</span>
+          <span className="nv-burger-t">Menu</span>
+        </button>
+
+        <nav id="nv-menu" className="nv-menu" aria-label="Site">
+          <ul className="nv-list">
+            <li><Link href="/" className="nv-link" onClick={closeAll}>Home</Link></li>
+
+            <li className={`nv-dd${open === "micro" ? " is-open" : ""}`} {...hover("micro")}>
+              <button type="button" className="nv-link nv-dd-btn" aria-expanded={open === "micro"} onClick={toggle("micro")}>
+                Microclimates <span className="nv-caret" aria-hidden="true">▾</span>
+              </button>
+              <div className="nv-panel nv-panel-micro">
+                {MICRO.map(m => (
+                  <Link key={m.href} href={m.href} className="nv-item" onClick={closeAll}>
+                    <b>{m.label}</b><span>{m.sub}</span>
+                  </Link>
+                ))}
+              </div>
+            </li>
+
+            <li className={`nv-dd${open === "hoods" ? " is-open" : ""}`} {...hover("hoods")}>
+              <button type="button" className="nv-link nv-dd-btn" aria-expanded={open === "hoods"} onClick={toggle("hoods")}>
+                Neighborhoods <span className="nv-caret" aria-hidden="true">▾</span>
+              </button>
+              <div className="nv-panel nv-panel-hoods">
+                <Link href="/neighborhoods" className="nv-all" onClick={closeAll}>All neighborhoods &rarr;</Link>
+                <div className="nv-az">
+                  {letters.map(g => (
+                    <div key={g.L} className="nv-az-g">
+                      <span className="nv-az-L">{g.L}</span>
+                      {g.items.map(h => (
+                        <Link key={h.slug} href={`/neighborhoods/${h.slug}`} onClick={closeAll}>{h.name}</Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </li>
+
+            <li><Link href="/fog?preset=fog" className="nv-link" onClick={closeAll}>The Map</Link></li>
+            <li><Link href="/property-types" className="nv-link" onClick={closeAll}>Buyer Guide</Link></li>
+            <li><Link href="/market" className="nv-link" onClick={closeAll}>Market</Link></li>
+            <li><a href={`mailto:${EMAIL}`} className="nv-cta">Work With Me</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
+}

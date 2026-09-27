@@ -6,6 +6,7 @@
 // Every figure comes from app/lib/landing-stats.json, regenerated from the
 // live sales file by scripts/build-landing-stats.mjs. Nothing is typed by hand.
 
+import SiteNav from "./SiteNav";
 import Link from "next/link";
 import stats from "../lib/landing-stats.json";
 import hoodStats from "../lib/neighborhood-stats.json";
@@ -86,16 +87,7 @@ export default function Landing() {
     <div className="lp">
       {/* No logo lockup here — the name and title sit under the portrait a
           few inches below, and dropping it lets the map start higher. */}
-      <header className="lp-nav lp-nav-bare">
-        <nav className="lp-nav-links">
-          <Link href="/fog?preset=fog">The Map</Link>
-          <Link href="/microclimates">Microclimates</Link>
-          <Link href="/neighborhoods">Neighborhoods</Link>
-          <Link href="/property-types">Buyer Guide</Link>
-          <Link href="/market">Market</Link>
-          <a className="lp-nav-cta" href={`mailto:${EMAIL}`}>Work With Me</a>
-        </nav>
-      </header>
+      <SiteNav bare />
 
       {/* Hero — the map is the subject. The city is the headline, the
           portrait is a byline, and there is no paragraph at all. */}

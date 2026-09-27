@@ -1,6 +1,7 @@
 // The public neighborhood guide index. One card per authored neighborhood,
 // each carrying its live median price and its microclimate zone.
 
+import SiteNav from "../components/SiteNav";
 import Link from "next/link";
 import SiteFooter from "../components/SiteFooter";
 import { allHoods, money, ZONE_COLOR, windowLabel, statsYear } from "./lib";
@@ -16,19 +17,7 @@ export default function Page() {
 
   return (
     <div className="lp">
-      <header className="lp-nav lp-nav-solid">
-        <Link href="/" className="lp-logo">
-          <span className="lp-logo-name">Chuck Heaver</span>
-          <span className="lp-logo-sub">San Francisco Realtor · Meteorologist</span>
-        </Link>
-        <nav className="lp-nav-links">
-          <Link href="/microclimates">Microclimates</Link>
-          <Link href="/fog?preset=fog">The Map</Link>
-          <Link href="/market">Market</Link>
-          <Link href="/tools">All Tools</Link>
-          <a className="lp-nav-cta" href="mailto:chuck.heaver@vanguardproperties.com">Work With Me</a>
-        </nav>
-      </header>
+      <SiteNav />
 
       <section className="lp-guide-head">
         <p className="lp-kicker">San Francisco Neighborhood Guide</p>

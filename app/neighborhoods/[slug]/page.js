@@ -1,6 +1,7 @@
 // One neighborhood's guide page. Editorial content is authored; every number
 // is computed from the live sales file, so the two never drift apart.
 
+import SiteNav from "../../components/SiteNav";
 import Link from "next/link";
 import SiteFooter from "../../components/SiteFooter";
 import { notFound } from "next/navigation";
@@ -47,18 +48,7 @@ export default async function Page({ params }) {
 
   return (
     <div className="lp">
-      <header className="lp-nav lp-nav-solid">
-        <Link href="/" className="lp-logo">
-          <span className="lp-logo-name">Chuck Heaver</span>
-          <span className="lp-logo-sub">San Francisco Realtor · Meteorologist</span>
-        </Link>
-        <nav className="lp-nav-links">
-          <Link href="/microclimates">Microclimates</Link>
-          <Link href="/neighborhoods">All Neighborhoods</Link>
-          <Link href="/fog?preset=fog">The Map</Link>
-          <a className="lp-nav-cta" href={`mailto:chuck.heaver@vanguardproperties.com?subject=${encodeURIComponent(name)}`}>Ask About {name}</a>
-        </nav>
-      </header>
+      <SiteNav />
 
       <article className="lp-nh">
         <p className="lp-crumb"><Link href="/neighborhoods">San Francisco Neighborhoods</Link> · {heading}</p>
