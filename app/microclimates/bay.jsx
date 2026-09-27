@@ -1,4 +1,4 @@
-// The Bay Area as nine named microclimates, and the city's fog map.
+// The Bay Area as ten named microclimates, and the city's fog map.
 //
 // Shoreline and zone shapes come from scripts/build-bay-map.mjs (real 1 km
 // coastline, generalized hand-drawn zones clipped to it). Zones are coloured
@@ -9,8 +9,8 @@ import Link from "next/link";
 import GEO from "./bay-zones.json";
 import { BAY_MAP } from "./content";
 
-// Nine steps, blue through a neutral to amber, ordered by July high.
-const HEAT = ["#4E7398", "#7292AF", "#9CB3C6", "#C5D2DB", "#E6DCC4", "#E8C987", "#DDAE5B", "#CC913A", "#BA7D2C"];
+// Ten steps, blue through a neutral to amber, ordered by July high.
+const HEAT = ["#4E7398", "#7292AF", "#9CB3C6", "#C5D2DB", "#D8C9A0", "#E6DCC4", "#E8C987", "#DDAE5B", "#CC913A", "#BA7D2C"];
 const LAND = "#F5F1E6", WATER = "#BCD3E1", COAST = "#6F93AB";
 const ALPHA = 0.6;                                  // how much of the base map shows through
 
@@ -28,16 +28,16 @@ export function BayMap() {
   const paint = Object.keys(GEO.zones).map(k => zones.find(z => z.key === k)).filter(Boolean);
   return (
     <figure className="mc-fig">
-      <p className="mc-fig-h">The Bay Area&rsquo;s nine microclimates</p>
+      <p className="mc-fig-h">The Bay Area&rsquo;s ten microclimates</p>
       <div className="bm">
         <div className="bm-map">
           <svg viewBox={`0 0 ${GEO.W} ${GEO.H}`} className="mc-svg" role="img"
-            aria-label={"Map of the Bay Area divided into nine microclimates, coolest to warmest: " +
+            aria-label={"Map of the Bay Area divided into ten microclimates, coolest to warmest: " +
               zones.map(z => `${z.name}, July high about ${z.jul} degrees`).join("; ") + "."}>
             <defs>
               <clipPath id="bm-land"><path d={GEO.land} /></clipPath>
               <filter id="bm-soft" x="-5%" y="-5%" width="110%" height="110%">
-                <feGaussianBlur stdDeviation="11" />
+                <feGaussianBlur stdDeviation="7" />
               </filter>
               <filter id="bm-shore" x="-5%" y="-5%" width="110%" height="110%">
                 <feGaussianBlur stdDeviation="6" />

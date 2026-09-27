@@ -71,13 +71,14 @@ export const BAY_ZONES = [
 export const BAY_MAP = [
   { key: "coast", name: "The Fog Coast", jul: 63, eg: "Bodega Bay · Point Reyes · Pacifica · Half Moon Bay", p: "First land the marine layer touches. Grey summers, green winters." },
   { key: "city", name: "The City", jul: 67, eg: "San Francisco", p: "All three belts in seven miles — see below." },
-  { key: "bayshore", name: "The Bayshore", jul: 76, eg: "Berkeley · Oakland · San Mateo · Palo Alto", p: "Marine air softened by the crossing. The region's mildest strip." },
-  { key: "ridges", name: "The Redwood Ridges", jul: 78, eg: "Skyline · La Honda · Oakland & Berkeley hills", p: "Fog-catching crests. Up to 45 inches of rain on the Santa Cruz Mountains." },
+  { key: "bayshore", name: "The Bayshore", jul: 76, eg: "Berkeley · Oakland · San Mateo · Burlingame", p: "Marine air softened by the crossing. The region's mildest strip." },
+  { key: "ridges", name: "The Redwood Ridges", jul: 78, eg: "Skyline · Kings Mountain · La Honda", p: "The Santa Cruz Mountains crest. Fog-catching redwoods, up to 45 inches of rain." },
+  { key: "hills", name: "The Hills", jul: 80, eg: "Berkeley & Oakland hills · 500–800 ft", p: "Overlooking Berkeley and Oakland, above much of the marine layer. Warmer, more sun, less fog." },
   { key: "gap", name: "The Wind Gap", jul: 81, eg: "Petaluma · Sears Point", p: "A low break in the Coast Range. One of the windiest corridors in California." },
   { key: "tam", name: "Tam's Shadow", jul: 82, eg: "San Rafael · Mill Valley · Novato", p: "Mount Tamalpais blocks the direct marine push." },
-  { key: "sunbowl", name: "The Sun Bowl", jul: 84, eg: "San Jose · Santa Clara · Los Gatos", p: "Far from every gap and in the mountains' rain shadow. Driest and sunniest." },
+  { key: "sunbowl", name: "The Sun Bowl", jul: 84, eg: "Redwood City · Palo Alto · San Jose · Los Gatos", p: "Far from every gap and in the mountains' rain shadow. Driest and sunniest." },
   { key: "vines", name: "Wine Country", jul: 88, eg: "Santa Rosa · Sonoma · Napa · Calistoga", p: "Hot afternoons, fog-cooled nights — the swing that grows the grapes." },
-  { key: "tunnel", name: "Beyond the Tunnel", jul: 91, eg: "Walnut Creek · Concord · Livermore · Fairfield", p: "Past the Caldecott, 90°F+ afternoons; the Delta breeze cools the nights." },
+  { key: "tunnel", name: "Over the Hills", jul: 91, eg: "Walnut Creek · Concord · Livermore · Fairfield", p: "East of the Berkeley–Oakland hills: 90°F+ afternoons, cooled at night by the Delta breeze." },
 ];
 
 export const BAY_BULLETS = [
