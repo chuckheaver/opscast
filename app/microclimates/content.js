@@ -165,6 +165,20 @@ export const BLOCK = [
   },
 ];
 
+// Sun on a lot — the bullets that go with the drawings.
+export const LOT_BULLETS = [
+  "In June the sun rises and sets behind the north wall — northeast and northwest.",
+  "In December it rises and sets well south of east and west, and tops out at 29°.",
+  "A north-facing rear yard spends most of the winter in its own house's shadow.",
+];
+
+export const SUN_TOOLS = [
+  "Sun Seeker or Sun Surveyor (phone): draws the sun's path over the camera view.",
+  "Compass and inclinometer apps: the direction and angle to any roofline or tree.",
+  "Google Earth: 3D buildings and a sun slider for any date.",
+  "A photo from the yard at noon near December 21 settles it.",
+];
+
 // ----------------------------------------------------------------- 6. Fog
 
 export const FOG_WHAT = [

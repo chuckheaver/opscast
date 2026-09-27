@@ -5308,6 +5308,55 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .mc-deck-p b span { font-size: 13px; font-weight: 600; color: var(--lp-muted); margin-left: 4px; }
 .mc-deck-p i { display: block; margin-top: 2px; font-style: normal; font-size: 13.5px; color: var(--lp-body); }
 
+/* Sun on the lot (sun.jsx). */
+.mc-h3 { margin-top: 34px; font-size: clamp(20px, 2.4vw, 24px); font-weight: 800; scroll-margin-top: 16px; }
+.sn-t { font-size: 11px; font-weight: 700; fill: #505050; }
+.sn-t-w { fill: #8A5F12; }
+.sn-t-b { font-size: 14px; fill: var(--lp-ink); }
+.sn-t-m { font-weight: 400; fill: #505050; }
+.sn-t-light { fill: var(--lp-ink); }
+.sn-lots { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.sn-row-h { font-size: 14px; color: var(--lp-body); margin-bottom: 8px; }
+.sn-row-h b { color: var(--lp-ink); }
+.sn-row-h span { display: block; font-size: 12px; color: var(--lp-muted); }
+.sn-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sn-col-h { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lp-muted); margin-bottom: 6px; }
+.sn-lot b { display: block; margin-top: 6px; font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 800; color: var(--lp-navy-2); }
+.sn-lot b span { display: block; font-family: 'Lato', sans-serif; font-size: 12px; font-weight: 400; color: var(--lp-muted); }
+.sn-key i { width: 16px; }
+
+.sn-slopes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.sn-slope > b { display: block; margin-top: 8px; font-size: 14.5px; font-weight: 800; color: var(--lp-ink); }
+.sn-slope-v { display: block; font-size: 13px; color: var(--lp-body); }
+.sn-slope-v b { color: var(--lp-ink); }
+.sn-slope-g { display: inline-block; margin-top: 4px; font-size: 12.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: #ECEEF0; color: var(--lp-body); }
+.sn-slope-g.up { background: #E3EFE6; color: #1F6B45; }
+.sn-slope-g.down { background: #F4E4E4; color: #A3282B; }
+
+.sn-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.sn-rule > b { display: block; margin-top: 8px; font-size: 15px; font-weight: 800; color: var(--lp-ink); }
+.sn-rule > span { display: block; margin-top: 2px; font-size: 14px; line-height: 1.5; color: var(--lp-body); }
+.sn-rule > i { display: block; margin-top: 4px; font-style: normal; font-size: 13px; color: var(--lp-muted); }
+
+.sn-sky { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 22px; align-items: center; }
+.sn-sky-svg { max-width: 460px; }
+.sn-sky-stats { display: grid; gap: 14px; }
+.sn-sky-row { display: flex; gap: 10px; align-items: flex-start; }
+.sn-sky-row > i { flex: none; width: 14px; height: 14px; border-radius: 4px; margin-top: 3px; }
+.sn-sky-row b { display: block; font-size: 15px; font-weight: 800; color: var(--lp-ink); }
+.sn-sky-row span { display: block; font-size: 13.5px; color: var(--lp-body); }
+.sn-sky-row em { font-style: normal; font-weight: 800; color: var(--lp-ink); }
+.sn-bar { display: block; width: 220px; max-width: 100%; height: 8px; margin-top: 6px; border-radius: 4px; background: #E4E7EA; overflow: hidden; }
+.sn-bar span { display: block; height: 100%; border-radius: 4px; }
+
+.mc-callout-sun {
+  margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
+  background: #fff; border: 1px solid var(--lp-line); border-left: 5px solid #E8B84B; border-radius: 14px; padding: 16px 18px;
+}
+.mc-callout-sun b { display: block; font-size: 15px; font-weight: 800; color: var(--lp-ink); }
+.mc-callout-sun span { display: block; margin-top: 2px; font-size: 14px; color: var(--lp-body); max-width: 52ch; }
+.mc-callout-sun .mc-btns { margin-top: 0; }
+
 /* Köppen scorecard. */
 .mc-tests { background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; overflow: hidden; }
 .mc-test {
@@ -5415,6 +5464,12 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 @media (max-width: 720px) {
   .mc-letters, .mc-engine, .mc-cards-2, .mc-price { grid-template-columns: 1fr; }
   .mc-tiles { gap: 8px; }
+  .sn-lots, .sn-rules, .sn-sky { grid-template-columns: 1fr; }
+  .sn-slopes { gap: 8px; }
+  .sn-slope > b { font-size: 12.5px; }
+  .sn-slope-v { font-size: 11.5px; }
+  .sn-slope-g { font-size: 11px; padding: 2px 6px; }
+  .sn-sky-svg { margin: 0 auto; }
   .mc-test-head { display: none; }
   .mc-test { grid-template-columns: 30px 1fr 28px; row-gap: 2px; }
   .mc-test-l { grid-row: span 2; }

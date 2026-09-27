@@ -14,10 +14,11 @@ import {
   BarRows, KoppenTests, OceanSection, CityProfile, SunAngle, FogClock, DeckHeights, TempChart, RainChart,
   ClimateTable, ClimateExtremes,
 } from "./charts";
+import { LotPlan, NeighborShadow, SlopeCompare, FieldRules, SkyChart } from "./sun";
 import {
   LEDE, KOPPEN, LATITUDE, ENGINE, ENGINE_BULLETS,
   BAY_ZONES, BAY_BULLETS, BAY_NOTE, BELTS_LEAD, BELTS, FOG_HOURS, FOG_HOURS_NOTE,
-  BLOCK, FOG_WHAT, DECK, FOG_TOPO, YEAR_BULLETS, DISCLAIMER,
+  BLOCK, LOT_BULLETS, SUN_TOOLS, FOG_WHAT, DECK, FOG_TOPO, YEAR_BULLETS, DISCLAIMER,
 } from "./content";
 
 export const metadata = {
@@ -212,11 +213,27 @@ export default function Page() {
         {/* 5 — Your block */}
         <section className="pt-sec" id="block">
           <h2>Block by Block</h2>
-          <SunAngle />
           <Cards items={BLOCK} />
-          <div className="mc-btns">
-            <Link className="lp-btn lp-btn-navy" href="/fog?preset=fog">Open the map</Link>
-            <Link className="lp-btn mc-btn-line" href="/microclimates/zones?layer=solar">Sun &amp; wind zones</Link>
+
+          <h3 className="mc-h3" id="sun">Sun on the Lot</h3>
+          <SunAngle />
+          <LotPlan />
+          <Bullets items={LOT_BULLETS} />
+          <NeighborShadow />
+          <SlopeCompare />
+          <FieldRules />
+          <Bullets items={SUN_TOOLS} />
+          <SkyChart />
+
+          <div className="mc-callout-sun">
+            <div>
+              <b>On the map</b>
+              <span>The sun layers show which slopes collect more or less sun than flat ground — summer, winter and equinox.</span>
+            </div>
+            <div className="mc-btns">
+              <Link className="lp-btn lp-btn-navy" href="/microclimates/zones?layer=solar">Sun &amp; wind zones</Link>
+              <Link className="lp-btn mc-btn-line" href="/fog?preset=fog">Open the map</Link>
+            </div>
           </div>
         </section>
 
