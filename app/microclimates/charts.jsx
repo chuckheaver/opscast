@@ -66,35 +66,33 @@ export function BarRows({ rows, max, unit = "", head, max2, unit2 = "", head2, c
 
 // ------------------------------------------------- December vs July, and rain
 
-// One row per place: a December–July line on a shared °F scale with both
-// numbers printed, then annual rain as its own bar on its own scale.
-// Temperature and rain never share an axis.
-const T0 = 45, T1 = 95;
-const tpos = f => ((f - T0) / (T1 - T0)) * 100;
-
-export function SeasonRows({ rows, rainMax = 48, caption }) {
+// One bar per place, like the rain bars: blue from zero to the December
+// high, then yellow for the extra degrees July adds on top. The bar's full
+// length is the July high. Rain is a separate bar on its own scale.
+export function SeasonRows({ rows, tempMax = 95, rainMax = 48, caption }) {
   return (
     <figure className="mc-fig mc-bars mc-bars-2 mc-season">
       <div className="mc-bars-row mc-bars-head" aria-hidden="true">
         <span />
         <span className="mc-season-h">
           Avg high
-          <em><i style={{ background: C.cool }} />Dec</em>
-          <em><i style={{ background: C.warm }} />Jul</em>
+          <em><i style={{ background: "#4E7398" }} />Dec</em>
+          <em><i style={{ background: "#E8B84B" }} />up to Jul</em>
         </span>
         <span>Rain a year</span>
       </div>
       <ul className="mc-bars-list">
         {rows.map(r => (
           <li key={r.k} className={`mc-bars-row${r.hi ? " is-hi" : ""}`}
-              title={`${r.k}: December ${r.dec}°, July ${r.jul}°, ${r.rain}" of rain a year`}>
+              title={`${r.k}: December ${r.dec}°, July ${r.jul}° (+${r.jul - r.dec}°), ${r.rain}" of rain a year`}>
             <span className="mc-bars-k">{r.k}{r.eg && <em>{r.eg}</em>}</span>
-            <span className="mc-season-track" role="img" aria-label={`December ${r.dec} degrees, July ${r.jul} degrees`}>
-              <span className="mc-season-line" style={{ left: `${tpos(r.dec)}%`, width: `${tpos(r.jul) - tpos(r.dec)}%` }} />
-              <span className="mc-season-dot" style={{ left: `${tpos(r.dec)}%`, background: C.cool }} />
-              <span className="mc-season-dot" style={{ left: `${tpos(r.jul)}%`, background: C.warm }} />
-              <b className="mc-season-v mc-season-dec" style={{ left: `${tpos(r.dec)}%` }}>{r.dec}°</b>
-              <b className="mc-season-v mc-season-jul" style={{ left: `${tpos(r.jul)}%` }}>{r.jul}°</b>
+            <span className="mc-bars-track mc-stack" style={{ "--p": r.jul / tempMax }}
+                  role="img" aria-label={`December ${r.dec} degrees, July ${r.jul} degrees`}>
+              <i>
+                <span className="mc-stack-dec" style={{ width: `${(r.dec / r.jul) * 100}%` }}>{r.dec}°</span>
+                <span className="mc-stack-jul" />
+              </i>
+              <b>{r.jul}°</b>
             </span>
             <span className="mc-bars-track" style={{ "--p": r.rain / rainMax }}>
               <i /><b>{r.rain}&Prime;</b>
