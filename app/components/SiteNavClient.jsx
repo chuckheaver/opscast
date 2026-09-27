@@ -139,7 +139,6 @@ export default function SiteNavClient({ hoods, guide, bare }) {
                 ))}
                 <div className="nv-panel-foot">
                   <a href="/reports/sf-market-briefing.pdf" download>Download the PDF</a>
-                  <Link href="/market" onClick={closeAll}>Market data explorer</Link>
                 </div>
               </div>
             </li>
