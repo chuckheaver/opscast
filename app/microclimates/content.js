@@ -74,10 +74,11 @@ export const BAY_MAP = [
   { key: "bayshore", name: "The Bayshore", jul: 76, eg: "Berkeley · Oakland · San Mateo · Burlingame", p: "Marine air softened by the crossing. The region's mildest strip." },
   { key: "ridges", name: "The Redwood Ridges", jul: 78, eg: "Skyline · Kings Mountain · La Honda", p: "The Santa Cruz Mountains crest. Fog-catching redwoods, up to 45 inches of rain." },
   { key: "hills", name: "The Hills", jul: 80, eg: "Berkeley & Oakland hills · 500–800 ft", p: "Overlooking Berkeley and Oakland, above much of the marine layer. Warmer, more sun, less fog." },
-  { key: "gap", name: "The Wind Gap", jul: 81, eg: "Petaluma · Sears Point", p: "A low break in the Coast Range. One of the windiest corridors in California." },
+  { key: "gap", name: "The Wind Tunnel", jul: 81, eg: "Petaluma · Sears Point", p: "A low break in the Coast Range. One of the windiest corridors in California." },
   { key: "tam", name: "Tam's Shadow", jul: 82, eg: "San Rafael · Mill Valley · Novato", p: "Mount Tamalpais blocks the direct marine push." },
   { key: "sunbowl", name: "The Sun Bowl", jul: 84, eg: "Redwood City · Palo Alto · San Jose · Los Gatos", p: "Far from every gap and in the mountains' rain shadow. Driest and sunniest." },
-  { key: "vines", name: "Wine Country", jul: 88, eg: "Santa Rosa · Sonoma · Napa · Calistoga", p: "Hot afternoons, fog-cooled nights — the swing that grows the grapes." },
+  { key: "delta", name: "The Delta Breeze", jul: 86, eg: "Benicia · Martinez · Pittsburg · Antioch", p: "Where the Bay narrows into the Delta. Hot afternoons, then an evening breeze through the Carquinez Strait cools the whole inland valley." },
+  { key: "vines", name: "Wine Country", jul: 88, eg: "Santa Rosa · Sonoma · Napa · Calistoga", p: "Hot afternoons, fog-cooled nights — the swing that grows the grapes.", link: { href: "/wine", label: "Wine AVA map" } },
   { key: "tunnel", name: "Over the Hills", jul: 91, eg: "Walnut Creek · Concord · Livermore · Fairfield", p: "East of the Berkeley–Oakland hills: 90°F+ afternoons, cooled at night by the Delta breeze." },
 ];
 

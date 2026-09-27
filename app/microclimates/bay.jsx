@@ -1,4 +1,4 @@
-// The Bay Area as ten named microclimates, and the city's fog map.
+// The Bay Area as eleven named microclimates, and the city's fog map.
 //
 // Shoreline and zone shapes come from scripts/build-bay-map.mjs (real 1 km
 // coastline, generalized hand-drawn zones clipped to it). Zones are coloured
@@ -9,8 +9,8 @@ import Link from "next/link";
 import GEO from "./bay-zones.json";
 import { BAY_MAP } from "./content";
 
-// Ten steps, blue through a neutral to amber, ordered by July high.
-const HEAT = ["#4E7398", "#7292AF", "#9CB3C6", "#C5D2DB", "#D8C9A0", "#E6DCC4", "#E8C987", "#DDAE5B", "#CC913A", "#BA7D2C"];
+// Eleven steps, blue through a neutral to amber, ordered by July high.
+const HEAT = ["#4E7398", "#7292AF", "#9CB3C6", "#C5D2DB", "#D8C9A0", "#E6DCC4", "#E8C987", "#DDAE5B", "#D5A04A", "#CC913A", "#BA7D2C"];
 const LAND = "#F5F1E6", WATER = "#BCD3E1", COAST = "#6F93AB";
 const ALPHA = 0.6;                                  // how much of the base map shows through
 
@@ -28,17 +28,24 @@ export function BayMap() {
   const paint = Object.keys(GEO.zones).map(k => zones.find(z => z.key === k)).filter(Boolean);
   return (
     <figure className="mc-fig">
-      <p className="mc-fig-h">The Bay Area&rsquo;s ten microclimates</p>
+      <p className="mc-fig-h">The Bay Area&rsquo;s eleven microclimates</p>
       <div className="bm">
         <div className="bm-map">
           <svg viewBox={`0 0 ${GEO.W} ${GEO.H}`} className="mc-svg" role="img"
-            aria-label={"Map of the Bay Area divided into ten microclimates, coolest to warmest: " +
+            aria-label={"Map of the Bay Area divided into eleven microclimates, coolest to warmest: " +
               zones.map(z => `${z.name}, July high about ${z.jul} degrees`).join("; ") + "."}>
             <defs>
               <clipPath id="bm-land"><path d={GEO.land} /></clipPath>
               <filter id="bm-soft" x="-5%" y="-5%" width="110%" height="110%">
                 <feGaussianBlur stdDeviation="7" />
               </filter>
+              <marker id="bm-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="#2F6F73" />
+              </marker>
+              {/* wind streaks — the Delta Breeze zone's texture */}
+              <pattern id="bm-wind" width="26" height="12" patternUnits="userSpaceOnUse">
+                <path d="M1,6 C7,2 13,10 25,6" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" />
+              </pattern>
               <filter id="bm-shore" x="-5%" y="-5%" width="110%" height="110%">
                 <feGaussianBlur stdDeviation="6" />
               </filter>
@@ -54,8 +61,18 @@ export function BayMap() {
                 {paint.map(z => <path key={z.key} d={GEO.zones[z.key].d} fill={z.fill} />)}
               </g>
             </g>
+            <g clipPath="url(#bm-land)">
+              <path d={GEO.zones.delta.d} fill="url(#bm-wind)" opacity="0.85" />
+            </g>
             <path d={GEO.land} fill="none" stroke={COAST} strokeWidth="1.3" strokeLinejoin="round" />
 
+            {/* the Delta breeze, drawn as the wind it is */}
+            {GEO.breeze.map((l, i) => (
+              <g key={i}>
+                <path d={`M${l[0][0]},${l[0][1]} L${l[1][0]},${l[1][1]}`} className="bm-breeze-halo" />
+                <path d={`M${l[0][0]},${l[0][1]} L${l[1][0]},${l[1][1]}`} className="bm-breeze" markerEnd="url(#bm-arrow)" />
+              </g>
+            ))}
             {GEO.water.map(w => <text key={w.k} x={w.x} y={w.y} textAnchor="middle" className="bm-water">{w.k}</text>)}
             {GEO.peaks.map(p => (
               <g key={p.k} className="bm-peak">
@@ -92,6 +109,7 @@ export function BayMap() {
                 <b>{z.name} <em>{z.jul}°F</em></b>
                 <span>{z.p}</span>
                 <i>{z.eg}</i>
+                {z.link && <Link className="bm-link" href={z.link.href}>{z.link.label} &rarr;</Link>}
               </div>
             </li>
           ))}

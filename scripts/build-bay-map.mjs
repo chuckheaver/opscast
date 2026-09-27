@@ -1,4 +1,4 @@
-// Builds app/microclimates/bay-zones.json: the Bay Area shoreline and ten
+// Builds app/microclimates/bay-zones.json: the Bay Area shoreline and eleven
 // named microclimate zones, projected to SVG path data for BayMap.
 //
 //   npm i --no-save polygon-clipping @geo-maps/earth-lands-1km
@@ -33,6 +33,10 @@ const ZONES = {
   vines: [[-123.00, 38.42], [-122.90, 38.27], [-122.80, 38.33], [-122.68, 38.34], [-122.55, 38.29],
           [-122.42, 38.21], [-122.33, 38.14], [-122.20, 38.16], [-122.12, 38.30], [-122.20, 38.52],
           [-122.35, 38.72], [-122.72, 38.76], [-123.08, 38.56]],
+  // The shoreline where the Bay narrows through the Carquinez Strait into
+  // Suisun Bay and the Delta — the path the evening breeze takes inland.
+  delta: [[-122.27, 38.07], [-122.20, 38.13], [-122.05, 38.17], [-121.85, 38.15], [-121.50, 38.12],
+          [-121.50, 37.96], [-121.80, 37.97], [-121.95, 37.99], [-122.10, 37.98], [-122.22, 38.01]],
   bayshore: [[-122.43, 37.71], [-122.38, 37.66], [-122.40, 37.62], [-122.32, 37.50], [-122.31, 37.52],
              [-122.20, 37.57], [-122.10, 37.55], [-121.96, 37.50], [-121.93, 37.52], [-122.05, 37.62],
              [-122.13, 37.72], [-122.22, 37.82], [-122.26, 37.90], [-122.24, 38.04], [-122.30, 38.07], [-122.43, 37.97],
@@ -136,7 +140,7 @@ const anchor = mp => {
 const LABELS = {
   coast: [-122.93, 38.06], city: [-122.45, 37.765], bayshore: [-122.19, 37.70], ridges: [-122.16, 37.21], hills: [-122.215, 37.885],
   gap: [-122.82, 38.20], tam: [-122.60, 38.03], sunbowl: [-121.85, 37.28], vines: [-122.47, 38.53],
-  tunnel: [-121.74, 37.98],
+  tunnel: [-121.74, 37.79], delta: [-121.80, 38.005],
 };
 
 const PLACES = [
@@ -176,6 +180,12 @@ const WATER = [
   ["Pacific Ocean", -122.93, 37.40], ["San Francisco Bay", -122.28, 37.63], ["San Pablo Bay", -122.40, 38.055],
 ].map(([k, lon, lat]) => ({ k, x: Math.round(X(lon)), y: Math.round(Y(lat)) }));
 
+// The breeze itself: west-to-east through the Strait and across Suisun Bay.
+const BREEZE = [
+  [[-122.25, 38.055], [-122.12, 38.045]],
+  [[-122.03, 38.075], [-121.90, 38.06]],
+].map(line => line.map(([lon, lat]) => [Math.round(X(lon)), Math.round(Y(lat))]));
+
 const out = {
   W, H,
   source: "Shoreline: geo-maps earth-lands 1 km (MIT). Zones: generalized, hand-drawn, smoothed.",
@@ -187,6 +197,7 @@ const out = {
   places: PLACES,
   peaks: PEAKS,
   water: WATER,
+  breeze: BREEZE,
 };
 writeFileSync(new URL("../app/microclimates/bay-zones.json", import.meta.url), JSON.stringify(out));
 console.log(`wrote bay-zones.json  ${W}×${H}  ${(JSON.stringify(out).length / 1024).toFixed(0)} KB`,
