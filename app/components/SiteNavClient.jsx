@@ -17,8 +17,14 @@ const MICRO = [
   { href: "/microclimates#fog", label: "Fog Map", sub: "How fog forms and moves" },
 ];
 
+const MARKET = [
+  { href: "/market/report#sf", label: "SF Market", sub: "Prices, pace, cash vs financed, inventory" },
+  { href: "/market/report#neighborhoods", label: "SF Neighborhoods", sub: "Every sale by neighborhood and fog zone" },
+  { href: "/market/report#national", label: "National Mkts", sub: "Rates, Treasuries, inflation, jobs" },
+];
+
 export default function SiteNavClient({ hoods, guide, bare }) {
-  const [open, setOpen] = useState(null);          // "micro" | "hoods" | "guide" | null
+  const [open, setOpen] = useState(null);          // "micro" | "hoods" | "guide" | "market" | null
   const [mobile, setMobile] = useState(false);     // phone panel
   const ref = useRef(null);
   const path = usePathname();
@@ -121,7 +127,22 @@ export default function SiteNavClient({ hoods, guide, bare }) {
                 </div>
               </div>
             </li>
-            <li><Link href="/market" className="nv-link" onClick={closeAll}>Market</Link></li>
+            <li className={`nv-dd${open === "market" ? " is-open" : ""}`} {...hover("market")}>
+              <button type="button" className="nv-link nv-dd-btn" aria-expanded={open === "market"} onClick={toggle("market")}>
+                Market <span className="nv-caret" aria-hidden="true">▾</span>
+              </button>
+              <div className="nv-panel nv-panel-micro nv-panel-right">
+                {MARKET.map(m => (
+                  <Link key={m.href} href={m.href} className="nv-item" onClick={closeAll}>
+                    <b>{m.label}</b><span>{m.sub}</span>
+                  </Link>
+                ))}
+                <div className="nv-panel-foot">
+                  <a href="/reports/sf-market-briefing.pdf" download>Download the PDF</a>
+                  <Link href="/market" onClick={closeAll}>Market data explorer</Link>
+                </div>
+              </div>
+            </li>
             <li><a href={`mailto:${EMAIL}`} className="nv-cta">Work With Me</a></li>
           </ul>
         </nav>

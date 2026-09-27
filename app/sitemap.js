@@ -16,6 +16,7 @@ export default function sitemap() {
     { url: "/neighborhoods", changeFrequency: "weekly", priority: 0.9 },
     { url: "/property-types", changeFrequency: "monthly", priority: 0.85 },
     { url: "/fog", changeFrequency: "weekly", priority: 0.8 },
+    { url: "/market/report", changeFrequency: "monthly", priority: 0.85 },
     { url: "/market", changeFrequency: "weekly", priority: 0.8 },
     { url: "/microclimates", changeFrequency: "monthly", priority: 0.85 },
     { url: "/microclimates/zones", changeFrequency: "monthly", priority: 0.6 },

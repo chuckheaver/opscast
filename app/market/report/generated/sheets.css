@@ -1,0 +1,98 @@
+.sheetA { margin:0; font-family: Helvetica, Arial, sans-serif; color:#1c1917; }
+.sheetA .page { width:10.3in; height:7.6in; page-break-after:always; position:relative; box-sizing:border-box; background:#fff; }
+.sheetA .mast { border-bottom:3px solid #C9A227; padding-bottom:4px; margin-bottom:5px; display:flex; justify-content:space-between; align-items:flex-end; }
+.sheetA .mast .t { font-size:24px; font-weight:800; color:#042C53; letter-spacing:-0.5px; }
+.sheetA .mast .p { font-size:11.5px; color:#042C53; margin-top:2px; }
+.sheetA .mast .p b { color:#854F0B; }
+.sheetA .mast .by { font-size:9px; color:#6b6560; text-align:right; line-height:1.5; }
+.sheetA .kpis { display:flex; gap:8px; margin-bottom:7px; }
+.sheetA .kpi { flex:1; min-width:0; background:#E6F1FB; border-radius:8px; padding:10px 8px 11px; border-left:5px solid #C9A227; text-align:center; display:flex; flex-direction:column; justify-content:space-between; height:62px; }
+.sheetA .kl { font-size:8.6px; color:#1c1917; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sheetA .kv { font-family:Georgia,'Bitstream Charter','Liberation Serif',serif; font-size:22px; font-weight:700; letter-spacing:-0.6px; line-height:1; margin:0; color:#042C53; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.sheetA .ks { font-size:9.6px; font-weight:700; line-height:1; white-space:nowrap; }
+.sheetA .cols { display:flex; gap:12px; }
+.sheetA .col { flex:1; min-width:0; }
+.sheetA h2.band { font-size:12.5px; margin-bottom:5px; }
+.sheetA h2 { font-size:12px; font-weight:800; color:#fff; background:#042C53; padding:3px 8px; border-radius:4px; margin:0 0 5px; letter-spacing:0.3px; }
+.sheetA ul { margin:0 0 7px; padding-left:0; list-style:none; }
+.sheetA li { font-size:10px; line-height:1.35; margin:0 0 6px; padding-left:11px; position:relative; color:#1c1917; }
+.sheetA li:before { content:''; position:absolute; left:0; top:4.5px; width:5px; height:5px; border-radius:50%; background:#042C53; }
+.sheetA .st { color:#042C53; font-weight:800; }
+.sheetA .hl li { padding-left:0; }
+.sheetA .hl li:before { display:none; }
+.sheetA .tag { display:inline-block; font-size:7.6px; font-weight:800; color:#fff; background:#042C53; padding:1px 5px; border-radius:3px; margin-right:5px; vertical-align:1px; letter-spacing:0.3px; }
+.sheetA .tag.y { background:#854F0B; }
+.sheetA .charts { display:flex; gap:12px; margin-top:4px; border-top:1.5px solid #C9A227; padding-top:6px; }
+.sheetA .cap { font-size:8.4px; line-height:1.3; margin-top:1px; }
+.sheetA .src { font-size:7.2px; color:#6b6560; }
+.sheetA .charts .ch { flex:1; min-width:0; }
+.sheetA .charts .cap { font-size:9.6px; line-height:1.4; margin-top:-2px; }
+.sheetA .charts .src { font-size:7.4px; color:#6b6560; }
+.sheetA table.top { border-collapse:collapse; width:100%; font-size:8.6px; margin-bottom:6px; }
+.sheetA table.top th { background:#042C53; color:#fff; font-size:6.9px; text-transform:uppercase; padding:2px 4px; text-align:right; }
+.sheetA table.top th.l, .sheetA table.top td.l { text-align:left; }
+.sheetA table.top td { padding:1.9px 4px; text-align:right; border-bottom:0.4px solid #ddd8d0; white-space:nowrap; overflow:hidden; }
+.sheetA table.top tr:nth-child(even) td { background:#faf9f7; }
+.sheetA table.top td.b { font-weight:800; color:#042C53; }
+.sheetA .mapwrap { border:1px solid #ddd8d0; border-radius:6px; overflow:hidden; line-height:0; }
+.sheetA .maplegend { display:flex; align-items:center; flex-wrap:nowrap; gap:7px; font-size:7.6px; white-space:nowrap; color:#1c1917; margin:4px 0 2px; }
+.sheetA .maplegend b { color:#042C53; }
+.sheetA .dotkey { display:inline-block; width:7px; height:7px; border-radius:50%; background:#12379E; margin-right:3px; }
+.sheetA .zk { display:inline-flex; align-items:center; gap:3px; }
+.sheetA .zc { display:inline-block; width:9px; height:9px; border-radius:2px; border:0.5px solid #a8a29e; }
+.sheetA .mapcap { font-size:8.4px; color:#6b6560; margin:3px 0 6px; line-height:1.35; }
+.sheetA .pull { margin-top:8px; border-left:5px solid #C9A227; background:#E6F1FB; border-radius:7px; padding:11px 14px; }
+.sheetA .pq { font-family:Georgia,'Bitstream Charter','Liberation Serif',serif; font-size:17px; font-weight:700; color:#042C53; line-height:1.25; letter-spacing:-0.3px; }
+.sheetA .pqs { font-size:10px; color:#1c1917; margin-top:5px; }
+.sheetA .sig { background:#FAEEDA; border-left:3px solid #C9A227; border-radius:6px; padding:8px 11px; font-size:10px; line-height:1.45; }
+.sheetA .sig b { color:#854F0B; }
+.sheetA table.linv { border-collapse:collapse; width:100%; font-size:8.2px; table-layout:fixed; }
+.sheetA table.linv th, .sheetA table.linv td { padding:2.1px 3px; text-align:right; white-space:nowrap; }
+.sheetA table.linv thead tr.g th { background:#042C53; color:#fff; font-size:7.6px; text-transform:uppercase; letter-spacing:0.2px; text-align:center; padding:3px; border-left:2px solid #fff; }
+.sheetA table.linv thead tr.g th.l { text-align:left; border-left:none; }
+.sheetA table.linv thead tr.sub th { background:#E6F1FB; color:#042C53; font-size:7px; font-weight:700; border-bottom:1.5px solid #042C53; }
+.sheetA table.linv td.l, .sheetA table.linv tfoot td.l { text-align:left; font-weight:600; overflow:hidden; text-overflow:ellipsis; }
+.sheetA table.linv tbody td { border-bottom:0.4px solid #ddd8d0; }
+.sheetA table.linv tbody tr:nth-child(even) td { background:#faf9f7; }
+.sheetA table.linv td.b { font-weight:800; color:#042C53; }
+.sheetA table.linv td.g0, .sheetA table.linv th.g0 { border-left:1.5px solid #cfc9c0; }
+.sheetA table.linv tfoot td { background:#FAEEDA; font-weight:800; border-top:2px solid #C9A227; border-bottom:2px solid #C9A227; }
+.sheetA td.bar { text-align:left; }
+.sheetA .db { display:inline-block; width:46px; height:7px; background:#e7e3dc; border-radius:2px; vertical-align:-1px; overflow:hidden; }
+.sheetA .dbf { display:block; height:7px; border-radius:2px; }
+.sheetA .dbv { margin-left:4px; font-weight:700; }
+.sheetA .foot { position:absolute; bottom:0; left:0; right:0; font-size:7px; color:#6b6560; border-top:0.5px solid #ddd8d0; padding-top:3px; display:flex; justify-content:space-between; }
+.sheetB { margin:0; font-family: Helvetica, Arial, sans-serif; color:#1c1917; }
+.sheetB .page { width: 10.3in; height: 7.6in; page-break-after: always; position: relative; background:#fff; box-sizing: border-box; }
+.sheetB .hdr { display:flex; align-items:flex-end; justify-content:space-between; border-bottom: 3px solid #C9A227; padding-bottom:4px; margin-bottom:4px; }
+.sheetB .hdr .t { font-size:19px; font-weight:800; color:#042C53; letter-spacing:-0.3px; }
+.sheetB .hdr .p { font-size:10.5px; color:#042C53; margin-top:3px; }
+.sheetB .hdr .p b { color:#854F0B; }
+.sheetB .hdr .s { font-size:8.5px; color:#6b6560; margin-top:2px; }
+.sheetB .hdr .seg { font-size:12.5px; font-weight:800; color:#854F0B; background:#FAEEDA; padding:5px 12px; border-radius:6px; white-space:nowrap; }
+.sheetB table { border-collapse:collapse; width:100%; font-size:7.3px; table-layout:fixed; }
+.sheetB th, .sheetB td { padding: 1.1px 1.5px; text-align:right; white-space:nowrap; overflow:hidden; }
+.sheetB col.nm { width:13.4%; }
+.sheetB thead tr.g th { background:#042C53; color:#fff; font-size:7.2px; letter-spacing:0.2px; text-transform:uppercase; border-left:2px solid #fff; text-align:center; padding:3px 2px; }
+.sheetB thead tr.g th.name { text-align:left; border-left:none; }
+.sheetB thead tr.g th u { display:block; font-size:6.6px; font-weight:400; letter-spacing:0; text-transform:none; opacity:0.75; text-decoration:none; }
+.sheetB thead tr.sub th { background:#E6F1FB; color:#042C53; font-size:6.6px; border-bottom:1.5px solid #042C53; font-weight:700; }
+.sheetB thead tr.sub th.ytd { color:#854F0B; }
+.sheetB tbody td.name, .sheetB tfoot td.name { text-align:left; font-weight:600; overflow:hidden; text-overflow:ellipsis; }
+.sheetB tbody tr:nth-child(even) td { background:#faf9f7; }
+.sheetB tbody td { border-bottom:0.4px solid #ddd8d0; }
+.sheetB td.g0, .sheetB th.g0 { border-left:2px solid #cfc9c0; }
+.sheetB td.g2 { border-left:0.8px dotted #cfc9c0; }
+.sheetB td.cur { font-weight:700; }
+.sheetB td.pri { color:#6b6560; }
+.sheetB tfoot td { background:#FAEEDA; color:#1c1917; font-weight:800; border-top:2px solid #C9A227; border-bottom:2px solid #C9A227; font-size:7.6px; }
+.sheetB .zh { font-size:10px; font-weight:800; color:#042C53; margin:5px 0 2px; }
+.sheetB .zh span { font-weight:400; font-size:8px; color:#6b6560; }
+.sheetB table.zone tbody td { background:#fbfaf8; font-size:7.8px; padding:2.2px 1.5px; }
+.sheetB table.zone tbody tr:last-child td { border-bottom:0.4px solid #ddd8d0; }
+.sheetB table.zone tfoot td { font-size:7.8px; padding:2.2px 1.5px; }
+.sheetB table.zone tbody td.name { font-weight:700; }
+.sheetB .chip { display:inline-block; width:9px; height:9px; border-radius:2px; border:0.5px solid #a8a29e; margin-right:4px; vertical-align:-1px; }
+.sheetB .rng { color:#6b6560; font-weight:400; font-size:7.4px; }
+.sheetB .legend { font-size:7.2px; color:#6b6560; margin-top:4px; line-height:1.35; }
+.sheetB .foot { position:absolute; bottom:0; left:0; right:0; font-size:7.2px; color:#6b6560; border-top:0.5px solid #ddd8d0; padding-top:3px; display:flex; justify-content:space-between; }

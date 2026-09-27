@@ -1,0 +1,25 @@
+{
+  "period": "Jan 1 \u2013 Aug 31, 2026",
+  "run": "Sep 14, 2026",
+  "pages": {
+    "sf": [
+      "San Francisco Right Now",
+      "Where the Money Came From",
+      "Who Is Buying",
+      "In Depth",
+      "Latent Inventory"
+    ],
+    "hoods": [
+      "The Neighborhoods",
+      "Grid \u2014 Single Family",
+      "Grid \u2014 Condo / TIC / Co-op"
+    ],
+    "national": [
+      "The National Picture"
+    ]
+  },
+  "links": {
+    "areas": 120,
+    "sales": 9
+  }
+}
