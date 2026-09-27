@@ -682,6 +682,19 @@ def build():
     table.linv tbody tr:nth-child(even) td {{ background:#faf9f7; }}
     table.linv td.b {{ font-weight:800; color:{NAV}; }}
     table.linv td.g0, table.linv th.g0 {{ border-left:1.5px solid #cfc9c0; }}
+    .lkpi {{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:6px 0 8px; }}
+    .lkpi div {{ background:{NAV_LT}; border-left:3px solid {GOLD_MID}; border-radius:4px; padding:5px 8px; }}
+    .lkpi b {{ display:block; font-size:17px; color:{NAV}; font-weight:800; }}
+    .lkpi span {{ font-size:8px; color:{MUTED}; }}
+    table.lsfh {{ font-size:8.4px; }}
+    table.lsfh thead tr.g th {{ text-align:left; }}
+    table.lsfh td.bar {{ text-align:left; }}
+    table.lsfh td.one {{ color:{MUTED}; }}
+    .lh, .lt {{ display:inline-block; vertical-align:middle; height:7px; border-radius:2px; background:#eceae6; }}
+    .lh {{ width:150px; }} .lt {{ width:120px; }}
+    .lhf, .ltf {{ display:block; height:7px; border-radius:2px; }}
+    .lhf {{ background:#b9c7d8; }} .ltf {{ background:{NAV}; }} .ltf.thin {{ background:#9aa6b6; }}
+    .lhv, .ltv {{ display:inline-block; margin-left:5px; vertical-align:middle; font-weight:700; color:{INK}; }}
     table.linv tfoot td {{ background:{GOLD_LT}; font-weight:800; border-top:2px solid {GOLD_MID}; border-bottom:2px solid {GOLD_MID}; }}
     td.bar {{ text-align:left; }}
     .db {{ display:inline-block; width:46px; height:7px; background:#e7e3dc; border-radius:2px; vertical-align:-1px; overflow:hidden; }}
@@ -980,49 +993,67 @@ def build():
       <div class='cap'>Grey bars after week {wcut} show where last year kept going — its busiest stretch was early October, which is what a full autumn looks like.</div></div>""")
     o.append(f"<div class='foot'><span>Rents from Zumper median 1BR, San Francisco. Equity and tender figures from CNBC, Bloomberg, PitchBook and Motley Fool reporting. Commentary is interpretation, not a forecast.</span><span>page 6 / 9</span></div></div>")
 
-    # ── PAGE 7 — latent inventory ────────────────────────────────────────
+    # ── PAGE 7 — latent inventory (single-family only) ───────────────────
+    # Only houses give a true turnover rate: one parcel is one house is one
+    # possible sale. Condo sales are units while multi-unit parcels are
+    # buildings, so mixing them compares different things — left out.
     linv,lskip=latent_inventory((W["m1"][0][:4]+"-01-01",W["m1"][1]))
-    T=lambda k: sum(r[k] for r in linv)
-    tmax=max(r["turn"] or 0 for r in linv)
-    def bar(v,mx,col):
+    MIN_SHOW, MIN_SOLID = 50, 250            # houses: to list at all / to trust the rate
+    shown=[r for r in linv if r["u1"]>=MIN_SHOW]
+    hidden=[r for r in linv if r["u1"]<MIN_SHOW]
+    shown.sort(key=lambda r:-r["u1"])
+    T=lambda k,rows=linv: sum(r[k] for r in rows)
+    houses, sold_h = T("u1"), T("sfh")
+    rate=100*sold_h/houses
+    months=int(W["m1"][1][5:7])
+    pace=rate*12/months                      # the year-to-date rate, run to a full year
+    solid=[r for r in shown if r["u1"]>=MIN_SOLID and r["turn"] is not None]
+    tmax=max(r["turn"] for r in solid)
+    hmax=max(r["u1"] for r in shown)
+    def hbar(v):
+        return (f"<span class='lh'><span class='lhf' style='width:{max(2,round(150*v/hmax))}px'></span></span>"
+                f"<span class='lhv'>{v:,}</span>")
+    def tbar(r):
+        v=r["turn"]
         if v is None: return "—"
-        w_=max(2,round(46*v/mx))
-        return (f"<span class='db'><span class='dbf' style='width:{w_}px;background:{col}'></span></span>"
-                f"<span class='dbv'>{v:.1f}%</span>")
+        w_=max(2,round(120*min(v,tmax)/tmax))
+        thin=r["u1"]<MIN_SOLID
+        return (f"<span class='lt'><span class='ltf{' thin' if thin else ''}' style='width:{w_}px'></span></span>"
+                f"<span class='ltv'>{v:.1f}%{'*' if thin else ''}</span>")
     lrows="".join(
         f"<tr><td class='l'>{html.escape(r['area'])}</td>"
-        f"<td>{r['u1']:,}</td><td>{r['u2_4']:,}</td><td>{r['u5_9']:,}</td><td>{r['u10']:,}</td><td>{r['othr']:,}</td>"
-        f"<td class='b'>{r['total']:,}</td>"
-        f"<td class='g0'>{r['sfh']:,}</td><td>{r['co']:,}</td><td class='b'>{r['sold']:,}</td>"
-        f"<td class='g0 bar'>{bar(r['turn'],tmax,'#12379E')}</td></tr>"
-        for r in linv)
-    tt_sfh=100*T('sfh')/T('u1')
-    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>Latent Inventory — What Could Sell vs What Did</div>
-      <div class='p'>Every residential parcel in the city beside this year's closings. <b>{tt_sfh:.1f}%</b> of the city's single-family houses changed hands through {mname}.</div></div>
+        f"<td class='bar'>{hbar(r['u1'])}</td>"
+        f"<td class='b'>{r['sfh']:,}</td>"
+        f"<td class='bar g0'>{tbar(r)}</td>"
+        f"<td class='one'>{('1 in ' + format(round(100/r['turn']), ',')) if r['turn'] else '—'}</td></tr>"
+        for r in shown)
+    lo_r=min(solid,key=lambda r:r["turn"]); hi_r=max(solid,key=lambda r:r["turn"])
+    big=shown[0]
+    hidden_names=", ".join(html.escape(r["area"]) for r in sorted(hidden,key=lambda r:r["area"]))
+    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>Latent Inventory — Single-Family Houses</div>
+      <div class='p'>Every house in the city beside the ones that sold. <b>{rate:.1f}%</b> changed hands January through {mname} — about one house in {round(100/rate)}.</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>SF Land Use parcels · SFAR MLS closings</div></div>
-      <table class='linv'>
-        <colgroup><col style='width:16%'>{"<col>"*10}</colgroup>
+      <div class='lkpi'>
+        <div><b>{houses:,}</b><span>single-family houses in the city</span></div>
+        <div><b>{sold_h:,}</b><span>sold, Jan 1 – {thru}</span></div>
+        <div><b>{rate:.1f}%</b><span>of all houses traded so far this year</span></div>
+        <div><b>~{pace:.1f}%</b><span>a year at this pace — one house in {round(100/pace)}</span></div>
+      </div>
+      <table class='linv lsfh'>
+        <colgroup><col style='width:24%'><col style='width:27%'><col style='width:9%'><col style='width:26%'><col style='width:14%'></colgroup>
         <thead>
-          <tr class='g'><th class='l'>Neighborhood</th><th colspan='6'>Latent Inventory — parcels by size</th>
-            <th colspan='3' class='g0'>Sold, {W["m1"][0][:4]} YTD</th><th class='g0'>Houses traded</th></tr>
-          <tr class='sub'><th></th><th>1 Unit</th><th>2–4</th><th>5–9</th><th>10+</th><th>Other</th><th>Total</th>
-            <th class='g0'>SFH</th><th>Condo/Other</th><th>Total</th><th class='g0'>% of 1-unit stock</th></tr>
+          <tr class='g'><th class='l'>Neighborhood</th><th>Houses — the latent inventory</th><th>Sold YTD</th>
+            <th class='g0'>Share that traded</th><th>One house in … (YTD)</th></tr>
         </thead>
         <tbody>{lrows}</tbody>
-        <tfoot><tr><td class='l'>All areas</td>
-          <td>{T('u1'):,}</td><td>{T('u2_4'):,}</td><td>{T('u5_9'):,}</td><td>{T('u10'):,}</td><td>{T('othr'):,}</td><td>{T('total'):,}</td>
-          <td class='g0'>{T('sfh'):,}</td><td>{T('co'):,}</td><td>{T('sold'):,}</td>
-          <td class='g0'>{tt_sfh:.1f}%</td></tr></tfoot>
       </table>
-      <div class='cap' style='margin-top:6px'><span class='st'>{T('u1'):,}</span> single-family parcels in the city and <span class='st'>{T('sfh'):,}</span> of them sold —
-      about <span class='st'>one house in {round(100/tt_sfh)}</span> trades in a year. That is the scarcity in one line, and it is why a well-priced listing draws a crowd.
-      Turnover, not size, decides how much choice a buyer gets: {linv[0]['area']} holds {linv[0]['u1']:,} houses and released only {linv[0]['sfh']:,} of them
-      ({linv[0]['turn']:.1f}%), while {max(linv,key=lambda r:r['turn'] or 0)['area']} turned over {max(r['turn'] or 0 for r in linv):.1f}%.</div>
-      <div class='src'>Parcel counts from the SF Land Use dataset (residential parcels, by unit count per parcel); closings from SFAR MLS.
-      Condo and TIC sales are individual units while the 2–4, 5–9 and 10+ columns count buildings, so only the single-family rate is a true turnover figure — an overall
-      percentage would compare units against buildings and exceed 100% in condo-dense areas like South Beach.
-      {lskip} parcel(s) fell outside the mapped areas.</div>
-      <div class='foot'><span>Latent inventory = every residential parcel that exists, sold or not. Sales are closed transactions, Jan 1 – {thru}.</span><span>page 7 / 9</span></div></div>""")
+      <div class='cap' style='margin-top:6px'>Size is not supply. {html.escape(big['area'])} holds the most houses — {big['u1']:,} — and released {big['sfh']:,} ({big['turn']:.1f}%).
+      Turnover runs from {lo_r['turn']:.1f}% in {html.escape(lo_r['area'])} to {hi_r['turn']:.1f}% in {html.escape(hi_r['area'])}:
+      the same buyer sees very different odds of a house coming up depending on where they are looking.</div>
+      <div class='src'>Houses are single-unit residential parcels in the SF Land Use dataset; sales are single-family closings (SFAR MLS).
+      * Fewer than {MIN_SOLID} houses in the area — a handful of sales moves the rate, so read it with care.
+      Not listed (fewer than {MIN_SHOW} houses — condo districts): {hidden_names}. {lskip} parcel(s) fell outside the mapped areas.</div>
+      <div class='foot'><span>Latent inventory = every house that exists, sold or not. Sales are closed transactions, Jan 1 – {thru}.</span><span>page 7 / 9</span></div></div>""")
 
     o.append("</body></html>")
     return "".join(o)
