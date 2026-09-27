@@ -5308,6 +5308,28 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .mc-deck-p b span { font-size: 13px; font-weight: 600; color: var(--lp-muted); margin-left: 4px; }
 .mc-deck-p i { display: block; margin-top: 2px; font-style: normal; font-size: 13.5px; color: var(--lp-body); }
 
+/* Köppen scorecard. */
+.mc-tests { background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; overflow: hidden; }
+.mc-test {
+  display: grid; grid-template-columns: 32px 1.6fr 1fr 1.2fr 32px; gap: 12px; align-items: center;
+  padding: 11px 16px; border-top: 1px solid var(--lp-line);
+}
+.mc-test-head { border-top: 0; padding-top: 10px; padding-bottom: 8px; }
+.mc-test-head span { font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lp-muted); }
+.mc-test-l {
+  width: 28px; height: 28px; border-radius: 8px; background: var(--lp-navy); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800;
+}
+.mc-test-k { font-size: 14.5px; font-weight: 700; color: var(--lp-ink); }
+.mc-test-n { font-size: 14px; color: var(--lp-body); }
+.mc-test-v { font-size: 14.5px; font-weight: 800; color: var(--lp-navy-2); }
+.mc-test-ok {
+  width: 26px; height: 26px; border-radius: 50%; background: #1F6B45; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800;
+}
+.mc-test-ok.is-fail { background: #A3282B; }
+
 /* Köppen letters. */
 .mc-letters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
 .mc-letter {
@@ -5393,6 +5415,14 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 @media (max-width: 720px) {
   .mc-letters, .mc-engine, .mc-cards-2, .mc-price { grid-template-columns: 1fr; }
   .mc-tiles { gap: 8px; }
+  .mc-test-head { display: none; }
+  .mc-test { grid-template-columns: 30px 1fr 28px; row-gap: 2px; }
+  .mc-test-l { grid-row: span 2; }
+  .mc-test-k { grid-column: 2; }
+  .mc-test-ok { grid-column: 3; grid-row: 1 / span 2; }
+  .mc-test-n, .mc-test-v { grid-column: 2; font-size: 13px; }
+  .mc-test-n::before { content: "Needs "; color: var(--lp-muted); }
+  .mc-test-v::before { content: "SF "; font-weight: 400; color: var(--lp-muted); }
   .mc-tile { padding: 12px; }
   .mc-tile b { font-size: 19px; }
   .mc-tile span { font-size: 11.5px; line-height: 1.35; }

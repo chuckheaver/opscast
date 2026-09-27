@@ -13,10 +13,11 @@ export const LEDE =
 
 export const KOPPEN = {
   code: "Csb",
+  name: "Warm-summer Mediterranean",
   letters: [
-    { k: "C", label: "Temperate", p: "Coldest month above freezing, below 64°F." },
-    { k: "s", label: "Dry summer", p: "July gets essentially nothing. January gets 4.4 inches." },
-    { k: "b", label: "Warm summer", p: "Warmest month averages under 71.6°F. Ours: 63°F." },
+    { k: "C", label: "Temperate", p: "Coldest month averages above 32°F (or 26.6°F)." },
+    { k: "s", label: "Dry summer", p: "Driest summer month under 1.6 in, and a third or less of the wettest winter month." },
+    { k: "b", label: "Warm summer", p: "Every month averages under 71.6°F; at least four average above 50°F." },
   ],
   bullets: [
     "Dry-summer climates like ours cover about 2% of Earth's land — Porto, Valparaíso and the Oregon coast share our code.",

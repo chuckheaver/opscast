@@ -209,6 +209,56 @@ export function ClimateExtremes() {
   );
 }
 
+// ------------------------------------------------------ the Köppen scorecard
+
+// Each Csb test, its threshold, and San Francisco's value — computed from the
+// normals, so the card can never claim a pass the numbers do not support.
+// Monthly mean = (average high + average low) / 2.
+export function KoppenTests({ months = CLIMATE.months }) {
+  const mean = d => (d.high + d.low) / 2;
+  const summer = months.filter(d => ["Apr", "May", "Jun", "Jul", "Aug", "Sep"].includes(d.m));
+  const winter = months.filter(d => ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"].includes(d.m));
+  const coldest = months.reduce((a, b) => (mean(b) < mean(a) ? b : a));
+  const warmest = months.reduce((a, b) => (mean(b) > mean(a) ? b : a));
+  const dry = summer.reduce((a, b) => (b.precip < a.precip ? b : a));
+  const wet = winter.reduce((a, b) => (b.precip > a.precip ? b : a));
+  const over50 = months.filter(d => mean(d) > 50).length;
+  const f = v => `${Math.round(v)}°F`;
+
+  const tests = [
+    { l: "C", k: "Coldest month", need: "above 32°F", sf: `${f(mean(coldest))} (${coldest.m})`, ok: mean(coldest) > 32 },
+    { l: "s", k: "Driest summer month", need: "under 1.6 in", sf: `${dry.precip.toFixed(1)} in (${dry.m})`, ok: dry.precip < 1.6 },
+    { l: "s", k: "Wettest winter vs driest summer", need: "3× or more",
+      sf: dry.precip === 0 ? `${wet.precip} in vs none` : `${(wet.precip / dry.precip).toFixed(0)}×`,
+      ok: wet.precip >= 3 * dry.precip },
+    { l: "b", k: "Warmest month", need: "under 71.6°F", sf: `${f(mean(warmest))} (${warmest.m})`, ok: mean(warmest) < 71.6 },
+    { l: "b", k: "Months above 50°F", need: "4 or more", sf: `${over50} of 12`, ok: over50 >= 4 },
+  ];
+
+  return (
+    <figure className="mc-fig">
+      <p className="mc-fig-h">Does San Francisco qualify?</p>
+      <div className="mc-tests">
+        <div className="mc-test mc-test-head" aria-hidden="true">
+          <span /><span>Test</span><span>Needs</span><span>San Francisco</span><span />
+        </div>
+        {tests.map(t => (
+          <div className="mc-test" key={t.k}>
+            <span className="mc-test-l">{t.l}</span>
+            <span className="mc-test-k">{t.k}</span>
+            <span className="mc-test-n">{t.need}</span>
+            <b className="mc-test-v">{t.sf}</b>
+            <span className={`mc-test-ok${t.ok ? "" : " is-fail"}`} aria-label={t.ok ? "pass" : "fail"}>
+              {t.ok ? "✓" : "✕"}
+            </span>
+          </div>
+        ))}
+      </div>
+      <figcaption className="mc-cap">Monthly mean = average of the daily high and low. Summer is April–September.</figcaption>
+    </figure>
+  );
+}
+
 // ================================================================ diagrams
 
 const Arrow = ({ id, color }) => (

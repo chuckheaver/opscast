@@ -11,7 +11,7 @@ import STATS from "../lib/landing-stats.json";
 import CLIMATE from "../lib/sf-climate.json";
 import NSTATS from "../lib/neighborhood-stats.json";
 import {
-  BarRows, OceanSection, CityProfile, SunAngle, FogClock, DeckHeights, TempChart, RainChart,
+  BarRows, KoppenTests, OceanSection, CityProfile, SunAngle, FogClock, DeckHeights, TempChart, RainChart,
   ClimateTable, ClimateExtremes,
 } from "./charts";
 import {
@@ -117,6 +117,7 @@ export default function Page() {
         {/* 1 — Classification */}
         <section className="pt-sec" id="koppen">
           <h2>Köppen: {KOPPEN.code}</h2>
+          <p className="mc-lead">{KOPPEN.name}</p>
           <div className="mc-letters">
             {KOPPEN.letters.map(l => (
               <div className="mc-letter" key={l.k}>
@@ -128,6 +129,7 @@ export default function Page() {
               </div>
             ))}
           </div>
+          <KoppenTests />
           <BarRows rows={LATITUDE} max={100} unit="°F" head="July afternoon, same latitude" labelW={190} />
           <Bullets items={KOPPEN.bullets} />
         </section>
