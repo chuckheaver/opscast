@@ -301,12 +301,14 @@ def latent_inventory(window):
     F=[f["properties"] for f in json.load(open(mg.SRC))["features"]]
     SFH=mg.SEG["Single Family Residences"]
     sold=collections.defaultdict(collections.Counter)
+    sfh_rows=collections.defaultdict(list)   # the houses themselves, for price / pace
     for r in F:
         d=r.get("sellingDate") or ""
         if not (window[0]<=d<=window[1]): continue
         a=N2A_(r.get("neighborhood") or "")
         if not a: continue
         sold[a]["sfh" if r["propType"] in SFH else "co"]+=1
+        if r["propType"] in SFH: sfh_rows[a].append(r)
     rows=[]
     for a,v in stock.items():
         s=sold.get(a,collections.Counter())
@@ -314,9 +316,11 @@ def latent_inventory(window):
         rows.append(dict(area=a,**{k:v[k] for k,_ in PARCEL_ROWS},total=v["total"],
                          sfh=s["sfh"],co=s["co"],sold=tot,
                          turn=(100*s["sfh"]/v["u1"]) if v["u1"] else None,
-                         turn_all=(100*tot/v["total"]) if v["total"] else None))
+                         turn_all=(100*tot/v["total"]) if v["total"] else None,
+                         st=mg.stats(sfh_rows.get(a,[]))))
     rows.sort(key=lambda r:-r["total"])
-    return rows,skipped
+    city=mg.stats([r for rs in sfh_rows.values() for r in rs])
+    return rows,skipped,city
 
 def N2A_(n):
     return mg.N2A.get(mg.FIX.get(n or "", n or ""))
@@ -691,7 +695,9 @@ def build():
     table.lsfh td.bar {{ text-align:left; }}
     table.lsfh td.one {{ color:{MUTED}; }}
     .lh, .lt {{ display:inline-block; vertical-align:middle; height:7px; border-radius:2px; background:#eceae6; }}
-    .lh {{ width:150px; }} .lt {{ width:120px; }}
+    .lh {{ width:96px; }} .lt {{ width:70px; }}
+    table.lsfh thead tr.g th.r {{ text-align:right; }}
+    table.lsfh tfoot td {{ font-weight:800; color:{NAV}; border-top:1.5px solid {NAV}; padding-top:3px; }}
     .lhf, .ltf {{ display:block; height:7px; border-radius:2px; }}
     .lhf {{ background:#b9c7d8; }} .ltf {{ background:{NAV}; }} .ltf.thin {{ background:#9aa6b6; }}
     .lhv, .ltv {{ display:inline-block; margin-left:5px; vertical-align:middle; font-weight:700; color:{INK}; }}
@@ -997,7 +1003,7 @@ def build():
     # Only houses give a true turnover rate: one parcel is one house is one
     # possible sale. Condo sales are units while multi-unit parcels are
     # buildings, so mixing them compares different things — left out.
-    linv,lskip=latent_inventory((W["m1"][0][:4]+"-01-01",W["m1"][1]))
+    linv,lskip,lcity=latent_inventory((W["m1"][0][:4]+"-01-01",W["m1"][1]))
     MIN_SHOW, MIN_SOLID = 50, 250            # houses: to list at all / to trust the rate
     shown=[r for r in linv if r["u1"]>=MIN_SHOW]
     hidden=[r for r in linv if r["u1"]<MIN_SHOW]
@@ -1011,21 +1017,28 @@ def build():
     tmax=max(r["turn"] for r in solid)
     hmax=max(r["u1"] for r in shown)
     def hbar(v):
-        return (f"<span class='lh'><span class='lhf' style='width:{max(2,round(150*v/hmax))}px'></span></span>"
+        return (f"<span class='lh'><span class='lhf' style='width:{max(2,round(96*v/hmax))}px'></span></span>"
                 f"<span class='lhv'>{v:,}</span>")
     def tbar(r):
         v=r["turn"]
         if v is None: return "—"
-        w_=max(2,round(120*min(v,tmax)/tmax))
+        w_=max(2,round(70*min(v,tmax)/tmax))
         thin=r["u1"]<MIN_SOLID
         return (f"<span class='lt'><span class='ltf{' thin' if thin else ''}' style='width:{w_}px'></span></span>"
                 f"<span class='ltv'>{v:.1f}%{'*' if thin else ''}</span>")
+    def sale_cells(st):
+        if not st["n"]: return "<td class='g0'>—</td><td>—</td><td>—</td><td>—</td>"
+        return (f"<td class='g0 b'>{mg.usdM(st['price'])}</td>"
+                f"<td>{mg.usd(st['ppsf']) if st['ppsf'] else '—'}</td>"
+                f"<td>{mg.i(st['dom'])}</td>"
+                f"<td>{mg.pct1(st['over'])}%</td>")
     lrows="".join(
         f"<tr><td class='l'>{html.escape(r['area'])}</td>"
         f"<td class='bar'>{hbar(r['u1'])}</td>"
         f"<td class='b'>{r['sfh']:,}</td>"
         f"<td class='bar g0'>{tbar(r)}</td>"
-        f"<td class='one'>{('1 in ' + format(round(100/r['turn']), ',')) if r['turn'] else '—'}</td></tr>"
+        f"<td class='one'>{('1 in ' + format(round(100/r['turn']), ',')) if r['turn'] else '—'}</td>"
+        f"{sale_cells(r['st'])}</tr>"
         for r in shown)
     lo_r=min(solid,key=lambda r:r["turn"]); hi_r=max(solid,key=lambda r:r["turn"])
     big=shown[0]
@@ -1040,12 +1053,17 @@ def build():
         <div><b>~{pace:.1f}%</b><span>a year at this pace — one house in {round(100/pace)}</span></div>
       </div>
       <table class='linv lsfh'>
-        <colgroup><col style='width:24%'><col style='width:27%'><col style='width:9%'><col style='width:26%'><col style='width:14%'></colgroup>
+        <colgroup><col style='width:19%'><col style='width:17%'><col style='width:6%'><col style='width:14%'><col style='width:8%'>
+          <col style='width:9%'><col style='width:8%'><col style='width:7%'><col style='width:12%'></colgroup>
         <thead>
-          <tr class='g'><th class='l'>Neighborhood</th><th>Houses — the latent inventory</th><th>Sold YTD</th>
-            <th class='g0'>Share that traded</th><th>One house in … (YTD)</th></tr>
+          <tr class='g'><th class='l'>Neighborhood</th><th>Houses — latent inventory</th><th>Sold YTD</th>
+            <th class='g0'>Share traded</th><th>1 house in</th>
+            <th class='g0 r'>Median price</th><th class='r'>$/sf</th><th class='r'>DOM</th><th class='r'>% over list</th></tr>
         </thead>
         <tbody>{lrows}</tbody>
+        <tfoot><tr><td class='l'>All single-family</td><td class='bar'><span class='lhv' style='margin-left:0'>{houses:,}</span></td>
+          <td class='b'>{sold_h:,}</td><td class='bar g0'><span class='ltv' style='margin-left:0'>{rate:.1f}%</span></td>
+          <td class='one'>1 in {round(100/rate)}</td>{sale_cells(lcity)}</tr></tfoot>
       </table>
       <div class='cap' style='margin-top:6px'>Size is not supply. {html.escape(big['area'])} holds the most houses — {big['u1']:,} — and released {big['sfh']:,} ({big['turn']:.1f}%).
       Turnover runs from {lo_r['turn']:.1f}% in {html.escape(lo_r['area'])} to {hi_r['turn']:.1f}% in {html.escape(hi_r['area'])}:

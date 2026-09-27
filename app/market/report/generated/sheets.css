@@ -65,8 +65,10 @@
 .sheetA table.lsfh td.bar { text-align:left; }
 .sheetA table.lsfh td.one { color:#6b6560; }
 .sheetA .lh, .sheetA .lt { display:inline-block; vertical-align:middle; height:7px; border-radius:2px; background:#eceae6; }
-.sheetA .lh { width:150px; }
-.sheetA .lt { width:120px; }
+.sheetA .lh { width:96px; }
+.sheetA .lt { width:70px; }
+.sheetA table.lsfh thead tr.g th.r { text-align:right; }
+.sheetA table.lsfh tfoot td { font-weight:800; color:#042C53; border-top:1.5px solid #042C53; padding-top:3px; }
 .sheetA .lhf, .sheetA .ltf { display:block; height:7px; border-radius:2px; }
 .sheetA .lhf { background:#b9c7d8; }
 .sheetA .ltf { background:#042C53; }
