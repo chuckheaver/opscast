@@ -4657,9 +4657,13 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   align-items: start;
 }
 .lp-hero-copy {
-  grid-area: copy;
+  grid-area: copy; min-width: 0;
   /* Flex column, so the inline-flex pill leaves no descender space beneath. */
   display: flex; flex-direction: column; align-items: flex-start;
+}
+/* The claim row is the one thing allowed to reach past the column. */
+@media (min-width: 721px) {
+  .lp-hero-copy .lp-claim-row { max-width: 148%; }
 }
 .lp-portrait { grid-area: portrait; }
 .lp-hero-map { grid-area: map; align-self: start; }
@@ -4670,10 +4674,19 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   font-size: clamp(34px, 5.2vw, 78px); line-height: 0.95; font-weight: 800;
   color: #fff; letter-spacing: -0.045em; white-space: nowrap;
 }
+/* Tagline and the live-conditions chip share a line. At this size the
+   tagline alone nearly fills the left column, so the row is allowed to run
+   past it — the space it runs into is the empty ocean at the map's left
+   edge, not the coastline. */
+.lp-claim-row {
+  display: flex; align-items: center; flex-wrap: nowrap;
+  gap: 10px 20px; margin-top: clamp(5px, 0.8vw, 10px);
+  width: max-content; max-width: 100%;
+  position: relative; z-index: 3;
+}
 .lp-claim {
-  margin-top: clamp(4px, 0.7vw, 9px);
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(16px, 1.9vw, 27px); line-height: 1.2;
+  font-size: clamp(18px, 2.3vw, 32px); line-height: 1.2;
   color: var(--lp-gold-lt); letter-spacing: -0.005em;
 }
 
@@ -4694,7 +4707,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 
 /* Portrait: cut out, standing on the navy, close under the Explore pill. */
 .lp-portrait {
-  margin: 14px 0 0; min-width: 0;
+  margin: 34px 0 0; min-width: 0;
   /* Fills whatever height row two has, so no dead navy under the headline. */
   display: flex; flex-direction: column; justify-content: flex-start;
 }
@@ -4848,7 +4861,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   /* Back to a row here — the desktop rule sets a column, and without this
      reset align-items:flex-end pushed the portrait to the right edge. */
   .lp-portrait {
-    flex-direction: row; align-items: flex-end; gap: 14px; margin-top: 2px;
+    flex-direction: row; align-items: flex-end; gap: 14px; margin-top: 12px;
   }
   .lp-portrait img { max-width: 124px; max-height: none; object-position: bottom left; }
   /* min-width:0 lets the caption shrink inside the flex row so the title
@@ -5125,7 +5138,6 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 }
 
 /* Live conditions chip, top-left of the hero ------------------------- */
-.lp-portrait figcaption .wx-chip { margin-top: 10px; }
 .wx-chip {
   display: inline-flex; align-items: center; gap: 9px;
   padding: 7px 15px 7px 12px; border-radius: 999px;

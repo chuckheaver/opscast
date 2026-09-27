@@ -102,14 +102,16 @@ export default function Landing() {
         <div className="lp-hero-grid">
           <div className="lp-hero-copy">
             <h1 className="lp-city">San Francisco</h1>
-            <p className="lp-claim">Microclimate Real Estate</p>
+            <div className="lp-claim-row">
+              <p className="lp-claim">Real Estate by Microclimate</p>
+              <WeatherChip />
+            </div>
           </div>
           <figure className="lp-portrait">
             <img src="/brand/chuck-heaver-cutout.webp" alt="Chuck Heaver" width="760" height="866" />
             <figcaption>
               <b>Chuck Heaver</b>
               <span>Realtor &amp; Meteorologist · Vanguard Properties</span>
-              <WeatherChip />
             </figcaption>
           </figure>
           <figure className="lp-hero-map">
