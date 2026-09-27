@@ -5262,6 +5262,21 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .is-hi .mc-bars-track i { background: var(--lp-navy); }
 .mc-bars-track b { font-size: 13.5px; font-weight: 700; color: var(--lp-ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
+/* December–July rows. */
+.mc-season-h { display: flex; align-items: center; gap: 12px; }
+.mc-season-h em { font-style: normal; display: inline-flex; align-items: center; gap: 5px; letter-spacing: 0.04em; }
+.mc-season-h i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.mc-season-track { position: relative; display: block; height: 30px; margin: 0 26px; }
+.mc-season-line { position: absolute; top: 50%; height: 4px; margin-top: -2px; border-radius: 2px; background: #9CB3C6; }
+.is-hi .mc-season-line { background: var(--lp-navy); }
+.mc-season-dot {
+  position: absolute; top: 50%; width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px;
+  border-radius: 50%; box-shadow: 0 0 0 2px var(--lp-cream);
+}
+.mc-season-v { position: absolute; top: 50%; transform: translateY(-50%); font-size: 13.5px; font-weight: 700; color: var(--lp-ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.mc-season-dec { margin-left: -12px; transform: translate(-100%, -50%); }
+.mc-season-jul { margin-left: 12px; }
+
 /* Column charts (temperature, rain). */
 .mc-cols { position: relative; display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; padding-left: 34px; }
 .mc-col { display: flex; flex-direction: column; align-items: center; min-width: 0; }

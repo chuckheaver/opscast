@@ -51,23 +51,23 @@ export const ENGINE_BULLETS = [
 // ------------------------------------------------- 3. Bay Area sub-climates
 
 export const BAY_ZONES = [
-  { k: "Sonoma Coast", eg: "Bodega Bay", jul: 62, rain: 30 },
-  { k: "Outer Marin coast", eg: "Point Reyes", jul: 63, rain: 32 },
-  { k: "Coastside", eg: "Pacifica, Half Moon Bay", jul: 64, rain: 27 },
-  { k: "San Francisco — west", eg: "Outer Sunset", jul: 64, rain: 22, hi: true },
-  { k: "San Francisco — east", eg: "Mission, North Beach", jul: 72, rain: 22, hi: true },
-  { k: "East Bay flats", eg: "Berkeley, Oakland", jul: 73, rain: 24 },
-  { k: "Santa Cruz Mtns crest", eg: "Skyline", jul: 78, rain: 45 },
-  { k: "Mid-Peninsula", eg: "San Mateo, Palo Alto", jul: 79, rain: 18 },
-  { k: "Petaluma Gap", eg: "Petaluma", jul: 82, rain: 25 },
-  { k: "Central Marin", eg: "San Rafael", jul: 82, rain: 32 },
-  { k: "South Bay", eg: "San Jose", jul: 84, rain: 15 },
-  { k: "Sonoma Valley", eg: "Santa Rosa", jul: 87, rain: 32 },
-  { k: "Upper Napa Valley", eg: "Calistoga", jul: 90, rain: 36 },
-  { k: "Inland East Bay", eg: "Walnut Creek, Livermore", jul: 90, rain: 16 },
+  { k: "Sonoma Coast", eg: "Bodega Bay", dec: 57, jul: 62, rain: 30 },
+  { k: "Outer Marin coast", eg: "Point Reyes", dec: 56, jul: 63, rain: 32 },
+  { k: "Coastside", eg: "Pacifica, Half Moon Bay", dec: 59, jul: 64, rain: 27 },
+  { k: "San Francisco — west", eg: "Outer Sunset", dec: 57, jul: 64, rain: 22, hi: true },
+  { k: "San Francisco — east", eg: "Mission, North Beach", dec: 58, jul: 72, rain: 22, hi: true },
+  { k: "East Bay flats", eg: "Berkeley, Oakland", dec: 58, jul: 73, rain: 24 },
+  { k: "Santa Cruz Mtns crest", eg: "Skyline", dec: 52, jul: 78, rain: 45 },
+  { k: "Mid-Peninsula", eg: "San Mateo, Palo Alto", dec: 59, jul: 79, rain: 18 },
+  { k: "Petaluma Gap", eg: "Petaluma", dec: 57, jul: 82, rain: 25 },
+  { k: "Central Marin", eg: "San Rafael", dec: 57, jul: 82, rain: 32 },
+  { k: "South Bay", eg: "San Jose", dec: 59, jul: 84, rain: 15 },
+  { k: "Sonoma Valley", eg: "Santa Rosa", dec: 57, jul: 87, rain: 32 },
+  { k: "Upper Napa Valley", eg: "Calistoga", dec: 57, jul: 90, rain: 36 },
+  { k: "Inland East Bay", eg: "Walnut Creek, Livermore", dec: 56, jul: 90, rain: 16 },
 ];
 
-// The nine zones on the Bay Area map. Keys match scripts/build-bay-map.mjs.
+// The zones on the Bay Area map. Keys match scripts/build-bay-map.mjs.
 export const BAY_MAP = [
   { key: "coast", name: "The Fog Coast", jul: 63, eg: "Bodega Bay · Point Reyes · Pacifica · Half Moon Bay", p: "First land the marine layer touches. Grey summers, green winters." },
   { key: "city", name: "The City", jul: 67, eg: "San Francisco", p: "All three belts in seven miles — see below." },
@@ -85,7 +85,7 @@ export const BAY_MAP = [
 export const BAY_BULLETS = [
   "28°F separates Bodega Bay from Livermore on the same July afternoon, 80 miles apart.",
   "Skyline collects three times the rain San Jose does — storms are forced up and over the Santa Cruz Mountains.",
-  "Winter nights barely vary: 38°F inland to 49°F in the city. Summer is what sorts this region.",
+  "December afternoons barely vary — 52°F on Skyline to 59°F in San Jose. July is what sorts this region.",
 ];
 
 export const BAY_NOTE =

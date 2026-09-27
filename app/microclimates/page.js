@@ -11,7 +11,7 @@ import STATS from "../lib/landing-stats.json";
 import CLIMATE from "../lib/sf-climate.json";
 import NSTATS from "../lib/neighborhood-stats.json";
 import {
-  BarRows, KoppenTests, OceanSection, CityProfile, SunAngle, FogClock, DeckHeights, TempChart, RainChart,
+  BarRows, SeasonRows, KoppenTests, OceanSection, CityProfile, SunAngle, FogClock, DeckHeights, TempChart, RainChart,
   ClimateTable, ClimateExtremes,
 } from "./charts";
 import { BayMap, FogMapCard } from "./bay";
@@ -158,12 +158,7 @@ export default function Page() {
         <section className="pt-sec" id="bay">
           <h2>Around the Bay</h2>
           <BayMap />
-          <BarRows
-            rows={BAY_ZONES.map(z => ({ k: z.k, eg: z.eg, v: z.jul, v2: z.rain, hi: z.hi }))}
-            max={95} unit="°" head="July afternoon"
-            max2={48} unit2={'"'} head2="Rain a year"
-            rowH={34} caption={BAY_NOTE}
-          />
+          <SeasonRows rows={BAY_ZONES} caption={BAY_NOTE} />
           <Bullets items={BAY_BULLETS} />
         </section>
 
