@@ -17,8 +17,8 @@ const MICRO = [
   { href: "/microclimates#fog", label: "Fog Map", sub: "How fog forms and moves" },
 ];
 
-export default function SiteNavClient({ hoods, bare }) {
-  const [open, setOpen] = useState(null);          // "micro" | "hoods" | null
+export default function SiteNavClient({ hoods, guide, bare }) {
+  const [open, setOpen] = useState(null);          // "micro" | "hoods" | "guide" | null
   const [mobile, setMobile] = useState(false);     // phone panel
   const ref = useRef(null);
   const path = usePathname();
@@ -99,7 +99,28 @@ export default function SiteNavClient({ hoods, bare }) {
             </li>
 
             <li><Link href="/fog?preset=fog" className="nv-link" onClick={closeAll}>The Map</Link></li>
-            <li><Link href="/property-types" className="nv-link" onClick={closeAll}>Buyer Guide</Link></li>
+            <li className={`nv-dd${open === "guide" ? " is-open" : ""}`} {...hover("guide")}>
+              <button type="button" className="nv-link nv-dd-btn" aria-expanded={open === "guide"} onClick={toggle("guide")}>
+                Buyer Guide <span className="nv-caret" aria-hidden="true">▾</span>
+              </button>
+              <div className="nv-panel nv-panel-guide">
+                <Link href="/property-types" className="nv-all" onClick={closeAll}>The full guide &rarr;</Link>
+                <div className="nv-guide">
+                  <div>
+                    <span className="nv-az-L">Types of property</span>
+                    {guide.types.map(t => (
+                      <Link key={t.id} href={`/property-types#${t.id}`} onClick={closeAll}>{t.label}</Link>
+                    ))}
+                  </div>
+                  <div>
+                    <span className="nv-az-L">Buying</span>
+                    {guide.topics.map(t => (
+                      <Link key={t.id} href={`/property-types#${t.id}`} onClick={closeAll}>{t.label}</Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </li>
             <li><Link href="/market" className="nv-link" onClick={closeAll}>Market</Link></li>
             <li><a href={`mailto:${EMAIL}`} className="nv-cta">Work With Me</a></li>
           </ul>

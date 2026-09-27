@@ -5614,6 +5614,11 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .nv-az a { display: block; padding: 3px 6px; margin: 0 -6px; border-radius: 6px; font-size: 13.5px; color: #131A25; }
 .nv-az a:hover, .nv-az a:focus-visible { background: #EEF2F6; color: #203C5F; }
 
+.nv-panel-guide { width: 440px; right: 0; left: auto; padding: 14px 18px 16px; }
+.nv-guide { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.nv-guide a { display: block; padding: 4px 6px; margin: 0 -6px; border-radius: 6px; font-size: 13.5px; color: #131A25; }
+.nv-guide a:hover, .nv-guide a:focus-visible { background: #EEF2F6; color: #203C5F; }
+
 /* Phone: ☰ opens a full-width panel; dropdowns expand in place. */
 .nv-burger {
   display: none; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px;
