@@ -1056,7 +1056,7 @@ def build():
         <colgroup><col style='width:19%'><col style='width:17%'><col style='width:6%'><col style='width:14%'><col style='width:8%'>
           <col style='width:9%'><col style='width:8%'><col style='width:7%'><col style='width:12%'></colgroup>
         <thead>
-          <tr class='g'><th class='l'>Neighborhood</th><th>Houses — latent inventory</th><th>Sold YTD</th>
+          <tr class='g'><th class='l'>Neighborhood</th><th>SFH — latent inventory</th><th>Sold YTD</th>
             <th class='g0'>Share traded</th><th>1 house in</th>
             <th class='g0 r'>Median price</th><th class='r'>$/sf</th><th class='r'>DOM</th><th class='r'>% over list</th></tr>
         </thead>
@@ -1068,7 +1068,7 @@ def build():
       <div class='cap' style='margin-top:6px'>Size is not supply. {html.escape(big['area'])} holds the most houses — {big['u1']:,} — and released {big['sfh']:,} ({big['turn']:.1f}%).
       Turnover runs from {lo_r['turn']:.1f}% in {html.escape(lo_r['area'])} to {hi_r['turn']:.1f}% in {html.escape(hi_r['area'])}:
       the same buyer sees very different odds of a house coming up depending on where they are looking.</div>
-      <div class='src'>Houses are single-unit residential parcels in the SF Land Use dataset; sales are single-family closings (SFAR MLS).
+      <div class='src'>SFH are single-unit residential parcels in the SF Land Use dataset; sales are single-family closings (SFAR MLS).
       * Fewer than {MIN_SOLID} houses in the area — a handful of sales moves the rate, so read it with care.
       Not listed (fewer than {MIN_SHOW} houses — condo districts): {hidden_names}. {lskip} parcel(s) fell outside the mapped areas.</div>
       <div class='foot'><span>Latent inventory = every house that exists, sold or not. Sales are closed transactions, Jan 1 – {thru}.</span><span>page 7 / 9</span></div></div>""")
