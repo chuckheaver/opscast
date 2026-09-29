@@ -5762,3 +5762,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   box-shadow: 0 6px 18px rgba(10,20,35,0.3);
 }
 .lp .lp-block-map-open:hover { background: #CEE2E6; color: #131A25; }
+/* Instagram: an icon in the bar; the word only appears in the phone menu. */
+.nv-ig { padding: 8px 10px; }
+.nv-ig-t { display: none; }
+@media (max-width: 960px) { .nv-ig { justify-content: flex-start; gap: 10px; } .nv-ig-t { display: inline; } }

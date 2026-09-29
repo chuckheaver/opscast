@@ -26,7 +26,7 @@ export default function SiteFooter({ note = null }) {
           <Link href="/neighborhoods">Neighborhoods</Link>
           <Link href="/property-types">Buyer guide</Link>
           <Link href="/market">Market</Link>
-          <Link href="/instagram">Instagram</Link>
+          <a href="https://www.instagram.com/chuckheaver/" target="_blank" rel="noopener noreferrer">Instagram</a>
           <Link href="/tools">All tools</Link>
           <a href={`mailto:${EMAIL}`}>Email</a>
           <a href={`tel:${PHONE_HREF}`}>{PHONE_DISPLAY}</a>

@@ -156,7 +156,17 @@ export default function SiteNavClient({ hoods, guide }) {
                 </div>
               </div>
             </li>
-            <li><Link href="/instagram" className="nv-link" onClick={closeAll}>Instagram</Link></li>
+            <li>
+              <a href="https://www.instagram.com/chuckheaver/" className="nv-link nv-ig" target="_blank" rel="noopener noreferrer"
+                 aria-label="Instagram — @chuckheaver" title="@chuckheaver on Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="2" />
+                  <circle cx="12" cy="12" r="4.2" stroke="currentColor" strokeWidth="2" />
+                  <circle cx="17.4" cy="6.6" r="1.3" fill="currentColor" />
+                </svg>
+                <span className="nv-ig-t">Instagram</span>
+              </a>
+            </li>
             <li><a href={`mailto:${EMAIL}`} className="nv-cta">Work With Me</a></li>
           </ul>
         </nav>
