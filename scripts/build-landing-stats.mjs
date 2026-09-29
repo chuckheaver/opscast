@@ -138,6 +138,19 @@ const out = {
 
 mkdirSync(dirname(OUT), { recursive: true });
 writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
+
+// Where this year's sales are, and nothing else — the home page's live map
+// draws these as dots. A few KB instead of the multi-MB listings file.
+const POINTS = "public/data/sold-points-ytd.json";
+const pts = [];
+for (const f of geo.features || []) {
+  const p = f.properties || {};
+  if (!(Number(p.sellingPrice) > 0) || !String(p.sellingDate || "").startsWith(year)) continue;
+  const [lng, lat] = f.geometry?.coordinates || [];
+  if (Number.isFinite(lng) && Number.isFinite(lat)) pts.push([+lng.toFixed(5), +lat.toFixed(5)]);
+}
+writeFileSync(POINTS, JSON.stringify({ year, through: built, points: pts }));
+console.log(`wrote ${POINTS} (${pts.length.toLocaleString()} points)`);
 console.log(`wrote ${OUT}`);
 console.log(`  ${out.salesThisYear.toLocaleString()} ${year} sales · ${out.salesTracked.toLocaleString()} tracked · ${out.parcels.toLocaleString()} parcels`);
 console.log(`  houses: sun $${(sun.median / 1e6).toFixed(2)}M ($${Math.round(sun.ppsf)}/sf) vs persistent fog $${(pfog.median / 1e6).toFixed(2)}M ($${Math.round(pfog.ppsf)}/sf) — ${out.houses.priceRatio.toFixed(2)}x`);

@@ -5,9 +5,8 @@
 //                           with Instagram Login). Tokens last 60 days;
 //                           refresh with GET graph.instagram.com/refresh_access_token
 //                           ?grant_type=ig_refresh_token&access_token=… before then.
-//   INSTAGRAM_HANDLE        the account name, without the @ — used for the
-//                           "Follow" link. Optional once the token is set; the
-//                           API's own username is used if it is missing.
+//   INSTAGRAM_HANDLE        optional override of the account name; defaults to
+//                           the API's own username, then to chuckheaver.
 //
 // Without a token the page still renders, with the follow link and a note in
 // place of the grid, so it never breaks the site.
@@ -44,7 +43,7 @@ const when = t => new Date(t).toLocaleDateString("en-US", { month: "short", day:
 
 export default async function Page() {
   const { posts, username, error } = await getFeed();
-  const handle = process.env.INSTAGRAM_HANDLE || username;
+  const handle = process.env.INSTAGRAM_HANDLE || username || "chuckheaver";
   const profile = handle ? `https://www.instagram.com/${handle}/` : null;
 
   return (

@@ -17,6 +17,7 @@ const GUIDE_COUNT = Object.keys(hoodStats.hoods || {}).length;
 
 import SiteFooter, { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "./SiteFooter";
 import HeroSearch from "./HeroSearch";
+import LiveBlockMap from "./LiveBlockMap";
 import WeatherChip from "./WeatherChip";
 
 const money = v => `$${(v / 1e6).toFixed(2)}M`;
@@ -147,15 +148,18 @@ export default function Landing() {
           <p className="lp-kicker lp-kicker-lg">Street level</p>
           <h2 className="lp-h2">What&rsquo;s on your block.</h2>
         </div>
-        {/* A picture of the live map with every home sold this year on it.
-            The picture opens the map; the pill on top is a real address
-            search that lands on the map with the sold homes showing. */}
+        {/* The live map, with every home sold this year on it. The pill on
+            top is a real address search that lands on the full map with the
+            sold homes showing; the button below opens the full map. */}
         <div className="lp-block">
         <div className="lp-block-map">
-          <Link href="/fog?preset=homes" className="lp-block-map-link" aria-label="Open the map with this year's sold homes">
-            <img src="/brand/map-sold-homes.webp" alt="San Francisco map with a blue dot for every home sold this year, by neighborhood"
-                 width="1400" height="1055" loading="lazy" />
-          </Link>
+          <LiveBlockMap fallback={
+            <Link href="/fog?preset=homes" className="lp-block-map-link" aria-label="Open the map with this year's sold homes">
+              <img src="/brand/map-sold-homes.webp" alt="San Francisco map with a blue dot for every home sold this year, by neighborhood"
+                   width="1400" height="1055" loading="lazy" />
+            </Link>
+          } />
+          <Link href="/fog?preset=homes" className="lp-block-map-open">Open the full map &rarr;</Link>
           <div className="lp-block-map-pill">
             <HeroSearch placeholder="Enter Address, Select Layer" preset="homes" className="hero-search-light" />
           </div>

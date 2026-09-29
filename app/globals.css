@@ -5753,3 +5753,12 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-block-layer-k { gap: 6px; }
 @media (max-width: 480px) { .lp-block-layer-k { font-size: 13.5px; } }
 .ig { min-height: 45vh; }
+.lp-live-map { width: 100%; height: 100%; min-height: 480px; }
+@media (max-width: 900px) { .lp-live-map { min-height: 0; height: clamp(320px, 80vw, 520px); } }
+.lp .lp-block-map-open {
+  position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 2;
+  padding: 9px 18px; border-radius: 999px; white-space: nowrap;
+  background: rgba(10,26,48,0.9); color: #CEE2E6; font-size: 13px; font-weight: 700;
+  box-shadow: 0 6px 18px rgba(10,20,35,0.3);
+}
+.lp .lp-block-map-open:hover { background: #CEE2E6; color: #131A25; }
