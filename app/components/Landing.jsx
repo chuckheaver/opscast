@@ -6,7 +6,6 @@
 // Every figure comes from app/lib/landing-stats.json, regenerated from the
 // live sales file by scripts/build-landing-stats.mjs. Nothing is typed by hand.
 
-import SiteNav from "./SiteNav";
 import Link from "next/link";
 import stats from "../lib/landing-stats.json";
 import hoodStats from "../lib/neighborhood-stats.json";
@@ -28,9 +27,9 @@ const num = v => v.toLocaleString("en-US");
 // Each of these is a layer that actually exists on the map, so the page
 // never promises a reading the site cannot produce.
 const LAYERS = [
-  { k: "Sun", href: "/microclimates/zones?layer=solar",
+  { k: "Sun", href: "/fog?preset=sun",
     d: "Hours of direct sun the property gets, season by season." },
-  { k: "Wind", href: "/microclimates/zones",
+  { k: "Wind", href: "/fog?preset=wind",
     d: "Which side of the hill takes the wind and which sits sheltered." },
   { k: "Fog", href: "/fog?preset=fog",
     d: "Average summer fog hours, drawn to the contour." },
@@ -87,7 +86,6 @@ export default function Landing() {
     <div className="lp">
       {/* No logo lockup here — the name and title sit under the portrait a
           few inches below, and dropping it lets the map start higher. */}
-      <SiteNav bare />
 
       {/* Hero — the map is the subject. The city is the headline, the
           portrait is a byline, and there is no paragraph at all. */}
@@ -146,24 +144,40 @@ export default function Landing() {
       {/* The actual differentiator: what can be read about one address. */}
       <section className="lp-layers">
         <div className="lp-section-head">
-          <p className="lp-kicker">Street level</p>
+          <p className="lp-kicker lp-kicker-lg">Street level</p>
           <h2 className="lp-h2">What&rsquo;s on your block.</h2>
         </div>
-        <div className="lp-layer-grid">
+        {/* A picture of the live map with every home sold this year on it.
+            The picture opens the map; the pill on top is a real address
+            search that lands on the map with the sold homes showing. */}
+        <div className="lp-block">
+        <div className="lp-block-map">
+          <Link href="/fog?preset=homes" className="lp-block-map-link" aria-label="Open the map with this year's sold homes">
+            <img src="/brand/map-sold-homes.webp" alt="San Francisco map with a blue dot for every home sold this year, by neighborhood"
+                 width="1400" height="1055" loading="lazy" />
+          </Link>
+          <div className="lp-block-map-pill">
+            <HeroSearch placeholder="Enter Address, Select Layer" preset="homes" className="hero-search-light" />
+          </div>
+        </div>
+        {/* The layers, as a compact column beside the map. Each opens the
+            map with that layer switched on. */}
+        <nav className="lp-block-layers" aria-label="Map layers">
           {LAYERS.map(l => (
-            <Link key={l.k} href={l.href} className="lp-layer">
-              <span className="lp-layer-k">{l.k}</span>
-              <span className="lp-layer-d">{l.d}</span>
+            <Link key={l.k} href={l.href} className="lp-block-layer">
+              <span className="lp-block-layer-k">{l.k} <i aria-hidden="true">&rarr;</i></span>
+              <span className="lp-block-layer-d">{l.d}</span>
             </Link>
           ))}
+        </nav>
         </div>
       </section>
 
       {/* The neighborhood guide. */}
       <section className="lp-guide-promo">
         <div>
-          <p className="lp-kicker">The guide</p>
-          <h2 className="lp-h2">All {num(GUIDE_COUNT)} San Francisco neighborhoods, written up.</h2>
+          <p className="lp-kicker lp-kicker-lg">The guide</p>
+          <h2 className="lp-h2">{num(GUIDE_COUNT)} Neighborhoods — The vibes of the City</h2>
           <p className="lp-mapshow-body">
             What each one is like, what homes are selling for, and the microclimate it sits in.
           </p>
@@ -175,7 +189,7 @@ export default function Landing() {
       <section className="lp-about" id="about">
         <div className="lp-about-inner">
           <div className="lp-about-copy">
-            <p className="lp-kicker">About</p>
+            <p className="lp-kicker lp-kicker-lg">About</p>
             <h2 className="lp-h2">Two careers, one job.</h2>
             <p>
               Twenty years forecasting weather. 35 years forecasting real estate. In a city
@@ -185,8 +199,9 @@ export default function Landing() {
             <ul className="lp-creds">
               <li><b>Vanguard Properties</b> — San Francisco</li>
               <li><b>35 years</b> residential, commercial and investment</li>
+              <li><b>Brokerage history</b> in NYC, Chicago and South Florida</li>
               <li><b>20+ years</b> meteorologist</li>
-              <li><b>B.S. Finance</b>, The Ohio State University</li>
+              <li><b>Education:</b> The Ohio State University, Mississippi State</li>
               <li>English, German, Portuguese</li>
             </ul>
             <Link className="lp-inline-link" href="/neighborhoods">
@@ -194,10 +209,10 @@ export default function Landing() {
             </Link>
           </div>
           <aside className="lp-about-card">
-            <h3>Send me an address.</h3>
+            <h3>Ask me anything.</h3>
             <p>
-              I will come back with its sun, wind and fog, what has closed on the block,
-              and what I think it is worth.
+              Send an address and I will come back with its sun, wind and fog, what has
+              closed on the block, and what I think it is worth.
             </p>
             <a className="lp-btn lp-btn-gold lp-btn-block" href={`mailto:${EMAIL}?subject=Run%20my%20street`}>
               Run my street

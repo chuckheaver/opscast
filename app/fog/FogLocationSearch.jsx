@@ -23,7 +23,7 @@ export default function FogLocationSearch({
   // Geocoder to use — defaults to the SF-biased fog one; pass a different
   // `suggest(query)` (e.g. the wine-country geocoder) to reuse this UI.
   suggest = defaultSuggest,
-  placeholder = "Where do you wanna go?",
+  placeholder = "Where do you want to live?",
 }) {
   const [q, setQ] = useState("");
   const [sugs, setSugs] = useState([]);

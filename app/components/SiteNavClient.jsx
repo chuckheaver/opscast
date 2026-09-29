@@ -23,13 +23,27 @@ const MARKET = [
   { href: "/market/report#national", label: "National Mkts", sub: "Rates, Treasuries, inflation, jobs" },
 ];
 
-export default function SiteNavClient({ hoods, guide, bare }) {
+export default function SiteNavClient({ hoods, guide }) {
   const [open, setOpen] = useState(null);          // "micro" | "hoods" | "guide" | "market" | null
   const [mobile, setMobile] = useState(false);     // phone panel
   const ref = useRef(null);
   const path = usePathname();
+  // The home page lays the menu over its hero without a logo — the name is
+  // right there in the hero. Everywhere else it is a solid bar.
+  const bare = path === "/";
 
   useEffect(() => { setOpen(null); setMobile(false); }, [path]);
+  // Publish the bar's height as --nv-h so full-screen map apps can start
+  // below it instead of underneath it.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const set = () => document.documentElement.style.setProperty("--nv-h", bare ? "0px" : `${el.offsetHeight}px`);
+    set();
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [bare]);
   useEffect(() => {
     const key = e => { if (e.key === "Escape") { setOpen(null); setMobile(false); } };
     const click = e => { if (ref.current && !ref.current.contains(e.target)) setOpen(null); };
@@ -142,6 +156,7 @@ export default function SiteNavClient({ hoods, guide, bare }) {
                 </div>
               </div>
             </li>
+            <li><Link href="/instagram" className="nv-link" onClick={closeAll}>Instagram</Link></li>
             <li><a href={`mailto:${EMAIL}`} className="nv-cta">Work With Me</a></li>
           </ul>
         </nav>

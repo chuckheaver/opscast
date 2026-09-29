@@ -2,7 +2,6 @@
 // landing page at /, so the tile grid lives here and is linked from it.
 
 import HomeHub from "../components/HomeHub";
-import SiteNav from "../components/SiteNav";
 import LegalLine from "../components/LegalLine";
 
 export const metadata = {
@@ -14,7 +13,6 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-    <SiteNav />
     <div className="app">
       <div className="topbar">
         <div>

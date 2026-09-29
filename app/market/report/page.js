@@ -6,7 +6,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import Link from "next/link";
-import SiteNav from "../../components/SiteNav";
 import SiteFooter from "../../components/SiteFooter";
 
 const G = path.join(process.cwd(), "app/market/report/generated");
@@ -30,7 +29,6 @@ export default function Page() {
     <>
       <style dangerouslySetInnerHTML={{ __html: read("sheets.css") }} />
       <div className="lp">
-        <SiteNav />
         <section className="lp-guide-head">
           <p className="lp-kicker">Market Report · {meta.period}</p>
           <h1 className="lp-guide-h1">San Francisco Market Briefing</h1>

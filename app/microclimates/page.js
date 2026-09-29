@@ -5,7 +5,6 @@
 // Words live in content.js, drawings in charts.jsx, climate figures in
 // app/lib/sf-climate.json.
 
-import SiteNav from "../components/SiteNav";
 import Link from "next/link";
 import SiteFooter, { EMAIL } from "../components/SiteFooter";
 import STATS from "../lib/landing-stats.json";
@@ -79,7 +78,6 @@ export default function Page() {
 
   return (
     <div className="lp">
-      <SiteNav />
 
       <section className="lp-guide-head">
         <p className="lp-kicker">San Francisco</p>

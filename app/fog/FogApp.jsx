@@ -85,13 +85,14 @@ export default function FogApp() {
   const [activityWanted, setActivityWanted] = useState(preset === "homes"); // Homes dots on
   const [homesFilter, setHomesFilter] = useState(defaultFilter); // shared market filter
   // "MicroClimates" overlay: terrain-derived sun/cool/wind zones (lazy-loaded).
-  const [microWanted, setMicroWanted] = useState(false);
+  // ?preset=sun / ?preset=wind open the map with that microclimate layer on.
+  const [microWanted, setMicroWanted] = useState(preset === "sun" || preset === "wind");
   const [microZones, setMicroZones] = useState(null);
   const [showMicroSun, setShowMicroSun] = useState(false);
   const [showMicroCool, setShowMicroCool] = useState(false);
-  const [showMicroWind, setShowMicroWind] = useState(false);
+  const [showMicroWind, setShowMicroWind] = useState(preset === "wind");
   // Solar "sun exposure" wash + its season, and the fog-inversion line.
-  const [showMicroSolar, setShowMicroSolar] = useState(false);
+  const [showMicroSolar, setShowMicroSolar] = useState(preset === "sun");
   const [solarSeason, setSolarSeason] = useState("annual");
   const [solarBySeason, setSolarBySeason] = useState({}); // season → geojson cache
   const [showMicroFogLine, setShowMicroFogLine] = useState(false);
@@ -800,7 +801,7 @@ export default function FogApp() {
           onMicroHide={hideMicro}
           onPickNeighborhood={pickFromNeighborhood}
           openHood={openHood}
-          initialMenu={preset === "homes" ? "activity" : preset === "transit" ? "transit" : undefined}
+          initialMenu={preset === "homes" ? "activity" : preset === "transit" ? "transit" : (preset === "sun" || preset === "wind") ? "micro" : undefined}
           activityOn={activityWanted}
           homesFilter={homesFilter}
           homesOptions={homesOptions}

@@ -7,7 +7,7 @@ import { allHoods } from "../neighborhoods/lib";
 import { TYPES, SECTIONS } from "../property-types/content";
 import SiteNavClient from "./SiteNavClient";
 
-export default function SiteNav({ bare = false }) {
+export default function SiteNav() {
   const hoods = allHoods()
     .map(h => ({ name: h.name, slug: h.slug }))
     .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: "base" }));
@@ -17,5 +17,5 @@ export default function SiteNav({ bare = false }) {
     types: TYPES.map(t => ({ id: t.key, label: t.name })),
     topics: SECTIONS.map(s => ({ id: s.id, label: s.nav })),
   };
-  return <SiteNavClient hoods={hoods} guide={guide} bare={bare} />;
+  return <SiteNavClient hoods={hoods} guide={guide} />;
 }

@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 // import Script from "next/script"; // ↳ uncomment alongside the <Script> tag below when going live with Plausible
 import "./globals.css";
+import SiteNav from "./components/SiteNav";
 
 // Geist fonts ship with the scaffold; kept available via CSS variables in case
 // we want them later. The Ur4cast UI uses DM Sans + DM Mono (loaded in globals.css).
@@ -63,6 +64,8 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* One menu on every page, maps included, so home is always a tap away. */}
+        <SiteNav />
         {children}
         {/* Plausible Analytics — uncomment (and the import above) once the domain is live */}
         {/* <Script defer data-domain="ur4cast.com" src="https://plausible.io/js/script.js" /> */}

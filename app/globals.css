@@ -5678,3 +5678,78 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .nv-panel-foot { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 6px 4px 2px; padding: 10px 8px 2px; border-top: 1px solid #DCDDDE; }
 .nv-panel-foot a { font-size: 13px; font-weight: 700; color: #203C5F; }
 .nv-panel-foot a:hover { text-decoration: underline; }
+
+/* Section labels on the home page, one size up so they read as signposts. */
+.lp-kicker.lp-kicker-lg { font-size: 15px; letter-spacing: 0.16em; }
+
+/* "What's on your block" — a snapshot of the live map, with a working
+   address pill laid over it. */
+.lp-block-map { position: relative; margin: 0 0 22px; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 1px 2px rgba(16,23,32,.08), 0 14px 34px rgba(16,23,32,.14); background: #9fd4f5; }
+.lp-block-map-link { display: block; }
+.lp-block-map img { display: block; width: 100%; height: clamp(300px, 46vw, 560px); object-fit: cover; object-position: 50% 45%;
+  transition: transform .25s; }
+.lp-block-map-link:hover img { transform: scale(1.015); }
+.lp-block-map-pill { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: min(520px, calc(100% - 28px)); z-index: 2; }
+.hero-search.hero-search-light {
+  max-width: none; background: #fff; border: 1px solid rgba(19,26,37,0.12);
+  box-shadow: 0 8px 24px rgba(10,20,35,0.22); color: #131A25;
+}
+.hero-search.hero-search-light:focus-within { border-color: #203C5F; background: #fff; }
+.hero-search.hero-search-light .fog-input { color: #131A25; }
+.hero-search.hero-search-light .fog-input::placeholder { color: #505050; opacity: 1; }
+.hero-search.hero-search-light .clear-btn { color: #505050; }
+.hero-search.hero-search-light .clear-btn:hover { color: #131A25; background: #EEF2F6; }
+.hero-search.hero-search-light .hero-search-icon { color: #203C5F; }
+
+/* Map on the left, the layer links in a narrow column on the right. */
+.lp-block { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; align-items: stretch; }
+.lp-block .lp-block-map { margin: 0; }
+.lp-block .lp-block-map img { height: 100%; min-height: 480px; }
+.lp-block .lp-block-map-link { height: 100%; }
+.lp-block-layers { display: grid; gap: 8px; align-content: start; }
+.lp .lp-block-layer {
+  display: block; padding: 10px 14px; border-radius: 12px; background: #fff;
+  border: 1px solid var(--lp-line); transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.lp .lp-block-layer:hover, .lp .lp-block-layer:focus-visible {
+  border-color: var(--lp-navy); box-shadow: 0 6px 18px rgba(16,23,32,.12); transform: translateX(2px);
+}
+.lp-block-layer-k { display: flex; justify-content: space-between; align-items: center; font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800; color: var(--lp-ink); }
+.lp-block-layer-k i { font-style: normal; color: var(--lp-navy); font-size: 14px; }
+.lp-block-layer-d { display: block; margin-top: 2px; font-size: 12.5px; line-height: 1.45; color: var(--lp-body); }
+@media (max-width: 900px) {
+  .lp-block { grid-template-columns: 1fr; }
+  .lp-block .lp-block-map img { min-height: 0; height: clamp(300px, 70vw, 520px); }
+  .lp-block-layers { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) { .lp-block-layer-d { display: none; } }
+
+/* Full-screen apps (the maps, listings) start below the site menu. */
+.fog-app, .re-app { top: var(--nv-h, 0px); }
+.nh-backdrop { top: var(--nv-h, 0px); }
+
+/* Instagram (/instagram) ------------------------------------------------------ */
+.ig { max-width: 1120px; margin: 0 auto; padding: clamp(24px, 4vw, 40px) clamp(16px, 4vw, 32px) 40px; }
+.ig-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.lp .ig-post { position: relative; display: block; aspect-ratio: 1; overflow: hidden; border-radius: 10px; background: #DCDDDE; }
+.ig-post img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s; }
+.ig-post:hover img, .ig-post:focus-visible img { transform: scale(1.04); }
+.ig-badge { position: absolute; top: 8px; right: 10px; color: #fff; font-size: 16px; text-shadow: 0 1px 4px rgba(0,0,0,.5); }
+.ig-cap {
+  position: absolute; inset: auto 0 0 0; padding: 26px 12px 10px; color: #fff;
+  background: linear-gradient(transparent, rgba(10,20,35,.82)); opacity: 0; transition: opacity .2s;
+}
+.ig-post:hover .ig-cap, .ig-post:focus-visible .ig-cap { opacity: 1; }
+.ig-cap b { display: block; font-size: 13px; font-weight: 700; line-height: 1.35; }
+.ig-cap i { display: block; margin-top: 4px; font-style: normal; font-size: 11.5px; opacity: .8; }
+.ig-empty { background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; padding: 28px; text-align: center; }
+.ig-empty p { font-size: 15.5px; color: var(--lp-body); }
+.ig-empty .lp-btn { margin-top: 16px; }
+.ig-more, .ig-back { margin-top: 18px; font-size: 14.5px; font-weight: 700; }
+.ig-more a, .ig-back a { color: var(--lp-navy); }
+@media (max-width: 900px) { .ig-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .ig-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; } .ig-cap { opacity: 1; } .ig-cap b { display: none; } }
+.lp-block-layer-k { gap: 6px; }
+@media (max-width: 480px) { .lp-block-layer-k { font-size: 13.5px; } }
+.ig { min-height: 45vh; }

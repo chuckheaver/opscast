@@ -132,6 +132,7 @@ export default function WineMapTools({
             <path d="m20 20-3.2-3.2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
           <FogLocationSearch
+            placeholder="Where do you wanna go?"
             suggest={geocodeSuggest}
             onPickFromAddress={onPickFromAddress}
             onUseGeoLocation={onUseGeoLocation}
