@@ -18,6 +18,11 @@ const GUIDE_COUNT = Object.keys(hoodStats.hoods || {}).length;
 import SiteFooter, { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "./SiteFooter";
 import HeroSearch from "./HeroSearch";
 import LiveBlockMap from "./LiveBlockMap";
+import LiveHoodMap from "./LiveHoodMap";
+import { allHoods } from "../neighborhoods/lib";
+
+// Map name → guide page slug, for the neighborhood map's click-through.
+const GUIDE_SLUGS = Object.fromEntries(allHoods().map(h => [h.name, h.slug]));
 import WeatherChip from "./WeatherChip";
 
 const money = v => `$${(v / 1e6).toFixed(2)}M`;
@@ -186,6 +191,10 @@ export default function Landing() {
             What each one is like, what homes are selling for, and the microclimate it sits in.
           </p>
           <Link className="lp-btn lp-btn-navy" href="/neighborhoods">Open the neighborhood guide</Link>
+        </div>
+        {/* Every neighborhood, outlined — click one to open its guide page. */}
+        <div className="lp-hood-map-wrap">
+          <LiveHoodMap guides={GUIDE_SLUGS} />
         </div>
       </section>
 

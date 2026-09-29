@@ -5817,3 +5817,9 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   .pt-steps { grid-template-columns: 1fr 1fr; }
   .pt-facts > div { grid-template-columns: 1fr; gap: 2px; }
 }
+
+/* The guide's neighborhood map on the home page. */
+.lp-hood-map-wrap { max-width: 1240px; margin: 26px auto 0; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 1px 2px rgba(16,23,32,.08), 0 14px 34px rgba(16,23,32,.14); }
+.lp-hood-map-wrap:empty { display: none; }
+.lp-hood-map { width: 100%; height: clamp(360px, 52vw, 620px); }
