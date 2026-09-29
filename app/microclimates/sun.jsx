@@ -84,81 +84,76 @@ function block(yard) {
   return { buildings, yardBox, street };
 }
 
-function yardSunHours(buildings, yardBox, decl) {
+// Hours of direct sun at each 2.5 ft cell of the rear yard, sunrise to
+// sunset, with every house on the block casting its shadow.
+const CELL = 2.5;
+function yardCells(buildings, yardBox, decl) {
   const [rise, set] = dayBounds(decl);
-  const pts = [];
-  for (let x = 1.25; x < 25; x += 2.5) for (let y = yardBox.y0 + 1.25; y < yardBox.y1; y += 2.5) pts.push([x, y]);
+  const cells = [];
+  for (let x = CELL / 2; x < 25; x += CELL)
+    for (let y = yardBox.y0 + CELL / 2; y < yardBox.y1; y += CELL) cells.push({ x, y, h: 0 });
   const step = 0.1;
-  let total = 0;
   for (let t = rise + step / 2; t < set; t += step) {
     const sun = sunAt(decl, t);
     if (sun.alt <= 0.5) continue;
     const shades = buildings.map(b => shadow(b, sun));
-    const lit = pts.filter(p => !shades.some(s => inside(p, s))).length;
-    total += (lit / pts.length) * step;
+    for (const c of cells) if (!shades.some(s => inside([c.x, c.y], s))) c.h += step;
   }
-  return { hours: total, day: set - rise };
+  const avg = cells.reduce((a, c) => a + c.h, 0) / cells.length;
+  return { cells, avg };
 }
 
+// Sun-hours ramp for the yard: shade grey → full-sun gold.
+const HEAT_MAX = 14;
+const heat = h => {
+  const t = Math.max(0, Math.min(1, h / HEAT_MAX));
+  const a = [200, 205, 211], b = [240, 190, 70];
+  return `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * t)).join(",")})`;
+};
+
+// One panel: north up, our house (navy) and its rear yard coloured by how
+// many hours of sun each part of it gets. Neighbors are drawn because their
+// shadows count; nothing else is on the drawing.
 function LotPanel({ yard, season }) {
   const decl = DEC[season];
-  const { buildings, yardBox, street } = block(yard);
-  const S = 2.4;                                   // px per foot
-  const X0 = -25, X1 = 50;
-  const Y0 = yard === "north" ? -30 : -70, Y1 = yard === "north" ? 170 : 130;
-  const W = (X1 - X0) * S, Hh = (Y1 - Y0) * S;
+  const { buildings, yardBox } = block(yard);
+  const { cells, avg } = yardCells(buildings, yardBox, decl);
+  const S = 2.6;
+  const X0 = -20, X1 = 45;
+  const Y0 = -14, Y1 = 114;                  // just the lot, the street and the back fence
+  const W = (X1 - X0) * S, H = (Y1 - Y0) * S;
   const px = x => (x - X0) * S, py = y => (Y1 - y) * S;
-  const poly = pts => pts.map(([x, y]) => `${px(x).toFixed(1)},${py(y).toFixed(1)}`).join(" ");
-  const times = [9, 12, 15];
-  const { hours } = yardSunHours(buildings, yardBox, decl);
-  const [rise, set] = dayBounds(decl);
-  const sr = sunAt(decl, rise + 0.02), ss = sunAt(decl, set - 0.02);
-  const cx = px(12.5), cy = py((yardBox.y0 + yardBox.y1) / 2);
-  const ray = az => [cx + Math.sin(az * R) * 70, cy - Math.cos(az * R) * 70];
-  const id = `clip-${yard}-${season}`;
+  const streetY = yard === "north" ? [-14, -2] : [102, 114];
+  const fenceY = yard === "north" ? 100 : 0;
 
   return (
     <div className="sn-lot">
-      <svg viewBox={`0 0 ${W} ${Hh}`} className="mc-svg" role="img"
-        aria-label={`Rear yard facing ${yard}, ${season === "jun" ? "June 21" : "December 21"}: about ${hours.toFixed(1)} hours of direct sun on average.`}>
-        <defs><clipPath id={id}><rect width={W} height={Hh} rx="10" /></clipPath></defs>
-        <g clipPath={`url(#${id})`}>
-          <rect width={W} height={Hh} fill="#F3F5EF" />
-          <rect x="0" y={py(street.y1)} width={W} height={(street.y1 - street.y0) * S} fill="#DADDE0" />
-          <text className="sn-t" x={W / 2} y={py((street.y0 + street.y1) / 2) + 4} textAnchor="middle">street</text>
-          {[-25, 0, 25, 50].map(x => (
-            <line key={x} x1={px(x)} x2={px(x)} y1={py(yard === "north" ? 100 : 0)} y2={py(yard === "north" ? 0 : 100)} stroke="#CDD2D6" />
+      <svg viewBox={`0 0 ${W} ${H}`} className="mc-svg" role="img"
+        aria-label={`Rear yard facing ${yard} on ${season === "jun" ? "June 21" : "December 21"}: about ${avg.toFixed(1)} hours of direct sun on average.`}>
+        <defs><clipPath id={`lot-${yard}-${season}`}><rect width={W} height={H} rx="10" /></clipPath></defs>
+        <g clipPath={`url(#lot-${yard}-${season})`}>
+          <rect width={W} height={H} fill="#F5F6F7" />
+          <rect x="0" y={py(streetY[1])} width={W} height={(streetY[1] - streetY[0]) * S} fill="#DCDFE3" />
+          <text className="sn-t" x={W / 2} y={py((streetY[0] + streetY[1]) / 2) + 4} textAnchor="middle">street</text>
+          {cells.map((c, i) => (
+            <rect key={i} x={px(c.x - CELL / 2)} y={py(c.y + CELL / 2)} width={CELL * S + 0.4} height={CELL * S + 0.4} fill={heat(c.h)} />
           ))}
-          <rect x={px(0)} y={py(yardBox.y1)} width={25 * S} height={(yardBox.y1 - yardBox.y0) * S} fill="#E4EDD9" />
-          {times.map(t => {
-            const sun = sunAt(decl, t);
-            return sun.alt > 0 && buildings.map((b, i) => (
-              <polygon key={`${t}-${i}`} points={poly(shadow(b, sun))} fill="#203C5F" opacity="0.2" />
-            ));
-          })}
-          {buildings.map((b, i) => (
+          {buildings.filter(b => b.y0 < Y1 && b.y1 > Y0).map((b, i) => (
             <rect key={i} x={px(b.x0)} y={py(b.y1)} width={(b.x1 - b.x0) * S} height={(b.y1 - b.y0) * S}
-                  fill={b.me ? "#7292AF" : "#BFC6CC"} stroke="#fff" strokeWidth="1" />
+                  fill={b.me ? "#4E7398" : "#B9C0C7"} stroke="#fff" strokeWidth="1.5" />
           ))}
           <rect x={px(0)} y={py(yardBox.y1)} width={25 * S} height={(yardBox.y1 - yardBox.y0) * S}
-                fill="none" stroke={C.barHi} strokeWidth="1.5" />
-          {[sr.az, ss.az].map((az, i) => {
-            const [x2, y2] = ray(az);
-            return (
-              <g key={i}>
-                <line x1={cx} y1={cy} x2={x2} y2={y2} stroke={C.warm} strokeWidth="1.5" />
-                <circle cx={x2} cy={y2} r="5" fill="#E8B84B" />
-                <text className="sn-t sn-t-w" x={x2} y={y2 + (y2 < cy ? -9 : 17)} textAnchor="middle">{i ? "set" : "rise"}</text>
-              </g>
-            );
-          })}
-          <g transform={`translate(${W - 16},18)`}>
-            <path d="M0,-10 L5,4 L0,1 L-5,4 Z" fill={C.ink} />
-            <text className="sn-t" x="0" y="17" textAnchor="middle">N</text>
+                fill="none" stroke="#131A25" strokeWidth="1.5" />
+          <line x1={px(-20)} x2={px(45)} y1={py(fenceY)} y2={py(fenceY)} stroke="#8E98A1" strokeWidth="1" />
+          <text className="sn-t sn-t-light" x={px(12.5)} y={py((yardBox.y0 + yardBox.y1) / 2) + 4} textAnchor="middle">yard</text>
+          <text className="sn-t sn-t-w2" x={px(12.5)} y={py(yard === "north" ? 27 : 73) + 4} textAnchor="middle">house</text>
+          <g transform={`translate(${W - 14},16)`}>
+            <path d="M0,-9 L5,4 L0,1 L-5,4 Z" fill="#131A25" />
+            <text className="sn-t" x="0" y="16" textAnchor="middle">N</text>
           </g>
         </g>
       </svg>
-      <b>{fmtH(hours)}<span> of sun in the rear yard</span></b>
+      <b>{fmtH(avg)}<span> of sun on the yard</span></b>
     </div>
   );
 }
@@ -167,30 +162,30 @@ export function LotPlan() {
   return (
     <figure className="mc-fig">
       <p className="mc-fig-h">The lot from above</p>
-      <div className="sn-lots">
-        <div className="sn-lots-row">
-          <p className="sn-row-h">Rear yard faces <b>north</b> <span>street on the south</span></p>
-          <div className="sn-pair">
-            <div><p className="sn-col-h">June 21</p><LotPanel yard="north" season="jun" /></div>
-            <div><p className="sn-col-h">December 21</p><LotPanel yard="north" season="dec" /></div>
-          </div>
-        </div>
-        <div className="sn-lots-row">
-          <p className="sn-row-h">Rear yard faces <b>south</b> <span>street on the north</span></p>
-          <div className="sn-pair">
-            <div><p className="sn-col-h">June 21</p><LotPanel yard="south" season="jun" /></div>
-            <div><p className="sn-col-h">December 21</p><LotPanel yard="south" season="dec" /></div>
-          </div>
-        </div>
+      <div className="sn-lotgrid">
+        <span />
+        <span className="sn-col-h">June 21</span>
+        <span className="sn-col-h">December 21</span>
+
+        <span className="sn-row-h">Yard <b>north</b> of the house</span>
+        <LotPanel yard="north" season="jun" />
+        <LotPanel yard="north" season="dec" />
+
+        <span className="sn-row-h">Yard <b>south</b> of the house</span>
+        <LotPanel yard="south" season="jun" />
+        <LotPanel yard="south" season="dec" />
       </div>
-      <div className="mc-key sn-key">
-        <i style={{ background: "#7292AF" }} /><span>the house</span>
-        <i style={{ background: "#E4EDD9", outline: "1.5px solid #203C5F" }} /><span>its rear yard</span>
-        <i style={{ background: "rgba(32,60,95,0.2)" }} /><span>shadow at 9am, noon, 3pm — darker = shaded longer</span>
+      <div className="sn-heatkey">
+        <span>Sun on the yard:</span>
+        <span>0 h</span>
+        <i style={{ background: `linear-gradient(90deg, ${heat(0)}, ${heat(HEAT_MAX / 2)}, ${heat(HEAT_MAX)})` }} />
+        <span className="sn-heatkey-r">{HEAT_MAX} h</span>
+        <em><i style={{ background: "#4E7398" }} /> the house</em>
+        <em><i style={{ background: "#B9C0C7" }} /> neighbors</em>
       </div>
       <figcaption className="mc-cap">
-        25 × 100 ft lot, 30 ft row houses, 45 ft yards, flat ground. Hours are the average across the
-        whole yard, sunrise to sunset.
+        The winter sun stays low in the southern sky, so a yard north of its house sits in the house&rsquo;s
+        shadow — and a yard south of it doesn&rsquo;t. 25 × 100 ft lot, 30 ft row houses, flat ground.
       </figcaption>
     </figure>
   );

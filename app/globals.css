@@ -5766,3 +5766,23 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .nv-ig { padding: 8px 10px; }
 .nv-ig-t { display: none; }
 @media (max-width: 960px) { .nv-ig { justify-content: flex-start; gap: 10px; } .nv-ig-t { display: inline; } }
+
+/* Lot from above, v2: a labelled 2×2 grid, yards coloured by sun hours. */
+.sn-lotgrid { display: grid; grid-template-columns: 120px repeat(2, minmax(0, 260px)); gap: 10px 16px; align-items: center; }
+.sn-lotgrid .sn-col-h { text-align: center; margin: 0; }
+.sn-lotgrid .sn-row-h { font-size: 14px; color: var(--lp-body); line-height: 1.35; }
+.sn-lotgrid .sn-row-h b { color: var(--lp-ink); }
+.sn-lotgrid .sn-lot b { text-align: center; }
+.sn-lotgrid .sn-lot b span { display: inline; margin-left: 4px; }
+.sn-t-w2 { fill: #fff; }
+.sn-heatkey { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 12px; font-size: 12.5px; color: var(--lp-body); }
+.sn-heatkey > i { display: inline-block; width: 120px; height: 10px; border-radius: 3px; }
+.sn-heatkey-r { margin-right: 14px; }
+.sn-heatkey em { font-style: normal; display: inline-flex; align-items: center; gap: 5px; }
+.sn-heatkey em i { display: inline-block; width: 14px; height: 10px; border-radius: 3px; }
+@media (max-width: 720px) {
+  .sn-lotgrid { grid-template-columns: 70px repeat(2, minmax(0, 1fr)); gap: 8px 10px; }
+  .sn-lotgrid .sn-row-h { font-size: 12px; }
+  .sn-lotgrid .sn-lot b { font-size: 14px; }
+  .sn-lotgrid .sn-lot b span { display: block; margin: 0; font-size: 11px; }
+}
