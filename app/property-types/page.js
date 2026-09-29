@@ -4,7 +4,7 @@
 
 import Link from "next/link";
 import SiteFooter, { EMAIL } from "../components/SiteFooter";
-import { TYPES, SECTIONS, DISCLAIMER } from "./content";
+import { COMPARE, TYPES, SECTIONS, DISCLAIMER } from "./content";
 
 export const metadata = {
   title: "Types of Real Estate in San Francisco — Chuck Heaver",
@@ -20,63 +20,78 @@ export default function Page() {
         <p className="lp-kicker">San Francisco Buyer &amp; Seller Guide</p>
         <h1 className="lp-guide-h1">Types of Real Estate</h1>
         <p className="lp-guide-lede">
-          Five ways property is owned here, and they are not interchangeable — each
-          one finances differently, resells differently, and carries its own way of
-          going wrong. Then the three things that cost people real money: the
-          disclosure package, the tax bill, and special tax districts.
+          Five ways to own in San Francisco, and what it takes to buy each one — in one-line facts.
         </p>
       </section>
 
       <div className="pt-toc">
         <nav>
-          {TYPES.map(t => <a key={t.key} href={`#${t.key}`}>{t.name}</a>)}
+          <a href="#compare">At a glance</a>
+          {TYPES.map(t => <a key={t.key} href={`#${t.key}`}>{t.name.replace(" (TIC)", "")}</a>)}
           <span className="pt-toc-sep" aria-hidden="true" />
           {SECTIONS.map(s => <a key={s.id} href={`#${s.id}`}>{s.nav}</a>)}
         </nav>
       </div>
 
       <article className="pt-body">
-        {TYPES.map(t => (
-          <section className="pt-type" id={t.key} key={t.key}>
-            <div className="pt-type-head">
+        {/* The five types at a glance. */}
+        <section className="pt-sec" id="compare">
+          <h2>At a glance</h2>
+          <div className="pt-cmp-wrap">
+            <table className="pt-cmp">
+              <thead>
+                <tr><th scope="col">Type</th>{COMPARE.cols.map(c => <th key={c} scope="col">{c}</th>)}</tr>
+              </thead>
+              <tbody>
+                {COMPARE.rows.map(r => (
+                  <tr key={r.key}>
+                    <th scope="row"><a href={`#${r.key}`}>{r.name}</a></th>
+                    {r.cells.map((c, i) => <td key={i}>{c}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div className="pt-types">
+          {TYPES.map(t => (
+            <section className="pt-type" id={t.key} key={t.key}>
               <h2>{t.name}</h2>
               <p className="pt-type-short">{t.short}</p>
-            </div>
-            <p className="pt-what">{t.what}</p>
-            <div className="pt-cols">
-              <div>
-                <h3>Financing</h3>
-                <ul>{t.financing.map((x, i) => <li key={i}>{x}</li>)}</ul>
-              </div>
-              <div>
-                <h3>What to check</h3>
-                <ul>{t.watch.map((x, i) => <li key={i}>{x}</li>)}</ul>
-              </div>
-            </div>
-          </section>
-        ))}
+              <p className="pt-what">{t.what}</p>
+              <h3>Financing</h3>
+              <ul>{t.financing.map((x, i) => <li key={i}>{x}</li>)}</ul>
+              <h3>Watch for</h3>
+              <ul>{t.watch.map((x, i) => <li key={i}>{x}</li>)}</ul>
+            </section>
+          ))}
+        </div>
 
         {SECTIONS.map(s => (
           <section className="pt-sec" id={s.id} key={s.id}>
             <p className="lp-kicker">{s.kicker}</p>
             <h2>{s.title}</h2>
             <p className="pt-lead">{s.lead}</p>
-            {s.body.map(b => (
-              <div className="pt-block" key={b.h}>
-                <h3>{b.h}</h3>
-                <p>{b.p}</p>
-              </div>
-            ))}
+            {s.steps && (
+              <ol className="pt-steps">
+                {s.steps.map((st, i) => (
+                  <li key={st.h}><span className="pt-step-n">{i + 1}</span><b>{st.h}</b><span>{st.p}</span></li>
+                ))}
+              </ol>
+            )}
+            <dl className="pt-facts">
+              {s.body.map(b => (
+                <div key={b.h}><dt>{b.h}</dt><dd>{b.p}</dd></div>
+              ))}
+            </dl>
           </section>
         ))}
 
         <section className="pt-cta">
           <div>
-            <h2>Not sure which one you are looking at?</h2>
-            <p>
-              Send me the address. I will tell you what it is, what the records say
-              about it, and what it will actually cost you to own.
-            </p>
+            <h2>Not sure what you're looking at?</h2>
+            <p>Send the address. I'll tell you what it is and what it costs to own.</p>
           </div>
           <a className="lp-btn lp-btn-gold" href={`mailto:${EMAIL}?subject=Question%20about%20a%20property`}>
             Ask me about a property
