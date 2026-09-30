@@ -56,6 +56,13 @@
 .sheetA table.linv tbody tr:nth-child(even) td { background:#faf9f7; }
 .sheetA table.linv td.b { font-weight:800; color:#042C53; }
 .sheetA table.linv td.g0, .sheetA table.linv th.g0 { border-left:1.5px solid #cfc9c0; }
+.sheetA ul.math { list-style:none; margin:4px 0 0; padding:0; font-size:9px; }
+.sheetA ul.math li { display:flex; justify-content:space-between; padding:2.5px 0; margin:0; border-bottom:0.5px solid #ddd8d0; }
+.sheetA ul.math li::before { content:none !important; display:none !important; }
+.sheetA ul.math li.tot { border-bottom:none; border-top:1.2px solid #042C53; font-weight:700; }
+.sheetA ul.math li.tot b { font-size:11px; color:#042C53; }
+.sheetA ul.sigl { margin:3px 0 0; padding-left:14px; }
+.sheetA ul.sigl li { margin:2px 0; }
 .sheetA .lkpi { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:6px 0 8px; }
 .sheetA .lkpi div { background:#E6F1FB; border-left:3px solid #C9A227; border-radius:4px; padding:5px 8px; }
 .sheetA .lkpi b { display:block; font-size:17px; color:#042C53; font-weight:800; }

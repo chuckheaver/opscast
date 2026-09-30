@@ -536,10 +536,10 @@ def spread_chart(w=470,h=158):
     o.append(f"<text x='{w-pad_l}' y='10' font-size='6.2' fill='{MUTED}' text-anchor='end'>shaded band = lender spread (bottom row)</text>")
     return "".join(o)+"</svg>"
 
-PROP_TAX=0.0118        # San Francisco property tax, roughly 1.18% of assessed value
+PROP_TAX=0.015         # property tax used for the carrying-cost example (SF base rate is ~1.18%; 1.5% allows for bonds and direct charges)
 LUX_EVENTS={6:"Nasdaq peak",7:"Nasdaq −10%",8:"OpenAI $7B tender"}
 
-def lux_series(lo=5e6,hi=10e6):
+def lux_series(lo=5e6,hi=float("inf")):
     """Monthly count of sales in a price band, prior year and current."""
     import collections
     F=[f["properties"] for f in json.load(open(mg.SRC))["features"]]
@@ -686,6 +686,13 @@ def build():
     table.linv tbody tr:nth-child(even) td {{ background:#faf9f7; }}
     table.linv td.b {{ font-weight:800; color:{NAV}; }}
     table.linv td.g0, table.linv th.g0 {{ border-left:1.5px solid #cfc9c0; }}
+    ul.math {{ list-style:none; margin:4px 0 0; padding:0; font-size:9px; }}
+    ul.math li {{ display:flex; justify-content:space-between; padding:2.5px 0; margin:0; border-bottom:0.5px solid {LINE}; }}
+    ul.math li::before {{ content:none !important; display:none !important; }}
+    ul.math li.tot {{ border-bottom:none; border-top:1.2px solid {NAV}; font-weight:700; }}
+    ul.math li.tot b {{ font-size:11px; color:{NAV}; }}
+    ul.sigl {{ margin:3px 0 0; padding-left:14px; }}
+    ul.sigl li {{ margin:2px 0; }}
     .lkpi {{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:6px 0 8px; }}
     .lkpi div {{ background:{NAV_LT}; border-left:3px solid {GOLD_MID}; border-radius:4px; padding:5px 8px; }}
     .lkpi b {{ display:block; font-size:17px; color:{NAV}; font-weight:800; }}
@@ -846,13 +853,14 @@ def build():
         f"<td class='b'>${P(MED_CO,r):,.0f}</td>"
         f"<td style='color:{DOWN if r>6.10 else MUTED}'>{'+' if r>6.10 else ''}{P(MED_CO,r)-P(MED_CO,6.10):,.0f}</td></tr>"
         for r in (6.10,6.76,7.00,7.25))
-    lux=[r for r in S["y1"] if 5e6<=r["sellingPrice"]<10e6]
-    lux0=[r for r in S["y0"] if 5e6<=r["sellingPrice"]<10e6]
+    lux=[r for r in S["y1"] if r["sellingPrice"]>=5e6]
+    lux0=[r for r in S["y0"] if r["sellingPrice"]>=5e6]
+    lc=lux_series()[2026]                   # month → count, for the caption
     top5=[r for r in S["y1"] if r["sellingPrice"]>=5e6]
     luxv=sum(r["sellingPrice"] for r in lux); top5v=sum(r["sellingPrice"] for r in top5)
     zero=[r for r in top5 if r.get("dom")==0 or r["status"]=="Sold Off MLS"]
     carry=lambda p,y: p*y/100+p*PROP_TAX
-    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>Who Is Buying</div>
+    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The Cost of Ownership</div>
       <div class='p'>Two buyers, two completely different triggers. One watches the mortgage rate. The other never thinks about it.</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales · Treasury &amp; Freddie Mac</div></div>""")
     o.append("<div class='cols'>")
@@ -862,23 +870,38 @@ def build():
       <table class='top'><tr><th class='l'>30-yr rate</th><th>SFH median</th><th>vs 6.10%</th><th>Condo median</th><th>vs 6.10%</th></tr>{rate_rows}</table>
       <div class='cap'>Monthly payment on a typical {M(MED_SFH)} house and {M(MED_CO)} condo with 20% down.
       January's {6.10:.2f}% to today's {MTG_NOW:.2f}% costs a house buyer <span class='st'>${P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10):,.0f} more a month</span> — <span class='st'>${12*(P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10)):,.0f} a year</span> — for the same house.</div>
-      <h2 style='margin-top:6px'>Home Loans Follow the Bond</h2>{spread_chart(h=206)}
+      <h2 style='margin-top:6px'>Home Loans Follow the Bond</h2>{spread_chart(h=190)}
       <div class='cap'>Gold is your home loan, blue is what the government pays. The gap between them barely moves, so the bond leads and your rate follows.</div></div>""")
     o.append(f"""<div class='col'><h2 class='band'>The Cash Buyer</h2>
       <div class='cap' style='margin-bottom:5px'><b>{100*len(top5)/len(S['y1']):.1f}%</b> of the sales, <b>{100*top5v/allv1:.0f}%</b> of the money. They pay cash, so the mortgage rate is beside the point.</div>
-      <h2>$5–10M Sales by Month — 2025 vs 2026</h2>
-      {lux_chart(h=214)}
+      <h2>Over $5M — Sales by Month, 2025 vs 2026</h2>
+      {lux_chart(h=190)}
       <div class='cap'><span class='st'>{len(lux)}</span> sales against <span class='st'>{len(lux0)}</span> last year, <span class='st'>{sgn(D(len(lux),len(lux0)))}%</span>.
-      Watch the shape: 28 in June, 11 in July when the stock market fell 10%, back up in August after OpenAI let staff cash out $7 billion of shares. Last year had no summer dip — so this is the stock market, not the season.</div>
-      <h2 style='margin-top:6px'>What an $8M House Costs to Just Hold</h2>
-      {carry_chart(w=470,h=180)}
-      <div class='cap'>A cash buyer pays no interest — they give up interest. That same $8M in government bonds earns <span class='st'>${8e6*TEN_NOW/100/1000:,.0f}K a year</span>; add property tax and holding the house runs <span class='st'>${carry(8e6,TEN_NOW)/1000:,.0f}K a year</span>.</div></div>""")
+      Sales peaked at {lc.get(6,0)} in June and fell to {lc.get(7,0)} in July, the month the Nasdaq dropped 10%.</div>
+      <h2 style='margin-top:6px'>Annual Opportunity Cost of Owning an $8M Home</h2>
+      {carry_chart(w=470,h=112)}
+      <ul class='math'>
+        <li>Lost bond earnings ({TEN_NOW:.2f}%) <b>${round(8e6*TEN_NOW/100,-3):,.0f}</b></li>
+        <li>Real estate taxes ({100*PROP_TAX:.1f}%) <b>${8e6*PROP_TAX:,.0f}</b></li>
+        <li class='tot'>Total <b>${round(8e6*TEN_NOW/100,-3)+8e6*PROP_TAX:,.0f}</b></li>
+      </ul></div>""")
     o.append("</div>")
     o.append(f"""<div class='cols' style='margin-top:7px'>
-      <div class='col'><div class='sig'><b>What moves them.</b> The financed buyer moves when the ten-year Treasury moves. Under <b>4.5%</b> home loans fall into the low 6s and buyers come back out; hold at 5% and loans head toward {5.02+1.80:.2f}% and fewer people qualify. Watch the bond, not the Fed.</div></div>
-      <div class='col'><div class='sig'><b>What moves them.</b> The cash buyer moves on two things: what their money earns sitting still — <b>{TEN_NOW:.2f}%</b> right now, tax-free of California — and whether they can get at it, which means share sales and IPOs. One thing outranks both: <b>need</b>. A family that has outgrown the house buys this year at whatever the market asks.</div></div>
+      <div class='col'><div class='sig'><b>What moves the financed buyer</b>
+        <ul class='sigl'>
+          <li>The 10-year Treasury leads; home loans run about 1.8 points above it.</li>
+          <li>Treasury under <b>4.5%</b> → loans in the low 6s → buyers come back.</li>
+          <li>Treasury at <b>5%</b> → loans toward {5.02+1.80:.2f}% → fewer buyers qualify.</li>
+          <li>Watch the bond, not the Fed.</li>
+        </ul></div></div>
+      <div class='col'><div class='sig'><b>What moves the cash buyer</b>
+        <ul class='sigl'>
+          <li><b>1. Need</b> — a family that has outgrown the house buys this year, at whatever the market asks. Outranks the other two.</li>
+          <li><b>2. Liquidity</b> — can they get at the money: share sales, tender offers, IPOs.</li>
+          <li><b>3. Opportunity cost</b> — cash left in 10-year Treasuries earns <b>{TEN_NOW:.2f}%</b>, free of California tax.</li>
+        </ul></div></div>
     </div>""")
-    o.append(f"""<div class='foot'><span>Payments are principal and interest only. Foregone yield uses the 10-year Treasury; property tax at {100*PROP_TAX:.2f}%. Insurance, upkeep and illiquidity are additional.</span><span>page 4 / 9</span></div></div>""")
+    o.append(f"""<div class='foot'><span>Payments are principal and interest only. Foregone yield uses the 10-year Treasury; property tax at {100*PROP_TAX:.1f}%. Insurance, upkeep and illiquidity are additional.</span><span>page 4 / 9</span></div></div>""")
 
     # ── PAGE 5 — the neighborhoods ───────────────────────────────────────
     erows=[("UCSF","Mission Bay"),("Salesforce","SoMa"),("OpenAI","Mission Bay"),("Anthropic","Howard St"),("Uber","Mission Bay"),
