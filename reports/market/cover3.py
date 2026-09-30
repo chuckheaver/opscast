@@ -536,7 +536,7 @@ def spread_chart(w=470,h=158):
     o.append(f"<text x='{w-pad_l}' y='10' font-size='6.2' fill='{MUTED}' text-anchor='end'>shaded band = lender spread (bottom row)</text>")
     return "".join(o)+"</svg>"
 
-PROP_TAX=0.015         # property tax used for the carrying-cost example (SF base rate is ~1.18%; 1.5% allows for bonds and direct charges)
+PROP_TAX=0.0118        # San Francisco property tax, roughly 1.18% of assessed value
 LUX_EVENTS={6:"Nasdaq peak",7:"Nasdaq −10%",8:"OpenAI $7B tender"}
 
 def lux_series(lo=5e6,hi=float("inf")):
@@ -882,7 +882,7 @@ def build():
       {carry_chart(w=470,h=112)}
       <ul class='math'>
         <li>Lost bond earnings ({TEN_NOW:.2f}%) <b>${round(8e6*TEN_NOW/100,-3):,.0f}</b></li>
-        <li>Real estate taxes ({100*PROP_TAX:.1f}%) <b>${8e6*PROP_TAX:,.0f}</b></li>
+        <li>Real estate taxes ({100*PROP_TAX:.2f}%) <b>${8e6*PROP_TAX:,.0f}</b></li>
         <li class='tot'>Total <b>${round(8e6*TEN_NOW/100,-3)+8e6*PROP_TAX:,.0f}</b></li>
       </ul></div>""")
     o.append("</div>")
@@ -901,7 +901,7 @@ def build():
           <li><b>3. Opportunity cost</b> — cash left in 10-year Treasuries earns <b>{TEN_NOW:.2f}%</b>, free of California tax.</li>
         </ul></div></div>
     </div>""")
-    o.append(f"""<div class='foot'><span>Payments are principal and interest only. Foregone yield uses the 10-year Treasury; property tax at {100*PROP_TAX:.1f}%. Insurance, upkeep and illiquidity are additional.</span><span>page 4 / 9</span></div></div>""")
+    o.append(f"""<div class='foot'><span>Payments are principal and interest only. Foregone yield uses the 10-year Treasury; property tax at {100*PROP_TAX:.2f}%. Insurance, upkeep and illiquidity are additional.</span><span>page 4 / 9</span></div></div>""")
 
     # ── PAGE 5 — the neighborhoods ───────────────────────────────────────
     erows=[("UCSF","Mission Bay"),("Salesforce","SoMa"),("OpenAI","Mission Bay"),("Anthropic","Howard St"),("Uber","Mission Bay"),
