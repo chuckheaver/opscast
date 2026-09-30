@@ -3,8 +3,8 @@
   "run": "Sep 14, 2026",
   "pages": {
     "sf": [
-      "San Francisco Right Now",
-      "Where the Money Came From",
+      "San Francisco Real Estate",
+      "Detail \u2014 Allocation of Money",
       "Who Is Buying",
       "In Depth",
       "Latent Inventory"
@@ -19,7 +19,7 @@
     ]
   },
   "links": {
-    "areas": 115,
+    "areas": 129,
     "sales": 9
   }
 }

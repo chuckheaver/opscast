@@ -9,7 +9,7 @@ import re, datetime, pathlib
 
 OUT = pathlib.Path(__file__).resolve().parent / "out"
 SRC = [(OUT / "cover3.html", "sheetA"), (OUT / "market-grid-v2.html", "sheetB")]
-PAGE_LABELS = ["San Francisco Right Now", "The National Picture", "Where the Money Came From",
+PAGE_LABELS = ["San Francisco Real Estate", "The National Picture", "Detail — Allocation of Money",
                "Who Is Buying", "The Neighborhoods", "In Depth", "Latent Inventory",
                "Grid — Single Family", "Grid — Condo / TIC / Co-op"]
 

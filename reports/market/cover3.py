@@ -388,7 +388,7 @@ def mirror_bars(split,w=470,h=206):
     full width and the numbers sit inside."""
     pad_l,gap=2,38; bw=w-pad_l-2; y1=34; y2=y1+BARH+gap
     o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>"]
-    for yy,key,title,fmt in ((y1,"pn","HOMES SOLD — ALL TYPES",lambda d:f"{d['n']:,}"),
+    for yy,key,title,fmt in ((y1,"pn","UNITS SOLD — ALL TYPES",lambda d:f"{d['n']:,}"),
                              (y2,"pv","MONEY SPENT",lambda d:f"${d['v']/1e6:,.0f}M")):
         o.append(f"<text x='{pad_l}' y='{yy-8}' font-size='8.6' font-weight='800' fill='{NAV}' letter-spacing='0.4'>{title}</text>")
         x=pad_l; out=[]
@@ -415,13 +415,13 @@ def mirror_bars(split,w=470,h=206):
 def hood_bars(rank,tot,w=300,h=300,top=11):
     """Neighborhoods ranked by dollars closed, with a line marking where half
     the city's money sits. Values print inside the bar so nothing runs off."""
-    mx=rank[0][1]; nw=98; bx=nw+6; bw=w-bx-4
+    mx=rank[0][1]; nw=124; bx=nw+6; bw=w-bx-4
     rowh=(h-30)/top
     o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>"]
     cum=0; half_y=None
     for i,(a_,v) in enumerate(rank[:top]):
         cum+=v; y=6+i*rowh
-        nm=a_ if len(a_)<=20 else a_[:19]+"…"
+        nm=a_ if len(a_)<=27 else a_[:26]+"…"
         o.append(f"<text x='0' y='{y+rowh*0.66:.1f}' font-size='7.4' fill='{INK}'>{nm}</text>")
         wseg=bw*v/mx
         o.append(f"<rect x='{bx}' y='{y+1.5:.1f}' width='{wseg:.1f}' height='{rowh-5:.1f}' fill='{NAV}' rx='1.5'/>")
@@ -443,7 +443,7 @@ def type_mirror(rows,w=470,h=168):
           ("Condo / TIC / Other","#C9A227",len(c_),sum(r["sellingPrice"] for r in c_))]
     pad_l,gap=2,34; bw=w-pad_l-2; y1=22; y2=y1+BARH+gap
     o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>"]
-    for yy,idx,total,title,fmt in ((y1,2,n,"HOMES SOLD",lambda v:f"{v:,}"),
+    for yy,idx,total,title,fmt in ((y1,2,n,"UNITS SOLD",lambda v:f"{v:,}"),
                                    (y2,3,tot,"MONEY SPENT",lambda v:f"${v/1e9:.2f}B")):
         o.append(f"<text x='{pad_l}' y='{yy-8}' font-size='8.6' font-weight='800' fill='{NAV}' letter-spacing='0.4'>{title}</text>")
         x=pad_l; out=[]
@@ -748,7 +748,7 @@ def build():
     # ── PAGE 1 — San Francisco right now ─────────────────────────────────
     # The local snapshot. Headline numbers, then four charts. One sentence
     # under each; anything longer belongs on the In Depth page.
-    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>San Francisco Right Now</div>
+    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>San Francisco Real Estate</div>
       <div class='p'><b>{mname} {mo.year}</b> and the year through <b>{thru}</b>, each against the same stretch last year.</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, SFAR MLS · run {datetime.date.today().strftime('%B %-d, %Y')}</div></div>""")
     o.append("<div class='kpis'>"
@@ -759,18 +759,18 @@ def build():
         +kpi("Sold Over Ask — SFH / Condo", f"{st['y1']['over']:.0f}{sl}{ct['y1']['over']:.0f}%", f"{st['y1']['over']-st['y0']['over']:+.0f} / {ct['y1']['over']-ct['y0']['over']:+.0f} pts")
         +"</div>")
     o.append("<div class='cols' style='margin-top:7px'>")
-    o.append(f"""<div class='col'><h2>How Many Sold</h2>
+    o.append(f"""<div class='col'><h2>Units Sold</h2>
       {stacked(urows,USEG,uytd,h=212)}
       <div class='cap'>Light bars are last year, dark bars this year. <span class='st'>{u26:,}</span> homes have sold, against <span class='st'>{u25:,}</span> by this point last year.</div></div>""")
-    o.append(f"""<div class='col'><h2>How Much Money</h2>
+    o.append(f"""<div class='col'><h2>Volume Allocation</h2>
       {stacked(vrows,VSEG,vytd,h=212,fmt=lambda v:f"{v/1e6:.0f}")}
       <div class='cap'>Millions of dollars a month. <span class='st'>${v26/1e9:.2f}B</span> so far against <span class='st'>${v25/1e9:.2f}B</span> — far more money on only {sgn(D(u26,u25))}% more sales.</div></div>""")
     o.append("</div>")
     o.append("<div class='cols' style='margin-top:7px'>")
-    o.append(f"""<div class='col'><h2>Asking Price vs What Buyers Paid — Houses</h2>
+    o.append(f"""<div class='col'><h2>Sale vs List — SFH</h2>
       {lines(mlrows,[("What sellers asked","#C9A227","mlist"),("What buyers paid","#12379E","msold")],h=196,dkey="d")}
       <div class='cap'>Blue sits above gold every month this year: buyers paid over asking all year. The figure under each month is the change from last year.</div></div>""")
-    o.append(f"""<div class='col'><h2>Asking Price vs What Buyers Paid — Condos</h2>
+    o.append(f"""<div class='col'><h2>Sale vs List — Condo/TIC</h2>
       {lines(clrows,[("What sellers asked","#C9A227","clist"),("What buyers paid","#12379E","csold")],h=196,dkey="d")}
       <div class='cap'>Same story for condos, with a narrower gap — sellers ask about {M(statistics.median([r['clist'] for r in clrows if r['clist']]))} and get about {M(statistics.median([r['csold'] for r in clrows if r['csold']]))}.</div></div>""")
     o.append("</div>")
@@ -811,37 +811,22 @@ def build():
         if run>=mtot/2: break
     top3=sum(v for _,v in hrank[:3])
     cheap=msplit[0]; rich=msplit[-1]
-    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>Where the Money Came From</div>
+    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>Detail — Allocation of Money</div>
       <div class='p'><b>${mtot/1e9:.2f} billion</b> changed hands in <b>{mn:,}</b> sales this year. It did not come from where most people assume.</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, Jan 1 – {thru}</div></div>""")
     o.append("<div class='cols'>")
-    o.append(f"""<div class='col' style='flex:1.5'><h2>The Same Market, Counted Two Ways</h2>
+    o.append(f"""<div class='col' style='flex:1.5'><h2>Allocation by Tier</h2>
       {mirror_bars(msplit)}
-      <div class='cap'>The top bar counts <b>homes</b>, the bottom counts <b>dollars</b> — same four price ranges, completely different shapes.
-      <span class='st'>{cheap['n']:,}</span> homes sold under $1M and brought <span class='st'>${cheap['v']/1e6:,.0f}M</span>; just <span class='st'>{rich['n']}</span> sold over $5M and brought <span class='st'>${rich['v']/1e6:,.0f}M</span>.</div>
-      <h2 style='margin-top:6px'>Houses or Condos?</h2>
+      <div class='cap'>The top bar counts <b>units</b>, the bottom counts <b>dollars</b> — same four price ranges, completely different shapes.
+      <span class='st'>{cheap['n']:,}</span> units sold under $1M and brought <span class='st'>${cheap['v']/1e6:,.0f}M</span>; just <span class='st'>{rich['n']}</span> sold over $5M and brought <span class='st'>${rich['v']/1e6:,.0f}M</span>.</div>
+      <h2 style='margin-top:6px'>Allocation by Type</h2>
       {type_mirror(S["y1"])}
       <div class='cap'>More condos change hands than houses, yet houses bring in more money.</div>
       <div class='pull'><div class='pq'>{rich['n']} homes — one sale in twenty — brought in ${rich['v']/1e9:.2f} billion.</div>
       <div class='pqs'>More than twice what the {cheap['n']:,} homes under $1M brought in, from a fifth as many sales.</div></div></div>""")
-    rows="".join(
-        f"<tr><td class='l'>{d['lab']}</td><td>{d['n']:,}</td><td>{d['pn']:.0f}%</td>"
-        f"<td class='b'>${d['v']/1e6:,.0f}M</td><td>{d['pv']:.0f}%</td>"
-        f"<td style='color:{UP if d['pv']>d['pn'] else MUTED};font-weight:700'>{d['pv']/d['pn']:.1f}×</td></tr>"
-        for d in msplit)
-    o.append(f"""<div class='col'><h2>Every Price Tier, in Full</h2>
-      <table class='top'><tr><th class='l'>Price</th><th>Sales</th><th>% sales</th><th>Money</th><th>% money</th><th>Weight</th></tr>{rows}</table>
-      <div class='cap'>Weight is the giveaway. <span class='st'>1.0×</span> means a price range brings in exactly its fair share of the money.
-      Under $1M scores <span class='st'>{cheap['pv']/cheap['pn']:.1f}×</span>; over $5M scores <span class='st'>{rich['pv']/rich['pn']:.1f}×</span>.</div>
-      <h2 style='margin-top:6px'>The Short Version</h2><ul>"""
-      +B(f"{khalf}", f"neighborhoods out of {len(hrank)} produced half the money in the whole city")
-      +B(f"{100*top3/mtot:.0f}", "% of every dollar came from just three neighborhoods")
-      +B("Price", "not volume, is what moved. Homes sold are up 8%; money is up 29%")
-      +B(f"${mtot/mn/1e6:.2f}M", "the average San Francisco sale this year, across every home type")
-      +"</ul></div>""")
-    o.append(f"""<div class='col'><h2>Which Neighborhoods Hold the Money</h2>
-      {hood_bars(hrank,mtot)}
-      <div class='cap'>Top eleven by dollars closed. <span class='st'>{hrank[0][0]}</span> alone took <span class='st'>${hrank[0][1]/1e6:,.0f}M</span> — <span class='st'>{100*hrank[0][1]/mtot:.0f}%</span> of the city — on {100*len([r for r in S['y1'] if N2A_(r.get('neighborhood') or '')==hrank[0][0]])/mn:.0f}% of its sales.</div>
+    o.append(f"""<div class='col' style='flex:1.1'><h2>Allocation by Neighborhood</h2>
+      {hood_bars(hrank,mtot,w=380,h=470,top=20)}
+      <div class='cap'>Top twenty by dollars closed. <span class='st'>{hrank[0][0]}</span> alone took <span class='st'>${hrank[0][1]/1e6:,.0f}M</span> — <span class='st'>{100*hrank[0][1]/mtot:.0f}%</span> of the city — on {100*len([r for r in S['y1'] if N2A_(r.get('neighborhood') or '')==hrank[0][0]])/mn:.0f}% of its sales.</div>
       <div class='sig' style='margin-top:5px'><b>The one to remember.</b> Half the money in San Francisco real estate this year came from <b>{khalf} neighborhoods</b>.
       If your home is in one of them, your buyer pool is deeper than the citywide numbers suggest. If it is not, price and presentation carry the whole job.</div></div>""")
     o.append("</div>")

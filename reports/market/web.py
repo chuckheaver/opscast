@@ -27,9 +27,9 @@ DEST = ROOT / "app" / "market" / "report" / "generated"
 
 # The nine pages, in print order, and where each lands on the web.
 PAGES = [
-    ("San Francisco Right Now", "sf"),
+    ("San Francisco Real Estate", "sf"),
     ("The National Picture", "national"),
-    ("Where the Money Came From", "sf"),
+    ("Detail — Allocation of Money", "sf"),
     ("Who Is Buying", "sf"),
     ("The Neighborhoods", "hoods"),
     ("In Depth", "sf"),
