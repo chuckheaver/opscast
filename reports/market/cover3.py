@@ -589,6 +589,36 @@ def carry_chart(w=228,h=120,price=8e6):
         o.append(f"<text x='{X(i):.1f}' y='{h-4}' font-size='6.4' fill='{MUTED}' text-anchor='{'start' if i==0 else 'end'}'>{lab}</text>")
     return "".join(o)+"</svg>"
 
+def by_numbers(rows, thru):
+    """Figures for the By the Numbers page, from the year's closed sales.
+    Robust counts only — single extreme records (a stale list price, a
+    listing left open for years) are not headline material."""
+    import collections
+    SFH=mg.SEG["Single Family Residences"]
+    n=len(rows); vol=sum(r["sellingPrice"] for r in rows)
+    days=(datetime.date.fromisoformat(thru)-datetime.date(int(thru[:4]),1,1)).days+1
+    hrs=days*24/n
+    dom=[r["dom"] for r in rows if r.get("dom") is not None]
+    rat=[r["sellingPrice"]/r["listPrice"] for r in rows if r.get("listPrice")]
+    sfh=[r for r in rows if r["propType"] in SFH]
+    beds=[r["sellingPrice"]/r["bedrooms"] for r in sfh if isinstance(r.get("bedrooms"),(int,float)) and r["bedrooms"]>0]
+    wd=collections.Counter(datetime.date.fromisoformat(r["sellingDate"][:10]).weekday() for r in rows)
+    z=collections.Counter(r.get("zip") for r in rows if r.get("zip")).most_common(1)[0]
+    sq=lambda rs: statistics.median([r["sqft"] for r in rs if r.get("sqft")])
+    return dict(
+        per_day=f"${vol/days/1e6:.1f}M", vol=f"${vol/1e9:.2f}B", days=days,
+        every=f"Every {int(hrs)}h {round((hrs%1)*60):02d}m",
+        zero=f"{sum(1 for d in dom if d==0):,}",
+        friday=f"{100*wd[4]/n:.0f}%", weekend=wd[5]+wd[6],
+        week=f"{100*sum(1 for d in dom if d<=7)/len(dom):.0f}%",
+        bid150=f"{sum(1 for x in rat if x>=1.5):,}", bid130=f"{sum(1 for x in rat if x>=1.3):,}",
+        per_bed=f"${statistics.median(beds)/1e3:,.0f}K",
+        zip=z[0], zipn=z[1],
+        under=f"{100*sum(1 for x in rat if x<1)/len(rat):.0f}%",
+        tenm=f"{sum(1 for r in rows if r['sellingPrice']>=10e6)}",
+        sqft=f"{sq(sfh):,.0f} sf", csqft=f"{sq([r for r in rows if r['propType'] not in SFH]):,.0f} sf",
+    )
+
 def mtg_pmt(P,r,yrs=30):
     i=r/100/12; n=yrs*12; return P*i/(1-(1+i)**-n)
 
@@ -686,6 +716,18 @@ def build():
     table.linv tbody tr:nth-child(even) td {{ background:#faf9f7; }}
     table.linv td.b {{ font-weight:800; color:{NAV}; }}
     table.linv td.g0, table.linv th.g0 {{ border-left:1.5px solid #cfc9c0; }}
+    .bn {{ display:grid; grid-template-columns:repeat(6,1fr); grid-auto-rows:118px; gap:7px; margin:8px 0 4px; }}
+    .bn-t {{ border-radius:6px; padding:10px 12px; display:flex; flex-direction:column; justify-content:center; overflow:hidden; }}
+    .bn-t b {{ font-family:Georgia,serif; font-weight:700; line-height:1; font-size:30px; }}
+    .bn-t span {{ margin-top:5px; font-size:10px; line-height:1.3; }}
+    .bn-t i {{ margin-top:3px; font-style:normal; font-size:8px; opacity:.75; }}
+    .bn-t.big {{ grid-column:span 2; grid-row:span 2; }}
+    .bn-t.big b {{ font-size:64px; }} .bn-t.big span {{ font-size:14px; }} .bn-t.big i {{ font-size:10px; }}
+    .bn-t.wide {{ grid-column:span 2; }} .bn-t.wide b {{ font-size:40px; }} .bn-t.wide span {{ font-size:11px; }}
+    .bn-t.navy {{ background:{NAV}; color:#fff; }}
+    .bn-t.gold {{ background:{GOLD_MID}; color:#1c1917; }}
+    .bn-t.light {{ background:{NAV_LT}; color:{NAV}; }}
+    .bn-t.light span {{ color:{INK}; }}
     ul.math {{ list-style:none; margin:4px 0 0; padding:0; font-size:9px; }}
     ul.math li {{ display:flex; justify-content:space-between; padding:2.5px 0; margin:0; border-bottom:0.5px solid {LINE}; }}
     ul.math li::before {{ content:none !important; display:none !important; }}
@@ -861,19 +903,21 @@ def build():
     zero=[r for r in top5 if r.get("dom")==0 or r["status"]=="Sold Off MLS"]
     carry=lambda p,y: p*y/100+p*PROP_TAX
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The Cost of Ownership</div>
-      <div class='p'>Two buyers, two completely different triggers. One watches the mortgage rate. The other never thinks about it.</div></div>
+      <div class='p'>The cost of money</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales · Treasury &amp; Freddie Mac</div></div>""")
     o.append("<div class='cols'>")
     o.append(f"""<div class='col'><h2 class='band'>The Financed Buyer</h2>
-      <div class='cap' style='margin-bottom:5px'>Most of the market. What they can pay is set by the mortgage rate, and the mortgage rate is set by the bond market.</div>
-      <h2>What a Rate Move Costs, Every Month</h2>
+      <div class='cap' style='margin-bottom:5px'><b>Watching Interest Rates</b></div>
+      <h2>The Cost of Financing an Average Home</h2>
       <table class='top'><tr><th class='l'>30-yr rate</th><th>SFH median</th><th>vs 6.10%</th><th>Condo median</th><th>vs 6.10%</th></tr>{rate_rows}</table>
       <div class='cap'>Monthly payment on a typical {M(MED_SFH)} house and {M(MED_CO)} condo with 20% down.
       January's {6.10:.2f}% to today's {MTG_NOW:.2f}% costs a house buyer <span class='st'>${P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10):,.0f} more a month</span> — <span class='st'>${12*(P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10)):,.0f} a year</span> — for the same house.</div>
-      <h2 style='margin-top:6px'>Home Loans Follow the Bond</h2>{spread_chart(h=190)}
-      <div class='cap'>Gold is your home loan, blue is what the government pays. The gap between them barely moves, so the bond leads and your rate follows.</div></div>""")
+      <h2 style='margin-top:6px'>Home Loans Follow the Bond</h2>{spread_chart(h=140)}
+      <div class='cap'>Gold is your home loan, blue is what the government pays. The gap between them barely moves, so the bond leads and your rate follows.</div>
+      <h2 style='margin-top:5px'>The Yield Curve Today</h2>{curve_chart(w=470,h=92)}
+      <div class='cap'>Lend longer, earn more — the line rises, as it should. When it tips the other way it is <b>inverted</b>, which has come before every U.S. recession since the 1970s. We are not there.</div></div>""")
     o.append(f"""<div class='col'><h2 class='band'>The Cash Buyer</h2>
-      <div class='cap' style='margin-bottom:5px'><b>{100*len(top5)/len(S['y1']):.1f}%</b> of the sales, <b>{100*top5v/allv1:.0f}%</b> of the money. They pay cash, so the mortgage rate is beside the point.</div>
+      <div class='cap' style='margin-bottom:5px'><b>Watching Bond Yields</b></div>
       <h2>Over $5M — Sales by Month, 2025 vs 2026</h2>
       {lux_chart(h=190)}
       <div class='cap'><span class='st'>{len(lux)}</span> sales against <span class='st'>{len(lux0)}</span> last year, <span class='st'>{sgn(D(len(lux),len(lux0)))}%</span>.
@@ -958,54 +1002,28 @@ def build():
     # the long explanations were moved down here.
     wrows,wcut,w25y,w26,wlast=weekly_series(W["m1"][1])
     w25=sum(r["a"] for r in wrows if r["w"]<=wcut)
-    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>In Depth</div>
-      <div class='p'>The detail behind the charts — read it if you want it, skip it if you don't</div></div>
-      <div class='by'>Chuck Heaver · Vanguard Properties</div></div>""")
-    o.append("<div class='cols'>")
-    o.append("<div class='col'><h2>Attention Sellers</h2><ul>"
-        +B(f"{s['big']:.0f}", "% of house closings at least 20% over ask")
-        +B(f"{st['y1']['dom']:.0f}", "Days to sell a house (median)")
-        +B(f"{s['wk']:.0f}", "% of houses under contract in a week")
-        +B(f"{st['y1']['pct']:.0f}", f"% of list the winning house bid paid. Was {st['y0']['pct']:.0f}% in '{py}")
-        +B(f"{ct['y1']['dom']:.0f}", f"Days to sell a condo. Was {ct['y0']['dom']:.0f} in '{py}")
-        +B(f"{ct['y1']['over']:.0f}", "% of condos now selling over list")
-        +B("35", f"% drop in active listings vs '{py}")
-        +"</ul><h2 style='margin-top:6px'>Attention Buyers</h2><ul>"
-        +B(f"{st['y1']['pct']:.0f}", "% of ask to budget on a house")
-        +B(f"{ct['y1']['pct']:.0f}", "% of ask to budget on a condo")
-        +B(f"{M(loan)}", f"Mortgage that ${RENT_NOW:,} rent carries at {cv.RATE_NOW:.2f}%")
-        +B(f"{c['dm_slow'][-1][0]:.0f}", f"Days to sell a {c['dm_slow'][-1][1]} condo. Take your time")
-        +B(f"{M(pf['price'])}", f"Cheapest way in — fog-belt house at ${pf['ppsf']:.0f}/sf")
-        +"</ul></div>")
-    o.append(f"""<div class='col'><h2>How a Mortgage Rate Actually Gets Set</h2><ul>"""
-      +B(f"{TEN_NOW:.2f}", "% — what the government pays to borrow for ten years")
-      +B(f"{mspread:.2f}", "Points the bank adds on top for its costs and its risk")
-      +B(f"{MTG_NOW:.2f}", "% — your home loan rate. Those two, added together")
-      +B(f"{rise:.2f}", "Points the government's rate rose in twelve months")
-      +"</ul>"
-      +f"""<h2 style='margin-top:6px'>The Yield Curve Today</h2>{curve_chart()}
-      <div class='cap'>What you earn lending the government money for three months, two years, ten years and thirty. Normally the line rises — lend longer, earn more — and it does today.
-      When it tips the other way, short money paying more than long, it is called <b>inverted</b>, and that has come before every U.S. recession since the 1970s. We are not there.</div>
-      <div class='cap' style='margin-top:4px'><b>Rents.</b> A one-bedroom now runs ${RENT_NOW:,} a month, {sgn(RENT_YOY)}% more than last year — the fastest rise in the country.
-      That same ${RENT_NOW:,} covers the payment on a {M(loan)} mortgage, which is why renters keep turning into buyers.</div></div>""")
-    o.append(f"""<div class='col'><h2>What Pulls a Cash Buyer Back</h2><ul>"""
-      +B("Stocks", "falling. Their shares are the down payment, and the market dropped twice this year")
-      +B(f"{TEN_NOW:.2f}", "% — what cash earns doing nothing. The higher that goes, the better waiting looks")
-      +B("No way", "to sell shares. Rich on paper is not the same as able to buy")
-      +"</ul><h2 style='margin-top:4px'>What Brings Them In</h2><ul>"
-      +B("Need", "first. A growing family, a move, a school year — none of it waits for the Nasdaq")
-      +B("$7B", "OpenAI tender in August at an $852B valuation. 300+ new decamillionaires")
-      +B("Scarcity", "41 trophy sales a year in Pacific Heights. You buy when one appears")
-      +B("Prop 13", "Buy now and the assessment is locked at today's price for as long as you hold")
-      +"</ul>"
-      +f"""<div class='sig' style='margin-top:5px'><b>How to read this report.</b> <b>Median</b> is the middle sale — half sold for more, half for less, and it ignores extremes.
-      <b>Average</b> is the total divided by the count, so one $30M sale drags it up. <b>Homes</b> means every residential type unless a chart says SFH or Condo.
-      <b>YTD</b> is January 1 to {thru}, always compared with the identical stretch of {py}.</div></div>""")
-    o.append("</div>")
+    bn=by_numbers(S["y1"], W["m1"][1])
+    T_=lambda cls,v,lab,sub="": f"<div class='bn-t {cls}'><b>{v}</b><span>{lab}</span>{f'<i>{sub}</i>' if sub else ''}</div>"
+    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>By the Numbers</div>
+      <div class='p'>San Francisco real estate in figures most people never see — Jan 1 – {thru}</div></div>
+      <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, SFAR MLS</div></div>
+      <div class='bn'>"""
+      +T_("navy big", bn['per_day'], "changed hands every day", f"{bn['vol']} over {bn['days']} days")
+      +T_("gold wide", bn['every'], "a San Francisco home sold, around the clock")
+      +T_("light wide", bn['zero'], "homes sold in zero days", "under contract before they ever hit the market")
+      +T_("light", bn['friday'], "of all closings land on a Friday", f"{bn['weekend']} closed on a weekend")
+      +T_("light", bn['week'], "sold within a week")
+      +T_("navy wide", bn['bid150'], "homes sold for 150% of list or more", f"{bn['bid130']} went for 130%+")
+      +T_("light wide", bn['per_bed'], "the price of one bedroom", "median house price ÷ its bedrooms")
+      +T_("gold", bn['zip'], "the busiest ZIP", f"{bn['zipn']} sales")
+      +T_("light", bn['under'], "sold below asking")
+      +T_("light", bn['tenm'], "sales of $10M or more")
+      +T_("navy", bn['sqft'], "the typical house", f"condo {bn['csqft']}")
+      +"</div>")
     o.append(f"""<div style='margin-top:7px'><h2>Units Sold by Week — Every Week of Both Years</h2>
       {weekly_bars(wrows,h=150,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"weeks 1–{wcut} · 2025 full year {w25y:,}"))}
       <div class='cap'>Grey bars after week {wcut} show where last year kept going — its busiest stretch was early October, which is what a full autumn looks like.</div></div>""")
-    o.append(f"<div class='foot'><span>Rents from Zumper median 1BR, San Francisco. Equity and tender figures from CNBC, Bloomberg, PitchBook and Motley Fool reporting. Commentary is interpretation, not a forecast.</span><span>page 6 / 9</span></div></div>")
+    o.append(f"<div class='foot'><span>Every figure from closed sales, Jan 1 – {thru} (SFAR MLS). Days on market as reported; list-to-sale ratios use the final list price.</span><span>page 6 / 9</span></div></div>")
 
     # ── PAGE 7 — latent inventory (single-family only) ───────────────────
     # Only houses give a true turnover rate: one parcel is one house is one

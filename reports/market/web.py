@@ -6,7 +6,7 @@ out/market-grid-v2.html), splits them into their pages, and regroups the pages
 into the three sections of the site's Market menu:
 
   SF Market         — Right Now, Where the Money Came From, Who Is Buying,
-                      In Depth, Latent Inventory
+                      By the Numbers, Latent Inventory
   SF Neighborhoods  — The Neighborhoods, and both market grids
   National Mkts     — The National Picture
 
@@ -32,7 +32,7 @@ PAGES = [
     ("Detail — Allocation of Money", "sf"),
     ("Who Is Buying", "sf"),
     ("The Neighborhoods", "hoods"),
-    ("In Depth", "sf"),
+    ("By the Numbers", "sf"),
     ("Latent Inventory", "sf"),
     ("Grid — Single Family", "hoods"),
     ("Grid — Condo / TIC / Co-op", "hoods"),
