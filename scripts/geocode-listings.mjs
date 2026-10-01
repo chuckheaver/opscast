@@ -23,6 +23,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
+import { statsThrough } from "./stats-through.mjs";
 import {
   findNeighborhoodForPoint,
   findContourForPoint,
@@ -802,6 +803,8 @@ async function main() {
     metadata: {
       source: "data/raw/*.csv (combined MLS exports)",
       builtAt: new Date().toISOString(),
+      // Market stats stop at the end of the last full month — see stats-through.mjs.
+      statsThrough: statsThrough({ features }),
       geocoder: "US Census batch geocoder (Public_AR_Current)",
       total: features.length,
       rebuilt: listings.length,

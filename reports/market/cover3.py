@@ -6,7 +6,7 @@ spec=importlib.util.spec_from_file_location("cv",__import__("os").path.join(__im
 mg=cv.mg; NAV,NAV_LT,GOLD,GOLD_LT,GOLD_MID,UP,DOWN,INK,MUTED,LINE=cv.NAV,cv.NAV_LT,cv.GOLD,cv.GOLD_LT,cv.GOLD_MID,cv.UP,cv.DOWN,cv.INK,cv.MUTED,cv.LINE
 M,D,sgn=cv.M,cv.D,cv.sgn
 RENTS=[("May",3480,4000),("Jun",3560,4060),("Jul",3400,4180),("Sep",3400,4250)]
-RENT_NOW=4250; RENT_YOY=25.0; RENT_2BR=6020
+RENT_NOW=4400; RENT_YOY=25.4; RENT_2BR=6340   # Zumper, September 2026 report (Sept 29)
 def pmt(principal,rate,years=30):
     r=rate/100/12; n=years*12; return principal*r/(1-(1+r)**-n)
 
@@ -31,10 +31,12 @@ def rent_chart(w=452,h=88):
 
 # Unemployment rate, 2026. U.S. seasonally adjusted (BLS Employment Situation);
 # California and San Francisco County from EDD monthly releases. Charted through
-# July, the last month all three are published — August county data lands Sept 18.
+# August, the last month all three are published as of Sept 30 (EDD, Sept 18).
+# September U.S. data lands Oct 2; California and county data Oct 16.
 UNEMP=[(1,4.3,5.4,4.1),(2,4.4,5.4,3.8),(3,4.3,5.3,3.7),(4,4.3,5.3,3.5),
-       (5,4.3,5.3,3.3),(6,4.2,5.2,3.7),(7,4.1,5.1,3.7)]
-# U.S. CPI, year over year, 2026 (BLS monthly releases).
+       (5,4.3,5.3,3.3),(6,4.2,5.2,3.7),(7,4.1,5.1,3.7),(8,4.1,5.1,4.2)]
+# U.S. CPI, year over year, 2026 (BLS monthly releases). August released Sept 11;
+# September lands Oct 14.
 CPI=[(1,2.4),(2,2.4),(3,3.3),(4,3.8),(5,4.2),(6,3.5),(7,3.4),(8,3.4)]
 # RentCafe cost-of-living index, San Francisco vs the U.S. average (published Sept 2026).
 COL=[("Housing",156),("Utilities",47),("Transportation",41),("Groceries",16)]
@@ -469,16 +471,16 @@ def type_mirror(rows,w=470,h=168):
 
 # ── Bond market ──────────────────────────────────────────────────────────
 # 10-year Treasury, month-end readings (U.S. Treasury via Advisor Perspectives,
-# CNBC and Bloomberg reporting of the daily close). Sept 2026 is the current level.
+# CNBC and Bloomberg reporting of the daily close). Sept 2026 is the Sept 30 close.
 TEN_Y=[("Sep'25",4.04),("Oct",4.11),("Nov",4.14),("Dec",4.16),("Jan'26",4.24),("Feb",4.04),
-       ("Mar",4.38),("Apr",4.30),("May",4.50),("Jun",4.44),("Jul",4.75),("Aug",4.78),("Sep'26",5.02)]
-CURVE=[("3 mo",3.91),("2 yr",4.37),("10 yr",4.78),("30 yr",5.24)]   # full par curve, Sept 4 2026
-TWO_NOW, TEN_NOW, MTG_NOW = 4.74, 5.02, 6.76                        # after the Sept 16 Fed hike
-MED_SFH, MED_CO = 2_075_000, 1_275_000
+       ("Mar",4.38),("Apr",4.30),("May",4.50),("Jun",4.44),("Jul",4.75),("Aug",4.78),("Sep'26",5.29)]
+CURVE=[("3 mo",4.20),("2 yr",4.90),("10 yr",5.29),("30 yr",5.63)]   # constant-maturity curve, Sept 30 2026
+TWO_NOW, TEN_NOW, MTG_NOW = 4.90, 5.29, 7.03                        # Sept 30 closes; PMMS Sept 24 (Fed hiked to 3.75–4.00% Sept 16)
+MED_SFH, MED_CO = 2_100_000, 1_275_000                               # YTD medians through Sept 30
 
 def yield_chart(w=470,h=150):
     """10-year Treasury over twelve months, with the 5% line marked."""
-    lo,hi=3.85,5.30; pad_l,pad_b,pad_t=8,17,18
+    lo,hi=3.85,5.45; pad_l,pad_b,pad_t=8,17,18
     n=len(TEN_Y); gw=(w-2*pad_l)/(n-1)
     X=lambda i:pad_l+i*gw; Y=lambda v:h-pad_b-(v-lo)/(hi-lo)*(h-pad_b-pad_t)
     o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>"]
@@ -512,10 +514,10 @@ def curve_chart(w=228,h=116):
 def spread_chart(w=470,h=158):
     """The 10-year and the 30-year mortgage on one scale: the shaded band
     between them is the lender spread, and it barely moves."""
-    ten={"Jan":4.24,"Feb":4.04,"Mar":4.38,"Apr":4.30,"May":4.50,"Jun":4.44,"Jul":4.75,"Aug":4.78,"Now":5.02}
+    ten={"Jan":4.24,"Feb":4.04,"Mar":4.38,"Apr":4.30,"May":4.50,"Jun":4.44,"Jul":4.75,"Aug":4.78,"Now":TEN_NOW}
     mtg=dict(cv.RATES); mtg["Now"]=cv.RATE_NOW
     labs=[k for k in ten if k in mtg]
-    lo,hi=3.8,7.1; pad_l,pad_b,pad_t=8,26,16
+    lo,hi=3.8,7.3; pad_l,pad_b,pad_t=8,26,16
     n=len(labs); gw=(w-2*pad_l)/(n-1)
     X=lambda i:pad_l+i*gw; Y=lambda v:h-pad_b-(v-lo)/(hi-lo)*(h-pad_b-pad_t)
     top=[(X(i),Y(mtg[k])) for i,k in enumerate(labs)]
@@ -847,7 +849,7 @@ def build():
     o.append(f"""<div class='col'><h2>Inflation — How Fast Everything Costs More</h2>{lines([dict(m=m_,cpi=v) for m_,v in CPI],[("Prices vs a year ago","#C9A227","cpi")],h=200,fmt=lambda v:f"{v:.1f}%")}
       <div class='cap'>How much more things cost than a year ago: {CPI[0][1]:.1f}% in January, up to {max(v for _,v in CPI):.1f}% in May, <span class='st'>{CPI[-1][1]:.1f}%</span> now. While this stays high, loans stay expensive.</div></div>""")
     o.append(f"""<div class='col'><h2>Jobs — Who Is Working</h2>{lines(urows2,[("San Francisco","#12379E","sf"),("California","#C9A227","ca"),("United States","#8A8F98","us")],h=200,fmt=lambda v:f"{v:.1f}%")}
-      <div class='cap'>Share of people looking for work. San Francisco is at <span class='st'>{UNEMP[-1][3]:.1f}%</span> against {UNEMP[-1][2]:.1f}% statewide and {UNEMP[-1][1]:.1f}% nationally — more people working here means more people able to buy.</div></div>""")
+      <div class='cap'>Share of people looking for work. San Francisco is at <span class='st'>{UNEMP[-1][3]:.1f}%</span> in {datetime.date(2026,UNEMP[-1][0],1):%B}, up from {UNEMP[-2][3]:.1f}% in {datetime.date(2026,UNEMP[-2][0],1):%B}, against {UNEMP[-1][2]:.1f}% statewide and {UNEMP[-1][1]:.1f}% nationally. Still well below the state.</div></div>""")
     o.append("</div>")
     o.append(f"""<div class='sig' style='margin-top:8px'><b>How the four fit together.</b> Inflation keeps the Treasury high. The Treasury sets the mortgage rate. The mortgage rate decides what a financed buyer can pay.
       Jobs decide how many buyers there are at all. Right now the first three are working against buyers and the fourth is working for them — which is why prices rose
@@ -897,7 +899,7 @@ def build():
         f"<td style='color:{DOWN if r>6.10 else MUTED}'>{'+' if r>6.10 else ''}{P(MED_SFH,r)-P(MED_SFH,6.10):,.0f}</td>"
         f"<td class='b'>${P(MED_CO,r):,.0f}</td>"
         f"<td style='color:{DOWN if r>6.10 else MUTED}'>{'+' if r>6.10 else ''}{P(MED_CO,r)-P(MED_CO,6.10):,.0f}</td></tr>"
-        for r in (6.10,6.76,7.00,7.25))
+        for r in (6.10,6.50,MTG_NOW,7.50))
     lux=[r for r in S["y1"] if r["sellingPrice"]>=5e6]
     lux0=[r for r in S["y0"] if r["sellingPrice"]>=5e6]
     lc=lux_series()[2026]                   # month → count, for the caption
@@ -936,9 +938,9 @@ def build():
     o.append(f"""<div class='cols' style='margin-top:7px'>
       <div class='col'><div class='sig'><b>What moves the financed buyer</b>
         <ul class='sigl'>
-          <li>The 10-year Treasury leads; home loans run about 1.8 points above it.</li>
+          <li>The 10-year Treasury leads; home loans run about {MTG_NOW-TEN_NOW:.1f} points above it.</li>
           <li>Treasury under <b>4.5%</b> → loans in the low 6s → buyers come back.</li>
-          <li>Treasury at <b>5%</b> → loans toward {5.02+1.80:.2f}% → fewer buyers qualify.</li>
+          <li>Treasury above <b>5%</b> → loans above 7% → fewer buyers qualify.</li>
           <li>Watch the bond, not the Fed.</li>
         </ul></div></div>
       <div class='col'><div class='sig'><b>What moves the cash buyer</b>

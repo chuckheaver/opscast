@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-01T16:31:10.473Z",
-  "dataThrough": "2026-10-01T16:30:50.780Z",
+  "generatedAt": "2026-10-01T21:35:43.231Z",
+  "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
     "from": "2026-01-01",
-    "to": "2026-10-01"
+    "to": "2026-09-30"
   },
   "hoods": {
     "Alamo Square": {
@@ -63,13 +63,13 @@
       "zone": "Fog"
     },
     "Bernal Heights": {
-      "n": 98,
-      "sfhMedian": 1987500,
-      "sfhN": 74,
+      "n": 97,
+      "sfhMedian": 1975000,
+      "sfhN": 73,
       "condoMedian": 1250000,
       "condoN": 23,
-      "ppsf": 1199.6693957819116,
-      "dom": 12.5,
+      "ppsf": 1194.6902654867256,
+      "dom": 13,
       "fogHours": 9,
       "zone": "Fog"
     },

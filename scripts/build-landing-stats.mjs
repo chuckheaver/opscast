@@ -10,6 +10,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
+import { statsThrough, throughStamp } from "./stats-through.mjs";
 
 const LISTINGS = "public/data/sf-listings.geojson";
 const PARCELS = "public/data/parcel-res-by-neighborhood.json";
@@ -30,15 +31,17 @@ const median = xs => {
 };
 
 const geo = JSON.parse(readFileSync(LISTINGS, "utf8"));
-const built = geo.metadata?.builtAt || null;
-const year = String(new Date(built || Date.now()).getFullYear());
+const THROUGH = statsThrough(geo);                 // e.g. "2026-09-30"
+const built = throughStamp(THROUGH);
+const year = THROUGH.slice(0, 4);
+const upTo = d => String(d || "").slice(0, 10) <= THROUGH;
 
 const sales = [];
 for (const f of geo.features || []) {
   const p = f.properties || {};
   const price = Number(p.sellingPrice) || 0;
   if (price <= 0) continue;
-  if (!String(p.sellingDate || "").startsWith(year)) continue;
+  if (!String(p.sellingDate || "").startsWith(year) || !upTo(p.sellingDate)) continue;
   sales.push({
     zone: zoneOf(Number(p.fogHours)),
     price,
@@ -67,8 +70,7 @@ const pfog = zoneStat(houses, "persistentFog");
 // ── The market KPIs, matching the monthly briefing's front page ─────────
 // Year to date against the identical stretch of the prior year, so the site
 // and the PDF report never disagree.
-const endDate = new Date(built || Date.now());
-const md = `${String(endDate.getMonth() + 1).padStart(2, "0")}-${String(endDate.getDate()).padStart(2, "0")}`;
+const md = THROUGH.slice(5);
 const prevYear = String(Number(year) - 1);
 
 const inWindow = (d, yr) => d >= `${yr}-01-01` && d <= `${yr}-${md}`;
@@ -145,7 +147,7 @@ const POINTS = "public/data/sold-points-ytd.json";
 const pts = [];
 for (const f of geo.features || []) {
   const p = f.properties || {};
-  if (!(Number(p.sellingPrice) > 0) || !String(p.sellingDate || "").startsWith(year)) continue;
+  if (!(Number(p.sellingPrice) > 0) || !String(p.sellingDate || "").startsWith(year) || !upTo(p.sellingDate)) continue;
   const [lng, lat] = f.geometry?.coordinates || [];
   if (Number.isFinite(lng) && Number.isFinite(lat)) pts.push([+lng.toFixed(5), +lat.toFixed(5)]);
 }

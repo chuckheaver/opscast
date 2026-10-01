@@ -11,6 +11,7 @@
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { listNeighborhoods } from "../app/fog/lib/neighborhoods.js";
+import { statsThrough, throughStamp } from "./stats-through.mjs";
 
 const LISTINGS = "public/data/sf-listings.geojson";
 const OUT = "app/lib/neighborhood-stats.json";
@@ -30,10 +31,9 @@ const zoneOf = h => {
 };
 
 const geo = JSON.parse(readFileSync(LISTINGS, "utf8"));
-const end = new Date(geo.metadata?.builtAt || Date.now());
-const YEAR = String(end.getFullYear());
-const iso = d => d.toISOString().slice(0, 10);
-const FROM = `${YEAR}-01-01`, TO = iso(end);
+const TO = statsThrough(geo);                      // last day of the last full month
+const YEAR = TO.slice(0, 4);
+const FROM = `${YEAR}-01-01`;
 
 const byHood = new Map();
 for (const f of geo.features || []) {
@@ -57,7 +57,7 @@ for (const f of geo.features || []) {
 
 const out = {
   generatedAt: new Date().toISOString(),
-  dataThrough: geo.metadata?.builtAt || null,
+  dataThrough: throughStamp(TO),
   year: YEAR,
   window: { from: FROM, to: TO },
   hoods: {},

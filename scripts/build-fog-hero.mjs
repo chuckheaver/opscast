@@ -4,6 +4,7 @@
 // no work at runtime.  node scripts/build-fog-hero.mjs
 
 import { readFileSync, writeFileSync } from "node:fs";
+import { statsThrough } from "./stats-through.mjs";
 
 const SHAPES = "public/data/map-shapes.json";
 const LISTINGS = "public/data/sf-listings.geojson";
@@ -24,7 +25,8 @@ const ZONES = [
 
 const shapes = JSON.parse(readFileSync(SHAPES, "utf8"));
 const geo = JSON.parse(readFileSync(LISTINGS, "utf8"));
-const year = String(new Date(geo.metadata?.builtAt || Date.now()).getFullYear());
+const THROUGH = statsThrough(geo);
+const year = THROUGH.slice(0, 4);
 
 const lat0 = ((S0 + N0) / 2) * Math.PI / 180;
 const sx = (E0 - W0) * Math.cos(lat0), sy = N0 - S0;
@@ -59,7 +61,7 @@ let n = 0;
 const dots = [];
 for (const f of geo.features || []) {
   const p = f.properties || {};
-  if (!String(p.sellingDate || "").startsWith(year)) continue;
+  if (!String(p.sellingDate || "").startsWith(year) || String(p.sellingDate).slice(0, 10) > THROUGH) continue;
   if (!(Number(p.sellingPrice) > 0)) continue;
   const c = f.geometry?.coordinates;
   if (!c) continue;

@@ -160,6 +160,17 @@ def as_coord(v):
     return "" if f == 0 or f != f else v  # 0 or NaN → missing
 
 
+def as_count(v):
+    """Like as_num, but 0 is a real value (days on market can be zero)."""
+    if v is None or v == "":
+        return None
+    try:
+        f = float(str(v).strip().replace(",", ""))
+    except ValueError:
+        return None
+    return int(f) if f >= 0 else None
+
+
 def as_num(v):
     """CSV cells arrive as strings; xlsx cells as ints/floats. Return an int
     if the value cleanly parses to a positive number, else None."""
@@ -227,7 +238,7 @@ def main():
             # "Sold Off MLS"); anything else passes through as exported.
             status_out = norm if norm is not None else raw_status
             close = as_date(g(r, "closeDate"))
-            dom_num = as_num(g(r, "dom"))
+            dom_num = as_count(g(r, "dom"))   # 0 is real: sold the day it listed
             list_date = ""
             if close and dom_num is not None:
                 list_date = (close - datetime.timedelta(days=int(dom_num))).strftime("%m/%d/%y")

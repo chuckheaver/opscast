@@ -246,7 +246,10 @@ export default function NeighborhoodModal({
       .then(r => (r.ok ? r.json() : Promise.reject()))
       .then(g => {
         if (cancelled) return;
-        setDataThrough(g.metadata?.builtAt ? mdy(g.metadata.builtAt) : "");
+        // Stats run through the end of the last full month (metadata.statsThrough).
+        const through = g.metadata?.statsThrough || "";
+        const shown = through || g.metadata?.builtAt;
+        setDataThrough(shown ? mdy(shown) : "");
         const feats = g.features || [];
         // Only homes physically IN this neighborhood (strict point-in-polygon
         // fogNeighborhood match) — not ones merely MLS-tagged to it.
@@ -257,7 +260,8 @@ export default function NeighborhoodModal({
               return p.fogNeighborhood === name
                 && typeRe.test(p.propType || "")
                 && Number(p.sellingPrice) > 0
-                && String(p.sellingDate || "").slice(0, 4) === CUR_YEAR;
+                && String(p.sellingDate || "").slice(0, 4) === CUR_YEAR
+                && (!through || String(p.sellingDate).slice(0, 10) <= through);
             })
             .map(f => {
               const p = f.properties;

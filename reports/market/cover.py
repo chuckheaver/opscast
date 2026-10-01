@@ -13,8 +13,8 @@ sgn=lambda x,d=0:f"{x:+.{d}f}"
 # One representative reading per month (the survey publishes weekly, not a
 # monthly mean), plus the latest reading as of the report run date.
 RATES=[("Jan",6.10),("Feb",5.98),("Mar",6.22),("Apr",6.35),("May",6.37),
-       ("Jun",6.52),("Jul",6.66),("Aug",6.67)]
-RATE_NOW=6.76; RATE_NOW_DATE="September 10, 2026"; RATE_LOW=5.98; RATE_LOW_MO="February"
+       ("Jun",6.52),("Jul",6.66),("Aug",6.67),("Sep",6.95)]   # Sep = Sept 17; "Now" = Sept 24
+RATE_NOW=7.03; RATE_NOW_DATE="September 24, 2026"; RATE_LOW=5.98; RATE_LOW_MO="February"
 
 def rate_chart(w=452,h=88):
     vals=[v for _,v in RATES]+[RATE_NOW]; labs=[m for m,_ in RATES]+["Now"]
