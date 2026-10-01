@@ -808,7 +808,7 @@ def build():
         +kpi("Condo — Med / Avg", f"${mm(ct['y1']['price'])}{sl}${mm(ct['y1']['avg'])}M", f"{sgn(D(ct['y1']['price'],ct['y0']['price']))}% / {sgn(D(ct['y1']['avg'],ct['y0']['avg']))}%")
         +kpi("Sales Volume — All Homes", f"${allv1/1e9:.1f}B", f"{sgn(D(allv1,allv0))}%")
         +kpi("Days on Mkt — SFH / Condo", f"{st['y1']['dom']:.0f}{sl}{ct['y1']['dom']:.0f}", f"{st['y1']['dom']-st['y0']['dom']:+.0f} / {ct['y1']['dom']-ct['y0']['dom']:+.0f} days")
-        +kpi("Sold Price vs List % — SFH / Condo", f"{st['y1']['pct']:.0f}{sl}{ct['y1']['pct']:.0f}%", f"{st['y1']['pct']-st['y0']['pct']:+.0f} / {ct['y1']['pct']-ct['y0']['pct']:+.0f} pts")
+        +kpi("Sold Price vs List %", f"{st['y1']['pct']:.0f}{sl}{ct['y1']['pct']:.0f}%", f"{st['y1']['pct']-st['y0']['pct']:+.0f} / {ct['y1']['pct']-ct['y0']['pct']:+.0f} pts · SFH / Condo")
         +"</div>")
     o.append("<div class='cols' style='margin-top:7px'>")
     o.append(f"""<div class='col'><h2>Units Sold</h2>
