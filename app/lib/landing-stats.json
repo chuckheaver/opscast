@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-01T21:49:37.960Z",
+  "generatedAt": "2026-10-01T21:55:13.858Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
-  "salesTracked": 9000,
-  "salesThisYear": 3955,
+  "salesTracked": 9005,
+  "salesThisYear": 3956,
   "neighborhoods": 116,
   "parcels": 152454,
   "market": {
@@ -27,8 +27,8 @@
         "overAsk": 56.39204545454545,
         "saleToList": 101.25523012552301
       },
-      "volume": 8157404138,
-      "n": 3955
+      "volume": 8159154138,
+      "n": 3956
     },
     "prior": {
       "sfh": {

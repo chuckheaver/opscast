@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T21:49:38.198Z",
+  "generatedAt": "2026-10-01T21:55:14.037Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -701,12 +701,12 @@
       "zone": "Persistent Fog"
     },
     "Nob Hill": {
-      "n": 82,
+      "n": 83,
       "sfhMedian": 1700000,
       "sfhN": 5,
       "condoMedian": 1380000,
       "condoN": 61,
-      "ppsf": 1090.1871921182264,
+      "ppsf": 1096.4912280701753,
       "dom": 33,
       "fogHours": 7,
       "zone": "Sun"
