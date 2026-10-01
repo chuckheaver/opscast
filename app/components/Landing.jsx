@@ -139,7 +139,7 @@ export default function Landing() {
           <p className="lp-stats-head">
             By the Numbers: &rsquo;26 vs <span className="lp-stats-key">&rsquo;25</span> YTD{through ? ` (${through})` : ""}
           </p>
-          <Link href="/market/report" className="lp-stats-pill">Market Stats - {statsMonth}</Link>
+          <Link href="/market/report#sf" className="lp-stats-pill">Market Stats - {statsMonth}</Link>
         </div>
         <div className="lp-stats-row">
           {KPIS.map(k => (

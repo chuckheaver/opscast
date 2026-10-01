@@ -5674,6 +5674,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .rp-sheets { margin-top: 16px; display: grid; gap: 22px; }
 /* Each printed page keeps its designed size and scrolls sideways if the
    screen is narrower, so tables and charts never reflow out of shape. */
+.rp-sheet[id] { scroll-margin-top: 80px; }
 .rp-sheet { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 6px; }
 .rp-sheet .page {
   margin: 0 auto; height: auto !important; min-height: 7.6in; padding: 0.3in 0.35in;

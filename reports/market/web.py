@@ -5,9 +5,10 @@ Reads the two print documents the generator writes (out/cover3.html and
 out/market-grid-v2.html), splits them into their pages, and regroups the pages
 into the three sections of the site's Market menu:
 
-  SF Market         — Right Now, Where the Money Came From, Who Is Buying,
-                      By the Numbers, Latent Inventory
-  SF Neighborhoods  — The Neighborhoods, and both market grids
+  Market Stats      — SF Real Estate, Detail — Allocation, Grid SFH,
+                      Grid Condo/TIC, The Neighborhoods, By the Numbers,
+                      Latent Inventory (in that order)
+  Cost of Ownership — the cost of money: rates, bonds, the cash buyer
   National Mkts     — The National Picture
 
 On the way through it turns report text into drill-downs on the live map:
@@ -25,17 +26,17 @@ ROOT = HERE.parents[1]
 OUT = HERE / "out"
 DEST = ROOT / "app" / "market" / "report" / "generated"
 
-# The nine pages, in print order, and where each lands on the web.
+# The nine pages, in print order: (label, web section, order within it, anchor).
 PAGES = [
-    ("San Francisco Real Estate", "sf"),
-    ("The National Picture", "national"),
-    ("Detail — Allocation of Money", "sf"),
-    ("Who Is Buying", "sf"),
-    ("The Neighborhoods", "hoods"),
-    ("By the Numbers", "sf"),
-    ("Latent Inventory", "sf"),
-    ("Grid — Single Family", "hoods"),
-    ("Grid — Condo / TIC / Co-op", "hoods"),
+    ("San Francisco Real Estate", "stats", 1, ""),
+    ("The National Picture", "national", 1, ""),
+    ("Detail — Allocation of Money", "stats", 2, ""),
+    ("The Cost of Ownership", "cost", 1, ""),
+    ("The Neighborhoods", "stats", 5, "neighborhoods"),
+    ("By the Numbers", "stats", 6, ""),
+    ("Latent Inventory", "stats", 7, "inventory"),
+    ("Grid — SFH", "stats", 3, "grid-sfh"),
+    ("Grid — Condo / TIC", "stats", 4, "grid-condo"),
 ]
 
 # Each report area opens the map on one representative neighborhood — the
@@ -136,15 +137,18 @@ def link_sales(s):
 
 # -------------------------------------------------------------- write out
 DEST.mkdir(parents=True, exist_ok=True)
-sections = {"sf": [], "hoods": [], "national": []}
+sections = {"stats": [], "cost": [], "national": []}
 counts = {"areas": 0, "sales": 0}
-for (label, sec), (cls, body) in zip(PAGES, pages):
+for (label, sec, order, anchor), (cls, body) in zip(PAGES, pages):
     b1 = link_areas(body); counts["areas"] += b1.count("class='rp-link'")
     b2 = link_sales(b1); counts["sales"] += b2.count("class='rp-link'") - b1.count("class='rp-link'")
-    sections[sec].append(f"<div class='rp-sheet {cls}' data-label='{html.escape(label)}'>{b2}</div>")
+    aid = f" id='{anchor}'" if anchor else ""
+    sections[sec].append((order, f"<div class='rp-sheet {cls}'{aid} data-label='{html.escape(label)}'>{b2}</div>"))
 
 for sec, sheets in sections.items():
-    (DEST / f"{sec}.html").write_text("\n".join(sheets))
+    (DEST / f"{sec}.html").write_text("\n".join(h for _, h in sorted(sheets)))
+for old in ("sf.html", "hoods.html"):          # the previous three-way split
+    (DEST / old).unlink(missing_ok=True)
 (DEST / "sheets.css").write_text("\n".join(css))
 
 run = re.search(r"run ([A-Z][a-z]{2} \d{1,2}, \d{4})", pages[-1][1])
@@ -152,10 +156,10 @@ period = re.search(r"Year to date: (Jan 1 – [A-Z][a-z]{2} \d{1,2}, \d{4})", pa
 meta = {
     "period": period.group(1) if period else "",
     "run": run.group(1) if run else "",
-    "pages": {sec: [l for l, s in PAGES if s == sec] for sec in sections},
+    "pages": {sec: [l for l, s, _, _ in sorted(PAGES, key=lambda x: x[2]) if s == sec] for sec in sections},
     "links": counts,
 }
 (DEST / "meta.json").write_text(json.dumps(meta, indent=2))
 print(f"wrote web edition → {DEST.relative_to(ROOT)}  "
-      f"sf {len(sections['sf'])} · hoods {len(sections['hoods'])} · national {len(sections['national'])} pages  "
+      f"stats {len(sections['stats'])} · cost {len(sections['cost'])} · national {len(sections['national'])} pages  "
       f"· {counts['areas']} area links · {counts['sales']} sale links")

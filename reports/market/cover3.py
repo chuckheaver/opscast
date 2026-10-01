@@ -883,10 +883,6 @@ def build():
     # ── PAGE 3 — where the money came from ───────────────────────────────
     msplit,mn,mtot=money_split(S["y1"])
     hrank=sorted(((a,v) for a,v in _money_by_hood(S["y1"]).items()), key=lambda kv:-kv[1])
-    khalf,run=0,0
-    for a,v in hrank:
-        run+=v; khalf+=1
-        if run>=mtot/2: break
     top3=sum(v for _,v in hrank[:3])
     cheap=msplit[0]; rich=msplit[-1]
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>Detail — Allocation of Money</div>
@@ -899,14 +895,10 @@ def build():
       <span class='st'>{cheap['n']:,}</span> units sold under $1M and brought <span class='st'>${cheap['v']/1e6:,.0f}M</span>; just <span class='st'>{rich['n']}</span> sold over $5M and brought <span class='st'>${rich['v']/1e6:,.0f}M</span>.</div>
       <h2 style='margin-top:6px'>Allocation by Type</h2>
       {type_mirror(S["y1"])}
-      <div class='cap'>More condos change hands than houses, yet houses bring in more money.</div>
-      <div class='pull'><div class='pq'>{rich['n']} homes — one sale in twenty — brought in ${rich['v']/1e9:.2f} billion.</div>
-      <div class='pqs'>More than twice what the {cheap['n']:,} homes under $1M brought in, from a fifth as many sales.</div></div></div>""")
+      <div class='cap'>More condos change hands than houses, yet houses bring in more money.</div></div>""")
     o.append(f"""<div class='col' style='flex:1.1'><h2>Allocation by Neighborhood</h2>
       {hood_bars(hrank,mtot,w=380,h=470,top=20)}
-      <div class='cap'>Top twenty by dollars closed. <span class='st'>{hrank[0][0]}</span> alone took <span class='st'>${hrank[0][1]/1e6:,.0f}M</span> — <span class='st'>{100*hrank[0][1]/mtot:.0f}%</span> of the city — on {100*len([r for r in S['y1'] if N2A_(r.get('neighborhood') or '')==hrank[0][0]])/mn:.0f}% of its sales.</div>
-      <div class='sig' style='margin-top:5px'><b>The one to remember.</b> Half the money in San Francisco real estate this year came from <b>{khalf} neighborhoods</b>.
-      If your home is in one of them, your buyer pool is deeper than the citywide numbers suggest. If it is not, price and presentation carry the whole job.</div></div>""")
+      <div class='cap'>Top twenty by dollars closed. <span class='st'>{hrank[0][0]}</span> alone took <span class='st'>${hrank[0][1]/1e6:,.0f}M</span> — <span class='st'>{100*hrank[0][1]/mtot:.0f}%</span> of the city — on {100*len([r for r in S['y1'] if N2A_(r.get('neighborhood') or '')==hrank[0][0]])/mn:.0f}% of its sales.</div></div>""")
     o.append("</div>")
     o.append(f"""<div class='foot'><span>All closed sales, Jan 1 – {thru}. Tiers by final sale price. Neighborhood totals use the report's combined areas.</span><span>page 3 / 9</span></div></div>""")
 
@@ -1015,7 +1007,7 @@ def build():
       <table class='top'><tr><th class='l'>Address</th><th>Closed</th><th>% ask</th></tr>{cr}</table></div>""")
     o.append(f"""<div class='col'><h2>Top 10 City Employers</h2>
       <table class='top'><tr><th class='l'>Company</th><th class='l'>Where</th></tr>{er}</table>
-      <h2 style='margin-top:6px'>What Changed on the Ground</h2><ul>"""
+      <h2 style='margin-top:6px'>Market Chatter</h2><ul>"""
       +B("58", "% of first-half office leasing went to AI. Near a 30-year high")
       +B("25", "% drop in property crime. Homelessness at a 15-year low")
       +B(f"{sb['y1']['n']-sb['y0']['n']}", "Extra South Beach condo sales — 1M sq ft of AI is a walk away")

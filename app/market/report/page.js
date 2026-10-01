@@ -11,9 +11,12 @@ import SiteFooter from "../../components/SiteFooter";
 const G = path.join(process.cwd(), "app/market/report/generated");
 const read = f => readFileSync(path.join(G, f), "utf8");
 
+// "sf" is the Market Stats section — the home page's "Market Stats" pill and
+// the menu's SF Market item both land on it. SF Neighborhoods jumps to the
+// Neighborhoods page inside it (#neighborhoods, set by web.py).
 const SECTIONS = [
-  { id: "sf", file: "sf.html", h: "SF Market", p: "The city right now: prices, pace, where the money came from, who is buying, and what is waiting to sell." },
-  { id: "neighborhoods", file: "hoods.html", h: "SF Neighborhoods", p: "Every closing on the fog map, the top neighborhoods and sales, and the full grids by neighborhood and fog zone." },
+  { id: "sf", file: "stats.html", h: "Market Stats", p: "San Francisco real estate, where the money went, the grids by neighborhood and fog zone, the neighborhoods, the year in numbers, and what is waiting to sell." },
+  { id: "cost", file: "cost.html", h: "The Cost of Ownership", p: "What money costs a financed buyer and a cash buyer right now: rates, bonds and the opportunity cost of owning." },
   { id: "national", file: "national.html", h: "National Markets", p: "Mortgage rates, the 10-year Treasury, inflation and jobs — the backdrop every San Francisco buyer is working against." },
 ];
 

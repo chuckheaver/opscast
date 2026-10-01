@@ -2,17 +2,17 @@
   "period": "Jan 1 \u2013 Sep 30, 2026",
   "run": "Oct 1, 2026",
   "pages": {
-    "sf": [
+    "stats": [
       "San Francisco Real Estate",
       "Detail \u2014 Allocation of Money",
-      "Who Is Buying",
+      "Grid \u2014 SFH",
+      "Grid \u2014 Condo / TIC",
+      "The Neighborhoods",
       "By the Numbers",
       "Latent Inventory"
     ],
-    "hoods": [
-      "The Neighborhoods",
-      "Grid \u2014 Single Family",
-      "Grid \u2014 Condo / TIC / Co-op"
+    "cost": [
+      "The Cost of Ownership"
     ],
     "national": [
       "The National Picture"
