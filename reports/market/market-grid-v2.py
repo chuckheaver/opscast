@@ -168,10 +168,10 @@ def render(pages,plabel,labels,W,run_date):
         return h+"</tr></thead>"
     out=[f"<!doctype html><html><head><meta charset='utf-8'><style>{css}</style></head><body>"]
     for pi,(seg,byA,tot,byZ) in enumerate(pages):
-        out.append(f"<div class='page'><div class='hdr'><div><div class='t'>San Francisco Market Grid</div>"
+        title={"Single Family Residences":"SFH","Condominiums / TIC / Co-ops":"Condo/TIC"}[seg]
+        out.append(f"<div class='page'><div class='hdr'><div><div class='t'>San Francisco Market Grid - {title}</div>"
                    f"<div class='p'>{html.escape(plabel)}</div>"
-                   f"<div class='s'>Closed sales, SFAR MLS &nbsp;\u00b7&nbsp; run {run_date.strftime('%b %-d, %Y')}</div></div>"
-                   f"<div class='seg'>{html.escape(seg)}</div></div>")
+                   f"<div class='s'>Closed sales, SFAR MLS &nbsp;\u00b7&nbsp; run {run_date.strftime('%b %-d, %Y')}</div></div></div>")
         out.append("<div class='zh'>Closings by Microclimate Fog Zone <span>summer fog hours per day at the property, from the site's fog-contour layer</span></div>")
         out.append("<table class='zone'>"+head().replace("<th class='name'>Neighborhood</th>","<th class='name'>Fog Zone</th>")+"<tbody>")
         for zn,col,rng,st in byZ:

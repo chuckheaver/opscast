@@ -184,15 +184,21 @@ def weekly_series(through):
     for yr in (2025,2026):
         cnt[yr]=_c.Counter(W(r["sellingDate"]) for r in F
                            if (r.get("sellingDate") or "").startswith(str(yr)) and r.get("sellingPrice")
-                           and (yr==2025 or W(r["sellingDate"])<=cut))
+                           and (yr==2025 or r["sellingDate"][:10]<=through))
     last=max(max(cnt[2025] or [0]),cut)
     rows=[]
     for k in range(1,last+1):
         a_=cnt[2025].get(k,0); b_=cnt[2026].get(k,0) if k<=cut else None
         d,dc=("",MUTED)
-        if a_ and b_: p=100*(b_-a_)/a_; d=f"{p:+.0f}%"; dc=UP if p>=0 else DOWN
+        # The cutoff week is partial unless the month ended on a Sunday —
+        # no % change against a full week of last year.
+        partial=k==cut and _dt.date.fromisoformat(through).isoweekday()!=7
+        if a_ and b_ and not partial: p=100*(b_-a_)/a_; d=f"{p:+.0f}%"; dc=UP if p>=0 else DOWN
         rows.append(dict(w=k,a=a_,b=b_,d=d,dc=dc))
-    return rows,cut,sum(cnt[2025].values()),sum(cnt[2026].values()),last
+    # Year to date against the same calendar date last year.
+    ly=str(int(through[:4])-1)+through[4:10]
+    ytd25=sum(1 for r in F if (r.get("sellingDate") or "")[:4]=="2025" and r["sellingDate"][:10]<=ly and r.get("sellingPrice"))
+    return rows,cut,sum(cnt[2025].values()),sum(cnt[2026].values()),last,ytd25
 
 ZONE_FILL=[("Sun","#FBDC7E"),("Transition","#EDCF95"),("Fog","#C3CBD2"),("Persistent Fog","#8D9BA6")]
 def zone_color(h):
@@ -612,21 +618,30 @@ def by_numbers(rows, thru):
     rat=[r["sellingPrice"]/r["listPrice"] for r in rows if r.get("listPrice")]
     sfh=[r for r in rows if r["propType"] in SFH]
     beds=[r["sellingPrice"]/r["bedrooms"] for r in sfh if isinstance(r.get("bedrooms"),(int,float)) and r["bedrooms"]>0]
+    CO=mg.SEG["Condominiums / TIC / Co-ops"]
     wd=collections.Counter(datetime.date.fromisoformat(r["sellingDate"][:10]).weekday() for r in rows)
-    z=collections.Counter(r.get("zip") for r in rows if r.get("zip")).most_common(1)[0]
+    topday,topn=wd.most_common(1)[0]
+    # Highest-volume ZIP by dollars closed, and its three busiest neighborhoods.
+    zv=collections.Counter()
+    for r in rows:
+        if r.get("zip"): zv[r["zip"]]+=r["sellingPrice"]
+    zip_,zipv=zv.most_common(1)[0]
+    zhoods=[h for h,_ in collections.Counter(r.get("neighborhood") for r in rows if r.get("zip")==zip_ and r.get("neighborhood")).most_common(3)]
+    off=sum(1 for r in rows if r.get("status")=="Sold Off MLS")
     sq=lambda rs: statistics.median([r["sqft"] for r in rs if r.get("sqft")])
     return dict(
         per_day=f"${vol/days/1e6:.1f}M", vol=f"${vol/1e9:.2f}B", days=days,
         every=f"Every {int(hrs)}h {round((hrs%1)*60):02d}m",
-        zero=f"{sum(1 for d in dom if d==0):,}",
-        friday=f"{100*wd[4]/n:.0f}%", weekend=wd[5]+wd[6],
+        off=f"{off:,}", offpct=f"{100*off/n:.0f}%", n=f"{n:,}",
+        topday=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"][topday],
+        toppct=f"{100*topn/n:.0f}%",
         week=f"{100*sum(1 for d in dom if d<=7)/len(dom):.0f}%",
         bid150=f"{sum(1 for x in rat if x>=1.5):,}", bid130=f"{sum(1 for x in rat if x>=1.3):,}",
         per_bed=f"${statistics.median(beds)/1e3:,.0f}K",
-        zip=z[0], zipn=z[1],
+        zip=zip_, zipv=f"${zipv/1e6:,.0f}M", zhoods=", ".join(zhoods),
         under=f"{100*sum(1 for x in rat if x<1)/len(rat):.0f}%",
         tenm=f"{sum(1 for r in rows if r['sellingPrice']>=10e6)}",
-        sqft=f"{sq(sfh):,.0f} sf", csqft=f"{sq([r for r in rows if r['propType'] not in SFH]):,.0f} sf",
+        sqft=f"{sq(sfh):,.0f} sf", csqft=f"{sq([r for r in rows if r['propType'] in CO]):,.0f} sf",
     )
 
 def mtg_pmt(P,r,yrs=30):
@@ -740,6 +755,7 @@ def build():
     .bn-t.navy {{ background:{NAV}; color:#fff; }}
     .bn-t.gold {{ background:{GOLD_MID}; color:#1c1917; }}
     .bn-t.light {{ background:{NAV_LT}; color:{NAV}; }}
+    .bn-t.pair b {{ font-size:23px; white-space:nowrap; }}   /* two figures in one tile */
     .bn-t.light span {{ color:{INK}; }}
     ul.math {{ list-style:none; margin:4px 0 0; padding:0; font-size:9px; }}
     ul.math li {{ display:flex; justify-content:space-between; padding:2.5px 0; margin:0; border-bottom:0.5px solid {LINE}; }}
@@ -1006,35 +1022,34 @@ def build():
       +B("3,491", "Homes approved at Stonestown, the west side's first big supply")
       +B("0", "New supply in the fog belt. All of it is sun-side")
       +"</ul>"
-      +f"""<div class='sig' style='margin-top:5px'><b>Why me.</b> Every number here comes from my own database of every closed sale in San Francisco, mapped to its neighborhood <i>and</i> its microclimate. I price to the crowd a home will actually draw. Ask me to run your street.</div></div>""")
+      +"</div>")
     o.append("</div>")
     o.append(f"<div class='foot'><span>Map: {ndots:,} closed sales, Jan 1 – {thru}, over USGS-derived summer-fog contours. City figures from CBRE, The Real Deal, SF Chronicle, SF Standard, Bisnow, CNBC, KQED and SF.gov.</span><span>page 5 / 9</span></div></div>")
 
     # ── PAGE 6 — in depth ────────────────────────────────────────────────
     # Everything a reader can skip. The narrative pages stay light because
     # the long explanations were moved down here.
-    wrows,wcut,w25y,w26,wlast=weekly_series(W["m1"][1])
-    w25=sum(r["a"] for r in wrows if r["w"]<=wcut)
+    wrows,wcut,w25y,w26,wlast,w25=weekly_series(W["m1"][1])
     bn=by_numbers(S["y1"], W["m1"][1])
     T_=lambda cls,v,lab,sub="": f"<div class='bn-t {cls}'><b>{v}</b><span>{lab}</span>{f'<i>{sub}</i>' if sub else ''}</div>"
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>By the Numbers</div>
       <div class='p'>San Francisco real estate in figures most people never see — Jan 1 – {thru}</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, SFAR MLS</div></div>
       <div class='bn'>"""
-      +T_("navy big", bn['per_day'], "changed hands every day", f"{bn['vol']} over {bn['days']} days")
-      +T_("gold wide", bn['every'], "a San Francisco home sold, around the clock")
-      +T_("light wide", bn['zero'], "homes sold in zero days", "under contract before they ever hit the market")
-      +T_("light", bn['friday'], "of all closings land on a Friday", f"{bn['weekend']} closed on a weekend")
+      +T_("navy big", bn['per_day'], "Avg Daily Sales Volume", f"{bn['vol']} over {bn['days']} days")
+      +T_("gold wide", bn['every'], "A property sold, around the clock")
+      +T_("light wide", bn['off'], "properties sold off-market", f"That is {bn['offpct']} of total {bn['n']} sales.")
+      +T_("light", bn['topday'], f"Most frequent Close Day, {bn['toppct']} of total")
       +T_("light", bn['week'], "sold within a week")
       +T_("navy wide", bn['bid150'], "homes sold for 150% of list or more", f"{bn['bid130']} went for 130%+")
       +T_("light wide", bn['per_bed'], "the price of one bedroom", "median house price ÷ its bedrooms")
-      +T_("gold", bn['zip'], "the busiest ZIP", f"{bn['zipn']} sales")
+      +T_("gold", bn['zip'], "highest volume ZIP", f"{bn['zipv']} · {bn['zhoods']}")
       +T_("light", bn['under'], "sold below asking")
       +T_("light", bn['tenm'], "sales of $10M or more")
-      +T_("navy", bn['sqft'], "the typical house", f"condo {bn['csqft']}")
+      +T_("navy pair", f"{bn['sqft'][:-3]} / {bn['csqft'][:-3]}", "sq ft — the typical SFH, Condo/TIC")
       +"</div>")
     o.append(f"""<div style='margin-top:7px'><h2>Units Sold by Week — Every Week of Both Years</h2>
-      {weekly_bars(wrows,h=150,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"weeks 1–{wcut} · 2025 full year {w25y:,}"))}
+      {weekly_bars(wrows,h=150,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"Jan 1 – {thru}, both years · 2025 full year {w25y:,}"))}
       <div class='cap'>Grey bars after week {wcut} show where last year kept going — its busiest stretch was early October, which is what a full autumn looks like.</div></div>""")
     o.append(f"<div class='foot'><span>Every figure from closed sales, Jan 1 – {thru} (SFAR MLS). Days on market as reported; list-to-sale ratios use the final list price.</span><span>page 6 / 9</span></div></div>")
 

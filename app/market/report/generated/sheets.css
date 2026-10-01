@@ -74,7 +74,9 @@
 .sheetA .bn-t.navy { background:#042C53; color:#fff; }
 .sheetA .bn-t.gold { background:#C9A227; color:#1c1917; }
 .sheetA .bn-t.light { background:#E6F1FB; color:#042C53; }
-.sheetA .bn-t.light span { color:#1c1917; }
+.sheetA .bn-t.pair b { font-size:23px; white-space:nowrap; }
+.sheetA /* two figures in one tile */
+    .bn-t.light span { color:#1c1917; }
 .sheetA ul.math { list-style:none; margin:4px 0 0; padding:0; font-size:9px; }
 .sheetA ul.math li { display:flex; justify-content:space-between; padding:2.5px 0; margin:0; border-bottom:0.5px solid #ddd8d0; }
 .sheetA ul.math li::before { content:none !important; display:none !important; }
