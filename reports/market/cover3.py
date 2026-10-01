@@ -476,7 +476,15 @@ TEN_Y=[("Sep'25",4.04),("Oct",4.11),("Nov",4.14),("Dec",4.16),("Jan'26",4.24),("
        ("Mar",4.38),("Apr",4.30),("May",4.50),("Jun",4.44),("Jul",4.75),("Aug",4.78),("Sep'26",5.29)]
 CURVE=[("3 mo",4.20),("2 yr",4.90),("10 yr",5.29),("30 yr",5.63)]   # constant-maturity curve, Sept 30 2026
 TWO_NOW, TEN_NOW, MTG_NOW = 4.90, 5.29, 7.03                        # Sept 30 closes; PMMS Sept 24 (Fed hiked to 3.75–4.00% Sept 16)
-MED_SFH, MED_CO = 2_100_000, 1_275_000                               # YTD medians through Sept 30
+def _ytd_medians():
+    """Year-to-date SFH and condo medians, same window as the report, so the
+    payment example always prices the typical home of the current data."""
+    F=[f["properties"] for f in json.load(open(mg.SRC))["features"]]
+    _,mt=mg.last_full_month(F); lo,hi=f"{mt.year}-01-01",mt.isoformat()
+    ytd=[r for r in F if r.get("sellingPrice") and lo<=(r.get("sellingDate") or "")<=hi]
+    med=lambda seg: statistics.median(r["sellingPrice"] for r in ytd if r["propType"] in mg.SEG[seg])
+    return round(med("Single Family Residences"),-3), round(med("Condominiums / TIC / Co-ops"),-3)
+MED_SFH, MED_CO = _ytd_medians()
 
 def yield_chart(w=470,h=150):
     """10-year Treasury over twelve months, with the 5% line marked."""

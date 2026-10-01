@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T21:35:43.231Z",
+  "generatedAt": "2026-10-01T21:49:38.198Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -52,14 +52,14 @@
       "zone": "Persistent Fog"
     },
     "Bayview": {
-      "n": 29,
+      "n": 34,
       "sfhMedian": 1000000,
-      "sfhN": 24,
-      "condoMedian": 810000,
-      "condoN": 5,
-      "ppsf": 724.6558197747185,
-      "dom": 25,
-      "fogHours": 10,
+      "sfhN": 27,
+      "condoMedian": 812500,
+      "condoN": 6,
+      "ppsf": 697.3504890171557,
+      "dom": 25.5,
+      "fogHours": 10.25,
       "zone": "Fog"
     },
     "Bernal Heights": {
@@ -206,9 +206,9 @@
       "zone": "Sun"
     },
     "Crocker Amazon": {
-      "n": 27,
+      "n": 29,
       "sfhMedian": 1288063,
-      "sfhN": 27,
+      "sfhN": 29,
       "condoMedian": null,
       "condoN": 0,
       "ppsf": 866.2551440329219,
@@ -272,12 +272,12 @@
       "zone": "Sun"
     },
     "Excelsior": {
-      "n": 60,
-      "sfhMedian": 1176500,
-      "sfhN": 60,
+      "n": 69,
+      "sfhMedian": 1188000,
+      "sfhN": 69,
       "condoMedian": null,
       "condoN": 0,
-      "ppsf": 881.9813857983015,
+      "ppsf": 884.8484848484849,
       "dom": 12,
       "fogHours": 10.5,
       "zone": "Fog"
@@ -393,13 +393,13 @@
       "zone": "Fog"
     },
     "Hunters Point": {
-      "n": 18,
-      "sfhMedian": 1050000,
-      "sfhN": 3,
-      "condoMedian": 610000,
-      "condoN": 11,
+      "n": 26,
+      "sfhMedian": 982500,
+      "sfhN": 4,
+      "condoMedian": 598000,
+      "condoN": 18,
       "ppsf": 611.9900355685593,
-      "dom": 56.5,
+      "dom": 58.5,
       "fogHours": 9,
       "zone": "Fog"
     },
@@ -668,12 +668,12 @@
       "zone": "Sun"
     },
     "Mission Terrace": {
-      "n": 26,
+      "n": 28,
       "sfhMedian": 1410000,
-      "sfhN": 25,
+      "sfhN": 27,
       "condoMedian": 1180000,
       "condoN": 1,
-      "ppsf": 920.9112549902279,
+      "ppsf": 916.4420485175202,
       "dom": 13,
       "fogHours": 10.75,
       "zone": "Fog"
@@ -745,12 +745,12 @@
       "zone": "Persistent Fog"
     },
     "Outer Mission": {
-      "n": 15,
-      "sfhMedian": 1175000,
-      "sfhN": 15,
+      "n": 19,
+      "sfhMedian": 1200000,
+      "sfhN": 19,
       "condoMedian": null,
       "condoN": 0,
-      "ppsf": 760.7403321689036,
+      "ppsf": 803.9302797957113,
       "dom": 13,
       "fogHours": 12,
       "zone": "Persistent Fog"
@@ -855,13 +855,13 @@
       "zone": "Sun"
     },
     "Portola": {
-      "n": 42,
-      "sfhMedian": 1180000,
-      "sfhN": 41,
-      "condoMedian": null,
-      "condoN": 0,
-      "ppsf": 824.535192563081,
-      "dom": 15,
+      "n": 51,
+      "sfhMedian": 1250000,
+      "sfhN": 49,
+      "condoMedian": 868000,
+      "condoN": 1,
+      "ppsf": 833.3333333333334,
+      "dom": 13,
       "fogHours": 10.5,
       "zone": "Fog"
     },
@@ -954,12 +954,12 @@
       "zone": "Sun"
     },
     "Silver Terrace": {
-      "n": 20,
-      "sfhMedian": 1067500,
-      "sfhN": 18,
+      "n": 21,
+      "sfhMedian": 1060000,
+      "sfhN": 19,
       "condoMedian": 560000,
       "condoN": 1,
-      "ppsf": 765.2015483759353,
+      "ppsf": 767.4603174603175,
       "dom": 13,
       "fogHours": 10.5,
       "zone": "Fog"
@@ -1020,13 +1020,13 @@
       "zone": "Persistent Fog"
     },
     "Sunnydale": {
-      "n": 4,
-      "sfhMedian": 922500,
-      "sfhN": 4,
+      "n": 5,
+      "sfhMedian": 1010000,
+      "sfhN": 5,
       "condoMedian": null,
       "condoN": 0,
-      "ppsf": 776.795775781577,
-      "dom": 16,
+      "ppsf": 773.9463601532567,
+      "dom": 13,
       "fogHours": 10.5,
       "zone": "Fog"
     },
@@ -1097,12 +1097,12 @@
       "zone": "Fog"
     },
     "Visitacion Valley": {
-      "n": 26,
-      "sfhMedian": 1068000,
-      "sfhN": 25,
+      "n": 28,
+      "sfhMedian": 1100000,
+      "sfhN": 27,
       "condoMedian": null,
       "condoN": 0,
-      "ppsf": 741.9772860393632,
+      "ppsf": 750.2854983004612,
       "dom": 15,
       "fogHours": 11,
       "zone": "Persistent Fog"
