@@ -147,7 +147,7 @@ def render(pages,plabel,labels,W,run_date):
     .foot {{ position:absolute; bottom:0; left:0; right:0; font-size:7.2px; color:{MUTED}; border-top:0.5px solid {LINE}; padding-top:3px; display:flex; justify-content:space-between; }}
     """
     groups=[("Qty Sold","","int","n"),("Median Sale Price","M / K","usdM","price"),("Average Sale Price","M / K","usdM","avg"),("Median $/SF","","usd","ppsf"),
-            ("Median DOM","days","dom","dom"),("% Sold Over List","","pts","over"),("% SP/LP","","pts","pct")]
+            ("Median DOM","days","dom","dom"),("Sold Price vs List %","","pts","pct")]
     F={"int":i,"usdM":usdM,"usd":usd,"dom":i,"pts":pct1}
     def cells(st,kind,key):
         out=[]

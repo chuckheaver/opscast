@@ -56,6 +56,9 @@
 .sheetA table.linv tbody tr:nth-child(even) td { background:#faf9f7; }
 .sheetA table.linv td.b { font-weight:800; color:#042C53; }
 .sheetA table.linv td.g0, .sheetA table.linv th.g0 { border-left:1.5px solid #cfc9c0; }
+.sheetA table.mzp { width:100%; border-collapse:collapse; font-size:10px; margin-top:3px; }
+.sheetA table.mzp td { padding:4px 2px; border-bottom:0.5px solid #ddd8d0; }
+.sheetA table.mzp td.b { text-align:right; font-weight:800; color:#042C53; font-size:11px; }
 .sheetA .bn { display:grid; grid-template-columns:repeat(6,1fr); grid-auto-rows:118px; gap:7px; margin:8px 0 4px; }
 .sheetA .bn-t { border-radius:6px; padding:10px 12px; display:flex; flex-direction:column; justify-content:center; overflow:hidden; }
 .sheetA .bn-t b { font-family:Georgia,serif; font-weight:700; line-height:1; font-size:30px; }

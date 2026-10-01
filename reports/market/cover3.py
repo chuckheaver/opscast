@@ -716,6 +716,9 @@ def build():
     table.linv tbody tr:nth-child(even) td {{ background:#faf9f7; }}
     table.linv td.b {{ font-weight:800; color:{NAV}; }}
     table.linv td.g0, table.linv th.g0 {{ border-left:1.5px solid #cfc9c0; }}
+    table.mzp {{ width:100%; border-collapse:collapse; font-size:10px; margin-top:3px; }}
+    table.mzp td {{ padding:4px 2px; border-bottom:0.5px solid {LINE}; }}
+    table.mzp td.b {{ text-align:right; font-weight:800; color:{NAV}; font-size:11px; }}
     .bn {{ display:grid; grid-template-columns:repeat(6,1fr); grid-auto-rows:118px; gap:7px; margin:8px 0 4px; }}
     .bn-t {{ border-radius:6px; padding:10px 12px; display:flex; flex-direction:column; justify-content:center; overflow:hidden; }}
     .bn-t b {{ font-family:Georgia,serif; font-weight:700; line-height:1; font-size:30px; }}
@@ -805,7 +808,7 @@ def build():
         +kpi("Condo — Med / Avg", f"${mm(ct['y1']['price'])}{sl}${mm(ct['y1']['avg'])}M", f"{sgn(D(ct['y1']['price'],ct['y0']['price']))}% / {sgn(D(ct['y1']['avg'],ct['y0']['avg']))}%")
         +kpi("Sales Volume — All Homes", f"${allv1/1e9:.1f}B", f"{sgn(D(allv1,allv0))}%")
         +kpi("Days on Mkt — SFH / Condo", f"{st['y1']['dom']:.0f}{sl}{ct['y1']['dom']:.0f}", f"{st['y1']['dom']-st['y0']['dom']:+.0f} / {ct['y1']['dom']-ct['y0']['dom']:+.0f} days")
-        +kpi("Sold Over Ask — SFH / Condo", f"{st['y1']['over']:.0f}{sl}{ct['y1']['over']:.0f}%", f"{st['y1']['over']-st['y0']['over']:+.0f} / {ct['y1']['over']-ct['y0']['over']:+.0f} pts")
+        +kpi("Sold Price vs List % — SFH / Condo", f"{st['y1']['pct']:.0f}{sl}{ct['y1']['pct']:.0f}%", f"{st['y1']['pct']-st['y0']['pct']:+.0f} / {ct['y1']['pct']-ct['y0']['pct']:+.0f} pts")
         +"</div>")
     o.append("<div class='cols' style='margin-top:7px'>")
     o.append(f"""<div class='col'><h2>Units Sold</h2>
@@ -974,12 +977,12 @@ def build():
         {"".join(f"<span class='zk'><span class='zc' style='background:{col}'></span>{nm}</span>" for nm,col in ZONE_FILL)}</div>
       <div class='mapcap'>Every 2026 closing over the city's summer-fog zones — my database, my map, and nobody else publishes it.
         Zones by daily summer fog hours: Sun ≤8.0 · Transition 8.5–8.9 · Fog 9.0–10.9 · Persistent Fog ≥11.</div>
-      <h2>What the Fog Is Worth</h2><ul>"""
-      +B(M(sun['price']), f"Median sale price, Sun zone {CHIP('#FBDC7E')}")
-      +B(M(fg['price']), f"Median sale price, Fog zone {CHIP('#C3CBD2')}")
-      +B(M(pf['price']), f"Median sale price, Persistent Fog {CHIP('#8D9BA6')}")
-      +B(f"{sun['ppsf']:.0f}", f"$/SF in the sun against ${pf['ppsf']:.0f} in persistent fog")
-      +"</ul></div>")
+      <h2>Microclimate Pricing — Median Sales Price</h2>
+      <table class='mzp'>"""
+      +"".join(f"<tr><td>{CHIP(col)} {nm}</td><td class='b'>{M(z['price'])}</td></tr>"
+               for nm,col,z in (("Sun Zone","#FBDC7E",sun),("Transition Zone","#E7D3B0",tr),
+                                ("Fog Zone","#C3CBD2",fg),("Persistent Fog","#8D9BA6",pf)))
+      +"</table><div class='cap'>Single-family homes, Jan 1 – " + thru + ".</div></div>")
     o.append(f"""<div class='col'><h2>Top 10 Neighborhoods — SFH &amp; Condo</h2>
       <table class='top'><tr><th class='l'>Neighborhood</th><th>SFH</th><th>Condo</th><th>vs {py}</th></tr>{nr}</table>
       <h2 style='margin-top:6px'>Top 10 Sales — SFH / Condo / Other</h2>
@@ -1057,7 +1060,7 @@ def build():
         return (f"<td class='g0 b'>{mg.usdM(st['price'])}</td>"
                 f"<td>{mg.usd(st['ppsf']) if st['ppsf'] else '—'}</td>"
                 f"<td>{mg.i(st['dom'])}</td>"
-                f"<td>{mg.pct1(st['over'])}%</td>")
+                f"<td>{mg.pct1(st['pct'])}%</td>")
     lrows="".join(
         f"<tr><td class='l'>{html.escape(r['area'])}</td>"
         f"<td class='bar'>{hbar(r['u1'])}</td>"
@@ -1084,7 +1087,7 @@ def build():
         <thead>
           <tr class='g'><th class='l'>Neighborhood</th><th>SFH — latent inventory</th><th>Sold YTD</th>
             <th class='g0'>Share traded</th><th>1 house in</th>
-            <th class='g0 r'>Median price</th><th class='r'>$/sf</th><th class='r'>DOM</th><th class='r'>% over list</th></tr>
+            <th class='g0 r'>Median price</th><th class='r'>$/sf</th><th class='r'>DOM</th><th class='r'>Sold Price vs List %</th></tr>
         </thead>
         <tbody>{lrows}</tbody>
         <tfoot><tr><td class='l'>All single-family</td><td class='bar'><span class='lhv' style='margin-left:0'>{houses:,}</span></td>
