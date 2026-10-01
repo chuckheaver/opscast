@@ -4765,11 +4765,24 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   background: var(--lp-navy-2); border-top: 1px solid rgba(255,255,255,0.09);
   padding: 22px clamp(18px, 5vw, 56px) 4px;
 }
-.lp-stats-head {
+.lp-stats-top {
   max-width: 1240px; margin: 0 auto 14px;
-  font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px;
+}
+.lp-stats-head {
+  margin: 0;
+  font-size: 15px; font-weight: 700; letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--lp-accent-dk);
 }
+/* Yellow on the navy band — the one thing on it that reads as a button. */
+.lp-stats-pill {
+  display: inline-block; padding: 6px 14px; border-radius: 999px;
+  background: #F2C94C; color: var(--lp-navy-2);
+  font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+  text-decoration: none; white-space: nowrap;
+  transition: background 0.15s ease;
+}
+.lp-stats-pill:hover, .lp-stats-pill:focus-visible { background: #fff; }
 .lp-stats-when { color: rgba(255,255,255,0.45); font-weight: 600; letter-spacing: 0.06em; }
 .lp-stats-row {
   max-width: 1240px; margin: 0 auto;

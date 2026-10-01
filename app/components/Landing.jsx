@@ -59,6 +59,10 @@ export default function Landing() {
         .toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
         .replace(/^Sep /, "Sept ")
     : null;
+  // "Sept 2026" — the month the stats run through, for the report pill.
+  const statsMonth = new Date(`${stats.market.through}T12:00:00`)
+    .toLocaleDateString("en-US", { month: "short", year: "numeric" })
+    .replace(/^Sep /, "Sept ");
   const m = stats.market.current;
   const p = stats.market.prior;
   const r = v => Math.round(v);
@@ -131,9 +135,12 @@ export default function Landing() {
           year then last, separated by a space, with the metric and the
           change beneath it. */}
       <section className="lp-stats" aria-label="By the numbers">
-        <p className="lp-stats-head">
-          By the Numbers: &rsquo;26 vs <span className="lp-stats-key">&rsquo;25</span> YTD{through ? ` (${through})` : ""}
-        </p>
+        <div className="lp-stats-top">
+          <p className="lp-stats-head">
+            By the Numbers: &rsquo;26 vs <span className="lp-stats-key">&rsquo;25</span> YTD{through ? ` (${through})` : ""}
+          </p>
+          <Link href="/market/report" className="lp-stats-pill">Market Stats - {statsMonth}</Link>
+        </div>
         <div className="lp-stats-row">
           {KPIS.map(k => (
             <div className="lp-stat" key={k.label}>
