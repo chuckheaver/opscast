@@ -1,6 +1,6 @@
 {
-  "period": "Jan 1 \u2013 Aug 31, 2026",
-  "run": "Sep 14, 2026",
+  "period": "Jan 1 \u2013 Sep 30, 2026",
+  "run": "Oct 1, 2026",
   "pages": {
     "sf": [
       "San Francisco Real Estate",
@@ -19,7 +19,7 @@
     ]
   },
   "links": {
-    "areas": 129,
-    "sales": 9
+    "areas": 130,
+    "sales": 10
   }
 }

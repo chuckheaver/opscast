@@ -195,7 +195,7 @@ def render(pages,plabel,labels,W,run_date):
 
 if __name__=="__main__":
     import sys
-    run=datetime.date(2026,9,14)
+    run=datetime.date.today()
     pages,plabel,labels,W=build()
     open(os.path.join(HERE,"out","market-grid-v2.html"),"w").write(render(pages,plabel,labels,W,run))
     print("windows:",W)

@@ -122,7 +122,7 @@ sold = {}
 for f in json.loads((ROOT / "public/data/sf-listings.geojson").read_text())["features"]:
     p = f["properties"]
     if p.get("sellingDate") and p.get("address") and p.get("lat") and p.get("lng"):
-        sold.setdefault(p["address"].strip(), p)
+        sold.setdefault(p["address"].split(",")[0].strip(), p)  # "2830 Pacific Ave[, San Francisco, CA …]"
 
 ADDR_RX = re.compile(r">(\s*\d+\.\s*)(\d+[^<>]*?(?:St|Ave|Blvd|Way|Ter|Dr|Rd|Ct|Pl|Ln|Hwy|Street|Avenue))(\s*)<")
 def link_sales(s):
