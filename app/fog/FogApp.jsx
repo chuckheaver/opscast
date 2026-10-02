@@ -77,6 +77,10 @@ export default function FogApp() {
   const [compFeatures, setCompFeatures] = useState(null); // dots for the expanded neighborhood Details list
   const prevHoodRef = useRef(null);
   const [openHood, setOpenHood] = useState(null); // neighborhood name whose highlights pop-up is open
+  // Quick Peek on a searched address: open flag, and the pop-up element the
+  // map hands up for the card to render into.
+  const [peekOpen, setPeekOpen] = useState(false);
+  const [peekEl, setPeekEl] = useState(null);
   const [statsOpen, setStatsOpen] = useState(false);     // Homes Stats bottom-sheet
   const [statsExpanded, setStatsExpanded] = useState(false);
   const [reporting, setReporting] = useState(false);     // PDF report generating
@@ -334,10 +338,10 @@ export default function FogApp() {
       const bounds = feature ? bboxOfFeature(feature) : null;
       setAddressPin({ point, address });
       setPicked({ point, address, feature, contour, bounds, source: "address", zoom: bounds ? undefined : 15 });
-      // Surface the neighborhood summary (with the point-level facts) for the
-      // address the user entered — that pop-up is now the only place details
-      // show, since there's no bottom panel.
-      setOpenHood(feature?.properties?.name || null);
+      // An address gets the Quick Peek card on its marker; the full
+      // neighborhood pop-up is one tap away from the card.
+      setOpenHood(null);
+      setPeekOpen(true);
     },
     [geojson, contours]
   );
@@ -349,6 +353,7 @@ export default function FogApp() {
     setAddressPin(null);
     setPicked(null);
     setOpenHood(null);
+    setPeekOpen(false);
     setCompFeatures(null);
   }, []);
 
@@ -365,6 +370,7 @@ export default function FogApp() {
       const bounds = full ? bboxOfFeature(full) : null;
       setPicked({ point, address: null, feature: full || feature, contour, scope: bounds ? "neighborhood" : undefined, bounds });
       setOpenHood(name);
+      setPeekOpen(false); // the card describes the address, not this pick
     },
     [contours, geojson]
   );
@@ -385,6 +391,7 @@ export default function FogApp() {
       const bounds = bboxOfFeature(feature);
       setPicked({ point, address: null, feature, contour, scope: "neighborhood", bounds });
       setOpenHood(name);
+      setPeekOpen(false); // the card describes the address, not this pick
     },
     [geojson, contours]
   );
@@ -477,13 +484,16 @@ export default function FogApp() {
       point: urlLoc.point,
       address: urlLoc.name || null,
       zoom: urlLoc.zoom,
+      // Frame the address's neighborhood (unless a building link asked to fly
+      // in to the footprint), same as searching on the map itself.
+      bounds: !urlLoc.zoom && feature ? bboxOfFeature(feature) : undefined,
       source: "address",
       feature,
       contour,
     });
-    // Arriving from the site's address box should behave like searching on
-    // the map itself: pin down, neighborhood summary open.
-    setOpenHood(feature?.properties?.name || null);
+    // Arriving from the site's address box behaves like searching on the
+    // map: pin down, zoomed to the neighborhood, Quick Peek on the pin.
+    setPeekOpen(true);
   }, [urlLoc, geojson, contours]);
 
   // Fallback initial pick from localStorage when no URL params present.
@@ -722,6 +732,9 @@ export default function FogApp() {
           showNeighborhoods={showNeighborhoods}
           picked={picked}
           addressPin={addressPin}
+          peekOpen={peekOpen}
+          onPeekEl={setPeekEl}
+          onPeekClose={() => setPeekOpen(false)}
           onPickFeature={pickFromMap}
           activityData={activityData}
           comps={compFeatures}
@@ -863,6 +876,9 @@ export default function FogApp() {
         buildingProfiles={buildingProfiles}
         openBuilding={openBuilding}
         onCloseBuilding={() => setOpenBuilding(null)}
+        peekEl={peekOpen ? peekEl : null}
+        onClosePeek={() => setPeekOpen(false)}
+        onOpenHood={setOpenHood}
       />
     </div>
   );

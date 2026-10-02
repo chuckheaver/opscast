@@ -4990,6 +4990,15 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-nstat { background: #fff; padding: 16px 18px 18px; box-shadow: 0 0 0 1px var(--lp-line); }
 .lp-nstat-v { font-family: Georgia, serif; font-size: 25px; font-weight: 700; color: var(--lp-navy-2); }
 .lp-nstat-l { margin-top: 4px; font-size: 12.5px; color: var(--lp-muted); }
+/* Neighborhood map snapshot — the whole frame links to the full map. */
+.lp-nmap { position: relative; display: block; border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--lp-line); background: #E9EDF0; }
+.lp-nmap-canvas { height: clamp(280px, 42vw, 420px); }
+.lp-nmap-canvas .mapboxgl-canvas { cursor: pointer; }
+.lp-nmap-cta { position: absolute; right: 14px; bottom: 14px; padding: 9px 16px; border-radius: 999px;
+  background: #F2C94C; color: var(--lp-navy-2); font-size: 13.5px; font-weight: 700;
+  box-shadow: 0 4px 14px rgba(19,26,37,0.22); transition: background .15s; }
+.lp-nmap:hover .lp-nmap-cta, .lp-nmap:focus-visible .lp-nmap-cta { background: #fff; }
 .lp-nsec { margin-top: 34px; }
 .lp-nsec h2 {
   font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
@@ -5833,3 +5842,56 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   box-shadow: 0 1px 2px rgba(16,23,32,.08), 0 14px 34px rgba(16,23,32,.14); }
 .lp-hood-map-wrap:empty { display: none; }
 .lp-hood-map { width: 100%; height: clamp(360px, 52vw, 620px); }
+
+/* ── Map neighborhood pop-up, in the guide page's voice ──────────────────
+   Mirrors .lp-nh-head / .lp-nh-spirit / .lp-reasons / .lp-nstats at pop-up
+   scale: Montserrat title, Lato text, Georgia figures, Vanguard palette. */
+.nh-modal { font-family: 'Lato', ui-sans-serif, system-ui, sans-serif; color: #131A25; background: #F2F3F2; }
+.nhm-crumb { margin: 0; font-size: 11.5px; color: #6B6F75; }
+.nhm-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 9px; margin-top: 4px; padding-right: 34px; }
+.nhm-head h2 { margin: 0; font-family: 'Montserrat', 'Lato', sans-serif; font-size: 27px; font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.05; color: #131A25; }
+.nhm-aka { font-size: 12.5px; font-style: italic; color: #6B6F75; }
+.nhm-zone { font-size: 9.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #131A25;
+  background: var(--z, #ddd); border-radius: 999px; padding: 3px 8px; align-self: center; }
+.nhm-spirit { margin: 10px 0 0; font-size: 15px; line-height: 1.55; color: #505050; }
+.nhm-reasons { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; padding: 0; }
+.nhm-reasons li { font-size: 11.5px; font-weight: 600; color: #505050; background: #fff;
+  border: 1px solid #DCDDDE; border-radius: 999px; padding: 4px 10px; }
+.nhm-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 14px;
+  background: #fff; border: 1px solid #DCDDDE; border-radius: 12px; overflow: hidden; }
+.nhm-stat { background: #fff; padding: 10px 11px 11px; box-shadow: 0 0 0 1px #DCDDDE; }
+.nhm-stat-v { font-family: Georgia, serif; font-size: 18px; font-weight: 700; color: #131A25; white-space: nowrap; }
+.nhm-stat-l { margin-top: 2px; font-size: 11px; line-height: 1.3; color: #6B6F75; }
+.nhm-guide { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 700; color: #203C5F;
+  text-decoration: none; border-bottom: 1px solid #DCDDDE; }
+.nhm-guide:hover { border-bottom-color: #203C5F; }
+.nhm-fact { background: #fff; border: 1px solid #DCDDDE; border-radius: 10px; padding: 10px 12px; }
+.nhm-fact h3 { margin: 0 0 3px; font-family: 'Montserrat', 'Lato', sans-serif; font-size: 13.5px; font-weight: 700;
+  letter-spacing: -0.01em; color: #131A25; }
+.nhm-fact p { margin: 0; font-size: 13px; line-height: 1.55; color: #505050; }
+
+/* ── Quick Peek: the card on a searched address's marker ─────────────────── */
+.qp-popup .mapboxgl-popup-content { padding: 0; border-radius: 12px; box-shadow: 0 8px 28px rgba(19,26,37,0.28); }
+.qp { width: 280px; max-width: calc(100vw - 40px); font-family: 'Lato', ui-sans-serif, system-ui, sans-serif; color: #131A25; }
+.qp-top { display: flex; align-items: center; justify-content: space-between; padding: 9px 12px 8px;
+  background: #131A25; border-radius: 12px 12px 0 0; }
+.qp-title { font-family: 'Montserrat', 'Lato', sans-serif; font-size: 11.5px; font-weight: 800; letter-spacing: .12em;
+  text-transform: uppercase; color: #CEE2E6; }
+.qp-x { border: 0; background: none; color: #CEE2E6; font-size: 18px; line-height: 1; cursor: pointer; padding: 0 2px; }
+.qp-rows { margin: 0; padding: 4px 12px 2px; }
+.qp-row { display: grid; grid-template-columns: 92px 1fr; gap: 8px; padding: 4px 0; border-bottom: 1px solid #EEF0F1; font-size: 12px; line-height: 1.35; }
+.qp-row:last-child { border-bottom: 0; }
+.qp-row dt { color: #6B6F75; font-weight: 700; }
+.qp-row dd { margin: 0; color: #131A25; }
+.qp-row dd i { font-style: normal; color: #6B6F75; }
+.qp-yes { color: #b91c1c; }
+.qp-wait { color: #8A8E93; }
+.qp-zone { display: inline-block; font-size: 9.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  background: var(--z, #ddd); border-radius: 999px; padding: 1px 7px; margin-right: 2px; }
+.qp-more { display: block; width: calc(100% - 24px); margin: 4px 12px 11px; padding: 7px 10px; border: 0; border-radius: 999px;
+  background: #F2C94C; color: #131A25; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; text-align: center; }
+.qp-more:hover { background: #E9BC3F; }
+.qp-dock { position: absolute; left: 10px; right: 10px; bottom: 12px; z-index: 6; }
+.qp-dock .qp { width: auto; max-width: none; background: #fff; border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(19,26,37,0.28); max-height: 52vh; overflow-y: auto; }

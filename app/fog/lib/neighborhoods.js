@@ -4446,6 +4446,19 @@ export function getNeighborhood(name) {
   return NEIGHBORHOODS[name] || NEIGHBORHOODS[ALIASES[name]] || null;
 }
 
+// The authored entry's key for a fog-map polygon name (its own name, or the
+// entry an alias polygon points at). Null when there is no entry.
+export function entryKeyFor(name) {
+  if (!name) return null;
+  return NEIGHBORHOODS[name] ? name : (NEIGHBORHOODS[ALIASES[name]] ? ALIASES[name] : null);
+}
+
+// Every fog-map polygon that opens this entry: its own name plus any alias
+// polygons that point at it (Castro → Castro + Eureka Valley).
+export function polygonNamesFor(key) {
+  return [key, ...Object.keys(ALIASES).filter(a => ALIASES[a] === key)];
+}
+
 // Alphabetical index of authored neighborhoods for the A–Z list on the page.
 // `key` is the fog geojson `name` (what the map/lookup uses); `label` is the
 // display name (the `title` override when present, e.g. "Cow Hollow / Union

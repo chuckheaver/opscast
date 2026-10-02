@@ -7,6 +7,9 @@
 // derived from the picked fog contour, so neither goes stale.
 
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { entryKeyFor } from "./lib/neighborhoods";
+import { statsFor, slugify, money, ZONE_COLOR, statsYear } from "../neighborhoods/lib";
 
 const LISTINGS_URL = "/data/sf-listings.geojson";
 const RES_COUNTS_URL = "/data/parcel-res-by-neighborhood.json";
@@ -22,19 +25,6 @@ const PARCEL_ROWS = [
   ["u10", "#123a70", "10+ (APTS)"],
   ["othr", "#9ca3af", "OTHR"],
 ];
-
-// Section / fact icons. The app is emoji-forward (see the home hub), so we
-// use emoji here rather than pulling in an icon font.
-const FACT_EMOJI = {
-  flag: "🏳️‍🌈", shop: "📷", movie: "🎬", confetti: "🎉", pin: "📍",
-  mayor: "🏛️", quake: "🏚️", stroller: "👶", tram: "🚊", shopping: "🛍️",
-  fair: "🎡", wave: "🌊", park: "🌳", art: "🎨",
-  money: "💰", house: "🏠", star: "⭐", church: "⛪", burrito: "🌯",
-  sun: "☀️", subway: "🚇", book: "📖", coffee: "☕", tower: "🗼",
-  pizza: "🍕", bird: "🦜", road: "🛣️", stairs: "🪜", bridge: "🌉",
-  dog: "🐕", beer: "🍺", factory: "🏭", cow: "🐄", water: "💧",
-  music: "🎷",
-};
 
 function fmtPrice(n) {
   if (!Number.isFinite(n)) return null;
@@ -58,7 +48,9 @@ const usd = n => (Number.isFinite(n) ? "$" + Math.round(n).toLocaleString("en-US
 const mdy = iso => { const m = iso && /^(\d{4})-(\d{2})-(\d{2})/.exec(iso); return m ? `${+m[2]}/${+m[3]}/${m[1].slice(2)}` : "—"; };
 
 const _mean = a => a.reduce((s, x) => s + x, 0) / a.length;
-const _median = a => { const s = [...a].sort((x, y) => x - y); return s[Math.floor((s.length - 1) / 2)]; };
+// True median (mean of the two middle values on an even count) — the same
+// rule as the stats file, so the pop-up's figures match the guide page's.
+const _median = a => { const s = [...a].sort((x, y) => x - y); const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
 // Average / Median across the comps for each numeric column (skips blanks).
 function summarize(homes, fn) {
   const col = k => { const c = homes.map(h => h[k]).filter(v => typeof v === "number" && Number.isFinite(v)); return c.length ? fn(c) : null; };
@@ -79,21 +71,21 @@ function PriceLine({ data, label, gap, sect, reportComps, onFocusComp }) {
   return (
     <div style={{ marginBottom: gap ? 10 : 2 }}>
     <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
-      <span style={{ fontSize: 24, fontWeight: 700, color: data ? "#1c1917" : "#a8a29e" }}>{data ? data.value : "—"}</span>
-      <span style={{ fontSize: 13.5, fontWeight: 700, color: "#1c1917" }}>{label}</span>
+      <span style={{ fontSize: 24, fontWeight: 700, color: data ? "#131A25" : "#8A8E93" }}>{data ? data.value : "—"}</span>
+      <span style={{ fontSize: 13.5, fontWeight: 700, color: "#131A25" }}>{label}</span>
       {homes.length > 0 && (
         <button type="button" onClick={toggle}
-          style={{ marginLeft: "auto", background: "none", border: "none", padding: 0, font: "inherit", fontSize: 12.5, fontWeight: 600, color: "#2563eb", cursor: "pointer" }}>
+          style={{ marginLeft: "auto", background: "none", border: "none", padding: 0, font: "inherit", fontSize: 12.5, fontWeight: 600, color: "#203C5F", cursor: "pointer" }}>
           {open ? "Hide details ▲" : "Details ▼"}
         </button>
       )}
     </div>
     {open && homes.length > 0 && (
-      <div style={{ marginTop: 6, borderTop: "1px solid #f0ece6", paddingTop: 6,
+      <div style={{ marginTop: 6, borderTop: "1px solid #DCDDDE", paddingTop: 6,
         display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr) auto auto auto auto auto",
-        columnGap: 8, rowGap: 1, fontSize: 11.5, color: "#44403c", alignItems: "baseline" }}>
+        columnGap: 8, rowGap: 1, fontSize: 11.5, color: "#505050", alignItems: "baseline" }}>
         {["List", "Sale", "SF", "$/sf", "%L", "Sold", "DM"].map((hd, k) => (
-          <div key={"h" + k} style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.3px", textTransform: "uppercase", color: "#a8a29e", textAlign: k >= 3 ? "right" : "left" }}>{hd}</div>
+          <div key={"h" + k} style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.3px", textTransform: "uppercase", color: "#8A8E93", textAlign: k >= 3 ? "right" : "left" }}>{hd}</div>
         ))}
         {homes.map((h, i) => (
           <Fragment key={i}>
@@ -103,13 +95,13 @@ function PriceLine({ data, label, gap, sect, reportComps, onFocusComp }) {
               title="Show this sale on the map"
               style={{ gridColumn: "1 / -1", display: "flex", alignItems: "baseline", gap: 8, marginTop: i ? 9 : 5,
                 background: "none", border: "none", padding: 0, font: "inherit", textAlign: "left",
-                fontSize: 13, fontWeight: 600, color: "#1c1917", cursor: h.feat ? "pointer" : "default" }}
+                fontSize: 13, fontWeight: 600, color: "#131A25", cursor: h.feat ? "pointer" : "default" }}
             >
               <span>{h.addr || "—"}</span>
-              {h.feat && <span style={{ fontSize: 11, fontWeight: 600, color: "#2563eb", whiteSpace: "nowrap" }}>◉ map</span>}
+              {h.feat && <span style={{ fontSize: 11, fontWeight: 600, color: "#203C5F", whiteSpace: "nowrap" }}>◉ map</span>}
             </button>
             <div>{usd(h.list)}</div>
-            <div style={{ fontWeight: 700, color: "#1c1917" }}>{usd(h.sale)}</div>
+            <div style={{ fontWeight: 700, color: "#131A25" }}>{usd(h.sale)}</div>
             <div>{h.sqft ? h.sqft.toLocaleString("en-US") : "—"}</div>
             <div style={{ textAlign: "right" }}>{h.ppsf ? "$" + h.ppsf.toLocaleString("en-US") : "—"}</div>
             <div style={{ textAlign: "right" }}>{h.pctList != null ? h.pctList + "%" : "—"}</div>
@@ -122,9 +114,9 @@ function PriceLine({ data, label, gap, sect, reportComps, onFocusComp }) {
             columnGap: 8, alignItems: "baseline", padding: "5px 0", borderRadius: 6,
             marginTop: si ? 3 : 9,
             background: lbl === "Average" ? "#e8f1fc" : "#fdf7e0" }}>
-            <div style={{ gridColumn: "1 / -1", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", color: "#57534e", marginBottom: 2 }}>{lbl}</div>
-            <div style={{ fontWeight: 700, color: "#1c1917" }}>{s.list != null ? usd(s.list) : "—"}</div>
-            <div style={{ fontWeight: 700, color: "#1c1917" }}>{s.sale != null ? usd(s.sale) : "—"}</div>
+            <div style={{ gridColumn: "1 / -1", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4px", color: "#505050", marginBottom: 2 }}>{lbl}</div>
+            <div style={{ fontWeight: 700, color: "#131A25" }}>{s.list != null ? usd(s.list) : "—"}</div>
+            <div style={{ fontWeight: 700, color: "#131A25" }}>{s.sale != null ? usd(s.sale) : "—"}</div>
             <div>{s.sqft != null ? Math.round(s.sqft).toLocaleString("en-US") : "—"}</div>
             <div style={{ textAlign: "right" }}>{s.ppsf != null ? "$" + Math.round(s.ppsf).toLocaleString("en-US") : "—"}</div>
             <div style={{ textAlign: "right" }}>{s.pctList != null ? Math.round(s.pctList) + "%" : "—"}</div>
@@ -138,20 +130,21 @@ function PriceLine({ data, label, gap, sect, reportComps, onFocusComp }) {
   );
 }
 
+// Section headings match the neighborhood guide page (.lp-nsec h2): small,
+// uppercase, letter-spaced navy — no tinted box, no emoji.
 const BANNER = {
-  display: "flex", alignItems: "center", gap: 8, marginBottom: 10,
-  background: "#E6F1FB", color: "#042C53", padding: "7px 11px", borderRadius: 8,
+  display: "flex", alignItems: "center", gap: 8, marginBottom: 9,
+  color: "#203C5F", padding: "0 0 6px", borderBottom: "1px solid #DCDDDE",
 };
-const SEC = { marginTop: 16 };
-const SECLBL = { fontSize: 13, fontWeight: 700 };
-const ICON = { fontSize: 16, lineHeight: 1 };
+const SEC = { marginTop: 22 };
+const SECLBL = { fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" };
 const LINK = {
   display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13,
-  color: "#2563eb", textDecoration: "none", border: "1px solid #ddd8d0",
+  color: "#203C5F", textDecoration: "none", border: "1px solid #DCDDDE",
   borderRadius: 8, padding: "6px 10px",
 };
 const NEARBY_NOTE = {
-  fontSize: 12, fontStyle: "italic", color: "#78716c",
+  fontSize: 12, fontStyle: "italic", color: "#6B6F75",
   margin: "0 0 9px", lineHeight: 1.5,
 };
 
@@ -161,16 +154,15 @@ function LayerButton({ on, onClick, children }) {
   return (
     <button type="button" onClick={onClick} aria-pressed={!!on}
       style={{ ...LINK, cursor: "pointer", font: "inherit", fontSize: 13,
-        background: on ? "#eff6ff" : "none", borderColor: on ? "#2563eb" : LINK.border.split(" ").pop(), fontWeight: on ? 600 : 400 }}>
+        background: on ? "#E4EEF0" : "#fff", borderColor: on ? "#203C5F" : LINK.border.split(" ").pop(), fontWeight: on ? 700 : 400 }}>
       <span aria-hidden="true">{on ? "◉" : "○"}</span> {on ? "Hide" : "Show"} {children}
     </button>
   );
 }
 
-function Banner({ emoji, children }) {
+function Banner({ children }) {
   return (
     <div style={BANNER}>
-      <span style={ICON} aria-hidden="true">{emoji}</span>
       <span style={SECLBL}>{children}</span>
     </div>
   );
@@ -186,19 +178,19 @@ function PlaceRow({ p, first }) {
       <div>
         {p.url ? (
           <a href={p.url} target="_blank" rel="noopener noreferrer" style={{
-            fontSize: 14, fontWeight: 600, color: "#1c1917", textDecoration: "none",
+            fontSize: 14, fontWeight: 600, color: "#131A25", textDecoration: "none",
             display: "inline-flex", alignItems: "center", gap: 5,
           }}>
-            {p.name} <span style={{ fontSize: 12, color: "#2563eb" }} aria-hidden="true">↗</span>
+            {p.name} <span style={{ fontSize: 12, color: "#203C5F" }} aria-hidden="true">↗</span>
           </a>
         ) : (
-          <span style={{ fontSize: 14, fontWeight: 600, color: "#1c1917" }}>{p.name}</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "#131A25" }}>{p.name}</span>
         )}
-        <div style={{ fontSize: 12, color: "#78716c" }}>{p.address}</div>
+        <div style={{ fontSize: 12, color: "#6B6F75" }}>{p.address}</div>
       </div>
       {p.phone && (
         <a href={`tel:${p.phone.replace(/[^0-9+]/g, "")}`} style={{
-          fontSize: 12, color: "#2563eb", whiteSpace: "nowrap", textDecoration: "none",
+          fontSize: 12, color: "#203C5F", whiteSpace: "nowrap", textDecoration: "none",
         }}>{p.phone}</a>
       )}
     </div>
@@ -284,7 +276,7 @@ export default function NeighborhoodModal({
             .sort((a, b) => b.sale - a.sale); // highest sold price first
           if (!homes.length) return null;
           const prices = homes.map(h => h.sale).sort((a, b) => a - b);
-          const median = prices[Math.floor((prices.length - 1) / 2)];
+          const median = _median(prices);
           return { value: fmtPrice(median), n: homes.length, homes };
         };
         setPrices({ sfh: collectFor(/single family/i), condo: collectFor(/condo|tenancy in common/i) });
@@ -314,6 +306,8 @@ export default function NeighborhoodModal({
   // the entry sets `title` so the header credits both, regardless of which
   // polygon was clicked.
   const heading = data.title || name;
+  const key = entryKeyFor(name);
+  const st = key ? statsFor(key) : null;
 
   return (
     <div className={"nh-backdrop" + (sheet ? " nh-backdrop-sheet" : "")}>
@@ -325,16 +319,39 @@ export default function NeighborhoodModal({
         {sheet && <div className="nh-grip" aria-hidden="true" />}
         <button className="nh-x" onClick={onClose} aria-label="Close">×</button>
 
-        <div style={{ fontSize: 22, fontWeight: 800, color: "#1c1917", lineHeight: 1.1, letterSpacing: "-0.5px" }}>{heading}</div>
-        <div style={{ fontSize: 13, color: "#78716c", marginTop: 3 }}>Neighborhood highlights</div>
-
-        <div style={{ background: "#FAEEDA", borderRadius: 12, padding: "14px 16px", marginTop: 14 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-            <span style={ICON} aria-hidden="true">✨</span>
-            <span style={{ fontSize: 13, fontWeight: 700, color: "#854F0B" }}>Why live here?</span>
-          </div>
-          <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: 0 }}>{data.spirit}</p>
+        {/* The same summary as the neighborhood's guide page: title, alias,
+            zone pill, spirit line, reasons, and the six stats from the same
+            stats file — so the pop-up and the page always agree. */}
+        <p className="nhm-crumb">San Francisco Neighborhoods</p>
+        <div className="nhm-head">
+          <h2>{heading}</h2>
+          {data.aka && <span className="nhm-aka">also {data.aka}</span>}
+          {st?.zone && <span className="nhm-zone" style={{ "--z": ZONE_COLOR[st.zone] }}>{st.zone} zone</span>}
         </div>
+        <p className="nhm-spirit">{data.spirit}</p>
+        {data.reasons?.length ? (
+          <ul className="nhm-reasons">{data.reasons.map(r => <li key={r}>{r}</li>)}</ul>
+        ) : null}
+        {st && st.n > 0 && (
+          <div className="nhm-stats">
+            {[
+              ["Median house", money(st.sfhMedian), st.sfhN ? `${st.sfhN} sold` : null],
+              ["Median condo / TIC", money(st.condoMedian), st.condoN ? `${st.condoN} sold` : null],
+              ["Per square foot", st.ppsf ? `$${Math.round(st.ppsf).toLocaleString("en-US")}` : null, null],
+              ["Days to sell", st.dom != null ? Math.round(st.dom) : null, "median"],
+              ["Summer fog", Number.isFinite(st.fogHours) ? `${st.fogHours.toFixed(1)}h` : null, "a day"],
+              ["Homes sold", st.n, statsYear],
+            ].filter(([, v]) => v != null).map(([l, v, sub]) => (
+              <div className="nhm-stat" key={l}>
+                <div className="nhm-stat-v">{v}</div>
+                <div className="nhm-stat-l">{l}{sub ? <span> {sub}</span> : null}</div>
+              </div>
+            ))}
+          </div>
+        )}
+        {key && (
+          <Link className="nhm-guide" href={`/neighborhoods/${slugify(key)}`}>Full neighborhood guide →</Link>
+        )}
 
         {resCounts && resCounts.total > 0 && (
           <section style={SEC}>
@@ -342,30 +359,29 @@ export default function NeighborhoodModal({
               type="button"
               onClick={() => setInvOpen(o => !o)}
               aria-expanded={invOpen}
-              style={{ ...BANNER, width: "100%", border: "none", cursor: "pointer", font: "inherit", textAlign: "left", marginBottom: invOpen ? 10 : 0 }}
+              style={{ ...BANNER, width: "100%", border: "none", borderBottom: BANNER.borderBottom, background: "none", cursor: "pointer", font: "inherit", textAlign: "left", marginBottom: invOpen ? 10 : 0 }}
             >
-              <span style={ICON} aria-hidden="true">📊</span>
-              <span style={SECLBL}>By the Numbers - Inventory Count</span>
-              <span style={{ marginLeft: "auto", fontSize: 12, fontWeight: 600, color: "#2563eb", whiteSpace: "nowrap" }}>
+              <span style={SECLBL}>Inventory — parcels</span>
+              <span style={{ marginLeft: "auto", fontSize: 12, fontWeight: 700, color: "#203C5F", whiteSpace: "nowrap" }}>
                 {invOpen ? "Hide ▲" : `${resCounts.total.toLocaleString("en-US")} parcels ▼`}
               </span>
             </button>
             {invOpen && (<>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.5px", textTransform: "uppercase", color: "#a8a29e", margin: "0 0 4px" }}>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.5px", textTransform: "uppercase", color: "#8A8E93", margin: "0 0 4px" }}>
               Inventory Types
             </div>
             <div style={{ marginBottom: 2 }}>
               {PARCEL_ROWS.map(([key, color, label]) => (
                 <div key={key} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, lineHeight: 1.9 }}>
                   <span style={{ width: 11, height: 11, borderRadius: 2, background: color, flex: "0 0 auto" }} />
-                  <span style={{ color: "#44403c", flex: 1 }}>{label}</span>
-                  <span style={{ fontWeight: 700, color: "#1c1917" }}>{(resCounts[key] || 0).toLocaleString("en-US")}</span>
+                  <span style={{ color: "#505050", flex: 1 }}>{label}</span>
+                  <span style={{ fontWeight: 700, color: "#131A25" }}>{(resCounts[key] || 0).toLocaleString("en-US")}</span>
                 </div>
               ))}
-              <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, lineHeight: 1.9, borderTop: "1px solid #f0ece6", marginTop: 4, paddingTop: 4 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13.5, lineHeight: 1.9, borderTop: "1px solid #DCDDDE", marginTop: 4, paddingTop: 4 }}>
                 <span style={{ width: 11, flex: "0 0 auto" }} />
-                <span style={{ color: "#57534e", flex: 1, fontWeight: 700 }}>Total parcels</span>
-                <span style={{ fontWeight: 800, color: "#1c1917" }}>{resCounts.total.toLocaleString("en-US")}</span>
+                <span style={{ color: "#505050", flex: 1, fontWeight: 700 }}>Total parcels</span>
+                <span style={{ fontWeight: 800, color: "#131A25" }}>{resCounts.total.toLocaleString("en-US")}</span>
               </div>
             </div>
             </>)}
@@ -373,23 +389,23 @@ export default function NeighborhoodModal({
         )}
 
         <section style={SEC}>
-          <Banner emoji="🏠">{dataThrough ? `1 · Home Prices - YTD Through ${dataThrough}` : "1 · Home Prices - YTD"}</Banner>
+          <Banner>{dataThrough ? `Home prices — YTD through ${dataThrough}` : "Home prices — YTD"}</Banner>
           {prices === "loading" ? (
-            <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#78716c" }}>Loading…</span></div>
+            <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#6B6F75" }}>Loading…</span></div>
           ) : prices ? (
             <div style={{ marginBottom: 2 }}>
               <PriceLine data={prices.sfh} label="Median Single-Family" gap sect="sfh" reportComps={reportComps} onFocusComp={onFocusComp} />
               <PriceLine data={prices.condo} label="Median Condo/TIC" sect="condo" reportComps={reportComps} onFocusComp={onFocusComp} />
             </div>
           ) : (
-            <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#78716c" }}>Market data unavailable.</span></div>
+            <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#6B6F75" }}>Market data unavailable.</span></div>
           )}
         </section>
 
         {microText && (
           <section style={SEC}>
-            <Banner emoji="☀️">2 · Microclimate</Banner>
-            <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: "0 0 10px" }}>{microText}</p>
+            <Banner>Microclimate</Banner>
+            <p style={{ fontSize: 14, lineHeight: 1.6, color: "#131A25", margin: "0 0 10px" }}>{microText}</p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               <LayerButton on={layerStates?.fog} onClick={() => onToggleLayer?.("fog")}>fog layer</LayerButton>
               <LayerButton on={layerStates?.micro} onClick={() => onToggleLayer?.("micro")}>microclimate layer</LayerButton>
@@ -399,21 +415,18 @@ export default function NeighborhoodModal({
 
         {data.history && (
           <section style={SEC}>
-            <Banner emoji="📜">3 · Name &amp; origins</Banner>
-            <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: 0 }}>{data.history}</p>
+            <Banner>The story</Banner>
+            <p style={{ fontSize: 14, lineHeight: 1.6, color: "#131A25", margin: 0 }}>{data.history}</p>
           </section>
         )}
 
         {data.facts?.length > 0 && (
           <section style={SEC}>
-            <Banner emoji="💡">4 · Did you know?</Banner>
+            <Banner>Things most people don&rsquo;t know</Banner>
             {data.facts.map((f, i) => (
-              <div key={f.title} style={{ display: "flex", gap: 10, marginBottom: i < data.facts.length - 1 ? 12 : 0 }}>
-                <span style={{ fontSize: 16, marginTop: 1 }} aria-hidden="true">{FACT_EMOJI[f.icon] || "•"}</span>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: "#1c1917" }}>{f.title}</div>
-                  <p style={{ fontSize: 13, lineHeight: 1.55, color: "#78716c", margin: "2px 0 0" }}>{f.text}</p>
-                </div>
+              <div key={f.title} className="nhm-fact" style={{ marginBottom: i < data.facts.length - 1 ? 10 : 0 }}>
+                <h3>{f.title}</h3>
+                <p>{f.text}</p>
               </div>
             ))}
           </section>
@@ -421,7 +434,7 @@ export default function NeighborhoodModal({
 
         {data.restaurants?.length > 0 && (
           <section style={SEC}>
-            <Banner emoji="🍽️">5 · {data.nearby ? "Nearby" : "Top"} {data.restaurants.length} restaurant{data.restaurants.length === 1 ? "" : "s"}</Banner>
+            <Banner>{data.nearby ? "Nearby" : "Top"} {data.restaurants.length} restaurant{data.restaurants.length === 1 ? "" : "s"}</Banner>
             {data.nearby && (
               <p style={NEARBY_NOTE}>Primarily a residential neighborhood — the closest restaurants are nearby in {fmtList(data.nearby)}.</p>
             )}
@@ -431,7 +444,7 @@ export default function NeighborhoodModal({
 
         {data.bars?.length > 0 && (
           <section style={SEC}>
-            <Banner emoji="🍸">6 · {data.nearby ? "Nearby" : "Top"} {data.bars.length} bar{data.bars.length === 1 ? "" : "s"}</Banner>
+            <Banner>{data.nearby ? "Nearby" : "Top"} {data.bars.length} bar{data.bars.length === 1 ? "" : "s"}</Banner>
             {data.nearby && (
               <p style={NEARBY_NOTE}>Primarily a residential neighborhood — the closest bars are nearby in {fmtList(data.nearby)}.</p>
             )}
@@ -441,16 +454,16 @@ export default function NeighborhoodModal({
 
         {data.hospital && (
           <section style={SEC}>
-            <Banner emoji="🏥">7 · Nearest hospital</Banner>
+            <Banner>Nearest hospital</Banner>
             <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
               <div>
-                <a href={data.hospital.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, fontWeight: 600, color: "#1c1917", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 5 }}>
-                  {data.hospital.name} <span style={{ fontSize: 12, color: "#2563eb" }} aria-hidden="true">↗</span>
+                <a href={data.hospital.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, fontWeight: 600, color: "#131A25", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 5 }}>
+                  {data.hospital.name} <span style={{ fontSize: 12, color: "#203C5F" }} aria-hidden="true">↗</span>
                 </a>
-                <div style={{ fontSize: 12, color: "#78716c" }}>{data.hospital.address}{data.hospital.dist ? ` · ${data.hospital.dist}` : ""}</div>
+                <div style={{ fontSize: 12, color: "#6B6F75" }}>{data.hospital.address}{data.hospital.dist ? ` · ${data.hospital.dist}` : ""}</div>
               </div>
               {data.hospital.phone && (
-                <a href={`tel:${data.hospital.phone.replace(/[^0-9+]/g, "")}`} style={{ fontSize: 12, color: "#2563eb", whiteSpace: "nowrap", textDecoration: "none" }}>{data.hospital.phone}</a>
+                <a href={`tel:${data.hospital.phone.replace(/[^0-9+]/g, "")}`} style={{ fontSize: 12, color: "#203C5F", whiteSpace: "nowrap", textDecoration: "none" }}>{data.hospital.phone}</a>
               )}
             </div>
           </section>
@@ -458,8 +471,8 @@ export default function NeighborhoodModal({
 
         {data.transit && (
           <section style={SEC}>
-            <Banner emoji="🚊">8 · Getting around</Banner>
-            <p style={{ fontSize: 14, lineHeight: 1.6, color: "#1c1917", margin: "0 0 8px" }}>{data.transit}</p>
+            <Banner>Getting around</Banner>
+            <p style={{ fontSize: 14, lineHeight: 1.6, color: "#131A25", margin: "0 0 8px" }}>{data.transit}</p>
             <LayerButton on={layerStates?.transit} onClick={() => onToggleLayer?.("transit")}>transit layer</LayerButton>
           </section>
         )}

@@ -12,6 +12,8 @@ import { fogLabel } from "./lib/risk";
 import { getNeighborhood } from "./lib/neighborhoods";
 import { getBuilding } from "./lib/buildings";
 import NeighborhoodModal from "./NeighborhoodModal";
+import QuickPeek from "./QuickPeek";
+import { createPortal } from "react-dom";
 import BuildingModal from "./BuildingModal";
 
 export default function FogPanel({
@@ -30,6 +32,7 @@ export default function FogPanel({
   seismicHazards,
   tsunamiHazard,
   buildingProfiles, openBuilding, onCloseBuilding,
+  peekEl, onClosePeek, onOpenHood,
 }) {
   // Per-location lookups for the picked point.
   const point = picked?.point;
@@ -89,6 +92,22 @@ export default function FogPanel({
           onFocusComp={onFocusComp}
           onComps={onComps}
         />
+      )}
+      {peekEl && picked?.point && createPortal(
+        <QuickPeek
+          point={picked.point}
+          address={picked.address}
+          neighborhood={neighborhoodName ? (getNeighborhood(neighborhoodName)?.title || neighborhoodName) : null}
+          district={realtorFeat?.properties?.district || null}
+          zip={zipCode}
+          fogHrs={fogHrs}
+          elevationFt={elevationFt}
+          seismicYN={seismicYN}
+          tsunamiYN={tsunamiYN}
+          onMore={neighborhoodName && getNeighborhood(neighborhoodName) ? () => onOpenHood?.(neighborhoodName) : null}
+          onClose={onClosePeek}
+        />,
+        peekEl
       )}
       {openBuilding && buildingProfiles?.[openBuilding] && (
         <BuildingModal

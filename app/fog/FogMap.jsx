@@ -63,6 +63,9 @@ export default function FogMap({
   // its own so that tapping a neighborhood — which replaces `picked` — does
   // not take the searched address off the map.
   addressPin,
+  peekOpen,
+  onPeekEl,
+  onPeekClose,
   // Pixels of the map hidden behind the phone bottom sheet. Picks are framed
   // into the strip above it so the marker never lands under the sheet.
   bottomInset = 0,
@@ -2511,6 +2514,36 @@ export default function FogMap({
       .setLngLat(addressPin.point)
       .addTo(map);
   }, [addressPin?.point?.[0], addressPin?.point?.[1]]);
+
+  // Quick Peek: a small pop-up on the address marker. The map owns the
+  // Mapbox Popup; its contents are a React portal (FogPanel renders the
+  // QuickPeek card into the element handed up through onPeekEl).
+  const peekCbRef = useRef({ onPeekEl, onPeekClose });
+  peekCbRef.current = { onPeekEl, onPeekClose };
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !peekOpen || !addressPin?.point) return;
+    const el = document.createElement("div");
+    // Phones: a pop-up beside the pin runs off the screen, so the card docks
+    // across the bottom of the map instead.
+    if (window.matchMedia("(max-width: 640px)").matches) {
+      el.className = "qp-dock";
+      map.getContainer().appendChild(el);
+      peekCbRef.current.onPeekEl?.(el);
+      return () => { peekCbRef.current.onPeekEl?.(null); el.remove(); };
+    }
+    let closedByUs = false;
+    const popup = new mapboxgl.Popup({
+      offset: [0, -38], maxWidth: "300px", closeButton: false, closeOnClick: false,
+      className: "qp-popup", focusAfterOpen: false,
+    }).setLngLat(addressPin.point).setDOMContent(el).addTo(map);
+    popup.on("close", () => {
+      peekCbRef.current.onPeekEl?.(null);
+      if (!closedByUs) peekCbRef.current.onPeekClose?.();
+    });
+    peekCbRef.current.onPeekEl?.(el);
+    return () => { closedByUs = true; popup.remove(); };
+  }, [peekOpen, addressPin?.point?.[0], addressPin?.point?.[1]]);
 
   useEffect(() => {
     const map = mapRef.current;

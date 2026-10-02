@@ -3,6 +3,8 @@
 
 import Link from "next/link";
 import SiteFooter from "../../components/SiteFooter";
+import HoodPreviewMap from "../../components/HoodPreviewMap";
+import { polygonNamesFor } from "../../fog/lib/neighborhoods";
 import { notFound } from "next/navigation";
 import {
   NAMES, slugify, nameForSlug, contentFor, statsFor,
@@ -73,6 +75,8 @@ export default async function Page({ params }) {
             <Stat label="Homes sold" value={s.n} sub={statsYear} />
           </section>
         )}
+
+        <HoodPreviewMap name={name} label={heading} polygons={polygonNamesFor(name)} />
 
         {c.history && (
           <section className="lp-nsec">
