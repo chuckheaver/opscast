@@ -200,7 +200,7 @@ def render(pages,plabel,labels,W,run_date):
         out.append("</tbody><tfoot><tr><td class='name'>All areas (pooled)</td>"+"".join(cells(tot,kind,key) for _,_,kind,key in groups)+"</tr></tfoot></table>")
         out.append("<div class='legend'>Median and average sale prices in millions (M) or thousands (K); $/SF and DOM as whole numbers; list-price columns are percentages. "
                    "Current-period figures are bold and colored against the same period a year earlier \u2014 green better, red worse (for DOM, fewer days is better). "
-                   "Prior-year columns in grey. * fewer than 10 YTD sales \u2014 read with care. Sorted by YTD median price. Totals are pooled medians (the median of every sale, not an average of area medians).</div>")
+                   "Prior-year columns in grey. * fewer than 10 YTD sales \u2014 read with care. \u2014 means no sales in that period (a median needs at least one). Sorted by YTD median price. Totals are pooled medians (the median of every sale, not an average of area medians).</div>")
         out.append(f"<div class='foot'><span>Source: SFAR MLS via BrokerMetrics, closed sales only (Closed + Sold Off MLS). Data through {W['m1'][1]}. Deemed reliable, not guaranteed.</span>"
                    f"<span>Chuck Heaver \u00b7 Vanguard Properties \u00b7 page {pi+8} / 9</span></div></div>")
     out.append("</body></html>")

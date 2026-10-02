@@ -1,7 +1,7 @@
 # "By the numbers" briefing: every bullet is STAT (bold blue) + description
 # (black). Page 2 leads with a fog-zone map of the year's closings and stacks
 # the three Top 10 tables. Figures come from the same build() as the grids.
-import datetime, html, json, math, statistics, importlib.util
+import datetime, html, json, math, re, statistics, importlib.util
 spec=importlib.util.spec_from_file_location("cv",__import__("os").path.join(__import__("os").path.dirname(__import__("os").path.abspath(__file__)),"cover.py")); cv=importlib.util.module_from_spec(spec); spec.loader.exec_module(cv)
 mg=cv.mg; NAV,NAV_LT,GOLD,GOLD_LT,GOLD_MID,UP,DOWN,INK,MUTED,LINE=cv.NAV,cv.NAV_LT,cv.GOLD,cv.GOLD_LT,cv.GOLD_MID,cv.UP,cv.DOWN,cv.INK,cv.MUTED,cv.LINE
 M,D,sgn=cv.M,cv.D,cv.sgn
@@ -632,9 +632,9 @@ def by_numbers(rows, thru):
     # Highest-volume ZIP by dollars closed, and its three busiest neighborhoods.
     zv=collections.Counter()
     for r in rows:
-        if r.get("zip"): zv[r["zip"]]+=r["sellingPrice"]
+        if zip_of(r): zv[zip_of(r)]+=r["sellingPrice"]
     zip_,zipv=zv.most_common(1)[0]
-    zhoods=[h for h,_ in collections.Counter(r.get("neighborhood") for r in rows if r.get("zip")==zip_ and r.get("neighborhood")).most_common(3)]
+    zhoods=[h for h,_ in collections.Counter(r.get("neighborhood") for r in rows if zip_of(r)==zip_ and r.get("neighborhood")).most_common(3)]
     off=sum(1 for r in rows if r.get("status")=="Sold Off MLS")
     # Ground incline at each sale (scripts/build-sale-incline.mjs).
     import os
@@ -664,6 +664,31 @@ def BN(v):
     up ($4.17B). Ordinary rounding, so parts add to the total and figures
     match the site's stats band ($8.16B)."""
     return f"${v/1e6:,.0f}M" if v<1e9 else f"${v/1e9:.2f}B"
+
+_ZIPS=None
+def zip_of(r):
+    """The sale's ZIP: the MLS value when it is a well-formed SF ZIP (941xx),
+    otherwise the ZIP polygon the sale sits in (typos like "9411" exist)."""
+    global _ZIPS
+    z=str(r.get("zip") or "")
+    if re.fullmatch(r"941\d\d",z): return z
+    if _ZIPS is None:
+        import os
+        _ZIPS=json.load(open(os.path.join(mg.ROOT,"public/data/sf-zip-codes.geojson")))["features"]
+    x,y=r.get("lng"),r.get("lat")
+    if x is None or y is None: return None
+    def inring(ring):
+        c=False; j=len(ring)-1
+        for i in range(len(ring)):
+            xi,yi=ring[i][0],ring[i][1]; xj,yj=ring[j][0],ring[j][1]
+            if (yi>y)!=(yj>y) and x<(xj-xi)*(y-yi)/(yj-yi)+xi: c=not c
+            j=i
+        return c
+    for f in _ZIPS:
+        g=f["geometry"]; polys=[g["coordinates"]] if g["type"]=="Polygon" else g["coordinates"]
+        for poly in polys:
+            if inring(poly[0]) and not any(inring(h) for h in poly[1:]): return str(f["properties"].get("zip"))
+    return None
 
 def site_kpis():
     """The home page's By the Numbers band, figure for figure: same file
@@ -772,11 +797,13 @@ def build():
     .charts .ch {{ flex:1; min-width:0; }} .charts .cap {{ font-size:9.6px; line-height:1.4; margin-top:-2px; }} .charts .src {{ font-size:7.4px; color:{MUTED}; }}
     table.top {{ border-collapse:collapse; width:100%; font-size:8.6px; margin-bottom:6px; }}
     .nb4 {{ gap:9px; }} .nb4 table.top {{ font-size:7.9px; table-layout:auto; }} .nb4 h2 {{ font-size:10.5px; }}
-    .nb4 .col {{ min-width:0; }} .nb4 table.top {{ table-layout:fixed; }}
+    .nb4 .col {{ min-width:0; }} .nn {{ font-weight:400; color:{MUTED}; font-size:0.85em; }} .nb4 table.top {{ table-layout:fixed; }}
     .nb4 table.top td, .nb4 table.top th {{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }}
     .nb4 table.top td.l:first-child, .nb4 table.top th.l:first-child {{ width:43%; }}
-    .nb4 table.zt td.l:first-child, .nb4 table.zt th.l:first-child {{ width:22%; }}
-    .nb4 table.zt td.l:nth-child(2), .nb4 table.zt th.l:nth-child(2) {{ width:40%; }}
+    .nb4 table.zt td:nth-child(1), .nb4 table.zt th:nth-child(1) {{ width:20%; }}
+    .nb4 table.zt td:nth-child(2), .nb4 table.zt th:nth-child(2) {{ width:47%; }}
+    .nb4 table.zt td:nth-child(3), .nb4 table.zt th:nth-child(3) {{ width:20%; }}
+    .nb4 table.zt td:nth-child(4), .nb4 table.zt th:nth-child(4) {{ width:13%; }}
     table.top th {{ background:{NAV}; color:#fff; font-size:6.9px; text-transform:uppercase; padding:2px 4px; text-align:right; }}
     table.top th.l, table.top td.l {{ text-align:left; }}
     table.top td {{ padding:1.9px 4px; text-align:right; border-bottom:0.4px solid {LINE}; white-space:nowrap; overflow:hidden; }}
@@ -795,7 +822,7 @@ def build():
     .sig {{ background:{GOLD_LT}; border-left:3px solid {GOLD_MID}; border-radius:6px; padding:8px 11px; font-size:10px; line-height:1.45; }}
     .sig b {{ color:{GOLD}; }}
     table.linv {{ border-collapse:collapse; width:100%; font-size:8.2px; table-layout:fixed; }}
-    table.linv th, table.linv td {{ padding:2.1px 3px; text-align:right; white-space:nowrap; }}
+    table.linv th, table.linv td {{ padding:1.5px 3px; text-align:right; white-space:nowrap; }}
     table.linv thead tr.g th {{ background:{NAV}; color:#fff; font-size:7.6px; text-transform:uppercase; letter-spacing:0.2px; text-align:center; padding:3px; border-left:2px solid #fff; }}
     table.linv thead tr.g th.l {{ text-align:left; border-left:none; }}
     table.linv thead tr.sub th {{ background:{NAV_LT}; color:{NAV}; font-size:7px; font-weight:700; border-bottom:1.5px solid {NAV}; }}
@@ -1042,32 +1069,35 @@ def build():
         return "".join(f"<tr><td class='l' data-sale='{html.escape(str(r.get('id','')))}'>{i+1}. {short(r)}</td><td class='b'>{M(r['sellingPrice'])}</td>"
                        f"<td style='color:{polc(r)};font-weight:700'>{pol(r)}</td></tr>" for i,r in enumerate(rs))
     # (b) neighborhoods by SFH median, with the Condo/TIC/Other median beside it
-    ranked=sorted([(a,stt) for a,stt in byA[SF].items() if stt["y1"]["n"]>=5 and stt["y1"]["price"]],key=lambda t:-t[1]["y1"]["price"])[:10]
+    # Every area with at least one sale counts; thin samples carry a * and
+    # their sale count rather than being dropped (* = fewer than 10 sales).
+    star=lambda n: "*" if n<10 else ""
+    ranked=sorted([(a,stt) for a,stt in byA[SF].items() if stt["y1"]["n"]>=1 and stt["y1"]["price"]],key=lambda t:-t[1]["y1"]["price"])[:10]
     def yoy(stt):
         p0=stt["y0"]["price"]; return (f"{D(stt['y1']['price'],p0):+.0f}%", UP if stt['y1']['price']>=p0 else DOWN) if p0 else ("—",MUTED)
     def cmed(a):
         x=byA[CO].get(a); return M(x["y1"]["price"]) if x and x["y1"]["price"] else "—"
-    nr="".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}</td><td class='b'>{M(stt['y1']['price'])}</td>"
+    nr="".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(stt['y1']['n'])}</td><td class='b'>{M(stt['y1']['price'])}</td>"
                f"<td>{cmed(a)}</td><td style='color:{yoy(stt)[1]};font-weight:700'>{yoy(stt)[0]}</td></tr>" for i,(a,stt) in enumerate(ranked))
     # (c)(d) the ten biggest sales in each segment
     tsfh=sorted([r for r in Y1 if r["propType"] in SFHs],key=lambda r:-r["sellingPrice"])[:10]
     tco=sorted([r for r in Y1 if r["propType"] in COs],key=lambda r:-r["sellingPrice"])[:10]
-    # (e) ZIP codes by median sale, 15+ sales; labelled with their busiest area
+    # (e) ZIP codes by median sale — every ZIP with a sale; labelled with its busiest area
     import collections as _c
     byzip=_c.defaultdict(list)
     for r in Y1:
-        if r.get("zip"): byzip[r["zip"]].append(r)
+        if zip_of(r): byzip[zip_of(r)].append(r)
     zrank=sorted([(z,statistics.median(x["sellingPrice"] for x in rs),len(rs),
                    _c.Counter(x.get("nb") for x in rs if x.get("nb")).most_common(1)[0][0])
-                  for z,rs in byzip.items() if len(rs)>=15],key=lambda t:-t[1])[:10]
-    zr="".join(f"<tr><td class='l'>{i+1}. {z}</td><td class='l'>{html.escape(a)}</td><td class='b'>{M(m)}</td><td>{n}</td></tr>"
+                  for z,rs in byzip.items() if rs and any(x.get("nb") for x in rs)],key=lambda t:-t[1])[:10]
+    zr="".join(f"<tr><td class='l'>{i+1}. {z}{star(n)}</td><td class='l'>{html.escape(a)}</td><td class='b'>{M(m)}</td><td>{n}</td></tr>"
                for i,(z,m,n,a) in enumerate(zrank))
-    # (f) areas by median $/sf, all property types, 15+ sales with square footage
+    # (f) areas by median $/sf, all property types, every sale with square footage
     bya=_c.defaultdict(list)
     for r in Y1:
         if r.get("nb") and r.get("sqft"): bya[r["nb"]].append(r["sellingPrice"]/r["sqft"])
-    pall=sorted([(a,statistics.median(v),len(v)) for a,v in bya.items() if len(v)>=15],key=lambda t:-t[1])
-    prow=lambda rk: "".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}</td><td class='b'>${v:,.0f}</td><td>{n}</td></tr>" for i,(a,v,n) in enumerate(rk))
+    pall=sorted([(a,statistics.median(v),len(v)) for a,v in bya.items() if v],key=lambda t:-t[1])
+    prow=lambda rk: "".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(n)}</td><td class='b'>${v:,.0f}</td><td>{n}</td></tr>" for i,(a,v,n) in enumerate(rk))
     pr=prow(pall[:10]); plo=prow(sorted(pall,key=lambda t:t[1])[:10])
     # (g)(h) biggest overbids by sale-to-list. A list price under $300K or a
     # ratio over 3x is a data error (a stale or placeholder list price), not a bid.
@@ -1105,7 +1135,7 @@ def build():
       <h2>Top 10 - Overbids - Condo/TIC/Other</h2>
       <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(oco)}</table></div>""")
     o.append("</div>")
-    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS), over USGS-derived summer-fog contours. ZIPs and $/sf need 15+ sales; overbids exclude list prices under $300K or bids over 3× list (data errors).</span><span>page 5 / 9</span></div></div>")
+    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS), over USGS-derived summer-fog contours. Every sale counts — no minimum; * fewer than 10 sales (read with care). Overbids exclude list prices under $300K or bids over 3× list (data errors).</span><span>page 5 / 9</span></div></div>")
 
     # ── PAGE 6 — in depth ────────────────────────────────────────────────
     # Everything a reader can skip. The narrative pages stay light because
@@ -1140,8 +1170,8 @@ def build():
     # buildings, so mixing them compares different things — left out.
     linv,lskip,lcity=latent_inventory((W["m1"][0][:4]+"-01-01",W["m1"][1]))
     MIN_SHOW, MIN_SOLID = 50, 250            # houses: to list at all / to trust the rate
-    shown=[r for r in linv if r["u1"]>=MIN_SHOW]
-    hidden=[r for r in linv if r["u1"]<MIN_SHOW]
+    shown=list(linv)                         # every area is listed; thin ones carry a *
+    hidden=[]
     shown.sort(key=lambda r:-r["u1"])
     T=lambda k,rows=linv: sum(r[k] for r in rows)
     houses, sold_h = T("u1"), T("sfh")
@@ -1205,7 +1235,7 @@ def build():
       the same buyer sees very different odds of an SFH coming up depending on where they are looking.</div>
       <div class='src'>SFH are single-unit residential parcels in the SF Land Use dataset; sales are single-family closings (SFAR MLS).
       * Fewer than {MIN_SOLID} SFH in the area — a handful of sales moves the rate, so read it with care.
-      Not listed (fewer than {MIN_SHOW} SFH — Condo/TIC/Other districts): {hidden_names}. {lskip} parcel(s) fell outside the mapped areas.</div>
+      {lskip} parcel(s) fell outside the mapped areas.</div>
       <div class='foot'><span>Latent inventory = every SFH that exists, sold or not. Sales are closed transactions, Jan 1 – {thru}.</span><span>page 7 / 9</span></div></div>""")
 
     o.append("</body></html>")
