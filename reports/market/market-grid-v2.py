@@ -51,7 +51,8 @@ AREAS={
 }
 N2A={n:a for a,ns in AREAS.items() for n in ns}
 SEG={"Single Family Residences":{"Single Family Residence","2 Houses on Lot","Halfplex"},
-     "Condominiums / TIC / Co-ops":{"Condominium","Tenancy in Common","Stock Cooperative","Townhouse"}}
+     # Every sale that is not a single-family house: two segments, nothing left over.
+     "Condo / TIC / Other":{"Condominium","Tenancy in Common","Stock Cooperative","Townhouse","Other","3+ Houses on Lot"}}
 ZONES=[("Sun","#FDE68A","\u2264 8.0 hrs/day",lambda h:h<8.5),
        ("Transition","#E7E5E4","8.5 \u2013 8.9",lambda h:8.5<=h<9),
        ("Fog","#C3C6CA","9.0 \u2013 10.9",lambda h:9<=h<11),
@@ -180,7 +181,7 @@ def render(pages,plabel,labels,W,run_date):
         return h+"</tr></thead>"
     out=[f"<!doctype html><html><head><meta charset='utf-8'><style>{css}</style></head><body>"]
     for pi,(seg,byA,tot,byZ) in enumerate(pages):
-        title={"Single Family Residences":"SFH","Condominiums / TIC / Co-ops":"Condo/TIC"}[seg]
+        title={"Single Family Residences":"SFH","Condo / TIC / Other":"Condo/TIC/Other"}[seg]
         out.append(f"<div class='page'><div class='hdr'><div><div class='t'>San Francisco Market Grid - {title}</div>"
                    f"<div class='p'>{html.escape(plabel)}</div>"
                    f"<div class='s'>Closed sales, SFAR MLS &nbsp;\u00b7&nbsp; run {run_date.strftime('%b %-d, %Y')}</div></div></div>")

@@ -42,6 +42,10 @@
 .sheetA .charts .cap { font-size:9.6px; line-height:1.4; margin-top:-2px; }
 .sheetA .charts .src { font-size:7.4px; color:#6B6F75; }
 .sheetA table.top { border-collapse:collapse; width:100%; font-size:8.6px; margin-bottom:6px; }
+.sheetA .nb4 { gap:9px; }
+.sheetA .nb4 table.top { font-size:7.9px; table-layout:auto; }
+.sheetA .nb4 h2 { font-size:10.5px; }
+.sheetA .nb4 table.top td.l { max-width:118px; text-overflow:ellipsis; }
 .sheetA table.top th { background:#203C5F; color:#fff; font-size:6.9px; text-transform:uppercase; padding:2px 4px; text-align:right; }
 .sheetA table.top th.l, .sheetA table.top td.l { text-align:left; }
 .sheetA table.top td { padding:1.9px 4px; text-align:right; border-bottom:0.4px solid #DCDDDE; white-space:nowrap; overflow:hidden; }

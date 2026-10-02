@@ -62,7 +62,7 @@ def tile(v,l,s=None,c=None):
 
 def build_cover():
     pages,plabel,labels,W,seg,top,S,mon=facts()
-    SF="Single Family Residences"; CO="Condominiums / TIC / Co-ops"
+    SF="Single Family Residences"; CO="Condo / TIC / Other"
     s,c=seg[SF],seg[CO]; st,ct=s["tot"],c["tot"]
     mlabel=datetime.date.fromisoformat(W["m1"][0]).strftime("%B %Y")
     ylabel=f"January 1 – {datetime.date.fromisoformat(W['m1'][1]).strftime('%B %-d, %Y')}"
@@ -142,7 +142,7 @@ def build_cover():
       {s['dm_slow'][-1][1]} remains the slowest market at {s['dm_slow'][-1][0]:.0f} days against a citywide {st['y1']['dom']:.0f}.</p></div>""")
     # Condo column
     ct3=c['top']; cb=c['bot']
-    o.append(f"""<div class='col'><h2>Condominiums / TIC / Co-ops</h2>
+    o.append(f"""<div class='col'><h2>Condo / TIC / Other</h2>
       <p><b>The month.</b> The condo recovery is the real story of {mlabel.split()[0]}. {ct['m1']['n']} closings, <span class='up'>{sgn(D(ct['m1']['n'],ct['m0']['n']))}%</span> year over year, at a
       median of <b>{M(ct['m1']['price'])}</b> (<span class='up'>{sgn(D(ct['m1']['price'],ct['m0']['price']))}%</span>). Median market time collapsed from <b>{ct['m0']['dom']:.0f} days to {ct['m1']['dom']:.0f}</b>,
       and the share selling over asking nearly doubled to <b>{ct['m1']['over']:.0f}%</b> from {ct['m0']['over']:.0f}%. After six years in the shadow of the house market, condominiums are moving at house-market speed.</p>

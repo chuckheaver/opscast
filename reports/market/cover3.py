@@ -47,7 +47,7 @@ def monthly_series():
     dollar volume, and the SFH median list vs median sold. Complete months."""
     import statistics
     F=[f["properties"] for f in json.load(open(mg.SRC))["features"]]
-    SFH=mg.SEG["Single Family Residences"]; CO=mg.SEG["Condominiums / TIC / Co-ops"]
+    SFH=mg.SEG["Single Family Residences"]; CO=mg.SEG["Condo / TIC / Other"]
     out={}
     for yr in (2025,2026):
         rows=[]
@@ -402,7 +402,7 @@ def mirror_bars(split,w=470,h=206):
     pad_l,gap=2,38; bw=w-pad_l-2; y1=34; y2=y1+BARH+gap
     o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>"]
     for yy,key,title,fmt in ((y1,"pn","UNITS SOLD — ALL TYPES",lambda d:f"{d['n']:,}"),
-                             (y2,"pv","MONEY SPENT",lambda d:f"${d['v']/1e6:,.0f}M")):
+                             (y2,"pv","MONEY SPENT",lambda d:BN(d['v']))):
         o.append(f"<text x='{pad_l}' y='{yy-8}' font-size='8.6' font-weight='800' fill='{NAV}' letter-spacing='0.4'>{title}</text>")
         x=pad_l; out=[]
         for d in split:
@@ -452,12 +452,12 @@ def type_mirror(rows,w=470,h=168):
     SFH=mg.SEG["Single Family Residences"]
     n=len(rows); tot=sum(r["sellingPrice"] for r in rows)
     h_=[r for r in rows if r["propType"] in SFH]; c_=[r for r in rows if r["propType"] not in SFH]
-    segs=[("Houses","#203C5F",len(h_),sum(r["sellingPrice"] for r in h_)),
-          ("Condo / TIC / Other","#E9BC3F",len(c_),sum(r["sellingPrice"] for r in c_))]
+    segs=[("SFH","#203C5F",len(h_),sum(r["sellingPrice"] for r in h_)),
+          ("Condo/TIC/Other","#E9BC3F",len(c_),sum(r["sellingPrice"] for r in c_))]
     pad_l,gap=2,34; bw=w-pad_l-2; y1=22; y2=y1+BARH+gap
     o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>"]
     for yy,idx,total,title,fmt in ((y1,2,n,"UNITS SOLD",lambda v:f"{v:,}"),
-                                   (y2,3,tot,"MONEY SPENT",lambda v:f"${v/1e9:.2f}B")):
+                                   (y2,3,tot,"MONEY SPENT",lambda v:BN(v))):
         o.append(f"<text x='{pad_l}' y='{yy-8}' font-size='8.6' font-weight='800' fill='{NAV}' letter-spacing='0.4'>{title}</text>")
         x=pad_l; out=[]
         for lab,col,cnt,val in segs:
@@ -494,7 +494,7 @@ def _ytd_medians():
     _,mt=mg.last_full_month(F); lo,hi=f"{mt.year}-01-01",mt.isoformat()
     ytd=[r for r in F if r.get("sellingPrice") and lo<=(r.get("sellingDate") or "")<=hi]
     med=lambda seg: statistics.median(r["sellingPrice"] for r in ytd if r["propType"] in mg.SEG[seg])
-    return round(med("Single Family Residences"),-3), round(med("Condominiums / TIC / Co-ops"),-3)
+    return round(med("Single Family Residences"),-3), round(med("Condo / TIC / Other"),-3)
 MED_SFH, MED_CO = _ytd_medians()
 
 def yield_chart(w=470,h=150):
@@ -626,7 +626,7 @@ def by_numbers(rows, thru):
     rat=[r["sellingPrice"]/r["listPrice"] for r in rows if r.get("listPrice")]
     sfh=[r for r in rows if r["propType"] in SFH]
     beds=[r["sellingPrice"]/r["bedrooms"] for r in sfh if isinstance(r.get("bedrooms"),(int,float)) and r["bedrooms"]>0]
-    CO=mg.SEG["Condominiums / TIC / Co-ops"]
+    CO=mg.SEG["Condo / TIC / Other"]
     wd=collections.Counter(datetime.date.fromisoformat(r["sellingDate"][:10]).weekday() for r in rows)
     topday,topn=wd.most_common(1)[0]
     # Highest-volume ZIP by dollars closed, and its three busiest neighborhoods.
@@ -638,7 +638,7 @@ def by_numbers(rows, thru):
     off=sum(1 for r in rows if r.get("status")=="Sold Off MLS")
     sq=lambda rs: statistics.median([r["sqft"] for r in rs if r.get("sqft")])
     return dict(
-        per_day=f"${vol/days/1e6:.1f}M", vol=f"${vol/1e9:.2f}B", days=days,
+        per_day=f"${vol/days/1e6:.1f}M", vol=BN(vol), days=days,
         every=f"Every {int(hrs)}h {round((hrs%1)*60):02d}m",
         off=f"{off:,}", offpct=f"{100*off/n:.0f}%", n=f"{n:,}",
         topday=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"][topday],
@@ -651,6 +651,12 @@ def by_numbers(rows, thru):
         tenm=f"{sum(1 for r in rows if r['sellingPrice']>=10e6)}",
         sqft=f"{sq(sfh):,.0f} sf", csqft=f"{sq([r for r in rows if r['propType'] in CO]):,.0f} sf",
     )
+
+def BN(v):
+    """Money totals: whole millions under $1B ($666M), two decimals from $1B
+    up ($4.17B). Ordinary rounding, so parts add to the total and figures
+    match the site's stats band ($8.16B)."""
+    return f"${v/1e6:,.0f}M" if v<1e9 else f"${v/1e9:.2f}B"
 
 def site_kpis():
     """The home page's By the Numbers band, figure for figure: same file
@@ -706,7 +712,7 @@ def zone_gap():
 
 def build():
     pages,plabel,labels,W,seg,top,S,mon=cv.facts()
-    SF="Single Family Residences"; CO="Condominiums / TIC / Co-ops"
+    SF="Single Family Residences"; CO="Condo / TIC / Other"
     s,c=seg[SF],seg[CO]; st,ct=s["tot"],c["tot"]
     mo=datetime.date.fromisoformat(W["m1"][0]); mname=mo.strftime("%B"); yy=str(mo.year)[2:]; py=str(mo.year-1)[2:]
     thru=datetime.date.fromisoformat(W["m1"][1]).strftime("%B %-d")
@@ -718,7 +724,7 @@ def build():
     sb=byA[CO].get("South Beach / Yerba Buena"); mb=byA[CO].get("Mission Bay")
     loan=RENT_NOW/pmt(1,cv.RATE_NOW)
     pac=[x for x in s['top']+s['bot'] if 'Pacific / Presidio' in x[1]]; pacpct=sgn(pac[0][0]) if pac else "+7"
-    mapsvg,ndots=sales_map(-122.517,37.705,-122.353,37.833,w=352,h=430)
+    mapsvg,ndots=sales_map(-122.517,37.705,-122.353,37.833,w=300,h=366)
     css=mg.FONT_CSS+f"""
     @page {{ size: letter landscape; margin: 0.32in 0.35in; }}
     body {{ margin:0; font-family: {mg.SANS}; color:{INK}; }}
@@ -758,6 +764,8 @@ def build():
     .cap {{ font-size:8.4px; line-height:1.3; margin-top:1px; }} .src {{ font-size:7.2px; color:{MUTED}; }}
     .charts .ch {{ flex:1; min-width:0; }} .charts .cap {{ font-size:9.6px; line-height:1.4; margin-top:-2px; }} .charts .src {{ font-size:7.4px; color:{MUTED}; }}
     table.top {{ border-collapse:collapse; width:100%; font-size:8.6px; margin-bottom:6px; }}
+    .nb4 {{ gap:9px; }} .nb4 table.top {{ font-size:7.9px; table-layout:auto; }} .nb4 h2 {{ font-size:10.5px; }}
+    .nb4 table.top td.l {{ max-width:118px; text-overflow:ellipsis; }}
     table.top th {{ background:{NAV}; color:#fff; font-size:6.9px; text-transform:uppercase; padding:2px 4px; text-align:right; }}
     table.top th.l, table.top td.l {{ text-align:left; }}
     table.top td {{ padding:1.9px 4px; text-align:right; border-bottom:0.4px solid {LINE}; white-space:nowrap; overflow:hidden; }}
@@ -864,14 +872,14 @@ def build():
     u26,u25=ytd_now(urows,ukeys),ytd_then(urows,ukeys); u25y=tot(urows,ukeys,"")
     v26,v25=ytd_now(vrows,vkeys),ytd_then(vrows,vkeys); v25y=tot(vrows,vkeys,"")
     uytd=dict(label=f"{u26:,} vs {u25:,}  {sgn(D(u26,u25))}%", sub=f"through {mname} · 2025 full year {u25y:,}")
-    vytd=dict(label=f"${v26/1e9:.2f}B vs ${v25/1e9:.2f}B  {sgn(D(v26,v25))}%", sub=f"through {mname} · 2025 full year ${v25y/1e9:.2f}B")
+    vytd=dict(label=f"{BN(v26)} vs {BN(v25)}  {sgn(D(v26,v25))}%", sub=f"through {mname} · 2025 full year {BN(v25y)}")
     USEG=[("SFH","#AFC0D0","#203C5F","sfh"),("Condo/TIC","#F6E3A6","#E9BC3F","cd"),("Other","#C9CCD0","#6B6F75","oth")]
     VSEG=[("SFH","#AFC0D0","#203C5F","sfh_v"),("Condo/TIC","#F6E3A6","#E9BC3F","cd_v"),("Other","#C9CCD0","#6B6F75","oth_v")]
     # ── PAGE 1 — San Francisco right now ─────────────────────────────────
     # The local snapshot. Headline numbers, then four charts. One sentence
     # under each; anything longer belongs on the In Depth page.
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>San Francisco Real Estate</div>
-      <div class='p'><b>{mname} {mo.year}</b> and the year through <b>{thru}</b>, each against the same stretch last year.</div></div>
+      <div class='p'>YTD through <b>{mname} {mo.year}</b> vs {mo.year-1}.</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, SFAR MLS · run {datetime.date.today().strftime('%B %-d, %Y')}</div></div>""")
     krows,kthru,kyy,kpy=site_kpis()
     o.append(f"<div class='sband'><div class='sband-h'>By the Numbers: \u2019{kyy} vs <span>\u2019{kpy}</span> YTD ({kthru})</div><div class='sband-row'>"
@@ -883,15 +891,15 @@ def build():
       <div class='cap'>Light bars are last year, dark bars this year. <span class='st'>{u26:,}</span> homes have sold, against <span class='st'>{u25:,}</span> by this point last year.</div></div>""")
     o.append(f"""<div class='col'><h2>Volume Allocation</h2>
       {stacked(vrows,VSEG,vytd,h=212,fmt=lambda v:f"{v/1e6:.0f}")}
-      <div class='cap'>Millions of dollars a month. <span class='st'>${v26/1e9:.2f}B</span> so far against <span class='st'>${v25/1e9:.2f}B</span> — far more money on only {sgn(D(u26,u25))}% more sales.</div></div>""")
+      <div class='cap'>Millions of dollars a month. <span class='st'>{BN(v26)}</span> so far against <span class='st'>{BN(v25)}</span> — far more money on only {sgn(D(u26,u25))}% more sales.</div></div>""")
     o.append("</div>")
     o.append("<div class='cols' style='margin-top:7px'>")
     o.append(f"""<div class='col'><h2>Sale vs List — SFH</h2>
       {lines(mlrows,[("What sellers asked","#E9BC3F","mlist"),("What buyers paid","#203C5F","msold")],h=196,dkey="d")}
       <div class='cap'>Navy sits above yellow every month this year: buyers paid over asking all year. The figure under each month is the change from last year.</div></div>""")
-    o.append(f"""<div class='col'><h2>Sale vs List — Condo/TIC</h2>
+    o.append(f"""<div class='col'><h2>Sale vs List — Condo/TIC/Other</h2>
       {lines(clrows,[("What sellers asked","#E9BC3F","clist"),("What buyers paid","#203C5F","csold")],h=196,dkey="d")}
-      <div class='cap'>Same story for condos, with a narrower gap — sellers ask about {M(statistics.median([r['clist'] for r in clrows if r['clist']]))} and get about {M(statistics.median([r['csold'] for r in clrows if r['csold']]))}.</div></div>""")
+      <div class='cap'>Same story for Condo/TIC/Other, with a narrower gap — sellers ask about {M(statistics.median([r['clist'] for r in clrows if r['clist']]))} and get about {M(statistics.median([r['csold'] for r in clrows if r['csold']]))}.</div></div>""")
     o.append("</div>")
     o.append(f"<div class='foot'><span>Source: SFAR MLS via BrokerMetrics, closed sales (Closed + Sold Off MLS), geocoded to the site's fog-contour layer. Data through {W['m1'][1]}. Deemed reliable, not guaranteed.</span><span>page 1 / 9</span></div></div>")
 
@@ -927,16 +935,16 @@ def build():
     top3=sum(v for _,v in hrank[:3])
     cheap=msplit[0]; rich=msplit[-1]
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>Detail — Allocation of Money</div>
-      <div class='p'><b>${mtot/1e9:.2f} billion</b> changed hands in <b>{mn:,}</b> sales this year. It did not come from where most people assume.</div></div>
+      <div class='p'><b>{BN(mtot)}</b> changed hands in <b>{mn:,}</b> sales this year.</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, Jan 1 – {thru}</div></div>""")
     o.append("<div class='cols'>")
     o.append(f"""<div class='col' style='flex:1.5'><h2>Allocation by Tier</h2>
       {mirror_bars(msplit)}
       <div class='cap'>The top bar counts <b>units</b>, the bottom counts <b>dollars</b> — same four price ranges, completely different shapes.
-      <span class='st'>{cheap['n']:,}</span> units sold under $1M and brought <span class='st'>${cheap['v']/1e6:,.0f}M</span>; just <span class='st'>{rich['n']}</span> sold over $5M and brought <span class='st'>${rich['v']/1e6:,.0f}M</span>.</div>
+      <span class='st'>{cheap['n']:,}</span> units sold under $1M and brought <span class='st'>{BN(cheap['v'])}</span>; just <span class='st'>{rich['n']}</span> sold over $5M and brought <span class='st'>{BN(rich['v'])}</span>.</div>
       <h2 style='margin-top:6px'>Allocation by Type</h2>
       {type_mirror(S["y1"])}
-      <div class='cap'>More condos change hands than houses, yet houses bring in more money.</div></div>""")
+      <div class='cap'>More Condo/TIC/Other units change hands than SFH, yet SFH bring in more money.</div></div>""")
     o.append(f"""<div class='col' style='flex:1.1'><h2>Allocation by Neighborhood</h2>
       {hood_bars(hrank,mtot,w=380,h=470,top=20)}
       <div class='cap'>Top twenty by dollars closed. <span class='st'>{hrank[0][0]}</span> alone took <span class='st'>${hrank[0][1]/1e6:,.0f}M</span> — <span class='st'>{100*hrank[0][1]/mtot:.0f}%</span> of the city — on {100*len([r for r in S['y1'] if N2A_(r.get('neighborhood') or '')==hrank[0][0]])/mn:.0f}% of its sales.</div></div>""")
@@ -972,8 +980,8 @@ def build():
       <div class='cap' style='margin-bottom:5px'><b>Watching Interest Rates</b></div>
       <h2>The Cost of Financing an Average Home</h2>
       <table class='top'><tr><th class='l'>30-yr rate</th><th>SFH median</th><th>vs 6.10%</th><th>Condo median</th><th>vs 6.10%</th></tr>{rate_rows}</table>
-      <div class='cap'>Monthly payment on a typical {M(MED_SFH)} house and {M(MED_CO)} condo with 20% down.
-      January's {6.10:.2f}% to today's {MTG_NOW:.2f}% costs a house buyer <span class='st'>${P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10):,.0f} more a month</span> — <span class='st'>${12*(P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10)):,.0f} a year</span> — for the same house.</div>
+      <div class='cap'>Monthly payment on a typical {M(MED_SFH)} SFH and {M(MED_CO)} Condo/TIC/Other with 20% down.
+      January's {6.10:.2f}% to today's {MTG_NOW:.2f}% costs an SFH buyer <span class='st'>${P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10):,.0f} more a month</span> — <span class='st'>${12*(P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10)):,.0f} a year</span> — for the same house.</div>
       <h2 style='margin-top:6px'>Home Loans Follow the Bond</h2>{spread_chart(h=140)}
       <div class='cap'>Yellow is your home loan, navy is what the government pays. The gap between them barely moves, so the bond leads and your rate follows.</div>
       <h2 style='margin-top:5px'>The Yield Curve Today</h2>{curve_chart(w=470,h=92)}
@@ -1010,15 +1018,18 @@ def build():
     o.append(f"""<div class='foot'><span>Payments are principal and interest only. Foregone yield uses the 10-year Treasury; property tax at {100*PROP_TAX:.2f}%. Insurance, upkeep and illiquidity are additional.</span><span>page 4 / 9</span></div></div>""")
 
     # ── PAGE 5 — the neighborhoods ───────────────────────────────────────
-    erows=[("UCSF","Mission Bay"),("Salesforce","SoMa"),("OpenAI","Mission Bay"),("Anthropic","Howard St"),("Uber","Mission Bay"),
-           ("Wells Fargo","Financial Dist"),("Airbnb","SoMa"),("Databricks","Financial Dist"),("Cognition","South Beach"),("Together AI","Showplace Sq")]
-    er="".join(f"<tr><td class='l b'>{i+1}. {n}</td><td class='l'>{loc}</td></tr>" for i,(n,loc) in enumerate(erows))
+    # Eight panels: (a) by microclimate, then seven Top 10s.
+    Y1=S["y1"]; SFHs=mg.SEG[SF]; COs=mg.SEG[CO]
+    ratio=lambda r: r["sellingPrice"]/r["listPrice"] if r.get("listPrice") else None
     def pol(r):
-        return f"{100*r['sellingPrice']/r['listPrice']:.0f}%" if r.get("listPrice") else "—"
+        return f"{100*ratio(r):.0f}%" if ratio(r) else "—"
     def polc(r):
-        return UP if r.get("listPrice") and r["sellingPrice"]>r["listPrice"] else MUTED
-    cr="".join(f"<tr><td class='l'>{i+1}. {html.escape(r['address'].split(',')[0])}</td><td class='b'>{M(r['sellingPrice'])}</td>"
-               f"<td style='color:{polc(r)};font-weight:700'>{pol(r)}</td></tr>" for i,r in enumerate(top))
+        return UP if ratio(r) and ratio(r)>1 else MUTED
+    short=lambda r: html.escape(r['address'].split(',')[0])
+    def sales_rows(rs):
+        return "".join(f"<tr><td class='l'>{i+1}. {short(r)}</td><td class='b'>{M(r['sellingPrice'])}</td>"
+                       f"<td style='color:{polc(r)};font-weight:700'>{pol(r)}</td></tr>" for i,r in enumerate(rs))
+    # (b) neighborhoods by SFH median, with the Condo/TIC/Other median beside it
     ranked=sorted([(a,stt) for a,stt in byA[SF].items() if stt["y1"]["n"]>=5 and stt["y1"]["price"]],key=lambda t:-t[1]["y1"]["price"])[:10]
     def yoy(stt):
         p0=stt["y0"]["price"]; return (f"{D(stt['y1']['price'],p0):+.0f}%", UP if stt['y1']['price']>=p0 else DOWN) if p0 else ("—",MUTED)
@@ -1026,38 +1037,60 @@ def build():
         x=byA[CO].get(a); return M(x["y1"]["price"]) if x and x["y1"]["price"] else "—"
     nr="".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}</td><td class='b'>{M(stt['y1']['price'])}</td>"
                f"<td>{cmed(a)}</td><td style='color:{yoy(stt)[1]};font-weight:700'>{yoy(stt)[0]}</td></tr>" for i,(a,stt) in enumerate(ranked))
+    # (c)(d) the ten biggest sales in each segment
+    tsfh=sorted([r for r in Y1 if r["propType"] in SFHs],key=lambda r:-r["sellingPrice"])[:10]
+    tco=sorted([r for r in Y1 if r["propType"] in COs],key=lambda r:-r["sellingPrice"])[:10]
+    # (e) ZIP codes by median sale, 15+ sales; labelled with their busiest area
+    import collections as _c
+    byzip=_c.defaultdict(list)
+    for r in Y1:
+        if r.get("zip"): byzip[r["zip"]].append(r)
+    zrank=sorted([(z,statistics.median(x["sellingPrice"] for x in rs),len(rs),
+                   _c.Counter(x.get("nb") for x in rs if x.get("nb")).most_common(1)[0][0])
+                  for z,rs in byzip.items() if len(rs)>=15],key=lambda t:-t[1])[:10]
+    zr="".join(f"<tr><td class='l'>{i+1}. {z}</td><td class='l'>{html.escape(a)}</td><td class='b'>{M(m)}</td><td>{n}</td></tr>"
+               for i,(z,m,n,a) in enumerate(zrank))
+    # (f) areas by median $/sf, all property types, 15+ sales with square footage
+    bya=_c.defaultdict(list)
+    for r in Y1:
+        if r.get("nb") and r.get("sqft"): bya[r["nb"]].append(r["sellingPrice"]/r["sqft"])
+    prank=sorted([(a,statistics.median(v),len(v)) for a,v in bya.items() if len(v)>=15],key=lambda t:-t[1])[:10]
+    pr="".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}</td><td class='b'>${v:,.0f}</td><td>{n}</td></tr>" for i,(a,v,n) in enumerate(prank))
+    # (g)(h) biggest overbids by sale-to-list. A list price under $300K or a
+    # ratio over 3x is a data error (a stale or placeholder list price), not a bid.
+    okbid=lambda r: ratio(r) and r["listPrice"]>=300_000 and ratio(r)<=3
+    osfh=sorted([r for r in Y1 if r["propType"] in SFHs and okbid(r)],key=lambda r:-ratio(r))[:10]
+    oco=sorted([r for r in Y1 if r["propType"] in COs and okbid(r)],key=lambda r:-ratio(r))[:10]
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The Neighborhoods</div>
-      <div class='p'>Where the sales landed, what they went for, and what the fog has to do with the price</div></div>
+      <div class='p'>Neighborhoods, Microclimates and Money Flow - Median Sales</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties</div></div>""")
-    o.append("<div class='cols'>")
-    o.append(f"""<div class='col'><h2>Every Sale This Year, on the Fog Map</h2>
+    TH=lambda *cols: "<tr>"+"".join(f"<th class='l'>{c[1:]}</th>" if c.startswith("<") else f"<th>{c}</th>" for c in cols)+"</tr>"
+    o.append("<div class='cols nb4'>")
+    o.append(f"""<div class='col' style='flex:1.3'><h2>By Microclimate</h2>
       <div class='mapwrap'>{mapsvg}</div>
       <div class='maplegend'><span class='dotkey'></span><b>{ndots:,}</b> closings, 2026 YTD
         {"".join(f"<span class='zk'><span class='zc' style='background:{col}'></span>{nm}</span>" for nm,col in ZONE_FILL)}</div>
-      <div class='mapcap'>Every 2026 closing over the city's summer-fog zones — my database, my map, and nobody else publishes it.
-        Zones by daily summer fog hours: Sun ≤8.0 · Transition 8.5–8.9 · Fog 9.0–10.9 · Persistent Fog ≥11.</div>
-      <h2>Microclimate Pricing — Median Sales Price</h2>
       <table class='mzp'>"""
       +"".join(f"<tr><td>{CHIP(col)} {nm}</td><td class='b'>{M(z['price'])}</td></tr>"
                for nm,col,z in (("Sun Zone","#FBDC7E",sun),("Transition Zone","#F6E3A6",tr),
                                 ("Fog Zone","#C3CBD2",fg),("Persistent Fog","#8D9BA6",pf)))
-      +"</table><div class='cap'>Single-family homes, Jan 1 – " + thru + ".</div></div>")
-    o.append(f"""<div class='col'><h2>Top 10 Neighborhoods — SFH &amp; Condo</h2>
-      <table class='top'><tr><th class='l'>Neighborhood</th><th>SFH</th><th>Condo</th><th>vs {py}</th></tr>{nr}</table>
-      <h2 style='margin-top:6px'>Top 10 Sales — SFH / Condo / Other</h2>
-      <table class='top'><tr><th class='l'>Address</th><th>Closed</th><th>% ask</th></tr>{cr}</table></div>""")
-    o.append(f"""<div class='col'><h2>Top 10 City Employers</h2>
-      <table class='top'><tr><th class='l'>Company</th><th class='l'>Where</th></tr>{er}</table>
-      <h2 style='margin-top:6px'>Market Chatter</h2><ul>"""
-      +B("58", "% of first-half office leasing went to AI. Near a 30-year high")
-      +B("25", "% drop in property crime. Homelessness at a 15-year low")
-      +B(f"{sb['y1']['n']-sb['y0']['n']}", "Extra South Beach condo sales — 1M sq ft of AI is a walk away")
-      +B("3,491", "Homes approved at Stonestown, the west side's first big supply")
-      +B("0", "New supply in the fog belt. All of it is sun-side")
-      +"</ul>"
-      +"</div>")
+      +"</table><div class='cap'>SFH median sale by summer-fog zone, Jan 1 – " + thru + ".</div></div>")
+    o.append(f"""<div class='col'><h2>Top 10 - Neighborhood</h2>
+      <table class='top'>{TH("<Neighborhood","SFH","Condo/TIC/O","vs "+py)}{nr}</table>
+      <h2>Top 10 - SFH</h2>
+      <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(tsfh)}</table>
+      <h2>Top 10 - Condo/TIC/Other</h2>
+      <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(tco)}</table></div>""")
+    o.append(f"""<div class='col'><h2>Top 10 - Zip Code</h2>
+      <table class='top'>{TH("<ZIP","<Area","Median","Sales")}{zr}</table>
+      <h2>Top 10 - $/sf</h2>
+      <table class='top'>{TH("<Neighborhood","Median $/sf","Sales")}{pr}</table></div>""")
+    o.append(f"""<div class='col'><h2>Top 10 - Overbids (SFH)</h2>
+      <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(osfh)}</table>
+      <h2>Top 10 - Overbids - Condo/TIC/Other</h2>
+      <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(oco)}</table></div>""")
     o.append("</div>")
-    o.append(f"<div class='foot'><span>Map: {ndots:,} closed sales, Jan 1 – {thru}, over USGS-derived summer-fog contours. City figures from CBRE, The Real Deal, SF Chronicle, SF Standard, Bisnow, CNBC, KQED and SF.gov.</span><span>page 5 / 9</span></div></div>")
+    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS), over USGS-derived summer-fog contours. ZIPs and $/sf need 15+ sales; overbids exclude list prices under $300K or bids over 3× list (data errors).</span><span>page 5 / 9</span></div></div>")
 
     # ── PAGE 6 — in depth ────────────────────────────────────────────────
     # Everything a reader can skip. The narrative pages stay light because
@@ -1075,11 +1108,11 @@ def build():
       +T_("light", bn['topday'], f"Most frequent Close Day, {bn['toppct']} of total")
       +T_("light", bn['week'], "sold within a week")
       +T_("navy wide", bn['bid150'], "homes sold for 150% of list or more", f"{bn['bid130']} went for 130%+")
-      +T_("light wide", bn['per_bed'], "the price of one bedroom", "median house price ÷ its bedrooms")
+      +T_("light wide", bn['per_bed'], "the price of one bedroom", "median SFH price ÷ its bedrooms")
       +T_("gold", bn['zip'], "highest volume ZIP", f"{bn['zipv']} · {bn['zhoods']}")
       +T_("light", bn['under'], "sold below asking")
       +T_("light", bn['tenm'], "sales of $10M or more")
-      +T_("navy pair", f"{bn['sqft'][:-3]} / {bn['csqft'][:-3]}", "sq ft — the typical SFH, Condo/TIC")
+      +T_("navy pair", f"{bn['sqft'][:-3]} / {bn['csqft'][:-3]}", "sq ft — the typical SFH, Condo/TIC/Other")
       +"</div>")
     o.append(f"""<div style='margin-top:7px'><h2>Units Sold by Week — Every Week of Both Years</h2>
       {weekly_bars(wrows,h=150,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"Jan 1 – {thru}, both years · 2025 full year {w25y:,}"))}
@@ -1130,21 +1163,21 @@ def build():
     lo_r=min(solid,key=lambda r:r["turn"]); hi_r=max(solid,key=lambda r:r["turn"])
     big=shown[0]
     hidden_names=", ".join(html.escape(r["area"]) for r in sorted(hidden,key=lambda r:r["area"]))
-    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>Latent Inventory — Single-Family Houses</div>
-      <div class='p'>Every house in the city beside the ones that sold. <b>{rate:.1f}%</b> changed hands January through {mname} — about one house in {round(100/rate)}.</div></div>
+    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>Latent Inventory — SFH</div>
+      <div class='p'>Every SFH in the city beside the ones that sold. <b>{rate:.1f}%</b> changed hands January through {mname} — about one SFH in {round(100/rate)}.</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>SF Land Use parcels · SFAR MLS closings</div></div>
       <div class='lkpi'>
-        <div><b>{houses:,}</b><span>single-family houses in the city</span></div>
+        <div><b>{houses:,}</b><span>SFH in the city</span></div>
         <div><b>{sold_h:,}</b><span>sold, Jan 1 – {thru}</span></div>
-        <div><b>{rate:.1f}%</b><span>of all houses traded so far this year</span></div>
-        <div><b>~{pace:.1f}%</b><span>a year at this pace — one house in {round(100/pace)}</span></div>
+        <div><b>{rate:.1f}%</b><span>of all SFH traded so far this year</span></div>
+        <div><b>~{pace:.1f}%</b><span>a year at this pace — one SFH in {round(100/pace)}</span></div>
       </div>
       <table class='linv lsfh'>
         <colgroup><col style='width:19%'><col style='width:17%'><col style='width:6%'><col style='width:14%'><col style='width:8%'>
           <col style='width:9%'><col style='width:8%'><col style='width:7%'><col style='width:12%'></colgroup>
         <thead>
           <tr class='g'><th class='l'>Neighborhood</th><th>SFH — latent inventory</th><th>Sold YTD</th>
-            <th class='g0'>Share traded</th><th>1 house in</th>
+            <th class='g0'>Share traded</th><th>1 SFH in</th>
             <th class='g0 r'>Median price</th><th class='r'>$/sf</th><th class='r'>DOM</th><th class='r'>Sold Price vs List %</th></tr>
         </thead>
         <tbody>{lrows}</tbody>
@@ -1152,13 +1185,13 @@ def build():
           <td class='b'>{sold_h:,}</td><td class='bar g0'><span class='ltv' style='margin-left:0'>{rate:.1f}%</span></td>
           <td class='one'>1 in {round(100/rate)}</td>{sale_cells(lcity)}</tr></tfoot>
       </table>
-      <div class='cap' style='margin-top:6px'>Size is not supply. {html.escape(big['area'])} holds the most houses — {big['u1']:,} — and released {big['sfh']:,} ({big['turn']:.1f}%).
+      <div class='cap' style='margin-top:6px'>Size is not supply. {html.escape(big['area'])} holds the most SFH — {big['u1']:,} — and released {big['sfh']:,} ({big['turn']:.1f}%).
       Turnover runs from {lo_r['turn']:.1f}% in {html.escape(lo_r['area'])} to {hi_r['turn']:.1f}% in {html.escape(hi_r['area'])}:
-      the same buyer sees very different odds of a house coming up depending on where they are looking.</div>
+      the same buyer sees very different odds of an SFH coming up depending on where they are looking.</div>
       <div class='src'>SFH are single-unit residential parcels in the SF Land Use dataset; sales are single-family closings (SFAR MLS).
-      * Fewer than {MIN_SOLID} houses in the area — a handful of sales moves the rate, so read it with care.
-      Not listed (fewer than {MIN_SHOW} houses — condo districts): {hidden_names}. {lskip} parcel(s) fell outside the mapped areas.</div>
-      <div class='foot'><span>Latent inventory = every house that exists, sold or not. Sales are closed transactions, Jan 1 – {thru}.</span><span>page 7 / 9</span></div></div>""")
+      * Fewer than {MIN_SOLID} SFH in the area — a handful of sales moves the rate, so read it with care.
+      Not listed (fewer than {MIN_SHOW} SFH — Condo/TIC/Other districts): {hidden_names}. {lskip} parcel(s) fell outside the mapped areas.</div>
+      <div class='foot'><span>Latent inventory = every SFH that exists, sold or not. Sales are closed transactions, Jan 1 – {thru}.</span><span>page 7 / 9</span></div></div>""")
 
     o.append("</body></html>")
     return "".join(o)
