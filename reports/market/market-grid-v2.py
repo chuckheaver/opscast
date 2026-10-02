@@ -3,7 +3,18 @@ from collections import defaultdict
 import os
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.abspath(os.path.join(HERE,"..",".."))
 SRC=os.path.join(ROOT,"public/data/sf-listings.geojson")
-NAV="#042C53"; NAV_LT="#E6F1FB"; GOLD="#854F0B"; GOLD_LT="#FAEEDA"; GOLD_MID="#C9A227"; UP="#15803d"; DOWN="#b91c1c"; INK="#1c1917"; MUTED="#6b6560"; LINE="#ddd8d0"
+# The site's own faces (public/fonts), so the PDF and the web edition read in
+# the same voice as ur4cast.com: Montserrat headings, Lato text, Georgia
+# figures. Paths are relative to out/, where the HTML is written; web.py
+# rewrites them to /fonts/ for the site.
+FONT_DIR="../../../public/fonts"
+FONT_CSS="".join(
+    f"@font-face {{ font-family:'{fam}'; src:url('{FONT_DIR}/{f}.woff2') format('woff2'); font-weight:{w}; font-style:normal; }}\n"
+    for fam,f,w in [("Montserrat","Montserrat-SemiBold",600),("Montserrat","Montserrat-Bold",700),
+                    ("Montserrat","Montserrat-ExtraBold",800),("Lato","Lato-Regular",400),("Lato","Lato-Bold",700)])
+SANS="'Lato', Helvetica, Arial, sans-serif"
+DISPLAY="'Montserrat', 'Lato', Helvetica, Arial, sans-serif"
+NAV="#203C5F"; NAV_LT="#E4EEF0"; GOLD="#203C5F"; GOLD_LT="#FBF3D9"; GOLD_MID="#E9BC3F"; GOLD_TXT="#94700F"; UP="#15803d"; DOWN="#b91c1c"; INK="#131A25"; MUTED="#6B6F75"; LINE="#DCDDDE"
 FIX={"Central Waterfront/D":"Central Waterfront/Dogpatch","Cole Valley/Parnassu":"Cole Valley/Parnassus Heights","Eureka Valley/Dolore":"Eureka Valley / Dolores Heights",
      "Financial District/B":"Financial District/Barbary Coast","Forest Hill Extensio":"Forest Hills Extension","Jordan Park/Laurel H":"Jordan Park / Laurel Heights",
      "Lower Pacific Height":"Lower Pacific Heights","Buena Vista/Ashbury":"Buena Vista Park/Ashbury Heights","Saint Francis Wood":"St. Francis Wood"}
@@ -43,8 +54,8 @@ SEG={"Single Family Residences":{"Single Family Residence","2 Houses on Lot","Ha
      "Condominiums / TIC / Co-ops":{"Condominium","Tenancy in Common","Stock Cooperative","Townhouse"}}
 ZONES=[("Sun","#FDE68A","\u2264 8.0 hrs/day",lambda h:h<8.5),
        ("Transition","#E7E5E4","8.5 \u2013 8.9",lambda h:8.5<=h<9),
-       ("Fog","#C1BEBC","9.0 \u2013 10.9",lambda h:9<=h<11),
-       ("Persistent Fog","#78716C","\u2265 11.0",lambda h:h>=11)]
+       ("Fog","#C3C6CA","9.0 \u2013 10.9",lambda h:9<=h<11),
+       ("Persistent Fog","#6B6F75","\u2265 11.0",lambda h:h>=11)]
 def zone_of(h):
     if h is None: return None
     for n,_,_,t in ZONES:
@@ -109,9 +120,10 @@ def build(anchor=None):
     return pages,plabel,labels,W
 
 def render(pages,plabel,labels,W,run_date):
-    css=f"""
+    css=FONT_CSS+f"""
     @page {{ size: letter landscape; margin: 0.32in 0.35in; }}
-    body {{ margin:0; font-family: Helvetica, Arial, sans-serif; color:{INK}; }}
+    body {{ margin:0; font-family: {SANS}; color:{INK}; }}
+    .hdr .t, .zh {{ font-family:{DISPLAY}; }}
     .page {{ width: 10.3in; height: 7.6in; page-break-after: always; position: relative; background:#fff; box-sizing: border-box; }}
     .hdr {{ display:flex; align-items:flex-end; justify-content:space-between; border-bottom: 3px solid {GOLD_MID}; padding-bottom:4px; margin-bottom:4px; }}
     .hdr .t {{ font-size:19px; font-weight:800; color:{NAV}; letter-spacing:-0.3px; }}
@@ -128,16 +140,16 @@ def render(pages,plabel,labels,W,run_date):
     thead tr.sub th {{ background:{NAV_LT}; color:{NAV}; font-size:6.6px; border-bottom:1.5px solid {NAV}; font-weight:700; }}
     thead tr.sub th.ytd {{ color:{GOLD}; }}
     tbody td.name, tfoot td.name {{ text-align:left; font-weight:600; overflow:hidden; text-overflow:ellipsis; }}
-    tbody tr:nth-child(even) td {{ background:#faf9f7; }}
+    tbody tr:nth-child(even) td {{ background:#F6F7F7; }}
     tbody td {{ border-bottom:0.4px solid {LINE}; }}
-    td.g0, th.g0 {{ border-left:2px solid #cfc9c0; }}
-    td.g2 {{ border-left:0.8px dotted #cfc9c0; }}
+    td.g0, th.g0 {{ border-left:2px solid #C9CCD0; }}
+    td.g2 {{ border-left:0.8px dotted #C9CCD0; }}
     td.cur {{ font-weight:700; }}
     td.pri {{ color:{MUTED}; }}
     tfoot td {{ background:{GOLD_LT}; color:{INK}; font-weight:800; border-top:2px solid {GOLD_MID}; border-bottom:2px solid {GOLD_MID}; font-size:7.6px; }}
     .zh {{ font-size:10px; font-weight:800; color:{NAV}; margin:5px 0 2px; }}
     .zh span {{ font-weight:400; font-size:8px; color:{MUTED}; }}
-    table.zone tbody td {{ background:#fbfaf8; font-size:7.8px; padding:2.2px 1.5px; }}
+    table.zone tbody td {{ background:#F6F7F7; font-size:7.8px; padding:2.2px 1.5px; }}
     table.zone tbody tr:last-child td {{ border-bottom:0.4px solid {LINE}; }}
     table.zone tfoot td {{ font-size:7.8px; padding:2.2px 1.5px; }}
     table.zone tbody td.name {{ font-weight:700; }}

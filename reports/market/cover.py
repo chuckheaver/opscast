@@ -88,12 +88,12 @@ def build_cover():
     h2.gold {{ background:{GOLD_LT}; color:{GOLD}; border-left:3px solid {GOLD_MID}; }}
     p {{ font-size:9.2px; line-height:1.55; margin:0 0 7px; text-align:justify; }}
     p b {{ color:{NAV}; }} .up {{ color:{UP}; font-weight:700; }} .dn {{ color:{DOWN}; font-weight:700; }}
-    .lead {{ font-size:10px; line-height:1.55; border-left:3px solid {GOLD_MID}; padding-left:9px; color:#3c3733; }}
+    .lead {{ font-size:10px; line-height:1.55; border-left:3px solid {GOLD_MID}; padding-left:9px; color:#505050; }}
     table.top {{ border-collapse:collapse; width:100%; font-size:8.4px; }}
     table.top th {{ background:{NAV}; color:#fff; font-size:7.4px; text-transform:uppercase; padding:3px 5px; text-align:right; }}
     table.top th.l, table.top td.l {{ text-align:left; }}
     table.top td {{ padding:2.4px 5px; text-align:right; border-bottom:0.4px solid {LINE}; }}
-    table.top tr:nth-child(even) td {{ background:#faf9f7; }}
+    table.top tr:nth-child(even) td {{ background:#F6F7F7; }}
     .news {{ display:flex; gap:12px; }} .news .bx {{ flex:1; border-radius:6px; padding:8px 10px; }}
     .bx.pos {{ background:#f0f9f2; border-left:3px solid {UP}; }} .bx.neg {{ background:#fdf2f2; border-left:3px solid {DOWN}; }}
     .bx h3 {{ font-size:10px; margin:0 0 5px; }} .bx.pos h3 {{ color:{UP}; }} .bx.neg h3 {{ color:{DOWN}; }}

@@ -28,18 +28,6 @@ const SF_BOUNDS = [
   [-122.355, 37.812], // NE
 ];
 
-// Three large weather glyphs placed at the same latitude across the
-// east-west fog gradient so a user can read the three zones at a
-// glance: ☀️ in the Sun band (east), 🌤️ in the Transition belt (mid),
-// ☁️ in the Fog band (west). The hand-picked emoji-per-neighborhood
-// pins from the original markup are gone — they were doing more visual
-// noise than information.
-const FOG_PIN_GROUPS = [
-  { emoji: "☀️", points: [[-122.410, 37.785]] },   // Sun (S)         — Downtown / Union Square (NE)
-  { emoji: "🌤️", points: [[-122.438, 37.757]] },   // Transition (PC) — between Castro / Dolores Heights / Clarendon Heights
-  { emoji: "☁️", points: [[-122.472, 37.731]] },   // Fog (C)         — Stonestown / Merced Manor (SW)
-];
-
 // Layer IDs the "Show fog data" toggle flips on and off as a group.
 const CONTOUR_LAYER_IDS = [
   "fog-contours-sun",
@@ -101,14 +89,6 @@ export default function FogMap({
   const openPropPopupRef = useRef(null);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
-  const transitionMarkersRef = useRef([]);
-  // Mirrors `showContours` for the once-only marker create effect — so
-  // newly-spawned markers respect the latest toggle state even if the
-  // map's load event fires long after mount.
-  const showContoursRef = useRef(showContours);
-  useEffect(() => {
-    showContoursRef.current = showContours;
-  }, [showContours]);
   // Mirrors whether EITHER buildings layer is on, so the always-bound
   // neighborhood click handler can step aside when a building is clicked
   // (showing only the building pop-up).
@@ -1936,48 +1916,6 @@ export default function FogMap({
     // defer to a "load" event that already fired and never apply.
     apply();
     map.once("load", apply);
-  }, [showContours]);
-
-  // Weather-emoji DOM markers at hand-picked SF locations. Mounted as
-  // mapboxgl.Markers so the system emoji font renders natively. Each
-  // group in FOG_PIN_GROUPS contributes a different emoji at its own
-  // list of coordinates. Markers are created once and their CSS
-  // visibility is toggled in lockstep with the Fog-data layer — so the
-  // emojis turn on and off with the contour polygons.
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map) return;
-    const create = () => {
-      transitionMarkersRef.current.forEach(m => m.remove());
-      transitionMarkersRef.current = [];
-      const visible = showContoursRef.current;
-      FOG_PIN_GROUPS.forEach(({ emoji, points }) => {
-        points.forEach(pt => {
-          const el = document.createElement("div");
-          el.className = "fog-cloud-marker";
-          el.textContent = emoji;
-          if (!visible) el.style.display = "none";
-          const marker = new mapboxgl.Marker({ element: el, anchor: "center" })
-            .setLngLat(pt)
-            .addTo(map);
-          transitionMarkersRef.current.push(marker);
-        });
-      });
-    };
-    if (map.isStyleLoaded()) create();
-    else map.once("load", create);
-    return () => {
-      transitionMarkersRef.current.forEach(m => m.remove());
-      transitionMarkersRef.current = [];
-    };
-  }, []);
-
-  // Show/hide the emoji markers alongside the Fog-data toggle.
-  useEffect(() => {
-    transitionMarkersRef.current.forEach(m => {
-      const el = m.getElement();
-      if (el) el.style.display = showContours ? "" : "none";
-    });
   }, [showContours]);
 
   // Toggle the satellite imagery base.

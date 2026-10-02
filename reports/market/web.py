@@ -93,6 +93,7 @@ def scope(css, cls):
 pages, css = [], []
 for src, cls in [(OUT / "cover3.html", "sheetA"), (OUT / "market-grid-v2.html", "sheetB")]:
     c, body = split(src)
+    c = re.sub(r"@font-face\s*\{[^}]*\}", "", c)   # the site already serves these faces
     css.append(scope(c, cls))
     for p in re.findall(r"<div class='page'>.*?(?=<div class='page'>|$)", body, re.S):
         pages.append((cls, p.rstrip()))

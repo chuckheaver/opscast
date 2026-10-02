@@ -19,12 +19,12 @@ def rent_chart(w=452,h=88):
     o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>"]
     for i,(m,a,b) in enumerate(RENTS):
         x0=pad+i*gw+gw/2-bw-2; x1=pad+i*gw+gw/2+2
-        o.append(f"<rect x='{x0:.1f}' y='{Y(a):.1f}' width='{bw:.1f}' height='{h-22-Y(a):.1f}' fill='#cfc9c0' rx='2'/>")
+        o.append(f"<rect x='{x0:.1f}' y='{Y(a):.1f}' width='{bw:.1f}' height='{h-22-Y(a):.1f}' fill='#C9CCD0' rx='2'/>")
         o.append(f"<rect x='{x1:.1f}' y='{Y(b):.1f}' width='{bw:.1f}' height='{h-22-Y(b):.1f}' fill='{NAV}' rx='2'/>")
         o.append(f"<text x='{x0+bw/2:.1f}' y='{Y(a)-4:.1f}' font-size='7' fill='{MUTED}' text-anchor='middle'>{a/1000:.2f}K</text>")
         o.append(f"<text x='{x1+bw/2:.1f}' y='{Y(b)-4:.1f}' font-size='7.4' font-weight='700' fill='{NAV}' text-anchor='middle'>{b/1000:.2f}K</text>")
         o.append(f"<text x='{pad+i*gw+gw/2:.1f}' y='{h-8}' font-size='7.4' fill='{MUTED}' text-anchor='middle'>{m}</text>")
-    o.append(f"<rect x='{w-118}' y='4' width='8' height='8' fill='#cfc9c0'/><text x='{w-106}' y='11' font-size='7' fill='{MUTED}'>2025</text>")
+    o.append(f"<rect x='{w-118}' y='4' width='8' height='8' fill='#C9CCD0'/><text x='{w-106}' y='11' font-size='7' fill='{MUTED}'>2025</text>")
     o.append(f"<rect x='{w-72}' y='4' width='8' height='8' fill='{NAV}'/><text x='{w-60}' y='11' font-size='7' fill='{MUTED}'>2026</text>")
     return "".join(o)+"</svg>"
 
@@ -95,7 +95,7 @@ def bars(rows,series,w=468,h=176,fmt=lambda v:f"{v:.0f}",ymax=None,legend=None,l
             d=r.get(dk) if dk else None
             if d and bh>26:
                 mx=x+(bw-1.5)/2; my=Y(v)+bh/2
-                tc="#ffffff" if col=="#12379E" else "#3F2E00"
+                tc="#ffffff" if col=="#203C5F" else "#131A25"
                 o.append(f"<text transform='rotate(-90 {mx:.1f} {my:.1f})' x='{mx:.1f}' y='{my:.1f}' font-size='{val-0.1}' font-weight='700' fill='{tc}' text-anchor='middle' dominant-baseline='middle'>{d}</text>")
         o.append(f"<text x='{cx:.1f}' y='{h-5}' font-size='{lab}' fill='{MUTED}' text-anchor='middle'>{MON[r['m']-1] if 'm' in r else r['w']}</text>")
     for j,t in enumerate(legend or series):
@@ -154,7 +154,7 @@ def weekly_bars(rows,w=960,h=172,ytd=None):
     o.append(f"<text x='{pad_l-8}' y='{ax+27}' font-size='5.4' fill='{MUTED}' text-anchor='end'>wk</text>")
     for i,r in enumerate(rows):
         cx=pad_l+i*gw+gw/2
-        for j,(v,col) in enumerate(((r["a"],"#B9BDC4"),(r.get("b"),"#12379E"))):
+        for j,(v,col) in enumerate(((r["a"],"#B9BDC4"),(r.get("b"),"#203C5F"))):
             if not v: continue
             x=cx-bw+j*bw
             o.append(f"<rect x='{x:.1f}' y='{Y(v):.1f}' width='{bw-1.1:.1f}' height='{ax-Y(v):.1f}' fill='{col}' rx='1'/>")
@@ -165,7 +165,7 @@ def weekly_bars(rows,w=960,h=172,ytd=None):
         o.append(f"<text x='{cx:.1f}' y='{ax+17}' font-size='5.2' font-weight='700' fill='{NAV}' text-anchor='middle'>{r.get('b') if r.get('b') is not None else ''}</text>")
         if r["w"]==1 or r["w"]%4==0:
             o.append(f"<text x='{cx:.1f}' y='{ax+27}' font-size='5.4' fill='{MUTED}' text-anchor='middle'>{r['w']}</text>")
-    for j,(lab,col) in enumerate((("2025","#B9BDC4"),("2026","#12379E"))):
+    for j,(lab,col) in enumerate((("2025","#B9BDC4"),("2026","#203C5F"))):
         lxx=pad_l+j*54
         o.append(f"<rect x='{lxx}' y='2' width='8' height='8' fill='{col}' rx='1.5'/><text x='{lxx+11}' y='9' font-size='7' fill='{INK}'>{lab}</text>")
     if ytd:
@@ -207,6 +207,11 @@ def zone_color(h):
     if h<11: return "#C3CBD2"
     return "#8D9BA6"
 
+def txt(col):
+    """Yellow reads as a line but not as small text on white — labels for a
+    yellow series are set in the darker gold."""
+    return mg.GOLD_TXT if col.upper()==GOLD_MID.upper() else col
+
 def lines(rows,series,w=468,h=176,fmt=lambda v:f"{v/1e6:.2f}M",dkey=None):
     """Line chart. With dkey, each point's year-over-year change is printed
     under its month label so the trend reads straight off the axis."""
@@ -222,7 +227,7 @@ def lines(rows,series,w=468,h=176,fmt=lambda v:f"{v/1e6:.2f}M",dkey=None):
         o.append(f"<polyline points='{' '.join(f'{x:.1f},{y:.1f}' for x,y in pts)}' fill='none' stroke='{col}' stroke-width='2'/>")
         for i,(x,y) in enumerate(pts):
             o.append(f"<circle cx='{x:.1f}' cy='{y:.1f}' r='2.1' fill='{col}'/>")
-            o.append(f"<text x='{x:.1f}' y='{y-5:.1f}' font-size='6.2' font-weight='700' fill='{col}' text-anchor='middle'>{fmt(rows[i][key])}</text>")
+            o.append(f"<text x='{x:.1f}' y='{y-5:.1f}' font-size='6.2' font-weight='700' fill='{txt(col)}' text-anchor='middle'>{fmt(rows[i][key])}</text>")
     for i,r in enumerate(rows):
         o.append(f"<text x='{X(i):.1f}' y='{h-(16 if dkey else 5)}' font-size='7' fill='{MUTED}' text-anchor='middle'>{MON[r['m']-1]}</text>")
         if dkey and r.get(dkey) is not None:
@@ -260,7 +265,7 @@ def sales_map(W0,S0,E0,N0,w=352,h=326,window=("2026-01-01","2026-08-31")):
         d=f["properties"].get("sellingDate") or ""
         if not (window[0]<=d<=window[1]): continue
         x,y=f["geometry"]["coordinates"]
-        o.append(f"<circle cx='{X(x):.1f}' cy='{Y(y):.1f}' r='1.45' fill='#12379E' fill-opacity='0.85'/>"); n+=1
+        o.append(f"<circle cx='{X(x):.1f}' cy='{Y(y):.1f}' r='1.45' fill='#203C5F' fill-opacity='0.85'/>"); n+=1
     return "".join(o)+"</svg>", n
 
 
@@ -334,7 +339,7 @@ def N2A_(n):
     return mg.N2A.get(mg.FIX.get(n or "", n or ""))
 
 # ── Where the money came from ────────────────────────────────────────────
-TIERS=[(0,1e6,"Under $1M","#C7D3EA"),(1e6,3e6,"$1–3M","#5273B4"),(3e6,5e6,"$3–5M","#1F3A7A"),(5e6,1e12,"$5M+","#C9A227")]
+TIERS=[(0,1e6,"Under $1M","#CEE2E6"),(1e6,3e6,"$1–3M","#7E9AB8"),(3e6,5e6,"$3–5M","#203C5F"),(5e6,1e12,"$5M+","#E9BC3F")]
 
 SGAP=2          # surface gap between touching segments — white does the separating
 BARH=44
@@ -344,7 +349,7 @@ def fg(fill):
     r,g,b=(int(fill[i:i+2],16)/255 for i in (1,3,5))
     f=lambda c: c/12.92 if c<=0.04045 else ((c+0.055)/1.055)**2.4
     L=0.2126*f(r)+0.7152*f(g)+0.0722*f(b)
-    Li=0.0114                                   # luminance of INK #1c1917
+    Li=0.0114                                   # luminance of INK #131A25
     return "#ffffff" if (1.05/(L+0.05)) > ((L+0.05)/(Li+0.05)) else INK
 
 _W={**{c:0.556 for c in "0123456789$"},",":0.278,".":0.278,"M":0.889,"B":0.667,
@@ -438,8 +443,8 @@ def hood_bars(rank,tot,w=300,h=300,top=11):
                  f"fill='{'#ffffff' if inside else NAV}' text-anchor='{'end' if inside else 'start'}'>${v/1e6:,.0f}M</text>")
         if half_y is None and cum>=tot/2: half_y=y+rowh-1.5
     if half_y:
-        o.append(f"<line x1='0' y1='{half_y:.1f}' x2='{w}' y2='{half_y:.1f}' stroke='{GOLD}' stroke-width='1.5' stroke-dasharray='4 3'/>")
-        o.append(f"<text x='{w}' y='{half_y-3.5:.1f}' font-size='7.4' font-weight='800' fill='{GOLD}' text-anchor='end'>↑ half of all the money in the city</text>")
+        o.append(f"<line x1='0' y1='{half_y:.1f}' x2='{w}' y2='{half_y:.1f}' stroke='{GOLD_MID}' stroke-width='1.5' stroke-dasharray='4 3'/>")
+        o.append(f"<text x='{w}' y='{half_y-3.5:.1f}' font-size='7.4' font-weight='800' fill='{mg.GOLD_TXT}' text-anchor='end'>↑ half of all the money in the city</text>")
     return "".join(o)+"</svg>"
 
 def type_mirror(rows,w=470,h=168):
@@ -447,8 +452,8 @@ def type_mirror(rows,w=470,h=168):
     SFH=mg.SEG["Single Family Residences"]
     n=len(rows); tot=sum(r["sellingPrice"] for r in rows)
     h_=[r for r in rows if r["propType"] in SFH]; c_=[r for r in rows if r["propType"] not in SFH]
-    segs=[("Houses","#12379E",len(h_),sum(r["sellingPrice"] for r in h_)),
-          ("Condo / TIC / Other","#C9A227",len(c_),sum(r["sellingPrice"] for r in c_))]
+    segs=[("Houses","#203C5F",len(h_),sum(r["sellingPrice"] for r in h_)),
+          ("Condo / TIC / Other","#E9BC3F",len(c_),sum(r["sellingPrice"] for r in c_))]
     pad_l,gap=2,34; bw=w-pad_l-2; y1=22; y2=y1+BARH+gap
     o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>"]
     for yy,idx,total,title,fmt in ((y1,2,n,"UNITS SOLD",lambda v:f"{v:,}"),
@@ -506,7 +511,10 @@ def yield_chart(w=470,h=150):
     for i,(lab,v) in enumerate(TEN_Y):
         last=i==len(TEN_Y)-1
         o.append(f"<circle cx='{X(i):.1f}' cy='{Y(v):.1f}' r='{3.2 if last else 2}' fill='{DOWN if last else NAV}'/>")
-        o.append(f"<text x='{X(i):.1f}' y='{Y(v)-5:.1f}' font-size='6.2' font-weight='{800 if last else 400}' fill='{DOWN if last else MUTED}' text-anchor='middle'>{v:.2f}</text>")
+        # A steep climb into the next point would run through a label set
+        # above this one, so it drops below the line instead.
+        below=not last and TEN_Y[i+1][1]-v>0.2
+        o.append(f"<text x='{X(i):.1f}' y='{Y(v)+(10 if below else -5):.1f}' font-size='6.2' font-weight='{800 if last else 400}' fill='{DOWN if last else MUTED}' text-anchor='middle'>{v:.2f}</text>")
         o.append(f"<text x='{X(i):.1f}' y='{h-5}' font-size='6.2' fill='{MUTED}' text-anchor='middle'>{lab}</text>")
     return "".join(o)+"</svg>"
 
@@ -517,10 +525,10 @@ def curve_chart(w=228,h=116):
     X=lambda i:pad_l+i*gw; Y=lambda v:h-pad_b-(v-lo)/(hi-lo)*(h-pad_b-pad_t)
     o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>"]
     pts=[(X(i),Y(v)) for i,(_,v) in enumerate(CURVE)]
-    o.append(f"<polyline points='{' '.join(f'{x:.1f},{y:.1f}' for x,y in pts)}' fill='none' stroke='{GOLD}' stroke-width='2.2'/>")
+    o.append(f"<polyline points='{' '.join(f'{x:.1f},{y:.1f}' for x,y in pts)}' fill='none' stroke='{GOLD_MID}' stroke-width='2.2'/>")
     for i,(lab,v) in enumerate(CURVE):
-        o.append(f"<circle cx='{X(i):.1f}' cy='{Y(v):.1f}' r='2.4' fill='{GOLD}'/>")
-        o.append(f"<text x='{X(i):.1f}' y='{Y(v)-5:.1f}' font-size='6.6' font-weight='700' fill='{GOLD}' text-anchor='middle'>{v:.2f}</text>")
+        o.append(f"<circle cx='{X(i):.1f}' cy='{Y(v):.1f}' r='2.4' fill='{GOLD_MID}'/>")
+        o.append(f"<text x='{X(i):.1f}' y='{Y(v)-5:.1f}' font-size='6.6' font-weight='700' fill='{mg.GOLD_TXT}' text-anchor='middle'>{v:.2f}</text>")
         o.append(f"<text x='{X(i):.1f}' y='{h-4}' font-size='6.6' fill='{MUTED}' text-anchor='middle'>{lab}</text>")
     o.append(f"<text x='{w-pad_l}' y='10' font-size='6.2' fill='{UP}' text-anchor='end' font-weight='700'>rising = normal</text>")
     return "".join(o)+"</svg>"
@@ -537,17 +545,17 @@ def spread_chart(w=470,h=158):
     top=[(X(i),Y(mtg[k])) for i,k in enumerate(labs)]
     bot=[(X(i),Y(ten[k])) for i,k in enumerate(labs)]
     o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>"]
-    o.append(f"<polygon points='{' '.join(f'{x:.1f},{y:.1f}' for x,y in top)} {' '.join(f'{x:.1f},{y:.1f}' for x,y in reversed(bot))}' fill='{GOLD}' fill-opacity='0.18'/>")
-    for pts,col,lab in ((top,GOLD,"30-yr mortgage"),(bot,NAV,"10-yr Treasury")):
+    o.append(f"<polygon points='{' '.join(f'{x:.1f},{y:.1f}' for x,y in top)} {' '.join(f'{x:.1f},{y:.1f}' for x,y in reversed(bot))}' fill='{GOLD_MID}' fill-opacity='0.18'/>")
+    for pts,col,lab in ((top,GOLD_MID,"30-yr mortgage"),(bot,NAV,"10-yr Treasury")):
         o.append(f"<polyline points='{' '.join(f'{x:.1f},{y:.1f}' for x,y in pts)}' fill='none' stroke='{col}' stroke-width='2.2'/>")
         for x,y in pts: o.append(f"<circle cx='{x:.1f}' cy='{y:.1f}' r='2' fill='{col}'/>")
     for i,k in enumerate(labs):
-        o.append(f"<text x='{X(i):.1f}' y='{Y(mtg[k])-5:.1f}' font-size='6' fill='{GOLD}' text-anchor='middle' font-weight='700'>{mtg[k]:.2f}</text>")
+        o.append(f"<text x='{X(i):.1f}' y='{Y(mtg[k])-5:.1f}' font-size='6' fill='{mg.GOLD_TXT}' text-anchor='middle' font-weight='700'>{mtg[k]:.2f}</text>")
         o.append(f"<text x='{X(i):.1f}' y='{Y(ten[k])+9:.1f}' font-size='6' fill='{NAV}' text-anchor='middle' font-weight='700'>{ten[k]:.2f}</text>")
         o.append(f"<text x='{X(i):.1f}' y='{h-14}' font-size='6.4' fill='{MUTED}' text-anchor='middle'>{k}</text>")
         sp=mtg[k]-ten[k]
         o.append(f"<text x='{X(i):.1f}' y='{h-4}' font-size='6.2' font-weight='700' fill='{INK}' text-anchor='middle'>{sp:.2f}</text>")
-    o.append(f"<text x='{pad_l}' y='10' font-size='6.6' fill='{GOLD}' font-weight='700'>30-yr mortgage</text>")
+    o.append(f"<text x='{pad_l}' y='10' font-size='6.6' fill='{mg.GOLD_TXT}' font-weight='700'>30-yr mortgage</text>")
     o.append(f"<text x='{pad_l+86}' y='10' font-size='6.6' fill='{NAV}' font-weight='700'>10-yr Treasury</text>")
     o.append(f"<text x='{w-pad_l}' y='10' font-size='6.2' fill='{MUTED}' text-anchor='end'>shaded band = lender spread (bottom row)</text>")
     return "".join(o)+"</svg>"
@@ -573,7 +581,7 @@ def lux_chart(w=470,h=176,through=8):
     o.append(f"<line x1='{pad_l}' y1='{h-pad_b}' x2='{w-pad_l}' y2='{h-pad_b}' stroke='{LINE}' stroke-width='0.8'/>")
     for i in range(n):
         m=i+1; cx=pad_l+i*gw+gw/2
-        for j,(v,col) in enumerate(((c[2025].get(m,0),"#B9BDC4"),(c[2026].get(m,0),"#12379E"))):
+        for j,(v,col) in enumerate(((c[2025].get(m,0),"#B9BDC4"),(c[2026].get(m,0),"#203C5F"))):
             if not v: continue
             x=cx-bw+j*bw
             o.append(f"<rect x='{x:.1f}' y='{Y(v):.1f}' width='{bw-1.5:.1f}' height='{h-pad_b-Y(v):.1f}' fill='{col}' rx='1.5'/>")
@@ -583,7 +591,7 @@ def lux_chart(w=470,h=176,through=8):
             yy=Y(c[2026].get(m,0))-12
             o.append(f"<line x1='{cx:.1f}' y1='{yy+3:.1f}' x2='{cx:.1f}' y2='{Y(c[2026].get(m,0))-4:.1f}' stroke='{DOWN}' stroke-width='0.7'/>")
             o.append(f"<text x='{cx:.1f}' y='{yy:.1f}' font-size='5.8' font-weight='700' fill='{DOWN}' text-anchor='middle'>{LUX_EVENTS[m]}</text>")
-    for j,(lab,col) in enumerate((("2025","#B9BDC4"),("2026","#12379E"))):
+    for j,(lab,col) in enumerate((("2025","#B9BDC4"),("2026","#203C5F"))):
         lxx=pad_l+j*48
         o.append(f"<rect x='{lxx}' y='2' width='8' height='8' fill='{col}' rx='1.5'/><text x='{lxx+11}' y='9' font-size='7' fill='{INK}'>{lab}</text>")
     return "".join(o)+"</svg>"
@@ -644,6 +652,30 @@ def by_numbers(rows, thru):
         sqft=f"{sq(sfh):,.0f} sf", csqft=f"{sq([r for r in rows if r['propType'] in CO]):,.0f} sf",
     )
 
+def site_kpis():
+    """The home page's By the Numbers band, figure for figure: same file
+    (app/lib/landing-stats.json), same rounding as Landing.jsx, so the
+    report and the site can never show different numbers."""
+    import os, math
+    L=json.load(open(os.path.join(mg.ROOT,"app/lib/landing-stats.json")))
+    m,p=L["market"]["current"],L["market"]["prior"]
+    rnd=lambda v: math.floor(v+0.5)                                  # JS Math.round
+    money=lambda v: f"${v/1e6:.2f}M"
+    pct=lambda a,b: f"{'+' if a/b-1>=0 else ''}{rnd((a/b-1)*100)}%"
+    unit=lambda a,b,one,many: f"{'+' if a-b>=0 else ''}{rnd(a-b)} {one if abs(rnd(a)-rnd(b))==1 else many}"
+    rows=[("SFH Median Sale",money(m["sfh"]["median"]),money(p["sfh"]["median"]),pct(m["sfh"]["median"],p["sfh"]["median"])),
+          ("Condo Median Sale",money(m["condo"]["median"]),money(p["condo"]["median"]),pct(m["condo"]["median"],p["condo"]["median"])),
+          ("Total Units Sold — All",f"{m['n']:,}",f"{p['n']:,}",pct(m["n"],p["n"])),
+          ("Total Sales Volume",f"${m['volume']/1e9:.2f}B",f"${p['volume']/1e9:.2f}B",pct(m["volume"],p["volume"])),
+          ("SFH DOM",rnd(m["sfh"]["dom"]),rnd(p["sfh"]["dom"]),unit(m["sfh"]["dom"],p["sfh"]["dom"],"day","days")),
+          ("Condo DOM",rnd(m["condo"]["dom"]),rnd(p["condo"]["dom"]),unit(m["condo"]["dom"],p["condo"]["dom"],"day","days")),
+          ("SFH Sale Price vs List",f"{rnd(m['sfh']['saleToList'])}%",f"{rnd(p['sfh']['saleToList'])}%",unit(m["sfh"]["saleToList"],p["sfh"]["saleToList"],"pt","pts")),
+          ("Condo Sale Price vs List",f"{rnd(m['condo']['saleToList'])}%",f"{rnd(p['condo']['saleToList'])}%",unit(m["condo"]["saleToList"],p["condo"]["saleToList"],"pt","pts"))]
+    d=datetime.date.fromisoformat(L["market"]["through"])
+    through=d.strftime("%b %-d, %Y").replace("Sep ","Sept ")
+    yy,py=L["market"]["year"][2:],L["market"]["priorYear"][2:]
+    return rows,through,yy,py
+
 def mtg_pmt(P,r,yrs=30):
     i=r/100/12; n=yrs*12; return P*i/(1-(1+i)**-n)
 
@@ -687,15 +719,27 @@ def build():
     loan=RENT_NOW/pmt(1,cv.RATE_NOW)
     pac=[x for x in s['top']+s['bot'] if 'Pacific / Presidio' in x[1]]; pacpct=sgn(pac[0][0]) if pac else "+7"
     mapsvg,ndots=sales_map(-122.517,37.705,-122.353,37.833,w=352,h=430)
-    css=f"""
+    css=mg.FONT_CSS+f"""
     @page {{ size: letter landscape; margin: 0.32in 0.35in; }}
-    body {{ margin:0; font-family: Helvetica, Arial, sans-serif; color:{INK}; }}
+    body {{ margin:0; font-family: {mg.SANS}; color:{INK}; }}
+    .mast .t, h2, .sig b {{ font-family:{mg.DISPLAY}; }}
     .page {{ width:10.3in; height:7.6in; page-break-after:always; position:relative; box-sizing:border-box; background:#fff; }}
     .mast {{ border-bottom:3px solid {GOLD_MID}; padding-bottom:4px; margin-bottom:5px; display:flex; justify-content:space-between; align-items:flex-end; }}
     .mast .t {{ font-size:24px; font-weight:800; color:{NAV}; letter-spacing:-0.5px; }}
     .mast .p {{ font-size:11.5px; color:{NAV}; margin-top:2px; }} .mast .p b {{ color:{GOLD}; }}
     .mast .by {{ font-size:9px; color:{MUTED}; text-align:right; line-height:1.5; }}
     .kpis {{ display:flex; gap:8px; margin-bottom:7px; }}
+    .sband {{ background:#131A25; border-radius:6px; padding:9px 16px 2px; margin-bottom:7px; }}
+    .sband-h {{ font-size:9.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#CEE2E6; margin-bottom:3px; }}
+    .sband-h span {{ color:rgba(255,255,255,0.50); }}
+    .sband-row {{ display:grid; grid-template-columns:repeat(4,1fr); }}
+    .sb {{ padding:6px 12px 7px; border-right:1px solid rgba(255,255,255,0.09); border-bottom:1px solid rgba(255,255,255,0.09); }}
+    .sb:nth-child(4n) {{ border-right:none; }} .sb:nth-child(4n+1) {{ padding-left:0; }}
+    .sb:nth-child(n+5) {{ border-bottom:none; }}
+    .sb-v {{ font-family:Georgia,'Times New Roman',serif; line-height:1.05; font-size:21px; font-weight:700; color:#CEE2E6; white-space:nowrap; }}
+    .sb-v span {{ margin-left:0.44em; font-size:0.66em; font-weight:600; color:rgba(255,255,255,0.50); }}
+    .sb-l {{ margin-top:3px; font-size:8.6px; line-height:1.35; color:rgba(255,255,255,0.72); }}
+    .sb-l b {{ color:#fff; font-weight:700; }}
     .kpi {{ flex:1; min-width:0; background:{NAV_LT}; border-radius:8px; padding:10px 8px 11px; border-left:5px solid {GOLD_MID}; text-align:center; display:flex; flex-direction:column; justify-content:space-between; height:62px; }}
     .kl {{ font-size:8.6px; color:{INK}; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
     .kv {{ font-family:Georgia,'Bitstream Charter','Liberation Serif',serif; font-size:22px; font-weight:700; letter-spacing:-0.6px; line-height:1; margin:0; color:{NAV}; white-space:nowrap; font-variant-numeric:tabular-nums; }}
@@ -717,12 +761,12 @@ def build():
     table.top th {{ background:{NAV}; color:#fff; font-size:6.9px; text-transform:uppercase; padding:2px 4px; text-align:right; }}
     table.top th.l, table.top td.l {{ text-align:left; }}
     table.top td {{ padding:1.9px 4px; text-align:right; border-bottom:0.4px solid {LINE}; white-space:nowrap; overflow:hidden; }}
-    table.top tr:nth-child(even) td {{ background:#faf9f7; }}
+    table.top tr:nth-child(even) td {{ background:#F6F7F7; }}
     table.top td.b {{ font-weight:800; color:{NAV}; }}
     .mapwrap {{ border:1px solid {LINE}; border-radius:6px; overflow:hidden; line-height:0; }}
     .maplegend {{ display:flex; align-items:center; flex-wrap:nowrap; gap:7px; font-size:7.6px; white-space:nowrap; color:{INK}; margin:4px 0 2px; }}
     .maplegend b {{ color:{NAV}; }}
-    .dotkey {{ display:inline-block; width:7px; height:7px; border-radius:50%; background:#12379E; margin-right:3px; }}
+    .dotkey {{ display:inline-block; width:7px; height:7px; border-radius:50%; background:#203C5F; margin-right:3px; }}
     .zk {{ display:inline-flex; align-items:center; gap:3px; }}
     .zc {{ display:inline-block; width:9px; height:9px; border-radius:2px; border:0.5px solid #a8a29e; }}
     .mapcap {{ font-size:8.4px; color:{MUTED}; margin:3px 0 6px; line-height:1.35; }}
@@ -738,9 +782,9 @@ def build():
     table.linv thead tr.sub th {{ background:{NAV_LT}; color:{NAV}; font-size:7px; font-weight:700; border-bottom:1.5px solid {NAV}; }}
     table.linv td.l, table.linv tfoot td.l {{ text-align:left; font-weight:600; overflow:hidden; text-overflow:ellipsis; }}
     table.linv tbody td {{ border-bottom:0.4px solid {LINE}; }}
-    table.linv tbody tr:nth-child(even) td {{ background:#faf9f7; }}
+    table.linv tbody tr:nth-child(even) td {{ background:#F6F7F7; }}
     table.linv td.b {{ font-weight:800; color:{NAV}; }}
-    table.linv td.g0, table.linv th.g0 {{ border-left:1.5px solid #cfc9c0; }}
+    table.linv td.g0, table.linv th.g0 {{ border-left:1.5px solid #C9CCD0; }}
     table.mzp {{ width:100%; border-collapse:collapse; font-size:10px; margin-top:3px; }}
     table.mzp td {{ padding:4px 2px; border-bottom:0.5px solid {LINE}; }}
     table.mzp td.b {{ text-align:right; font-weight:800; color:{NAV}; font-size:11px; }}
@@ -753,7 +797,7 @@ def build():
     .bn-t.big b {{ font-size:64px; }} .bn-t.big span {{ font-size:14px; }} .bn-t.big i {{ font-size:10px; }}
     .bn-t.wide {{ grid-column:span 2; }} .bn-t.wide b {{ font-size:40px; }} .bn-t.wide span {{ font-size:11px; }}
     .bn-t.navy {{ background:{NAV}; color:#fff; }}
-    .bn-t.gold {{ background:{GOLD_MID}; color:#1c1917; }}
+    .bn-t.gold {{ background:{GOLD_MID}; color:#131A25; }}
     .bn-t.light {{ background:{NAV_LT}; color:{NAV}; }}
     .bn-t.pair b {{ font-size:23px; white-space:nowrap; }}   /* two figures in one tile */
     .bn-t.light span {{ color:{INK}; }}
@@ -772,7 +816,7 @@ def build():
     table.lsfh thead tr.g th {{ text-align:left; }}
     table.lsfh td.bar {{ text-align:left; }}
     table.lsfh td.one {{ color:{MUTED}; }}
-    .lh, .lt {{ display:inline-block; vertical-align:middle; height:7px; border-radius:2px; background:#eceae6; }}
+    .lh, .lt {{ display:inline-block; vertical-align:middle; height:7px; border-radius:2px; background:#E6E7E8; }}
     .lh {{ width:96px; }} .lt {{ width:70px; }}
     table.lsfh thead tr.g th.r {{ text-align:right; }}
     table.lsfh tfoot td {{ font-weight:800; color:{NAV}; border-top:1.5px solid {NAV}; padding-top:3px; }}
@@ -781,7 +825,7 @@ def build():
     .lhv, .ltv {{ display:inline-block; margin-left:5px; vertical-align:middle; font-weight:700; color:{INK}; }}
     table.linv tfoot td {{ background:{GOLD_LT}; font-weight:800; border-top:2px solid {GOLD_MID}; border-bottom:2px solid {GOLD_MID}; }}
     td.bar {{ text-align:left; }}
-    .db {{ display:inline-block; width:46px; height:7px; background:#e7e3dc; border-radius:2px; vertical-align:-1px; overflow:hidden; }}
+    .db {{ display:inline-block; width:46px; height:7px; background:#E6E7E8; border-radius:2px; vertical-align:-1px; overflow:hidden; }}
     .dbf {{ display:block; height:7px; border-radius:2px; }}
     .dbv {{ margin-left:4px; font-weight:700; }}
     .foot {{ position:absolute; bottom:0; left:0; right:0; font-size:7px; color:{MUTED}; border-top:0.5px solid {LINE}; padding-top:3px; display:flex; justify-content:space-between; }}
@@ -792,7 +836,7 @@ def build():
     def kpi(label,value,vs,color=UP):
         return (f"<div class='kpi'><div class='kl'>{label}</div><div class='kv'>{value}</div>"
                 f"<div class='ks' style='color:{color}'>Versus {py}: {vs}</div></div>")
-    sl="<span style='font-size:15px;color:#6B6560;font-weight:400;padding:0 5px'>/</span>"
+    sl="<span style='font-size:15px;color:#6B6F75;font-weight:400;padding:0 5px'>/</span>"
     zg=zone_gap(); gap_c=zg["cur"]["Sun"]/zg["cur"]["Fog"]; gap_p=zg["prior"]["Sun"]/zg["prior"]["Fog"]
     mm=lambda v: f"{v/1e6:.2f}"
     o=[f"<!doctype html><html><head><meta charset='utf-8'><style>{css}</style></head><body>"]
@@ -821,21 +865,18 @@ def build():
     v26,v25=ytd_now(vrows,vkeys),ytd_then(vrows,vkeys); v25y=tot(vrows,vkeys,"")
     uytd=dict(label=f"{u26:,} vs {u25:,}  {sgn(D(u26,u25))}%", sub=f"through {mname} · 2025 full year {u25y:,}")
     vytd=dict(label=f"${v26/1e9:.2f}B vs ${v25/1e9:.2f}B  {sgn(D(v26,v25))}%", sub=f"through {mname} · 2025 full year ${v25y/1e9:.2f}B")
-    USEG=[("SFH","#9FB0D6","#12379E","sfh"),("Condo/TIC","#E4D9A8","#C9A227","cd"),("Other","#CFCBC4","#6B6560","oth")]
-    VSEG=[("SFH","#9FB0D6","#12379E","sfh_v"),("Condo/TIC","#E4D9A8","#C9A227","cd_v"),("Other","#CFCBC4","#6B6560","oth_v")]
+    USEG=[("SFH","#AFC0D0","#203C5F","sfh"),("Condo/TIC","#F6E3A6","#E9BC3F","cd"),("Other","#C9CCD0","#6B6F75","oth")]
+    VSEG=[("SFH","#AFC0D0","#203C5F","sfh_v"),("Condo/TIC","#F6E3A6","#E9BC3F","cd_v"),("Other","#C9CCD0","#6B6F75","oth_v")]
     # ── PAGE 1 — San Francisco right now ─────────────────────────────────
     # The local snapshot. Headline numbers, then four charts. One sentence
     # under each; anything longer belongs on the In Depth page.
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>San Francisco Real Estate</div>
       <div class='p'><b>{mname} {mo.year}</b> and the year through <b>{thru}</b>, each against the same stretch last year.</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, SFAR MLS · run {datetime.date.today().strftime('%B %-d, %Y')}</div></div>""")
-    o.append("<div class='kpis'>"
-        +kpi("SFH — Med / Avg", f"${mm(st['y1']['price'])}{sl}${mm(st['y1']['avg'])}M", f"{sgn(D(st['y1']['price'],st['y0']['price']))}% / {sgn(D(st['y1']['avg'],st['y0']['avg']))}%")
-        +kpi("Condo — Med / Avg", f"${mm(ct['y1']['price'])}{sl}${mm(ct['y1']['avg'])}M", f"{sgn(D(ct['y1']['price'],ct['y0']['price']))}% / {sgn(D(ct['y1']['avg'],ct['y0']['avg']))}%")
-        +kpi("Sales Volume — All Homes", f"${allv1/1e9:.1f}B", f"{sgn(D(allv1,allv0))}%")
-        +kpi("Days on Mkt — SFH / Condo", f"{st['y1']['dom']:.0f}{sl}{ct['y1']['dom']:.0f}", f"{st['y1']['dom']-st['y0']['dom']:+.0f} / {ct['y1']['dom']-ct['y0']['dom']:+.0f} days")
-        +kpi("Sold Price vs List %", f"{st['y1']['pct']:.0f}{sl}{ct['y1']['pct']:.0f}%", f"{st['y1']['pct']-st['y0']['pct']:+.0f} / {ct['y1']['pct']-ct['y0']['pct']:+.0f} pts · SFH / Condo")
-        +"</div>")
+    krows,kthru,kyy,kpy=site_kpis()
+    o.append(f"<div class='sband'><div class='sband-h'>By the Numbers: \u2019{kyy} vs <span>\u2019{kpy}</span> YTD ({kthru})</div><div class='sband-row'>"
+        +"".join(f"<div class='sb'><div class='sb-v'>{now}<span>{then}</span></div><div class='sb-l'>{lab}: <b>{chg}</b></div></div>" for lab,now,then,chg in krows)
+        +"</div></div>")
     o.append("<div class='cols' style='margin-top:7px'>")
     o.append(f"""<div class='col'><h2>Units Sold</h2>
       {stacked(urows,USEG,uytd,h=212)}
@@ -846,10 +887,10 @@ def build():
     o.append("</div>")
     o.append("<div class='cols' style='margin-top:7px'>")
     o.append(f"""<div class='col'><h2>Sale vs List — SFH</h2>
-      {lines(mlrows,[("What sellers asked","#C9A227","mlist"),("What buyers paid","#12379E","msold")],h=196,dkey="d")}
-      <div class='cap'>Blue sits above gold every month this year: buyers paid over asking all year. The figure under each month is the change from last year.</div></div>""")
+      {lines(mlrows,[("What sellers asked","#E9BC3F","mlist"),("What buyers paid","#203C5F","msold")],h=196,dkey="d")}
+      <div class='cap'>Navy sits above yellow every month this year: buyers paid over asking all year. The figure under each month is the change from last year.</div></div>""")
     o.append(f"""<div class='col'><h2>Sale vs List — Condo/TIC</h2>
-      {lines(clrows,[("What sellers asked","#C9A227","clist"),("What buyers paid","#12379E","csold")],h=196,dkey="d")}
+      {lines(clrows,[("What sellers asked","#E9BC3F","clist"),("What buyers paid","#203C5F","csold")],h=196,dkey="d")}
       <div class='cap'>Same story for condos, with a narrower gap — sellers ask about {M(statistics.median([r['clist'] for r in clrows if r['clist']]))} and get about {M(statistics.median([r['csold'] for r in clrows if r['csold']]))}.</div></div>""")
     o.append("</div>")
     o.append(f"<div class='foot'><span>Source: SFAR MLS via BrokerMetrics, closed sales (Closed + Sold Off MLS), geocoded to the site's fog-contour layer. Data through {W['m1'][1]}. Deemed reliable, not guaranteed.</span><span>page 1 / 9</span></div></div>")
@@ -870,9 +911,9 @@ def build():
       <div class='cap'>What the government pays to borrow for ten years. Banks price home loans off this, then add about {mspread:.1f} points. It was {yr_ago:.2f}% a year ago and is <span class='st'>{TEN_NOW:.2f}%</span> today — the highest since 2007.</div></div>""")
     o.append("</div>")
     o.append("<div class='cols' style='margin-top:7px'>")
-    o.append(f"""<div class='col'><h2>Inflation — How Fast Everything Costs More</h2>{lines([dict(m=m_,cpi=v) for m_,v in CPI],[("Prices vs a year ago","#C9A227","cpi")],h=200,fmt=lambda v:f"{v:.1f}%")}
+    o.append(f"""<div class='col'><h2>Inflation — How Fast Everything Costs More</h2>{lines([dict(m=m_,cpi=v) for m_,v in CPI],[("Prices vs a year ago","#E9BC3F","cpi")],h=200,fmt=lambda v:f"{v:.1f}%")}
       <div class='cap'>How much more things cost than a year ago: {CPI[0][1]:.1f}% in January, up to {max(v for _,v in CPI):.1f}% in May, <span class='st'>{CPI[-1][1]:.1f}%</span> now. While this stays high, loans stay expensive.</div></div>""")
-    o.append(f"""<div class='col'><h2>Jobs — Who Is Working</h2>{lines(urows2,[("San Francisco","#12379E","sf"),("California","#C9A227","ca"),("United States","#8A8F98","us")],h=200,fmt=lambda v:f"{v:.1f}%")}
+    o.append(f"""<div class='col'><h2>Jobs — Who Is Working</h2>{lines(urows2,[("San Francisco","#203C5F","sf"),("California","#E9BC3F","ca"),("United States","#8A8E93","us")],h=200,fmt=lambda v:f"{v:.1f}%")}
       <div class='cap'>Share of people looking for work. San Francisco is at <span class='st'>{UNEMP[-1][3]:.1f}%</span> in {datetime.date(2026,UNEMP[-1][0],1):%B}, up from {UNEMP[-2][3]:.1f}% in {datetime.date(2026,UNEMP[-2][0],1):%B}, against {UNEMP[-1][2]:.1f}% statewide and {UNEMP[-1][1]:.1f}% nationally. Still well below the state.</div></div>""")
     o.append("</div>")
     o.append(f"""<div class='sig' style='margin-top:8px'><b>How the four fit together.</b> Inflation keeps the Treasury high. The Treasury sets the mortgage rate. The mortgage rate decides what a financed buyer can pay.
@@ -934,7 +975,7 @@ def build():
       <div class='cap'>Monthly payment on a typical {M(MED_SFH)} house and {M(MED_CO)} condo with 20% down.
       January's {6.10:.2f}% to today's {MTG_NOW:.2f}% costs a house buyer <span class='st'>${P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10):,.0f} more a month</span> — <span class='st'>${12*(P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10)):,.0f} a year</span> — for the same house.</div>
       <h2 style='margin-top:6px'>Home Loans Follow the Bond</h2>{spread_chart(h=140)}
-      <div class='cap'>Gold is your home loan, blue is what the government pays. The gap between them barely moves, so the bond leads and your rate follows.</div>
+      <div class='cap'>Yellow is your home loan, navy is what the government pays. The gap between them barely moves, so the bond leads and your rate follows.</div>
       <h2 style='margin-top:5px'>The Yield Curve Today</h2>{curve_chart(w=470,h=92)}
       <div class='cap'>Lend longer, earn more — the line rises, as it should. When it tips the other way it is <b>inverted</b>, which has come before every U.S. recession since the 1970s. We are not there.</div></div>""")
     o.append(f"""<div class='col'><h2 class='band'>The Cash Buyer</h2>
@@ -998,7 +1039,7 @@ def build():
       <h2>Microclimate Pricing — Median Sales Price</h2>
       <table class='mzp'>"""
       +"".join(f"<tr><td>{CHIP(col)} {nm}</td><td class='b'>{M(z['price'])}</td></tr>"
-               for nm,col,z in (("Sun Zone","#FBDC7E",sun),("Transition Zone","#E7D3B0",tr),
+               for nm,col,z in (("Sun Zone","#FBDC7E",sun),("Transition Zone","#F6E3A6",tr),
                                 ("Fog Zone","#C3CBD2",fg),("Persistent Fog","#8D9BA6",pf)))
       +"</table><div class='cap'>Single-family homes, Jan 1 – " + thru + ".</div></div>")
     o.append(f"""<div class='col'><h2>Top 10 Neighborhoods — SFH &amp; Condo</h2>

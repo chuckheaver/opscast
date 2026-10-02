@@ -2297,10 +2297,10 @@ input[type=range]::-webkit-slider-thumb:hover {
   align-items: center;
   gap: 10px;
 }
-.fog-legend-emoji {
-  font-size: 18px;
-  line-height: 1;
-  text-align: center;
+.fog-legend-swatch {
+  width: 18px; height: 14px; border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  justify-self: center;
 }
 .fog-legend-range {
   font-family: 'DM Sans', sans-serif;
@@ -2560,12 +2560,6 @@ input[type=range]::-webkit-slider-thumb:hover {
 .fog-map {
   width: 100%;
   height: 100%;
-}
-.fog-cloud-marker {
-  font-size: 56px;
-  line-height: 1;
-  pointer-events: none;
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4));
 }
 .fog-map-missing-token {
   display: flex;
@@ -4404,7 +4398,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   flex: 0 0 auto;
 }
 
-/* Clicked-point marker (mirrors .fog-cloud-marker). */
+/* Clicked-point marker. */
 .wine-pick-marker {
   font-size: 26px;
   line-height: 1;
@@ -5677,12 +5671,14 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .rp-sheet[id] { scroll-margin-top: 80px; }
 .rp-sheet { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 6px; }
 .rp-sheet .page {
-  margin: 0 auto; height: auto !important; min-height: 7.6in; padding: 0.3in 0.35in;
+  margin: 0 auto; height: auto !important; min-height: 7.6in; padding: 0.3in 0.35in 0.5in;
   box-shadow: 0 1px 2px rgba(16,23,32,.08), 0 10px 30px rgba(16,23,32,.12);
 }
 /* The print footer is pinned to the page edge; on screen the page has
    padding standing in for the print margins, so pin it inside that. */
 .rp-sheet .page .foot { left: 0.35in; right: 0.35in; bottom: 0.18in; }
+/* Point labels at a chart's first and last x sit on the plot edge. */
+.rp-sheet svg { overflow: visible; }
 .rp-sheet a.rp-link { color: inherit; text-decoration: underline; text-decoration-color: #C9A227; text-decoration-thickness: 2px; text-underline-offset: 2px; }
 .rp-sheet a.rp-link:hover { color: #203C5F; background: #FAEEDA; }
 .rp-sheet svg a.rp-link { text-decoration: underline; }

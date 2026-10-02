@@ -303,26 +303,25 @@ function Result({ picked }) {
   );
 }
 
-// Microclimates legend — three bands matching the fog map's coloring.
-// Each row is a colored swatch (the actual polygon fill colour) with the
-// matching weather emoji inside, plus the hour range and label.
+// Microclimates legend — three bands, each a swatch in the fog map's own
+// polygon fill colour, plus the hour range and label.
 function Legend() {
   return (
     <div className="fog-legend">
       <div className="fog-legend-title">Microclimates · Fog Hours</div>
       <div className="fog-legend-rows">
-        <LegendRow emoji="☀️"  range="≤ 8 hrs" label="Sun" />
-        <LegendRow emoji="🌤️" range="8.5 hrs" label="Transition" />
-        <LegendRow emoji="☁️"  range="≥ 9 hrs" label="Fog" />
+        <LegendRow color="#fef9c3" range="≤ 8 hrs" label="Sun" />
+        <LegendRow color="#e7e5e4" range="8.5 hrs" label="Transition" />
+        <LegendRow color="#a8a29e" range="≥ 9 hrs" label="Fog" />
       </div>
     </div>
   );
 }
 
-function LegendRow({ emoji, range, label }) {
+function LegendRow({ color, range, label }) {
   return (
     <div className="fog-legend-row">
-      <span className="fog-legend-emoji" aria-hidden="true">{emoji}</span>
+      <span className="fog-legend-swatch" style={{ background: color }} aria-hidden="true" />
       <span className="fog-legend-range">{range}</span>
       <span className="fog-legend-label">{label}</span>
     </div>
