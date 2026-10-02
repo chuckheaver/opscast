@@ -6,7 +6,7 @@
 // districts — are looked up here once the card opens.
 
 import { useEffect, useState } from "react";
-import { nearestMuni, nearestBike, parcelLandUse, zoningAndDistricts } from "./lib/quickpeek";
+import { nearestMuni, nearestBike, parcelLandUse, zoningAndDistricts, incline } from "./lib/quickpeek";
 
 // Same four zones the neighborhood guide and the market report use.
 function zoneOf(h) {
@@ -19,8 +19,10 @@ function zoneOf(h) {
 const ZONE_COLOR = { Sun: "#E8B84B", Transition: "#D8C08E", Fog: "#A8BCCD", "Persistent Fog": "#8DA2B5" };
 
 const routesShort = r => {
-  const list = String(r || "").split("·").map(s => s.trim()).filter(Boolean);
-  return list.length > 5 ? `${list.slice(0, 5).join(" · ")} +${list.length - 5}` : list.join(" · ");
+  let list = String(r || "").split("·").map(s => s.trim()).filter(Boolean);
+  // "FBUS" / "KBUS" are bus substitutes for the F and K — skip when the line is listed.
+  list = list.filter(x => !(x.endsWith("BUS") && list.includes(x.slice(0, -3))));
+  return list.length > 6 ? `${list.slice(0, 6).join(", ")} +${list.length - 6}` : list.join(", ");
 };
 
 export default function QuickPeek({
@@ -31,16 +33,18 @@ export default function QuickPeek({
   const [bike, setBike] = useState(undefined);
   const [land, setLand] = useState(undefined);
   const [zd, setZd] = useState(undefined);
+  const [slope, setSlope] = useState(undefined);
   const key = point ? point.join(",") : "";
 
   useEffect(() => {
     if (!point) return;
     let live = true;
-    setMuni(undefined); setBike(undefined); setLand(undefined); setZd(undefined);
+    setMuni(undefined); setBike(undefined); setLand(undefined); setZd(undefined); setSlope(undefined);
     nearestMuni(point).then(v => live && setMuni(v));
     nearestBike(point).then(v => live && setBike(v));
     parcelLandUse(point).then(v => live && setLand(v));
     zoningAndDistricts(point).then(v => live && setZd(v));
+    incline(point).then(v => live && setSlope(v));
     return () => { live = false; };
   }, [key]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -48,9 +52,10 @@ export default function QuickPeek({
   const wait = <span className="qp-wait">…</span>;
   const hazards = (() => {
     if (seismicYN == null && tsunamiYN == null) return wait;
-    const hit = [seismicYN === "Yes" && "seismic (liquefaction / landslide)", tsunamiYN === "Yes" && "tsunami"].filter(Boolean);
-    return hit.length ? <><b className="qp-yes">Yes</b> — {hit.join(", ")}</> : "No";
+    const hit = [seismicYN === "Yes" && "Seismic", tsunamiYN === "Yes" && "Tsunami"].filter(Boolean);
+    return hit.length ? <b className="qp-yes">{hit.join(", ")}</b> : "No";
   })();
+  const elev = Number.isFinite(elevationFt) ? `${Math.round(elevationFt).toLocaleString("en-US")} ft` : null;
   const street = String(address || "").split(",")[0] || "Dropped pin";
 
   const rows = [
@@ -58,13 +63,13 @@ export default function QuickPeek({
     ["Neighborhood", neighborhood || "—"],
     ["District", district || "—"],
     ["Zip Code", zip || "—"],
-    ["Microclimate Zone", zone
-      ? <><span className="qp-zone" style={{ "--z": ZONE_COLOR[zone] }}>{zone}</span> {fogHrs.toFixed(1)} h summer fog</>
-      : "—"],
-    ["Elevation", Number.isFinite(elevationFt) ? `${Math.round(elevationFt).toLocaleString("en-US")} ft` : wait],
+    ["Microclimate Zone", zone ? <span className="qp-zone" style={{ "--z": ZONE_COLOR[zone] }}>{zone}</span> : "—"],
+    ["Elevation / Incline", !elev ? wait
+      : slope === undefined ? <>{elev} / {wait}</>
+      : slope ? `${elev} / ${slope.pct}% (${slope.label})` : elev],
     ["Hazards", hazards],
-    ["Muni", muni === undefined ? wait : muni ? <>{muni.name} <i>· {routesShort(muni.routes)} · {muni.dist}</i></> : "—"],
-    ["Bike Path", bike === undefined ? wait : bike ? <>{bike.street} <i>· {bike.type} · {bike.dist}</i></> : "—"],
+    ["Muni", muni === undefined ? wait : muni ? <>{routesShort(muni.routes) || muni.name} <i>· {muni.dist}</i></> : "—"],
+    ["Bike Path", bike === undefined ? wait : bike ? <>{bike.street} / {bike.cls} <i>· {bike.dist}</i></> : "—"],
     ["Land Use", land === undefined ? wait
       : land ? <>{land.use}{land.units ? <i> · {land.units} unit{land.units === 1 ? "" : "s"}</i> : null}{zd?.zoning ? <i> · {zd.zoning}</i> : null}</> : "—"],
     ["Abutting Land Use", land === undefined ? wait : land?.abutting?.length ? land.abutting.join(", ") : "—"],

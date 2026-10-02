@@ -76,6 +76,7 @@ export async function nearestBike(point) {
   return {
     street: pr.street || "",
     type: BIKE_LABEL[pr.facility] || pr.symbology || pr.facility || "Bike route",
+    cls: /^CLASS /.test(pr.facility || "") ? `Class ${pr.facility.slice(6)}` : (pr.symbology || "Bike route"),
     dist: fmtDist(bd),
   };
 }
@@ -184,4 +185,33 @@ export async function zoningAndDistricts(point) {
   if (c) special.push(`${c.properties.community_benefit_district} (CBD)`);
   if (z && /\(SD\)/.test(z.properties.code || "")) special.push(`${z.properties.code} special development`);
   return { zoning: z ? z.properties.code : null, zoningName: z ? z.properties.name : null, special };
+}
+
+// ── Incline ──────────────────────────────────────────────────────────────
+// Ground slope at the address from the 10 m USGS elevation model
+// (/api/elevation): sample 20 m north, south, east and west and take the
+// steepest grade across that 40 m. Returns { pct, label } or null.
+async function demFt([lng, lat]) {
+  try {
+    const r = await fetch(`/api/elevation?lat=${lat}&lng=${lng}`);
+    const d = r.ok ? await r.json() : null;
+    return Number.isFinite(d?.ft) ? d.ft : null;
+  } catch { return null; }
+}
+export function inclineLabel(pct) {
+  if (pct < 4) return "Flat";            // under 4%: within the 10 m model's noise
+  if (pct < 8) return "Gentle";
+  if (pct < 15) return "Moderate";
+  if (pct < 35) return "Steep";
+  return "Very steep";
+}
+export async function incline([lng, lat]) {
+  const d = 20, dLat = d / M_LAT, dLng = d / mLng(lat);
+  const [n, s, e, w] = await Promise.all([
+    demFt([lng, lat + dLat]), demFt([lng, lat - dLat]), demFt([lng + dLng, lat]), demFt([lng - dLng, lat]),
+  ]);
+  if ([n, s, e, w].some(v => v == null)) return null;
+  const run = (2 * d) * 3.28084;                 // feet
+  const pct = Math.round(100 * Math.hypot((n - s) / run, (e - w) / run));
+  return { pct, label: inclineLabel(pct) };
 }
