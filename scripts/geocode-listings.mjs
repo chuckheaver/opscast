@@ -24,10 +24,7 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 import { statsThrough } from "./stats-through.mjs";
-import {
-  findNeighborhoodForPoint,
-  findContourForPoint,
-} from "../app/fog/lib/spatial.js";
+import { tag } from "./tag-point.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -48,15 +45,6 @@ const CACHE_PATH = join(ROOT, "data", "tmp", "geocode-cache.json");
 // neighbors. Loaded as a fallback tier (see loadInterpolated).
 const INTERP_PATH = join(ROOT, "data", "geocode-interpolated.json");
 
-const CONTOURS = JSON.parse(
-  readFileSync(join(PUBLIC_DATA, "sf-fog-contours.geojson"), "utf8")
-);
-const FOG_NEIGH = JSON.parse(
-  readFileSync(join(PUBLIC_DATA, "sf-fog-neighborhoods.geojson"), "utf8")
-);
-const REALTOR = JSON.parse(
-  readFileSync(join(PUBLIC_DATA, "sf-realtor-neighborhoods.geojson"), "utf8")
-);
 
 const CENSUS_URL =
   "https://geocoding.geo.census.gov/geocoder/locations/addressbatch";
@@ -320,7 +308,9 @@ function seedCacheFromPublished(cache) {
     if (p.geoSource === "neighborhood") continue;
     const street = String(p.address).split(",")[0].replace(/\s+/g, " ").trim();
     if (!street) continue;
-    const key = addrKey({ street, city: "San Francisco", state: "CA", zip: p.zip || "" });
+    // Key on the ZIP the MLS row carries (zipMls when validation corrected it),
+    // so the seed matches the listing when it is parsed again.
+    const key = addrKey({ street, city: "San Francisco", state: "CA", zip: p.zipMls ?? p.zip ?? "" });
     if (cache[key] || OVERRIDES[key]) continue;
     // A published point that was itself only estimated stays in the
     // estimate tier so a reachable geocoder still gets to replace it.
@@ -551,65 +541,7 @@ function csvCell(v) {
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
-// ── Nearest-neighborhood snap ───────────────────────────────────────────────
-// Presidio, Golden Gate Park, and Lincoln Park are parkland with no real
-// estate (they carry a null district_num in the realtor data). A listing that
-// geocodes into one of them is an edge case — snap it to the nearest
-// neighborhood polygon that actually has real estate.
 const KX = Math.cos((37.77 * Math.PI) / 180); // scale lng→x at SF latitude
-
-function segDist2(px, py, ax, ay, bx, by) {
-  const dx = bx - ax, dy = by - ay;
-  const len2 = dx * dx + dy * dy;
-  let t = len2 ? ((px - ax) * dx + (py - ay) * dy) / len2 : 0;
-  t = t < 0 ? 0 : t > 1 ? 1 : t;
-  const ex = px - (ax + t * dx), ey = py - (ay + t * dy);
-  return ex * ex + ey * ey;
-}
-function featureMinDist2([lng, lat], feature) {
-  const g = feature.geometry;
-  if (!g) return Infinity;
-  const px = lng * KX, py = lat;
-  const polys =
-    g.type === "Polygon" ? [g.coordinates] : g.type === "MultiPolygon" ? g.coordinates : [];
-  let best = Infinity;
-  for (const poly of polys)
-    for (const ring of poly)
-      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-        const d = segDist2(px, py, ring[j][0] * KX, ring[j][1], ring[i][0] * KX, ring[i][1]);
-        if (d < best) best = d;
-      }
-  return best;
-}
-function nearestRealtorWithRE(point) {
-  let best = null, bestD = Infinity;
-  for (const f of REALTOR.features) {
-    if (f.properties?.district_num == null) continue; // skip parkland
-    const d = featureMinDist2(point, f);
-    if (d < bestD) { bestD = d; best = f; }
-  }
-  return best;
-}
-
-// ── Spatial tagging ─────────────────────────────────────────────────────────
-function tag(point) {
-  const contour = findContourForPoint(CONTOURS, point);
-  const fogN = findNeighborhoodForPoint(FOG_NEIGH, point);
-  let realtor = findNeighborhoodForPoint(REALTOR, point);
-  // Landed in a no-real-estate park polygon → reassign to the nearest
-  // neighborhood that has real estate. (A point outside all polygons stays
-  // null so the SF-only guard still drops it.)
-  if (realtor && realtor.properties?.district_num == null) {
-    realtor = nearestRealtorWithRE(point) || realtor;
-  }
-  return {
-    fogHours: contour?.properties?.hours ?? fogN?.properties?.fogHours ?? null,
-    fogNeighborhood: fogN?.properties?.name ?? null,
-    neighborhood: realtor?.properties?.nbrhood ?? null,
-    district: realtor?.properties?.district ?? null,
-    districtNum: realtor?.properties?.district_num ?? null,
-  };
-}
 
 // ── Main ──────────────────────────────────────────────────────────────────
 async function main() {
@@ -730,9 +662,10 @@ async function main() {
       outside.push(l.address);
       continue;
     }
-    // An MLS-supplied neighborhood is authoritative over the polygon guess;
-    // a manual per-address override beats both.
-    if (l.nbhd) tags.neighborhood = l.nbhd;
+    // The neighborhood comes from where the sale sits, not what was typed:
+    // an MLS-entered neighborhood is kept only for the audit trail
+    // (mlsNeighborhood). A manual per-address override still wins.
+    if (l.nbhd && l.nbhd !== tags.neighborhood) tags.mlsNeighborhood = l.nbhd;
     const nbOverride = NEIGHBORHOOD_OVERRIDES[addrKey(l)];
     if (nbOverride) tags.neighborhood = nbOverride;
     // A placeholder files under the neighborhood it was inferred from (the
@@ -843,6 +776,20 @@ async function main() {
   // Refresh the Tall Building ↔ sales join off the listings we just wrote, so
   // the building pop-ups and the building/market cross-links stay in sync with
   // every data refresh — no separate command to remember.
+  // Check agent-entered location fields against where each sale sits and
+  // correct typos (ZIP, SF district, a misplaced pin) — data/mls-corrections.csv.
+  console.log(`\nValidating MLS entries against location…`);
+  try {
+    execFileSync("node", [join(__dirname, "validate-listings.mjs")], { stdio: "inherit" });
+  } catch (e) {
+    console.warn(`  validation failed (${e.message}); listings left as geocoded.`);
+  }
+  try {
+    execFileSync("node", [join(__dirname, "build-sale-incline.mjs")], { stdio: "inherit" });
+  } catch (e) {
+    console.warn(`  incline step failed (${e.message}); run scripts/build-sale-incline.mjs`);
+  }
+
   console.log(`\nRefreshing building↔sales links…`);
   try {
     execFileSync("node", [join(__dirname, "build-building-sales.mjs")], { stdio: "inherit" });

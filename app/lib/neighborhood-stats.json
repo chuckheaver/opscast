@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T21:55:14.037Z",
+  "generatedAt": "2026-10-02T15:41:47.073Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -30,12 +30,12 @@
       "zone": "Transition"
     },
     "Ashbury Heights": {
-      "n": 20,
+      "n": 21,
       "sfhMedian": 3600918,
       "sfhN": 9,
-      "condoMedian": 1830000,
-      "condoN": 11,
-      "ppsf": 1540.954482794328,
+      "condoMedian": 1940000,
+      "condoN": 12,
+      "ppsf": 1510.0671140939598,
       "dom": 11,
       "fogHours": 9,
       "zone": "Fog"
@@ -206,12 +206,12 @@
       "zone": "Sun"
     },
     "Crocker Amazon": {
-      "n": 29,
+      "n": 30,
       "sfhMedian": 1288063,
       "sfhN": 29,
-      "condoMedian": null,
-      "condoN": 0,
-      "ppsf": 866.2551440329219,
+      "condoMedian": 605000,
+      "condoN": 1,
+      "ppsf": 858.8917641561989,
       "dom": 12,
       "fogHours": 11,
       "zone": "Persistent Fog"
@@ -294,13 +294,13 @@
       "zone": "Fog"
     },
     "Financial District": {
-      "n": 25,
+      "n": 26,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 1598888,
-      "condoN": 25,
-      "ppsf": 1327.4336283185842,
-      "dom": 19,
+      "condoMedian": 1493444,
+      "condoN": 26,
+      "ppsf": 1297.843798286276,
+      "dom": 21,
       "fogHours": 7,
       "zone": "Sun"
     },
@@ -393,13 +393,13 @@
       "zone": "Fog"
     },
     "Hunters Point": {
-      "n": 26,
+      "n": 27,
       "sfhMedian": 982500,
       "sfhN": 4,
       "condoMedian": 598000,
       "condoN": 18,
-      "ppsf": 611.9900355685593,
-      "dom": 58.5,
+      "ppsf": 598.4690327070285,
+      "dom": 49,
       "fogHours": 9,
       "zone": "Fog"
     },
@@ -437,13 +437,13 @@
       "zone": "Persistent Fog"
     },
     "Inner Richmond": {
-      "n": 76,
+      "n": 77,
       "sfhMedian": 3212500,
       "sfhN": 38,
-      "condoMedian": 1507500,
-      "condoN": 38,
-      "ppsf": 1268.660696517413,
-      "dom": 10.5,
+      "condoMedian": 1515000,
+      "condoN": 39,
+      "ppsf": 1261.2895959076095,
+      "dom": 10,
       "fogHours": 9,
       "zone": "Fog"
     },
@@ -503,13 +503,13 @@
       "zone": "Persistent Fog"
     },
     "Laurel Heights / Jordan Park": {
-      "n": 15,
+      "n": 16,
       "sfhMedian": 3420000,
       "sfhN": 7,
-      "condoMedian": 1700000,
-      "condoN": 7,
-      "ppsf": 1395.2164009111618,
-      "dom": 7,
+      "condoMedian": 1942500,
+      "condoN": 8,
+      "ppsf": 1429.3155175287516,
+      "dom": 6.5,
       "fogHours": 9,
       "zone": "Fog"
     },
@@ -657,12 +657,12 @@
       "zone": "Sun"
     },
     "Mission Dolores": {
-      "n": 58,
+      "n": 61,
       "sfhMedian": 2822500,
       "sfhN": 2,
-      "condoMedian": 1425000,
-      "condoN": 56,
-      "ppsf": 1188.811188811189,
+      "condoMedian": 1452500,
+      "condoN": 58,
+      "ppsf": 1192.8611928611929,
       "dom": 13,
       "fogHours": 7.5,
       "zone": "Sun"
@@ -701,12 +701,12 @@
       "zone": "Persistent Fog"
     },
     "Nob Hill": {
-      "n": 83,
+      "n": 84,
       "sfhMedian": 1700000,
       "sfhN": 5,
-      "condoMedian": 1380000,
-      "condoN": 61,
-      "ppsf": 1096.4912280701753,
+      "condoMedian": 1440000,
+      "condoN": 62,
+      "ppsf": 1084.2456140350878,
       "dom": 33,
       "fogHours": 7,
       "zone": "Sun"
@@ -723,13 +723,13 @@
       "zone": "Transition"
     },
     "North Beach": {
-      "n": 35,
+      "n": 26,
       "sfhMedian": 3148500,
       "sfhN": 2,
-      "condoMedian": 1185000,
-      "condoN": 29,
-      "ppsf": 1108.9813800657173,
-      "dom": 13,
+      "condoMedian": 1130000,
+      "condoN": 23,
+      "ppsf": 1118.1372549019607,
+      "dom": 11.5,
       "fogHours": 6.5,
       "zone": "Sun"
     },
@@ -800,13 +800,13 @@
       "zone": "Transition"
     },
     "Parkmerced": {
-      "n": 3,
+      "n": 4,
       "sfhMedian": 1710000,
       "sfhN": 1,
       "condoMedian": 1337250,
       "condoN": 2,
-      "ppsf": 758.5644371941272,
-      "dom": 13,
+      "ppsf": 733.7782660278937,
+      "dom": 31,
       "fogHours": 12.5,
       "zone": "Persistent Fog"
     },
@@ -891,7 +891,7 @@
       "n": 9,
       "sfhMedian": 3750000,
       "sfhN": 5,
-      "condoMedian": 1933560,
+      "condoMedian": 1528560,
       "condoN": 4,
       "ppsf": 1286.5278080943326,
       "dom": 10,
@@ -976,11 +976,11 @@
       "zone": "Sun"
     },
     "South of Market": {
-      "n": 221,
+      "n": 219,
       "sfhMedian": 2226662.5,
       "sfhN": 2,
       "condoMedian": 895000,
-      "condoN": 219,
+      "condoN": 217,
       "ppsf": 912.2533266459855,
       "dom": 34,
       "fogHours": 7,

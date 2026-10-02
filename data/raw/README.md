@@ -74,3 +74,22 @@ neighborhood's anchor point so the sale still counts; the map draws these
 as one larger blue dot per neighborhood whose pop-up lists every listing).
 Estimates and placeholders are never cached, so a run with the Census
 geocoder reachable replaces them with real positions automatically.
+
+## Validation (runs automatically)
+
+`geocode-listings.mjs` finishes by running `scripts/validate-listings.mjs`,
+which checks every agent-entered location field against where the sale sits
+and corrects typos:
+
+- **Pin vs APN** — the APN's city block should be under the pin. When it isn't
+  and the APN's parcel sits in the ZIP the agent typed, the address/APN/ZIP
+  agree and the pin moves to the APN parcel (`geoSource: "apn"`, old pin kept
+  as `pinMls`). If nothing agrees the sale is flagged `geoCheck: "apn-far"`.
+- **ZIP** — compared with the ZIPs typed for the other sales on the same block;
+  3+ neighbors agreeing 80%+ override a different ZIP, and non-SF ZIPs are
+  always replaced (MLS value kept as `zipMls`).
+- **SF District** — from the SFAR district at the pin (`areaDescMls` keeps
+  the typed value). Neighborhood was already taken from the pin.
+
+Every change and flag is listed in `data/mls-corrections.csv` for review.
+Per-sale incline (`data/sale-incline.json`) is rebuilt right after.
