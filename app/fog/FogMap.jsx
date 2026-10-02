@@ -2361,7 +2361,9 @@ export default function FogMap({
       setRing();
       openPropPopupRef.current?.({ features: [feat], lngLat: { lng: c[0], lat: c[1] } });
     });
-    map.easeTo({ center: c, zoom: Math.max(map.getZoom(), 15.5), duration: 900 });
+    // Land the dot below center so its pop-up opens in clear space under
+    // the search bar and layer chips rather than behind them.
+    map.easeTo({ center: c, zoom: Math.max(map.getZoom(), 15.5), duration: 900, offset: [0, 170] });
   }, [focusComp]);
 
   // Reset button → re-frame all of San Francisco. Bumped counter animates once.

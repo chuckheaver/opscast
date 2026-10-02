@@ -119,22 +119,14 @@ def _link_areas(s):
                 f"title='Open {html.escape(area)} on the map — sold homes'>{m.group(2)}</a>{m.group(3)}{m.group(4)}<")
     return AREA_RX.sub(sub, s)
 
-# Top 10 sales: "1. 2830 Pacific Ave" → a pin on that sale.
-sold = {}
-for f in json.loads((ROOT / "public/data/sf-listings.geojson").read_text())["features"]:
-    p = f["properties"]
-    if p.get("sellingDate") and p.get("address") and p.get("lat") and p.get("lng"):
-        sold.setdefault(p["address"].split(",")[0].strip(), p)  # "2830 Pacific Ave[, San Francisco, CA …]"
-
-ADDR_RX = re.compile(r">(\s*\d+\.\s*)(\d+[^<>]*?(?:St|Ave|Blvd|Way|Ter|Dr|Rd|Ct|Pl|Ln|Hwy|Street|Avenue))(\s*)<")
+# Sale rows carry their MLS listing number (data-sale, set by cover3.py):
+# each address links to the map with that sold home's pop-up open.
+SALE_RX = re.compile(r"(<td class='l' data-sale='([^']+)'>\s*\d+\.\s*)([^<]+)(</td>)")
 def link_sales(s):
     def sub(m):
-        addr = html.unescape(m.group(2)).strip()
-        p = sold.get(addr)
-        if not p: return m.group(0)
-        url = "/fog?" + urllib.parse.urlencode({"preset": "homes", "lat": p["lat"], "lng": p["lng"], "name": addr})
-        return f">{m.group(1)}<a class='rp-link' href='{html.escape(url)}' title='Show this sale on the map'>{m.group(2)}</a>{m.group(3)}<"
-    return ADDR_RX.sub(sub, s)
+        url = "/fog?" + urllib.parse.urlencode({"preset": "homes", "sale": html.unescape(m.group(2))})
+        return f"{m.group(1)}<a class='rp-link' href='{html.escape(url)}' title='Open this sale on the map'>{m.group(3)}</a>{m.group(4)}"
+    return SALE_RX.sub(sub, s)
 
 # -------------------------------------------------------------- write out
 DEST.mkdir(parents=True, exist_ok=True)

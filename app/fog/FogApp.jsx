@@ -267,8 +267,11 @@ export default function FogApp() {
   // If the page was opened with ?lat=&lng=&name= (e.g. the Fog Forecast
   // button on Ur4cast), parse those once.
   const urlLoc = (() => {
-    const lat = Number(searchParams?.get("lat"));
-    const lng = Number(searchParams?.get("lng"));
+    // Number(null) is 0, so a missing param would read as a pin at 0,0 —
+    // require both to be present before parsing.
+    if (!searchParams?.get("lat") || !searchParams?.get("lng")) return null;
+    const lat = Number(searchParams.get("lat"));
+    const lng = Number(searchParams.get("lng"));
     if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
     // ?bz=1 (building zoom) — from a "View building structure" link — flies in
     // to the footprint instead of framing the whole city.
@@ -609,6 +612,21 @@ export default function FogApp() {
     loadListingsGeo().then(g => { if (!cancelled) setListingsGeo(g); });
     return () => { cancelled = true; };
   }, [activityWanted, listingsGeo]);
+
+  // ?sale=<listing id> (the market report's sale links): once the listings
+  // load, glide to that sold home and open its property pop-up — the same
+  // path a Details-list row takes.
+  const urlSale = searchParams?.get("sale");
+  const saleAppliedRef = useRef(false);
+  useEffect(() => {
+    if (!urlSale || saleAppliedRef.current || !listingsGeo) return;
+    const f = listingsGeo.features.find(x => String(x.properties?.id) === urlSale);
+    if (!f) return;
+    saleAppliedRef.current = true;
+    urlLocAppliedRef.current = true;     // no address pick / Quick Peek on top of it
+    autoGeoTriedRef.current = true;
+    setFocusComp({ feature: { ...f, properties: { ...f.properties, actKind: "sold" } }, n: Date.now() });
+  }, [urlSale, listingsGeo]);
 
   // ── MicroClimates overlay ──
   // Lazy-load the terrain-derived sun/cool/wind zones on first panel open.

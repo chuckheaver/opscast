@@ -636,6 +636,11 @@ def by_numbers(rows, thru):
     zip_,zipv=zv.most_common(1)[0]
     zhoods=[h for h,_ in collections.Counter(r.get("neighborhood") for r in rows if r.get("zip")==zip_ and r.get("neighborhood")).most_common(3)]
     off=sum(1 for r in rows if r.get("status")=="Sold Off MLS")
+    # Ground incline at each sale (scripts/build-sale-incline.mjs).
+    import os
+    inc=json.load(open(os.path.join(mg.ROOT,"data/sale-incline.json")))
+    slopes=[inc[str(r["id"])] for r in rows if str(r.get("id")) in inc]
+    steep=sum(1 for v in slopes if v>=15)
     sq=lambda rs: statistics.median([r["sqft"] for r in rs if r.get("sqft")])
     return dict(
         per_day=f"${vol/days/1e6:.1f}M", vol=BN(vol), days=days,
@@ -645,6 +650,8 @@ def by_numbers(rows, thru):
         toppct=f"{100*topn/n:.0f}%",
         week=f"{100*sum(1 for d in dom if d<=7)/len(dom):.0f}%",
         bid150=f"{sum(1 for x in rat if x>=1.5):,}", bid130=f"{sum(1 for x in rat if x>=1.3):,}",
+        bidn=f"{len(rat):,}", bidpct=f"{100*sum(1 for x in rat if x>=1.5)/len(rat):.1f}%",
+        steep=f"{steep:,}", steeppct=f"{100*steep/len(slopes):.0f}%", slopen=f"{len(slopes):,}",
         per_bed=f"${statistics.median(beds)/1e3:,.0f}K",
         zip=zip_, zipv=f"${zipv/1e6:,.0f}M", zhoods=", ".join(zhoods),
         under=f"{100*sum(1 for x in rat if x<1)/len(rat):.0f}%",
@@ -765,7 +772,11 @@ def build():
     .charts .ch {{ flex:1; min-width:0; }} .charts .cap {{ font-size:9.6px; line-height:1.4; margin-top:-2px; }} .charts .src {{ font-size:7.4px; color:{MUTED}; }}
     table.top {{ border-collapse:collapse; width:100%; font-size:8.6px; margin-bottom:6px; }}
     .nb4 {{ gap:9px; }} .nb4 table.top {{ font-size:7.9px; table-layout:auto; }} .nb4 h2 {{ font-size:10.5px; }}
-    .nb4 table.top td.l {{ max-width:118px; text-overflow:ellipsis; }}
+    .nb4 .col {{ min-width:0; }} .nb4 table.top {{ table-layout:fixed; }}
+    .nb4 table.top td, .nb4 table.top th {{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }}
+    .nb4 table.top td.l:first-child, .nb4 table.top th.l:first-child {{ width:43%; }}
+    .nb4 table.zt td.l:first-child, .nb4 table.zt th.l:first-child {{ width:22%; }}
+    .nb4 table.zt td.l:nth-child(2), .nb4 table.zt th.l:nth-child(2) {{ width:40%; }}
     table.top th {{ background:{NAV}; color:#fff; font-size:6.9px; text-transform:uppercase; padding:2px 4px; text-align:right; }}
     table.top th.l, table.top td.l {{ text-align:left; }}
     table.top td {{ padding:1.9px 4px; text-align:right; border-bottom:0.4px solid {LINE}; white-space:nowrap; overflow:hidden; }}
@@ -807,7 +818,8 @@ def build():
     .bn-t.navy {{ background:{NAV}; color:#fff; }}
     .bn-t.gold {{ background:{GOLD_MID}; color:#131A25; }}
     .bn-t.light {{ background:{NAV_LT}; color:{NAV}; }}
-    .bn-t.pair b {{ font-size:23px; white-space:nowrap; }}   /* two figures in one tile */
+    .bn-t.pair b {{ font-size:19px; white-space:nowrap; }}   /* two figures in one tile */
+    .bn-t b small {{ font-size:0.45em; font-weight:600; opacity:.85; letter-spacing:0; }}
     .bn-t.light span {{ color:{INK}; }}
     ul.math {{ list-style:none; margin:4px 0 0; padding:0; font-size:9px; }}
     ul.math li {{ display:flex; justify-content:space-between; padding:2.5px 0; margin:0; border-bottom:0.5px solid {LINE}; }}
@@ -1027,7 +1039,7 @@ def build():
         return UP if ratio(r) and ratio(r)>1 else MUTED
     short=lambda r: html.escape(r['address'].split(',')[0])
     def sales_rows(rs):
-        return "".join(f"<tr><td class='l'>{i+1}. {short(r)}</td><td class='b'>{M(r['sellingPrice'])}</td>"
+        return "".join(f"<tr><td class='l' data-sale='{html.escape(str(r.get('id','')))}'>{i+1}. {short(r)}</td><td class='b'>{M(r['sellingPrice'])}</td>"
                        f"<td style='color:{polc(r)};font-weight:700'>{pol(r)}</td></tr>" for i,r in enumerate(rs))
     # (b) neighborhoods by SFH median, with the Condo/TIC/Other median beside it
     ranked=sorted([(a,stt) for a,stt in byA[SF].items() if stt["y1"]["n"]>=5 and stt["y1"]["price"]],key=lambda t:-t[1]["y1"]["price"])[:10]
@@ -1054,8 +1066,9 @@ def build():
     bya=_c.defaultdict(list)
     for r in Y1:
         if r.get("nb") and r.get("sqft"): bya[r["nb"]].append(r["sellingPrice"]/r["sqft"])
-    prank=sorted([(a,statistics.median(v),len(v)) for a,v in bya.items() if len(v)>=15],key=lambda t:-t[1])[:10]
-    pr="".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}</td><td class='b'>${v:,.0f}</td><td>{n}</td></tr>" for i,(a,v,n) in enumerate(prank))
+    pall=sorted([(a,statistics.median(v),len(v)) for a,v in bya.items() if len(v)>=15],key=lambda t:-t[1])
+    prow=lambda rk: "".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}</td><td class='b'>${v:,.0f}</td><td>{n}</td></tr>" for i,(a,v,n) in enumerate(rk))
+    pr=prow(pall[:10]); plo=prow(sorted(pall,key=lambda t:t[1])[:10])
     # (g)(h) biggest overbids by sale-to-list. A list price under $300K or a
     # ratio over 3x is a data error (a stale or placeholder list price), not a bid.
     okbid=lambda r: ratio(r) and r["listPrice"]>=300_000 and ratio(r)<=3
@@ -1082,9 +1095,11 @@ def build():
       <h2>Top 10 - Condo/TIC/Other</h2>
       <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(tco)}</table></div>""")
     o.append(f"""<div class='col'><h2>Top 10 - Zip Code</h2>
-      <table class='top'>{TH("<ZIP","<Area","Median","Sales")}{zr}</table>
+      <table class='top zt'>{TH("<ZIP","<Area","Median","Sales")}{zr}</table>
       <h2>Top 10 - $/sf</h2>
-      <table class='top'>{TH("<Neighborhood","Median $/sf","Sales")}{pr}</table></div>""")
+      <table class='top'>{TH("<Neighborhood","Median $/sf","Sales")}{pr}</table>
+      <h2>Lowest 10 - $/sf</h2>
+      <table class='top'>{TH("<Neighborhood","Median $/sf","Sales")}{plo}</table></div>""")
     o.append(f"""<div class='col'><h2>Top 10 - Overbids (SFH)</h2>
       <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(osfh)}</table>
       <h2>Top 10 - Overbids - Condo/TIC/Other</h2>
@@ -1107,8 +1122,8 @@ def build():
       +T_("light wide", bn['off'], "properties sold off-market", f"That is {bn['offpct']} of total {bn['n']} sales.")
       +T_("light", bn['topday'], f"Most frequent Close Day, {bn['toppct']} of total")
       +T_("light", bn['week'], "sold within a week")
-      +T_("navy wide", bn['bid150'], "homes sold for 150% of list or more", f"{bn['bid130']} went for 130%+")
-      +T_("light wide", bn['per_bed'], "the price of one bedroom", "median SFH price ÷ its bedrooms")
+      +T_("navy wide", f"{bn['bid150']}<small> of {bn['bidn']} ({bn['bidpct']})</small>", "homes sold for 150% of list or more", f"{bn['bid130']} went for 130%+")
+      +T_("light wide", bn['steep'], "properties on a steep incline (15%+)", f"{bn['steeppct']} of {bn['slopen']} sales · ground slope at the address, USGS 10 m elevation")
       +T_("gold", bn['zip'], "highest volume ZIP", f"{bn['zipv']} · {bn['zhoods']}")
       +T_("light", bn['under'], "sold below asking")
       +T_("light", bn['tenm'], "sales of $10M or more")

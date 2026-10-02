@@ -45,7 +45,12 @@
 .sheetA .nb4 { gap:9px; }
 .sheetA .nb4 table.top { font-size:7.9px; table-layout:auto; }
 .sheetA .nb4 h2 { font-size:10.5px; }
-.sheetA .nb4 table.top td.l { max-width:118px; text-overflow:ellipsis; }
+.sheetA .nb4 .col { min-width:0; }
+.sheetA .nb4 table.top { table-layout:fixed; }
+.sheetA .nb4 table.top td, .sheetA .nb4 table.top th { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.sheetA .nb4 table.top td.l:first-child, .sheetA .nb4 table.top th.l:first-child { width:43%; }
+.sheetA .nb4 table.zt td.l:first-child, .sheetA .nb4 table.zt th.l:first-child { width:22%; }
+.sheetA .nb4 table.zt td.l:nth-child(2), .sheetA .nb4 table.zt th.l:nth-child(2) { width:40%; }
 .sheetA table.top th { background:#203C5F; color:#fff; font-size:6.9px; text-transform:uppercase; padding:2px 4px; text-align:right; }
 .sheetA table.top th.l, .sheetA table.top td.l { text-align:left; }
 .sheetA table.top td { padding:1.9px 4px; text-align:right; border-bottom:0.4px solid #DCDDDE; white-space:nowrap; overflow:hidden; }
@@ -91,9 +96,10 @@
 .sheetA .bn-t.navy { background:#203C5F; color:#fff; }
 .sheetA .bn-t.gold { background:#E9BC3F; color:#131A25; }
 .sheetA .bn-t.light { background:#E4EEF0; color:#203C5F; }
-.sheetA .bn-t.pair b { font-size:23px; white-space:nowrap; }
+.sheetA .bn-t.pair b { font-size:19px; white-space:nowrap; }
 .sheetA /* two figures in one tile */
-    .bn-t.light span { color:#131A25; }
+    .bn-t b small { font-size:0.45em; font-weight:600; opacity:.85; letter-spacing:0; }
+.sheetA .bn-t.light span { color:#131A25; }
 .sheetA ul.math { list-style:none; margin:4px 0 0; padding:0; font-size:9px; }
 .sheetA ul.math li { display:flex; justify-content:space-between; padding:2.5px 0; margin:0; border-bottom:0.5px solid #DCDDDE; }
 .sheetA ul.math li::before { content:none !important; display:none !important; }
