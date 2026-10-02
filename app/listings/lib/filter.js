@@ -71,9 +71,13 @@ export function toggleGroup(set, members, universe) {
 }
 
 // Default filter: both sold statuses / all types (empty Set = no restriction
-// within the sold-only universe), January of the current year through the end
-// of the current month (≈ latest data feed).
-export function defaultFilter() {
+// within the sold-only universe), January through the stats cutoff — the
+// listings file's metadata.statsThrough (end of the last full month) when it
+// is known, else the end of the current month.
+export function defaultFilter(through) {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(through || "")) {
+    return { ...defaultFilter(), closedFrom: `${through.slice(0, 4)}-01-01`, closedTo: through };
+  }
   const d = new Date();
   const y = d.getFullYear();
   const mo = d.getMonth() + 1;

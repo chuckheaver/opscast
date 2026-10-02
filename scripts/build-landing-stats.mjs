@@ -122,7 +122,7 @@ const out = {
   dataThrough: built,
   year,
   // Every closed sale in the database, all years.
-  salesTracked: (geo.features || []).length,
+  salesTracked: (geo.features || []).filter(f => upTo(f.properties?.sellingDate)).length,
   // This year's closings, which is what the map shows.
   salesThisYear: sales.length,
   neighborhoods: Object.keys(parcels).length,

@@ -7,11 +7,25 @@ const DATA_URL = "/data/sf-listings.geojson";
 
 let geoPromise = null;
 
+// Every figure on the site runs through the same date: the end of the last
+// full month (metadata.statsThrough, e.g. 2026-09-30). Sales that closed
+// after it wait for next month's numbers, so map counts, the Homes stats and
+// the market report always agree.
+export function capToStatsThrough(g) {
+  const through = g?.metadata?.statsThrough;
+  if (!through || !g.features) return g;
+  return { ...g, features: g.features.filter(f => {
+    const d = f.properties?.sellingDate;
+    return !d || String(d).slice(0, 10) <= through;
+  }) };
+}
+
 // Resolve to the raw FeatureCollection (point geometry + properties).
 export function loadListingsGeo() {
   if (!geoPromise) {
     geoPromise = fetch(DATA_URL)
       .then(r => (r.ok ? r.json() : { type: "FeatureCollection", features: [] }))
+      .then(capToStatsThrough)
       .catch(() => ({ type: "FeatureCollection", features: [] }));
   }
   return geoPromise;

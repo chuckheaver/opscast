@@ -609,7 +609,13 @@ export default function FogApp() {
   useEffect(() => {
     if (!activityWanted || listingsGeo) return;
     let cancelled = false;
-    loadListingsGeo().then(g => { if (!cancelled) setListingsGeo(g); });
+    loadListingsGeo().then(g => {
+      if (cancelled) return;
+      setListingsGeo(g);
+      // Default date range ends at the stats cutoff (Sep 30), not "this month".
+      const through = g?.metadata?.statsThrough;
+      if (through) setHomesFilter(f => (f.closedTo === defaultFilter().closedTo ? { ...f, ...defaultFilter(through), statuses: f.statuses, subtypes: f.subtypes, fogNeighborhood: f.fogNeighborhood } : f));
+    });
     return () => { cancelled = true; };
   }, [activityWanted, listingsGeo]);
 
@@ -671,12 +677,12 @@ export default function FogApp() {
   // that neighborhood + segment and open the Stats sheet (the address grid).
   const SEG_TYPES = { sfh: ["Single Family Residence"], condo: ["Condominium", "Tenancy in Common"] };
   const showNeighborhoodProperties = useCallback((nbhd, seg) => {
-    setHomesFilter({ ...defaultFilter(), fogNeighborhood: nbhd, subtypes: new Set(SEG_TYPES[seg] || []) });
+    setHomesFilter({ ...defaultFilter(listingsGeo?.metadata?.statsThrough), fogNeighborhood: nbhd, subtypes: new Set(SEG_TYPES[seg] || []) });
     setActivityWanted(true);
     setOpenHood(null);
     setStatsOpen(true);
     setStatsExpanded(true);
-  }, []);
+  }, [listingsGeo]);
 
   // Neighborhood pop-up "Show … layer" toggles: flip that overlay on/off in
   // place — the pop-up stays open (like the Details lists), no navigation.

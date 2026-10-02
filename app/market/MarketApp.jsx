@@ -13,6 +13,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { computeStats } from "./../listings/lib/stats";
 
+import { capToStatsThrough } from "../listings/lib/load";
 const DATA_URL = "/data/sf-listings.geojson";
 
 const SEGMENTS = [
@@ -58,7 +59,7 @@ export default function MarketApp() {
   useEffect(() => {
     fetch(DATA_URL)
       .then(r => { if (!r.ok) throw new Error(`Failed to load data (${r.status})`); return r.json(); })
-      .then(d => setFeatures(d.features || []))
+      .then(d => setFeatures(capToStatsThrough(d).features || []))
       .catch(e => setErr(e.message));
   }, []);
 
