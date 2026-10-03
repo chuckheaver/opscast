@@ -715,7 +715,9 @@ export default function FogApp() {
     if (!activityWanted) return null;
     return {
       type: "FeatureCollection",
-      features: homesMatches.map(f => ({
+      // A sale with no real location (noLocation: the MLS placeholder pin and
+      // no address match) still counts in the stats but isn't drawn.
+      features: homesMatches.filter(f => !f.properties.noLocation).map(f => ({
         type: "Feature",
         geometry: f.geometry,
         properties: { ...f.properties, actKind: isSoldStatus(f.properties.status) ? "sold" : "active" },

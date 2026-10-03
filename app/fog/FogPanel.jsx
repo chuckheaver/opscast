@@ -98,7 +98,8 @@ export default function FogPanel({
           point={picked.point}
           address={picked.address}
           neighborhood={neighborhoodName ? (getNeighborhood(neighborhoodName)?.title || neighborhoodName) : null}
-          district={realtorFeat?.properties?.district || null}
+          district={realtorFeat ? `${realtorFeat.properties.nid ? realtorFeat.properties.nid + " · " : ""}${realtorFeat.properties.district}` : null}
+          supDistrict={supFeat?.properties?.district ?? null}
           zip={zipCode}
           fogHrs={fogHrs}
           elevationFt={elevationFt}

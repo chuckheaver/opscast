@@ -26,7 +26,7 @@ const routesShort = r => {
 };
 
 export default function QuickPeek({
-  point, address, neighborhood, district, zip, fogHrs, elevationFt,
+  point, address, neighborhood, district, supDistrict, zip, fogHrs, elevationFt,
   seismicYN, tsunamiYN, onMore, onClose,
 }) {
   const [muni, setMuni] = useState(undefined);
@@ -61,7 +61,8 @@ export default function QuickPeek({
   const rows = [
     ["Street Address", street],
     ["Neighborhood", neighborhood || "—"],
-    ["District", district || "—"],
+    ["SFAR District", district || "—"],
+    ["Supervisor District", supDistrict != null ? `District ${supDistrict}` : "—"],
     ["Zip Code", zip || "—"],
     ["Microclimate Zone", zone ? <span className="qp-zone" style={{ "--z": ZONE_COLOR[zone] }}>{zone}</span> : "—"],
     ["Elevation / Incline", !elev ? wait

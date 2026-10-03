@@ -1356,11 +1356,13 @@ export default function FogMap({
           ...(sold ? [["Closed", fmtMDY(p.sellingDate)]] : []),
           ["Days on market", p.dom != null && p.dom !== "" ? p.dom : ""],
           ["Neighborhood", p.fogNeighborhood || p.neighborhood],
-          ["District", p.areaDesc],
-          ["RE district", p.district],
+          // Both district systems: SFAR's number + letter (e.g. 1c) and the
+          // city's Supervisor district — taken from where the sale sits.
+          ["SFAR District", p.realtorNid ? `${p.realtorNid} · ${p.district || ""}` : p.district],
+          ["Supervisor District", p.supDistrict != null ? `District ${p.supDistrict}` : null],
           ["Zip", p.zip],
           ["Fog exposure", p.fogHours != null ? `${p.fogHours} hrs/day` : ""],
-          ["Map position", p.geoVia ? `nearest address (${p.geoVia})` : ""],
+          ["Map position", p.geoSource === "address" ? "placed at its street address (MLS pin was off)" : p.geoVia ? `nearest address (${p.geoVia})` : ""],
           ["APN", p.apn],
           ["MLS #", p.id],
           ["Listing agent", p.agent],

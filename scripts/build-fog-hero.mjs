@@ -63,6 +63,7 @@ for (const f of geo.features || []) {
   const p = f.properties || {};
   if (!String(p.sellingDate || "").startsWith(year) || String(p.sellingDate).slice(0, 10) > THROUGH) continue;
   if (!(Number(p.sellingPrice) > 0)) continue;
+  if (p.noLocation) continue;                   // no real location — not drawn
   const c = f.geometry?.coordinates;
   if (!c) continue;
   dots.push(`<circle cx="${X(c[0]).toFixed(1)}" cy="${Y(c[1]).toFixed(1)}" r="2.1"/>`);

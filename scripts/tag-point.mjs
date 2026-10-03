@@ -71,6 +71,8 @@ export function tag(point) {
     neighborhood: realtor?.properties?.nbrhood ?? null,
     district: realtor?.properties?.district ?? null,
     districtNum: realtor?.properties?.district_num ?? null,
+    // The SFAR district code: number + letter, e.g. "1c" Jordan Park / Laurel Heights.
+    realtorNid: realtor?.properties?.nid ?? null,
   };
 }
 

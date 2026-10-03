@@ -148,6 +148,7 @@ const pts = [];
 for (const f of geo.features || []) {
   const p = f.properties || {};
   if (!(Number(p.sellingPrice) > 0) || !String(p.sellingDate || "").startsWith(year) || !upTo(p.sellingDate)) continue;
+  if (p.noLocation) continue;                   // no real location — not drawn
   const [lng, lat] = f.geometry?.coordinates || [];
   if (Number.isFinite(lng) && Number.isFinite(lat)) pts.push([+lng.toFixed(5), +lat.toFixed(5)]);
 }

@@ -264,6 +264,7 @@ def sales_map(W0,S0,E0,N0,w=352,h=326,window=("2026-01-01","2026-08-31")):
     for f in lis:
         d=f["properties"].get("sellingDate") or ""
         if not (window[0]<=d<=window[1]): continue
+        if f["properties"].get("noLocation"): continue      # no real location — not drawn
         x,y=f["geometry"]["coordinates"]
         o.append(f"<circle cx='{X(x):.1f}' cy='{Y(y):.1f}' r='1.45' fill='#203C5F' fill-opacity='0.85'/>"); n+=1
     return "".join(o)+"</svg>", n

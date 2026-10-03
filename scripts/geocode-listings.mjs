@@ -312,6 +312,10 @@ function seedCacheFromPublished(cache) {
     // so the seed matches the listing when it is parsed again.
     const key = addrKey({ street, city: "San Francisco", state: "CA", zip: p.zipMls ?? p.zip ?? "" });
     if (cache[key] || OVERRIDES[key]) continue;
+    // A point validate-listings.mjs placed from the street address is not a
+    // geocode: never seed it, so every run starts from the file's own values
+    // and the address check decides again.
+    if (p.geoSource === "address") continue;
     // A published point that was itself only estimated stays in the
     // estimate tier so a reachable geocoder still gets to replace it.
     cache[key] = p.geoSource === "interpolated"

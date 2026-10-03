@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T15:41:47.073Z",
+  "generatedAt": "2026-10-03T17:17:28.506Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -63,13 +63,13 @@
       "zone": "Fog"
     },
     "Bernal Heights": {
-      "n": 97,
-      "sfhMedian": 1975000,
-      "sfhN": 73,
+      "n": 95,
+      "sfhMedian": 2000000,
+      "sfhN": 71,
       "condoMedian": 1250000,
       "condoN": 23,
       "ppsf": 1194.6902654867256,
-      "dom": 13,
+      "dom": 12,
       "fogHours": 9,
       "zone": "Fog"
     },
@@ -107,13 +107,13 @@
       "zone": "Sun"
     },
     "Cathedral Hill": {
-      "n": 62,
+      "n": 63,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 665000,
-      "condoN": 59,
-      "ppsf": 755.1319648093842,
-      "dom": 22.5,
+      "condoMedian": 660000,
+      "condoN": 60,
+      "ppsf": 749.9064079366069,
+      "dom": 24,
       "fogHours": 7.5,
       "zone": "Sun"
     },
@@ -206,12 +206,12 @@
       "zone": "Sun"
     },
     "Crocker Amazon": {
-      "n": 30,
+      "n": 29,
       "sfhMedian": 1288063,
       "sfhN": 29,
-      "condoMedian": 605000,
-      "condoN": 1,
-      "ppsf": 858.8917641561989,
+      "condoMedian": null,
+      "condoN": 0,
+      "ppsf": 866.2551440329219,
       "dom": 12,
       "fogHours": 11,
       "zone": "Persistent Fog"
@@ -382,24 +382,24 @@
       "zone": "Sun"
     },
     "Holly Park": {
-      "n": 17,
-      "sfhMedian": 1852500,
-      "sfhN": 14,
+      "n": 18,
+      "sfhMedian": 1850000,
+      "sfhN": 15,
       "condoMedian": 1123500,
       "condoN": 2,
-      "ppsf": 1167.0631460954041,
+      "ppsf": 1157.142857142857,
       "dom": 12,
       "fogHours": 9.5,
       "zone": "Fog"
     },
     "Hunters Point": {
-      "n": 27,
+      "n": 26,
       "sfhMedian": 982500,
       "sfhN": 4,
       "condoMedian": 598000,
       "condoN": 18,
-      "ppsf": 598.4690327070285,
-      "dom": 49,
+      "ppsf": 611.9900355685593,
+      "dom": 58.5,
       "fogHours": 9,
       "zone": "Fog"
     },
@@ -437,13 +437,13 @@
       "zone": "Persistent Fog"
     },
     "Inner Richmond": {
-      "n": 77,
+      "n": 76,
       "sfhMedian": 3212500,
       "sfhN": 38,
-      "condoMedian": 1515000,
-      "condoN": 39,
-      "ppsf": 1261.2895959076095,
-      "dom": 10,
+      "condoMedian": 1507500,
+      "condoN": 38,
+      "ppsf": 1268.660696517413,
+      "dom": 10.5,
       "fogHours": 9,
       "zone": "Fog"
     },
@@ -636,23 +636,23 @@
     },
     "Mission": {
       "n": 128,
-      "sfhMedian": 2360000,
-      "sfhN": 31,
-      "condoMedian": 989000,
-      "condoN": 97,
-      "ppsf": 994.2240772932489,
-      "dom": 19.5,
+      "sfhMedian": 2305000,
+      "sfhN": 32,
+      "condoMedian": 989500,
+      "condoN": 96,
+      "ppsf": 1002.6238043096503,
+      "dom": 19,
       "fogHours": 7.5,
       "zone": "Sun"
     },
     "Mission Bay": {
-      "n": 73,
+      "n": 74,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 1299000,
-      "condoN": 73,
-      "ppsf": 1157.489455824369,
-      "dom": 13,
+      "condoMedian": 1299500,
+      "condoN": 74,
+      "ppsf": 1174.6280344557556,
+      "dom": 13.5,
       "fogHours": 7.5,
       "zone": "Sun"
     },
@@ -701,12 +701,12 @@
       "zone": "Persistent Fog"
     },
     "Nob Hill": {
-      "n": 84,
+      "n": 85,
       "sfhMedian": 1700000,
       "sfhN": 5,
       "condoMedian": 1440000,
       "condoN": 62,
-      "ppsf": 1084.2456140350878,
+      "ppsf": 1096.4912280701753,
       "dom": 33,
       "fogHours": 7,
       "zone": "Sun"
@@ -723,13 +723,13 @@
       "zone": "Transition"
     },
     "North Beach": {
-      "n": 26,
+      "n": 24,
       "sfhMedian": 3148500,
       "sfhN": 2,
-      "condoMedian": 1130000,
-      "condoN": 23,
-      "ppsf": 1118.1372549019607,
-      "dom": 11.5,
+      "condoMedian": 1052500,
+      "condoN": 22,
+      "ppsf": 1102.9411764705883,
+      "dom": 9,
       "fogHours": 6.5,
       "zone": "Sun"
     },
@@ -767,12 +767,12 @@
       "zone": "Fog"
     },
     "Outer Sunset": {
-      "n": 204,
-      "sfhMedian": 1870000,
-      "sfhN": 193,
+      "n": 203,
+      "sfhMedian": 1865000,
+      "sfhN": 192,
       "condoMedian": 1015000,
       "condoN": 9,
-      "ppsf": 1183.5592451886246,
+      "ppsf": 1185.1851851851852,
       "dom": 12,
       "fogHours": 9,
       "zone": "Fog"
@@ -811,12 +811,12 @@
       "zone": "Persistent Fog"
     },
     "Parkside": {
-      "n": 77,
-      "sfhMedian": 1910000,
-      "sfhN": 75,
+      "n": 78,
+      "sfhMedian": 1920000,
+      "sfhN": 76,
       "condoMedian": 780684.5,
       "condoN": 2,
-      "ppsf": 1098.62711623275,
+      "ppsf": 1096.2441314553992,
       "dom": 12,
       "fogHours": 10.5,
       "zone": "Fog"
@@ -891,7 +891,7 @@
       "n": 9,
       "sfhMedian": 3750000,
       "sfhN": 5,
-      "condoMedian": 1528560,
+      "condoMedian": 1933560,
       "condoN": 4,
       "ppsf": 1286.5278080943326,
       "dom": 10,
@@ -965,23 +965,23 @@
       "zone": "Fog"
     },
     "South Beach": {
-      "n": 52,
+      "n": 53,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 1370000,
-      "condoN": 52,
-      "ppsf": 1105.521472392638,
-      "dom": 24.5,
+      "condoMedian": 1365000,
+      "condoN": 53,
+      "ppsf": 1098.8600269764609,
+      "dom": 24,
       "fogHours": 7,
       "zone": "Sun"
     },
     "South of Market": {
-      "n": 219,
+      "n": 218,
       "sfhMedian": 2226662.5,
       "sfhN": 2,
-      "condoMedian": 895000,
-      "condoN": 217,
-      "ppsf": 912.2533266459855,
+      "condoMedian": 897000,
+      "condoN": 216,
+      "ppsf": 913.937547600914,
       "dom": 34,
       "fogHours": 7,
       "zone": "Sun"
@@ -1064,15 +1064,15 @@
       "zone": "Sun"
     },
     "Treasure Island": {
-      "n": 1,
+      "n": 0,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 499000,
-      "condoN": 1,
-      "ppsf": 737.0753323485967,
-      "dom": 74,
-      "fogHours": 6,
-      "zone": "Sun"
+      "condoMedian": null,
+      "condoN": 0,
+      "ppsf": null,
+      "dom": null,
+      "fogHours": null,
+      "zone": null
     },
     "University Mound": {
       "n": 21,
@@ -1119,13 +1119,13 @@
       "zone": "Persistent Fog"
     },
     "Western Addition": {
-      "n": 33,
+      "n": 34,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 1250000,
-      "condoN": 31,
+      "condoMedian": 1277500,
+      "condoN": 32,
       "ppsf": 1021.021021021021,
-      "dom": 16,
+      "dom": 15,
       "fogHours": 8,
       "zone": "Sun"
     },

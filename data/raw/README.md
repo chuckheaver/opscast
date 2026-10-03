@@ -78,18 +78,24 @@ geocoder reachable replaces them with real positions automatically.
 ## Validation (runs automatically)
 
 `geocode-listings.mjs` finishes by running `scripts/validate-listings.mjs`,
-which checks every agent-entered location field against where the sale sits
-and corrects typos:
+which places every sale and takes its location fields from the map layers.
+The APN is not used.
 
-- **Pin vs APN** — the APN's city block should be under the pin. When it isn't
-  and the APN's parcel sits in the ZIP the agent typed, the address/APN/ZIP
-  agree and the pin moves to the APN parcel (`geoSource: "apn"`, old pin kept
-  as `pinMls`). If nothing agrees the sale is flagged `geoCheck: "apn-far"`.
-- **ZIP** — compared with the ZIPs typed for the other sales on the same block;
-  3+ neighbors agreeing 80%+ override a different ZIP, and non-SF ZIPs are
-  always replaced (MLS value kept as `zipMls`).
-- **SF District** — from the SFAR district at the pin (`areaDescMls` keeps
-  the typed value). Neighborhood was already taken from the pin.
+1. **Street address first.** The address is located from our own records:
+   the same street number in another sale, or between the nearest house
+   numbers on that street (same side, within two blocks). If that lands
+   within 150 m of the file's coordinates (250 m when interpolated), the
+   coordinates are confirmed. If it is farther, or the file's coordinates are
+   the MLS placeholder (one spot used for sales on many streets), the sale
+   moves to its address (`geoSource: "address"`, file point kept as `pinMls`).
+2. **File coordinates second**, when the address matches nothing.
+3. **Districts from the location:** SFAR district (number + letter, e.g. `1c`,
+   in `realtorNid`; `district`, `districtNum`, `areaDesc`) and Supervisor
+   District (`supDistrict`). ZIP is checked against the other sales on the
+   same block (`zipMls` keeps the typed value).
+4. **Anything unknown** goes to `data/location-exceptions.csv`. A sale with
+   the MLS placeholder and no address match gets no neighborhood or district
+   and is kept off the map (`noLocation`) until it has a real location.
 
-Every change and flag is listed in `data/mls-corrections.csv` for review.
+Every change, with the MLS value, is listed in `data/mls-corrections.csv`.
 Per-sale incline (`data/sale-incline.json`) is rebuilt right after.

@@ -1,32 +1,36 @@
-// Check every sale's agent-entered location fields against where the sale
-// actually sits, and correct the ones a person typed wrong.
+// Put every sale where its street address says it is, then take its
+// location-based fields from the map layers at that spot.
 //
-// The pin (MLS coordinates, or the geocoded street address when the export has
-// none) is the authority for anything that depends on location:
-//   • ZIP        — checked against the ZIPs agents entered for the other sales
-//                  on the same city block (blocks don't split ZIPs). With 3+
-//                  neighbors agreeing 80%+, a different ZIP is a typo and takes
-//                  theirs; a ZIP that isn't a real SF ZIP (e.g. "9411") is always
-//                  replaced (neighbors, else the ZIP map). The MLS value is kept
-//                  as zipMls. The 2010 ZIP map alone is never trusted over the
-//                  agent — it predates Mission Bay and its lines are coarse.
-//   • District   — areaDesc "SF District N" from the SFAR district the pin is
-//                  in; the MLS value is kept as areaDescMls.
-//   • Neighborhood — already the polygon at the pin (geocode-listings.mjs).
+// LOCATION — the street address first, the file's coordinates second. The
+// APN is not used.
+//   • The address is located from our own records: the same street number on
+//     the same street in another sale, or failing that, interpolated between
+//     the nearest house numbers on that street (same side, within two
+//     blocks). Only trustworthy points are used to build that index — never
+//     the MLS's placeholder coordinate (one spot shared by sales on many
+//     different streets) or our own neighborhood stand-ins and estimates.
+//   • Address located and within 150 m of the file's coordinates (250 m when
+//     interpolated): the coordinates stand — the address confirms them.
+//   • Address located but farther away, or the file's coordinates are a
+//     placeholder: the sale moves to its address (geoSource "address"; the
+//     file's coordinates kept as pinMls).
+//   • Address not found: the file's coordinates are used as they are.
+//   • Neither: the location is unknown — listed on the exception report.
 //
-// The pin itself is cross-checked against the MLS parcel number (APN): the
-// city block in the APN should be the block under the pin. When they disagree
-// by more than a block, the typed fields decide:
-//   • the APN's parcel sits in the ZIP the agent entered → the address, APN
-//     and ZIP agree and the pin is the error: the pin moves to the APN's
-//     parcel and is re-tagged (geoSource "apn"; the old one kept as pinMls);
-//   • otherwise nothing agrees → flagged (geoCheck "apn-far") for a human.
-// ZIP and district are only corrected from pins that check out.
+// FIELDS FROM THE LOCATION
+//   • SFAR District (district, districtNum, areaDesc "SF District N") and the
+//     SFAR neighborhood, fog-map neighborhood and fog hours (tag-point.mjs).
+//   • Supervisor District (supDistrict) from the city's supervisor map.
+//   • ZIP — checked against the ZIPs typed for the other sales on the same
+//     city block (blocks don't split ZIPs): 3+ neighbors agreeing 80%+
+//     override a different ZIP; a ZIP that isn't a real SF ZIP is always
+//     replaced. The MLS value is kept as zipMls.
 //
-// Every change and flag is written to data/mls-corrections.csv.
+// Writes data/mls-corrections.csv (every change, with the MLS value) and
+// data/location-exceptions.csv (anything that could not be determined).
 // Run after geocode-listings.mjs:  node scripts/validate-listings.mjs
 
-import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { VectorTile } from "@mapbox/vector-tile";
 import Pbf from "pbf";
 import { findNeighborhoodForPoint } from "../app/fog/lib/spatial.js";
@@ -35,18 +39,114 @@ import { tag } from "./tag-point.mjs";
 const LISTINGS = "public/data/sf-listings.geojson";
 const geo = JSON.parse(readFileSync(LISTINGS, "utf8"));
 const zips = JSON.parse(readFileSync("public/data/sf-zip-codes.geojson", "utf8"));
+const sups = JSON.parse(readFileSync("public/data/sf-supervisor-districts.geojson", "utf8"));
 
-// ── Parcels: blklot → where it is, and block lookups ──────────────────────
-// Decoded from the map's own z16 parcel tiles.
+const meters = (a, b) => {
+  const la = ((a[1] + b[1]) / 2) * Math.PI / 180;
+  return Math.hypot((a[0] - b[0]) * 111_320 * Math.cos(la), (a[1] - b[1]) * 110_540);
+};
+const round6 = pt => pt.map(v => +(+v).toFixed(6));
+
+// ── Start from the file's own values (undo any earlier correction) ─────────
+for (const f of geo.features) {
+  const p = f.properties;
+  if (p.pinMls) {
+    f.geometry.coordinates = p.pinMls; p.lng = p.pinMls[0]; p.lat = p.pinMls[1];
+    p.geoSource = p.geoSourceMls || "export";
+  }
+  delete p.pinMls; delete p.geoSourceMls; delete p.geoCheck; delete p.addrMatch;
+  if (p.zipMls !== undefined) { p.zip = p.zipMls; delete p.zipMls; }
+  if (p.areaDescMls !== undefined) { p.areaDesc = p.areaDescMls; delete p.areaDescMls; }
+}
+
+// ── Addresses ──────────────────────────────────────────────────────────────
+const SUFFIX = {
+  street: "st", st: "st", avenue: "ave", ave: "ave", av: "ave", boulevard: "blvd", blvd: "blvd",
+  drive: "dr", dr: "dr", road: "rd", rd: "rd", court: "ct", ct: "ct", place: "pl", pl: "pl",
+  lane: "ln", ln: "ln", terrace: "ter", ter: "ter", way: "way", circle: "cir", cir: "cir",
+  highway: "hwy", hwy: "hwy", alley: "aly", aly: "aly", plaza: "plz", plz: "plz",
+};
+function parseAddress(address) {
+  const line = String(address || "").split(",")[0].replace(/#.*$/, "").replace(/\./g, " ").replace(/\s+/g, " ").trim().toLowerCase();
+  const m = /^(\d+)(?:[a-z])?(?:\s*-\s*\d+[a-z]?)?\s+(.+)$/.exec(line);
+  if (!m) return null;
+  const words = m[2].split(" ").filter(Boolean).map(w => SUFFIX[w] || w);
+  // "Great Highway Hwy" → "great hwy"; drop a doubled suffix.
+  while (words.length > 1 && SUFFIX[words[words.length - 2]] && words[words.length - 1] === SUFFIX[words[words.length - 2]]) words.pop();
+  return { num: +m[1], street: words.join(" ") };
+}
+
+// Points we trust enough to locate other addresses from.
+const coordKey = pt => pt.map(v => (+v).toFixed(5)).join(",");
+const streetsAt = new Map();
+for (const f of geo.features) {
+  // Our own neighborhood stand-ins borrow a real sale's point; they must not
+  // make that sale's genuine coordinates look like a shared placeholder.
+  if (f.properties.geoSource === "neighborhood") continue;
+  const a = parseAddress(f.properties.address);
+  if (!a) continue;
+  const k = coordKey(f.geometry.coordinates);
+  (streetsAt.get(k) || streetsAt.set(k, new Set()).get(k)).add(a.street);
+}
+const isPlaceholder = pt => (streetsAt.get(coordKey(pt))?.size || 0) >= 3;   // one spot, 3+ different streets
+const UNTRUSTED = new Set(["neighborhood", "interpolated"]);
+const trusted = f => !UNTRUSTED.has(f.properties.geoSource) && !isPlaceholder(f.geometry.coordinates);
+
+const exact = new Map();     // "num|street" → [{id, pt}]
+const byStreet = new Map();  // street → [{num, pt}]
+for (const f of geo.features) {
+  if (!trusted(f)) continue;
+  const a = parseAddress(f.properties.address);
+  if (!a) continue;
+  const pt = f.geometry.coordinates;
+  (exact.get(`${a.num}|${a.street}`) || exact.set(`${a.num}|${a.street}`, []).get(`${a.num}|${a.street}`)).push({ id: f.properties.id, pt });
+  (byStreet.get(a.street) || byStreet.set(a.street, []).get(a.street)).push({ num: a.num, pt });
+}
+for (const list of byStreet.values()) list.sort((x, y) => x.num - y.num);
+const median = pts => {
+  const xs = pts.map(p => p[0]).sort((a, b) => a - b), ys = pts.map(p => p[1]).sort((a, b) => a - b);
+  return [xs[xs.length >> 1], ys[ys.length >> 1]];
+};
+
+// A street written without its suffix ("501 Beale") or with a direction in
+// front ("N Mission Bay Blvd") resolves to the one indexed street it names.
+const SUFFIXES = new Set(Object.values(SUFFIX));
+const stem = st => st.replace(/^(n|s|e|w) /, "").split(" ").filter(w => !SUFFIXES.has(w)).join(" ");
+const byStem = new Map();
+for (const st of byStreet.keys()) (byStem.get(stem(st)) || byStem.set(stem(st), new Set()).get(stem(st))).add(st);
+function resolveStreet(street) {
+  if (byStreet.has(street)) return street;
+  const c = byStem.get(stem(street));
+  return c && c.size === 1 ? [...c][0] : street;
+}
+
+// Where the street address is, from the other sales. → { pt, how } or null
+function locateAddress(p) {
+  const a = parseAddress(p.address);
+  if (!a) return null;
+  a.street = resolveStreet(a.street);
+  const same = (exact.get(`${a.num}|${a.street}`) || []).filter(x => x.id !== p.id);
+  if (same.length) return { pt: median(same.map(x => x.pt)), how: `same address in ${same.length} other sale${same.length > 1 ? "s" : ""}` };
+  const list = (byStreet.get(a.street) || []).filter(x => x.num % 2 === a.num % 2 && x.num !== a.num);
+  let lo = null, hi = null;
+  for (const x of list) { if (x.num < a.num) lo = x; else if (x.num > a.num && !hi) hi = x; }
+  const SPAN = 200;   // two blocks of house numbers
+  if (lo && hi && hi.num - lo.num <= 2 * SPAN && meters(lo.pt, hi.pt) <= 800) {
+    const t = (a.num - lo.num) / (hi.num - lo.num);
+    return { pt: [lo.pt[0] + t * (hi.pt[0] - lo.pt[0]), lo.pt[1] + t * (hi.pt[1] - lo.pt[1])], how: `between ${lo.num} and ${hi.num} ${a.street}`, interp: true };
+  }
+  const one = [lo, hi].filter(x => x && Math.abs(x.num - a.num) <= 40).sort((x, y) => Math.abs(x.num - a.num) - Math.abs(y.num - a.num))[0];
+  if (one) return { pt: one.pt, how: `next to ${one.num} ${a.street}`, interp: true };
+  return null;
+}
+
+// ── Parcels: which city block a point is on (for the ZIP check) ───────────
 const Z = 16, TDIR = `public/tiles/parcels/${Z}`;
 const tile2lng = (x, z) => (x / 2 ** z) * 360 - 180;
 const tile2lat = (y, z) => { const n = Math.PI - (2 * Math.PI * y) / 2 ** z; return (180 / Math.PI) * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n))); };
 const BLKLOT = /^(\d{4}[A-Z]?)(\d{3}[A-Z]?)$/;
 const blockOf = s => { const m = BLKLOT.exec(String(s || "").toUpperCase().replace(/[^0-9A-Z]/g, "")); return m ? m[1] : null; };
-
-const blockPts = new Map();          // block → [[lng,lat], ...] parcel centers
-const lotPt = new Map();             // blklot → [lng,lat] parcel center
-const tileParcels = new Map();       // "x/y" → [{ block, rings:[[lng,lat]...] }]
+const tileParcels = new Map();
 for (const x of readdirSync(TDIR)) {
   for (const f of readdirSync(`${TDIR}/${x}`)) {
     const y = f.replace(".pbf", "");
@@ -58,23 +158,11 @@ for (const x of readdirSync(TDIR)) {
       if (ft.type !== 3) continue;
       const block = blockOf(ft.properties.blklot);
       if (!block) continue;
-      const rings = ft.loadGeometry().map(r => r.map(p => [
-        tile2lng(+x + p.x / layer.extent, Z), tile2lat(+y + p.y / layer.extent, Z),
-      ]));
-      const ring = rings[0];
-      const c = ring.reduce((a, p) => [a[0] + p[0] / ring.length, a[1] + p[1] / ring.length], [0, 0]);
-      (blockPts.get(block) || blockPts.set(block, []).get(block)).push(c);
-      lotPt.set(String(ft.properties.blklot).toUpperCase(), c);
-      list.push({ block, rings });
+      list.push({ block, rings: ft.loadGeometry().map(r => r.map(q => [tile2lng(+x + q.x / layer.extent, Z), tile2lat(+y + q.y / layer.extent, Z)])) });
     }
     tileParcels.set(`${x}/${y}`, list);
   }
 }
-
-const meters = (a, b) => {
-  const la = ((a[1] + b[1]) / 2) * Math.PI / 180;
-  return Math.hypot((a[0] - b[0]) * 111_320 * Math.cos(la), (a[1] - b[1]) * 110_540);
-};
 function inRing(pt, ring) {
   let c = false;
   for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
@@ -83,109 +171,114 @@ function inRing(pt, ring) {
   }
   return c;
 }
-function blockAtPin([lng, lat]) {
+function blockAt([lng, lat]) {
   const n = 2 ** Z, r = (lat * Math.PI) / 180;
-  const x = Math.floor(((lng + 180) / 360) * n);
-  const y = Math.floor(((1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2) * n);
-  for (const p of tileParcels.get(`${x}/${y}`) || []) {
-    if (p.rings.reduce((acc, ring) => (inRing([lng, lat], ring) ? !acc : acc), false)) return p.block;
-  }
+  const key = `${Math.floor(((lng + 180) / 360) * n)}/${Math.floor(((1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2) * n)}`;
+  for (const p of tileParcels.get(key) || []) if (p.rings.reduce((acc, ring) => (inRing([lng, lat], ring) ? !acc : acc), false)) return p.block;
   return null;
 }
 
-// ── Check every sale ──────────────────────────────────────────────────────
-const log = [];
-const counts = { pinMoved: 0, zip: 0, district: 0, apnFar: 0, apnOk: 0, apnUnchecked: 0 };
-const zipAt = pt => { const z = findNeighborhoodForPoint(zips, pt); return z ? String(z.properties.zip) : null; };
-const typedZip = p => String(p.zipMls ?? p.zip ?? "");
+// ── Place every sale ──────────────────────────────────────────────────────
+const log = [], exceptions = [];
+const counts = { verified: 0, moved: 0, unverified: 0, unknown: 0, zip: 0, district: 0 };
+const typedArea = new Map(geo.features.map(f => [f, f.properties.areaDesc]));
 for (const f of geo.features) {
   const p = f.properties;
-  let pt = f.geometry?.coordinates;
-  if (!Array.isArray(pt) || p.geoSource === "neighborhood") continue;   // placeholders have no real spot
-
-  // 1. Pin vs APN.
-  const apnKey = String(p.apn || "").toUpperCase().replace(/[^0-9A-Z]/g, "");
-  const apnBlock = blockOf(p.apn);
-  let pinOk = true;
-  if (!apnBlock || !blockPts.has(apnBlock)) { counts.apnUnchecked++; delete p.geoCheck; }
-  else {
-    const near = blockAtPin(pt) === apnBlock || Math.min(...blockPts.get(apnBlock).map(c => meters(pt, c))) <= 120;
-    if (near) { counts.apnOk++; p.geoCheck = "apn"; }
+  const file = f.geometry?.coordinates;
+  const fileOk = Array.isArray(file) && p.geoSource !== "neighborhood" && !isPlaceholder(file);
+  const addr = locateAddress(p);
+  let pt = file, status;
+  if (addr && fileOk) {
+    const d = meters(addr.pt, file);
+    if (d <= (addr.interp ? 250 : 150)) { status = "verified"; p.addrMatch = "verified"; }
     else {
-      const pts = blockPts.get(apnBlock);
-      const apnLoc = lotPt.get(apnKey) || pts.reduce((a, c) => [a[0] + c[0] / pts.length, a[1] + c[1] / pts.length], [0, 0]);
-      const away = Math.round(meters(pt, apnLoc));
-      if (typedZip(p) && zipAt(apnLoc) === typedZip(p)) {
-        // Address, APN and ZIP agree; the pin is the typo. Move it and re-tag.
-        p.pinMls = p.pinMls || pt;
-        p.geoSource = "apn";
-        pt = f.geometry.coordinates = apnLoc.map(v => +v.toFixed(6));
-        p.lng = pt[0]; p.lat = pt[1];
-        Object.assign(p, tag(pt));
-        p.geoCheck = "apn"; counts.pinMoved++;
-        log.push([p.id, p.address, "Pin", `MLS pin ${away} m from parcel`, `moved to APN ${p.apn}`, "address, APN and ZIP agree; pin did not"]);
-      } else {
-        pinOk = false; counts.apnFar++; p.geoCheck = "apn-far";
-        log.push([p.id, p.address, "Pin vs APN", `APN ${p.apn} (block ${apnBlock})`, `pin ${away} m away`, "fields disagree — check the pin, APN and ZIP"]);
-      }
+      status = "moved"; pt = round6(addr.pt);
+      log.push([p.id, p.address, "Location", `file coordinates ${Math.round(d)} m from the address`, `moved to the address (${addr.how})`]);
     }
+  } else if (addr) {
+    status = "moved"; pt = round6(addr.pt);
+    log.push([p.id, p.address, "Location", p.geoSource === "neighborhood" ? "no location in the file" : "MLS placeholder coordinates", `placed at the address (${addr.how})`]);
+  } else if (fileOk) {
+    status = "unverified"; p.addrMatch = "unverified";
+  } else {
+    status = "unknown"; p.addrMatch = "unknown";
+    exceptions.push([p.id, p.address, (p.sellingDate || "").slice(0, 10), "Location unknown",
+      p.geoSource === "neighborhood" ? "no coordinates in the file and the address matches no other sale" : "MLS placeholder coordinates and the address matches no other sale",
+      p.geoSource === "neighborhood" ? "shown at a neighborhood stand-in point (neighborhood inferred from its street/ZIP); needs a real location" : "kept off the map with no neighborhood or district until it has a real location"]);
   }
-  if (!pinOk) continue;   // a suspect pin corrects nothing
+  counts[status]++;
+  if (status === "moved") {
+    p.pinMls = file; p.geoSourceMls = p.geoSource; p.geoSource = "address"; p.addrMatch = "moved";
+    f.geometry.coordinates = pt; p.lng = pt[0]; p.lat = pt[1];
+  }
 
-  // 2. ZIP — decided in a second pass, once every pin is final.
-  p._block = blockAtPin(pt);
-
-  // 3. SF district from the pin.
+  // Fields from the location. A sale sitting on the MLS placeholder with no
+  // address match has no real location: it gets no neighborhood or district
+  // (rather than the placeholder's) and stays off the map — noLocation.
+  if (status === "unknown" && p.geoSource !== "neighborhood") {
+    Object.assign(p, { fogHours: null, fogNeighborhood: null, neighborhood: null, district: null, districtNum: null, realtorNid: null, supDistrict: null, noLocation: true });
+    p._block = null;
+    continue;
+  }
+  delete p.noLocation;
+  Object.assign(p, tag(pt));
+  const sup = findNeighborhoodForPoint(sups, pt);
+  p.supDistrict = sup ? sup.properties.district : null;
   if (p.districtNum != null) {
-    const want = `SF District ${p.districtNum}`;
-    const had = p.areaDescMls ?? p.areaDesc;
+    const want = `SF District ${p.districtNum}`, had = typedArea.get(f);
     if (had !== want) {
-      if (!p.areaDescMls) { p.areaDescMls = had || null;
-        log.push([p.id, p.address, "SF District", had || "", want, "SFAR district at the pin"]); }
-      p.areaDesc = want; counts.district++;
-    } else if (p.areaDescMls) { delete p.areaDescMls; }
+      p.areaDescMls = had || null; p.areaDesc = want; counts.district++;
+      log.push([p.id, p.address, "SFAR District", had || "(blank)", `${want}${p.realtorNid ? ` (${p.realtorNid})` : ""}`]);
+    }
+  } else if (status !== "unknown") {
+    exceptions.push([p.id, p.address, (p.sellingDate || "").slice(0, 10), "SFAR District unknown", "the location is outside every SFAR district", ""]);
   }
+  if (p.supDistrict == null && status !== "unknown") {
+    exceptions.push([p.id, p.address, (p.sellingDate || "").slice(0, 10), "Supervisor District unknown", "the location is outside every supervisor district", ""]);
+  }
+  if (!p.neighborhood && status !== "unknown") {
+    exceptions.push([p.id, p.address, (p.sellingDate || "").slice(0, 10), "Neighborhood unknown", "the location is outside every neighborhood", ""]);
+  }
+  p._block = status === "unknown" ? null : blockAt(pt);
 }
 
 // ── ZIP: the block's consensus ─────────────────────────────────────────────
 const SF_ZIP = /^941\d\d$/;
+const zipAt = pt => { const z = findNeighborhoodForPoint(zips, pt); return z ? String(z.properties.zip) : null; };
 const byBlock = new Map();
 for (const f of geo.features) {
-  const p = f.properties;
-  if (!p._block || p.geoCheck === "apn-far") continue;
-  const z = typedZip(p);
-  if (!SF_ZIP.test(z)) continue;
+  const p = f.properties, z = String(p.zip || "");
+  if (!p._block || !SF_ZIP.test(z)) continue;
   const m = byBlock.get(p._block) || byBlock.set(p._block, new Map()).get(p._block);
   m.set(z, (m.get(z) || 0) + 1);
 }
 for (const f of geo.features) {
   const p = f.properties;
   const block = p._block; delete p._block;
-  if (!block || p.geoCheck === "apn-far") continue;
-  const z = typedZip(p);
-  // Neighbors' ZIPs on this block, not counting this sale.
-  const tally = new Map(byBlock.get(block) || []);
-  if (SF_ZIP.test(z)) tally.set(z, tally.get(z) - 1);
+  const z = String(p.zip || "");
+  const tally = new Map(block ? byBlock.get(block) || [] : []);
+  if (SF_ZIP.test(z) && tally.has(z)) tally.set(z, tally.get(z) - 1);
   const others = [...tally.values()].reduce((a, b) => a + b, 0);
   const [topZip, topN] = [...tally.entries()].sort((a, b) => b[1] - a[1])[0] || [null, 0];
   let fix = null, how = null;
   if (!SF_ZIP.test(z)) {
-    fix = topN ? topZip : zipAt(f.geometry.coordinates);
-    how = topN ? `not an SF ZIP; ${topN} other sale(s) on the block use ${topZip}` : "not an SF ZIP; ZIP map at the pin";
+    fix = topN ? topZip : (p.addrMatch === "unknown" ? null : zipAt(f.geometry.coordinates));
+    how = topN ? `${topN} other sale(s) on the block use ${topZip}` : "ZIP map at the location";
+    if (!fix) exceptions.push([p.id, p.address, (p.sellingDate || "").slice(0, 10), "ZIP unknown", `MLS ZIP "${z}" is not an SF ZIP and the location can't supply one`, ""]);
   } else if (others >= 3 && topZip !== z && topN / others >= 0.8) {
     fix = topZip; how = `${topN} of ${others} other sales on the block use ${topZip}`;
   }
   if (fix && fix !== z) {
     p.zipMls = z || null; p.zip = fix; counts.zip++;
-    log.push([p.id, p.address, "ZIP", z, fix, how]);
-  } else if (p.zipMls) { p.zip = p.zipMls; delete p.zipMls; }
+    log.push([p.id, p.address, "ZIP", z || "(blank)", `${fix} (${how})`]);
+  }
 }
 
-geo.metadata = { ...(geo.metadata || {}), validation: { checkedAt: new Date().toISOString(), ...counts } };
+geo.metadata = { ...(geo.metadata || {}), validation: { checkedAt: new Date().toISOString(), method: "street address, then file coordinates; districts from the map layers", ...counts, exceptions: exceptions.length } };
 writeFileSync(LISTINGS, JSON.stringify(geo));
-const csv = [["listing", "address", "field", "mls_value", "corrected_or_found", "how"], ...log]
-  .map(r => r.map(v => /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v)).join(","))
-  .join("\n") + "\n";
-writeFileSync("data/mls-corrections.csv", csv);
-console.log(`validated ${geo.features.length.toLocaleString()} sales — pins moved to their APN ${counts.pinMoved}, ZIP corrected ${counts.zip}, ` +
-  `SF District corrected ${counts.district}; pin vs APN: ${counts.apnOk} agree, ${counts.apnFar} flagged, ${counts.apnUnchecked} not checkable → data/mls-corrections.csv`);
+const csv = rows => rows.map(r => r.map(v => /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v)).join(",")).join("\n") + "\n";
+writeFileSync("data/mls-corrections.csv", csv([["listing", "address", "field", "before", "now"], ...log]));
+writeFileSync("data/location-exceptions.csv", csv([["listing", "address", "sold", "problem", "why", "what it means"], ...exceptions]));
+console.log(`placed ${geo.features.length.toLocaleString()} sales — address confirms file coordinates ${counts.verified}, moved to the address ${counts.moved}, ` +
+  `address not found (file coordinates used) ${counts.unverified}, location unknown ${counts.unknown}; SFAR District corrected ${counts.district}, ZIP corrected ${counts.zip}; ` +
+  `${exceptions.length} exception(s) → data/location-exceptions.csv`);
