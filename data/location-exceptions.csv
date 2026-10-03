@@ -1,24 +1,8 @@
 listing,address,sold,problem,why,what it means
-425070370,"1 Bristol Ct #218, San Francisco, CA 94130",2026-03-30,SFAR District unknown,the location is outside every SFAR district,
-425070370,"1 Bristol Ct #218, San Francisco, CA 94130",2026-03-30,Neighborhood unknown,the location is outside every neighborhood,
-425074124,"38 Meadow Dr #3, San Francisco, CA 94130",2026-03-10,SFAR District unknown,the location is outside every SFAR district,
-425074124,"38 Meadow Dr #3, San Francisco, CA 94130",2026-03-10,Neighborhood unknown,the location is outside every neighborhood,
 82025665,"258 Harvard St, San Francisco, CA 94134",2026-01-02,Location unknown,no coordinates in the file and the address matches no other sale,shown at a neighborhood stand-in point (neighborhood inferred from its street/ZIP); needs a real location
 82029908,"800 Jamestown Ave, San Francisco, CA 94124",2026-01-21,Location unknown,no coordinates in the file and the address matches no other sale,shown at a neighborhood stand-in point (neighborhood inferred from its street/ZIP); needs a real location
-426093864,"1 Bristol Ct #208, San Francisco, CA 94130",2026-02-24,SFAR District unknown,the location is outside every SFAR district,
-426093864,"1 Bristol Ct #208, San Francisco, CA 94130",2026-02-24,Neighborhood unknown,the location is outside every neighborhood,
-426094425,"1 Bristol Ct #304, San Francisco, CA 94130",2026-02-24,SFAR District unknown,the location is outside every SFAR district,
-426094425,"1 Bristol Ct #304, San Francisco, CA 94130",2026-02-24,Neighborhood unknown,the location is outside every neighborhood,
 82031971,"808 Red Leaf Ct, San Francisco, CA 94134",2026-02-27,Location unknown,MLS placeholder coordinates and the address matches no other sale,kept off the map with no neighborhood or district until it has a real location
-426103385,"38 Meadow Dr #4, San Francisco, CA 94130",2026-04-07,SFAR District unknown,the location is outside every SFAR district,
-426103385,"38 Meadow Dr #4, San Francisco, CA 94130",2026-04-07,Neighborhood unknown,the location is outside every neighborhood,
-426103241,"1 Bristol Ct #201, San Francisco, CA 94130",2026-06-12,SFAR District unknown,the location is outside every SFAR district,
-426103241,"1 Bristol Ct #201, San Francisco, CA 94130",2026-06-12,Neighborhood unknown,the location is outside every neighborhood,
-426106187,"1 Bristol Ct #601, San Francisco, CA 94130",2026-03-10,SFAR District unknown,the location is outside every SFAR district,
-426106187,"1 Bristol Ct #601, San Francisco, CA 94130",2026-03-10,Neighborhood unknown,the location is outside every neighborhood,
 426118857,"253 Friedell St, San Francisco, CA 94124",2026-05-22,Location unknown,MLS placeholder coordinates and the address matches no other sale,kept off the map with no neighborhood or district until it has a real location
-426121494,"1 Bristol Ct #605, San Francisco, CA 94130",2026-09-21,SFAR District unknown,the location is outside every SFAR district,
-426121494,"1 Bristol Ct #605, San Francisco, CA 94130",2026-09-21,Neighborhood unknown,the location is outside every neighborhood,
 82055819,"28 Megan Dr #1, San Francisco, CA 94134",2026-09-21,Location unknown,no coordinates in the file and the address matches no other sale,shown at a neighborhood stand-in point (neighborhood inferred from its street/ZIP); needs a real location
 82056639,"1737 McKinnon, San Francisco, CA 94124",2026-09-11,Location unknown,no coordinates in the file and the address matches no other sale,shown at a neighborhood stand-in point (neighborhood inferred from its street/ZIP); needs a real location
 82057631,"142 Josiah Ave, San Francisco, CA 94112",2026-09-25,Location unknown,no coordinates in the file and the address matches no other sale,shown at a neighborhood stand-in point (neighborhood inferred from its street/ZIP); needs a real location
@@ -28,23 +12,5 @@ listing,address,sold,problem,why,what it means
 82060341,"736 Foerster St, San Francisco, CA 94127",2026-09-24,Location unknown,no coordinates in the file and the address matches no other sale,shown at a neighborhood stand-in point (neighborhood inferred from its street/ZIP); needs a real location
 41087227,"717 Kirkham St, San Francisco, CA 94122",2025-03-24,Location unknown,MLS placeholder coordinates and the address matches no other sale,kept off the map with no neighborhood or district until it has a real location
 41099833,"805 Red Leaf Ct, San Francisco, CA 94134",2025-10-14,Location unknown,MLS placeholder coordinates and the address matches no other sale,kept off the map with no neighborhood or district until it has a real location
-424082429,"1 Bristol Ct #228, San Francisco, CA 94130",2025-06-06,SFAR District unknown,the location is outside every SFAR district,
-424082429,"1 Bristol Ct #228, San Francisco, CA 94130",2025-06-06,Neighborhood unknown,the location is outside every neighborhood,
-425019782,"1 Bristol Ct #219, San Francisco, CA 94130",2025-08-14,SFAR District unknown,the location is outside every SFAR district,
-425019782,"1 Bristol Ct #219, San Francisco, CA 94130",2025-08-14,Neighborhood unknown,the location is outside every neighborhood,
 425030485,"480 N Mission Bay Blvd #611, San Francisco, CA 94158",2025-04-14,Location unknown,MLS placeholder coordinates and the address matches no other sale,kept off the map with no neighborhood or district until it has a real location
-425070396,"1 Bristol Ct #428, San Francisco, CA 94130",2025-12-15,SFAR District unknown,the location is outside every SFAR district,
-425070396,"1 Bristol Ct #428, San Francisco, CA 94130",2025-12-15,Neighborhood unknown,the location is outside every neighborhood,
 425082954,"1812 20th St, San Francisco, CA 94107",2025-12-03,Location unknown,MLS placeholder coordinates and the address matches no other sale,kept off the map with no neighborhood or district until it has a real location
-426102799,"1 Bristol Ct #216, San Francisco, CA 94130",2025-06-11,SFAR District unknown,the location is outside every SFAR district,
-426102799,"1 Bristol Ct #216, San Francisco, CA 94130",2025-06-11,Neighborhood unknown,the location is outside every neighborhood,
-426102800,"1 Bristol Ct #327, San Francisco, CA 94130",2025-11-25,SFAR District unknown,the location is outside every SFAR district,
-426102800,"1 Bristol Ct #327, San Francisco, CA 94130",2025-11-25,Neighborhood unknown,the location is outside every neighborhood,
-426102849,"1 Bristol Ct #314, San Francisco, CA 94130",2025-06-10,SFAR District unknown,the location is outside every SFAR district,
-426102849,"1 Bristol Ct #314, San Francisco, CA 94130",2025-06-10,Neighborhood unknown,the location is outside every neighborhood,
-426102850,"1 Bristol Ct #305, San Francisco, CA 94130",2025-05-16,SFAR District unknown,the location is outside every SFAR district,
-426102850,"1 Bristol Ct #305, San Francisco, CA 94130",2025-05-16,Neighborhood unknown,the location is outside every neighborhood,
-426102858,"1 Bristol Ct #427, San Francisco, CA 94130",2025-10-20,SFAR District unknown,the location is outside every SFAR district,
-426102858,"1 Bristol Ct #427, San Francisco, CA 94130",2025-10-20,Neighborhood unknown,the location is outside every neighborhood,
-426106137,"36 Meadow Dr #107, San Francisco, CA 94130",2025-12-31,SFAR District unknown,the location is outside every SFAR district,
-426106137,"36 Meadow Dr #107, San Francisco, CA 94130",2025-12-31,Neighborhood unknown,the location is outside every neighborhood,

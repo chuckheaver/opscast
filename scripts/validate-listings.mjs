@@ -178,6 +178,15 @@ function blockAt([lng, lat]) {
   return null;
 }
 
+// ── Manual answers (data/location-overrides.json) ──────────────────────────
+// Keyed by MLS listing number: { "lat": .., "lng": .. } places the sale there;
+// { "nid": "5m", "sup": 8 } sets its districts when the exact spot is unknown.
+// Applied on every run, so an answer given once holds for future imports.
+let OVERRIDES = {};
+try { OVERRIDES = JSON.parse(readFileSync("data/location-overrides.json", "utf8")); } catch {}
+const realtorGeo = JSON.parse(readFileSync("public/data/sf-realtor-neighborhoods.geojson", "utf8"));
+const realtorByNid = new Map(realtorGeo.features.map(f => [String(f.properties.nid || "").toLowerCase(), f.properties]));
+
 // ── Place every sale ──────────────────────────────────────────────────────
 const log = [], exceptions = [];
 const counts = { verified: 0, moved: 0, unverified: 0, unknown: 0, zip: 0, district: 0 };
@@ -186,7 +195,9 @@ for (const f of geo.features) {
   const p = f.properties;
   const file = f.geometry?.coordinates;
   const fileOk = Array.isArray(file) && p.geoSource !== "neighborhood" && !isPlaceholder(file);
-  const addr = locateAddress(p);
+  const ov = OVERRIDES[p.id] || null;
+  const addr = ov && Number.isFinite(ov.lat) && Number.isFinite(ov.lng)
+    ? { pt: [ov.lng, ov.lat], how: "location given by hand" } : locateAddress(p);
   let pt = file, status;
   if (addr && fileOk) {
     const d = meters(addr.pt, file);
@@ -217,6 +228,12 @@ for (const f of geo.features) {
   // (rather than the placeholder's) and stays off the map — noLocation.
   if (status === "unknown" && p.geoSource !== "neighborhood") {
     Object.assign(p, { fogHours: null, fogNeighborhood: null, neighborhood: null, district: null, districtNum: null, realtorNid: null, supDistrict: null, noLocation: true });
+    // Districts given by hand still apply; the sale stays off the map.
+    if (ov?.nid && realtorByNid.has(String(ov.nid).toLowerCase())) {
+      const r = realtorByNid.get(String(ov.nid).toLowerCase());
+      Object.assign(p, { neighborhood: r.nbrhood, district: r.district, districtNum: r.district_num, realtorNid: r.nid, areaDesc: `SF District ${r.district_num}` });
+    }
+    if (ov?.sup != null) p.supDistrict = Number(ov.sup);
     p._block = null;
     continue;
   }
@@ -224,6 +241,11 @@ for (const f of geo.features) {
   Object.assign(p, tag(pt));
   const sup = findNeighborhoodForPoint(sups, pt);
   p.supDistrict = sup ? sup.properties.district : null;
+  if (ov?.nid && realtorByNid.has(String(ov.nid).toLowerCase())) {
+    const r = realtorByNid.get(String(ov.nid).toLowerCase());
+    Object.assign(p, { neighborhood: r.nbrhood, district: r.district, districtNum: r.district_num, realtorNid: r.nid });
+  }
+  if (ov?.sup != null) p.supDistrict = Number(ov.sup);
   if (p.districtNum != null) {
     const want = `SF District ${p.districtNum}`, had = typedArea.get(f);
     if (had !== want) {

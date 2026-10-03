@@ -99,3 +99,10 @@ The APN is not used.
 
 Every change, with the MLS value, is listed in `data/mls-corrections.csv`.
 Per-sale incline (`data/sale-incline.json`) is rebuilt right after.
+
+### Fixed assignments
+
+- **Treasure Island and Yerba Buena Island** (ZIP 94130) are SFAR **9t**,
+  District 9 - Central East, and Supervisor District **6**. The 9t area is a
+  feature in `public/data/sf-realtor-neighborhoods.geojson` (both islands),
+  so every import tags island sales 9t automatically.
