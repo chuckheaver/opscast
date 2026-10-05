@@ -20,7 +20,6 @@ const MICRO = [
 const MARKET = [
   { href: "/market/report#sf", label: "SF Market", sub: "Market stats, grids, by the numbers, inventory" },
   { href: "/market/report#neighborhoods", label: "SF Neighborhoods", sub: "Every sale by neighborhood and fog zone" },
-  { href: "/market/report#national", label: "National Mkts", sub: "Rates, Treasuries, inflation, jobs" },
 ];
 
 export default function SiteNavClient({ hoods, guide }) {

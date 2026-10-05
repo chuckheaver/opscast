@@ -9,7 +9,6 @@ into the three sections of the site's Market menu:
                       Grid Condo/TIC, The Neighborhoods, By the Numbers,
                       Latent Inventory (in that order)
   Cost of Ownership — the cost of money: rates, bonds, the cash buyer
-  National Mkts     — The National Picture
 
 On the way through it turns report text into drill-downs on the live map:
   • every area name → the map framed on that neighborhood, sold homes on
@@ -17,7 +16,7 @@ On the way through it turns report text into drill-downs on the live map:
 
 The print documents are not touched, so the PDF stays exactly as designed.
 Writes app/market/report/generated/{sheets.css, sf.html, hoods.html,
-national.html, meta.json}.
+meta.json}.
 """
 import html, json, pathlib, re, urllib.parse
 
@@ -39,7 +38,6 @@ def placement(title):
     if t.startswith("by the numbers"):                    return ("stats", 70, "")
     if t.startswith("latent inventory"):                  return ("stats", 80, "inventory")
     if t.startswith("the cost of ownership"):             return ("cost", 10, "")
-    if t.startswith("the national picture"):              return ("national", 10, "")
     raise SystemExit(f"web.py: no section for page titled {title!r}")
 
 def page_title(body):
@@ -143,7 +141,7 @@ def link_sales(s):
 
 # -------------------------------------------------------------- write out
 DEST.mkdir(parents=True, exist_ok=True)
-sections = {"stats": [], "cost": [], "national": []}
+sections = {"stats": [], "cost": []}
 counts = {"areas": 0, "sales": 0}
 for (label, sec, order, anchor), (cls, body) in zip(PAGES, pages):
     b1 = link_areas(body); counts["areas"] += b1.count("class='rp-link'")
@@ -168,5 +166,5 @@ meta = {
 }
 (DEST / "meta.json").write_text(json.dumps(meta, indent=2))
 print(f"wrote web edition → {DEST.relative_to(ROOT)}  "
-      f"stats {len(sections['stats'])} · cost {len(sections['cost'])} · national {len(sections['national'])} pages  "
+      f"stats {len(sections['stats'])} · cost {len(sections['cost'])} pages  "
       f"· {counts['areas']} area links · {counts['sales']} sale links")

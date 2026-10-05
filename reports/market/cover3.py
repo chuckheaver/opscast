@@ -954,31 +954,10 @@ def build():
     o.append("</div>")
     o.append(f"<div class='foot'><span>Source: SFAR MLS via BrokerMetrics, closed sales (Closed + Sold Off MLS), geocoded to the site's fog-contour layer. Data through {W['m1'][1]}. Deemed reliable, not guaranteed.</span><span>page 1 / 9</span></div></div>")
 
-    # ── PAGE 2 — the national picture ────────────────────────────────────
-    # Four national numbers, four charts, four sentences. The mechanics of
-    # how they connect live on the In Depth page.
+    # (The National Picture page was removed; these values still feed the Cost of Ownership page.)
     urows2=[dict(m=m_,us=u,ca=c_,sf=f_) for m_,u,c_,f_ in UNEMP]
     mspread=MTG_NOW-TEN_NOW
     yr_ago=TEN_Y[0][1]
-    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The National Picture</div>
-      <div class='p'>Four numbers set the rules for every sale in the city. None of them are decided in San Francisco.</div></div>
-      <div class='by'>Chuck Heaver · Vanguard Properties<br>Freddie Mac · U.S. Treasury · BLS · EDD</div></div>""")
-    o.append("<div class='cols'>")
-    o.append(f"""<div class='col'><h2>Mortgage Rates — What a Loan Costs</h2>{cv.rate_chart(h=196)}
-      <div class='cap'>The rate on an ordinary 30-year loan: <span class='st'>{cv.RATES[0][1]:.2f}%</span> in January, down to {cv.RATE_LOW:.2f}% in {cv.RATE_LOW_MO}, <span class='st'>{cv.RATE_NOW:.2f}%</span> now. A higher rate means a bigger payment for the very same house.</div></div>""")
-    o.append(f"""<div class='col'><h2>The 10-Year Treasury — What Sets That Rate</h2>{yield_chart(h=212)}
-      <div class='cap'>What the government pays to borrow for ten years. Banks price home loans off this, then add about {mspread:.1f} points. It was {yr_ago:.2f}% a year ago and is <span class='st'>{TEN_NOW:.2f}%</span> today — the highest since 2007.</div></div>""")
-    o.append("</div>")
-    o.append("<div class='cols' style='margin-top:7px'>")
-    o.append(f"""<div class='col'><h2>Inflation — How Fast Everything Costs More</h2>{lines([dict(m=m_,cpi=v) for m_,v in CPI],[("Prices vs a year ago","#E9BC3F","cpi")],h=200,fmt=lambda v:f"{v:.1f}%")}
-      <div class='cap'>How much more things cost than a year ago: {CPI[0][1]:.1f}% in January, up to {max(v for _,v in CPI):.1f}% in May, <span class='st'>{CPI[-1][1]:.1f}%</span> now. While this stays high, loans stay expensive.</div></div>""")
-    o.append(f"""<div class='col'><h2>Jobs — Who Is Working</h2>{lines(urows2,[("San Francisco","#203C5F","sf"),("California","#E9BC3F","ca"),("United States","#8A8E93","us")],h=200,fmt=lambda v:f"{v:.1f}%")}
-      <div class='cap'>Share of people looking for work. San Francisco is at <span class='st'>{UNEMP[-1][3]:.1f}%</span> in {datetime.date(2026,UNEMP[-1][0],1):%B}, up from {UNEMP[-2][3]:.1f}% in {datetime.date(2026,UNEMP[-2][0],1):%B}, against {UNEMP[-1][2]:.1f}% statewide and {UNEMP[-1][1]:.1f}% nationally. Still well below the state.</div></div>""")
-    o.append("</div>")
-    o.append(f"""<div class='sig' style='margin-top:8px'><b>How the four fit together.</b> Inflation keeps the Treasury high. The Treasury sets the mortgage rate. The mortgage rate decides what a financed buyer can pay.
-      Jobs decide how many buyers there are at all. Right now the first three are working against buyers and the fourth is working for them — which is why prices rose
-      <b>{sgn(D(st['y1']['price'],st['y0']['price']))}%</b> in a year of expensive money.</div>""")
-    o.append(f"<div class='foot'><span>30-year fixed from Freddie Mac PMMS; 10-year Treasury month-end readings via U.S. Treasury and market reporting; CPI from BLS; unemployment from BLS and California EDD.</span><span>page 2 / 9</span></div></div>")
 
     # ── PAGE 3 — where the money came from ───────────────────────────────
     msplit,mn,mtot=money_split(S["y1"])

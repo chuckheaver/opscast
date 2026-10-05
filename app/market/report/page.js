@@ -17,13 +17,12 @@ const read = f => readFileSync(path.join(G, f), "utf8");
 const SECTIONS = [
   { id: "sf", file: "stats.html", h: "Market Stats", p: "San Francisco real estate, where the money went, the grids by neighborhood and fog zone, the neighborhoods, the year in numbers, and what is waiting to sell." },
   { id: "cost", file: "cost.html", h: "The Cost of Ownership", p: "What money costs a financed buyer and a cash buyer right now: rates, bonds and the opportunity cost of owning." },
-  { id: "national", file: "national.html", h: "National Markets", p: "Mortgage rates, the 10-year Treasury, inflation and jobs — the backdrop every San Francisco buyer is working against." },
 ];
 
 export const metadata = {
   title: "San Francisco Market Briefing | Chuck Heaver",
   description:
-    "San Francisco real estate market report: year-to-date closed sales, prices, days on market, cash vs financed buyers, neighborhood grids by fog zone, and the national rate and jobs picture — with every neighborhood linked to its sold homes on the map.",
+    "San Francisco real estate market report: year-to-date closed sales, prices, days on market, cash vs financed buyers, neighborhood grids by fog zone, and the cost of financing — with every neighborhood linked to its sold homes on the map.",
 };
 
 export default function Page() {
@@ -62,7 +61,7 @@ export default function Page() {
         ))}
         <p className="rp-foot">
           Report run {meta.run}. Source: SFAR MLS closed sales. Deemed reliable, not guaranteed.
-          National figures from Freddie Mac, the U.S. Treasury, BLS and EDD as cited on each page.
+          Rate figures from Freddie Mac and the U.S. Treasury as cited on the page.
         </p>
       </main>
 
