@@ -5688,7 +5688,9 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .rp-sheet .page .foot { left: 0.35in; right: 0.35in; bottom: 0.18in; }
 /* Point labels at a chart's first and last x sit on the plot edge. */
 .rp-sheet svg { overflow: visible; }
-.rp-sheet a.rp-link { color: inherit; text-decoration: underline; text-decoration-color: #C9A227; text-decoration-thickness: 2px; text-underline-offset: 2px; }
+/* One link style for every report link — areas, neighborhoods, sales:
+   the report's yellow, a light 1px underline. */
+.rp-sheet a.rp-link { color: inherit; text-decoration: underline; text-decoration-color: #E9BC3F; text-decoration-thickness: 1px; text-underline-offset: 2px; }
 .rp-sheet a.rp-link:hover { color: #203C5F; background: #FAEEDA; }
 .rp-sheet svg a.rp-link { text-decoration: underline; }
 .rp-foot { max-width: 1080px; margin: 28px auto 0; font-size: 12.5px; color: #6B6F75; line-height: 1.6; }
@@ -5895,6 +5897,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .qp-dock { position: absolute; left: 10px; right: 10px; bottom: 12px; z-index: 6; }
 .qp-dock .qp { width: auto; max-width: none; background: #fff; border-radius: 12px;
   box-shadow: 0 8px 28px rgba(19,26,37,0.28); max-height: 52vh; overflow-y: auto; }
-/* Web edition of the Neighborhoods page: the sheet is narrower than print,
-   so long names wrap instead of being cut off (the page grows to fit). */
-.rp-sheet.sheetA .nb4 table.top td { white-space: normal; text-overflow: clip; overflow: visible; }
+/* Web edition, Neighborhoods page: the sheet is narrower than print, so the
+   Top 10 tables set a touch smaller to keep every name on one line. */
+.rp-sheet.sheetA .nb4 table.top { font-size: 6.5px; }
+.rp-sheet.sheetA .nb4 table.top th { font-size: 6.2px; }

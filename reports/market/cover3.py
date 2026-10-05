@@ -802,13 +802,8 @@ def build():
     .charts .ch {{ flex:1; min-width:0; }} .charts .cap {{ font-size:9.6px; line-height:1.4; margin-top:-2px; }} .charts .src {{ font-size:7.4px; color:{MUTED}; }}
     table.top {{ border-collapse:collapse; width:100%; font-size:8.6px; margin-bottom:6px; }}
     .nb4 {{ gap:9px; }} .nb4 table.top {{ font-size:7.9px; table-layout:auto; }} .nb4 h2 {{ font-size:10.5px; }}
-    .nb4 .col {{ min-width:0; }} .nn {{ font-weight:400; color:{MUTED}; font-size:0.85em; }} .nb4 table.top {{ table-layout:fixed; }}
-    .nb4 table.top td, .nb4 table.top th {{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }}
-    .nb4 table.top td.l:first-child, .nb4 table.top th.l:first-child {{ width:43%; }}
-    .nb4 table.zt td:nth-child(1), .nb4 table.zt th:nth-child(1) {{ width:20%; }}
-    .nb4 table.zt td:nth-child(2), .nb4 table.zt th:nth-child(2) {{ width:47%; }}
-    .nb4 table.zt td:nth-child(3), .nb4 table.zt th:nth-child(3) {{ width:20%; }}
-    .nb4 table.zt td:nth-child(4), .nb4 table.zt th:nth-child(4) {{ width:13%; }}
+    .nb4 .col {{ min-width:0; }} .nn {{ font-weight:400; color:{MUTED}; font-size:0.85em; }} .nb4 table.top {{ table-layout:auto; font-size:7.2px; }}
+    .nb4 table.top td, .nb4 table.top th {{ white-space:nowrap; overflow:visible; padding-left:3px; padding-right:3px; }}
     table.top th {{ background:{NAV}; color:#fff; font-size:6.9px; text-transform:uppercase; padding:2px 4px; text-align:right; }}
     table.top th.l, table.top td.l {{ text-align:left; }}
     table.top td {{ padding:1.9px 4px; text-align:right; border-bottom:0.4px solid {LINE}; white-space:nowrap; overflow:hidden; }}
@@ -1058,30 +1053,40 @@ def build():
     # Every area with at least one sale counts; thin samples carry a * and
     # their sale count rather than being dropped (* = fewer than 10 sales).
     star=lambda n: "*" if n<10 else ""
-    ranked=sorted([(a,stt) for a,stt in byA[SF].items() if stt["y1"]["n"]>=1 and stt["y1"]["price"]],key=lambda t:-t[1]["y1"]["price"])[:10]
+    # Individual SFAR neighborhoods (no combined areas) for every Top 10 here.
+    import collections as _c
+    Y0=S["y0"]
+    nbk=lambda r: r.get("neighborhood") if r.get("realtorNid") else None
+    def bynb(rows, seg):
+        out=_c.defaultdict(list)
+        for r in rows:
+            if nbk(r) and r["propType"] in seg: out[nbk(r)].append(r)
+        return out
+    sf1,sf0,co1=bynb(Y1,SFHs),bynb(Y0,SFHs),bynb(Y1,COs)
+    nbst={a:{"y1":mg.stats(rs),"y0":mg.stats(sf0.get(a,[]))} for a,rs in sf1.items()}
+    ranked=sorted([(a,stt) for a,stt in nbst.items() if stt["y1"]["price"]],key=lambda t:-t[1]["y1"]["price"])[:10]
     def yoy(stt):
         p0=stt["y0"]["price"]; return (f"{D(stt['y1']['price'],p0):+.0f}%", UP if stt['y1']['price']>=p0 else DOWN) if p0 else ("—",MUTED)
     def cmed(a):
-        x=byA[CO].get(a); return M(x["y1"]["price"]) if x and x["y1"]["price"] else "—"
+        rs=co1.get(a); return M(statistics.median(r["sellingPrice"] for r in rs)) if rs else "—"
     nr="".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(stt['y1']['n'])}</td><td class='b'>{M(stt['y1']['price'])}</td>"
                f"<td>{cmed(a)}</td><td style='color:{yoy(stt)[1]};font-weight:700'>{yoy(stt)[0]}</td></tr>" for i,(a,stt) in enumerate(ranked))
     # (c)(d) the ten biggest sales in each segment
     tsfh=sorted([r for r in Y1 if r["propType"] in SFHs],key=lambda r:-r["sellingPrice"])[:10]
     tco=sorted([r for r in Y1 if r["propType"] in COs],key=lambda r:-r["sellingPrice"])[:10]
-    # (e) ZIP codes by median sale — every ZIP with a sale; labelled with its busiest area
-    import collections as _c
+    # (e) ZIP codes by median sale — every ZIP with a sale; labelled with its busiest neighborhood
     byzip=_c.defaultdict(list)
     for r in Y1:
         if zip_of(r): byzip[zip_of(r)].append(r)
     zrank=sorted([(z,statistics.median(x["sellingPrice"] for x in rs),len(rs),
-                   _c.Counter(x.get("nb") for x in rs if x.get("nb")).most_common(1)[0][0])
-                  for z,rs in byzip.items() if rs and any(x.get("nb") for x in rs)],key=lambda t:-t[1])[:10]
+                   _c.Counter(nbk(x) for x in rs if nbk(x)).most_common(1)[0][0])
+                  for z,rs in byzip.items() if rs and any(nbk(x) for x in rs)],key=lambda t:-t[1])[:10]
     zr="".join(f"<tr><td class='l'>{i+1}. {z}{star(n)}</td><td class='l'>{html.escape(a)}</td><td class='b'>{M(m)}</td><td>{n}</td></tr>"
                for i,(z,m,n,a) in enumerate(zrank))
     # (f) areas by median $/sf, all property types, every sale with square footage
     bya=_c.defaultdict(list)
     for r in Y1:
-        if r.get("nb") and r.get("sqft"): bya[r["nb"]].append(r["sellingPrice"]/r["sqft"])
+        if nbk(r) and r.get("sqft"): bya[nbk(r)].append(r["sellingPrice"]/r["sqft"])
     pall=sorted([(a,statistics.median(v),len(v)) for a,v in bya.items() if v],key=lambda t:-t[1])
     prow=lambda rk: "".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(n)}</td><td class='b'>${v:,.0f}</td><td>{n}</td></tr>" for i,(a,v,n) in enumerate(rk))
     pr=prow(pall[:10]); plo=prow(sorted(pall,key=lambda t:t[1])[:10])

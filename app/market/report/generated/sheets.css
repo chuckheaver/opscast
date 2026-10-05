@@ -47,13 +47,8 @@
 .sheetA .nb4 h2 { font-size:10.5px; }
 .sheetA .nb4 .col { min-width:0; }
 .sheetA .nn { font-weight:400; color:#6B6F75; font-size:0.85em; }
-.sheetA .nb4 table.top { table-layout:fixed; }
-.sheetA .nb4 table.top td, .sheetA .nb4 table.top th { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.sheetA .nb4 table.top td.l:first-child, .sheetA .nb4 table.top th.l:first-child { width:43%; }
-.sheetA .nb4 table.zt td:nth-child(1), .sheetA .nb4 table.zt th:nth-child(1) { width:20%; }
-.sheetA .nb4 table.zt td:nth-child(2), .sheetA .nb4 table.zt th:nth-child(2) { width:47%; }
-.sheetA .nb4 table.zt td:nth-child(3), .sheetA .nb4 table.zt th:nth-child(3) { width:20%; }
-.sheetA .nb4 table.zt td:nth-child(4), .sheetA .nb4 table.zt th:nth-child(4) { width:13%; }
+.sheetA .nb4 table.top { table-layout:auto; font-size:7.2px; }
+.sheetA .nb4 table.top td, .sheetA .nb4 table.top th { white-space:nowrap; overflow:visible; padding-left:3px; padding-right:3px; }
 .sheetA table.top th { background:#203C5F; color:#fff; font-size:6.9px; text-transform:uppercase; padding:2px 4px; text-align:right; }
 .sheetA table.top th.l, .sheetA table.top td.l { text-align:left; }
 .sheetA table.top td { padding:1.9px 4px; text-align:right; border-bottom:0.4px solid #DCDDDE; white-space:nowrap; overflow:hidden; }

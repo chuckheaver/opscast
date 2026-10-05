@@ -72,6 +72,17 @@ map_names = {f["properties"]["name"] for f in
 missing = sorted(v for v in AREA_TO_MAP.values() if v not in map_names)
 assert not missing, f"map has no neighborhood named: {missing}"
 
+# Every individual SFAR neighborhood links too: to the fog-map neighborhood
+# where most of its sales sit (the map's own names, so the link always lands).
+import collections as _c
+_votes = _c.defaultdict(_c.Counter)
+for _f in json.loads((ROOT / "public/data/sf-listings.geojson").read_text())["features"]:
+    _p = _f["properties"]
+    if _p.get("realtorNid") and _p.get("neighborhood") and _p.get("fogNeighborhood") in map_names:
+        _votes[_p["neighborhood"]][_p["fogNeighborhood"]] += 1
+for _name, _v in _votes.items():
+    AREA_TO_MAP.setdefault(_name, _v.most_common(1)[0][0])
+
 def hood_url(area):
     return "/fog?" + urllib.parse.urlencode({"preset": "homes", "hood": AREA_TO_MAP[area]})
 
