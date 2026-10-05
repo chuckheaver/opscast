@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T03:45:47.645Z",
+  "generatedAt": "2026-10-05T03:52:56.804Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -206,12 +206,12 @@
       "zone": "Sun"
     },
     "Crocker Amazon": {
-      "n": 29,
+      "n": 30,
       "sfhMedian": 1288063,
       "sfhN": 29,
-      "condoMedian": null,
-      "condoN": 0,
-      "ppsf": 866.2551440329219,
+      "condoMedian": 605000,
+      "condoN": 1,
+      "ppsf": 858.8917641561989,
       "dom": 12,
       "fogHours": 11,
       "zone": "Persistent Fog"
@@ -393,13 +393,13 @@
       "zone": "Fog"
     },
     "Hunters Point": {
-      "n": 26,
+      "n": 27,
       "sfhMedian": 982500,
       "sfhN": 4,
       "condoMedian": 598000,
       "condoN": 18,
-      "ppsf": 611.9900355685593,
-      "dom": 58.5,
+      "ppsf": 598.4690327070285,
+      "dom": 49,
       "fogHours": 9,
       "zone": "Fog"
     },

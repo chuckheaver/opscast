@@ -187,6 +187,29 @@ let OVERRIDES = {};
 try { OVERRIDES = JSON.parse(readFileSync("data/location-overrides.json", "utf8")); } catch {}
 const realtorGeo = JSON.parse(readFileSync("public/data/sf-realtor-neighborhoods.geojson", "utf8"));
 const realtorByNid = new Map(realtorGeo.features.map(f => [String(f.properties.nid || "").toLowerCase(), f.properties]));
+// A point inside a realtor area for a stand-in: the trusted sale nearest the
+// area's middle (so it sits on real streets), else the area's middle.
+const anchorCache = new Map();
+function anchorFor(nid) {
+  if (anchorCache.has(nid)) return anchorCache.get(nid);
+  const feat = realtorGeo.features.find(f => String(f.properties.nid || "").toLowerCase() === nid);
+  let pt = null;
+  if (feat) {
+    const one = { type: "FeatureCollection", features: [feat] };
+    const ring = (feat.geometry.type === "Polygon" ? feat.geometry.coordinates : feat.geometry.coordinates.sort((a, b) => b[0].length - a[0].length)[0])[0];
+    const mid = ring.reduce((a, c) => [a[0] + c[0] / ring.length, a[1] + c[1] / ring.length], [0, 0]);
+    let best = Infinity;
+    for (const x of geo.features) {
+      if (!trusted(x) || x.properties.geoSource === "neighborhood") continue;
+      const c = x.geometry.coordinates;
+      if (!findNeighborhoodForPoint(one, c)) continue;
+      const d = meters(c, mid); if (d < best) { best = d; pt = c; }
+    }
+    if (!pt && findNeighborhoodForPoint(one, mid)) pt = mid;
+  }
+  anchorCache.set(nid, pt ? round6(pt) : null);
+  return anchorCache.get(nid);
+}
 
 // ── Place every sale ──────────────────────────────────────────────────────
 const log = [], exceptions = [];
@@ -216,7 +239,7 @@ for (const f of geo.features) {
     status = "unknown"; p.addrMatch = "unknown";
     // A stand-in whose neighborhood you've confirmed (overrides: confirmed)
     // is settled — it stays at its neighborhood point and off the report.
-    if (!(ov?.confirmed && p.geoSource === "neighborhood")) exceptions.push([p.id, p.address, (p.sellingDate || "").slice(0, 10), "Location unknown",
+    if (!(ov?.confirmed && (p.geoSource === "neighborhood" || ov.nid))) exceptions.push([p.id, p.address, (p.sellingDate || "").slice(0, 10), "Location unknown",
       p.geoSource === "neighborhood" ? "no coordinates in the file and the address matches no other sale" : "MLS placeholder coordinates and the address matches no other sale",
       p.geoSource === "neighborhood" ? "shown at a neighborhood stand-in point (neighborhood inferred from its street/ZIP); needs a real location" : "kept off the map with no neighborhood or district until it has a real location"]);
   }
@@ -229,6 +252,17 @@ for (const f of geo.features) {
   // Fields from the location. A sale sitting on the MLS placeholder with no
   // address match has no real location: it gets no neighborhood or district
   // (rather than the placeholder's) and stays off the map — noLocation.
+  // No location, but you gave its realtor code: stand it in that realtor
+  // area like any no-coordinate sale, so it shows and counts there.
+  if (status === "unknown" && p.geoSource !== "neighborhood" && ov?.nid && realtorByNid.has(String(ov.nid).toLowerCase())) {
+    const anchor = anchorFor(String(ov.nid).toLowerCase());
+    if (anchor) {
+      p.pinMls = file; p.geoSourceMls = p.geoSource; p.geoSource = "neighborhood";
+      p.placeholder = realtorByNid.get(String(ov.nid).toLowerCase()).nbrhood;
+      pt = anchor; f.geometry.coordinates = pt; p.lng = pt[0]; p.lat = pt[1];
+      log.push([p.id, p.address, "Location", "MLS placeholder coordinates", `stand-in point in ${p.placeholder} (${ov.nid}, given by hand)`]);
+    }
+  }
   if (status === "unknown" && p.geoSource !== "neighborhood") {
     Object.assign(p, { fogHours: null, fogNeighborhood: null, neighborhood: null, district: null, districtNum: null, realtorNid: null, supDistrict: null, noLocation: true });
     // Districts given by hand still apply; the sale stays off the map.

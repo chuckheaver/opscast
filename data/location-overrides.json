@@ -43,5 +43,40 @@
     "nid": "4h",
     "confirmed": true,
     "note": "736 Foerster St: no coordinates in the MLS file; Miraloma Park confirmed"
+  },
+  "426118857": {
+    "nid": "10j",
+    "confirmed": true,
+    "note": "253 Friedell St: realtor code given by Chuck",
+    "sup": 10
+  },
+  "82031971": {
+    "nid": "10b",
+    "confirmed": true,
+    "note": "808 Red Leaf Ct: realtor code given by Chuck",
+    "sup": 11
+  },
+  "425082954": {
+    "nid": "9e",
+    "confirmed": true,
+    "note": "1812 20th St: realtor code given by Chuck",
+    "sup": 10
+  },
+  "41099833": {
+    "nid": "10b",
+    "confirmed": true,
+    "note": "805 Red Leaf Ct (given as 10bm): realtor code given by Chuck",
+    "sup": 11
+  },
+  "425030485": {
+    "nid": "9d",
+    "confirmed": true,
+    "note": "480 N Mission Bay Blvd #611: realtor code given by Chuck",
+    "sup": 6
+  },
+  "41087227": {
+    "nid": "2f",
+    "confirmed": true,
+    "note": "717 Kirkham St (realtor District 2): realtor code given by Chuck"
   }
 }
