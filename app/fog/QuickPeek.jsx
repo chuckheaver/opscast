@@ -6,7 +6,7 @@
 // districts — are looked up here once the card opens.
 
 import { useEffect, useState } from "react";
-import { nearestMuni, nearestBike, parcelLandUse, zoningAndDistricts, incline } from "./lib/quickpeek";
+import { nearestMuni, nearestBike, parcelLandUse, zoningAndDistricts, incline, zipForBlock } from "./lib/quickpeek";
 
 // Same four zones the neighborhood guide and the market report use.
 function zoneOf(h) {
@@ -34,6 +34,7 @@ export default function QuickPeek({
   const [land, setLand] = useState(undefined);
   const [zd, setZd] = useState(undefined);
   const [slope, setSlope] = useState(undefined);
+  const [blockZip, setBlockZip] = useState(null);
   const key = point ? point.join(",") : "";
 
   useEffect(() => {
@@ -42,7 +43,12 @@ export default function QuickPeek({
     setMuni(undefined); setBike(undefined); setLand(undefined); setZd(undefined); setSlope(undefined);
     nearestMuni(point).then(v => live && setMuni(v));
     nearestBike(point).then(v => live && setBike(v));
-    parcelLandUse(point).then(v => live && setLand(v));
+    setBlockZip(null);
+    parcelLandUse(point).then(v => {
+      if (!live) return;
+      setLand(v);
+      zipForBlock(v?.block).then(z => live && setBlockZip(z));
+    });
     zoningAndDistricts(point).then(v => live && setZd(v));
     incline(point).then(v => live && setSlope(v));
     return () => { live = false; };
@@ -63,7 +69,8 @@ export default function QuickPeek({
     ["Neighborhood", neighborhood || "—"],
     ["SFAR District", district || "—"],
     ["Supervisor District", supDistrict != null ? `District ${supDistrict}` : "—"],
-    ["Zip Code", zip || "—"],
+    // The block's USPS ZIP from its sales when it has some; else the ZIP map.
+    ["Zip Code", blockZip || zip || "—"],
     ["Microclimate Zone", zone ? <span className="qp-zone" style={{ "--z": ZONE_COLOR[zone] }}>{zone}</span> : "—"],
     ["Elevation / Incline", !elev ? wait
       : slope === undefined ? <>{elev} / {wait}</>

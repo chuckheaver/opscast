@@ -171,6 +171,7 @@ export async function parcelLandUse(point) {
     use: LAND_USE[t] || t || "—",
     units: Number(subject.props.units) || 0,
     abutting: [...abut].filter(Boolean),
+    block: (/^(\d{4}[A-Z]?)\d{3}[A-Z]?$/.exec(String(subject.props.blklot || "").toUpperCase()) || [])[1] || null,
   };
 }
 
@@ -214,4 +215,14 @@ export async function incline([lng, lat]) {
   const run = (2 * d) * 3.28084;                 // feet
   const pct = Math.round(100 * Math.hypot((n - s) / run, (e - w) / run));
   return { pct, label: inclineLabel(pct) };
+}
+
+// ── ZIP by city block ─────────────────────────────────────────────────────
+// The USPS ZIP the sales on this block carry (validate-listings.mjs). The ZIP
+// map's lines run up to half a block off along some boundaries, so a block
+// with sales answers first; null when the block has none.
+export async function zipForBlock(block) {
+  if (!block) return null;
+  const t = await load("/data/zip-by-block.json");
+  return t?.[block] || null;
 }

@@ -264,6 +264,28 @@ for (const f of geo.features) {
   p._block = status === "unknown" ? null : blockAt(pt);
 }
 
+// How far a point is from a ZIP's area (0 inside it). A typed ZIP whose area
+// is more than 300 m away is a typo; within half a block of its line it is
+// trusted — the ZIP map's lines run that far off along some boundaries.
+const KX = Math.cos((37.77 * Math.PI) / 180);
+const zipFeats = new Map();
+for (const z of zips.features) { const k = String(z.properties.zip); (zipFeats.get(k) || zipFeats.set(k, []).get(k)).push(z); }
+function metersToZip(pt, zip) {
+  const feats = zipFeats.get(zip); if (!feats) return Infinity;
+  if (feats.some(z => findNeighborhoodForPoint({ type: "FeatureCollection", features: [z] }, pt))) return 0;
+  let best = Infinity;
+  for (const z of feats) {
+    const g = z.geometry, polys = g.type === "Polygon" ? [g.coordinates] : g.coordinates;
+    for (const poly of polys) for (const ring of poly) for (let i = 1; i < ring.length; i++) {
+      const ax = ring[i - 1][0] * KX, ay = ring[i - 1][1], bx = ring[i][0] * KX, by = ring[i][1];
+      const px = pt[0] * KX, py = pt[1], dx = bx - ax, dy = by - ay, L = dx * dx + dy * dy;
+      let t = L ? ((px - ax) * dx + (py - ay) * dy) / L : 0; t = Math.max(0, Math.min(1, t));
+      best = Math.min(best, Math.hypot(px - (ax + t * dx), py - (ay + t * dy)) * 110_540);
+    }
+  }
+  return best;
+}
+
 // ── ZIP: the block's consensus ─────────────────────────────────────────────
 const SF_ZIP = /^941\d\d$/;
 const zipAt = pt => { const z = findNeighborhoodForPoint(zips, pt); return z ? String(z.properties.zip) : null; };
@@ -274,6 +296,7 @@ for (const f of geo.features) {
   const m = byBlock.get(p._block) || byBlock.set(p._block, new Map()).get(p._block);
   m.set(z, (m.get(z) || 0) + 1);
 }
+const finalByBlock = new Map();     // block → Map(zip → sales), after corrections
 for (const f of geo.features) {
   const p = f.properties;
   const block = p._block; delete p._block;
@@ -289,18 +312,42 @@ for (const f of geo.features) {
     if (!fix) exceptions.push([p.id, p.address, (p.sellingDate || "").slice(0, 10), "ZIP unknown", `MLS ZIP "${z}" is not an SF ZIP and the location can't supply one`, ""]);
   } else if (others >= 3 && topZip !== z && topN / others >= 0.8) {
     fix = topZip; how = `${topN} of ${others} other sales on the block use ${topZip}`;
+  } else if (p.addrMatch !== "unknown" && p.geoSource !== "neighborhood") {
+    const away = metersToZip(f.geometry.coordinates, z);
+    if (away > 300) {
+      fix = topN && topZip !== z ? topZip : zipAt(f.geometry.coordinates);
+      how = `${z} is ${(away / 1609.34).toFixed(1)} mi away; ${topN && topZip !== z ? "the block's other sales use " + topZip : "ZIP map at the location"}`;
+    }
   }
   if (fix && fix !== z) {
     p.zipMls = z || null; p.zip = fix; counts.zip++;
     log.push([p.id, p.address, "ZIP", z || "(blank)", `${fix} (${how})`]);
   }
+  if (block && SF_ZIP.test(String(p.zip || ""))) {
+    const m = finalByBlock.get(block) || finalByBlock.set(block, new Map()).get(block);
+    m.set(p.zip, (m.get(p.zip) || 0) + 1);
+  }
 }
+
+// ── ZIP by city block, from the sales ──────────────────────────────────────
+// The ZIP map's lines run up to half a block off along some boundaries
+// (94109/94123, 94158/94107, ...), while the ZIPs on the sales are the USPS
+// ones. The map's address lookups read an address's ZIP from its block here
+// first and fall back to the polygon only for blocks with no sales.
+const zipByBlock = {};
+for (const [block, m] of finalByBlock) {
+  const [top, n] = [...m.entries()].sort((a, b) => b[1] - a[1])[0];
+  const total = [...m.values()].reduce((a, b) => a + b, 0);
+  if (n / total >= 0.6) zipByBlock[block] = top;          // a split block gets no entry
+}
+writeFileSync("public/data/zip-by-block.json", JSON.stringify(zipByBlock));
 
 geo.metadata = { ...(geo.metadata || {}), validation: { checkedAt: new Date().toISOString(), method: "street address, then file coordinates; districts from the map layers", ...counts, exceptions: exceptions.length } };
 writeFileSync(LISTINGS, JSON.stringify(geo));
 const csv = rows => rows.map(r => r.map(v => /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v)).join(",")).join("\n") + "\n";
 writeFileSync("data/mls-corrections.csv", csv([["listing", "address", "field", "before", "now"], ...log]));
 writeFileSync("data/location-exceptions.csv", csv([["listing", "address", "sold", "problem", "why", "what it means"], ...exceptions]));
+console.log(`ZIP by block: ${Object.keys(zipByBlock).length.toLocaleString()} blocks → public/data/zip-by-block.json`);
 console.log(`placed ${geo.features.length.toLocaleString()} sales — address confirms file coordinates ${counts.verified}, moved to the address ${counts.moved}, ` +
   `address not found (file coordinates used) ${counts.unverified}, location unknown ${counts.unknown}; SFAR District corrected ${counts.district}, ZIP corrected ${counts.zip}; ` +
   `${exceptions.length} exception(s) → data/location-exceptions.csv`);

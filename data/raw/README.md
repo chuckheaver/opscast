@@ -91,8 +91,12 @@ The APN is not used.
 2. **File coordinates second**, when the address matches nothing.
 3. **Districts from the location:** SFAR district (number + letter, e.g. `1c`,
    in `realtorNid`; `district`, `districtNum`, `areaDesc`) and Supervisor
-   District (`supDistrict`). ZIP is checked against the other sales on the
-   same block (`zipMls` keeps the typed value).
+   District (`supDistrict`). ZIP: the typed (USPS) ZIP is kept unless 3+
+   other sales on the same block agree 80%+ on another, or the typed ZIP's
+   area is more than 300 m away (a typo); `zipMls` keeps the typed value.
+   The ZIP map's lines run up to half a block off along some boundaries, so
+   `public/data/zip-by-block.json` (each block's ZIP from its sales) answers
+   address lookups first and the map polygon only for blocks without sales.
 4. **Anything unknown** goes to `data/location-exceptions.csv`. A sale with
    the MLS placeholder and no address match gets no neighborhood or district
    and is kept off the map (`noLocation`) until it has a real location.
