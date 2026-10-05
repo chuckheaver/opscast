@@ -1095,26 +1095,26 @@ def build():
     okbid=lambda r: ratio(r) and r["listPrice"]>=300_000 and ratio(r)<=3
     osfh=sorted([r for r in Y1 if r["propType"] in SFHs and okbid(r)],key=lambda r:-ratio(r))[:10]
     oco=sorted([r for r in Y1 if r["propType"] in COs and okbid(r)],key=lambda r:-ratio(r))[:10]
-    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The Neighborhoods</div>
+    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The 10s</div>
       <div class='p'>Neighborhoods and Money Flow - Median Sales &nbsp;·&nbsp; microclimates are on their own page</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties</div></div>""")
     TH=lambda *cols: "<tr>"+"".join(f"<th class='l'>{c[1:]}</th>" if c.startswith("<") else f"<th>{c}</th>" for c in cols)+"</tr>"
     o.append("<div class='cols nb4'>")
-    o.append(f"""<div class='col'><h2>Top 10 - Neighborhood</h2>
+    o.append(f"""<div class='col'><h2>Neighborhood</h2>
       <table class='top'>{TH("<Neighborhood","SFH","Condo/TIC/O","vs "+py)}{nr}</table>
-      <h2>Top 10 - Zip Code</h2>
+      <h2>Zip Code</h2>
       <table class='top zt'>{TH("<ZIP","<Area","Median","Sales")}{zr}</table></div>""")
-    o.append(f"""<div class='col'><h2>Top 10 - SFH</h2>
+    o.append(f"""<div class='col'><h2>SFH</h2>
       <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(tsfh)}</table>
-      <h2>Top 10 - Condo/TIC/Other</h2>
+      <h2>Condo/TIC/Other</h2>
       <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(tco)}</table></div>""")
-    o.append(f"""<div class='col'><h2>Top 10 - $/sf</h2>
+    o.append(f"""<div class='col'><h2>$/sf</h2>
       <table class='top'>{TH("<Neighborhood","Median $/sf","Sales")}{pr}</table>
-      <h2>Lowest 10 - $/sf</h2>
+      <h2>Lowest $/sf</h2>
       <table class='top'>{TH("<Neighborhood","Median $/sf","Sales")}{plo}</table></div>""")
-    o.append(f"""<div class='col'><h2>Top 10 - Overbids (SFH)</h2>
+    o.append(f"""<div class='col'><h2>Overbids (SFH)</h2>
       <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(osfh)}</table>
-      <h2>Top 10 - Overbids - Condo/TIC/Other</h2>
+      <h2>Overbids - Condo/TIC/Other</h2>
       <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(oco)}</table></div>""")
     o.append("</div>")
     o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS). Every sale counts — no minimum; * fewer than 10 sales (read with care). Overbids exclude list prices under $300K or bids over 3× list (data errors).</span><span>page 5 / 9</span></div></div>")

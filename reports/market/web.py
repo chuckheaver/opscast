@@ -6,7 +6,7 @@ out/market-grid-v2.html), splits them into their pages, and regroups the pages
 into the three sections of the site's Market menu:
 
   Market Stats      — SF Real Estate, Detail — Allocation, Grid SFH,
-                      Grid Condo/TIC, The Neighborhoods, By the Numbers,
+                      Grid Condo/TIC, The 10s, By the Numbers,
                       Latent Inventory (in that order)
   Cost of Ownership — the cost of money: rates, bonds, the cash buyer
 
@@ -33,7 +33,7 @@ def placement(title):
     if t.startswith("detail"):                            return ("stats", 20, "")
     if "market grid - sfh" in t:                          return ("stats", 30, "grid-sfh")
     if "market grid - condo" in t:                        return ("stats", 40, "grid-condo")
-    if t.startswith("the neighborhoods"):                 return ("stats", 50, "neighborhoods")
+    if t.startswith("the 10s"):                           return ("stats", 50, "neighborhoods")
     if t.startswith("microclimates and real estate"):    return ("stats", 60, "microclimates")
     if t.startswith("by the numbers"):                    return ("stats", 70, "")
     if t.startswith("latent inventory"):                  return ("stats", 80, "inventory")
