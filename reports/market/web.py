@@ -26,18 +26,26 @@ ROOT = HERE.parents[1]
 OUT = HERE / "out"
 DEST = ROOT / "app" / "market" / "report" / "generated"
 
-# The nine pages, in print order: (label, web section, order within it, anchor).
-PAGES = [
-    ("San Francisco Real Estate", "stats", 1, ""),
-    ("The National Picture", "national", 1, ""),
-    ("Detail — Allocation of Money", "stats", 2, ""),
-    ("The Cost of Ownership", "cost", 1, ""),
-    ("The Neighborhoods", "stats", 5, "neighborhoods"),
-    ("By the Numbers", "stats", 6, ""),
-    ("Latent Inventory", "stats", 7, "inventory"),
-    ("Grid — SFH", "stats", 3, "grid-sfh"),
-    ("Grid — Condo / TIC", "stats", 4, "grid-condo"),
-]
+# Where each page lands on the web: (section, order within it, anchor),
+# decided by the page's own title so grids can run to several pages.
+def placement(title):
+    t = title.lower()
+    if t.startswith("san francisco real estate"):        return ("stats", 10, "")
+    if t.startswith("detail"):                            return ("stats", 20, "")
+    if "market grid - sfh" in t:                          return ("stats", 30, "grid-sfh")
+    if "market grid - condo" in t:                        return ("stats", 40, "grid-condo")
+    if t.startswith("the neighborhoods"):                 return ("stats", 50, "neighborhoods")
+    if t.startswith("microclimates and real estate"):    return ("stats", 60, "microclimates")
+    if t.startswith("by the numbers"):                    return ("stats", 70, "")
+    if t.startswith("latent inventory"):                  return ("stats", 80, "inventory")
+    if t.startswith("the cost of ownership"):             return ("cost", 10, "")
+    if t.startswith("the national picture"):              return ("national", 10, "")
+    raise SystemExit(f"web.py: no section for page titled {title!r}")
+
+def page_title(body):
+    m = re.search(r"class='t'>(.*?)</div>", body, re.S)
+    t = re.sub(r"<[^>]+>", "", m.group(1)) if m else ""
+    return re.sub(r"\s+", " ", t.replace("&nbsp;", " ")).strip()
 
 # Each report area opens the map on one representative neighborhood — the
 # map's own names, checked against its geojson below so a link can never
@@ -97,7 +105,12 @@ for src, cls in [(OUT / "cover3.html", "sheetA"), (OUT / "market-grid-v2.html", 
     css.append(scope(c, cls))
     for p in re.findall(r"<div class='page'>.*?(?=<div class='page'>|$)", body, re.S):
         pages.append((cls, p.rstrip()))
-assert len(pages) == len(PAGES), f"expected {len(PAGES)} pages, got {len(pages)}"
+PAGES = []
+for k, (_, body) in enumerate(pages):
+    title = page_title(body); sec, order, anchor = placement(title)
+    # only the first page of a multi-page grid carries the anchor
+    if anchor and any(a == anchor for _, _, _, a in PAGES): anchor = ""
+    PAGES.append((title, sec, order + k / 100, anchor))
 
 # ------------------------------------------------------------------ links
 # Area names appear as whole text nodes: a table cell, a ranked "3. Name", an
@@ -144,8 +157,9 @@ for old in ("sf.html", "hoods.html"):          # the previous three-way split
     (DEST / old).unlink(missing_ok=True)
 (DEST / "sheets.css").write_text("\n".join(css))
 
-run = re.search(r"run ([A-Z][a-z]{2} \d{1,2}, \d{4})", pages[-1][1])
-period = re.search(r"Year to date: (Jan 1 – [A-Z][a-z]{2} \d{1,2}, \d{4})", pages[-1][1])
+ALL = "".join(b for _, b in pages)
+run = re.search(r"run ([A-Z][a-z]{2} \d{1,2}, \d{4})", ALL)
+period = re.search(r"Year to date: (Jan 1 – [A-Z][a-z]{2} \d{1,2}, \d{4})", ALL)
 meta = {
     "period": period.group(1) if period else "",
     "run": run.group(1) if run else "",

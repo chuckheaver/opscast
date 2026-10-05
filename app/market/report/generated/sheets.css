@@ -169,3 +169,22 @@
 .sheetB .rng { color:#6B6F75; font-weight:400; font-size:7.4px; }
 .sheetB .legend { font-size:7.2px; color:#6B6F75; margin-top:4px; line-height:1.35; }
 .sheetB .foot { position:absolute; bottom:0; left:0; right:0; font-size:7.2px; color:#6B6F75; border-top:0.5px solid #DCDDDE; padding-top:3px; display:flex; justify-content:space-between; }
+.sheetB .hdr .t .part { font-size:11px; font-weight:700; color:#6B6F75; letter-spacing:0; }
+.sheetB tbody tr.dist td { background:#E4EEF0 !important; color:#203C5F; font-weight:800; border-top:1px solid #203C5F; font-size:7.5px; }
+.sheetB tbody tr.dist td.pri { color:#6B6F75; }
+.sheetB td.name .code { color:#6B6F75; font-weight:400; font-size:6.8px; }
+.sheetB table tbody td { padding-top:0.9px; padding-bottom:0.9px; }
+.sheetB .mc-top { display:flex; gap:14px; align-items:stretch; margin:6px 0 4px; }
+.sheetB .mc-map { flex:0 0 230px; }
+.sheetB .mc-map svg { width:100%; height:auto; display:block; }
+.sheetB .mc-map .mapwrap { border:1px solid #DCDDDE; border-radius:6px; overflow:hidden; line-height:0; }
+.sheetB .mc-legend { display:flex; flex-wrap:wrap; gap:4px 9px; font-size:7.4px; margin-top:4px; color:#131A25; align-items:center; }
+.sheetB .mc-side { flex:1; min-width:0; display:flex; flex-direction:column; gap:7px; }
+.sheetB .mc-h { font-family:'Montserrat', 'Lato', Helvetica, Arial, sans-serif; font-size:12px; font-weight:800; color:#fff; background:#203C5F; padding:3px 8px; border-radius:4px; }
+.sheetB .mc-tiles { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+.sheetB .mc-tile { border-radius:6px; padding:7px 8px; background:#E4EEF0; border-left:5px solid var(--z); }
+.sheetB .mc-tile b { display:block; font-family:Georgia,serif; font-size:19px; color:#203C5F; }
+.sheetB .mc-tile span { font-size:8.4px; color:#131A25; font-weight:700; }
+.sheetB .mc-tile i { display:block; font-style:normal; font-size:7.6px; color:#6B6F75; margin-top:2px; }
+.sheetB .mc-note { font-size:8.6px; color:#131A25; line-height:1.45; }
+.sheetB .mc-note b { color:#203C5F; }

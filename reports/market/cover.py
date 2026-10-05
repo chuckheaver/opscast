@@ -38,7 +38,7 @@ def facts():
     inw=lambda r,w: r.get("sellingDate") and w[0]<=r["sellingDate"]<=w[1]
     S={k:[r for r in F if inw(r,w) and r.get("sellingPrice")] for k,w in W.items()}
     seg={}
-    for (name,byA,tot,byZ) in pages:
+    for (name,byA,tot,byZ,*_) in pages:
         mvr=[(D(st["y1"]["price"],st["y0"]["price"]),a,st) for a,st in byA if st["y1"]["n"]>=20 and st["y0"]["n"]>=20 and st["y0"]["price"]]
         mvr.sort(reverse=True)
         vol=sorted([(st["y1"]["n"]-st["y0"]["n"],a,st) for a,st in byA],reverse=True)

@@ -5,11 +5,14 @@
     "stats": [
       "San Francisco Real Estate",
       "Detail \u2014 Allocation of Money",
-      "Grid \u2014 SFH",
-      "Grid \u2014 Condo / TIC",
+      "San Francisco Market Grid - SFH 1 of 2",
+      "San Francisco Market Grid - SFH 2 of 2",
+      "San Francisco Market Grid - Condo/TIC/Other 1 of 2",
+      "San Francisco Market Grid - Condo/TIC/Other 2 of 2",
       "The Neighborhoods",
+      "Microclimates and Real Estate",
       "By the Numbers",
-      "Latent Inventory"
+      "Latent Inventory \u2014 SFH"
     ],
     "cost": [
       "The Cost of Ownership"
@@ -19,7 +22,7 @@
     ]
   },
   "links": {
-    "areas": 165,
+    "areas": 115,
     "sales": 40
   }
 }

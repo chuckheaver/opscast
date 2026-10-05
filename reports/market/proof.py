@@ -9,9 +9,11 @@ import re, datetime, pathlib
 
 OUT = pathlib.Path(__file__).resolve().parent / "out"
 SRC = [(OUT / "cover3.html", "sheetA"), (OUT / "market-grid-v2.html", "sheetB")]
-PAGE_LABELS = ["San Francisco Real Estate", "The National Picture", "Detail — Allocation of Money",
-               "Who Is Buying", "The Neighborhoods", "By the Numbers", "Latent Inventory",
-               "Grid — Single Family", "Grid — Condo / TIC / Co-op"]
+# Labels come from each page's own title, so pages can be added or split.
+def page_title(body):
+    m = re.search(r"class='t'>(.*?)</div>", body, re.S)
+    t = re.sub(r"<[^>]+>", "", m.group(1)) if m else "Page"
+    return re.sub(r"\s+", " ", t.replace("&nbsp;", " ")).strip()
 
 def split(path):
     s = pathlib.Path(path).read_text()
@@ -47,7 +49,7 @@ for path, cls in SRC:
     for p in re.findall(r"<div class='page'>.*?(?=<div class='page'>|$)", body, re.S):
         pages.append((cls, p.rstrip()))
 
-assert len(pages) == 9, f"expected 9 pages, got {len(pages)}"
+PAGE_LABELS = [page_title(b) for _, b in pages]
 
 SHELL_CSS = """
 :root { --ground:#E9ECF1; --ground-2:#DDE2EA; --ink:#101720; --muted:#5A6472;

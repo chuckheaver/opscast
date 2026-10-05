@@ -753,11 +753,22 @@ def build():
     zs={z[0]:z[3] for z in s["byZ"]}; zc={z[0]:z[3] for z in c["byZ"]}
     sun,pf,tr,fg=zs["Sun"]["y1"],zs["Persistent Fog"]["y1"],zs["Transition"]["y1"],zs["Fog"]["y1"]
     peak=max(mon,key=lambda x:x[1]); ratio0=zs['Sun']['y0']['price']/zs['Persistent Fog']['y0']['price']
-    byA={name:{a:stt for a,stt in byA_} for (name,byA_,_,_) in pages}
+    byA={name:{a:stt for a,stt in byA_} for (name,byA_,*_) in pages}
     sb=byA[CO].get("South Beach / Yerba Buena"); mb=byA[CO].get("Mission Bay")
     loan=RENT_NOW/pmt(1,cv.RATE_NOW)
     pac=[x for x in s['top']+s['bot'] if 'Pacific / Presidio' in x[1]]; pacpct=sgn(pac[0][0]) if pac else "+7"
-    mapsvg,ndots=sales_map(-122.517,37.705,-122.353,37.833,w=300,h=366)
+    mapsvg,ndots=sales_map(-122.517,37.705,-122.353,37.833,w=300,h=366,window=(W["y1"][0],W["y1"][1]))
+    # The fog map and the SFH-by-zone medians live on the Microclimates and
+    # Real Estate page, which the grid script builds; hand them over.
+    rat=sun["price"]/pf["price"] if sun.get("price") and pf.get("price") else None
+    json.dump(dict(map=mapsvg, ndots=ndots, zones=ZONE_FILL,
+        tiles=[dict(name=nm,color=col,price=z["price"],n=z["n"],ppsf=z["ppsf"] or 0) for nm,col,z in
+               (("Sun Zone","#FBDC7E",sun),("Transition Zone","#F6E3A6",tr),("Fog Zone","#C3CBD2",fg),("Persistent Fog","#8D9BA6",pf))],
+        note=(f"Single-family homes in the <b>Sun</b> zone sold for a median <b>{M(sun['price'])}</b>, "
+              f"<b>{rat:.1f}×</b> the <b>Persistent Fog</b> zone's {M(pf['price'])}, and per square foot "
+              f"${sun['ppsf']:,.0f} against ${pf['ppsf']:,.0f}. Houses against houses: across all property types the order "
+              f"flips, because the Sun zone is mostly condos.") if rat else ""),
+        open(mg.os.path.join(mg.HERE,"out","micro.json"),"w"))
     css=mg.FONT_CSS+f"""
     @page {{ size: letter landscape; margin: 0.32in 0.35in; }}
     body {{ margin:0; font-family: {mg.SANS}; color:{INK}; }}
@@ -1106,28 +1117,19 @@ def build():
     osfh=sorted([r for r in Y1 if r["propType"] in SFHs and okbid(r)],key=lambda r:-ratio(r))[:10]
     oco=sorted([r for r in Y1 if r["propType"] in COs and okbid(r)],key=lambda r:-ratio(r))[:10]
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The Neighborhoods</div>
-      <div class='p'>Neighborhoods, Microclimates and Money Flow - Median Sales</div></div>
+      <div class='p'>Neighborhoods and Money Flow - Median Sales &nbsp;·&nbsp; microclimates are on their own page</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties</div></div>""")
     TH=lambda *cols: "<tr>"+"".join(f"<th class='l'>{c[1:]}</th>" if c.startswith("<") else f"<th>{c}</th>" for c in cols)+"</tr>"
     o.append("<div class='cols nb4'>")
-    o.append(f"""<div class='col' style='flex:1.3'><h2>By Microclimate</h2>
-      <div class='mapwrap'>{mapsvg}</div>
-      <div class='maplegend'><span class='dotkey'></span><b>{ndots:,}</b> closings, 2026 YTD
-        {"".join(f"<span class='zk'><span class='zc' style='background:{col}'></span>{nm}</span>" for nm,col in ZONE_FILL)}</div>
-      <table class='mzp'>"""
-      +"".join(f"<tr><td>{CHIP(col)} {nm}</td><td class='b'>{M(z['price'])}</td></tr>"
-               for nm,col,z in (("Sun Zone","#FBDC7E",sun),("Transition Zone","#F6E3A6",tr),
-                                ("Fog Zone","#C3CBD2",fg),("Persistent Fog","#8D9BA6",pf)))
-      +"</table><div class='cap'>SFH median sale by summer-fog zone, Jan 1 – " + thru + ".</div></div>")
     o.append(f"""<div class='col'><h2>Top 10 - Neighborhood</h2>
       <table class='top'>{TH("<Neighborhood","SFH","Condo/TIC/O","vs "+py)}{nr}</table>
-      <h2>Top 10 - SFH</h2>
+      <h2>Top 10 - Zip Code</h2>
+      <table class='top zt'>{TH("<ZIP","<Area","Median","Sales")}{zr}</table></div>""")
+    o.append(f"""<div class='col'><h2>Top 10 - SFH</h2>
       <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(tsfh)}</table>
       <h2>Top 10 - Condo/TIC/Other</h2>
       <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(tco)}</table></div>""")
-    o.append(f"""<div class='col'><h2>Top 10 - Zip Code</h2>
-      <table class='top zt'>{TH("<ZIP","<Area","Median","Sales")}{zr}</table>
-      <h2>Top 10 - $/sf</h2>
+    o.append(f"""<div class='col'><h2>Top 10 - $/sf</h2>
       <table class='top'>{TH("<Neighborhood","Median $/sf","Sales")}{pr}</table>
       <h2>Lowest 10 - $/sf</h2>
       <table class='top'>{TH("<Neighborhood","Median $/sf","Sales")}{plo}</table></div>""")
@@ -1136,7 +1138,7 @@ def build():
       <h2>Top 10 - Overbids - Condo/TIC/Other</h2>
       <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(oco)}</table></div>""")
     o.append("</div>")
-    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS), over USGS-derived summer-fog contours. Every sale counts — no minimum; * fewer than 10 sales (read with care). Overbids exclude list prices under $300K or bids over 3× list (data errors).</span><span>page 5 / 9</span></div></div>")
+    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS). Every sale counts — no minimum; * fewer than 10 sales (read with care). Overbids exclude list prices under $300K or bids over 3× list (data errors).</span><span>page 5 / 9</span></div></div>")
 
     # ── PAGE 6 — in depth ────────────────────────────────────────────────
     # Everything a reader can skip. The narrative pages stay light because
