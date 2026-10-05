@@ -72,7 +72,9 @@
 .sheetA .sig { background:#FBF3D9; border-left:3px solid #E9BC3F; border-radius:6px; padding:8px 11px; font-size:10px; line-height:1.45; }
 .sheetA .sig b { color:#203C5F; }
 .sheetA table.linv { border-collapse:collapse; width:100%; font-size:8.2px; table-layout:fixed; }
-.sheetA table.linv th, .sheetA table.linv td { padding:1.5px 3px; text-align:right; white-space:nowrap; }
+.sheetA table.linv th, .sheetA table.linv td { padding:0.55px 3px; text-align:right; white-space:nowrap; }
+.sheetA table.linv td .code { color:#6B6F75; font-weight:400; font-size:0.85em; }
+.sheetA .mast .t .part { font-size:12px; font-weight:700; color:#6B6F75; letter-spacing:0; }
 .sheetA table.linv thead tr.g th { background:#203C5F; color:#fff; font-size:7.6px; text-transform:uppercase; letter-spacing:0.2px; text-align:center; padding:3px; border-left:2px solid #fff; }
 .sheetA table.linv thead tr.g th.l { text-align:left; border-left:none; }
 .sheetA table.linv thead tr.sub th { background:#E4EEF0; color:#203C5F; font-size:7px; font-weight:700; border-bottom:1.5px solid #203C5F; }
