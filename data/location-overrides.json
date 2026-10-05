@@ -1,1 +1,47 @@
-{}
+{
+  "82025665": {
+    "nid": "10f",
+    "confirmed": true,
+    "note": "258 Harvard St: no coordinates in the MLS file; Portola confirmed"
+  },
+  "82029908": {
+    "nid": "10a",
+    "confirmed": true,
+    "note": "800 Jamestown Ave: no coordinates in the MLS file; Bayview confirmed"
+  },
+  "82055819": {
+    "nid": "10f",
+    "confirmed": true,
+    "note": "28 Megan Dr #1: no coordinates in the MLS file; Portola confirmed"
+  },
+  "82056639": {
+    "nid": "10a",
+    "confirmed": true,
+    "note": "1737 McKinnon: no coordinates in the MLS file; Bayview confirmed"
+  },
+  "82057631": {
+    "nid": "3j",
+    "confirmed": true,
+    "note": "142 Josiah Ave: no coordinates in the MLS file; Oceanview confirmed"
+  },
+  "82058462": {
+    "nid": "10c",
+    "confirmed": true,
+    "note": "60 Camellia Ave: no coordinates in the MLS file; Excelsior confirmed"
+  },
+  "82058643": {
+    "nid": "10f",
+    "confirmed": true,
+    "note": "181 Dartmouth St: no coordinates in the MLS file; Portola confirmed"
+  },
+  "82058690": {
+    "nid": "10f",
+    "confirmed": true,
+    "note": "1642 Burrows St: no coordinates in the MLS file; Portola confirmed"
+  },
+  "82060341": {
+    "nid": "4h",
+    "confirmed": true,
+    "note": "736 Foerster St: no coordinates in the MLS file; Miraloma Park confirmed"
+  }
+}

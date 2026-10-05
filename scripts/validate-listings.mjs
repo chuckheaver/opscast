@@ -180,7 +180,8 @@ function blockAt([lng, lat]) {
 
 // ── Manual answers (data/location-overrides.json) ──────────────────────────
 // Keyed by MLS listing number: { "lat": .., "lng": .. } places the sale there;
-// { "nid": "5m", "sup": 8 } sets its districts when the exact spot is unknown.
+// { "nid": "5m", "sup": 8 } sets its districts when the exact spot is unknown;
+// "confirmed": true settles a neighborhood stand-in (off the exception report).
 // Applied on every run, so an answer given once holds for future imports.
 let OVERRIDES = {};
 try { OVERRIDES = JSON.parse(readFileSync("data/location-overrides.json", "utf8")); } catch {}
@@ -213,7 +214,9 @@ for (const f of geo.features) {
     status = "unverified"; p.addrMatch = "unverified";
   } else {
     status = "unknown"; p.addrMatch = "unknown";
-    exceptions.push([p.id, p.address, (p.sellingDate || "").slice(0, 10), "Location unknown",
+    // A stand-in whose neighborhood you've confirmed (overrides: confirmed)
+    // is settled — it stays at its neighborhood point and off the report.
+    if (!(ov?.confirmed && p.geoSource === "neighborhood")) exceptions.push([p.id, p.address, (p.sellingDate || "").slice(0, 10), "Location unknown",
       p.geoSource === "neighborhood" ? "no coordinates in the file and the address matches no other sale" : "MLS placeholder coordinates and the address matches no other sale",
       p.geoSource === "neighborhood" ? "shown at a neighborhood stand-in point (neighborhood inferred from its street/ZIP); needs a real location" : "kept off the map with no neighborhood or district until it has a real location"]);
   }
