@@ -298,40 +298,6 @@ PARCEL_FIX={
  "Fishermans Wharf":"North Beach / Waterfront","Northern Waterfront":"North Beach / Waterfront",
  "Rincon Hill":"South Beach / Yerba Buena","Golden Gate Park":"Sunset / Parkside",
 }
-PARCEL_ROWS=[("u1","1 Unit"),("u2_4","2–4"),("u5_9","5–9"),("u10","10+"),("othr","Other")]
-
-def latent_inventory(window):
-    """Residential parcel stock per neighborhood (our fog-map neighborhoods,
-    with the SFAR code most of their sales carry) beside the year's closings,
-    so the share of each neighborhood that actually traded is visible.
-    Stock: public/data/parcel-res-by-fog.json
-    (scripts/build-parcel-res-by-realtor.mjs)."""
-    import collections
-    par=json.load(open(mg.os.path.join(mg.ROOT,"public/data/parcel-res-by-fog.json")))
-    F=[f["properties"] for f in json.load(open(mg.SRC))["features"]]
-    code=mg.fog_codes(F)
-    SFH=mg.SEG["Single Family Residences"]
-    sold=collections.defaultdict(collections.Counter)
-    sfh_rows=collections.defaultdict(list)
-    for r in F:
-        d=r.get("sellingDate") or ""
-        if not (window[0]<=d<=window[1]) or not r.get("fogNeighborhood"): continue
-        k=r["fogNeighborhood"]
-        sold[k]["sfh" if r["propType"] in SFH else "co"]+=1
-        if r["propType"] in SFH: sfh_rows[k].append(r)
-    rows=[]
-    for nm,v in par.items():
-        s_=sold.get(nm,collections.Counter()); tot=s_["sfh"]+s_["co"]
-        if not v.get("u1") and not s_["sfh"]: continue      # no houses (parks, the Presidio's open land)
-        nid=nm
-        rows.append(dict(area=nm,nid=code.get(nm,""),**{k:v.get(k,0) for k,_ in PARCEL_ROWS},total=v["total"],
-                         sfh=s_["sfh"],co=s_["co"],sold=tot,
-                         turn=(100*s_["sfh"]/v["u1"]) if v.get("u1") else None,
-                         turn_all=(100*tot/v["total"]) if v["total"] else None,
-                         st=mg.stats(sfh_rows.get(nm,[]))))
-    rows.sort(key=lambda r:(r["area"].lower(),r["nid"]))
-    city=mg.stats([r for rs in sfh_rows.values() for r in rs])
-    return rows,0,city
 
 def N2A_(n):
     return mg.N2A.get(mg.FIX.get(n or "", n or ""))
@@ -825,18 +791,7 @@ def build():
     .pqs {{ font-size:10px; color:{INK}; margin-top:5px; }}
     .sig {{ background:{GOLD_LT}; border-left:3px solid {GOLD_MID}; border-radius:6px; padding:8px 11px; font-size:10px; line-height:1.45; }}
     .sig b {{ color:{GOLD}; }}
-    table.linv {{ border-collapse:collapse; width:100%; font-size:8.2px; table-layout:fixed; }}
-    table.linv th, table.linv td {{ padding:0.55px 3px; text-align:right; white-space:nowrap; }}
-    table.linv td .code {{ color:{MUTED}; font-weight:400; font-size:0.85em; }}
     .mast .t .part {{ font-size:12px; font-weight:700; color:{MUTED}; letter-spacing:0; }}
-    table.linv thead tr.g th {{ background:{NAV}; color:#fff; font-size:7.6px; text-transform:uppercase; letter-spacing:0.2px; text-align:center; padding:3px; border-left:2px solid #fff; }}
-    table.linv thead tr.g th.l {{ text-align:left; border-left:none; }}
-    table.linv thead tr.sub th {{ background:{NAV_LT}; color:{NAV}; font-size:7px; font-weight:700; border-bottom:1.5px solid {NAV}; }}
-    table.linv td.l, table.linv tfoot td.l {{ text-align:left; font-weight:600; overflow:hidden; text-overflow:ellipsis; }}
-    table.linv tbody td {{ border-bottom:0.4px solid {LINE}; }}
-    table.linv tbody tr:nth-child(even) td {{ background:#F6F7F7; }}
-    table.linv td.b {{ font-weight:800; color:{NAV}; }}
-    table.linv td.g0, table.linv th.g0 {{ border-left:1.5px solid #C9CCD0; }}
     table.mzp {{ width:100%; border-collapse:collapse; font-size:10px; margin-top:3px; }}
     table.mzp td {{ padding:4px 2px; border-bottom:0.5px solid {LINE}; }}
     table.mzp td.b {{ text-align:right; font-weight:800; color:{NAV}; font-size:11px; }}
@@ -861,22 +816,6 @@ def build():
     ul.math li.tot b {{ font-size:11px; color:{NAV}; }}
     ul.sigl {{ margin:3px 0 0; padding-left:14px; }}
     ul.sigl li {{ margin:2px 0; }}
-    .lkpi {{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:6px 0 8px; }}
-    .lkpi div {{ background:{NAV_LT}; border-left:3px solid {GOLD_MID}; border-radius:4px; padding:5px 8px; }}
-    .lkpi b {{ display:block; font-size:17px; color:{NAV}; font-weight:800; }}
-    .lkpi span {{ font-size:8px; color:{MUTED}; }}
-    table.lsfh {{ font-size:8.4px; }}
-    table.lsfh thead tr.g th {{ text-align:left; }}
-    table.lsfh td.bar {{ text-align:left; }}
-    table.lsfh td.one {{ color:{MUTED}; }}
-    .lh, .lt {{ display:inline-block; vertical-align:middle; height:7px; border-radius:2px; background:#E6E7E8; }}
-    .lh {{ width:96px; }} .lt {{ width:70px; }}
-    table.lsfh thead tr.g th.r {{ text-align:right; }}
-    table.lsfh tfoot td {{ font-weight:800; color:{NAV}; border-top:1.5px solid {NAV}; padding-top:3px; }}
-    .lhf, .ltf {{ display:block; height:7px; border-radius:2px; }}
-    .lhf {{ background:#b9c7d8; }} .ltf {{ background:{NAV}; }} .ltf.thin {{ background:#9aa6b6; }}
-    .lhv, .ltv {{ display:inline-block; margin-left:5px; vertical-align:middle; font-weight:700; color:{INK}; }}
-    table.linv tfoot td {{ background:{GOLD_LT}; font-weight:800; border-top:2px solid {GOLD_MID}; border-bottom:2px solid {GOLD_MID}; }}
     td.bar {{ text-align:left; }}
     .db {{ display:inline-block; width:46px; height:7px; background:#E6E7E8; border-radius:2px; vertical-align:-1px; overflow:hidden; }}
     .dbf {{ display:block; height:7px; border-radius:2px; }}
@@ -1149,84 +1088,6 @@ def build():
       {weekly_bars(wrows,h=150,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"Jan 1 – {thru}, both years · 2025 full year {w25y:,}"))}
       <div class='cap'>Grey bars after week {wcut} show where last year kept going — its busiest stretch was early October, which is what a full autumn looks like.</div></div>""")
     o.append(f"<div class='foot'><span>Every figure from closed sales, Jan 1 – {thru} (SFAR MLS). Days on market as reported; list-to-sale ratios use the final list price.</span><span>page 6 / 9</span></div></div>")
-
-    # ── PAGE 7 — latent inventory (single-family only) ───────────────────
-    # Only houses give a true turnover rate: one parcel is one house is one
-    # possible sale. Condo sales are units while multi-unit parcels are
-    # buildings, so mixing them compares different things — left out.
-    linv,lskip,lcity=latent_inventory((W["m1"][0][:4]+"-01-01",W["m1"][1]))
-    MIN_SHOW, MIN_SOLID = 50, 250            # houses: to list at all / to trust the rate
-    shown=list(linv)                         # every area is listed; thin ones carry a *
-    hidden=[]
-    # A–Z, like the grids (latent_inventory already sorts by name)
-    T=lambda k,rows=linv: sum(r[k] for r in rows)
-    houses, sold_h = T("u1"), T("sfh")
-    rate=100*sold_h/houses
-    months=int(W["m1"][1][5:7])
-    pace=rate*12/months                      # the year-to-date rate, run to a full year
-    solid=[r for r in shown if r["u1"]>=MIN_SOLID and r["turn"] is not None]
-    tmax=max(r["turn"] for r in solid)
-    hmax=max(r["u1"] for r in shown)
-    def hbar(v):
-        return (f"<span class='lh'><span class='lhf' style='width:{max(2,round(96*v/hmax))}px'></span></span>"
-                f"<span class='lhv'>{v:,}</span>")
-    def tbar(r):
-        v=r["turn"]
-        if v is None: return "—"
-        w_=max(2,round(70*min(v,tmax)/tmax))
-        thin=r["u1"]<MIN_SOLID
-        return (f"<span class='lt'><span class='ltf{' thin' if thin else ''}' style='width:{w_}px'></span></span>"
-                f"<span class='ltv'>{v:.1f}%{'*' if thin else ''}</span>")
-    def sale_cells(st):
-        if not st["n"]: return "<td class='g0'>—</td><td>—</td><td>—</td><td>—</td>"
-        return (f"<td class='g0 b'>{mg.usdM(st['price'])}</td>"
-                f"<td>{mg.usd(st['ppsf']) if st['ppsf'] else '—'}</td>"
-                f"<td>{mg.i(st['dom'])}</td>"
-                f"<td>{mg.pct1(st['pct'])}%</td>")
-    lrow=lambda r: (
-        f"<tr><td class='l'>{html.escape(r['area'])} <span class='code'>{html.escape(r['nid'])}</span></td>"
-        f"<td class='bar'>{hbar(r['u1'])}</td>"
-        f"<td class='b'>{r['sfh']:,}</td>"
-        f"<td class='bar g0'>{tbar(r)}</td>"
-        f"<td class='one'>{('1 in ' + format(round(100/r['turn']), ',')) if r['turn'] else '—'}</td>"
-        f"{sale_cells(r['st'])}</tr>")
-    lo_r=min(solid,key=lambda r:r["turn"]); hi_r=max(solid,key=lambda r:r["turn"])
-    big=max(shown,key=lambda r:r['u1'])
-    hidden_names=", ".join(html.escape(r["area"]) for r in sorted(hidden,key=lambda r:r["area"]))
-    FIRST, REST = 44, 44                       # rows: page with the summary tiles, then full pages
-    chunks=[shown[:FIRST]]+[shown[k:k+REST] for k in range(FIRST,len(shown),REST)]
-    for ci,chunk in enumerate(chunks):
-        last=ci==len(chunks)-1
-        part=f" &nbsp;<span class='part'>{ci+1} of {len(chunks)}</span>" if len(chunks)>1 else ""
-        o.append(f"""<div class='page'><div class='mast'><div><div class='t'>Latent Inventory — SFH{part}</div>
-      <div class='p'>Every SFH in the city beside the ones that sold. <b>{rate:.1f}%</b> changed hands January through {mname} — about one SFH in {round(100/rate)}.</div></div>
-      <div class='by'>Chuck Heaver · Vanguard Properties<br>SF Land Use parcels · SFAR MLS closings</div></div>""")
-        if ci==0: o.append(f"""<div class='lkpi'>
-        <div><b>{houses:,}</b><span>SFH in the city</span></div>
-        <div><b>{sold_h:,}</b><span>sold, Jan 1 – {thru}</span></div>
-        <div><b>{rate:.1f}%</b><span>of all SFH traded so far this year</span></div>
-        <div><b>~{pace:.1f}%</b><span>a year at this pace — one SFH in {round(100/pace)}</span></div>
-      </div>""")
-        o.append(f"""<table class='linv lsfh'>
-        <colgroup><col style='width:19%'><col style='width:17%'><col style='width:6%'><col style='width:14%'><col style='width:8%'>
-          <col style='width:9%'><col style='width:8%'><col style='width:7%'><col style='width:12%'></colgroup>
-        <thead>
-          <tr class='g'><th class='l'>Neighborhood</th><th>SFH — latent inventory</th><th>Sold YTD</th>
-            <th class='g0'>Share traded</th><th>1 SFH in</th>
-            <th class='g0 r'>Median price</th><th class='r'>$/sf</th><th class='r'>DOM</th><th class='r'>Sold Price vs List %</th></tr>
-        </thead><tbody>{"".join(lrow(r) for r in chunk)}</tbody>""")
-        if last: o.append(f"""<tfoot><tr><td class='l'>All single-family</td><td class='bar'><span class='lhv' style='margin-left:0'>{houses:,}</span></td>
-          <td class='b'>{sold_h:,}</td><td class='bar g0'><span class='ltv' style='margin-left:0'>{rate:.1f}%</span></td>
-          <td class='one'>1 in {round(100/rate)}</td>{sale_cells(lcity)}</tr></tfoot>""")
-        o.append("</table>")
-        if last: o.append(f"""<div class='cap' style='margin-top:6px'>Size is not supply. {html.escape(big['area'])} holds the most SFH — {big['u1']:,} — and released {big['sfh']:,} ({big['turn']:.1f}%).
-      Turnover runs from {lo_r['turn']:.1f}% in {html.escape(lo_r['area'])} to {hi_r['turn']:.1f}% in {html.escape(hi_r['area'])}:
-      the same buyer sees very different odds of an SFH coming up depending on where they are looking.</div>
-      <div class='src'>SFH are single-unit residential parcels in the SF Land Use dataset; sales are single-family closings (SFAR MLS).
-      * Fewer than {MIN_SOLID} SFH in the area — a handful of sales moves the rate, so read it with care.
-      Every neighborhood on its own row, A–Z, with its SFAR code.</div>
-      <div class='foot'><span>Latent inventory = every SFH that exists, sold or not. Sales are closed transactions, Jan 1 – {thru}.</span><span>page 7 / 9</span></div></div>""")
-        else: o.append(f"""<div class='foot'><span>Continued: every neighborhood, A–Z, with its SFAR code.</span><span>page 0 / 0</span></div></div>""")
 
     o.append("</body></html>")
     return "".join(o)

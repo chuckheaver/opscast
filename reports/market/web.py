@@ -6,8 +6,7 @@ out/market-grid-v2.html), splits them into their pages, and regroups the pages
 into the three sections of the site's Market menu:
 
   Market Stats      — SF Real Estate, Detail — Allocation, Grid SFH,
-                      Grid Condo/TIC, The 10s, By the Numbers,
-                      Latent Inventory (in that order)
+                      Grid Condo/TIC, The 10s, By the Numbers (in that order)
   Cost of Ownership — the cost of money: rates, bonds, the cash buyer
 
 On the way through it turns report text into drill-downs on the live map:
@@ -36,7 +35,6 @@ def placement(title):
     if t.startswith("the 10s"):                           return ("stats", 50, "neighborhoods")
     if t.startswith("microclimates and real estate"):    return ("stats", 60, "microclimates")
     if t.startswith("by the numbers"):                    return ("stats", 70, "")
-    if t.startswith("latent inventory"):                  return ("stats", 80, "inventory")
     if t.startswith("the cost of ownership"):             return ("cost", 10, "")
     raise SystemExit(f"web.py: no section for page titled {title!r}")
 

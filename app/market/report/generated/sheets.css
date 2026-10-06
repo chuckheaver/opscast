@@ -66,18 +66,7 @@
 .sheetA .pqs { font-size:10px; color:#131A25; margin-top:5px; }
 .sheetA .sig { background:#FBF3D9; border-left:3px solid #E9BC3F; border-radius:6px; padding:8px 11px; font-size:10px; line-height:1.45; }
 .sheetA .sig b { color:#203C5F; }
-.sheetA table.linv { border-collapse:collapse; width:100%; font-size:8.2px; table-layout:fixed; }
-.sheetA table.linv th, .sheetA table.linv td { padding:0.55px 3px; text-align:right; white-space:nowrap; }
-.sheetA table.linv td .code { color:#6B6F75; font-weight:400; font-size:0.85em; }
 .sheetA .mast .t .part { font-size:12px; font-weight:700; color:#6B6F75; letter-spacing:0; }
-.sheetA table.linv thead tr.g th { background:#203C5F; color:#fff; font-size:7.6px; text-transform:uppercase; letter-spacing:0.2px; text-align:center; padding:3px; border-left:2px solid #fff; }
-.sheetA table.linv thead tr.g th.l { text-align:left; border-left:none; }
-.sheetA table.linv thead tr.sub th { background:#E4EEF0; color:#203C5F; font-size:7px; font-weight:700; border-bottom:1.5px solid #203C5F; }
-.sheetA table.linv td.l, .sheetA table.linv tfoot td.l { text-align:left; font-weight:600; overflow:hidden; text-overflow:ellipsis; }
-.sheetA table.linv tbody td { border-bottom:0.4px solid #DCDDDE; }
-.sheetA table.linv tbody tr:nth-child(even) td { background:#F6F7F7; }
-.sheetA table.linv td.b { font-weight:800; color:#203C5F; }
-.sheetA table.linv td.g0, .sheetA table.linv th.g0 { border-left:1.5px solid #C9CCD0; }
 .sheetA table.mzp { width:100%; border-collapse:collapse; font-size:10px; margin-top:3px; }
 .sheetA table.mzp td { padding:4px 2px; border-bottom:0.5px solid #DCDDDE; }
 .sheetA table.mzp td.b { text-align:right; font-weight:800; color:#203C5F; font-size:11px; }
@@ -107,25 +96,6 @@
 .sheetA ul.math li.tot b { font-size:11px; color:#203C5F; }
 .sheetA ul.sigl { margin:3px 0 0; padding-left:14px; }
 .sheetA ul.sigl li { margin:2px 0; }
-.sheetA .lkpi { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:6px 0 8px; }
-.sheetA .lkpi div { background:#E4EEF0; border-left:3px solid #E9BC3F; border-radius:4px; padding:5px 8px; }
-.sheetA .lkpi b { display:block; font-size:17px; color:#203C5F; font-weight:800; }
-.sheetA .lkpi span { font-size:8px; color:#6B6F75; }
-.sheetA table.lsfh { font-size:8.4px; }
-.sheetA table.lsfh thead tr.g th { text-align:left; }
-.sheetA table.lsfh td.bar { text-align:left; }
-.sheetA table.lsfh td.one { color:#6B6F75; }
-.sheetA .lh, .sheetA .lt { display:inline-block; vertical-align:middle; height:7px; border-radius:2px; background:#E6E7E8; }
-.sheetA .lh { width:96px; }
-.sheetA .lt { width:70px; }
-.sheetA table.lsfh thead tr.g th.r { text-align:right; }
-.sheetA table.lsfh tfoot td { font-weight:800; color:#203C5F; border-top:1.5px solid #203C5F; padding-top:3px; }
-.sheetA .lhf, .sheetA .ltf { display:block; height:7px; border-radius:2px; }
-.sheetA .lhf { background:#b9c7d8; }
-.sheetA .ltf { background:#203C5F; }
-.sheetA .ltf.thin { background:#9aa6b6; }
-.sheetA .lhv, .sheetA .ltv { display:inline-block; margin-left:5px; vertical-align:middle; font-weight:700; color:#131A25; }
-.sheetA table.linv tfoot td { background:#FBF3D9; font-weight:800; border-top:2px solid #E9BC3F; border-bottom:2px solid #E9BC3F; }
 .sheetA td.bar { text-align:left; }
 .sheetA .db { display:inline-block; width:46px; height:7px; background:#E6E7E8; border-radius:2px; vertical-align:-1px; overflow:hidden; }
 .sheetA .dbf { display:block; height:7px; border-radius:2px; }
