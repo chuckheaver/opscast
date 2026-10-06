@@ -201,7 +201,7 @@ CSS = f"""
     .fm-idx .hr {{ color:{MUTED}; }}
     .fm-idx .tp {{ flex:0 0 17px; text-align:right; font-weight:700; }}
     .fm-note {{ font-size:7.4px; color:{MUTED}; margin-top:5px; line-height:1.35; }}
-    .mz-cards {{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:5px 0 7px; }}
+    .mz-cards {{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:4px 0 5px; }}
     .mz-card {{ border-radius:7px; padding:7px 9px 6px; background:{NAV_LT}; border-top:6px solid var(--z); position:relative; }}
     .mz-card .L {{ position:absolute; right:8px; top:4px; font-family:'Montserrat','Lato',sans-serif; font-size:24px; font-weight:800; color:var(--z); opacity:.9; }}
     .mz-card .nm {{ font-family:'Montserrat','Lato',sans-serif; font-size:10.5px; font-weight:800; color:{NAV}; }}
@@ -216,12 +216,12 @@ CSS = f"""
     table.mz {{ width:100%; border-collapse:collapse; font-size:7.6px; table-layout:fixed; }}
     table.mz th {{ font-size:6.6px; color:{MUTED}; text-transform:uppercase; text-align:right; font-weight:700; padding:1px 2px; border-bottom:1px solid {NAV}; }}
     table.mz th.l, table.mz td.l {{ text-align:left; }}
-    table.mz td {{ padding:1.6px 2px; text-align:right; border-bottom:0.4px solid {LINE}; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
+    table.mz td {{ padding:1.2px 2px; text-align:right; border-bottom:0.4px solid {LINE}; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
     table.mz td.b {{ font-weight:800; color:{NAV}; }}
     table.mz .zc {{ display:inline-block; width:9px; height:9px; border-radius:2px; font-size:6px; font-weight:800; text-align:center; line-height:9px; margin-right:3px; vertical-align:-1px; }}
-    .mz-facts {{ display:grid; grid-template-columns:1fr 1fr; gap:5px; }}
-    .mz-fact {{ background:{GOLD_LT}; border-left:3px solid {GOLD_MID}; border-radius:5px; padding:4px 7px; font-size:7.5px; line-height:1.3; }}
-    .mz-fact b {{ display:block; font-family:Georgia,serif; font-size:13.5px; color:{NAV}; line-height:1.1; }}
+    .mz-facts {{ display:grid; grid-template-columns:repeat(4,1fr); gap:5px; }}
+    .mz-fact {{ background:{GOLD_LT}; border-left:3px solid {GOLD_MID}; border-radius:5px; padding:3px 7px; font-size:7.3px; line-height:1.25; }}
+    .mz-fact b {{ display:block; font-family:Georgia,serif; font-size:12.5px; color:{NAV}; line-height:1.1; }}
     .mz-cap {{ font-size:7px; color:{MUTED}; margin-top:2px; line-height:1.3; }}
 """
 
@@ -298,8 +298,7 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
           "<div class='mz-mid'>",
           f"<div class='mz-col'><div class='mz-h'>Warmest 10 ☀</div><table class='mz'>{colg}{th}{rows(warm)}</table></div>",
           f"<div class='mz-col'><div class='mz-h'>Coolest 10 ☁</div><table class='mz'>{colg}{th}{rows(cool)}</table></div>",
-          f"<div class='mz-col' style='flex:1.15'><div class='mz-h'>Fog facts</div><div class='mz-facts'>{fact_html}</div></div>",
-          f"<div class='mz-col' style='flex:0.95'><div class='mz-h'>The year downtown, °F</div>{year_chart(months, w=250, h=118)}"
+          f"<div class='mz-col' style='flex:0.95'><div class='mz-h'>The year downtown, °F</div>{year_chart(months, w=250, h=104)}"
           f"<div class='mz-cap'>Normal high and low by month, downtown, NOAA 1991–2020. September is the high point.</div></div>",
           "</div>"]
     for title, byZ, tot in zone_rows:
@@ -309,5 +308,6 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
             o.append(f"<tr><td class='name'>{zc(z)}{html.escape(zn)} <span class='rng'>{html.escape(z['rng'])}</span></td>"
                      + "".join(cells(st, kind, key) for _, _, kind, key in groups) + "</tr>")
         o.append("</tbody><tfoot><tr><td class='name'>Total — all zones</td>" + "".join(cells(tot, kind, key) for _, _, kind, key in groups) + "</tr></tfoot></table>")
+    o.append(f"<div class='mz-h' style='margin-top:5px'>Microclimate facts</div><div class='mz-facts'>{fact_html}</div>")
     o.append(foot(f"Warmest/coolest: neighborhoods with 300+ homes and 5+ sales this year; median of all property types. Temperatures estimated from fog hours. SFH medians: closed sales, Jan 1 – {thru} (SFAR MLS)."))
     return "".join(o)
