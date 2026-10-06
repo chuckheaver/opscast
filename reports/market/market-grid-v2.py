@@ -85,6 +85,21 @@ def d_abs(c,p,unit=""):
 def d_int(c,p):
     if c is None or p is None: return ("—",MUTED)
     d=c-p; return (f"{d:+,}", UP if d>=0 else DOWN)
+CODE={}
+def fog_codes(F):
+    """Each of our neighborhoods' SFAR code: the one most of its sales carry."""
+    c=defaultdict(lambda: defaultdict(int))
+    for r in F:
+        if r.get("fogNeighborhood") and r.get("realtorNid"): c[r["fogNeighborhood"]][r["realtorNid"]]+=1
+    return {n:max(v,key=v.get) for n,v in c.items()}
+
+# Latent inventory per neighborhood (scripts/build-parcel-res-by-realtor.mjs):
+# single-family houses for the SFH grid, units in 2+ unit buildings for the
+# Condo/TIC/Other grid.
+try: STOCK=json.load(open(os.path.join(ROOT,"public/data/parcel-res-by-fog.json")))
+except Exception: STOCK={}
+LATENT_KEY={"Single Family Residences":"u1","Condo / TIC / Other":"units2"}
+
 def last_full_month(F):
     latest=max(r["sellingDate"] for r in F if r.get("sellingDate"))
     y,m=int(latest[:4]),int(latest[5:7])
@@ -94,6 +109,8 @@ def last_full_month(F):
 def build(anchor=None):
     d=json.load(open(SRC)); F=[f["properties"] for f in d["features"]]
     for r in F: r["nb"]=N2A.get(FIX.get(r.get("neighborhood") or "", r.get("neighborhood") or ""))
+    global CODE
+    CODE=fog_codes(F)
     mf,mt = last_full_month(F) if anchor is None else anchor
     yf = datetime.date(mt.year,1,1)
     P = lambda a,b: (a.isoformat(), b.isoformat())
@@ -117,16 +134,15 @@ def build(anchor=None):
         byA.sort(key=lambda t:-(t[1]["y1"]["price"] or 0))
         byZ=[(zn,col,rng,{k:stats([r for r in S[k] if zone_of(r.get("fogHours"))==zn]) for k in W}) for zn,col,rng,_ in ZONES]
         tot={k:stats(S[k]) for k in W}
-        # Every SFAR neighborhood on its own row, A–Z by name, with its code
-        # (number + letter, e.g. 5m) — no combined areas, no district groups.
-        hoods=sorted({(r.get("neighborhood"),r.get("realtorNid")) for k in W for r in S[k] if r.get("realtorNid")},
-                     key=lambda t:(str(t[0]).lower(),t[1]))
-        byD=[(nm,nid,{k:stats([r for r in S[k] if r.get("realtorNid")==nid]) for k in W}) for nm,nid in hoods]
+        # Every neighborhood in our database (the fog map's neighborhoods) on
+        # its own row, A–Z, with the SFAR code most of its sales carry.
+        hoods=sorted({r.get("fogNeighborhood") for k in W for r in S[k] if r.get("fogNeighborhood")}, key=str.lower)
+        byD=[(nm,CODE.get(nm,""),{k:stats([r for r in S[k] if r.get("fogNeighborhood")==nm]) for k in W}) for nm in hoods]
         byD=[h for h in byD if sum(h[2][k]["n"] for k in W)]
         pages.append((seg,byA,tot,byZ,byD))
     return pages,plabel,labels,W
 
-def micro_page(pages,labels,W,head,cells,groups,run_date):
+def micro_page(pages,plabel,labels,W,head,cells,groups,run_date):
     """Microclimates and Real Estate: every fog / microclimate figure in one
     place — the fog map of the year's sales and the SFH medians by zone
     (written by cover3.py to out/micro.json), and the fog-zone grids for
@@ -134,8 +150,7 @@ def micro_page(pages,labels,W,head,cells,groups,run_date):
     try: M=json.load(open(os.path.join(HERE,"out","micro.json")))
     except Exception: M=None
     o=[f"<div class='page'><div class='hdr'><div><div class='t'>Microclimates and Real Estate</div>"
-       f"<div class='p'>What the fog does to price and pace \u2014 every sale placed on the city's summer-fog contours, Jan 1 \u2013 {datetime.date.fromisoformat(W['y1'][1]).strftime('%b %-d, %Y')}</div>"
-       f"<div class='s'>Closed sales, SFAR MLS &nbsp;\u00b7&nbsp; run {run_date.strftime('%b %-d, %Y')}</div></div></div>"]
+       f"<div class='p'>{html.escape(plabel)}</div></div></div>"]
     if M:
         o.append("<div class='mc-top'><div class='mc-map'>")
         o.append(f"<div class='mapwrap'>{M['map']}</div><div class='mc-legend'><b>{M['ndots']:,}</b> closings, {W['y1'][0][:4]} YTD "+
@@ -199,6 +214,15 @@ def render(pages,plabel,labels,W,run_date):
     tbody tr.dist td.pri {{ color:{MUTED}; }}
     td.name .code {{ color:{MUTED}; font-weight:400; font-size:6.8px; }}
     table tbody td {{ padding-top:0.9px; padding-bottom:0.9px; }}
+    table.grid {{ font-size:8.3px; margin:0 auto; }}
+    table.grid col.nm {{ width:12.2%; }}
+    table.grid col.lt {{ width:3.6%; }}
+    table.grid th, table.grid td {{ padding-left:1.2px; padding-right:1.2px; }}
+    table.grid tbody td {{ padding-top:0.9px; padding-bottom:0.9px; }}
+    table.grid thead tr.g th {{ font-size:7.6px; }}
+    table.grid thead tr.sub th {{ font-size:7px; white-space:normal; line-height:1.05; vertical-align:bottom; }}
+    table.grid td.name .code {{ font-size:7.2px; }}
+    table.grid tfoot td {{ font-size:8.3px; }}
     .mc-top {{ display:flex; gap:14px; align-items:stretch; margin:6px 0 4px; }}
     .mc-map {{ flex:0 0 230px; }} .mc-map svg {{ width:100%; height:auto; display:block; }}
     .mc-map .mapwrap {{ border:1px solid {LINE}; border-radius:6px; overflow:hidden; line-height:0; }}
@@ -228,17 +252,24 @@ def render(pages,plabel,labels,W,run_date):
                 if v!=prior: col=f"color:{UP if better else DOWN};"
             out.append(f"<td class='{cls}{edge}' style='{col}'>{F[kind](v)}</td>")
         return "".join(out)
-    def head():
-        h="<colgroup><col class='nm'>"+"<col>"*28+"</colgroup><thead><tr class='g'><th class='name'>Neighborhood</th>"
-        h+="".join(f"<th colspan='4'>{g}{('<u>'+u+'</u>') if u else ''}</th>" for g,u,_,_ in groups)+"</tr><tr class='sub'><th></th>"
+    def head(lat=False):
+        h="<colgroup><col class='nm'>"+"<col>"*24+("<col class='lt'><col class='lt'><col class='lt'>" if lat else "")+"</colgroup><thead><tr class='g'><th class='name'>Neighborhood</th>"
+        h+="".join(f"<th colspan='4'>{g}{('<u>'+u+'</u>') if u else ''}</th>" for g,u,_,_ in groups)
+        if lat: h+="<th colspan='3'>Latent vs Sold</th>"
+        h+="</tr><tr class='sub'><th></th>"
         h+="".join(f"<th class='g0'>{labels['m1']}</th><th>{labels['m0']}</th><th class='ytd g2'>{labels['y1']}</th><th class='ytd'>{labels['y0']}</th>" for _ in groups)
+        if lat: h+="<th class='g0'>Latent Units</th><th class='ytd'>Sold YTD</th><th>% Traded</th>"
         return h+"</tr></thead>"
+    def latent(seg,names,st):
+        """Latent vs Sold: the neighborhood's stock (houses for SFH, units in
+        2+ unit buildings for Condo/TIC/Other), this year's sales, and the
+        share of the stock that traded."""
+        k=LATENT_KEY[seg]
+        stock=sum((STOCK.get(n) or {}).get(k,0) for n in names)
+        sold=st["y1"]["n"]
+        pct="\u2014" if not stock else (f"{100*sold/stock:.1f}%")
+        return (f"<td class='cur g0'>{i(stock) if stock else chr(8212)}</td><td class='cur'>{i(sold)}</td><td class='cur'>{pct}</td>")
     out=[f"<!doctype html><html><head><meta charset='utf-8'><style>{css}</style></head><body>"]
-    LEGEND=("Median and average sale prices in millions (M) or thousands (K); $/SF and DOM as whole numbers; list-price columns are percentages. "
-            "Current-period figures are bold and colored against the same period a year earlier \u2014 green better, red worse (for DOM, fewer days is better). "
-            "Prior-year columns in grey. * fewer than 10 YTD sales \u2014 read with care. \u2014 means no sales in that period (a median needs at least one). "
-            "Every SFAR neighborhood on its own row, A\u2013Z, with its realtor code (e.g. 5m); the total is a pooled median (the median of every sale, not an average of neighborhood medians). "
-            "Microclimate / fog-zone figures are on the Microclimates and Real Estate page.")
     ROWS=47                                   # table rows per page
     for seg,byA,tot,byZ,byD in pages:
         title={"Single Family Residences":"SFH","Condo / TIC / Other":"Condo/TIC/Other"}[seg]
@@ -250,18 +281,16 @@ def render(pages,plabel,labels,W,run_date):
             out.append(f"<div class='page'><div class='hdr'><div><div class='t'>San Francisco Market Grid - {title}{part}</div>"
                        f"<div class='p'>{html.escape(plabel)}</div>"
                        f"<div class='s'>Closed sales, SFAR MLS &nbsp;\u00b7&nbsp; run {run_date.strftime('%b %-d, %Y')}</div></div></div>")
-            out.append("<table>"+head()+"<tbody>")
+            out.append("<table class='grid'>"+head(True)+"<tbody>")
             for _,nm,nid,st in chunk:
-                small="*" if st["y1"]["n"]<10 else ""
-                out.append(f"<tr><td class='name'>{html.escape(nm)}{small} <span class='code'>{html.escape(nid)}</span></td>"+"".join(cells(st,kind,key) for _,_,kind,key in groups)+"</tr>")
+                out.append(f"<tr><td class='name'>{html.escape(nm)} <span class='code'>{html.escape(nid)}</span></td>"+"".join(cells(st,kind,key) for _,_,kind,key in groups)+latent(seg,[nm],st)+"</tr>")
             out.append("</tbody>")
             if ci==len(chunks)-1:
-                out.append("<tfoot><tr><td class='name'>All San Francisco (pooled)</td>"+"".join(cells(tot,kind,key) for _,_,kind,key in groups)+"</tr></tfoot>")
+                out.append("<tfoot><tr><td class='name'>All San Francisco (pooled)</td>"+"".join(cells(tot,kind,key) for _,_,kind,key in groups)+latent(seg,list(STOCK),tot)+"</tr></tfoot>")
             out.append("</table>")
-            out.append(f"<div class='legend'>{LEGEND}</div>")
             out.append(f"<div class='foot'><span>Source: SFAR MLS via BrokerMetrics, closed sales only (Closed + Sold Off MLS). Data through {W['m1'][1]}. Deemed reliable, not guaranteed.</span>"
                        f"<span>Chuck Heaver \u00b7 Vanguard Properties \u00b7 page 0 / 0</span></div></div>")
-    out.append(micro_page(pages,labels,W,head,cells,groups,run_date))
+    out.append(micro_page(pages,plabel,labels,W,head,cells,groups,run_date))
     out.append("</body></html>")
     return "".join(out)
 

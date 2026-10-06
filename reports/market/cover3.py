@@ -301,30 +301,34 @@ PARCEL_FIX={
 PARCEL_ROWS=[("u1","1 Unit"),("u2_4","2–4"),("u5_9","5–9"),("u10","10+"),("othr","Other")]
 
 def latent_inventory(window):
-    """Residential parcel stock per SFAR neighborhood (realtor code, e.g. 5m)
-    beside the year's closings, so the share of each neighborhood that
-    actually traded is visible. Stock: public/data/parcel-res-by-realtor.json
+    """Residential parcel stock per neighborhood (our fog-map neighborhoods,
+    with the SFAR code most of their sales carry) beside the year's closings,
+    so the share of each neighborhood that actually traded is visible.
+    Stock: public/data/parcel-res-by-fog.json
     (scripts/build-parcel-res-by-realtor.mjs)."""
     import collections
-    par=json.load(open(mg.os.path.join(mg.ROOT,"public/data/parcel-res-by-realtor.json")))
+    par=json.load(open(mg.os.path.join(mg.ROOT,"public/data/parcel-res-by-fog.json")))
     F=[f["properties"] for f in json.load(open(mg.SRC))["features"]]
+    code=mg.fog_codes(F)
     SFH=mg.SEG["Single Family Residences"]
     sold=collections.defaultdict(collections.Counter)
     sfh_rows=collections.defaultdict(list)
     for r in F:
         d=r.get("sellingDate") or ""
-        if not (window[0]<=d<=window[1]) or not r.get("realtorNid"): continue
-        k=r["realtorNid"]
+        if not (window[0]<=d<=window[1]) or not r.get("fogNeighborhood"): continue
+        k=r["fogNeighborhood"]
         sold[k]["sfh" if r["propType"] in SFH else "co"]+=1
         if r["propType"] in SFH: sfh_rows[k].append(r)
     rows=[]
-    for nid,v in par.items():
-        s_=sold.get(nid,collections.Counter()); tot=s_["sfh"]+s_["co"]
-        rows.append(dict(area=v["name"],nid=nid,**{k:v.get(k,0) for k,_ in PARCEL_ROWS},total=v["total"],
+    for nm,v in par.items():
+        s_=sold.get(nm,collections.Counter()); tot=s_["sfh"]+s_["co"]
+        if not v.get("u1") and not s_["sfh"]: continue      # no houses (parks, the Presidio's open land)
+        nid=nm
+        rows.append(dict(area=nm,nid=code.get(nm,""),**{k:v.get(k,0) for k,_ in PARCEL_ROWS},total=v["total"],
                          sfh=s_["sfh"],co=s_["co"],sold=tot,
                          turn=(100*s_["sfh"]/v["u1"]) if v.get("u1") else None,
                          turn_all=(100*tot/v["total"]) if v["total"] else None,
-                         st=mg.stats(sfh_rows.get(nid,[]))))
+                         st=mg.stats(sfh_rows.get(nm,[]))))
     rows.sort(key=lambda r:(r["area"].lower(),r["nid"]))
     city=mg.stats([r for rs in sfh_rows.values() for r in rs])
     return rows,0,city
@@ -628,7 +632,7 @@ def by_numbers(rows, thru):
     for r in rows:
         if zip_of(r): zv[zip_of(r)]+=r["sellingPrice"]
     zip_,zipv=zv.most_common(1)[0]
-    zhoods=[h for h,_ in collections.Counter(r.get("neighborhood") for r in rows if zip_of(r)==zip_ and r.get("neighborhood")).most_common(3)]
+    zhoods=[h for h,_ in collections.Counter(r.get("fogNeighborhood") for r in rows if zip_of(r)==zip_ and r.get("fogNeighborhood")).most_common(3)]
     off=sum(1 for r in rows if r.get("status")=="Sold Off MLS")
     # Ground incline at each sale (scripts/build-sale-incline.mjs).
     import os
@@ -715,7 +719,7 @@ def _money_by_hood(rows):
     import collections
     out=collections.Counter()
     for r in rows:
-        a=N2A_(r.get("neighborhood") or "")
+        a=r.get("fogNeighborhood")
         if a: out[a]+=r["sellingPrice"]
     return out
 
@@ -967,9 +971,9 @@ def build():
       <div class='cap'>More Condo/TIC/Other units change hands than SFH, yet SFH bring in more money.</div></div>""")
     o.append(f"""<div class='col' style='flex:1.1'><h2>Allocation by Neighborhood</h2>
       {hood_bars(hrank,mtot,w=380,h=470,top=20)}
-      <div class='cap'>Top twenty by dollars closed. <span class='st'>{hrank[0][0]}</span> alone took <span class='st'>${hrank[0][1]/1e6:,.0f}M</span> — <span class='st'>{100*hrank[0][1]/mtot:.0f}%</span> of the city — on {100*len([r for r in S['y1'] if N2A_(r.get('neighborhood') or '')==hrank[0][0]])/mn:.0f}% of its sales.</div></div>""")
+      <div class='cap'>Top twenty by dollars closed. <span class='st'>{hrank[0][0]}</span> alone took <span class='st'>${hrank[0][1]/1e6:,.0f}M</span> — <span class='st'>{100*hrank[0][1]/mtot:.0f}%</span> of the city — on {100*len([r for r in S['y1'] if r.get('fogNeighborhood')==hrank[0][0]])/mn:.0f}% of its sales.</div></div>""")
     o.append("</div>")
-    o.append(f"""<div class='foot'><span>All closed sales, Jan 1 – {thru}. Tiers by final sale price. Neighborhood totals use the report's combined areas.</span><span>page 3 / 9</span></div></div>""")
+    o.append(f"""<div class='foot'><span>All closed sales, Jan 1 – {thru}. Tiers by final sale price. Every neighborhood counted on its own.</span><span>page 3 / 9</span></div></div>""")
 
     # ── PAGE 4 — who's buying ────────────────────────────────────────────
     # The two buyers side by side. They respond to completely different
@@ -1053,10 +1057,10 @@ def build():
     # Every area with at least one sale counts; thin samples carry a * and
     # their sale count rather than being dropped (* = fewer than 10 sales).
     star=lambda n: "*" if n<10 else ""
-    # Individual SFAR neighborhoods (no combined areas) for every Top 10 here.
+    # Every neighborhood in our database on its own (no combined areas).
     import collections as _c
     Y0=S["y0"]
-    nbk=lambda r: r.get("neighborhood") if r.get("realtorNid") else None
+    nbk=lambda r: r.get("fogNeighborhood")
     def bynb(rows, seg):
         out=_c.defaultdict(list)
         for r in rows:
@@ -1096,7 +1100,7 @@ def build():
     osfh=sorted([r for r in Y1 if r["propType"] in SFHs and okbid(r)],key=lambda r:-ratio(r))[:10]
     oco=sorted([r for r in Y1 if r["propType"] in COs and okbid(r)],key=lambda r:-ratio(r))[:10]
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The 10s</div>
-      <div class='p'>Neighborhoods and Money Flow - Median Sales &nbsp;·&nbsp; microclimates are on their own page</div></div>
+      <div class='p'>Year to date: Jan 1 – {datetime.date.fromisoformat(W['m1'][1]).strftime('%b %-d, %Y')}</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties</div></div>""")
     TH=lambda *cols: "<tr>"+"".join(f"<th class='l'>{c[1:]}</th>" if c.startswith("<") else f"<th>{c}</th>" for c in cols)+"</tr>"
     o.append("<div class='cols nb4'>")
@@ -1220,9 +1224,9 @@ def build():
       the same buyer sees very different odds of an SFH coming up depending on where they are looking.</div>
       <div class='src'>SFH are single-unit residential parcels in the SF Land Use dataset; sales are single-family closings (SFAR MLS).
       * Fewer than {MIN_SOLID} SFH in the area — a handful of sales moves the rate, so read it with care.
-      Every SFAR neighborhood on its own row, A–Z, with its realtor code.</div>
+      Every neighborhood on its own row, A–Z, with its SFAR code.</div>
       <div class='foot'><span>Latent inventory = every SFH that exists, sold or not. Sales are closed transactions, Jan 1 – {thru}.</span><span>page 7 / 9</span></div></div>""")
-        else: o.append(f"""<div class='foot'><span>Continued: every SFAR neighborhood, A–Z, with its realtor code.</span><span>page 0 / 0</span></div></div>""")
+        else: o.append(f"""<div class='foot'><span>Continued: every neighborhood, A–Z, with its SFAR code.</span><span>page 0 / 0</span></div></div>""")
 
     o.append("</body></html>")
     return "".join(o)

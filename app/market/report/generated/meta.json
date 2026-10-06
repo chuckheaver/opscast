@@ -1,6 +1,6 @@
 {
   "period": "Jan 1 \u2013 Sep 30, 2026",
-  "run": "Oct 5, 2026",
+  "run": "Oct 6, 2026",
   "pages": {
     "stats": [
       "San Francisco Real Estate",
@@ -12,15 +12,16 @@
       "The 10s",
       "Microclimates and Real Estate",
       "By the Numbers",
-      "Latent Inventory \u2014 SFH 1 of 2",
-      "Latent Inventory \u2014 SFH 2 of 2"
+      "Latent Inventory \u2014 SFH 1 of 3",
+      "Latent Inventory \u2014 SFH 2 of 3",
+      "Latent Inventory \u2014 SFH 3 of 3"
     ],
     "cost": [
       "The Cost of Ownership"
     ]
   },
   "links": {
-    "areas": 303,
+    "areas": 352,
     "sales": 40
   }
 }

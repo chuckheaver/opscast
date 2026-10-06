@@ -72,6 +72,10 @@ map_names = {f["properties"]["name"] for f in
 missing = sorted(v for v in AREA_TO_MAP.values() if v not in map_names)
 assert not missing, f"map has no neighborhood named: {missing}"
 
+# Our own neighborhoods (the report's rows) are the map's names: link as-is.
+for _n in map_names:
+    AREA_TO_MAP.setdefault(_n, _n)
+
 # Every individual SFAR neighborhood links too: to the fog-map neighborhood
 # where most of its sales sit (the map's own names, so the link always lands).
 import collections as _c

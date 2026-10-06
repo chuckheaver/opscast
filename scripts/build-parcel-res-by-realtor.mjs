@@ -6,7 +6,8 @@
 // u2_4, u5_9, u10, othr (non-residential), total. Parcels repeat across tile
 // edges, so each blklot counts once, placed by its center.
 //
-// Writes public/data/parcel-res-by-realtor.json: { nid: {name, u1, …} }.
+// Writes public/data/parcel-res-by-realtor.json: { nid: {name, u1, …} } and
+// public/data/parcel-res-by-fog.json: { neighborhood: {u1, …, units2} }.
 // Re-run when the parcel tiles or the realtor map change:
 //   node scripts/build-parcel-res-by-realtor.mjs
 
@@ -19,6 +20,7 @@ const Z = 16, TDIR = `public/tiles/parcels/${Z}`;
 const tile2lng = (x, z) => (x / 2 ** z) * 360 - 180;
 const tile2lat = (y, z) => { const n = Math.PI - (2 * Math.PI * y) / 2 ** z; return (180 / Math.PI) * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n))); };
 const realtor = JSON.parse(readFileSync("public/data/sf-realtor-neighborhoods.geojson", "utf8"));
+const fog = JSON.parse(readFileSync("public/data/sf-fog-neighborhoods.geojson", "utf8"));
 
 const seen = new Map();   // blklot → {t, units, pt}
 for (const x of readdirSync(TDIR)) for (const f of readdirSync(`${TDIR}/${x}`)) {
@@ -48,5 +50,23 @@ for (const { t, units, pt } of seen.values()) {
   o[b]++; o.total++;
 }
 writeFileSync("public/data/parcel-res-by-realtor.json", JSON.stringify(out));
+
+// The same stock per neighborhood in our own database (the site's map /
+// guide neighborhoods) — what the market report lists, one row each.
+// units2: housing units in buildings of 2+ units, residential or mixed use
+// (the condo / TIC stock).
+const byFog = {};
+for (const { t, units, pt } of seen.values()) {
+  const f = findNeighborhoodForPoint(fog, pt);
+  if (!f) continue;
+  const k = f.properties.name;
+  const o = byFog[k] || (byFog[k] = { u1: 0, u2_4: 0, u5_9: 0, u10: 0, othr: 0, total: 0, units2: 0 });
+  const res = t === "RES" && units > 0;
+  const b = !res ? "othr" : units === 1 ? "u1" : units <= 4 ? "u2_4" : units <= 9 ? "u5_9" : "u10";
+  o[b]++; o.total++;
+  if (units >= 2 && (t === "RES" || t === "MIX")) o.units2 += units;   // condo towers are often coded mixed use
+}
+writeFileSync("public/data/parcel-res-by-fog.json", JSON.stringify(byFog));
+console.log(`by neighborhood: ${Object.keys(byFog).length} neighborhoods; one-unit ${Object.values(byFog).reduce((a, o) => a + o.u1, 0).toLocaleString()}, units in 2+ unit buildings ${Object.values(byFog).reduce((a, o) => a + o.units2, 0).toLocaleString()}`);
 const T = k => Object.values(out).reduce((a, o) => a + o[k], 0);
 console.log(`${seen.size.toLocaleString()} parcels → ${Object.keys(out).length} SFAR neighborhoods; one-unit ${T("u1").toLocaleString()}, total ${T("total").toLocaleString()}, outside ${outside}`);
