@@ -200,13 +200,6 @@ def weekly_series(through):
     ytd25=sum(1 for r in F if (r.get("sellingDate") or "")[:4]=="2025" and r["sellingDate"][:10]<=ly and r.get("sellingPrice"))
     return rows,cut,sum(cnt[2025].values()),sum(cnt[2026].values()),last,ytd25
 
-ZONE_FILL=[("Sun","#FBDC7E"),("Transition","#EDCF95"),("Fog","#C3CBD2"),("Persistent Fog","#8D9BA6")]
-def zone_color(h):
-    if h<8.5: return "#FBDC7E"
-    if h<9: return "#EDCF95"
-    if h<11: return "#C3CBD2"
-    return "#8D9BA6"
-
 def txt(col):
     """Yellow reads as a line but not as small text on white — labels for a
     yellow series are set in the darker gold."""
@@ -237,38 +230,6 @@ def lines(rows,series,w=468,h=176,fmt=lambda v:f"{v/1e6:.2f}M",dkey=None):
         lxx=pad_l+j*120
         o.append(f"<rect x='{lxx}' y='2' width='8' height='8' fill='{col}' rx='1.5'/><text x='{lxx+11}' y='9' font-size='7' fill='{INK}'>{lab}</text>")
     return "".join(o)+"</svg>"
-
-def sales_map(W0,S0,E0,N0,w=352,h=326,window=("2026-01-01","2026-08-31")):
-    """The city's land shape coloured by fog zone, one blue dot per closing.
-    Zone shapes are pre-intersected with the land outline (map-shapes.json) so
-    every part of the city is shaded exactly once."""
-    shp=json.load(open(mg.os.path.join(mg.ROOT,"public/data/map-shapes.json")))
-    lis=json.load(open(mg.SRC))["features"]
-    lat0=math.radians((S0+N0)/2); sx=(E0-W0)*math.cos(lat0); sy=(N0-S0)
-    sc=min(w/sx,h/sy); ox=(w-sx*sc)/2; oy=(h-sy*sc)/2
-    X=lambda lng:ox+(lng-W0)*math.cos(lat0)*sc; Y=lambda lat:oy+(N0-lat)*sc
-    def draw(geom,fill,stroke="none",sw=0):
-        out=[]
-        parts=[geom["coordinates"]] if geom["type"]=="Polygon" else geom["coordinates"]
-        for rings in parts:
-            d="".join("M"+" L".join(f"{X(x):.1f},{Y(y):.1f}" for x,y in r)+"Z" for r in rings)
-            out.append(f"<path d='{d}' fill='{fill}' fill-rule='evenodd' stroke='{stroke}' stroke-width='{sw}'/>")
-        return "".join(out)
-    o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>",
-       f"<rect width='{w}' height='{h}' fill='#EDF2F7'/>"]
-    for nm,col in ZONE_FILL:
-        g=shp["zones"].get(nm)
-        if g: o.append(draw(g,col))
-    o.append(draw(shp["land"],"none","#ffffff",0.5))
-    n=0
-    for f in lis:
-        d=f["properties"].get("sellingDate") or ""
-        if not (window[0]<=d<=window[1]): continue
-        if f["properties"].get("noLocation"): continue      # no real location — not drawn
-        x,y=f["geometry"]["coordinates"]
-        o.append(f"<circle cx='{X(x):.1f}' cy='{Y(y):.1f}' r='1.45' fill='#203C5F' fill-opacity='0.85'/>"); n+=1
-    return "".join(o)+"</svg>", n
-
 
 # Parcel-stock neighborhoods use SF planning names; the listings use MLS names.
 # This maps the planning-only names onto the report's areas so stock and sales
@@ -720,18 +681,7 @@ def build():
     sb=byA[CO].get("South Beach / Yerba Buena"); mb=byA[CO].get("Mission Bay")
     loan=RENT_NOW/pmt(1,cv.RATE_NOW)
     pac=[x for x in s['top']+s['bot'] if 'Pacific / Presidio' in x[1]]; pacpct=sgn(pac[0][0]) if pac else "+7"
-    mapsvg,ndots=sales_map(-122.517,37.705,-122.353,37.833,w=300,h=366,window=(W["y1"][0],W["y1"][1]))
-    # The fog map and the SFH-by-zone medians live on the Microclimates and
-    # Real Estate page, which the grid script builds; hand them over.
-    rat=sun["price"]/pf["price"] if sun.get("price") and pf.get("price") else None
-    json.dump(dict(map=mapsvg, ndots=ndots, zones=ZONE_FILL,
-        tiles=[dict(name=nm,color=col,price=z["price"],n=z["n"],ppsf=z["ppsf"] or 0) for nm,col,z in
-               (("Sun Zone","#FBDC7E",sun),("Transition Zone","#F6E3A6",tr),("Fog Zone","#C3CBD2",fg),("Persistent Fog","#8D9BA6",pf))],
-        note=(f"Single-family homes in the <b>Sun</b> zone sold for a median <b>{M(sun['price'])}</b>, "
-              f"<b>{rat:.1f}×</b> the <b>Persistent Fog</b> zone's {M(pf['price'])}, and per square foot "
-              f"${sun['ppsf']:,.0f} against ${pf['ppsf']:,.0f}. Houses against houses: across all property types the order "
-              f"flips, because the Sun zone is mostly condos.") if rat else ""),
-        open(mg.os.path.join(mg.HERE,"out","micro.json"),"w"))
+
     css=mg.FONT_CSS+f"""
     @page {{ size: letter landscape; margin: 0.32in 0.35in; }}
     body {{ margin:0; font-family: {mg.SANS}; color:{INK}; }}

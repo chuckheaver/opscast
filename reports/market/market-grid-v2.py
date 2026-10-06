@@ -1,6 +1,6 @@
 import json, statistics, datetime, html
 from collections import defaultdict
-import os
+import os, sys
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.abspath(os.path.join(HERE,"..",".."))
 SRC=os.path.join(ROOT,"public/data/sf-listings.geojson")
 # The site's own faces (public/fonts), so the PDF and the web edition read in
@@ -143,36 +143,17 @@ def build(anchor=None):
     return pages,plabel,labels,W
 
 def micro_page(pages,plabel,labels,W,head,cells,groups,run_date):
-    """Microclimates and Real Estate: every fog / microclimate figure in one
-    place — the fog map of the year's sales and the SFH medians by zone
-    (written by cover3.py to out/micro.json), and the fog-zone grids for
-    SFH and Condo/TIC/Other."""
-    try: M=json.load(open(os.path.join(HERE,"out","micro.json")))
-    except Exception: M=None
-    o=[f"<div class='page'><div class='hdr'><div><div class='t'>Microclimates and Real Estate</div>"
-       f"<div class='p'>{html.escape(plabel)}</div></div></div>"]
-    if M:
-        o.append("<div class='mc-top'><div class='mc-map'>")
-        o.append(f"<div class='mapwrap'>{M['map']}</div><div class='mc-legend'><b>{M['ndots']:,}</b> closings, {W['y1'][0][:4]} YTD "+
-                 "".join(f"<span><span class='chip' style='background:{c}'></span>{html.escape(n)}</span>" for n,c in M['zones'])+"</div></div>")
-        o.append("<div class='mc-side'><div class='mc-h'>Microclimate Pricing \u2014 SFH Median Sale Price</div><div class='mc-tiles'>"+
-                 "".join(f"<div class='mc-tile' style='--z:{t['color']}'><span>{html.escape(t['name'])}</span><b>${usdM(t['price'])}</b>"
-                         f"<i>{t['n']:,} sales \u00b7 ${t['ppsf']:,.0f}/sf</i></div>" for t in M['tiles'])+"</div>")
-        o.append(f"<div class='mc-note'>{M['note']}</div></div></div>")
-    for seg,byA,tot,byZ,byD in pages:
-        title={"Single Family Residences":"SFH","Condo / TIC / Other":"Condo/TIC/Other"}[seg]
-        o.append(f"<div class='zh'>Closings by Microclimate Fog Zone \u2014 {title} <span>summer fog hours per day at the property, from the site's fog-contour layer</span></div>")
-        o.append("<table class='zone'>"+head().replace("<th class='name'>Neighborhood</th>","<th class='name'>Fog Zone</th>")+"<tbody>")
-        for zn,col,rng,st in byZ:
-            o.append(f"<tr><td class='name'><span class='chip' style='background:{col}'></span>{html.escape(zn)} <span class='rng'>{html.escape(rng)}</span></td>"
-                     +"".join(cells(st,kind,key) for _,_,kind,key in groups)+"</tr>")
-        o.append("</tbody><tfoot><tr><td class='name'>Total \u2014 all zones</td>"+"".join(cells(tot,kind,key) for _,_,kind,key in groups)+"</tr></tfoot></table>")
-    o.append(f"<div class='foot'><span>Fog zones by daily summer fog hours from USGS-derived contours: Sun \u2264 8.0 \u00b7 Transition 8.5\u20138.9 \u00b7 Fog 9.0\u201310.9 \u00b7 Persistent Fog \u2265 11. Data through {W['m1'][1]}.</span>"
-             f"<span>Chuck Heaver \u00b7 Vanguard Properties \u00b7 page 0 / 0</span></div></div>")
-    return "".join(o)
+    """The microclimate pages (micro.py): the numbered fog map, then
+    Microclimates and Real Estate with the closings grids by fog zone."""
+    import micro
+    F=[f["properties"] for f in json.load(open(SRC))["features"]]
+    title={"Single Family Residences":"SFH","Condo / TIC / Other":"Condo/TIC/Other"}
+    zone_rows=[(title[seg],byZ,tot) for seg,byA,tot,byZ,byD in pages]
+    return micro.pages(F=F,W=W,plabel=plabel,mg=sys.modules[__name__],head=head,cells=cells,groups=groups,zone_rows=zone_rows)
 
 def render(pages,plabel,labels,W,run_date):
-    css=FONT_CSS+f"""
+    import micro
+    css=FONT_CSS+micro.CSS+f"""
     @page {{ size: letter landscape; margin: 0.32in 0.35in; }}
     body {{ margin:0; font-family: {SANS}; color:{INK}; }}
     .hdr .t, .zh {{ font-family:{DISPLAY}; }}
@@ -205,6 +186,7 @@ def render(pages,plabel,labels,W,run_date):
     table.zone tbody tr:last-child td {{ border-bottom:0.4px solid {LINE}; }}
     table.zone tfoot td {{ font-size:7.8px; padding:2.2px 1.5px; }}
     table.zone tbody td.name {{ font-weight:700; }}
+    .zone td.name .zc {{ display:inline-block; width:11px; height:11px; border-radius:2px; font-size:7px; font-weight:800; text-align:center; line-height:11px; margin-right:4px; vertical-align:-1px; }}
     .chip {{ display:inline-block; width:9px; height:9px; border-radius:2px; border:0.5px solid #a8a29e; margin-right:4px; vertical-align:-1px; }}
     .rng {{ color:{MUTED}; font-weight:400; font-size:7.4px; }}
     .legend {{ font-size:7.2px; color:{MUTED}; margin-top:4px; line-height:1.35; }}
@@ -223,19 +205,6 @@ def render(pages,plabel,labels,W,run_date):
     table.grid thead tr.sub th {{ font-size:7px; white-space:normal; line-height:1.05; vertical-align:bottom; }}
     table.grid td.name .code {{ font-size:7.2px; }}
     table.grid tfoot td {{ font-size:8.3px; }}
-    .mc-top {{ display:flex; gap:14px; align-items:stretch; margin:6px 0 4px; }}
-    .mc-map {{ flex:0 0 230px; }} .mc-map svg {{ width:100%; height:auto; display:block; }}
-    .mc-map .mapwrap {{ border:1px solid {LINE}; border-radius:6px; overflow:hidden; line-height:0; }}
-    .mc-legend {{ display:flex; flex-wrap:wrap; gap:4px 9px; font-size:7.4px; margin-top:4px; color:{INK}; align-items:center; }}
-    .mc-side {{ flex:1; min-width:0; display:flex; flex-direction:column; gap:7px; }}
-    .mc-h {{ font-family:{DISPLAY}; font-size:12px; font-weight:800; color:#fff; background:{NAV}; padding:3px 8px; border-radius:4px; }}
-    .mc-tiles {{ display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }}
-    .mc-tile {{ border-radius:6px; padding:7px 8px; background:{NAV_LT}; border-left:5px solid var(--z); }}
-    .mc-tile b {{ display:block; font-family:Georgia,serif; font-size:19px; color:{NAV}; }}
-    .mc-tile span {{ font-size:8.4px; color:{INK}; font-weight:700; }}
-    .mc-tile i {{ display:block; font-style:normal; font-size:7.6px; color:{MUTED}; margin-top:2px; }}
-    .mc-note {{ font-size:8.6px; color:{INK}; line-height:1.45; }}
-    .mc-note b {{ color:{NAV}; }}
     """
     groups=[("Qty Sold","","int","n"),("Median Sale Price","M / K","usdM","price"),("Average Sale Price","M / K","usdM","avg"),("Median $/SF","","usd","ppsf"),
             ("Median DOM","days","dom","dom"),("Sold Price vs List %","","pts","pct")]
