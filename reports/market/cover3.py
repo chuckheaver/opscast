@@ -650,23 +650,6 @@ def _money_by_hood(rows):
         if a: out[a]+=r["sellingPrice"]
     return out
 
-def zone_gap():
-    """Sun (incl. Transition) vs Fog (incl. Persistent) across ALL property
-    types. Reported per square foot: the Sun zone is 84% condos and the Fog
-    zone 80% houses, so a raw median compares condos with houses and inverts."""
-    import statistics
-    F=[f["properties"] for f in json.load(open(mg.SRC))["features"]]
-    g=lambda h: None if h is None else ("Sun" if h<9 else "Fog")
-    out={}
-    for yr,(a,b) in (("cur",("2026-01-01","2026-08-31")),("prior",("2025-01-01","2025-08-31"))):
-        rs=[r for r in F if r.get("sellingDate") and a<=r["sellingDate"]<=b]
-        v={}
-        for z in ("Sun","Fog"):
-            ps=[r["sellingPrice"]/r["sqft"] for r in rs if g(r.get("fogHours"))==z and r.get("sellingPrice") and r.get("sqft")]
-            v[z]=statistics.median(ps) if ps else None
-        out[yr]=v
-    return out
-
 def build():
     pages,plabel,labels,W,seg,top,S,mon=cv.facts()
     SF="Single Family Residences"; CO="Condo / TIC / Other"
@@ -779,7 +762,6 @@ def build():
         return (f"<div class='kpi'><div class='kl'>{label}</div><div class='kv'>{value}</div>"
                 f"<div class='ks' style='color:{color}'>Versus {py}: {vs}</div></div>")
     sl="<span style='font-size:15px;color:#6B6F75;font-weight:400;padding:0 5px'>/</span>"
-    zg=zone_gap(); gap_c=zg["cur"]["Sun"]/zg["cur"]["Fog"]; gap_p=zg["prior"]["Sun"]/zg["prior"]["Fog"]
     mm=lambda v: f"{v/1e6:.2f}"
     o=[f"<!doctype html><html><head><meta charset='utf-8'><style>{css}</style></head><body>"]
     # monthly series feeding the two stacked charts

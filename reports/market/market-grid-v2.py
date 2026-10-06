@@ -132,7 +132,10 @@ def build(anchor=None):
             if sum(st[k]["n"] for k in W)==0: continue
             byA.append((a,st))
         byA.sort(key=lambda t:-(t[1]["y1"]["price"] or 0))
-        byZ=[(zn,col,rng,{k:stats([r for r in S[k] if zone_of(r.get("fogHours"))==zn]) for k in W}) for zn,col,rng,_ in ZONES]
+        # A sale takes its neighborhood's fog zone (micro.py / neighborhood-fog-zones.json).
+        import micro
+        zn_of=lambda r: (micro.sale_zone(r) or {}).get("name")
+        byZ=[(zn,col,rng,{k:stats([r for r in S[k] if zn_of(r)==zn]) for k in W}) for zn,col,rng,_ in ZONES]
         tot={k:stats(S[k]) for k in W}
         # Every neighborhood in our database (the fog map's neighborhoods) on
         # its own row, A–Z, with the SFAR code most of its sales carry.

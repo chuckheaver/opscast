@@ -1,7 +1,7 @@
 """The microclimate pages of the market report.
 
   1. The Fog Map — every neighborhood shaded by its fog zone (A–D) and
-     numbered from the sunniest (1) to the foggiest, with the numbered index
+     numbered zone by zone, sunniest (1) to foggiest, with the numbered index
      beside it: fog hours and an estimated summer afternoon temperature.
   2. Microclimates and Real Estate — the four zones side by side, the
      warmest and coolest neighborhoods, fog facts, the city's year in
@@ -18,15 +18,28 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.pat
 NAV = "#203C5F"; NAV_LT = "#E4EEF0"; GOLD_MID = "#E9BC3F"; GOLD_LT = "#FBF3D9"; GOLD_TXT = "#94700F"
 INK = "#131A25"; MUTED = "#6B6F75"; LINE = "#DCDDDE"
 
-# The four zones, lettered. Same cut points as the grids and the site.
+# The four zones, lettered. A neighborhood's zone comes from the ground it
+# covers (scripts/build-neighborhood-fog-zones.mjs): Transition when it
+# straddles the 8.5-hour sun/fog line, else by which side it sits on.
 ZONES = [
-    dict(k="A", name="Sun", fill="#F7CF5C", ink="#131A25", rng="under 8.5 hrs", lo=0, hi=8.5),
-    dict(k="B", name="Transition", fill="#E9D3A2", ink="#131A25", rng="8.5 – 8.9 hrs", lo=8.5, hi=9),
-    dict(k="C", name="Fog", fill="#AFC0CF", ink="#131A25", rng="9 – 10.9 hrs", lo=9, hi=11),
-    dict(k="D", name="Persistent Fog", fill="#6F8497", ink="#ffffff", rng="11+ hrs", lo=11, hi=99),
+    dict(k="A", name="Sun", fill="#F7CF5C", ink="#131A25", rng="under 8.5 hrs", desc="under 8.5 hrs of fog a day"),
+    dict(k="B", name="Transition", fill="#E9D3A2", ink="#131A25", rng="on the 8.5-hr line", desc="straddles the 8.5-hr sun / fog line"),
+    dict(k="C", name="Fog", fill="#AFC0CF", ink="#131A25", rng="9 – 10.9 hrs", desc="9+ hrs of fog, under 11 on average"),
+    dict(k="D", name="Persistent Fog", fill="#6F8497", ink="#ffffff", rng="11+ hrs", desc="11+ hrs of fog a day on average"),
 ]
-def zone(h):
-    return next(z for z in ZONES if z["lo"] <= h < z["hi"])
+_BY_NAME = {z["name"]: z for z in ZONES}
+try: NZ = json.load(open(os.path.join(ROOT, "public/data/neighborhood-fog-zones.json")))
+except Exception: NZ = {}
+def zone_of_hours(h):
+    return ZONES[0] if h < 8.5 else ZONES[1] if h < 9 else ZONES[2] if h < 11 else ZONES[3]
+def zone(name, hours=None):
+    """A neighborhood's zone; by its fog hours if it was never sampled."""
+    v = NZ.get(name)
+    return _BY_NAME[v["zone"]] if v else zone_of_hours(hours)
+def sale_zone(r):
+    """A sale's zone: its neighborhood's."""
+    if r.get("fogNeighborhood") in NZ: return _BY_NAME[NZ[r["fogNeighborhood"]]["zone"]]
+    return zone_of_hours(r["fogHours"]) if r.get("fogHours") is not None else None
 
 # Estimated typical summer (Jun–Sep) afternoon high, °F, from fog hours.
 # Anchors: NOAA downtown normals (Sep 70°F, Aug 68°F) for the sunbelt; the
@@ -139,7 +152,7 @@ def year_chart(months, w=300, h=112):
 
 # ── data ─────────────────────────────────────────────────────────────────
 def neighborhoods(sales_y1, sfh_types, stats):
-    """Every map neighborhood, numbered sunniest (1) to foggiest, with its
+    """Every map neighborhood, numbered zone by zone, sunniest (1) to foggiest, with its
     zone, estimated temperature and this year's single-family medians."""
     fc = json.load(open(os.path.join(ROOT, "public/data/sf-fog-neighborhoods.geojson")))
     try: stock = json.load(open(os.path.join(ROOT, "public/data/parcel-res-by-fog.json")))
@@ -148,10 +161,11 @@ def neighborhoods(sales_y1, sfh_types, stats):
     for r in sales_y1:
         if r.get("fogNeighborhood"): by.setdefault(r["fogNeighborhood"], []).append(r)
     out = []
-    for f in sorted(fc["features"], key=lambda f: (f["properties"]["fogHours"], f["properties"]["name"].lower())):
+    key = lambda f: (ZONES.index(zone(f["properties"]["name"], f["properties"]["fogHours"])), f["properties"]["fogHours"], f["properties"]["name"].lower())
+    for f in sorted(fc["features"], key=key):
         p = f["properties"]; nm = p["name"]; rs = by.get(nm, [])
         st = stock.get(nm) or {}
-        out.append(dict(name=nm, hours=p["fogHours"], zone=zone(p["fogHours"]), temp=est_temp(p["fogHours"]),
+        out.append(dict(name=nm, hours=p["fogHours"], zone=zone(nm, p["fogHours"]), temp=est_temp(p["fogHours"]),
                         geom=f["geometry"], homes=(st.get("u1", 0) + st.get("units2", 0)),
                         sfh=stats([r for r in rs if r.get("propType") in sfh_types]), all=stats(rs), sales=len(rs)))
     for i, hd in enumerate(out): hd["n"] = i + 1
@@ -229,27 +243,27 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
     idx = "".join("<section>" + "".join(item(h) for h in part) + "</section>" for part in (hoods[:half], hoods[half:]))
     zkey = "".join(
         f"<div style='background:{z['fill']};color:{z['ink']}'><b>{z['k']}</b><span>{z['name']}</span><br>"
-        f"{z['rng']} of fog a day · {sum(1 for h in hoods if h['zone'] is z)} neighborhoods · ~{min(h['temp'] for h in hoods if h['zone'] is z)}–{max(h['temp'] for h in hoods if h['zone'] is z)}°F</div>" for z in ZONES)
+        f"{z['desc']} · {sum(1 for h in hoods if h['zone'] is z)} neighborhoods · ~{min(h['temp'] for h in hoods if h['zone'] is z)}–{max(h['temp'] for h in hoods if h['zone'] is z)}°F</div>" for z in ZONES)
     sunny, foggy = hoods[0], hoods[-1]
     o = [f"<div class='page'><div class='hdr'><div><div class='t'>The Fog Map — San Francisco's Microclimates</div>"
-         f"<div class='p'>{len(hoods)} neighborhoods, numbered from the sunniest (1, {html.escape(sunny['name'])}) to the foggiest "
-         f"({len(hoods)}, {html.escape(foggy['name'])}) · four zones, A to D</div></div></div>",
+         f"<div class='p'>Four zones, A to D · {len(hoods)} neighborhoods, numbered zone by zone from the sunniest "
+         f"(1, {html.escape(sunny['name'])}) to the foggiest ({len(hoods)}, {html.escape(foggy['name'])})</div></div></div>",
          "<div class='fm-wrap'><div class='fm-map'>",
          f"<div class='mapbox'>{fog_map(hoods, w=612, h=628)}</div><div class='fm-zkey'>{zkey}</div></div>",
          "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>fog hrs/day · est. summer afternoon °F</i></div>",
          f"<div class='fm-idx'>{idx}</div>",
          "</div></div>",
-         foot("Fog hours: summer fog and low cloud per day, USGS / GOES satellite, 1999–2009. Numbered fewest hours first, ties A–Z. °F: a typical Jun–Sep afternoon estimated from fog hours (NOAA downtown normals as anchor) — not a station reading.")]
+         foot("Fog hours: summer fog and low cloud, USGS / GOES satellite, 1999–2009. Transition = 10%+ of a neighborhood on the 8.5-hr line, or on each side of it. °F: estimated from fog hours, not a station reading.")]
 
     # ── page 2: microclimates and real estate ──
-    zst = {z["k"]: mg.stats([r for r in y1 if r.get("propType") in sfh and r.get("fogHours") is not None and zone(r["fogHours"]) is z]) for z in ZONES}
+    zst = {z["k"]: mg.stats([r for r in y1 if r.get("propType") in sfh and sale_zone(r) is z]) for z in ZONES}
     cards = []
     for z in ZONES:
         hs = [h for h in hoods if h["zone"] is z]
         t0, t1 = min(h["temp"] for h in hs), max(h["temp"] for h in hs)
         s = zst[z["k"]]
         cards.append(f"<div class='mz-card' style='--z:{z['fill']}'><span class='L'>{z['k']}</span><div class='nm'>{z['name']}</div>"
-                     f"<div class='rg'>{z['rng']} of fog · {len(hs)} neighborhoods</div>"
+                     f"<div class='rg'>{z['desc']} · {len(hs)} neighborhoods</div>"
                      f"<div class='tp'>{t0}–{t1}°<small> est. summer afternoon</small></div>"
                      f"<div class='row'><span>SFH median</span><b>{M(s['price'])}</b></div>"
                      f"<div class='row'><span>$/sf · sales</span><b>${(s['ppsf'] or 0):,.0f} · {s['n']:,}</b></div></div>")
