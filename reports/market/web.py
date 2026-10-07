@@ -33,7 +33,7 @@ def placement(title):
     if "market grid - sfh" in t:                          return ("stats", 30, "grid-sfh")
     if "market grid - condo" in t:                        return ("stats", 40, "grid-condo")
     if t.startswith("the 10s"):                           return ("stats", 50, "neighborhoods")
-    if t.startswith("the fog map"):                       return ("stats", 58, "microclimates")
+    if t.startswith("heat map"):                          return ("stats", 58, "microclimates")
     if t.startswith("microclimates and real estate"):    return ("stats", 60, "")
     if t.startswith("by the numbers"):                    return ("stats", 70, "")
     if t.startswith("the cost of ownership"):             return ("cost", 10, "")

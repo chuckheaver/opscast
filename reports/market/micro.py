@@ -52,6 +52,10 @@ def est_temp(h):
         if h <= h1: return round(t0 + (t1 - t0) * (h - h0) / (h1 - h0))
     return _ANCHORS[-1][1]
 
+def Mm(v):
+    """Millions, one decimal: 4.9M, 0.9M."""
+    return "—" if not v else f"{v/1e6:.1f}M"
+
 def M(v):
     return "—" if not v else (f"${v/1e6:.2f}M" if v >= 995_000 else f"${v/1e3:.0f}K")
 
@@ -134,11 +138,11 @@ def fog_map(hoods, w=560, h=560, bbox=(-122.516, 37.703, -122.355, 37.833)):
         rings = max(_rings(hd["geom"]), key=lambda rs: _area(rs[0]))
         (lx, ly), depth = label_point(rings)
         x, y = P(lx, ly)
-        fs = 7.4 if hd["n"] < 100 else 6.6
-        z = hd["zone"]
-        # just the number: white where it sits on the darkest shading, navy elsewhere
+        # the neighborhood's median SFH sale this year, in millions; blank with no house sales
+        if not hd["sfh"]["price"]: continue
+        fs = max(4.6, min(6.6, depth * sc * 0.55))   # smaller in the smallest neighborhoods
         ink = "#ffffff" if shade_at(lx, ly)["k"] == "D" else NAV
-        o.append(f"<text x='{x:.1f}' y='{y + fs * 0.36:.1f}' font-size='{fs}' font-weight='700' fill='{ink}' text-anchor='middle'>{hd['n']}</text>")
+        o.append(f"<text x='{x:.1f}' y='{y + fs * 0.36:.1f}' font-size='{fs}' font-weight='700' fill='{ink}' text-anchor='middle'>{Mm(hd['sfh']['price'])}</text>")
     # compass + scale
     km = sc * (1 / 111.32)                 # px per km (east–west, at lat0 via cos already in sc)
     mi = km * 1.609
@@ -217,6 +221,7 @@ CSS = f"""
     .fm-idx .nm {{ flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
     .fm-idx .hr {{ color:{MUTED}; }}
     .fm-idx .tp {{ flex:0 0 17px; text-align:right; font-weight:700; }}
+    .fm-idx .md {{ flex:0 0 26px; text-align:right; font-weight:800; color:{NAV}; }}
     .fm-note {{ font-size:7.4px; color:{MUTED}; margin-top:5px; line-height:1.35; }}
     .mz-cards {{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:4px 0 5px; }}
     .mz-card {{ border-radius:7px; padding:7px 9px 6px; background:{NAV_LT}; border-top:6px solid var(--z); position:relative; }}
@@ -254,23 +259,23 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
     foot = lambda txt: (f"<div class='foot'><span>{txt}</span><span>Chuck Heaver · Vanguard Properties · page 0 / 0</span></div></div>")
 
     # ── page 1: the fog map ──
-    item = lambda h: (f"<div><span class='no'>{h['n']}</span>{zc(h['zone'])}<span class='nm'>{html.escape(h['name'])}</span>"
-                  f"<span class='hr'>{h['hours']:g}h</span><span class='tp'>{h['temp']}°</span></div>")
-    half = -(-len(hoods) // 2)
-    idx = "".join("<section>" + "".join(item(h) for h in part) + "</section>" for part in (hoods[:half], hoods[half:]))
+    item = lambda h: (f"<div>{zc(h['zone'])}<span class='nm'>{html.escape(h['name'])}</span>"
+                  f"<span class='hr'>{h['hours']:g}h</span><span class='tp'>{h['temp']}°</span>"
+                  f"<span class='md'>{Mm(h['sfh']['price']) if h['sfh']['price'] else '—'}</span></div>")
+    az = sorted(hoods, key=lambda h: (ZONES.index(h["zone"]), h["name"].lower()))   # zone by zone, A–Z
+    half = -(-len(az) // 2)
+    idx = "".join("<section>" + "".join(item(h) for h in part) + "</section>" for part in (az[:half], az[half:]))
     zkey = "".join(
         f"<div style='background:{z['fill']};color:{z['ink']}'><b>{z['k']}</b><span>{z['name']}</span><br>"
         f"{z['desc']} · {sum(1 for h in hoods if h['zone'] is z)} neighborhoods · ~{min(h['temp'] for h in hoods if h['zone'] is z)}–{max(h['temp'] for h in hoods if h['zone'] is z)}°F</div>" for z in ZONES)
-    sunny, foggy = hoods[0], hoods[-1]
-    o = [f"<div class='page'><div class='hdr'><div><div class='t'>The Fog Map — San Francisco's Microclimates</div>"
-         f"<div class='p'>Four zones, A to D · {len(hoods)} neighborhoods, numbered zone by zone from the sunniest "
-         f"(1, {html.escape(sunny['name'])}) to the foggiest ({len(hoods)}, {html.escape(foggy['name'])})</div></div></div>",
+    o = [f"<div class='page'><div class='hdr'><div><div class='t'>Heat Map</div>"
+         f"<div class='p'>Median single-family sale price by neighborhood, in millions, Jan 1 – {thru} · on the city's four fog zones, A to D</div></div></div>",
          "<div class='fm-wrap'><div class='fm-map'>",
          f"<div class='mapbox'>{fog_map(hoods, w=612, h=628)}</div><div class='fm-zkey'>{zkey}</div></div>",
-         "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>fog hrs/day · est. summer afternoon °F</i></div>",
+         "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>fog hrs/day · est. summer °F · SFH median</i></div>",
          f"<div class='fm-idx'>{idx}</div>",
          "</div></div>",
-         foot("Fog hours: summer fog and low cloud, USGS / GOES satellite, 1999–2009. Shading is the fog contours; a neighborhood's letter is its category — Transition when 10%+ of it is on the 8.5-hr line, or on each side of it. °F: estimated from fog hours, not a station reading.")]
+         foot("Shading: fog contours (USGS / GOES, 1999–2009). Letter: the neighborhood's zone — Transition when 10%+ of it is on the 8.5-hr line or on each side. °F estimated from fog hours. SFH medians: SFAR MLS; blank = no house sales.")]
 
     # ── page 2: microclimates and real estate ──
     zst = {z["k"]: mg.stats([r for r in y1 if r.get("propType") in sfh and sale_zone(r) is z]) for z in ZONES}
@@ -286,7 +291,7 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
                      f"<div class='row'><span>$/sf · sales</span><b>${(s['ppsf'] or 0):,.0f} · {s['n']:,}</b></div></div>")
     res = [h for h in hoods if h["homes"] >= 300 and h["sales"] >= 5]  # places people live and buy
     def rows(hs):
-        return "".join(f"<tr><td class='l'>{h['n']}. {zc(h['zone'])}{html.escape(h['name'])}</td><td class='b'>{h['temp']}°</td>"
+        return "".join(f"<tr><td class='l'>{zc(h['zone'])}{html.escape(h['name'])}</td><td class='b'>{h['temp']}°</td>"
                        f"<td>{h['hours']:g}</td><td>{M(h['all']['price'])}</td><td>{h['all']['n'] or '—'}</td></tr>" for h in hs)
     th = "<tr><th class='l'>Neighborhood</th><th>Est. °F</th><th>Fog hrs</th><th>Median</th><th>Sales</th></tr>"
     colg = "<colgroup><col style='width:48%'><col style='width:13%'><col style='width:13%'><col style='width:15%'><col style='width:11%'></colgroup>"
