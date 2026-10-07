@@ -97,30 +97,48 @@ def label_point(rings):
     return best, bd
 
 def fog_map(hoods, w=560, h=560, bbox=(-122.516, 37.703, -122.355, 37.833)):
-    """Neighborhoods shaded by zone with clean white borders, each numbered
-    at its deepest point. No sale dots."""
+    """The city shaded straight from the fog contour polygons (the layers the
+    site's fog map draws), so a neighborhood split by the sun / fog line
+    shows each part in its own zone. Thin white neighborhood boundaries on
+    top, each neighborhood numbered at its deepest point. No sale dots."""
     W0, S0, E0, N0 = bbox
     shp = json.load(open(os.path.join(ROOT, "public/data/map-shapes.json")))
+    con = json.load(open(os.path.join(ROOT, "public/data/sf-fog-contours.geojson")))
     lat0 = math.radians((S0 + N0) / 2); sx = (E0 - W0) * math.cos(lat0); sy = N0 - S0
     sc = min(w / sx, h / sy); ox = (w - sx * sc) / 2; oy = (h - sy * sc) / 2
     P = lambda lng, lat: (ox + (lng - W0) * math.cos(lat0) * sc, oy + (N0 - lat) * sc)
     def path(geom):
         return "".join("M" + " L".join("%.1f,%.1f" % P(x, y) for x, y in r) + "Z" for rings in _rings(geom) for r in rings)
+    land = path(shp["land"])
     o = [f"<svg viewBox='0 0 {w} {h}' width='100%' preserveAspectRatio='xMidYMid meet' font-family=\"'Lato',Helvetica,Arial,sans-serif\">",
+         f"<defs><clipPath id='fm-land'><path d='{land}' clip-rule='evenodd'/></clipPath></defs>",
          f"<rect width='{w}' height='{h}' fill='#EAF1F6'/>",
-         # the land underneath, in the neutral grey of parkland and gaps
-         f"<path d='{path(shp['land'])}' fill='#ffffff' fill-rule='evenodd'/>"]   # gaps between neighborhoods read as white border
+         f"<path d='{land}' fill='{ZONES[0]['fill']}' fill-rule='evenodd'/>",
+         "<g clip-path='url(#fm-land)'>"]
+    # Contours nest: a point takes the smallest polygon around it, so paint
+    # largest first and let the smaller ones cover them.
+    size = lambda f: sum(_area(rs[0]) for rs in _rings(f["geometry"]))
+    for f in sorted(con["features"], key=size, reverse=True):
+        o.append(f"<path d='{path(f['geometry'])}' fill='{zone_of_hours(f['properties']['hours'])['fill']}' fill-rule='evenodd'/>")
+    o.append("</g>")
+    def shade_at(lng, lat):
+        """The zone the map paints at a point: the smallest contour around it."""
+        best, ba = None, float("inf")
+        for f in con["features"]:
+            for rs in _rings(f["geometry"]):
+                if _inside(lng, lat, rs) and _area(rs[0]) < ba: best, ba = f, _area(rs[0])
+        return zone_of_hours(best["properties"]["hours"]) if best else ZONES[0]
     for hd in hoods:
-        z = hd["zone"]
-        o.append(f"<path d='{path(hd['geom'])}' fill='{z['fill']}' fill-rule='evenodd' stroke='#ffffff' stroke-width='0.6' stroke-linejoin='round'/>")
+        o.append(f"<path d='{path(hd['geom'])}' fill='none' stroke='#ffffff' stroke-width='0.6' stroke-linejoin='round'/>")
     for hd in hoods:
         rings = max(_rings(hd["geom"]), key=lambda rs: _area(rs[0]))
         (lx, ly), depth = label_point(rings)
         x, y = P(lx, ly)
         fs = 7.4 if hd["n"] < 100 else 6.6
         z = hd["zone"]
-        # just the number, in the zone's own ink (white on the darkest zone)
-        o.append(f"<text x='{x:.1f}' y='{y + fs * 0.36:.1f}' font-size='{fs}' font-weight='700' fill='{z['ink'] if z['k'] == 'D' else NAV}' text-anchor='middle'>{hd['n']}</text>")
+        # just the number: white where it sits on the darkest shading, navy elsewhere
+        ink = "#ffffff" if shade_at(lx, ly)["k"] == "D" else NAV
+        o.append(f"<text x='{x:.1f}' y='{y + fs * 0.36:.1f}' font-size='{fs}' font-weight='700' fill='{ink}' text-anchor='middle'>{hd['n']}</text>")
     # compass + scale
     km = sc * (1 / 111.32)                 # px per km (east–west, at lat0 via cos already in sc)
     mi = km * 1.609
@@ -252,7 +270,7 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
          "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>fog hrs/day · est. summer afternoon °F</i></div>",
          f"<div class='fm-idx'>{idx}</div>",
          "</div></div>",
-         foot("Fog hours: summer fog and low cloud, USGS / GOES satellite, 1999–2009. Transition = 10%+ of a neighborhood on the 8.5-hr line, or on each side of it. °F: estimated from fog hours, not a station reading.")]
+         foot("Fog hours: summer fog and low cloud, USGS / GOES satellite, 1999–2009. Shading is the fog contours; a neighborhood's letter is its category — Transition when 10%+ of it is on the 8.5-hr line, or on each side of it. °F: estimated from fog hours, not a station reading.")]
 
     # ── page 2: microclimates and real estate ──
     zst = {z["k"]: mg.stats([r for r in y1 if r.get("propType") in sfh and sale_zone(r) is z]) for z in ZONES}
