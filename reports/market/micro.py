@@ -109,19 +109,18 @@ def fog_map(hoods, w=560, h=560, bbox=(-122.516, 37.703, -122.355, 37.833)):
     o = [f"<svg viewBox='0 0 {w} {h}' width='100%' preserveAspectRatio='xMidYMid meet' font-family=\"'Lato',Helvetica,Arial,sans-serif\">",
          f"<rect width='{w}' height='{h}' fill='#EAF1F6'/>",
          # the land underneath, in the neutral grey of parkland and gaps
-         f"<path d='{path(shp['land'])}' fill='#E3E4DF' fill-rule='evenodd'/>"]
+         f"<path d='{path(shp['land'])}' fill='#ffffff' fill-rule='evenodd'/>"]   # gaps between neighborhoods read as white border
     for hd in hoods:
         z = hd["zone"]
-        o.append(f"<path d='{path(hd['geom'])}' fill='{z['fill']}' fill-rule='evenodd' stroke='#ffffff' stroke-width='1.1' stroke-linejoin='round'/>")
-    o.append(f"<path d='{path(shp['land'])}' fill='none' stroke='{NAV}' stroke-width='1.2' stroke-linejoin='round' fill-rule='evenodd'/>")
+        o.append(f"<path d='{path(hd['geom'])}' fill='{z['fill']}' fill-rule='evenodd' stroke='#ffffff' stroke-width='0.6' stroke-linejoin='round'/>")
     for hd in hoods:
         rings = max(_rings(hd["geom"]), key=lambda rs: _area(rs[0]))
         (lx, ly), depth = label_point(rings)
-        x, y = P(lx, ly); r = max(4.6, min(7.2, depth * sc * 0.75))
-        fs = 6.2 if hd["n"] < 100 else 5.4
+        x, y = P(lx, ly)
+        fs = 7.4 if hd["n"] < 100 else 6.6
         z = hd["zone"]
-        o.append(f"<circle cx='{x:.1f}' cy='{y:.1f}' r='{r:.1f}' fill='#ffffff' fill-opacity='0.92' stroke='{NAV}' stroke-width='0.5'/>"
-                 f"<text x='{x:.1f}' y='{y + fs * 0.36:.1f}' font-size='{fs}' font-weight='700' fill='{NAV}' text-anchor='middle'>{hd['n']}</text>")
+        # just the number, in the zone's own ink (white on the darkest zone)
+        o.append(f"<text x='{x:.1f}' y='{y + fs * 0.36:.1f}' font-size='{fs}' font-weight='700' fill='{z['ink'] if z['k'] == 'D' else NAV}' text-anchor='middle'>{hd['n']}</text>")
     # compass + scale
     km = sc * (1 / 111.32)                 # px per km (east–west, at lat0 via cos already in sc)
     mi = km * 1.609
