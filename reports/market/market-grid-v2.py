@@ -93,12 +93,6 @@ def fog_codes(F):
         if r.get("fogNeighborhood") and r.get("realtorNid"): c[r["fogNeighborhood"]][r["realtorNid"]]+=1
     return {n:max(v,key=v.get) for n,v in c.items()}
 
-# Latent inventory per neighborhood (scripts/build-parcel-res-by-realtor.mjs):
-# single-family houses for the SFH grid, units in 2+ unit buildings for the
-# Condo/TIC/Other grid.
-try: STOCK=json.load(open(os.path.join(ROOT,"public/data/parcel-res-by-fog.json")))
-except Exception: STOCK={}
-LATENT_KEY={"Single Family Residences":"u1","Condo / TIC / Other":"units2"}
 
 def last_full_month(F):
     latest=max(r["sellingDate"] for r in F if r.get("sellingDate"))
@@ -199,15 +193,14 @@ def render(pages,plabel,labels,W,run_date):
     tbody tr.dist td.pri {{ color:{MUTED}; }}
     td.name .code {{ color:{MUTED}; font-weight:400; font-size:6.8px; }}
     table tbody td {{ padding-top:0.9px; padding-bottom:0.9px; }}
-    table.grid {{ font-size:8.3px; margin:0 auto; }}
-    table.grid col.nm {{ width:12.2%; }}
-    table.grid col.lt {{ width:3.6%; }}
+    table.grid {{ font-size:8.45px; margin:0 auto; }}
+    table.grid col.nm {{ width:13.2%; }}
     table.grid th, table.grid td {{ padding-left:1.2px; padding-right:1.2px; }}
     table.grid tbody td {{ padding-top:0.9px; padding-bottom:0.9px; }}
     table.grid thead tr.g th {{ font-size:7.6px; }}
     table.grid thead tr.sub th {{ font-size:7px; white-space:normal; line-height:1.05; vertical-align:bottom; }}
-    table.grid td.name .code {{ font-size:7.2px; }}
-    table.grid tfoot td {{ font-size:8.3px; }}
+    table.grid td.name .code {{ font-size:7.3px; }}
+    table.grid tfoot td {{ font-size:8.45px; }}
     """
     groups=[("Qty Sold","","int","n"),("Median Sale Price","M / K","usdM","price"),("Average Sale Price","M / K","usdM","avg"),("Median $/SF","","usd","ppsf"),
             ("Median DOM","days","dom","dom"),("Sold Price vs List %","","pts","pct")]
@@ -224,23 +217,12 @@ def render(pages,plabel,labels,W,run_date):
                 if v!=prior: col=f"color:{UP if better else DOWN};"
             out.append(f"<td class='{cls}{edge}' style='{col}'>{F[kind](v)}</td>")
         return "".join(out)
-    def head(lat=False):
-        h="<colgroup><col class='nm'>"+"<col>"*24+("<col class='lt'><col class='lt'><col class='lt'>" if lat else "")+"</colgroup><thead><tr class='g'><th class='name'>Neighborhood</th>"
+    def head():
+        h="<colgroup><col class='nm'>"+"<col>"*24+"</colgroup><thead><tr class='g'><th class='name'>Neighborhood</th>"
         h+="".join(f"<th colspan='4'>{g}{('<u>'+u+'</u>') if u else ''}</th>" for g,u,_,_ in groups)
-        if lat: h+="<th colspan='3'>Latent vs Sold</th>"
         h+="</tr><tr class='sub'><th></th>"
         h+="".join(f"<th class='g0'>{labels['m1']}</th><th>{labels['m0']}</th><th class='ytd g2'>{labels['y1']}</th><th class='ytd'>{labels['y0']}</th>" for _ in groups)
-        if lat: h+="<th class='g0'>Latent Units</th><th class='ytd'>Sold YTD</th><th>% Traded</th>"
         return h+"</tr></thead>"
-    def latent(seg,names,st):
-        """Latent vs Sold: the neighborhood's stock (houses for SFH, units in
-        2+ unit buildings for Condo/TIC/Other), this year's sales, and the
-        share of the stock that traded."""
-        k=LATENT_KEY[seg]
-        stock=sum((STOCK.get(n) or {}).get(k,0) for n in names)
-        sold=st["y1"]["n"]
-        pct="\u2014" if not stock else (f"{100*sold/stock:.1f}%")
-        return (f"<td class='cur g0'>{i(stock) if stock else chr(8212)}</td><td class='cur'>{i(sold)}</td><td class='cur'>{pct}</td>")
     out=[f"<!doctype html><html><head><meta charset='utf-8'><style>{css}</style></head><body>"]
     ROWS=47                                   # table rows per page
     for seg,byA,tot,byZ,byD in pages:
@@ -253,12 +235,12 @@ def render(pages,plabel,labels,W,run_date):
             out.append(f"<div class='page'><div class='hdr'><div><div class='t'>San Francisco Market Grid - {title}{part}</div>"
                        f"<div class='p'>{html.escape(plabel)}</div>"
                        f"<div class='s'>Closed sales, SFAR MLS &nbsp;\u00b7&nbsp; run {run_date.strftime('%b %-d, %Y')}</div></div></div>")
-            out.append("<table class='grid'>"+head(True)+"<tbody>")
+            out.append("<table class='grid'>"+head()+"<tbody>")
             for _,nm,nid,st in chunk:
-                out.append(f"<tr><td class='name'>{html.escape(nm)} <span class='code'>{html.escape(nid)}</span></td>"+"".join(cells(st,kind,key) for _,_,kind,key in groups)+latent(seg,[nm],st)+"</tr>")
+                out.append(f"<tr><td class='name'>{html.escape(nm)} <span class='code'>{html.escape(nid)}</span></td>"+"".join(cells(st,kind,key) for _,_,kind,key in groups)+"</tr>")
             out.append("</tbody>")
             if ci==len(chunks)-1:
-                out.append("<tfoot><tr><td class='name'>All San Francisco (pooled)</td>"+"".join(cells(tot,kind,key) for _,_,kind,key in groups)+latent(seg,list(STOCK),tot)+"</tr></tfoot>")
+                out.append("<tfoot><tr><td class='name'>All San Francisco (pooled)</td>"+"".join(cells(tot,kind,key) for _,_,kind,key in groups)+"</tr></tfoot>")
             out.append("</table>")
             out.append(f"<div class='foot'><span>Source: SFAR MLS via BrokerMetrics, closed sales only (Closed + Sold Off MLS). Data through {W['m1'][1]}. Deemed reliable, not guaranteed.</span>"
                        f"<span>Chuck Heaver \u00b7 Vanguard Properties \u00b7 page 0 / 0</span></div></div>")

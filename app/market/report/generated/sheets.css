@@ -184,12 +184,11 @@
 .sheetB tbody tr.dist td.pri { color:#6B6F75; }
 .sheetB td.name .code { color:#6B6F75; font-weight:400; font-size:6.8px; }
 .sheetB table tbody td { padding-top:0.9px; padding-bottom:0.9px; }
-.sheetB table.grid { font-size:8.3px; margin:0 auto; }
-.sheetB table.grid col.nm { width:12.2%; }
-.sheetB table.grid col.lt { width:3.6%; }
+.sheetB table.grid { font-size:8.45px; margin:0 auto; }
+.sheetB table.grid col.nm { width:13.2%; }
 .sheetB table.grid th, .sheetB table.grid td { padding-left:1.2px; padding-right:1.2px; }
 .sheetB table.grid tbody td { padding-top:0.9px; padding-bottom:0.9px; }
 .sheetB table.grid thead tr.g th { font-size:7.6px; }
 .sheetB table.grid thead tr.sub th { font-size:7px; white-space:normal; line-height:1.05; vertical-align:bottom; }
-.sheetB table.grid td.name .code { font-size:7.2px; }
-.sheetB table.grid tfoot td { font-size:8.3px; }
+.sheetB table.grid td.name .code { font-size:7.3px; }
+.sheetB table.grid tfoot td { font-size:8.45px; }
