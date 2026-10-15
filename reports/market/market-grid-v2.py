@@ -4,7 +4,7 @@ import os, sys
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.abspath(os.path.join(HERE,"..",".."))
 SRC=os.path.join(ROOT,"public/data/sf-listings.geojson")
 # The site's own faces (public/fonts), so the PDF and the web edition read in
-# the same voice as ur4cast.com: Montserrat headings, Lato text, Georgia
+# the same voice as chuckheaver.com: Montserrat headings, Lato text, Georgia
 # figures. Paths are relative to out/, where the HTML is written; web.py
 # rewrites them to /fonts/ for the site.
 FONT_DIR="../../../public/fonts"

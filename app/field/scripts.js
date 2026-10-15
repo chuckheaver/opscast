@@ -16,8 +16,8 @@ export const SCRIPTS = {
   "Castro": {
     aka: "Eureka Valley",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Castro&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Castro)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Castro&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Castro)",
     route: {
       // Landmark stops tied to the hidden facts, numbered to match the map pins
       // and the "STOP N" callouts in the script. In-boundary (verified against
@@ -230,8 +230,8 @@ export const SCRIPTS = {
   "Noe Valley": {
     aka: "Stroller Valley",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Noe%20Valley&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Noe Valley)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Noe%20Valley&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Noe Valley)",
     route: {
       // Route stays ENTIRELY within the Noe Valley boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -447,8 +447,8 @@ export const SCRIPTS = {
   "Marina": {
     aka: "1915 Expo grounds",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Marina&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Marina)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Marina&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Marina)",
     route: {
       // Route stays ENTIRELY within the Marina boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -662,8 +662,8 @@ export const SCRIPTS = {
   "Hayes Valley": {
     aka: "Reborn after 1989",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Hayes%20Valley&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Hayes Valley)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Hayes%20Valley&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Hayes Valley)",
     route: {
       // Route stays ENTIRELY within the Hayes Valley boundary (verified against
       // the neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -878,8 +878,8 @@ export const SCRIPTS = {
   "Pacific Heights": {
     aka: "Pac Heights",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Pacific%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Pacific Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Pacific%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Pacific Heights)",
     route: {
       // Route stays ENTIRELY within the Pacific Heights boundary (verified against
       // the neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -1101,8 +1101,8 @@ export const SCRIPTS = {
   "Mission": {
     aka: "La Misión",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Mission&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Mission)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Mission&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Mission)",
     route: {
       // Route stays ENTIRELY within the Mission boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -1322,8 +1322,8 @@ export const SCRIPTS = {
   "North Beach": {
     aka: "Little Italy",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=North%20Beach&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → North Beach)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=North%20Beach&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → North Beach)",
     route: {
       // Route stays ENTIRELY within the North Beach boundary (verified against
       // the neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -1538,8 +1538,8 @@ export const SCRIPTS = {
   },
   "Russian Hill": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Russian%20Hill&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Russian Hill)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Russian%20Hill&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Russian Hill)",
     route: {
       // Route stays ENTIRELY within the Russian Hill boundary (verified against
       // the neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -1757,8 +1757,8 @@ export const SCRIPTS = {
   "Nob Hill": {
     aka: "“Snob Hill”",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Nob%20Hill&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Nob Hill)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Nob%20Hill&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Nob Hill)",
     route: {
       // Route stays ENTIRELY within the Nob Hill boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -1972,8 +1972,8 @@ export const SCRIPTS = {
   },
   "Cole Valley": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Cole%20Valley&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Cole Valley)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Cole%20Valley&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Cole Valley)",
     route: {
       // Route stays ENTIRELY within the Cole Valley boundary (verified against the
       // neighborhood polygon; bbox [-122.4534, 37.7645, -122.4476, 37.7689]).
@@ -2194,8 +2194,8 @@ export const SCRIPTS = {
 "Bernal Heights": {
     aka: "“Maternal Heights”",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Bernal%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Bernal Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Bernal%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Bernal Heights)",
     route: {
       // Route stays ENTIRELY within the Bernal Heights boundary (verified against
       // the neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -2409,8 +2409,8 @@ export const SCRIPTS = {
   },
 "Potrero Hill": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Potrero%20Hill&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Potrero Hill)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Potrero%20Hill&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Potrero Hill)",
     route: {
       // Route stays ENTIRELY within the Potrero Hill boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -2632,8 +2632,8 @@ export const SCRIPTS = {
 "Glen Park": {
     aka: "“The Village in the City”",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Glen%20Park&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Glen Park)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Glen%20Park&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Glen Park)",
     route: {
       // Route stays ENTIRELY within the Glen Park boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -2849,8 +2849,8 @@ export const SCRIPTS = {
   },
 "Cow Hollow": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Cow%20Hollow&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Cow Hollow)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Cow%20Hollow&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Cow Hollow)",
     route: {
       // Route stays ENTIRELY within the Cow Hollow boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -3066,8 +3066,8 @@ export const SCRIPTS = {
   },
 "Duboce Triangle": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Duboce%20Triangle&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Duboce Triangle)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Duboce%20Triangle&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Duboce Triangle)",
     route: {
       // Route stays ENTIRELY within the Duboce Triangle boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -3288,8 +3288,8 @@ export const SCRIPTS = {
 "South of Market": {
     aka: "SoMa",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=South%20of%20Market&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → South of Market)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=South%20of%20Market&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → South of Market)",
     route: {
       // Route stays ENTIRELY within the South of Market boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -3507,8 +3507,8 @@ export const SCRIPTS = {
 "Presidio Heights": {
     aka: "Presidio Terrace area",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Presidio%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Presidio Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Presidio%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Presidio Heights)",
     route: {
       // Route stays ENTIRELY within the Presidio Heights boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -3728,8 +3728,8 @@ export const SCRIPTS = {
 "Telegraph Hill": {
     aka: "Goat Hill",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Telegraph%20Hill&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Telegraph Hill)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Telegraph%20Hill&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Telegraph Hill)",
     route: {
       // Route stays ENTIRELY within the Telegraph Hill boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -3948,8 +3948,8 @@ export const SCRIPTS = {
 "Seacliff": {
     aka: "Sea Cliff",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Seacliff&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Seacliff)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Seacliff&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Seacliff)",
     route: {
       // Route stays ENTIRELY within the Seacliff boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -4178,8 +4178,8 @@ export const SCRIPTS = {
 "Lake Street": {
     aka: "Lake District",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Lake%20Street&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Lake Street)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Lake%20Street&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Lake Street)",
     route: {
       // Route stays ENTIRELY within the Lake Street boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -4395,8 +4395,8 @@ export const SCRIPTS = {
 "Alamo Square": {
     aka: "Postcard Row",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Alamo%20Square&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Alamo Square)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Alamo%20Square&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Alamo Square)",
     route: {
       // Route stays ENTIRELY within the Alamo Square boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -4607,8 +4607,8 @@ export const SCRIPTS = {
   },
 "St. Francis Wood": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=St.%20Francis%20Wood&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → St. Francis Wood)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=St.%20Francis%20Wood&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → St. Francis Wood)",
     route: {
       // Route stays ENTIRELY within the St. Francis Wood boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -4829,8 +4829,8 @@ export const SCRIPTS = {
 "Haight Ashbury": {
     aka: "The Haight",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Haight%20Ashbury&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Haight Ashbury)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Haight%20Ashbury&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Haight Ashbury)",
     route: {
       // Route stays ENTIRELY within the Haight Ashbury boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -5042,8 +5042,8 @@ export const SCRIPTS = {
 "Japantown": {
     aka: "Nihonmachi",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Japantown&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Japantown)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Japantown&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Japantown)",
     route: {
       // Route stays ENTIRELY within the Japantown boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -5258,8 +5258,8 @@ export const SCRIPTS = {
 "Western Addition": {
     aka: "The Fillmore",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Western%20Addition&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Western Addition)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Western%20Addition&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Western Addition)",
     route: {
       // Route stays ENTIRELY within the Western Addition boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -5472,8 +5472,8 @@ export const SCRIPTS = {
   },
 "Laurel Heights / Jordan Park": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Laurel%20Heights%20%2F%20Jordan%20Park&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Laurel Heights / Jordan Park)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Laurel%20Heights%20%2F%20Jordan%20Park&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Laurel Heights / Jordan Park)",
     route: {
       // Route stays ENTIRELY within the Laurel Heights / Jordan Park boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -5690,8 +5690,8 @@ export const SCRIPTS = {
   },
 "Ashbury Heights": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Ashbury%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Ashbury Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Ashbury%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Ashbury Heights)",
     route: {
       // Route stays ENTIRELY within the Ashbury Heights boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -5914,8 +5914,8 @@ export const SCRIPTS = {
 "Lower Pacific Heights": {
     aka: "Lower Pac Heights",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Lower%20Pacific%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Lower Pacific Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Lower%20Pacific%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Lower Pacific Heights)",
     route: {
       // Route stays ENTIRELY within the Lower Pacific Heights boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -6130,8 +6130,8 @@ export const SCRIPTS = {
 "Buena Vista": {
     aka: "Buena Vista Park",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Buena%20Vista&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Buena Vista)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Buena%20Vista&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Buena Vista)",
     route: {
       // Route stays ENTIRELY within the Buena Vista boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -6345,8 +6345,8 @@ export const SCRIPTS = {
   },
 "Dolores Heights": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Dolores%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Dolores Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Dolores%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Dolores Heights)",
     route: {
       // Route stays ENTIRELY within the Dolores Heights boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -6567,8 +6567,8 @@ export const SCRIPTS = {
   },
 "Parnassus Heights": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Parnassus%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Parnassus Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Parnassus%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Parnassus Heights)",
     route: {
       // Route stays ENTIRELY within the Parnassus Heights boundary (verified
       // against the neighborhood polygon). Coords approximate — I'll snap to the
@@ -6781,8 +6781,8 @@ export const SCRIPTS = {
 "Lower Haight": {
     aka: "Haight-Fillmore",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Lower%20Haight&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Lower Haight)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Lower%20Haight&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Lower Haight)",
     route: {
       // Route stays ENTIRELY within the Lower Haight boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the
@@ -6996,8 +6996,8 @@ export const SCRIPTS = {
   },
 "Monterey Heights": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Monterey%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Monterey Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Monterey%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Monterey Heights)",
     route: {
       // Route stays ENTIRELY within the Monterey Heights boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -7219,8 +7219,8 @@ export const SCRIPTS = {
 "Panhandle": {
     aka: "NoPa",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Panhandle&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Panhandle)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Panhandle&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Panhandle)",
     route: {
       // Route stays ENTIRELY within the Panhandle boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -7432,8 +7432,8 @@ export const SCRIPTS = {
   },
 "West Portal": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=West%20Portal&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → West Portal)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=West%20Portal&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → West Portal)",
     route: {
       // Route stays ENTIRELY within the West Portal boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk grid for the final cut.
@@ -7648,8 +7648,8 @@ export const SCRIPTS = {
   },
 "Balboa Terrace": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Balboa%20Terrace&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Balboa Terrace)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Balboa%20Terrace&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Balboa Terrace)",
     route: {
       // Route stays ENTIRELY within the Balboa Terrace boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -7865,8 +7865,8 @@ export const SCRIPTS = {
 "Inner Richmond": {
     aka: "New Chinatown",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Inner%20Richmond&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Inner Richmond)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Inner%20Richmond&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Inner Richmond)",
     route: {
       // Route stays ENTIRELY within the Inner Richmond boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -8086,8 +8086,8 @@ export const SCRIPTS = {
   },
 "Mission Dolores": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Mission%20Dolores&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Mission Dolores)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Mission%20Dolores&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Mission Dolores)",
     route: {
       // Route stays ENTIRELY within the Mission Dolores boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -8298,8 +8298,8 @@ export const SCRIPTS = {
   },
 "Laguna Honda": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Laguna%20Honda&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Laguna Honda)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Laguna%20Honda&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Laguna Honda)",
     route: {
       // Route stays ENTIRELY within the Laguna Honda boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -8510,8 +8510,8 @@ export const SCRIPTS = {
   },
 "Upper Market": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Upper%20Market&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Upper Market)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Upper%20Market&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Upper Market)",
     route: {
       // Route stays ENTIRELY within the Upper Market boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the
@@ -8728,8 +8728,8 @@ export const SCRIPTS = {
   },
 "Forest Hill": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Forest%20Hill&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Forest Hill)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Forest%20Hill&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Forest Hill)",
     route: {
       // Route stays ENTIRELY within the Forest Hill boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk grid for the final cut.
@@ -8947,8 +8947,8 @@ export const SCRIPTS = {
 "Diamond Heights": {
     aka: "Red Rock Hill",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Diamond%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Diamond Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Diamond%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Diamond Heights)",
     route: {
       // Route stays ENTIRELY within the Diamond Heights boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk grid for the final cut.
@@ -9163,8 +9163,8 @@ export const SCRIPTS = {
   },
 "Ingleside Terraces": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Ingleside%20Terraces&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Ingleside Terraces)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Ingleside%20Terraces&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Ingleside Terraces)",
     route: {
       // Route stays ENTIRELY within the Ingleside Terraces boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk grid
@@ -9381,8 +9381,8 @@ export const SCRIPTS = {
   },
 "Clarendon Heights": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Clarendon%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Clarendon Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Clarendon%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Clarendon Heights)",
     route: {
       // Route stays ENTIRELY within the Clarendon Heights boundary (verified
       // against the neighborhood polygon). Coords approximate — I'll snap to the
@@ -9596,8 +9596,8 @@ export const SCRIPTS = {
   },
 "Chinatown": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Chinatown&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Chinatown)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Chinatown&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Chinatown)",
     route: {
       // Route stays ENTIRELY within the Chinatown boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -9817,8 +9817,8 @@ export const SCRIPTS = {
 "Financial District": {
     aka: "Barbary Coast",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Financial%20District&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Financial District)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Financial%20District&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Financial District)",
     route: {
       // Route stays ENTIRELY within the Financial District boundary (verified
       // against the neighborhood polygon). Coords approximate — I'll snap to the
@@ -10035,8 +10035,8 @@ export const SCRIPTS = {
 "Tenderloin": {
     aka: "The TL",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Tenderloin&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Tenderloin)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Tenderloin&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Tenderloin)",
     route: {
       // Route stays ENTIRELY within the Tenderloin boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -10245,8 +10245,8 @@ export const SCRIPTS = {
   },
 "Civic Center": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Civic%20Center&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Civic Center)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Civic%20Center&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Civic Center)",
     route: {
       // Route stays ENTIRELY within the Civic Center boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -10458,8 +10458,8 @@ export const SCRIPTS = {
   },
 "Fishermans Wharf": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Fishermans%20Wharf&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Fishermans Wharf)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Fishermans%20Wharf&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Fishermans Wharf)",
     route: {
       // Route stays ENTIRELY within the Fishermans Wharf boundary (verified
       // against the neighborhood polygon). Coords approximate — I'll snap to the
@@ -10675,8 +10675,8 @@ export const SCRIPTS = {
   },
 "Inner Sunset": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Inner%20Sunset&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Inner Sunset)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Inner%20Sunset&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Inner Sunset)",
     route: {
       // Route stays ENTIRELY within the Inner Sunset boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the
@@ -10895,8 +10895,8 @@ export const SCRIPTS = {
 "Outer Sunset": {
     aka: "the Outside Lands",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Outer%20Sunset&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Outer Sunset)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Outer%20Sunset&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Outer Sunset)",
     route: {
       // Route stays ENTIRELY within the Outer Sunset boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -11120,8 +11120,8 @@ export const SCRIPTS = {
 "Outer Richmond": {
     aka: "The Avenues",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Outer%20Richmond&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Outer Richmond)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Outer%20Richmond&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Outer Richmond)",
     route: {
       // Route stays ENTIRELY within the Outer Richmond boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -11345,8 +11345,8 @@ export const SCRIPTS = {
 "Dogpatch": {
     aka: "Central Waterfront",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Dogpatch&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Dogpatch)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Dogpatch&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Dogpatch)",
     route: {
       // Route stays ENTIRELY within the Dogpatch boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -11560,8 +11560,8 @@ export const SCRIPTS = {
   },
 "Mission Bay": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Mission%20Bay&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Mission Bay)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Mission%20Bay&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Mission Bay)",
     route: {
       // Route stays ENTIRELY within the Mission Bay boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -11779,8 +11779,8 @@ export const SCRIPTS = {
   },
 "South Beach": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=South%20Beach&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → South Beach)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=South%20Beach&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → South Beach)",
     route: {
       // Route stays ENTIRELY within the South Beach boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -11994,8 +11994,8 @@ export const SCRIPTS = {
 "Rincon Hill": {
     aka: "The East Cut",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Rincon%20Hill&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Rincon Hill)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Rincon%20Hill&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Rincon Hill)",
     route: {
       // Route stays ENTIRELY within the Rincon Hill boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the
@@ -12211,8 +12211,8 @@ export const SCRIPTS = {
 "Corona Heights": {
     aka: "Museum Hill",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Corona%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Corona Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Corona%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Corona Heights)",
     route: {
       // Route stays ENTIRELY within the Corona Heights boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -12421,8 +12421,8 @@ export const SCRIPTS = {
 "Bayview": {
     aka: "Bayview–Hunters Point",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Bayview&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Bayview)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Bayview&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Bayview)",
     route: {
       // Route stays ENTIRELY within the Bayview boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -12636,8 +12636,8 @@ export const SCRIPTS = {
 "Hunters Point": {
     aka: "The Point",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Hunters%20Point&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Hunters Point)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Hunters%20Point&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Hunters Point)",
     route: {
       // Route stays ENTIRELY within the Hunters Point boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -12853,8 +12853,8 @@ export const SCRIPTS = {
   },
 "Excelsior": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Excelsior&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Excelsior)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Excelsior&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Excelsior)",
     route: {
       // Route stays ENTIRELY within the Excelsior boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -13070,8 +13070,8 @@ export const SCRIPTS = {
 "Portola": {
     aka: "the Garden District",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Portola&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Portola)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Portola&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Portola)",
     route: {
       // Route stays ENTIRELY within the Portola boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -13284,8 +13284,8 @@ export const SCRIPTS = {
 "Visitacion Valley": {
     aka: "Viz Valley",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Visitacion%20Valley&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Visitacion Valley)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Visitacion%20Valley&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Visitacion Valley)",
     route: {
       // Route stays ENTIRELY within the Visitacion Valley boundary (verified
       // against the neighborhood polygon). Coords approximate — I'll snap to the
@@ -13508,8 +13508,8 @@ export const SCRIPTS = {
 "Sunnyside": {
     aka: null,
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Sunnyside&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Sunnyside)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Sunnyside&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Sunnyside)",
     route: {
       // Route stays ENTIRELY within the Sunnyside boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -13726,8 +13726,8 @@ export const SCRIPTS = {
 "Oceanview": {
     aka: "Part of OMI",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Oceanview&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Oceanview)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Oceanview&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Oceanview)",
     route: {
       // Route stays ENTIRELY within the Oceanview boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -13944,8 +13944,8 @@ export const SCRIPTS = {
 "Outer Mission": {
     aka: "Cayuga Terrace",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Outer%20Mission&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Outer Mission)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Outer%20Mission&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Outer Mission)",
     route: {
       // Route stays ENTIRELY within the Outer Mission boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -14159,8 +14159,8 @@ export const SCRIPTS = {
   },
 "Mission Terrace": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Mission%20Terrace&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Mission Terrace)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Mission%20Terrace&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Mission Terrace)",
     route: {
       // Route stays ENTIRELY within the Mission Terrace boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -14372,8 +14372,8 @@ export const SCRIPTS = {
 "Crocker Amazon": {
     aka: "Crocker-Amazon",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Crocker%20Amazon&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Crocker Amazon)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Crocker%20Amazon&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Crocker Amazon)",
     route: {
       // Route stays ENTIRELY within the Crocker Amazon boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -14591,8 +14591,8 @@ export const SCRIPTS = {
   },
 "Miraloma Park": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Miraloma%20Park&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Miraloma Park)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Miraloma%20Park&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Miraloma Park)",
     route: {
       // Route stays ENTIRELY within the Miraloma Park boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -14814,8 +14814,8 @@ export const SCRIPTS = {
   },
 "Golden Gate Heights": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Golden%20Gate%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Golden Gate Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Golden%20Gate%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Golden Gate Heights)",
     route: {
       // Route stays ENTIRELY within the Golden Gate Heights boundary (verified
       // against the neighborhood polygon). Coords approximate — I'll snap to the
@@ -15035,8 +15035,8 @@ export const SCRIPTS = {
   },
 "Midtown Terrace": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Midtown%20Terrace&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Midtown Terrace)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Midtown%20Terrace&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Midtown Terrace)",
     route: {
       // Route stays ENTIRELY within the Midtown Terrace boundary (verified against
       // the neighborhood polygon; bbox -122.4564..-122.4448 lon, 37.7458..37.7541 lat).
@@ -15250,8 +15250,8 @@ export const SCRIPTS = {
   },
 "Mt. Davidson Manor": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Mt.%20Davidson%20Manor&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Mt. Davidson Manor)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Mt.%20Davidson%20Manor&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Mt. Davidson Manor)",
     route: {
       // Route stays ENTIRELY within the Mt. Davidson Manor boundary (verified
       // against the neighborhood polygon). Coords approximate — I'll snap to the
@@ -15466,8 +15466,8 @@ export const SCRIPTS = {
   },
 "Sherwood Forest": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Sherwood%20Forest&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Sherwood Forest)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Sherwood%20Forest&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Sherwood Forest)",
     route: {
       // Route stays ENTIRELY within the Sherwood Forest boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk grid for the final cut.
@@ -15683,8 +15683,8 @@ export const SCRIPTS = {
   },
 "Forest Knolls": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Forest%20Knolls&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Forest Knolls)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Forest%20Knolls&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Forest Knolls)",
     route: {
       // Route stays ENTIRELY within the Forest Knolls boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -15901,8 +15901,8 @@ export const SCRIPTS = {
   },
 "Westwood Park": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Westwood%20Park&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Westwood Park)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Westwood%20Park&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Westwood Park)",
     route: {
       // Route stays ENTIRELY within the Westwood Park boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -16124,8 +16124,8 @@ export const SCRIPTS = {
   },
 "Westwood Highlands": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Westwood%20Highlands&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Westwood Highlands)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Westwood%20Highlands&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Westwood Highlands)",
     route: {
       // Route stays ENTIRELY within the Westwood Highlands boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -16333,8 +16333,8 @@ export const SCRIPTS = {
   },
 "Merced Manor": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Merced%20Manor&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Merced Manor)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Merced%20Manor&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Merced Manor)",
     route: {
       // Route stays ENTIRELY within the Merced Manor boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -16543,8 +16543,8 @@ export const SCRIPTS = {
   },
 "Merced Heights": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Merced%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Merced Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Merced%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Merced Heights)",
     route: {
       // Route stays ENTIRELY within the Merced Heights boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -16755,8 +16755,8 @@ export const SCRIPTS = {
 "Parkside": {
     aka: "the Outer Sunset",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Parkside&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Parkside)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Parkside&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Parkside)",
     route: {
       // Route stays ENTIRELY within the Parkside boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -16969,8 +16969,8 @@ export const SCRIPTS = {
   },
 "Parkmerced": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Parkmerced&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Parkmerced)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Parkmerced&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Parkmerced)",
     route: {
       // Route stays ENTIRELY within the Parkmerced boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -17187,8 +17187,8 @@ export const SCRIPTS = {
   },
 "Stonestown": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Stonestown&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Stonestown)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Stonestown&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Stonestown)",
     route: {
       // Route stays ENTIRELY within the Stonestown boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the
@@ -17403,8 +17403,8 @@ export const SCRIPTS = {
   },
 "Lakeshore": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Lakeshore&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Lakeshore)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Lakeshore&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Lakeshore)",
     route: {
       // Route stays ENTIRELY within the Lakeshore boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -17623,8 +17623,8 @@ export const SCRIPTS = {
 "Cayuga": {
     aka: "Cayuga Terrace",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Cayuga&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Cayuga)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Cayuga&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Cayuga)",
     route: {
       // Route stays ENTIRELY within the Cayuga boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -17837,8 +17837,8 @@ export const SCRIPTS = {
   },
 "Sunnydale": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Sunnydale&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Sunnydale)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Sunnydale&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Sunnydale)",
     route: {
       // Route stays ENTIRELY within the Sunnydale boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -18056,8 +18056,8 @@ export const SCRIPTS = {
 "Little Hollywood": {
     aka: "Bayshore Tract",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Little%20Hollywood&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Little Hollywood)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Little%20Hollywood&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Little Hollywood)",
     route: {
       // Route stays ENTIRELY within the Little Hollywood boundary (verified
       // against the neighborhood polygon). Coords approximate — I'll snap to the
@@ -18273,8 +18273,8 @@ export const SCRIPTS = {
   },
 "Lone Mountain": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Lone%20Mountain&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Lone Mountain)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Lone%20Mountain&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Lone Mountain)",
     route: {
       // Route stays ENTIRELY within the Lone Mountain boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the
@@ -18492,8 +18492,8 @@ export const SCRIPTS = {
   },
 "Anza Vista": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Anza%20Vista&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Anza Vista)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Anza%20Vista&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Anza Vista)",
     route: {
       // Route stays ENTIRELY within the Anza Vista boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -18705,8 +18705,8 @@ export const SCRIPTS = {
   },
 "Cathedral Hill": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Cathedral%20Hill&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Cathedral Hill)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Cathedral%20Hill&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Cathedral Hill)",
     route: {
       // Route stays ENTIRELY within the Cathedral Hill boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -18923,8 +18923,8 @@ export const SCRIPTS = {
 "Polk Gulch": {
     aka: "the Polk Strip",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Polk%20Gulch&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Polk Gulch)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Polk%20Gulch&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Polk Gulch)",
     route: {
       // Route stays ENTIRELY within the Polk Gulch boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -19139,8 +19139,8 @@ export const SCRIPTS = {
 "Lower Nob Hill": {
     aka: "the Tendernob",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Lower%20Nob%20Hill&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Lower Nob Hill)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Lower%20Nob%20Hill&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Lower Nob Hill)",
     route: {
       // Route stays ENTIRELY within the Lower Nob Hill boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -19356,8 +19356,8 @@ export const SCRIPTS = {
     batchTip: "Shoot adjacent hoods the same outing — e.g. Lower Nob Hill + Tenderloin + Downtown / Union Square in one morning loop.",
   },
 "Downtown / Union Square": {
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Downtown%20%2F%20Union%20Square&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Downtown / Union Square)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Downtown%20%2F%20Union%20Square&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Downtown / Union Square)",
     route: {
       // Route stays ENTIRELY within the Downtown / Union Square boundary
       // (verified against the neighborhood polygon). Coords approximate —
@@ -19572,8 +19572,8 @@ export const SCRIPTS = {
   },
 "Presidio Terrace": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Presidio%20Terrace&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Presidio Terrace)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Presidio%20Terrace&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Presidio Terrace)",
     route: {
       // Route stays ENTIRELY within the Presidio Terrace boundary (verified against
       // the neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -19799,8 +19799,8 @@ export const SCRIPTS = {
   },
 "Holly Park": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Holly%20Park&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Holly Park)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Holly%20Park&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Holly Park)",
     route: {
       // Route stays ENTIRELY within the Holly Park boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -20019,8 +20019,8 @@ export const SCRIPTS = {
 "Fairmount": {
     aka: "Fairmount Heights",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Fairmount&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Fairmount)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Fairmount&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Fairmount)",
     route: {
       // Route stays ENTIRELY within the Fairmount boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -20234,8 +20234,8 @@ export const SCRIPTS = {
   },
 "Peralta Heights": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Peralta%20Heights&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Peralta Heights)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Peralta%20Heights&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Peralta Heights)",
     route: {
       // Route stays ENTIRELY within the Peralta Heights boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -20447,8 +20447,8 @@ export const SCRIPTS = {
 "St. Marys Park": {
     aka: "College Hill",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=St.%20Marys%20Park&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → St. Marys Park)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=St.%20Marys%20Park&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → St. Marys Park)",
     route: {
       // Route stays ENTIRELY within the St. Marys Park boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -20662,8 +20662,8 @@ export const SCRIPTS = {
   },
 "University Mound": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=University%20Mound&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → University Mound)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=University%20Mound&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → University Mound)",
     route: {
       // Route stays ENTIRELY within the University Mound boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -20873,8 +20873,8 @@ export const SCRIPTS = {
   },
 "Silver Terrace": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Silver%20Terrace&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Silver Terrace)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Silver%20Terrace&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Silver Terrace)",
     route: {
       // Route stays ENTIRELY within the Silver Terrace boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the sidewalk grid for the final cut.
@@ -21087,8 +21087,8 @@ export const SCRIPTS = {
   },
 "India Basin": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=India%20Basin&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → India Basin)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=India%20Basin&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → India Basin)",
     route: {
       // Route stays ENTIRELY within the India Basin boundary (verified against
       // the neighborhood polygon, bbox lon -122.3879..-122.3674, lat
@@ -21303,8 +21303,8 @@ export const SCRIPTS = {
   },
 "Central Waterfront": {
     runtime: "~10 min (8-10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Central%20Waterfront&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card -> Central Waterfront)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Central%20Waterfront&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card -> Central Waterfront)",
     route: {
       // Route stays ENTIRELY within the Central Waterfront boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk grid for the final cut.
@@ -21520,8 +21520,8 @@ export const SCRIPTS = {
 "Showplace Square": {
     aka: "Design District",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Showplace%20Square&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Showplace Square)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Showplace%20Square&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Showplace Square)",
     route: {
       // Route stays ENTIRELY within the Showplace Square boundary (verified
       // against the neighborhood polygon). Coords approximate — I'll snap to
@@ -21741,8 +21741,8 @@ export const SCRIPTS = {
   },
 "Mint Hill": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Mint%20Hill&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Mint Hill)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Mint%20Hill&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Mint Hill)",
     route: {
       // Route stays ENTIRELY within the Mint Hill boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -21953,8 +21953,8 @@ export const SCRIPTS = {
   },
 "Bret Harte": {
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Bret%20Harte&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Bret Harte)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Bret%20Harte&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Bret Harte)",
     route: {
       // Route stays ENTIRELY within the Bret Harte boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -22175,8 +22175,8 @@ export const SCRIPTS = {
 "Ingleside": {
     aka: "OMI (Ocean View-Merced Heights-Ingleside)",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Ingleside&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Ingleside)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Ingleside&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Ingleside)",
     route: {
       // Route stays ENTIRELY within the Ingleside boundary (verified against the
       // neighborhood polygon). Coords approximate — I'll snap to the sidewalk
@@ -22392,8 +22392,8 @@ export const SCRIPTS = {
 "Treasure Island": {
     aka: "TI",
     runtime: "~10 min (8–10 target)",
-    marketLink: "https://www.ur4cast.com/listings?nbhd=Treasure%20Island&layer=nbhd",
-    detailsLink: "https://www.ur4cast.com/fog (open the Neighborhoods card → Treasure Island)",
+    marketLink: "https://www.chuckheaver.com/listings?nbhd=Treasure%20Island&layer=nbhd",
+    detailsLink: "https://www.chuckheaver.com/fog (open the Neighborhoods card → Treasure Island)",
     route: {
       // Route stays ENTIRELY within the Treasure Island boundary (verified against the
       // neighborhood polygon). Coords approximate — snap to the path grid for the final cut.

@@ -20,10 +20,10 @@ const DESC =
   "Every San Francisco block has its own microclimate. Twenty years forecasting this coastline, "
   + "thirty-five selling homes on it — with every closed sale in the city mapped to the sun, wind and fog it sits in.";
 
-// The site's canonical home. chuckheaver.com is being pointed here; when the
-// DNS cuts over, change this one line (and the openGraph url below) and every
-// canonical, OG and relative metadata URL follows.
-export const SITE_URL = "https://www.ur4cast.com";
+// The site's canonical home. Every canonical, OG and relative metadata URL,
+// the sitemap and robots.txt follow this one line. ur4cast.com still serves
+// the site and should redirect here.
+export const SITE_URL = "https://www.chuckheaver.com";
 const SITE = SITE_URL;
 
 export const metadata = {
@@ -68,7 +68,7 @@ export default function RootLayout({ children }) {
         <SiteNav />
         {children}
         {/* Plausible Analytics — uncomment (and the import above) once the domain is live */}
-        {/* <Script defer data-domain="ur4cast.com" src="https://plausible.io/js/script.js" /> */}
+        {/* <Script defer data-domain="chuckheaver.com" src="https://plausible.io/js/script.js" /> */}
       </body>
     </html>
   );
