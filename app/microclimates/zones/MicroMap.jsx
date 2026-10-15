@@ -41,7 +41,6 @@ export default function MicroMap({
   showSolar,
   showTerrain,
   showContours,
-  showFogLine,
   showNeighborhoods,
   picked,
   flyTo,
@@ -57,7 +56,7 @@ export default function MicroMap({
 
   // Latest data + toggle state, readable from the stable callbacks below.
   const dataRef = useRef({ neighborhoods, zones, solar });
-  const visRef = useRef({ showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods });
+  const visRef = useRef({ showWind, showFog, showSolar, showTerrain, showContours, showNeighborhoods });
 
   const applyVisibility = useCallback(() => {
     const map = mapRef.current;
@@ -75,8 +74,6 @@ export default function MicroMap({
     set("micro-contour-lines", v.showContours);
     set("micro-contour-labels", v.showContours);
     set("micro-contour-peaks", v.showContours);
-    set("micro-fog-inversion", v.showFogLine);
-    set("micro-fog-inversion-label", v.showFogLine);
     set("micro-neigh-outline", v.showNeighborhoods);
     set("micro-neigh-labels", v.showNeighborhoods);
   }, []);
@@ -219,46 +216,6 @@ export default function MicroMap({
           "text-opacity": ["interpolate", ["linear"], ["zoom"], 12.5, 0, 13.5, 1],
         },
       });
-      // Fog Inversion Line — highlight every ~500 ft (150 m) contour in a
-      // bold blue dash. Marine fog pushing in from the west usually stops
-      // migrating east around this height, so these lines mark its limit.
-      map.addLayer({
-        id: "micro-fog-inversion",
-        type: "line",
-        source: "micro-terrain",
-        "source-layer": "contour",
-        filter: ["==", ["get", "ele"], 150],
-        layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
-        paint: {
-          "line-color": "#1d4ed8",
-          "line-width": 3,
-          "line-dasharray": [2, 1.4],
-          "line-opacity": 0.92,
-        },
-      });
-      map.addLayer({
-        id: "micro-fog-inversion-label",
-        type: "symbol",
-        source: "micro-terrain",
-        "source-layer": "contour",
-        filter: ["==", ["get", "ele"], 150],
-        layout: {
-          visibility: "none",
-          "text-field": "Fog inversion ≈500 ft",
-          "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
-          "text-size": 11,
-          "symbol-placement": "line",
-          "symbol-spacing": 600,
-          "text-padding": 20,
-          "text-allow-overlap": false,
-        },
-        paint: {
-          "text-color": "#1d4ed8",
-          "text-halo-color": "#ffffff",
-          "text-halo-width": 2,
-          "text-opacity": ["interpolate", ["linear"], ["zoom"], 12, 0, 13, 1],
-        },
-      });
     }
     // Hill peak labels from the DEM — always-on (higher peaks win
     // collisions) so every hilltop shows its elevation in feet.
@@ -356,9 +313,9 @@ export default function MicroMap({
 
   // Toggle changes → refresh refs + apply.
   useEffect(() => {
-    visRef.current = { showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods };
+    visRef.current = { showWind, showFog, showSolar, showTerrain, showContours, showNeighborhoods };
     applyVisibility();
-  }, [showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods, applyVisibility]);
+  }, [showWind, showFog, showSolar, showTerrain, showContours, showNeighborhoods, applyVisibility]);
 
   // Picked point → drop a marker (no auto-recenter, so map clicks don't jump).
   useEffect(() => {

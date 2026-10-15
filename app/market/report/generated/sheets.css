@@ -113,7 +113,7 @@
 .sheetB .fm-h i { font-style:normal; font-weight:600; font-size:7.6px; opacity:.85; }
 .sheetB .fm-idx { display:flex; gap:9px; margin-top:2px; font-size:7px; }
 .sheetB .fm-idx > section { flex:1; min-width:0; }
-.sheetB .fm-idx div { display:flex; align-items:center; gap:3px; break-inside:avoid; height:9.9px; padding:0; border-bottom:0.4px solid #DCDDDE; }
+.sheetB .fm-idx div { display:flex; align-items:center; gap:3px; break-inside:avoid; height:9.7px; padding:0; border-bottom:0.4px solid #DCDDDE; }
 .sheetB .fm-idx .no { flex:0 0 13px; font-weight:800; color:#203C5F; text-align:right; }
 .sheetB .fm-idx .mx { flex:0 0 20px; height:5px; display:flex; border-radius:1.5px; overflow:hidden; background:#EEE; }
 .sheetB .fm-idx .mx i { display:block; height:100%; }
@@ -172,9 +172,9 @@
 .sheetB tfoot td { background:#FBF3D9; color:#131A25; font-weight:800; border-top:2px solid #E9BC3F; border-bottom:2px solid #E9BC3F; font-size:7.6px; }
 .sheetB .zh { font-size:10px; font-weight:800; color:#203C5F; margin:5px 0 2px; }
 .sheetB .zh span { font-weight:400; font-size:8px; color:#6B6F75; }
-.sheetB table.zone tbody td { background:#F6F7F7; font-size:7.8px; padding:2.2px 1.5px; }
+.sheetB table.zone tbody td { background:#F6F7F7; font-size:7.8px; padding:1.6px 1.5px; }
 .sheetB table.zone tbody tr:last-child td { border-bottom:0.4px solid #DCDDDE; }
-.sheetB table.zone tfoot td { font-size:7.8px; padding:2.2px 1.5px; }
+.sheetB table.zone tfoot td { font-size:7.8px; padding:1.6px 1.5px; }
 .sheetB table.zone tbody td.name { font-weight:700; }
 .sheetB .zone td.name .zc { display:inline-block; width:11px; height:11px; border-radius:2px; font-size:7px; font-weight:800; text-align:center; line-height:11px; margin-right:4px; vertical-align:-1px; }
 .sheetB .chip { display:inline-block; width:9px; height:9px; border-radius:2px; border:0.5px solid #a8a29e; margin-right:4px; vertical-align:-1px; }

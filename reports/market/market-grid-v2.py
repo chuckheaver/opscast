@@ -180,9 +180,9 @@ def render(pages,plabel,labels,W,run_date):
     tfoot td {{ background:{GOLD_LT}; color:{INK}; font-weight:800; border-top:2px solid {GOLD_MID}; border-bottom:2px solid {GOLD_MID}; font-size:7.6px; }}
     .zh {{ font-size:10px; font-weight:800; color:{NAV}; margin:5px 0 2px; }}
     .zh span {{ font-weight:400; font-size:8px; color:{MUTED}; }}
-    table.zone tbody td {{ background:#F6F7F7; font-size:7.8px; padding:2.2px 1.5px; }}
+    table.zone tbody td {{ background:#F6F7F7; font-size:7.8px; padding:1.6px 1.5px; }}
     table.zone tbody tr:last-child td {{ border-bottom:0.4px solid {LINE}; }}
-    table.zone tfoot td {{ font-size:7.8px; padding:2.2px 1.5px; }}
+    table.zone tfoot td {{ font-size:7.8px; padding:1.6px 1.5px; }}
     table.zone tbody td.name {{ font-weight:700; }}
     .zone td.name .zc {{ display:inline-block; width:11px; height:11px; border-radius:2px; font-size:7px; font-weight:800; text-align:center; line-height:11px; margin-right:4px; vertical-align:-1px; }}
     .chip {{ display:inline-block; width:9px; height:9px; border-radius:2px; border:0.5px solid #a8a29e; margin-right:4px; vertical-align:-1px; }}

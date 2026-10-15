@@ -310,14 +310,16 @@ export default function NeighborhoodModal({
   const hoodMix = NEIGHBORHOOD_ZONES[key]?.mix ?? null;
   const lineZone = NEIGHBORHOOD_ZONES[name]?.zone ?? zoneLabel;
 
+  // Names the zone only — no fog-hour figure. Still shown only when the
+  // picked point's fog contour is inside this neighborhood (fogHrs).
   const microText = (() => {
-    if (!Number.isFinite(fogHrs)) return null;
+    if (!Number.isFinite(fogHrs) || !lineZone) return null;
     const tail = lineZone === "Sun"
       ? " — sunnier than the foggier west side of the city."
       : lineZone === "Fog" || lineZone === "Persistent Fog"
         ? " — among the foggier, cooler parts of the city."
         : ", a mix of sun and marine-layer fog.";
-    return `${name} sits in a ${lineZone || "microclimate"} zone, averaging about ${fogHrs.toFixed(1)} hours of summer fog a day${tail}`;
+    return `${name} sits in the ${lineZone} zone${tail}`;
   })();
 
   return (
@@ -332,8 +334,8 @@ export default function NeighborhoodModal({
 
         {/* The same summary as the neighborhood's guide page: title, alias,
             zone pill (from the neighborhood fog zones), spirit line, reasons,
-            and the six stats from the same stats file — so the pop-up and the
-            page always agree. */}
+            and the market stats from the same stats file — so the pop-up and
+            the page always agree. (No fog-hour tile: the zone pill says it.) */}
         <p className="nhm-crumb">San Francisco Neighborhoods</p>
         <div className="nhm-head">
           <h2>{heading}</h2>
@@ -352,7 +354,6 @@ export default function NeighborhoodModal({
               ["Median condo / TIC", money(st.condoMedian), st.condoN ? `${st.condoN} sold` : null],
               ["Per square foot", st.ppsf ? `$${Math.round(st.ppsf).toLocaleString("en-US")}` : null, null],
               ["Days to sell", st.dom != null ? Math.round(st.dom) : null, "median"],
-              ["Summer fog", Number.isFinite(st.fogHours) ? `${st.fogHours.toFixed(1)}h` : null, "a day"],
               ["Homes sold", st.n, statsYear],
             ].filter(([, v]) => v != null).map(([l, v, sub]) => (
               <div className="nhm-stat" key={l}>

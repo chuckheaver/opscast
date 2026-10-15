@@ -17,6 +17,7 @@ import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { NAME_OVERRIDES, getBuilding, RENTAL_OBJECTIDS, FORCE_COMMERCIAL_OBJECTIDS, OCCUPANCY_OVERRIDES, ADDRESS_OVERRIDES } from "./lib/buildings";
+import { fogZone } from "../lib/fog-zones";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
@@ -78,7 +79,6 @@ export default function FogMap({
   showMicroCool,
   showMicroWind,
   showMicroSolar,
-  showMicroFogLine,
   flyTo,
   focusComp,
   recenter,
@@ -1208,64 +1208,24 @@ export default function FogMap({
           "circle-opacity": 0.95,
         },
       });
-      // Solar "sun exposure" wash — the graduated background layer from the
-      // /microclimates page (cream = more sun than flat ground, brown = more
-      // shaded). Fed by the microSolar prop (the active season's polygons) and
-      // added FIRST so it sits UNDER the sun/cool/wind zone fills below.
+      // Solar "sun exposure" wash — the background layer from the
+      // /microclimates page. Only the "more sun than flat" band is drawn; the
+      // "shaded vs flat" polygons in the data are filtered out so the base map
+      // shows through. Fed by the microSolar prop (the active season's
+      // polygons) and added FIRST so it sits UNDER the sun/cool/wind zone
+      // fills below.
       map.addSource("micro-solar", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
       map.addLayer({
         id: "fmicro-solar-fill",
         type: "fill",
         source: "micro-solar",
+        filter: ["==", ["get", "level"], "sun"],
         layout: { visibility: "none" },
         paint: {
-          "fill-color": [
-            "match", ["get", "level"],
-            "sun", "#fef3c7",   // light yellow — more sun than flat
-            "shade", "#c4a574", // light brown  — less sun than flat
-            "#c4a574",
-          ],
+          "fill-color": "#fef3c7", // light yellow — more sun than flat
           "fill-opacity": 0.6,
         },
       });
-
-      // Fog inversion line — the ~500 ft (150 m) contour drawn as a bold blue
-      // dash, marking where marine fog pushing in from the west usually stops.
-      // Rides the existing Mapbox Terrain v2 contour source.
-      if (map.getSource("terrain-v2")) {
-        map.addLayer({
-          id: "fmicro-fog-inversion",
-          type: "line",
-          source: "terrain-v2",
-          "source-layer": "contour",
-          filter: ["==", ["get", "ele"], 150],
-          layout: { visibility: "none", "line-cap": "round", "line-join": "round" },
-          paint: { "line-color": "#1d4ed8", "line-width": 3, "line-dasharray": [2, 1.4], "line-opacity": 0.92 },
-        });
-        map.addLayer({
-          id: "fmicro-fog-inversion-label",
-          type: "symbol",
-          source: "terrain-v2",
-          "source-layer": "contour",
-          filter: ["==", ["get", "ele"], 150],
-          layout: {
-            visibility: "none",
-            "text-field": "Fog inversion ≈500 ft",
-            "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
-            "text-size": 11,
-            "symbol-placement": "line",
-            "symbol-spacing": 600,
-            "text-padding": 20,
-            "text-allow-overlap": false,
-          },
-          paint: {
-            "text-color": "#1d4ed8",
-            "text-halo-color": "#ffffff",
-            "text-halo-width": 2,
-            "text-opacity": ["interpolate", ["linear"], ["zoom"], 12, 0, 13, 1],
-          },
-        });
-      }
 
       // MicroClimates zones — terrain-derived sun / cool / wind areas, fed by
       // the microZones prop. Each zone is a fill + matching outline, hidden
@@ -1344,6 +1304,9 @@ export default function FogMap({
         const basis = sold ? p.sellingPrice : p.listPrice;
         const ppsf = (p.sqft > 0 && basis > 0) ? "$" + Math.round(basis / p.sqft).toLocaleString("en-US") : "—";
         const baths = p.bathrooms ? String(p.bathrooms).replace(/\s*\(.*$/, "").trim() : "";
+        // The zone of the fog polygon the home sits in (app/lib/fog-zones.js) —
+        // shown in place of an hours figure; a blank fogHours gets no row.
+        const zone = p.fogHours === "" ? null : fogZone(p.fogHours);
         // Full detail — the same fields the old listing card carried.
         const rows = [
           ["Type", p.propType],
@@ -1361,7 +1324,7 @@ export default function FogMap({
           ["SFAR District", p.realtorNid ? `${p.realtorNid} · ${p.district || ""}` : p.district],
           ["Supervisor District", p.supDistrict != null ? `District ${p.supDistrict}` : null],
           ["Zip", p.zip],
-          ["Fog exposure", p.fogHours != null ? `${p.fogHours} hrs/day` : ""],
+          ["Fog exposure", zone ? `${zone} zone` : ""],
           ["Map position", p.geoSource === "address" ? "placed at its street address (MLS pin was off)" : p.geoVia ? `nearest address (${p.geoVia})` : ""],
           ["APN", p.apn],
           ["MLS #", p.id],
@@ -2313,7 +2276,7 @@ export default function FogMap({
   }, [microSolar]);
 
   // Toggle the MicroClimates sun / cool / wind zone overlays + the solar
-  // wash + the fog inversion line.
+  // wash.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
@@ -2326,9 +2289,6 @@ export default function FogMap({
       set("cool", showMicroCool);
       set("wind", showMicroWind);
       if (map.getLayer("fmicro-solar-fill")) map.setLayoutProperty("fmicro-solar-fill", "visibility", showMicroSolar ? "visible" : "none");
-      ["fmicro-fog-inversion", "fmicro-fog-inversion-label"].forEach(id => {
-        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", showMicroFogLine ? "visible" : "none");
-      });
     };
     // Call apply() directly (each apply is guarded by getLayer/getSource, so
     // it's a no-op before the layers exist) and also bind once to first load.
@@ -2337,7 +2297,7 @@ export default function FogMap({
     // defer to a "load" event that already fired and never apply.
     apply();
     map.once("load", apply);
-  }, [showMicroSun, showMicroCool, showMicroWind, showMicroSolar, showMicroFogLine]);
+  }, [showMicroSun, showMicroCool, showMicroWind, showMicroSolar]);
 
   // Fly the camera to a requested target (e.g. a building chosen from the
   // Bldgs list). Keyed on identity so each request animates once.

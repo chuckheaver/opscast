@@ -8,6 +8,7 @@
 // Everything floats over a full-bleed map. Only one dropdown is open at a time.
 
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { listNeighborhoods } from "./lib/neighborhoods";
 import FogLocationSearch from "./FogLocationSearch";
 import HomesFilterBar from "../components/HomesFilterBar";
@@ -18,12 +19,13 @@ import { BIKE_CLASSES } from "./lib/bikes";
 // Alphabetical neighborhood index (already sorted by listNeighborhoods).
 const NBHD_INDEX = listNeighborhoods();
 
-// Solar "sun exposure" seasons, matching the /microclimates page.
+// Solar "sun exposure" seasons, matching the /microclimates page. No Summer
+// option: only the "more sun than flat" band is drawn, and the summer solar
+// data has none of it (high summer sun evens slopes out).
 const MICRO_SEASONS = [
   { key: "annual", label: "Ann Avg" },
   { key: "winter", label: "Winter" },
   { key: "equinox", label: "Spring / Fall" },
-  { key: "summer", label: "Summer" },
 ];
 
 export default function FogMapTools({
@@ -65,7 +67,6 @@ export default function FogMapTools({
   showMicroSun, onToggleMicroSun, showMicroCool, onToggleMicroCool,
   showMicroWind, onToggleMicroWind, onMicroOpen,
   showMicroSolar, onToggleMicroSolar, solarSeason, onSelectSolarSeason,
-  showMicroFogLine, onToggleMicroFogLine,
   // Location / search
   onPickFromAddress,
   onClearLocation, onUseGeoLocation, onResetView, ready, geoLoading, picked,
@@ -104,10 +105,10 @@ export default function FogMapTools({
   const toggleMenu = id => setMenu(m => (m === id ? null : id));
 
   // The MicroClimates pill lights up when any of its own overlays are on —
-  // the sun/cool/wind zones, the solar wash, or the fog-inversion line.
+  // the sun/cool/wind zones or the solar wash.
   // (Terrain + Elevation are shared with the Layers gear, so they don't drive
   // the pill's on-state.)
-  const microOn = showMicroSun || showMicroCool || showMicroWind || showMicroSolar || showMicroFogLine;
+  const microOn = showMicroSun || showMicroCool || showMicroWind || showMicroSolar;
   const terrainOn = !!(showTerrain || showElevation);
   const bldgsOn = !!(showResBuildings || showComBuildings);
   const landUseOn = !!(showParcelsRes || showParcelsCom);
@@ -174,8 +175,6 @@ export default function FogMapTools({
   const microItems = [
     showMicroWind && ["#2dd4bf", "Wind corridors"],
     showMicroSolar && ["#fef3c7", "More sun than flat"],
-    showMicroSolar && ["#c4a574", "Shaded vs flat"],
-    showMicroFogLine && ["#1d4ed8", "Fog inversion ≈500 ft"],
   ].filter(Boolean);
   const hazardItems = [
     showSeismic && ["#dc2626", "Seismic zone"],
@@ -251,6 +250,9 @@ export default function FogMapTools({
             <img src="/brand/equal-housing.svg" width="13" height="13"
                  alt="Equal Housing Opportunity" title="Equal Housing Opportunity" />
             <span>DRE #02252640</span>
+            <span aria-hidden="true">·</span>
+            {/* The map shows sales and fog data; the full caveat lives on /disclaimer. */}
+            <Link href="/disclaimer" title="Weather and sales data are approximations for information only">Disclaimer</Link>
           </div>
         </div>
       </div>
@@ -490,15 +492,6 @@ export default function FogMapTools({
               aria-pressed={!!showMicroSolar}
             >
               Sun exposure
-            </button>
-            <button
-              type="button"
-              className={"fog-lk" + (showMicroFogLine ? " on" : "")}
-              style={showMicroFogLine ? { color: "#1d4ed8", borderColor: "#1d4ed8" } : undefined}
-              onClick={() => onToggleMicroFogLine?.(!showMicroFogLine)}
-              aria-pressed={!!showMicroFogLine}
-            >
-              Fog line
             </button>
             {showMicroSolar && (
               <>

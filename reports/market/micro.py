@@ -46,6 +46,9 @@ def sale_zone(r):
     if r.get("fogNeighborhood") in NZ: return _BY_NAME[NZ[r["fogNeighborhood"]]["zone"]]
     return None
 
+FOG_NOTE = ("Summer fog: daily totals averaged across the four summer months, from ~26,000 hourly GOES satellite images (USGS) "
+            "applied to observations on the ground — 8 hrs or less Sun · 8.5 Transition · 9 – 11 Fog · over 11 Persistent Fog.")
+
 # Estimated typical summer (Jun–Sep) afternoon high, °F, from fog hours.
 # Anchors: NOAA downtown normals (Sep 70°F, Aug 68°F) for the sunbelt; the
 # site's guide for the rest — the sunbelt 8–10° warmer than the west side,
@@ -220,7 +223,7 @@ CSS = f"""
     .fm-h {{ font-family:'Montserrat','Lato',sans-serif; font-size:10.5px; font-weight:800; color:#fff; background:{NAV}; padding:3px 7px; border-radius:4px; display:flex; justify-content:space-between; }}
     .fm-h i {{ font-style:normal; font-weight:600; font-size:7.6px; opacity:.85; }}
     .fm-idx {{ display:flex; gap:9px; margin-top:2px; font-size:7px; }} .fm-idx > section {{ flex:1; min-width:0; }}
-    .fm-idx div {{ display:flex; align-items:center; gap:3px; break-inside:avoid; height:9.9px; padding:0; border-bottom:0.4px solid {LINE}; }}
+    .fm-idx div {{ display:flex; align-items:center; gap:3px; break-inside:avoid; height:9.7px; padding:0; border-bottom:0.4px solid {LINE}; }}
     .fm-idx .no {{ flex:0 0 13px; font-weight:800; color:{NAV}; text-align:right; }}
     .fm-idx .mx {{ flex:0 0 20px; height:5px; display:flex; border-radius:1.5px; overflow:hidden; background:#EEE; }}
     .fm-idx .mx i {{ display:block; height:100%; }}
@@ -270,22 +273,22 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
     mixbar = lambda h: ("<span class='mx'>" + "".join(
         f"<i style='width:{100 * h['mix'].get(z['name'], 0):.0f}%;background:{z['fill']}'></i>" for z in ZONES) + "</span>")
     item = lambda h: (f"<div>{zc(h['zone'])}{mixbar(h)}<span class='nm'>{html.escape(h['name'])}</span>"
-                  f"<span class='hr'>{h['hours']:g}h</span><span class='tp'>{h['temp']}°</span>"
+                  f"<span class='tp'>{h['temp']}°</span>"
                   f"<span class='md'>{Mm(h['sfh']['price']) if h['sfh']['price'] else '0'}</span></div>")
     az = sorted(hoods, key=lambda h: (ZONES.index(h["zone"]), h["name"].lower()))   # zone by zone, A–Z
     half = -(-len(az) // 2)
     idx = "".join("<section>" + "".join(item(h) for h in part) + "</section>" for part in (az[:half], az[half:]))
     zkey = "".join(
         f"<div style='background:{z['fill']};color:{z['ink']}'><b>{z['k']}</b><span>{z['name']}</span><br>"
-        f"{z['desc']} · {sum(1 for h in hoods if h['zone'] is z)} neighborhoods · ~{min(h['temp'] for h in hoods if h['zone'] is z)}–{max(h['temp'] for h in hoods if h['zone'] is z)}°F</div>" for z in ZONES)
+        f"{sum(1 for h in hoods if h['zone'] is z)} neighborhoods · ~{min(h['temp'] for h in hoods if h['zone'] is z)}–{max(h['temp'] for h in hoods if h['zone'] is z)}°F</div>" for z in ZONES)
     o = [f"<div class='page'><div class='hdr'><div><div class='t'>Heat Map</div>"
          f"<div class='p'>Median single-family sale price by neighborhood, in millions, Jan 1 – {thru} · on the city's four fog zones, A to D</div></div></div>",
          "<div class='fm-wrap'><div class='fm-map'>",
          f"<div class='mapbox'>{fog_map(hoods, w=612, h=628)}</div><div class='fm-zkey'>{zkey}</div></div>",
-         "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>fog hrs/day · est. summer °F · SFH median</i></div>",
+         "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>est. summer °F · SFH median</i></div>",
          f"<div class='fm-idx'>{idx}</div>",
          "</div></div>",
-         foot("Shading: fog contours (USGS / GOES, 1999–2009) — 8 hrs or less Sun · 8.5 Transition · 9 – 11 Fog · over 11 Persistent Fog. Letter: the neighborhood's category; bar: its mix of zones. °F estimated. 0 = no house sales.")]
+         foot(FOG_NOTE + " Shading: the fog contours. Letter: each neighborhood's category; bar: its mix of zones. °F estimated. 0 = no house sales.")]
 
     # ── page 2: microclimates and real estate ──
     zst = {z["k"]: mg.stats([r for r in y1 if r.get("propType") in sfh and sale_zone(r) is z]) for z in ZONES}
@@ -295,16 +298,16 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
         t0, t1 = min(h["temp"] for h in hs), max(h["temp"] for h in hs)
         s = zst[z["k"]]
         cards.append(f"<div class='mz-card' style='--z:{z['fill']}'><span class='L'>{z['k']}</span><div class='nm'>{z['name']}</div>"
-                     f"<div class='rg'>{z['desc']} · {len(hs)} neighborhoods</div>"
+                     f"<div class='rg'>{len(hs)} neighborhoods</div>"
                      f"<div class='tp'>{t0}–{t1}°<small> est. summer afternoon</small></div>"
                      f"<div class='row'><span>SFH median</span><b>{M(s['price'])}</b></div>"
                      f"<div class='row'><span>$/sf · sales</span><b>${(s['ppsf'] or 0):,.0f} · {s['n']:,}</b></div></div>")
     res = [h for h in hoods if h["homes"] >= 300 and h["sales"] >= 5]  # places people live and buy
     def rows(hs):
         return "".join(f"<tr><td class='l'>{zc(h['zone'])}{html.escape(h['name'])}</td><td class='b'>{h['temp']}°</td>"
-                       f"<td>{h['hours']:g}</td><td>{M(h['all']['price'])}</td><td>{h['all']['n'] or '—'}</td></tr>" for h in hs)
-    th = "<tr><th class='l'>Neighborhood</th><th>Est. °F</th><th>Fog hrs</th><th>Median</th><th>Sales</th></tr>"
-    colg = "<colgroup><col style='width:48%'><col style='width:13%'><col style='width:13%'><col style='width:15%'><col style='width:11%'></colgroup>"
+                       f"<td>{M(h['all']['price'])}</td><td>{h['all']['n'] or '—'}</td></tr>" for h in hs)
+    th = "<tr><th class='l'>Neighborhood</th><th>Est. °F</th><th>Median</th><th>Sales</th></tr>"
+    colg = "<colgroup><col style='width:54%'><col style='width:15%'><col style='width:18%'><col style='width:13%'></colgroup>"
     warm = res[:10]; cool = list(reversed(res[-10:]))
     slope, npts = fog_price_slope(y1, sfh)
     months = clim["months"]; hot = max(months, key=lambda m: m["high"])
@@ -337,9 +340,10 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
         o.append(f"<div class='zh'>Closings by Fog Zone — {title}</div>")
         o.append("<table class='zone'>" + head().replace("<th class='name'>Neighborhood</th>", "<th class='name'>Fog Zone</th>") + "<tbody>")
         for (zn, _, _, st), z in zip(byZ, ZONES):
-            o.append(f"<tr><td class='name'>{zc(z)}{html.escape(zn)} <span class='rng'>{html.escape(z['rng'])}</span></td>"
+            o.append(f"<tr><td class='name'>{zc(z)}{html.escape(zn)}</td>"
                      + "".join(cells(st, kind, key) for _, _, kind, key in groups) + "</tr>")
         o.append("</tbody><tfoot><tr><td class='name'>Total — all zones</td>" + "".join(cells(tot, kind, key) for _, _, kind, key in groups) + "</tr></tfoot></table>")
     o.append(f"<div class='mz-h' style='margin-top:5px'>Microclimate facts</div><div class='mz-facts'>{fact_html}</div>")
-    o.append(foot(f"Warmest/coolest: neighborhoods with 300+ homes and 5+ sales this year; median of all property types. Temperatures estimated from fog hours. SFH medians: closed sales, Jan 1 – {thru} (SFAR MLS)."))
+    o.append(foot(f"{FOG_NOTE} Sales: SFAR MLS closed sales, Jan 1 – {thru}, each counted by the fog zone at the property — not a valuation of "
+                  "any property. Weather and climate figures are approximations. Warmest/coolest: 300+ homes and 5+ sales; °F estimated."))
     return "".join(o)

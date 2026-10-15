@@ -24,6 +24,7 @@ export default function sitemap() {
     { url: "/weather", changeFrequency: "monthly", priority: 0.5 },
     { url: "/tools", changeFrequency: "monthly", priority: 0.5 },
     { url: "/wine", changeFrequency: "monthly", priority: 0.4 },
+    { url: "/disclaimer", changeFrequency: "yearly", priority: 0.2 },
   ].map(e => ({ ...e, url: SITE_URL + e.url, lastModified }));
 
   const hoods = NAMES.map(name => ({

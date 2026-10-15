@@ -1,15 +1,18 @@
 // Shared footer for every page that has one: brokerage, licence and the
 // Equal Housing Opportunity mark, which has to appear on agent marketing.
-// `note` carries whatever data caveat the page needs underneath.
+// `note` carries whatever data caveat the page needs underneath, and the
+// site-wide weather and sales disclaimer closes it — `disclaimer={false}`
+// drops that for /disclaimer, which prints the same text as its body.
 
 import Link from "next/link";
+import { DISCLAIMERS } from "../lib/disclaimer";
 
 export const EMAIL = "chuck.heaver@vanguardproperties.com";
 export const PHONE_DISPLAY = "415.549.1777";
 export const PHONE_HREF = "+14155491777";
 export const DRE = "02252640";
 
-export default function SiteFooter({ note = null }) {
+export default function SiteFooter({ note = null, disclaimer = true }) {
   return (
     <footer className="lp-foot">
       <div className="lp-foot-inner">
@@ -43,6 +46,12 @@ export default function SiteFooter({ note = null }) {
       </div>
 
       {note ? <p className="lp-fine lp-foot-fine">{note}</p> : null}
+
+      {disclaimer ? (
+        <div className="lp-foot-disclaimer">
+          {DISCLAIMERS.map(d => <p key={d.title}><b>{d.title}</b> {d.text}</p>)}
+        </div>
+      ) : null}
     </footer>
   );
 }

@@ -23,7 +23,6 @@ export default function MicroMapTools({
   solarSeason, onSelectSolarSeason,
   showTerrain, onToggleTerrain,
   showContours, onToggleContours,
-  showFogLine, onToggleFogLine,
   showNeighborhoods, onToggleNeighborhoods,
   onPickFromAddress, onUseGeoLocation, ready, geoLoading, picked,
   dataErr, geoErr,
@@ -51,11 +50,10 @@ export default function MicroMapTools({
   const refToggles = [
     ["Terrain", showTerrain, onToggleTerrain],
     ["Elevation contours", showContours, onToggleContours],
-    ["Fog inversion line", showFogLine, onToggleFogLine],
     ["Neighborhoods", showNeighborhoods, onToggleNeighborhoods],
   ];
   const activeCount =
-    [showWind, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods]
+    [showWind, showSolar, showTerrain, showContours, showNeighborhoods]
       .filter(Boolean).length;
 
   // Active-layer color key.

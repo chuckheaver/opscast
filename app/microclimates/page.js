@@ -250,7 +250,7 @@ export default function Page() {
           <div className="mc-callout-sun">
             <div>
               <b>On the map</b>
-              <span>The sun layers show which slopes collect more or less sun than flat ground — summer, winter and equinox.</span>
+              <span>The sun layer shows which slopes collect more sun than flat ground — year-round, in winter and in spring and fall.</span>
             </div>
             <div className="mc-btns">
               <Link className="lp-btn lp-btn-navy" href="/microclimates/zones?layer=solar">Sun &amp; wind zones</Link>

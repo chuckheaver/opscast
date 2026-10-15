@@ -73,7 +73,6 @@ export default async function Page({ params }) {
             <Stat label="Median condo / TIC" value={money(s.condoMedian)} sub={s.condoN ? `${s.condoN} sold` : null} />
             <Stat label="Per square foot" value={s.ppsf ? `$${Math.round(s.ppsf).toLocaleString("en-US")}` : null} />
             <Stat label="Days to sell" value={s.dom != null ? Math.round(s.dom) : null} sub="median" />
-            <Stat label="Summer fog" value={Number.isFinite(s.fogHours) ? `${s.fogHours.toFixed(1)}h` : null} sub="a day" />
             <Stat label="Homes sold" value={s.n} sub={statsYear} />
           </section>
         )}
@@ -171,7 +170,6 @@ export default async function Page({ params }) {
           Prices are {statsYear} closed sales from SFAR MLS{windowLabel ? ` (${windowLabel})` : ""},
           matched to the neighborhood each home physically sits in. Every sale is included,
           and the &ldquo;sold&rdquo; count beside each median says how many it is drawn from.
-          Fog hours are the median daily summer figure from USGS-derived contours.
           Deemed reliable, not guaranteed.
         </>
       } />

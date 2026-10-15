@@ -26,12 +26,13 @@ const TRANSIT_PREF_KEY = "mysf.transit.v1";
 const BIKE_PREF_KEY = "mysf.bikes.v1";
 const HAZARD_PREF_KEY = "mysf.hazards.v1";
 const MICRO_PREF_KEY = "mysf.micro.v1";
-// Per-season solar "sun exposure" polygons (lazy-loaded on first need).
+// Per-season solar "sun exposure" polygons (lazy-loaded on first need). No
+// summer: the map draws only the "more sun than flat" band, and the summer
+// file has none of it — only shaded polygons.
 const SOLAR_URLS = {
   annual:  "/data/sf-solar-annual.geojson",
   winter:  "/data/sf-solar-winter.geojson",
   equinox: "/data/sf-solar-equinox.geojson",
-  summer:  "/data/sf-solar-summer.geojson",
 };
 const DATA_URL = "/data/sf-fog-neighborhoods.geojson";
 const CONTOURS_URL = "/data/sf-fog-contours.geojson";
@@ -95,11 +96,10 @@ export default function FogApp() {
   const [showMicroSun, setShowMicroSun] = useState(false);
   const [showMicroCool, setShowMicroCool] = useState(false);
   const [showMicroWind, setShowMicroWind] = useState(preset === "wind");
-  // Solar "sun exposure" wash + its season, and the fog-inversion line.
+  // Solar "sun exposure" wash + its season.
   const [showMicroSolar, setShowMicroSolar] = useState(preset === "sun");
   const [solarSeason, setSolarSeason] = useState("annual");
   const [solarBySeason, setSolarBySeason] = useState({}); // season → geojson cache
-  const [showMicroFogLine, setShowMicroFogLine] = useState(false);
   // Camera fly-to target (e.g. zoom to a building picked from the Bldgs list).
   const [flyTo, setFlyTo] = useState(null); // { center: [lng,lat], zoom } | null
   // A sale clicked in a neighborhood pop-up's Details list → the map flies
@@ -228,7 +228,7 @@ export default function FogApp() {
   const selectNoneHazards = () => { const d = { seismic: false, tsunami: false, faults: false }; applyHaz(d); persistHaz(d); };
 
   // Microclimates selector handlers. The overlay is Wind corridors + Sun
-  // exposure (+ optional fog-inversion line); the older sun-pocket / cool-
+  // exposure; the older sun-pocket / cool-
   // shade zone fills are retired and always stay off. Opening turns on wind
   // + sun exposure; the bar chips toggle each one; the chip-off hides all.
   const applyMicro = d => { setShowMicroSun(false); setShowMicroCool(false); setShowMicroWind(!!d.wind); };
@@ -238,10 +238,13 @@ export default function FogApp() {
     applyMicro({ wind: true });
     setShowMicroSolar(true);
   };
-  const hideMicro = () => { applyMicro({ wind: false }); setShowMicroSolar(false); setShowMicroFogLine(false); };
+  const hideMicro = () => { applyMicro({ wind: false }); setShowMicroSolar(false); };
   // Solar exposure needs its season data — mark the overlay wanted so the
   // lazy-load effect fetches it, then flip the layer on/off.
   const toggleMicroSolar = on => { if (on) setMicroWanted(true); setShowMicroSolar(on); };
+  // Only seasons with a solar file are selectable; anything else (e.g. an
+  // old "summer" pick) falls back to the annual average.
+  const selectSolarSeason = s => setSolarSeason(SOLAR_URLS[s] ? s : "annual");
   const toggleMicro = key => { const d = { sun: false, cool: false, wind: showMicroWind }; d[key] = !d[key]; applyMicro(d); persistMicro(d); };
 
   // SFAR Realtor neighborhoods (blue outlines + nbrhood (nid) labels).
@@ -586,7 +589,7 @@ export default function FogApp() {
     setShowRealtor(false); setShowCBD(false);
     setShowResBuildings(false); setShowComBuildings(false);
     setShowMicroSun(false); setShowMicroCool(false); setShowMicroWind(false);
-    setShowMicroSolar(false); setShowMicroFogLine(false);
+    setShowMicroSolar(false);
     setActivityWanted(false); setMicroWanted(false);
     setAddressPin(null);
     setPicked(null); setOpenHood(null); setOpenBuilding(null); setStatsOpen(false);
@@ -686,7 +689,7 @@ export default function FogApp() {
 
   // Neighborhood pop-up "Show … layer" toggles: flip that overlay on/off in
   // place — the pop-up stays open (like the Details lists), no navigation.
-  const microOn = showMicroSun || showMicroCool || showMicroWind || showMicroSolar || showMicroFogLine;
+  const microOn = showMicroSun || showMicroCool || showMicroWind || showMicroSolar;
   const layerStates = { fog: showContours, micro: microOn, transit: showMuni };
   const toggleLayerInPlace = layer => {
     if (layer === "fog") setShowContours(v => !v);
@@ -770,7 +773,6 @@ export default function FogApp() {
           showMicroCool={showMicroCool}
           showMicroWind={showMicroWind}
           showMicroSolar={showMicroSolar}
-          showMicroFogLine={showMicroFogLine}
           flyTo={flyTo}
           focusComp={focusComp}
           recenter={recenter}
@@ -858,9 +860,7 @@ export default function FogApp() {
           showMicroSolar={showMicroSolar}
           onToggleMicroSolar={toggleMicroSolar}
           solarSeason={solarSeason}
-          onSelectSolarSeason={setSolarSeason}
-          showMicroFogLine={showMicroFogLine}
-          onToggleMicroFogLine={setShowMicroFogLine}
+          onSelectSolarSeason={selectSolarSeason}
           onMicroOpen={openMicro}
           onPickFromAddress={pickFromAddress}
           onClearLocation={clearLocation}

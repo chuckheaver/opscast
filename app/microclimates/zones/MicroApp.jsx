@@ -39,7 +39,6 @@ export default function MicroApp() {
   const [showSolar, setShowSolar] = useState(false);
   const [showTerrain, setShowTerrain] = useState(false);
   const [showContours, setShowContours] = useState(false);
-  const [showFogLine, setShowFogLine] = useState(false);
   const [showNeighborhoods, setShowNeighborhoods] = useState(true);
 
   const [geoLoading, setGeoLoading] = useState(false);
@@ -171,7 +170,6 @@ export default function MicroApp() {
           showSolar={showSolar}
           showTerrain={showTerrain}
           showContours={showContours}
-          showFogLine={showFogLine}
           showNeighborhoods={showNeighborhoods}
           picked={picked}
           flyTo={flyTo}
@@ -183,7 +181,6 @@ export default function MicroApp() {
           solarSeason={solarSeason} onSelectSolarSeason={setSolarSeason}
           showTerrain={showTerrain} onToggleTerrain={setShowTerrain}
           showContours={showContours} onToggleContours={setShowContours}
-          showFogLine={showFogLine} onToggleFogLine={setShowFogLine}
           showNeighborhoods={showNeighborhoods} onToggleNeighborhoods={setShowNeighborhoods}
           onPickFromAddress={pickFromAddress}
           onUseGeoLocation={requestGeoLocation}

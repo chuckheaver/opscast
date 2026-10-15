@@ -42,12 +42,14 @@ export default function Page() {
             {/* Share of its ground in each zone, under the pill's row. */}
             {h.stats?.zone && <ZoneMix mix={h.stats.zoneMix} className="lp-hood-mix" />}
             <p className="lp-hood-spirit">{h.content.spirit}</p>
-            <div className="lp-hood-nums">
-              {/* Every median is shown, with its sale count beside it. */}
-              {h.stats?.sfhMedian ? <span><b>{money(h.stats.sfhMedian)}</b> house <i>({h.stats.sfhN})</i></span> : null}
-              {h.stats?.condoMedian ? <span><b>{money(h.stats.condoMedian)}</b> condo <i>({h.stats.condoN})</i></span> : null}
-              {Number.isFinite(h.stats?.fogHours) ? <span><b>{h.stats.fogHours.toFixed(1)}h</b> fog</span> : null}
-            </div>
+            {/* Every median is shown, with its sale count beside it; a
+                neighborhood with no sales this year gets no empty line. */}
+            {h.stats?.sfhMedian || h.stats?.condoMedian ? (
+              <div className="lp-hood-nums">
+                {h.stats.sfhMedian ? <span><b>{money(h.stats.sfhMedian)}</b> house <i>({h.stats.sfhN})</i></span> : null}
+                {h.stats.condoMedian ? <span><b>{money(h.stats.condoMedian)}</b> condo <i>({h.stats.condoN})</i></span> : null}
+              </div>
+            ) : null}
           </Link>
         ))}
       </section>
@@ -56,9 +58,8 @@ export default function Page() {
         <>
           Prices are {statsYear} closed sales from SFAR MLS{windowLabel ? ` (${windowLabel})` : ""},
           matched to the neighborhood each home physically sits in. Every sale is included;
-          where a neighborhood had few of a type, the count in brackets says so. Fog hours
-          are the median daily summer figure from USGS-derived contours. Deemed reliable,
-          not guaranteed.
+          where a neighborhood had few of a type, the count in brackets says so. Deemed
+          reliable, not guaranteed.
         </>
       } />
     </div>
