@@ -57,6 +57,13 @@ const Cards = ({ items, cols = 2 }) => (
 );
 
 // The four headline numbers, computed so they move with the data.
+// The sales window's last day, e.g. "Sept 30, 2026" (landing-stats.json).
+function ytdThrough() {
+  const d = new Date(STATS.dataThrough);
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "America/Los_Angeles" })
+    .replace(/^Sep /, "Sept ");
+}
+
 function topline() {
   const m = CLIMATE.months;
   const highs = m.map(d => d.high);
@@ -69,7 +76,7 @@ function topline() {
     { v: `${Math.min(...fog)} – ${Math.max(...fog)}`, k: "hours of summer fog a day", s: "bayside → southwest" },
     { v: `${Math.max(...highs) - Math.min(...highs)}°F`, k: "between our coolest and warmest month", s: "most US cities: 40+" },
     { v: `${Math.round((wet / rain) * 100)}%`, k: "of the year's rain falls Nov – Mar", s: "July: none" },
-    { v: `${(h.sun.median / h.persistentFog.median).toFixed(1)}×`, k: "house price, Sun vs Persistent Fog", s: `single-family, ${STATS.year}` },
+    { v: `${(h.sun.median / h.persistentFog.median).toFixed(1)}×`, k: "house price, Sun vs Persistent Fog", s: `single-family, Jan 1 – ${ytdThrough()}` },
   ];
 }
 
@@ -208,7 +215,7 @@ export default function Page() {
                    max={13} unit="h" head="Summer fog, hours a day" labelW={150}
                    caption={FOG_HOURS_NOTE} />
 
-          <p className="mc-fig-h mc-price-h">Single-family median, {STATS.year}</p>
+          <p className="mc-fig-h mc-price-h">Single-family median, Jan 1 – {ytdThrough()}</p>
           <div className="mc-price">
             <div className="mc-price-t" style={{ "--b": "#E8B84B" }}>
               <b>{money(h.sun.median)}</b><span>Sun · {h.sun.n.toLocaleString("en-US")} sales</span>

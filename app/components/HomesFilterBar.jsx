@@ -58,7 +58,7 @@ export default function HomesFilterBar({ filter, options, count, onChange, onOpe
         <MonthField
           label="Sold from month"
           value={filter.closedFrom ? filter.closedFrom.slice(0, 7) : ""}
-          max={filter.closedTo ? filter.closedTo.slice(0, 7) : undefined}
+          max={(filter.closedTo || options?.through || "").slice(0, 7) || undefined}
           onChange={e => set({ closedFrom: e.target.value ? `${e.target.value}-01` : "" })}
         />
         <span className="fog-farr" aria-hidden="true">→</span>
@@ -66,6 +66,7 @@ export default function HomesFilterBar({ filter, options, count, onChange, onOpe
           label="Sold to month"
           value={filter.closedTo ? filter.closedTo.slice(0, 7) : ""}
           min={filter.closedFrom ? filter.closedFrom.slice(0, 7) : undefined}
+          max={options?.through ? options.through.slice(0, 7) : undefined}
           onChange={e => set({ closedTo: monthEnd(e.target.value) })}
         />
         <span className="fog-fsep" aria-hidden="true" />

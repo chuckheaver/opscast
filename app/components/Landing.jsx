@@ -137,7 +137,7 @@ export default function Landing() {
       <section className="lp-stats" aria-label="By the numbers">
         <div className="lp-stats-top">
           <p className="lp-stats-head">
-            By the Numbers: &rsquo;26 vs <span className="lp-stats-key">&rsquo;25</span> YTD{through ? ` (${through})` : ""}
+            By the Numbers: &rsquo;{String(stats.market.year).slice(2)} vs <span className="lp-stats-key">&rsquo;{String(stats.market.priorYear).slice(2)}</span> YTD{through ? ` (${through})` : ""}
           </p>
           <Link href="/market/report#sf" className="lp-stats-pill">Market Stats - {statsMonth}<span className="lp-stats-pill-arrow" aria-hidden="true">&rarr;</span></Link>
         </div>

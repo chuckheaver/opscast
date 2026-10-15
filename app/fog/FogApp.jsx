@@ -665,7 +665,8 @@ export default function FogApp() {
   }, [showMicroSolar, solarSeason, solarBySeason]);
 
   // Option lists for the shared filter, derived from the listings data.
-  const homesOptions = useMemo(() => deriveOptions(listingsGeo?.features), [listingsGeo]);
+  // The data date rides along so the month pickers stop at it.
+  const homesOptions = useMemo(() => ({ ...deriveOptions(listingsGeo?.features), through: listingsGeo?.metadata?.statsThrough || "" }), [listingsGeo]);
 
   // Properties matching the shared Homes filter — feeds the live count, the
   // map dots, and the Stats sheet (all from one filter). Empty when Homes off.

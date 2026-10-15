@@ -255,7 +255,7 @@ export default function NeighborhoodModal({
               return p.fogNeighborhood === name
                 && typeRe.test(p.propType || "")
                 && Number(p.sellingPrice) > 0
-                && String(p.sellingDate || "").slice(0, 4) === CUR_YEAR
+                && String(p.sellingDate || "").slice(0, 4) === (through ? through.slice(0, 4) : CUR_YEAR)
                 && (!through || String(p.sellingDate).slice(0, 10) <= through);
             })
             .map(f => {

@@ -78,11 +78,13 @@ export function defaultFilter(through) {
   if (/^\d{4}-\d{2}-\d{2}$/.test(through || "")) {
     return { ...defaultFilter(), closedFrom: `${through.slice(0, 4)}-01-01`, closedTo: through };
   }
-  const d = new Date();
-  const y = d.getFullYear();
-  const mo = d.getMonth() + 1;
-  const lastDay = new Date(y, mo, 0).getDate();
-  const mm = String(mo).padStart(2, "0");
+  // Until the data date is known: the last full month (the same rule as
+  // scripts/stats-through.mjs), never the month still in progress.
+  const end = new Date();
+  end.setDate(0);                                  // last day of the previous month
+  const y = end.getFullYear();
+  const mm = String(end.getMonth() + 1).padStart(2, "0");
+  const lastDay = end.getDate();
   return {
     statuses: new Set(),
     subtypes: new Set(),

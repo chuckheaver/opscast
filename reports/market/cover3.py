@@ -174,11 +174,15 @@ def weekly_bars(rows,w=960,h=172,ytd=None):
     return "".join(o)+"</svg>"
 
 def weekly_series(through):
-    """Closed sales by ISO week: 2025 for the full year, 2026 through the last
-    complete month, with the year-over-year change where both years have data."""
+    """Closed sales by week: 2025 for the full year, 2026 through the data date,
+    with the year-over-year change where both years have data. Weeks count
+    from January 1 in each year (week 1 = Jan 1–7), so week k covers the same
+    calendar days in both years; the odd day or two after week 52 (Dec 30–31)
+    folds into week 52."""
     import datetime as _dt, collections as _c
     F=[f["properties"] for f in json.load(open(mg.SRC))["features"]]
-    W=lambda d:_dt.date.fromisoformat(d).isocalendar()[1]
+    day=lambda d:(_dt.date.fromisoformat(d[:10])-_dt.date(int(d[:4]),1,1)).days
+    W=lambda d:min(day(d)//7+1,52)
     cut=W(through)
     cnt={}
     for yr in (2025,2026):
@@ -190,15 +194,26 @@ def weekly_series(through):
     for k in range(1,last+1):
         a_=cnt[2025].get(k,0); b_=cnt[2026].get(k,0) if k<=cut else None
         d,dc=("",MUTED)
-        # The cutoff week is partial unless the month ended on a Sunday —
+        # The cutoff week is partial unless the data date is its last day —
         # no % change against a full week of last year.
-        partial=k==cut and _dt.date.fromisoformat(through).isoweekday()!=7
+        partial=k==cut and day(through)%7!=6
         if a_ and b_ and not partial: p=100*(b_-a_)/a_; d=f"{p:+.0f}%"; dc=UP if p>=0 else DOWN
         rows.append(dict(w=k,a=a_,b=b_,d=d,dc=dc))
     # Year to date against the same calendar date last year.
     ly=str(int(through[:4])-1)+through[4:10]
     ytd25=sum(1 for r in F if (r.get("sellingDate") or "")[:4]=="2025" and r["sellingDate"][:10]<=ly and r.get("sellingPrice"))
     return rows,cut,sum(cnt[2025].values()),sum(cnt[2026].values()),last,ytd25
+
+def week_peak_after(rows,cut,year=2025):
+    """'its busiest week was Oct 8–14 (138 sales)' — last year's top week
+    after the cutoff, from the counts."""
+    import datetime as _dt
+    after=[r for r in rows if r["w"]>cut and r["a"]]
+    if not after: return "its pace after that is not in the data"
+    pk=max(after,key=lambda r:r["a"])
+    a=_dt.date(year,1,1)+_dt.timedelta(days=7*(pk["w"]-1)); b=a+_dt.timedelta(days=6)
+    rng=f"{a.strftime('%b')} {a.day}–{b.day}" if a.month==b.month else f"{a.strftime('%b')} {a.day} – {b.strftime('%b')} {b.day}"
+    return f"its busiest week was {rng} ({pk['a']:,} sales)"
 
 def txt(col):
     """Yellow reads as a line but not as small text on white — labels for a
@@ -416,7 +431,7 @@ def _ytd_medians():
     """Year-to-date SFH and condo medians, same window as the report, so the
     payment example always prices the typical home of the current data."""
     F=[f["properties"] for f in json.load(open(mg.SRC))["features"]]
-    _,mt=mg.last_full_month(F); lo,hi=f"{mt.year}-01-01",mt.isoformat()
+    _,mt=mg.last_full_month(); lo,hi=f"{mt.year}-01-01",mt.isoformat()
     ytd=[r for r in F if r.get("sellingPrice") and lo<=(r.get("sellingDate") or "")<=hi]
     med=lambda seg: statistics.median(r["sellingPrice"] for r in ytd if r["propType"] in mg.SEG[seg])
     return round(med("Single Family Residences"),-3), round(med("Condo / TIC / Other"),-3)
@@ -461,8 +476,10 @@ def curve_chart(w=228,h=116):
 def spread_chart(w=470,h=158):
     """The 10-year and the 30-year mortgage on one scale: the shaded band
     between them is the lender spread, and it barely moves."""
-    ten={"Jan":4.24,"Feb":4.04,"Mar":4.38,"Apr":4.30,"May":4.50,"Jun":4.44,"Jul":4.75,"Aug":4.78,"Now":TEN_NOW}
-    mtg=dict(cv.RATES); mtg["Now"]=cv.RATE_NOW
+    # September = the 10-year's Sept 30 close against the last Freddie Mac
+    # survey of the month (Sept 24) — the report's data date, not "now".
+    ten={"Jan":4.24,"Feb":4.04,"Mar":4.38,"Apr":4.30,"May":4.50,"Jun":4.44,"Jul":4.75,"Aug":4.78,"Sep":TEN_NOW}
+    mtg=dict(cv.RATES); mtg["Sep"]=cv.RATE_NOW
     labs=[k for k in ten if k in mtg]
     lo,hi=3.8,7.3; pad_l,pad_b,pad_t=8,26,16
     n=len(labs); gw=(w-2*pad_l)/(n-1)
@@ -498,8 +515,9 @@ def lux_series(lo=5e6,hi=float("inf")):
             if (r.get("sellingDate") or "").startswith(str(yr)) and r.get("sellingPrice") and lo<=r["sellingPrice"]<hi)
     return c
 
-def lux_chart(w=470,h=176,through=8):
-    c=lux_series(); hi_=max(max(c[2025].values()),max(c[2026].values()))*1.34
+def lux_chart(w=470,h=176,through=9):
+    """Bars for January through the report's last full month (`through`)."""
+    c=lux_series(); hi_=max(max(c[yr].get(m,0) for m in range(1,through+1)) for yr in (2025,2026))*1.34
     pad_l,pad_b,pad_t=10,17,14; n=through; gw=(w-2*pad_l)/n; bw=gw*0.34
     Y=lambda v:h-pad_b-(v/hi_)*(h-pad_b-pad_t)
     o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>"]
@@ -520,6 +538,23 @@ def lux_chart(w=470,h=176,through=8):
         lxx=pad_l+j*48
         o.append(f"<rect x='{lxx}' y='2' width='8' height='8' fill='{col}' rx='1.5'/><text x='{lxx+11}' y='9' font-size='7' fill='{INK}'>{lab}</text>")
     return "".join(o)+"</svg>"
+
+def lux_caption(lc,through):
+    """The over-$5M story in one sentence, from the counts: the peak month,
+    the July dip (the Nasdaq's 10% drop) when the peak came before it, and
+    where the last month landed."""
+    MONTH="January February March April May June July August September October November December".split()
+    months=range(1,through+1)
+    pk=max(months,key=lambda m:lc.get(m,0))
+    out=f"Sales peaked at {lc.get(pk,0)} in {MONTH[pk-1]}"
+    if pk<7<=through:
+        out+=f", fell to {lc.get(7,0)} in July — the month the Nasdaq dropped 10%"
+    last=through
+    if last!=pk and last>1:
+        prev=lc.get(last-1,0); now=lc.get(last,0)
+        verb="came back to" if now>prev else "slipped to" if now<prev else "held at"
+        out+=f" — and {verb} {now} in {MONTH[last-1]}"
+    return out+"."
 
 def carry_chart(w=228,h=120,price=8e6):
     """What the 10-year yield costs a cash buyer each year on an $8M house."""
@@ -869,24 +904,24 @@ def build():
     carry=lambda p,y: p*y/100+p*PROP_TAX
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The Cost of Ownership</div>
       <div class='p'>The cost of money</div></div>
-      <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales · Treasury &amp; Freddie Mac</div></div>""")
+      <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales · rates as of Sept 30 (mortgage: Sept 24 survey)</div></div>""")
     o.append("<div class='cols'>")
     o.append(f"""<div class='col'><h2 class='band'>The Financed Buyer</h2>
       <div class='cap' style='margin-bottom:5px'><b>Watching Interest Rates</b></div>
       <h2>The Cost of Financing an Average Home</h2>
       <table class='top'><tr><th class='l'>30-yr rate</th><th>SFH median</th><th>vs 6.10%</th><th>Condo median</th><th>vs 6.10%</th></tr>{rate_rows}</table>
       <div class='cap'>Monthly payment on a typical {M(MED_SFH)} SFH and {M(MED_CO)} Condo/TIC/Other with 20% down.
-      January's {6.10:.2f}% to today's {MTG_NOW:.2f}% costs an SFH buyer <span class='st'>${P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10):,.0f} more a month</span> — <span class='st'>${12*(P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10)):,.0f} a year</span> — for the same house.</div>
+      January's {6.10:.2f}% to {MTG_NOW:.2f}% on September 24 costs an SFH buyer <span class='st'>${P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10):,.0f} more a month</span> — <span class='st'>${12*(P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10)):,.0f} a year</span> — for the same house.</div>
       <h2 style='margin-top:6px'>Home Loans Follow the Bond</h2>{spread_chart(h=140)}
       <div class='cap'>Yellow is your home loan, navy is what the government pays. The gap between them barely moves, so the bond leads and your rate follows.</div>
-      <h2 style='margin-top:5px'>The Yield Curve Today</h2>{curve_chart(w=470,h=92)}
+      <h2 style='margin-top:5px'>The Yield Curve, Sept 30</h2>{curve_chart(w=470,h=92)}
       <div class='cap'>Lend longer, earn more — the line rises, as it should. When it tips the other way it is <b>inverted</b>, which has come before every U.S. recession since the 1970s. We are not there.</div></div>""")
     o.append(f"""<div class='col'><h2 class='band'>The Cash Buyer</h2>
       <div class='cap' style='margin-bottom:5px'><b>Watching Bond Yields</b></div>
       <h2>Over $5M — Sales by Month, 2025 vs 2026</h2>
-      {lux_chart(h=190)}
+      {lux_chart(h=190,through=mo.month)}
       <div class='cap'><span class='st'>{len(lux)}</span> sales against <span class='st'>{len(lux0)}</span> last year, <span class='st'>{sgn(D(len(lux),len(lux0)))}%</span>.
-      Sales peaked at {lc.get(6,0)} in June and fell to {lc.get(7,0)} in July, the month the Nasdaq dropped 10%.</div>
+      {lux_caption(lc,mo.month)}</div>
       <h2 style='margin-top:6px'>Annual Opportunity Cost of Owning an $8M Home</h2>
       {carry_chart(w=470,h=112)}
       <ul class='math'>
@@ -1018,7 +1053,7 @@ def build():
       +"</div>")
     o.append(f"""<div style='margin-top:7px'><h2>Units Sold by Week — Every Week of Both Years</h2>
       {weekly_bars(wrows,h=150,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"Jan 1 – {thru}, both years · 2025 full year {w25y:,}"))}
-      <div class='cap'>Grey bars after week {wcut} show where last year kept going — its busiest stretch was early October, which is what a full autumn looks like.</div></div>""")
+      <div class='cap'>Grey bars after week {wcut} show where last year kept going — {week_peak_after(wrows,wcut)}, which is what a full autumn looks like.</div></div>""")
     o.append(f"<div class='foot'><span>Every figure from closed sales, Jan 1 – {thru} (SFAR MLS). Days on market as reported; list-to-sale ratios use the final list price.</span><span>page 6 / 9</span></div></div>")
 
     o.append("</body></html>")

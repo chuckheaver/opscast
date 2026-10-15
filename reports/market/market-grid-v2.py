@@ -95,7 +95,15 @@ def fog_codes(F):
     return {n:max(v,key=v.get) for n,v in c.items()}
 
 
-def last_full_month(F):
+def last_full_month(F=None):
+    """The report month, ending on the site's data date: the listings file's
+    metadata.statsThrough (scripts/stats-through.mjs); STATS_THROUGH
+    overrides it, as in the JS. Falls back to the month before the latest
+    sale only if neither is set."""
+    thru=os.environ.get("STATS_THROUGH") or json.load(open(SRC)).get("metadata",{}).get("statsThrough")
+    if thru:
+        mt=datetime.date.fromisoformat(thru[:10])
+        return mt.replace(day=1), mt
     latest=max(r["sellingDate"] for r in F if r.get("sellingDate"))
     y,m=int(latest[:4]),int(latest[5:7])
     first=datetime.date(y,m,1)-datetime.timedelta(days=1)   # last day of prior month

@@ -112,6 +112,9 @@ sheets = "".join(
     for i, (cls, html) in enumerate(pages))
 
 today = datetime.date.today().strftime("%b %-d, %Y")
+# The report's data date: the last day of the last full month of sales.
+import json
+_thru = datetime.date.fromisoformat(json.loads((pathlib.Path(__file__).resolve().parents[2] / "public/data/sf-listings.geojson").read_text())["metadata"]["statsThrough"][:10])
 doc = f"""<!doctype html><html lang='en'><head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
 <title>Market Briefing Proof</title>
@@ -120,12 +123,12 @@ doc = f"""<!doctype html><html lang='en'><head><meta charset='utf-8'>
 .sheetA, .sheetB {{ width:989px; }}
 .sheetA .page, .sheetB .page {{ page-break-after:auto; }}
 </style></head><body>
-<div class='bar'><h1>SF Market Briefing — August 2026</h1>
-  <span class='sub'>9 pages · on-screen proof · {today}</span>
+<div class='bar'><h1>SF Market Briefing — {_thru.strftime("%B %Y")}</h1>
+  <span class='sub'>{len(pages)} pages · on-screen proof · {today}</span>
   <nav class='chips'>{chips}</nav></div>
 <main>{sheets}
 <p class='foot-note'>Screen proof of the print briefing. Each sheet is one landscape letter page,
-scaled to fit. Figures are closed sales from my database, Jan 1 – August 31, 2026.</p>
+scaled to fit. Figures are closed sales from my database, Jan 1 – {_thru.strftime("%B %-d, %Y")}.</p>
 </main><script>{SCRIPT}</script></body></html>"""
 
 (OUT / "sf-briefing-proof.html").write_text(doc)
