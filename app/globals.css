@@ -5738,6 +5738,13 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
    screen is narrower, so tables and charts never reflow out of shape. */
 .rp-sheet[id] { scroll-margin-top: 80px; }
 .rp-sheet { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 6px; }
+/* Above each market grid: only where the landscape page is wider than the
+   screen (it is about 1,060px across), i.e. phones, tablets, narrow windows. */
+.rp-scroll-hint { display: none; margin: 0 0 -12px; font-size: 13px; font-weight: 700; color: var(--lp-navy-2, #203C5F); }
+.rp-scroll-hint span { display: inline-block; color: #B8860B; animation: rp-hint-nudge 1.4s ease-in-out infinite; }
+@keyframes rp-hint-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+@media (max-width: 1140px) { .rp-scroll-hint { display: block; } }
+@media (prefers-reduced-motion: reduce) { .rp-scroll-hint span { animation: none; } }
 .rp-sheet .page {
   margin: 0 auto; height: auto !important; min-height: 7.6in; padding: 0.3in 0.35in 0.5in;
   box-shadow: 0 1px 2px rgba(16,23,32,.08), 0 10px 30px rgba(16,23,32,.12);

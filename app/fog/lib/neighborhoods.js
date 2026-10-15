@@ -7,8 +7,8 @@
 //
 // Schema per entry:
 //   title       string?  header override when one entry covers two fog
-//                        polygons that share a story (e.g. "Cow Hollow /
-//                        Union Street"); defaults to the clicked polygon name
+//                        polygons that share a story (none do today);
+//                        defaults to the clicked polygon name
 //   spirit      string   one creative line capturing the neighborhood
 //   reasons     string[] short "why live here" chips
 //   aka         string?  alternate / historic name shown as a chip
@@ -37,9 +37,8 @@ export const NEIGHBORHOODS = {
       "Transit-rich",
       "Living LGBTQ history",
     ],
-    aka: "Eureka Valley",
     history:
-      "Castro Street honors José Castro (1808–1860), a Californio leader and governor of Mexican Alta California. The area grew as Eureka Valley, a working-class streetcar suburb built out in the 1880s–90s after the Market Street cable line arrived. As families left for the suburbs in the 1960s–70s, LGBTQ residents moved in, making it one of America's first and most famous gay neighborhoods.",
+      "Castro Street honors José Castro (1808–1860), a Californio leader and governor of Mexican Alta California. The area grew as part of Eureka Valley, a working-class streetcar suburb built out in the 1880s–90s after the Market Street cable line arrived. As families left for the suburbs in the 1960s–70s, LGBTQ residents moved in, making it one of America's first and most famous gay neighborhoods.",
     facts: [
       {
         icon: "flag",
@@ -69,7 +68,7 @@ export const NEIGHBORHOODS = {
         icon: "pin",
         title: "Hidden in plain sight",
         text:
-          "It was plain “Eureka Valley” until the name “the Castro” caught on in the 1970s. Rainbow-striped crosswalks mark 18th & Castro (2014), all on the ancestral land of the Ramaytush Ohlone.",
+          "The whole valley was plain “Eureka Valley” until the name “the Castro” caught on for the blocks around Castro Street in the 1970s. Rainbow-striped crosswalks mark 18th & Castro (2014), all on the ancestral land of the Ramaytush Ohlone.",
       },
     ],
     restaurants: [
@@ -887,17 +886,16 @@ export const NEIGHBORHOODS = {
   },
 
   "Cow Hollow": {
-    title: "Cow Hollow / Union Street",
     spirit:
-      "Boutique-lined Union Street between the Marina and Pac Heights — brunch, blowouts, and bars on a flat, walkable stretch that was once a literal dairy pasture.",
+      "The old dairy valley's quieter western end — leafy Victorian and Edwardian blocks running from Steiner to the Presidio's edge, a short stroll from Union Street's boutiques and brunch.",
     reasons: [
-      "Union St shopping & brunch",
+      "Steps from Union St shops",
       "Flat & walkable",
       "Between Marina & Pac Heights",
-      "Lively bar scene",
+      "Presidio at the western edge",
     ],
     history:
-      "Cow Hollow was a marshy valley of dairy farms in the mid-1800s — dozens of dairies grazed cows here, which is exactly how it got its name. The city shut the dairies in 1891 over pollution of Washerwoman's Lagoon, filled the pond, and the area built out with Victorian and Edwardian homes. Union Street reinvented itself as a chic boutique-and-dining strip in the 1950s–60s.",
+      "Cow Hollow was a marshy valley of dairy farms in the mid-1800s — dozens of dairies grazed cows here, which is exactly how it got its name. The city shut the dairies in 1891 over pollution of Washerwoman's Lagoon, filled the pond, and the area built out with Victorian and Edwardian homes. Its blocks from Steiner west to the Presidio's edge at Lyon St are mostly residential today, a short walk from the Union Street shops.",
     facts: [
       {
         icon: "cow",
@@ -912,24 +910,13 @@ export const NEIGHBORHOODS = {
           "The dairies and tanneries fouled Washerwoman's Lagoon, a freshwater pond once used for laundry. The city closed them in 1891 and filled the lagoon, clearing the way for homes.",
       },
       {
-        icon: "house",
-        title: "A dairy farmhouse still stands",
+        icon: "church",
+        title: "A church on a spring",
         text:
-          "The 1854 farmhouse that gave Cow Hollow its name survives on Union St — today it houses the Palm House bar and restaurant, behind one of the city's oldest palm trees.",
-      },
-      {
-        icon: "shopping",
-        title: "An early boutique row",
-        text:
-          "In the 1950s–60s, shopkeepers converted Union Street's old Victorians into one of San Francisco's first boutique shopping strips — a template the city's commercial streets still follow.",
-      },
-      {
-        icon: "star",
-        title: "A 1913 power saloon",
-        text:
-          "The Balboa Cafe (1913) is one of the city's oldest continuously operating saloons and a longtime see-and-be-seen hangout for San Francisco's political set.",
+          "St. Mary the Virgin Episcopal Church, at Union and Steiner, dates to 1891. Its courtyard fountain is said to be fed by a natural spring — a reminder of the springs that once watered the valley's dairy herds.",
       },
     ],
+    nearby: ["Union Street"],
     restaurants: [
       { name: "Atelier Crenn", address: "3127 Fillmore St", phone: "(415) 440-0460", url: "https://www.ateliercrenn.com" },
       { name: "Flores", address: "2030 Union St", phone: "(415) 796-2926", url: "https://www.floressf.com" },
@@ -949,7 +936,7 @@ export const NEIGHBORHOODS = {
       url: "https://www.sutterhealth.org/cpmc",
     },
     transit:
-      "The 41 Union and 45 Union–Stockton buses run the length of Union Street toward downtown, with the 22 Fillmore and 43 Masonic crossing toward the rest of the city. There's no rail nearby — it's a bus-and-walk neighborhood.",
+      "The 45 Union–Stockton bus runs the length of Union Street toward downtown, with the 22 Fillmore and 43 Masonic crossing toward the rest of the city. There's no rail nearby — it's a bus-and-walk neighborhood.",
   },
 
   "Duboce Triangle": {
@@ -4419,17 +4406,197 @@ export const NEIGHBORHOODS = {
     hospital: { name: "CPMC Van Ness Campus", address: "1101 Van Ness Ave (ER at 1260 Franklin St)", dist: "about 6 mi via the Bay Bridge", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
     transit: "The 25-Treasure Island Muni bus runs every 20 minutes, 7 days a week, between the island and the Salesforce Transit Center in downtown SF. The Treasure Island Ferry connects the island to the SF Ferry Building in about 8 minutes, 7 days a week.",
   },
+
+  "Eureka Valley": {
+    spirit:
+      "The Castro's quieter uphill neighbor — Victorian-lined streets climbing toward Twin Peaks, with hidden concrete slides, grassy Kite Hill and the skyline spread out below.",
+    reasons: [
+      "Walk to the Castro",
+      "Quiet residential hills",
+      "Victorian-lined streets",
+      "Kite Hill views",
+    ],
+    history:
+      "Eureka Valley is the original name for the whole valley below Twin Peaks' eastern slope, the Castro's shops included; here it means the residential slopes south and west of them, south to 22nd Street and west to Clayton Street, where Market Street bends uphill toward Twin Peaks. The valley filled in during the 1880s–90s as a working-class streetcar suburb after the Market Street cable line arrived, and a cable line once hauled riders up Castro Street and over the hill to Noe Valley. Rows of wooden Victorians and Edwardians went up on its steep blocks, and many still stand. When the Castro's commercial core became world-famous in the 1970s, the streets above it stayed quieter and mostly residential.",
+    facts: [
+      {
+        icon: "pin",
+        title: "A name worth keeping",
+        text:
+          "The name echoes California's state motto, “Eureka” — Greek for “I have found it.” It lives on in Eureka Street, which runs through the middle of the neighborhood, the Eureka Valley Recreation Center on Collingwood St and the Eureka Valley/Harvey Milk Memorial Branch Library.",
+      },
+      {
+        icon: "park",
+        title: "Slides on Seward Street",
+        text:
+          "Tucked into a tiny mini-park on Seward Street, a pair of steep concrete slides is one of the city's quirkiest hidden playgrounds — riders bring a square of cardboard to sit on.",
+      },
+      {
+        icon: "star",
+        title: "Kite Hill",
+        text:
+          "At 19th and Yukon streets, the grassy open space of Kite Hill rises above the valley, with sweeping views east over the Castro toward downtown and the bay.",
+      },
+      {
+        icon: "church",
+        title: "A parish that opened its doors",
+        text:
+          "Most Holy Redeemer, the Catholic parish at 100 Diamond St, became known during the AIDS crisis for welcoming gay parishioners and for its AIDS support group.",
+      },
+      {
+        icon: "quake",
+        title: "Spared by the 1906 fire",
+        text:
+          "The fires after the 1906 earthquake were stopped a few blocks east, near Dolores Park — famously with water from the now-golden hydrant at 20th & Church — and never reached the valley's wooden Victorians.",
+      },
+    ],
+    nearby: ["the Castro"],
+    restaurants: [
+      { name: "Mama Ji's", address: "4416 18th St", phone: "(415) 626-4416" },
+      { name: "Anchor Oyster Bar", address: "579 Castro St", phone: "(415) 431-3990", url: "https://anchoroysterbar.com" },
+      { name: "Poesia Osteria Italiana", address: "4072 18th St", phone: "(415) 252-9325", url: "https://poesiasf.com" },
+      { name: "Kasa Indian Eatery", address: "4001 18th St", phone: "(415) 621-6940", url: "https://kasaindian.com" },
+    ],
+    bars: [
+      { name: "The Mix", address: "4086 18th St", phone: "(415) 431-8616", url: "https://www.themixbarsf.com" },
+      { name: "Midnight Sun", address: "4067 18th St", phone: "(415) 861-4186", url: "https://midnightsunsf.com" },
+      { name: "440 Castro", address: "440 Castro St", phone: "(415) 621-8732", url: "https://440castro.com" },
+      { name: "Twin Peaks Tavern", address: "401 Castro St", phone: "(415) 864-9470", url: "https://twinpeakstavern.com" },
+    ],
+    hospital: {
+      name: "CPMC Davies Campus",
+      address: "45 Castro St at Duboce Ave",
+      dist: "about 1 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "Buses do the climbing: the 24 Divisadero runs along Castro St, the 33 Ashbury–18th along 18th St, the 35 Eureka along Eureka St and the 37 Corbett along Corbett Ave. Castro Station (Muni Metro K, L and M) and the historic F-Market streetcar are just downhill at Market & Castro.",
+  },
+  "Union Street": {
+    spirit:
+      "Eight sunny blocks of Victorian storefronts from Van Ness to Steiner — boutiques, brunch patios, and a buzzing Fillmore Street bar corner, on what was once dairy pasture.",
+    reasons: [
+      "Union St boutiques & brunch",
+      "Lively bar scene",
+      "Sunny & walkable",
+      "Condos & classic flats",
+    ],
+    history:
+      "Named for the shopping street at its heart, this is the eastern end of greater Cow Hollow — the marshy valley where dozens of dairies supplied the young city's milk in the mid-1800s. Here lay Washerwoman's Lagoon, the freshwater pond where Gold Rush–era laundries washed the city's clothes, until dairies and tanneries fouled it; late in the century the dairies were pushed out and the pond was filled. Victorian and Edwardian homes and storefronts rose on the new lots, and in the 1950s–60s Union Street's blocks between Van Ness and Steiner reinvented themselves as a boutique-and-dining strip.",
+    facts: [
+      {
+        icon: "house",
+        title: "An eight-sided survivor",
+        text:
+          "The Octagon House on Gough St at Union dates to 1861, when eight-sided homes were a national fad. One of only two left in the city, it is now a small museum run by the National Society of the Colonial Dames of America.",
+      },
+      {
+        icon: "church",
+        title: "A temple of many towers",
+        text:
+          "The Vedanta Society's Old Temple at Webster and Filbert, built in 1905, is often called the first Hindu temple in the Western world. Its rooftop mixes domes and towers from several traditions — a nod to the Vedanta teaching that all religions lead to the same truth.",
+      },
+      {
+        icon: "shopping",
+        title: "An early boutique row",
+        text:
+          "In the 1950s–60s, shopkeepers converted Union Street's old Victorians into shops and cafés, making it one of San Francisco's first boutique shopping strips.",
+      },
+      {
+        icon: "star",
+        title: "A 1913 power saloon",
+        text:
+          "The Balboa Cafe (1913), at Fillmore and Greenwich, is one of the city's oldest saloons and a longtime see-and-be-seen hangout for San Francisco's political set.",
+      },
+    ],
+    restaurants: [
+      { name: "Flores", address: "2030 Union St", phone: "(415) 796-2926", url: "https://www.floressf.com" },
+      { name: "Roaming Goat", address: "1830 Union St", phone: "(415) 769-7281", url: "https://www.roaminggoatsf.com" },
+      { name: "Atelier Crenn", address: "3127 Fillmore St", phone: "(415) 440-0460", url: "https://www.ateliercrenn.com" },
+      { name: "Rooster & Rice", address: "2211 Filbert St", phone: "(415) 776-3647", url: "https://www.roosterandrice.com" },
+    ],
+    bars: [
+      { name: "Balboa Cafe", address: "3199 Fillmore St", phone: "(415) 921-3944", url: "https://www.balboacafesf.com" },
+      { name: "Palm House", address: "2032 Union St", phone: "(415) 400-4355", url: "https://www.palmhousesf.com" },
+      { name: "Bar Crenn", address: "3131 Fillmore St", phone: "(415) 440-0460", url: "https://www.barcrenn.com" },
+    ],
+    hospital: {
+      name: "CPMC Van Ness Campus",
+      address: "1101 Van Ness Ave",
+      dist: "about 1.4 mi",
+      phone: "(415) 600-6000",
+      url: "https://www.sutterhealth.org/cpmc",
+    },
+    transit:
+      "The 45 Union–Stockton bus runs the length of Union Street toward downtown, with the 22 Fillmore crossing at Fillmore St, the 49 Van Ness along the eastern edge, and the 28 and 43 on Lombard St at the northern edge. There's no Muni Metro or BART nearby — it's a bus-and-walk neighborhood.",
+  },
+  "Sutro Heights": {
+    spirit:
+      "Where Geary runs out of city — a fog-draped bluff of Adolph Sutro's old gardens, the Cliff House perched on the rocks below, and nothing to the west but the Pacific.",
+    reasons: ["Clifftop park at the door", "Ocean Beach starts here", "Lands End trails next door", "Quiet end-of-the-line blocks"],
+    history:
+      "Sutro Heights is named for Adolph Sutro (1830–1898), the Prussian-born engineer who made his fortune on the Sutro Tunnel, which drained the silver mines of Nevada's Comstock Lode, and who later served as mayor of San Francisco. In 1881 he bought a cottage on this windswept bluff above the Cliff House and made it his home and showpiece garden. He rebuilt the Cliff House below after the first one burned in 1894, and built the giant Sutro Baths in the cove just to the north. His family later deeded the Heights to the city; the house is long gone, but its foundations and the old parapet survive in Sutro Heights Park, now part of the Golden Gate National Recreation Area. Around the park, the western ends of Geary Boulevard and Point Lobos Avenue, Seal Rock Drive and the avenues from 42nd to 48th filled in as a quiet residential corner at the Richmond District's far western edge.",
+    facts: [
+      { icon: "park", title: "A millionaire's garden, open to all", text: "Sutro planted his clifftop estate with gardens and trees, lined its paths with dozens of statues, many of them copies of classical works, and opened it to the public. The grounds are now Sutro Heights Park, run by the National Park Service." },
+      { icon: "pin", title: "The parapet lookout", text: "The parapet from Sutro's estate still stands at the bluff's edge, looking out over Seal Rocks and the long sweep of Ocean Beach." },
+      { icon: "house", title: "Three Cliff Houses", text: "The first Cliff House went up on the rocks below the Heights in 1863. Sutro's turreted château replaced it in 1896, rode out the 1906 earthquake, then burned in 1907; the neoclassical building of 1909 still stands." },
+      { icon: "wave", title: "Where Ocean Beach begins", text: "Ocean Beach, about 3.5 miles of sand, starts at the foot of the Cliff House and runs south to Fort Funston, with the Great Highway setting off beside it from Point Lobos Avenue." },
+      { icon: "mayor", title: "The mayor who owned a twelfth of SF", text: "Sutro served as mayor from 1895 to 1897 and at one point owned roughly a twelfth of San Francisco's land, from these bluffs to the forested hill now called Mount Sutro." },
+    ],
+    nearby: ["the Outer Richmond"],
+    restaurants: [
+      { name: "Pacific Cafe", address: "7000 Geary Blvd", phone: "(415) 387-7091", url: "https://pacificcafesf.com" },
+      { name: "Violet's Tavern", address: "2301 Clement St", phone: "(415) 682-4861", url: "https://www.violets-sf.com" },
+      { name: "Pearl 6101", address: "6101 California St", phone: "(415) 592-9777", url: "https://www.pearl6101.com" },
+    ],
+    bars: [
+      { name: "Simple Pleasures Cafe", address: "3434 Balboa St", phone: "(415) 387-4022" },
+      { name: "Trad'r Sam", address: "6150 Geary Blvd", phone: "(415) 221-0773", url: "https://tradrsam.net" },
+      { name: "The Blarney Stone", address: "5625 Geary Blvd", phone: "(415) 386-9914" },
+    ],
+    hospital: { name: "UCSF Health Stanyan Hospital (formerly St. Mary's)", address: "450 Stanyan St", dist: "about 3 mi", phone: "(415) 668-1000", url: "https://sfcommunityhospitals.ucsfhealth.org/st-marys" },
+    transit:
+      "The 38-Geary runs out to 48th Ave & Point Lobos at the park gate and, with the 38R-Geary Rapid, runs the length of Geary Blvd to downtown; the 31-Balboa runs along Balboa St at the southern edge, and the 5-Fulton and 5R-Fulton Rapid run along Fulton, two blocks south.",
+  },
+  "Northern Waterfront": {
+    spirit:
+      "The sunny, bay-facing foot of Telegraph Hill — old cargo piers reborn as a science museum and a cruise terminal, with the F-line streetcar rolling down the Embarcadero out front.",
+    reasons: ["Sunny bayfront blocks", "Embarcadero promenade", "Walk to the Financial District", "F-line streetcar at the door"],
+    aka: "Northeast Waterfront",
+    history:
+      "The name is plain geography: this is the northern stretch of San Francisco's port waterfront — the flat, bay-facing strip along the Embarcadero from Washington Street, past the foot of Telegraph Hill, to the edge of Fisherman's Wharf. Most of it is made land. In Gold Rush days the bay reached the foot of Telegraph Hill, and wharves, rubble and rock quarried from the hill pushed the shoreline east. From the late 1870s a state-built seawall, and later finger piers and the State Belt Railroad, made it a working port of warehouses and cargo sheds, with the city's wholesale produce market crowded around Washington and Davis streets. When shipping moved to Oakland's container terminals in the 1960s and '70s the piers emptied; the Golden Gateway redevelopment replaced the produce district, and the 1991 demolition of the Embarcadero Freeway reopened the shoreline. Today old brick warehouses hold offices, newer condos and apartments fill the blocks below the hill, and the piers host a science museum and a cruise terminal.",
+    facts: [
+      { icon: "road", title: "The freeway that came down", text: "The double-deck Embarcadero Freeway ended at Broadway, where the city's freeway revolt stopped its planned run toward the Golden Gate Bridge. Damaged in the 1989 Loma Prieta earthquake, it was torn down in 1991." },
+      { icon: "star", title: "A museum on the piers", text: "The Exploratorium, founded in 1969 by physicist Frank Oppenheimer at the Palace of Fine Arts, moved to Pier 15 at the foot of Green Street in 2013." },
+      { icon: "factory", title: "Blue-jeans headquarters", text: "Levi's Plaza was built in the early 1980s at the foot of Telegraph Hill as Levi Strauss & Co.'s headquarters; its plaza and park were designed by landscape architect Lawrence Halprin." },
+      { icon: "house", title: "Once the produce market", text: "Into the early 1960s the blocks around Washington, Front and Davis streets were the city's wholesale produce market. After it moved to its present site on Jerrold Avenue in 1963, the Golden Gateway apartments, townhouses and Sydney G. Walton Square took its place." },
+      { icon: "water", title: "Cruise ships at the door", text: "The James R. Herman Cruise Terminal opened at Pier 27 in 2014, named for longtime longshore union leader Jimmy Herman." },
+    ],
+    nearby: ["the Financial District", "North Beach", "Fisherman's Wharf"],
+    restaurants: [
+      { name: "Kokkari Estiatorio", address: "200 Jackson St", phone: "(415) 981-0983", url: "https://kokkari.com" },
+      { name: "Schroeder's", address: "240 Front St", phone: "(415) 421-4778", url: "https://www.schroederssf.com" },
+      { name: "Tadich Grill", address: "240 California St", phone: "(415) 391-1849", url: "https://tadichgrillsf.com" },
+      { name: "Fog Harbor Fish House", address: "PIER 39, Suite A202", phone: "(415) 421-2442", url: "https://fogharbor.com" },
+      { name: "Sotto Mare Oysteria & Seafood", address: "552 Green St", phone: "(415) 398-3181", url: "https://www.sottomaresf.com" },
+    ],
+    bars: [
+      { name: "Comstock Saloon", address: "155 Columbus Ave", phone: "(415) 617-0071", url: "https://www.comstocksaloon.com" },
+      { name: "Vesuvio Cafe", address: "255 Columbus Ave", url: "https://vesuvio.com" },
+      { name: "Specs' Twelve Adler Museum Cafe", address: "12 William Saroyan Pl", phone: "(415) 421-4112", url: "https://www.specsbarsf.com" },
+    ],
+    hospital: { name: "Chinese Hospital", address: "845 Jackson St", dist: "about 0.6 mi", phone: "(415) 982-2400", url: "https://chinesehospital-sf.org" },
+    transit:
+      "The F-Market & Wharves historic streetcar runs the length of the neighborhood on the Embarcadero, with stops from Washington St up to Sansome St on its way to Fisherman's Wharf. The 1 California and the 12 stop a block south on Clay St, and the 12 also runs on Sansome St and Broadway just to the west. Embarcadero BART and Muni Metro station and the Ferry Building's ferry terminal are just to the south.",
+  },
 };
 
-// Some fog polygons split one colloquial neighborhood into two names —
-// map those aliases onto the authored entry so a click anywhere in the
-// area opens the right highlights.
-const ALIASES = {
-  "Union Street": "Cow Hollow",          // commercial strip within greater Cow Hollow
-  "Eureka Valley": "Castro",             // the Castro's historic name; same polygon story
-  "Sutro Heights": "Outer Richmond",     // tiny clifftop pocket at the Outer Richmond's edge
-  "Northern Waterfront": "Fishermans Wharf", // the piers overlap the Wharf entry
-};
+// Every fog-map polygon is its own neighborhood with its own entry. (Four
+// polygons used to be folded into a neighbor's entry here — Eureka Valley,
+// Union Street, Sutro Heights and Northern Waterfront; they now have their
+// own.) Kept as the hook for a future alias, should one be needed.
+const ALIASES = {};
 
 // Fog polygons intentionally left WITHOUT a highlights entry because they are
 // parks, military reservations, or pure industrial/maritime zones — not places
@@ -4454,15 +4621,14 @@ export function entryKeyFor(name) {
 }
 
 // Every fog-map polygon that opens this entry: its own name plus any alias
-// polygons that point at it (Castro → Castro + Eureka Valley).
+// polygons that point at it (none today).
 export function polygonNamesFor(key) {
   return [key, ...Object.keys(ALIASES).filter(a => ALIASES[a] === key)];
 }
 
 // Alphabetical index of authored neighborhoods for the A–Z list on the page.
 // `key` is the fog geojson `name` (what the map/lookup uses); `label` is the
-// display name (the `title` override when present, e.g. "Cow Hollow / Union
-// Street").
+// display name (the `title` override when present; no entry sets one today).
 export function listNeighborhoods() {
   return Object.entries(NEIGHBORHOODS)
     .map(([key, v]) => ({ key, label: v.title || key }))

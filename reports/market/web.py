@@ -161,7 +161,11 @@ for (label, sec, order, anchor), (cls, body) in zip(PAGES, pages):
     b1 = link_areas(body); counts["areas"] += b1.count("class='rp-link'")
     b2 = link_sales(b1); counts["sales"] += b2.count("class='rp-link'") - b1.count("class='rp-link'")
     aid = f" id='{anchor}'" if anchor else ""
-    sections[sec].append((order, f"<div class='rp-sheet {cls}'{aid} data-label='{html.escape(label)}'>{b2}</div>"))
+    # The grids are a landscape page wider than a phone (or a narrow window):
+    # say so above each one, so a reader knows the rest is a swipe away.
+    hint = ("<p class='rp-scroll-hint'>Scroll sideways for more data <span aria-hidden='true'>→</span></p>"
+            if "market grid" in label.lower() else "")
+    sections[sec].append((order, f"{hint}<div class='rp-sheet {cls}'{aid} data-label='{html.escape(label)}'>{b2}</div>"))
 
 for sec, sheets in sections.items():
     (DEST / f"{sec}.html").write_text("\n".join(h for _, h in sorted(sheets)))

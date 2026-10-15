@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T13:54:24.389Z",
+  "generatedAt": "2026-10-15T15:28:31.552Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -412,6 +412,23 @@
         "Sun": 1,
         "Transition": 0,
         "Fog": 0,
+        "Persistent Fog": 0
+      }
+    },
+    "Eureka Valley": {
+      "n": 70,
+      "sfhMedian": 3775000,
+      "sfhN": 35,
+      "condoMedian": 1282500,
+      "condoN": 34,
+      "ppsf": 1483.0780192376203,
+      "dom": 13,
+      "fogHours": 8.5,
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.39,
+        "Transition": 0.58,
+        "Fog": 0.03,
         "Persistent Fog": 0
       }
     },
@@ -1129,6 +1146,23 @@
         "Persistent Fog": 0
       }
     },
+    "Northern Waterfront": {
+      "n": 15,
+      "sfhMedian": null,
+      "sfhN": 0,
+      "condoMedian": 2150000,
+      "condoN": 14,
+      "ppsf": 1330.015832908592,
+      "dom": 14,
+      "fogHours": 6.5,
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
+    },
     "Oceanview": {
       "n": 33,
       "sfhMedian": 1222500,
@@ -1605,6 +1639,23 @@
         "Persistent Fog": 0.55
       }
     },
+    "Sutro Heights": {
+      "n": 18,
+      "sfhMedian": 2300000,
+      "sfhN": 13,
+      "condoMedian": 1610000,
+      "condoN": 5,
+      "ppsf": 1120.6403659233847,
+      "dom": 13,
+      "fogHours": 9,
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
+    },
     "Telegraph Hill": {
       "n": 49,
       "sfhMedian": 5200625,
@@ -1648,6 +1699,23 @@
       "ppsf": null,
       "dom": null,
       "fogHours": null,
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
+    },
+    "Union Street": {
+      "n": 44,
+      "sfhMedian": 3828000,
+      "sfhN": 3,
+      "condoMedian": 1500000,
+      "condoN": 39,
+      "ppsf": 1413.7931034482758,
+      "dom": 13.5,
+      "fogHours": 7,
       "zone": "Sun",
       "zoneMix": {
         "Sun": 1,

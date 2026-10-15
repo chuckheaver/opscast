@@ -194,14 +194,14 @@ def render(pages,plabel,labels,W,run_date):
     tbody tr.dist td.pri {{ color:{MUTED}; }}
     td.name .code {{ color:{MUTED}; font-weight:400; font-size:6.8px; }}
     table tbody td {{ padding-top:0.9px; padding-bottom:0.9px; }}
-    table.grid {{ font-size:8.45px; margin:0 auto; }}
-    table.grid col.nm {{ width:13.2%; }}
-    table.grid th, table.grid td {{ padding-left:1.2px; padding-right:1.2px; }}
-    table.grid tbody td {{ padding-top:0.9px; padding-bottom:0.9px; }}
-    table.grid thead tr.g th {{ font-size:7.6px; }}
-    table.grid thead tr.sub th {{ font-size:7px; white-space:normal; line-height:1.05; vertical-align:bottom; }}
-    table.grid td.name .code {{ font-size:7.3px; }}
-    table.grid tfoot td {{ font-size:8.45px; }}
+    table.mgrid {{ font-size:8.45px; margin:0 auto; }}
+    table.mgrid col.nm {{ width:13.2%; }}
+    table.mgrid th, table.mgrid td {{ padding-left:1.2px; padding-right:1.2px; }}
+    table.mgrid tbody td {{ padding-top:0.9px; padding-bottom:0.9px; }}
+    table.mgrid thead tr.g th {{ font-size:7.6px; }}
+    table.mgrid thead tr.sub th {{ font-size:7px; white-space:normal; line-height:1.05; vertical-align:bottom; }}
+    table.mgrid td.name .code {{ font-size:7.3px; }}
+    table.mgrid tfoot td {{ font-size:8.45px; }}
     """
     groups=[("Qty Sold","","int","n"),("Median Sale Price","M / K","usdM","price"),("Average Sale Price","M / K","usdM","avg"),("Median $/SF","","usd","ppsf"),
             ("Median DOM","days","dom","dom"),("Sold Price vs List %","","pts","pct")]
@@ -236,7 +236,7 @@ def render(pages,plabel,labels,W,run_date):
             out.append(f"<div class='page'><div class='hdr'><div><div class='t'>San Francisco Market Grid - {title}{part}</div>"
                        f"<div class='p'>{html.escape(plabel)}</div>"
                        f"<div class='s'>Closed sales, SFAR MLS &nbsp;\u00b7&nbsp; run {run_date.strftime('%b %-d, %Y')}</div></div></div>")
-            out.append("<table class='grid'>"+head()+"<tbody>")
+            out.append("<table class='mgrid'>"+head()+"<tbody>")
             for _,nm,nid,st in chunk:
                 out.append(f"<tr><td class='name'>{html.escape(nm)} <span class='code'>{html.escape(nid)}</span></td>"+"".join(cells(st,kind,key) for _,_,kind,key in groups)+"</tr>")
             out.append("</tbody>")

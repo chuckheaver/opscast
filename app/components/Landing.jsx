@@ -15,7 +15,7 @@ import hoodStats from "../lib/neighborhood-stats.json";
 // guide. The page must not claim the larger number for the smaller thing.
 const GUIDE_COUNT = Object.keys(hoodStats.hoods || {}).length;
 
-import SiteFooter, { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "./SiteFooter";
+import SiteFooter, { EMAIL, PHONE_DISPLAY, PHONE_HREF, DRE } from "./SiteFooter";
 import HeroSearch from "./HeroSearch";
 import LiveBlockMap from "./LiveBlockMap";
 import LiveHoodMap from "./LiveHoodMap";
@@ -112,7 +112,7 @@ export default function Landing() {
             <img src="/brand/chuck-heaver-cutout.webp" alt="Chuck Heaver" width="760" height="866" />
             <figcaption>
               <b>Chuck Heaver</b>
-              <span>Realtor &amp; Meteorologist · Vanguard Properties</span>
+              <span>Realtor &amp; Meteorologist · DRE #{DRE} · Vanguard Properties</span>
             </figcaption>
           </figure>
           <figure className="lp-hero-map">
