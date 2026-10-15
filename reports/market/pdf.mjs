@@ -24,7 +24,9 @@ catch {
 const exe = ["/opt/pw-browsers/chromium-1194/chrome-linux/chrome"].find(p => { try { readFileSync(p); return true; } catch { return false; } });
 const browser = await chromium.launch(exe ? { executablePath: exe } : {});
 const parts = [];
-for (const src of ["cover3.html", "market-grid-v2.html"]) {
+// Print order: the narrative pages, the grids and microclimate pages, then
+// The Cost of Ownership last.
+for (const src of ["cover3.html", "market-grid-v2.html", "cover3-cost.html"]) {
   const page = await browser.newPage({ viewport: { width: 1500, height: 1000 } });
   await page.goto("file://" + path.join(OUT, src));
   parts.push(await page.pdf({ format: "Letter", landscape: true, printBackground: true,

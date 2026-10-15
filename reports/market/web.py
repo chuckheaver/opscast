@@ -111,10 +111,13 @@ def scope(css, cls):
     return "\n".join(out)
 
 pages, css = [], []
-for src, cls in [(OUT / "cover3.html", "sheetA"), (OUT / "market-grid-v2.html", "sheetB")]:
+# cover3-cost.html is The Cost of Ownership page on its own (it prints last);
+# it shares cover3's styles, so its CSS is not added twice. On the web it
+# has its own section either way (placement below).
+for src, cls in [(OUT / "cover3.html", "sheetA"), (OUT / "market-grid-v2.html", "sheetB"), (OUT / "cover3-cost.html", "sheetA")]:
     c, body = split(src)
     c = re.sub(r"@font-face\s*\{[^}]*\}", "", c)   # the site already serves these faces
-    css.append(scope(c, cls))
+    if src.name != "cover3-cost.html": css.append(scope(c, cls))
     for p in re.findall(r"<div class='page'>.*?(?=<div class='page'>|$)", body, re.S):
         pages.append((cls, p.rstrip()))
 PAGES = []

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Number every page "page n / N" in print order (cover3 pages, then the grid
-document), so adding or splitting pages never leaves stale numbers."""
+"""Number every page "page n / N" in print order (cover3 pages, the grid
+document, then The Cost of Ownership), so adding or splitting pages never
+leaves stale numbers."""
 import pathlib, re
 OUT = pathlib.Path(__file__).resolve().parent / "out"
-docs = [OUT / "cover3.html", OUT / "market-grid-v2.html"]
+docs = [OUT / "cover3.html", OUT / "market-grid-v2.html", OUT / "cover3-cost.html"]
 texts = [d.read_text() for d in docs]
 RX = re.compile(r"page \d+ / \d+")
 total = sum(len(RX.findall(t)) for t in texts)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild sf-briefing-proof.html from cover3.html + market-grid-v2.html.
+"""Rebuild sf-briefing-proof.html from cover3.html + market-grid-v2.html + cover3-cost.html.
 
 Both source documents are standalone print sheets with their own bare-element
 CSS (body, table, h2 ...). Combining them in one page means scoping every rule:
@@ -8,7 +8,7 @@ cover pages get .sheetA, grid pages get .sheetB.
 import re, datetime, pathlib
 
 OUT = pathlib.Path(__file__).resolve().parent / "out"
-SRC = [(OUT / "cover3.html", "sheetA"), (OUT / "market-grid-v2.html", "sheetB")]
+SRC = [(OUT / "cover3.html", "sheetA"), (OUT / "market-grid-v2.html", "sheetB"), (OUT / "cover3-cost.html", "sheetA")]
 # Labels come from each page's own title, so pages can be added or split.
 def page_title(body):
     m = re.search(r"class='t'>(.*?)</div>", body, re.S)

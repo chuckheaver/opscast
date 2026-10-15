@@ -902,6 +902,7 @@ def build():
     luxv=sum(r["sellingPrice"] for r in lux); top5v=sum(r["sellingPrice"] for r in top5)
     zero=[r for r in top5 if r.get("dom")==0 or r["status"]=="Sold Off MLS"]
     carry=lambda p,y: p*y/100+p*PROP_TAX
+    cost_at=len(o)                        # The Cost of Ownership prints last (see build's end)
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The Cost of Ownership</div>
       <div class='p'>The cost of money</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales · rates as of Sept 30 (mortgage: Sept 24 survey)</div></div>""")
@@ -947,6 +948,7 @@ def build():
     </div>""")
     o.append(f"""<div class='foot'><span>Payments are principal and interest only. Foregone yield uses the 10-year Treasury; property tax at {100*PROP_TAX:.2f}%. Insurance, upkeep and illiquidity are additional.</span><span>page 4 / 9</span></div></div>""")
 
+    cost_end=len(o)
     # ── PAGE 5 — the neighborhoods ───────────────────────────────────────
     # Eight panels: (a) by microclimate, then seven Top 10s.
     Y1=S["y1"]; SFHs=mg.SEG[SF]; COs=mg.SEG[CO]
@@ -1057,7 +1059,14 @@ def build():
     o.append(f"<div class='foot'><span>Every figure from closed sales, Jan 1 – {thru} (SFAR MLS). Days on market as reported; list-to-sale ratios use the final list price.</span><span>page 6 / 9</span></div></div>")
 
     o.append("</body></html>")
-    return "".join(o)
+    # The Cost of Ownership is the report's last page, after the grids and the
+    # microclimate pages, so it goes to its own document (same styles) that
+    # renumber.py, proof.py, web.py and pdf.mjs take last.
+    cost=o[cost_at:cost_end]; del o[cost_at:cost_end]
+    return "".join(o), o[0]+"".join(cost)+"</body></html>"
 
 if __name__=="__main__":
-    open(mg.os.path.join(mg.HERE,"out","cover3.html"),"w").write(build()); print("wrote cover3.html")
+    main, cost = build()
+    open(mg.os.path.join(mg.HERE,"out","cover3.html"),"w").write(main)
+    open(mg.os.path.join(mg.HERE,"out","cover3-cost.html"),"w").write(cost)
+    print("wrote cover3.html, cover3-cost.html")
