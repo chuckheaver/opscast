@@ -138,11 +138,10 @@ def fog_map(hoods, w=560, h=560, bbox=(-122.516, 37.703, -122.355, 37.833)):
         rings = max(_rings(hd["geom"]), key=lambda rs: _area(rs[0]))
         (lx, ly), depth = label_point(rings)
         x, y = P(lx, ly)
-        # the neighborhood's median SFH sale this year, in millions; blank with no house sales
-        if not hd["sfh"]["price"]: continue
+        # the neighborhood's median SFH sale this year, in millions; 0 with no house sales
         fs = max(4.6, min(6.6, depth * sc * 0.55))   # smaller in the smallest neighborhoods
         ink = "#ffffff" if shade_at(lx, ly)["k"] == "D" else NAV
-        o.append(f"<text x='{x:.1f}' y='{y + fs * 0.36:.1f}' font-size='{fs}' font-weight='700' fill='{ink}' text-anchor='middle'>{Mm(hd['sfh']['price'])}</text>")
+        o.append(f"<text x='{x:.1f}' y='{y + fs * 0.36:.1f}' font-size='{fs}' font-weight='700' fill='{ink}' text-anchor='middle'>{Mm(hd['sfh']['price']) if hd['sfh']['price'] else '0'}</text>")
     # compass + scale
     km = sc * (1 / 111.32)                 # px per km (east–west, at lat0 via cos already in sc)
     mi = km * 1.609
@@ -261,7 +260,7 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
     # ── page 1: the fog map ──
     item = lambda h: (f"<div>{zc(h['zone'])}<span class='nm'>{html.escape(h['name'])}</span>"
                   f"<span class='hr'>{h['hours']:g}h</span><span class='tp'>{h['temp']}°</span>"
-                  f"<span class='md'>{Mm(h['sfh']['price']) if h['sfh']['price'] else '—'}</span></div>")
+                  f"<span class='md'>{Mm(h['sfh']['price']) if h['sfh']['price'] else '0'}</span></div>")
     az = sorted(hoods, key=lambda h: (ZONES.index(h["zone"]), h["name"].lower()))   # zone by zone, A–Z
     half = -(-len(az) // 2)
     idx = "".join("<section>" + "".join(item(h) for h in part) + "</section>" for part in (az[:half], az[half:]))
@@ -275,7 +274,7 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
          "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>fog hrs/day · est. summer °F · SFH median</i></div>",
          f"<div class='fm-idx'>{idx}</div>",
          "</div></div>",
-         foot("Shading: fog contours (USGS / GOES, 1999–2009). Letter: the neighborhood's zone — Transition when 10%+ of it is on the 8.5-hr line or on each side. °F estimated from fog hours. SFH medians: SFAR MLS; blank = no house sales.")]
+         foot("Shading: fog contours (USGS / GOES, 1999–2009). Letter: the neighborhood's zone — Transition when 10%+ of it is on the 8.5-hr line or on each side. °F estimated from fog hours. SFH medians: SFAR MLS; 0 = no house sales.")]
 
     # ── page 2: microclimates and real estate ──
     zst = {z["k"]: mg.stats([r for r in y1 if r.get("propType") in sfh and sale_zone(r) is z]) for z in ZONES}
