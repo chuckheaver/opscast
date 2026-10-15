@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T03:52:56.804Z",
+  "generatedAt": "2026-10-15T13:54:24.389Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -16,7 +16,13 @@
       "ppsf": 1358.941837289364,
       "dom": 13,
       "fogHours": 8,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Anza Vista": {
       "n": 8,
@@ -27,7 +33,13 @@
       "ppsf": 1063.4441087613293,
       "dom": 10.5,
       "fogHours": 8.25,
-      "zone": "Transition"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.13,
+        "Transition": 0.87,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Ashbury Heights": {
       "n": 21,
@@ -38,7 +50,13 @@
       "ppsf": 1510.0671140939598,
       "dom": 11,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0.06,
+        "Fog": 0.94,
+        "Persistent Fog": 0
+      }
     },
     "Balboa Terrace": {
       "n": 9,
@@ -49,7 +67,13 @@
       "ppsf": 1135.9026369168357,
       "dom": 11,
       "fogHours": 12,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Bayview": {
       "n": 34,
@@ -60,7 +84,13 @@
       "ppsf": 697.3504890171557,
       "dom": 25.5,
       "fogHours": 10.25,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Bernal Heights": {
       "n": 95,
@@ -71,7 +101,13 @@
       "ppsf": 1194.6902654867256,
       "dom": 12,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.02,
+        "Transition": 0.34,
+        "Fog": 0.65,
+        "Persistent Fog": 0
+      }
     },
     "Bret Harte": {
       "n": 12,
@@ -82,7 +118,13 @@
       "ppsf": 698.2911019446082,
       "dom": 17,
       "fogHours": 11,
-      "zone": "Persistent Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Buena Vista": {
       "n": 40,
@@ -93,7 +135,13 @@
       "ppsf": 1311.3496932515338,
       "dom": 14,
       "fogHours": 8.5,
-      "zone": "Transition"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.28,
+        "Transition": 0.71,
+        "Fog": 0.01,
+        "Persistent Fog": 0
+      }
     },
     "Castro": {
       "n": 13,
@@ -104,7 +152,13 @@
       "ppsf": 1313.722752333912,
       "dom": 11,
       "fogHours": 8,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Cathedral Hill": {
       "n": 63,
@@ -115,7 +169,13 @@
       "ppsf": 749.9064079366069,
       "dom": 24,
       "fogHours": 7.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Cayuga": {
       "n": 17,
@@ -126,7 +186,13 @@
       "ppsf": 867.339509514836,
       "dom": 11,
       "fogHours": 11.5,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0.18,
+        "Persistent Fog": 0.82
+      }
     },
     "Central Waterfront": {
       "n": 14,
@@ -137,7 +203,13 @@
       "ppsf": 882.109310685122,
       "dom": 12.5,
       "fogHours": 8,
-      "zone": "Sun"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.57,
+        "Transition": 0.36,
+        "Fog": 0.06,
+        "Persistent Fog": 0
+      }
     },
     "Chinatown": {
       "n": 2,
@@ -148,7 +220,13 @@
       "ppsf": 764.7847107872333,
       "dom": 46.5,
       "fogHours": 6.75,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Civic Center": {
       "n": 20,
@@ -159,7 +237,13 @@
       "ppsf": 1141.0402361269976,
       "dom": 14.5,
       "fogHours": 7.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Clarendon Heights": {
       "n": 21,
@@ -170,7 +254,13 @@
       "ppsf": 1168.8311688311687,
       "dom": 14,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0.13,
+        "Fog": 0.87,
+        "Persistent Fog": 0
+      }
     },
     "Cole Valley": {
       "n": 5,
@@ -181,7 +271,13 @@
       "ppsf": 1296.7581047381545,
       "dom": 11,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Corona Heights": {
       "n": 26,
@@ -192,7 +288,13 @@
       "ppsf": 1304.4444444444443,
       "dom": 8.5,
       "fogHours": 8,
-      "zone": "Sun"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.64,
+        "Transition": 0.36,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Cow Hollow": {
       "n": 25,
@@ -203,7 +305,13 @@
       "ppsf": 1615.8371040723982,
       "dom": 11,
       "fogHours": 7.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Crocker Amazon": {
       "n": 30,
@@ -214,7 +322,13 @@
       "ppsf": 858.8917641561989,
       "dom": 12,
       "fogHours": 11,
-      "zone": "Persistent Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0.65,
+        "Persistent Fog": 0.35
+      }
     },
     "Diamond Heights": {
       "n": 45,
@@ -225,7 +339,13 @@
       "ppsf": 836.1486486486486,
       "dom": 26,
       "fogHours": 9.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Dogpatch": {
       "n": 20,
@@ -236,7 +356,13 @@
       "ppsf": 1246.5373961218836,
       "dom": 11.5,
       "fogHours": 8,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Dolores Heights": {
       "n": 52,
@@ -247,7 +373,13 @@
       "ppsf": 1491.2052117263843,
       "dom": 11,
       "fogHours": 7.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Downtown / Union Square": {
       "n": 5,
@@ -258,7 +390,13 @@
       "ppsf": 1139.0887290167866,
       "dom": 37,
       "fogHours": 7,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Duboce Triangle": {
       "n": 25,
@@ -269,7 +407,13 @@
       "ppsf": 1227.0468786434017,
       "dom": 13,
       "fogHours": 8,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Excelsior": {
       "n": 69,
@@ -280,7 +424,13 @@
       "ppsf": 884.8484848484849,
       "dom": 12,
       "fogHours": 10.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0.99,
+        "Persistent Fog": 0.01
+      }
     },
     "Fairmount": {
       "n": 21,
@@ -291,7 +441,13 @@
       "ppsf": 1215.5591572123176,
       "dom": 13,
       "fogHours": 9.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0.01,
+        "Fog": 0.99,
+        "Persistent Fog": 0
+      }
     },
     "Financial District": {
       "n": 26,
@@ -302,7 +458,13 @@
       "ppsf": 1297.843798286276,
       "dom": 21,
       "fogHours": 7,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Fishermans Wharf": {
       "n": 3,
@@ -313,7 +475,13 @@
       "ppsf": 1317.7879432624113,
       "dom": 13,
       "fogHours": 6.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Forest Hill": {
       "n": 13,
@@ -324,7 +492,13 @@
       "ppsf": 1382.8733191790516,
       "dom": 8,
       "fogHours": 10,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Forest Knolls": {
       "n": 6,
@@ -335,7 +509,13 @@
       "ppsf": 845.0970449273074,
       "dom": 39,
       "fogHours": 9.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Glen Park": {
       "n": 24,
@@ -346,7 +526,13 @@
       "ppsf": 1406.4362336114423,
       "dom": 12,
       "fogHours": 10,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Golden Gate Heights": {
       "n": 53,
@@ -357,7 +543,13 @@
       "ppsf": 1211.0726643598616,
       "dom": 12,
       "fogHours": 9.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Haight Ashbury": {
       "n": 21,
@@ -368,7 +560,13 @@
       "ppsf": 1222.5250587243809,
       "dom": 12,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0.4,
+        "Fog": 0.6,
+        "Persistent Fog": 0
+      }
     },
     "Hayes Valley": {
       "n": 21,
@@ -379,7 +577,13 @@
       "ppsf": 1104.79797979798,
       "dom": 13,
       "fogHours": 7.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Holly Park": {
       "n": 18,
@@ -390,7 +594,13 @@
       "ppsf": 1157.142857142857,
       "dom": 12,
       "fogHours": 9.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Hunters Point": {
       "n": 27,
@@ -401,7 +611,13 @@
       "ppsf": 598.4690327070285,
       "dom": 49,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.04,
+        "Transition": 0.36,
+        "Fog": 0.6,
+        "Persistent Fog": 0
+      }
     },
     "India Basin": {
       "n": 0,
@@ -412,7 +628,13 @@
       "ppsf": null,
       "dom": null,
       "fogHours": null,
-      "zone": null
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.01,
+        "Transition": 0.42,
+        "Fog": 0.57,
+        "Persistent Fog": 0
+      }
     },
     "Ingleside": {
       "n": 41,
@@ -423,7 +645,13 @@
       "ppsf": 912.2203098106712,
       "dom": 13,
       "fogHours": 12.5,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Ingleside Terraces": {
       "n": 10,
@@ -434,7 +662,13 @@
       "ppsf": 1057.5219864924638,
       "dom": 12,
       "fogHours": 12.5,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Inner Richmond": {
       "n": 76,
@@ -445,7 +679,13 @@
       "ppsf": 1268.660696517413,
       "dom": 10.5,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Inner Sunset": {
       "n": 20,
@@ -456,7 +696,13 @@
       "ppsf": 1199.5184735160433,
       "dom": 11.5,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Japantown": {
       "n": 23,
@@ -467,7 +713,13 @@
       "ppsf": 1222.2222222222222,
       "dom": 15,
       "fogHours": 7.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Laguna Honda": {
       "n": 18,
@@ -478,7 +730,13 @@
       "ppsf": 1191.619380183326,
       "dom": 8,
       "fogHours": 10.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Lake Street": {
       "n": 11,
@@ -489,7 +747,13 @@
       "ppsf": 1248.956749828609,
       "dom": 9,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Lakeshore": {
       "n": 17,
@@ -500,7 +764,13 @@
       "ppsf": 775.9456838021339,
       "dom": 13,
       "fogHours": 12.5,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0.01,
+        "Persistent Fog": 0.99
+      }
     },
     "Laurel Heights / Jordan Park": {
       "n": 16,
@@ -511,7 +781,13 @@
       "ppsf": 1429.3155175287516,
       "dom": 6.5,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0.12,
+        "Fog": 0.88,
+        "Persistent Fog": 0
+      }
     },
     "Little Hollywood": {
       "n": 3,
@@ -522,7 +798,13 @@
       "ppsf": 661.7647058823529,
       "dom": 26,
       "fogHours": 11,
-      "zone": "Persistent Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Lone Mountain": {
       "n": 20,
@@ -533,7 +815,13 @@
       "ppsf": 1223.644578313253,
       "dom": 11,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0.02,
+        "Fog": 0.98,
+        "Persistent Fog": 0
+      }
     },
     "Lower Haight": {
       "n": 34,
@@ -544,7 +832,13 @@
       "ppsf": 1143.5204100583144,
       "dom": 12,
       "fogHours": 8,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Lower Nob Hill": {
       "n": 42,
@@ -555,7 +849,13 @@
       "ppsf": 886.6666666666666,
       "dom": 52,
       "fogHours": 7,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Lower Pacific Heights": {
       "n": 34,
@@ -566,7 +866,13 @@
       "ppsf": 1262.2222222222222,
       "dom": 12,
       "fogHours": 8,
-      "zone": "Sun"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.58,
+        "Transition": 0.42,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Marina": {
       "n": 77,
@@ -577,7 +883,13 @@
       "ppsf": 1578.5054575986567,
       "dom": 11,
       "fogHours": 7,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Merced Heights": {
       "n": 29,
@@ -588,7 +900,13 @@
       "ppsf": 882.8297789125484,
       "dom": 22,
       "fogHours": 12.5,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Merced Manor": {
       "n": 13,
@@ -599,7 +917,13 @@
       "ppsf": 1084.4748858447488,
       "dom": 13,
       "fogHours": 11.5,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Midtown Terrace": {
       "n": 9,
@@ -610,7 +934,13 @@
       "ppsf": 1234.0632943910005,
       "dom": 14,
       "fogHours": 9.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Mint Hill": {
       "n": 8,
@@ -621,7 +951,13 @@
       "ppsf": 1040.295119182747,
       "dom": 26,
       "fogHours": 7.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Miraloma Park": {
       "n": 36,
@@ -632,7 +968,13 @@
       "ppsf": 1204.7945205479452,
       "dom": 10,
       "fogHours": 10.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0.98,
+        "Persistent Fog": 0.02
+      }
     },
     "Mission": {
       "n": 128,
@@ -643,7 +985,13 @@
       "ppsf": 1002.6238043096503,
       "dom": 19,
       "fogHours": 7.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 0.95,
+        "Transition": 0.05,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Mission Bay": {
       "n": 74,
@@ -654,7 +1002,13 @@
       "ppsf": 1174.6280344557556,
       "dom": 13.5,
       "fogHours": 7.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Mission Dolores": {
       "n": 61,
@@ -665,7 +1019,13 @@
       "ppsf": 1192.8611928611929,
       "dom": 13,
       "fogHours": 7.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Mission Terrace": {
       "n": 28,
@@ -676,7 +1036,13 @@
       "ppsf": 916.4420485175202,
       "dom": 13,
       "fogHours": 10.75,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0.82,
+        "Persistent Fog": 0.18
+      }
     },
     "Monterey Heights": {
       "n": 14,
@@ -687,7 +1053,13 @@
       "ppsf": 1184.0034875514393,
       "dom": 9,
       "fogHours": 12,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Mt. Davidson Manor": {
       "n": 13,
@@ -698,7 +1070,13 @@
       "ppsf": 922.9957805907173,
       "dom": 9,
       "fogHours": 12,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Nob Hill": {
       "n": 85,
@@ -709,7 +1087,13 @@
       "ppsf": 1096.4912280701753,
       "dom": 33,
       "fogHours": 7,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Noe Valley": {
       "n": 114,
@@ -720,7 +1104,13 @@
       "ppsf": 1534.850640113798,
       "dom": 10,
       "fogHours": 8.5,
-      "zone": "Transition"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.21,
+        "Transition": 0.54,
+        "Fog": 0.25,
+        "Persistent Fog": 0
+      }
     },
     "North Beach": {
       "n": 24,
@@ -731,7 +1121,13 @@
       "ppsf": 1102.9411764705883,
       "dom": 9,
       "fogHours": 6.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Oceanview": {
       "n": 33,
@@ -742,7 +1138,13 @@
       "ppsf": 917.5720225354885,
       "dom": 13,
       "fogHours": 12.5,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Outer Mission": {
       "n": 19,
@@ -753,7 +1155,13 @@
       "ppsf": 803.9302797957113,
       "dom": 13,
       "fogHours": 12,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Outer Richmond": {
       "n": 92,
@@ -764,7 +1172,13 @@
       "ppsf": 1098.175853058881,
       "dom": 12.5,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Outer Sunset": {
       "n": 203,
@@ -775,7 +1189,13 @@
       "ppsf": 1185.1851851851852,
       "dom": 12,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Pacific Heights": {
       "n": 188,
@@ -786,7 +1206,13 @@
       "ppsf": 1314.2174432497013,
       "dom": 11,
       "fogHours": 7.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 0.93,
+        "Transition": 0.07,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Panhandle": {
       "n": 33,
@@ -797,7 +1223,13 @@
       "ppsf": 1261.3289082785564,
       "dom": 12,
       "fogHours": 8.5,
-      "zone": "Transition"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.11,
+        "Transition": 0.5,
+        "Fog": 0.4,
+        "Persistent Fog": 0
+      }
     },
     "Parkmerced": {
       "n": 4,
@@ -808,7 +1240,13 @@
       "ppsf": 733.7782660278937,
       "dom": 31,
       "fogHours": 12.5,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Parkside": {
       "n": 78,
@@ -819,7 +1257,13 @@
       "ppsf": 1096.2441314553992,
       "dom": 12,
       "fogHours": 10.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0.88,
+        "Persistent Fog": 0.12
+      }
     },
     "Parnassus Heights": {
       "n": 7,
@@ -830,7 +1274,13 @@
       "ppsf": 1133.9285714285713,
       "dom": 20,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Peralta Heights": {
       "n": 18,
@@ -841,7 +1291,13 @@
       "ppsf": 1098.0518821327482,
       "dom": 14,
       "fogHours": 8.5,
-      "zone": "Transition"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0.67,
+        "Fog": 0.33,
+        "Persistent Fog": 0
+      }
     },
     "Polk Gulch": {
       "n": 35,
@@ -852,7 +1308,13 @@
       "ppsf": 1176.7895878524946,
       "dom": 13,
       "fogHours": 7,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Portola": {
       "n": 51,
@@ -863,7 +1325,13 @@
       "ppsf": 833.3333333333334,
       "dom": 13,
       "fogHours": 10.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Potrero Hill": {
       "n": 100,
@@ -874,7 +1342,13 @@
       "ppsf": 1141.6105443031613,
       "dom": 12,
       "fogHours": 8,
-      "zone": "Sun"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.83,
+        "Transition": 0.17,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Presidio Heights": {
       "n": 32,
@@ -885,7 +1359,13 @@
       "ppsf": 1662.9070289945462,
       "dom": 7,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0.29,
+        "Fog": 0.71,
+        "Persistent Fog": 0
+      }
     },
     "Presidio Terrace": {
       "n": 9,
@@ -896,7 +1376,13 @@
       "ppsf": 1286.5278080943326,
       "dom": 10,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Rincon Hill": {
       "n": 123,
@@ -907,7 +1393,13 @@
       "ppsf": 1182.4324324324325,
       "dom": 22,
       "fogHours": 7,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Russian Hill": {
       "n": 95,
@@ -918,7 +1410,13 @@
       "ppsf": 1328.6520343571328,
       "dom": 16,
       "fogHours": 6.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Seacliff": {
       "n": 20,
@@ -929,7 +1427,13 @@
       "ppsf": 1939.4800974817222,
       "dom": 7,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0.51,
+        "Fog": 0.49,
+        "Persistent Fog": 0
+      }
     },
     "Sherwood Forest": {
       "n": 12,
@@ -940,7 +1444,13 @@
       "ppsf": 924.2864719821379,
       "dom": 13,
       "fogHours": 11.5,
-      "zone": "Persistent Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0.56,
+        "Persistent Fog": 0.44
+      }
     },
     "Showplace Square": {
       "n": 3,
@@ -951,7 +1461,13 @@
       "ppsf": 804.8317757009346,
       "dom": 76,
       "fogHours": 7.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Silver Terrace": {
       "n": 21,
@@ -962,7 +1478,13 @@
       "ppsf": 767.4603174603175,
       "dom": 13,
       "fogHours": 10.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "South Beach": {
       "n": 53,
@@ -973,7 +1495,13 @@
       "ppsf": 1098.8600269764609,
       "dom": 24,
       "fogHours": 7,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "South of Market": {
       "n": 218,
@@ -984,7 +1512,13 @@
       "ppsf": 913.937547600914,
       "dom": 34,
       "fogHours": 7,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "St. Francis Wood": {
       "n": 10,
@@ -995,7 +1529,13 @@
       "ppsf": 1518.8135554583869,
       "dom": 12.5,
       "fogHours": 11.25,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0.37,
+        "Persistent Fog": 0.63
+      }
     },
     "St. Marys Park": {
       "n": 15,
@@ -1006,7 +1546,13 @@
       "ppsf": 981.5302259552822,
       "dom": 14,
       "fogHours": 9.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Stonestown": {
       "n": 7,
@@ -1017,7 +1563,13 @@
       "ppsf": 1097.0258410531449,
       "dom": 14,
       "fogHours": 12.5,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Sunnydale": {
       "n": 5,
@@ -1028,7 +1580,13 @@
       "ppsf": 773.9463601532567,
       "dom": 13,
       "fogHours": 10.5,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Sunnyside": {
       "n": 58,
@@ -1039,7 +1597,13 @@
       "ppsf": 1235.2406902815621,
       "dom": 10.5,
       "fogHours": 11,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0.45,
+        "Persistent Fog": 0.55
+      }
     },
     "Telegraph Hill": {
       "n": 49,
@@ -1050,7 +1614,13 @@
       "ppsf": 1032.132862212911,
       "dom": 13,
       "fogHours": 6.5,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Tenderloin": {
       "n": 31,
@@ -1061,7 +1631,13 @@
       "ppsf": 885.2137759038801,
       "dom": 37,
       "fogHours": 7,
-      "zone": "Sun"
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Treasure Island": {
       "n": 0,
@@ -1072,7 +1648,13 @@
       "ppsf": null,
       "dom": null,
       "fogHours": null,
-      "zone": null
+      "zone": "Sun",
+      "zoneMix": {
+        "Sun": 1,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "University Mound": {
       "n": 21,
@@ -1083,7 +1665,13 @@
       "ppsf": 791.4151576123407,
       "dom": 13,
       "fogHours": 10,
-      "zone": "Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "Upper Market": {
       "n": 37,
@@ -1094,7 +1682,13 @@
       "ppsf": 1205.4409005628518,
       "dom": 14,
       "fogHours": 9,
-      "zone": "Fog"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0.2,
+        "Fog": 0.8,
+        "Persistent Fog": 0
+      }
     },
     "Visitacion Valley": {
       "n": 28,
@@ -1105,7 +1699,13 @@
       "ppsf": 750.2854983004612,
       "dom": 15,
       "fogHours": 11,
-      "zone": "Persistent Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 1,
+        "Persistent Fog": 0
+      }
     },
     "West Portal": {
       "n": 21,
@@ -1116,7 +1716,13 @@
       "ppsf": 1248.9981414169422,
       "dom": 13,
       "fogHours": 11,
-      "zone": "Persistent Fog"
+      "zone": "Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0.9,
+        "Persistent Fog": 0.1
+      }
     },
     "Western Addition": {
       "n": 34,
@@ -1127,7 +1733,13 @@
       "ppsf": 1021.021021021021,
       "dom": 15,
       "fogHours": 8,
-      "zone": "Sun"
+      "zone": "Transition",
+      "zoneMix": {
+        "Sun": 0.79,
+        "Transition": 0.21,
+        "Fog": 0,
+        "Persistent Fog": 0
+      }
     },
     "Westwood Highlands": {
       "n": 8,
@@ -1138,7 +1750,13 @@
       "ppsf": 1308.785890455582,
       "dom": 10,
       "fogHours": 11.5,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Westwood Park": {
       "n": 7,
@@ -1149,7 +1767,13 @@
       "ppsf": 1289.4499549143372,
       "dom": 8,
       "fogHours": 12.5,
-      "zone": "Persistent Fog"
+      "zone": "Persistent Fog",
+      "zoneMix": {
+        "Sun": 0,
+        "Transition": 0,
+        "Fog": 0,
+        "Persistent Fog": 1
+      }
     },
     "Yerba Buena": {
       "n": 0,
@@ -1160,7 +1784,8 @@
       "ppsf": null,
       "dom": null,
       "fogHours": null,
-      "zone": null
+      "zone": null,
+      "zoneMix": null
     }
   }
 }

@@ -10,14 +10,11 @@
 import { useEffect } from "react";
 
 const ZONES = [
-  ["☀️", "#d97706", "Sun Pockets", "≥20° SE/S/SW-facing inclines — the warmest, sunniest slopes."],
-  ["❄️", "#0ea5e9", "Cool / Shade", "≥20° NW/N/NE-facing inclines — far less direct sun, so cooler."],
   ["🌬️", "#0d9488", "Wind Corridors", "Areas most exposed to the prevailing W/NW wind — the open coast, windward faces & crests, gaps between the hills, the Golden Gate, and the Van Ness/Market corridor."],
 ];
 
 const SOLAR_BANDS = [
-  ["#fde68a", "More sun than flat", "Slopes that beat flat-ground irradiation in the selected season (mostly south-facing)."],
-  ["#c4a574", "Shaded vs flat", "Slopes that fall short of flat-ground (mostly north-facing)."],
+  ["#fef3c7", "More sun than flat", "Slopes that beat flat-ground irradiation in the selected season (mostly south-facing)."],
 ];
 
 // Solar declination + noon altitude at a given lat / day-of-year.
@@ -68,7 +65,7 @@ export default function MicroDetailModal({ picked, onClose }) {
         <section style={{ marginTop: 8, paddingTop: 12, borderTop: "1px solid #ece8df" }}>
           <div style={{ fontSize: 13, fontWeight: 700, color: "#b45309", marginBottom: 4 }}>Solar Exposure</div>
           <div style={{ fontSize: 13, color: "#57534e", lineHeight: 1.5, marginBottom: 8 }}>
-            Modelled annual sun. The orange &quot;city average&quot; band is hidden so the base map shows — everyone gets some sun.
+            Modelled sun by season. Only the sunniest slopes are highlighted in yellow; everywhere else is left clear so the base map shows — everyone gets some sun.
           </div>
           {SOLAR_BANDS.map(([color, name, desc]) => (
             <div key={name} style={{ display: "flex", gap: 10, marginTop: 6 }}>

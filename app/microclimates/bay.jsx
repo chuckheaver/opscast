@@ -133,7 +133,7 @@ export function FogMapCard() {
         <span className="lp-map-hint">Open the Summer Fog Map &rarr;</span>
       </Link>
       <div className="mc-fogmap-key">
-        {[["Sun", "#E8B84B"], ["Transition", "#C9A882"], ["Fog", "#A8BCCD"], ["Persistent fog", "#8DA2B5"]].map(([k, c]) => (
+        {[["Sun", "#E8B84B"], ["Transition", "#C9A882"], ["Fog", "#A8BCCD"], ["Persistent Fog", "#8DA2B5"]].map(([k, c]) => (
           <span key={k}><i style={{ background: c }} />{k}</span>
         ))}
         <span><i className="mc-fogmap-dot" />home sold this year</span>

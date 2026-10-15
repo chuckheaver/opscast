@@ -10,6 +10,7 @@ import {
   NAMES, slugify, nameForSlug, contentFor, statsFor,
   money, ZONE_COLOR, windowLabel, statsYear,
 } from "../lib";
+import ZoneMix from "../ZoneMix";
 
 export function generateStaticParams() {
   return NAMES.map(n => ({ slug: slugify(n) }));
@@ -57,6 +58,7 @@ export default async function Page({ params }) {
           {c.aka && <span className="lp-aka">also {c.aka}</span>}
           {s?.zone && <span className="lp-zone" style={{ "--z": ZONE_COLOR[s.zone] }}>{s.zone} zone</span>}
         </div>
+        {s?.zone && <ZoneMix mix={s.zoneMix} className="lp-nh-mix" />}
         <p className="lp-nh-spirit">{c.spirit}</p>
 
         {c.reasons?.length ? (

@@ -4,6 +4,7 @@
 import Link from "next/link";
 import SiteFooter from "../components/SiteFooter";
 import { allHoods, money, ZONE_COLOR, windowLabel, statsYear } from "./lib";
+import ZoneMix from "./ZoneMix";
 
 export const metadata = {
   title: "San Francisco Neighborhood Guide — Chuck Heaver",
@@ -38,6 +39,8 @@ export default function Page() {
                 </span>
               )}
             </div>
+            {/* Share of its ground in each zone, under the pill's row. */}
+            {h.stats?.zone && <ZoneMix mix={h.stats.zoneMix} className="lp-hood-mix" />}
             <p className="lp-hood-spirit">{h.content.spirit}</p>
             <div className="lp-hood-nums">
               {/* Every median is shown, with its sale count beside it. */}

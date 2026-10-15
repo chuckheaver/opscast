@@ -3,8 +3,12 @@
 // House style for this page: short titles, no paragraphs, facts as bullets, a
 // graphic per section. If a sentence can be a number, it is a number.
 //
-// Belt membership and fog hours are read from the site's own measured data
-// (USGS GOES low-cloud hours, 1999–2009), so the copy cannot drift from the map.
+// Zone membership is read from the same file the fog map uses
+// (public/data/neighborhood-fog-zones.json), and fog hours from the site's own
+// measured data (USGS GOES low-cloud hours, 1999–2009), so the copy cannot
+// drift from the map.
+
+import NEIGHBORHOOD_ZONES from "../../public/data/neighborhood-fog-zones.json";
 
 export const LEDE =
   "Seven miles across, and the weather changes with the block. Here is why, from the ocean down to your street.";
@@ -70,7 +74,7 @@ export const BAY_ZONES = [
 // The zones on the Bay Area map. Keys match scripts/build-bay-map.mjs.
 export const BAY_MAP = [
   { key: "coast", name: "The Fog Coast", jul: 63, eg: "Bodega Bay · Point Reyes · Pacifica · Half Moon Bay", p: "First land the marine layer touches. Grey summers, green winters." },
-  { key: "city", name: "The City", jul: 67, eg: "San Francisco", p: "All three belts in seven miles — see below." },
+  { key: "city", name: "The City", jul: 67, eg: "San Francisco", p: "All four fog zones in seven miles — see below." },
   { key: "bayshore", name: "The Bayshore", jul: 76, eg: "Berkeley · Oakland · San Mateo · Burlingame", p: "Marine air softened by the crossing. The region's mildest strip." },
   { key: "ridges", name: "The Redwood Ridges", jul: 78, eg: "Skyline · Kings Mountain · La Honda", p: "The Santa Cruz Mountains crest. Fog-catching redwoods, up to 45 inches of rain." },
   { key: "hills", name: "The Hills", jul: 80, eg: "Berkeley & Oakland hills · 500–800 ft", p: "Overlooking Berkeley and Oakland, above much of the marine layer. Warmer, more sun, less fog." },
@@ -91,15 +95,39 @@ export const BAY_BULLETS = [
 export const BAY_NOTE =
   "Rounded typical values, shown for the spread rather than to be quoted for any one town.";
 
-// ------------------------------------------------------ 4. The three belts
+// ------------------------------------------------------- 4. The four zones
 
 export const BELTS_LEAD =
   "The ridge down the middle of the city — Mount Davidson 928 ft, Twin Peaks 922, Mount Sutro 909 — does to marine air what the Coast Range does to the region.";
 
+// The site's zones (app/lib/fog-zones.js), by summer fog hours a day at a
+// point: 8 or less Sun · 8.5 Transition · 9 – 11 Fog · over 11 Persistent Fog.
+// A neighborhood's category and mix are worked out from all of its ground
+// (scripts/build-neighborhood-fog-zones.mjs); the cards count and list from it.
+const ZONE_COUNT = {};
+for (const { zone } of Object.values(NEIGHBORHOOD_ZONES)) ZONE_COUNT[zone] = (ZONE_COUNT[zone] || 0) + 1;
+// Neighborhoods with 10%+ of their ground in two or more zones.
+const MULTI = Object.values(NEIGHBORHOOD_ZONES)
+  .filter(({ mix }) => Object.values(mix || {}).filter(v => v >= 0.1).length >= 2).length;
+
+// The names a card lists: the first eight of these its zone holds, so a
+// neighborhood is only ever listed under the zone the map gives it. Grouped
+// roughly by zone for reading; the zones file decides.
+const NAMED = [
+  "North Beach", "Russian Hill", "Nob Hill", "Telegraph Hill", "Marina", "Hayes Valley", "Mission Dolores", "South of Market",
+  "Pacific Heights", "Cow Hollow", "Castro", "Mission",
+  "Noe Valley", "Eureka Valley", "Lower Pacific Heights", "Laurel Heights / Jordan Park", "Bernal Heights", "Potrero Hill", "Haight Ashbury", "Presidio Heights",
+  "Inner Richmond", "Outer Richmond", "Inner Sunset", "Outer Sunset", "Cole Valley", "Glen Park", "West Portal", "Excelsior",
+  "St. Francis Wood", "Westwood Park", "Ingleside Terraces", "Balboa Terrace", "Merced Heights", "Sunnyside", "Crocker Amazon", "Outer Mission",
+];
+const whereIn = zone => NAMED.filter(n => NEIGHBORHOOD_ZONES[n]?.zone === zone).slice(0, 8).join(", ");
+
+// Keys match the zone keys in app/lib/landing-stats.json. Colours are the
+// site's zone colours, light to dark.
 export const BELTS = [
   {
-    key: "sun", name: "Sunbelt", color: "#E8B84B", hours: "6 – 8", count: 37,
-    where: "North Beach, Russian Hill, Financial District, SoMa, Mission, Castro, Potrero Hill, Dogpatch",
+    key: "sun", name: "Sun", color: "#E8B84B", hours: "8 or less", count: ZONE_COUNT["Sun"] || 0,
+    where: whereIn("Sun"),
     bullets: [
       "The northeast quadrant, in the lee of the ridge.",
       "Eight to ten degrees warmer than the west side on a summer afternoon.",
@@ -107,21 +135,30 @@ export const BELTS = [
     ],
   },
   {
-    key: "transition", name: "Transition", color: "#D8C08E", hours: "8.25 – 8.5", count: 6,
-    where: "Noe Valley, Buena Vista, Panhandle, Anza Vista, Lower Pacific Heights, Peralta Heights",
+    key: "transition", name: "Transition", color: "#D8C08E", hours: "8.5", count: ZONE_COUNT["Transition"] || 0,
+    where: whereIn("Transition"),
     bullets: [
-      "The saddles through the ridge — only six neighborhoods sit here.",
-      "Fog spills over in the late afternoon, gone by eleven the next morning.",
-      "One block can be on the sunny or the grey side of a saddle.",
+      `The 8.5-hour line, where fog spills through the ridge's saddles — ${ZONE_COUNT["Transition"] || 0} neighborhoods reach it.`,
+      "Fog arrives in the late afternoon, gone by eleven the next morning.",
+      `Sun on one block, grey on the next — ${MULTI} neighborhoods cover more than one zone.`,
     ],
   },
   {
-    key: "fog", name: "Fog belt", color: "#8DA2B5", hours: "9 – 12.5", count: 60,
-    where: "Richmond, Sunset, Cole Valley, Glen Park, Bayview, Excelsior, West Portal, Ingleside, Lakeshore",
+    key: "fog", name: "Fog", color: "#A8BCCD", hours: "9 – 11", count: ZONE_COUNT["Fog"] || 0,
+    where: whereIn("Fog"),
     bullets: [
-      "Everything west of the ridge, plus the southern tier fed by the San Bruno Gap.",
+      "West of the ridge, plus the southern tier fed by the San Bruno Gap.",
       "Summer afternoons in the low 60s with a 20+ mph west wind.",
-      "The southwest corner — Ingleside, Oceanview, Parkmerced, Lakeshore — runs to 12.5 hours and is the city's most affordable ground.",
+      "Grey mornings and evenings, with a clear spell around midday.",
+    ],
+  },
+  {
+    key: "persistentFog", name: "Persistent Fog", color: "#8DA2B5", hours: "over 11", count: ZONE_COUNT["Persistent Fog"] || 0,
+    where: whereIn("Persistent Fog"),
+    bullets: [
+      "The southwest corner — Ingleside, Oceanview, Parkmerced, Lakeshore.",
+      "Runs to 12.5 hours a day, the most in the city.",
+      "The city's most affordable houses.",
     ],
   },
 ];
@@ -227,7 +264,7 @@ export const FOG_TOPO = [
     bullets: [
       "Marine air comes in low and heavy and stacks against the western slope.",
       "It spills through the saddles and around the ends rather than over the top.",
-      "Cole Valley sits below a saddle and gets the overflow. The Castro, a mile east, stays in the sunbelt.",
+      "Cole Valley sits below a saddle and gets the overflow. The Castro, a mile east, stays in the sun.",
     ],
   },
   {

@@ -9,16 +9,15 @@
 import { useState, useRef, useEffect } from "react";
 import FogLocationSearch from "../../fog/FogLocationSearch";
 
+// No Summer option: only the "more sun than flat" band is drawn, and the
+// summer solar data has none of it (high summer sun evens slopes out).
 const SEASONS = [
   { key: "annual", label: "Ann Avg" },
   { key: "winter", label: "Winter" },
   { key: "equinox", label: "Spring / Fall" },
-  { key: "summer", label: "Summer" },
 ];
 
 export default function MicroMapTools({
-  showSun, onToggleSun,
-  showCool, onToggleCool,
   showWind, onToggleWind,
   showSolar, onToggleSolar,
   solarSeason, onSelectSolarSeason,
@@ -47,8 +46,6 @@ export default function MicroMapTools({
   }, [menu]);
 
   const zoneToggles = [
-    ["Sun pockets", showSun, onToggleSun],
-    ["Cool / shade", showCool, onToggleCool],
     ["Wind corridors", showWind, onToggleWind],
   ];
   const refToggles = [
@@ -58,20 +55,15 @@ export default function MicroMapTools({
     ["Neighborhoods", showNeighborhoods, onToggleNeighborhoods],
   ];
   const activeCount =
-    [showSun, showCool, showWind, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods]
+    [showWind, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods]
       .filter(Boolean).length;
 
   // Active-layer color key.
   const legends = [];
-  const zoneItems = [
-    showSun && ["#fdba74", "Sun pockets"],
-    showCool && ["#7dd3fc", "Cool / shade"],
-    showWind && ["#2dd4bf", "Wind corridors"],
-  ].filter(Boolean);
-  if (zoneItems.length) legends.push({ title: "Microclimate Zones", items: zoneItems });
+  if (showWind) legends.push({ title: "Wind", items: [["#2dd4bf", "Wind corridors"]] });
   if (showSolar) legends.push({
     title: "Solar Exposure",
-    items: [["#fef3c7", "More sun than flat"], ["#c4a574", "Shaded vs flat"]],
+    items: [["#fef3c7", "More sun than flat"]],
   });
 
   return (

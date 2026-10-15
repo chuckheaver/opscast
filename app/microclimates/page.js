@@ -1,5 +1,5 @@
 // San Francisco microclimates, top down: classification, the ocean, the Bay,
-// the city's three belts, the block, fog, the year. One graphic per section,
+// the city's four fog zones, the block, fog, the year. One graphic per section,
 // facts as bullets, no paragraphs.
 //
 // Words live in content.js, drawings in charts.jsx, climate figures in
@@ -27,7 +27,7 @@ export const metadata = {
   description:
     "San Francisco's microclimates in graphics: the Köppen classification, how the " +
     "Pacific drives Bay Area weather, sub-climates from Napa to San Jose, the city's " +
-    "three fog belts, block-level wind, sun and elevation, how fog forms and moves, " +
+    "four fog zones, block-level wind, sun and elevation, how fog forms and moves, " +
     "and monthly temperature and rainfall.",
 };
 
@@ -69,7 +69,7 @@ function topline() {
     { v: `${Math.min(...fog)} – ${Math.max(...fog)}`, k: "hours of summer fog a day", s: "bayside → southwest" },
     { v: `${Math.max(...highs) - Math.min(...highs)}°F`, k: "between our coolest and warmest month", s: "most US cities: 40+" },
     { v: `${Math.round((wet / rain) * 100)}%`, k: "of the year's rain falls Nov – Mar", s: "July: none" },
-    { v: `${(h.sun.median / h.persistentFog.median).toFixed(1)}×`, k: "house price, sunbelt vs persistent fog", s: `single-family, ${STATS.year}` },
+    { v: `${(h.sun.median / h.persistentFog.median).toFixed(1)}×`, k: "house price, Sun vs Persistent Fog", s: `single-family, ${STATS.year}` },
   ];
 }
 
@@ -165,7 +165,7 @@ export default function Page() {
           <Bullets items={BAY_BULLETS} />
         </section>
 
-        {/* SF MICRO — the belts, the block, and sun on the lot last */}
+        {/* SF MICRO — the fog zones, the block, and sun on the lot last */}
         <section className="pt-sec" id="sf">
           <p className="lp-kicker mc-group-k">SF Micro</p>
         </section>
@@ -211,19 +211,25 @@ export default function Page() {
           <p className="mc-fig-h mc-price-h">Single-family median, {STATS.year}</p>
           <div className="mc-price">
             <div className="mc-price-t" style={{ "--b": "#E8B84B" }}>
-              <b>{money(h.sun.median)}</b><span>Sunbelt · {h.sun.n} sales</span>
+              <b>{money(h.sun.median)}</b><span>Sun · {h.sun.n.toLocaleString("en-US")} sales</span>
               <i>${Math.round(h.sun.ppsf).toLocaleString("en-US")}/sq ft</i>
             </div>
+            {h.transition && (
+              <div className="mc-price-t" style={{ "--b": "#D8C08E" }}>
+                <b>{money(h.transition.median)}</b><span>Transition · {h.transition.n.toLocaleString("en-US")} sales</span>
+                <i>${Math.round(h.transition.ppsf).toLocaleString("en-US")}/sq ft</i>
+              </div>
+            )}
             <div className="mc-price-t" style={{ "--b": "#A8BCCD" }}>
-              <b>{money(h.fog.median)}</b><span>Fog · {h.fog.n} sales</span>
+              <b>{money(h.fog.median)}</b><span>Fog · {h.fog.n.toLocaleString("en-US")} sales</span>
               <i>${Math.round(h.fog.ppsf).toLocaleString("en-US")}/sq ft</i>
             </div>
             <div className="mc-price-t" style={{ "--b": "#8DA2B5" }}>
-              <b>{money(h.persistentFog.median)}</b><span>Persistent fog · {h.persistentFog.n} sales</span>
+              <b>{money(h.persistentFog.median)}</b><span>Persistent Fog · {h.persistentFog.n.toLocaleString("en-US")} sales</span>
               <i>${Math.round(h.persistentFog.ppsf).toLocaleString("en-US")}/sq ft</i>
             </div>
           </div>
-          <p className="mc-cap">Houses only. Across all property types the order flips, because the sunbelt is mostly condos.</p>
+          <p className="mc-cap">Houses only, each counted by the fog zone at the house. Across all property types the order flips, because the Sun zone is mostly condos.</p>
         </section>
 
         {/* the block, ending on sun */}

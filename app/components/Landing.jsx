@@ -246,8 +246,8 @@ export default function Landing() {
       <SiteFooter note={
         <>
           Market figures are {stats.market.year} closed sales from SFAR MLS through{" "}
-          {through}, against the same stretch of {stats.market.priorYear}. Sun-belt and
-          fog-belt price comparisons are single-family homes only. Deemed reliable,
+          {through}, against the same stretch of {stats.market.priorYear}. Sun and fog
+          zone price comparisons are single-family homes only. Deemed reliable,
           not guaranteed.
         </>
       } />

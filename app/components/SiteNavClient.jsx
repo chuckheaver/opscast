@@ -13,7 +13,7 @@ import { EMAIL } from "./SiteFooter";
 const MICRO = [
   { href: "/microclimates#climate", label: "Climate", sub: "Köppen, the ocean, the year" },
   { href: "/microclimates#bay", label: "Bay Micro", sub: "The Bay Area's microclimates" },
-  { href: "/microclimates#sf", label: "SF Micro", sub: "Three belts, your block, sun on the lot" },
+  { href: "/microclimates#sf", label: "SF Micro", sub: "Four fog zones, your block, sun on the lot" },
   { href: "/microclimates#fog", label: "Fog Map", sub: "How fog forms and moves" },
 ];
 

@@ -8,7 +8,7 @@ import LegalLine from "../../components/LegalLine";
 export const metadata = {
   title: "SF Micro-Climate Zones",
   description:
-    "Terrain-derived sub-microclimate zones for San Francisco — sun pockets, wind corridors, and persistent-fog ridges, computed from elevation.",
+    "Terrain-derived sub-microclimate zones for San Francisco — wind corridors, sunnier-than-flat slopes, and persistent-fog ridges, computed from elevation.",
 };
 
 export default function Page() {

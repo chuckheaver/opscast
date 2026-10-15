@@ -1,8 +1,9 @@
 'use client';
 
 // Mapbox canvas for the micro-climate page. Renders the SF neighborhood
-// outlines + labels and the three terrain-derived sub-zone fills (sun /
-// wind / fog), each toggleable, plus a marker for the picked address.
+// outlines + labels, the terrain-derived wind-corridor and fog-band fills
+// and the solar-exposure wash, each toggleable, plus a marker for the
+// picked address.
 //
 // Data + toggle state are mirrored into refs so the stable addLayers /
 // applyVisibility callbacks always read the latest values — this avoids
@@ -18,27 +19,23 @@ const SF_BOUNDS = [
   [-122.355, 37.812],
 ];
 
-// Slope zones (crisp colours) + the fog density bands (graduated greys,
+// Wind corridors (crisp teal) + the fog density bands (graduated greys,
 // darkest in the low fog path, lightening as fog thins up the slopes).
 const ZONE_COLOR = {
-  sun: "#fdba74",  // light orange — warm ≥20° south-facing sun pockets
-  cool: "#7dd3fc", // light blue — cool ≥20° north-facing slopes
   wind: "#2dd4bf", // teal — wind-channeling valleys
   fog: "#334155",  // slate-700 — ≤200 ft fog path (densest)
   fog2: "#475569", // slate-600 — 200–350 ft
   fog3: "#64748b", // slate-500 — 350–500 ft
   fog4: "#94a3b8", // slate-400 — 500–1000 ft (thinnest, but still readable)
 };
-const ZONE_OPACITY = { sun: 0.55, cool: 0.55, wind: 0.45, fog: 0.45, fog2: 0.5, fog3: 0.54, fog4: 0.58 };
-const SLOPE_ZONES = ["sun", "cool", "wind"];
+const ZONE_OPACITY = { wind: 0.45, fog: 0.45, fog2: 0.5, fog3: 0.54, fog4: 0.58 };
+const OUTLINED_ZONES = ["wind"];
 const FOG_ZONES = ["fog", "fog2", "fog3", "fog4"];
 
 export default function MicroMap({
   neighborhoods,
   zones,
   solar,
-  showSun,
-  showCool,
   showWind,
   showFog,
   showSolar,
@@ -60,7 +57,7 @@ export default function MicroMap({
 
   // Latest data + toggle state, readable from the stable callbacks below.
   const dataRef = useRef({ neighborhoods, zones, solar });
-  const visRef = useRef({ showSun, showCool, showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods });
+  const visRef = useRef({ showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods });
 
   const applyVisibility = useCallback(() => {
     const map = mapRef.current;
@@ -69,8 +66,6 @@ export default function MicroMap({
     const set = (id, on) => {
       if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", on ? "visible" : "none");
     };
-    set("micro-sun-fill", v.showSun);   set("micro-sun-line", v.showSun);
-    set("micro-cool-fill", v.showCool); set("micro-cool-line", v.showCool);
     set("micro-wind-fill", v.showWind); set("micro-wind-line", v.showWind);
     // All four fog density bands ride the one Fog toggle.
     ["fog", "fog2", "fog3", "fog4"].forEach(z => set(`micro-${z}-fill`, v.showFog));
@@ -128,23 +123,19 @@ export default function MicroMap({
     }
 
     // Solar irradiation layer goes UNDER everything else — it's the
-    // background wash on which the sun/cool/wind/fog polygons paint.
-    // 5-step ramp matches the SF Solar Map reference legend (cream =
-    // most sun, near-black = deepest shadow).
+    // background wash on which the wind/fog polygons paint. Only the
+    // "more sun than flat" band is drawn; the "shaded vs flat" polygons
+    // in the data are filtered out so the base map shows through.
     if (sl && !map.getSource("micro-solar")) {
       map.addSource("micro-solar", { type: "geojson", data: sl });
       map.addLayer({
         id: "micro-solar-fill",
         type: "fill",
         source: "micro-solar",
+        filter: ["==", ["get", "level"], "sun"],
         layout: { visibility: "none" },
         paint: {
-          "fill-color": [
-            "match", ["get", "level"],
-            "sun",   "#fef3c7",   // light yellow — more sun than flat
-            "shade", "#c4a574",   // light brown  — less sun than flat
-            "#c4a574",
-          ],
+          "fill-color": "#fef3c7", // light yellow — more sun than flat
           "fill-opacity": 0.6,
         },
       });
@@ -162,8 +153,8 @@ export default function MicroMap({
           paint: { "fill-color": ZONE_COLOR[zone], "fill-opacity": ZONE_OPACITY[zone] },
         });
       });
-      // Slope zones on top, with a matching outline.
-      SLOPE_ZONES.forEach(zone => {
+      // Wind corridors on top, with a matching outline.
+      OUTLINED_ZONES.forEach(zone => {
         map.addLayer({
           id: `micro-${zone}-fill`,
           type: "fill",
@@ -365,9 +356,9 @@ export default function MicroMap({
 
   // Toggle changes → refresh refs + apply.
   useEffect(() => {
-    visRef.current = { showSun, showCool, showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods };
+    visRef.current = { showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods };
     applyVisibility();
-  }, [showSun, showCool, showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods, applyVisibility]);
+  }, [showWind, showFog, showSolar, showTerrain, showContours, showFogLine, showNeighborhoods, applyVisibility]);
 
   // Picked point → drop a marker (no auto-recenter, so map clicks don't jump).
   useEffect(() => {

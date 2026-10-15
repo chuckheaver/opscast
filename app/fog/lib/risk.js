@@ -19,6 +19,9 @@
 //   • ≥ 8.5    → grey gradient, light grey at 8.5 → near-black at 12.5
 //                (the 8.5 polygon also gets white cloud icons overlaid
 //                via a separate Mapbox layer in FogMap.jsx)
+
+import { fogZone } from "../../lib/fog-zones";
+
 export const riskColorStops = [
   [0,    "#fef08a"], // Sun        — pale yellow
   [8,    "#fef08a"], // Sun        — flat through here
@@ -35,11 +38,10 @@ export function fogColor(hours) {
   return riskColorStops[0][1];
 }
 
-// Three-zone bucketing matching the color gradient.
+// The site's four zones (app/lib/fog-zones.js): 8 hrs or less Sun, the 8.5
+// polygon Transition, 9 – 11 Fog, over 11 Persistent Fog.
 export function fogLabel(hours) {
-  if (hours >= 9) return "Fog";
-  if (hours >= 8.5) return "Transition";
-  return "Sun";
+  return fogZone(hours);
 }
 
 // Used by FogMap.jsx to filter the transition fill layer. Transition is

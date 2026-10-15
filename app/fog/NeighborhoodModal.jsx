@@ -4,12 +4,15 @@
 // fog/neighborhoods card. Curated editorial content comes from
 // lib/neighborhoods.js; the home-price figure (section 7) is computed live
 // from the listings GeoJSON and the microclimate line (section 8) is
-// derived from the picked fog contour, so neither goes stale.
+// derived from the picked fog contour and the neighborhood's fog zone, so
+// neither goes stale.
 
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { entryKeyFor } from "./lib/neighborhoods";
 import { statsFor, slugify, money, ZONE_COLOR, statsYear } from "../neighborhoods/lib";
+import NEIGHBORHOOD_ZONES from "../../public/data/neighborhood-fog-zones.json";
+import ZoneMix from "../neighborhoods/ZoneMix";
 
 const LISTINGS_URL = "/data/sf-listings.geojson";
 const RES_COUNTS_URL = "/data/parcel-res-by-neighborhood.json";
@@ -292,22 +295,30 @@ export default function NeighborhoodModal({
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  const microText = (() => {
-    if (!Number.isFinite(fogHrs)) return null;
-    const tail = zoneLabel === "Sun"
-      ? " — sunnier than the foggier west side of the city."
-      : zoneLabel === "Fog"
-        ? " — among the foggier, cooler parts of the city."
-        : ", a mix of sun and marine-layer fog.";
-    return `${name} sits in a ${zoneLabel || "microclimate"} zone, averaging about ${fogHrs.toFixed(1)} hours of summer fog a day${tail}`;
-  })();
-
   // When one entry covers two fog polygons (e.g. Cow Hollow / Union Street),
   // the entry sets `title` so the header credits both, regardless of which
   // polygon was clicked.
   const heading = data.title || name;
   const key = entryKeyFor(name);
   const st = key ? statsFor(key) : null;
+  // A whole neighborhood's zone comes from the precomputed neighborhood zones
+  // (scripts/build-neighborhood-fog-zones.mjs), not from one point: the pill
+  // is the entry's, the Microclimate line names the polygon it's about. The
+  // picked point's own zone (zoneLabel) is only a fallback. The mix bar under
+  // the pill comes from the same entry, so the two always agree.
+  const hoodZone = NEIGHBORHOOD_ZONES[key]?.zone ?? null;
+  const hoodMix = NEIGHBORHOOD_ZONES[key]?.mix ?? null;
+  const lineZone = NEIGHBORHOOD_ZONES[name]?.zone ?? zoneLabel;
+
+  const microText = (() => {
+    if (!Number.isFinite(fogHrs)) return null;
+    const tail = lineZone === "Sun"
+      ? " — sunnier than the foggier west side of the city."
+      : lineZone === "Fog" || lineZone === "Persistent Fog"
+        ? " — among the foggier, cooler parts of the city."
+        : ", a mix of sun and marine-layer fog.";
+    return `${name} sits in a ${lineZone || "microclimate"} zone, averaging about ${fogHrs.toFixed(1)} hours of summer fog a day${tail}`;
+  })();
 
   return (
     <div className={"nh-backdrop" + (sheet ? " nh-backdrop-sheet" : "")}>
@@ -320,14 +331,16 @@ export default function NeighborhoodModal({
         <button className="nh-x" onClick={onClose} aria-label="Close">×</button>
 
         {/* The same summary as the neighborhood's guide page: title, alias,
-            zone pill, spirit line, reasons, and the six stats from the same
-            stats file — so the pop-up and the page always agree. */}
+            zone pill (from the neighborhood fog zones), spirit line, reasons,
+            and the six stats from the same stats file — so the pop-up and the
+            page always agree. */}
         <p className="nhm-crumb">San Francisco Neighborhoods</p>
         <div className="nhm-head">
           <h2>{heading}</h2>
           {data.aka && <span className="nhm-aka">also {data.aka}</span>}
-          {st?.zone && <span className="nhm-zone" style={{ "--z": ZONE_COLOR[st.zone] }}>{st.zone} zone</span>}
+          {hoodZone && <span className="nhm-zone" style={{ "--z": ZONE_COLOR[hoodZone] }}>{hoodZone} zone</span>}
         </div>
+        {hoodZone && <ZoneMix mix={hoodMix} className="nhm-zmix" />}
         <p className="nhm-spirit">{data.spirit}</p>
         {data.reasons?.length ? (
           <ul className="nhm-reasons">{data.reasons.map(r => <li key={r}>{r}</li>)}</ul>

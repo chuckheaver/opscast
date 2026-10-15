@@ -1,6 +1,7 @@
 // Pure analytics helpers for the listings explorer. No React, no Mapbox —
 // just takes GeoJSON-style property objects and returns numbers, so it can
 // be unit-tested and reused by both the stats panel and any export.
+import { fogZone } from "../../lib/fog-zones";
 
 // ── Fog hours ─────────────────────────────────────────────────────────────
 // The USGS contour polygons carry discrete fog-hour values in 0.5-hr steps
@@ -36,13 +37,11 @@ function lerpColor(a, b, t) {
   return "#" + ch.map(v => v.toString(16).padStart(2, "0")).join("");
 }
 
-// Three named exposure zones over the continuous fog-hours value:
-//   Sun   ≤ 8 hrs/day · Trans 8.1–8.9 · Fog ≥ 9
+// The site's four zones over the fog-hours value at a sale
+// (app/lib/fog-zones.js), with Transition shortened to "Trans".
 export function fogZoneName(h) {
-  if (h == null) return null;
-  if (h <= 8) return "Sun";
-  if (h < 9) return "Trans";
-  return "Fog";
+  const z = fogZone(h);
+  return z === "Transition" ? "Trans" : z;
 }
 // e.g. 6.5 → "Sun Zone (6.5hrs)", 8.5 → "Trans Zone (8.5hrs)", 9 → "Fog Zone (9.0hrs)"
 export function fogZoneLabel(h) {
@@ -147,10 +146,12 @@ export function groupStats(props, keyFn, labelFn = k => k, sortFn) {
   return rows;
 }
 
-// Microclimate buckets over the continuous fog-hours value:
-//   Sun ≤ 8 hr · Transition 8–9 hr · Fog 9+ hr
-const MICRO_LABEL = { Sun: "Sun (≤8 hr)", Trans: "Transition (8–9 hr)", Fog: "Fog (9+ hr)" };
-const MICRO_RANK = { Sun: 0, Trans: 1, Fog: 2 };
+// Microclimate buckets over the fog-hours value at each sale.
+const MICRO_LABEL = {
+  Sun: "Sun (8 hr or less)", Trans: "Transition (8.5 hr)",
+  Fog: "Fog (9–11 hr)", "Persistent Fog": "Persistent Fog (over 11 hr)",
+};
+const MICRO_RANK = { Sun: 0, Trans: 1, Fog: 2, "Persistent Fog": 3 };
 
 // Named grouping dimensions the UI exposes, in display order:
 // Microclimate · City (Supervisor) District · RE (SFAR) District · Neighborhood.
@@ -159,7 +160,7 @@ export const GROUP_BY = {
     label: "Microclimate",
     keyFn: p => fogZoneName(p.fogHours),
     labelFn: k => MICRO_LABEL[k] || k,
-    // Sun → Transition → Fog (sunniest to foggiest).
+    // Sun → Transition → Fog → Persistent Fog (sunniest to foggiest).
     sortFn: (a, b) => (MICRO_RANK[a.key] ?? 9) - (MICRO_RANK[b.key] ?? 9),
   },
   cityDistrict: {

@@ -310,9 +310,10 @@ function Legend() {
     <div className="fog-legend">
       <div className="fog-legend-title">Microclimates · Fog Hours</div>
       <div className="fog-legend-rows">
-        <LegendRow color="#fef9c3" range="≤ 8 hrs" label="Sun" />
+        <LegendRow color="#fef9c3" range="8 hrs or less" label="Sun" />
         <LegendRow color="#e7e5e4" range="8.5 hrs" label="Transition" />
-        <LegendRow color="#a8a29e" range="≥ 9 hrs" label="Fog" />
+        <LegendRow color="#a8a29e" range="9 – 11 hrs" label="Fog" />
+        <LegendRow color="#57534e" range="over 11 hrs" label="Persistent Fog" />
       </div>
     </div>
   );

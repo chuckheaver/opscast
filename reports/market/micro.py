@@ -18,28 +18,33 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.pat
 NAV = "#203C5F"; NAV_LT = "#E4EEF0"; GOLD_MID = "#E9BC3F"; GOLD_LT = "#FBF3D9"; GOLD_TXT = "#94700F"
 INK = "#131A25"; MUTED = "#6B6F75"; LINE = "#DCDDDE"
 
-# The four zones, lettered. A neighborhood's zone comes from the ground it
-# covers (scripts/build-neighborhood-fog-zones.mjs): Transition when it
-# straddles the 8.5-hour sun/fog line, else by which side it sits on.
+# The four zones, lettered — the site's rule (app/lib/fog-zones.js). A POINT
+# (a sale, the map's shading) takes the zone of the fog polygon it sits in:
+# 8 hrs or less Sun · 8.5 Transition · 9 – 11 Fog · over 11 Persistent Fog.
+# A NEIGHBORHOOD's category and its mix of zones come from the ground it
+# covers (scripts/build-neighborhood-fog-zones.mjs): Transition when 10%+ of
+# it is in the 8.5 polygon or it spans sun and fog, else its main zone.
 ZONES = [
-    dict(k="A", name="Sun", fill="#F7CF5C", ink="#131A25", rng="under 8.5 hrs", desc="under 8.5 hrs of fog a day"),
-    dict(k="B", name="Transition", fill="#E9D3A2", ink="#131A25", rng="on the 8.5-hr line", desc="straddles the 8.5-hr sun / fog line"),
-    dict(k="C", name="Fog", fill="#AFC0CF", ink="#131A25", rng="9 – 10.9 hrs", desc="9+ hrs of fog, under 11 on average"),
-    dict(k="D", name="Persistent Fog", fill="#6F8497", ink="#ffffff", rng="11+ hrs", desc="11+ hrs of fog a day on average"),
+    dict(k="A", name="Sun", fill="#F7CF5C", ink="#131A25", rng="8 hrs or less", desc="8 hrs or less of fog a day"),
+    dict(k="B", name="Transition", fill="#E9D3A2", ink="#131A25", rng="8.5 hrs", desc="on or across the 8.5-hr line"),
+    dict(k="C", name="Fog", fill="#AFC0CF", ink="#131A25", rng="9 – 11 hrs", desc="mostly 9 – 11 hrs of fog a day"),
+    dict(k="D", name="Persistent Fog", fill="#6F8497", ink="#ffffff", rng="over 11 hrs", desc="mostly over 11 hrs of fog a day"),
 ]
 _BY_NAME = {z["name"]: z for z in ZONES}
 try: NZ = json.load(open(os.path.join(ROOT, "public/data/neighborhood-fog-zones.json")))
 except Exception: NZ = {}
 def zone_of_hours(h):
-    return ZONES[0] if h < 8.5 else ZONES[1] if h < 9 else ZONES[2] if h < 11 else ZONES[3]
+    return ZONES[0] if h <= 8 else ZONES[1] if h < 9 else ZONES[2] if h <= 11 else ZONES[3]
 def zone(name, hours=None):
     """A neighborhood's zone; by its fog hours if it was never sampled."""
     v = NZ.get(name)
     return _BY_NAME[v["zone"]] if v else zone_of_hours(hours)
 def sale_zone(r):
-    """A sale's zone: its neighborhood's."""
+    """A sale's zone: the fog polygon at the property; its neighborhood's
+    category only when the sale has no fog reading."""
+    if r.get("fogHours") is not None: return zone_of_hours(r["fogHours"])
     if r.get("fogNeighborhood") in NZ: return _BY_NAME[NZ[r["fogNeighborhood"]]["zone"]]
-    return zone_of_hours(r["fogHours"]) if r.get("fogHours") is not None else None
+    return None
 
 # Estimated typical summer (Jun–Sep) afternoon high, °F, from fog hours.
 # Anchors: NOAA downtown normals (Sep 70°F, Aug 68°F) for the sunbelt; the
@@ -102,7 +107,7 @@ def label_point(rings):
 
 def fog_map(hoods, w=560, h=560, bbox=(-122.516, 37.703, -122.355, 37.833)):
     """The city shaded straight from the fog contour polygons (the layers the
-    site's fog map draws), so a neighborhood split by the sun / fog line
+    site's fog map draws), so a neighborhood that spans more than one zone
     shows each part in its own zone. Thin white neighborhood boundaries on
     top, each neighborhood numbered at its deepest point. No sale dots."""
     W0, S0, E0, N0 = bbox
@@ -186,6 +191,7 @@ def neighborhoods(sales_y1, sfh_types, stats):
         p = f["properties"]; nm = p["name"]; rs = by.get(nm, [])
         st = stock.get(nm) or {}
         out.append(dict(name=nm, hours=p["fogHours"], zone=zone(nm, p["fogHours"]), temp=est_temp(p["fogHours"]),
+                        mix=(NZ.get(nm) or {}).get("mix") or {zone(nm, p["fogHours"])["name"]: 1},
                         geom=f["geometry"], homes=(st.get("u1", 0) + st.get("units2", 0)),
                         sfh=stats([r for r in rs if r.get("propType") in sfh_types]), all=stats(rs), sales=len(rs)))
     for i, hd in enumerate(out): hd["n"] = i + 1
@@ -216,6 +222,8 @@ CSS = f"""
     .fm-idx {{ display:flex; gap:9px; margin-top:2px; font-size:7px; }} .fm-idx > section {{ flex:1; min-width:0; }}
     .fm-idx div {{ display:flex; align-items:center; gap:3px; break-inside:avoid; height:9.9px; padding:0; border-bottom:0.4px solid {LINE}; }}
     .fm-idx .no {{ flex:0 0 13px; font-weight:800; color:{NAV}; text-align:right; }}
+    .fm-idx .mx {{ flex:0 0 20px; height:5px; display:flex; border-radius:1.5px; overflow:hidden; background:#EEE; }}
+    .fm-idx .mx i {{ display:block; height:100%; }}
     .fm-idx .zc {{ flex:0 0 9px; height:9px; border-radius:2px; font-size:6px; font-weight:800; text-align:center; line-height:9px; }}
     .fm-idx .nm {{ flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
     .fm-idx .hr {{ color:{MUTED}; }}
@@ -258,7 +266,10 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
     foot = lambda txt: (f"<div class='foot'><span>{txt}</span><span>Chuck Heaver · Vanguard Properties · page 0 / 0</span></div></div>")
 
     # ── page 1: the fog map ──
-    item = lambda h: (f"<div>{zc(h['zone'])}<span class='nm'>{html.escape(h['name'])}</span>"
+    # The neighborhood's mix of zones: a thin bar, a segment per zone it covers.
+    mixbar = lambda h: ("<span class='mx'>" + "".join(
+        f"<i style='width:{100 * h['mix'].get(z['name'], 0):.0f}%;background:{z['fill']}'></i>" for z in ZONES) + "</span>")
+    item = lambda h: (f"<div>{zc(h['zone'])}{mixbar(h)}<span class='nm'>{html.escape(h['name'])}</span>"
                   f"<span class='hr'>{h['hours']:g}h</span><span class='tp'>{h['temp']}°</span>"
                   f"<span class='md'>{Mm(h['sfh']['price']) if h['sfh']['price'] else '0'}</span></div>")
     az = sorted(hoods, key=lambda h: (ZONES.index(h["zone"]), h["name"].lower()))   # zone by zone, A–Z
@@ -274,7 +285,7 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
          "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>fog hrs/day · est. summer °F · SFH median</i></div>",
          f"<div class='fm-idx'>{idx}</div>",
          "</div></div>",
-         foot("Shading: fog contours (USGS / GOES, 1999–2009). Letter: the neighborhood's zone — Transition when 10%+ of it is on the 8.5-hr line or on each side. °F estimated from fog hours. SFH medians: SFAR MLS; 0 = no house sales.")]
+         foot("Shading: fog contours (USGS / GOES, 1999–2009) — 8 hrs or less Sun · 8.5 Transition · 9 – 11 Fog · over 11 Persistent Fog. Letter: the neighborhood's category; bar: its mix of zones. °F estimated. 0 = no house sales.")]
 
     # ── page 2: microclimates and real estate ──
     zst = {z["k"]: mg.stats([r for r in y1 if r.get("propType") in sfh and sale_zone(r) is z]) for z in ZONES}

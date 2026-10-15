@@ -7,15 +7,10 @@
 
 import { useEffect, useState } from "react";
 import { nearestMuni, nearestBike, parcelLandUse, zoningAndDistricts, incline, zipForBlock } from "./lib/quickpeek";
+import { fogZone } from "../lib/fog-zones";
 
-// Same four zones the neighborhood guide and the market report use.
-function zoneOf(h) {
-  if (!Number.isFinite(h)) return null;
-  if (h <= 8) return "Sun";
-  if (h < 9) return "Transition";
-  if (h < 11) return "Fog";
-  return "Persistent Fog";
-}
+// The zone of the fog polygon at this address (app/lib/fog-zones.js).
+const zoneOf = fogZone;
 const ZONE_COLOR = { Sun: "#E8B84B", Transition: "#D8C08E", Fog: "#A8BCCD", "Persistent Fog": "#8DA2B5" };
 
 const routesShort = r => {

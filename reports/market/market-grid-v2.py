@@ -53,10 +53,11 @@ N2A={n:a for a,ns in AREAS.items() for n in ns}
 SEG={"Single Family Residences":{"Single Family Residence","2 Houses on Lot","Halfplex"},
      # Every sale that is not a single-family house: two segments, nothing left over.
      "Condo / TIC / Other":{"Condominium","Tenancy in Common","Stock Cooperative","Townhouse","Other","3+ Houses on Lot"}}
-ZONES=[("Sun","#FDE68A","\u2264 8.0 hrs/day",lambda h:h<8.5),
-       ("Transition","#E7E5E4","8.5 \u2013 8.9",lambda h:8.5<=h<9),
-       ("Fog","#C3C6CA","9.0 \u2013 10.9",lambda h:9<=h<11),
-       ("Persistent Fog","#6B6F75","\u2265 11.0",lambda h:h>=11)]
+# The site's zones at a point (app/lib/fog-zones.js, reports/market/micro.py).
+ZONES=[("Sun","#FDE68A","8 hrs or less",lambda h:h<=8),
+       ("Transition","#E7E5E4","8.5 hrs",lambda h:8<h<9),
+       ("Fog","#C3C6CA","9 \u2013 11 hrs",lambda h:9<=h<=11),
+       ("Persistent Fog","#6B6F75","over 11 hrs",lambda h:h>11)]
 def zone_of(h):
     if h is None: return None
     for n,_,_,t in ZONES:
@@ -126,7 +127,7 @@ def build(anchor=None):
             if sum(st[k]["n"] for k in W)==0: continue
             byA.append((a,st))
         byA.sort(key=lambda t:-(t[1]["y1"]["price"] or 0))
-        # A sale takes its neighborhood's fog zone (micro.py / neighborhood-fog-zones.json).
+        # A sale takes the zone of the fog polygon at the property (micro.sale_zone).
         import micro
         zn_of=lambda r: (micro.sale_zone(r) or {}).get("name")
         byZ=[(zn,col,rng,{k:stats([r for r in S[k] if zn_of(r)==zn]) for k in W}) for zn,col,rng,_ in ZONES]

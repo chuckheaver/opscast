@@ -115,6 +115,8 @@
 .sheetB .fm-idx > section { flex:1; min-width:0; }
 .sheetB .fm-idx div { display:flex; align-items:center; gap:3px; break-inside:avoid; height:9.9px; padding:0; border-bottom:0.4px solid #DCDDDE; }
 .sheetB .fm-idx .no { flex:0 0 13px; font-weight:800; color:#203C5F; text-align:right; }
+.sheetB .fm-idx .mx { flex:0 0 20px; height:5px; display:flex; border-radius:1.5px; overflow:hidden; background:#EEE; }
+.sheetB .fm-idx .mx i { display:block; height:100%; }
 .sheetB .fm-idx .zc { flex:0 0 9px; height:9px; border-radius:2px; font-size:6px; font-weight:800; text-align:center; line-height:9px; }
 .sheetB .fm-idx .nm { flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .sheetB .fm-idx .hr { color:#6B6F75; }

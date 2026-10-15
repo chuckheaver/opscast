@@ -8,12 +8,17 @@
 // The window is YEAR TO DATE. Every sale in it is reported, however few a
 // neighborhood had — the sale count sits beside each median so the reader can
 // weigh it themselves rather than having the figure withheld.
+//
+// A neighborhood's zone is the one worked out from all of its ground
+// (scripts/build-neighborhood-fog-zones.mjs), not from where this year's
+// sales happened to fall, so it is the same zone the fog map shows.
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { listNeighborhoods } from "../app/fog/lib/neighborhoods.js";
 import { statsThrough, throughStamp } from "./stats-through.mjs";
 
 const LISTINGS = "public/data/sf-listings.geojson";
+const ZONES = "public/data/neighborhood-fog-zones.json";
 const OUT = "app/lib/neighborhood-stats.json";
 
 const median = xs => {
@@ -22,14 +27,8 @@ const median = xs => {
   const m = s.length >> 1;
   return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
 };
-const zoneOf = h => {
-  if (!Number.isFinite(h)) return null;
-  if (h <= 8.0) return "Sun";
-  if (h < 9.0) return "Transition";
-  if (h < 11.0) return "Fog";
-  return "Persistent Fog";
-};
 
+const zones = JSON.parse(readFileSync(ZONES, "utf8"));
 const geo = JSON.parse(readFileSync(LISTINGS, "utf8"));
 const TO = statsThrough(geo);                      // last day of the last full month
 const YEAR = TO.slice(0, 4);
@@ -80,7 +79,9 @@ for (const { key } of listNeighborhoods()) {
     ppsf: median(ppsf),
     dom: median(doms),
     fogHours: fog,
-    zone: zoneOf(fog),
+    zone: zones[key]?.zone ?? null,
+    // Share of the neighborhood's ground in each zone, for the mix bar.
+    zoneMix: zones[key]?.mix ?? null,
   };
 }
 

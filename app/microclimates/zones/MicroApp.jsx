@@ -1,7 +1,7 @@
 'use client';
 
 // Top-level micro-climate experience. Loads the SF neighborhood outlines
-// and the terrain-derived sub-zone polygons, owns the layer toggles + the
+// and the terrain-derived wind-corridor polygons, owns the layer toggles + the
 // picked location, and renders the map + sidebar in the same shell as /fog.
 
 import { useEffect, useState, useCallback, useRef } from "react";
@@ -17,7 +17,6 @@ const SOLAR_URLS = {
   annual:  "/data/sf-solar-annual.geojson",
   winter:  "/data/sf-solar-winter.geojson",
   equinox: "/data/sf-solar-equinox.geojson",
-  summer:  "/data/sf-solar-summer.geojson",
 };
 
 export default function MicroApp() {
@@ -30,10 +29,8 @@ export default function MicroApp() {
   const [dataErr, setDataErr] = useState("");
   const [picked, setPicked] = useState(null); // { point: [lng,lat], address }
 
-  // Layer toggles — all three sub-zones on by default; neighborhood
-  // outlines on as the anchor.
-  const [showSun, setShowSun] = useState(true);
-  const [showCool, setShowCool] = useState(true);
+  // Layer toggles — wind corridors on by default; neighborhood outlines
+  // on as the anchor.
   const [showWind, setShowWind] = useState(true);
   // "Fog path & bands" layer — its sidebar toggle is currently hidden (see
   // MicroSidebar), so default it off rather than leaving it stuck on with no
@@ -169,8 +166,6 @@ export default function MicroApp() {
           neighborhoods={neighborhoods}
           zones={zones}
           solar={solarBySeason[solarSeason] || null}
-          showSun={showSun}
-          showCool={showCool}
           showWind={showWind}
           showFog={showFog}
           showSolar={showSolar}
@@ -183,8 +178,6 @@ export default function MicroApp() {
           onPickPoint={pickFromMap}
         />
         <MicroMapTools
-          showSun={showSun} onToggleSun={setShowSun}
-          showCool={showCool} onToggleCool={setShowCool}
           showWind={showWind} onToggleWind={setShowWind}
           showSolar={showSolar} onToggleSolar={setShowSolar}
           solarSeason={solarSeason} onSelectSolarSeason={setSolarSeason}

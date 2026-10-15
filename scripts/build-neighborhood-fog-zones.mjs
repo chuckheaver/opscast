@@ -1,22 +1,26 @@
-// Each fog-map neighborhood's fog zone, from the ground it covers rather
-// than one number: the neighborhood is sampled on a ~45 m grid against the
-// fog contours (public/data/sf-fog-contours.geojson).
+// Each fog-map neighborhood's fog zone and the mix of zones it covers, from
+// the ground it covers rather than one number: the neighborhood is sampled on
+// a ~45 m grid against the fog contours (public/data/sf-fog-contours.geojson),
+// and each sample takes the zone of its polygon (app/lib/fog-zones.js:
+// 8 hrs or less Sun · 8.5 Transition · 9 – 11 Fog · over 11 Persistent Fog).
 //
-//   Transition      — 10%+ of its ground in the 8.5-hour band (the line
-//                     between sun and fog), or 10%+ on each side of it
-//   Sun             — otherwise, ground under 8.5 hours
-//   Fog             — otherwise, ground at 9+ hours, averaging under 11
-//   Persistent Fog  — ground at 9+ hours, averaging 11 or more
-//
-// The 10% floor keeps a sliver along an edge from flipping a neighborhood.
+// Category:
+//   Transition      — 10%+ of its ground in the 8.5 polygon, or 10%+ Sun
+//                     ground and 10%+ Fog / Persistent Fog ground (it spans
+//                     the sun / fog line)
+//   otherwise       — the zone covering most of its ground
+// The 10% floor keeps a sliver along an edge from flipping a neighborhood;
+// the mix (share of ground in each zone) is kept so pages can show it.
 //
 //   node scripts/build-neighborhood-fog-zones.mjs
-//   → public/data/neighborhood-fog-zones.json  { name: {zone, mean, sun, band, fog} }
+//   → public/data/neighborhood-fog-zones.json
+//     { name: {zone, mean, mix: {Sun, Transition, Fog, Persistent Fog}} }
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { findContourForPoint } from "../app/fog/lib/spatial.js";
+import { fogZone, FOG_ZONES } from "../app/lib/fog-zones.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(ROOT, "public", "data");
@@ -54,16 +58,14 @@ for (const f of N.features) {
   // Too small to sample: fall back to the neighborhood's own figure.
   if (!hrs.length) hrs.push(f.properties.fogHours);
   const n = hrs.length;
-  const sun = hrs.filter(h => h < 8.5).length / n;
-  const band = hrs.filter(h => h >= 8.5 && h < 9).length / n;
-  const fog = hrs.filter(h => h >= 9).length / n;
+  const mix = Object.fromEntries(FOG_ZONES.map(z => [z.name, hrs.filter(h => fogZone(h) === z.name).length / n]));
   const mean = hrs.reduce((a, h) => a + h, 0) / n;
-  const zone =
-    band >= MIN || (sun >= MIN && fog >= MIN) ? "Transition"
-    : sun > fog ? "Sun"
-    : mean >= 11 ? "Persistent Fog" : "Fog";
+  const spans = mix.Sun >= MIN && mix.Fog + mix["Persistent Fog"] >= MIN;
+  const zone = mix.Transition >= MIN || spans
+    ? "Transition"
+    : FOG_ZONES.map(z => z.name).reduce((a, b) => (mix[b] > mix[a] ? b : a));
   const r2 = v => Math.round(v * 100) / 100;
-  out[name] = { zone, mean: r2(mean), sun: r2(sun), band: r2(band), fog: r2(fog) };
+  out[name] = { zone, mean: r2(mean), mix: Object.fromEntries(Object.entries(mix).map(([k, v]) => [k, r2(v)])) };
 }
 
 writeFileSync(join(DATA, "neighborhood-fog-zones.json"), JSON.stringify(out));

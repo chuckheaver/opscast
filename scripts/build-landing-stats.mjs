@@ -11,18 +11,15 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import { statsThrough, throughStamp } from "./stats-through.mjs";
+import { fogZone } from "../app/lib/fog-zones.js";
 
 const LISTINGS = "public/data/sf-listings.geojson";
 const PARCELS = "public/data/parcel-res-by-neighborhood.json";
 const OUT = "app/lib/landing-stats.json";
 
-const zoneOf = h => {
-  if (!Number.isFinite(h)) return null;
-  if (h <= 8.0) return "sun";
-  if (h < 9.0) return "transition";
-  if (h < 11.0) return "fog";
-  return "persistentFog";
-};
+// A sale's zone: the fog polygon at its own point (app/lib/fog-zones.js).
+const KEY = { Sun: "sun", Transition: "transition", Fog: "fog", "Persistent Fog": "persistentFog" };
+const zoneOf = h => KEY[fogZone(h)] ?? null;
 const median = xs => {
   if (!xs.length) return null;
   const s = [...xs].sort((a, b) => a - b);
@@ -43,7 +40,7 @@ for (const f of geo.features || []) {
   if (price <= 0) continue;
   if (!String(p.sellingDate || "").startsWith(year) || !upTo(p.sellingDate)) continue;
   sales.push({
-    zone: zoneOf(Number(p.fogHours)),
+    zone: zoneOf(p.fogHours),
     price,
     sqft: Number(p.sqft) || 0,
     house: /single family/i.test(p.propType || ""),
@@ -131,7 +128,7 @@ const out = {
   market: { year, priorYear: prevYear, through: `${year}-${md}`, current: cur, prior },
   // Houses only — see the note at the top of this file.
   houses: {
-    sun, fog: zoneStat(houses, "fog"), persistentFog: pfog,
+    sun, transition: zoneStat(houses, "transition"), fog: zoneStat(houses, "fog"), persistentFog: pfog,
     n: houses.length,
     priceRatio: sun && pfog ? sun.median / pfog.median : null,
     ppsfRatio: sun && pfog ? sun.ppsf / pfog.ppsf : null,
