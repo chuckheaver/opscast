@@ -4777,6 +4777,25 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   transition: background 0.15s ease;
 }
 .lp-stats-pill:hover, .lp-stats-pill:focus-visible { background: #fff; }
+/* Drawing the eye: a gold ring pulses out from the pill and the arrow
+   nudges forward, both on a slow loop. Hovering settles it; a visitor who
+   asks for reduced motion gets the pill still. */
+.lp-stats-pill { animation: lp-pill-pulse 2.4s ease-out infinite; }
+.lp-stats-pill-arrow { display: inline-block; margin-left: 6px; animation: lp-pill-nudge 1.2s ease-in-out infinite; }
+.lp-stats-pill:hover, .lp-stats-pill:focus-visible,
+.lp-stats-pill:hover .lp-stats-pill-arrow, .lp-stats-pill:focus-visible .lp-stats-pill-arrow { animation: none; }
+@keyframes lp-pill-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(242, 201, 76, 0.70); }
+  70%  { box-shadow: 0 0 0 12px rgba(242, 201, 76, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(242, 201, 76, 0); }
+}
+@keyframes lp-pill-nudge {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-stats-pill, .lp-stats-pill-arrow { animation: none; }
+}
 .lp-stats-when { color: rgba(255,255,255,0.45); font-weight: 600; letter-spacing: 0.06em; }
 .lp-stats-row {
   max-width: 1240px; margin: 0 auto;
