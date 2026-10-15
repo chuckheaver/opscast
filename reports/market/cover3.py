@@ -742,6 +742,7 @@ def build():
     .nb4 {{ gap:9px; }} .nb4 table.top {{ font-size:7.9px; table-layout:auto; }} .nb4 h2 {{ font-size:10.5px; }}
     .nb4 .col {{ min-width:0; }} .nn {{ font-weight:400; color:{MUTED}; font-size:0.85em; }} .nb4 table.top {{ table-layout:auto; font-size:7.2px; }}
     .nb4 table.top td, .nb4 table.top th {{ white-space:nowrap; overflow:visible; padding-left:3px; padding-right:3px; }}
+    .nb12 table.top {{ font-size:8.3px; }} .nb12 table.top th {{ font-size:7.2px; }} .nb12 table.top td {{ padding-top:1.9px; padding-bottom:1.9px; }} .nb12 h2 {{ font-size:11.5px; margin-top:6px; }}
     table.top th {{ background:{NAV}; color:#fff; font-size:6.9px; text-transform:uppercase; padding:2px 4px; text-align:right; }}
     table.top th.l, table.top td.l {{ text-align:left; }}
     table.top td {{ padding:1.9px 4px; text-align:right; border-bottom:0.4px solid {LINE}; white-space:nowrap; overflow:hidden; }}
@@ -950,8 +951,10 @@ def build():
 
     cost_end=len(o)
     # ── PAGE 5 — the neighborhoods ───────────────────────────────────────
-    # Eight panels: (a) by microclimate, then seven Top 10s.
-    Y1=S["y1"]; SFHs=mg.SEG[SF]; COs=mg.SEG[CO]
+    # The 10s: twelve Top 10s, four across in three rows, in the owner's
+    # order — row 1 SFH (neighborhoods, sales, $/sf, overbids), row 2 the same
+    # for Condo/TIC/Other, row 3 the lows and the busiest neighborhoods.
+    Y1=S["y1"]; Y0=S["y0"]; SFHs=mg.SEG[SF]; COs=mg.SEG[CO]
     ratio=lambda r: r["sellingPrice"]/r["listPrice"] if r.get("listPrice") else None
     def pol(r):
         return f"{100*ratio(r):.0f}%" if ratio(r) else "—"
@@ -961,75 +964,78 @@ def build():
     def sales_rows(rs):
         return "".join(f"<tr><td class='l' data-sale='{html.escape(str(r.get('id','')))}'>{i+1}. {short(r)}</td><td class='b'>{M(r['sellingPrice'])}</td>"
                        f"<td style='color:{polc(r)};font-weight:700'>{pol(r)}</td></tr>" for i,r in enumerate(rs))
-    # (b) neighborhoods by SFH median, with the Condo/TIC/Other median beside it
-    # Every area with at least one sale counts; thin samples carry a * and
-    # their sale count rather than being dropped (* = fewer than 10 sales).
+    # Every neighborhood in our database on its own; every area with a sale
+    # counts, thin samples carry a * (fewer than 10 sales) instead of being dropped.
     star=lambda n: "*" if n<10 else ""
-    # Every neighborhood in our database on its own (no combined areas).
     import collections as _c
-    Y0=S["y0"]
     nbk=lambda r: r.get("fogNeighborhood")
-    def bynb(rows, seg):
+    def bynb(rows, seg=None):
         out=_c.defaultdict(list)
         for r in rows:
-            if nbk(r) and r["propType"] in seg: out[nbk(r)].append(r)
+            if nbk(r) and (seg is None or r["propType"] in seg): out[nbk(r)].append(r)
         return out
-    sf1,sf0,co1=bynb(Y1,SFHs),bynb(Y0,SFHs),bynb(Y1,COs)
-    nbst={a:{"y1":mg.stats(rs),"y0":mg.stats(sf0.get(a,[]))} for a,rs in sf1.items()}
-    ranked=sorted([(a,stt) for a,stt in nbst.items() if stt["y1"]["price"]],key=lambda t:-t[1]["y1"]["price"])[:10]
-    def yoy(stt):
-        p0=stt["y0"]["price"]; return (f"{D(stt['y1']['price'],p0):+.0f}%", UP if stt['y1']['price']>=p0 else DOWN) if p0 else ("—",MUTED)
-    def cmed(a):
-        rs=co1.get(a); return M(statistics.median(r["sellingPrice"] for r in rs)) if rs else "—"
-    nr="".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(stt['y1']['n'])}</td><td class='b'>{M(stt['y1']['price'])}</td>"
-               f"<td>{cmed(a)}</td><td style='color:{yoy(stt)[1]};font-weight:700'>{yoy(stt)[0]}</td></tr>" for i,(a,stt) in enumerate(ranked))
-    # (c)(d) the ten biggest sales in each segment
-    tsfh=sorted([r for r in Y1 if r["propType"] in SFHs],key=lambda r:-r["sellingPrice"])[:10]
-    tco=sorted([r for r in Y1 if r["propType"] in COs],key=lambda r:-r["sellingPrice"])[:10]
-    # (e) ZIP codes by median sale — every ZIP with a sale; labelled with its busiest neighborhood
-    byzip=_c.defaultdict(list)
-    for r in Y1:
-        if zip_of(r): byzip[zip_of(r)].append(r)
-    zrank=sorted([(z,statistics.median(x["sellingPrice"] for x in rs),len(rs),
-                   _c.Counter(nbk(x) for x in rs if nbk(x)).most_common(1)[0][0])
-                  for z,rs in byzip.items() if rs and any(nbk(x) for x in rs)],key=lambda t:-t[1])[:10]
-    zr="".join(f"<tr><td class='l'>{i+1}. {z}{star(n)}</td><td class='l'>{html.escape(a)}</td><td class='b'>{M(m)}</td><td>{n}</td></tr>"
-               for i,(z,m,n,a) in enumerate(zrank))
-    # (f) areas by median $/sf, all property types, every sale with square footage
-    bya=_c.defaultdict(list)
-    for r in Y1:
-        if nbk(r) and r.get("sqft"): bya[nbk(r)].append(r["sellingPrice"]/r["sqft"])
-    pall=sorted([(a,statistics.median(v),len(v)) for a,v in bya.items() if v],key=lambda t:-t[1])
-    prow=lambda rk: "".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(n)}</td><td class='b'>${v:,.0f}</td><td>{n}</td></tr>" for i,(a,v,n) in enumerate(rk))
-    pr=prow(pall[:10]); plo=prow(sorted(pall,key=lambda t:t[1])[:10])
-    # (g)(h) biggest overbids by sale-to-list. A list price under $300K or a
-    # ratio over 3x is a data error (a stale or placeholder list price), not a bid.
+    def yoy(v1,v0):
+        return (f"{D(v1,v0):+.0f}%", UP if v1>=v0 else DOWN) if v0 else ("—",MUTED)
+    def nb_median_rows(seg, low=False):
+        """Neighborhoods by median sale price in one segment, with this year's
+        sales and the change from the same stretch last year."""
+        now,prior=bynb(Y1,seg),bynb(Y0,seg)
+        rk=sorted([(a,statistics.median(r["sellingPrice"] for r in rs),len(rs)) for a,rs in now.items() if rs],
+                  key=lambda t:(t[1] if low else -t[1]))[:10]
+        out=""
+        for i,(a,m,n) in enumerate(rk):
+            p0=statistics.median(r["sellingPrice"] for r in prior[a]) if prior.get(a) else None
+            d,dc=yoy(m,p0)
+            out+=(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(n)}</td><td class='b'>{M(m)}</td><td>{n}</td>"
+                  f"<td style='color:{dc};font-weight:700'>{d}</td></tr>")
+        return out
+    def nb_ppsf_rows(seg):
+        """Neighborhoods by median price per square foot in one segment."""
+        by=_c.defaultdict(list)
+        for r in Y1:
+            if nbk(r) and r["propType"] in seg and r.get("sqft"): by[nbk(r)].append(r["sellingPrice"]/r["sqft"])
+        rk=sorted([(a,statistics.median(v),len(v)) for a,v in by.items() if v],key=lambda t:-t[1])[:10]
+        return "".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(n)}</td><td class='b'>${v:,.0f}</td><td>{n}</td></tr>" for i,(a,v,n) in enumerate(rk))
+    def nb_count_rows():
+        """Neighborhoods by number of sales, every property type."""
+        now,prior=bynb(Y1),bynb(Y0)
+        rk=sorted(now.items(),key=lambda kv:-len(kv[1]))[:10]
+        out=""
+        for i,(a,rs) in enumerate(rk):
+            d,dc=yoy(len(rs),len(prior.get(a,[])))
+            out+=(f"<tr><td class='l'>{i+1}. {html.escape(a)}</td><td class='b'>{len(rs):,}</td>"
+                  f"<td>{M(statistics.median(r['sellingPrice'] for r in rs))}</td><td style='color:{dc};font-weight:700'>{d}</td></tr>")
+        return out
+    seg_sales=lambda seg: [r for r in Y1 if r["propType"] in seg]
+    top_sales=lambda seg: sorted(seg_sales(seg),key=lambda r:-r["sellingPrice"])[:10]
+    # The lows leave out sales under $100K: parking spaces, storage and
+    # placeholder prices, not homes.
+    low_sales=lambda seg: sorted([r for r in seg_sales(seg) if r["sellingPrice"]>=100_000],key=lambda r:r["sellingPrice"])[:10]
+    # Biggest overbids by sale-to-list. A list price under $300K or a ratio
+    # over 3x is a data error (a stale or placeholder list price), not a bid.
     okbid=lambda r: ratio(r) and r["listPrice"]>=300_000 and ratio(r)<=3
-    osfh=sorted([r for r in Y1 if r["propType"] in SFHs and okbid(r)],key=lambda r:-ratio(r))[:10]
-    oco=sorted([r for r in Y1 if r["propType"] in COs and okbid(r)],key=lambda r:-ratio(r))[:10]
+    overbids=lambda seg: sorted([r for r in seg_sales(seg) if okbid(r)],key=lambda r:-ratio(r))[:10]
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The 10s</div>
       <div class='p'>Year to date: Jan 1 – {datetime.date.fromisoformat(W['m1'][1]).strftime('%b %-d, %Y')}</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties</div></div>""")
     TH=lambda *cols: "<tr>"+"".join(f"<th class='l'>{c[1:]}</th>" if c.startswith("<") else f"<th>{c}</th>" for c in cols)+"</tr>"
-    o.append("<div class='cols nb4'>")
-    o.append(f"""<div class='col'><h2>Neighborhood</h2>
-      <table class='top'>{TH("<Neighborhood","SFH","Condo/TIC/O","vs "+py)}{nr}</table>
-      <h2>Zip Code</h2>
-      <table class='top zt'>{TH("<ZIP","<Area","Median","Sales")}{zr}</table></div>""")
-    o.append(f"""<div class='col'><h2>SFH</h2>
-      <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(tsfh)}</table>
-      <h2>Condo/TIC/Other</h2>
-      <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(tco)}</table></div>""")
-    o.append(f"""<div class='col'><h2>$/sf</h2>
-      <table class='top'>{TH("<Neighborhood","Median $/sf","Sales")}{pr}</table>
-      <h2>Lowest $/sf</h2>
-      <table class='top'>{TH("<Neighborhood","Median $/sf","Sales")}{plo}</table></div>""")
-    o.append(f"""<div class='col'><h2>Overbids (SFH)</h2>
-      <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(osfh)}</table>
-      <h2>Overbids - Condo/TIC/Other</h2>
-      <table class='top'>{TH("<Address","Closed","% list")}{sales_rows(oco)}</table></div>""")
+    NB=TH("<Neighborhood","Median","Sales","vs "+py)
+    SALE=TH("<Address","Closed","% list")
+    PSF=TH("<Neighborhood","Median $/sf","Sales")
+    panel=lambda title,head,rows: f"<h2>{title}</h2><table class='top'>{head}{rows}</table>"
+    COT="Condo/TIC/Other"
+    cols=[
+        [("Neighborhood SFH",NB,nb_median_rows(SFHs)), (f"Neighborhood {COT}",NB,nb_median_rows(COs)), ("Lowest Neighborhood SFH",NB,nb_median_rows(SFHs,low=True))],
+        [("Top 10 SFH",SALE,sales_rows(top_sales(SFHs))), (f"Top 10 {COT}",SALE,sales_rows(top_sales(COs))), ("Lowest 10 SFH",SALE,sales_rows(low_sales(SFHs)))],
+        [("Top $/sf SFH",PSF,nb_ppsf_rows(SFHs)), (f"Top $/sf {COT}",PSF,nb_ppsf_rows(COs)), (f"Lowest 10 {COT}",SALE,sales_rows(low_sales(COs)))],
+        [("Overbids - SFH",SALE,sales_rows(overbids(SFHs))), (f"Overbids - {COT}",SALE,sales_rows(overbids(COs))),
+         ("Top # Units Sold (All)",TH("<Neighborhood","Sales","Median","vs "+py),nb_count_rows())],
+    ]
+    o.append("<div class='cols nb4 nb12'>")
+    for col in cols:
+        o.append("<div class='col'>"+"".join(panel(*p) for p in col)+"</div>")
     o.append("</div>")
-    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS). Every sale counts — no minimum; * fewer than 10 sales (read with care). Overbids exclude list prices under $300K or bids over 3× list (data errors).</span><span>page 5 / 9</span></div></div>")
+    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS); vs {py} = same stretch last year. Every sale counts — no minimum; * fewer than 10 sales (read with care). Lowest 10 leave out sales under $100K (parking, storage); overbids exclude list prices under $300K or bids over 3× list (data errors).</span><span>page 5 / 9</span></div></div>")
 
     # ── PAGE 6 — in depth ────────────────────────────────────────────────
     # Everything a reader can skip. The narrative pages stay light because

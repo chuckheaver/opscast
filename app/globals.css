@@ -5999,3 +5999,6 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
    Top 10 tables set a touch smaller to keep every name on one line. */
 .rp-sheet.sheetA .nb4 table.top { font-size: 6.5px; }
 .rp-sheet.sheetA .nb4 table.top th { font-size: 6.2px; }
+/* The 10s (twelve tables) has room for larger type than the old eight-panel page. */
+.rp-sheet.sheetA .nb12 table.top { font-size: 7.6px; }
+.rp-sheet.sheetA .nb12 table.top th { font-size: 6.6px; }
