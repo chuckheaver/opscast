@@ -220,9 +220,10 @@ export default function Landing() {
               <li><b>Vanguard Properties</b> — San Francisco</li>
               <li><b>35 years</b> residential, commercial and investment</li>
               <li><b>Brokerage history</b> in NYC, Chicago and South Florida</li>
-              <li><b>20+ years</b> meteorologist</li>
+              <li><b>Meteorologist</b> — NBC, PBS, WGN</li>
               <li><b>Education:</b> The Ohio State University, Mississippi State</li>
-              <li>English, German, Portuguese</li>
+              <li><b>Lived in</b> Chicago, NYC, South Florida, Rio de Janeiro, Santiago and Germany</li>
+              <li>English, German, Portuguese, Spanish (in progress)</li>
             </ul>
             <Link className="lp-inline-link" href="/neighborhoods">
               Start with the neighborhood guide &rarr;
