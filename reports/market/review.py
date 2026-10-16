@@ -19,6 +19,11 @@ A sale over $25M is probably an entry error: it stays in, and is pointed
 out every month (E8). List prices are not reviewed for their own sake —
 the report uses sold data — only as a yardstick for the sale price (R4).
 
+Bedrooms, bathrooms and unit details decide nothing (owner, Oct 16 2026): the
+property type as recorded sets a sale's segment, and a type is questioned only
+when records of the same property disagree (E7b, E7c). Everything else here
+is the numbers: prices, $/sf, dates, duplicates, sale against list.
+
 So this script only FLAGS. It never edits, drops or excludes a sale and it
 changes none of the report's outputs; a new finding goes to the owner, whose
 decision is recorded in data/sale-decisions.json. It looks at this year to
@@ -26,13 +31,13 @@ date (Jan 1 – the period end, mg.last_full_month()) and the same stretch last
 year; the likely-error checks (E) also cover the rest of last year, since the
 report prints last year's full-year totals:
 
-  likely-error  E1–E8   duplicates, impossible prices and dates, sales in no grid, over $25M
+  likely-error  E1–E8   duplicates, impossible prices and dates, sales in no grid, type conflicts, over $25M
   review        R1–R10  figures worth a second look before the report goes out
   notable       N1–N6   real sales the narrative may want to mention
   owner-decision X1–X2   records the owner's decisions took out or corrected
 
 A check's second rule gets its own id where it reads differently (E1b, E5b,
-E7b, R1b, R9b); R1b, R9b and N5 are counts only, with no rows.
+R1b, R9b); R1b, R9b and N5 are counts only, with no rows.
 
 Writes out/review.json and out/review.csv (every finding) and out/outliers.csv
 (every sale with no square footage — the list outliers.py used to write), then
@@ -64,13 +69,13 @@ SFH, CONDO = mg.SEG["Single Family Residences"], mg.SEG["Condo / TIC / Other"]
 
 CHECKS = [  # id, title — in report order
     ("E1", "duplicate-sale"), ("E1b", "conflicting-duplicate"),
-    ("E3", "non-dwelling"), ("E4", "price-under-100k-or-digit-error"), ("E5", "segment-gap"),
-    ("E5b", "neighborhood-in-no-area"), ("E6", "dates"), ("E7", "sfh-with-unit"), ("E7b", "typed-sfh-and-condo"),
+    ("E4", "price-under-100k-or-digit-error"), ("E5", "segment-gap"),
+    ("E5b", "neighborhood-in-no-area"), ("E6", "dates"), ("E7b", "typed-sfh-and-condo"),
     ("E7c", "sfh-in-a-condo-building"),
     ("E8", f"over-${OVER / 1e6:.0f}M (point out)"),
     ("R1", "big-sale-no-sqft"), ("R1b", "no-sqft (all, out/outliers.csv)"), ("R2", "ppsf-vs-neighborhood"),
-    ("R3", "sqft-vs-bedrooms"), ("R4", "sale-to-list-extreme"), ("R5", "drives-a-printed-figure"),
-    ("R6", "round-million-placeholder"), ("R7", "zero-bedrooms-1m"), ("R8", "location"), ("R9", "dom"),
+    ("R4", "sale-to-list-extreme"), ("R5", "drives-a-printed-figure"),
+    ("R6", "round-million-placeholder"), ("R8", "location"), ("R9", "dom"),
     ("R9b", "closed-with-0-dom (count only)"), ("R10", "copied-record"),
     ("N1", "top-sales"), ("N2", "far-above-neighborhood"), ("N3", "new-neighborhood-high"), ("N4", "flips"),
     ("N5", "bmr-looking (count only, valid sales)"), ("N6", "one-building-dominates"),
@@ -216,17 +221,6 @@ for grp, what in [(by_key, "address")] + ([(by_apn, "APN")] if "apn" in HAS else
             flag("E1b", x, f"same {what} as MLS {o['id']} ({o['address'].split(',')[0]}, {o.get('status')}, {o['sellingDate'][:10]}) {DAYS(gap(a, b))} apart "
                            f"at a different price: {M(P(x))} here vs {M(P(o))}", related=[o["id"]], year=x["_win"] or o["_win"] or x["_d"].year)
 
-# E3 non-dwelling: a parking space, storage locker or boat slip sold as a unit.
-NONDWELL = re.compile(r"^(P-?\d+|PKG\w*|PK\d*|PS\d*|PARK\w*|STOR\w*|STG\d*|SLIP\w*|BS\d+|BOAT\w*|GAR(?!DEN)\w*|SPACE\w*)$", re.I)  # a garden unit is a home
-baths = lambda x: (lambda m: float(m.group(1)) if m else None)(re.match(r"\s*(\d+(?:\.\d+)?)", str(x.get("bathrooms") or "")))
-full_baths = lambda x: (lambda m: int(m.group(1)) if m else None)(re.search(r"\((\d+)\s+\d+\)", str(x.get("bathrooms") or "")))  # '1 (0 1)' → 0
-for x in WS:
-    if x["_unitw"] and NONDWELL.match(re.sub(r"\s", "", x["_unitw"])): flag("E3", x, f"unit '#{x['_unitw']}' reads as parking/storage/slip")
-    if "bathrooms" in HAS and x.get("bedrooms") == 0 and baths(x) == 0 and P(x) < 150_000:
-        flag("E3", x, f"0 bed / 0 bath at {M(P(x))}")
-    elif "bathrooms" in HAS and x.get("bedrooms") == 0 and full_baths(x) == 0 and (baths(x) or 0) > 0:   # a half bath only; '0 (0 0)' is just not entered
-        flag("E3", x, f"no bedroom and no full bath ({x.get('bathrooms')}){'' if x.get('sqft') else ', no sqft'} at {M(P(x))}: a home, or storage/commercial/parking?")
-
 # E4 price-under-100k-or-digit-error: a dropped digit, or a parking space priced as a home.
 pp = defaultdict(list)
 for x in W: pp[(x["_win"], x["_seg"], x["_sfar"])].append(P(x))
@@ -278,10 +272,7 @@ for x in held:
     else:                    # the period moved past it but the holdback was not rerun
         flag("E6", x, f"closed {x['_d']}, inside the period (through {THRU}) but still held out: run scripts/apply-sale-decisions.mjs", year=x["_d"].year)
 
-# E7 sfh-with-unit, and E7b one address typed both single-family and condo.
-for x in WS:
-    if x["_seg"] == "SFH" and x["_unit"]:
-        flag("E7", x, f"single-family type ({x.get('propType')}) with a unit number '{x['_unitw']}'")
+# E7b one address typed both single-family and condo.
 for rs in by_key.values():
     segs = {r["_seg"] for r in rs}
     if not {"SFH", "Condo/TIC/Other"} <= segs: continue
@@ -362,18 +353,6 @@ if need("R2", "sqft"):
         if q >= 2.0 or q <= 0.4:
             flag("R2", x, f"${psf(x):,.0f}/sf is {q:.2f}× the {where} {x['_seg']} median ${ref:,.0f}/sf ({len(v) - 1} other sales, {x['_win']}; {x['sqft']:,} sf)")
 
-# R3 sqft-vs-bedrooms: against the city median footage for the segment and bedroom count.
-if need("R3", "sqft", "bedrooms"):
-    bed = lambda x: min(x["bedrooms"], 6)
-    sq = defaultdict(list)
-    for x in W:
-        if x.get("sqft") and x["_seg"] and (x.get("bedrooms") or 0) >= 1: sq[(x["_seg"], bed(x))].append(x["sqft"])
-    for x in W:
-        if not (x.get("sqft") and x["_seg"] and (x.get("bedrooms") or 0) >= 1): continue
-        m = med(sq[(x["_seg"], bed(x))]); q = x["sqft"] / m
-        if q <= 0.45 or q >= 3.0:
-            flag("R3", x, f"{x['sqft']:,} sf for {x['bedrooms']} bed is {q:.2f}× the city {x['_seg']} median of {m:,.0f} sf for {bed(x)}{'+' if bed(x) == 6 else ''} bed")
-
 # R4 sale-to-list-extreme: list price is only a yardstick for the sale price here (the report
 # uses sold data; list price feeds only The 10s' Overbids tables). Far over list tops an Overbids
 # table, as a mistyped list price would; far under list may be a mistyped sale price. Under 15%
@@ -429,10 +408,6 @@ if need("R6", "dom"):
     for x in W:
         if P(x) % 1_000_000 == 0 and x.get("listPrice") == P(x) and (x.get("dom") == 0 or x.get("status") != "Closed"):
             flag("R6", x, f"round {M(P(x))} = list, {x.get('dom')} DOM, {x.get('status')}: a placeholder price?")
-
-# R7 zero-bedrooms-1m
-for x in W if need("R7", "bedrooms") else []:
-    if x.get("bedrooms") == 0 and P(x) >= 1_000_000: flag("R7", x, f"0 bedrooms at {M(P(x))}")
 
 # R8 location: stand-in points, pins the validator moved far, unverified $10M+ addresses.
 def km(a, b):

@@ -27,6 +27,10 @@ The owner's rules:
 - A duplicated sale counts once, keeping the Closed record.
 - A sale over $25M is probably an entry error: it stays in, but always point
   it out to the owner (E8).
+- Bedrooms, bathrooms and unit details decide nothing. The property type as
+  recorded sets a sale's segment; question a type only when records of the
+  same property disagree (same address, building or parcel typed differently).
+  Otherwise review the numbers: prices, $/sf, dates, duplicates, sale vs list.
 - Listing data isn't reviewed — the report uses sold data (list price only
   feeds the Overbids tables).
 - Never drop or edit a sale without the owner's decision. Decisions live in
