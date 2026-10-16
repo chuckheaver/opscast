@@ -1017,16 +1017,18 @@ export default function FogMap({
         return m ? `${+m[2]}/${+m[3]}/${m[1].slice(2)}` : (iso || "");
       };
       // Builds the "Market activity" block from the building→sales lookup, when
-      // this building has matching MLS listings. Summary line + recent sales +
-      // a link into the full filtered listings view.
+      // this building has matching MLS listings: this year to date only (the
+      // owner's rule for the site's summaries) — the count, the median and the
+      // recent sales — plus a link into the full filtered listings view.
       const marketHtml = objectid => {
         const rec = buildingSalesRef.current?.[objectid];
-        if (!rec || !rec.total) return "";
-        const summary = [
-          `${rec.total} listing${rec.total === 1 ? "" : "s"} on record`,
-          rec.closedCount ? `${rec.closedCount} sold` : null,
-          rec.medianSale ? `median ${usdShort(rec.medianSale)}` : null,
-        ].filter(Boolean).join(" · ");
+        if (!rec) return "";
+        const per = rec.period || {};
+        const thru = per.to ? new Date(`${per.to}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
+        const span = per.year ? `${per.year} YTD${thru ? ` (Jan 1 – ${thru})` : ""}` : "This year";
+        const summary = rec.closedCount
+          ? `${span} · ${rec.closedCount} sold${rec.medianSale ? ` · median ${usdShort(rec.medianSale)}` : ""}`
+          : `${span} · no sales yet this year`;
         const items = (rec.recent || []).slice(0, 6).map(s => {
           const left = [s.unit ? `#${esc(s.unit)}` : null, s.status ? esc(s.status) : null].filter(Boolean).join(" · ");
           const right = [usd(s.price), s.date ? shortDate(s.date) : null].filter(Boolean).join(" · ");

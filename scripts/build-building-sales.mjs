@@ -17,6 +17,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { normalizeStreetAddress } from "../app/lib/buildingMatch.js";
+import { statsThrough } from "./stats-through.mjs";
 import { RENTAL_OBJECTIDS, RENTAL_AND_CONDO_OBJECTIDS, EXCLUDED_OBJECTIDS, EXTRA_BUILDINGS, NAME_OVERRIDES, ADDRESS_OVERRIDES, OCCUPANCY_OVERRIDES } from "../app/fog/lib/buildings.js";
 
 // Preferred display name for an inventory feature (name override → city name → address).
@@ -38,6 +39,14 @@ const buildings = JSON.parse(readFileSync(join(DATA, "sf-tall-buildings.geojson"
 const listings = JSON.parse(readFileSync(join(DATA, "sf-listings.geojson"), "utf8"));
 
 const CLOSED = new Set(["Closed", "Sold Off MLS"]);
+
+// Every building figure is this year to date (the owner's rule for the site's
+// summaries): closings Jan 1 – the period end. Earlier sales stay out of the
+// counts, medians, ranges and recent-sales lists.
+const END = statsThrough(listings);
+const FROM = `${END.slice(0, 4)}-01-01`;
+const PERIOD = { year: Number(END.slice(0, 4)), from: FROM, to: END };
+const inYtd = h => CLOSED.has(h.status) && String(h.sellingDate || "").slice(0, 10) >= FROM && String(h.sellingDate || "").slice(0, 10) <= END;
 
 // Index every listing by its normalized street address.
 const listingsByAddr = new Map();
@@ -83,11 +92,12 @@ for (const f of buildings.features) {
     lat: center?.[1] ?? null,
   };
 
-  const hits = listingsByAddr.get(key);
-  if (!hits || !hits.length) continue;
+  const all = listingsByAddr.get(key);
+  if (!all || !all.length) continue;
   matched++;
 
-  const closed = hits.filter(h => CLOSED.has(h.status));
+  const hits = all.filter(inYtd);
+  const closed = hits;
   const recent = [...hits]
     .sort((a, b) => {
       const da = a.sellingDate || a.statusDate || a.listDate || "";
@@ -111,6 +121,7 @@ for (const f of buildings.features) {
     closedCount: closed.length,
     medianSale: median(closed.map(h => h.sellingPrice)),
     recent,
+    period: PERIOD,
   };
 }
 
@@ -150,14 +161,16 @@ const hoaOf = h => num(h.hoa ?? h.hoaDues ?? h.hoa_dues ?? h.associationFee ?? h
 
 // Market stats for one building, from its matched MLS listings. Shared by the
 // inventory buildings (geojson) and the off-inventory EXTRA_BUILDINGS.
-function computeMarket(hits) {
-  const sold = hits.filter(h => CLOSED.has(h.status) && num(h.sellingPrice));
-  const active = hits.filter(h => FOR_SALE.has(h.status));
-  const pending = hits.filter(h => PENDING.has(h.status));
+function computeMarket(all) {
+  const hits = all.filter(inYtd);                  // this year's sales only
+  const sold = hits.filter(h => num(h.sellingPrice));
+  const active = all.filter(h => FOR_SALE.has(h.status));     // listed now, not a period figure
+  const pending = all.filter(h => PENDING.has(h.status));
   const ppsf = sold.map(h => (num(h.sqft) ? num(h.sellingPrice) / num(h.sqft) : null)).filter(Boolean);
   const pctList = sold.map(h => (num(h.listPrice) ? (num(h.sellingPrice) / num(h.listPrice)) * 100 : null)).filter(Boolean);
-  const hoaVals = hits.map(hoaOf).filter(v => Number.isFinite(v) && v > 0);
+  const hoaVals = all.map(hoaOf).filter(v => Number.isFinite(v) && v > 0);
   return {
+    period: PERIOD,
     active: active.length,
     pending: pending.length,
     sold: sold.length,

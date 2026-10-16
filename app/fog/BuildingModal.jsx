@@ -141,10 +141,15 @@ export default function BuildingModal({ profile, authored, onClose }) {
           </section>
         ) : (
           <section style={SEC}>
-            <Banner emoji="📈">Market activity</Banner>
+            <Banner emoji="📈">{m.period?.year ? `Market activity · ${m.period.year} YTD` : "Market activity"}</Banner>
+            {m.period?.to && (
+              <p style={{ fontSize: 12.5, color: "#78716c", margin: "0 0 8px" }}>
+                Closed sales Jan 1 – {fmtDate(m.period.to)}; earlier sales are not counted.
+              </p>
+            )}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))", gap: 8, marginBottom: 10 }}>
               <Stat label="For sale now" value={m.active ?? 0} />
-              <Stat label="Sold (on record)" value={m.sold ?? 0} />
+              <Stat label={m.period?.year ? `Sold, ${m.period.year} YTD` : "Sold"} value={m.sold ?? 0} />
               <Stat label="Median sold" value={fmtUSDshort(m.medianSale)} />
               <Stat label="Price range" value={fmtRangeUSD(m.priceRange)} />
               <Stat label="$ / sq ft" value={Number.isFinite(m.medianPpsf) ? "$" + Math.round(m.medianPpsf).toLocaleString("en-US") : "—"} />
