@@ -251,7 +251,7 @@ def render(pages,plabel,labels,W,run_date):
             if ci==len(chunks)-1:
                 out.append("<tfoot><tr><td class='name'>All San Francisco (pooled)</td>"+"".join(cells(tot,kind,key) for _,_,kind,key in groups)+"</tr></tfoot>")
             out.append("</table>")
-            out.append(f"<div class='foot'><span>Source: SFAR MLS via BrokerMetrics, closed sales only (Closed + Sold Off MLS). Data through {W['m1'][1]}. Deemed reliable, not guaranteed.</span>"
+            out.append(f"<div class='foot'><span>Source: SFAR MLS via BrokerMetrics, closed sales only (Closed + Sold Off MLS), BMR units included. Median $/SF leaves out sales with no square footage reported. Data through {W['m1'][1]}. Deemed reliable, not guaranteed.</span>"
                        f"<span>Chuck Heaver \u00b7 Vanguard Properties \u00b7 page 0 / 0</span></div></div>")
     out.append(micro_page(pages,plabel,labels,W,head,cells,groups,run_date))
     out.append("</body></html>")

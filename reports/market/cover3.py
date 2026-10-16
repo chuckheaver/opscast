@@ -989,18 +989,13 @@ def build():
             out+=(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(n)}</td><td class='b'>{M(m)}</td><td>{n}</td>"
                   f"<td style='color:{dc};font-weight:700'>{d}</td></tr>")
         return out
-    def ppsf_sales_rows(seg, cap):
+    def ppsf_sales_rows(seg):
         """The ten individual sales with the highest price per square foot in
-        one segment. A sale more than `cap` times its own neighborhood's
-        median $/sf is left out: a square-footage error (one unit's or one
-        floor's footage, a typo), not a price. No real house this year runs
-        above 1.9x; condo penthouses reach about 2.9x, so houses get 2.5x
-        and condos 3x."""
+        one segment — every sale with square footage reported (the owner's
+        rule: the reported figures stand; only a sale with no footage is
+        left out, and the footer says so)."""
         psf=lambda r: r["sellingPrice"]/r["sqft"]
-        rs=[r for r in Y1 if r["propType"] in seg and r.get("sqft")]
-        med={a:statistics.median(psf(r) for r in g) for a,g in bynb(rs).items()}
-        ok=[r for r in rs if not (nbk(r) in med and psf(r)>cap*med[nbk(r)])]
-        top=sorted(ok,key=lambda r:-psf(r))[:10]
+        top=sorted([r for r in Y1 if r["propType"] in seg and r.get("sqft")],key=lambda r:-psf(r))[:10]
         return "".join(f"<tr><td class='l' data-sale='{html.escape(str(r.get('id','')))}'>{i+1}. {short(r)}</td>"
                        f"<td class='b'>${psf(r):,.0f}</td><td>{M(r['sellingPrice'])}</td></tr>" for i,r in enumerate(top))
     def nb_count_rows():
@@ -1015,13 +1010,12 @@ def build():
         return out
     seg_sales=lambda seg: [r for r in Y1 if r["propType"] in seg]
     top_sales=lambda seg: sorted(seg_sales(seg),key=lambda r:-r["sellingPrice"])[:10]
-    # The lows leave out sales under $100K: parking spaces, storage and
-    # placeholder prices, not homes.
-    low_sales=lambda seg: sorted([r for r in seg_sales(seg) if r["sellingPrice"]>=100_000],key=lambda r:r["sellingPrice"])[:10]
-    # Biggest overbids by sale-to-list. A list price under $300K or a ratio
-    # over 3x is a data error (a stale or placeholder list price), not a bid.
-    okbid=lambda r: ratio(r) and r["listPrice"]>=300_000 and ratio(r)<=3
-    overbids=lambda seg: sorted([r for r in seg_sales(seg) if okbid(r)],key=lambda r:-ratio(r))[:10]
+    # Every sale is a reportable sale, below-market-rate (BMR) units included;
+    # the one thing left out is a sale with no square footage reported (the
+    # footer says so), which also keeps a parking space off the lows.
+    low_sales=lambda seg: sorted([r for r in seg_sales(seg) if r.get("sqft")],key=lambda r:r["sellingPrice"])[:10]
+    # Biggest overbids by sale-to-list, every sale with a list price.
+    overbids=lambda seg: sorted([r for r in seg_sales(seg) if ratio(r)],key=lambda r:-ratio(r))[:10]
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The 10s</div>
       <div class='p'>Year to date: Jan 1 – {datetime.date.fromisoformat(W['m1'][1]).strftime('%b %-d, %Y')}</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties</div></div>""")
@@ -1034,7 +1028,7 @@ def build():
     cols=[
         [("Neighborhood SFH",NB,nb_median_rows(SFHs)), (f"Neighborhood {COT}",NB,nb_median_rows(COs)), ("Lowest Neighborhood SFH",NB,nb_median_rows(SFHs,low=True))],
         [("Top 10 SFH",SALE,sales_rows(top_sales(SFHs))), (f"Top 10 {COT}",SALE,sales_rows(top_sales(COs))), ("Lowest 10 SFH",SALE,sales_rows(low_sales(SFHs)))],
-        [("Top $/sf SFH",PSF,ppsf_sales_rows(SFHs,2.5)), (f"Top $/sf {COT}",PSF,ppsf_sales_rows(COs,3)), (f"Lowest 10 {COT}",SALE,sales_rows(low_sales(COs)))],
+        [("Top $/sf SFH",PSF,ppsf_sales_rows(SFHs)), (f"Top $/sf {COT}",PSF,ppsf_sales_rows(COs)), (f"Lowest 10 {COT}",SALE,sales_rows(low_sales(COs)))],
         [("Overbids - SFH",SALE,sales_rows(overbids(SFHs))), (f"Overbids - {COT}",SALE,sales_rows(overbids(COs))),
          ("Top # Units Sold (All)",TH("<Neighborhood","Sales","Median","vs "+py),nb_count_rows())],
     ]
@@ -1042,7 +1036,7 @@ def build():
     for col in cols:
         o.append("<div class='col'>"+"".join(panel(*p) for p in col)+"</div>")
     o.append("</div>")
-    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS); vs {py} = same stretch last year. * fewer than 10 sales. Lows skip sales under $100K (parking, storage); Top $/sf skips sales over 2.5× (houses) or 3× (condos) their neighborhood's median $/sf (square-footage errors); overbids skip list prices under $300K or over 3× list.</span><span>page 5 / 9</span></div></div>")
+    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS); vs {py} = same stretch last year. * fewer than 10 sales. Every sale counts, below-market-rate (BMR) units included; Top $/sf and the Lowest 10 leave out sales with no square footage reported.</span><span>page 5 / 9</span></div></div>")
 
     # ── PAGE 6 — in depth ────────────────────────────────────────────────
     # Everything a reader can skip. The narrative pages stay light because

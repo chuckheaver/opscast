@@ -4,7 +4,8 @@
 import json, html, datetime, importlib.util, statistics
 spec=importlib.util.spec_from_file_location("mg",__import__("os").path.join(__import__("os").path.dirname(__import__("os").path.abspath(__file__)),"market-grid-v2.py")); mg=importlib.util.module_from_spec(spec); spec.loader.exec_module(mg)
 NAV,NAV_LT,GOLD,GOLD_LT,GOLD_MID,UP,DOWN,INK,MUTED,LINE=mg.NAV,mg.NAV_LT,mg.GOLD,mg.GOLD_LT,mg.GOLD_MID,mg.UP,mg.DOWN,mg.INK,mg.MUTED,mg.LINE
-M=lambda v:f"${v/1e6:.2f}M" if v>=1e6 else f"${v/1e3:.0f}K"
+# Under $100K (a BMR resale, say) the exact dollars: "$5,500", not "$6K".
+M=lambda v:f"${v/1e6:.2f}M" if v>=1e6 else f"${v/1e3:.0f}K" if v>=1e5 else f"${v:,.0f}"
 D=lambda c,p:100*(c-p)/p
 sgn=lambda x,d=0:f"{x:+.{d}f}"
 
