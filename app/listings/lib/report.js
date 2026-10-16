@@ -27,7 +27,7 @@ function deltaPct(cur, prior) {
   return (cur / prior - 1) * 100;
 }
 
-function segment(name, typesCovered, segTypes, props, from, to, lo, hi) {
+function segment(name, typesCovered, segTypes, props, from, to, lo, hi, prior) {
   const pool = props.filter(p =>
     segTypes.includes(p.propType) &&
     (lo == null || (p.price != null && p.price >= lo)) &&
@@ -35,19 +35,20 @@ function segment(name, typesCovered, segTypes, props, from, to, lo, hi) {
   );
   const inPeriod = (p, f, t) => p.sellingDate && (!f || p.sellingDate >= f) && (!t || p.sellingDate <= t);
   const sold = pool.filter(p => SOLD.has(p.status) && inPeriod(p, from, to));
-  const priorSold = pool.filter(p => SOLD.has(p.status) && inPeriod(p, shiftYear(from, -1), shiftYear(to, -1)));
+  // The same stretch a year earlier — only when the data covers all of it.
+  const priorSold = prior ? pool.filter(p => SOLD.has(p.status) && inPeriod(p, prior[0], prior[1])) : null;
 
   const s = computeStats(sold);
-  const ps = computeStats(priorSold);
+  const ps = priorSold ? computeStats(priorSold) : {};
 
   const compare = [
     { label: "Median Sales Price", cur: s.medianSale, prior: ps.medianSale, fmt: "usd" },
     { label: "Days On Market", cur: s.medianDom, prior: ps.medianDom, fmt: "int" },
     { label: "$ / Sq. Ft.", cur: s.medianPpsf, prior: ps.medianPpsf, fmt: "usd" },
-    { label: "Properties Sold", cur: sold.length, prior: priorSold.length, fmt: "int" },
+    { label: "Properties Sold", cur: sold.length, prior: priorSold ? priorSold.length : null, fmt: "int" },
     { label: "% Sold Over List", cur: s.pctOverList, prior: ps.pctOverList, fmt: "pct" },
     { label: "% of List Received (avg)", cur: s.avgPctOfList, prior: ps.avgPctOfList, fmt: "pct" },
-  ].map(r => ({ ...r, pct: deltaPct(r.cur, r.prior) }));
+  ].map(r => ({ ...r, prior: r.prior ?? null, pct: deltaPct(r.cur, r.prior ?? null) }));
 
   const nbMap = new Map();
   for (const p of sold) {
@@ -67,16 +68,28 @@ function segment(name, typesCovered, segTypes, props, from, to, lo, hi) {
     neighborhoods,
     yoy: {
       medianPrice: s.medianSale, medianPricePct: deltaPct(s.medianSale, ps.medianSale),
-      sales: sold.length, salesPct: deltaPct(sold.length, priorSold.length),
+      sales: sold.length, salesPct: priorSold ? deltaPct(sold.length, priorSold.length) : null,
       dom: s.medianDom, domDelta: s.medianDom != null && ps.medianDom != null ? s.medianDom - ps.medianDom : null,
     },
   };
 }
 
-export function buildReportData(features, filter) {
+// `through` is the period end (metadata.statsThrough). A comparison uses the
+// same stretch a year earlier, so it is made only when the data covers all of
+// that stretch (the sales file begins on its first sale); otherwise the
+// prior column reads "not in data" rather than a figure for a shorter span.
+export function buildReportData(features, filter, through) {
   const props = (features || []).map(f => f.properties);
-  const from = filter.closedFrom || "";
-  const to = filter.closedTo || "";
+  const dates = props.map(p => String(p.sellingDate || "").slice(0, 10)).filter(Boolean).sort();
+  const first = dates[0] || "", last = through || dates[dates.length - 1] || "";
+  // An emptied month field means the default stretch — Jan 1 of the stats
+  // year through the period end — never an open-ended window.
+  let to = filter.closedTo || last;
+  if (last && to > last) to = last;
+  let from = filter.closedFrom || (last ? `${last.slice(0, 4)}-01-01` : "");
+  if (to && from > to) from = `${to.slice(0, 7)}-01`;
+  const pFrom = shiftYear(from, -1), pTo = shiftYear(to, -1);
+  const prior = first && pFrom && pFrom >= first ? [pFrom, pTo] : null;
   const lo = filter.minPrice ? Number(filter.minPrice) : null;
   const hi = filter.maxPrice ? Number(filter.maxPrice) : null;
   const sub = filter.subtypes;
@@ -85,14 +98,14 @@ export function buildReportData(features, filter) {
   const wantCondo = !sub.size || CONDO_TYPES.some(t => sub.has(t));
 
   const segments = [];
-  if (wantSFH) segments.push(segment("Single-Family Homes", "Single-family", SFH_TYPES, props, from, to, lo, hi));
+  if (wantSFH) segments.push(segment("Single-Family Homes", "Single-family", SFH_TYPES, props, from, to, lo, hi, prior));
   if (wantCondo) {
     const t = sub.size ? CONDO_TYPES.filter(x => sub.has(x)) : CONDO_TYPES;
-    segments.push(segment("Condos / TIC / Co-ops", "Condominium, TIC, Stock Co-op", t, props, from, to, lo, hi));
+    segments.push(segment("Condos / TIC / Co-ops", "Condominium, TIC, Stock Co-op", t, props, from, to, lo, hi, prior));
   }
   if (!segments.length) {
     const t = sub.size ? [...sub] : [];
-    segments.push(segment("Selected Homes", "Selected property types", t, props, from, to, lo, hi));
+    segments.push(segment("Selected Homes", "Selected property types", t, props, from, to, lo, hi, prior));
   }
 
   const filtersLine = [
@@ -102,7 +115,7 @@ export function buildReportData(features, filter) {
   return {
     title: "San Francisco Market Update",
     periodLabel: periodLabel(from, to),
-    priorLabel: periodLabel(shiftYear(from, -1), shiftYear(to, -1)),
+    priorLabel: prior ? periodLabel(pFrom, pTo) : "Prior year (not in data)",
     filtersLine,
     generated: null, // stamped by the caller
     segments,

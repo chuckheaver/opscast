@@ -129,8 +129,11 @@ export function matchesFilter(p, f) {
 // Distinct option lists for the dropdowns/chips, derived from the data.
 export function deriveOptions(features) {
   const statuses = new Set(), subtypes = new Set(), districts = new Set(), neighborhoods = new Set(), fogHrs = new Set();
+  let first = "";                                  // the earliest closing in the data
   for (const f of features || []) {
     const p = f.properties;
+    const d = String(p.sellingDate || "").slice(0, 10);
+    if (d && (!first || d < first)) first = d;
     if (isSoldStatus(p.status)) statuses.add(p.status);
     if (p.propType) subtypes.add(p.propType);
     if (p.areaDesc) districts.add(p.areaDesc);
@@ -148,6 +151,7 @@ export function deriveOptions(features) {
     districts: [...districts].sort((a, b) => distNum(a) - distNum(b)),
     neighborhoods: [...neighborhoods].sort(),
     fogHrs: [...fogHrs].sort((a, b) => a - b),
+    first,
   };
 }
 

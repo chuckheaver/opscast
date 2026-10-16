@@ -704,7 +704,7 @@ export default function FogApp() {
     if (!listingsGeo) return;
     setReporting(true);
     try {
-      const data = buildReportData(listingsGeo.features, homesFilter);
+      const data = buildReportData(listingsGeo.features, homesFilter, listingsGeo.metadata?.statsThrough);
       const { downloadReport: dl } = await import("../listings/lib/reportPdf");
       const slug = data.periodLabel.replace(/[^a-z0-9]+/gi, "_").replace(/^_|_$/g, "");
       await dl(data, `SF_Market_Update_${slug}.pdf`);

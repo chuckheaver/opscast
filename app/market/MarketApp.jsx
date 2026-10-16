@@ -64,7 +64,7 @@ export default function MarketApp() {
   }, []);
 
   // Closed sales only, indexed by segment → month → [property objects].
-  const { bySegMonth, months } = useMemo(() => {
+  const { bySegMonth, months, firstMonth } = useMemo(() => {
     const idx = {};
     SEGMENTS.forEach(s => (idx[s.key] = {}));
     const typeToSeg = {};
@@ -86,7 +86,11 @@ export default function MarketApp() {
     const valid = latest
       ? sorted.filter(m => m > shiftMonth(latest, -18))
       : [];
-    return { bySegMonth: idx, months: valid };
+    // The first month of the unbroken run of months with sales: earlier
+    // months are not in the data, so they read "—", not 0 sold.
+    let firstMonth = latest || "";
+    while (firstMonth && monthSet.has(shiftMonth(firstMonth, -1))) firstMonth = shiftMonth(firstMonth, -1);
+    return { bySegMonth: idx, months: valid, firstMonth };
   }, [features]);
 
   // Default to the latest *complete* month — skip the current calendar month,
@@ -214,7 +218,7 @@ export default function MarketApp() {
                   return (
                     <tr key={ym} className={isSel ? "mk-sel" : ""}>
                       <td>{monthLabelShort(ym)}</td>
-                      <td className="mk-num">{s.soldCount || 0}</td>
+                      <td className="mk-num">{firstMonth && ym < firstMonth ? "—" : s.soldCount || 0}</td>
                       <td className="mk-num">{usdShort(s.medianSale)}</td>
                       <td className="mk-num">{s.medianDom ?? "—"}</td>
                       <td className="mk-num">{s.pctOverList == null ? "—" : Math.round(s.pctOverList) + "%"}</td>

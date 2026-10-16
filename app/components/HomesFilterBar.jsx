@@ -55,11 +55,14 @@ export default function HomesFilterBar({ filter, options, count, onChange, onOpe
           );
         })}
         <span className="fog-fsep" aria-hidden="true" />
+        {/* An emptied month goes back to the default stretch (Jan 1 of the
+            stats year → the period end), never an open-ended window. */}
         <MonthField
           label="Sold from month"
           value={filter.closedFrom ? filter.closedFrom.slice(0, 7) : ""}
+          min={options?.first ? options.first.slice(0, 7) : undefined}
           max={(filter.closedTo || options?.through || "").slice(0, 7) || undefined}
-          onChange={e => set({ closedFrom: e.target.value ? `${e.target.value}-01` : "" })}
+          onChange={e => set({ closedFrom: e.target.value ? `${e.target.value}-01` : (options?.through ? `${options.through.slice(0, 4)}-01-01` : "") })}
         />
         <span className="fog-farr" aria-hidden="true">→</span>
         <MonthField
@@ -67,7 +70,7 @@ export default function HomesFilterBar({ filter, options, count, onChange, onOpe
           value={filter.closedTo ? filter.closedTo.slice(0, 7) : ""}
           min={filter.closedFrom ? filter.closedFrom.slice(0, 7) : undefined}
           max={options?.through ? options.through.slice(0, 7) : undefined}
-          onChange={e => set({ closedTo: monthEnd(e.target.value) })}
+          onChange={e => set({ closedTo: e.target.value ? monthEnd(e.target.value) : (options?.through || "") })}
         />
         <span className="fog-fsep" aria-hidden="true" />
         <input type="number" inputMode="numeric" className="fog-ffld fog-fprice" placeholder="$ min" aria-label="Min price" value={filter.minPrice} onChange={e => set({ minPrice: e.target.value })} />
