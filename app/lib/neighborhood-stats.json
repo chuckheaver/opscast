@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T15:28:31.552Z",
+  "generatedAt": "2026-10-16T14:05:04.991Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -722,13 +722,13 @@
       }
     },
     "Japantown": {
-      "n": 23,
-      "sfhMedian": 4500000,
-      "sfhN": 7,
+      "n": 22,
+      "sfhMedian": 4295000,
+      "sfhN": 6,
       "condoMedian": 1510000,
       "condoN": 9,
-      "ppsf": 1222.2222222222222,
-      "dom": 15,
+      "ppsf": 1173.4211415062477,
+      "dom": 13.5,
       "fogHours": 7.5,
       "zone": "Sun",
       "zoneMix": {
@@ -1028,12 +1028,12 @@
       }
     },
     "Mission Dolores": {
-      "n": 61,
+      "n": 60,
       "sfhMedian": 2822500,
       "sfhN": 2,
-      "condoMedian": 1452500,
-      "condoN": 58,
-      "ppsf": 1192.8611928611929,
+      "condoMedian": 1435000,
+      "condoN": 57,
+      "ppsf": 1188.811188811189,
       "dom": 13,
       "fogHours": 7.5,
       "zone": "Sun",
@@ -1113,12 +1113,12 @@
       }
     },
     "Noe Valley": {
-      "n": 114,
+      "n": 113,
       "sfhMedian": 3832902.5,
       "sfhN": 62,
-      "condoMedian": 1560000,
-      "condoN": 51,
-      "ppsf": 1534.850640113798,
+      "condoMedian": 1580000,
+      "condoN": 50,
+      "ppsf": 1540.5405405405406,
       "dom": 10,
       "fogHours": 8.5,
       "zone": "Transition",
@@ -1215,12 +1215,12 @@
       }
     },
     "Outer Sunset": {
-      "n": 203,
-      "sfhMedian": 1865000,
-      "sfhN": 192,
+      "n": 202,
+      "sfhMedian": 1860000,
+      "sfhN": 191,
       "condoMedian": 1015000,
       "condoN": 9,
-      "ppsf": 1185.1851851851852,
+      "ppsf": 1186.3425925925926,
       "dom": 12,
       "fogHours": 9,
       "zone": "Fog",
@@ -1521,12 +1521,12 @@
       }
     },
     "South Beach": {
-      "n": 53,
+      "n": 51,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 1365000,
-      "condoN": 53,
-      "ppsf": 1098.8600269764609,
+      "condoMedian": 1375000,
+      "condoN": 51,
+      "ppsf": 1105.521472392638,
       "dom": 24,
       "fogHours": 7,
       "zone": "Sun",

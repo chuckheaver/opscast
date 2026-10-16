@@ -105,6 +105,7 @@
 .sheetA .dbf { display:block; height:7px; border-radius:2px; }
 .sheetA .dbv { margin-left:4px; font-weight:700; }
 .sheetA .foot { position:absolute; bottom:0; left:0; right:0; font-size:7px; color:#6B6F75; border-top:0.5px solid #DCDDDE; padding-top:3px; display:flex; justify-content:space-between; }
+.sheetA .foot span:last-child { white-space:nowrap; padding-left:8px; }
 .sheetB .fm-wrap { display:flex; gap:14px; margin-top:4px; }
 .sheetB .fm-map { flex:0 0 612px; position:relative; }
 .sheetB .fm-map .mapbox { border:1px solid #DCDDDE; border-radius:8px; overflow:hidden; line-height:0; }
@@ -185,6 +186,7 @@
 .sheetB .rng { color:#6B6F75; font-weight:400; font-size:7.4px; }
 .sheetB .legend { font-size:7.2px; color:#6B6F75; margin-top:4px; line-height:1.35; }
 .sheetB .foot { position:absolute; bottom:0; left:0; right:0; font-size:7.2px; color:#6B6F75; border-top:0.5px solid #DCDDDE; padding-top:3px; display:flex; justify-content:space-between; }
+.sheetB .foot span:last-child { white-space:nowrap; padding-left:8px; }
 .sheetB .hdr .t .part { font-size:11px; font-weight:700; color:#6B6F75; letter-spacing:0; }
 .sheetB tbody tr.dist td { background:#E4EEF0 !important; color:#203C5F; font-weight:800; border-top:1px solid #203C5F; font-size:7.5px; }
 .sheetB tbody tr.dist td.pri { color:#6B6F75; }

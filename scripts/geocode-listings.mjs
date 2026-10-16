@@ -788,6 +788,15 @@ async function main() {
   } catch (e) {
     console.warn(`  validation failed (${e.message}); listings left as geocoded.`);
   }
+  // The owner's standing decisions (data/sale-decisions.json): sales under the
+  // price floor and second copies of duplicated sales come out before any
+  // stat, map or report reads the file — data/removed-sales.csv lists them.
+  console.log(`\nApplying the owner's sale decisions…`);
+  try {
+    execFileSync("node", [join(__dirname, "apply-sale-decisions.mjs")], { stdio: "inherit" });
+  } catch (e) {
+    console.warn(`  sale decisions failed (${e.message}); run scripts/apply-sale-decisions.mjs`);
+  }
   try {
     execFileSync("node", [join(__dirname, "build-sale-incline.mjs")], { stdio: "inherit" });
   } catch (e) {

@@ -790,6 +790,7 @@ def build():
     .dbf {{ display:block; height:7px; border-radius:2px; }}
     .dbv {{ margin-left:4px; font-weight:700; }}
     .foot {{ position:absolute; bottom:0; left:0; right:0; font-size:7px; color:{MUTED}; border-top:0.5px solid {LINE}; padding-top:3px; display:flex; justify-content:space-between; }}
+    .foot span:last-child {{ white-space:nowrap; padding-left:8px; }}
     """
     CHIP=lambda c: f"<span style='display:inline-block;width:9px;height:9px;border-radius:2px;background:{c};border:0.5px solid #a8a29e;vertical-align:-1px;margin-left:2px'></span>"
     B=lambda stat,desc: f"<li><span class='st'>{stat}</span> — {desc}</li>"
@@ -1036,7 +1037,7 @@ def build():
     for col in cols:
         o.append("<div class='col'>"+"".join(panel(*p) for p in col)+"</div>")
     o.append("</div>")
-    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS); vs {py} = same stretch last year. * fewer than 10 sales. Every sale counts, below-market-rate (BMR) units included; Top $/sf and the Lowest 10 leave out sales with no square footage reported.</span><span>page 5 / 9</span></div></div>")
+    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS); vs {py} = same stretch last year. * fewer than 10 sales. Every sale counts, BMR units included; sales under $100K (parking, rentals, entry errors) and duplicate entries left out. Top $/sf and Lowest 10 leave out sales with no sq ft reported.</span><span>page 5 / 9</span></div></div>")
 
     # ── PAGE 6 — in depth ────────────────────────────────────────────────
     # Everything a reader can skip. The narrative pages stay light because

@@ -52,7 +52,7 @@ AREAS={
 N2A={n:a for a,ns in AREAS.items() for n in ns}
 SEG={"Single Family Residences":{"Single Family Residence","2 Houses on Lot","Halfplex"},
      # Every sale that is not a single-family house: two segments, nothing left over.
-     "Condo / TIC / Other":{"Condominium","Tenancy in Common","Stock Cooperative","Townhouse","Other","3+ Houses on Lot"}}
+     "Condo / TIC / Other":{"Condominium","Tenancy in Common","Stock Cooperative","Co-Ownership","Townhouse","Other","3+ Houses on Lot"}}
 # The site's zones at a point (app/lib/fog-zones.js, reports/market/micro.py).
 ZONES=[("Sun","#FDE68A","8 hrs or less",lambda h:h<=8),
        ("Transition","#E7E5E4","8.5 hrs",lambda h:8<h<9),
@@ -197,6 +197,7 @@ def render(pages,plabel,labels,W,run_date):
     .rng {{ color:{MUTED}; font-weight:400; font-size:7.4px; }}
     .legend {{ font-size:7.2px; color:{MUTED}; margin-top:4px; line-height:1.35; }}
     .foot {{ position:absolute; bottom:0; left:0; right:0; font-size:7.2px; color:{MUTED}; border-top:0.5px solid {LINE}; padding-top:3px; display:flex; justify-content:space-between; }}
+    .foot span:last-child {{ white-space:nowrap; padding-left:8px; }}
     .hdr .t .part {{ font-size:11px; font-weight:700; color:{MUTED}; letter-spacing:0; }}
     tbody tr.dist td {{ background:{NAV_LT} !important; color:{NAV}; font-weight:800; border-top:1px solid {NAV}; font-size:7.5px; }}
     tbody tr.dist td.pri {{ color:{MUTED}; }}
@@ -251,7 +252,7 @@ def render(pages,plabel,labels,W,run_date):
             if ci==len(chunks)-1:
                 out.append("<tfoot><tr><td class='name'>All San Francisco (pooled)</td>"+"".join(cells(tot,kind,key) for _,_,kind,key in groups)+"</tr></tfoot>")
             out.append("</table>")
-            out.append(f"<div class='foot'><span>Source: SFAR MLS via BrokerMetrics, closed sales only (Closed + Sold Off MLS), BMR units included. Median $/SF leaves out sales with no square footage reported. Data through {W['m1'][1]}. Deemed reliable, not guaranteed.</span>"
+            out.append(f"<div class='foot'><span>SFAR MLS via BrokerMetrics, closed sales (Closed + Sold Off MLS) through {W['m1'][1]}, BMR units included; under $100K (parking, rentals, entry errors) and duplicates left out. Median $/SF leaves out sales with no sq ft. Deemed reliable, not guaranteed.</span>"
                        f"<span>Chuck Heaver \u00b7 Vanguard Properties \u00b7 page 0 / 0</span></div></div>")
     out.append(micro_page(pages,plabel,labels,W,head,cells,groups,run_date))
     out.append("</body></html>")

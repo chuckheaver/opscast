@@ -17,7 +17,11 @@ bash reports/market/build.sh
 | Web edition | `web.py` | `app/market/report/generated/` (committed) |
 | PDF | `pdf.mjs` | `public/reports/sf-market-briefing.pdf` (committed) |
 
-Sales come from `public/data/sf-listings.geojson`. National figures (rates,
+Sales come from `public/data/sf-listings.geojson`, after the owner's
+standing decisions (`data/sale-decisions.json`: sales under $100K and second
+copies of a duplicated sale) are applied by `scripts/apply-sale-decisions.mjs`
+on every data refresh. `review.py` lists those records (X1) and points out
+every sale over $25M (E8) each month. National figures (rates,
 Treasuries, CPI, unemployment, rents) are set at the top of `cover.py` and
 `cover3.py` and are updated by hand each month.
 

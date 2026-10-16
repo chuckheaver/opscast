@@ -4,19 +4,28 @@ each refresh:  python3 reports/market/review.py
 
 The owner's rule: every closed sale is a reportable sale — below-market-rate
 (BMR) units under $500K included, and reported square footage stands as
-given. The one exclusion is a sale with NO square footage reported: it can't
-have a $/sf, so it is left out of $/sf figures (the grids' Median $/SF and
-The 10s' Top $/sf) and of The 10s' Lowest 10 tables. It is still counted in
-sale counts and price medians.
+given. A sale with NO square footage reported can't have a $/sf, so it is
+left out of $/sf figures (the grids' Median $/SF and The 10s' Top $/sf) and
+of The 10s' Lowest 10 tables; it still counts in sale counts and medians.
+The only records taken out are the owner's standing decisions in
+data/sale-decisions.json — sales under $100K (parking, rentals, entry
+errors) and the second copy of a duplicated sale — which
+scripts/apply-sale-decisions.mjs removes on every data refresh and lists in
+data/removed-sales.csv. This review prints that list every month (X1).
+A sale over $25M is probably an entry error: it stays in, and is pointed
+out every month (E8). List prices are not reviewed for their own sake —
+the report uses sold data — only as a yardstick for the sale price (R4).
 
 So this script only FLAGS. It never edits, drops or excludes a sale and it
-changes none of the report's outputs; a finding is fixed (or let stand) at
-the source, in the MLS exports. It looks at this year to date (Jan 1 – the
-data date, mg.last_full_month()) and the same stretch last year:
+changes none of the report's outputs; a new finding goes to the owner, whose
+decision is recorded in data/sale-decisions.json. It looks at this year to
+date (Jan 1 – the data date, mg.last_full_month()) and the same stretch last
+year:
 
-  likely-error  E1–E7   duplicates, impossible prices and dates, sales in no grid
+  likely-error  E1–E8   duplicates, impossible prices and dates, sales in no grid, over $25M
   review        R1–R10  figures worth a second look before the report goes out
   notable       N1–N6   real sales the narrative may want to mention
+  left-out      X1      records the owner's decisions took out (data/removed-sales.csv)
 
 A check's second rule gets its own id where it reads differently (E1b, E5b,
 E7b, R1b, R9b); R1b, R9b and N5 are counts only, with no rows.
@@ -29,6 +38,11 @@ import bisect, csv, datetime, importlib.util, itertools, json, math, os, re, sta
 from collections import Counter, defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(HERE))
+DEC = json.load(open(os.path.join(ROOT, "data", "sale-decisions.json")))
+OVER = DEC.get("pointOut", {}).get("overPrice", 25_000_000)
+KEEP = [set(map(str, k["ids"])) for k in DEC.get("keep", [])]          # owner: real, separate sales
+decided = lambda *ids: any({str(i) for i in ids} <= k for k in KEEP)
 spec = importlib.util.spec_from_file_location("mg", os.path.join(HERE, "market-grid-v2.py"))
 mg = importlib.util.module_from_spec(spec); spec.loader.exec_module(mg)
 
@@ -44,17 +58,20 @@ TODAY = datetime.date.today()
 SFH, CONDO = mg.SEG["Single Family Residences"], mg.SEG["Condo / TIC / Other"]
 
 CHECKS = [  # id, title — in report order
-    ("E1", "duplicate-sale"), ("E1b", "conflicting-duplicate"), ("E2", "list-price-magnitude"),
+    ("E1", "duplicate-sale"), ("E1b", "conflicting-duplicate"),
     ("E3", "non-dwelling"), ("E4", "price-under-100k-or-digit-error"), ("E5", "segment-gap"),
     ("E5b", "neighborhood-in-no-area"), ("E6", "dates"), ("E7", "sfh-with-unit"), ("E7b", "typed-sfh-and-condo"),
+    ("E8", f"over-${OVER / 1e6:.0f}M (point out)"),
     ("R1", "big-sale-no-sqft"), ("R1b", "no-sqft (all, out/outliers.csv)"), ("R2", "ppsf-vs-neighborhood"),
     ("R3", "sqft-vs-bedrooms"), ("R4", "sale-to-list-extreme"), ("R5", "drives-a-printed-figure"),
     ("R6", "round-million-placeholder"), ("R7", "zero-bedrooms-1m"), ("R8", "location"), ("R9", "dom"),
     ("R9b", "closed-with-0-dom (count only)"), ("R10", "copied-record"),
     ("N1", "top-sales"), ("N2", "far-above-neighborhood"), ("N3", "new-neighborhood-high"), ("N4", "flips"),
-    ("N5", "bmr-looking (count only, valid sales)"), ("N6", "one-building-dominates")]
+    ("N5", "bmr-looking (count only, valid sales)"), ("N6", "one-building-dominates"),
+    ("X1", "left out by the owner's decisions")]
 TITLE = dict(CHECKS); ORDER = {c: i for i, (c, _) in enumerate(CHECKS)}
-SEV = {"E": "likely-error", "R": "review", "N": "notable"}; SEV_ORDER = {"likely-error": 0, "review": 1, "notable": 2}
+SEV = {"E": "likely-error", "R": "review", "N": "notable", "X": "left-out"}
+SEV_ORDER = {"likely-error": 0, "review": 1, "notable": 2, "left-out": 3}
 SKIP = {}            # check → the field it needed and the file lacks
 COUNTS = {}          # count-only checks → {year: n}
 
@@ -164,7 +181,7 @@ clusters = defaultdict(list)
 for x in S:
     if x["_i"] in linked: clusters[root(x["_i"])].append(x)
 for rs in clusters.values():
-    if len(rs) < 2 or not any(x["_win"] for x in rs): continue
+    if len(rs) < 2 or not any(x["_win"] for x in rs) or decided(*(r["id"] for r in rs)): continue
     o = min(rs, key=orig_first)
     for x in rs:
         if x is o: continue
@@ -182,19 +199,13 @@ for grp, what in [(by_key, "address")] + ([(by_apn, "APN")] if "apn" in HAS else
         for a, b in itertools.combinations(rs, 2):
             if P(a) == P(b) or gap(a, b) > 30 or not (a["_win"] or b["_win"]): continue
             if what == "APN" and not (a["_seg"] == b["_seg"] == "SFH"): continue
+            if decided(a["id"], b["id"]): continue
             pair = frozenset((a["_i"], b["_i"]))
             if pair in seen: continue
             seen.add(pair)
             o, x = sorted((a, b), key=orig_first)
             flag("E1b", x, f"same {what} as MLS {o['id']} ({o['address'].split(',')[0]}, {o.get('status')}, {o['sellingDate'][:10]}) {DAYS(gap(a, b))} apart "
                            f"at a different price: {M(P(x))} here vs {M(P(o))}", related=[o["id"]], year=x["_win"] or o["_win"])
-
-# E2 list-price-magnitude
-for x in W if need("E2", "listPrice") else []:      # no listPrice field at all: skipped, not every sale an error
-    lp, sp = x.get("listPrice"), P(x)
-    if not lp or lp <= 0: flag("E2", x, "no list price")
-    elif lp >= 100_000_000: flag("E2", x, f"list price {M(lp)} (≥ $100M)")
-    elif lp >= 5 * sp or sp / lp <= 0.15: flag("E2", x, f"list {M(lp)} is {lp / sp:.1f}× the sale price (sold at {100 * sp / lp:.0f}% of list)")
 
 # E3 non-dwelling: a parking space, storage locker or boat slip sold as a unit.
 NONDWELL = re.compile(r"^(P-?\d+|PKG\w*|PK\d*|PS\d*|PARK\w*|STOR\w*|STG\d*|SLIP\w*|BS\d+|BOAT\w*|GAR(?!DEN)\w*|SPACE\w*)$", re.I)  # a garden unit is a home
@@ -253,6 +264,12 @@ for rs in by_key.values():
         flag("E7b", x, f"typed {x.get('propType')} here, " + ", ".join(f"{r.get('propType')} on MLS {r['id']} ({r['sellingDate'][:10]})" for r in other),
              related=[r["id"] for r in other])
 
+# E8 over-$25M: probably an entry error (the owner's rule) — kept, and pointed out every month.
+for x in W:
+    if P(x) > OVER:
+        flag("E8", x, f"{M(P(x))} is over {M(OVER)}: probably an entry error — confirm the price"
+                      + (f" (${P(x) / x['sqft']:,.0f}/sf on {x['sqft']:,} sf)" if x.get("sqft") else " (no sqft)"))
+
 # R1 big-sale-no-sqft; R1b every no-sqft sale → out/outliers.csv (outliers.py's list, unchanged).
 if need("R1", "sqft"):
     for x in W:
@@ -305,11 +322,15 @@ if need("R3", "sqft", "bedrooms"):
         if q <= 0.45 or q >= 3.0:
             flag("R3", x, f"{x['sqft']:,} sf for {x['bedrooms']} bed is {q:.2f}× the city {x['_seg']} median of {m:,.0f} sf for {bed(x)}{'+' if bed(x) == 6 else ''} bed")
 
-# R4 sale-to-list-extreme (≤ 15% of list is E2's)
+# R4 sale-to-list-extreme: list price is only a yardstick for the sale price here (the report
+# uses sold data; list price feeds only The 10s' Overbids tables). Far over list tops an Overbids
+# table, as a mistyped list price would; far under list may be a mistyped sale price. Under 15%
+# of list is a list-price typo, which the owner ignores.
 for x in W if need("R4", "listPrice") else []:
     lp = x.get("listPrice")
-    if lp and lp > 0 and 0.15 < P(x) / lp and (P(x) / lp >= 1.90 or P(x) / lp <= 0.60):
-        flag("R4", x, f"sold at {100 * P(x) / lp:.0f}% of list ({M(lp)})")
+    if not (lp and lp > 0 and 0.15 < P(x) / lp): continue
+    if P(x) / lp >= 1.90: flag("R4", x, f"sold at {100 * P(x) / lp:.0f}% of list ({M(lp)}): tops an Overbids table — a mistyped list price would too")
+    elif P(x) / lp <= 0.60: flag("R4", x, f"sold at {100 * P(x) / lp:.0f}% of list ({M(lp)}): is the sale price right?")
 
 # R5 drives-a-printed-figure: the grid rows (fog neighborhood × segment) whose YTD median change
 # or YTD average hangs on one or two sales.
@@ -470,6 +491,20 @@ if need("N6", "fogNeighborhood"):
              related=[r["id"] for r in inb], year=y, key=nb_, address=inb[0]["address"].split(",")[0].split("#")[0].strip(), neighborhood=nb_,
              sfar=inb[0]["_sfar"], segment="Condo/TIC/Other", price=round(med(list(map(P, inb)))))
 
+# X1 left out by the owner's decisions (data/removed-sales.csv, written by scripts/apply-sale-decisions.mjs).
+REMOVED = []
+try:
+    with open(os.path.join(ROOT, "data", "removed-sales.csv"), newline="") as fh: REMOVED = list(csv.DictReader(fh))
+except FileNotFoundError: pass
+for r in REMOVED:
+    d = (r.get("sellingDate") or "")[:10]
+    y = next((yy for yy, (lo, hi) in WINDOWS.items() if lo <= d <= hi), int(d[:4]) if d[:4].isdigit() else None)
+    pt = r.get("propType") or ""
+    FIND[("X1", y, r["id"])] = dict(check="X1", severity="left-out", title=TITLE["X1"], year=y, id=r["id"], address=(r.get("address") or "").split(",")[0],
+        neighborhood=r.get("fogNeighborhood") or "", sfar="", segment="SFH" if pt in SFH else "Condo/TIC/Other" if pt in CONDO else "",
+        propType=pt, date=d, price=int(float(r["sellingPrice"])) if r.get("sellingPrice") else None, list=None, sqft=None, beds=None,
+        status=r.get("status") or "", why=r.get("reason") or "", related_ids=[])
+
 # ── out ─────────────────────────────────────────────────────────────────────
 findings = sorted(FIND.values(), key=lambda f: (SEV_ORDER[f["severity"]], ORDER[f["check"]], -(f["price"] or 0), -(f["year"] or 0), f["id"]))
 summary = []
@@ -494,8 +529,9 @@ def show(f):
     rel = f" (+ {' '.join(f['related_ids'])})" if f["related_ids"] else ""
     print(f"{f['check']:<4} {f['year']} | {f['segment'] or '—':<15} | {f['address']:<32} | {f['neighborhood']:<24} | {M(f['price']):>8} | list {M(f['list']):>8} | {f['date'] or '—'} | {f['status'] or '—'} | MLS {f['id'] or '—'}{rel}")
     print(f"     {f['propType'] or '—'}, SFAR {f['sfar'] or '—'}, {f['beds'] if f['beds'] is not None else '—'} bd, {f['sqft'] if f['sqft'] else '—'} sf — {f['why']}")
-for head, pick in (("LIKELY ERRORS", lambda f: f["severity"] == "likely-error"), ("TOP SALES (N1)", lambda f: f["check"] == "N1")):
+for head, pick in (("LIKELY ERRORS", lambda f: f["severity"] == "likely-error"), ("TOP SALES (N1)", lambda f: f["check"] == "N1"),
+                   ("LEFT OUT BY THE OWNER'S DECISIONS (X1, data/sale-decisions.json)", lambda f: f["check"] == "X1")):
     rs = [f for f in findings if pick(f)]
     print(f"\n{head} — {len(rs)}")
     for f in rs: show(f)
-print("\n→ reports/market/out/review.json, review.csv, outliers.csv  (flags only — no sale is changed or left out)")
+print("\n→ reports/market/out/review.json, review.csv, outliers.csv  (flags only — the only records left out are the owner's decisions, X1)")
