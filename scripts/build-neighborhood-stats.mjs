@@ -34,10 +34,15 @@ const TO = statsThrough(geo);                      // last day of the last full 
 const YEAR = TO.slice(0, 4);
 const FROM = `${YEAR}-01-01`;
 
+// A map area with no page of its own counts on its neighbor's page: SFAR
+// files both islands as one neighborhood (9t), and the site has a Treasure
+// Island page but none for Yerba Buena Island, where the islands' sales sit.
+const PAGE_FOR = { "Yerba Buena Island": "Treasure Island" };
+
 const byHood = new Map();
 for (const f of geo.features || []) {
   const p = f.properties || {};
-  const hood = p.fogNeighborhood;
+  const hood = PAGE_FOR[p.fogNeighborhood] || p.fogNeighborhood;
   if (!hood) continue;
   const price = Number(p.sellingPrice) || 0;
   if (price <= 0) continue;

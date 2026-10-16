@@ -16,7 +16,7 @@ the owner's corrections to a record (data/edited-sales.csv, X2). Closings
 after the reporting period end the owner confirmed (data/reporting-period.json)
 are held out of the file until the period moves (data/held-sales.geojson, E6).
 A sale over $25M is probably an entry error: it stays in, and is pointed
-out every month (E8). List prices are not reviewed for their own sake —
+out every month (E8) until the owner confirms it. List prices are not reviewed for their own sake —
 the report uses sold data — only as a yardstick for the sale price (R4).
 
 Bedrooms, bathrooms and unit details decide nothing (owner, Oct 16 2026): the
@@ -52,7 +52,7 @@ DEC = json.load(open(os.path.join(ROOT, "data", "sale-decisions.json")))
 OVER = DEC.get("pointOut", {}).get("overPrice", 25_000_000)
 KEEP = [set(map(str, k["ids"])) for k in DEC.get("keep", [])]          # owner: real, separate sales
 decided = lambda *ids: any({str(i) for i in ids} <= k for k in KEEP)
-CONFIRMED = {str(c["id"]) for c in DEC.get("confirmed", [])}          # owner checked the price: stop asking
+CONFIRMED = {str(c["id"]) for c in DEC.get("confirmed", [])}          # owner checked the price or type: stop asking
 spec = importlib.util.spec_from_file_location("mg", os.path.join(HERE, "market-grid-v2.py"))
 mg = importlib.util.module_from_spec(spec); spec.loader.exec_module(mg)
 
@@ -157,7 +157,7 @@ def flag(check, x, why, related=(), year=None, key=None, **fields):
                    price=x.get("sellingPrice"), list=x.get("listPrice"), sqft=x.get("sqft"), beds=x.get("bedrooms"), status=x.get("status") or "")
     else:
         row = dict(id="", address="", neighborhood="", sfar="", segment="", propType="", date="", price=None, list=None, sqft=None, beds=None, status="")
-    if check in ("E4", "R4") and row["id"] in CONFIRMED: return
+    if check in ("E4", "E7b", "E7c", "E8", "R2", "R4") and row["id"] in CONFIRMED: return
     row.update(fields)
     y = year if year is not None else ((x["_win"] or (x["_d"].year if x.get("_d") else None)) if x is not None else None)
     k = (check, y, key or row["id"])

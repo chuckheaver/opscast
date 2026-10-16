@@ -1,5 +1,5 @@
 {
-  "_about": "The owner's standing decisions on sales records, applied to public/data/sf-listings.geojson by scripts/apply-sale-decisions.mjs on every data refresh (geocode-listings.mjs runs it after validation). Sales in \"confirmed\" are ones the owner checked: the review stops questioning their price. Records left out are listed in data/removed-sales.csv, corrected records in data/edited-sales.csv, and reports/market/review.py shows both every month. The reporting period end is data/reporting-period.json.",
+  "_about": "The owner's standing decisions on sales records, applied to public/data/sf-listings.geojson by scripts/apply-sale-decisions.mjs on every data refresh (geocode-listings.mjs runs it after validation). Sales in \"confirmed\" are ones the owner checked: the review stops questioning their price or type (E4, E7b, E7c, E8, R2, R4). \"remove\" takes out a record that is not a home sale. Records left out are listed in data/removed-sales.csv, corrected records in data/edited-sales.csv, and reports/market/review.py shows both every month. The reporting period end is data/reporting-period.json.",
   "minPrice": {
     "value": 100000,
     "reason": "Under $100K: parking, a rental or an entry error, not a home sale (owner, Oct 16 2026)."
@@ -119,6 +119,17 @@
       },
       "reason": "A condo in both 2025 and 2026 (owner, Oct 16 2026); the Mar 2025 sale was typed Single Family Residence.",
       "footnote": "117 Telegraph Hill Blvd’s Mar 2025 sale is counted as a condo; the MLS entry typed it single-family."
+    },
+    {
+      "id": "41118737",
+      "address": "661 Peralta Ave Unit 3",
+      "set": {
+        "propType": "Tenancy in Common"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "A TIC (owner, Oct 16 2026); the feed typed it Single Family Residence."
     }
   ],
   "confirmed": [
@@ -131,6 +142,73 @@
       "id": "424082575",
       "address": "3229 Jennings St",
       "note": "$265,000 is correct (owner, Oct 16 2026)."
+    },
+    {
+      "id": "426106137",
+      "address": "36 Meadow Dr #107",
+      "note": "$7,983,700 is correct (owner, Oct 16 2026)."
+    },
+    {
+      "id": "425027684",
+      "address": "1826 19th Ave #1",
+      "note": "$913,440 is correct (owner, Oct 16 2026)."
+    },
+    {
+      "id": "425027696",
+      "address": "1826 19th Ave #2",
+      "note": "$913,440 is correct (owner, Oct 16 2026)."
+    },
+    {
+      "id": "425006424",
+      "address": "1052-1056 Chestnut St",
+      "note": "$4,800,000 is correct; a separate sale from 1054 Chestnut St (owner, Oct 16 2026)."
+    },
+    {
+      "id": "424060716",
+      "address": "1054 Chestnut St",
+      "note": "$2,700,000 is correct; a separate sale from 1052-1056 Chestnut St (owner, Oct 16 2026)."
+    },
+    {
+      "id": "426116822",
+      "address": "2830 Pacific Ave",
+      "note": "$27,500,000 is correct (owner, Oct 16 2026)."
+    },
+    {
+      "id": "426129625",
+      "address": "2880 Vallejo St",
+      "note": "$26,500,000 is correct (owner, Oct 16 2026)."
+    },
+    {
+      "id": "425009178",
+      "address": "2990 Broadway St",
+      "note": "$26,500,000 is correct (owner, Oct 16 2026)."
+    },
+    {
+      "id": "424073976",
+      "address": "254-256 8th Ave",
+      "note": "A 2-unit residential building; the recorded type stands (owner, Oct 16 2026)."
+    },
+    {
+      "id": "81989925",
+      "address": "3535 Webster St #3533",
+      "note": "A 2-unit residential building; the recorded type stands (owner, Oct 16 2026)."
+    },
+    {
+      "id": "425074405",
+      "address": "1701-1711 Funston Ave #1703",
+      "note": "A 3-unit residential building; the recorded type stands (owner, Oct 16 2026)."
+    },
+    {
+      "id": "426131655",
+      "address": "2628 Lawton St",
+      "note": "A single-family home; the recorded type stands (owner, Oct 16 2026)."
+    }
+  ],
+  "remove": [
+    {
+      "id": "425037304",
+      "address": "870 North Point St #A",
+      "reason": "A commercial condo, not a home sale (owner, Oct 16 2026)."
     }
   ]
 }

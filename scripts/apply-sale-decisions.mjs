@@ -2,8 +2,9 @@
 // reporting period (data/reporting-period.json) to the sales file,
 // public/data/sf-listings.geojson, so no map, stat or report goes past them:
 //
-//  - Sales under the price floor (parking, rentals, entry errors) and the
-//    second copy of a duplicated sale are taken out, and written to
+//  - Sales under the price floor (parking, rentals, entry errors), the
+//    second copy of a duplicated sale, and records the owner says are not a
+//    home sale ("remove") are taken out, and written to
 //    data/removed-sales.csv with their reason.
 //  - Corrections the owner made to a record (a sale price, a property type,
 //    square footage) are set on it, and written to data/edited-sales.csv.
@@ -34,6 +35,7 @@ const geo = JSON.parse(readFileSync(LISTINGS, "utf8"));
 const floor = dec.minPrice?.value ?? 0;
 const dupes = new Map((dec.duplicates?.drop || []).map(d => [String(d.id), d]));
 const kept = new Set((dec.keep || []).flatMap(k => k.ids.map(String)));
+const dropped = new Map((dec.remove || []).map(d => [String(d.id), d]));   // not a home sale (owner)
 const edits = new Map((dec.edits || []).map(e => [String(e.id), e]));
 
 // Held closings rejoin the file first; the period end then decides again.
@@ -76,6 +78,7 @@ for (const f of geo.features) {
   }
   let why = null;
   if (kept.has(id)) why = null;
+  else if (dropped.has(id)) why = dropped.get(id).reason;
   else if (dupes.has(id)) why = `duplicate of MLS ${dupes.get(id).keep}: ${dupes.get(id).reason || dec.duplicates.reason}`;
   else if (Number(p.sellingPrice) > 0 && Number(p.sellingPrice) < floor) why = dec.minPrice.reason;
   if (why) removed.push([id, p.address, p.propType, p.status, String(p.sellingDate || "").slice(0, 10), p.sellingPrice, p.fogNeighborhood, why]);

@@ -21,6 +21,12 @@ and show the owner every likely-error and notable finding — duplicates, typos,
 big sales, new neighborhood highs, flips, and the records left out (X1) —
 before pushing.
 The owner's rules:
+- The current year runs Jan 1 through the period end the owner gives. A
+  comparison with last year uses the same stretch of last year (YTD vs YTD
+  through the same date, the month vs the same month). Where last year is
+  shown as a year — its totals, its monthly or weekly activity — show all of
+  it, labeled as the full year. The 10s is the current year only ("The 10s of
+  2026"), with no prior-year columns.
 - Every closed sale counts (BMR units included) and reported square footage
   stands. A sale with no square footage is left out of $/sf figures only.
 - A sale under $100K is parking, a rental or an entry error: it is left out.

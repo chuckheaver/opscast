@@ -952,10 +952,11 @@ def build():
 
     cost_end=len(o)
     # ── PAGE 5 — the neighborhoods ───────────────────────────────────────
-    # The 10s: twelve Top 10s, four across in three rows, in the owner's
-    # order — row 1 SFH (neighborhoods, sales, $/sf, overbids), row 2 the same
-    # for Condo/TIC/Other, row 3 the lows and the busiest neighborhoods.
-    Y1=S["y1"]; Y0=S["y0"]; SFHs=mg.SEG[SF]; COs=mg.SEG[CO]
+    # The 10s of the current year: twelve Top 10s, four across in three rows,
+    # in the owner's order — row 1 SFH (neighborhoods, sales, $/sf, overbids),
+    # row 2 the same for Condo/TIC/Other, row 3 the lows and the busiest
+    # neighborhoods. This year only (owner, Oct 16 2026): no prior-year column.
+    Y1=S["y1"]; SFHs=mg.SEG[SF]; COs=mg.SEG[CO]
     ratio=lambda r: r["sellingPrice"]/r["listPrice"] if r.get("listPrice") else None
     def pol(r):
         return f"{100*ratio(r):.0f}%" if ratio(r) else "—"
@@ -975,21 +976,14 @@ def build():
         for r in rows:
             if nbk(r) and (seg is None or r["propType"] in seg): out[nbk(r)].append(r)
         return out
-    def yoy(v1,v0):
-        return (f"{D(v1,v0):+.0f}%", UP if v1>=v0 else DOWN) if v0 else ("—",MUTED)
     def nb_median_rows(seg, low=False):
         """Neighborhoods by median sale price in one segment, with this year's
-        sales and the change from the same stretch last year."""
-        now,prior=bynb(Y1,seg),bynb(Y0,seg)
+        sales."""
+        now=bynb(Y1,seg)
         rk=sorted([(a,statistics.median(r["sellingPrice"] for r in rs),len(rs)) for a,rs in now.items() if rs],
                   key=lambda t:(t[1] if low else -t[1]))[:10]
-        out=""
-        for i,(a,m,n) in enumerate(rk):
-            p0=statistics.median(r["sellingPrice"] for r in prior[a]) if prior.get(a) else None
-            d,dc=yoy(m,p0)
-            out+=(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(n)}</td><td class='b'>{M(m)}</td><td>{n}</td>"
-                  f"<td style='color:{dc};font-weight:700'>{d}</td></tr>")
-        return out
+        return "".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(n)}</td><td class='b'>{M(m)}</td><td>{n}</td></tr>"
+                       for i,(a,m,n) in enumerate(rk))
     def ppsf_sales_rows(seg):
         """The ten individual sales with the highest price per square foot in
         one segment — every sale with square footage reported (the owner's
@@ -1001,14 +995,9 @@ def build():
                        f"<td class='b'>${psf(r):,.0f}</td><td>{M(r['sellingPrice'])}</td></tr>" for i,r in enumerate(top))
     def nb_count_rows():
         """Neighborhoods by number of sales, every property type."""
-        now,prior=bynb(Y1),bynb(Y0)
-        rk=sorted(now.items(),key=lambda kv:-len(kv[1]))[:10]
-        out=""
-        for i,(a,rs) in enumerate(rk):
-            d,dc=yoy(len(rs),len(prior.get(a,[])))
-            out+=(f"<tr><td class='l'>{i+1}. {html.escape(a)}</td><td class='b'>{len(rs):,}</td>"
-                  f"<td>{M(statistics.median(r['sellingPrice'] for r in rs))}</td><td style='color:{dc};font-weight:700'>{d}</td></tr>")
-        return out
+        rk=sorted(bynb(Y1).items(),key=lambda kv:-len(kv[1]))[:10]
+        return "".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}</td><td class='b'>{len(rs):,}</td>"
+                       f"<td>{M(statistics.median(r['sellingPrice'] for r in rs))}</td></tr>" for i,(a,rs) in enumerate(rk))
     seg_sales=lambda seg: [r for r in Y1 if r["propType"] in seg]
     top_sales=lambda seg: sorted(seg_sales(seg),key=lambda r:-r["sellingPrice"])[:10]
     # Every sale is a reportable sale, below-market-rate (BMR) units included;
@@ -1017,11 +1006,11 @@ def build():
     low_sales=lambda seg: sorted([r for r in seg_sales(seg) if r.get("sqft")],key=lambda r:r["sellingPrice"])[:10]
     # Biggest overbids by sale-to-list, every sale with a list price.
     overbids=lambda seg: sorted([r for r in seg_sales(seg) if ratio(r)],key=lambda r:-ratio(r))[:10]
-    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The 10s</div>
+    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The 10s of {datetime.date.fromisoformat(W['m1'][1]).year}</div>
       <div class='p'>Year to date: Jan 1 – {datetime.date.fromisoformat(W['m1'][1]).strftime('%b %-d, %Y')}</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties</div></div>""")
     TH=lambda *cols: "<tr>"+"".join(f"<th class='l'>{c[1:]}</th>" if c.startswith("<") else f"<th>{c}</th>" for c in cols)+"</tr>"
-    NB=TH("<Neighborhood","Median","Sales","vs "+py)
+    NB=TH("<Neighborhood","Median","Sales")
     SALE=TH("<Address","Closed","% list")
     PSF=TH("<Address","$/sf","Closed")
     panel=lambda title,head,rows: f"<h2>{title}</h2><table class='top'>{head}{rows}</table>"
@@ -1031,13 +1020,13 @@ def build():
         [("Top 10 SFH",SALE,sales_rows(top_sales(SFHs))), (f"Top 10 {COT}",SALE,sales_rows(top_sales(COs))), ("Lowest 10 SFH",SALE,sales_rows(low_sales(SFHs)))],
         [("Top $/sf SFH",PSF,ppsf_sales_rows(SFHs)), (f"Top $/sf {COT}",PSF,ppsf_sales_rows(COs)), (f"Lowest 10 {COT}",SALE,sales_rows(low_sales(COs)))],
         [("Overbids - SFH",SALE,sales_rows(overbids(SFHs))), (f"Overbids - {COT}",SALE,sales_rows(overbids(COs))),
-         ("Top # Units Sold (All)",TH("<Neighborhood","Sales","Median","vs "+py),nb_count_rows())],
+         ("Top # Units Sold (All)",TH("<Neighborhood","Sales","Median"),nb_count_rows())],
     ]
     o.append("<div class='cols nb4 nb12'>")
     for col in cols:
         o.append("<div class='col'>"+"".join(panel(*p) for p in col)+"</div>")
     o.append("</div>")
-    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS); vs {py} = same stretch last year. * fewer than 10 sales. Every sale counts, BMR units included; sales under $100K (parking, rentals, entry errors) and duplicate entries left out. Top $/sf and Lowest 10 leave out sales with no sq ft reported.</span><span>page 5 / 9</span></div></div>")
+    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS), this year only. * fewer than 10 sales. Every sale counts, BMR units included; sales under $100K (parking, rentals, entry errors) and duplicate entries left out. Top $/sf and Lowest 10 leave out sales with no sq ft reported.</span><span>page 5 / 9</span></div></div>")
 
     # ── PAGE 6 — in depth ────────────────────────────────────────────────
     # Everything a reader can skip. The narrative pages stay light because
