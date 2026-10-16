@@ -11,7 +11,10 @@ The only records taken out are the owner's standing decisions in
 data/sale-decisions.json — sales under $100K (parking, rentals, entry
 errors) and the second copy of a duplicated sale — which
 scripts/apply-sale-decisions.mjs removes on every data refresh and lists in
-data/removed-sales.csv. This review prints that list every month (X1).
+data/removed-sales.csv. This review prints that list every month (X1), and
+the owner's corrections to a record (data/edited-sales.csv, X2). Closings
+after the reporting period end the owner confirmed (data/reporting-period.json)
+are held out of the file until the period moves (data/held-sales.geojson, E6).
 A sale over $25M is probably an entry error: it stays in, and is pointed
 out every month (E8). List prices are not reviewed for their own sake —
 the report uses sold data — only as a yardstick for the sale price (R4).
@@ -25,7 +28,7 @@ year:
   likely-error  E1–E8   duplicates, impossible prices and dates, sales in no grid, over $25M
   review        R1–R10  figures worth a second look before the report goes out
   notable       N1–N6   real sales the narrative may want to mention
-  left-out      X1      records the owner's decisions took out (data/removed-sales.csv)
+  owner-decision X1–X2   records the owner's decisions took out or corrected
 
 A check's second rule gets its own id where it reads differently (E1b, E5b,
 E7b, R1b, R9b); R1b, R9b and N5 are counts only, with no rows.
@@ -61,6 +64,7 @@ CHECKS = [  # id, title — in report order
     ("E1", "duplicate-sale"), ("E1b", "conflicting-duplicate"),
     ("E3", "non-dwelling"), ("E4", "price-under-100k-or-digit-error"), ("E5", "segment-gap"),
     ("E5b", "neighborhood-in-no-area"), ("E6", "dates"), ("E7", "sfh-with-unit"), ("E7b", "typed-sfh-and-condo"),
+    ("E7c", "sfh-in-a-condo-building"),
     ("E8", f"over-${OVER / 1e6:.0f}M (point out)"),
     ("R1", "big-sale-no-sqft"), ("R1b", "no-sqft (all, out/outliers.csv)"), ("R2", "ppsf-vs-neighborhood"),
     ("R3", "sqft-vs-bedrooms"), ("R4", "sale-to-list-extreme"), ("R5", "drives-a-printed-figure"),
@@ -68,10 +72,10 @@ CHECKS = [  # id, title — in report order
     ("R9b", "closed-with-0-dom (count only)"), ("R10", "copied-record"),
     ("N1", "top-sales"), ("N2", "far-above-neighborhood"), ("N3", "new-neighborhood-high"), ("N4", "flips"),
     ("N5", "bmr-looking (count only, valid sales)"), ("N6", "one-building-dominates"),
-    ("X1", "left out by the owner's decisions")]
+    ("X1", "left out by the owner's decisions"), ("X2", "corrected by the owner")]
 TITLE = dict(CHECKS); ORDER = {c: i for i, (c, _) in enumerate(CHECKS)}
-SEV = {"E": "likely-error", "R": "review", "N": "notable", "X": "left-out"}
-SEV_ORDER = {"likely-error": 0, "review": 1, "notable": 2, "left-out": 3}
+SEV = {"E": "likely-error", "R": "review", "N": "notable", "X": "owner-decision"}
+SEV_ORDER = {"likely-error": 0, "review": 1, "notable": 2, "owner-decision": 3}
 SKIP = {}            # check → the field it needed and the file lacks
 COUNTS = {}          # count-only checks → {year: n}
 
@@ -246,10 +250,15 @@ for x in W:
         flag("E6", x, f"contract date {x['contractDate'][:10]} after the closing {x['sellingDate'][:10]}")
     if "listDate" in HAS and x.get("listDate") and x["listDate"][:10] > x["sellingDate"][:10]:
         flag("E6", x, f"list date {x['listDate'][:10]} after the closing {x['sellingDate'][:10]}")
-for x in S:
+HELD = []
+try: HELD = [f["properties"] for f in json.load(open(os.path.join(ROOT, "data", "held-sales.geojson")))["features"]]
+except FileNotFoundError: pass
+for x in S + [dict(h, _win=None, _d=day(h.get("sellingDate")), _sfar=mg.FIX.get(h.get("neighborhood") or "", h.get("neighborhood") or ""),
+                   _seg="SFH" if h.get("propType") in SFH else "Condo/TIC/Other" if h.get("propType") in CONDO else "") for h in HELD]:
+    if not x["_d"]: continue
     if x["_d"] > TODAY: flag("E6", x, f"closing date {x['_d']} is in the future (today {TODAY})", year=x["_d"].year)
-    elif x["_d"] > THRU and x["_d"].year == TY:
-        flag("E6", x, f"closed {x['_d']}, after the data date {THRU}: in the file but in no window until the next refresh", year=TY)
+    elif x["_d"] > THRU:
+        flag("E6", x, f"closed {x['_d']}, after the reporting period end {THRU}: held out of every statistic until the period moves", year=x["_d"].year)
 
 # E7 sfh-with-unit, and E7b one address typed both single-family and condo.
 for x in W:
@@ -263,6 +272,16 @@ for rs in by_key.values():
         other = [r for r in rs if r["_seg"] and r["_seg"] != x["_seg"]]
         flag("E7b", x, f"typed {x.get('propType')} here, " + ", ".join(f"{r.get('propType')} on MLS {r['id']} ({r['sellingDate'][:10]})" for r in other),
              related=[r["id"] for r in other])
+
+# E7c sfh-in-a-condo-building: typed single-family where the building's other sales are condos
+# (1483 Sutter St #517, Oct 2026: the 2025 history feed's type, not the MLS's).
+for rs in by_bldg.values():
+    co = [r for r in rs if r["_seg"] == "Condo/TIC/Other"]
+    if not co: continue
+    for x in rs:
+        if x["_seg"] == "SFH":
+            flag("E7c", x, f"typed {x.get('propType')} in a building with {len(co)} Condo/TIC/Other sale(s): "
+                           + ", ".join(f"{r['address'].split(',')[0]} ({r.get('propType')})" for r in co[:3]), related=[r["id"] for r in co])
 
 # E8 over-$25M: probably an entry error (the owner's rule) — kept, and pointed out every month.
 for x in W:
@@ -500,10 +519,20 @@ for r in REMOVED:
     d = (r.get("sellingDate") or "")[:10]
     y = next((yy for yy, (lo, hi) in WINDOWS.items() if lo <= d <= hi), int(d[:4]) if d[:4].isdigit() else None)
     pt = r.get("propType") or ""
-    FIND[("X1", y, r["id"])] = dict(check="X1", severity="left-out", title=TITLE["X1"], year=y, id=r["id"], address=(r.get("address") or "").split(",")[0],
+    FIND[("X1", y, r["id"])] = dict(check="X1", severity="owner-decision", title=TITLE["X1"], year=y, id=r["id"], address=(r.get("address") or "").split(",")[0],
         neighborhood=r.get("fogNeighborhood") or "", sfar="", segment="SFH" if pt in SFH else "Condo/TIC/Other" if pt in CONDO else "",
         propType=pt, date=d, price=int(float(r["sellingPrice"])) if r.get("sellingPrice") else None, list=None, sqft=None, beds=None,
         status=r.get("status") or "", why=r.get("reason") or "", related_ids=[])
+
+# X2 corrected by the owner (data/edited-sales.csv): the sale as the stats now count it.
+try:
+    with open(os.path.join(ROOT, "data", "edited-sales.csv"), newline="") as fh: EDITS = list(csv.DictReader(fh))
+except FileNotFoundError: EDITS = []
+byid = {str(x.get("id")): x for x in S}
+for e in EDITS:
+    x = byid.get(e["id"])
+    if x is None: continue
+    flag("X2", x, f"{e['field']}: {e['from'] or '(none)'} → {e['to']} — {e['reason']}", year=x["_win"] or x["_d"].year)
 
 # ── out ─────────────────────────────────────────────────────────────────────
 findings = sorted(FIND.values(), key=lambda f: (SEV_ORDER[f["severity"]], ORDER[f["check"]], -(f["price"] or 0), -(f["year"] or 0), f["id"]))
@@ -530,7 +559,8 @@ def show(f):
     print(f"{f['check']:<4} {f['year']} | {f['segment'] or '—':<15} | {f['address']:<32} | {f['neighborhood']:<24} | {M(f['price']):>8} | list {M(f['list']):>8} | {f['date'] or '—'} | {f['status'] or '—'} | MLS {f['id'] or '—'}{rel}")
     print(f"     {f['propType'] or '—'}, SFAR {f['sfar'] or '—'}, {f['beds'] if f['beds'] is not None else '—'} bd, {f['sqft'] if f['sqft'] else '—'} sf — {f['why']}")
 for head, pick in (("LIKELY ERRORS", lambda f: f["severity"] == "likely-error"), ("TOP SALES (N1)", lambda f: f["check"] == "N1"),
-                   ("LEFT OUT BY THE OWNER'S DECISIONS (X1, data/sale-decisions.json)", lambda f: f["check"] == "X1")):
+                   ("LEFT OUT BY THE OWNER'S DECISIONS (X1, data/sale-decisions.json)", lambda f: f["check"] == "X1"),
+                   ("CORRECTED BY THE OWNER (X2, data/sale-decisions.json)", lambda f: f["check"] == "X2")):
     rs = [f for f in findings if pick(f)]
     print(f"\n{head} — {len(rs)}")
     for f in rs: show(f)

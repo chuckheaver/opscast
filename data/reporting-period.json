@@ -1,0 +1,5 @@
+{
+  "_about": "The reporting period end: the last closing date any published statistic counts (site, map counts, monthly report). Closings after it are held out of public/data/sf-listings.geojson (data/held-sales.geojson) until the period moves. The owner confirms this date before every rebuild; it is never inferred.",
+  "periodEnd": "2026-09-30",
+  "confirmedByOwner": "2026-10-16"
+}

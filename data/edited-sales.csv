@@ -1,0 +1,4 @@
+id,address,field,from,to,reason
+"82018546","1483 Sutter St #517, San Francisco, CA 94109","propType","Single Family Residence","Condominium","A condo, and typed Condominium in the MLS (owner, Oct 16 2026); the 2025 history feed had Single Family Residence."
+"424073940","117 Telegraph Hill Blvd, San Francisco, CA 94133","propType","Single Family Residence","Condominium","A condo in both 2025 and 2026 (owner, Oct 16 2026); the Mar 2025 sale was typed Single Family Residence."
+"425022869","4033 25th St, San Francisco, CA 94114","sqft","","1195","Square footage from the duplicate entry of the same sale (MLS 425037665, 4035 25th St), which reported 1,195 sf (owner, Oct 16 2026)."

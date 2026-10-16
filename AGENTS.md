@@ -6,6 +6,13 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # Market report: the monthly data review
 
+Before every rebuild, ask the owner what the reporting period end date
+should be, and set it in `data/reporting-period.json` (`periodEnd`, and the
+day they confirmed it in `confirmedByOwner`). Never infer it from the data.
+No closing after that date goes into any statistic — site, map counts or
+report: `scripts/apply-sale-decisions.mjs` holds them out of the sales file
+(`data/held-sales.geojson`) until the period moves.
+
 Every time the market report is rebuilt (`bash reports/market/build.sh`), read
 the output of `reports/market/review.py` (also `reports/market/out/review.csv`)
 and show the owner every likely-error and notable finding — duplicates, typos,
@@ -22,4 +29,9 @@ The owner's rules:
   feeds the Overbids tables).
 - Never drop or edit a sale without the owner's decision. Decisions live in
   `data/sale-decisions.json`; `scripts/apply-sale-decisions.mjs` applies them
-  on every data refresh and lists what it took out in `data/removed-sales.csv`.
+  on every data refresh and lists what it took out in `data/removed-sales.csv`
+  and what it corrected in `data/edited-sales.csv`. A correction the owner
+  asks to footnote carries a `footnote`, printed on the grid pages it touches.
+- Before applying a correction, check the record against its neighbors (same
+  address, APN, agents, dates): the sale the owner means may be a different
+  listing already in the data.

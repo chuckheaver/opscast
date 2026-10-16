@@ -1,5 +1,5 @@
 {
-  "_about": "The owner's standing decisions on sales records, applied to public/data/sf-listings.geojson by scripts/apply-sale-decisions.mjs on every data refresh (geocode-listings.mjs runs it after validation). Records left out are listed in data/removed-sales.csv, and reports/market/review.py shows them every month.",
+  "_about": "The owner's standing decisions on sales records, applied to public/data/sf-listings.geojson by scripts/apply-sale-decisions.mjs on every data refresh (geocode-listings.mjs runs it after validation). Records left out are listed in data/removed-sales.csv, corrected records in data/edited-sales.csv, and reports/market/review.py shows both every month. The reporting period end is data/reporting-period.json.",
   "minPrice": {
     "value": 100000,
     "reason": "Under $100K: parking, a rental or an entry error, not a home sale (owner, Oct 16 2026)."
@@ -7,23 +7,106 @@
   "duplicates": {
     "reason": "The same sale entered twice; counted once, keeping the Closed record (owner, Oct 16 2026).",
     "drop": [
-      { "id": "426110049", "keep": "82049715",  "address": "653 Dolores St" },
-      { "id": "426134008", "keep": "426129864", "address": "46 Wilmot St / 46-48 S Wilmot St" },
-      { "id": "426137311", "keep": "426145173", "address": "1775 47th Ave" },
-      { "id": "426100963", "keep": "426095970", "address": "1060 Noe St #1060 / #1060A" },
-      { "id": "425007873", "keep": "425007956", "address": "3131 Pierce St #303" },
-      { "id": "425062286", "keep": "425061312", "address": "1925 / 1953 Filbert St" },
-      { "id": "425037665", "keep": "425022869", "address": "4033 / 4035 25th St" },
-      { "id": "425037063", "keep": "82005204",  "address": "112 Galewood Cir" },
-      { "id": "425049943", "keep": "41102102",  "address": "2 Gloria Ct" },
-      { "id": "425010698", "keep": "41092411",  "address": "2985 Mission St #302" }
+      {
+        "id": "426110049",
+        "keep": "82049715",
+        "address": "653 Dolores St"
+      },
+      {
+        "id": "426134008",
+        "keep": "426129864",
+        "address": "46 Wilmot St / 46-48 S Wilmot St"
+      },
+      {
+        "id": "426137311",
+        "keep": "426145173",
+        "address": "1775 47th Ave"
+      },
+      {
+        "id": "426100963",
+        "keep": "426095970",
+        "address": "1060 Noe St #1060 / #1060A"
+      },
+      {
+        "id": "425007873",
+        "keep": "425007956",
+        "address": "3131 Pierce St #303"
+      },
+      {
+        "id": "425062286",
+        "keep": "425061312",
+        "address": "1925 / 1953 Filbert St"
+      },
+      {
+        "id": "425037665",
+        "keep": "425022869",
+        "address": "4033 / 4035 25th St"
+      },
+      {
+        "id": "425037063",
+        "keep": "82005204",
+        "address": "112 Galewood Cir"
+      },
+      {
+        "id": "425049943",
+        "keep": "41102102",
+        "address": "2 Gloria Ct"
+      },
+      {
+        "id": "425010698",
+        "keep": "41092411",
+        "address": "2985 Mission St #302"
+      }
     ]
   },
   "keep": [
-    { "ids": ["426141574", "41137523"], "address": "115 Navajo Ave", "note": "A quick flip: two real sales, both count (owner, Oct 16 2026)." }
+    {
+      "ids": [
+        "426141574",
+        "41137523"
+      ],
+      "address": "115 Navajo Ave",
+      "note": "A quick flip: two real sales, both count (owner, Oct 16 2026)."
+    }
   ],
   "pointOut": {
     "overPrice": 25000000,
     "note": "Over $25M is probably an entry error: kept, but always pointed out in the monthly review (owner, Oct 16 2026)."
-  }
+  },
+  "edits": [
+    {
+      "id": "425022869",
+      "address": "4033 25th St",
+      "set": {
+        "sqft": 1195
+      },
+      "from": {
+        "sqft": null
+      },
+      "reason": "Square footage from the duplicate entry of the same sale (MLS 425037665, 4035 25th St), which reported 1,195 sf (owner, Oct 16 2026)."
+    },
+    {
+      "id": "82018546",
+      "address": "1483 Sutter St #517",
+      "set": {
+        "propType": "Condominium"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "A condo, and typed Condominium in the MLS (owner, Oct 16 2026); the 2025 history feed had Single Family Residence."
+    },
+    {
+      "id": "424073940",
+      "address": "117 Telegraph Hill Blvd",
+      "set": {
+        "propType": "Condominium"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "A condo in both 2025 and 2026 (owner, Oct 16 2026); the Mar 2025 sale was typed Single Family Residence.",
+      "footnote": "117 Telegraph Hill Blvd’s Mar 2025 sale is counted as a condo; the MLS entry typed it single-family."
+    }
+  ]
 }

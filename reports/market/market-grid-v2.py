@@ -48,8 +48,17 @@ AREAS={
  "Excelsior / Portola":["Excelsior","Portola","Crocker Amazon","Outer Mission","Mission Terrace"],
  "Bayview / Hunters Point":["Bayview","Bayview Heights","Hunters Point","Candlestick Point"],
  "Visitacion Vly / Silver Terr":["Visitacion Valley","Silver Terrace","Little Hollywood"],
+ "Treasure Island / YBI":["Treasure Island / Yerba Buena Island"],
 }
 N2A={n:a for a,ns in AREAS.items() for n in ns}
+# A report row is a fog-map neighborhood, under SFAR's name where the owner
+# reads it by that name: the islands' sales sit in the map's Yerba Buena
+# Island polygon, and SFAR files both islands as one neighborhood (9t).
+LABEL={"Yerba Buena Island":"Treasure Island / YBI","Treasure Island":"Treasure Island / YBI"}
+def hood(r):
+    n=r.get("fogNeighborhood")
+    return LABEL.get(n,n) if n else None
+PERIOD=os.path.join(ROOT,"data","reporting-period.json")
 SEG={"Single Family Residences":{"Single Family Residence","2 Houses on Lot","Halfplex"},
      # Every sale that is not a single-family house: two segments, nothing left over.
      "Condo / TIC / Other":{"Condominium","Tenancy in Common","Stock Cooperative","Co-Ownership","Townhouse","Other","3+ Houses on Lot"}}
@@ -91,16 +100,18 @@ def fog_codes(F):
     """Each of our neighborhoods' SFAR code: the one most of its sales carry."""
     c=defaultdict(lambda: defaultdict(int))
     for r in F:
-        if r.get("fogNeighborhood") and r.get("realtorNid"): c[r["fogNeighborhood"]][r["realtorNid"]]+=1
+        if hood(r) and r.get("realtorNid"): c[hood(r)][r["realtorNid"]]+=1
     return {n:max(v,key=v.get) for n,v in c.items()}
 
 
 def last_full_month(F=None):
-    """The report month, ending on the site's data date: the listings file's
-    metadata.statsThrough (scripts/stats-through.mjs); STATS_THROUGH
-    overrides it, as in the JS. Falls back to the month before the latest
-    sale only if neither is set."""
-    thru=os.environ.get("STATS_THROUGH") or json.load(open(SRC)).get("metadata",{}).get("statsThrough")
+    """The report month, ending on the reporting period end the owner
+    confirmed (data/reporting-period.json, as scripts/stats-through.mjs
+    reads it); STATS_THROUGH overrides it, as in the JS. Then the listings
+    file's metadata.statsThrough; the month before the latest sale only if
+    none is set."""
+    end=json.load(open(PERIOD)).get("periodEnd") if os.path.exists(PERIOD) else None
+    thru=os.environ.get("STATS_THROUGH") or end or json.load(open(SRC)).get("metadata",{}).get("statsThrough")
     if thru:
         mt=datetime.date.fromisoformat(thru[:10])
         return mt.replace(day=1), mt
@@ -142,10 +153,17 @@ def build(anchor=None):
         tot={k:stats(S[k]) for k in W}
         # Every neighborhood in our database (the fog map's neighborhoods) on
         # its own row, A–Z, with the SFAR code most of its sales carry.
-        hoods=sorted({r.get("fogNeighborhood") for k in W for r in S[k] if r.get("fogNeighborhood")}, key=str.lower)
-        byD=[(nm,CODE.get(nm,""),{k:stats([r for r in S[k] if r.get("fogNeighborhood")==nm]) for k in W}) for nm in hoods]
+        hoods=sorted({hood(r) for k in W for r in S[k] if hood(r)}, key=str.lower)
+        byD=[(nm,CODE.get(nm,""),{k:stats([r for r in S[k] if hood(r)==nm]) for k in W}) for nm in hoods]
         byD=[h for h in byD if sum(h[2][k]["n"] for k in W)]
-        pages.append((seg,byA,tot,byZ,byD))
+        # The owner's footnoted corrections (data/sale-decisions.json): a row
+        # that counts one, or lost it to the other segment, carries a dagger.
+        notes={}
+        for r in F:
+            if not r.get("ownerFootnote") or not any(inw(r,w) for w in W.values()): continue
+            was=(r.get("ownerEdits") or {}).get("propType",{}).get("from")
+            if r.get("propType") in types or was in types: notes.setdefault(hood(r),[]).append(r["ownerFootnote"])
+        pages.append((seg,byA,tot,byZ,byD,notes))
     return pages,plabel,labels,W
 
 def micro_page(pages,plabel,labels,W,head,cells,groups,run_date):
@@ -154,7 +172,7 @@ def micro_page(pages,plabel,labels,W,head,cells,groups,run_date):
     import micro
     F=[f["properties"] for f in json.load(open(SRC))["features"]]
     title={"Single Family Residences":"SFH","Condo / TIC / Other":"Condo/TIC/Other"}
-    zone_rows=[(title[seg],byZ,tot) for seg,byA,tot,byZ,byD in pages]
+    zone_rows=[(title[seg],byZ,tot) for seg,byA,tot,byZ,byD,*_ in pages]
     return micro.pages(F=F,W=W,plabel=plabel,mg=sys.modules[__name__],head=head,cells=cells,groups=groups,zone_rows=zone_rows)
 
 def render(pages,plabel,labels,W,run_date):
@@ -235,7 +253,7 @@ def render(pages,plabel,labels,W,run_date):
         return h+"</tr></thead>"
     out=[f"<!doctype html><html><head><meta charset='utf-8'><style>{css}</style></head><body>"]
     ROWS=47                                   # table rows per page
-    for seg,byA,tot,byZ,byD in pages:
+    for seg,byA,tot,byZ,byD,notes in pages:
         title={"Single Family Residences":"SFH","Condo / TIC / Other":"Condo/TIC/Other"}[seg]
         items=[("h",nm,nid,st) for nm,nid,st in byD]
         per=-(-len(items)//(-(-len(items)//ROWS)))        # even split across pages
@@ -247,12 +265,15 @@ def render(pages,plabel,labels,W,run_date):
                        f"<div class='s'>Closed sales, SFAR MLS &nbsp;\u00b7&nbsp; run {run_date.strftime('%b %-d, %Y')}</div></div></div>")
             out.append("<table class='mgrid'>"+head()+"<tbody>")
             for _,nm,nid,st in chunk:
-                out.append(f"<tr><td class='name'>{html.escape(nm)} <span class='code'>{html.escape(nid)}</span></td>"+"".join(cells(st,kind,key) for _,_,kind,key in groups)+"</tr>")
+                dag="\u2020" if nm in notes else ""
+                out.append(f"<tr><td class='name'>{html.escape(nm)}{dag} <span class='code'>{html.escape(nid)}</span></td>"+"".join(cells(st,kind,key) for _,_,kind,key in groups)+"</tr>")
             out.append("</tbody>")
             if ci==len(chunks)-1:
                 out.append("<tfoot><tr><td class='name'>All San Francisco (pooled)</td>"+"".join(cells(tot,kind,key) for _,_,kind,key in groups)+"</tr></tfoot>")
             out.append("</table>")
-            out.append(f"<div class='foot'><span>SFAR MLS via BrokerMetrics, closed sales (Closed + Sold Off MLS) through {W['m1'][1]}, BMR units included; under $100K (parking, rentals, entry errors) and duplicates left out. Median $/SF leaves out sales with no sq ft. Deemed reliable, not guaranteed.</span>"
+            here=[(nm,t) for _,nm,_,_ in chunk for t in notes.get(nm,[])]
+            fn="".join(f"<br>\u2020 {html.escape(nm)}: {html.escape(t)}" for nm,t in here)
+            out.append(f"<div class='foot'><span>SFAR MLS via BrokerMetrics, closed sales (Closed + Sold Off MLS) through {W['m1'][1]}, BMR units included; under $100K (parking, rentals, entry errors) and duplicates left out. Median $/SF leaves out sales with no sq ft. Deemed reliable, not guaranteed.{fn}</span>"
                        f"<span>Chuck Heaver \u00b7 Vanguard Properties \u00b7 page 0 / 0</span></div></div>")
     out.append(micro_page(pages,plabel,labels,W,head,cells,groups,run_date))
     out.append("</body></html>")
@@ -264,5 +285,5 @@ if __name__=="__main__":
     pages,plabel,labels,W=build()
     open(os.path.join(HERE,"out","market-grid-v2.html"),"w").write(render(pages,plabel,labels,W,run))
     print("windows:",W)
-    for seg,byA,tot,byZ,byD in pages:
+    for seg,byA,tot,byZ,byD,*_ in pages:
         print(f"{seg}: {len(byD)} neighborhoods | month {tot['m1']['n']} vs {tot['m0']['n']} | ytd {tot['y1']['n']} vs {tot['y0']['n']}")

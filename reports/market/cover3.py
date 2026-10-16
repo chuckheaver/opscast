@@ -594,7 +594,7 @@ def by_numbers(rows, thru):
     for r in rows:
         if zip_of(r): zv[zip_of(r)]+=r["sellingPrice"]
     zip_,zipv=zv.most_common(1)[0]
-    zhoods=[h for h,_ in collections.Counter(r.get("fogNeighborhood") for r in rows if zip_of(r)==zip_ and r.get("fogNeighborhood")).most_common(3)]
+    zhoods=[h for h,_ in collections.Counter(mg.hood(r) for r in rows if zip_of(r)==zip_ and mg.hood(r)).most_common(3)]
     off=sum(1 for r in rows if r.get("status")=="Sold Off MLS")
     # Ground incline at each sale (scripts/build-sale-incline.mjs).
     import os
@@ -681,7 +681,7 @@ def _money_by_hood(rows):
     import collections
     out=collections.Counter()
     for r in rows:
-        a=r.get("fogNeighborhood")
+        a=mg.hood(r)
         if a: out[a]+=r["sellingPrice"]
     return out
 
@@ -879,7 +879,7 @@ def build():
       <div class='cap'>More Condo/TIC/Other units change hands than SFH, yet SFH bring in more money.</div></div>""")
     o.append(f"""<div class='col' style='flex:1.1'><h2>Allocation by Neighborhood</h2>
       {hood_bars(hrank,mtot,w=380,h=470,top=20)}
-      <div class='cap'>Top twenty by dollars closed. <span class='st'>{hrank[0][0]}</span> alone took <span class='st'>${hrank[0][1]/1e6:,.0f}M</span> — <span class='st'>{100*hrank[0][1]/mtot:.0f}%</span> of the city — on {100*len([r for r in S['y1'] if r.get('fogNeighborhood')==hrank[0][0]])/mn:.0f}% of its sales.</div></div>""")
+      <div class='cap'>Top twenty by dollars closed. <span class='st'>{hrank[0][0]}</span> alone took <span class='st'>${hrank[0][1]/1e6:,.0f}M</span> — <span class='st'>{100*hrank[0][1]/mtot:.0f}%</span> of the city — on {100*len([r for r in S['y1'] if mg.hood(r)==hrank[0][0]])/mn:.0f}% of its sales.</div></div>""")
     o.append("</div>")
     o.append(f"""<div class='foot'><span>All closed sales, Jan 1 – {thru}. Tiers by final sale price. Every neighborhood counted on its own.</span><span>page 3 / 9</span></div></div>""")
 
@@ -969,7 +969,7 @@ def build():
     # counts, thin samples carry a * (fewer than 10 sales) instead of being dropped.
     star=lambda n: "*" if n<10 else ""
     import collections as _c
-    nbk=lambda r: r.get("fogNeighborhood")
+    nbk=mg.hood
     def bynb(rows, seg=None):
         out=_c.defaultdict(list)
         for r in rows:

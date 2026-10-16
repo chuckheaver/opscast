@@ -17,11 +17,15 @@ bash reports/market/build.sh
 | Web edition | `web.py` | `app/market/report/generated/` (committed) |
 | PDF | `pdf.mjs` | `public/reports/sf-market-briefing.pdf` (committed) |
 
+The report runs through the reporting period end the owner confirms before
+each rebuild, `data/reporting-period.json` (`STATS_THROUGH` overrides it).
 Sales come from `public/data/sf-listings.geojson`, after the owner's
-standing decisions (`data/sale-decisions.json`: sales under $100K and second
-copies of a duplicated sale) are applied by `scripts/apply-sale-decisions.mjs`
-on every data refresh. `review.py` lists those records (X1) and points out
-every sale over $25M (E8) each month. National figures (rates,
+standing decisions (`data/sale-decisions.json`: sales under $100K, second
+copies of a duplicated sale, and corrections to a record) and the period end
+are applied by `scripts/apply-sale-decisions.mjs` on every data refresh;
+closings after the period end wait in `data/held-sales.geojson`. `review.py`
+lists the records left out (X1) and corrected (X2), the closings held (E6),
+and points out every sale over $25M (E8) each month. National figures (rates,
 Treasuries, CPI, unemployment, rents) are set at the top of `cover.py` and
 `cover3.py` and are updated by hand each month.
 

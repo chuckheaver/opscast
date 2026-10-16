@@ -64,6 +64,7 @@ AREA_TO_MAP = {
     "Ingleside Terrace / Lakeside": "Ingleside Terraces", "Lake Shore / Stonestown": "Lakeshore",
     "Ingleside / Oceanview": "Ingleside", "Excelsior / Portola": "Excelsior",
     "Bayview / Hunters Point": "Bayview", "Visitacion Vly / Silver Terr": "Visitacion Valley",
+    "Treasure Island / YBI": "Yerba Buena Island",   # also the grid's row for the islands (market-grid-v2.py LABEL)
 }
 
 map_names = {f["properties"]["name"] for f in
@@ -129,10 +130,10 @@ for k, (_, body) in enumerate(pages):
 
 # ------------------------------------------------------------------ links
 # Area names appear as whole text nodes: a table cell, a ranked "3. Name", an
-# SVG label, sometimes with a trailing * (thin sample). Match only whole
+# SVG label, sometimes with a trailing * (thin sample) or † (footnote). Match only whole
 # nodes so "Mission" never catches inside "Mission Bay".
 area_alt = "|".join(re.escape(html.escape(a, quote=False)) for a in sorted(AREA_TO_MAP, key=len, reverse=True))
-AREA_RX = re.compile(r">(\s*(?:\d+\.\s*)?)(" + area_alt + r")(\*?)(\s*)<")
+AREA_RX = re.compile(r">(\s*(?:\d+\.\s*)?)(" + area_alt + r")([*\u2020]?)(\s*)<")   # * thin sample, † footnote
 
 def link_areas(s):
     """Link area names, except inside the employers table — its "Where"
