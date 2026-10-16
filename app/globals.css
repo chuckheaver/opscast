@@ -4777,6 +4777,10 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   transition: background 0.15s ease;
 }
 .lp-stats-pill:hover, .lp-stats-pill:focus-visible { background: #fff; }
+/* In the hero, above the name beside the portrait. */
+.lp-stats-pill-hero { margin: 0 0 10px; }
+/* The caption styles every <span> as its subtitle line; not the pill's arrow. */
+.lp-portrait figcaption .lp-stats-pill-arrow { display: inline-block; font-size: inherit; line-height: inherit; color: inherit; margin-top: 0; }
 /* Drawing the eye: a gold ring pulses out from the pill and the arrow
    nudges forward, both on a slow loop. Hovering settles it; a visitor who
    asks for reduced motion gets the pill still. */

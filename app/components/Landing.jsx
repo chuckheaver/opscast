@@ -111,6 +111,9 @@ export default function Landing() {
           <figure className="lp-portrait">
             <img src="/brand/chuck-heaver-cutout.webp" alt="Chuck Heaver" width="760" height="866" />
             <figcaption>
+              {/* Up here, beside the portrait, so it is on screen without
+                  scrolling — on phones too (it used to sit under the fold). */}
+              <Link href="/market/report#sf" className="lp-stats-pill lp-stats-pill-hero">Market Stats - {statsMonth}<span className="lp-stats-pill-arrow" aria-hidden="true">&rarr;</span></Link>
               <b>Chuck Heaver</b>
               <span>Realtor &amp; Meteorologist · DRE #{DRE} · Vanguard Properties</span>
             </figcaption>
@@ -139,7 +142,6 @@ export default function Landing() {
           <p className="lp-stats-head">
             By the Numbers: &rsquo;{String(stats.market.year).slice(2)} vs <span className="lp-stats-key">&rsquo;{String(stats.market.priorYear).slice(2)}</span> YTD{through ? ` (${through})` : ""}
           </p>
-          <Link href="/market/report#sf" className="lp-stats-pill">Market Stats - {statsMonth}<span className="lp-stats-pill-arrow" aria-hidden="true">&rarr;</span></Link>
         </div>
         <div className="lp-stats-row">
           {KPIS.map(k => (
