@@ -989,13 +989,20 @@ def build():
             out+=(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(n)}</td><td class='b'>{M(m)}</td><td>{n}</td>"
                   f"<td style='color:{dc};font-weight:700'>{d}</td></tr>")
         return out
-    def nb_ppsf_rows(seg):
-        """Neighborhoods by median price per square foot in one segment."""
-        by=_c.defaultdict(list)
-        for r in Y1:
-            if nbk(r) and r["propType"] in seg and r.get("sqft"): by[nbk(r)].append(r["sellingPrice"]/r["sqft"])
-        rk=sorted([(a,statistics.median(v),len(v)) for a,v in by.items() if v],key=lambda t:-t[1])[:10]
-        return "".join(f"<tr><td class='l'>{i+1}. {html.escape(a)}{star(n)}</td><td class='b'>${v:,.0f}</td><td>{n}</td></tr>" for i,(a,v,n) in enumerate(rk))
+    def ppsf_sales_rows(seg, cap):
+        """The ten individual sales with the highest price per square foot in
+        one segment. A sale more than `cap` times its own neighborhood's
+        median $/sf is left out: a square-footage error (one unit's or one
+        floor's footage, a typo), not a price. No real house this year runs
+        above 1.9x; condo penthouses reach about 2.9x, so houses get 2.5x
+        and condos 3x."""
+        psf=lambda r: r["sellingPrice"]/r["sqft"]
+        rs=[r for r in Y1 if r["propType"] in seg and r.get("sqft")]
+        med={a:statistics.median(psf(r) for r in g) for a,g in bynb(rs).items()}
+        ok=[r for r in rs if not (nbk(r) in med and psf(r)>cap*med[nbk(r)])]
+        top=sorted(ok,key=lambda r:-psf(r))[:10]
+        return "".join(f"<tr><td class='l' data-sale='{html.escape(str(r.get('id','')))}'>{i+1}. {short(r)}</td>"
+                       f"<td class='b'>${psf(r):,.0f}</td><td>{M(r['sellingPrice'])}</td></tr>" for i,r in enumerate(top))
     def nb_count_rows():
         """Neighborhoods by number of sales, every property type."""
         now,prior=bynb(Y1),bynb(Y0)
@@ -1021,13 +1028,13 @@ def build():
     TH=lambda *cols: "<tr>"+"".join(f"<th class='l'>{c[1:]}</th>" if c.startswith("<") else f"<th>{c}</th>" for c in cols)+"</tr>"
     NB=TH("<Neighborhood","Median","Sales","vs "+py)
     SALE=TH("<Address","Closed","% list")
-    PSF=TH("<Neighborhood","Median $/sf","Sales")
+    PSF=TH("<Address","$/sf","Closed")
     panel=lambda title,head,rows: f"<h2>{title}</h2><table class='top'>{head}{rows}</table>"
     COT="Condo/TIC/Other"
     cols=[
         [("Neighborhood SFH",NB,nb_median_rows(SFHs)), (f"Neighborhood {COT}",NB,nb_median_rows(COs)), ("Lowest Neighborhood SFH",NB,nb_median_rows(SFHs,low=True))],
         [("Top 10 SFH",SALE,sales_rows(top_sales(SFHs))), (f"Top 10 {COT}",SALE,sales_rows(top_sales(COs))), ("Lowest 10 SFH",SALE,sales_rows(low_sales(SFHs)))],
-        [("Top $/sf SFH",PSF,nb_ppsf_rows(SFHs)), (f"Top $/sf {COT}",PSF,nb_ppsf_rows(COs)), (f"Lowest 10 {COT}",SALE,sales_rows(low_sales(COs)))],
+        [("Top $/sf SFH",PSF,ppsf_sales_rows(SFHs,2.5)), (f"Top $/sf {COT}",PSF,ppsf_sales_rows(COs,3)), (f"Lowest 10 {COT}",SALE,sales_rows(low_sales(COs)))],
         [("Overbids - SFH",SALE,sales_rows(overbids(SFHs))), (f"Overbids - {COT}",SALE,sales_rows(overbids(COs))),
          ("Top # Units Sold (All)",TH("<Neighborhood","Sales","Median","vs "+py),nb_count_rows())],
     ]
@@ -1035,7 +1042,7 @@ def build():
     for col in cols:
         o.append("<div class='col'>"+"".join(panel(*p) for p in col)+"</div>")
     o.append("</div>")
-    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS); vs {py} = same stretch last year. Every sale counts — no minimum; * fewer than 10 sales (read with care). Lowest 10 leave out sales under $100K (parking, storage); overbids exclude list prices under $300K or bids over 3× list (data errors).</span><span>page 5 / 9</span></div></div>")
+    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS); vs {py} = same stretch last year. * fewer than 10 sales. Lows skip sales under $100K (parking, storage); Top $/sf skips sales over 2.5× (houses) or 3× (condos) their neighborhood's median $/sf (square-footage errors); overbids skip list prices under $300K or over 3× list.</span><span>page 5 / 9</span></div></div>")
 
     # ── PAGE 6 — in depth ────────────────────────────────────────────────
     # Everything a reader can skip. The narrative pages stay light because
