@@ -265,6 +265,8 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
     hoods = neighborhoods(y1, sfh, mg.stats)
     clim = json.load(open(os.path.join(ROOT, "app/lib/sf-climate.json")))
     thru = datetime.date.fromisoformat(W["y1"][1]).strftime("%b %-d, %Y")
+    mprior = datetime.date.fromisoformat(W["m0"][0]).strftime("%b %Y")      # the same month last year
+    pyear = datetime.date.fromisoformat(W["y0"][0]).year
     zc = lambda z: f"<span class='zc' style='background:{z['fill']};color:{z['ink']}'>{z['k']}</span>"
     foot = lambda txt: (f"<div class='foot'><span>{txt}</span><span>Chuck Heaver · Vanguard Properties · page 0 / 0</span></div></div>")
 
@@ -344,6 +346,6 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
                      + "".join(cells(st, kind, key) for _, _, kind, key in groups) + "</tr>")
         o.append("</tbody><tfoot><tr><td class='name'>Total — all zones</td>" + "".join(cells(tot, kind, key) for _, _, kind, key in groups) + "</tr></tfoot></table>")
     o.append(f"<div class='mz-h' style='margin-top:5px'>Microclimate facts</div><div class='mz-facts'>{fact_html}</div>")
-    o.append(foot(f"{FOG_NOTE} Sales: SFAR MLS closed sales, Jan 1 – {thru}, each counted by the fog zone at the property — not a valuation of "
+    o.append(foot(f"{FOG_NOTE} Sales: SFAR MLS closed sales, Jan 1 – {thru}, against {mprior} and the same stretch of {pyear}, each counted by the fog zone at the property — not a valuation of "
                   "any property. Weather and climate figures are approximations. Warmest/coolest: 300+ homes and 5+ sales; °F estimated."))
     return "".join(o)

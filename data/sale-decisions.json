@@ -68,6 +68,36 @@
         "keep": "425030049",
         "address": "489-495 Utah St",
         "reason": "A repeat of MLS 425030049, the one 489-495 Utah St sale ($1,175,000, 6/10/25) (owner, Oct 16 2026)."
+      },
+      {
+        "id": "425071076",
+        "keep": "82020604",
+        "address": "343 Raymond Ave",
+        "reason": "Entered twice; counted once (owner, Oct 16 2026): both Closed 10/8/25 at $760,000; the earlier MLS number kept."
+      },
+      {
+        "id": "425086115",
+        "keep": "41116906",
+        "address": "2849 Bryant St",
+        "reason": "Entered twice; counted once (owner, Oct 16 2026): both Closed 12/8/25 at $1,875,000; the earlier MLS number kept."
+      },
+      {
+        "id": "425092615",
+        "keep": "425089308",
+        "address": "3890 Market St #3 / #4",
+        "reason": "Entered twice; counted once (owner, Oct 16 2026): $900,000 on one parcel a week apart; the Closed record (#3, 12/26/25) kept."
+      },
+      {
+        "id": "425087276",
+        "keep": "425034134",
+        "address": "226 Roosevelt Way #A",
+        "reason": "Entered twice; counted once (owner, Oct 16 2026): both Closed at $1,320,000 (10/30 and 12/18/25); the earlier sale kept."
+      },
+      {
+        "id": "425086394",
+        "keep": "425089255",
+        "address": "1786 36th Ave",
+        "reason": "Entered twice; counted once (owner, Oct 16 2026): Sold Off MLS at $995,000 (11/21/25), Closed at $1,400,000 (12/8/25); the Closed record kept."
       }
     ]
   },
@@ -119,17 +149,6 @@
       },
       "reason": "A condo in both 2025 and 2026 (owner, Oct 16 2026); the Mar 2025 sale was typed Single Family Residence.",
       "footnote": "117 Telegraph Hill Blvd’s Mar 2025 sale is counted as a condo; the MLS entry typed it single-family."
-    },
-    {
-      "id": "41118737",
-      "address": "661 Peralta Ave Unit 3",
-      "set": {
-        "propType": "Tenancy in Common"
-      },
-      "from": {
-        "propType": "Single Family Residence"
-      },
-      "reason": "A TIC (owner, Oct 16 2026); the feed typed it Single Family Residence."
     }
   ],
   "confirmed": [
@@ -209,6 +228,11 @@
       "id": "425037304",
       "address": "870 North Point St #A",
       "reason": "A commercial condo, not a home sale (owner, Oct 16 2026)."
+    },
+    {
+      "id": "41118737",
+      "address": "661 Peralta Ave Unit 3",
+      "reason": "Not a sale in the owner's MLS: no 2025 or 2026 activity (owner, Oct 16 2026)."
     }
   ]
 }

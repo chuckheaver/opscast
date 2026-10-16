@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T17:19:21.919Z",
+  "generatedAt": "2026-10-16T18:07:34.623Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -93,9 +93,9 @@
       }
     },
     "Bernal Heights": {
-      "n": 95,
+      "n": 94,
       "sfhMedian": 2000000,
-      "sfhN": 71,
+      "sfhN": 70,
       "condoMedian": 1250000,
       "condoN": 23,
       "ppsf": 1194.6902654867256,
@@ -1691,14 +1691,14 @@
       }
     },
     "Treasure Island": {
-      "n": 0,
+      "n": 8,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": null,
-      "condoN": 0,
-      "ppsf": null,
-      "dom": null,
-      "fogHours": null,
+      "condoMedian": 1727500,
+      "condoN": 8,
+      "ppsf": 972.3030363781339,
+      "dom": 29.5,
+      "fogHours": 6.5,
       "zone": "Sun",
       "zoneMix": {
         "Sun": 1,

@@ -505,37 +505,40 @@ def spread_chart(w=470,h=158):
 PROP_TAX=0.0118        # San Francisco property tax, roughly 1.18% of assessed value
 LUX_EVENTS={6:"Nasdaq peak",7:"Nasdaq −10%",8:"OpenAI $7B tender"}
 
-def lux_series(lo=5e6,hi=float("inf")):
-    """Monthly count of sales in a price band, prior year and current."""
+def lux_series(cy,lo=5e6,hi=float("inf")):
+    """Monthly count of sales in a price band: all of the prior year, and the
+    current year `cy` (the sales file runs only to the period end)."""
     import collections
     F=[f["properties"] for f in json.load(open(mg.SRC))["features"]]
     c={}
-    for yr in (2025,2026):
+    for yr in (cy-1,cy):
         c[yr]=collections.Counter(int(r["sellingDate"][5:7]) for r in F
             if (r.get("sellingDate") or "").startswith(str(yr)) and r.get("sellingPrice") and lo<=r["sellingPrice"]<hi)
     return c
 
-def lux_chart(w=470,h=176,through=9):
-    """Bars for January through the report's last full month (`through`)."""
-    c=lux_series(); hi_=max(max(c[yr].get(m,0) for m in range(1,through+1)) for yr in (2025,2026))*1.34
-    pad_l,pad_b,pad_t=10,17,14; n=through; gw=(w-2*pad_l)/n; bw=gw*0.34
+def lux_chart(cy,w=470,h=176,through=9):
+    """Twelve months: the prior year's bars all year (its activity is the full
+    year), the current year's January through the period month (`through`)."""
+    c=lux_series(cy); py_,cy_=cy-1,cy
+    hi_=max([c[py_].get(m,0) for m in range(1,13)]+[c[cy_].get(m,0) for m in range(1,through+1)])*1.34
+    pad_l,pad_b,pad_t=10,17,14; n=12; gw=(w-2*pad_l)/n; bw=gw*0.34
     Y=lambda v:h-pad_b-(v/hi_)*(h-pad_b-pad_t)
     o=[f"<svg width='100%' height='{h}' viewBox='0 0 {w} {h}' preserveAspectRatio='xMidYMid meet'>"]
     o.append(f"<line x1='{pad_l}' y1='{h-pad_b}' x2='{w-pad_l}' y2='{h-pad_b}' stroke='{LINE}' stroke-width='0.8'/>")
     for i in range(n):
         m=i+1; cx=pad_l+i*gw+gw/2
-        for j,(v,col) in enumerate(((c[2025].get(m,0),"#B9BDC4"),(c[2026].get(m,0),"#203C5F"))):
+        for j,(v,col) in enumerate(((c[py_].get(m,0),"#B9BDC4"),(c[cy_].get(m,0) if m<=through else 0,"#203C5F"))):
             if not v: continue
             x=cx-bw+j*bw
             o.append(f"<rect x='{x:.1f}' y='{Y(v):.1f}' width='{bw-1.5:.1f}' height='{h-pad_b-Y(v):.1f}' fill='{col}' rx='1.5'/>")
             o.append(f"<text x='{x+(bw-1.5)/2:.1f}' y='{Y(v)-2.5:.1f}' font-size='6.4' font-weight='700' fill='{col if j else MUTED}' text-anchor='middle'>{v}</text>")
         o.append(f"<text x='{cx:.1f}' y='{h-5}' font-size='6.8' fill='{MUTED}' text-anchor='middle'>{MON[i]}</text>")
-        if m in LUX_EVENTS:
-            yy=Y(c[2026].get(m,0))-12
-            o.append(f"<line x1='{cx:.1f}' y1='{yy+3:.1f}' x2='{cx:.1f}' y2='{Y(c[2026].get(m,0))-4:.1f}' stroke='{DOWN}' stroke-width='0.7'/>")
+        if m in LUX_EVENTS and m<=through:
+            yy=Y(c[cy_].get(m,0))-12
+            o.append(f"<line x1='{cx:.1f}' y1='{yy+3:.1f}' x2='{cx:.1f}' y2='{Y(c[cy_].get(m,0))-4:.1f}' stroke='{DOWN}' stroke-width='0.7'/>")
             o.append(f"<text x='{cx:.1f}' y='{yy:.1f}' font-size='5.8' font-weight='700' fill='{DOWN}' text-anchor='middle'>{LUX_EVENTS[m]}</text>")
-    for j,(lab,col) in enumerate((("2025","#B9BDC4"),("2026","#203C5F"))):
-        lxx=pad_l+j*48
+    for j,(lab,col) in enumerate(((f"{py_} (full year)","#B9BDC4"),(str(cy_),"#203C5F"))):
+        lxx=pad_l+j*82
         o.append(f"<rect x='{lxx}' y='2' width='8' height='8' fill='{col}' rx='1.5'/><text x='{lxx+11}' y='9' font-size='7' fill='{INK}'>{lab}</text>")
     return "".join(o)+"</svg>"
 
@@ -899,7 +902,8 @@ def build():
         for r in (6.10,6.50,MTG_NOW,7.50))
     lux=[r for r in S["y1"] if r["sellingPrice"]>=5e6]
     lux0=[r for r in S["y0"] if r["sellingPrice"]>=5e6]
-    lc=lux_series()[2026]                   # month → count, for the caption
+    lc=lux_series(mo.year)[mo.year]         # month → count, for the caption
+    lux_py=sum(lux_series(mo.year)[mo.year-1].values())   # the prior year's whole-year count
     top5=[r for r in S["y1"] if r["sellingPrice"]>=5e6]
     luxv=sum(r["sellingPrice"] for r in lux); top5v=sum(r["sellingPrice"] for r in top5)
     zero=[r for r in top5 if r.get("dom")==0 or r["status"]=="Sold Off MLS"]
@@ -921,9 +925,9 @@ def build():
       <div class='cap'>Lend longer, earn more — the line rises, as it should. When it tips the other way it is <b>inverted</b>, which has come before every U.S. recession since the 1970s. We are not there.</div></div>""")
     o.append(f"""<div class='col'><h2 class='band'>The Cash Buyer</h2>
       <div class='cap' style='margin-bottom:5px'><b>Watching Bond Yields</b></div>
-      <h2>Over $5M — Sales by Month, 2025 vs 2026</h2>
-      {lux_chart(h=190,through=mo.month)}
-      <div class='cap'><span class='st'>{len(lux)}</span> sales against <span class='st'>{len(lux0)}</span> last year, <span class='st'>{sgn(D(len(lux),len(lux0)))}%</span>.
+      <h2>Over $5M — Sales by Month, 20{py} vs 20{yy}</h2>
+      {lux_chart(mo.year,h=190,through=mo.month)}
+      <div class='cap'><span class='st'>{len(lux)}</span> sales Jan 1 – {thru} against <span class='st'>{len(lux0)}</span> in the same stretch of 20{py}, <span class='st'>{sgn(D(len(lux),len(lux0)))}%</span> (20{py} full year: {lux_py}).
       {lux_caption(lc,mo.month)}</div>
       <h2 style='margin-top:6px'>Annual Opportunity Cost of Owning an $8M Home</h2>
       {carry_chart(w=470,h=112)}
@@ -1035,7 +1039,7 @@ def build():
     bn=by_numbers(S["y1"], W["m1"][1])
     T_=lambda cls,v,lab,sub="": f"<div class='bn-t {cls}'><b>{v}</b><span>{lab}</span>{f'<i>{sub}</i>' if sub else ''}</div>"
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>By the Numbers</div>
-      <div class='p'>San Francisco real estate in figures most people never see — Jan 1 – {thru}</div></div>
+      <div class='p'>San Francisco real estate in figures most people never see — Jan 1 – {thru}, 20{yy}</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, SFAR MLS</div></div>
       <div class='bn'>"""
       +T_("navy big", bn['per_day'], "Avg Daily Sales Volume", f"{bn['vol']} over {bn['days']} days")
@@ -1053,7 +1057,7 @@ def build():
     o.append(f"""<div style='margin-top:7px'><h2>Units Sold by Week — Every Week of Both Years</h2>
       {weekly_bars(wrows,h=150,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"Jan 1 – {thru}, both years · 2025 full year {w25y:,}"))}
       <div class='cap'>Grey bars after week {wcut} show where last year kept going — {week_peak_after(wrows,wcut)}, which is what a full autumn looks like.</div></div>""")
-    o.append(f"<div class='foot'><span>Every figure from closed sales, Jan 1 – {thru} (SFAR MLS). Days on market as reported; list-to-sale ratios use the final list price.</span><span>page 6 / 9</span></div></div>")
+    o.append(f"<div class='foot'><span>Closed sales (SFAR MLS), Jan 1 – {thru}, 20{yy}; comparisons with 20{py} use the same stretch, and 20{py} activity marked “full year” runs Jan 1 – Dec 31. Days on market as reported; list-to-sale ratios use the final list price.</span><span>page 6 / 9</span></div></div>")
 
     o.append("</body></html>")
     # The Cost of Ownership is the report's last page, after the grids and the
