@@ -160,7 +160,7 @@ export default function BuildingModal({ profile, authored, onClose }) {
             </div>
             {m.recent?.length > 0 && (
               <div style={{ marginBottom: 10 }}>
-                {m.recent.slice(0, 6).map((r, i) => (
+                {m.recent.map((r, i) => (
                   <div key={i} style={{ display: "flex", justifyContent: "space-between", gap: 10, fontSize: 13, padding: "4px 0", borderTop: i ? "1px solid #ece8df" : "none" }}>
                     <span style={{ color: "#78716c" }}>{[r.unit ? `#${r.unit}` : null, r.status].filter(Boolean).join(" · ") || "—"}</span>
                     <span style={{ color: "#1c1917", fontWeight: 600 }}>{[fmtUSD(r.price), r.date ? fmtDate(r.date) : null].filter(Boolean).join(" · ")}</span>

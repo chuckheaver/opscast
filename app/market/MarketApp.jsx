@@ -1,9 +1,12 @@
 'use client';
 
-// Market Update — a data-only, rolling-12-month version of the monthly PDF
-// market reports. Two segments (Single-Family, Condo/TIC/Coop). For the
-// selected month it shows the report's comparison block (with MoM/YoY), a
-// trailing-12-month trend table, and a neighborhood breakdown.
+// Market Update — a data-only, year-to-date version of the monthly PDF market
+// reports. Two segments (Single-Family, Condo/TIC/Coop). For the selected
+// month of this year it shows the report's comparison block (MoM within this
+// year, YoY against the same month last year), this year's months to date,
+// and a neighborhood breakdown. The owner's rule for the site: every figure is
+// this year to date; last year appears only as the same period, for a
+// comparison.
 //
 // Everything is computed from the same geocoded closed-sale data the rest of
 // the app uses. Metrics that need data we don't have yet ($/sqft, contracts,
@@ -55,16 +58,17 @@ export default function MarketApp() {
   const [features, setFeatures] = useState([]);
   const [err, setErr] = useState("");
   const [month, setMonth] = useState("");
+  const [through, setThrough] = useState("");      // the period end, metadata.statsThrough
 
   useEffect(() => {
     fetch(DATA_URL)
       .then(r => { if (!r.ok) throw new Error(`Failed to load data (${r.status})`); return r.json(); })
-      .then(d => setFeatures(capToStatsThrough(d).features || []))
+      .then(d => { setThrough(d.metadata?.statsThrough || ""); setFeatures(capToStatsThrough(d).features || []); })
       .catch(e => setErr(e.message));
   }, []);
 
   // Closed sales only, indexed by segment → month → [property objects].
-  const { bySegMonth, months, firstMonth } = useMemo(() => {
+  const { bySegMonth, months } = useMemo(() => {
     const idx = {};
     SEGMENTS.forEach(s => (idx[s.key] = {}));
     const typeToSeg = {};
@@ -79,19 +83,13 @@ export default function MarketApp() {
       monthSet.add(ym);
       (idx[seg][ym] = idx[seg][ym] || []).push(p);
     }
-    // Sane, contiguous month list: trailing 18 from the latest real month
-    // (drops stray bad dates like a lone 2002 entry).
+    // The months a viewer can pick: this year's, January through the period
+    // end. Last year's months stay in the index only for the YoY comparison.
     const sorted = [...monthSet].sort();
-    const latest = sorted[sorted.length - 1];
-    const valid = latest
-      ? sorted.filter(m => m > shiftMonth(latest, -18))
-      : [];
-    // The first month of the unbroken run of months with sales: earlier
-    // months are not in the data, so they read "—", not 0 sold.
-    let firstMonth = latest || "";
-    while (firstMonth && monthSet.has(shiftMonth(firstMonth, -1))) firstMonth = shiftMonth(firstMonth, -1);
-    return { bySegMonth: idx, months: valid, firstMonth };
-  }, [features]);
+    const end = (through || sorted[sorted.length - 1] || "").slice(0, 7);
+    const valid = end ? sorted.filter(m => m.slice(0, 4) === end.slice(0, 4) && m <= end) : [];
+    return { bySegMonth: idx, months: valid };
+  }, [features, through]);
 
   // Default to the latest *complete* month — skip the current calendar month,
   // which is still accruing sales (matches how the PDF reports the prior month).
@@ -103,11 +101,8 @@ export default function MarketApp() {
   const selected = month || defaultMonth;
   const isPartial = selected === currentYM;
 
-  // Trailing 12 months ending at the selected month.
-  const trailing12 = useMemo(() => {
-    if (!selected) return [];
-    return Array.from({ length: 12 }, (_, i) => shiftMonth(selected, -(11 - i)));
-  }, [selected]);
+  // This year's months, January through the selected month.
+  const ytdMonths = useMemo(() => months.filter(m => m <= selected), [months, selected]);
 
   const statsFor = (segKey, ym) => {
     const props = bySegMonth[segKey]?.[ym] || [];
@@ -133,13 +128,15 @@ export default function MarketApp() {
       </header>
       {isPartial && <p className="mk-partial">⚠ {monthLabel(selected)} is still in progress — figures are partial and MoM/YoY will look skewed until the month closes.</p>}
       <p className="mk-sub">
-        Rolling view from SFAR MLS closed sales · MoM vs prior month · YoY vs same month last year.
+        {selected ? `${selected.slice(0, 4)} year to date` : "Year to date"} from SFAR MLS closed sales · MoM vs the prior month this year · YoY vs the same month last year.
         Cells marked “—” await data the export doesn’t carry yet ($/sq ft, contracts, month-end inventory).
       </p>
 
       {SEGMENTS.map(seg => {
         const cur = statsFor(seg.key, selected);
         const mom = statsFor(seg.key, shiftMonth(selected, -1));
+        // January has no earlier month this year: MoM would reach into last year.
+        const hasMoM = shiftMonth(selected, -1).slice(0, 4) === selected.slice(0, 4);
         const yoy = statsFor(seg.key, shiftMonth(selected, -12));
         const hasYoY = (bySegMonth[seg.key]?.[shiftMonth(selected, -12)] || []).length > 0;
 
@@ -197,7 +194,7 @@ export default function MarketApp() {
                     <tr key={r.label}>
                       <td>{r.label}{r.note && c == null ? <span className="mk-note"> · {r.note}</span> : null}</td>
                       <td className="mk-num">{r.fmt(c)}</td>
-                      <td className={"mk-num " + deltaClass(deltaPct(c, m))}>{fmtDelta(deltaPct(c, m))}</td>
+                      <td className={"mk-num " + (hasMoM ? deltaClass(deltaPct(c, m)) : "")}>{hasMoM ? fmtDelta(deltaPct(c, m)) : "n/a"}</td>
                       <td className={"mk-num " + (hasYoY ? deltaClass(deltaPct(c, y)) : "")}>{hasYoY ? fmtDelta(deltaPct(c, y)) : "n/a"}</td>
                     </tr>
                   );
@@ -205,20 +202,22 @@ export default function MarketApp() {
               </tbody>
             </table>
 
-            {/* Rolling 12-month trend */}
-            <h3 className="mk-h3">Rolling 12 months</h3>
+            {/* This year, month by month, with the year-to-date total */}
+            <h3 className="mk-h3">{selected.slice(0, 4)} year to date, by month</h3>
             <table className="mk-table mk-trend">
               <thead>
                 <tr><th>Month</th><th># Sold</th><th>Median</th><th>DOM</th><th>%Over</th><th>%ofList</th></tr>
               </thead>
               <tbody>
-                {trailing12.map(ym => {
-                  const s = statsFor(seg.key, ym).stats;
+                {[...ytdMonths.map(ym => ({ ym, label: monthLabelShort(ym), props: statsFor(seg.key, ym).props })),
+                  { ym: "ytd", label: `Jan–${MON[Number(selected.slice(5, 7)) - 1]} ${selected.slice(0, 4)}`,
+                    props: ytdMonths.flatMap(ym => statsFor(seg.key, ym).props) }].map(({ ym, label, props }) => {
+                  const s = computeStats(props);
                   const isSel = ym === selected;
                   return (
-                    <tr key={ym} className={isSel ? "mk-sel" : ""}>
-                      <td>{monthLabelShort(ym)}</td>
-                      <td className="mk-num">{firstMonth && ym < firstMonth ? "—" : s.soldCount || 0}</td>
+                    <tr key={ym} className={isSel ? "mk-sel" : ym === "ytd" ? "mk-ytd" : ""}>
+                      <td>{ym === "ytd" ? <b>{label}</b> : label}</td>
+                      <td className="mk-num">{s.soldCount || 0}</td>
                       <td className="mk-num">{usdShort(s.medianSale)}</td>
                       <td className="mk-num">{s.medianDom ?? "—"}</td>
                       <td className="mk-num">{s.pctOverList == null ? "—" : Math.round(s.pctOverList) + "%"}</td>

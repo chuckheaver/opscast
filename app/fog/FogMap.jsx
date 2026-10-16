@@ -1029,7 +1029,7 @@ export default function FogMap({
         const summary = rec.closedCount
           ? `${span} · ${rec.closedCount} sold${rec.medianSale ? ` · median ${usdShort(rec.medianSale)}` : ""}`
           : `${span} · no sales yet this year`;
-        const items = (rec.recent || []).slice(0, 6).map(s => {
+        const items = (rec.recent || []).map(s => {
           const left = [s.unit ? `#${esc(s.unit)}` : null, s.status ? esc(s.status) : null].filter(Boolean).join(" · ");
           const right = [usd(s.price), s.date ? shortDate(s.date) : null].filter(Boolean).join(" · ");
           return `<div style="display:flex;justify-content:space-between;gap:10px"><span style="color:#6b7280">${left || "—"}</span><span>${right}</span></div>`;
@@ -1038,7 +1038,8 @@ export default function FogMap({
         return `<div style="margin-top:8px;padding-top:8px;border-top:1px solid #e5e7eb">`
           + `<strong style="font-size:12.5px">🏢 Market activity</strong>`
           + `<div style="color:#374151;margin:2px 0 6px">${summary}</div>`
-          + items
+          // every sale this year, scrolling when a busy tower has many
+          + `<div style="max-height:168px;overflow-y:auto">${items}</div>`
           + link
           + `</div>`;
       };

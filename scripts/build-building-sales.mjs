@@ -104,7 +104,6 @@ for (const f of buildings.features) {
       const db = b.sellingDate || b.statusDate || b.listDate || "";
       return db.localeCompare(da);
     })
-    .slice(0, 12)
     .map(h => ({
       unit: h.unit || (h.address?.match(/#\s*([\w-]+)/)?.[1] ?? null),
       status: h.status || null,
@@ -168,7 +167,7 @@ function computeMarket(all) {
   const pending = all.filter(h => PENDING.has(h.status));
   const ppsf = sold.map(h => (num(h.sqft) ? num(h.sellingPrice) / num(h.sqft) : null)).filter(Boolean);
   const pctList = sold.map(h => (num(h.listPrice) ? (num(h.sellingPrice) / num(h.listPrice)) * 100 : null)).filter(Boolean);
-  const hoaVals = all.map(hoaOf).filter(v => Number.isFinite(v) && v > 0);
+  const hoaVals = hits.map(hoaOf).filter(v => Number.isFinite(v) && v > 0);   // this year's sales, like the rest
   return {
     period: PERIOD,
     active: active.length,
@@ -190,7 +189,6 @@ function computeMarket(all) {
         const db = b.sellingDate || b.statusDate || b.listDate || "";
         return db.localeCompare(da);
       })
-      .slice(0, 12)
       .map(h => ({
         unit: h.unit || (h.address?.match(/#\s*([\w-]+)/)?.[1] ?? null),
         status: h.status || null,

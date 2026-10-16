@@ -118,8 +118,6 @@ const out = {
   generatedAt: new Date().toISOString(),
   dataThrough: built,
   year,
-  // Every closed sale in the database, all years.
-  salesTracked: (geo.features || []).filter(f => upTo(f.properties?.sellingDate)).length,
   // This year's closings, which is what the map shows.
   salesThisYear: sales.length,
   neighborhoods: Object.keys(parcels).length,
@@ -152,5 +150,5 @@ for (const f of geo.features || []) {
 writeFileSync(POINTS, JSON.stringify({ year, through: built, points: pts }));
 console.log(`wrote ${POINTS} (${pts.length.toLocaleString()} points)`);
 console.log(`wrote ${OUT}`);
-console.log(`  ${out.salesThisYear.toLocaleString()} ${year} sales · ${out.salesTracked.toLocaleString()} tracked · ${out.parcels.toLocaleString()} parcels`);
+console.log(`  ${out.salesThisYear.toLocaleString()} ${year} sales · ${out.parcels.toLocaleString()} parcels`);
 console.log(`  houses: sun $${(sun.median / 1e6).toFixed(2)}M ($${Math.round(sun.ppsf)}/sf) vs persistent fog $${(pfog.median / 1e6).toFixed(2)}M ($${Math.round(pfog.ppsf)}/sf) — ${out.houses.priceRatio.toFixed(2)}x`);

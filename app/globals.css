@@ -4119,6 +4119,7 @@ body {
 .mk-empty { text-align: center; color: var(--muted); font-style: italic; }
 
 .mk-trend tbody tr.mk-sel { background: #fef9c3; }
+.mk-trend tbody tr.mk-ytd td { border-top: 2px solid var(--border); font-weight: 700; }
 .mk-trend td:first-child, .mk-nb td:first-child { font-weight: 600; }
 
 /* Clickable neighborhood rows in the House Market Stats pop-up. */
