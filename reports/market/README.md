@@ -1,6 +1,6 @@
 # SF Market Briefing
 
-One generator, two outputs: the 9-page Letter-landscape PDF and the web
+One generator, two outputs: the 11-page Letter-landscape PDF and the web
 edition at `/market/report`.
 
 ```
@@ -12,6 +12,7 @@ bash reports/market/build.sh
 |---|---|---|
 | Narrative pages | `cover3.py` (uses `cover.py`, `market-grid-v2.py`) | `out/cover3.html` |
 | Market grids | `market-grid-v2.py` | `out/market-grid-v2.html` |
+| Sales-data review (flags only; changes no outputs) | `review.py` | `out/review.json`, `out/review.csv`, `out/outliers.csv` |
 | Proof viewer | `proof.py` | `out/sf-briefing-proof.html` |
 | Web edition | `web.py` | `app/market/report/generated/` (committed) |
 | PDF | `pdf.mjs` | `public/reports/sf-market-briefing.pdf` (committed) |
