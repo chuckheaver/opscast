@@ -97,6 +97,18 @@ export const BAY_NOTE =
 
 // ------------------------------------------------------- 4. The four zones
 
+// The quick summary under "San Francisco Primary Microclimates": what shapes
+// a microclimate here, one line each. Each line is taken from a section
+// further down the page (fog, the ridge, two doors, wind, elevation, sun).
+export const MICRO_FACTORS = [
+  { k: "Fog", p: "Ocean air crossing cold upwelled water rolls in May to August — pulled harder the hotter inland California gets." },
+  { k: "The ridge", p: "Mount Davidson (928 ft), Twin Peaks and Mount Sutro stop it: fog stacks on the west side, the northeast sits in the lee and the sun." },
+  { k: "Two gaps", p: "The Golden Gate feeds the north half, the San Bruno Gap the south along 280 — why Ingleside is foggier than the Mission." },
+  { k: "Wind", p: "20–30 mph through the Golden Gate from midafternoon; ground just downwind of a hill can be 10°F warmer and half as windy." },
+  { k: "Elevation", p: "The fog deck usually tops out at 800–1,500 ft — peaks can sit in sun above a white sea while the slopes below are grey." },
+  { k: "Sun & slope", p: "The way a lot faces decides its winter sun: south slopes collect the most, a north slope can sit in shadow for weeks." },
+];
+
 export const BELTS_LEAD =
   "The ridge down the middle of the city — Mount Davidson 928 ft, Twin Peaks 922, Mount Sutro 909 — does to marine air what the Coast Range does to the region.";
 

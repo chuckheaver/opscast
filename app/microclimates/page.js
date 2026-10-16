@@ -18,7 +18,7 @@ import { BayMap, FogMapCard } from "./bay";
 import { LotPlan, NeighborShadow, SlopeCompare, FieldRules, SkyChart } from "./sun";
 import {
   LEDE, KOPPEN, LATITUDE, ENGINE, ENGINE_BULLETS,
-  BAY_ZONES, BAY_BULLETS, BAY_NOTE, BELTS_LEAD, BELTS, FOG_HOURS, FOG_HOURS_NOTE,
+  BAY_ZONES, BAY_BULLETS, BAY_NOTE, BELTS_LEAD, MICRO_FACTORS, BELTS, FOG_HOURS, FOG_HOURS_NOTE,
   BLOCK, LOT_BULLETS, SUN_TOOLS, FOG_WHAT, DECK, FOG_TOPO, YEAR_BULLETS, DISCLAIMER,
 } from "./content";
 
@@ -178,6 +178,13 @@ export default function Page() {
         </section>
         <section className="pt-sec" id="belts">
           <h2>San Francisco Primary Microclimates</h2>
+          {/* The quick summary: what shapes a microclimate here, before the detail. */}
+          <p className="mc-fig-h mc-factors-h">What shapes the city&rsquo;s microclimates</p>
+          <dl className="mc-factors">
+            {MICRO_FACTORS.map(f => (
+              <div className="mc-factor" key={f.k}><dt>{f.k}</dt><dd>{f.p}</dd></div>
+            ))}
+          </dl>
 
           {/* Fog first — it is what draws the city's lines. The menu's
               "Fog Map" item lands here. */}

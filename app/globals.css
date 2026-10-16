@@ -5529,6 +5529,16 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .mc-part h3 { font-size: 15px; font-weight: 800; }
 .mc-part p { margin-top: 4px; font-size: 13.5px; line-height: 1.5; color: var(--lp-body); }
 
+/* What shapes the city's microclimates: six short tiles, three across,
+   two on a tablet, one on a phone. */
+.mc-factors-h { margin-top: 14px; }
+.mc-factors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0 0; }
+.mc-factor { background: #fff; border: 1px solid var(--lp-line); border-left: 4px solid #E9BC3F; border-radius: 12px; padding: 12px 14px; }
+.mc-factor dt { font-family: 'Montserrat', sans-serif; font-size: 14.5px; font-weight: 800; color: var(--lp-navy-2); }
+.mc-factor dd { margin: 4px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--lp-body); }
+@media (max-width: 860px) { .mc-factors { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .mc-factors { grid-template-columns: 1fr; } }
+
 /* Cards of bullets. */
 .mc-cards { display: grid; gap: 12px; margin-top: 18px; }
 .mc-cards-2 { grid-template-columns: repeat(2, 1fr); }

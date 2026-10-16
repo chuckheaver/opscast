@@ -125,7 +125,7 @@ const hourLabel = h => (h === 0 || h === 24 ? "12am" : h === 12 ? "noon" : h < 1
 export function FogClock() {
   return (
     <figure className="mc-fig">
-      <p className="mc-fig-h">A July day on the west side</p>
+      <p className="mc-fig-h">A Summer Day in SF</p>
       <div className="mc-clock" role="img"
         aria-label="Fog is thickest from late night to 8am, burns back late morning, is clearest around midday, pushes back through the Golden Gate mid-afternoon and covers the west side again by evening.">
         {CLOCK.map((v, h) => (
