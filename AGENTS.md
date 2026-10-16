@@ -11,7 +11,9 @@ should be, and set it in `data/reporting-period.json` (`periodEnd`, and the
 day they confirmed it in `confirmedByOwner`). Never infer it from the data.
 No closing after that date goes into any statistic — site, map counts or
 report: `scripts/apply-sale-decisions.mjs` holds them out of the sales file
-(`data/held-sales.geojson`) until the period moves.
+(`data/held-sales.geojson`) until the period moves. `build.sh` applies the
+decisions and the period end first, rebuilds the site's stats from the same
+file, and stops if the sales file isn't cut to the period end.
 
 Every time the market report is rebuilt (`bash reports/market/build.sh`), read
 the output of `reports/market/review.py` (also `reports/market/out/review.csv`)

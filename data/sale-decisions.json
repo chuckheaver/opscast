@@ -56,6 +56,18 @@
         "id": "425010698",
         "keep": "41092411",
         "address": "2985 Mission St #302"
+      },
+      {
+        "id": "425011322",
+        "keep": "425030049",
+        "address": "489-495 Utah St",
+        "reason": "A repeat of MLS 425030049, the one 489-495 Utah St sale ($1,175,000, 6/10/25) (owner, Oct 16 2026)."
+      },
+      {
+        "id": "425011295",
+        "keep": "425030049",
+        "address": "489-495 Utah St",
+        "reason": "A repeat of MLS 425030049, the one 489-495 Utah St sale ($1,175,000, 6/10/25) (owner, Oct 16 2026)."
       }
     ]
   },
@@ -107,36 +119,9 @@
       },
       "reason": "A condo in both 2025 and 2026 (owner, Oct 16 2026); the Mar 2025 sale was typed Single Family Residence.",
       "footnote": "117 Telegraph Hill Blvd’s Mar 2025 sale is counted as a condo; the MLS entry typed it single-family."
-    },
-    {
-      "id": "425011322",
-      "address": "489-495 Utah St",
-      "set": {
-        "address": "489-495 Utah St #489, San Francisco, CA 94110"
-      },
-      "from": {
-        "address": "489-495 Utah St #495, San Francisco, CA 94110"
-      },
-      "reason": "The studio, #489: sold $100,000, listed $299,000 (owner, Oct 16 2026); the feed had the unit numbers of MLS 425011322 and 425011295 swapped."
-    },
-    {
-      "id": "425011295",
-      "address": "489-495 Utah St",
-      "set": {
-        "address": "489-495 Utah St #495, San Francisco, CA 94110"
-      },
-      "from": {
-        "address": "489-495 Utah St #489, San Francisco, CA 94110"
-      },
-      "reason": "#495: sold $1,075,000, originally listed at $998,000 (owner, Oct 16 2026); the feed had the unit numbers of MLS 425011322 and 425011295 swapped."
     }
   ],
   "confirmed": [
-    {
-      "id": "425011322",
-      "address": "489-495 Utah St #489",
-      "note": "The studio really sold for $100,000: a valid TIC sale (owner, Oct 16 2026)."
-    },
     {
       "id": "41120266",
       "address": "270 Lobos St",

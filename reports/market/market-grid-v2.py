@@ -104,14 +104,37 @@ def fog_codes(F):
     return {n:max(v,key=v.get) for n,v in c.items()}
 
 
+def _date(v,where):
+    """A real date written YYYY-MM-DD, or a stop (as scripts/stats-through.mjs)."""
+    import re
+    try:
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}",v or ""): return datetime.date.fromisoformat(v).isoformat()
+    except ValueError: pass
+    raise SystemExit(f"{where} must be a date written YYYY-MM-DD, got {v!r}")
+def period_end():
+    """STATS_THROUGH, else the owner-confirmed data/reporting-period.json."""
+    if os.environ.get("STATS_THROUGH"): return _date(os.environ["STATS_THROUGH"],"STATS_THROUGH")
+    if os.path.exists(PERIOD): return _date(json.load(open(PERIOD)).get("periodEnd"),"data/reporting-period.json periodEnd")
+    return None
+def check_cut(d):
+    """Stop unless the sales file was cut to the period end: no closing after
+    it, and the metadata the site's client caps read says the same date
+    (scripts/apply-sale-decisions.mjs does both; build.sh runs it first)."""
+    end=period_end()
+    if not end: return
+    late=sorted({(f["properties"].get("sellingDate") or "")[:10] for f in d["features"]} - {""})
+    late=[x for x in late if x>end]
+    meta=d.get("metadata",{}).get("statsThrough")
+    if late or meta!=end:
+        raise SystemExit(f"sales file not cut to the period end {end} (metadata.statsThrough {meta}; "
+                         f"{len(late)} closing date(s) after it): run node scripts/apply-sale-decisions.mjs")
 def last_full_month(F=None):
     """The report month, ending on the reporting period end the owner
     confirmed (data/reporting-period.json, as scripts/stats-through.mjs
     reads it); STATS_THROUGH overrides it, as in the JS. Then the listings
     file's metadata.statsThrough; the month before the latest sale only if
     none is set."""
-    end=json.load(open(PERIOD)).get("periodEnd") if os.path.exists(PERIOD) else None
-    thru=os.environ.get("STATS_THROUGH") or end or json.load(open(SRC)).get("metadata",{}).get("statsThrough")
+    thru=period_end() or json.load(open(SRC)).get("metadata",{}).get("statsThrough")
     if thru:
         mt=datetime.date.fromisoformat(thru[:10])
         return mt.replace(day=1), mt
@@ -122,6 +145,7 @@ def last_full_month(F=None):
 
 def build(anchor=None):
     d=json.load(open(SRC)); F=[f["properties"] for f in d["features"]]
+    if anchor is None: check_cut(d)
     for r in F: r["nb"]=N2A.get(FIX.get(r.get("neighborhood") or "", r.get("neighborhood") or ""))
     global CODE
     CODE=fog_codes(F)

@@ -76,7 +76,7 @@ for (const f of geo.features) {
   }
   let why = null;
   if (kept.has(id)) why = null;
-  else if (dupes.has(id)) why = `duplicate of MLS ${dupes.get(id).keep}: ${dec.duplicates.reason}`;
+  else if (dupes.has(id)) why = `duplicate of MLS ${dupes.get(id).keep}: ${dupes.get(id).reason || dec.duplicates.reason}`;
   else if (Number(p.sellingPrice) > 0 && Number(p.sellingPrice) < floor) why = dec.minPrice.reason;
   if (why) removed.push([id, p.address, p.propType, p.status, String(p.sellingDate || "").slice(0, 10), p.sellingPrice, p.fogNeighborhood, why]);
   else if (String(p.sellingDate || "").slice(0, 10) > END) hold.push(f);

@@ -22,8 +22,9 @@ the report uses sold data — only as a yardstick for the sale price (R4).
 So this script only FLAGS. It never edits, drops or excludes a sale and it
 changes none of the report's outputs; a new finding goes to the owner, whose
 decision is recorded in data/sale-decisions.json. It looks at this year to
-date (Jan 1 – the data date, mg.last_full_month()) and the same stretch last
-year:
+date (Jan 1 – the period end, mg.last_full_month()) and the same stretch last
+year; the likely-error checks (E) also cover the rest of last year, since the
+report prints last year's full-year totals:
 
   likely-error  E1–E8   duplicates, impossible prices and dates, sales in no grid, over $25M
   review        R1–R10  figures worth a second look before the report goes out
@@ -120,10 +121,12 @@ for i, (f, r) in enumerate(zip(RAW, F)):
     x["_d"] = day(r["sellingDate"]); d = r["sellingDate"][:10]
     if not x["_d"]: continue                       # not a date: the grids can't place it either
     x["_win"] = next((y for y, (lo, hi) in WINDOWS.items() if lo <= d <= hi), None)
+    x["_span"] = f"{LY}-01-01" <= d <= THRU.isoformat()
     g = (f.get("geometry") or {}).get("coordinates") or [r.get("lng"), r.get("lat")]
     x["_xy"] = g if g and None not in g else None
     S.append(x)
 W = [x for x in S if x["_win"]]                     # the sales the YTD windows hold
+WS = [x for x in S if x["_span"]]                   # + the rest of last year: the report prints its full-year totals
 P = lambda x: x["sellingPrice"]
 M = lambda v: "—" if v is None else f"${v:,.0f}" if v < 100_000 else "$" + mg.usdM(v)
 PCT = lambda q: f"{100 * q:.1f}%" if q < 0.01 else f"{100 * q:.0f}%"
@@ -151,7 +154,7 @@ def flag(check, x, why, related=(), year=None, key=None, **fields):
         row = dict(id="", address="", neighborhood="", sfar="", segment="", propType="", date="", price=None, list=None, sqft=None, beds=None, status="")
     if check in ("E4", "R4") and row["id"] in CONFIRMED: return
     row.update(fields)
-    y = year if year is not None else (x["_win"] if x is not None else None)
+    y = year if year is not None else ((x["_win"] or (x["_d"].year if x.get("_d") else None)) if x is not None else None)
     k = (check, y, key or row["id"])
     rel = {str(r) for r in related if r} - {row["id"]}
     if k in FIND:
@@ -187,7 +190,7 @@ clusters = defaultdict(list)
 for x in S:
     if x["_i"] in linked: clusters[root(x["_i"])].append(x)
 for rs in clusters.values():
-    if len(rs) < 2 or not any(x["_win"] for x in rs) or decided(*(r["id"] for r in rs)): continue
+    if len(rs) < 2 or not any(x["_span"] for x in rs) or decided(*(r["id"] for r in rs)): continue
     o = min(rs, key=orig_first)
     for x in rs:
         if x is o: continue
@@ -195,7 +198,7 @@ for rs in clusters.values():
         same = f"same {how}" + (f" {x['_apn']}" if how == "APN" else "")
         flag("E1", x, f"duplicate of MLS {o['id']} ({o.get('status')}, {o['sellingDate'][:10]}, {o['address'].split(',')[0]}, {o.get('propType')}): "
                       f"{same}, same price {M(P(x))}, {DAYS(gap(x, o))} apart — counted twice",
-             related=[r["id"] for r in rs], year=x["_win"] or o["_win"])
+             related=[r["id"] for r in rs], year=x["_win"] or o["_win"] or x["_d"].year)
 
 # E1b conflicting-duplicate: the same home twice within 30 days at different prices. By APN only
 # when both are single-family: a condo or TIC building's units share one parcel number.
@@ -203,7 +206,7 @@ seen = set()
 for grp, what in [(by_key, "address")] + ([(by_apn, "APN")] if "apn" in HAS else []):
     for rs in grp.values():
         for a, b in itertools.combinations(rs, 2):
-            if P(a) == P(b) or gap(a, b) > 30 or not (a["_win"] or b["_win"]): continue
+            if P(a) == P(b) or gap(a, b) > 30 or not (a["_span"] or b["_span"]): continue
             if what == "APN" and not (a["_seg"] == b["_seg"] == "SFH"): continue
             if decided(a["id"], b["id"]): continue
             pair = frozenset((a["_i"], b["_i"]))
@@ -211,15 +214,18 @@ for grp, what in [(by_key, "address")] + ([(by_apn, "APN")] if "apn" in HAS else
             seen.add(pair)
             o, x = sorted((a, b), key=orig_first)
             flag("E1b", x, f"same {what} as MLS {o['id']} ({o['address'].split(',')[0]}, {o.get('status')}, {o['sellingDate'][:10]}) {DAYS(gap(a, b))} apart "
-                           f"at a different price: {M(P(x))} here vs {M(P(o))}", related=[o["id"]], year=x["_win"] or o["_win"])
+                           f"at a different price: {M(P(x))} here vs {M(P(o))}", related=[o["id"]], year=x["_win"] or o["_win"] or x["_d"].year)
 
 # E3 non-dwelling: a parking space, storage locker or boat slip sold as a unit.
 NONDWELL = re.compile(r"^(P-?\d+|PKG\w*|PK\d*|PS\d*|PARK\w*|STOR\w*|STG\d*|SLIP\w*|BS\d+|BOAT\w*|GAR(?!DEN)\w*|SPACE\w*)$", re.I)  # a garden unit is a home
 baths = lambda x: (lambda m: float(m.group(1)) if m else None)(re.match(r"\s*(\d+(?:\.\d+)?)", str(x.get("bathrooms") or "")))
-for x in W:
+full_baths = lambda x: (lambda m: int(m.group(1)) if m else None)(re.search(r"\((\d+)\s+\d+\)", str(x.get("bathrooms") or "")))  # '1 (0 1)' → 0
+for x in WS:
     if x["_unitw"] and NONDWELL.match(re.sub(r"\s", "", x["_unitw"])): flag("E3", x, f"unit '#{x['_unitw']}' reads as parking/storage/slip")
     if "bathrooms" in HAS and x.get("bedrooms") == 0 and baths(x) == 0 and P(x) < 150_000:
         flag("E3", x, f"0 bed / 0 bath at {M(P(x))}")
+    elif "bathrooms" in HAS and x.get("bedrooms") == 0 and full_baths(x) == 0 and (baths(x) or 0) > 0:   # a half bath only; '0 (0 0)' is just not entered
+        flag("E3", x, f"no bedroom and no full bath ({x.get('bathrooms')}){'' if x.get('sqft') else ', no sqft'} at {M(P(x))}: a home, or storage/commercial/parking?")
 
 # E4 price-under-100k-or-digit-error: a dropped digit, or a parking space priced as a home.
 pp = defaultdict(list)
@@ -234,6 +240,9 @@ for x in W:
     v = pp[(x["_win"], x["_seg"], x["_sfar"])]
     if x["_seg"] and len(v) - 1 >= 3 and sp <= 0.1 * med_without(v, sp):
         flag("E4", x, f"{PCT(sp / med_without(v, sp))} of the {x['_sfar']} {x['_seg']} median {M(med_without(v, sp))} ({len(v) - 1} other sales, {x['_win']})")
+
+for x in WS:                                         # the rest of last year: its full-year totals print
+    if not x["_win"] and P(x) < 100_000: flag("E4", x, f"sold for {M(P(x))}, under $100K")
 
 # E5 segment-gap: a type in neither segment is in no grid; an SFAR neighborhood in no AREA is
 # in no area row (one row per neighborhood).
@@ -255,38 +264,60 @@ for x in W:
 HELD = []
 try: HELD = [f["properties"] for f in json.load(open(os.path.join(ROOT, "data", "held-sales.geojson")))["features"]]
 except FileNotFoundError: pass
-for x in S + [dict(h, _win=None, _d=day(h.get("sellingDate")), _sfar=mg.FIX.get(h.get("neighborhood") or "", h.get("neighborhood") or ""),
-                   _seg="SFH" if h.get("propType") in SFH else "Condo/TIC/Other" if h.get("propType") in CONDO else "") for h in HELD]:
-    if not x["_d"]: continue
+held = [dict(h, _win=None, _span=False, _d=day(h.get("sellingDate")), _sfar=mg.FIX.get(h.get("neighborhood") or "", h.get("neighborhood") or ""),
+             _seg="SFH" if h.get("propType") in SFH else "Condo/TIC/Other" if h.get("propType") in CONDO else "") for h in HELD]
+for x in S:
     if x["_d"] > TODAY: flag("E6", x, f"closing date {x['_d']} is in the future (today {TODAY})", year=x["_d"].year)
-    elif x["_d"] > THRU:
+    elif x["_d"] > THRU:     # apply-sale-decisions.mjs holds these out; one still here is a leak
+        flag("E6", x, f"closed {x['_d']}, after the reporting period end {THRU}, and still in the published sales file: "
+                      "run scripts/apply-sale-decisions.mjs", year=x["_d"].year)
+for x in held:
+    if not x["_d"]: continue
+    if x["_d"] > THRU:
         flag("E6", x, f"closed {x['_d']}, after the reporting period end {THRU}: held out of every statistic until the period moves", year=x["_d"].year)
+    else:                    # the period moved past it but the holdback was not rerun
+        flag("E6", x, f"closed {x['_d']}, inside the period (through {THRU}) but still held out: run scripts/apply-sale-decisions.mjs", year=x["_d"].year)
 
 # E7 sfh-with-unit, and E7b one address typed both single-family and condo.
-for x in W:
-    if x["_seg"] == "SFH" and "#" in (x.get("address") or "").split(",")[0]:
-        flag("E7", x, f"single-family type ({x.get('propType')}) with a unit number '#{x['address'].split(',')[0].split('#', 1)[1].strip()}'")
+for x in WS:
+    if x["_seg"] == "SFH" and x["_unit"]:
+        flag("E7", x, f"single-family type ({x.get('propType')}) with a unit number '{x['_unitw']}'")
 for rs in by_key.values():
     segs = {r["_seg"] for r in rs}
     if not {"SFH", "Condo/TIC/Other"} <= segs: continue
     for x in rs:
-        if not x["_win"]: continue
+        if not x["_span"]: continue
         other = [r for r in rs if r["_seg"] and r["_seg"] != x["_seg"]]
         flag("E7b", x, f"typed {x.get('propType')} here, " + ", ".join(f"{r.get('propType')} on MLS {r['id']} ({r['sellingDate'][:10]})" for r in other),
              related=[r["id"] for r in other])
 
-# E7c sfh-in-a-condo-building: typed single-family where the building's other sales are condos
-# (1483 Sutter St #517, Oct 2026: the 2025 history feed's type, not the MLS's).
-for rs in by_bldg.values():
-    co = [r for r in rs if r["_seg"] == "Condo/TIC/Other"]
-    if not co: continue
-    for x in rs:
-        if x["_seg"] == "SFH":
-            flag("E7c", x, f"typed {x.get('propType')} in a building with {len(co)} Condo/TIC/Other sale(s): "
-                           + ", ".join(f"{r['address'].split(',')[0]} ({r.get('propType')})" for r in co[:3]), related=[r["id"] for r in co])
+# E7c sfh-in-a-condo-building: typed single-family where the building's other sales (any year) are
+# condos/TICs — by building, a range address ('254-256 8th') matching each of its numbers, or by
+# parcel number (1483 Sutter St #517, 254-256 8th Ave, Oct 2026: the 2025 history feed's type).
+def bkeys(x):
+    m = re.match(r"(\d+)[a-z]?\s*-\s*(\d+)[a-z]?\s+(.*)", (x.get("address") or "").split(",")[0].split("#")[0].strip().lower())
+    if not m: return {x["_bldg"]}
+    rest = split_addr(m.group(3))[0]
+    return {x["_bldg"], f"{m.group(1)} {rest}", f"{m.group(2)} {rest}"}
+cobld, coapn = defaultdict(list), defaultdict(list)
+for r in S:
+    if r["_seg"] != "Condo/TIC/Other": continue
+    for k in bkeys(r): cobld[k].append(r)
+    if r["_apn"]: coapn[r["_apn"]].append(r)
+for x in WS:
+    if x["_seg"] != "SFH": continue
+    co = {r["id"]: r for k in bkeys(x) for r in cobld.get(k, [])}
+    how = "building"
+    if x["_apn"] and coapn.get(x["_apn"]):
+        if not co: how = f"parcel {x['_apn']}"
+        co.update({r["id"]: r for r in coapn[x["_apn"]]})
+    co = list(co.values())
+    if co:
+        flag("E7c", x, f"typed {x.get('propType')}, but the same {how} has {len(co)} Condo/TIC/Other sale(s): "
+                       + ", ".join(f"{r['address'].split(',')[0]} ({r.get('propType')}, {r['sellingDate'][:10]})" for r in co[:3]), related=[r["id"] for r in co])
 
 # E8 over-$25M: probably an entry error (the owner's rule) — kept, and pointed out every month.
-for x in W:
+for x in WS:
     if P(x) > OVER:
         flag("E8", x, f"{M(P(x))} is over {M(OVER)}: probably an entry error — confirm the price"
                       + (f" (${P(x) / x['sqft']:,.0f}/sf on {x['sqft']:,} sf)" if x.get("sqft") else " (no sqft)"))
@@ -553,6 +584,7 @@ with open(os.path.join(OUT, "review.csv"), "w", newline="") as fh:
     w.writerows(dict(f, related_ids=" ".join(f["related_ids"])) for f in findings)
 
 print(f"Sales-data review — YTD {TY} ({WINDOWS[TY][0]} – {WINDOWS[TY][1]}) vs YTD {LY} ({WINDOWS[LY][0]} – {WINDOWS[LY][1]}); {len(W):,} sales")
+print(f"  likely errors (E) also cover the rest of {LY}, whose full-year totals the report prints; {len(WS):,} sales in all")
 print(f"{'':4} {'':12} {'':40} {TY:>6} {LY:>6}")
 for s in summary:
     print(f"{s['check']:<4} {s['severity']:<12} {s['title']:<40} {s['count_this_year']:>6} {s['count_last_year']:>6}")

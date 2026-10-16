@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-16T16:42:21.691Z",
+  "generatedAt": "2026-10-16T17:19:21.761Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
-  "salesTracked": 8987,
+  "salesTracked": 8985,
   "salesThisYear": 3949,
   "neighborhoods": 116,
   "parcels": 152454,
@@ -40,15 +40,15 @@
         "saleToList": 110.09615384615384
       },
       "condo": {
-        "n": 1868,
+        "n": 1866,
         "median": 1100000,
-        "avg": 1309031.971092077,
+        "avg": 1309805.3172561629,
         "dom": 29,
-        "overAsk": 36.13490364025696,
+        "overAsk": 36.12004287245445,
         "saleToList": 100
       },
-      "volume": 6302041300,
-      "n": 3637
+      "volume": 6300866300,
+      "n": 3635
     }
   },
   "houses": {

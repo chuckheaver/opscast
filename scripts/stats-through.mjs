@@ -13,12 +13,17 @@ import { fileURLToPath } from "node:url";
 
 const PERIOD = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "reporting-period.json");
 
+// A real calendar date written YYYY-MM-DD, or a stop: a mistyped period end
+// must never quietly turn into a guessed one.
+function checkDate(v, where) {
+  const ok = /^\d{4}-\d{2}-\d{2}$/.test(v || "") && new Date(`${v}T00:00:00Z`).toISOString().slice(0, 10) === v;
+  if (!ok) throw new Error(`${where} must be a date written YYYY-MM-DD, got ${JSON.stringify(v)}`);
+  return v;
+}
+
 export function statsThrough(geo) {
-  if (process.env.STATS_THROUGH) return process.env.STATS_THROUGH;
-  if (existsSync(PERIOD)) {
-    const end = JSON.parse(readFileSync(PERIOD, "utf8")).periodEnd;
-    if (/^\d{4}-\d{2}-\d{2}$/.test(end || "")) return end;
-  }
+  if (process.env.STATS_THROUGH) return checkDate(process.env.STATS_THROUGH, "STATS_THROUGH");
+  if (existsSync(PERIOD)) return checkDate(JSON.parse(readFileSync(PERIOD, "utf8")).periodEnd, "data/reporting-period.json periodEnd");
   let latest = "";
   for (const f of geo.features || []) {
     const d = String(f.properties?.sellingDate || "").slice(0, 10);
