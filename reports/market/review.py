@@ -46,6 +46,7 @@ DEC = json.load(open(os.path.join(ROOT, "data", "sale-decisions.json")))
 OVER = DEC.get("pointOut", {}).get("overPrice", 25_000_000)
 KEEP = [set(map(str, k["ids"])) for k in DEC.get("keep", [])]          # owner: real, separate sales
 decided = lambda *ids: any({str(i) for i in ids} <= k for k in KEEP)
+CONFIRMED = {str(c["id"]) for c in DEC.get("confirmed", [])}          # owner checked the price: stop asking
 spec = importlib.util.spec_from_file_location("mg", os.path.join(HERE, "market-grid-v2.py"))
 mg = importlib.util.module_from_spec(spec); spec.loader.exec_module(mg)
 
@@ -148,6 +149,7 @@ def flag(check, x, why, related=(), year=None, key=None, **fields):
                    price=x.get("sellingPrice"), list=x.get("listPrice"), sqft=x.get("sqft"), beds=x.get("bedrooms"), status=x.get("status") or "")
     else:
         row = dict(id="", address="", neighborhood="", sfar="", segment="", propType="", date="", price=None, list=None, sqft=None, beds=None, status="")
+    if check in ("E4", "R4") and row["id"] in CONFIRMED: return
     row.update(fields)
     y = year if year is not None else (x["_win"] if x is not None else None)
     k = (check, y, key or row["id"])

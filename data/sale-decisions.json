@@ -1,5 +1,5 @@
 {
-  "_about": "The owner's standing decisions on sales records, applied to public/data/sf-listings.geojson by scripts/apply-sale-decisions.mjs on every data refresh (geocode-listings.mjs runs it after validation). Records left out are listed in data/removed-sales.csv, corrected records in data/edited-sales.csv, and reports/market/review.py shows both every month. The reporting period end is data/reporting-period.json.",
+  "_about": "The owner's standing decisions on sales records, applied to public/data/sf-listings.geojson by scripts/apply-sale-decisions.mjs on every data refresh (geocode-listings.mjs runs it after validation). Sales in \"confirmed\" are ones the owner checked: the review stops questioning their price. Records left out are listed in data/removed-sales.csv, corrected records in data/edited-sales.csv, and reports/market/review.py shows both every month. The reporting period end is data/reporting-period.json.",
   "minPrice": {
     "value": 100000,
     "reason": "Under $100K: parking, a rental or an entry error, not a home sale (owner, Oct 16 2026)."
@@ -107,6 +107,45 @@
       },
       "reason": "A condo in both 2025 and 2026 (owner, Oct 16 2026); the Mar 2025 sale was typed Single Family Residence.",
       "footnote": "117 Telegraph Hill Blvd’s Mar 2025 sale is counted as a condo; the MLS entry typed it single-family."
+    },
+    {
+      "id": "425011322",
+      "address": "489-495 Utah St",
+      "set": {
+        "address": "489-495 Utah St #489, San Francisco, CA 94110"
+      },
+      "from": {
+        "address": "489-495 Utah St #495, San Francisco, CA 94110"
+      },
+      "reason": "The studio, #489: sold $100,000, listed $299,000 (owner, Oct 16 2026); the feed had the unit numbers of MLS 425011322 and 425011295 swapped."
+    },
+    {
+      "id": "425011295",
+      "address": "489-495 Utah St",
+      "set": {
+        "address": "489-495 Utah St #495, San Francisco, CA 94110"
+      },
+      "from": {
+        "address": "489-495 Utah St #489, San Francisco, CA 94110"
+      },
+      "reason": "#495: sold $1,075,000, originally listed at $998,000 (owner, Oct 16 2026); the feed had the unit numbers of MLS 425011322 and 425011295 swapped."
+    }
+  ],
+  "confirmed": [
+    {
+      "id": "425011322",
+      "address": "489-495 Utah St #489",
+      "note": "The studio really sold for $100,000: a valid TIC sale (owner, Oct 16 2026)."
+    },
+    {
+      "id": "41120266",
+      "address": "270 Lobos St",
+      "note": "$485,000 is correct (owner, Oct 16 2026)."
+    },
+    {
+      "id": "424082575",
+      "address": "3229 Jennings St",
+      "note": "$265,000 is correct (owner, Oct 16 2026)."
     }
   ]
 }
