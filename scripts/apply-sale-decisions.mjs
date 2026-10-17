@@ -21,7 +21,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { statsThrough } from "./stats-through.mjs";
+import { statsThrough, lastFullMonth, latestLoadDate } from "./stats-through.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const LISTINGS = join(ROOT, "public", "data", "sf-listings.geojson");
@@ -43,6 +43,19 @@ const held = existsSync(HELD) ? JSON.parse(readFileSync(HELD, "utf8")).features 
 const have = new Set(geo.features.map(f => String(f.properties?.id ?? "")));
 for (const f of held) if (!have.has(String(f.properties?.id ?? ""))) geo.features.push(f);
 const END = statsThrough(geo);
+
+// Only full calendar months are reported (the owner's rule): the period end
+// may not fall inside the month the latest load is still in.
+const FULL = lastFullMonth(geo.features), LOADED = latestLoadDate(geo.features);
+if (FULL && END > FULL) {
+  throw new Error(`period end ${END} is inside a month the data load hasn't finished (it runs to ${LOADED}); `
+    + `the last full month ends ${FULL}. Set data/reporting-period.json periodEnd to ${FULL} or earlier.`);
+}
+if (FULL && END < FULL) {
+  console.warn(`  ! the latest data load is complete through ${FULL} (it runs to ${LOADED}); the period end is ${END}.`
+    + ` Ask the owner whether to move data/reporting-period.json periodEnd to ${FULL}.`);
+}
+console.log(`  period end ${END}: the last full month of a data load that runs to ${LOADED}`);
 
 // What an earlier run already took out stays on the list.
 const csvq = v => `"${String(v ?? "").replace(/"/g, '""')}"`;

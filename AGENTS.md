@@ -6,9 +6,15 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # Market report: the monthly data review
 
-Before every rebuild, ask the owner what the reporting period end date
-should be, and set it in `data/reporting-period.json` (`periodEnd`, and the
-day they confirmed it in `confirmedByOwner`). Never infer it from the data.
+Always build from the latest data load, and report only full calendar
+months: the period end is the last day of the last FULL month in that load.
+A month the load is still in (e.g. the early-October closings of an Oct 1
+load) is never reported until a later load completes it. Before every
+rebuild, tell the owner that date and have them confirm it, then set it in
+`data/reporting-period.json` (`periodEnd`, and the day they confirmed it in
+`confirmedByOwner`); `scripts/apply-sale-decisions.mjs` stops if it falls
+inside an unfinished month. The monthly report and the site's Market Update
+PDF are always the whole city.
 No closing after that date goes into any statistic — site, map counts or
 report: `scripts/apply-sale-decisions.mjs` holds them out of the sales file
 (`data/held-sales.geojson`) until the period moves. `build.sh` applies the
