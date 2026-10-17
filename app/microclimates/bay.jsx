@@ -8,6 +8,7 @@
 import Link from "next/link";
 import GEO from "./bay-zones.json";
 import { BAY_MAP } from "./content";
+import FogZoneKey from "../components/FogZoneKey";
 
 // Eleven steps, blue through a neutral to amber, ordered by July high.
 const HEAT = ["#4E7398", "#7292AF", "#9CB3C6", "#C5D2DB", "#D8C9A0", "#E6DCC4", "#E8C987", "#DDAE5B", "#D5A04A", "#CC913A", "#BA7D2C"];
@@ -130,9 +131,8 @@ export function FogMapCard() {
         <img src="/brand/sf-fog-hero.svg"
              alt="Map of San Francisco's four summer-fog zones, 1 sunniest to 4 foggiest, with every neighborhood outlined and named"
              width="1000" height="780" loading="lazy" />
-        <span className="lp-map-hint">Open the Summer Fog Map &rarr;</span>
       </Link>
-      {/* the map carries its own 1–4 zone key */}
+      <FogZoneKey />
       <div className="mc-fogmap-btns">
         <Link href="/fog?preset=fog">Fog</Link>
         <Link href="/fog?preset=terrain">Terrain</Link>

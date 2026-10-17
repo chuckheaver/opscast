@@ -18,6 +18,7 @@ const GUIDE_COUNT = Object.keys(hoodStats.hoods || {}).length;
 import SiteFooter, { EMAIL, PHONE_DISPLAY, PHONE_HREF, DRE } from "./SiteFooter";
 import HeroSearch from "./HeroSearch";
 import LiveBlockMap from "./LiveBlockMap";
+import FogZoneKey from "./FogZoneKey";
 import LiveHoodMap from "./LiveHoodMap";
 import { allHoods } from "../neighborhoods/lib";
 
@@ -123,9 +124,9 @@ export default function Landing() {
               <img src="/brand/sf-fog-hero.svg"
                    alt="Map of San Francisco's four summer-fog zones, 1 sunniest to 4 foggiest, with every neighborhood outlined and named"
                    width="1000" height="780" />
-              <span className="lp-map-hint">Open the Summer Fog Map &rarr;</span>
             </Link>
             <figcaption>
+              <FogZoneKey />
               {/* Typing an address goes to the same map, with the pin already
                   dropped on it, via the ?lat=&lng=&name= deep-link. */}
               <HeroSearch />

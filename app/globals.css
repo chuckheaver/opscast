@@ -5204,17 +5204,16 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-map-link { display: block; position: relative; }
 .lp-map-link img { transition: transform .2s, filter .2s; }
 .lp-map-link:hover img { transform: translateY(-2px); filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5)); }
-/* Under the map, not over it: every neighborhood down to the city's south
-   edge carries its name. */
-.lp-map-hint {
-  display: table; margin: 8px auto 0;
-  padding: 8px 17px; border-radius: 999px; white-space: nowrap;
-  background: rgba(10,26,48,0.9); border: 1px solid rgba(206,226,230,0.55);
-  color: var(--lp-accent-dk); font-size: 12.5px; font-weight: 700;
-  transition: background .18s, border-color .18s; pointer-events: none;
+/* The fog map's key, under the map (FogZoneKey): numbered zone badges in
+   the map's colours, names in white. */
+.fog-zone-key {
+  list-style: none; margin: 4px auto 12px; padding: 0;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px;
 }
-.lp-map-link:hover .lp-map-hint, .lp-map-link:focus-visible .lp-map-hint {
-  background: var(--lp-accent-dk); border-color: var(--lp-accent-dk); color: var(--lp-navy-2);
+.fog-zone-key li { display: flex; align-items: center; gap: 8px; color: #fff; font-weight: 700; font-size: 15px; }
+.fog-zone-key b {
+  display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 6px;
+  color: #131A25; font-size: 14px; font-weight: 800;
 }
 
 .hero-search {
@@ -5258,7 +5257,9 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 
 @media (max-width: 720px) {
   .hero-search { max-width: none; }
-  .lp-map-hint { font-size: 11.5px; padding: 7px 13px; }
+  .fog-zone-key { gap: 6px 14px; }
+  .fog-zone-key li { font-size: 13.5px; gap: 6px; }
+  .fog-zone-key b { width: 22px; height: 22px; font-size: 12.5px; }
   .wx-chip { padding: 6px 12px 6px 10px; gap: 7px; }
   .wx-text b { font-size: 14px; }
 }

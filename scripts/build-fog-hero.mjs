@@ -7,7 +7,8 @@
 // ships as an <img>): every neighborhood at desktop size (~600px), and the
 // larger ones, bigger, on a phone (~360px). Labels are measured in the real
 // font (headless Chromium) and placed in code, so none overlap. Lato Bold is
-// embedded, so it renders the same everywhere.
+// embedded, so it renders the same everywhere. The zone key is drawn by the
+// page under the map (app/components/FogZoneKey.jsx), in the same colours.
 //
 // It depends only on the neighborhood and fog-contour shapes, not on the
 // sales, so it needs a rebuild only when those change:
@@ -374,49 +375,8 @@ function labelSVG(L) {
 }
 const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 
-// ── key & note (top-left water) and the site's pill (bottom centre) ───────
-// Desktop pill: "Open the Summer Fog Map →" 12.5px bold, 8×17 padding, at
-// bottom:5% — about 215×34 CSS px at a 620px-wide map; phone 11.5px, 7×13.
-const pill = (cssW, pw, ph) => {
-  const u = W / cssW; const w = pw * u, h = ph * u; const yb = H * 0.95;
-  return { x0: W / 2 - w / 2 - 6, x1: W / 2 + w / 2 + 6, y0: yb - h - 6, y1: H };
-};
-
-function keySVG(s, cls, x0 = 22) {
-  // s: font size of the key text in viewBox units; x0: where the row starts
-  const sw = s * 1.55, gapIn = s * 0.45, gapOut = s * 1.0;
-  let x = x0, y = 16;
-  const o = [`<g class="${cls}">`];
-  const row1 = [];
-  for (const z of ZONES) {
-    const tw = widthOf(z.name, s);
-    row1.push(`<rect x="${f1(x)}" y="${f1(y)}" width="${f1(sw)}" height="${f1(sw)}" rx="${f1(s * 0.3)}" fill="${z.fill}"/>` +
-      `<text x="${f1(x + sw / 2)}" y="${f1(y + sw / 2 + s * 0.36)}" font-size="${f1(s)}" text-anchor="middle" fill="${INK_SFH}">${z.k}</text>` +
-      `<text x="${f1(x + sw + gapIn)}" y="${f1(y + sw / 2 + s * 0.36)}" font-size="${f1(s)}" fill="#E7EEF4">${z.name}</text>`);
-    x += sw + gapIn + tw + gapOut;
-  }
-  const keyW = x - gapOut - x0;
-  o.push(row1.join(""));
-  o.push("</g>");
-  const kb = { x0: x0 - 8, y0: 14, x1: x0 + keyW + 8, y1: y + sw + 8 };
-  for (let i = 0; i <= 20; i++) for (let j = 0; j <= 6; j++) {
-    const px = kb.x0 + (kb.x1 - kb.x0) * i / 20, py = kb.y0 + (kb.y1 - kb.y0) * j / 6;
-    if (LAND.some(rs => inside(px, py, rs))) throw new Error(`key ${cls} sits on land at ${px.toFixed(0)},${py.toFixed(0)}`);
-  }
-  return { svg: o.join(""), box: kb };
-}
-// widths for key/note strings: rough Lato Bold metrics (no letter-spacing)
-const LATO = { " ": 0.193, "/": 0.36, ":": 0.26, ".": 0.25, "-": 0.32, $: 0.58 };
-function widthOf(t, fs) {
-  let w = 0;
-  for (const ch of t) w += LATO[ch] ?? (/[0-9]/.test(ch) ? 0.58 : /[A-Z]/.test(ch) ? (ch === "M" ? 0.86 : ch === "I" ? 0.3 : 0.66) : /[mw]/.test(ch) ? 0.84 : /[ijlft]/.test(ch) ? 0.31 : 0.54);
-  return w * fs;
-}
-
 const LAND = polys(shapes.land).map(rs => rs.map(proj));
 const LAND_RINGS = LAND.flat();
-// Several orders of placement; keep the run that names the most
-// neighborhoods, then the one with the largest type overall.
 function bestOf(run, rounds = 5) {
   // Run the layout; any name left out moves to the front of the line and it
   // runs again, until every neighborhood has its name or the rounds run out.
@@ -431,15 +391,11 @@ function bestOf(run, rounds = 5) {
   }
   return best;
 }
-// On desktop the hero's headline reaches over the map's top-left corner
-// (about 120 units across), so the key starts clear of it.
-const keyD = keySVG(17, "d", 150);
-const keyP = keySVG(26, "p");
 const PARKS = PARK_NAMES;
 // Every name inside its own neighborhood: most of the box in the shape and no
 // point more than a few units past its edge (the halo covers the line there).
-const D = bestOf(first => layout({ smallFirst: true, first, last: { fin: 0.5, tol: 12, fnMin: 4.5, pad: 1.2 }, fnMin: 5.5, fullMin: 7.5, fnMax: 15, byArea: true, wet: 3, rMin: 0, passes: [[0.86, 5], [0.74, 7], [0.64, 9], [0.56, 11]], pad: 3, parks: PARKS, reserved: [keyD.box] }));   // the map link sits below the map now
-const P = layout({ fnMin: 15, fullMin: 17, fnMax: 24, wet: 9, rMin: 14, passes: [[0.8, 10], [0.68, 14], [0.58, 18]], pad: 5, parks: PARKS, reserved: [keyP.box] });
+const D = bestOf(first => layout({ smallFirst: true, first, last: { fin: 0.5, tol: 12, fnMin: 4.5, pad: 1.2 }, fnMin: 5.5, fullMin: 7.5, fnMax: 15, byArea: true, wet: 3, rMin: 0, passes: [[0.86, 5], [0.74, 7], [0.64, 9], [0.56, 11]], pad: 3, parks: PARKS, reserved: [] }));
+const P = layout({ fnMin: 15, fullMin: 17, fnMax: 24, wet: 9, rMin: 14, passes: [[0.8, 10], [0.68, 14], [0.58, 18]], pad: 5, parks: PARKS, reserved: [] });
 
 // ── assemble ──────────────────────────────────────────────────────────────
 const landD = pathD(LAND.flat(), 0.5);
@@ -461,7 +417,6 @@ o.push(`<g fill="none" stroke="${OUTLINE}" stroke-opacity=".78" stroke-width=".8
 o.push(`<path d="${landD}" fill="none" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="1.1" vector-effect="non-scaling-stroke" fill-rule="evenodd"/>`);
 o.push(`<g class="d">${D.map(labelSVG).join("")}</g>`);
 o.push(`<g class="p">${P.map(labelSVG).join("")}</g>`);
-o.push(keyD.svg, keyP.svg);
 o.push(`</svg>`);
 const svg = o.join("\n") + "\n";
 writeFileSync(OUT, svg);
