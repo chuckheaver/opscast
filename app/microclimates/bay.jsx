@@ -128,16 +128,11 @@ export function FogMapCard() {
     <figure className="mc-fig mc-fogmap">
       <Link href="/fog?preset=fog" className="lp-map-link" aria-label="Open the interactive summer fog map">
         <img src="/brand/sf-fog-hero.svg"
-             alt="San Francisco split into its fog zones, one dot per home sold this year"
+             alt="Map of San Francisco's four summer-fog zones, 1 sunniest to 4 foggiest, with every neighborhood outlined and named"
              width="1000" height="780" loading="lazy" />
         <span className="lp-map-hint">Open the Summer Fog Map &rarr;</span>
       </Link>
-      <div className="mc-fogmap-key">
-        {[["Sun", "#E8B84B"], ["Transition", "#C9A882"], ["Fog", "#A8BCCD"], ["Persistent Fog", "#8DA2B5"]].map(([k, c]) => (
-          <span key={k}><i style={{ background: c }} />{k}</span>
-        ))}
-        <span><i className="mc-fogmap-dot" />home sold this year</span>
-      </div>
+      {/* the map carries its own 1–4 zone key */}
       <div className="mc-fogmap-btns">
         <Link href="/fog?preset=fog">Fog</Link>
         <Link href="/fog?preset=terrain">Terrain</Link>

@@ -121,7 +121,7 @@ export default function Landing() {
           <figure className="lp-hero-map">
             <Link href="/fog?preset=fog" className="lp-map-link" aria-label="Open the interactive microclimate map">
               <img src="/brand/sf-fog-hero.svg"
-                   alt="San Francisco split into its microclimate zones, one dot per home sold this year"
+                   alt="Map of San Francisco's four summer-fog zones, 1 sunniest to 4 foggiest, with every neighborhood outlined and named"
                    width="1000" height="780" />
               <span className="lp-map-hint">Open the Summer Fog Map &rarr;</span>
             </Link>

@@ -13,7 +13,6 @@ python3 -c "import json; p=json.load(open('../../data/reporting-period.json')); 
 (cd ../.. && node scripts/apply-sale-decisions.mjs \
   && node --no-warnings scripts/build-landing-stats.mjs \
   && node --no-warnings scripts/build-neighborhood-stats.mjs \
-  && node --no-warnings scripts/build-fog-hero.mjs \
   && node --no-warnings scripts/build-building-sales.mjs)
 python3 cover3.py            # the narrative pages  → out/cover3.html
 python3 market-grid-v2.py    # the two grids        → out/market-grid-v2.html
