@@ -139,15 +139,19 @@ writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
 // Where this year's sales are, and nothing else — the home page's live map
 // draws these as dots. A few KB instead of the multi-MB listings file.
 const POINTS = "public/data/sold-points-ytd.json";
+// Each point carries its segment, as the market report splits them:
+// 0 = single-family (Single Family Residence, 2 Houses on Lot, Halfplex),
+// 1 = Condo / TIC / Other — the map colours them navy and gold to match.
+const SFH_TYPES = new Set(["Single Family Residence", "2 Houses on Lot", "Halfplex"]);
 const pts = [];
 for (const f of geo.features || []) {
   const p = f.properties || {};
   if (!(Number(p.sellingPrice) > 0) || !String(p.sellingDate || "").startsWith(year) || !upTo(p.sellingDate)) continue;
   if (p.noLocation) continue;                   // no real location — not drawn
   const [lng, lat] = f.geometry?.coordinates || [];
-  if (Number.isFinite(lng) && Number.isFinite(lat)) pts.push([+lng.toFixed(5), +lat.toFixed(5)]);
+  if (Number.isFinite(lng) && Number.isFinite(lat)) pts.push([+lng.toFixed(5), +lat.toFixed(5), SFH_TYPES.has(p.propType) ? 0 : 1]);
 }
-writeFileSync(POINTS, JSON.stringify({ year, through: built, points: pts }));
+writeFileSync(POINTS, JSON.stringify({ year, through: built, segments: ["SFH", "Condo/TIC/Other"], points: pts }));
 console.log(`wrote ${POINTS} (${pts.length.toLocaleString()} points)`);
 console.log(`wrote ${OUT}`);
 console.log(`  ${out.salesThisYear.toLocaleString()} ${year} sales · ${out.parcels.toLocaleString()} parcels`);

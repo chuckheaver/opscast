@@ -5873,6 +5873,16 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 @media (max-width: 480px) { .lp-block-layer-k { font-size: 13.5px; } }
 .ig { min-height: 45vh; }
 .lp-live-map { width: 100%; height: 100%; min-height: 480px; }
+/* The live map's key: top-left, under the address pill. */
+.lp-live-key {
+  position: absolute; top: 76px; left: 12px; z-index: 2; margin: 0; padding: 7px 11px; list-style: none;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; max-width: calc(100% - 24px);
+  background: rgba(255,255,255,0.94); border-radius: 10px; box-shadow: 0 4px 14px rgba(10,20,35,0.18);
+  font-size: 13px; font-weight: 700; color: #131A25;
+}
+.lp-live-key li { display: flex; align-items: center; gap: 6px; }
+.lp-live-key i { width: 12px; height: 12px; border-radius: 50%; box-shadow: 0 0 0 1.5px #fff, 0 0 0 2.5px rgba(19,26,37,0.18); }
+.lp-live-key .lp-live-key-when { font-weight: 400; color: #505050; font-size: 12px; }
 @media (max-width: 900px) { .lp-live-map { min-height: 0; height: clamp(320px, 80vw, 520px); } }
 .lp .lp-block-map-open {
   position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 2;
