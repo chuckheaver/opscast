@@ -688,6 +688,17 @@ export default function FogApp() {
     setStatsExpanded(true);
   }, [listingsGeo]);
 
+  // ?hood=<name>&homes=sfh|condo|all — a guide page's stat tile: once the
+  // neighborhood is picked, show its sales (that segment, or all) on the Homes
+  // layer with the Stats sheet's address list open.
+  const urlHomes = searchParams?.get("homes") || "";
+  const urlHomesAppliedRef = useRef(false);
+  useEffect(() => {
+    if (urlHomesAppliedRef.current || !urlHomes || !urlHood || !urlHoodAppliedRef.current) return;
+    urlHomesAppliedRef.current = true;
+    showNeighborhoodProperties(urlHood, urlHomes === "all" ? null : urlHomes);
+  }, [urlHomes, urlHood, geojson, contours, showNeighborhoodProperties]);
+
   // Neighborhood pop-up "Show … layer" toggles: flip that overlay on/off in
   // place — the pop-up stays open (like the Details lists), no navigation.
   const microOn = showMicroSun || showMicroCool || showMicroWind || showMicroSolar;

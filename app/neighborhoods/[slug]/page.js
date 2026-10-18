@@ -4,6 +4,7 @@
 import Link from "next/link";
 import SiteFooter from "../../components/SiteFooter";
 import HoodPreviewMap from "../../components/HoodPreviewMap";
+import WalkTour from "../../components/WalkTour";
 import { polygonNamesFor } from "../../fog/lib/neighborhoods";
 import { notFound } from "next/navigation";
 import {
@@ -30,14 +31,16 @@ export async function generateMetadata({ params }) {
 }
 
 // Every figure is reported, however few sales are behind it. The sale count
-// rides with each median so the reader can weigh it themselves.
-const Stat = ({ label, value, sub }) =>
+// rides with each median so the reader can weigh it themselves. Each one opens
+// the map on this neighborhood with its sales showing and their list open.
+const Stat = ({ label, value, sub, href }) =>
   value == null ? null : (
-    <div className="lp-nstat">
+    <Link className="lp-nstat lp-nstat-link" href={href} title="See these sales on the map">
       <div className="lp-nstat-v">{value}</div>
       <div className="lp-nstat-l">{label}{sub ? <span className="lp-fine"> {sub}</span> : null}</div>
-    </div>
+    </Link>
   );
+const salesMap = (name, seg) => `/fog?${new URLSearchParams({ preset: "homes", hood: name, homes: seg })}`;
 
 export default async function Page({ params }) {
   const { slug } = await params;
@@ -69,11 +72,11 @@ export default async function Page({ params }) {
 
         {s && s.n > 0 && (
           <section className="lp-nstats">
-            <Stat label="Median house" value={money(s.sfhMedian)} sub={s.sfhN ? `${s.sfhN} sold` : null} />
-            <Stat label="Median condo / TIC" value={money(s.condoMedian)} sub={s.condoN ? `${s.condoN} sold` : null} />
-            <Stat label="Per square foot" value={s.ppsf ? `$${Math.round(s.ppsf).toLocaleString("en-US")}` : null} />
-            <Stat label="Days to sell" value={s.dom != null ? Math.round(s.dom) : null} sub="median" />
-            <Stat label="Homes sold" value={s.n} sub={statsYear} />
+            <Stat label="Median house" value={money(s.sfhMedian)} sub={s.sfhN ? `${s.sfhN} sold` : null} href={salesMap(name, "sfh")} />
+            <Stat label="Median condo / TIC" value={money(s.condoMedian)} sub={s.condoN ? `${s.condoN} sold` : null} href={salesMap(name, "condo")} />
+            <Stat label="Per square foot" value={s.ppsf ? `$${Math.round(s.ppsf).toLocaleString("en-US")}` : null} href={salesMap(name, "all")} />
+            <Stat label="Days to sell" value={s.dom != null ? Math.round(s.dom) : null} sub="median" href={salesMap(name, "all")} />
+            <Stat label="Homes sold" value={s.n} sub={statsYear} href={salesMap(name, "all")} />
           </section>
         )}
 
@@ -82,21 +85,39 @@ export default async function Page({ params }) {
         {c.history && (
           <section className="lp-nsec">
             <h2>The story</h2>
-            <p>{c.history}</p>
+            {String(c.history).split(/\n\s*\n/).map((para, i) => <p key={i}>{para}</p>)}
           </section>
         )}
 
         {c.facts?.length ? (
           <section className="lp-nsec">
-            <h2>Things most people don&rsquo;t know</h2>
-            <div className="lp-facts">
-              {c.facts.map(f => (
-                <div key={f.title} className="lp-fact">
-                  <h3>{f.title}</h3>
-                  <p>{f.text}</p>
-                </div>
-              ))}
-            </div>
+            <h2>Did You Know?</h2>
+            {/* Each located fact is a stop on the walk, numbered on the map
+                and on its card in the same order. */}
+            {(() => {
+              let n = 0;
+              const facts = c.facts.map(f => ({ ...f, n: Array.isArray(f.at) ? ++n : null }));
+              return (
+                <>
+                  {n >= 2 && (
+                    <>
+                      <h3 className="lp-walk-h">A walk through {name}</h3>
+                      <WalkTour name={name} polygons={polygonNamesFor(name)} walk={c.walk}
+                        stops={facts.filter(f => f.n).map(f => ({ n: f.n, at: f.at, place: f.place, title: f.title }))} />
+                    </>
+                  )}
+                  <div className="lp-facts">
+                    {facts.map(f => (
+                      <div key={f.title} className="lp-fact">
+                        <h3>{f.n ? <span className="lp-fact-n">{f.n}</span> : null}{f.title}</h3>
+                        {f.place ? <p className="lp-fact-where">{f.place}{f.where && !f.where.startsWith(f.place) ? ` · ${f.where.replace(/, San Francisco.*$/, "")}` : ""}</p> : null}
+                        <p>{f.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              );
+            })()}
           </section>
         ) : null}
 

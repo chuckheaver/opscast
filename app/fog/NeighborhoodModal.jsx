@@ -446,7 +446,7 @@ export default function NeighborhoodModal({
 
         {data.facts?.length > 0 && (
           <section style={SEC}>
-            <Banner>Things most people don&rsquo;t know</Banner>
+            <Banner>Did You Know?</Banner>
             {data.facts.map((f, i) => (
               <div key={f.title} className="nhm-fact" style={{ marginBottom: i < data.facts.length - 1 ? 10 : 0 }}>
                 <h3>{f.title}</h3>
