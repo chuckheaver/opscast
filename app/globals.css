@@ -4659,9 +4659,13 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
    subject, so it gets the wider column and all the height there is. */
 .lp-hero {
   position: relative; overflow: hidden;
+  /* Clip side to side only: the address search's suggestions hang below the
+     hero's bottom edge (over the next band) instead of being cut off. */
+  z-index: 3;
   background: radial-gradient(120% 120% at 42% 18%, var(--lp-navy-2) 0%, var(--lp-navy) 70%), var(--lp-navy);
   padding: clamp(62px, 8vh, 84px) clamp(18px, 5vw, 56px) clamp(26px, 4vh, 40px);
 }
+@supports (overflow: clip) { .lp-hero { overflow: visible; overflow-x: clip; } }
 /* Bare nav: links only, pushed right. */
 .lp-nav-bare { justify-content: flex-end; }
 .lp-hero-grid {
@@ -5217,6 +5221,8 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 }
 
 .hero-search {
+  /* the anchor for its suggestion list, which opens right under the box */
+  position: relative;
   display: flex; align-items: center; gap: 9px;
   max-width: 460px; margin: 0 auto;
   background: rgba(255,255,255,0.07);

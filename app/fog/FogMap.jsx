@@ -2497,7 +2497,18 @@ export default function FogMap({
       el.className = "qp-dock";
       map.getContainer().appendChild(el);
       peekCbRef.current.onPeekEl?.(el);
-      return () => { peekCbRef.current.onPeekEl?.(null); el.remove(); };
+      // Once the card has its real height, keep the pin centred in the map
+      // left above it — once per pin, so it never fights the user's panning.
+      const pin = addressPin.point;
+      let fitted = false;
+      const ro = new ResizeObserver(() => {
+        const ch = el.offsetHeight;
+        if (fitted || ch < 40) return;
+        fitted = true;
+        map.easeTo({ center: pin, padding: { top: 110, right: 20, bottom: ch + 28, left: 20 }, duration: 500 });
+      });
+      ro.observe(el);
+      return () => { ro.disconnect(); peekCbRef.current.onPeekEl?.(null); el.remove(); };
     }
     let closedByUs = false;
     const popup = new mapboxgl.Popup({
@@ -2525,10 +2536,21 @@ export default function FogMap({
       : null;
 
     if (picked.point) {
+      // An address flies to its pin, with room left for the Quick Peek card:
+      // above the pin on desktop (the card hangs over it), and on a phone
+      // above the card docked across the bottom (refined once the card has
+      // its real height, in the Quick Peek effect).
+      if (picked.source === "address" && picked.zoom) {
+        const phone = window.matchMedia("(max-width: 640px)").matches;
+        const h = map.getContainer().clientHeight;
+        const padding = phone
+          ? { top: 110, right: 20, bottom: Math.max(bottomInset + 24, Math.round(h * 0.42)), left: 20 }
+          : { top: Math.min(300, Math.round(h * 0.42)), right: 40, bottom: 40, left: 40 };
+        map.flyTo({ center: picked.point, zoom: picked.zoom, padding, duration: 1000 });
       // A neighborhood pick (picked.bounds) frames that polygon; a building
       // deep-link (picked.zoom) flies in to the footprint; every other pick
       // keeps the city-wide frame.
-      if (picked.bounds) {
+      } else if (picked.bounds) {
         map.fitBounds(picked.bounds, { padding: pad || 60, maxZoom: 15, duration: 900 });
       } else if (picked.zoom) {
         map.flyTo({ center: picked.point, zoom: picked.zoom, padding: pad || undefined, duration: 1000 });

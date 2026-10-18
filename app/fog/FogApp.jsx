@@ -45,6 +45,8 @@ const SHEET_VH = 52;
 // Geographic centre of San Francisco — the default placeholder for the
 // "Neighborhoods" entry, so the map opens centred on the city for browsing.
 const SF_CENTER = [-122.4376, 37.7577];
+// How close an address search zooms: the street and the pin, a few blocks around.
+const ADDRESS_ZOOM = 16;
 
 export default function FogApp() {
   const searchParams = useSearchParams();
@@ -339,11 +341,10 @@ export default function FogApp() {
       if (!geojson) return;
       const feature = findNeighborhoodForPoint(geojson, point);
       const contour = findContourForPoint(contours, point);
-      // Zoom down to the address: frame its neighborhood polygon (with a pin at
-      // the exact spot), or — if the address is outside SF — fly to the point.
-      const bounds = feature ? bboxOfFeature(feature) : null;
+      // Zoom right down to the address, its pin in view (the map keeps it
+      // clear of the Quick Peek card), not the whole neighborhood.
       setAddressPin({ point, address });
-      setPicked({ point, address, feature, contour, bounds, source: "address", zoom: bounds ? undefined : 15 });
+      setPicked({ point, address, feature, contour, source: "address", zoom: ADDRESS_ZOOM });
       // An address gets the Quick Peek card on its marker; the full
       // neighborhood pop-up is one tap away from the card.
       setOpenHood(null);
@@ -489,10 +490,9 @@ export default function FogApp() {
     setPicked({
       point: urlLoc.point,
       address: urlLoc.name || null,
-      zoom: urlLoc.zoom,
-      // Frame the address's neighborhood (unless a building link asked to fly
-      // in to the footprint), same as searching on the map itself.
-      bounds: !urlLoc.zoom && feature ? bboxOfFeature(feature) : undefined,
+      // Zoom to the address (or a building link's own zoom), as searching on
+      // the map itself does.
+      zoom: urlLoc.zoom || ADDRESS_ZOOM,
       source: "address",
       feature,
       contour,

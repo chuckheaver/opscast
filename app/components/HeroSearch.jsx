@@ -9,6 +9,7 @@
 // /fog already supports, so the map opens with the pin dropped and the
 // neighborhood pop-up open.
 
+import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import FogLocationSearch from "../fog/FogLocationSearch";
 
@@ -18,6 +19,16 @@ export default function HeroSearch({
   className = "",
 }) {
   const router = useRouter();
+  const box = useRef(null);
+  // On a phone the keyboard takes the bottom half of the screen: bring the
+  // box to the top so its suggestions open in the room left above it.
+  const roomForSuggestions = () => {
+    if (typeof window === "undefined" || !window.matchMedia("(max-width: 720px)").matches) return;
+    setTimeout(() => {
+      const el = box.current; if (!el) return;
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 12, behavior: "smooth" });
+    }, 250);   // after the keyboard has opened and the browser's own scroll
+  };
 
   const go = (center, label) => {
     if (!Array.isArray(center)) return;
@@ -31,7 +42,7 @@ export default function HeroSearch({
   };
 
   return (
-    <div className={`hero-search ${className}`.trim()}>
+    <div ref={box} className={`hero-search ${className}`.trim()} onFocus={roomForSuggestions}>
       <svg className="hero-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
         <path d="m20 20-3.2-3.2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
