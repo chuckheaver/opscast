@@ -1,6 +1,6 @@
 """The microclimate pages of the market report.
 
-  1. The Heat Map — the city shaded by fog zone (A–D), each neighborhood
+  1. The Heat Map — the city shaded by fog zone (1–4), each neighborhood
      labeled with this year's median sale prices, single-family / Condo/TIC/
      Other in their segment colors, with the neighborhood index beside it
      (zone, mix of zones and the same two medians).
@@ -22,17 +22,17 @@ INK = "#131A25"; MUTED = "#6B6F75"; LINE = "#DCDDDE"
 # family, gold Condo/TIC/Other, as in the Units Sold chart).
 SFH_INK = NAV; CTO_INK = GOLD_TXT
 
-# The four zones, lettered — the site's rule (app/lib/fog-zones.js). A POINT
+# The four zones, numbered 1 (sunniest) to 4 (foggiest) — the site's rule (app/lib/fog-zones.js). A POINT
 # (a sale, the map's shading) takes the zone of the fog polygon it sits in:
 # 8 hrs or less Sun · 8.5 Transition · 9 – 11 Fog · over 11 Persistent Fog.
 # A NEIGHBORHOOD's category and its mix of zones come from the ground it
 # covers (scripts/build-neighborhood-fog-zones.mjs): Transition when 10%+ of
 # it is in the 8.5 polygon or it spans sun and fog, else its main zone.
 ZONES = [
-    dict(k="A", name="Sun", fill="#F7CF5C", ink="#131A25", rng="8 hrs or less", desc="8 hrs or less of fog a day"),
-    dict(k="B", name="Transition", fill="#E9D3A2", ink="#131A25", rng="8.5 hrs", desc="on or across the 8.5-hr line"),
-    dict(k="C", name="Fog", fill="#AFC0CF", ink="#131A25", rng="9 – 11 hrs", desc="mostly 9 – 11 hrs of fog a day"),
-    dict(k="D", name="Persistent Fog", fill="#6F8497", ink="#ffffff", rng="over 11 hrs", desc="mostly over 11 hrs of fog a day"),
+    dict(k="1", name="Sun", fill="#F7CF5C", ink="#131A25", rng="8 hrs or less", desc="8 hrs or less of fog a day"),
+    dict(k="2", name="Transition", fill="#E9D3A2", ink="#131A25", rng="8.5 hrs", desc="on or across the 8.5-hr line"),
+    dict(k="3", name="Fog", fill="#AFC0CF", ink="#131A25", rng="9 – 11 hrs", desc="mostly 9 – 11 hrs of fog a day"),
+    dict(k="4", name="Persistent Fog", fill="#6F8497", ink="#ffffff", rng="over 11 hrs", desc="mostly over 11 hrs of fog a day"),
 ]
 _BY_NAME = {z["name"]: z for z in ZONES}
 try: NZ = json.load(open(os.path.join(ROOT, "public/data/neighborhood-fog-zones.json")))
@@ -316,13 +316,13 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
         f"<div style='background:{z['fill']};color:{z['ink']}'><b>{z['k']}</b><span>{z['name']}</span><br>"
         f"{sum(1 for h in hoods if h['zone'] is z)} neighborhoods · ~{min(h['temp'] for h in hoods if h['zone'] is z)}–{max(h['temp'] for h in hoods if h['zone'] is z)}°F</div>" for z in ZONES)
     o = [f"<div class='page'><div class='hdr'><div><div class='t'>Heat Map</div>"
-         f"<div class='p'>Median sale price by neighborhood, in millions, Jan 1 – {thru}: <b class='sfh'>SFH in navy</b> · <b class='cto'>Condo/TIC/Other in gold</b> · on the city's four fog zones, A to D</div></div></div>",
+         f"<div class='p'>Median sale price by neighborhood, in millions, Jan 1 – {thru}: <b class='sfh'>SFH in navy</b> · <b class='cto'>Condo/TIC/Other in gold</b> · on the city's four fog zones, 1 to 4</div></div></div>",
          "<div class='fm-wrap'><div class='fm-map'>",
          f"<div class='mapbox'>{fog_map(hoods, w=612, h=628)}</div><div class='fm-zkey'>{zkey}</div></div>",
          "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>median: <b class='sfh'>SFH</b> · <b class='cto'>Condo/TIC/Other</b></i></div>",
          f"<div class='fm-idx'>{idx}</div>",
          "</div></div>",
-         foot(FOG_NOTE + " Shading: the fog contours. Letter: each neighborhood's category; bar: its mix of zones. Medians this year: single-family (navy), then Condo/TIC/Other (gold); one figure = only that type sold; no label = no sales. °F estimated.")]
+         foot(FOG_NOTE + " Shading: the fog contours. Number: each neighborhood's zone; bar: its mix of zones. Medians this year: single-family (navy), then Condo/TIC/Other (gold); one figure = only that type sold; no label = no sales. °F estimated.")]
 
     # ── page 2: microclimates and real estate ──
     zst = {z["k"]: mg.stats([r for r in y1 if r.get("propType") in sfh and sale_zone(r) is z]) for z in ZONES}
@@ -348,14 +348,14 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
     jul = next(m for m in months if m["m"] == "Jul")
     ext = {e["k"]: e for e in clim["extremes"]}
     spread = warm[0]["temp"] - cool[0]["temp"]
-    sun_k, pf_k = zst["A"], zst["D"]
+    sun_k, pf_k = zst["1"], zst["4"]
     facts = [
         (f"{hot['m']}", f"is the city's warmest month — a {hot['high']}°F normal high, against {jul['high']}°F in July. Summer arrives in the fall."),
         (f"{spread}°F", f"between the warmest and coolest neighborhoods on a typical summer afternoon: {html.escape(warm[0]['name'])} and {html.escape(cool[0]['name'])}."),
         ("928 ft", "Mount Davidson, the top of the ridge (Twin Peaks 922, Sutro 909) that splits the city into a fog side and a sun side."),
         ("52–56°F", "the ocean off Ocean Beach in August. Wind pulls cold water up from below — that cold water is what makes the fog."),
         (ext.get("Hottest day on record", {}).get("v", "106°F"), f"the hottest day on record downtown, {ext.get('Hottest day on record', {}).get('when', 'Sep 1, 2017')} — in September, naturally."),
-        (f"{(sun_k['price'] or 0)/(pf_k['price'] or 1):.1f}×", f"what an SFH costs in Zone A against Zone D this year: {M(sun_k['price'])} vs {M(pf_k['price'])} median."),
+        (f"{(sun_k['price'] or 0)/(pf_k['price'] or 1):.1f}×", f"what an SFH costs in Zone 1 against Zone 4 this year: {M(sun_k['price'])} vs {M(pf_k['price'])} median."),
     ]
     if slope is not None:
         facts.append((f"${abs(slope):,.0f}/sf", f"lower price per square foot, on average, for each extra hour of daily summer fog — {npts:,} house sales this year."))
