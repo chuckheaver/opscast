@@ -19,6 +19,11 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { NAME_OVERRIDES, getBuilding, RENTAL_OBJECTIDS, FORCE_COMMERCIAL_OBJECTIDS, OCCUPANCY_OVERRIDES, ADDRESS_OVERRIDES } from "./lib/buildings";
 import { fogZone } from "../lib/fog-zones";
 
+// Sold homes in the market report's segment colours (its Units Sold chart):
+// single-family navy, Condo/TIC/Other gold — the same on every map.
+const SFH_DOT = "#203C5F", CTO_DOT = "#E9BC3F";
+const SEG_DOT = ["match", ["get", "propType"], ["Single Family Residence", "2 Houses on Lot", "Halfplex"], SFH_DOT, CTO_DOT];
+
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
 // Bounding box that frames just SF — Ocean Beach / Daly City to the
@@ -1156,7 +1161,8 @@ export default function FogMap({
 
       // Housing Activity dots — listings for the chosen status / type / period.
       // Empty until the FogApp filter feeds setData (see the activityData
-      // effect). Each feature is tagged actKind: blue = sold, green = active.
+      // effect). Each feature is tagged actKind: a sale is coloured by its
+      // segment, as in the market report (SEG_DOT), green = active.
       map.addSource("activity", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
       map.addLayer({
         id: "activity-dots",
@@ -1165,8 +1171,7 @@ export default function FogMap({
         paint: {
           // Neighborhood placeholders — listings with no mappable address,
           // pinned to their neighborhood so they still count — draw larger
-          // with a heavier ring; colour stays the same blue for consistency.
-          // Blue = sold, green = active.
+          // with a heavier ring; colour stays the segment's for consistency.
           // NB: ["zoom"] must feed a TOP-LEVEL interpolate — a zoom curve
           // nested inside a case is a style error that silently drops the
           // whole layer. Data-driven branching goes inside the stops instead.
@@ -1174,15 +1179,15 @@ export default function FogMap({
             10, ["case", ["==", ["get", "geoSource"], "neighborhood"], 5, 3],
             14, ["case", ["==", ["get", "geoSource"], "neighborhood"], 8, 5],
             16, ["case", ["==", ["get", "geoSource"], "neighborhood"], 11, 7]],
-          "circle-color": ["case", ["==", ["get", "actKind"], "sold"], "#2563eb", "#16a34a"],
+          "circle-color": ["case", ["==", ["get", "actKind"], "sold"], SEG_DOT, "#16a34a"],
           "circle-stroke-color": "#ffffff",
           "circle-stroke-width": ["case", ["==", ["get", "geoSource"], "neighborhood"], 2, 1],
           "circle-opacity": 0.9,
         },
       });
       // Comp dots — the homes in an expanded neighborhood "Details" list. Fed
-      // by the `comps` prop; same blue as the Homes overlay (one colour for
-      // listings everywhere), set apart by size and a heavier ring. Click
+      // by the `comps` prop; the same segment colours as the Homes overlay,
+      // set apart by size and a heavier ring. Click
       // opens the same full property pop-up.
       map.addSource("comps", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
       // Focus ring — drawn under the comp dot whose row was clicked in the
@@ -1205,7 +1210,7 @@ export default function FogMap({
         source: "comps",
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 5, 14, 8, 16, 11],
-          "circle-color": "#2563eb",
+          "circle-color": SEG_DOT,
           "circle-stroke-color": "#ffffff",
           "circle-stroke-width": 2,
           "circle-opacity": 0.95,
@@ -2578,5 +2583,17 @@ export default function FogMap({
     );
   }
 
-  return <div ref={containerRef} className="fog-map" />;
+  // The key to the sale dots' two colours, whenever any are on the map.
+  const showSegKey = (activityData?.features?.length || 0) > 0 || (comps?.features?.length || 0) > 0;
+  return (
+    <>
+      <div ref={containerRef} className="fog-map" />
+      {showSegKey && (
+        <ul className="fog-seg-key" style={{ bottom: bottomInset + 34 }} aria-label="Map key: sold homes">
+          <li><i style={{ background: SFH_DOT }} />SFH</li>
+          <li><i style={{ background: CTO_DOT }} />Condo/TIC/Other</li>
+        </ul>
+      )}
+    </>
+  );
 }

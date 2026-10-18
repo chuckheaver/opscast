@@ -50,7 +50,8 @@ export default function LiveBlockMap({ fallback }) {
     map.on("load", async () => {
       const [hoods, sold] = await Promise.all([
         fetch("/data/sf-fog-neighborhoods.geojson").then(r => r.json()),
-        fetch("/data/sold-points-ytd.json").then(r => r.json()),
+        // no stale copy from a browser cache: the dots change with each month's data
+        fetch("/data/sold-points-ytd.json", { cache: "no-cache" }).then(r => r.json()),
       ]);
       map.addSource("hoods", { type: "geojson", data: hoods });
       map.addLayer({ id: "hood-lines", type: "line", source: "hoods",

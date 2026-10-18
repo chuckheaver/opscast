@@ -1319,6 +1319,15 @@ input[type=range]::-webkit-slider-thumb:hover {
   position: relative;
 }
 .fog-map-wrap .fog-map { position: absolute; inset: 0; }
+/* Key to the sold-home dots (FogMap), bottom-left above the Mapbox logo,
+   beside the zoom buttons. */
+.fog-seg-key {
+  position: absolute; left: 52px; z-index: 4; margin: 0; padding: 6px 10px; list-style: none;
+  display: flex; gap: 12px; background: rgba(255,255,255,0.94); border-radius: 9px;
+  box-shadow: 0 4px 14px rgba(10,20,35,0.18); font-size: 12.5px; font-weight: 700; color: #131A25;
+}
+.fog-seg-key li { display: flex; align-items: center; gap: 6px; }
+.fog-seg-key i { width: 11px; height: 11px; border-radius: 50%; box-shadow: 0 0 0 1.5px #fff, 0 0 0 2.5px rgba(19,26,37,0.18); }
 
 /* ── Google-Maps-style on-map controls ─────────────────────────────────────
    Search bar across the top, quick-link chips under it, a round Layers button
