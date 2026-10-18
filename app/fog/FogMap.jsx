@@ -1199,8 +1199,8 @@ export default function FogMap({
         filter: ["==", ["get", "id"], ""],
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 11, 14, 16, 16, 22],
-          "circle-color": "rgba(37, 99, 235, 0.18)",
-          "circle-stroke-color": "#1d4ed8",
+          "circle-color": "rgba(19, 26, 37, 0.14)",
+          "circle-stroke-color": "#131A25",
           "circle-stroke-width": 3,
         },
       });
@@ -1210,7 +1210,8 @@ export default function FogMap({
         source: "comps",
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 5, 14, 8, 16, 11],
-          "circle-color": SEG_DOT,
+          // the Details list it came from (seg), else the sale's own type
+          "circle-color": ["match", ["get", "seg"], "sfh", SFH_DOT, "condo", CTO_DOT, SEG_DOT],
           "circle-stroke-color": "#ffffff",
           "circle-stroke-width": 2,
           "circle-opacity": 0.95,

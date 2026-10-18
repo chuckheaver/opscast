@@ -60,6 +60,10 @@ function summarize(homes, fn) {
   return { list: col("list"), sale: col("sale"), sqft: col("sqft"), ppsf: col("ppsf"), pctList: col("pctList"), dom: col("dom") };
 }
 
+// The market report's segment colours, as the map's sale dots use them: the
+// price line's dot is the key to its homes on the map.
+const SEG_COLOR = { sfh: "#203C5F", condo: "#E9BC3F" };
+
 function PriceLine({ data, label, gap, sect, reportComps, onFocusComp }) {
   const [open, setOpen] = useState(false);
   const homes = data?.homes || [];
@@ -69,11 +73,16 @@ function PriceLine({ data, label, gap, sect, reportComps, onFocusComp }) {
     setOpen(nx);
     // Expanding plots this list's homes as map dots; collapsing removes them.
     // (Dots persist if the pop-up is simply closed, so they stay clickable.)
-    reportComps?.(sect, nx ? homes.map(h => h.feat).filter(Boolean) : null);
+    // Each dot carries its list's segment, so its colour matches this line.
+    reportComps?.(sect, nx ? homes.map(h => h.feat).filter(Boolean)
+      .map(f => ({ ...f, properties: { ...f.properties, seg: sect } })) : null);
   };
   return (
     <div style={{ marginBottom: gap ? 10 : 2 }}>
     <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
+      <span aria-hidden="true" title={sect === "sfh" ? "Single-family homes on the map" : "Condos / TICs on the map"}
+        style={{ alignSelf: "center", width: 12, height: 12, borderRadius: "50%", background: SEG_COLOR[sect],
+          boxShadow: "0 0 0 1.5px #fff, 0 0 0 2.5px rgba(19,26,37,0.2)" }} />
       <span style={{ fontSize: 24, fontWeight: 700, color: data ? "#131A25" : "#8A8E93" }}>{data ? data.value : "—"}</span>
       <span style={{ fontSize: 13.5, fontWeight: 700, color: "#131A25" }}>{label}</span>
       {homes.length > 0 && (
@@ -101,7 +110,8 @@ function PriceLine({ data, label, gap, sect, reportComps, onFocusComp }) {
                 fontSize: 13, fontWeight: 600, color: "#131A25", cursor: h.feat ? "pointer" : "default" }}
             >
               <span>{h.addr || "—"}</span>
-              {h.feat && <span style={{ fontSize: 11, fontWeight: 600, color: "#203C5F", whiteSpace: "nowrap" }}>◉ map</span>}
+              {h.feat && <span style={{ fontSize: 11, fontWeight: 600, color: "#203C5F", whiteSpace: "nowrap" }}>
+                <span aria-hidden="true" style={{ color: SEG_COLOR[sect] }}>●</span> map</span>}
             </button>
             <div>{usd(h.list)}</div>
             <div style={{ fontWeight: 700, color: "#131A25" }}>{usd(h.sale)}</div>
