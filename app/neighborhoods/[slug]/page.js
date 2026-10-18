@@ -83,7 +83,7 @@ export default async function Page({ params }) {
         <HoodPreviewMap name={name} label={heading} polygons={polygonNamesFor(name)} />
 
         {c.history && (
-          <section className="lp-nsec">
+          <section className="lp-nsec lp-nstory">
             <h2>The story</h2>
             {String(c.history).split(/\n\s*\n/).map((para, i) => <p key={i}>{para}</p>)}
           </section>

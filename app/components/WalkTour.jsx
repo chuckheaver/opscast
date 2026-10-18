@@ -13,6 +13,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const LINE = "#203C5F";          // the site's navy, as on the report
+const PIN = 26;                  // a pin's width plus its white ring, px
 
 function bboxOf(coords) {
   let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
@@ -76,13 +77,30 @@ export default function WalkTour({ name, polygons = [], stops = [], walk }) {
       map.addLayer({ id: "walk-line", type: "line", source: "walk", layout: { "line-join": "round", "line-cap": "round" },
         paint: { "line-color": LINE, "line-width": 2.5 } });
       // numbered stops, in walking order
-      located.forEach(s => {
+      const pins = located.map(s => {
         const el = document.createElement("div");
         el.className = "walk-pin";
         el.textContent = String(s.n);
         el.title = s.place || s.title || "";
-        new mapboxgl.Marker({ element: el }).setLngLat(s.at).addTo(map);
+        el.style.zIndex = String(100 - s.n);   // where a loop ends beside its start, 1 stays on top
+        return new mapboxgl.Marker({ element: el }).setLngLat(s.at).addTo(map);
       });
+      // Stops a few doors apart would hide one another at this zoom: a pin
+      // that lands on an earlier one is set just beside it, until a zoom in
+      // gives them room.
+      const spread = () => {
+        const xy = located.map(s => map.project(s.at));
+        pins.forEach((m, i) => {
+          let off = [0, 0];
+          for (let j = 0; j < i; j++) {
+            const dx = xy[i].x - xy[j].x, dy = xy[i].y - xy[j].y, d = Math.hypot(dx, dy);
+            if (d < PIN) { const ux = d > 1 ? dx / d : 0.7, uy = d > 1 ? dy / d : -0.7; off = [ux * (PIN - d), uy * (PIN - d)]; }
+          }
+          m.setOffset(off);
+        });
+      };
+      spread();
+      map.on("zoomend", spread);
       try {
         const key = `walk:v1:${name}:${located.map(s => s.at.join(",")).join(";")}`;
         const r = await walkingRoute(located, key);

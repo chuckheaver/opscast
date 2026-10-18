@@ -12,8 +12,18 @@
 //   spirit      string   one creative line capturing the neighborhood
 //   reasons     string[] short "why live here" chips
 //   aka         string?  alternate / historic name shown as a chip
-//   history     string   section 1 — name origin + settlement history
-//   facts       [{ icon, title, text }]   section 2 — lesser-known facts
+//   history     string   section 1 — name origin + settlement history;
+//                        paragraphs separated by a blank line ("\n\n")
+//   facts       [{ icon, title, text, place?, where?, at?, source? }]
+//                        section 2, "Did You Know?" — lesser-known facts.
+//                        A fact with `at` ([lng, lat]) is a stop on the
+//                        walking tour, numbered in the order listed, so list
+//                        located facts in walking order. `place` names the
+//                        spot, `where` its address or corner, `source` the
+//                        page it was checked against (not shown).
+//   walk        { intro, miles, minutes, tip }?   the walking tour's
+//                        description; miles/minutes stand in until the
+//                        street route is measured in the browser
 //   restaurants [{ name, address, phone, url }]   section 3 (top 5)
 //   bars        [{ name, address, phone, url }]   section 4 (top 5)
 //   nearby      string[]?  for residential-only areas with no/few venues of
@@ -38,39 +48,87 @@ export const NEIGHBORHOODS = {
       "Living LGBTQ history",
     ],
     history:
-      "Castro Street honors José Castro (1808–1860), a Californio leader and governor of Mexican Alta California. The area grew as part of Eureka Valley, a working-class streetcar suburb built out in the 1880s–90s after the Market Street cable line arrived. As families left for the suburbs in the 1960s–70s, LGBTQ residents moved in, making it one of America's first and most famous gay neighborhoods.",
+      "Castro Street honors José Castro (1808–1860), the Californio general who was briefly acting governor of Mexican Alta California. The valley it crosses was part of Rancho San Miguel, granted in 1845 to José de Jesús Noé, Yerba Buena's last Mexican alcalde. Transit built the neighborhood: in the late 1880s a cable line ran out Market Street and over the hill on Castro to 26th Street (its Castro hill section ran until 1941), and Irish, German and Scandinavian families filled “Eureka Valley” with cottages and flats that came through the 1906 earthquake and fire largely intact. In 1918 the Twin Peaks Tunnel opened, its east portal at Market and Castro, beside today's Castro Station.\n\nBy the late 1960s families were leaving for the suburbs, and inexpensive Victorians drew gay men, many from Polk Street and the Tenderloin. They restored the houses and opened bars and shops, and the blocks around Castro and 18th took the street's name. When the old Eureka Valley merchants' group snubbed gay-owned businesses, camera-shop owner Harvey Milk became first president of the new Castro Village Association and, in 1974, started the Castro Street Fair; in 1977 he became the first openly gay man elected to office in California. After his assassination in 1978, the manslaughter verdict for his killer set off the White Night riots, and police struck back by raiding the Elephant Walk bar at 18th and Castro.\n\nWhen AIDS devastated the neighborhood in the 1980s, it built much of its own response: a parish support group and hospice, a Zen center that took in the dying, and the NAMES Project, which assembled the AIDS Memorial Quilt in a storefront at 2362 Market Street.",
     facts: [
       {
         icon: "flag",
-        title: "Birthplace of the Pride flag",
+        title: "The flag is a city landmark",
         text:
-          "Artist Gilbert Baker sewed the first rainbow flag here in 1978. A 20-by-30-foot version has flown over Harvey Milk Plaza, above the Castro Muni station, since 1997.",
-      },
-      {
-        icon: "shop",
-        title: "Harvey Milk's camera shop",
-        text:
-          "Milk ran Castro Camera at 575 Castro St and in 1977 won a seat on the Board of Supervisors — among the first openly gay elected officials in the U.S. After his 1978 assassination, a candlelight march down Market St marks the day each year.",
+          "The 20-by-30-foot rainbow flag over Harvey Milk Plaza first went up on November 8, 1997, the 20th anniversary of Milk's election, and in 2024 the city made it a landmark; planners call it the only permanent Rainbow Flag installation by the flag's creator, Gilbert Baker. Across Market Street, Pink Triangle Park's 15 granite pylons, each topped with a pink triangle, form what its founders call the first permanent, free-standing U.S. memorial to LGBT people persecuted by the Nazis.",
+        place: "Harvey Milk Plaza & Pink Triangle Park",
+        where: "Castro St & Market St",
+        at: [-122.43495, 37.76250],
+        source: "https://sfplanning.org/sites/default/files/documents/preserv/landmarks_designation/LM319.pdf",
       },
       {
         icon: "movie",
-        title: "A 1922 movie palace",
+        title: "A 1922 movie palace, reborn",
         text:
-          "The Castro Theatre, designed by Timothy Pflueger, is a city landmark — a “Mighty Wurlitzer” organ still rises from the floor and plays before screenings.",
+          "The Nasser family's 1922 movie palace was designed by Timothy Pflueger, later the architect of Oakland's Paramount Theatre, and became city Landmark No. 100 in 1977. It reopened on February 6, 2026, after a two-year, roughly $41 million renovation that traded the orchestra's fixed rows for tiered platforms with removable seats, while a section of cast-iron balcony seats the city deemed historic stays put.",
+        place: "Castro Theatre",
+        where: "429 Castro St",
+        at: [-122.43483, 37.76192],
+        source: "https://sfstandard.com/2026/02/05/castro-theatre-reopens-renovation/",
       },
       {
-        icon: "confetti",
-        title: "Street fair & the AIDS quilt",
+        icon: "shop",
+        title: "Where Castro Halloween began",
         text:
-          "Harvey Milk founded the Castro Street Fair in 1974; it still fills the streets each October. Cleve Jones first conceived the AIDS Memorial Quilt here in 1985.",
+          "Cliff's Variety, on Castro Street since 1936 and at this address since 1971, fills the building where the first Castro Theatre opened in 1910. In the late 1940s the founder's son, Ernie DeBaca, started a children's Halloween costume contest out front, the seed of Halloween in the Castro; the store ended the contest in 1979 as adult crowds took over.",
+        place: "Cliff's Variety",
+        where: "479 Castro St",
+        at: [-122.43476, 37.76113],
+        source: "https://en.wikipedia.org/wiki/Cliff%27s_Variety_Store",
       },
       {
-        icon: "pin",
-        title: "Hidden in plain sight",
+        icon: "sun",
+        title: "The corner called Hibernia Beach",
         text:
-          "The whole valley was plain “Eureka Valley” until the name “the Castro” caught on for the blocks around Castro Street in the 1970s. Rainbow-striped crosswalks mark 18th & Castro (2014), all on the ancestral land of the Ramaytush Ohlone.",
+          "The sunny corner outside the old Hibernia Bank branch here picked up the nickname “Hibernia Beach” in the 1970s, and by the early 1980s it was packed with shirtless men on warm afternoons. As AIDS spread, its wall and railing became a folk memorial for the dead, and when the bank posted signs banning memorials in 2021, a backlash got them taken down within days. The rainbow crosswalks went in in 2014, their design picked in a vote of about 4,500 people.",
+        place: "Hibernia Beach",
+        where: "Castro St & 18th St",
+        at: [-122.43505, 37.76105],
+        source: "https://www.ebar.com/story/20838",
+      },
+      {
+        icon: "mayor",
+        title: "Landmarked on Milk's 70th birthday",
+        text:
+          "Harvey Milk ran his camera store and his campaigns for office from 573–575 Castro Street, and lived in the flat upstairs. Supervisors gave final approval to making it city Landmark No. 227 on May 22, 2000, which would have been his 70th birthday. On 19th Street just before it, look down: the bronze Rainbow Honor Walk plaques honoring LGBTQ figures began going into these sidewalks in 2014.",
+        place: "Castro Camera",
+        where: "575 Castro St",
+        at: [-122.43463, 37.75962],
+        source: "https://www.sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances00/o0121-00.pdf",
+      },
+      {
+        icon: "house",
+        title: "A Zen temple's AIDS hospice",
+        text:
+          "A Gay Buddhist Club met in the basement of this Victorian, which became the Hartford Street Zen Center in 1981. In 1987 its teacher, Issan Dorsey, took in a homeless student dying of AIDS, starting Maitri, described as the first Buddhist hospice of its kind in the U.S.; it outgrew the house and moved to Church and Duboce in 1997.",
+        place: "Hartford Street Zen Center",
+        where: "57 Hartford St",
+        at: [-122.43365, 37.76165],
+        source: "https://en.wikipedia.org/wiki/Hartford_Street_Zen_Center",
+      },
+      {
+        icon: "beer",
+        title: "Landmarked for its windows",
+        text:
+          "Twin Peaks Tavern opened in 1935 as a neighborhood bar. In the early 1970s new owners Mary Ellen Cunha and Peggy Forster made it a gay bar and uncovered its windows, which the city's landmark report says made it the first known gay bar with full-length, open plate-glass windows. In 2013 the city named it Landmark No. 264.",
+        place: "Twin Peaks Tavern",
+        where: "401 Castro St",
+        at: [-122.43487, 37.76236],
+        source: "https://default.sfplanning.org/Preservation/landmarks_designation/Adopted_TwinPeaksLM_Report.pdf",
       },
     ],
+    walk: {
+      intro:
+        "A short loop for first-time visitors and would-be neighbors that starts and ends at Castro Station (Muni Metro K, L and M; the F streetcar ends a few steps away), taking in the Castro Street shopping blocks and the quiet Victorian blocks of 19th and Hartford streets. Allow about 40 minutes; a weekday late morning is calmest, a weekend afternoon is liveliest.",
+      miles: 0.7,
+      minutes: 40,
+      tip:
+        "Half a block west of 18th & Castro, stop into the GLBT Historical Society Museum at 4127 18th St, opened in January 2011 and billed as the nation's first stand-alone museum of LGBTQ history. The city has bought 2280 Market St as its larger future home, so check its location and hours before you go.",
+    },
     restaurants: [
       { name: "Frances", address: "3870 17th St", phone: "(415) 621-3870", url: "https://frances-sf.com" },
       { name: "Anchor Oyster Bar", address: "579 Castro St", phone: "(415) 431-3990", url: "https://anchoroysterbar.com" },
@@ -703,39 +761,77 @@ export const NEIGHBORHOODS = {
     ],
     aka: "“Maternal Heights”",
     history:
-      "Bernal Heights sits on a rocky hill that was the heart of Rancho Rincón de las Salinas, granted to José Cornelio Bernal in 1839. It grew as a working-class, almost rural district; because it sits on solid bedrock, it largely escaped the 1906 quake, and refugees built cottages here. Long bohemian and diverse, it's now a beloved family neighborhood known for its sun, its hilltop park, and the small-town feel of Cortland Avenue.",
+      "Bernal Heights is named for José Cornelio Bernal, whose 1839 Mexican land grant, Rancho Rincón de las Salinas y Potrero Viejo — roughly “salt-marsh corner and old pasture” — took in about 4,446 acres around the hill. After California became part of the United States, the rancho was sold off and cut into small lots. Early settlers, many of them Irish, ran dairies and kept goats on the open slopes, and the goats gave the bare hill a nickname: Nanny Goat Hill.\n\nThe hill is a knob of hard Franciscan chert, and Bernal rode out the 1906 earthquake well; the fire that followed burned itself out at 20th Street in the Mission, well to the north. Afterward the neighborhood filled in, partly with the wooden relief cottages, or “earthquake shacks,” that families hauled out of the refugee camps, and a few still hide among the later houses. In 1940 Holly Courts opened near Holly Park, southwest of the hill, as San Francisco's first public housing project, designed by City Hall architect Arthur Brown Jr.; the same year a new WPA-built branch library opened on Cortland Avenue.\n\nCheap rents and a small-town feel drew newcomers in the 1960s and '70s: antiwar activists in shared houses and collectives, artists, and lesbian households. The radicals earned Bernal another nickname, Red Hill. In 1977 muralists founded Precita Eyes beside Precita Park, and the lesbian bar Wild Side West moved onto Cortland, still the hill's village-scale main street. The treeless crest above is a city park, with views in every direction and off-leash room for the neighborhood's dogs.",
     facts: [
       {
-        icon: "pin",
-        title: "Named for a land-grant family",
+        icon: "art",
+        title: "Where Precita Eyes got its name",
         text:
-          "José Cornelio Bernal's 1839 Mexican land grant — Rancho Rincón de las Salinas y Potrero Viejo — covered the hill and the flats around it, and gave the neighborhood its name.",
+          "Muralists Susan and Luis Cervantes and fellow artists founded Precita Eyes Muralists in 1977 and named it for this park; the group's original studio faces it a short way east of Folsom, at 348 Precita Ave. Its center on 24th Street in the Mission now leads guided walks past Balmy Alley and the neighborhood's other murals.",
+        place: "Precita Park & Precita Eyes",
+        where: "Folsom St & Precita Ave",
+        at: [-122.41364, 37.74719],
+        source: "https://www.precitaeyes.org/about.html",
       },
       {
-        icon: "quake",
-        title: "Saved by bedrock",
+        icon: "park",
+        title: "A hilltop made of plankton",
         text:
-          "Bernal sits on solid Franciscan rock and barely shook in 1906. Refugees from the burning city threw up earthquake-shack cottages on the hill — some still tucked among the houses today.",
-      },
-      {
-        icon: "dog",
-        title: "The city's dog park",
-        text:
-          "Grassy, treeless Bernal Heights Park crowns the hill — one of San Francisco's most-loved off-leash dog runs, with a 360° view loop that fills with locals at sunset.",
+          "The rust-red, ribbon-layered rock poking through the grass near the top is radiolarian chert, built from the glassy silica skeletons of single-celled plankton that settled on the deep Pacific floor in the age of the dinosaurs. The ocean plate carried it toward North America, where it was scraped off onto the continent's edge, so the summit stands on rock that formed far out at sea.",
+        place: "Bernal Heights Park",
+        where: "Top of Folsom St",
+        at: [-122.41357, 37.74379],
+        source: "https://en.wikipedia.org/wiki/Franciscan_Assemblage",
       },
       {
         icon: "stairs",
-        title: "Stairways and hidden lanes",
+        title: "Where the street turns into slides",
         text:
-          "The steep hill is laced with public stairway streets and narrow lanes — Esmeralda, Coso, and the Bernal “goat paths” — that wander between gardens instead of along the road grid.",
+          "Where Bernal's slopes get too steep for cars, its streets turn into public stairways, and the Esmeralda Avenue stairway at Winfield Street comes with a pair of long concrete slides running down beside the steps, open to anyone willing to ride.",
+        place: "Esmeralda Slide Park",
+        where: "Esmeralda Ave steps at Winfield St",
+        at: [-122.41811, 37.74353],
+        source: "https://bernalwood.com/2014/03/06/remember-when-the-day-when-difi-laughed-her-way-down-the-esmeralda-slides",
       },
       {
-        icon: "star",
-        title: "“Maternal Heights”",
+        icon: "beer",
+        title: "When women couldn't tend bar",
         text:
-          "Long a haven for artists, lesbian families, and working households, Bernal kept its mellow, small-town character as the city changed — earning its affectionate nickname.",
+          "Pat Ramseyer and Nancy White opened Wild Side West in Oakland in 1962, naming it for that year's film Walk on the Wild Side. California law then barred bars from hiring women to tend bar, so women who owned one had to pour themselves or hire a man, until the state Supreme Court struck the law down in 1971. The bar moved here to Cortland Avenue in 1977.",
+        place: "Wild Side West",
+        where: "424 Cortland Ave",
+        at: [-122.41672, 37.73919],
+        source: "https://bernalwood.com/2017/08/25/1977-remember-when-wild-side-west-arrived-in-bernal-heights/",
+      },
+      {
+        icon: "book",
+        title: "A Civic Auditorium architect's library",
+        text:
+          "Frederick H. Meyer, one of the three architects of the 1915 Civic Auditorium, designed this branch library, a Works Progress Administration project that opened in 1940, the same year as Holly Courts, the city's first public housing.",
+        place: "Bernal Heights Branch Library",
+        where: "500 Cortland Ave",
+        at: [-122.41601, 37.73921],
+        source: "https://sfpl.org/locations/bernal-heights/bernal-heights-library-history",
+      },
+      {
+        icon: "shop",
+        title: "California's first farmers' market",
+        text:
+          "With wartime rationing and labor shortages squeezing them, growers began selling straight to shoppers from their trucks in 1943, in what the city calls California's first farmers' market. It moved to this lot on Alemany Boulevard in 1947 and still runs every Saturday.",
+        place: "Alemany Farmers' Market",
+        where: "100 Alemany Blvd",
+        at: [-122.41096, 37.73478],
+        source: "https://www.sfgov.org/ccsfgsa/realestate/alemany-farmers-market-new",
       },
     ],
+    walk: {
+      intro:
+        "A 1.7-mile line for visitors and would-be neighbors, from Precita Park (Folsom St & Precita Ave, where the 67 bus stops, about a 12-minute walk from 24th St Mission BART) up over Bernal Hill, down past the Esmeralda slides and along Cortland Avenue to the Alemany Farmers' Market, where the 23 and 67 buses stop at Crescent Ave & Putnam St for the ride back. Allow about 80 minutes, and go on a Saturday morning, when the market is running.",
+      miles: 1.7,
+      minutes: 80,
+      tip:
+        "The only real climb comes first, up Folsom St from Precita Park to the summit, so it is downhill from there; save your coffee stop for Cortland Avenue, between the slides and the library.",
+    },
     restaurants: [
       { name: "3rd Cousin", address: "919 Cortland Ave", phone: "(415) 814-3709", url: "https://www.3rdcousinsf.com" },
       { name: "Precita Social", address: "300 Precita Ave", phone: "(415) 729-9029", url: "https://www.precitasocial.com" },
@@ -4417,39 +4513,77 @@ export const NEIGHBORHOODS = {
       "Kite Hill views",
     ],
     history:
-      "Eureka Valley is the original name for the whole valley below Twin Peaks' eastern slope, the Castro's shops included; here it means the residential slopes south and west of them, south to 22nd Street and west to Clayton Street, where Market Street bends uphill toward Twin Peaks. The valley filled in during the 1880s–90s as a working-class streetcar suburb after the Market Street cable line arrived, and a cable line once hauled riders up Castro Street and over the hill to Noe Valley. Rows of wooden Victorians and Edwardians went up on its steep blocks, and many still stand. When the Castro's commercial core became world-famous in the 1970s, the streets above it stayed quieter and mostly residential.",
+      "Before anyone said “the Castro,” this bowl beneath Twin Peaks was Eureka Valley, part of Rancho San Miguel, the land granted in 1845 to José de Jesús Noé, Yerba Buena's last Mexican alcalde. Transit turned it into a neighborhood. In 1887 the Market Street Cable Railway decided to convert its steam-dummy line out Market Street to cable and push it over the Castro hill to 26th Street; by 1888 its cable cars ran from the Ferry Building to Noe Valley. Irish, German and Scandinavian families filled the slopes with cottages and flats, and in 1891 Alfred “Nobby” Clarke announced a castle at the foot of Twin Peaks that was quickly dubbed his folly.\n\nThe valley came through the 1906 earthquake and fire largely intact. When the line went electric after the quake, the Castro hill proved too steep for streetcars, so a cable shuttle kept climbing it until 1941. In 1918 the Twin Peaks Tunnel opened under Market Street with a stop of its own, Eureka Valley station; it closed in 1972, during construction of the Market Street subway.\n\nBy the late 1960s families were leaving for the suburbs, and inexpensive Victorians drew gay men who restored the houses and opened bars and shops. When the old Eureka Valley merchants' group snubbed gay-owned businesses, camera-shop owner Harvey Milk became first president of the new Castro Village Association, and the shopping blocks took the street's name. Uphill, neighbors fought for a decade, sit-in included, to save a Seward Street lot that opened as a mini-park in 1973. When AIDS struck, Most Holy Redeemer's former convent became a hospice in 1987. The quieter slopes above the shops still carry the old name.",
     facts: [
       {
-        icon: "pin",
-        title: "A name worth keeping",
+        icon: "subway",
+        title: "Muni's only ghost station",
         text:
-          "The name echoes California's state motto, “Eureka” — Greek for “I have found it.” It lives on in Eureka Street, which runs through the middle of the neighborhood, the Eureka Valley Recreation Center on Collingwood St and the Eureka Valley/Harvey Milk Memorial Branch Library.",
-      },
-      {
-        icon: "park",
-        title: "Slides on Seward Street",
-        text:
-          "Tucked into a tiny mini-park on Seward Street, a pair of steep concrete slides is one of the city's quirkiest hidden playgrounds — riders bring a square of cardboard to sit on.",
-      },
-      {
-        icon: "star",
-        title: "Kite Hill",
-        text:
-          "At 19th and Yukon streets, the grassy open space of Kite Hill rises above the valley, with sweeping views east over the Castro toward downtown and the bay.",
+          "Under Market Street a few steps south of this corner, between Diamond and Eureka streets, lies Eureka Valley station, which opened with the Twin Peaks Tunnel in 1918 and closed in 1972 during construction of the Market Street subway. Its street entrances were demolished, but K, L and M trains still run past its low platforms without stopping, and SFMTA calls it Muni's only ghost station.",
+        place: "Eureka Valley station (closed)",
+        where: "Diamond St & 17th St",
+        at: [-122.43750, 37.76258],
+        source: "https://en.wikipedia.org/wiki/Eureka_Valley_station",
       },
       {
         icon: "church",
-        title: "A parish that opened its doors",
+        title: "A convent turned AIDS hospice",
         text:
-          "Most Holy Redeemer, the Catholic parish at 100 Diamond St, became known during the AIDS crisis for welcoming gay parishioners and for its AIDS support group.",
+          "Most Holy Redeemer was founded in 1900 for Eureka Valley's Irish, German and Italian families, and its church was dedicated on Christmas Day 1901. As AIDS swept the neighborhood, the parish started an AIDS Support Group in 1985, and its former convent across Diamond Street opened as Coming Home Hospice in 1987.",
+        place: "Most Holy Redeemer Church",
+        where: "100 Diamond St",
+        at: [-122.43737, 37.76064],
+        source: "https://www.sfbos.org/sites/default/files/r0495-25.pdf",
       },
       {
-        icon: "quake",
-        title: "Spared by the 1906 fire",
+        icon: "house",
+        title: "Nobby Clarke's Folly",
         text:
-          "The fires after the 1906 earthquake were stopped a few blocks east, near Dolores Park — famously with water from the now-golden hydrant at 20th & Church — and never reached the valley's wooden Victorians.",
+          "When Alfred “Nobby” Clarke announced in 1891 that he would build a great castle at the foot of Twin Peaks, it was quickly dubbed “Nobby Clarke's Folly,” and by 1896 he had gone bankrupt and sold it to the faculty of the California Medical College. The four-story Baroque Queen Anne by architects Gould & Colley came through the 1906 earthquake and fires, later served as a hospital and then as 15 rental apartments, and became city Landmark No. 80 in 1975.",
+        place: "Alfred E. “Nobby” Clarke Mansion",
+        where: "250 Douglass St",
+        at: [-122.43946, 37.75973],
+        source: "https://en.wikipedia.org/wiki/Alfred_E._Clarke_Mansion",
+      },
+      {
+        icon: "park",
+        title: "Slides won by a decade-long fight",
+        text:
+          "In 1963 this steep lot was slated for development, and neighbors fought for a decade to save it, staging a bulldozer-defying sit-in in 1966; their campaign also helped change city law to require a minimum of open space in new developments. The mini-park opened in 1973 with a pair of concrete slides designed by a local teenager, and riders still bring a square of cardboard to sit on.",
+        place: "Seward Street Slides (Seward Mini-Park)",
+        where: "30 Seward St",
+        at: [-122.44039, 37.75818],
+        source: "https://www.atlasobscura.com/places/seward-street-slides",
+      },
+      {
+        icon: "star",
+        title: "The view from Kite Hill",
+        text:
+          "A short walk from the slides, the grassy open space of Kite Hill rises over the valley at 19th and Yukon streets. From the top, the view runs east over the Castro toward downtown and the bay.",
+        place: "Kite Hill Open Space",
+        where: "170 Corwin St",
+        at: [-122.44064, 37.75808],
+        source: "https://sfrecpark.org/",
+      },
+      {
+        icon: "tram",
+        title: "The cable car that outlived 1906",
+        text:
+          "The line began in 1880 as a steam dummy running out Market Street to Castro; in 1887 its owners decided to convert it to cable and extend it over this hill to 26th Street, with Castro cars painted ivory with dark red trim. When the route went electric after the 1906 earthquake, this hill was too steep for streetcars, so a cable shuttle kept climbing it between 18th and 26th streets until April 5, 1941, when the 24 bus line took over; the 24 still climbs Castro Street today.",
+        place: "Castro Street cable hill",
+        where: "Castro St & 19th St",
+        at: [-122.43481, 37.75924],
+        source: "https://www.streetcar.org/cable_car_to_castro/",
       },
     ],
+    walk: {
+      intro:
+        "A loop for visitors and would-be neighbors who want the Castro's quieter, hillier side: start at Castro Muni station (K, L and M trains, plus the F streetcar at 17th & Castro), climb past the Clarke mansion to the Seward Street slides and Kite Hill, then come back down 19th Street, about 1.5 miles and 80 minutes with stops. Go in daylight on a clear day, when the view from Kite Hill reaches downtown.",
+      miles: 1.5,
+      minutes: 80,
+      tip:
+        "Bring a flattened cardboard box for the concrete Seward Street slides, and pace yourself on the climb from Douglass Street up to Kite Hill, which gains about 150 feet; after that it's downhill along 19th Street, ending a block from the cafes and bars at 18th & Castro.",
+    },
     nearby: ["the Castro"],
     restaurants: [
       { name: "Mama Ji's", address: "4416 18th St", phone: "(415) 626-4416" },

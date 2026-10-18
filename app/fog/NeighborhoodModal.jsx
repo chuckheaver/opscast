@@ -440,7 +440,9 @@ export default function NeighborhoodModal({
         {data.history && (
           <section style={SEC}>
             <Banner>The story</Banner>
-            <p style={{ fontSize: 14, lineHeight: 1.6, color: "#131A25", margin: 0 }}>{data.history}</p>
+            {String(data.history).split(/\n\s*\n/).map((para, i) => (
+              <p key={i} style={{ fontSize: 14, lineHeight: 1.6, color: "#131A25", margin: i ? "10px 0 0" : 0 }}>{para}</p>
+            ))}
           </section>
         )}
 
