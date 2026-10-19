@@ -2669,39 +2669,87 @@ export const NEIGHBORHOODS = {
     ],
     aka: "The Fillmore",
     history:
-      "The neighborhood is literally the \"Western Addition\" appended to the original 1850s street survey as the young city pushed west of Van Ness. After WWII its Fillmore corridor became the \"Harlem of the West,\" packed with Black-owned jazz clubs. Then 1960s–70s redevelopment (the A-2 project) bulldozed dozens of blocks, displacing thousands of mostly African-American residents and businesses — a wound the district still feels. Surviving Victorians, churches, and a revived jazz district carry that layered legacy forward.",
+      "The name is literal. The Western Addition was the grid San Francisco added west of Larkin Street, its old western boundary: the Van Ness Ordinance of 1855 settled land titles there, reserved land for the city and approved a map of new blocks, and the name came to cover some 500 blocks out to Divisadero Street. Victorian houses and flats filled those blocks.\n\nIn 1942 Executive Order 9066 sent the district's Japanese American families to incarceration camps, and Black workers recruited for the Bay Area shipyards, many from Texas and Louisiana, moved into the emptied homes. The Fillmore became the “Harlem of the West,” where you could hear jazz, blues and R&B at dozens of clubs. Bop City, which grew out of Slim Gaillard's short-lived Vout City in 1949, soon became, as pianist Frank Jackson recalled, the after-hours spot, where touring players such as Charlie Parker and John Coltrane sat in at the jam sessions in Jimbo Edwards's back room.\n\nThen came “urban renewal,” touted as blight removal. The Redevelopment Agency's A-2 project alone covered nearly 60 square blocks and affected more than 13,000 Fillmore residents. In 2008, as the agency prepared to leave the Western Addition the next January after 40 years, city officials counted 883 businesses shuttered, 4,729 households forced out and roughly 2,500 Victorians demolished. A few houses were saved by trucking them to new lots, and in the mid-1990s the agency itself created the Fillmore Jazz Preservation District, a dining and entertainment destination meant to draw visitors back.",
     facts: [
       {
         icon: "music",
-        title: "Harlem of the West",
+        title: "The promoter before Bill Graham",
         text:
-          "In the 1940s and '50s, Fillmore Street brimmed with jazz and blues clubs drawing greats like Billie Holiday and John Coltrane. The scene earned the neighborhood its \"Harlem of the West\" nickname.",
+          "The hall opened in 1912 as the Majestic Hall and Academy of Dancing, and in 1954 promoter Charles Sullivan took a lease on it and renamed it the Fillmore Auditorium. When Bill Graham staged a San Francisco Mime Troupe benefit here on December 10, 1965, he used Sullivan's permit, then kept booking shows on nights Sullivan wasn't using the hall. Sullivan was shot to death on Bluxome Street in August 1966, a murder that remains unsolved; the hall, damaged in the 1989 Loma Prieta earthquake, reopened on April 27, 1994.",
+        place: "Fillmore Auditorium",
+        where: "1805 Geary Blvd",
+        at: [-122.43313, 37.78410],
+        source: "https://pcad.lib.washington.edu/building/1757",
       },
       {
-        icon: "confetti",
-        title: "The Fillmore Auditorium",
+        icon: "pin",
+        title: "A Masonic temple, then Peoples Temple",
         text:
-          "At Geary and Fillmore, this 1912 hall became Bill Graham's psychedelic-rock mecca in the 1960s, launching the Grateful Dead, Janis Joplin, and Jimi Hendrix. It still hosts shows today.",
-      },
-      {
-        icon: "road",
-        title: "Urban renewal scars",
-        text:
-          "The 1960s–70s A-2 redevelopment project demolished some 60 blocks of the Western Addition. Thousands of mostly Black residents and hundreds of businesses were displaced, and many were never able to return.",
+          "The building that stood here began as the Albert Pike Memorial Temple of the Scottish Rite Masons. In the early 1970s Peoples Temple bought it for $125,000 as its San Francisco headquarters, and many of the more than 900 people who died at the group's Jonestown settlement in Guyana on November 18, 1978, were members from the Fillmore. The building was later torn down and a post office built in the 1990s now fills the lot; for the 40th anniversary in 2018, the Chronicle reported, San Francisco's first public ceremony for the victims was planned here.",
+        place: "Peoples Temple site",
+        where: "1859 Geary Blvd",
+        at: [-122.43388, 37.78398],
+        source: "https://theclio.com/entry/38287",
       },
       {
         icon: "house",
-        title: "Surviving Victorians",
+        title: "A street of rescued houses",
         text:
-          "The district retains rows of ornate Victorian and Edwardian flats that escaped demolition. During redevelopment, some prized homes were even lifted onto trucks and relocated to new lots.",
+          "In the early 1970s San Francisco Heritage and the Redevelopment Agency picked 12 Victorians in the agency's clearance area to save if they could be sold and moved, and Heritage bought all 12 at public auction. Most were trucked here in November 1974, and the Chronicle counts ten homes in the Beideman Place historic district. The Italianate at 33–35 made the longest move, about 18 blocks from 736–738 Franklin Street, and 43–45 came from 848 Octavia Street.",
+        place: "Beideman Place",
+        where: "33 Beideman St",
+        at: [-122.43860, 37.78203],
+        source: "https://www.sfchronicle.com/totalsf/article/victorian-homes-tour-sf-19722418.php",
+      },
+      {
+        icon: "music",
+        title: "A jazz club's long intermission",
+        text:
+          "Opened in 2007 as one of the last projects of the Western Addition redevelopment program, this $80.5 million public-private complex has 80 condominiums and about 50,000 square feet of commercial space, once anchored by Yoshi's, a 28,000-square-foot jazz club. Yoshi's closed in 2014 and the space has sat largely dark since; in 2026 the city reopened it, free to community groups, for short-term programming through December while it studies the building's future.",
+        place: "Fillmore Heritage Center",
+        where: "1330 Fillmore St",
+        at: [-122.43205, 37.78192],
+        source: "https://hoodline.com/2026/05/long-dark-fillmore-heritage-center-gets-brief-second-act/",
+      },
+      {
+        icon: "mayor",
+        title: "A first on the Board of Supervisors",
+        text:
+          "Ella Hill Hutch, a civil rights leader elected to the Board of Supervisors in 1977 and reelected in 1980, was the first African American woman to serve on it. She died on February 25, 1981, and on June 11, 1981, Mayor Dianne Feinstein dedicated this community center bearing her name. Through the summer and fall of 2026 the Recreation and Park Department is running it while the city gathers ideas for its future.",
+        place: "Ella Hill Hutch Community Center",
+        where: "1050 McAllister St",
+        at: [-122.42949, 37.77915],
+        source: "https://sfplanning.org/node/3740",
+      },
+      {
+        icon: "art",
+        title: "A city-owned home for Black arts",
+        text:
+          "Billed as the only city-owned cultural center devoted to preserving African American art and culture, this 34,000-square-foot complex holds the roughly 200-seat Buriel Clay Theater. Its resident organizations include the San Francisco African American Historical and Cultural Society and the African American Shakespeare Company, here since 2004. The building faces a closure for a major renovation expected to take several years.",
+        place: "African American Art & Culture Complex",
+        where: "762 Fulton St",
+        at: [-122.42930, 37.77824],
+        source: "https://savingplaces.org/places/african-american-art-and-culture-complex",
       },
       {
         icon: "church",
-        title: "Historic Black churches",
+        title: "A congregation from the Gold Rush",
         text:
-          "Congregations like Third Baptist and St. John Coltrane African Orthodox Church anchored the community through displacement. They remain cultural pillars of African-American life in San Francisco.",
+          "Bethel AME dates its San Francisco history to 1852 and has gone by several names, among them St. Cyprian's African M.E. Church, meeting in several places around the city before settling here on Laguna Street in 1945. KQED has called it the largest and oldest African American church in San Francisco, and it is counted among the earliest African American churches in the West.",
+        place: "Bethel AME Church",
+        where: "916 Laguna St",
+        at: [-122.42688, 37.77942],
+        source: "https://en.wikipedia.org/wiki/Bethel_African_Methodist_Episcopal_Church_(San_Francisco)",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.5 miles for visitors and would-be neighbors, from the Fillmore Auditorium at Geary Blvd & Fillmore St (22 Fillmore and 38 Geary buses) west along Geary to Beideman Place, back east along Eddy St to the old jazz blocks of Fillmore Street, and on past the community and cultural centers to Bethel AME near Laguna & McAllister, where the 5 Fulton stops. Allow about 70 minutes; the grades are gentle, and a weekday afternoon is a good time.",
+      miles: 1.5,
+      minutes: 70,
+      tip:
+        "From the Peoples Temple site, follow Geary west to Scott St and walk south to Ellis St for Beideman Place; afterward Eddy St, a block farther south, runs straight east to Fillmore St. Check what's open before you go: the Heritage Center's community programming is a city pilot through December 2026, and the Art & Culture Complex faces a multiyear renovation. At the end, the 5 and 5R at McAllister & Laguna run back downtown.",
+    },
     restaurants: [
       { name: "State Bird Provisions", address: "1529 Fillmore St", phone: "(415) 795-1272", url: "https://www.statebirdsf.com" },
       { name: "Woodhouse Fish Co.", address: "1914 Fillmore St", phone: "(415) 437-2722", url: "https://www.woodhousefish.com" },
@@ -2734,39 +2782,77 @@ export const NEIGHBORHOODS = {
       "Michelin dining nearby",
     ],
     history:
-      "Beneath these quiet streets lies the former Laurel Hill Cemetery, one of San Francisco's \"Big Four\" burial grounds, which interred the city's elite from the 1850s. As the growing city ran out of room, voters banned new burials in 1900, and by the 1940s the remaining graves were exhumed and the dead relocated to Colma. Meanwhile, developer James Clark Jordan had laid out Jordan Park around 1906 as an upscale planned tract, lining its blocks with the grand homes that still define the neighborhood today.",
+      "Long before Laurel Heights had houses, it had headstones. Lone Mountain Cemetery opened here in 1854 and was renamed Laurel Hill in 1867. It held, in the words of the state's landmark listing, “the builders of the West, civic and military leaders, jurists, inventors, artists, and eleven United States Senators.” The city halted new burials around 1900 and barred them by ordinance in 1902. Laurel Hill's defenders beat back several ballot measures to clear it, but in 1937 the Board of Supervisors ordered its burials removed; exhumations began in 1940, and some 35,000 remains went south to Cypress Lawn in Colma.\n\nWest of the graves, Jordan Park had been laid out in 1906 on what a photograph of that year calls race track property. Once the cemetery was cleared, Heyman Brothers, a city builder since the 1890s, planned some 600 houses, duplexes and small apartment buildings there, first conceived as Mayfair Terrace. World War II held them up; building began in 1947 and was about three-quarters done within two years. The new neighborhood was called Laurel Heights in a nod to the cemetery, and its California Street shopping strip became Laurel Village.\n\nThe school district bought a 12-acre corner of the old cemetery and then decided not to build. The land was rezoned, and Fireman's Fund Insurance opened a modernist headquarters there in 1957. The insurer stayed until 1983; UCSF bought the building in 1985 for pharmacy school laboratories, and neighbors sued over its environmental review. Laurel Heights Improvement Association v. Regents reached the California Supreme Court twice, in 1988 and 1993. UCSF closed the campus in 2023, and the site is now planned for 744 homes.",
     facts: [
       {
         icon: "church",
-        title: "A neighborhood atop a cemetery",
+        title: "The landmark plaque that vanished",
         text:
-          "Laurel Hill Cemetery once covered much of this area, holding tens of thousands of San Franciscans. It was one of the city's \"Big Four\" cemeteries clustered near Lone Mountain.",
+          "The state registered the site of Laurel Hill Cemetery as California Historical Landmark No. 760 on April 28, 1961, and a bronze plaque went up on the campus wall here at California and Walnut; landmark hunters have reported it missing since at least 2013. Among the cemetery's dead was U.S. Senator David C. Broderick, killed in a duel. When the graves were cleared, his monument column was broken up where it stood, and with no family to claim him, he went to the Pioneer Mound at Cypress Lawn.",
+        place: "Laurel Hill Cemetery site",
+        where: "California St & Walnut St",
+        at: [-122.44844, 37.78692],
+        source: "https://ohp.parks.ca.gov/ListedResources/Detail/760",
       },
       {
-        icon: "quake",
-        title: "The great removal to Colma",
+        icon: "money",
+        title: "A modernist office on old graves",
         text:
-          "After San Francisco banned new burials in 1900, the city eventually ordered the cemeteries cleared. By the 1940s Laurel Hill's remains were disinterred and moved south to Colma, freeing the land for housing.",
-      },
-      {
-        icon: "house",
-        title: "Jordan Park's grand tract",
-        text:
-          "Developer James Clark Jordan began laying out Jordan Park around 1906 as an exclusive residential tract. Its wide, well-kept blocks of stately homes remain among the city's most prized.",
+          "Fireman's Fund Insurance began work in its new headquarters here on June 17, 1957: a glass-walled, four-winged modernist building by architect Edward B. Page, with grounds by landscape architects Eckbo, Royston & Williams, the buildings and landscape designed to work as one. UCSF bought it in 1985 and closed its Laurel Heights campus here in 2023. Now called Presidio Highlands, the 10-acre site is planned for 744 homes, and permits for a first phase of 152 apartments in three buildings were filed in February 2026.",
+        place: "Fireman's Fund headquarters",
+        where: "3333 California St",
+        at: [-122.44960, 37.78650],
+        source: "https://pcad.lib.washington.edu/building/16191",
       },
       {
         icon: "shopping",
-        title: "Laurel Village shopping",
+        title: "Named for the cemetery",
         text:
-          "The Laurel Village center along the 3500 block of California Street has anchored neighborhood errands since the 1940s. Its grocers, cafés, and shops draw residents from across the surrounding hills.",
+          "When the cleared cemetery land was built up after World War II, the new neighborhood was called Laurel Heights in a nod to Laurel Hill, and this California Street shopping strip between Laurel and Spruce streets became Laurel Village. A 1951 photograph in the Western Neighborhoods Project's archive shows the future Laurel Village site still holding just one business, Roselli, at 3601 California.",
+        place: "Laurel Village",
+        where: "California St & Locust St",
+        at: [-122.45170, 37.78640],
+        source: "https://newfillmore.com/?p=10590",
       },
       {
-        icon: "book",
-        title: "The 3333 California campus",
+        icon: "pin",
+        title: "A headstone under the garage",
         text:
-          "The large complex at 3333 California St began as Fireman's Fund headquarters and later housed UCSF's Laurel Heights campus. It has since been redeveloped into a mixed-use residential and academic site.",
+          "Heyman Brothers first conceived its roughly 600 postwar homes as Mayfair Terrace, and the name lives on in Mayfair Drive, by Laurel Village. The cemetery never entirely left: in 2017 a work crew beneath a garage at Iris Avenue and Mayfair Drive struck a marble headstone, about a ton by one account, whose oldest carved date was 1813. News reports noted that some of Laurel Hill's gravestones were left behind when the dead were moved.",
+        place: "Mayfair Drive",
+        where: "Iris Ave & Mayfair Dr",
+        at: [-122.45240, 37.78600],
+        source: "https://digital-release.kron4.com/news/video-century-old-tombstone-found-buried-underneath-san-francisco-garage/amp",
+      },
+      {
+        icon: "house",
+        title: "A 1906 residence park",
+        text:
+          "Jordan Park, between Geary Boulevard, California Street, Palm Avenue and Parker Avenue, dates from 1906; a photograph from that year in the California Historical Society's collection is titled “Race track property—now Jordan Park.” It is one of eight residence parks in the city's draft study “Gardens in the City: San Francisco Residence Parks, 1906–1940.” Its entrance pillars are gone, but a Western Neighborhoods Project photo caption places a sales office of the Suburban Home Building Society at this intersection's southwest corner.",
+        place: "Jordan Park",
+        where: "Jordan Ave & Euclid Ave",
+        at: [-122.45690, 37.78385],
+        source: "https://sfplanning.org/project/residence-parks-historic-context-statement",
+      },
+      {
+        icon: "movie",
+        title: "Where Star Wars lines circled the block",
+        text:
+          "Across Geary, at No. 3575, stood the Coronet, a Streamline Moderne movie house by Cantin & Cantin that opened on November 2, 1949. When Star Wars opened in 1977, the Coronet was its only San Francisco theater, and lines snaked around the block for weeks. It closed on March 17, 2005, about two months before Revenge of the Sith opened, and was torn down in July 2007; an Institute on Aging building now stands on the site.",
+        place: "Coronet Theatre site",
+        where: "3575 Geary Blvd",
+        at: [-122.45750, 37.78111],
+        source: "https://en.wikipedia.org/wiki/Coronet_Theatre_(San_Francisco)",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about a mile for visitors and would-be neighbors, from the 1, 2 and 43 bus stops at California St & Presidio Ave west past the old Laurel Hill Cemetery grounds and Laurel Village, then by Mayfair Drive and Iris Avenue to Euclid Avenue and Jordan Park, ending on Geary Blvd near Arguello Blvd, where the 38 Geary and 33 buses stop. Allow about 45 minutes; a weekday late morning is calmest.",
+      miles: 1,
+      minutes: 45,
+      tip:
+        "Laurel Village, a third of the way along, is the walk's coffee and snack stop. At the end, the 38 and 38R Geary run east toward downtown and west toward the Outer Richmond.",
+    },
     restaurants: [
       { name: "Spruce", address: "3640 Sacramento St", phone: "(415) 931-5100", url: "https://www.sprucesf.com" },
       { name: "Sociale", address: "3665 Sacramento St", phone: "(415) 921-3200", url: "https://sfsociale.com" },
@@ -2799,39 +2885,57 @@ export const NEIGHBORHOODS = {
       "Tank Hill at the edge",
     ],
     history:
-      "Ashbury Heights climbs the slope above Haight-Ashbury, sharing its name with Monroe Ashbury, a San Francisco supervisor of the 1860s who helped plan nearby Golden Gate Park. As streetcar and cable lines pushed west in the late 1800s, developers terraced these hills with grand Victorian and Edwardian homes, creating an affluent residential enclave perched above the commercial Haight. Its steep, leafy streets, hillside stairways, and panoramic views have kept it quieter and pricier than the neighborhood below ever since.",
+      "Ashbury Heights takes its name from Ashbury Street, which honors Munroe Ashbury, a member of the Board of Supervisors from 1864 to 1870. The name once stretched much farther: an old newspaper item applied it to the whole district south of the Panhandle, from Baker Street west to First Avenue, where residents had formed the Ashbury Heights and Stanyan Street Improvement Club. Today it means the steep slope at the base of Tank Hill beside Cole Valley, which San Francisco State's Kirkeberg photo collection bounds by 17th Street, Stanyan Street, Clarendon Avenue and Twin Peaks Boulevard.\n\nIn 1880 Adolph Sutro bought 1,200 acres of Rancho San Miguel, including the hill to the west that he called Mount Parnassus, now Mount Sutro. In 1894 the Spring Valley Water Company built a 500,000-gallon tank on the 650-foot knob above the east end of Belgrave Avenue, giving Tank Hill its name. By 1910, when the appraiser A. S. Baldwin photographed Sutro's estate, his “Ashbury Heights” plates showed houses, streets, a boardwalk and Sutro's Triumph of Light statue on Mount Olympus. After the 1906 earthquake and fire, voters approved bonds in 1908 for a separate high-pressure firefighting water system, completed in 1913; in 1912 crews were photographed building its Ashbury Heights tank at Clayton and Carmel streets, and Engine Company No. 40, organized in 1909, had its quarters across the street.\n\nThe tank on Tank Hill came down in 1957, and the city sold the lot as surplus in 1960. Neighbors pushed the city to buy it back, and in 1977 it did, as part of a citywide effort to acquire the remaining knolls and ridges for parks.",
     facts: [
       {
-        icon: "park",
-        title: "Buena Vista Park",
+        icon: "road",
+        title: "Sutro's Mount Parnassus",
         text:
-          "Bordering the neighborhood, Buena Vista Park is San Francisco's oldest official park, dedicated in 1867. Its wooded summit offers sweeping views across the city and bay.",
+          "Parnassus Avenue runs west from this corner toward UCSF's Parnassus Heights campus, which began with 13 acres on Parnassus Avenue that Adolph Sutro donated to the University of California's Regents in 1895. Sutro called the hill above the campus Mount Parnassus; in 1886 he began planting it with imported and native trees to celebrate San Francisco's first Arbor Day, UCSF says, and it was later renamed Mount Sutro in his honor.",
+        place: "Parnassus Avenue",
+        where: "Cole St & Parnassus Ave",
+        at: [-122.44985, 37.76477],
+        source: "https://www.ucsf.edu/cgr/cgr-projects/mount-sutro-open-space-reserve",
       },
       {
-        icon: "house",
-        title: "Hillside Victorians",
+        icon: "water",
+        title: "The tank behind the red-top hydrants",
         text:
-          "The Heights is prized for its grand Victorian and Edwardian houses lining steep blocks. Built during the streetcar-era expansion of the late 1800s, many survived the 1906 disaster intact.",
+          "Across Clayton Street, opposite the end of Carmel Street, stands the Ashbury Heights tank of the high-pressure firefighting water system that voters funded in 1908, after the earthquake and fire, and that was completed in 1913, separate from the drinking-water system. The original 500,000-gallon tank, photographed under construction in 1912, fed the system's upper zone, and the SFPUC lists a new Ashbury Tank among its completed upgrades. Watch for hydrants with red tops: the SFPUC's 2026 fact sheet says they draw on the Ashbury tanks, while black tops draw on Twin Peaks and blue tops on the Jones Street tank. Engine Company No. 40, organized in October 1909, had its quarters across the street from the tank until 1956.",
+        place: "Ashbury Tank",
+        where: "Clayton St & Carmel St",
+        at: [-122.44663, 37.76094],
+        source: "https://www.sfpuc.gov/sites/default/files/documents/Firefighting-Water-System-Fact-Sheet-02.24.2026.pdf",
       },
       {
         icon: "star",
-        title: "Tank Hill views",
+        title: "Named for a tank that's gone",
         text:
-          "At the neighborhood's edge sits Tank Hill, named for a water tank installed by the Spring Valley Water Company in 1894. The tank came down in 1957, leaving one of the city's best panoramic viewpoints.",
+          "In 1894 the Spring Valley Water Company built the 500,000-gallon Clarendon Heights tank on this 650-foot hill, storing water pumped up from its reservoir at Laguna Honda, and the tank gave the hill its name; after Pearl Harbor, blue gum eucalyptus were planted around it to hide it. The city removed the tank in 1957, leaving its concrete platform, and sold the land as surplus in 1960. Neighbors pushed the city to buy it back, and in 1977 it did, as part of a citywide effort to acquire the remaining knolls and ridges for parks.",
+        place: "Tank Hill",
+        where: "Twin Peaks Blvd & Clarendon Ave",
+        at: [-122.44769, 37.75995],
+        source: "https://en.wikipedia.org/wiki/Tank_Hill",
       },
       {
-        icon: "stairs",
-        title: "Streets that become stairs",
+        icon: "park",
+        title: "A stair into Sutro's forest",
         text:
-          "Some slopes here are too steep for cars, so the streets give way to public stairways. These hidden walkways connect blocks and reward climbers with quiet garden views.",
-      },
-      {
-        icon: "mayor",
-        title: "Named for a supervisor",
-        text:
-          "Monroe Ashbury served on the Board of Supervisors in the 1860s. He had a hand in planning both the surrounding neighborhood and Golden Gate Park, and the area took his name.",
+          "Near this corner, wooden stairs climb into the Interior Greenbelt, a city-owned part of Sutro Forest that the city bought in the 1950s. Recreation and Park says it holds the long-hidden Woodland Creek and a half mile of trail built in the 1880s that leads up to Mount Sutro, and that a newly restored historic trail now links it with the Mount Sutro trails, opening a total of 72 acres.",
+        place: "Interior Greenbelt",
+        where: "Stanyan St & 17th St",
+        at: [-122.45186, 37.76131],
+        source: "https://sfrecpark.org/1062/Interior-Greenbelt-Trail",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about a mile for visitors and would-be neighbors, from Cole St & Parnassus Ave (6, 37 and 43 buses; the N Judah stops a block north at Carl & Cole) south on Cole Street and east on Carmel Street to the Ashbury tank, up Twin Peaks Boulevard and the wooden steps to Tank Hill, then down to Belgrave Avenue and west to Stanyan Street, ending at the Interior Greenbelt stair at Stanyan & 17th. Allow about an hour, and go on a clear day, when the view from Tank Hill reaches farthest.",
+      miles: 1,
+      minutes: 60,
+      tip:
+        "The wooden steps up Tank Hill leave Twin Peaks Boulevard near Clarendon Avenue, across from Crown Terrace, and another path drops from the top to the east end of Belgrave Avenue. At the end, the Greenbelt's 1880s trail climbs on toward Mount Sutro if you want more forest, and the 37 Corbett stops at 17th & Cole, a short walk east on 17th Street, for the ride back.",
+    },
     nearby: ["Cole Valley", "the Haight"],
     restaurants: [
       { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
@@ -2865,39 +2969,87 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Lower Pac Heights",
     history:
-      "Lower Pacific Heights is the flatter southern apron of Pacific Heights, blending into the Fillmore and Western Addition. Streetcar lines along Fillmore and Geary spurred dense Victorian and Edwardian flats in the late 1800s and early 1900s. The Fillmore corridor became the heart of a thriving Black community and jazz scene mid-century, much of it razed during 1960s redevelopment. Today the strip mixes longtime shops, restaurants, and music venues just north of Japantown.",
+      "For most of its history this stretch between Fillmore Street and Presidio Avenue was part of the Western Addition. An 1861 street guide already listed Hamilton Square, spanning Geary between Steiner and Scott, and in 1863 Dominican friars paid $6,000 for the block at Bush and Steiner, where their first church was blessed in 1873. The California Street Cable Railroad opened to Fillmore in April 1878 and in May 1879 pushed west to Central Avenue, today's Presidio Avenue, along the neighborhood's northern edge. Victorians followed, among them an 1883 house on Broderick Street that television would make famous.\n\nWhen the 1906 fire burned out downtown, City Hall and most big department stores moved west to Fillmore, the closest thoroughfare left intact. Mayor Eugene Schmitz and the Committee of Fifty met at Franklin Hall, at Fillmore and Bush, to launch the relief effort, and refugees camped in Hamilton Square. Merchants from the burned district soon proposed electrically lit arches over the street. Mount Zion Hospital, founded by members of the city's Jewish community in 1887, came west too, with $100,000 from Isaias Hellman for a new hospital named for his late wife, Esther.\n\nDuring World War II, Black newcomers from the South moved into the Fillmore, replacing Japanese American families forced into incarceration camps. After the war Erich Mendelsohn, a leading Expressionist architect, designed the Maimonides Health Center on Sutter Street. The 1989 Loma Prieta earthquake destroyed the lantern atop St. Dominic's tower; by 1992 the tower was rebuilt and the walls braced by nine flying buttresses. In the 1980s and '90s the older name Upper Fillmore fell out of favor, and Lower Pacific Heights came into wider use.",
     facts: [
       {
-        icon: "music",
-        title: "Harlem of the West",
+        icon: "park",
+        title: "The square that spanned Geary",
         text:
-          "The lower Fillmore was a renowned jazz hub in the 1940s and '50s, nicknamed the \"Harlem of the West.\" Ella Fitzgerald, Duke Ellington, and Billie Holiday all played its clubs.",
+          "An 1861 street guide lists Hamilton Square as spanning Geary, bounded by Post, Steiner, O'Farrell and Scott streets: a full square rather than today's rectangle. After the 1906 earthquake it held a refugee camp. Today Hamilton Recreation Center, with its indoor swimming pool, and the Raymond Kimbell Playground and athletic fields lie on either side of Geary Boulevard.",
+        place: "Hamilton Recreation Center",
+        where: "Geary Blvd & Steiner St",
+        at: [-122.43480, 37.78440],
+        source: "https://hoodline.com/2016/02/how-2-western-addition-parks-separated-by-a-century-came-to-be/",
+      },
+      {
+        icon: "pin",
+        title: "Named for Esther Hellman",
+        text:
+          "In November 1887, 43 members of San Francisco's Jewish community met at the home of Frederick and Charlotte Castle and formed the Mount Zion Hospital Association. After his wife Esther died in 1908, Isaias Hellman gave $100,000 for a new hospital in the Western Addition, and this building is named for her; UCSF marked its centennial in 2011. Mount Zion joined UCSF in 1990 and remains a hub for outpatient clinics, surgery and cancer care.",
+        place: "Mount Zion Hellman Building",
+        where: "2200 Post St",
+        at: [-122.43830, 37.78470],
+        source: "https://www.ucsf.edu/news/2011/06/103813/mount-zion-anniversary-event-june-18-celebrates-past-present-and-future",
       },
       {
         icon: "art",
-        title: "Fillmore Jazz Festival",
+        title: "An expressionist's hidden hospital",
         text:
-          "Each July 4th weekend the street hosts the largest free jazz festival on the West Coast. It spans about twelve blocks and draws well over 100,000 visitors.",
+          "Erich Mendelsohn, a leading figure of German Expressionist architecture, designed the Maimonides Health Center for the Chronic Sick here; the Pacific Coast Architecture Database dates the project 1946 to 1950. The New Fillmore counts it as one of his two San Francisco commissions, the other a house for Leon and Madeline Russell. Altered since and tucked among later hospital and clinic buildings, its tall, round-balconied form is easy to miss.",
+        place: "Maimonides Health Center",
+        where: "2356 Sutter St",
+        at: [-122.43908, 37.78547],
+        source: "https://newfillmore.com/2019/04/01/he-scraped-the-gingerbread-off/",
       },
       {
         icon: "movie",
-        title: "The \"Full House\" house",
+        title: "The house from the opening credits",
         text:
-          "The Victorian used for exterior shots in TV's Full House sits nearby at 1709 Broderick Street. Built in 1883, it remains a private residence and a popular photo stop.",
+          "Built in 1883 and attributed to architect Charles Lewis Hinkel, this red-doored Victorian is the house in the opening credits of TV's Full House. Series creator Jeff Franklin bought it for $4 million in 2016, after Fuller House launched on Netflix, then gutted and remodeled the interior; it sold again in 2020 for $5.35 million. It is a private home, so enjoy it from the sidewalk.",
+        place: "Full House house",
+        where: "1709 Broderick St",
+        at: [-122.44207, 37.78634],
+        source: "https://socketsite.com/archives/2020/02/another-cut-for-the-fully-remodeled-full-house-home.html",
       },
       {
-        icon: "house",
-        title: "Streetcar-era flats",
+        icon: "church",
+        title: "Flying buttresses from 1992",
         text:
-          "Much of the area is lined with Victorian and Edwardian flats from the late 1800s and early 1900s. Frequent transit along Fillmore and Geary made it an early streetcar suburb.",
+          "Dominican friars paid $6,000 in 1863 for this block, bounded by Steiner, Bush, Pierce and Pine, and Archbishop Joseph Alemany blessed their first church here in 1873. A brick successor by Thomas J. Welsh, begun in 1883, was destroyed in 1906, and twin architects Louis and Michael Beezer designed the present church, completed in 1928. The 1989 Loma Prieta earthquake destroyed the octagonal lantern atop its tower; a project finished in 1992 rebuilt the tower and braced the walls with nine flying buttresses.",
+        place: "St. Dominic's Church",
+        where: "Bush St & Steiner St",
+        at: [-122.43519, 37.78706],
+        source: "https://en.wikipedia.org/wiki/St._Dominic%27s_Catholic_Church_(San_Francisco)",
       },
       {
-        icon: "shopping",
-        title: "The Fillmore strip",
+        icon: "mayor",
+        title: "City Hall on a street corner",
         text:
-          "The street is one of the city's premier shopping and dining corridors. Its southern end blends boutiques and restaurants with the neighboring Japantown commercial district.",
+          "Franklin Hall, on the southwest corner of Fillmore and Bush, served as relief headquarters and San Francisco's temporary City Hall after the 1906 earthquake. Mayor Eugene Schmitz and the Committee of Fifty met there on the last day of the fire to start the relief effort. With downtown burned out, City Hall and most of the big department stores moved a mile or so west to Fillmore, the closest thoroughfare left intact.",
+        place: "Franklin Hall site",
+        where: "Fillmore St & Bush St",
+        at: [-122.43360, 37.78690],
+        source: "https://fillmorestreetsf.com/history/after-the-great-earthquake/",
+      },
+      {
+        icon: "star",
+        title: "Fourteen arches of light",
+        text:
+          "The week after the 1906 earthquake, merchants and businessmen transplanted from the burned zone formed the Fillmore Street Improvement Association. In April 1907 it asked the supervisors to let it raise decorative metal arches, fitted with electric lights, across 14 intersections of Fillmore Street from Sacramento to Fulton, this one among them. In 1943, when the lights could not be dimmed for a wartime dim-out, the merchants took the arches down and gave the iron for scrap.",
+        place: "Fillmore Street",
+        where: "Fillmore St & Sutter St",
+        at: [-122.43312, 37.78603],
+        source: "https://www.sanfranciscostory.com/fillmore-arches/",
       },
     ],
+    walk: {
+      intro:
+        "A loop of about 1.3 miles for visitors and would-be neighbors that starts and ends at Fillmore St & Geary Blvd, served by the 22 Fillmore and 38 Geary buses: west past Hamilton Recreation Center and Mount Zion, out Sutter and up Broderick to the Full House house, then east along Bush to St. Dominic's and back down Fillmore Street. Allow about an hour; the blocks are mostly gentle, and a weekday morning is calmest.",
+      miles: 1.3,
+      minutes: 60,
+      tip:
+        "Save your coffee or lunch for the last blocks of Fillmore Street. Over the Fourth of July weekend the free Fillmore Jazz Festival, billed as the West Coast's largest, fills Fillmore from Jackson to Eddy; in 2026 its Sutter Street stage was named for Miles Davis.",
+    },
     restaurants: [
       { name: "State Bird Provisions", address: "1529 Fillmore St", phone: "(415) 795-1272", url: "https://www.statebirdsf.com" },
       { name: "Copra", address: "1700 Fillmore St", phone: "(415) 873-0795", url: "https://www.coprarestaurant.com" },
@@ -2930,39 +3082,77 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Buena Vista Park",
     history:
-      "The name is Spanish for \"good view\" — fitting for a hill that looks from the bay to the Pacific. Buena Vista Park was set aside in 1867, making it San Francisco's oldest official park, originally called Hill Park. As cable and streetcar lines reached the area in the late 1800s, developers lined the steep surrounding streets with ornate Victorian and Edwardian homes, many of which survived the 1906 earthquake and still stand today.",
+      "Buena Vista, Spanish for “good view,” is the hill at the eastern edge of the old Outside Lands, the ground beyond the city's 1851 charter limits, roughly west of Divisadero Street, where squatters' claims clouded titles for years. In 1867 the city reserved its hilltop as Hill Park, often called San Francisco's oldest official park, and paid squatters $88,250 to give up their claims to it. It was dedicated as Buena Vista Park in 1894.\n\nTransit and money then climbed the slopes. Cable cars began running out Haight Street to Stanyan in late 1883. In 1887 Adolph Sutro's statue, the Triumph of Light, was dedicated on Mount Olympus to the south; St. Joseph's Hospital was founded on the hill's east side in 1889; and in 1897 Richard Spreckels, of the sugar-refining family, built a house across from the park on Buena Vista Avenue West. After the 1906 earthquake, crowds spent five days on the summit watching the city burn. Around 1910 neighbors formed an improvement club, and the staircases, paths and tennis courts it won were dedicated in 1913.\n\nIn 1928 St. Joseph's opened a Spanish Renaissance Revival building that would later play the sanatorium in Hitchcock's Vertigo. In the mid-1930s WPA crews rebuilt the park's walls and gutters with broken headstones from the city's emptied Victorian cemeteries, and in the 1960s the Spreckels house's top floor held a recording studio where the Grateful Dead made early recordings. The hospital closed in 1979 and was converted into the Park Hill condominiums, and in 2026 the Board of Supervisors voted to make the Spreckels house a city landmark.",
     facts: [
       {
         icon: "park",
-        title: "The city's oldest park",
+        title: "Bought back from squatters",
         text:
-          "Buena Vista Park was established in 1867, making it the oldest official park in San Francisco. Its forested slopes climb to one of the highest points in the central city.",
+          "The city reserved this hilltop in 1867 as Hill Park, often called San Francisco's oldest official park, and paid squatters $88,250 to give up their claims to it; it was dedicated as Buena Vista Park in 1894 and covers about 36 acres today. Around 1910 neighbors formed an improvement club, and the new staircases, paths and tennis courts it won were dedicated in 1913.",
+        place: "Buena Vista Park",
+        where: "Haight St & Buena Vista Ave E",
+        at: [-122.44055, 37.77075],
+        source: "https://www.foundsf.org/Buena_Vista_History",
+      },
+      {
+        icon: "music",
+        title: "A sugar mansion's rock studio",
+        text:
+          "Richard Spreckels, of the sugar-refining family, built this Colonial Revival house across from the park in 1897 to designs by Edward Vogel. In the 1960s its top floor held a recording studio, Buena Vista Studios, where the Grateful Dead made some early recordings, and actor Danny Glover bought the house in 1990. In 2026 the Board of Supervisors voted to make it a city landmark, the Richard Spreckels Mansion / Buena Vista Studios.",
+        place: "Richard Spreckels Mansion",
+        where: "737 Buena Vista Ave W",
+        at: [-122.44375, 37.76884],
+        source: "https://media.api.sf.gov/documents/o0178-26.pdf",
+      },
+      {
+        icon: "art",
+        title: "Sutro's vanished Triumph of Light",
+        text:
+          "This wooded knob on Upper Terrace was once considered the geographic center of San Francisco. Adolph Sutro crowned it with a statue, the Triumph of Light, a copy of a work by the Belgian artist Antoine Wiertz, dedicated on Thanksgiving Day 1887. The statue was taken down in the 1950s, and all that remains is its base inside a raised, wooded circle where Upper Terrace dead-ends.",
+        place: "Mount Olympus",
+        where: "End of Upper Ter",
+        at: [-122.44553, 37.76299],
+        source: "https://en.wikipedia.org/wiki/Mount_Olympus_(San_Francisco)",
       },
       {
         icon: "book",
-        title: "Headstones in the gutters",
+        title: "Headstones in the walls",
         text:
-          "The park's drainage gutters are lined with marble fragments from old headstones. They came from city cemeteries cleared in the early 20th century, and carved names and dates are still visible.",
+          "Follow the trail east into the park from this corner and the walls turn oddly speckled. WPA crews built the park's walls and gutters in the 1930s from broken granite and marble headstones, left behind when the city's Victorian-era cemeteries were moved to Colma. Workers were told to lay the stones writing side down, but a few face up, and fragments of names and words such as “Died” can still be read.",
+        place: "Tombstone walls",
+        where: "Buena Vista Ave W & Upper Ter",
+        at: [-122.44280, 37.76582],
+        source: "https://www.sfchronicle.com/totalsf/article/buena-vista-park-sf-19787788.php",
       },
       {
-        icon: "star",
-        title: "Bay-to-ocean views",
+        icon: "quake",
+        title: "Five days watching the city burn",
         text:
-          "From the summit you can see the Golden Gate Bridge, the bay, downtown, and out to the Pacific. The vista is the reason for the Spanish name \"buena vista,\" meaning good view.",
+          "The top of the park is a small lawn about 575 feet above sea level, by the city parks department's figures. After the earthquake of April 1906, crowds gathered up here for five days to watch the fires burn across San Francisco.",
+        place: "Buena Vista Park summit",
+        where: "Top of Buena Vista Park",
+        at: [-122.44060, 37.76890],
+        source: "https://www.foundsf.org/Buena_Vista_History",
       },
       {
-        icon: "house",
-        title: "A showcase of Victorians",
+        icon: "movie",
+        title: "Vertigo's sanatorium",
         text:
-          "The steep streets ringing the park are famous for grand Victorian and Edwardian houses. Many were built during the late-1800s streetcar boom and survived the 1906 earthquake and fire.",
-      },
-      {
-        icon: "bird",
-        title: "A forested refuge",
-        text:
-          "Once a windswept hill, the park was planted with eucalyptus, pine, and cypress starting in the 1890s. Today its dense canopy shelters owls, hawks, and migrating songbirds in the heart of the city.",
+          "St. Joseph's Hospital was founded on this site in 1889 through a charitable gift to the Catholic Church, with Franciscan Sisters running it, and in 1928 it opened this Spanish Renaissance Revival building by the architects Bakewell & Brown. Alfred Hitchcock used its exterior as the sanatorium in Vertigo. The hospital closed in 1979, the building joined the National Register of Historic Places in 1985, and it was later converted into the Park Hill condominiums.",
+        place: "Former St. Joseph's Hospital",
+        where: "355 Buena Vista Ave E",
+        at: [-122.44006, 37.76746],
+        source: "https://en.wikipedia.org/wiki/St._Joseph%27s_Hospital_(San_Francisco)",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.5 miles and 85 minutes with stops, for visitors and would-be neighbors: start at Haight Street and Buena Vista Avenue East (7 bus), follow Buena Vista Avenue West around the park past the Spreckels mansion and up Upper Terrace to Mount Olympus, then cut back through the park over the summit and down to Park Hill, beside a 37 Corbett stop. Go on a clear day, when the views from both hilltops are widest.",
+      miles: 1.5,
+      minutes: 85,
+      tip:
+        "The park's trails and stairs are steep and uneven, so wear shoes with grip; to finish where you started, Haight Street is about a 10-minute walk from Park Hill along Buena Vista Avenue East.",
+    },
     nearby: ["the Haight", "Cole Valley", "the Castro"],
     restaurants: [
       { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
