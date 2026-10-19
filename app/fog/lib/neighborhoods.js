@@ -71,16 +71,6 @@ export const NEIGHBORHOODS = {
         source: "https://sfstandard.com/2026/02/05/castro-theatre-reopens-renovation/",
       },
       {
-        icon: "shop",
-        title: "Where Castro Halloween began",
-        text:
-          "Cliff's Variety, on Castro Street since 1936 and at this address since 1971, fills the building where the first Castro Theatre opened in 1910. In the late 1940s the founder's son, Ernie DeBaca, started a children's Halloween costume contest out front, the seed of Halloween in the Castro; the store ended the contest in 1979 as adult crowds took over.",
-        place: "Cliff's Variety",
-        where: "479 Castro St",
-        at: [-122.43476, 37.76113],
-        source: "https://en.wikipedia.org/wiki/Cliff%27s_Variety_Store",
-      },
-      {
         icon: "sun",
         title: "The corner called Hibernia Beach",
         text:
@@ -94,11 +84,21 @@ export const NEIGHBORHOODS = {
         icon: "mayor",
         title: "Landmarked on Milk's 70th birthday",
         text:
-          "Harvey Milk ran his camera store and his campaigns for office from 573–575 Castro Street, and lived in the flat upstairs. Supervisors gave final approval to making it city Landmark No. 227 on May 22, 2000, which would have been his 70th birthday. On 19th Street just before it, look down: the bronze Rainbow Honor Walk plaques honoring LGBTQ figures began going into these sidewalks in 2014.",
+          "Harvey Milk ran his camera store and his campaigns for office from 573–575 Castro Street, and lived in the flat upstairs. Supervisors gave final approval to making it city Landmark No. 227 on May 22, 2000, which would have been his 70th birthday. Along Castro Street on the way here, watch the sidewalk: the bronze Rainbow Honor Walk plaques honoring LGBTQ figures began going into these sidewalks in 2014.",
         place: "Castro Camera",
         where: "575 Castro St",
         at: [-122.43463, 37.75962],
         source: "https://www.sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances00/o0121-00.pdf",
+      },
+      {
+        icon: "shop",
+        title: "Where two shopping streets cross",
+        text:
+          "San Francisco's planning code describes the Castro's shopping district as a crossing at Castro and 18th streets, its arms lined with many small, intensely active businesses: Castro Street from Market to 19th, and 18th Street on either side of Castro, this block included. The Market Street Cable Railway's Castro Street line, opened in the late 1880s, made old Eureka Valley easy to reach, and the neighborhood had its own bakeries, butcher shops and poultry and fish markets. Today shops, restaurants, cafés and bars fill the storefronts.",
+        place: "Castro and 18th Street shops",
+        where: "18th St & Hartford St",
+        at: [-122.43374, 37.76111],
+        source: "https://www.sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances12/o0226-12.pdf",
       },
       {
         icon: "house",
@@ -123,9 +123,9 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A short loop for first-time visitors and would-be neighbors that starts and ends at Castro Station (Muni Metro K, L and M; the F streetcar ends a few steps away), taking in the Castro Street shopping blocks and the quiet Victorian blocks of 19th and Hartford streets. Allow about 40 minutes; a weekday late morning is calmest, a weekend afternoon is liveliest.",
-      miles: 0.7,
-      minutes: 40,
+        "A short loop for first-time visitors and would-be neighbors that starts and ends at Castro Station (Muni Metro K, L and M; the F streetcar ends a few steps away), taking in the shops of Castro and 18th streets and the quiet Victorian block of Hartford Street. Allow about 35 minutes; a weekday late morning is calmest, a weekend afternoon is liveliest.",
+      miles: 0.6,
+      minutes: 35,
       tip:
         "Half a block west of 18th & Castro, stop into the GLBT Historical Society Museum at 4127 18th St, opened in January 2011 and billed as the nation's first stand-alone museum of LGBTQ history. The city has bought 2280 Market St as its larger future home, so check its location and hours before you go.",
     },
@@ -188,6 +188,16 @@ export const NEIGHBORHOODS = {
         source: "https://sfrecpark.org/1685/Noe-Valley-Town-Square",
       },
       {
+        icon: "shop",
+        title: "The valley's main street",
+        text:
+          "Noe Valley's shopping district runs along 24th Street from Chattanooga Street west to Diamond Street, with this corner near its middle; the city's planning code describes it as a daytime-oriented district serving a mostly local market. A 1926 photograph taken here, looking west toward Twin Peaks, shows a movie theater on one side of 24th Street and a market on the other, and photographs from the 1940s show 11-line streetcars running along the street out to Hoffman Avenue. Shops, services, cafés and restaurants fill the ground floors, with some offices on the second story and homes on the floors above.",
+        place: "24th Street shops",
+        where: "24th St & Noe St",
+        at: [-122.43188, 37.75145],
+        source: "https://www.sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances10/o0101-10.pdf",
+      },
+      {
         icon: "book",
         title: "The library a neighbor kept open",
         text:
@@ -230,11 +240,11 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A one-way walk of about 1.8 miles for visitors and would-be neighbors, from the J-Church stop at Church & 24th streets along the 24th Street shopping blocks, then south past the old cable car turnaround and the Lyon-Martin House to St. Paul's Church, where the J runs past on Church Street for the ride back. Allow about 80 minutes; on a Saturday morning the farmers' market is running at Town Square.",
+        "A one-way walk of about 1.8 miles for visitors and would-be neighbors, from the J-Church stop at Church & 24th streets along the 24th Street shopping blocks, then south past the old cable car turnaround and the Lyon-Martin House to St. Paul's Church, where the J runs past on Church Street for the ride back. Allow about 85 minutes; on a Saturday morning the farmers' market is running at Town Square.",
       miles: 1.8,
-      minutes: 80,
+      minutes: 85,
       tip:
-        "Save your coffee stop for 24th Street between Church and Castro, before the walk turns south. At the end, look a block south of St. Paul's: the wye track where J-Church streetcars turned back for about eight decades still sits on 30th Street.",
+        "Save your coffee stop for the cafés on 24th Street between Church and Castro, before the walk turns south. At the end, look a block south of St. Paul's: the wye track where J-Church streetcars turned back for about eight decades still sits on 30th Street.",
     },
     restaurants: [
       { name: "Firefly", address: "4288 24th St", phone: "(415) 821-7652", url: "https://www.fireflysf.com" },
@@ -324,20 +334,20 @@ export const NEIGHBORHOODS = {
         source: "https://guardiansofthecity.org/sffd/fires/notable_fires/oct_17_1989.html",
       },
       {
-        icon: "movie",
-        title: "A Streamline Moderne movie house",
+        icon: "shop",
+        title: "The Marina's main street",
         text:
-          "The El Presidio Theatre went up on Chestnut Street in 1937 in the Streamline Moderne style and shortened its name to the Presidio Theatre in 1951. It stayed a single-screen movie house until 2003, and in March 2026 the Board of Supervisors voted unanimously to begin making the building a city landmark.",
-        place: "Presidio Theatre",
-        where: "2340 Chestnut St",
-        at: [-122.44185, 37.80030],
-        source: "https://media.api.sf.gov/documents/r0172-26.pdf",
+          "Chestnut Street became the Marina's main street as the district was built out in the 1920s and early 1930s; the city's planning code treats its six blocks from Webster Street to Broderick as a neighborhood shopping district and, to keep its mix of sales and services, requires special approval for new banks. The F streetcar, opened in December 1914 with the fairgrounds at the end of its line, ran out Chestnut from Van Ness Avenue, and the 30 Stockton trolley bus that replaced it in 1951 still runs along the street. Today restaurants, cocktail lounges and clothing boutiques line it, along with a bakery, a bookstore, a gift shop and a 1937 Streamline Moderne movie theater.",
+        place: "Chestnut Street shops and restaurants",
+        where: "Chestnut St & Pierce St",
+        at: [-122.43949, 37.80041],
+        source: "https://www.sfmta.com/node/13311",
       },
     ],
     walk: {
       intro:
-        "A one-way walk of about 2.2 miles for visitors and would-be neighbors, from the Marina Branch Library at Chestnut and Webster streets, where the 30 Stockton bus stops, north to the Marina Green, out the jetty to the Wave Organ, then west to the Palace of Fine Arts and back to Chestnut Street. Allow about an hour and a half, and go on a clear morning timed to a high tide.",
-      miles: 2.2,
+        "A one-way walk of about 2.7 miles for visitors and would-be neighbors, from the Marina Branch Library at Chestnut and Webster streets, where the 30 Stockton bus stops, north to the Marina Green, out the jetty to the Wave Organ, then west to the Palace of Fine Arts and back to Chestnut Street, ending among its shops and restaurants at Pierce Street, three blocks west of the start. Allow about an hour and a half, and go on a clear morning timed to a high tide.",
+      miles: 2.7,
       minutes: 90,
       tip:
         "The Wave Organ is at its liveliest near high tide, so check a tide table before you set out. The jetty is exposed to the wind off the bay, so bring a layer even on a sunny day.",
@@ -390,6 +400,16 @@ export const NEIGHBORHOODS = {
         source: "https://hoodline.com/2013/04/the-dangers-of-cooking-after-a-quake-the-ham-and-eggs-fire",
       },
       {
+        icon: "shop",
+        title: "A shopping street revived",
+        text:
+          "Hayes Valley's commercial center is the stretch of Hayes Street from Franklin Street west to about Laguna Street, three blocks with this corner near the middle, plus storefronts around the corners on Gough and Laguna streets. The elevated Central Freeway blighted parts of the valley, and one urban expert recalled Hayes Street as “pretty much abandoned”; after the freeway came down and Octavia Boulevard took its place, liquor stores and auto repair shops gave way to restaurants and boutiques. Today art galleries and clothing and furniture shops fill its storefronts too.",
+        place: "Hayes Street shops",
+        where: "Hayes St & Octavia St",
+        at: [-122.42474, 37.77682],
+        source: "https://www.nbcbayarea.com/news/local/freeways-ghost-looms-over-hipster-hotspot/1881117/",
+      },
+      {
         icon: "tram",
         title: "A landowner's horsecar line",
         text:
@@ -440,10 +460,10 @@ export const NEIGHBORHOODS = {
         source: "https://www.sfexaminer.com/news/hayes-valley-park-to-be-named-after-green-activist/article_ba1af560-f491-5348-b638-59d7527bd1e8.html",
       },
       {
-        icon: "coffee",
-        title: "A coffee kiosk and a living alley",
+        icon: "road",
+        title: "A living alley",
         text:
-          "On January 23, 2005, Blue Bottle Coffee opened a kiosk in the garage of a Hayes Valley benefactor at 315 Linden Street, which the company calls its first brick-and-mortar location, three years before its first four-walled café, at Mint Plaza. In 2010 neighbors and the Department of Public Works made this end of Linden a “living alley”: three parking spaces gave way to a wider, landscaped sidewalk on the sunny side, and street and sidewalk were brought to one level. By 2018 the living alley ran the full block to Octavia.",
+          "In 2010 neighbors and the Department of Public Works made this end of Linden a “living alley”: three parking spaces gave way to a wider, landscaped sidewalk on the sunny side, and street and sidewalk were brought to one level. By 2018 the living alley ran the full block to Octavia.",
         place: "Linden Living Alley",
         where: "315 Linden St",
         at: [-122.42320, 37.77633],
@@ -452,9 +472,9 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A loop of about 0.7 mile for visitors and would-be neighbors that starts and ends at the Muni bus stop at Hayes and Gough streets: west on Hayes Street to the playground, then back east along Fell Street through the old freeway corridor to Patricia's Green and Linden Street. Allow about 40 minutes; a weekday morning is calmest, a weekend afternoon is liveliest.",
+        "A loop of about 0.7 mile for visitors and would-be neighbors that starts and ends at the Muni bus stop at Hayes and Gough streets: west past the shops of Hayes Street to the playground, then back east along Fell Street through the old freeway corridor to Patricia's Green and Linden Street. Allow about 45 minutes; a weekday morning is calmest, a weekend afternoon is liveliest.",
       miles: 0.7,
-      minutes: 40,
+      minutes: 45,
       tip:
         "For a bonus view, detour three blocks west on Hayes Street from the playground to Alamo Square, where the Painted Ladies, seven Queen Anne houses that developer Matthew Kavanaugh built between 1892 and 1896, face the park from Steiner Street. They are private homes, so admire them from the park or the sidewalk.",
     },
@@ -565,6 +585,16 @@ export const NEIGHBORHOODS = {
         source: "https://en.wikipedia.org/wiki/Calvary_Presbyterian_Church_(San_Francisco)",
       },
       {
+        icon: "shop",
+        title: "Six blocks of Upper Fillmore",
+        text:
+          "City planners describe the Upper Fillmore shopping district as about six blocks of Fillmore Street, from Bush Street north to Jackson, with this corner at its midpoint; most of its two- to four-story buildings went up between 1900 and the 1930s. The first electric streetcar line on Fillmore Street opened along these blocks in 1895, running from 16th and Folsom streets to Fillmore and Broadway on part of today's 22 Fillmore route. Planning reports from the mid-2010s counted more than 130 ground-floor businesses, among them restaurants, bars and clothing stores, with offices or apartments on the floors above.",
+        place: "Fillmore Street shops",
+        where: "Fillmore St & Sacramento St",
+        at: [-122.43407, 37.78987],
+        source: "https://commissions.sfplanning.org/cpcpackets/2015-005741CUA.pdf",
+      },
+      {
         icon: "movie",
         title: "The stairs cars came down",
         text:
@@ -577,11 +607,11 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A one-way walk of about 1.3 miles for visitors and would-be neighbors, from the Haas-Lilienthal House on Franklin St (the 1 California stops a block and a half south, at Clay & Franklin) past Lafayette Park, a run of mansions and a church built with Union Square bricks to Alta Plaza Park, two blocks above the 1's stop at California & Pierce for the ride back. Allow about an hour, and pick a clear day for the views from the two hilltop parks.",
+        "A one-way walk of about 1.3 miles for visitors and would-be neighbors, from the Haas-Lilienthal House on Franklin St (the 1 California stops a block and a half south, at Clay & Franklin) past Lafayette Park, a run of mansions, a church built with Union Square bricks and three blocks of Fillmore Street shops to Alta Plaza Park, two blocks above the 1's stop at California & Pierce for the ride back. Allow a little over an hour, and pick a clear day for the views from the two hilltop parks.",
       miles: 1.3,
-      minutes: 60,
+      minutes: 65,
       tip:
-        "From Calvary, walk a block west on Jackson St into Alta Plaza, cross the park to its south side and take the wide stairway down to Clay & Pierce: the same steps the cars came down in What's Up, Doc?",
+        "From Calvary, walk three blocks south on Fillmore St to Sacramento, then two blocks west on Sacramento and a block up Pierce St to Clay, where the wide stairway climbs into Alta Plaza: the same steps the cars came down in What's Up, Doc?",
     },
     restaurants: [
       { name: "SPQR", address: "1911 Fillmore St", phone: "(415) 771-7779", url: "https://www.spqrsf.com" },
@@ -650,10 +680,20 @@ export const NEIGHBORHOODS = {
         source: "https://en.wikipedia.org/wiki/Clarion_Alley_Mural_Project",
       },
       {
+        icon: "shop",
+        title: "The Mission Miracle Mile",
+        text:
+          "Streetcars once ran down Mission Street, and in 1949 its merchants persuaded Mayor Elmer Robinson to proclaim the dozen blocks from 15th Street to Army Street, now Cesar Chavez Street, the “Mission Miracle Mile.” Clothing, furniture and hardware stores, smaller department stores and big movie theaters already lined it. City planners call Mission Street the district's strong retail and transit spine, with Valencia and 24th streets as secondary retail spines.",
+        place: "Mission Street shops",
+        where: "Mission St & 21st St",
+        at: [-122.41891, 37.75706],
+        source: "https://www.sanfranciscostory.com/mission-miracle-mile/",
+      },
+      {
         icon: "movie",
         title: "A movie palace named for Nolan",
         text:
-          "This began as a nickelodeon, the Idle Hour; in 1915 its owners hired the Reid Brothers to design a large auditorium and lobby, which opened in 1916, and in 1932 Timothy Pflueger remade it in Art Deco style, with 2,012 seats, for the Nasser brothers' theater chain. It closed in 1993, and City College bought it in 1998 for a campus that would have meant demolishing most of it, until it became a city landmark in 2004. Alamo Drafthouse reopened it in December 2015, and in 2026 renamed it the Christopher Nolan Cinema.",
+          "This began as a nickelodeon, the Idle Hour; in 1915 its owners hired the Reid Brothers to design a large auditorium and lobby, which opened in 1916, and in 1932 Timothy Pflueger remade it in Art Deco style, with 2,012 seats, for the Nasser brothers' theater chain. It closed in 1993, and City College bought it in 1998 for a campus that would have meant demolishing most of it, until it became city Landmark No. 245 in 2004. Alamo Drafthouse reopened it in December 2015, and in 2026 renamed it the Christopher Nolan Cinema.",
         place: "New Mission Theater",
         where: "2550 Mission St",
         at: [-122.41902, 37.75631],
@@ -679,14 +719,24 @@ export const NEIGHBORHOODS = {
         at: [-122.41245, 37.75250],
         source: "https://en.wikipedia.org/wiki/Balmy_Alley",
       },
+      {
+        icon: "shop",
+        title: "Calle 24, Mission to Potrero",
+        text:
+          "From Mission Street east to Potrero Avenue, 24th Street is lined with specialty stores, taquerias, Mexican bakeries and produce grocers. Longtime residents, merchants, service providers and arts groups founded the Lower 24th Street Merchants and Neighbors Association, today's Calle 24, in 1999, and in 2014 the Board of Supervisors recognized the Calle 24 Latino Cultural District, which runs from 22nd Street to Cesar Chavez Street with this stretch at its center.",
+        place: "Calle 24 shops",
+        where: "Harrison St & 24th St",
+        at: [-122.41189, 37.75264],
+        source: "https://calle24sf.org/about",
+      },
     ],
     walk: {
       intro:
-        "A 1.7-mile line for visitors and would-be neighbors, from the Armory at Mission and 14th streets (two blocks north of 16th St Mission BART; the 14 and 49 buses run along Mission St) south past the Mission's labor hall, mural alleys, movie palace and library to Balmy Alley, about a seven-minute walk east of 24th St Mission BART for the ride back. Allow about 75 minutes, and go on a sunny afternoon, when the murals are in full light.",
+        "A 1.7-mile line for visitors and would-be neighbors, from the Armory at Mission and 14th streets (two blocks north of 16th St Mission BART; the 14 and 49 buses run along Mission St) south along the shops of Mission Street past the Mission's labor hall, mural alleys, movie palace and library, then east along the shops of 24th Street past Balmy Alley to Harrison Street, about a seven-minute walk east of 24th St Mission BART for the ride back. Allow about 80 minutes, and go on a sunny afternoon, when the murals are in full light.",
       miles: 1.7,
-      minutes: 75,
+      minutes: 80,
       tip:
-        "Walk Clarion Alley all the way through to Valencia St and back before continuing south on Mission St. The library reopens with a ribbon-cutting on Saturday, November 14, 2026; check SFPL's hours before planning to go inside.",
+        "Walk Clarion Alley all the way through to Valencia St, another of the Mission's shopping streets, and back before continuing south on Mission St. The shops of Calle 24 continue east of Harrison St to Potrero Ave. The library reopens with a ribbon-cutting on Saturday, November 14, 2026; check SFPL's hours before planning to go inside.",
     },
     restaurants: [
       { name: "Foreign Cinema", address: "2534 Mission St", phone: "(415) 648-7600", url: "https://foreigncinema.com" },
@@ -728,21 +778,11 @@ export const NEIGHBORHOODS = {
         icon: "book",
         title: "Where Howl beat the censors",
         text:
-          "Poet Lawrence Ferlinghetti and Peter D. Martin opened City Lights in June 1953, naming it for Martin's magazine City Lights, itself a nod to the Chaplin film, and it has been called the nation's first all-paperback bookstore. In June 1957 police arrested its manager, Shig Murao, for selling Allen Ginsberg's Howl, which City Lights had published, to an undercover officer, and charged Ferlinghetti too; on October 3, Judge Clayton W. Horn ruled the poem was not obscene. Beside the store, Jack Kerouac Alley, renamed from Adler Alley in 1988 at Ferlinghetti's request and made pedestrian-only in 2007 with quotes from Kerouac, Maya Angelou, John Steinbeck and others set into it, runs along Vesuvio, a bar since 1948.",
+          "Poet Lawrence Ferlinghetti and Peter D. Martin opened City Lights in June 1953, naming it for Martin's magazine City Lights, itself a nod to the Chaplin film, and it has been called the nation's first all-paperback bookstore. In June 1957 police arrested its manager, Shig Murao, for selling Allen Ginsberg's Howl, which City Lights had published, to an undercover officer, and charged Ferlinghetti too; on October 3, Judge Clayton W. Horn ruled the poem was not obscene. In 2001 the Board of Supervisors made City Lights San Francisco Landmark No. 228, citing its role in the literary and cultural development of San Francisco and the nation. Beside it runs Jack Kerouac Alley, renamed from Adler Alley in 1988 at Ferlinghetti's request and made pedestrian-only in 2007 with quotes from Kerouac, Maya Angelou, John Steinbeck and others set into it.",
         place: "City Lights Bookstore",
         where: "261 Columbus Ave",
         at: [-122.40658, 37.79763],
         source: "https://en.wikipedia.org/wiki/City_Lights_Bookstore",
-      },
-      {
-        icon: "coffee",
-        title: "Seventy years of North Beach espresso",
-        text:
-          "Giovanni “Papa Gianni” Giotta, born in 1920 in Rovigno on the Istrian peninsula, in what is now Croatia, came to San Francisco in 1951 and opened this café at Vallejo and Grant on April 1, 1956. Some consider it the first espresso house on the West Coast. Giotta died in 2016 at 96, and the café marked its 70th anniversary on April 4, 2026, with 70-cent espresso and cappuccino and an afternoon of free music.",
-        place: "Caffe Trieste",
-        where: "601 Vallejo St",
-        at: [-122.40730, 37.79867],
-        source: "https://www.nbcbayarea.com/news/local/san-franciscos-iconic-caffe-trieste-turns-65-amid-pandemic-and-temporary-closure/2507168/",
       },
       {
         icon: "church",
@@ -753,6 +793,16 @@ export const NEIGHBORHOODS = {
         where: "610 Vallejo St",
         at: [-122.40752, 37.79900],
         source: "https://en.wikipedia.org/wiki/Saint_Francis_of_Assisi_Church_(San_Francisco)",
+      },
+      {
+        icon: "shop",
+        title: "A diagonal main street",
+        text:
+          "Columbus Avenue was cut diagonally through the street grid in the 1870s as Montgomery Avenue and took its present name in 1909. The city's planning code centers the North Beach commercial district on Columbus north of Broadway and describes it as a neighborhood-serving marketplace, a citywide specialty shopping and dining district and a tourist attraction. Many Italian restaurants, cafés and bakeries still line it on the way to Washington Square.",
+        place: "Columbus Avenue shops and restaurants",
+        where: "Columbus Ave & Green St",
+        at: [-122.40872, 37.79939],
+        source: "https://www.sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances08/o0087-08.pdf",
       },
       {
         icon: "park",
@@ -807,11 +857,11 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A one-way walk of about a mile for visitors and would-be neighbors, from City Lights at Columbus Ave & Broadway, a few blocks from Muni's Chinatown–Rose Pak Station, past the café and church at Grant and Vallejo, around Washington Square and out Columbus Avenue to where the old beach was. Allow about an hour, and go by day, when the cafés are open.",
+        "A one-way walk of about a mile for visitors and would-be neighbors, from City Lights at Columbus Ave & Broadway, a few blocks from Muni's Chinatown–Rose Pak Station, past the church on Vallejo Street and up the shops and restaurants of Columbus Avenue to Washington Square, then around the square and on out Columbus to where the old beach was. Allow about an hour, and go by day, when the cafés are open.",
       miles: 1,
       minutes: 60,
       tip:
-        "Have your espresso at Caffe Trieste, the second stop, and save the bench time for Washington Square. The last stop is a Powell–Mason cable car stop; the line turns around a block north at Bay & Taylor, where you can board for the ride back to Powell & Market.",
+        "Have your espresso at one of the cafés on Columbus Avenue, and save the bench time for Washington Square. The last stop is a Powell–Mason cable car stop; the line turns around a block north at Bay & Taylor, where you can board for the ride back to Powell & Market.",
     },
     restaurants: [
       { name: "Tommaso's", address: "1042 Kearny St", phone: "(415) 398-9696", url: "https://tommasos.com" },
@@ -847,14 +897,14 @@ export const NEIGHBORHOODS = {
       "The name comes from graves. A plaque on the crest says Gold Rush-era miners found the graves, marked by wooden crosses, of Russian-American Company sailors who died here in the early 1840s, and added graves of their own; other accounts point to seal hunters from Count Rezanov's ship as early as 1806, or to a Russian warship's crew in 1848. The graves were removed or built over in the 1850s, the decade the eight-sided house on Green Street went up. In 1891 one of the city's last entirely new cable lines began running up Hyde Street.\n\nIn 1892 the architect Willis Polk built a double house on the Vallejo Street crest for his family and for Dora Williams, and the poet Ina Coolbrith's home on the hill became a salon for artists and writers. The fire after the 1906 earthquake destroyed Coolbrith's home, but the crest escaped, an island amid the flames. From 1912 H. P. Livermore's nine-unit building program there, including Pueblo-Mission Revival houses by Charles F. Whittlesey, earned him the title “Father of Russian Hill.”\n\nLombard Street's block between Hyde and Leavenworth got its eight hairpin turns in 1922, Diego Rivera painted a fresco at the Chestnut Street art school in 1931, and in 1957 Alfred Hitchcock filmed the exterior of Scottie's apartment for Vertigo at 900 Lombard. On May 24, 1976, the San Francisco Chronicle began running Armistead Maupin's Tales of the City, whose Barbary Lane was modeled on Macondray Lane. In 1988 the Vallejo Street crest was listed on the National Register as a historic district.",
     facts: [
       {
-        icon: "tram",
-        title: "The city's last new cable lines",
+        icon: "shop",
+        title: "A shopping street on the cable line",
         text:
-          "The cable cars climbing Hyde Street follow a route that opened on February 9, 1891, as the California Street Cable Railroad's O'Farrell, Jones & Hyde line; it and a Jones Street shuttle that opened the same day were San Francisco's last entirely new cable lines, and its Hyde Street stretch survives in today's Powell-Hyde line. Look east along Filbert Street: its block from here to Leavenworth, at a 31.5 percent grade, tied 22nd Street for steepest on the city Bureau of Engineering's old list, though a newer independent measurement ranks it lower.",
-        place: "Hyde Street cable car",
-        where: "Hyde St & Filbert St",
-        at: [-122.41925, 37.80019],
-        source: "https://streetcar.org/hyde-at-125-2",
+          "Small businesses and restaurants cluster along the five blocks of Hyde Street from Union south to Jackson, under a canopy of ficus trees, and an ice cream parlor has held the southwest corner of Hyde and Union, where the commercial strip begins, since 1948. The cable cars passing these storefronts follow a route that opened on February 9, 1891, as the California Street Cable Railroad's O'Farrell, Jones & Hyde line. It and a Jones Street shuttle that opened the same day were San Francisco's last entirely new cable lines, and its Hyde Street stretch survives in today's Powell-Hyde line.",
+        place: "Hyde Street shops",
+        where: "Hyde St & Green St",
+        at: [-122.41887, 37.79833],
+        source: "https://www.thebolditalic.com/my-favorite-corner-of-sf-hyde-and-union-swensens-ice-cream/",
       },
       {
         icon: "park",
@@ -929,11 +979,11 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A one-way walk for visitors and would-be neighbors, from the Powell-Hyde cable car stop at Hyde & Filbert, down Lombard Street's crooked block and across the hill's lanes and stairways to Ina Coolbrith Park, a block above the Powell-Mason cable car stop at Mason & Vallejo. It runs about 1.3 miles with steep climbs; allow 75 minutes, go on a weekday morning to beat the Lombard Street crowds, and save it for a clear day for the views.",
-      miles: 1.3,
-      minutes: 75,
+        "A one-way walk for visitors and would-be neighbors, from the Powell-Hyde cable car stop at Hyde & Green, north past Hyde Street's shops, down Lombard Street's crooked block and across the hill's lanes and stairways to Ina Coolbrith Park, a block above the Powell-Mason cable car stop at Mason & Vallejo. It runs about 1.4 miles with steep climbs; allow 80 minutes, go on a weekday morning to beat the Lombard Street crowds, and save it for a clear day for the views.",
+      miles: 1.4,
+      minutes: 80,
       tip:
-        "From the foot of the Macondray Lane stairs, walk south on Taylor and west on Green St to the octagon house, then south on Jones to Polk's ramps; from Ina Coolbrith Park it is downhill to Mason St and the Powell-Mason cable car, a few blocks above North Beach. Bring good shoes for Jones St and the lane's wooden stairs.",
+        "Walking north on Hyde, look east at Filbert Street: its block down to Leavenworth, at a 31.5 percent grade, tied 22nd Street for steepest on the city Bureau of Engineering's old list, though a newer independent measurement ranks it lower. From the foot of the Macondray Lane stairs, walk south on Taylor and west on Green St to the octagon house, then south on Jones to Polk's ramps; from Ina Coolbrith Park it is downhill to Mason St and the Powell-Mason cable car, a few blocks above North Beach. For more shops and restaurants, Polk Street, two blocks west of Hyde, has a shopping strip that runs about a mile through the gulch between Nob and Russian Hills. Bring good shoes for Jones St and the lane's wooden stairs.",
     },
     restaurants: [
       { name: "Nisei", address: "2316 Polk St", phone: "(415) 827-6898", url: "https://www.restaurantnisei.com" },
@@ -974,7 +1024,7 @@ export const NEIGHBORHOODS = {
         icon: "tram",
         title: "Where three cable lines meet",
         text:
-          "Leland Stanford built a $2 million mansion on this corner in 1876. The fire after the 1906 earthquake destroyed it, but the ten-foot wall of basalt and granite around its two-acre grounds survived, and part of it, with a restored fence, still runs along the eastern side of the Stanford Court Hotel. Stanford's California Street line crosses the Powell Street tracks here, the one corner where all three of the city's cable car lines stop.",
+          "Leland Stanford built a $2 million mansion on this corner in 1876. The fire after the 1906 earthquake destroyed it, but the ten-foot wall of basalt and granite around its two-acre grounds survived, and part of it, with a restored fence, still runs along the eastern side of the hotel that stands on the site today. Stanford's California Street line crosses the Powell Street tracks here, the one corner where all three of the city's cable car lines stop.",
         place: "California & Powell",
         where: "California St & Powell St",
         at: [-122.40930, 37.79213],
@@ -984,7 +1034,7 @@ export const NEIGHBORHOODS = {
         icon: "star",
         title: "Mansion, art school, sky bar",
         text:
-          "Mark Hopkins' widow, Mary, left the mansion on this corner to her second husband, Edward Searles, who in February 1893 donated it to the San Francisco Art Association; it ran the Mark Hopkins Institute of Art here until the fire after the 1906 earthquake destroyed the house. In 1939 George D. Smith, owner of the hotel that now stands here, turned its 11-room, 19th-floor penthouse into the glass-walled Top of the Mark. In World War II, wives and sweethearts of departing servicemen gathered in its northwest corner to watch the ships sail out through the Golden Gate, and it became known as Weepers' Corner.",
+          "Mark Hopkins' widow, Mary, left the mansion on this corner to her second husband, Edward Searles, who in February 1893 donated it to the San Francisco Art Association; it ran the Mark Hopkins Institute of Art here until the fire after the 1906 earthquake destroyed the house. In 1939 George D. Smith, owner of the hotel that now stands here, city Landmark No. 184, turned its 11-room, 19th-floor penthouse into the glass-walled Top of the Mark. In World War II, wives and sweethearts of departing servicemen gathered in its northwest corner to watch the ships sail out through the Golden Gate, and it became known as Weepers' Corner.",
         place: "Mark Hopkins Hotel",
         where: "999 California St",
         at: [-122.41035, 37.79155],
@@ -994,38 +1044,28 @@ export const NEIGHBORHOODS = {
         icon: "beer",
         title: "A tiki bar in the old pool",
         text:
-          "Sisters Tessie Fair Oelrichs and Virginia Fair Vanderbilt began this hotel, and it had not yet opened when the 1906 earthquake and fire damaged it. Julia Morgan, hired for her skill with reinforced concrete, repaired it, and it opened a year to the day after the quake. Downstairs, the Tonga Room replaced the hotel's 75-foot indoor pool of 1929, the Fairmont Plunge, in 1945, with a band on a barge in the old pool and staged tropical rainstorms, and the hotel's timeline says Tony Bennett first sang “I Left My Heart in San Francisco” here in December 1961.",
+          "Sisters Tessie Fair Oelrichs and Virginia Fair Vanderbilt began this hotel, now city Landmark No. 185, and it had not yet opened when the 1906 earthquake and fire damaged it. Julia Morgan, hired for her skill with reinforced concrete, repaired it, and it opened a year to the day after the quake. Downstairs, the Tonga Room replaced the hotel's 75-foot indoor pool of 1929, the Fairmont Plunge, in 1945, with a band on a barge in the old pool and staged tropical rainstorms, and the hotel's timeline says Tony Bennett first sang “I Left My Heart in San Francisco” here in December 1961.",
         place: "Fairmont San Francisco",
         where: "950 Mason St",
         at: [-122.41072, 37.79240],
         source: "https://fairmont-san-francisco.com/explore/history",
       },
       {
-        icon: "house",
-        title: "The mansion that outlived the fire",
-        text:
-          "Silver baron James C. Flood finished this house in 1886, faced in brownstone shipped from Connecticut quarries. The 1906 fire left its stone shell standing while the mansions around it burned, and the Pacific-Union Club acquired it and had architect Willis Polk remodel it as the club's home. Now a National Historic Landmark, it is a private club, so admire it from the sidewalk.",
-        place: "Pacific-Union Club",
-        where: "1000 California St",
-        at: [-122.41137, 37.79208],
-        source: "https://en.wikipedia.org/wiki/James_C._Flood_Mansion",
-      },
-      {
         icon: "park",
-        title: "A railroad widow's gift",
+        title: "One mansion survived, one became a park",
         text:
-          "In 1872 railroad attorney David Colton built a white Neoclassical mansion here, with marble steps and tall Corinthian columns. Collis Huntington bought it in 1892, and it burned in the 1906 fire. In February 1915 Huntington's widow, Arabella, sent the mayor a deed to the land, asking that it be known from then on as Collis P. Huntington Park, a gift that came as the city celebrated its recovery with the Panama-Pacific International Exposition.",
-        place: "Huntington Park",
+          "Silver baron James C. Flood finished the brownstone beside the park in 1886, faced in stone shipped from Connecticut quarries. The 1906 fire left its shell standing while the mansions around it burned, and the Pacific-Union Club had architect Willis Polk remodel it as the club's home; now a National Historic Landmark and a city landmark, it is a private club, so admire it from the sidewalk. On the park's site stood railroad attorney David Colton's white Neoclassical house of 1872, which Collis Huntington bought in 1892; it burned in the fire, and in February 1915 Huntington's widow, Arabella, sent the mayor a deed to the land, asking that it be known from then on as Collis P. Huntington Park.",
+        place: "Pacific-Union Club & Huntington Park",
         where: "California St & Taylor St",
         at: [-122.41205, 37.79220],
-        source: "https://nobhillassociation.org/huntington-park/",
+        source: "https://en.wikipedia.org/wiki/James_C._Flood_Mansion",
       },
       {
         icon: "art",
         title: "A window of glass and soil",
         text:
-          "Designed by Albert Roller, the California Masonic Memorial Temple was dedicated on September 29, 1958. Its main foyer holds a 48-by-38-foot “endomosaic” window by Emile Norman, who developed the technique: more than 150 hues of crushed glass, with soil, plant matter and metals, pressed between two large panes of acrylic. Roller commissioned it after seeing one of Norman's endomosaic windows at the Casa Munras hotel in Monterey.",
-        place: "The Masonic",
+          "Designed by Albert Roller, the California Masonic Memorial Temple was dedicated on September 29, 1958. Its main foyer holds a 48-by-38-foot “endomosaic” window by Emile Norman, who developed the technique: more than 150 hues of crushed glass, with soil, plant matter and metals, pressed between two large panes of acrylic. Roller commissioned it after seeing one of Norman's endomosaic windows at a hotel in Monterey.",
+        place: "Masonic Memorial Temple",
         where: "1111 California St",
         at: [-122.41289, 37.79129],
         source: "https://californiafreemason.org/?p=16645",
@@ -1050,14 +1090,24 @@ export const NEIGHBORHOODS = {
         at: [-122.41165, 37.79477],
         source: "https://www.hmdb.org/m.asp?m=259555",
       },
+      {
+        icon: "shop",
+        title: "A small shopping street on a narrow one",
+        text:
+          "San Francisco's Planning Code describes Pacific Avenue from just east of Polk Street to the four corners at Jones, about four blocks on Nob Hill's north slope south of the Broadway Tunnel, as a small-scale, mixed-use neighborhood shopping district on a narrow street, offering limited convenience goods to the blocks around it. The city made the stretch a neighborhood commercial district of its own in 2007, with rules meant to keep it a small shopping street in a largely low-rise neighborhood and to let sun reach its narrow roadway, and since 2017 the code has required shops or other commercial uses on the ground floor along parts of the avenue.",
+        place: "Pacific Avenue shops",
+        where: "Pacific Ave & Hyde St",
+        at: [-122.41829, 37.79542],
+        source: "https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_planning/0-0-0-65882",
+      },
     ],
     walk: {
       intro:
-        "A one-way walk for visitors and would-be neighbors across the crest of Nob Hill: start at California & Powell, where all three cable car lines stop, pass the grand hotels, the Flood mansion, Huntington Park, the Masonic and Grace Cathedral, then head down Taylor and Washington streets to the Cable Car Museum, about 0.7 miles and an hour with stops. Leave time to step inside Grace Cathedral and the museum.",
-      miles: 0.7,
-      minutes: 60,
+        "A one-way walk for visitors and would-be neighbors across the crest of Nob Hill and down its north slope: start at California & Powell, where all three cable car lines stop, pass the grand hotels, the Flood mansion and Huntington Park, the Masonic Memorial Temple and Grace Cathedral, head down Taylor and Washington streets to the Cable Car Museum, then follow the Powell-Mason tracks north on Mason Street to Pacific Avenue and walk west to its shops at Hyde Street, about 1.2 miles and an hour and 20 minutes with stops. Leave time to step inside Grace Cathedral and the museum.",
+      miles: 1.2,
+      minutes: 80,
       tip:
-        "Ride a cable car up to California & Powell, where all three lines stop. The Cable Car Museum at the end is free, and Powell-Hyde and Powell-Mason cars stop right outside at Washington & Mason for the ride down Powell Street toward Union Square.",
+        "Ride a cable car up to California & Powell, where all three lines stop. The Cable Car Museum is free, and the walk ends at Pacific & Hyde, where Powell-Hyde cars stop for the ride back past the museum and down Powell Street toward Union Square.",
     },
     restaurants: [
       { name: "Acquerello", address: "1722 Sacramento St", phone: "(415) 567-5432", url: "https://www.acquerellosf.com" },
@@ -1099,28 +1149,18 @@ export const NEIGHBORHOODS = {
           "N Judah trains surface here from the 4,232-foot Sunset Tunnel, first called the Duboce Tunnel, which was built from 1926 to 1928 under the hill beside Buena Vista Park. On Sunday, October 21, 1928, Mayor James Rolph took the controls of the first N car through it as crowds of thousands turned out for the opening. The small park the tracks cut through at the portal is Richard Gamble Memorial Park.",
         place: "Sunset Tunnel West Portal",
         where: "Carl St & Cole St",
-        at: [-122.44997, 37.76580],
+        at: [-122.44920, 37.76615],
         source: "https://www.sfmta.com/blog/n-judah-turns-87",
       },
       {
         icon: "shop",
-        title: "No strangers, just friends",
+        title: "Shops at the streetcar stop",
         text:
-          "The city's Legacy Business Registry dates this hardware store's Cole Valley location to 1920 and says Dave Karp bought it in 1961. He hung his motto over the register: “There are no strangers here, just friends we haven't met.” His son Rick, who started out sweeping its floors as a young teen, grew it into a chain with stores in other neighborhoods, and this is still its flagship.",
-        place: "Cole Hardware",
-        where: "956 Cole St",
-        at: [-122.44959, 37.76528],
-        source: "https://www.legacybusiness.org/business/cole-hardware",
-      },
-      {
-        icon: "beer",
-        title: "Last call at Maud's",
-        text:
-          "From 1966 to 1989 this was Maud's, the lesbian bar Rikki Streicher opened, whose patrons included Janis Joplin and the activists Del Martin and Phyllis Lyon; at its closing it was claimed to be the oldest lesbian bar in the United States, and Paris Poirier's 1993 documentary Last Call at Maud's tells its story. Streicher went on to open Amelia's and co-found the Gay Games. In 1989 Finnegans Wake, a pub founded in Noe Valley in 1976, reopened in the space.",
-        place: "Finnegans Wake",
-        where: "937 Cole St",
-        at: [-122.45005, 37.76530],
-        source: "https://en.wikipedia.org/wiki/Maud%27s_(bar)",
+          "Cole Valley grew up around the streetcar stop at this corner, at the entrance to the Sunset Tunnel, and the corner is still the center of its small business district: about three blocks along Cole Street and part of Carl Street, with more than a dozen restaurants and cafés among the shops. In 2025 the city made Cole Street from Frederick Street to Parnassus Avenue and Carl Street from Shrader to Clayton, a block each way from this corner, the Cole Valley Entertainment Zone, where people may drink outdoors during permitted street events. From 1966 to 1989 a storefront on the block south of Carl held a lesbian bar that at its closing was claimed to be the oldest in the United States.",
+        place: "Cole Street shops",
+        where: "Cole St & Carl St",
+        at: [-122.44997, 37.76580],
+        source: "https://en.wikipedia.org/wiki/Cole_Valley,_San_Francisco",
       },
       {
         icon: "flag",
@@ -1145,9 +1185,9 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A short loop for visitors and would-be neighbors that starts and ends at the N Judah's Carl & Cole stop, takes in the shops on Cole Street, heads west on Carl Street to follow Stanyan Street along the edge of Golden Gate Park, and returns by Waller and Cole streets: about 0.8 mile and 40 minutes with stops. A weekday morning is calmest; a clear afternoon is best for lingering at the park's edge.",
-      miles: 0.8,
-      minutes: 40,
+        "A short loop for visitors and would-be neighbors that starts and ends at the N Judah's Carl & Cole stop. See where the trains come out of the hill, stroll the shops and cafés on Cole Street down to Parnassus Avenue and back, then head west on Carl Street to follow Stanyan Street along the edge of Golden Gate Park and return by Waller and Cole streets: about a mile and 45 minutes with stops. A weekday morning is calmest; a clear afternoon is best for lingering at the park's edge.",
+      miles: 1,
+      minutes: 45,
       tip:
         "Ride the N Judah in and you come out of the Sunset Tunnel right at the start. At the hotel corner, Golden Gate Park lies just across Stanyan Street if you want to stretch the walk; otherwise head east on Waller Street and back down Cole Street to close the loop at Carl & Cole.",
     },
@@ -1216,16 +1256,6 @@ export const NEIGHBORHOODS = {
         source: "https://bernalwood.com/2014/03/06/remember-when-the-day-when-difi-laughed-her-way-down-the-esmeralda-slides",
       },
       {
-        icon: "beer",
-        title: "When women couldn't tend bar",
-        text:
-          "Pat Ramseyer and Nancy White opened Wild Side West in Oakland in 1962, naming it for that year's film Walk on the Wild Side. California law then barred bars from hiring women to tend bar, so women who owned one had to pour themselves or hire a man, until the state Supreme Court struck the law down in 1971. The bar moved here to Cortland Avenue in 1977.",
-        place: "Wild Side West",
-        where: "424 Cortland Ave",
-        at: [-122.41672, 37.73919],
-        source: "https://bernalwood.com/2017/08/25/1977-remember-when-wild-side-west-arrived-in-bernal-heights/",
-      },
-      {
         icon: "book",
         title: "A Civic Auditorium architect's library",
         text:
@@ -1234,6 +1264,16 @@ export const NEIGHBORHOODS = {
         where: "500 Cortland Ave",
         at: [-122.41601, 37.73921],
         source: "https://sfpl.org/locations/bernal-heights/bernal-heights-library-history",
+      },
+      {
+        icon: "shop",
+        title: "Streetcar tracks down the middle",
+        text:
+          "Cortland Avenue is Bernal Heights' main shopping street, with bakeries, cafés, restaurants, bars, bookshops and small boutiques in the storefronts along the blocks east and west of the library. Streetcar tracks were laid down the middle of the avenue for United Railroads' line 24, which linked Cortland with Divisadero Street and the Richmond, and today the 24 Divisadero bus runs along it.",
+        place: "Cortland Avenue shops",
+        where: "Cortland Ave & Ellsworth St",
+        at: [-122.41458, 37.73888],
+        source: "https://bernalwood.com/2015/06/17/tonight-show-and-tell-about-the-history-of-cortland-avenue/",
       },
       {
         icon: "shop",
@@ -1248,11 +1288,11 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A 1.7-mile line for visitors and would-be neighbors, from Precita Park (Folsom St & Precita Ave, where the 67 bus stops, about a 12-minute walk from 24th St Mission BART) up over Bernal Hill, down past the Esmeralda slides and along Cortland Avenue to the Alemany Farmers' Market, where the 23 and 67 buses stop at Crescent Ave & Putnam St for the ride back. Allow about 80 minutes, and go on a Saturday morning, when the market is running.",
+        "A 1.7-mile line for visitors and would-be neighbors, from Precita Park (Folsom St & Precita Ave, where the 67 bus stops, about a 12-minute walk from 24th St Mission BART) up over Bernal Hill, down past the Esmeralda slides and along the shops of Cortland Avenue to the Alemany Farmers' Market, where the 23 and 67 buses stop at Crescent Ave & Putnam St for the ride back. Allow about 80 minutes, and go on a Saturday morning, when the market is running.",
       miles: 1.7,
       minutes: 80,
       tip:
-        "The only real climb comes first, up Folsom St from Precita Park to the summit, so it is downhill from there; save your coffee stop for Cortland Avenue, between the slides and the library.",
+        "The only real climb comes first, up Folsom St from Precita Park to the summit, so it is downhill from there; save your coffee stop for the cafés along Cortland Avenue.",
     },
     restaurants: [
       { name: "3rd Cousin", address: "919 Cortland Ave", phone: "(415) 814-3709", url: "https://www.3rdcousinsf.com" },
@@ -1309,6 +1349,16 @@ export const NEIGHBORHOODS = {
         source: "https://www.potreroview.net/historic-buildings-and-their-stories/",
       },
       {
+        icon: "shop",
+        title: "Shops on the old streetcar line",
+        text:
+          "The hill's shops, cafés and restaurants cluster on 18th Street, chiefly along the two blocks between Texas and Connecticut streets, with this corner in the middle. Soon after the 1906 earthquake, the San Francisco Chronicle reported a new business center springing up at 18th and Texas and 18th and Connecticut, with some retail merchants moving there from other parts of the city, and photographs from 1941 show Market Street Railway 22-line streetcars running along 18th Street and turning at Connecticut. Today restaurants, cafés and small shops fill the storefronts.",
+        place: "18th Street shops",
+        where: "18th St & Missouri St",
+        at: [-122.39638, 37.76249],
+        source: "https://www.potreroview.net/18th-street-then-now/",
+      },
+      {
         icon: "church",
         title: "The church that was cut in two",
         text:
@@ -1317,16 +1367,6 @@ export const NEIGHBORHOODS = {
         where: "1490 19th St",
         at: [-122.39718, 37.76142],
         source: "https://www.dogpatchna.org/st-theresas-church",
-      },
-      {
-        icon: "beer",
-        title: "Steam beer in a coffee roastery",
-        text:
-          "Fritz Maytag, who had rescued an ailing Anchor in 1965, moved the brewery into this former coffee roastery, built in 1937, and brewed the first Anchor Steam here on August 13, 1979. After its owner, Sapporo, closed the brewery in 2023, Chobani founder Hamdi Ulukaya announced in 2024 that he had bought Anchor, and new approvals for its Anchor Steam and Old Foghorn labels have since pointed to a revival.",
-        place: "Anchor Brewing",
-        where: "1705 Mariposa St",
-        at: [-122.40085, 37.76332],
-        source: "https://en.wikipedia.org/wiki/Anchor_Brewing_Company",
       },
       {
         icon: "music",
@@ -1361,11 +1401,11 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A one-way walk of about 2 miles for visitors and would-be neighbors, starting at Caltrain's 22nd Street station: north to two of the hill's 1860s houses, west along the 18th Street shops to St. Teresa's, past the Anchor brewery and Slovenian Hall on Mariposa Street, then up Vermont Street and down its crooked block, ending at Julia Morgan's Neighborhood House on De Haro Street. Allow about 90 minutes in daylight; on Easter Sunday the Big Wheel race takes over Vermont Street.",
+        "A one-way walk of about 2 miles for visitors and would-be neighbors, starting at Caltrain's 22nd Street station: north to two of the hill's 1860s houses, west along the 18th Street shops to St. Teresa's, on to Slovenian Hall on Mariposa Street, then up Vermont Street and down its crooked block, ending at Julia Morgan's Neighborhood House on De Haro Street. Allow about 90 minutes in daylight; on Easter Sunday the Big Wheel race takes over Vermont Street.",
       miles: 2,
       minutes: 90,
       tip:
-        "The hill is steep, so wear good shoes, and stop for coffee or lunch early on, along 18th Street between Texas and Connecticut streets, the hill's shopping blocks. At the end, the 19 Polk bus stops at De Haro Street and Southern Heights Avenue, and the 22nd Street station is about half a mile to the east.",
+        "The hill is steep, so wear good shoes, and stop for coffee or lunch early on, at the cafés and restaurants along 18th Street between Texas and Connecticut streets. At the end, the 19 Polk bus stops at De Haro Street and Southern Heights Avenue, and the 22nd Street station is about half a mile to the east.",
     },
     restaurants: [
       { name: "Plow", address: "1299 18th St", phone: "(415) 821-7569", url: "https://www.eatatplow.com" },
@@ -1422,14 +1462,14 @@ export const NEIGHBORHOODS = {
         source: "https://www.glenparkhistory.org/glen-park-s-roving-branch-library",
       },
       {
-        icon: "music",
-        title: "Jazz among the bookshelves",
+        icon: "shop",
+        title: "The Village at the crossroads",
         text:
-          "This independent bookshop, founded in 1999 on the village's stretch of Chenery Street, doubles as a music room. In 2007 an allied nonprofit, the Bird & Beckett Cultural Legacy Project, was set up to take over the shop's ever-expanding slate of cultural programs, and its 2026 calendar lists live jazz among the shelves several times a week.",
-        place: "Bird & Beckett Books and Records",
-        where: "653 Chenery St",
-        at: [-122.43316, 37.73444],
-        source: "https://www.jazznearyou.com/world/events/rova-at-bird-and-beckett-books-and-records-on-june-13",
+          "Glen Park's commercial core, a stretch of about two blocks known as the Village, centers on this crossing: electric streetcars ran along Chenery Street from 1892, and in the 1910s and 1920s businesses and homes clustered around what fast became the neighborhood's core. Two buildings in a photograph dated 1910, looking east on Chenery from Diamond, still stand: 654 and 677 Chenery. The city's Planning Department says this crossing gives the small district more depth than a typical linear commercial corridor, and that its streets are lined with shops and restaurants, many of them locally owned.",
+        place: "Diamond and Chenery Street shops",
+        where: "Diamond St & Chenery St",
+        at: [-122.43390, 37.73447],
+        source: "https://generalplan.sfplanning.org/Glen_Park.htm",
       },
       {
         icon: "factory",
@@ -1464,11 +1504,11 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A loop of about 1.3 miles for visitors and would-be neighbors that starts and ends at Glen Park BART (Diamond St & Bosworth St, also served by the J Church and the 23, 35, 36, 44 and 52 buses), through the village on Diamond and Chenery streets, out Chenery to Glen Canyon Park and its creek, and back along Bosworth St. Allow about an hour, and go by day, when the canyon trail is easiest to follow.",
-      miles: 1.3,
-      minutes: 60,
+        "A loop of about 1.2 miles for visitors and would-be neighbors that starts and ends at Glen Park BART (Diamond St & Bosworth St, also served by the J Church and the 23, 35, 36, 44 and 52 buses), up Diamond St to the village shops at Chenery St, out Chenery to Glen Canyon Park and its creek, and back along Bosworth St. Allow about an hour, and go by day, when the canyon trail is easiest to follow.",
+      miles: 1.2,
+      minutes: 55,
       tip:
-        "Bird & Beckett's nonprofit presents live music at least three times a week, so check its calendar before you go and time the walk to end with a show back in the village.",
+        "Save time at the end for the Village: its shops and restaurants line Diamond and Chenery streets, within a block of the BART station where the loop finishes.",
     },
     restaurants: [
       { name: "Gialina Pizzeria", address: "2842 Diamond St", phone: "(415) 239-8500", url: "https://www.gialina.com" },
@@ -1555,7 +1595,7 @@ export const NEIGHBORHOODS = {
         icon: "bridge",
         title: "Main street to the bridge",
         text:
-          "Lombard Street was planned as the main approach to the Golden Gate Bridge, which opened to pedestrians on May 27, 1937, and to cars the next day; it still carries U.S. 101 from Van Ness Avenue to Richardson Avenue. Right after the opening, KQED reports, officials widened it from two lanes to six by clearing the south side, and dozens of motor lodges then lined that side; the first on the street, the Marina Motel on the north side, began taking guests in 1939.",
+          "Lombard Street was planned as the main approach to the Golden Gate Bridge, which opened to pedestrians on May 27, 1937, and to cars the next day; it still carries U.S. 101 from Van Ness Avenue to Richardson Avenue. Right after the opening, KQED reports, officials widened it from two lanes to six by clearing the south side, and dozens of motor lodges then lined that side.",
         place: "Lombard Street motels",
         where: "Lombard St & Divisadero St",
         at: [-122.44267, 37.79903],
@@ -1568,7 +1608,7 @@ export const NEIGHBORHOODS = {
       miles: 1,
       minutes: 45,
       tip:
-        "Before heading west, walk one block along Union to Pierce Street and turn left: just past Green Street is the Casebolt House at 2727 Pierce St, built for blacksmith Henry Casebolt around 1865 and now city Landmark No. 51. It's a private home, so admire it from the sidewalk, then rejoin Union Street.",
+        "Before heading west, walk one block along Union to Pierce Street and turn left: just past Green Street is the Casebolt House at 2727 Pierce St, built for blacksmith Henry Casebolt around 1865 and now city Landmark No. 51. It's a private home, so admire it from the sidewalk, then rejoin Union Street. For shops and restaurants, go the other way from the start: Union Street's shopping district runs about eight blocks east from Steiner Street to Van Ness Avenue.",
     },
     nearby: ["Union Street"],
     restaurants: [
@@ -2473,6 +2513,16 @@ export const NEIGHBORHOODS = {
         source: "https://savingplaces.org/press-center/media-resources/leading-national-historic-preservation-organization-names-the-corner-of-haight-and-ashbury-in-san-francisco-a-national-treasure",
       },
       {
+        icon: "shop",
+        title: "From cable car saloons to vintage racks",
+        text:
+          "San Francisco's planning code sets the Haight Street commercial district along about half a mile of Haight, from Stanyan Street at the park east to Central Avenue, and this corner is near its middle. After the Haight Street cable railroad was finished in 1883, the street's early businesses, among them saloons, hotels and restaurants, clustered near the cable car turnaround at Stanyan. Today its storefronts are best known for vintage and secondhand clothing, with record stores, smoke shops, cafés and restaurants among them.",
+        place: "Haight Street shops",
+        where: "Haight St & Clayton St",
+        at: [-122.44858, 37.76981],
+        source: "https://www.sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances08/o0088-08.pdf",
+      },
+      {
         icon: "star",
         title: "A free clinic in an upstairs flat",
         text:
@@ -2493,16 +2543,6 @@ export const NEIGHBORHOODS = {
         source: "https://sfpl.org/locations/park/park-library-history",
       },
       {
-        icon: "music",
-        title: "Records where the pins once fell",
-        text:
-          "Marc Weinstein and Dave Prinz opened their first Amoeba on Telegraph Avenue in Berkeley in 1990. In 1997 they opened this one in a 24,000-square-foot former bowling alley at the eastern edge of Golden Gate Park.",
-        place: "Amoeba Music",
-        where: "1855 Haight St",
-        at: [-122.45264, 37.76894],
-        source: "https://localwiki.org/sf/Amoeba_Records",
-      },
-      {
         icon: "bridge",
         title: "A concrete first, with stalactites",
         text:
@@ -2515,7 +2555,7 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A one-way stroll of about 0.7 mile for visitors and would-be neighbors: start at Ashbury & Frederick (6 and 33 buses), walk north past the Grateful Dead house to Haight Street, then loop up Clayton and along Page Street, dropping back to Haight at Shrader and ending at Golden Gate Park at Stanyan. Allow about 45 minutes; a weekday morning is calmest, a weekend afternoon is liveliest.",
+        "A one-way stroll of about 0.7 mile for visitors and would-be neighbors: start at Ashbury & Frederick (6 and 33 buses), walk north past the Grateful Dead house to Haight Street and west past its shops to Clayton, then loop up Clayton and along Page Street, dropping back to Haight at Shrader and ending at Golden Gate Park at Stanyan. Allow about 45 minutes; a weekday morning is calmest, a weekend afternoon is liveliest.",
       miles: 0.7,
       minutes: 45,
       tip:
