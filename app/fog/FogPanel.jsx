@@ -26,6 +26,7 @@ export default function FogPanel({
   layerStates,
   onFocusComp,
   onComps,
+  autoDetails, onAutoDetailsDone,
   zips,
   supervisorDistricts,
   realtorNeighborhoods,
@@ -91,6 +92,8 @@ export default function FogPanel({
           layerStates={layerStates}
           onFocusComp={onFocusComp}
           onComps={onComps}
+          autoDetails={autoDetails?.hood === openHood ? autoDetails.seg : null}
+          onAutoDetailsDone={onAutoDetailsDone}
         />
       )}
       {peekEl && picked?.point && createPortal(

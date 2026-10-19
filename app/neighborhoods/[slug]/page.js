@@ -32,7 +32,8 @@ export async function generateMetadata({ params }) {
 
 // Every figure is reported, however few sales are behind it. The sale count
 // rides with each median so the reader can weigh it themselves. Each one opens
-// the map on this neighborhood with its sales showing and their list open.
+// the map on this neighborhood's pop-up, with that segment's Details list
+// (both, for the all-sales figures) open and its sales dotted on the map.
 const Stat = ({ label, value, sub, href }) =>
   value == null ? null : (
     <Link className="lp-nstat lp-nstat-link" href={href} title="See these sales on the map">
@@ -40,7 +41,7 @@ const Stat = ({ label, value, sub, href }) =>
       <div className="lp-nstat-l">{label}{sub ? <span className="lp-fine"> {sub}</span> : null}</div>
     </Link>
   );
-const salesMap = (name, seg) => `/fog?${new URLSearchParams({ preset: "homes", hood: name, homes: seg })}`;
+const salesMap = (name, seg) => `/fog?${new URLSearchParams({ hood: name, details: seg })}`;
 
 export default async function Page({ params }) {
   const { slug } = await params;

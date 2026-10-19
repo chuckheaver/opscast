@@ -64,7 +64,7 @@ function summarize(homes, fn) {
 // price line's dot is the key to its homes on the map.
 const SEG_COLOR = { sfh: "#203C5F", condo: "#E9BC3F" };
 
-function PriceLine({ data, label, gap, sect, reportComps, onFocusComp }) {
+function PriceLine({ data, label, gap, sect, reportComps, onFocusComp, autoOpen }) {
   const [open, setOpen] = useState(false);
   const homes = data?.homes || [];
   const summaries = homes.length ? [["Average", summarize(homes, _mean)], ["Median", summarize(homes, _median)]] : [];
@@ -77,6 +77,10 @@ function PriceLine({ data, label, gap, sect, reportComps, onFocusComp }) {
     reportComps?.(sect, nx ? homes.map(h => h.feat).filter(Boolean)
       .map(f => ({ ...f, properties: { ...f.properties, seg: sect } })) : null);
   };
+  // Opened from a guide page's stat tile: start expanded, dots on the map.
+  useEffect(() => {
+    if (autoOpen && homes.length && !open) toggle();
+  }, [autoOpen, homes.length]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div style={{ marginBottom: gap ? 10 : 2 }}>
     <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
@@ -215,6 +219,7 @@ export default function NeighborhoodModal({
   // map, its marker and the layer chips all stay visible and usable above.
   sheet, name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict,
   zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties, onToggleLayer, layerStates, onComps, onFocusComp,
+  autoDetails, onAutoDetailsDone, // "sfh" | "condo" | "all": the Details list(s) to open with
 }) {
   const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
   // Which Details lists are expanded → map dots. Each PriceLine reports its
@@ -297,6 +302,12 @@ export default function NeighborhoodModal({
       .catch(() => { if (!cancelled) setPrices(null); });
     return () => { cancelled = true; };
   }, [name]);
+
+  // The price lines open their lists from autoDetails as the prices arrive
+  // (children's effects run first); after that it is spent.
+  useEffect(() => {
+    if (autoDetails && prices !== "loading") onAutoDetailsDone?.();
+  }, [autoDetails, prices, onAutoDetailsDone]);
 
   // Esc to close.
   useEffect(() => {
@@ -418,8 +429,10 @@ export default function NeighborhoodModal({
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#6B6F75" }}>Loading…</span></div>
           ) : prices ? (
             <div style={{ marginBottom: 2 }}>
-              <PriceLine data={prices.sfh} label="Median Single-Family" gap sect="sfh" reportComps={reportComps} onFocusComp={onFocusComp} />
-              <PriceLine data={prices.condo} label="Median Condo/TIC" sect="condo" reportComps={reportComps} onFocusComp={onFocusComp} />
+              <PriceLine data={prices.sfh} label="Median Single-Family" gap sect="sfh" reportComps={reportComps} onFocusComp={onFocusComp}
+                autoOpen={autoDetails === "sfh" || autoDetails === "all"} />
+              <PriceLine data={prices.condo} label="Median Condo/TIC" sect="condo" reportComps={reportComps} onFocusComp={onFocusComp}
+                autoOpen={autoDetails === "condo" || autoDetails === "all"} />
             </div>
           ) : (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#6B6F75" }}>Market data unavailable.</span></div>

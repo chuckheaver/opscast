@@ -688,16 +688,12 @@ export default function FogApp() {
     setStatsExpanded(true);
   }, [listingsGeo]);
 
-  // ?hood=<name>&homes=sfh|condo|all — a guide page's stat tile: once the
-  // neighborhood is picked, show its sales (that segment, or all) on the Homes
-  // layer with the Stats sheet's address list open.
-  const urlHomes = searchParams?.get("homes") || "";
-  const urlHomesAppliedRef = useRef(false);
-  useEffect(() => {
-    if (urlHomesAppliedRef.current || !urlHomes || !urlHood || !urlHoodAppliedRef.current) return;
-    urlHomesAppliedRef.current = true;
-    showNeighborhoodProperties(urlHood, urlHomes === "all" ? null : urlHomes);
-  }, [urlHomes, urlHood, geojson, contours, showNeighborhoodProperties]);
+  // ?hood=<name>&details=sfh|condo|all — a guide page's stat tile: the
+  // neighborhood's pop-up opens with that segment's Details list (or both)
+  // expanded, its sales dotted on the map. Used once, on the first opening.
+  // (`homes` is the parameter's earlier name.)
+  const urlDetails = searchParams?.get("details") || searchParams?.get("homes") || "";
+  const [autoDetails, setAutoDetails] = useState(() => (urlHood && urlDetails ? { hood: urlHood, seg: urlDetails } : null));
 
   // Neighborhood pop-up "Show … layer" toggles: flip that overlay on/off in
   // place — the pop-up stays open (like the Details lists), no navigation.
@@ -906,6 +902,8 @@ export default function FogApp() {
         layerStates={layerStates}
         onFocusComp={f => setFocusComp({ feature: f, n: Date.now() })}
         onComps={setCompFeatures}
+        autoDetails={autoDetails}
+        onAutoDetailsDone={() => setAutoDetails(null)}
         zips={zips}
         supervisorDistricts={supervisorDistricts}
         realtorNeighborhoods={realtorNeighborhoods}

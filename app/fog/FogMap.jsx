@@ -2535,10 +2535,11 @@ export default function FogMap({
 
     if (!picked) return;
 
-    // Keep the pick clear of the bottom sheet (phone) and of the search bar
-    // and chip row along the top. With no sheet this is the old even padding.
+    // Keep the pick clear of the bottom sheet (phone), of the sold-homes key
+    // that sits just above it, and of the search bar and chip row along the
+    // top. With no sheet this is the old even padding.
     const pad = bottomInset > 0
-      ? { top: 128, right: 24, bottom: bottomInset + 24, left: 24 }
+      ? { top: 128, right: 24, bottom: bottomInset + 72, left: 24 }
       : null;
 
     if (picked.point) {
