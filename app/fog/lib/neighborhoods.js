@@ -2150,39 +2150,77 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Lake District",
     history:
-      "Lake Street takes its name from Mountain Lake, one of the last natural lakes in San Francisco, fed by a chain of dunes and springs along the Presidio's southern boundary. Spanish explorer Juan Bautista de Anza camped at the lake in March 1776 while scouting sites for the Presidio and Mission. The surrounding Richmond District sand dunes were subdivided and developed in the early 20th century, when builders erected the large, architecturally rich single-family homes that still define this prosperous corridor today.",
+      "Lake Street runs west from Arguello Boulevard past Mountain Lake, where Juan Bautista de Anza's party camped on March 27–28, 1776, while choosing sites for the Presidio and the mission; this neighborhood is its stretch west of Park Presidio Boulevard. The Presidio next door was sandy dune country until the Army planted it: in 1883 Maj. William A. Jones proposed a forest that would make the post look far larger than it was, and the first trees, donated by Adolph Sutro, went in on Arbor Day 1886. By the late 1880s a steam train ran out California Street toward Land's End; in 1905 electric streetcars of the new 1 Sutter-California line replaced it.\n\nIn 1903 the city paid $360,000 for the strip that became Park Presidio Boulevard to extend Golden Gate Park, and after the 1906 earthquake and fire, the refugee cottages of Camp Richmond lined it. In 1932 a Colonial Revival campus centered on a six-story hospital replaced the U.S. Public Health Service's original buildings at the north end of 15th Avenue; the hospital closed in 1981 and reopened as apartments in 2010. In the late 1930s Park Presidio was widened as the Highway 1 approach to the new Golden Gate Bridge.\n\nA 2012 city evaluation found a 1905 house at 1650 Lake Street individually eligible for the California Register, and in March 2020 neighbors applied to create a Lake Street Landmark District, an application planners called incomplete that June. Lake Street became a pandemic Slow Street, and on December 6, 2022, it was among the 16 initial corridors of the city's ongoing program. Its average daily traffic fell from 5,310 vehicles beforehand to 820 in 2023.",
     facts: [
       {
-        icon: "water",
-        title: "A real natural lake",
+        icon: "road",
+        title: "A refugee camp became a highway",
         text:
-          "Mountain Lake is one of San Francisco's few remaining natural lakes. Long degraded by runoff, it underwent a major restoration in the 2010s that returned native plants and wildlife to its shores.",
-      },
-      {
-        icon: "flag",
-        title: "Anza camped here in 1776",
-        text:
-          "Juan Bautista de Anza's expedition made camp at Mountain Lake in late March 1776. From here he set out to choose the sites for the Presidio and Mission Dolores, founding the city.",
-      },
-      {
-        icon: "park",
-        title: "Mountain Lake Park",
-        text:
-          "The lake anchors a beloved green park with playgrounds, tennis courts, and trails. A path connects directly into the Presidio and the Juan Bautista de Anza National Historic Trail.",
+          "The city paid $360,000 in 1903 for this strip as an extension of Golden Gate Park, and after the 1906 earthquake and fire, rows of refugee cottages lined it at a camp called Camp Richmond. In the late 1930s it was widened and re-landscaped as the Highway 1 approach to the new Golden Gate Bridge; until the state finished the connector through the Presidio in 1940, the boulevard stopped at Lake Street, and bridge traffic went by way of 25th Avenue. Caltrans and the city's Recreation and Park Department maintain it today.",
+        place: "Park Presidio Boulevard",
+        where: "California St & Park Presidio Blvd",
+        at: [-122.47285, 37.78444],
+        source: "https://en.wikipedia.org/wiki/Park_Presidio_Boulevard",
       },
       {
         icon: "house",
-        title: "Grand period homes",
+        title: "A hospital turned apartments",
         text:
-          "Lake Street is known for its large, well-kept early-20th-century houses in Mediterranean, Tudor, and period-revival styles. It is one of the Richmond's most affluent and architecturally distinguished residential streets.",
+          "Walk a short block north to where 15th Avenue ends at the Presidio's old Public Health Service District: in 1932 a Colonial Revival campus designed by Treasury architect James Wetmore replaced the original buildings there, with a six-story hospital at its center. The hospital closed abruptly in 1981 and sat vacant for years; in 2009 the Presidio Trust removed the wings added in the 1950s, and the next year the main building, the Presidio's largest historic building, reopened as the Presidio Landmark apartments.",
+        place: "Public Health Service Hospital",
+        where: "15th Ave & Lake St",
+        at: [-122.47441, 37.78625],
+        source: "https://www.nps.gov/places/000/public-health-service-district.htm",
+      },
+      {
+        icon: "house",
+        title: "Older than the earthquake",
+        text:
+          "A 2012 city evaluation found this 1905 house individually eligible for the California Register of Historical Resources, for its architecture and its link to master architect Alexander Aimwell Cantin, best known for the Pacific Telephone building at 140 New Montgomery Street, done with Miller and Pflueger. In March 2020 neighbors applied to make a Lake Street Landmark District with this house as a contributor; their nomination describes Mediterranean Revival, Italian Renaissance Revival, Beaux Arts and Spanish Colonial Revival houses alongside Bay Region Craftsman and Shingle styles, though that June planners called the application incomplete.",
+        place: "Proposed Lake Street Landmark District",
+        where: "1650 Lake St",
+        at: [-122.47743, 37.78634],
+        source: "https://commissions.sfplanning.org/hpcpackets/2019-017767DES.pdf",
       },
       {
         icon: "park",
-        title: "On the Presidio's doorstep",
+        title: "A forest planted to look bigger",
         text:
-          "The street runs along the Presidio's southern edge, giving residents quick access to forested trails, scenic overlooks, and the national park's vast open space.",
+          "The Presidio's boundary lies a short block north of Lake Street here, and its forest is an Army creation. In 1883 Maj. William A. Jones proposed planting trees that would “border the boundary fences” and make the post “appear immensely larger than it really is.” They were also meant as windbreaks in the Presidio's sandy dunes, and the first, donated by Adolph Sutro, were planted on Arbor Day 1886.",
+        place: "Presidio forest edge",
+        where: "Lake St & 21st Ave",
+        at: [-122.48085, 37.78595],
+        source: "https://baynature.org/article/presidios-forest-resists-the-sands-of-time/",
+      },
+      {
+        icon: "road",
+        title: "A Slow Street that stayed",
+        text:
+          "Lake Street joined the city's pandemic Slow Streets program, which began in April 2020; the SFMTA Board voted on August 3, 2021, to keep it, and a design approved in August 2022 slows cars with speed humps, raised crosswalks and new stop signs. On December 6, 2022, it was among the 16 initial corridors of the ongoing Slow Streets Program, which aims for 1,000 or fewer cars a day and median speeds of 15 mph or less. Lake's average daily traffic fell from 5,310 vehicles before the program to 820 in 2023.",
+        place: "Lake Slow Street",
+        where: "Lake St & 23rd Ave",
+        at: [-122.48299, 37.78585],
+        source: "https://www.sfmta.com/projects/lake-slow-street",
+      },
+      {
+        icon: "tram",
+        title: "Steam trains to Land's End",
+        text:
+          "By the late 1880s, cable cars from the Ferry Building ran to Presidio Avenue and California Street, and from there a steam train of the Ferries and Cliff House Railway carried riders out California Street, past this corner, to 33rd Avenue, then turned north along the cliffs above the Golden Gate, ending steps from Sutro Heights, Sutro Baths and the Cliff House. In 1905 the United Railroads replaced the steam train with electric streetcars, which began running on the new 1 Sutter-California line on May 27 of that year; Muni's 1 California still stops at this corner.",
+        place: "California Street line",
+        where: "California St & 25th Ave",
+        at: [-122.48503, 37.78384],
+        source: "https://www.sfmta.com/blog/line-lands-end-san-franciscos-lost-scenic-railway",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about a mile for visitors and would-be neighbors: start at the California St & Park Presidio Blvd stop (1 California, 28 and 28R), walk up 15th Avenue to Lake Street, follow Lake west along the Presidio's edge to 25th Avenue, and turn south to the 1 California stop at California St & 25th Ave. Allow about 45 minutes; a clear day shows off the Presidio's trees.",
+      miles: 1,
+      minutes: 45,
+      tip:
+        "The houses along the way are private, so enjoy them from the sidewalk. For coffee or a meal afterward, Clement Street is a block south of the last stop, and the 1 California runs from there back toward downtown.",
+    },
     nearby: ["the Richmond District"],
     restaurants: [
       { name: "Burma Superstar", address: "309 Clement St", phone: "(415) 387-2147", url: "https://www.burmasuperstar.com" },
@@ -2216,39 +2254,77 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Postcard Row",
     history:
-      "The square was named for a lone cottonwood tree — álamo in Spanish — that marked a watering stop on the road from Mission Dolores to the Presidio. The four-acre park was reserved in an 1856 city survey under Mayor James Van Ness, as San Francisco platted the Western Addition. The surrounding blocks filled with grand Victorian and Edwardian homes through the 1890s, many surviving the 1906 quake, and the eastern \"Painted Ladies\" became one of the city's most photographed sights.",
+      "Alamo Square takes its name from the álamo, Spanish for poplar: a lone cottonwood on the hill marked a watering hole on the horseback trail between Mission Dolores and the Presidio. After the Van Ness Ordinance of 1855 laid out the Western Addition west to Divisadero Street, then the city's western edge, Mayor James Van Ness set aside 12.7 acres on the hill in 1856 for a public square. Taking possession took longer: Charles “Dutch Charley” Duane, a onetime fire chief twice banished by the city's vigilance committees, squatted on the hilltop until the city ousted him in 1868. Grading began in 1892, and by 1896 the park had curving paths, stairways and a masonry wall.\n\nThe blocks around it filled between 1870 and 1929 with Italianate, Queen Anne and Classical Revival houses, many of them designed by architects for owners who were mostly moderately successful businessmen. Confectioner William Westerfeld's mansion went up in 1889, developer Matthew Kavanaugh's row on Steiner Street between 1892 and 1896, and Archbishop Patrick Riordan's residence in 1904. In April 1906 the fires stopped at Laguna Street, a few blocks east, and the neighborhood was spared.\n\nLater, as owners moved away, entrepreneurs carved many of the big houses into rooming houses, and redevelopment in the nearby Fillmore planned the demolition of some 2,500 Victorians. Neighbors who fought a 1963 city plan to level the hilltop for playing fields formed the Alamo Square Neighborhood Association, which also fought a freeway planned through the Panhandle. In July 1984 the city made the blocks from Golden Gate Avenue to Fell Street, between Divisadero and Webster, a historic district.",
     facts: [
       {
+        icon: "music",
+        title: "The Dead played this movie house",
+        text:
+          "The Harding Theater opened on April 8, 1926, with Colleen Moore in Irene, in a building by the Reid Brothers, the firm behind the Fairmont Hotel and the 1909 Cliff House. It staged everything from vaudeville and silent films to concerts by Curtis Mayfield, and in the late 1960s and early 1970s the Grateful Dead and Big Brother and the Holding Company played here. It became a church in the 1970s, stood empty after the congregation moved out in 2004, and reopened in late 2017 as a four-level arcade bar whose balcony looks down on the original stage.",
+        place: "Harding Theater",
+        where: "616 Divisadero St",
+        at: [-122.43758, 37.77522],
+        source: "https://en.wikipedia.org/wiki/Harding_Theater",
+      },
+      {
         icon: "house",
-        title: "Postcard Row",
+        title: "The house called the Russian Embassy",
         text:
-          "The six matching Victorians at 710–720 Steiner Street, built by developer Matthew Kavanaugh between 1892 and 1896, are the famed \"Painted Ladies.\" Their colorful facades framed by the skyline make this one of the most photographed blocks in San Francisco.",
+          "Architect Henry Geilfuss designed this house, finished in 1889, for William Westerfeld, a German-born baker and confectioner who ran a confectionery on Market Street. From the late 1920s Czarist Russian émigrés ran a nightclub called Dark Eyes in its ground-floor ballroom and met in the rooms upstairs, making it an informal “Russian Embassy”; after it became apartments in 1948, jazz musicians playing the nearby clubs moved in, saxophonist John Handy among them. Experimental filmmaker Kenneth Anger later lived here and used the house as a movie set.",
+        place: "Westerfeld House",
+        where: "1198 Fulton St",
+        at: [-122.43639, 37.77722],
+        source: "https://en.wikipedia.org/wiki/William_Westerfeld_House",
       },
       {
-        icon: "movie",
-        title: "Full House opening",
+        icon: "church",
+        title: "Built on bedrock for an archbishop",
         text:
-          "The Steiner Street row appears in the opening credits of the sitcom Full House. The actual house used for exterior establishing shots, however, sits across town in Lower Pacific Heights, not on the square.",
+          "Architect Frank Shea finished this mansion in 1904 for Patrick William Riordan, San Francisco's second Roman Catholic archbishop, setting its wood frame on a steel-beam substructure over bedrock, uncommon locally at the time. The church later made it a boys' home and school, and in 1974 sold it to Presbyterian Hospital, which used it for offices and an outpatient clinic. It became city Landmark No. 151 in 1982, and in 1983 new owners won approval to open it as a bed-and-breakfast.",
+        place: "Archbishop's Mansion",
+        where: "1000 Fulton St",
+        at: [-122.43330, 37.77785],
+        source: "https://en.wikipedia.org/wiki/Archbishop%27s_Mansion",
       },
       {
-        icon: "star",
-        title: "The Westerfeld House",
+        icon: "art",
+        title: "Postcard Row's builder lived next door",
         text:
-          "The towering 1889 Queen Anne at 1198 Fulton Street, known as the Westerfeld House, anchors the square's northwest corner. Over the decades it has housed Russian émigrés, a jazz club, and a commune of artists and filmmakers.",
+          "Developer Matthew Kavanaugh built this row of Queen Anne houses between 1892 and 1896 and lived next door at 722 Steiner. The bright paint came much later: San Francisco's colorist movement is traced to 1963, when Butch Kardum painted his Italianate Victorian in intense blues and greens, and a 1978 book by Elizabeth Pomada and Michael Larsen popularized the name “Painted Ladies.” By one estimate the row has appeared in some 70 films, TV shows and ads, including the opening credits of Full House.",
+        place: "Painted Ladies",
+        where: "710–720 Steiner St",
+        at: [-122.43262, 37.77615],
+        source: "https://en.wikipedia.org/wiki/Painted_ladies",
+      },
+      {
+        icon: "water",
+        title: "A lawn rebuilt to drink less",
+        text:
+          "The lawn facing the Painted Ladies was part of a park-wide makeover: Alamo Square closed on May 10, 2016, for a $5.3 million renovation built around a new irrigation system, replacing three-decade-old pipes that were corroded and prone to leaks. Rec and Park estimated the new system would cut the park's water use by 2.5 million gallons, or 33 percent, and the park reopened on May 24, 2017, with drought-resistant turf.",
+        place: "Alamo Square east lawn",
+        where: "Steiner St & Hayes St",
+        at: [-122.43320, 37.77612],
+        source: "https://www.hoodline.com/2017/05/behind-the-scenes-of-alamo-square-park-s-5-3-million-dollar-renovation",
       },
       {
         icon: "park",
-        title: "Hilltop park",
+        title: "The hilltop they planned to flatten",
         text:
-          "Alamo Square Park climbs a steep rise to roughly 100 feet, opening a sweeping view across the Painted Ladies to the downtown towers. The grassy slopes draw picnickers, dog walkers, and tourists year-round.",
-      },
-      {
-        icon: "pin",
-        title: "Western Addition roots",
-        text:
-          "The neighborhood sits within the Western Addition, just north of the dining corridor locals call NoPa, for \"North of the Panhandle.\" Many of its wooden homes predate the 1906 earthquake that leveled much of the city to the east.",
+          "After the fires of April 1906, Alamo Square became a major refuge for the homeless, with about 1,000 tents but no permanent “earthquake cottages.” In 1963 the city drew up plans to slice off the crest of this hill, level it for playing fields and build a large field house at Fulton and Steiner; the plan was dropped after neighbors appealed to Mayor Joseph Alioto.",
+        place: "Alamo Square Park",
+        where: "Hayes St & Pierce St",
+        at: [-122.43460, 37.77645],
+        source: "https://diva.sfsu.edu/collections/kirkeberg/bundles/223921",
       },
     ],
+    walk: {
+      intro:
+        "A short one-way walk for visitors and would-be neighbors: start at the Divisadero & Hayes stop for the 6 and 24 buses beside the Harding Theater, climb Scott Street along the park to the landmark houses on Fulton Street, come down Steiner Street past the Painted Ladies and finish on the hilltop, a short stroll from the 6 stop at Hayes & Pierce. Allow about 45 minutes for three-quarters of a mile; a clear afternoon is best.",
+      miles: 0.75,
+      minutes: 45,
+      tip:
+        "The Painted Ladies face west across Steiner Street toward the park, so in the morning they are backlit by the sun rising behind them and downtown; on a clear afternoon the sun is at your back and lights their fronts. They are private homes, so take photos from the east lawn or the sidewalk.",
+    },
     restaurants: [
       { name: "Nopa", address: "560 Divisadero St", phone: "(415) 864-8643", url: "https://www.nopasf.com" },
       { name: "Bar Crudo", address: "655 Divisadero St", phone: "(415) 409-0679", url: "https://www.barcrudo.com" },
@@ -2279,39 +2355,67 @@ export const NEIGHBORHOODS = {
       "Steps from West Portal",
     ],
     history:
-      "Named for St. Francis of Assisi, the neighborhood was launched in 1912 when the Mason-McDuffie Company bought former Sutro land to build one of California's first \"residence parks.\" Duncan McDuffie hired the Olmsted Brothers to lay curving streets along the natural topography. Architect John Galen Howard designed the entry gates, lampposts, and lower fountain; Henry Gutterson succeeded him, shaping the upper fountain and scores of homes. Most houses rose in the 1920s, and the district joined the National Register in 2022.",
+      "St. Francis Wood rose on 175 acres of the former Sutro estate on the western slope of Mount Davidson; Adolph Sutro had bought the old Rancho San Miguel lands in 1880 and planted thousands of trees there. Duncan McDuffie and his partner Joseph Mason bought the tract, and their Mason-McDuffie Company opened lot sales in its “residence park” on October 12, 1912. McDuffie, later a two-term Sierra Club president who helped establish California's state park system, hired the Olmsted Brothers in 1913, and at his insistence the electric and telephone wires went underground. John Galen Howard, the first supervising architect, designed the gates, lampposts, brick-diamond sidewalks and first fountain; Henry Gutterson took over in 1914.\n\nThe hill was the easy part. Lot sales were nearly nonexistent from 1914 to 1919, and McDuffie lobbied hard for the Twin Peaks Tunnel, which opened on February 3, 1918. Building took off in the 1920s, when 347 houses went up, more than 60 percent of the eventual total. Gutterson (75 houses) and the firm Masten & Hurd (77) designed 152 of the subdivision's 509 between them, and Julia Morgan was among the other architects who built here.\n\nThe founding documents of 1912 also carried a clause barring certain ethnic groups from owning or leasing property here; shortly after the 1968 Fair Housing Act, the neighborhood recorded an extension of its restrictions declaring that clause invalid, illegal and against public policy. The association McDuffie formed in 1912 took over the parks and boulevards about a decade later, and on June 30, 2022, after a campaign by residents, the district was listed on the National Register of Historic Places.",
     facts: [
       {
-        icon: "park",
-        title: "A pioneering residence park",
+        icon: "star",
+        title: "Beaux-Arts gates at the circle",
         text:
-          "Mason-McDuffie marketed St. Francis Wood as a planned \"residence park\" with lots roughly twice the size of an ordinary city lot. Landscaped medians, boulevards, and deed restrictions were meant to keep it parklike in perpetuity.",
+          "John Galen Howard, the residence park's first supervising architect, designed these Beaux-Arts entrance portals, with their loggias and gardens, where St. Francis Boulevard leaves St. Francis Circle. He also drew the neighborhood's elaborate lampposts, entry pillars and brick-diamond sidewalks. When the Twin Peaks Tunnel opened in 1918, Muni's new K line began right here, running from the circle through the tunnel and down Market Street.",
+        place: "St. Francis Wood Gates",
+        where: "St Francis Blvd & Junipero Serra Blvd",
+        at: [-122.47115, 37.73472],
+        source: "https://tclf.org/landscapes/st-francis-wood",
       },
       {
         icon: "road",
-        title: "Designed by the Olmsted Brothers",
+        title: "Streets that follow the hill",
         text:
-          "In 1913 Duncan McDuffie hired the famed Olmsted Brothers firm, led by James Frederick Dawson, to design the curvilinear street plan. The streets were laid out to follow the site's natural hillside contours rather than a rigid grid.",
+          "In 1913 Duncan McDuffie hired the Olmsted Brothers, and the firm, led by James Frederick Dawson, laid out curving streets that follow the site's natural topography rather than a grid, along with the neighborhood's walks and parks. St. Francis Boulevard is the main artery. At McDuffie's insistence, all the electric and telephone wires were placed underground.",
+        place: "St. Francis Boulevard",
+        where: "St Francis Blvd & San Fernando Way",
+        at: [-122.46969, 37.73479],
+        source: "https://en.wikipedia.org/wiki/Duncan_McDuffie",
       },
       {
         icon: "water",
-        title: "Two formal fountains",
+        title: "A fountain at the halfway mark",
         text:
-          "St. Francis Boulevard is anchored by two ornamental fountains evoking Italian Renaissance gardens. John Galen Howard designed the lower fountain and entry gates, and his successor Henry Gutterson designed the monumental upper fountain.",
+          "Howard's monumental fountain, which the neighborhood's archive calls the Circle fountain, marks the boulevard's center point where Santa Ana Avenue crosses. Unlike many developments, St. Francis Wood's developers encouraged houses designed by prominent architects for specific clients, and period revivals of traditional English, French and Italian idioms dominate the streets around it.",
+        place: "The Circle Fountain",
+        where: "St Francis Blvd & Santa Ana Ave",
+        at: [-122.46796, 37.73486],
+        source: "https://oac.cdlib.org/findaid/ark:/13030/c85h7q2g",
       },
       {
-        icon: "house",
-        title: "Architect-designed homes",
+        icon: "water",
+        title: "A fountain aimed at the Pacific",
         text:
-          "Henry Gutterson served as supervising architect for three decades and personally designed many of the houses. The collection of period-revival homes by notable architects is central to the neighborhood's character.",
+          "At the top of the boulevard, Henry Gutterson, Howard's successor as supervising architect, designed this terraced plaza and fountain after extensive consultation with the Olmsted firm, placing it to take in a sweeping vista of the Pacific. An OpenSFHistory photograph from 1920 shows its steps and fountain, labeled “The Terminal.” On a clear day, look west from the steps for the ocean view it was built around.",
+        place: "Terminal Fountain",
+        where: "St Francis Blvd & San Anselmo Ave",
+        at: [-122.46480, 37.73500],
+        source: "https://tclf.org/landscapes/st-francis-wood",
       },
       {
-        icon: "star",
-        title: "On the National Register",
+        icon: "tram",
+        title: "The tunnel that rescued sales",
         text:
-          "After a resident-led campaign, St. Francis Wood was added to the National Register of Historic Places in 2022, recognized as an early-20th-century residence park and an intact collection of architecturally significant homes.",
+          "From 1914 to 1919 lot sales in St. Francis Wood were nearly nonexistent, and it was faster to reach downtown by ferry from the East Bay than by streetcar from here. McDuffie and other developers with land west of Twin Peaks lobbied fiercely for a streetcar tunnel; once it opened in 1918, its west portal a short walk north of this corner, lots sold briskly.",
+        place: "Portola Drive",
+        where: "Portola Dr & Claremont Blvd",
+        at: [-122.46508, 37.73977],
+        source: "https://oac.cdlib.org/findaid/ark:/13030/kt787023c0",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about a mile for visitors and would-be neighbors: start at St. Francis Circle, where the K and M streetcars and the 23 and 57 buses stop, climb St. Francis Boulevard past both fountains, then double back a block to Santa Clara Avenue and follow it north to Portola Drive, ending a short walk from West Portal Station. Allow about 45 minutes, and go on a clear day, when the view from the top fountain reaches the ocean.",
+      miles: 1,
+      minutes: 45,
+      tip:
+        "The boulevard climbs steadily from the circle to the top fountain, so take it slowly; at the end, West Portal Avenue's cafes and restaurants start just past the station.",
+    },
     nearby: ["West Portal"],
     restaurants: [
       { name: "Trattoria da Vittorio", address: "150 W Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
@@ -2346,39 +2450,77 @@ export const NEIGHBORHOODS = {
     ],
     aka: "The Haight",
     history:
-      "Named for pioneer banker Henry Haight and Monroe Ashbury, an early San Francisco supervisor who shaped the adjacent park land, the district filled with Victorian flats after the 1880s. Cheap rents in those subdivided homes drew artists and students in the 1960s, and by 1967 the corner of Haight and Ashbury became the epicenter of the hippie movement, drawing tens of thousands of young people during the Summer of Love and birthing a counterculture of music, protest, and psychedelia.",
+      "Haight Street honors the banker Henry Haight, and Ashbury Street honors Munroe Ashbury, a San Francisco supervisor. Until 1883 their crossing lay among isolated farms and acres of sand dunes. That year the Haight Street cable railroad was finished, linking the east end of Golden Gate Park with the Market Street line and downtown, and many of the cable lines out to the park ended near its main pedestrian entrance at Haight and Stanyan. From 1895 to 1902 the Chutes, an amusement park franchised by Coney Island's Captain Paul Boyton, drew crowds to Haight Street between Clayton and Cole. In 1906 the district was one of the few spared by the fires that followed the earthquake.\n\nDecades later, Beats who couldn't find rooms in North Beach turned to the Haight's quaint, relatively cheap blocks. On January 3, 1966, the brothers Ron and Jay Thelin opened the Psychedelic Shop at 1535 Haight Street, and some of its revenue went to start the newspaper that became the San Francisco Oracle. On January 14, 1967, the Human Be-In drew an estimated 20,000 to 30,000 people to Golden Gate Park, the prelude to a Summer of Love in which as many as 100,000 young people converged on the neighborhood and the park.\n\nThat October, Ron Thelin and the Diggers staged the Death of Hippie. The Psychedelic Shop gave away everything it had and closed, its sign was laid in a casket, and on October 6, 1967, a mock funeral, announced to begin at sunrise in Buena Vista Park, carried it through the Haight, a send-off meant to rid the word “hippie” of what it had come to mean.",
     facts: [
       {
-        icon: "confetti",
-        title: "The Summer of Love",
-        text:
-          "In 1967, an estimated 100,000 young people converged on the Haight during the Summer of Love. The neighborhood became the global heart of hippie counterculture, music, and the psychedelic movement.",
-      },
-      {
         icon: "house",
-        title: "The Grateful Dead house",
+        title: "Front-page news on Ashbury Street",
         text:
-          "The Grateful Dead lived communally at 710 Ashbury Street from 1966 to 1968. The Victorian became a counterculture landmark and was the site of a famous 1967 drug bust that the band protested publicly.",
-      },
-      {
-        icon: "star",
-        title: "Janis Joplin lived here",
-        text:
-          "Singer Janis Joplin lived at 122 Lyon Street, near the Panhandle, during her rise to fame in the late 1960s. Many leading musicians of the era called the surrounding blocks home.",
-      },
-      {
-        icon: "park",
-        title: "Hippie Hill",
-        text:
-          "Just inside Golden Gate Park near the Haight Street entrance lies Hippie Hill, a grassy gathering spot for drum circles since the 1960s. It remains the site of an enormous unofficial 4/20 celebration each year.",
+          "The Grateful Dead lived in this Victorian until 1968, and the Haight-Ashbury Legal Organization kept an office in the house. On October 2, 1967, narcotics agents raided it and arrested Pigpen, Bob Weir and others, and the next day's Chronicle ran “ROCK BAND BUSTED” across its front page. It is a private home, so take it in from the sidewalk.",
+        place: "Grateful Dead House",
+        where: "710 Ashbury St",
+        at: [-122.44664, 37.76890],
+        source: "https://www.sfchronicle.com/oursf/article/Grateful-Dead-drug-bust-at-50-Nothing-left-10992821.php",
       },
       {
         icon: "flag",
-        title: "The famous corner",
+        title: "The 100th National Treasure",
         text:
-          "The intersection of Haight and Ashbury streets is the symbolic center of the neighborhood. A clock on the corner building is famously stuck at 4:20, and the street sign is among the most photographed in the city.",
+          "Richard P. Doolan built this Colonial Revival house on the corner in 1903, and after the 1906 earthquake it was raised to add storefronts on the ground floor; from April 1965 to 1968 one of them, 1510 Haight, held Peggy Caserta's Mnasidika, one of the first hippie shops in San Francisco. Its longtime owner, Norman Larson, bequeathed the building to San Francisco Heritage, and here, on May 15, 2019, the National Trust for Historic Preservation named the corner of Haight and Ashbury a National Treasure, its 100th. It has been city Landmark No. 253 since 2006.",
+        place: "Doolan-Larson Building",
+        where: "Haight St & Ashbury St",
+        at: [-122.44685, 37.76994],
+        source: "https://savingplaces.org/press-center/media-resources/leading-national-historic-preservation-organization-names-the-corner-of-haight-and-ashbury-in-san-francisco-a-national-treasure",
+      },
+      {
+        icon: "star",
+        title: "A free clinic in an upstairs flat",
+        text:
+          "Dr. David E. Smith opened the Haight Ashbury Free Clinic on June 7, 1967, in an old upstairs flat in this building, which had once held a suite of dentists' offices; private donations paid the rent. By Wikipedia's count it was the first of more than 600 free clinics opened across the United States over the next decade. It later became part of HealthRIGHT 360, which paused primary care here in July 2019 and moved it to its Mission Street center.",
+        place: "Haight Ashbury Free Clinic",
+        where: "558 Clayton St",
+        at: [-122.44853, 37.77015],
+        source: "https://en.wikipedia.org/wiki/Haight_Ashbury_Free_Clinic",
+      },
+      {
+        icon: "book",
+        title: "The city's oldest library building",
+        text:
+          "Opened on October 29, 1909, the Park Branch is, by the library's own account, the oldest existing San Francisco Public Library building, and it was the first branch in the city built with public funds, paid for with city money before any agreement with Andrew Carnegie was settled. The McDougall Brothers designed the two-story neoclassical building in brick and terra cotta and set it 30 feet back from the street to complement the houses around it.",
+        place: "Park Branch Library",
+        where: "1833 Page St",
+        at: [-122.45100, 37.77032],
+        source: "https://sfpl.org/locations/park/park-library-history",
+      },
+      {
+        icon: "music",
+        title: "Records where the pins once fell",
+        text:
+          "Marc Weinstein and Dave Prinz opened their first Amoeba on Telegraph Avenue in Berkeley in 1990. In 1997 they opened this one in a 24,000-square-foot former bowling alley at the eastern edge of Golden Gate Park.",
+        place: "Amoeba Music",
+        where: "1855 Haight St",
+        at: [-122.45264, 37.76894],
+        source: "https://localwiki.org/sf/Amoeba_Records",
+      },
+      {
+        icon: "bridge",
+        title: "A concrete first, with stalactites",
+        text:
+          "Just inside the park from this corner, where many of the old cable lines ended, stands the Alvord Lake Bridge, built by Ernest L. Ransome in 1889 and described by the American Society of Civil Engineers as the first reinforced concrete bridge built in the United States. Ransome reinforced it with his own cold-twisted square steel bars, scored its face to look like sandstone and hung its cave-like underpass with sculpted concrete stalactites; it came through the 1906 earthquake undamaged, and the ASCE made it a civil engineering landmark in 1969.",
+        place: "Golden Gate Park entrance",
+        where: "Haight St & Stanyan St",
+        at: [-122.45296, 37.76925],
+        source: "https://www.asce.org/about-civil-engineering/history-and-heritage/historic-landmarks/alvord-lake-bridge",
       },
     ],
+    walk: {
+      intro:
+        "A one-way stroll of about 0.7 mile for visitors and would-be neighbors: start at Ashbury & Frederick (6 and 33 buses), walk north past the Grateful Dead house to Haight Street, then loop up Clayton and along Page Street, dropping back to Haight at Shrader and ending at Golden Gate Park at Stanyan. Allow about 45 minutes; a weekday morning is calmest, a weekend afternoon is liveliest.",
+      miles: 0.7,
+      minutes: 45,
+      tip:
+        "At Stanyan, step into the park to see the stalactite-hung underpass of the Alvord Lake Bridge; for the ride back, the 7 and 33 buses stop at Haight & Stanyan.",
+    },
     restaurants: [
       { name: "Cha Cha Cha", address: "1801 Haight St", phone: "(415) 386-7670", url: "https://www.chachachasf.com" },
       { name: "Parada 22", address: "1805 Haight St", phone: "(415) 750-1111", url: "https://www.parada22.com" },
@@ -2412,39 +2554,87 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Nihonmachi",
     history:
-      "Nihonmachi, meaning \"Japantown,\" took root after the 1906 earthquake and fire pushed Japanese immigrants into the Western Addition, where the community flourished for decades. Executive Order 9066 forced their incarceration during World War II, emptying the district almost overnight; African-American war workers filled the vacated homes. Postwar, returning families rebuilt, but 1960s redevelopment razed Victorian blocks and displaced many residents, reshaping the area into today's Japan Center malls and Peace Plaza.",
+      "Before 1906, San Francisco's Japanese immigrants lived in enclaves around Chinatown, South of Market and South Park. After the 1906 earthquake and fire, some went back to South Park, but most moved west to the Western Addition. The heart of the new Nihonmachi was the area bounded by Geary, Webster, Bush and Laguna streets, and by 1940 it held more than 200 Japanese American–owned businesses. Barred by the 1913 Alien Land Law from owning land, the women of the Japanese YWCA had the city's YWCA hold their Sutter Street lot in trust.\n\nIn the spring of 1942, San Francisco's 5,280 Japanese and Japanese Americans were forced from their homes into incarceration camps, and thousands of newly arrived war workers, most of them African American, moved into the empty houses. After the war, officials labeled the district blighted, and in 1948, 27 blocks of the Western Addition, including much of Japantown, were selected for the A-1 redevelopment project. Many Black and Japanese American leaders vigorously opposed redevelopment. In 1956, after wholesale evictions, A-1 began flattening entire blocks south of Post Street, and by 1960 at least 1,500 Japanese American residents and more than 60 small businesses had been displaced.\n\nIn their place rose the Japanese Cultural and Trade Center, designed by Minoru Yamasaki and dedicated by Mayor Joseph Alioto in 1968, with a Peace Pagoda paid for largely by donations from Osaka, San Francisco's sister city. In 2006, its centennial year, a Board of Supervisors resolution called it the oldest Japantown in the United States and one of only three remaining. Its prewar language school, YWCA and temple still stand on Bush and Sutter streets.",
     facts: [
       {
+        icon: "shopping",
+        title: "Designed by the Twin Towers' architect",
+        text:
+          "The Japanese Cultural and Trade Center, now Japan Center, opened in March 1968. Minoru Yamasaki, also the designer of New York's World Trade Center towers, planned it with the local firm Van Bourg-Nakamura Associates, combining shops and restaurants in an interior mall with a hotel and a theater, most of it over underground parking. Across its bridge over Webster Street, Kinokuniya's bookstore, opened in 1969, was the chain's first in the United States.",
+        place: "Japan Center",
+        where: "1581 Webster St",
+        at: [-122.43135, 37.78500],
+        source: "https://en.wikipedia.org/wiki/Japan_Center_(San_Francisco)",
+      },
+      {
         icon: "tower",
-        title: "Peace Pagoda",
+        title: "Osaka's gift, getting a copper roof",
         text:
-          "The five-tiered concrete Peace Pagoda was a 1968 gift from sister city Osaka, designed by Japanese architect Yoshiro Taniguchi. It rises about 100 feet over Peace Plaza.",
+          "Designed by Japanese architect Yoshiro Taniguchi and paid for largely by donations from Osaka, San Francisco's sister city since 1957, the five-tiered concrete pagoda, about 100 feet tall, was dedicated in 1968; it was first surrounded by two reflecting pools, later removed because of drainage problems. In a Peace Plaza renovation that broke ground in April 2024, crews added and tensioned steel rods to reinforce it and began work on a new copper roof, which the city says will look bright copper until it weathers to a patina matching its historic color.",
+        place: "Peace Pagoda",
+        where: "Post St & Buchanan St",
+        at: [-122.42970, 37.78510],
+        source: "https://default.sfplanning.org/Preservation/peacepagoda/PeacePagodaDraftLandmarkDesignationReport_4-13-15.pdf",
       },
       {
-        icon: "confetti",
-        title: "Cherry Blossom Festival",
+        icon: "water",
+        title: "Ruth Asawa's origami fountains",
         text:
-          "Held each April since 1968, the Northern California Cherry Blossom Festival is among the largest of its kind in the country. It draws hundreds of thousands over two weekends.",
-      },
-      {
-        icon: "flag",
-        title: "Incarceration and Redress",
-        text:
-          "Some 120,000 Japanese Americans were incarcerated during WWII under Executive Order 9066. The 1988 Civil Liberties Act later issued a formal apology and reparations to survivors.",
-      },
-      {
-        icon: "movie",
-        title: "The Kabuki cinema",
-        text:
-          "The neighborhood's landmark movie house opened in 1986 as the AMC Kabuki. It became known for reserved seating and a 21-and-over dine-in concept.",
+          "In 1975 and 1976 this block of Buchanan Street was turned into a pedestrian mall set with origami fountains by sculptor Ruth Asawa. Her original Corten steel fountains corroded and were removed after a long drought, and public outcry brought back bronze replicas, cast under Asawa's supervision, in 1999. Renamed Osaka Way in 2007, the mall has had its fountains' water shut off for more than a decade; the city's planned rebuild of the mall lists rehabilitating them among its goals.",
+        place: "Buchanan Mall",
+        where: "Buchanan St & Sutter St",
+        at: [-122.42993, 37.78615],
+        source: "https://newfillmore.com/2025/06/09/will-ruth-asawas-fountains-flow-again/",
       },
       {
         icon: "house",
-        title: "Shrinking footprint",
+        title: "Built in trust by Issei women",
         text:
-          "Once spanning some 30 blocks before the war, Japantown today covers only about six. Redevelopment-era demolitions permanently shrank the historic district.",
+          "Because the 1913 Alien Land Law barred Issei women from owning property, the San Francisco YWCA agreed in 1921, after a fund drive in the Japanese community, to hold this lot in trust for the Japanese YWCA. Despite the Depression, the women raised enough for a new building, designed by Julia Morgan without a fee and completed in 1932. When the San Francisco YWCA tried to sell it in 1996, researchers recovered the trust documents and a lawsuit followed; tenant Nihonmachi Little Friends became the owner in a 2002 settlement. It joined the National Register in 2020 and became a city landmark in 2021.",
+        place: "Japanese YWCA Building",
+        where: "1830 Sutter St",
+        at: [-122.43050, 37.78664],
+        source: "https://en.wikipedia.org/wiki/Japanese_YWCA_Building",
+      },
+      {
+        icon: "park",
+        title: "The row once called Japan Street",
+        text:
+          "Cottage Row anchors the Bush Street–Cottage Row Historic District, listed on the National Register in 1982 and a city landmark district since 1991; Rec and Park credits William Hollis, president of the developer Real Estate Associates, with building most of its 22 buildings. Before World War II the district was home to Japanese American families, and the walkway was popularly called Japan Street. The mini park's Sutter Street end has been remade, with the Japanese Cultural and Community Center of Northern California, as a garden honoring the Issei.",
+        place: "Cottage Row",
+        where: "Sutter St & Cottage Row",
+        at: [-122.43226, 37.78648],
+        source: "https://sfrecpark.org/facilities/facility/details/cottagerowminipark-162",
+      },
+      {
+        icon: "book",
+        title: "Ordered to report here, 1942",
+        text:
+          "This building of the Japanese-language school Kinmon Gakuen, designed by William C. Hays, was completed in April 1926. On April 24, 1942, many of San Francisco's Japanese Americans were ordered to report here to register for removal, and it was the gathering place for one of the main contingents sent to the Tanforan Assembly Center. Closed through the war, the school resumed classes in the late 1940s; in 2024 it received $5 million from the city and $4.5 million from the state to rehabilitate the school and its auditorium.",
+        place: "Kinmon Gakuen",
+        where: "2031 Bush St",
+        at: [-122.43070, 37.78720],
+        source: "https://www.californiajapantowns.org/sf/kinmongakuen.html",
+      },
+      {
+        icon: "church",
+        title: "From synagogue to Zen temple",
+        text:
+          "Congregation Ohabai Shalome completed this temple in 1895, and the city made it a landmark in 1976. In the 1930s it became home to Sokoji, a Soto Zen temple; a Christian congregation used it during World War II, and it went back to the temple afterward. Shunryu Suzuki came in May 1959 to be Sokoji's head priest and stayed until November 1969. The temple moved out in the early 1970s, and the building is now part of Kokoro Assisted Living.",
+        place: "Bush Street Temple",
+        where: "1881 Bush St",
+        at: [-122.42826, 37.78751],
+        source: "https://en.wikipedia.org/wiki/Bush_Street_Temple",
       },
     ],
+    walk: {
+      intro:
+        "A short one-way walk for visitors and would-be neighbors: start at the 38 Geary and 38R stop at Geary & Webster, cut through Japan Center to Peace Plaza, then follow the Buchanan Street mall north, Sutter Street west to Cottage Row and Bush Street back east to the old Bush Street Temple, a block from the 2 bus at Sutter & Laguna. Allow about 45 minutes for 0.7 mile; a weekday late morning is calmest.",
+      miles: 0.7,
+      minutes: 45,
+      tip:
+        "Japan Center's malls are indoors and linked by the Webster Street bridge, a good fallback on a foggy or wet afternoon. Peace Plaza's renovation, begun in April 2024, ran into 2026, and the Buchanan Street mall is due for a rebuild of its own, so check the city's project updates before you go; if either is fenced, Webster or Laguna Street links Post and Sutter, and the 100-foot pagoda is easy to see from Post Street.",
+    },
     restaurants: [
       { name: "Benihana", address: "1737 Post St", phone: "(415) 563-4844", url: "https://www.benihana.com" },
       { name: "Suzu Noodle House", address: "1825 Post St", phone: "(415) 346-5083" },
