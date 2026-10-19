@@ -1676,16 +1676,6 @@ export const NEIGHBORHOODS = {
         source: "https://en.wikipedia.org/wiki/Sunset_Tunnel",
       },
       {
-        icon: "art",
-        title: "Renamed for Harvey Milk in 1978",
-        text:
-          "Built in 1954 at the park's Scott Street end, this building, commonly called “Drama, Dance & Music,” was headquarters of the Recreation and Park Department's Performing Arts Division. In December 1978, weeks after Supervisor Harvey Milk was killed, the Recreation and Park Commission approved renaming it for him. On its lower level, the Harvey Milk Photo Center traces its start to the city's first camera room, created in 1949 at the Hayes Valley Recreation Center, and settled here in 1954.",
-        place: "Harvey Milk Recreational Arts Center",
-        where: "50 Scott St",
-        at: [-122.43470, 37.76960],
-        source: "https://www.harveymilkphotocenter.org/?p=31",
-      },
-      {
         icon: "park",
         title: "A hospital site that became a park",
         text:
@@ -1699,7 +1689,7 @@ export const NEIGHBORHOODS = {
         icon: "road",
         title: "A 340-foot ride to the ocean",
         text:
-          "Mona Caron's first mural, unveiled on November 21, 1998, runs about 340 feet along the back wall of the Market Street Safeway beside the Duboce Bikeway, which her site calls the first stretch of San Francisco street converted from car use to bicycle and pedestrian use; city planner Peter Tannen wrote a mural into the bikeway's budget. The 6,000-square-foot painting follows a virtual ride from downtown to Ocean Beach, past the Wiggle and Golden Gate Park, and paints the Wiggle as a waterway, a nod to the creek that once ran down its canyon.",
+          "Mona Caron's first mural, unveiled on November 21, 1998, runs about 340 feet along the back wall of a Market Street supermarket beside the Duboce Bikeway, which her site calls the first stretch of San Francisco street converted from car use to bicycle and pedestrian use; city planner Peter Tannen wrote a mural into the bikeway's budget. The 6,000-square-foot painting follows a virtual ride from downtown to Ocean Beach, past the Wiggle and Golden Gate Park, and paints the Wiggle as a waterway, a nod to the creek that once ran down its canyon.",
         place: "Duboce Bikeway Mural",
         where: "Duboce Ave & Church St",
         at: [-122.42880, 37.76932],
@@ -1716,6 +1706,16 @@ export const NEIGHBORHOODS = {
         source: "https://npgallery.nps.gov/GetAsset/c1fbd798-b200-4766-816d-60cecbbf4934",
       },
       {
+        icon: "shop",
+        title: "Upper Market's three blocks",
+        text:
+          "For three blocks from Church Street to Castro Street, the north side of Market Street is lined with bars, restaurants, shops and other small businesses, and more continue up Church Street to Duboce Avenue, all part of what the city zones as the Upper Market Street Neighborhood Commercial Transit District. The strip follows an old transit route: in the late 1880s the Market Street Cable Railway replaced the steam dummy that had served the area with a cable car line running out Market from the Ferry to Castro Street. Many Scandinavian immigrants settled around Upper Market in the 1870s and 1880s, and churches, clubs and businesses serving them followed.",
+        place: "Market Street shops",
+        where: "Market St & Noe St",
+        at: [-122.43306, 37.76422],
+        source: "https://www.streetcar.org/historic_transit_heartland/",
+      },
+      {
         icon: "house",
         title: "Greek Revival, from 1875",
         text:
@@ -1728,9 +1728,9 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A loop of about 1.6 miles for visitors and would-be neighbors: from Castro Station (Muni Metro K, L and M; the F streetcar ends at 17th & Castro), walk north on Castro Street past 16th and 15th streets to Henry Street, cross Duboce Park past the N Judah's tunnel portal, then come back along Market and 15th streets. Allow about 70 minutes, in daylight so you can see the houses' details.",
-      miles: 1.6,
-      minutes: 70,
+        "A loop of about 1.8 miles for visitors and would-be neighbors: from Castro Station (Muni Metro K, L and M; the F streetcar ends at 17th & Castro), walk north on Castro Street past 16th and 15th streets to Henry Street, cross Duboce Park past the N Judah's tunnel portal, then come back down Church Street and along the shops of Market Street to Noe Street and 15th Street. Allow about 80 minutes, in daylight so you can see the houses' details.",
+      miles: 1.8,
+      minutes: 80,
       tip:
         "Halfway around, the Duboce & Church stop (N and J trains, 22 Fillmore) and Church St Station, a block south, let you cut the loop short. Otherwise finish on 15th Street, a short block from the F streetcar's Market & Noe stop and about a quarter mile from Castro Station.",
     },
@@ -1801,11 +1801,21 @@ export const NEIGHBORHOODS = {
         icon: "road",
         title: "Bootprints in the alley",
         text:
-          "Look down along Ringold Alley: metal bootprints along the curb honor 28 people from leather history, a design that the Exiles' Ringold Alley project page says was based on Stompers founder Mike McNamee's Dehner motorcycle boots. A black granite marker reproduces Mike Caffee's “Leather David” statue, made for Fe-Be's, and Chuck Arnett's Tool Box mural, with a narrative by Gayle Rubin. Paid for from the adjacent L7 development's public-benefit fee, the installation was unveiled on July 27, 2017, on the alley that hosted the first Up Your Alley fair in 1985.",
+          "Look down along Ringold Alley: metal bootprints along the curb honor 28 people from leather history, a design that the Exiles' Ringold Alley project page says was based on Mike McNamee's motorcycle boots. A black granite marker reproduces Mike Caffee's “Leather David” statue and a mural by Chuck Arnett, with a narrative by Gayle Rubin. Paid for from the adjacent L7 development's public-benefit fee, the installation was unveiled on July 27, 2017, on the alley that hosted the first Up Your Alley fair in 1985.",
         place: "Ringold Alley",
         where: "Ringold St & 8th St",
         at: [-122.40915, 37.77433],
         source: "https://en.wikipedia.org/wiki/San_Francisco_South_of_Market_Leather_History_Alley",
+      },
+      {
+        icon: "shop",
+        title: "Western SoMa's main street",
+        text:
+          "San Francisco's planning code sets aside part of Folsom Street as a neighborhood commercial district and means Folsom to be the main street of Western SoMa, with businesses that serve the neighborhood. The street's first leather bar opened at 11th Street in 1966, and by the late 1970s Folsom was a leather “Miracle Mile” of more than 30 gay bars, shops and bathhouses. Today bars and nightclubs dot the four blocks of Folsom from Seventh to 11th Street, and 11th's block down to Harrison is packed with bars, restaurants, lounges and clubs.",
+        place: "Folsom Street shops and bars",
+        where: "Folsom St & 9th St",
+        at: [-122.41132, 37.77389],
+        source: "https://gocodebook.com/library/us/ca/san-francisco-planning/article-2.5-height-and-bulk-districts/sec.-261.-additional-height-limits-applicable-to-certain-rh-districts/sec.-261.2.-additional-height-limits-for-the-folsom-street-nct-district",
       },
       {
         icon: "flag",
@@ -1831,8 +1841,8 @@ export const NEIGHBORHOODS = {
         icon: "mayor",
         title: "City Hall's stand-in",
         text:
-          "Completed in 1912, this building served as San Francisco's temporary city hall; OpenSFHistory dates that role from 1912 to 1915, and Densho's encyclopedia says it briefly held the city jail as well. In 1917 it reopened as the Hotel Whitcomb.",
-        place: "Hotel Whitcomb",
+          "Completed in 1912, this building served as San Francisco's temporary city hall; OpenSFHistory dates that role from 1912 to 1915, and Densho's encyclopedia says it briefly held the city jail as well. In 1917 it reopened as a hotel.",
+        place: "Old temporary City Hall",
         where: "1231 Market St",
         at: [-122.41506, 37.77807],
         source: "https://en.wikipedia.org/wiki/Hotel_Whitcomb",
@@ -1840,11 +1850,11 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A flat loop of about 2.3 miles for visitors and would-be neighbors, starting and ending at Civic Center Station (BART and Muni Metro) on Market Street at 7th and 8th: down Sixth Street, along Folsom, Ringold and Harrison through the SoMa Pilipinas and Leather and LGBTQ cultural districts, and back up 10th Street to Market. Allow about an hour and 40 minutes with stops, and go in daylight so you can read the markers set along Ringold Alley.",
-      miles: 2.3,
-      minutes: 100,
+        "A flat loop of about 2.4 miles for visitors and would-be neighbors, starting and ending at Civic Center Station (BART and Muni Metro) on Market Street at 7th and 8th: down Sixth Street, along Folsom and Ringold Alley, back up to the bars and shops of Folsom Street and down 11th Street to Harrison, through the SoMa Pilipinas and Leather and LGBTQ cultural districts, then back along Harrison and up 10th Street to Market. Allow about an hour and 45 minutes with stops, and go in daylight so you can read the markers set along Ringold Alley.",
+      miles: 2.4,
+      minutes: 105,
       tip:
-        "The Ringold Alley bootprints run along the curb, so walk the alley end to end, from 8th Street to 9th, with your eyes down. From the Whitcomb, Civic Center Station is a short walk back up Market Street.",
+        "The Ringold Alley bootprints run along the curb, so walk the alley end to end, from 8th Street to 9th, with your eyes down, then turn up 9th Street to Folsom. From the old temporary City Hall, Civic Center Station is a short walk back up Market Street.",
     },
     restaurants: [
       { name: "Yank Sing", address: "101 Spear St (Rincon Center)", phone: "(415) 781-1111", url: "https://yanksing.com" },
@@ -1881,16 +1891,6 @@ export const NEIGHBORHOODS = {
       "Presidio Heights grew up along the low stone wall that marks the Presidio's southern edge, and the cable cars arrived early: on May 30, 1879, the California Street line opened its extension west from Fillmore Street to Central Avenue, today's Presidio Avenue. In 1895 the Rev. Joseph Worcester's Swedenborgian congregation opened a small church at Lyon and Washington streets that the National Park Service calls one of the West Coast's earliest expressions of the Arts and Crafts movement. In 1901 Ernest Coxhead designed a Shingle Style house for Julian Waybur on the wedge of Pacific Avenue that the wall pinches to a point at Walnut Street.\n\nGrander houses followed. From 1902 to 1904 Marcus and Corinne Koshland built a copy of Versailles' Petit Trianon at Washington and Maple streets and opened it with a Marie Antoinette costume ball. In 1909 Morris Meyerfeld, president of the Orpheum theater circuit, gave his daughter Elizabeth and her husband, Leon Roos, a Tudor Revival house by Bernard Maybeck on Jackson Street. On Sacramento Street a movie house called the Elite opened around 1910; it has been the Vogue since the late 1930s.\n\nIn the 1950s the cable cars were cut back to Van Ness Avenue, and preservation became the next chapter: the Roos House became city Landmark No. 56 in 1973, the Koshland house No. 95 in 1977, and the Swedenborgian church a National Historic Landmark in 2004. In 2019 the city renamed the playground it runs just inside the wall, dropping congressman Julius Kahn's name, and today a stretch of West Pacific Avenue, the road inside the wall, is closed to cars.",
     facts: [
       {
-        icon: "movie",
-        title: "A movie house since about 1910",
-        text:
-          "This single-screen theater opened around 1910 as the Elite, though the city's landmark resolution dates its construction to about 1912. It became the Rex in 1919 and the Plaza by 1932, then reopened as the Vogue in the late 1930s. In 2007 the nonprofit San Francisco Neighborhood Theater Foundation bought it to keep it running; its marquee and neon signs were restored in 2025, and in 2026 the Board of Supervisors began the process of making it a city landmark, calling it one of San Francisco's oldest surviving cinemas.",
-        place: "Vogue Theatre",
-        where: "3290 Sacramento St",
-        at: [-122.44680, 37.78845],
-        source: "https://media.api.sf.gov/documents/r0176-26.pdf",
-      },
-      {
         icon: "church",
         title: "Madrone logs hold up the roof",
         text:
@@ -1924,7 +1924,7 @@ export const NEIGHBORHOODS = {
         icon: "road",
         title: "The gate's missing capstone",
         text:
-          "The U.S. Army put up this gate on the Presidio's southern edge in 1896. In the 1990s a truck knocked a capstone off one of its piers, and the stone sat in storage in the Marin Headlands until 2008, when the Presidio Trust had the stone carvers of Stonesculpt repair the cracked piers, recarve lost details from old photographs and put the capstone back on the southwest pier. The roughly $100,000 job won a California Preservation Foundation award in 2009.",
+          "The U.S. Army put up this gate on the Presidio's southern edge in 1896. In the 1990s a truck knocked a capstone off one of its piers, and the stone sat in storage in the Marin Headlands until 2008, when the Presidio Trust had stone carvers repair the cracked piers, recarve lost details from old photographs and put the capstone back on the southwest pier. The roughly $100,000 job won a California Preservation Foundation award in 2009.",
         place: "Arguello Gate",
         where: "Arguello Blvd & Jackson St",
         at: [-122.45930, 37.78945],
@@ -1950,12 +1950,22 @@ export const NEIGHBORHOODS = {
         at: [-122.44807, 37.79178],
         source: "https://noehill.com/SF/LANDMARKS/poi_presidio_wall.asp",
       },
+      {
+        icon: "shop",
+        title: "Five blocks of shops",
+        text:
+          "The city's planning code calls Sacramento Street's five blocks from Lyon Street west to Spruce Street, with this corner near their middle, a small-scale linear shopping strip, its daytime-oriented stores interspersed among homes and garages and offering convenience goods to the immediate neighborhood. Cable cars once ran along it: the Sacramento-Clay cable line, whose western end was at Walnut Street, was extended in February 1894 along Lake Street and Sixth Avenue to the Midwinter Fair in Golden Gate Park, and in 1904 the stretch west of Walnut was turned over to electric trolleys. Today home-decor shops, fashion boutiques and restaurants share the street.",
+        place: "Sacramento Street shops",
+        where: "Sacramento St & Laurel St",
+        at: [-122.45020, 37.78764],
+        source: "https://sfbos.org/sites/default/files/o0023-17.pdf",
+      },
     ],
     walk: {
       intro:
-        "A loop of about 2.2 miles for visitors and would-be neighbors from the 1, 2 and 43 buses at California St & Presidio Ave: past the Vogue and the Swedenborgian church, west along Jackson and Washington streets to the Arguello Gate, then back east inside the Presidio on West Pacific Avenue, a stretch closed to cars, leaving by the Presidio Avenue gate beside the shingled houses of Pacific Avenue. Allow about 90 minutes and pick a dry day for the stretch inside the wall; the 43 stops a block south at Presidio Ave & Jackson St.",
-      miles: 2.2,
-      minutes: 90,
+        "A walk of about 2.4 miles for visitors and would-be neighbors from the 1, 2 and 43 buses at California St & Presidio Ave: up to the Swedenborgian church, west along Jackson and Washington streets to the Arguello Gate, then back east inside the Presidio on West Pacific Avenue, a stretch closed to cars, leaving by the Presidio Avenue gate beside the shingled houses of Pacific Avenue. From there head down Presidio Avenue and west along the shops of Sacramento Street to Laurel Street, a block north of the 1's stop at California St & Laurel St. Allow about 95 minutes and pick a dry day for the stretch inside the wall; the 43 also stops at Presidio Ave & Jackson St, a block south of the gate.",
+      miles: 2.4,
+      minutes: 95,
       tip:
         "Near the east end of West Pacific Avenue, where it meets Presidio Boulevard just before the gate, look for Andy Goldsworthy's Wood Line (2011), eucalyptus branches laid in a long, sinuous curve through a grove just off Lovers' Lane; it is free and open to the public. The houses on this walk are private, so enjoy them from the sidewalk.",
     },
@@ -1992,6 +2002,16 @@ export const NEIGHBORHOODS = {
     history:
       "The Spanish reportedly called it Loma Alta, the high hill, and early San Franciscans knew it by other names, Goat Hill among them. The name that stuck came in September 1849, when a semaphore station went up on the summit, its arms signaling to the merchants, wholesalers and speculators below what kind of ship was entering the Golden Gate.\n\nSailing ships that brought cargo to San Francisco needed ballast to leave, and rock for it was quarried from the hill's bay side. From their quarry at Green and Sansome streets, the Gray brothers kept blasting into the eastern face: in January 1894 one explosion set off a rockslide that crushed a duplex on Vallejo Street, and in 1895 a judge permanently barred them from blasting on the hill, yet they carried on. Around 1900 George Gray argued that cutting Telegraph Hill down would give the east side of Russian Hill a magnificent marine view. The digging ended only in 1914, when a worker who could not collect his back wages shot and killed him.\n\nBy 1906 the slopes were a working-class quarter of Irish and Italian immigrants. In that year's fire, residents fought the flames with water they had saved and with wine fermenting in Italian families' basements, and some of their simple cottages were among the few buildings the fire spared. For decades afterward the hill remained an isolated neighborhood of working-class immigrants and artists, and in 1933 Coit Tower rose on its summit. In 2003 Judy Irving's documentary The Wild Parrots of Telegraph Hill made famous the flock of cherry-headed conures, descended from escaped or abandoned pets, that roams the hill.",
     facts: [
+      {
+        icon: "shop",
+        title: "Where the Beats hung out",
+        text:
+          "The North Beach commercial district runs up Grant Avenue for four blocks, from Broadway to Filbert Street, and its last block, between Union and Filbert, lies on Telegraph Hill's edge; the street was Dupont Street until 1908, when the city extended the Grant Avenue name north of Bush Street. In the 1950s a bar on upper Grant hosted Beat poetry readings and jazz jam sessions, and a coffeehouse at Grant and Green was another Beat hangout. Today shops, cafés, bars and restaurants fill its small storefronts, with homes on the floors above.",
+        place: "Upper Grant Avenue shops",
+        where: "Grant Ave & Union St",
+        at: [-122.40750, 37.80068],
+        source: "https://www.sfchronicle.com/bayarea/article/The-life-and-times-of-North-Beach-s-renowned-11010424.php",
+      },
       {
         icon: "quake",
         title: "Saved with wine-soaked burlap",
@@ -2055,9 +2075,9 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A short stair-climbing line for visitors and would-be neighbors, from the 39 Coit bus stop at Union St & Montgomery St (the 8, 30 and 45 run along Columbus Ave a few blocks west), down the Filbert Steps past Napier Lane to Sansome Street and back up the Greenwich Steps to Coit Tower and Pioneer Park. Allow about 45 minutes, more to see the tower's murals, and pick a clear morning for the view from the top.",
-      miles: 0.6,
-      minutes: 45,
+        "A short stair-climbing line for visitors and would-be neighbors, starting a block east of Washington Square: walk down the shops of Grant Avenue from Filbert Street to the 39 Coit bus stop at Union Street (the 8, 30 and 45 stop at Columbus Ave and Union St, two blocks west), climb Union Street to Montgomery Street, then go down the Filbert Steps past Napier Lane to Sansome Street and back up the Greenwich Steps to Coit Tower and Pioneer Park. Allow about an hour, more to see the tower's murals, and pick a clear morning for the view from the top.",
+      miles: 0.8,
+      minutes: 60,
       tip:
         "Save your legs for the end: from Sansome Street the Greenwich Steps climb to Montgomery Street beside Julius' Castle, then resume in brick up to Pioneer Park and Coit Tower. From the stops on Telegraph Hill Blvd at Greenwich St, the 39 Coit runs back down to Washington Square.",
     },
@@ -2154,7 +2174,7 @@ export const NEIGHBORHOODS = {
       miles: 1.1,
       minutes: 60,
       tip:
-        "A construction project has limited parking and closed parts of China Beach, so check the Park Service's alerts before you go; from the lot, steep stairs or a gentler service road to the right lead down to the sand. The houses along El Camino del Mar are private, so enjoy them from the sidewalk.",
+        "A construction project has limited parking and closed parts of China Beach, so check the Park Service's alerts before you go; from the lot, steep stairs or a gentler service road to the right lead down to the sand. The houses along El Camino del Mar are private, so enjoy them from the sidewalk. For coffee or a meal, the shops and restaurants of the Outer Clement Street commercial district are under half a mile south of the starting corner, down 25th Avenue.",
     },
     nearby: ["the Inner Richmond"],
     restaurants: [
@@ -2190,7 +2210,7 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Lake District",
     history:
-      "Lake Street runs west from Arguello Boulevard past Mountain Lake, where Juan Bautista de Anza's party camped on March 27–28, 1776, while choosing sites for the Presidio and the mission; this neighborhood is its stretch west of Park Presidio Boulevard. The Presidio next door was sandy dune country until the Army planted it: in 1883 Maj. William A. Jones proposed a forest that would make the post look far larger than it was, and the first trees, donated by Adolph Sutro, went in on Arbor Day 1886. By the late 1880s a steam train ran out California Street toward Land's End; in 1905 electric streetcars of the new 1 Sutter-California line replaced it.\n\nIn 1903 the city paid $360,000 for the strip that became Park Presidio Boulevard to extend Golden Gate Park, and after the 1906 earthquake and fire, the refugee cottages of Camp Richmond lined it. In 1932 a Colonial Revival campus centered on a six-story hospital replaced the U.S. Public Health Service's original buildings at the north end of 15th Avenue; the hospital closed in 1981 and reopened as apartments in 2010. In the late 1930s Park Presidio was widened as the Highway 1 approach to the new Golden Gate Bridge.\n\nA 2012 city evaluation found a 1905 house at 1650 Lake Street individually eligible for the California Register, and in March 2020 neighbors applied to create a Lake Street Landmark District, an application planners called incomplete that June. Lake Street became a pandemic Slow Street, and on December 6, 2022, it was among the 16 initial corridors of the city's ongoing program. Its average daily traffic fell from 5,310 vehicles beforehand to 820 in 2023.",
+      "Lake Street runs west from Arguello Boulevard past Mountain Lake, where Juan Bautista de Anza's party camped on March 27–28, 1776, while choosing sites for the Presidio and the mission; this neighborhood is its stretch west of Park Presidio Boulevard. The Presidio next door was sandy dune country until the Army planted it: in 1883 Maj. William A. Jones proposed a forest that would make the post look far larger than it was, and the first trees, donated by Adolph Sutro, went in on Arbor Day 1886. By the late 1880s a steam train ran out California Street toward Land's End; in 1905 electric streetcars of the new 1 Sutter-California line replaced it.\n\nIn 1903 the city paid $360,000 for the strip that became Park Presidio Boulevard to extend Golden Gate Park, and after the 1906 earthquake and fire, the refugee cottages of Camp Richmond lined it. In 1932 a Colonial Revival campus centered on a new hospital replaced the U.S. Public Health Service's original buildings at the north end of 15th Avenue; the hospital closed in 1981 and reopened as apartments in 2010. In the late 1930s Park Presidio was widened as the Highway 1 approach to the new Golden Gate Bridge.\n\nA 2012 city evaluation found a 1905 house at 1650 Lake Street individually eligible for the California Register, and in March 2020 neighbors applied to create a Lake Street Landmark District, an application planners called incomplete that June. Lake Street became a pandemic Slow Street, and on December 6, 2022, it was among the 16 initial corridors of the city's ongoing program. Its average daily traffic fell from 5,310 vehicles beforehand to 820 in 2023.",
     facts: [
       {
         icon: "road",
@@ -2206,7 +2226,7 @@ export const NEIGHBORHOODS = {
         icon: "house",
         title: "A hospital turned apartments",
         text:
-          "Walk a short block north to where 15th Avenue ends at the Presidio's old Public Health Service District: in 1932 a Colonial Revival campus designed by Treasury architect James Wetmore replaced the original buildings there, with a six-story hospital at its center. The hospital closed abruptly in 1981 and sat vacant for years; in 2009 the Presidio Trust removed the wings added in the 1950s, and the next year the main building, the Presidio's largest historic building, reopened as the Presidio Landmark apartments.",
+          "Walk a short block north to where 15th Avenue ends at the Presidio's old Public Health Service District: in 1932 a Colonial Revival campus designed by Treasury architect James Wetmore replaced the original buildings there, with a new hospital at its center. The hospital closed abruptly in 1981 and sat vacant for years; in 2009 the Presidio Trust removed the wings added in the 1950s, and the next year the main building, the Presidio's largest historic building, reopened as apartments.",
         place: "Public Health Service Hospital",
         where: "15th Ave & Lake St",
         at: [-122.47441, 37.78625],
@@ -2246,7 +2266,7 @@ export const NEIGHBORHOODS = {
         icon: "tram",
         title: "Steam trains to Land's End",
         text:
-          "By the late 1880s, cable cars from the Ferry Building ran to Presidio Avenue and California Street, and from there a steam train of the Ferries and Cliff House Railway carried riders out California Street, past this corner, to 33rd Avenue, then turned north along the cliffs above the Golden Gate, ending steps from Sutro Heights, Sutro Baths and the Cliff House. In 1905 the United Railroads replaced the steam train with electric streetcars, which began running on the new 1 Sutter-California line on May 27 of that year; Muni's 1 California still stops at this corner.",
+          "By the late 1880s, cable cars from the Ferry Building ran to Presidio Avenue and California Street, and from there a steam train of the Ferries and Cliff House Railway carried riders out California Street, past this corner, to 33rd Avenue, then turned north along the cliffs above the Golden Gate, ending steps from Sutro Heights and Sutro Baths. In 1905 the United Railroads replaced the steam train with electric streetcars, which began running on the new 1 Sutter-California line on May 27 of that year; Muni's 1 California still stops at this corner.",
         place: "California Street line",
         where: "California St & 25th Ave",
         at: [-122.48503, 37.78384],
@@ -2297,20 +2317,20 @@ export const NEIGHBORHOODS = {
       "Alamo Square takes its name from the álamo, Spanish for poplar: a lone cottonwood on the hill marked a watering hole on the horseback trail between Mission Dolores and the Presidio. After the Van Ness Ordinance of 1855 laid out the Western Addition west to Divisadero Street, then the city's western edge, Mayor James Van Ness set aside 12.7 acres on the hill in 1856 for a public square. Taking possession took longer: Charles “Dutch Charley” Duane, a onetime fire chief twice banished by the city's vigilance committees, squatted on the hilltop until the city ousted him in 1868. Grading began in 1892, and by 1896 the park had curving paths, stairways and a masonry wall.\n\nThe blocks around it filled between 1870 and 1929 with Italianate, Queen Anne and Classical Revival houses, many of them designed by architects for owners who were mostly moderately successful businessmen. Confectioner William Westerfeld's mansion went up in 1889, developer Matthew Kavanaugh's row on Steiner Street between 1892 and 1896, and Archbishop Patrick Riordan's residence in 1904. In April 1906 the fires stopped at Laguna Street, a few blocks east, and the neighborhood was spared.\n\nLater, as owners moved away, entrepreneurs carved many of the big houses into rooming houses, and redevelopment in the nearby Fillmore planned the demolition of some 2,500 Victorians. Neighbors who fought a 1963 city plan to level the hilltop for playing fields formed the Alamo Square Neighborhood Association, which also fought a freeway planned through the Panhandle. In July 1984 the city made the blocks from Golden Gate Avenue to Fell Street, between Divisadero and Webster, a historic district.",
     facts: [
       {
-        icon: "music",
-        title: "The Dead played this movie house",
+        icon: "shop",
+        title: "A cable car street of shops",
         text:
-          "The Harding Theater opened on April 8, 1926, with Colleen Moore in Irene, in a building by the Reid Brothers, the firm behind the Fairmont Hotel and the 1909 Cliff House. It staged everything from vaudeville and silent films to concerts by Curtis Mayfield, and in the late 1960s and early 1970s the Grateful Dead and Big Brother and the Holding Company played here. It became a church in the 1970s, stood empty after the congregation moved out in 2004, and reopened in late 2017 as a four-level arcade bar whose balcony looks down on the original stage.",
-        place: "Harding Theater",
-        where: "616 Divisadero St",
-        at: [-122.43758, 37.77522],
-        source: "https://en.wikipedia.org/wiki/Harding_Theater",
+          "City zoning makes Divisadero a neighborhood commercial district for 12 blocks, from Haight Street north to O'Farrell Street, with this corner at the midpoint; the walk from Hayes Street covers two of them. Cable cars running along the street brought the traffic that made it a busy shopping strip as the blocks around it grew into a streetcar suburb from the 1870s on. Its restaurant scene took off in the mid-2000s, when the street was better known for its mechanics and corner stores, and today restaurants, bars, grocers and other shops line it.",
+        place: "Divisadero Street shops",
+        where: "Divisadero St & Fulton St",
+        at: [-122.43803, 37.77670],
+        source: "https://en.wikipedia.org/wiki/Divisadero_Street",
       },
       {
         icon: "house",
         title: "The house called the Russian Embassy",
         text:
-          "Architect Henry Geilfuss designed this house, finished in 1889, for William Westerfeld, a German-born baker and confectioner who ran a confectionery on Market Street. From the late 1920s Czarist Russian émigrés ran a nightclub called Dark Eyes in its ground-floor ballroom and met in the rooms upstairs, making it an informal “Russian Embassy”; after it became apartments in 1948, jazz musicians playing the nearby clubs moved in, saxophonist John Handy among them. Experimental filmmaker Kenneth Anger later lived here and used the house as a movie set.",
+          "Architect Henry Geilfuss designed this house, finished in 1889, for William Westerfeld, a German-born baker and confectioner who ran a confectionery on Market Street. From the late 1920s Czarist Russian émigrés ran a nightclub in its ground-floor ballroom and met in the rooms upstairs, making it an informal “Russian Embassy”; after it became apartments in 1948, jazz musicians playing the nearby clubs moved in, saxophonist John Handy among them. Experimental filmmaker Kenneth Anger later lived here and used the house as a movie set.",
         place: "Westerfeld House",
         where: "1198 Fulton St",
         at: [-122.43639, 37.77722],
@@ -2359,7 +2379,7 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A short one-way walk for visitors and would-be neighbors: start at the Divisadero & Hayes stop for the 6 and 24 buses beside the Harding Theater, climb Scott Street along the park to the landmark houses on Fulton Street, come down Steiner Street past the Painted Ladies and finish on the hilltop, a short stroll from the 6 stop at Hayes & Pierce. Allow about 45 minutes for three-quarters of a mile; a clear afternoon is best.",
+        "A short one-way walk for visitors and would-be neighbors: from the Divisadero & Hayes stop for the 6 and 24 buses, head two blocks north past the shops and restaurants of Divisadero Street to Fulton Street, walk east on Fulton to the landmark houses at Scott and Steiner streets, come down Steiner Street past the Painted Ladies and finish on the hilltop, a short stroll from the 6 stop at Hayes & Pierce. Allow about 45 minutes for three-quarters of a mile; a clear afternoon is best.",
       miles: 0.75,
       minutes: 45,
       tip:
@@ -2600,10 +2620,10 @@ export const NEIGHBORHOODS = {
         icon: "shopping",
         title: "Designed by the Twin Towers' architect",
         text:
-          "The Japanese Cultural and Trade Center, now Japan Center, opened in March 1968. Minoru Yamasaki, also the designer of New York's World Trade Center towers, planned it with the local firm Van Bourg-Nakamura Associates, combining shops and restaurants in an interior mall with a hotel and a theater, most of it over underground parking. Across its bridge over Webster Street, Kinokuniya's bookstore, opened in 1969, was the chain's first in the United States.",
-        place: "Japan Center",
-        where: "1581 Webster St",
-        at: [-122.43135, 37.78500],
+          "The Japanese Cultural and Trade Center, now Japan Center, opened in March 1968 on blocks cleared by redevelopment. Minoru Yamasaki, also the designer of New York's World Trade Center towers, planned it with the local firm Van Bourg-Nakamura Associates, combining shops and restaurants in an interior mall with a hotel and a theater, most of it over underground parking. Today it covers the blocks between Fillmore and Laguna streets, from Post Street to Geary, and its three mall buildings hold Japanese restaurants, bookstores, skincare and beauty shops, and shops selling ceramics, cast-iron ware, anime and manga.",
+        place: "Japan Center malls",
+        where: "Post St & Webster St",
+        at: [-122.43144, 37.78535],
         source: "https://en.wikipedia.org/wiki/Japan_Center_(San_Francisco)",
       },
       {
@@ -2669,7 +2689,7 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A short one-way walk for visitors and would-be neighbors: start at the 38 Geary and 38R stop at Geary & Webster, cut through Japan Center to Peace Plaza, then follow the Buchanan Street mall north, Sutter Street west to Cottage Row and Bush Street back east to the old Bush Street Temple, a block from the 2 bus at Sutter & Laguna. Allow about 45 minutes for 0.7 mile; a weekday late morning is calmest.",
+        "A short one-way walk for visitors and would-be neighbors: start at the 38 Geary and 38R stop at Geary & Webster, walk up Webster Street to Post and through Japan Center's malls to Peace Plaza, then follow the Buchanan Street mall north, Sutter Street west to Cottage Row and Bush Street back east to the old Bush Street Temple, a block from the 2 bus at Sutter & Laguna. Allow about 45 minutes for 0.7 mile; a weekday late morning is calmest.",
       miles: 0.7,
       minutes: 45,
       tip:
@@ -2712,14 +2732,14 @@ export const NEIGHBORHOODS = {
       "The name is literal. The Western Addition was the grid San Francisco added west of Larkin Street, its old western boundary: the Van Ness Ordinance of 1855 settled land titles there, reserved land for the city and approved a map of new blocks, and the name came to cover some 500 blocks out to Divisadero Street. Victorian houses and flats filled those blocks.\n\nIn 1942 Executive Order 9066 sent the district's Japanese American families to incarceration camps, and Black workers recruited for the Bay Area shipyards, many from Texas and Louisiana, moved into the emptied homes. The Fillmore became the “Harlem of the West,” where you could hear jazz, blues and R&B at dozens of clubs. Bop City, which grew out of Slim Gaillard's short-lived Vout City in 1949, soon became, as pianist Frank Jackson recalled, the after-hours spot, where touring players such as Charlie Parker and John Coltrane sat in at the jam sessions in Jimbo Edwards's back room.\n\nThen came “urban renewal,” touted as blight removal. The Redevelopment Agency's A-2 project alone covered nearly 60 square blocks and affected more than 13,000 Fillmore residents. In 2008, as the agency prepared to leave the Western Addition the next January after 40 years, city officials counted 883 businesses shuttered, 4,729 households forced out and roughly 2,500 Victorians demolished. A few houses were saved by trucking them to new lots, and in the mid-1990s the agency itself created the Fillmore Jazz Preservation District, a dining and entertainment destination meant to draw visitors back.",
     facts: [
       {
-        icon: "music",
-        title: "The promoter before Bill Graham",
+        icon: "house",
+        title: "A street of rescued houses",
         text:
-          "The hall opened in 1912 as the Majestic Hall and Academy of Dancing, and in 1954 promoter Charles Sullivan took a lease on it and renamed it the Fillmore Auditorium. When Bill Graham staged a San Francisco Mime Troupe benefit here on December 10, 1965, he used Sullivan's permit, then kept booking shows on nights Sullivan wasn't using the hall. Sullivan was shot to death on Bluxome Street in August 1966, a murder that remains unsolved; the hall, damaged in the 1989 Loma Prieta earthquake, reopened on April 27, 1994.",
-        place: "Fillmore Auditorium",
-        where: "1805 Geary Blvd",
-        at: [-122.43313, 37.78410],
-        source: "https://pcad.lib.washington.edu/building/1757",
+          "In the early 1970s San Francisco Heritage and the Redevelopment Agency picked 12 Victorians in the agency's clearance area to save if they could be sold and moved, and Heritage bought all 12 at public auction. Most were trucked here in November 1974, and the Chronicle counts ten homes in the Beideman Place historic district. The Italianate at 33–35 made the longest move, about 18 blocks from 736–738 Franklin Street, and 43–45 came from 848 Octavia Street.",
+        place: "Beideman Place",
+        where: "33 Beideman St",
+        at: [-122.43860, 37.78203],
+        source: "https://www.sfchronicle.com/totalsf/article/victorian-homes-tour-sf-19722418.php",
       },
       {
         icon: "pin",
@@ -2732,20 +2752,20 @@ export const NEIGHBORHOODS = {
         source: "https://theclio.com/entry/38287",
       },
       {
-        icon: "house",
-        title: "A street of rescued houses",
+        icon: "shop",
+        title: "Nine blocks of storefronts",
         text:
-          "In the early 1970s San Francisco Heritage and the Redevelopment Agency picked 12 Victorians in the agency's clearance area to save if they could be sold and moved, and Heritage bought all 12 at public auction. Most were trucked here in November 1974, and the Chronicle counts ten homes in the Beideman Place historic district. The Italianate at 33–35 made the longest move, about 18 blocks from 736–738 Franklin Street, and 43–45 came from 848 Octavia Street.",
-        place: "Beideman Place",
-        where: "33 Beideman St",
-        at: [-122.43860, 37.78203],
-        source: "https://www.sfchronicle.com/totalsf/article/victorian-homes-tour-sf-19722418.php",
+          "City zoning sets aside nine blocks of Fillmore Street, from Bush Street south to McAllister, as a neighborhood commercial district with housing over ground-floor shops; this walk follows the six blocks below Geary. After the 1906 earthquake the first streetcar line back in service ran on Fillmore, and City Hall and most of the big Market Street department stores moved to the street while downtown rebuilt. Today restaurants, bars and music venues cluster in the blocks just south of Geary, where sidewalk pavers are engraved with the names of jazz greats and the clubs of the Fillmore’s “Harlem of the West” years.",
+        place: "Fillmore Street shops and restaurants",
+        where: "Fillmore St & O'Farrell St",
+        at: [-122.43267, 37.78310],
+        source: "https://www.sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances15/o0126-15.pdf",
       },
       {
         icon: "music",
         title: "A jazz club's long intermission",
         text:
-          "Opened in 2007 as one of the last projects of the Western Addition redevelopment program, this $80.5 million public-private complex has 80 condominiums and about 50,000 square feet of commercial space, once anchored by Yoshi's, a 28,000-square-foot jazz club. Yoshi's closed in 2014 and the space has sat largely dark since; in 2026 the city reopened it, free to community groups, for short-term programming through December while it studies the building's future.",
+          "Opened in 2007 as one of the last projects of the Western Addition redevelopment program, this $80.5 million public-private complex has 80 condominiums and about 50,000 square feet of commercial space, once anchored by a 28,000-square-foot jazz club. The club closed in 2014 and the space has sat largely dark since; in 2026 the city reopened it, free to community groups, for short-term programming through December while it studies the building's future.",
         place: "Fillmore Heritage Center",
         where: "1330 Fillmore St",
         at: [-122.43205, 37.78192],
@@ -2784,11 +2804,11 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A one-way walk of about 1.5 miles for visitors and would-be neighbors, from the Fillmore Auditorium at Geary Blvd & Fillmore St (22 Fillmore and 38 Geary buses) west along Geary to Beideman Place, back east along Eddy St to the old jazz blocks of Fillmore Street, and on past the community and cultural centers to Bethel AME near Laguna & McAllister, where the 5 Fulton stops. Allow about 70 minutes; the grades are gentle, and a weekday afternoon is a good time.",
-      miles: 1.5,
-      minutes: 70,
+        "A one-way walk of about 1.4 miles for visitors and would-be neighbors, from Beideman Place, a short walk from the 31 Balboa stop at Eddy & Scott, north to Geary Blvd and east to the Peoples Temple site, then south down the shops and old jazz blocks of Fillmore Street and on past the community and cultural centers to Bethel AME near Laguna & McAllister, where the 5 Fulton stops. Allow about 65 minutes; the grades are gentle, and a weekday afternoon is a good time.",
+      miles: 1.4,
+      minutes: 65,
       tip:
-        "From the Peoples Temple site, follow Geary west to Scott St and walk south to Ellis St for Beideman Place; afterward Eddy St, a block farther south, runs straight east to Fillmore St. Check what's open before you go: the Heritage Center's community programming is a city pilot through December 2026, and the Art & Culture Complex faces a multiyear renovation. At the end, the 5 and 5R at McAllister & Laguna run back downtown.",
+        "From the 31 Balboa stop at Eddy & Scott, walk a block north on Scott St and turn west on Ellis St for Beideman Place; afterward return to Scott St, follow it north to Geary Blvd and Geary east past the Peoples Temple site to Fillmore St, then walk south on Fillmore. Check what's open before you go: the Heritage Center's community programming is a city pilot through December 2026, and the Art & Culture Complex faces a multiyear renovation. At the end, the 5 and 5R at McAllister & Laguna run back downtown.",
     },
     restaurants: [
       { name: "State Bird Provisions", address: "1529 Fillmore St", phone: "(415) 795-1272", url: "https://www.statebirdsf.com" },
@@ -2848,11 +2868,11 @@ export const NEIGHBORHOODS = {
         icon: "shopping",
         title: "Named for the cemetery",
         text:
-          "When the cleared cemetery land was built up after World War II, the new neighborhood was called Laurel Heights in a nod to Laurel Hill, and this California Street shopping strip between Laurel and Spruce streets became Laurel Village. A 1951 photograph in the Western Neighborhoods Project's archive shows the future Laurel Village site still holding just one business, Roselli, at 3601 California.",
-        place: "Laurel Village",
+          "Laurel Village is the shopping center along two blocks of California Street, from Laurel Street west to Spruce, with this corner at its middle; when the cleared cemetery land was built up after World War II, the new neighborhood was called Laurel Heights in a nod to Laurel Hill, and this strip became Laurel Village. Its midcentury modern buildings date from 1948 through the 1950s, and a 1951 photograph shows the site still nearly vacant, with just one business. A supermarket, cafés and eateries, a hardware store, a pharmacy, boutiques and wellness studios fill its storefronts.",
+        place: "Laurel Village shops",
         where: "California St & Locust St",
         at: [-122.45170, 37.78640],
-        source: "https://newfillmore.com/?p=10590",
+        source: "https://couparconsulting.com/journal/weve-moved-coupar-on-sacramento-street",
       },
       {
         icon: "pin",
@@ -2887,11 +2907,11 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A one-way walk of about a mile for visitors and would-be neighbors, from the 1, 2 and 43 bus stops at California St & Presidio Ave west past the old Laurel Hill Cemetery grounds and Laurel Village, then by Mayfair Drive and Iris Avenue to Euclid Avenue and Jordan Park, ending on Geary Blvd near Arguello Blvd, where the 38 Geary and 33 buses stop. Allow about 45 minutes; a weekday late morning is calmest.",
+        "A one-way walk of about a mile for visitors and would-be neighbors, from the 1, 2 and 43 bus stops at California St & Presidio Ave west past the old Laurel Hill Cemetery grounds and the Laurel Village shops, then by Mayfair Drive and Iris Avenue to Euclid Avenue and Jordan Park, ending on Geary Blvd near Arguello Blvd, where the 38 Geary and 33 buses stop. Allow about 45 minutes; a weekday late morning is calmest.",
       miles: 1,
       minutes: 45,
       tip:
-        "Laurel Village, a third of the way along, is the walk's coffee and snack stop. At the end, the 38 and 38R Geary run east toward downtown and west toward the Outer Richmond.",
+        "The cafés of Laurel Village, a third of the way along, make the walk's coffee and snack stop. At the end, the 38 and 38R Geary run east toward downtown and west toward the Outer Richmond.",
     },
     restaurants: [
       { name: "Spruce", address: "3640 Sacramento St", phone: "(415) 931-5100", url: "https://www.sprucesf.com" },
@@ -2974,7 +2994,7 @@ export const NEIGHBORHOODS = {
       miles: 1,
       minutes: 60,
       tip:
-        "The wooden steps up Tank Hill leave Twin Peaks Boulevard near Clarendon Avenue, across from Crown Terrace, and another path drops from the top to the east end of Belgrave Avenue. At the end, the Greenbelt's 1880s trail climbs on toward Mount Sutro if you want more forest, and the 37 Corbett stops at 17th & Cole, a short walk east on 17th Street, for the ride back.",
+        "For coffee or a bite before you set out, Cole Valley's small business district, about three blocks of cafés, restaurants and shops on Cole Street and part of Carl Street, is centered a block north of the start at Carl & Cole. The wooden steps up Tank Hill leave Twin Peaks Boulevard near Clarendon Avenue, across from Crown Terrace, and another path drops from the top to the east end of Belgrave Avenue. At the end, the Greenbelt's 1880s trail climbs on toward Mount Sutro if you want more forest, and the 37 Corbett stops at 17th & Cole, a short walk east on 17th Street, for the ride back.",
     },
     nearby: ["Cole Valley", "the Haight"],
     restaurants: [
@@ -3081,12 +3101,22 @@ export const NEIGHBORHOODS = {
         at: [-122.43312, 37.78603],
         source: "https://www.sanfranciscostory.com/fillmore-arches/",
       },
+      {
+        icon: "shop",
+        title: "A zoning seam at Bush Street",
+        text:
+          "Bush Street is a seam in the city's zoning: Upper Fillmore's shopping district runs north from it, while these three blocks down to Geary Boulevard begin the Fillmore Street district that continues south to McAllister. City code describes a dense mix of apartments over ground-floor businesses, in buildings from one-story shops to high-rise towers, and in 2015 the supervisors, calling Fillmore and Geary important transit corridors, made it a transit district and lifted its caps on housing density. At this intersection, a corner building that was once a bank branch and later a thrift store now holds a restaurant.",
+        place: "Fillmore Street shops below Bush",
+        where: "Fillmore St & Post St",
+        at: [-122.43327, 37.78521],
+        source: "https://www.sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances15/o0126-15.pdf",
+      },
     ],
     walk: {
       intro:
-        "A loop of about 1.3 miles for visitors and would-be neighbors that starts and ends at Fillmore St & Geary Blvd, served by the 22 Fillmore and 38 Geary buses: west past Hamilton Recreation Center and Mount Zion, out Sutter and up Broderick to the Full House house, then east along Bush to St. Dominic's and back down Fillmore Street. Allow about an hour; the blocks are mostly gentle, and a weekday morning is calmest.",
+        "A loop of about 1.3 miles for visitors and would-be neighbors that starts and ends at Fillmore St & Geary Blvd, served by the 22 Fillmore and 38 Geary buses: west past Hamilton Recreation Center and Mount Zion, out Sutter and up Broderick to the Full House house, then east along Bush to St. Dominic's and back down three blocks of Fillmore Street shops. Allow a little over an hour; the blocks are mostly gentle, and a weekday morning is calmest.",
       miles: 1.3,
-      minutes: 60,
+      minutes: 65,
       tip:
         "Save your coffee or lunch for the last blocks of Fillmore Street. Over the Fourth of July weekend the free Fillmore Jazz Festival, billed as the West Coast's largest, fills Fillmore from Jackson to Eddy; in 2026 its Sutter Street stage was named for Miles Davis.",
     },
@@ -3124,6 +3154,16 @@ export const NEIGHBORHOODS = {
     history:
       "Buena Vista, Spanish for “good view,” is the hill at the eastern edge of the old Outside Lands, the ground beyond the city's 1851 charter limits, roughly west of Divisadero Street, where squatters' claims clouded titles for years. In 1867 the city reserved its hilltop as Hill Park, often called San Francisco's oldest official park, and paid squatters $88,250 to give up their claims to it. It was dedicated as Buena Vista Park in 1894.\n\nTransit and money then climbed the slopes. Cable cars began running out Haight Street to Stanyan in late 1883. In 1887 Adolph Sutro's statue, the Triumph of Light, was dedicated on Mount Olympus to the south; St. Joseph's Hospital was founded on the hill's east side in 1889; and in 1897 Richard Spreckels, of the sugar-refining family, built a house across from the park on Buena Vista Avenue West. After the 1906 earthquake, crowds spent five days on the summit watching the city burn. Around 1910 neighbors formed an improvement club, and the staircases, paths and tennis courts it won were dedicated in 1913.\n\nIn 1928 St. Joseph's opened a Spanish Renaissance Revival building that would later play the sanatorium in Hitchcock's Vertigo. In the mid-1930s WPA crews rebuilt the park's walls and gutters with broken headstones from the city's emptied Victorian cemeteries, and in the 1960s the Spreckels house's top floor held a recording studio where the Grateful Dead made early recordings. The hospital closed in 1979 and was converted into the Park Hill condominiums, and in 2026 the Board of Supervisors voted to make the Spreckels house a city landmark.",
     facts: [
+      {
+        icon: "shop",
+        title: "Where Divisadero's shops begin",
+        text:
+          "Divisadero's shopping strip starts at this end: city zoning makes the street a neighborhood commercial district for 12 blocks, from Haight Street north to O'Farrell Street, and this corner sits in the middle of its first two blocks, between Haight and Oak. Grocers, restaurants, bars and other shops line them, and the walk heads a block south past them to Haight Street.",
+        place: "Divisadero shops near Haight",
+        where: "Divisadero St & Page St",
+        at: [-122.43751, 37.77233],
+        source: "https://en.wikipedia.org/wiki/Divisadero_Street",
+      },
       {
         icon: "park",
         title: "Bought back from squatters",
@@ -3187,11 +3227,11 @@ export const NEIGHBORHOODS = {
     ],
     walk: {
       intro:
-        "A one-way walk of about 1.5 miles and 85 minutes with stops, for visitors and would-be neighbors: start at Haight Street and Buena Vista Avenue East (7 bus), follow Buena Vista Avenue West around the park past the Spreckels mansion and up Upper Terrace to Mount Olympus, then cut back through the park over the summit and down to Park Hill, beside a 37 Corbett stop. Go on a clear day, when the views from both hilltops are widest.",
-      miles: 1.5,
-      minutes: 85,
+        "A one-way walk of about 1.8 miles and 95 minutes with stops, for visitors and would-be neighbors: start on Divisadero Street at Page Street, between the 24 bus stops at Oak and Haight, walk a block south past the shops and two blocks west on Haight Street to the park at Buena Vista Avenue East, follow Buena Vista Avenue West around the park past the Spreckels mansion and up Upper Terrace to Mount Olympus, then cut back through the park over the summit and down to Park Hill, beside a 37 Corbett stop. Go on a clear day, when the views from both hilltops are widest.",
+      miles: 1.8,
+      minutes: 95,
       tip:
-        "The park's trails and stairs are steep and uneven, so wear shoes with grip; to finish where you started, Haight Street is about a 10-minute walk from Park Hill along Buena Vista Avenue East.",
+        "The park's trails and stairs are steep and uneven, so wear shoes with grip; to get back to Haight Street, it is about a 10-minute walk from Park Hill along Buena Vista Avenue East. For more shops, cafés and restaurants, the Haight Street commercial district starts across Central Avenue from the park's northwest corner and runs west to Stanyan Street.",
     },
     nearby: ["the Haight", "Cole Valley", "the Castro"],
     restaurants: [
