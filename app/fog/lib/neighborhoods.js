@@ -1603,39 +1603,97 @@ export const NEIGHBORHOODS = {
       "Steps from the Castro & Mission",
     ],
     history:
-      "Duboce Triangle is a small wedge of Victorian and Edwardian homes between the Castro, the Mission, and the Lower Haight, named for Duboce Avenue — itself honoring Victor Duboce, a San Francisco supervisor and Spanish-American War officer. Built up after 1900 and largely spared by the 1906 fire, it centers on Duboce Park and the streetcar portal where the N-Judah dives underground.",
+      "This wedge was once part of Sans Souci Valley, which carried storm runoff from Buena Vista Hill and Lone Mountain toward today's Duboce Park, along the route cyclists now call the Wiggle. The Van Ness Ordinance set the future park aside as a public reservation, an 1861 engineer's map labeled it “hospital site,” and the area began to develop in the 1860s as a prestigious rural exurb. In 1878 the German General Benevolent Society opened its new hospital on the block bounded by 14th, Ridley, Noe and Castro streets, and when cable car lines pushed up Market Street in the 1880s, merchant builders followed with rows of nearly identical Victorians.\n\nNo hospital ever rose on the reservation. After a court awarded parts of it to two claimants in the late 1880s, houses and flats went up on those lots, many by builder Fernando Nelson and most between 1899 and about 1905. Victor Duboce, an officer of the First California Volunteer Infantry in the Philippines who won a seat on the Board of Supervisors after coming home, died in August 1900; the supervisors renamed Ridley Street for him and made the rest of the reservation Duboce Park, whose name the neighborhood now shares. After the 1906 earthquake and fire, several dozen flats and apartment buildings followed.\n\nBy the 1960s the area had been labeled “blighted” and was threatened with redevelopment, but in the 1970s residents began renovating its older houses. The park and nearly 90 houses beside it became the Duboce Park Landmark District in 2013, and in March 2026 supervisors began landmarking an 1875 Greek Revival house on 15th Street and an 1892 row on Henry Street.",
     facts: [
       {
-        icon: "mayor",
-        title: "Named for a war hero",
+        icon: "house",
+        title: "A Stick-Eastlake row of 1892",
         text:
-          "Duboce Avenue and the neighborhood honor Victor Duboce, a city supervisor who commanded San Francisco's volunteer regiment in the Spanish-American War.",
+          "These rowhouses on the south side of Henry Street went up in 1892, as Duboce Triangle was turning from an exurb of large-lot Victorian villas into a middle-class neighborhood. On March 3, 2026, supervisors began making them a city landmark, and the designation ordinance calls them a rare Stick-Eastlake rowhouse with much of its original character intact: note the wooden ornament at the cornice and porches, the bay windows, the portico turret and the compound roof. They are private homes, so admire them from the sidewalk.",
+        place: "Henry Street Rowhouses",
+        where: "191-197 Henry St",
+        at: [-122.43528, 37.76656],
+        source: "https://media.api.sf.gov/documents/o0173-26.pdf",
+      },
+      {
+        icon: "pin",
+        title: "The German Hospital's block",
+        text:
+          "The German General Benevolent Society, formed in 1854 to serve German immigrants, lost its Brannan Street hospital to fire in 1876 and formally opened a new one on this block on February 22, 1878. A new hospital rose here between about 1905 and 1908, was renamed Franklin Hospital, for Benjamin Franklin, during World War I, became Ralph K. Davies Medical Center in 1968 and joined California Pacific Medical Center in 1998. Sutter Health credits the founder, Dr. Joseph N. Rausch, with proposing one of the country's first prepaid health plans.",
+        place: "CPMC Davies Campus",
+        where: "45 Castro St",
+        at: [-122.43521, 37.76824],
+        source: "https://www.sutterhealth.org/about/cpmc-history",
       },
       {
         icon: "tram",
-        title: "Where the N-Judah dives under",
+        title: "Where the N dives into the hill",
         text:
-          "At Duboce Park, the N-Judah Muni Metro plunges into the 1928 Sunset Tunnel through the Duboce Portal — a favorite trainspotting and dog-walking spot.",
-      },
-      {
-        icon: "dog",
-        title: "One of the city's best dog parks",
-        text:
-          "Duboce Park's off-leash meadow, ringed by Victorian flats and a community garden, is among the most beloved dog runs in San Francisco.",
+          "N Judah trains run along Duboce Avenue on the park's southern edge, then dive into the east portal of the Sunset Tunnel, originally the Duboce Tunnel, which opened to large crowds on October 21, 1928, with Mayor James Rolph leading a streetcar parade. The Duboce and Noe stop opened the same day, its two side platforms lining the park's south edge; 4,232 feet later, the trains come back into daylight near Carl and Cole streets.",
+        place: "Sunset Tunnel East Portal",
+        where: "Duboce Ave & Noe St",
+        at: [-122.43444, 37.76917],
+        source: "https://en.wikipedia.org/wiki/Sunset_Tunnel",
       },
       {
         icon: "art",
-        title: "America's oldest public darkroom",
+        title: "Renamed for Harvey Milk in 1978",
         text:
-          "The Harvey Milk Photo Center on the park's edge — founded in 1937 — is the oldest and largest public photography center and darkroom in the United States.",
+          "Built in 1954 at the park's Scott Street end, this building, commonly called “Drama, Dance & Music,” was headquarters of the Recreation and Park Department's Performing Arts Division. In December 1978, weeks after Supervisor Harvey Milk was killed, the Recreation and Park Commission approved renaming it for him. On its lower level, the Harvey Milk Photo Center traces its start to the city's first camera room, created in 1949 at the Hayes Valley Recreation Center, and settled here in 1954.",
+        place: "Harvey Milk Recreational Arts Center",
+        where: "50 Scott St",
+        at: [-122.43470, 37.76960],
+        source: "https://www.harveymilkphotocenter.org/?p=31",
+      },
+      {
+        icon: "park",
+        title: "A hospital site that became a park",
+        text:
+          "The Van Ness Ordinance set this ground aside as a public reservation, an 1861 engineer's map labeled it “hospital site,” and in the 1880s and ’90s it was leased to the San Francisco Female Hospital for a building that was never built. In the late 1880s a district court awarded parts of it to two claimants, which gave the park its irregular shape and opened lots for the houses along its north side. The park and nearly 90 of those houses became the Duboce Park Landmark District in 2013.",
+        place: "Duboce Park",
+        where: "Duboce Ave & Steiner St",
+        at: [-122.43230, 37.76955],
+        source: "https://friendsofdubocepark.org/about-us/history-of-duboce-park/",
+      },
+      {
+        icon: "road",
+        title: "A 340-foot ride to the ocean",
+        text:
+          "Mona Caron's first mural, unveiled on November 21, 1998, runs about 340 feet along the back wall of the Market Street Safeway beside the Duboce Bikeway, which her site calls the first stretch of San Francisco street converted from car use to bicycle and pedestrian use; city planner Peter Tannen wrote a mural into the bikeway's budget. The 6,000-square-foot painting follows a virtual ride from downtown to Ocean Beach, past the Wiggle and Golden Gate Park, and paints the Wiggle as a waterway, a nod to the creek that once ran down its canyon.",
+        place: "Duboce Bikeway Mural",
+        where: "Duboce Ave & Church St",
+        at: [-122.42880, 37.76932],
+        source: "https://monacaron.com/murals/making-and-unveiling-duboce-bikeway-mural",
+      },
+      {
+        icon: "music",
+        title: "Odin and Freja on Market Street",
+        text:
+          "After the 1906 earthquake and fire destroyed Scandia Hall, its earlier meeting place, the Swedish Society of San Francisco bought this lot in July 1906, and Swedish-born architect August Nordin designed the combined social hall and commercial building it finished in 1907. Its lodge rooms take their names from Norse mythology, among them Odin, Freja, Balder and Valhalla, and Café du Nord opened in its basement in 1908. The city made it Landmark No. 267 in 2015 and unveiled the first of its new landmark plaques here on May 11, 2017.",
+        place: "Swedish American Hall",
+        where: "2168-2174 Market St",
+        at: [-122.43049, 37.76672],
+        source: "https://npgallery.nps.gov/GetAsset/c1fbd798-b200-4766-816d-60cecbbf4934",
       },
       {
         icon: "house",
-        title: "Pre-quake Victorians intact",
+        title: "Greek Revival, from 1875",
         text:
-          "Spared major 1906 fire damage, the triangle keeps a dense, intact stock of pre-earthquake Victorian and Edwardian homes on its quiet, leafy blocks.",
+          "Built in 1875, before cable cars brought the neighborhood its rows of Victorians in the 1880s, this house is in the Greek Revival style, a pre-Victorian form that supervisors' March 2026 landmark resolution calls rare in San Francisco. The city's Duboce Triangle historic context statement had already found it eligible to be a city landmark. It is a private home, so view it from the sidewalk.",
+        place: "Duboce Triangle Greek Revival Home",
+        where: "2173 15th St",
+        at: [-122.43263, 37.76570],
+        source: "https://www.sfbos.org/sites/default/files/r0097-26.pdf",
       },
     ],
+    walk: {
+      intro:
+        "A loop of about 1.6 miles for visitors and would-be neighbors: from Castro Station (Muni Metro K, L and M; the F streetcar ends at 17th & Castro), walk north on Castro Street past 16th and 15th streets to Henry Street, cross Duboce Park past the N Judah's tunnel portal, then come back along Market and 15th streets. Allow about 70 minutes, in daylight so you can see the houses' details.",
+      miles: 1.6,
+      minutes: 70,
+      tip:
+        "Halfway around, the Duboce & Church stop (N and J trains, 22 Fillmore) and Church St Station, a block south, let you cut the loop short. Otherwise finish on 15th Street, a short block from the F streetcar's Market & Noe stop and about a quarter mile from Castro Station.",
+    },
     restaurants: [
       { name: "Aquitaine", address: "216 Church St", phone: "(415) 658-7863", url: "https://aquitainesf.com" },
       { name: "Wooden Spoon", address: "2172 Market St", url: "https://www.woodenspoonsf.com" },
@@ -1667,39 +1725,87 @@ export const NEIGHBORHOODS = {
     ],
     aka: "SoMa",
     history:
-      "South of Market — “SoMa” — was the city's industrial and working-class heart from the Gold Rush on: rail yards, factories, and laborers' rooming houses in the area once called “South of the Slot.” Hit hard by the 1906 quake and fire, it was reborn in stages — Moscone Center, Yerba Buena, SFMOMA, and the ballpark — then transformed again by the 2000s–2010s tech boom and its high-rises.",
+      "South of Market grew up as the city's workshop. Near today's Transbay Transit Center the ground was once under the bay; as it was filled, shipbuilders moved in, followed by foundries and boiler works, and an archaeology report found that in the second half of the 1800s most residents of alleys there, like Natoma and Minna, came from Ireland. Market Street's iron cable-car slot gave the district its old nickname, “South of the Slot.” Jack London's 1909 story of that name put the theaters, hotels and banks north of the Slot, and south of it “the factories, slums, laundries, machine-shops, boiler works, and the abodes of the working class.”\n\nIn 1906 filled land gave way under Sixth and Howard, where big lodging houses collapsed, killing hundreds, and the GSA says only two structures south of Market survived the quake and fires: the 1874 Mint and the new post office at Seventh and Mission. While a new City Hall was built, city government worked from a Market Street building that later became the Hotel Whitcomb.\n\nLater, urban renewal pushed Filipino San Franciscans out of Manilatown on Kearny Street, the Fillmore and the Yerba Buena blocks, and SoMa's Mint Mall and Hall became a center of organizing; in 2016 the city recognized the SoMa Pilipinas cultural heritage district. In 1966 Fe-Be's opened at Folsom and 11th as Folsom Street's first leather bar, beginning what became the “Miracle Mile” of more than 30 gay bars, shops and bathhouses by the late 1970s. In 1984 Kathleen Connell and Michael Valerio started the Folsom Street Fair to show the neighborhood didn't need “revitalizing,” and in 2018 supervisors created the Leather and LGBTQ Cultural District.",
     facts: [
       {
-        icon: "factory",
-        title: "“South of the Slot”",
+        icon: "star",
+        title: "The post office that's a palace",
         text:
-          "SoMa was long called “South of the Slot,” for the cable-car slot down Market St that divided the working-class, industrial south side from the white-collar north.",
-      },
-      {
-        icon: "art",
-        title: "A museum district",
-        text:
-          "Yerba Buena Gardens and SFMOMA anchor a dense cultural quarter; SFMOMA — founded 1935 and rebuilt in 2016 — is one of the largest modern-art museums in the country.",
-      },
-      {
-        icon: "money",
-        title: "The tech boom's home base",
-        text:
-          "The 2010s planted tech headquarters across SoMa, capped by Salesforce Tower (2018) — at 1,070 feet, the tallest building in San Francisco.",
-      },
-      {
-        icon: "subway",
-        title: "The city's transit spine",
-        text:
-          "Multiple Muni Metro and BART stations line Market St, the T-Third Central Subway runs under 4th, Caltrain terminates at 4th & King, and the Salesforce Transit Center tops it off.",
+          "Ground was broken here in 1897, and the post office and courthouse opened in 1905 to acclaim as “a post office that's a palace,” its interior finished so finely that officials brought in skilled artisans from Italy, the GSA says. By the GSA's account, it and the 1874 Mint were the only structures south of Market to survive the 1906 earthquake and fires. Named the U.S. Court of Appeals Building for the Ninth Circuit in 1996, it has carried Judge James R. Browning's name since 2005.",
+        place: "James R. Browning U.S. Courthouse",
+        where: "95 7th St",
+        at: [-122.41155, 37.77934],
+        source: "https://origin-www.gsa.gov/node/161218",
       },
       {
         icon: "quake",
-        title: "Built on filled marsh",
+        title: "The corner where hundreds died",
         text:
-          "Much of SoMa sits on filled creek beds and bay mud — soft ground that shook hard and burned in both 1906 and 1989, and still shapes the city's seismic maps today.",
+          "The Chronicle titled its history of this corner “Sixth and Howard, where hundreds died”: in 1906 the Brunswick House rooming house stood on its northwest corner, and the Nob Hill Gazette counts at least 300 dead when four large boardinghouses near here collapsed as the filled ground under them liquefied. Sixth Street was rebuilt with 33 low-budget residential hotels from 1906 through 1913, which the Board of Supervisors calls the last surviving sizable group of low-budget residential hotels built after the earthquake.",
+        place: "Sixth & Howard",
+        where: "6th St & Howard St",
+        at: [-122.40699, 37.77975],
+        source: "https://www.sfchronicle.com/bayarea/article/sixth-and-howard-where-hundreds-died-4588225.php",
+      },
+      {
+        icon: "park",
+        title: "Two golds for a SoMa kid",
+        text:
+          "Vicki Manalo Draves, born in San Francisco in 1924 to a Filipino father and an English mother, grew up in South of Market, and at the 1948 London Olympics she became the first woman to win both the springboard and platform diving titles at the same Games. After SoMa's Filipino community pushed the city to honor her from 1999 to 2006, this two-acre park, an acre for each gold medal, was named for her in October 2006.",
+        place: "Victoria Manalo Draves Park",
+        where: "Folsom St & Sherman St",
+        at: [-122.40638, 37.77765],
+        source: "https://en.wikipedia.org/wiki/Vicki_Draves",
+      },
+      {
+        icon: "road",
+        title: "Bootprints in the alley",
+        text:
+          "Look down along Ringold Alley: metal bootprints along the curb honor 28 people from leather history, a design that the Exiles' Ringold Alley project page says was based on Stompers founder Mike McNamee's Dehner motorcycle boots. A black granite marker reproduces Mike Caffee's “Leather David” statue, made for Fe-Be's, and Chuck Arnett's Tool Box mural, with a narrative by Gayle Rubin. Paid for from the adjacent L7 development's public-benefit fee, the installation was unveiled on July 27, 2017, on the alley that hosted the first Up Your Alley fair in 1985.",
+        place: "Ringold Alley",
+        where: "Ringold St & 8th St",
+        at: [-122.40915, 37.77433],
+        source: "https://en.wikipedia.org/wiki/San_Francisco_South_of_Market_Leather_History_Alley",
+      },
+      {
+        icon: "flag",
+        title: "A landmark leather bar",
+        text:
+          "Opened in 1981 at 12th and Harrison, the SF Eagle became city Landmark No. 295 on October 29, 2021, which the Bay Area Reporter called the city's first leather-related landmark. Outside it, about 12,500 square feet of 12th Street between Harrison and Bernice became Eagle Plaza, which broke ground in June 2019 and which the bar calls the world's first public space centering queer history and the leather community. At the plaza's Harrison Street entrance, a flagpole flying an oversized Leather Pride flag was dedicated in September 2019, at the start of Leather Week.",
+        place: "SF Eagle & Eagle Plaza",
+        where: "398 12th St",
+        at: [-122.41345, 37.77008],
+        source: "https://en.wikipedia.org/wiki/San_Francisco_Eagle",
+      },
+      {
+        icon: "church",
+        title: "An Irish parish turned Filipino",
+        text:
+          "Designed by John J. Foley and built in 1913–14 in the Romanesque Revival style, St. Joseph's became a city landmark in 1980 and joined the National Register in 1982. Its parish began predominantly Irish and was mainly Filipino when it closed after the 1989 Loma Prieta earthquake damaged the church; the city red-tagged it, and it stood vacant until 2018. Its conversion created about 22,000 square feet of creative office space and about 10,000 square feet of outdoor community space.",
+        place: "St. Joseph's Church",
+        where: "1401 Howard St",
+        at: [-122.41437, 37.77370],
+        source: "https://en.wikipedia.org/wiki/St._Joseph%27s_Church_and_Complex",
+      },
+      {
+        icon: "mayor",
+        title: "City Hall's stand-in",
+        text:
+          "Completed in 1912, this building served as San Francisco's temporary city hall; OpenSFHistory dates that role from 1912 to 1915, and Densho's encyclopedia says it briefly held the city jail as well. In 1917 it reopened as the Hotel Whitcomb.",
+        place: "Hotel Whitcomb",
+        where: "1231 Market St",
+        at: [-122.41506, 37.77807],
+        source: "https://en.wikipedia.org/wiki/Hotel_Whitcomb",
       },
     ],
+    walk: {
+      intro:
+        "A flat loop of about 2.3 miles for visitors and would-be neighbors, starting and ending at Civic Center Station (BART and Muni Metro) on Market Street at 7th and 8th: down Sixth Street, along Folsom, Ringold and Harrison through the SoMa Pilipinas and Leather and LGBTQ cultural districts, and back up 10th Street to Market. Allow about an hour and 40 minutes with stops, and go in daylight so you can read the markers set along Ringold Alley.",
+      miles: 2.3,
+      minutes: 100,
+      tip:
+        "The Ringold Alley bootprints run along the curb, so walk the alley end to end, from 8th Street to 9th, with your eyes down. From the Whitcomb, Civic Center Station is a short walk back up Market Street.",
+    },
     restaurants: [
       { name: "Yank Sing", address: "101 Spear St (Rincon Center)", phone: "(415) 781-1111", url: "https://yanksing.com" },
       { name: "Deli Board", address: "1058 Folsom St", phone: "(415) 552-7687", url: "https://www.deliboardsf.com" },
@@ -1732,39 +1838,87 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Presidio Terrace area",
     history:
-      "Presidio Heights takes its name from its perch on the high ground beside the Presidio army post. The district filled in during the early 1900s, accelerating after the 1906 earthquake and fire as prosperous families rebuilt west of the ruined downtown. Its centerpiece, Presidio Terrace, was a master-planned community begun in 1905 by developers Baldwin & Howell, with thirty-six lots on a single private oval street.",
+      "Presidio Heights grew up along the low stone wall that marks the Presidio's southern edge, and the cable cars arrived early: on May 30, 1879, the California Street line opened its extension west from Fillmore Street to Central Avenue, today's Presidio Avenue. In 1895 the Rev. Joseph Worcester's Swedenborgian congregation opened a small church at Lyon and Washington streets that the National Park Service calls one of the West Coast's earliest expressions of the Arts and Crafts movement. In 1901 Ernest Coxhead designed a Shingle Style house for Julian Waybur on the wedge of Pacific Avenue that the wall pinches to a point at Walnut Street.\n\nGrander houses followed. From 1902 to 1904 Marcus and Corinne Koshland built a copy of Versailles' Petit Trianon at Washington and Maple streets and opened it with a Marie Antoinette costume ball. In 1909 Morris Meyerfeld, president of the Orpheum theater circuit, gave his daughter Elizabeth and her husband, Leon Roos, a Tudor Revival house by Bernard Maybeck on Jackson Street. On Sacramento Street a movie house called the Elite opened around 1910; it has been the Vogue since the late 1930s.\n\nIn the 1950s the cable cars were cut back to Van Ness Avenue, and preservation became the next chapter: the Roos House became city Landmark No. 56 in 1973, the Koshland house No. 95 in 1977, and the Swedenborgian church a National Historic Landmark in 2004. In 2019 the city renamed the playground it runs just inside the wall, dropping congressman Julius Kahn's name, and today a stretch of West Pacific Avenue, the road inside the wall, is closed to cars.",
     facts: [
       {
-        icon: "money",
-        title: "The $90,000 street",
+        icon: "movie",
+        title: "A movie house since about 1910",
         text:
-          "In 2015 a San Jose couple bought Presidio Terrace's private street at a city tax auction for about $90,100 after the homeowners association left a small annual tax bill unpaid for years. The city later voted to reverse the sale.",
-      },
-      {
-        icon: "house",
-        title: "A gated private oval",
-        text:
-          "Presidio Terrace is a single circular private street ringed by mansions. It was among the first San Francisco developments with underground utilities and electric street lights, unusual luxuries for the early 1900s.",
+          "This single-screen theater opened around 1910 as the Elite, though the city's landmark resolution dates its construction to about 1912. It became the Rex in 1919 and the Plaza by 1932, then reopened as the Vogue in the late 1930s. In 2007 the nonprofit San Francisco Neighborhood Theater Foundation bought it to keep it running; its marquee and neon signs were restored in 2025, and in 2026 the Board of Supervisors began the process of making it a city landmark, calling it one of San Francisco's oldest surviving cinemas.",
+        place: "Vogue Theatre",
+        where: "3290 Sacramento St",
+        at: [-122.44680, 37.78845],
+        source: "https://media.api.sf.gov/documents/r0176-26.pdf",
       },
       {
         icon: "church",
-        title: "Temple Emanu-El's dome",
+        title: "Madrone logs hold up the roof",
         text:
-          "The neighborhood's skyline is anchored by Congregation Emanu-El, completed in 1926. Its massive red-tiled dome was inspired by Istanbul's Hagia Sophia and remains one of the city's landmark houses of worship.",
+          "The Rev. Joseph Worcester, who came to San Francisco from Boston in 1867, bought the land and worked with A. Page Brown, A. C. Schweinfurth and Bernard Maybeck on this small church, which opened for worship on March 17, 1895. Bark-covered madrone logs hold up its heavy tile roof, and William Keith's paintings of California landscapes through the four seasons hang inside. The National Park Service calls it one of the West Coast's earliest expressions of the Arts and Crafts movement, and in 2004 it was named a National Historic Landmark.",
+        place: "Swedenborgian Church",
+        where: "2107 Lyon St",
+        at: [-122.44625, 37.79035],
+        source: "https://en.wikipedia.org/wiki/Swedenborgian_Church_(San_Francisco)",
       },
       {
-        icon: "star",
-        title: "Michelin on Sacramento St",
+        icon: "house",
+        title: "A Maybeck wedding present",
         text:
-          "For a quiet residential district, the dining is serious. Spruce and Sorrel have both earned Michelin recognition, drawing diners from across the city to a few low-key blocks.",
+          "Morris Meyerfeld, president of the Orpheum theater circuit, commissioned Bernard Maybeck to design this house as a wedding present for his daughter, Elizabeth, and her husband, Leon Roos, and it was built while the couple was in Europe. Maybeck's 1909 design is Tudor Revival with Gothic ornament, and he also designed its light fixtures and some of its furniture. It became city Landmark No. 56 in 1973 and joined the National Register in 2009, and in 2017 it went on the market for the first time.",
+        place: "Roos House",
+        where: "3500 Jackson St",
+        at: [-122.45270, 37.79040],
+        source: "https://noehill.com/SF/LANDMARKS/sf056.asp",
+      },
+      {
+        icon: "house",
+        title: "Versailles on Washington Street",
+        text:
+          "Marcus and Corinne Koshland built this copy of the Petit Trianon at Versailles from 1902 to 1904, on a corner lot that was a gift from her father, after Corinne fell for the original on a trip to Europe in 1900. Architect Franklin S. Van Trees modeled its Washington Street facade on the original's west, or garden, facade, and the Koshlands opened it with a Marie Antoinette costume ball. The 1906 earthquake damaged the facade, which was quickly restored, and the private home became city Landmark No. 95 in 1977.",
+        place: "Koshland House",
+        where: "3800 Washington St",
+        at: [-122.45590, 37.78915],
+        source: "https://noehill.com/SF/LANDMARKS/nat1984001186.asp",
+      },
+      {
+        icon: "road",
+        title: "The gate's missing capstone",
+        text:
+          "The U.S. Army put up this gate on the Presidio's southern edge in 1896. In the 1990s a truck knocked a capstone off one of its piers, and the stone sat in storage in the Marin Headlands until 2008, when the Presidio Trust had the stone carvers of Stonesculpt repair the cracked piers, recarve lost details from old photographs and put the capstone back on the southwest pier. The roughly $100,000 job won a California Preservation Foundation award in 2009.",
+        place: "Arguello Gate",
+        where: "Arguello Blvd & Jackson St",
+        at: [-122.45930, 37.78945],
+        source: "https://presidio.gov/about/press/presidios-historic-arguello-gate-gets-facelift",
       },
       {
         icon: "park",
-        title: "The Presidio at the doorstep",
+        title: "A playground renamed in 2019",
         text:
-          "Residents step almost directly into the Presidio, a former military base turned national park. Its forests, trails, and bay overlooks form a vast green backyard along the neighborhood's northern edge.",
+          "Until 2019 this city playground just inside the Presidio was named for Julius Kahn, a local congressman who introduced a bill to make the Chinese Exclusion Act permanent; it was made permanent in 1902 and stood until Congress repealed it in 1943. After a push by Chinese for Affirmative Action and the Chinese Historical Society, the Recreation and Park Commission voted unanimously on September 19, 2019, to rename it, and Presidio Wall beat names such as West Pacific Playground in public outreach.",
+        place: "Presidio Wall Playground",
+        where: "Spruce St & W Pacific Ave",
+        at: [-122.45415, 37.79048],
+        source: "https://www.nichibei.org/2019/09/s-f-rec-and-park-commission-approves-renaming-julius-kahn-playground/",
+      },
+      {
+        icon: "house",
+        title: "Shingled houses on a wedge",
+        text:
+          "NoeHill lists Bernard Maybeck, Willis Polk, Julia Morgan, Ernest Coxhead, Albert Farr and William Knowles among the architects of the 3200 and 3300 blocks of Pacific Avenue. On the north side of the 3200 block, the houses step down the hill as the Presidio wall narrows the block, until it pinches out to a sharp point at Walnut Street. Coxhead's Julian Waybur House of 1901 here joined the National Register in 2011 as an outstanding example of how he combined the American Shingle Style with European Revival styles.",
+        place: "Julian Waybur House",
+        where: "3232 Pacific Ave",
+        at: [-122.44807, 37.79178],
+        source: "https://noehill.com/SF/LANDMARKS/poi_presidio_wall.asp",
       },
     ],
+    walk: {
+      intro:
+        "A loop of about 2.2 miles for visitors and would-be neighbors from the 1, 2 and 43 buses at California St & Presidio Ave: past the Vogue and the Swedenborgian church, west along Jackson and Washington streets to the Arguello Gate, then back east inside the Presidio on West Pacific Avenue, a stretch closed to cars, leaving by the Presidio Avenue gate beside the shingled houses of Pacific Avenue. Allow about 90 minutes and pick a dry day for the stretch inside the wall; the 43 stops a block south at Presidio Ave & Jackson St.",
+      miles: 2.2,
+      minutes: 90,
+      tip:
+        "Near the east end of West Pacific Avenue, where it meets Presidio Boulevard just before the gate, look for Andy Goldsworthy's Wood Line (2011), eucalyptus branches laid in a long, sinuous curve through a grove just off Lovers' Lane; it is free and open to the public. The houses on this walk are private, so enjoy them from the sidewalk.",
+    },
     restaurants: [
       { name: "Spruce", address: "3640 Sacramento St", phone: "(415) 931-5100", url: "https://www.sprucesf.com" },
       { name: "Sorrel", address: "3228 Sacramento St", phone: "(415) 525-3765", url: "https://www.sorrelrestaurant.com" },
@@ -1796,39 +1950,77 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Goat Hill",
     history:
-      "Telegraph Hill takes its name from the semaphore signal station built atop it in 1849, which flagged arriving ships to merchants below. Earlier called Loma Alta by the Spanish and \"Goat Hill\" by settlers, it became a working-class enclave of Irish and Italian immigrants. Quarrying blasted away its eastern face for ballast and seawall fill, creating today's sheer cliffs. In the 1930s the hill's artists and bohemians cemented its reputation, and Coit Tower rose in 1933.",
+      "The Spanish reportedly called it Loma Alta, the high hill, and early San Franciscans knew it by other names, Goat Hill among them. The name that stuck came in September 1849, when a semaphore station went up on the summit, its arms signaling to the merchants, wholesalers and speculators below what kind of ship was entering the Golden Gate.\n\nSailing ships that brought cargo to San Francisco needed ballast to leave, and rock for it was quarried from the hill's bay side. From their quarry at Green and Sansome streets, the Gray brothers kept blasting into the eastern face: in January 1894 one explosion set off a rockslide that crushed a duplex on Vallejo Street, and in 1895 a judge permanently barred them from blasting on the hill, yet they carried on. Around 1900 George Gray argued that cutting Telegraph Hill down would give the east side of Russian Hill a magnificent marine view. The digging ended only in 1914, when a worker who could not collect his back wages shot and killed him.\n\nBy 1906 the slopes were a working-class quarter of Irish and Italian immigrants. In that year's fire, residents fought the flames with water they had saved and with wine fermenting in Italian families' basements, and some of their simple cottages were among the few buildings the fire spared. For decades afterward the hill remained an isolated neighborhood of working-class immigrants and artists, and in 1933 Coit Tower rose on its summit. In 2003 Judy Irving's documentary The Wild Parrots of Telegraph Hill made famous the flock of cherry-headed conures, descended from escaped or abandoned pets, that roams the hill.",
     facts: [
       {
-        icon: "tower",
-        title: "A firefighter's gift",
+        icon: "quake",
+        title: "Saved with wine-soaked burlap",
         text:
-          "Coit Tower was funded by a bequest from heiress Lillie Hitchcock Coit, who adored the city's volunteer firefighters. Despite the resemblance, it was not designed to look like a fire hose nozzle.",
+          "Built around 1865, this Italianate house stands on land believed to be the site of Hudson's Windmill, which probably burned in the July 4, 1861, fire that destroyed many of the hill's buildings. In 1906 the fire was contained at Montgomery Street, and the house's National Register nomination says a tenant, his oldest son and neighbors cooled its walls with burlap sacks soaked in wine from casks in the basement. One of a handful of buildings on the hill to survive the fire, it joined the National Register in 1979.",
+        place: "Montgomery Street Italianate",
+        where: "1254 Montgomery St",
+        at: [-122.40420, 37.80060],
+        source: "https://noehill.com/SF/LANDMARKS/nat1979000532.asp",
       },
       {
-        icon: "bird",
-        title: "The wild parrots",
+        icon: "movie",
+        title: "Lauren Bacall's movie apartment",
         text:
-          "A flock of feral cherry-headed conures roams the hill, descended from escaped or released pets. They were made famous by the 2003 documentary The Wild Parrots of Telegraph Hill.",
+          "Jack Malloch and his son John Rolph Malloch built this Streamline Moderne apartment house, nicknamed the Ocean-Liner House, in 1937; its design is credited to architect Irvin Goldstine. Artist Alfred Du Pont gave its walls figures of a Spanish explorer, a worker with a globe and a woman representing the spirit of California. In the 1947 film noir Dark Passage it is the apartment of Lauren Bacall's character, where Humphrey Bogart's character hides out.",
+        place: "Malloch Building",
+        where: "1360 Montgomery St",
+        at: [-122.40433, 37.80179],
+        source: "https://en.wikipedia.org/wiki/Malloch_Building",
+      },
+      {
+        icon: "park",
+        title: "A garden grown on a dump",
+        text:
+          "When Grace Marchant began gardening here in 1949, this stretch of the Filbert Steps was strewn with the debris of a dump. She cleared away rubbish, abandoned furniture and stoves, planted roses, delphiniums, banana plants and Japanese maples, and tended them for more than 30 years. In the mid-1980s, when a proposed house threatened to split the garden, the Trust for Public Land raised the money to protect it as public open space. Napier Lane, the wooden-plank walkway off the steps here, has been called the city's only wooden street.",
+        place: "Grace Marchant Garden",
+        where: "Filbert St & Napier Ln",
+        at: [-122.40392, 37.80193],
+        source: "https://tpl.org/our-work/grace-marchant-garden",
       },
       {
         icon: "stairs",
-        title: "Secret garden stairs",
+        title: "A castle restaurant on the steps",
         text:
-          "The Filbert and Greenwich Steps descend the hill's steep eastern cliff through lush private gardens. They were largely planted and tended for decades by resident Grace Marchant.",
+          "Restaurateur Julius Roz built this castle-style restaurant in 1922–23, hiring architect Luigi Mastropasqua to design it as a tribute to Layman's wooden castle, which stood on the summit from 1882 to 1903. Roz ran it until his death in 1943, the city named it Landmark No. 121 in 1980, and it closed in 2007. Paul Scott bought it in 2012, and in October 2026 he said he planned to open its doors as a restaurant again in the coming weeks.",
+        place: "Julius' Castle",
+        where: "1541 Montgomery St",
+        at: [-122.40472, 37.80289],
+        source: "https://www.ktvu.com/news/historic-bay-area-castle-designed-landmark-is-reopening-operate-again-restaurant",
       },
       {
-        icon: "art",
-        title: "Depression-era murals",
+        icon: "tower",
+        title: "Murals behind a padlock",
         text:
-          "The interior of Coit Tower is lined with 1934 fresco murals painted by 25 artists under the New Deal's Public Works of Art Project. Their social-realist themes briefly stirred political controversy.",
+          "Lillie Hitchcock Coit's will set aside a third of her fortune to beautify the city, and the tower it paid for, designed by Arthur Brown Jr. and Henry Howard, was completed in 1933. Inside, 25 artists and their assistants spent about six months of 1934 painting frescoes under the federal Public Works of Art Project. As that year's waterfront strike stoked fears of Communist agitation, a hammer and sickle in a Clifford Wight fresco and a Western Worker banner in John Langley Howard's mural set off a controversy, and the tower was padlocked, its windows painted over, for more than three months.",
+        place: "Coit Tower",
+        where: "1 Telegraph Hill Blvd",
+        at: [-122.40583, 37.80250],
+        source: "https://en.wikipedia.org/wiki/Coit_Tower",
       },
       {
-        icon: "quake",
-        title: "Saved by wine",
+        icon: "tram",
+        title: "A castle with its own railway",
         text:
-          "Residents are said to have saved homes on the hill's eastern slope from the 1906 fire by dousing them with barrels of red wine when the water mains failed.",
+          "On April 14, 1876, the nation's centennial year, a group of 22 prominent men, George Hearst among them, gave the city the deed to four 50-vara lots on the summit, bought for $12,000, and the land became Pioneer Park. On July 4, 1882, a castle-style observatory known as Layman's Folly opened here, and a short-lived cable railway was built up the west side of the hill on Greenwich Street to reach it. Fire destroyed the castle in 1903; its site is now Coit Tower's north parking lot.",
+        place: "Pioneer Park",
+        where: "Telegraph Hill Blvd & Greenwich St",
+        at: [-122.40654, 37.80267],
+        source: "https://opensfhistory.org/news/2019/02/15/laymans-folly-a-closer-look/",
       },
     ],
+    walk: {
+      intro:
+        "A short stair-climbing line for visitors and would-be neighbors, from the 39 Coit bus stop at Union St & Montgomery St (the 8, 30 and 45 run along Columbus Ave a few blocks west), down the Filbert Steps past Napier Lane to Sansome Street and back up the Greenwich Steps to Coit Tower and Pioneer Park. Allow about 45 minutes, more to see the tower's murals, and pick a clear morning for the view from the top.",
+      miles: 0.6,
+      minutes: 45,
+      tip:
+        "Save your legs for the end: from Sansome Street the Greenwich Steps climb to Montgomery Street beside Julius' Castle, then resume in brick up to Pioneer Park and Coit Tower. From the stops on Telegraph Hill Blvd at Greenwich St, the 39 Coit runs back down to Washington Square.",
+    },
     nearby: ["North Beach"],
     restaurants: [
       { name: "Sotto Mare Oysteria & Seafood", address: "552 Green St", phone: "(415) 398-3181", url: "https://www.sottomaresf.com" },
@@ -1863,39 +2055,67 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Sea Cliff",
     history:
-      "Sea Cliff takes its name from its dramatic perch on the bluffs above the Pacific. The Allen real-estate group began developing the enclave around 1912 as one of San Francisco's master-planned \"residence parks,\" with landscape architect Mark Daniels laying out the curving streets, ornate entry gates, fountains and large lots to evoke genteel country living. Mediterranean and period-revival homes filled in through the 1920s and 1930s, and the neighborhood has remained a quiet, purely residential address ever since.",
+      "The cove below these bluffs had its name before the houses came. Some accounts say Chinese fishermen anchored and camped there, and the Chow Chong family recalled using it from 1868 into the 1890s as an anchorage for returning exhumed remains from the nearby City Cemetery to their home village; the Park Service notes that oral history is largely all that exists on how China Beach got its name. At the neighborhood's western edge, the Lands End trail sets out from Eagle's Point along the 1880s roadbed of the Ferries and Cliff House Railroad.\n\nSea Cliff itself was established in 1913 for the John Brickell Company, one of the master-planned residence parks, or garden suburbs, that came into vogue in San Francisco after the 1906 earthquake, with large lots and extensive landscaping. Landscape architect Mark Daniels drew its plan, and in 1914 he briefly became general superintendent and landscape engineer of the national parks, just before the National Park Service was formed. Carl Bertz designed most of the first houses; Willis Polk designed three on Scenic Way, and Julia Morgan designed one there in 1921.\n\nThe state bought the beach in 1933 and named it for former mayor James D. Phelan, an advocate of Asian exclusion; in 1974 the National Park Service declared that the name China Beach would be restored. In December 1995, during torrential rain, a 100-year-old brick sewer ruptured, and the rushing water carved out a pit more than 250 feet wide that swallowed an unoccupied house on El Camino del Mar. In 2015 the old stairs at the end of California Street, the way up into Lincoln Park, reopened clad in hand-made tile.",
     facts: [
       {
-        icon: "house",
-        title: "A planned residence park",
+        icon: "water",
+        title: "The year a house vanished",
         text:
-          "Sea Cliff was one of San Francisco's master-planned residence parks laid out after the 1906 quake. Landscape architect Mark Daniels designed it with gated entries, sculptures and fountains to feel like a garden suburb.",
+          "In December 1995, after torrential rain, a 100-year-old brick sewer ruptured on the block just east of this corner, and the rushing water eroded a pit more than 250 feet wide and 40 feet deep. It swallowed an unoccupied Tudor-style house on El Camino del Mar and forced the evacuation of 23 other buildings. A forensic study later found that an overflow structure 1,400 feet downstream had constricted the storm flow and pressurized the sewer.",
+        place: "The 1995 sinkhole",
+        where: "25th Ave & El Camino del Mar",
+        at: [-122.48525, 37.78746],
+        source: "https://scholarsmine.mst.edu/icchge/4icchge/4icchge-session06/9",
       },
       {
-        icon: "money",
-        title: "Celebrity enclave",
+        icon: "house",
+        title: "A garden suburb on the bluffs",
         text:
-          "The neighborhood's privacy and views have long drawn the wealthy and famous. Robin Williams and Sharon Stone both owned homes here, alongside tech founders and old San Francisco families.",
+          "Sea Cliff was established in 1913 for the John Brickell Company as one of San Francisco's master-planned residence parks, from a plan by landscape architect Mark Daniels. Carl Bertz designed most of the first houses. On Scenic Way, Willis Polk designed Nos. 9, 25 and 45, and Julia Morgan designed No. 50, built in 1921 for Maude Strowbridge.",
+        place: "El Camino del Mar",
+        where: "El Camino del Mar & 26th Ave",
+        at: [-122.48636, 37.78756],
+        source: "https://en.wikipedia.org/wiki/Sea_Cliff,_San_Francisco",
       },
       {
         icon: "wave",
-        title: "China Beach and Baker Beach",
+        title: "A beach that got its name back",
         text:
-          "Tucked below the bluffs, sheltered China Beach is one of the city's few swimmable coves. Just north, larger Baker Beach stretches toward the Golden Gate Bridge with postcard views.",
+          "Some accounts say Chinese fishermen anchored and camped in this cove, and the Chow Chong family recalled using it from 1868 into the 1890s as an anchorage for returning exhumed remains from the nearby City Cemetery to their home village. The state bought the beach in 1933 and named it for former mayor James D. Phelan, an advocate of Asian exclusion. In 1974 the National Park Service declared the old name would be restored, and a seven-foot granite marker donated by the Chung family was dedicated on June 5, 1982.",
+        place: "China Beach",
+        where: "Sea Cliff Ave & El Camino del Mar",
+        at: [-122.49090, 37.78792],
+        source: "https://www.nps.gov/goga/learn/historyculture/the-history-of-china-beach.htm",
       },
       {
-        icon: "water",
-        title: "The 1995 sewer collapse",
+        icon: "road",
+        title: "A trail on an old railbed",
         text:
-          "In December 1995 a ruptured sewer on Sea Cliff Avenue triggered aggressive erosion and a series of slope collapses along El Camino del Mar. Several homes were damaged in one of the neighborhood's most dramatic incidents.",
+          "Just west of 32nd Avenue, El Camino del Mar meets the eastern trailhead of the Lands End Coastal Trail at Eagle's Point; the Park Service puts the trail at 1.7 miles one way. From here it follows the 1880s roadbed of the Ferries and Cliff House Railroad. In 2014 the old wooden overlook and its ramp gave way to a subtler viewpoint set back along the trail and level with it, a semicircle with three benches.",
+        place: "Eagle's Point",
+        where: "El Camino del Mar & 32nd Ave",
+        at: [-122.49300, 37.78661],
+        source: "https://www.nps.gov/goga/learn/historyculture/vestiges-lands-end-trail.htm",
       },
       {
-        icon: "bridge",
-        title: "Golden Gate panoramas",
+        icon: "stairs",
+        title: "Steps tiled by hand",
         text:
-          "Built on bluffs west of the Presidio, Sea Cliff offers some of the city's finest views of the Golden Gate Bridge and the Marin Headlands. Many homes were oriented expressly to capture them.",
+          "At the end of California Street beyond 32nd Avenue, these concrete stairs climb into Lincoln Park, the gateway to its golf course and playground, the Legion of Honor and the Lands End trail. Decades of neglect left their landings, pillars and benches badly damaged until Friends of Lincoln Park took on a restoration that, with the structural repairs, cost about half a million dollars. Artist Aileen Barr designed the mosaic and made its tiles by hand, and the steps were dedicated on May 28, 2015.",
+        place: "Lincoln Park Steps",
+        where: "California St & 32nd Ave",
+        at: [-122.49330, 37.78358],
+        source: "https://tileheritage.org/pdfs/E-News-Summer-2015.pdf",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.1 miles for visitors and would-be neighbors: start at the 29 Sunset stop at 25th Ave & El Camino del Mar, follow El Camino del Mar west through the residence park, detour down Sea Cliff Avenue to China Beach, continue to the Lands End trailhead at Eagle's Point, then walk 32nd Avenue south to the Lincoln Park Steps, steps from the 1 California stops at California St & 32nd Ave. Allow about an hour with the climb down to the beach, and go on a clear day, when the Golden Gate is in view.",
+      miles: 1.1,
+      minutes: 60,
+      tip:
+        "A construction project has limited parking and closed parts of China Beach, so check the Park Service's alerts before you go; from the lot, steep stairs or a gentler service road to the right lead down to the sand. The houses along El Camino del Mar are private, so enjoy them from the sidewalk.",
+    },
     nearby: ["the Inner Richmond"],
     restaurants: [
       { name: "Burma Superstar", address: "309 Clement St", phone: "(415) 387-2147", url: "https://www.burmasuperstar.com" },
