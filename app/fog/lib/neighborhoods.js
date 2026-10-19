@@ -3266,39 +3266,97 @@ export const NEIGHBORHOODS = {
       "Above Dolores Park",
     ],
     history:
-      "The name traces to Mission San Francisco de Asís, founded in 1776 and long known as Mission Dolores after the nearby Laguna de los Dolores, the \"Lagoon of Sorrows.\" As San Francisco grew, this steep hill above the mission lands developed into an affluent residential enclave. Builders carved homes, public stairways, and landscaped mini-parks into the precipitous terrain, creating a quiet, leafy neighborhood prized for its period and modernist houses and commanding city views.",
+      "Dolores Heights rises a few blocks south of Mission Dolores, but its first neighborhood grew on the gentler ground at the hill's eastern foot. Liberty Hill, named not for a summit but for two of its streets, Liberty and Hill, was one of San Francisco's earliest residential “suburbs.” Coal dealer Marsden Kershaw built his house at Guerrero and Liberty in 1871, and in 1895 dairy farmer John Daly, who would later subdivide his ranch to begin what is now Daly City, finished a Queen Anne mansion at the crest of Guerrero at 21st.\n\nThe fire that followed the 1906 earthquake was stopped at 20th Street, so Liberty Hill still holds examples of every style of its building years. Public Works photographs show the steep hill to the west still rough, with 1906 earthquake shacks above a cliff on Cumberland Street in 1914 and Sanchez Street unpaved at 21st. The climb over it was the hardest grade on the J-Church line: at least fifteen routes were proposed, one a tunnel under Chattanooga Street, before the line opened in 1917 on its own right-of-way along Dolores Park. In 1930, by the SF Examiner's account, Mayor James Rolph, who lived on Sanchez Street, built a guesthouse next door.\n\nIn 1983, 51 houses on two blocks of Liberty Street joined the National Register, and in 1985 the city made Liberty Hill a landmark district. Today the Dolores Heights Special Use District holds new buildings to 35 feet above existing grade and requires deep rear yards, to protect views and light, and in 2003 the Dolores Heights Improvement Club and property owners along the Liberty Street stairs restored the stairway's garden.",
     facts: [
       {
-        icon: "stairs",
-        title: "Hidden stairways",
+        icon: "house",
+        title: "A capsule of Victorian San Francisco",
         text:
-          "The neighborhood is laced with public stairways that climb its steepest blocks. The landscaped Cumberland and Vista stairways are local landmarks, linking streets too steep for cars and offering pocket gardens and views along the way.",
-      },
-      {
-        icon: "church",
-        title: "Mission Dolores roots",
-        text:
-          "The Dolores name comes from Mission San Francisco de Asís, founded in 1776 and nicknamed Mission Dolores for the nearby Laguna de los Dolores. The original adobe mission is the oldest surviving building in San Francisco.",
-      },
-      {
-        icon: "sun",
-        title: "One of the sunny pockets",
-        text:
-          "Tucked east of Twin Peaks, Dolores Heights sits in one of the city's sunnier microclimates. The hills often catch sun while fog blankets neighborhoods just to the west.",
-      },
-      {
-        icon: "park",
-        title: "Mini-parks on the slopes",
-        text:
-          "Beyond the stairways, small landscaped open spaces are built into the hillside. These mini-parks soften the steep grades and give the residential streets a quiet, garden-like character distinct from the busier Mission below.",
+          "Along two blocks of Liberty Street, Nos. 15 to 188, 51 houses make up the Liberty Street Historic District, listed on the National Register on September 15, 1983; its nomination calls the enclave a capsule history of middle-class housing in San Francisco between 1867 and 1911. The houses run from early and standard San Francisco Italianates through Stick and Queen Anne to Classical Revival, and the district also sits inside the city's Liberty Hill Historic District.",
+        place: "Liberty Street Historic District",
+        where: "Liberty St & Valencia St",
+        at: [-122.42140, 37.75745],
+        source: "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/83001230_text",
       },
       {
         icon: "house",
-        title: "Architectural mix",
+        title: "Two landmarks at Liberty's corner",
         text:
-          "The enclave is known for its blend of housing styles, from Edwardian and period homes to striking mid-century modernist residences. The hilltop lots command panoramic views, making it one of the city's more coveted addresses.",
+          "Marsden Kershaw, a partner in the Kershaw and Twing coal yard, built the house on this corner in 1871, one of the earliest in what is now the Liberty Hill Historic District, and it is city Landmark No. 136. Just to the north, the John McMullen House at 827 Guerrero Street is city Landmark No. 123.",
+        place: "Kershaw and McMullen houses",
+        where: "845 Guerrero St",
+        at: [-122.42297, 37.75762],
+        source: "https://noehill.com/SF/LANDMARKS/sf136.asp",
+      },
+      {
+        icon: "cow",
+        title: "The dairyman behind Daly City",
+        text:
+          "Charles Havens designed this Queen Anne mansion, completed in 1895 at the crest of Guerrero Street at 21st, for John Daly, a dairy farmer who owned 250 acres just outside the county line. After the 1906 earthquake Daly subdivided his ranch, beginning what is now Daly City, and his house stands in the city's Liberty Hill landmark district.",
+        place: "John Daly House",
+        where: "900 Guerrero St",
+        at: [-122.42338, 37.75662],
+        source: "https://www.sfchronicle.com/bayarea/article/A-Mission-District-mansion-born-in-an-earlier-boom-5553087.php",
+      },
+      {
+        icon: "tram",
+        title: "The streetcar's back-door route",
+        text:
+          "The J-Church opened on August 11, 1917, paid for by a 1913 bond issue, and its climb over Dolores Heights was the line's most difficult grade; at least fifteen routes were proposed, including engineer Bion J. Arnold's 1912 plan for a tunnel under the line of Chattanooga Street. As built, the tracks cut through the western edge of Dolores Park between 18th and 20th streets on a private right-of-way at a 9% grade, the steepest on the Muni Metro, and stay off the street past this crossing until they rejoin Church Street at 22nd.",
+        place: "J-Church right-of-way",
+        where: "Right of Way & 21st St",
+        at: [-122.42687, 37.75654],
+        source: "https://en.wikipedia.org/wiki/J_Church",
+      },
+      {
+        icon: "mayor",
+        title: "Sunny Jim's house in the sky",
+        text:
+          "James “Sunny Jim” Rolph, mayor of San Francisco from 1912 until he resigned in 1931 to become governor, lived next door at 775 Sanchez Street, and the SF Examiner says he built this guesthouse, Casa Cielo, in 1930. When Rolph died in 1934, an eye surgeon bought the house and kept it for 10 years.",
+        place: "Casa Cielo",
+        where: "3690 21st St",
+        at: [-122.43005, 37.75662],
+        source: "https://www.sfexaminer.com/news/hot-property-a-residence-fit-for-a-mayor/article_7ea1f7d6-0879-5460-ba07-00b86a91454c.html",
+      },
+      {
+        icon: "stairs",
+        title: "A stairway garden on Liberty",
+        text:
+          "On the block of Liberty Street between Sanchez and Noe, a public stairway climbs through a planted garden. In 2003 the Dolores Heights Improvement Club and the property owners along the stairs restored it, supplying the labor and other funding, with a $2,400 grant from San Francisco Beautiful for new soil and a drip irrigation system.",
+        place: "Liberty Street stairway",
+        where: "Liberty St & Sanchez St",
+        at: [-122.43133, 37.75711],
+        source: "https://sfbeautiful.org/?p=95",
+      },
+      {
+        icon: "road",
+        title: "Tied for the city's steepest",
+        text:
+          "The city's Bureau of Engineering once ranked this block of 22nd Street, between Church and Vicksburg, as San Francisco's steepest, tied with Filbert Street between Leavenworth and Hyde at a 31.5% grade; cars may only drive it one way, downhill. A newer ranking that 7x7 built with Stephen Von Worley from federal elevation data and street maps puts it ninth, with Bradford Street above Tompkins first at 41%.",
+        place: "22nd Street steep block",
+        where: "22nd St & Vicksburg St",
+        at: [-122.42856, 37.75486],
+        source: "https://www.7x7.com/the-real-top-10-list-of-steepest-streets-in-san-francisco-1786501295.html",
+      },
+      {
+        icon: "shop",
+        title: "Where 24th Street's shops begin",
+        text:
+          "Noe Valley's shopping street starts a short block east of this corner: the city's 24th Street–Noe Valley Neighborhood Commercial District covers six blocks of 24th Street, from Chattanooga Street west to Diamond. The planning code describes a daytime-oriented district selling everyday and comparison goods and services to a mostly local market, with shops and personal services at street level, some offices on the second story and homes almost entirely on the third floor and up.",
+        place: "24th and Church shops",
+        where: "24th St & Church St",
+        at: [-122.42734, 37.75169],
+        source: "https://www.sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances10/o0101-10.pdf",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.4 miles for visitors and would-be neighbors, from the Victorian blocks of Liberty Hill up over Dolores Heights and down to 24th and Church streets, where the J-Church and the 48 bus stop for the ride back. Start at Liberty and Valencia streets, a five-minute walk from the 14 and 49 buses at Mission and 20th streets; allow about 75 minutes, and pick a clear day for the views from the hilltop.",
+      miles: 1.4,
+      minutes: 75,
+      tip:
+        "Wear shoes with grip: the walk climbs 21st Street from Church toward Sanchez, then, after the Liberty Street stairs, comes down the 31.5% block of 22nd Street below Vicksburg, so take that one slowly, and watch the J-Church from the 21st Street crossing, since walking on the tracks is illegal. For coffee, Valencia Street's cafés are steps from the start, and 24th Street's are at the finish.",
+    },
     nearby: ["Noe Valley"],
     restaurants: [
       { name: "Firefly", address: "4288 24th St", phone: "(415) 821-7652", url: "https://www.fireflysf.com" },
@@ -3331,39 +3389,67 @@ export const NEIGHBORHOODS = {
       "Steep, quiet streets",
     ],
     history:
-      "Parnassus Avenue takes its name from Mount Parnassus of Greek myth, echoing the classical street names nearby. In 1895 Mayor Adolph Sutro donated land overlooking Golden Gate Park, and the Affiliated Colleges opened here in 1898 — the seed of today's UCSF. The medical center grew steadily up the hillside through the 20th century, while modest homes filled the steep blocks below the forested crown of Mount Sutro.",
+      "Adolph Sutro owned the hill above Parnassus Avenue, then called Mount Parnassus, and first planned to build homes on it. Around 1886, the year of California's first Arbor Day, he began planting it with trees, and in July 1895, as mayor, he gave the University of California 13 acres overlooking Golden Gate Park for its Affiliated Colleges, then scattered around the city. The first cornerstone went in among the sand dunes in 1897, and the buildings opened in the fall of 1898. One was meant for Hastings College of the Law, whose faculty refused to move so far from the courts.\n\nSutro died in 1898, and settling his estate took nearly 20 years of litigation. In 1909 the estate struck a deal with the Consolidated Eucalyptus Company to log and process its trees, and in 1910 an appraiser photographed its “Sunset Heights” lots on Edgewood Avenue. The 1906 earthquake, meanwhile, turned the colleges into a hospital: a 75-bed teaching hospital opened in April 1907, and Lewis P. Hobart's UC Hall followed in 1917, standing until 2023. Logging ended in 1934, after a 10-acre fire turned neighbors against the lumber mill.\n\nAs the medical center grew up the hill, neighbors sued, and in 1976 the Regents settled with a cap of 3.55 million gross square feet of buildings on the campus, a limit called permanent. That year UCSF's part of the forest became permanent open space, today the 61-acre Mount Sutro Open Space Reserve. In 1996 UCSF said future growth would go to Mission Bay, but in 2021 the Regents approved a plan adding roughly two million square feet at Parnassus, including a 15-story hospital due in 2030.",
     facts: [
       {
-        icon: "book",
-        title: "Birthplace of UCSF",
+        icon: "house",
+        title: "Photographed for Sutro's estate",
         text:
-          "The Affiliated Colleges opened on this hill in 1898 on land donated by Adolph Sutro. They became the University of California's San Francisco campus, now a world-renowned medical school and hospital.",
+          "Edgewood Avenue climbs south from here toward the forest. On January 1, 1910, while Sutro's estate was still being settled, A. S. Baldwin photographed it for an appraisal of the Sutro Estate: his view, labeled Sunset Heights No. 47 and now in the OpenSFHistory archive, looks south along the street's east side at the estate's lots in Block H, around today's No. 257. A 1926 photo in the same archive looks south up the 200 block toward Sutro Forest.",
+        place: "Edgewood Avenue",
+        where: "Edgewood Ave & Farnsworth Ln",
+        at: [-122.45520, 37.76300],
+        source: "https://test.opensfhistory.org/photo/wnp26.1072",
       },
       {
         icon: "bird",
-        title: "Mount Sutro forest",
+        title: "A forest logged until 1934",
         text:
-          "The Interior Greenbelt cloaks Mount Sutro in a dense eucalyptus forest planted under Adolph Sutro in the 1880s. UCSF maintains the roughly 60-acre Mount Sutro Open Space Reserve, laced with hiking trails.",
+          "UCSF says Sutro began planting this hill around the 1886 Arbor Day celebration, and that after his death his estate's 1909 deal with the Consolidated Eucalyptus Company covered logging and processing on more than 1,500 acres. The logging ended in 1934, after a 10-acre fire turned neighbors against the lumber mill. From the end of Edgewood Avenue, the Edgewood Trail climbs into the forest.",
+        place: "Edgewood Trailhead",
+        where: "End of Edgewood Ave",
+        at: [-122.45510, 37.76080],
+        source: "https://ucsf.edu/about/locations/mount-sutro-open-space-reserve",
       },
       {
-        icon: "star",
-        title: "Views above the fog",
+        icon: "park",
+        title: "A Nike radar post turned meadow",
         text:
-          "Perched high between Golden Gate Park and Twin Peaks, the upper streets deliver sweeping vistas. On clear days the outlook stretches across the city, the bay, and the Pacific.",
+          "In the 1950s the top of Mount Sutro was cleared and flattened to hold radar equipment that controlled the launch of Nike missiles around the Bay Area; the Sutro Stewards identify the post as SF-89C, the radar control site, with a separate launch site in the Presidio. In 2004 the Rotary Club of San Francisco gave UCSF $100,000 to turn the old radar site into a native-plant meadow, now the Sutro Stewards' native plant garden at the 909-foot summit of the 61-acre Mount Sutro Open Space Reserve.",
+        place: "Rotary Meadow",
+        where: "Summit of Mount Sutro",
+        at: [-122.45719, 37.75826],
+        source: "https://www.sutrostewards.org/post/2016/09/22/sutro-stewards-10th-anniversary-reflections-from-our-beginning",
       },
       {
-        icon: "house",
-        title: "Steep, quiet hillside",
+        icon: "tower",
+        title: "A 15-story hospital takes shape",
         text:
-          "Narrow, sharply graded streets climb the slopes between the campus and the forest. The residential blocks are calm and tucked away, with shopping and dining concentrated in adjacent Cole Valley and the Inner Sunset.",
+          "UCSF began building the 15-story Helen Diller Hospital here in 2024, designed by Herzog & de Meuron with HDR as architect of record, and expects to open it in 2030. It rises on the site of the Langley Porter Psychiatric Hospital at 401 Parnassus, named for medical-school dean Langley Porter. Built on university land for the state's Department of Mental Hygiene, it had its cornerstone laid in 1941, began operating in 1943, passed to the university's administration in 1973 and was demolished to make way for the new hospital.",
+        place: "Helen Diller Hospital",
+        where: "Parnassus Ave & Hillway Ave",
+        at: [-122.45685, 37.76376],
+        source: "https://www.ucsf.edu/news/2024/05/427536/ucsf-health-starts-construction-massive-parnassus-campus-hospital",
       },
       {
-        icon: "subway",
-        title: "The Sunset Tunnel",
+        icon: "book",
+        title: "Founded in rain and blowing sand",
         text:
-          "The N Judah Muni Metro line dives under the hill through the Sunset Tunnel, linking the area to downtown and the beach. Its eastern portal sits in Cole Valley at Carl and Cole.",
+          "Mayor Adolph Sutro gave the University of California these 13 acres overlooking Golden Gate Park in 1895, and the cornerstone of the Affiliated Colleges' first medical building was laid on March 27, 1897, in “rain and blowing sand.” After the 1906 earthquake the medical faculty moved its preclinical departments to Berkeley to make room for a teaching hospital, which opened in the refitted medical building with 75 beds in April 1907. That old medical building stood until 1967.",
+        place: "UCSF Parnassus campus",
+        where: "513 Parnassus Ave",
+        at: [-122.45821, 37.76330],
+        source: "https://ucsf.edu/news/2024/09/428516/how-ucsfs-historic-parnassus-heights-campus-rose-remote-sand-dunes",
       },
     ],
+    walk: {
+      intro:
+        "A near-loop of about 1.4 miles for visitors and would-be neighbors, from the 6 and 43 bus stop at Parnassus Ave & Willard St (the N Judah stops nearby at Carl & Stanyan) up Edgewood Avenue into the eucalyptus forest, over the summit of Mount Sutro and back down to the UCSF campus on Parnassus Avenue, where the 6 and 43 stop again a few blocks west of the start. Allow about 75 minutes, and go in daylight, on a clear day if you can.",
+      miles: 1.4,
+      minutes: 75,
+      tip:
+        "The reserve is open from sunrise to sunset and closes when winds top 40 mph, and UCSF posts trail closures on its Mount Sutro page, so check it before you go and wear shoes with good grip for the forest trails. There are no shops on the hill itself; for coffee or a bite, Cole Street's cafés are three blocks east of the start, and Irving Street's restaurants in the Inner Sunset are about half a mile northwest of the campus.",
+    },
     nearby: ["Cole Valley", "the Inner Sunset"],
     restaurants: [
       { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
@@ -3397,39 +3483,67 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Haight-Fillmore",
     history:
-      "Just east of Haight-Ashbury and folded into the historic Western Addition, the Lower Haight filled with streetcar-era Victorian flats in the late 1800s, many surviving the 1906 quake. Long tied to the neighborhood's Black community, it became a 1990s hub of DJ and house-music culture, and its dive bars, cafés, and record and skate shops still define a scrappy, creative character.",
+      "Before the street grid, these blocks lay in the Sans Souci Valley, which carried storm runoff from Buena Vista Hill and Lone Mountain through today's Panhandle toward Duboce Park, and was once the easiest walking route between Mission Dolores and the Presidio. Which Haight the main street honors has never been settled; the banker Henry Haight, his nephew Governor Henry H. Haight and a banker's wife, Weltha Haight, all have champions. Transit built the neighborhood. In 1883 the Market Street Cable Railway replaced a horse-car line on Haight Street, linking downtown with the east end of Golden Gate Park; land prices rose, and by one local history nearly every lot here was built on by the end of the decade.\n\nThe area largely came through the 1906 earthquake and fire, which is why so many of its Victorians remain. After the Redevelopment Agency declared the Western Addition blighted in 1948, the first phase of urban renewal in the Fillmore to the north cut its population almost in half and shut more than 850 businesses, most of them Black-owned. These blocks, called Haight-Fillmore by the late 1960s, were the southern tip of the Fillmore district, and in the late 1970s still an almost entirely Black community, one account notes.\n\nThe name Lower Haight turns up in a 1921 grocers' trade journal but went mainstream only in the mid-to-late 1980s. In the 1990s the strip was a hub of the city's DJ, hip-hop and rave culture; one record shop, opened around 1990, did most of its early business with local rappers hunting for records to sample, and got a mention in the Beastie Boys' 1992 song “Professor Booty.”",
     facts: [
       {
-        icon: "beer",
-        title: "A beer-bar legend",
-        text:
-          "Toronado opened at 547 Haight in 1987 and earned national fame for its deep, ever-rotating craft and Belgian draft list — a cash-only temple for beer pilgrims.",
-      },
-      {
-        icon: "music",
-        title: "DJ and house-music roots",
-        text:
-          "In the 1990s the Lower Haight was a hub of San Francisco's underground DJ and house-music scene, anchored by its record shops.",
-      },
-      {
         icon: "house",
-        title: "Victorians that survived 1906",
+        title: "The landmark that moved a house",
         text:
-          "The strip is lined with streetcar-era Victorian and Edwardian flats, many of which came through the 1906 earthquake intact.",
+          "Henry Geilfuss, a Thuringia-born architect who came to San Francisco in 1876 and designed some 400 homes in the area, Alamo Square's Westerfeld House among them, drew this Stick-style house for Charles Dietle; the city made it Landmark No. 48 in 1972. By the Western Neighborhoods Project's account it went up in 1888, and the 1878 house it replaced was moved to 527–529 Oak Street rather than torn down. After the 1906 earthquake and fire, the story goes, Dietle sold this house to commission merchant John DeMartini for a bag of gold DeMartini had salvaged from his ruined business.",
+        place: "Charles Dietle House",
+        where: "294 Page St",
+        at: [-122.42556, 37.77389],
+        source: "https://en.wikipedia.org/wiki/Charles_Dietle_House",
       },
       {
-        icon: "art",
-        title: "Western Addition heritage",
+        icon: "church",
+        title: "A Julia Morgan club turned Zen temple",
         text:
-          "Part of the historic Western Addition, the area is long tied to San Francisco's Black community and its cultural legacy.",
+          "Julia Morgan designed this building, completed in 1922 as the Emanu-El Residence Club, where the Emanu-El Sisterhood offered room and board to as many as 70 single Jewish women, working or studying, at a time. The club closed in 1969, and that year Shunryu Suzuki, who had arrived in 1959 to lead the Sokoji temple on Bush Street, founded the San Francisco Zen Center's City Center here. Also called Beginner's Mind Temple, or Hosshin-ji, it is one of the Zen Center's three practice communities, with Green Gulch Farm and Tassajara.",
+        place: "San Francisco Zen Center",
+        where: "300 Page St",
+        at: [-122.42600, 37.77374],
+        source: "https://sfzc.org/about-city-center",
       },
       {
-        icon: "shop",
-        title: "Records, skate, and vintage",
+        icon: "park",
+        title: "A park from a burned lot",
         text:
-          "Record stores, skate shops, and vintage spots give the few blocks a creative, independent retail character.",
+          "An apartment building on this site burned down in 1973, and members of the Koshland family bought the land and gave it to the city as a park in tribute to their father, Daniel E. Koshland Sr.; the city counts it among the Trust for Public Land's first projects, established in 1976. The family gave $400,000 more for a renovation the city accepted in 1997, and in October 2025 the Recreation and Park Commission approved a redesign of the park's community garden, backed by the Trust for Public Land.",
+        place: "Koshland Park",
+        where: "Page St & Buchanan St",
+        at: [-122.42742, 37.77358],
+        source: "https://sfrecpark.org/1848/Koshland-Park-Community-Garden-Renovatio",
+      },
+      {
+        icon: "shopping",
+        title: "Four blocks of storefronts",
+        text:
+          "Commercially zoned lots line Haight Street for about four blocks, from Webster to Scott, and a 2016 city planning workshop treated the blocks either side of Fillmore as the strip's commercial core. Restaurants, cafés, bars, small nightclubs, galleries and hair salons fill the storefronts. The street built up after the cable line opened on Haight in 1883, and in the 1990s its record shops made these blocks a center of the city's DJ, hip-hop and rave culture.",
+        place: "Lower Haight shops",
+        where: "Haight St & Fillmore St",
+        at: [-122.43052, 37.77210],
+        source: "https://commissions.sfplanning.org/cpcpackets/2014-001722CUA.pdf",
+      },
+      {
+        icon: "road",
+        title: "A bike route down an old valley",
+        text:
+          "Here the Wiggle, the zig-zag bike route from Market Street toward Golden Gate Park, turns off Pierce onto Haight on its way to Scott and Fell streets. Over about a mile it rises some 120 feet at grades averaging about 3% and never over 6%, roughly following the paved-over watercourse of the Sans Souci Valley. Natural historian Joel Pomerantz gave the route its name in a 1994 article.",
+        place: "The Wiggle",
+        where: "Haight St & Pierce St",
+        at: [-122.43379, 37.77168],
+        source: "https://en.wikipedia.org/wiki/The_Wiggle",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 0.6 miles for visitors and would-be neighbors, starting at the 7 bus stop at Haight and Laguna: a block north to a landmark Victorian and a Julia Morgan-designed Zen temple on Page Street, west to Koshland Park, then down Webster to the Haight Street shops and on to the Wiggle at Pierce Street. Allow about 30 minutes; go by day, when the shops are open, and on a weekend afternoon for the busiest Haight Street.",
+      miles: 0.6,
+      minutes: 30,
+      tip:
+        "The blocks of Haight either side of Fillmore are the walk's coffee stop. At the end, you can follow the Wiggle a block west on Haight and north up Scott Street to Fell, or catch the 7 at Haight and Pierce back toward Market Street.",
+    },
     restaurants: [
       { name: "Kate's Kitchen", address: "471 Haight St", phone: "(415) 626-3984", url: "https://orderkateskitchen.com" },
       { name: "The Grind Cafe", address: "783 Haight St", phone: "(415) 864-0955", url: "https://thegrindcafe.com" },
@@ -3462,39 +3576,77 @@ export const NEIGHBORHOODS = {
       "Quiet, leafy, residential",
     ],
     history:
-      "Monterey Heights was laid out in the 1920s by the Baldwin & Howell real-estate firm as one of San Francisco's planned residence parks on the slopes near Mount Davidson, west of Glen Park and beside St. Francis Wood and Westwood Highlands. The developers platted gently curving, tree-lined streets and filled them with large single-family period-revival homes — Spanish, Mediterranean, and Tudor styles. Purely residential by design, it remains an affluent, view-rich enclave a century later.",
+      "Monterey Heights climbs the south slope of Mount Davidson on land that once belonged to Adolph Sutro, who had willed his original 1,400 acres as an educational trust so his forest would be preserved for public recreation. Some of his heirs persuaded the California Supreme Court to invalidate the will. In 1911 the heirs' appraiser, A.S. Baldwin, bought the mountain's western slope and much of the land to its north and south, about 700 acres for $1.4 million, according to historian Jacquie Proctor, and began planning residence parks there: St. Francis Wood, Westwood Park, Westwood Highlands, Forest Hill, Sherwood Forest and Monterey Heights.\n\nMonterey Heights is a small pocket of single-family streets between Yerba Buena Avenue on the east and San Jacinto Way on the west, with interior drives named for woods, such as Maywood, Fernwood and Rosewood. Its first houses, two-story custom homes of the 1920s, were comparable in size and quality to those in neighboring St. Francis Wood, and architect Harold G. Stoner designed many of them, including a Tudor on Maywood in 1929. In 1927 the parish of St. Emydius built a Spanish-style bungalow on Brentwood, furnished it and raffled it off to help pay for its new church. Building stopped during the Depression; from 1938 through 1942, split-level houses with garages went up.\n\nThe boulevard along the southern edge carries a name won in a fight. It began as Sunnyside Avenue, and as St. Francis Wood, Westwood Park and Westwood Highlands were developed around 1920, their developers and early residents petitioned City Hall to rename it Monterey Boulevard. Sunnyside residents led by Ernest Van Beck fought to keep the old name, and lost.",
     facts: [
       {
-        icon: "house",
-        title: "A planned residence park",
+        icon: "pin",
+        title: "Sutro's land, Baldwin's plan",
         text:
-          "Developed in the 1920s by Baldwin & Howell as a single-family residence park with large period-revival homes and no commercial lots.",
+          "Monterey Heights rose on land that had belonged to Adolph Sutro: in 1911 A.S. Baldwin, the appraiser for Sutro's heirs, bought Mount Davidson's western slope along with much of the land to its north and south, and began planning Monterey Heights there alongside St. Francis Wood, Westwood Park, Westwood Highlands, Forest Hill and Sherwood Forest. San Jacinto Way, which climbs north from this corner, marks the neighborhood's western edge.",
+        place: "San Jacinto Way",
+        where: "Monterey Blvd & San Jacinto Way",
+        at: [-122.46396, 37.73203],
+        source: "https://en.wikipedia.org/wiki/Mount_Davidson_(California)",
       },
       {
-        icon: "star",
-        title: "Mount Davidson next door",
+        icon: "house",
+        title: "Harold Stoner's 1929 Tudor",
         text:
-          "At 938 feet, adjacent Mount Davidson is the highest natural point in San Francisco, crowned by a 103-foot concrete cross.",
+          "Architect Harold G. Stoner designed many of Monterey Heights' houses, among them this 1929 Tudor at 225 Maywood; it is a private home, so admire it from the sidewalk. Born in Brighton, England, in 1890, Stoner left for Regina, Canada, before making his name in San Francisco, where his work included the “Tropic Beach” facade of the Sutro Baths and the building for Sally Rand's Nude Ranch at the 1939 Golden Gate International Exposition.",
+        place: "Maywood Drive Tudor",
+        where: "225 Maywood Dr",
+        at: [-122.46210, 37.73260],
+        source: "https://mtdavidson.org/monterey-heights/",
       },
       {
         icon: "road",
-        title: "Curving by design",
+        title: "Streets named for the woods",
         text:
-          "Streets were deliberately laid out to curve with the hillside contours, giving the neighborhood its leafy, parklike feel.",
+          "Yerba Buena Avenue forms Monterey Heights' eastern edge, and the interior streets are named for woods, among them Maywood, Fernwood and Rosewood. The first houses, two-story custom homes of the 1920s, were comparable in size and quality to those in neighboring St. Francis Wood; building stalled during the Depression and resumed in 1938 with split-level houses with garages, which went up through 1942.",
+        place: "Yerba Buena Avenue",
+        where: "Yerba Buena Ave & Miraloma Dr",
+        at: [-122.46080, 37.73551],
+        source: "https://mtdavidson.org/monterey-heights/",
       },
       {
         icon: "park",
-        title: "Trees and trails",
+        title: "Blue Mountain's Easter cross",
         text:
-          "Mature street trees and the eucalyptus groves of Mount Davidson Park, planted in Adolph Sutro's era, frame the slopes.",
+          "Monterey Heights sits on the south slope of Mount Davidson, which was called Blue Mountain when Adolph Sutro bought it and was later named for George Davidson, a charter member of the Sierra Club. More than 5,000 people braved rain to hike up before dawn for an Easter sunrise service at a 40-foot cross on the summit in 1923; that cross burned in December 1925, and the present 103-foot concrete cross was dedicated in 1934, when President Franklin D. Roosevelt lit it by telegraph from the White House.",
+        place: "Mount Davidson's south slope",
+        where: "Yerba Buena Ave & Hazelwood Ave",
+        at: [-122.45968, 37.73448],
+        source: "https://en.wikipedia.org/wiki/Mount_Davidson_(California)",
       },
       {
-        icon: "tram",
-        title: "West Portal nearby",
+        icon: "church",
+        title: "A house raffled for a church",
         text:
-          "The closest shops, restaurants, and Muni Metro station sit a short distance away along West Portal Avenue.",
+          "In 1927 the parish of St. Emydius, which needed about $130,000 to build its present church, built a Spanish-style bungalow called Casa Emydio on a lot at 245 Brentwood, the street that meets Yerba Buena here, furnished it inside and raffled it off. Mayor James Rolph attended its dedication on September 18, and the drawing was held at a ball in the Civic Auditorium on December 15, 1927. The church, completed in 1928 on Ashton Avenue, is named for the patron saint of protection against earthquakes.",
+        place: "Brentwood Avenue",
+        where: "Yerba Buena Ave & Brentwood Ave",
+        at: [-122.45908, 37.73365],
+        source: "https://mtdavidson.org/monterey-heights/",
+      },
+      {
+        icon: "road",
+        title: "The boulevard that was Sunnyside",
+        text:
+          "Monterey Boulevard, the neighborhood's southern edge, began as Sunnyside Avenue. As St. Francis Wood, Westwood Park and Westwood Highlands were developed around 1920, their developers and early residents petitioned City Hall to rename the street running through their tracts, according to Sunnyside historian Thomas Malim. Sunnyside residents led by Ernest Van Beck, owner of the Sunnyside Conservatory, fought to keep the old name, and lost.",
+        place: "Monterey Boulevard",
+        where: "Monterey Blvd & Yerba Buena Ave",
+        at: [-122.45882, 37.73098],
+        source: "https://mtdavidson.org/monterey-boulevard/",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of a little under a mile for visitors and would-be neighbors: start at the 23 Monterey bus stop at Monterey Boulevard and San Jacinto Way, climb through the interior streets past Harold Stoner's Tudor on Maywood Drive to Yerba Buena Avenue, then follow Yerba Buena, where the 43 bus runs, back down to Monterey Boulevard. Allow about 40 minutes, and go in daylight, when the 1920s houses are easiest to see.",
+      miles: 0.9,
+      minutes: 40,
+      tip:
+        "Monterey Heights has no shops of its own, so for cafés and restaurants head to West Portal Avenue, less than a mile to the north; the 23 bus runs along Monterey Boulevard at both ends of the walk.",
+    },
     nearby: ["West Portal"],
     restaurants: [
       { name: "Trattoria da Vittorio", address: "150 W Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
@@ -3528,39 +3680,87 @@ export const NEIGHBORHOODS = {
     ],
     aka: "NoPa",
     history:
-      "The Panhandle was laid out in the 1870s as the original eastern entrance to Golden Gate Park, shaped under engineer William Hammond Hall as a tree-lined carriage approach. Its elegant Victorians survived the 1906 earthquake, and the strip became a refugee campground for thousands left homeless. The blocks north of the park stayed quietly residential for decades until the restaurant Nopa opened in 2006, sparking a dining revival and christening the NoPa neighborhood.",
+      "The blocks around the Panhandle began as sand hills just west of Divisadero Street, which was laid out in the 1850s as the western edge of the Western Addition. In 1866 Congress handed San Francisco the dunes from Divisadero to the ocean, and by 1868 surveyors had mapped them into a grid of rectangular blocks; two years later streets were laid out, lots graded and land grants offered to investors and settlers. An eight-block strip between Fell and Oak streets became the eastern arm of the new Golden Gate Park, and in 1871 William Hammond Hall, the park's first superintendent, began planting it. A road called the Avenue wound down its middle.\n\nQueen Anne houses went up around it in the 1890s, among them a towered house at Baker and Hayes streets in 1891 and the Clunie House on Lyon Street in 1897, and in 1893 a firehouse with a tall hose tower rose on Oak Street. In 1903 President Theodore Roosevelt broke ground for a monument to William McKinley at the strip's eastern tip. After the 1906 earthquake, refugees camped on the Panhandle in tents and makeshift shelters.\n\nIn the 1950s and '60s the state planned an eight-lane freeway down the center of the Panhandle. Neighbors fought it for years, and on March 21, 1966, the Board of Supervisors voted 6–5 to reject it. That October the strip became a stage for the Haight-Ashbury counterculture: the Love Pageant Rally gathered on its lawns, and the Diggers began serving free food there. References to the blocks “North of the Panhandle” go back to the early 1900s, and the shorthand NoPa spread in the 2000s.",
     facts: [
       {
-        icon: "park",
-        title: "The park's original arm",
+        icon: "shop",
+        title: "The street once spelled Devisadero",
         text:
-          "The one-block-wide, three-quarter-mile strip was designed in the 1870s as Golden Gate Park's eastern entrance — a green spine still lined with mature trees.",
+          "Divisadero was laid out in the 1850s as the western edge of the Western Addition and was spelled Devisadero until 1909; from the 1870s on, the traffic its cable cars brought made it a busy commercial street. City zoning describes the Divisadero corridor, which runs from Haight Street to O'Farrell Street, as two- to four-story buildings with housing over a largely continuous row of storefronts serving nearby neighborhoods with everyday goods and services. This corner is the middle of the four blocks from Oak Street to Fulton Street, where restaurants, bars and shops fill the ground floors.",
+        place: "Divisadero Street shops and restaurants",
+        where: "Divisadero St & Hayes St",
+        at: [-122.43786, 37.77497],
+        source: "https://en.wikipedia.org/wiki/Divisadero_Street",
       },
       {
-        icon: "quake",
-        title: "1906 refuge",
+        icon: "tower",
+        title: "A landmark firehouse from 1893",
         text:
-          "After the earthquake and fires, thousands of displaced San Franciscans camped along the Panhandle's lawns in tents and shacks.",
-      },
-      {
-        icon: "house",
-        title: "Grand Victorians",
-        text:
-          "Stately Victorian and Edwardian rowhouses line the surrounding streets, many spared by the 1906 disaster.",
-      },
-      {
-        icon: "road",
-        title: "Bike & jog path",
-        text:
-          "A paved multi-use path runs the length of the green strip — a key cross-town commuter and recreation route.",
+          "Built in 1893 to a design by Henrikson & Mahoney, this Stick-Eastlake firehouse with its tall hose tower first housed Engine Company 21 and Truck Company 6; motorized apparatus arrived in 1915, and Engine 21 stayed until 1958, when it moved to Grove Street. After the 1906 earthquake, with the alarm system down, its crew went out to fight the Hayes Valley fires and stayed on duty for 54 hours. It is city Landmark No. 89, and in 2016 Hoodline called it the oldest firehouse still owned by the San Francisco Fire Department.",
+        place: "Fire Station No. 21",
+        where: "1152 Oak St",
+        at: [-122.43830, 37.77318],
+        source: "https://www.hoodline.com/2016/04/inside-old-station-21-landmark-firehouse/",
       },
       {
         icon: "star",
-        title: "NoPa was born here",
+        title: "A president in a medallion",
         text:
-          "The restaurant Nopa opened in 2006 and gave the North-of-Panhandle area its now-ubiquitous nickname.",
+          "An inscription on this memorial records that President Theodore Roosevelt broke ground for it on May 13, 1903, and more than 5,000 people came to its unveiling on November 24, 1904, though the sculptor, Robert Ingersoll Aitken, was not there. Aitken gave McKinley himself only a small bronze relief medallion on the granite pedestal and crowned the monument with a towering female figure representing the Republic.",
+        place: "McKinley Monument",
+        where: "Baker St & Oak St",
+        at: [-122.44111, 37.77306],
+        source: "https://en.wikipedia.org/wiki/William_McKinley_Memorial",
+      },
+      {
+        icon: "house",
+        title: "A congressman's corner house",
+        text:
+          "Architect William Curlett designed this Queen Anne house, finished in 1897 on a corner facing the Panhandle, for Thomas Jefferson Clunie, a lawyer, politician and real estate speculator who served as a state senator and a U.S. congressman. It has since been a private home, a nursing home, a bed and breakfast and student housing, and in the late 1960s it housed a hippie community; the city made it Landmark No. 128 in 1981.",
+        place: "Clunie House",
+        where: "301 Lyon St",
+        at: [-122.44275, 37.77368],
+        source: "https://www.sfexaminer.com/news/the-city/landmark-clunie-house-has-lived-at-forefront-of-sf-history/article_c62e3339-8606-45d2-9082-7050ead9c46e.html",
+      },
+      {
+        icon: "park",
+        title: "Where the park's planting began",
+        text:
+          "William Hammond Hall, Golden Gate Park's first superintendent, began planting this strip in 1871, and the trio of species he relied on, Monterey cypress, Monterey pine and blue gum eucalyptus, are still stalwarts throughout the park. A road known as the Avenue once wound down the middle of the Panhandle, carrying horses and carriages and, after 1913, cars, until it was removed in 1955 and its asphalt replaced with grass.",
+        place: "Panhandle tree groves",
+        where: "Fell St & Central Ave",
+        at: [-122.44410, 37.77280],
+        source: "https://goldengatepark.substack.com/p/the-panhandle-tree-museum",
+      },
+      {
+        icon: "music",
+        title: "A rally the day LSD was outlawed",
+        text:
+          "On October 6, 1966, the day LSD became illegal in California, the Love Pageant Rally gathered in the Panhandle; its organizers, Allen Cohen and artist Michael Bowen, creators of the San Francisco Oracle, billed it as a celebration rather than a protest. That same month a flyer on Haight Street offered free stew and fruit at 4 p.m. in the Panhandle near Ashbury Street, the start of the Diggers' free meals, which fed up to 200 people a day until they petered out after October 1967.",
+        place: "Panhandle lawns at Ashbury Street",
+        where: "Fell St & Ashbury St",
+        at: [-122.44770, 37.77240],
+        source: "https://en.wikipedia.org/wiki/Love_Pageant_Rally",
+      },
+      {
+        icon: "road",
+        title: "The vote that saved the Panhandle",
+        text:
+          "In the 1950s and '60s the state planned an eight-lane freeway down the center of the Panhandle, extending the Central Freeway along Oak and Fell streets and tunneling under the north edge of Golden Gate Park toward Park Presidio Boulevard and the Golden Gate Bridge. Sue Bierman formed a council in her Haight-Ashbury neighborhood in 1964 to fight it, and on March 21, 1966, the Board of Supervisors voted 6–5 to reject both the Panhandle and Golden Gate freeways. The Panhandle's Susan J. Bierman Grove honors her, later a city supervisor; its plaque, dedicated on September 5, 2001, salutes her for uniting neighborhoods in an eight-year struggle.",
+        place: "Panhandle at Stanyan Street",
+        where: "Oak St & Stanyan St",
+        at: [-122.45350, 37.77160],
+        source: "https://en.wikipedia.org/wiki/Sue_Bierman",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.1 miles for visitors and would-be neighbors: start at Divisadero & Hayes (6 and 24 buses), walk south past the shops of Divisadero Street to the 1893 firehouse on Oak Street, then follow the Panhandle from the McKinley Monument at Baker Street, past the 1897 Clunie House, west to Stanyan Street, where Golden Gate Park begins. Allow about 55 minutes; a clear afternoon is best, when sun filters through the old trees.",
+      miles: 1.1,
+      minutes: 55,
+      tip:
+        "Pick up something to eat on Divisadero before you start and picnic on the Panhandle's lawns along the way. At the end, Golden Gate Park continues across Stanyan Street; for the ride back, the 33 Stanyan stops at Stanyan & Oak, and the 5 Fulton stops four blocks north at Fulton & Stanyan.",
+    },
     restaurants: [
       { name: "Nopa", address: "560 Divisadero St", phone: "(415) 864-8643", url: "https://www.nopasf.com" },
       { name: "Bar Crudo", address: "655 Divisadero St", phone: "(415) 409-0679", url: "https://www.barcrudo.com" },
