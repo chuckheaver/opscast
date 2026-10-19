@@ -143,9 +143,20 @@ def last_full_month(F=None):
     first=datetime.date(y,m,1)-datetime.timedelta(days=1)   # last day of prior month
     return first.replace(day=1), first
 
+def check_segments(F):
+    """Stop if a sale's property type is in neither segment: every closed sale
+    counts (the owner's rule), so a new type must be placed, never dropped.
+    Residential Income (2-4 unit buildings) goes in Condo / TIC / Other."""
+    known=set().union(*SEG.values())
+    new=sorted({r.get("propType") or "(blank)" for r in F} - known)
+    if new:
+        raise SystemExit(f"property type(s) in no segment: {', '.join(new)}. Add each to SEG in reports/market/market-grid-v2.py "
+                         f"(Residential Income goes in 'Condo / TIC / Other') and to the site's segment lists (AGENTS.md lists them).")
+
 def build(anchor=None):
     d=json.load(open(SRC)); F=[f["properties"] for f in d["features"]]
     if anchor is None: check_cut(d)
+    check_segments(F)
     for r in F: r["nb"]=N2A.get(FIX.get(r.get("neighborhood") or "", r.get("neighborhood") or ""))
     global CODE
     CODE=fog_codes(F)

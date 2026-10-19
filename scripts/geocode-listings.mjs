@@ -230,6 +230,15 @@ function loadAllListings() {
     console.log(`  ${f.split("/").pop()}: ${rows.length} rows`);
   }
   if (dupes) console.log(`  (skipped ${dupes} duplicate listing numbers across files)`);
+  // The owner's rule: every load includes Residential Income (2-4 unit
+  // buildings), counted with Condo / TIC / Other. Their MLS export leaves
+  // that class out unless it is ticked, so say so loudly when it is missing.
+  const types = {};
+  for (const l of byId.values()) types[l.propType || "(blank)"] = (types[l.propType || "(blank)"] || 0) + 1;
+  console.log(`  property types: ${Object.entries(types).sort((a, b) => b[1] - a[1]).map(([t, n]) => `${t} ${n}`).join(" · ")}`);
+  if (!Object.keys(types).some(t => /income|\bunits?\b|duplex|triplex|fourplex|multi/i.test(t)))
+    console.warn("  ! REMINDER for the owner: this load has no Residential Income properties. Add Residential Income to the MLS export"
+      + " and reload; those sales count with Condo / TIC / Other (see AGENTS.md).");
   // The site shows SOLD comps only (Closed / Sold Off MLS — the same set as
   // SOLD_STATUSES in app/listings/lib/filter.js). Older exports left in
   // data/raw/ carry Active / Pending / Hold / Coming Soon rows; drop them here

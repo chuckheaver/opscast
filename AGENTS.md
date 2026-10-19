@@ -35,6 +35,20 @@ The owner's rules:
   2026"), with no prior-year columns.
 - Every closed sale counts (BMR units included) and reported square footage
   stands. A sale with no square footage is left out of $/sf figures only.
+- Every data load includes "Residential Income" properties (2-4 unit
+  buildings), and they count with Condo/TIC/Other. The owner's MLS export
+  leaves that class out unless it is selected: when a new load arrives,
+  check it has Residential Income sales (`scripts/geocode-listings.mjs`
+  prints the property types and warns when there are none) and, if not,
+  remind the owner to add Residential Income to the export before
+  rebuilding. When Residential Income types first appear, add their exact
+  names to the Condo/TIC/Other segment everywhere a segment is decided:
+  `SEG` in `reports/market/market-grid-v2.py` (the report stops on a type
+  in no segment), the condo test in `scripts/build-neighborhood-stats.mjs`
+  and `scripts/build-landing-stats.mjs`, `collectFor` in
+  `app/fog/NeighborhoodModal.jsx` and `SEG_TYPES` in `app/fog/FogApp.jsx`
+  (the map's dot colours already treat any type that isn't single-family
+  as Condo/TIC/Other).
 - A sale under $100K is parking, a rental or an entry error: it is left out.
 - A duplicated sale counts once, keeping the Closed record.
 - A sale over $25M is probably an entry error: it stays in, but always point
