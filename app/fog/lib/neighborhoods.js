@@ -3792,39 +3792,77 @@ export const NEIGHBORHOODS = {
       "Beloved Italian restaurants",
     ],
     history:
-      "West Portal takes its name from the western mouth of the Twin Peaks Tunnel, which opened in February 1918 and finally let Muni streetcars reach the area. Trains emerging from the portal turned a stretch of sand-dune outskirts into a thriving streetcar suburb, and West Portal Avenue grew into its commercial spine. Today the avenue keeps its small-town, family-friendly character beside St. Francis Wood and Forest Hill.",
+      "West Portal was part of Rancho San Miguel, José de Jesús Noé's Mexican land grant, and later belonged to Adolph Sutro. After Sutro's heirs broke the trust on the land, tracts went to Mason-McDuffie, Newell-Murdoch and Fernando Nelson, who created St. Francis Wood, Forest Hill and West Portal. Before the tunnel the slope was largely barren, with no West Portal Avenue yet. On July 14, 1917, crowds watched Mayor James Rolph and City Engineer M.M. O'Shaughnessy drive a ceremonial spike at the future corner of West Portal Avenue and Ulloa Street to mark the Twin Peaks Tunnel's finished bore, and on February 3, 1918, the K Ingleside streetcar began running out of its western portal, which gave the neighborhood its name.\n\nNelson became its primary builder, and more streetcar lines followed: the L Taraval along Ulloa Street in 1919 and the M Ocean View in 1925. A business district grew up on the new avenue, which a Western Neighborhoods Project history says served as the commercial strip for the residence parks around it, keeping shops apart from homes in a way that became commonplace in Bay Area suburbs only after World War II. The Moorish-style Portal Theatre, credited to architect Irving Morrow, who later shaped the Golden Gate Bridge's towers and lighting, opened there on December 26, 1925.\n\nThe branch library opened in 1936 and three years later reopened in its WPA-built home beside the portal. For Muni Metro's light rail, the portal's curbside stop was rebuilt into today's station, which opened on April 2, 1979. The theater, renamed the Empire in 1936 and split into three screens in 1974, closed for good in January 2021, during the pandemic.",
     facts: [
       {
         icon: "tram",
-        title: "Out of the tunnel",
+        title: "A spike at an empty corner",
         text:
-          "The neighborhood is named for the west portal of the Twin Peaks Tunnel, where Muni streetcars emerge into daylight at the foot of the avenue.",
+          "On July 14, 1917, crowds gathered at what would become this corner to watch Mayor James Rolph and City Engineer M.M. O'Shaughnessy drive a ceremonial spike marking the completion of the Twin Peaks Tunnel's bore; captions in the Western Neighborhoods Project's photo archive say Rolph drove a silver spike after walking through the tunnel. On February 3, 1918, Muni's K Ingleside streetcar began running through the tunnel's Beaux-Arts western portal, at first only as far as St. Francis Circle. What began as little more than a curbside stop was rebuilt for Muni Metro's light rail, and the new West Portal Station opened on April 2, 1979.",
+        place: "Twin Peaks Tunnel west portal",
+        where: "West Portal Ave & Ulloa St",
+        at: [-122.46590, 37.74087],
+        source: "https://www.sfmta.com/blog/twin-peaks-tunnel-portal-west",
       },
       {
-        icon: "subway",
-        title: "Opened 1918",
+        icon: "book",
+        title: "The WPA's Mediterranean library",
         text:
-          "The Twin Peaks Tunnel opened in February 1918, connecting the area to downtown and sparking its build-out as a streetcar suburb.",
+          "The West Portal branch first opened on May 2, 1936, on land the Board of Education had transferred to the library that February. Just three years later, on May 8, 1939, it reopened in this building, designed by architect Frederick H. Meyer and built by the Works Progress Administration for $109,090, in a Mediterranean style with red ceramic roof tiles and painted ceiling beams. Its renovation, completed on February 10, 2007, was the second finished under the branch program funded by the city's 2000 library bond.",
+        place: "West Portal Branch Library",
+        where: "190 Lenox Way",
+        at: [-122.46616, 37.74135],
+        source: "https://sfpl.org/locations/west-portal/west-portal-library-history",
       },
       {
-        icon: "shopping",
-        title: "The avenue",
+        icon: "house",
+        title: "West Portal's primary builder",
         text:
-          "West Portal Avenue is the commercial spine — a low-rise strip of locally owned shops, cafés, and restaurants.",
+          "Fernando Nelson, whom the Western Neighborhoods Project calls West Portal's primary builder, is best known for buying the land at the west end of the Twin Peaks Tunnel to establish the neighborhood. He built his first San Francisco house at 16 and, by one count, more than 4,000 homes in all, and his habit was to buy whole blocks, once even 50 acres, and fill them with similar houses. He built around West Portal before moving on to Mount Davidson Manor in 1923.",
+        place: "Forest Side Avenue",
+        where: "Ulloa St & Forest Side Ave",
+        at: [-122.46864, 37.74149],
+        source: "https://mtdavidson.org/mount_davidson_manor",
       },
       {
-        icon: "stroller",
-        title: "Village by design",
+        icon: "tram",
+        title: "When the L was a shuttle",
         text:
-          "Walkable and quiet, West Portal is known as one of the city's most family-friendly, village-like neighborhoods.",
+          "Muni's L Taraval, which runs along Ulloa Street here, opened on April 12, 1919, with a new connection from West Portal by way of Ulloa Street and 15th Avenue. Ridership was low at first, so small “dinky” streetcars bought for Muni's E-Union line across town shuttled between West Portal and Taraval Street at 33rd Avenue, and riders bound downtown changed to the K at the portal. The tracks reached 48th Avenue at Ocean Beach in January 1923, and larger streetcars later replaced the shuttle, running through to the Ferry Building.",
+        place: "L Taraval on Ulloa Street",
+        where: "Ulloa St & 14th Ave",
+        at: [-122.47010, 37.74150],
+        source: "https://www.sfmta.com/blog/dunes-destinations-100-years-l-taraval",
       },
       {
-        icon: "movie",
-        title: "The old Empire",
+        icon: "church",
+        title: "A parish that began in a house",
         text:
-          "The 1925 Portal Theatre, later the CineArts Empire, lit up the avenue for decades before closing in 2021.",
+          "Archbishop Edward J. Hanna established St. Cecilia parish in 1917 and named the Rev. John P. Tobin its first pastor; a house at 1215 Taraval Street served as its first church and rectory, followed by an old converted schoolhouse on Taraval. By the parish's own count, 59 Catholic families lived within its boundaries on January 7, 1917, a territory that took in West Portal, Forest Hill, St. Francis Wood, Merritt Terrace, Sunset Terrace and the Parkside. Today the parish church stands here on 17th Avenue.",
+        place: "St. Cecilia Church",
+        where: "2555 17th Ave",
+        at: [-122.47369, 37.73956],
+        source: "https://stcecilia.com/parishhistory",
+      },
+      {
+        icon: "shop",
+        title: "Main street for the residence parks",
+        text:
+          "San Francisco's Planning Code describes the West Portal Avenue commercial district as three long blocks of West Portal Avenue, from Ulloa Street to 15th Avenue, plus one block of Ulloa. There was no West Portal Avenue before the tunnel; a business district grew up along it with the streetcars, and a Western Neighborhoods Project history says it served as the commercial strip for the residence parks around it. Today shops, cafés and restaurants fill its small-scale storefronts.",
+        place: "West Portal Avenue shops",
+        where: "West Portal Ave & 14th Ave",
+        at: [-122.46905, 37.73796],
+        source: "https://dev-codelibrary.amlegal.com/codes/san_francisco/latest/sf_planning/0-0-0-25735",
       },
     ],
+    walk: {
+      intro:
+        "A loop of about 1.3 miles for visitors and would-be neighbors that starts and ends at West Portal Station, where K, L and M trains come out of the Twin Peaks Tunnel: past the library, west along Ulloa Street, where L Taraval trains run, to St. Cecilia Church, then back by Vicente Street and 15th Avenue to walk the shops of West Portal Avenue to the station. Allow about an hour, and go in the daytime, when the library is open and the avenue is busy.",
+      miles: 1.3,
+      minutes: 60,
+      tip:
+        "Save coffee or lunch for the end of the loop, on West Portal Avenue a few steps from the trains; near the start, step inside the library if it is open to see the painted ceiling beams of its 1939 interior.",
+    },
     restaurants: [
       { name: "Trattoria da Vittorio", address: "150 W Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
       { name: "Little Original Joe's", address: "393 W Portal Ave", phone: "(415) 759-1155", url: "https://www.littleoriginaljoes.com" },
@@ -3857,39 +3895,67 @@ export const NEIGHBORHOODS = {
       "Affluent & residential",
     ],
     history:
-      "Balboa Terrace was laid out in the early 1920s as one of San Francisco's planned \"residence parks\" west of Twin Peaks, in the Mason-McDuffie / Baldwin & Howell era of bespoke garden suburbs. Architects gave the enclave a cohesive look of Mediterranean, Tudor, and Spanish Colonial Revival homes on winding streets. Distinctive brick gateposts mark the entrances, and planted medians and mature landscaping reinforce the park-like feel that still defines the neighborhood a century later.",
+      "Balboa Terrace fills a wedge between Junipero Serra Boulevard, Monterey Boulevard and Ocean Avenue, just south of St. Francis Wood. It was once part of Adolph Sutro's estate, whose largest piece was 1,200 acres of Rancho San Miguel, the Mexican land grant of 1845. Sutro willed those acres to a charitable trust, but after his death in 1898 his heirs broke it, and buyers including A.S. Baldwin and Duncan McDuffie took most of the land for residence parks. The homes association dates the first Balboa Terrace filing to 1912, by Baldwin & Howell.\n\nNewell-Murdoch, then developing Forest Hill, paid $100,000 for the property in May 1918, but the Western Neighborhoods Project says debts and World War I construction restrictions pushed it out of the housing business. In 1920 the John Rosenfeld's Sons Company, represented by Lang Realty, filed the official plat, designed by Punnett & Parez, and brothers Ernest C. and Oscar M. Hueter, self-described capitalists, bought the tract soon after. Hueter Homes built most of the houses in the 1920s; architect Harold G. Stoner designed as many as 60 percent of them, Walter Zweig supervised construction and Lang Realty sold them, and the Langs, Hueters and Zweigs were all related. The styles run from single-story English cottages to Spanish Colonial and Italian Renaissance Revival.\n\nDeed restrictions adopted in 1920 limited the tract to single-family detached houses, with setbacks and height limits. The 1924 covenants also barred selling or renting to anyone but white people, a restriction typical of residence parks of the era. In 1948, in Shelley v. Kraemer, the U.S. Supreme Court ruled that courts could not enforce such covenants.",
     facts: [
       {
-        icon: "road",
-        title: "Planned residence park",
+        icon: "tram",
+        title: "Where the K turned south",
         text:
-          "One of a cluster of 1920s residence parks west of Twin Peaks, designed as a unified garden suburb rather than a standard grid.",
+          "Muni's K line opened on February 3, 1918, the first to run through the new Twin Peaks Tunnel, but it ended at St. Francis Circle rather than cross the private United Railroads' tracks. After a November 1918 agreement let city streetcars use that trackage, the K was extended south down Junipero Serra Boulevard and began serving this corner in 1919. The stop itself dates to around 1896, and United Railroads' 12 line served it before the K arrived.",
+        place: "Junipero Serra and Ocean station",
+        where: "Ocean Ave & Junipero Serra Blvd",
+        at: [-122.47175, 37.73129],
+        source: "https://en.wikipedia.org/wiki/Junipero_Serra_and_Ocean_station",
       },
       {
         icon: "house",
-        title: "Period-revival cohesion",
+        title: "Stoner's houses for the Langs",
         text:
-          "Single-family homes in coordinated Mediterranean, Tudor, and Spanish Colonial Revival styles give the small enclave unusual architectural unity.",
+          "Harold G. Stoner, chief architect for Lang Realty, which promoted and sold Balboa Terrace, designed the R.D. Lang residence at 121 Junipero Serra in 1924 and the T.F. Lang residence at 141 in 1935, works the Mount Davidson history site says show his range in historical revival designs. Historian Jacquie Proctor writes that 121 was built as a family home at the entrance of the development. Both are private homes, so admire them from the sidewalk.",
+        place: "Lang houses",
+        where: "121 Junipero Serra Blvd",
+        at: [-122.47105, 37.73295],
+        source: "https://mtdavidson.org/harold-g-stoner/",
       },
       {
-        icon: "park",
-        title: "Gateposts and medians",
+        icon: "road",
+        title: "Built out one street at a time",
         text:
-          "Brick entry gateposts and planted street medians signal the neighborhood's boundaries and lend it a private, park-like character.",
+          "In October 1926 The Home Designer and Garden Beautiful named Ernest C. and Oscar Hueter as the land's owners and described their method: once an entire block or avenue was built up, activity moved on to the next street. Designs ran from Italian Renaissance villas to English cottage types, though most were Italian or Spanish by popular demand, among them the Kaplan home built that year on San Benito Way. Stoner's firm, which designed most of the houses, exercised architectural supervision over each one.",
+        place: "San Benito Way",
+        where: "San Benito Way & Monterey Blvd",
+        at: [-122.46697, 37.73285],
+        source: "https://mtdavidson.org/balboa-terrace/",
       },
       {
-        icon: "money",
-        title: "Quietly affluent",
+        icon: "house",
+        title: "The Chronicle's Model Home No. 2",
         text:
-          "A small, well-kept district of owner-occupied homes, consistently among the city's pricier and most stable residential pockets.",
+          "Harold G. Stoner designed this mock Tudor house as San Francisco Chronicle Model Home No. 2, and OpenSFHistory holds a photograph of it whose old caption misidentified the neighborhood as Monterey Heights. Stoner designed as many as 60 percent of Balboa Terrace's houses, and the Western Neighborhoods Project says Walter Zweig supervised their construction. It is a private home, so admire it from the sidewalk.",
+        place: "Chronicle Model Home",
+        where: "540 Darien Way",
+        at: [-122.46575, 37.73138],
+        source: "https://test.opensfhistory.org/keyword/Copy%20Negative?page=388",
       },
       {
-        icon: "tram",
-        title: "Streetcar-era suburb",
+        icon: "pin",
+        title: "Thirty-six more acres from Sutro",
         text:
-          "Developed alongside the Twin Peaks Tunnel and West Portal streetcar lines that opened the western neighborhoods to commuters.",
+          "In 1924 the Hueter brothers paid Charles W. Sutro $325,000 for 36 acres to the east and south of the original tract, taking Balboa Terrace to the east side of today's San Aleso Avenue. The K streetcar stops here at Aptos Avenue for the ride back through the Twin Peaks Tunnel.",
+        place: "Ocean Avenue at Aptos",
+        where: "Ocean Ave & Aptos Ave",
+        at: [-122.46771, 37.72834],
+        source: "https://www.outsidelands.org/balboa-terrace.php",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of just under a mile for visitors and would-be neighbors: start at the Junipero Serra and Ocean stop, served by the K streetcar and the 57 bus, head north up Junipero Serra Boulevard and east along Monterey Boulevard, then follow San Benito Way and Darien Way past the 1920s houses and finish at the K stop at Ocean and Aptos avenues. Allow about 35 minutes; a clear afternoon shows off the period-revival facades.",
+      miles: 0.9,
+      minutes: 35,
+      tip:
+        "Balboa Terrace's own streets have no shops; the nearest are just west across Junipero Serra Boulevard in the Lakeside Village commercial district on Ocean Avenue, or ride the K inbound past St. Francis Circle to the shops of West Portal Avenue.",
+    },
     nearby: ["West Portal", "Ocean Avenue"],
     restaurants: [
       { name: "Elena's Mexican Restaurant", address: "255 W Portal Ave", phone: "(415) 622-4440", url: "https://www.elenasmexican.com" },
@@ -3923,39 +3989,77 @@ export const NEIGHBORHOODS = {
     ],
     aka: "New Chinatown",
     history:
-      "The Richmond rose from the windswept \"Outside Lands\" sand dunes the city annexed in the late 1800s. Local lore credits an Australian settler with naming the district for Richmond, Victoria. Streetcars opened the dunes to development, and successive waves of immigrants gave it character: a large Russian community fleeing revolution, then Chinese, Burmese, and other Asian families whose markets and restaurants made Clement Street the bustling corridor known today as the \"New Chinatown.\"",
+      "The Inner Richmond began as part of the Outside Lands, the sand dunes west of the young city, whose title Congress settled in 1866. Australian-born art dealer George Turner Marsh, who built a house around 1876 near today's 12th Avenue and Clement Street, is credited with the name: he called it Richmond House, after the Richmond near Melbourne, and in 1890 the Board of Supervisors made the Richmond District official. The road west was Point Lobos Avenue, today's Geary Boulevard, and in a dance hall beside it the district's Catholic families held their first Mass, on Easter Sunday 1887.\n\nTransit filled in the dunes. In 1896 Adolph Sutro underwrote an electric trolley line the length of Clement Street, and after the 1906 earthquake and fire, refugees flooded west and building boomed, bringing Irish, Jewish and Russian newcomers. In 1909 the city traded the district's lettered streets for Spanish explorers' names; on December 28, 1912, Muni's first streetcars began running out Geary; and in 1914 San Francisco's first Carnegie-funded library opened on Ninth Avenue. In 1917, to avoid confusion with the city of Richmond across the bay, the city renamed the area the Park Presidio District. The name never caught on, and a 2009 ordinance formally gave the Richmond its name back.\n\nBy the 1950s, an SFMOMA neighborhood history notes, so many Chinese American families had bought houses along Clement Street that locals called it “New Chinatown,” and Chinese immigration to the Richmond accelerated after 1965.",
     facts: [
       {
         icon: "shop",
-        title: "New Chinatown",
+        title: "A trolley built a main street",
         text:
-          "Clement Street and Geary Boulevard pack in Chinese, Burmese, Russian, and pan-Asian restaurants and markets, earning the area its \"New Chinatown\" nickname.",
+          "Adolph Sutro underwrote an electric trolley line the length of Clement Street in 1896, and it helped make the street a commercial corridor; a new wave of building followed the 1906 earthquake and fire. From Arguello Boulevard to Funston Avenue, about a dozen blocks, the city zones it the Inner Clement Neighborhood Commercial District, which the Planning Code credits with one of the greatest concentrations of restaurants of any commercial street in San Francisco, alongside specialty groceries, variety stores and salons. Yet the district barred new restaurants of any kind from its creation in 1987 until a 2007 ordinance made room for three new full-service restaurants.",
+        place: "Clement Street shops",
+        where: "Clement St & 6th Ave",
+        at: [-122.46446, 37.78304],
+        source: "https://www.tclf.org/clement-street",
       },
       {
         icon: "church",
-        title: "Gold-domed landmark",
+        title: "First Mass in a dance hall",
         text:
-          "Holy Virgin Cathedral (\"Joy of All Who Sorrow\"), the gold-domed Russian Orthodox cathedral on Geary, was completed in 1965 and holds the relics of St. John of Shanghai and San Francisco.",
+          "In 1886, 41 Catholic families in the young Richmond felt ready to keep a church of their own, and their first Mass was celebrated on Easter Sunday 1887 upstairs in Farrell's Dance Hall, at Ninth Avenue and Point Lobos Avenue, as Geary was then called. Within a year they had built a 500-seat wooden church, and in 1894 the mission became a full parish under Father John P. Coyle, described as the first native San Franciscan ordained a Catholic priest; Star of the Sea marked 125 years as a parish in 2019.",
+        place: "Star of the Sea Church",
+        where: "4420 Geary Blvd",
+        at: [-122.46669, 37.78106],
+        source: "https://richmondsunsetnews.com/2019/11/03/star-of-the-sea-church-celebrates-its-quasquicentennial/",
       },
       {
         icon: "book",
-        title: "Green Apple Books",
+        title: "The city's first Carnegie library",
         text:
-          "Open on Clement Street since 1967, Green Apple is one of the city's most beloved independent bookstores, famous for its creaky floors and labyrinth of new and used titles.",
+          "Opened in 1914, this was the first library building in San Francisco built with Andrew Carnegie's grant money, the first of seven Carnegie branches in the city, designed by the Beaux-Arts firm Bliss & Faville. It replaced the Richmond's first branch, opened in 1892 at 809 Point Lobos Avenue, and became city Landmark No. 247 in 2005. A renovation finished in May 2009 added a pair of two-story wings on either side and rebuilt the historic reading room's ornamental ceiling.",
+        place: "Richmond Branch Library",
+        where: "351 9th Ave",
+        at: [-122.46772, 37.78195],
+        source: "https://sfpl.org/locations/richmond/library-history",
       },
       {
-        icon: "sun",
-        title: "Fog factory",
+        icon: "star",
+        title: "A concrete bowl on Clement Street",
         text:
-          "Wedged between the Pacific and downtown, the Inner Richmond catches the marine layer that rolls through the Golden Gate, keeping summer days cool and gray.",
+          "Congregation Beth Sholom traces its unofficial founding to 1906, when the earthquake displaced Russian Jewish émigrés; 17 men formally founded it in October 1921, and in 1934 the cornerstone of its first synagogue was laid on this corner. In 2001 it chose architect Stanley Saitowitz to design a new home, and the congregation moved in in May 2008. Its two main volumes are a monumental concrete bowl set atop a one-story base and a near-cube sheathed in zinc-coated steel and glass; the architect lists a 2009 AIA San Francisco design honor award.",
+        place: "Congregation Beth Sholom",
+        where: "Clement St & 14th Ave",
+        at: [-122.47348, 37.78252],
+        source: "https://www.bethsholomsf.org/our-building",
       },
       {
-        icon: "park",
-        title: "Green on both sides",
+        icon: "road",
+        title: "Where the alphabet begins",
         text:
-          "The neighborhood is framed by Golden Gate Park to the south and the Presidio to the north, putting thousands of acres of trails and trees within a short walk.",
+          "Until 1909 this was B Street. That year a city commission gave the Richmond's lettered streets the names of Spanish explorers, so A, B and C streets became Anza, Balboa and Cabrillo; D Street had already become Fulton because it ran out from downtown. Residents of the Richmond and Sunset protested, fearing their districts would be called San Francisco's “Spanish Town,” but the names stuck.",
+        place: "Anza, Balboa and Cabrillo streets",
+        where: "Balboa St & 12th Ave",
+        at: [-122.47042, 37.77694],
+        source: "https://www.kqed.org/news/12079532/from-anza-to-yorba-the-messy-history-behind-the-richmond-and-sunsets-street-names",
+      },
+      {
+        icon: "tram",
+        title: "Muni's first line ended here",
+        text:
+          "The city's Municipal Railway opened on December 28, 1912, and its first A-Geary schedule began at this corner: inbound cars left Tenth Avenue and Fulton Street, at the edge of Golden Gate Park, ran up to Geary and went on downtown to Kearny and Market streets in 28 minutes. SFMTA says service began in 1912 on the A and B lines, along Geary between downtown and 33rd Avenue. Today the 5 and 5R Fulton buses stop here.",
+        place: "A-Geary line terminal",
+        where: "Fulton St & 10th Ave",
+        at: [-122.46839, 37.77335],
+        source: "https://www.streetcar.org/munis_first_schedule_from_our_archives",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 2 miles for visitors and would-be neighbors: start at the Geary Blvd & Arguello Blvd stop (33, 38 and 38R), walk a block north to Clement Street and west along its shops, detour a block south to the church on Geary and the library on Ninth Avenue, follow Clement to 14th Avenue, then head south to Balboa Street and on to Golden Gate Park's edge at 10th Avenue and Fulton Street. Allow about 90 minutes; late morning or early afternoon, when the shops are open, is best.",
+      miles: 2.1,
+      minutes: 90,
+      tip:
+        "The route sticks to the avenue grid, with no stairways or steep climbs. Save a coffee or lunch stop for Clement Street; at the end, the 5 and 5R Fulton stop at 10th Avenue and Fulton Street for the ride back toward downtown, with Golden Gate Park across the street.",
+    },
     restaurants: [
       { name: "Burma Superstar", address: "309 Clement St", phone: "(415) 387-2147", url: "https://www.burmasuperstar.com" },
       { name: "B Star", address: "127 Clement St", phone: "(415) 933-9900", url: "https://www.bstarbar.com" },
@@ -3987,39 +4091,97 @@ export const NEIGHBORHOODS = {
       "Victorian flats & bakeries",
     ],
     history:
-      "Mission San Francisco de Asís was founded in 1776 and nicknamed Mission Dolores for the nearby Laguna de los Dolores. Its adobe chapel, completed in 1791, is the oldest intact building in San Francisco and survived the 1906 quake; the grand Mission Dolores Basilica beside it dates to 1918. The surrounding neighborhood of Victorian and Edwardian flats grew up around the church, and today Mission Dolores Park draws sun-seekers to its sloping lawns and skyline views.",
+      "Franciscan missionaries founded Mission San Francisco de Asís in 1776, and its everyday name, which the neighborhood shares, came from a nearby creek, the Arroyo de los Dolores, or “Creek of Sorrows.” Native American laborers built its adobe church, the city's oldest intact building, between 1782 and 1791. In the 1850s two plank roads linked the mission to downtown; Col. Charles Wilson finished the Mission Plank Road, along today's Mission Street, on March 18, 1851, the last day his franchise allowed, and charged 50 cents for a horse and cart. The area became a resort and entertainment district, with saloons and gambling halls in some old mission properties, racetracks nearby and staged fights between bulls and bears.\n\nThe two Tanforan cottages on Dolores Street are said to date from the early 1850s. From 1861 the slope to the south held Jewish cemeteries, later moved to Colma, and in 1905 the city bought the land for a park. A year later the fire that followed the earthquake burned only to the east edge of Dolores Street, sparing the mission church, the cottages and the new park, where more than 1,600 homeless families camped until the summer of 1908. Levi Strauss & Co. replaced its burned plant south of Market with a factory on Valencia Street, and the burned blocks were rebuilt in the years through 1915.\n\nFrom the 1970s Valencia Street was a lesbian cultural corridor, with women's cafés, bars and a feminist bookstore, and in 1979 the Women's Building bought a 1910 hall on 18th Street. In 2026 the city made two pockets of early houses, around Chula Lane and Abbey Street and around Alert Alley, historic districts.",
     facts: [
       {
         icon: "church",
-        title: "Oldest building in SF",
+        title: "A mural hidden since 1796",
         text:
-          "The Mission Dolores adobe chapel, completed in 1791, is the oldest intact structure in San Francisco and came through the 1906 earthquake undamaged.",
-      },
-      {
-        icon: "flag",
-        title: "Founded 1776",
-        text:
-          "Mission San Francisco de Asís was founded in 1776, the sixth of California's 21 Spanish missions and the namesake of the entire Mission District.",
-      },
-      {
-        icon: "park",
-        title: "Dolores Park",
-        text:
-          "Mission Dolores Park opened in 1905 on former cemetery land and served as a refugee camp after the 1906 quake; today its lawns are the city's favorite sunny gathering spot.",
-      },
-      {
-        icon: "sun",
-        title: "Sunny microclimate",
-        text:
-          "Sheltered from the coastal fog that blankets the western neighborhoods, Mission Dolores enjoys some of the warmest, sunniest weather in the city.",
+          "Native American laborers built this adobe church between 1782 and 1791; it is the oldest intact building in San Francisco, and its National Register nomination calls it the city's oldest essentially unaltered building. On the wall behind its altar, Ohlone painters made a mural in 1791 that an altarpiece, or reredos, has hidden since 1796; in 2004 artist Ben Wood and archaeologist Eric Blind lowered a camera through a trap door in the attic to photograph it, work that won a Governor's Historic Preservation Award. In the cemetery beside it, which the mission calls the only one left within city limits, lie Luis Antonio Argüello, the first governor of California under Mexican rule, and Francisco de Haro, San Francisco's first alcalde.",
+        place: "Mission Dolores",
+        where: "3321 16th St",
+        at: [-122.42703, 37.76439],
+        source: "https://en.wikipedia.org/wiki/Mission_Dolores_mural",
       },
       {
         icon: "house",
-        title: "Victorian flats",
+        title: "Among the city's oldest houses",
         text:
-          "The streets around Dolores and Church are lined with ornate Victorian and Edwardian flats, many predating the 1906 earthquake.",
+          "These two small cottages are city Landmarks No. 67 and No. 68: 214 Dolores is said to have been built a little before 1853 and 220 not long after, though the first firm date is 1866, when the owner of 214 had water piped in. The Tanforan family gave them to their daughters, and they stayed in the family until the mid-20th century; a small carriage house behind 220 still held one of the family's carriages as late as 1940. In 1906 the fire burned only to the east edge of Dolores Street, and city planners list the cottages, two of the oldest residences in the city, among what it spared.",
+        place: "Tanforan Cottages",
+        where: "214 Dolores St",
+        at: [-122.42685, 37.76582],
+        source: "https://noehill.com/SF/LANDMARKS/sf067.asp",
+      },
+      {
+        icon: "shop",
+        title: "Valencia Street's shopping corridor",
+        text:
+          "The city zones Valencia Street from 14th Street to Cesar Chavez Street as the Valencia Street Neighborhood Commercial Transit District, with an arm west along 16th Street toward Dolores; its blocks from 14th to 20th Street edge this neighborhood. From the 1970s these blocks were what KQED calls a lesbian cultural corridor, with women's cafés, bars, hairstylists and mechanics, and in 1976 a feminist bookstore opened at 532 Valencia, just south of this corner. Today restaurants, cafés, bars and shops fill the ground floors.",
+        place: "Valencia Street shops",
+        where: "Valencia St & 16th St",
+        at: [-122.42191, 37.76492],
+        source: "https://www.kqed.org/arts/13987669/bay-area-lesbian-archives-directory-of-dreams-glbt-historical-society-san-francisco",
+      },
+      {
+        icon: "art",
+        title: "Seven muralists, one building",
+        text:
+          "Architect August Reinhold Denke designed this hall, built in 1910, and on March 31, 1979, by its own timeline, the Women's Building bought it from the Sons of Norway; it was added to the National Register of Historic Places in 2018. Its MaestraPeace mural was completed in 1994 after 18 months of work by seven artists, Juana Alicia, Miranda Bergman, Edythe Boone, Susan Kelk Cervantes, Meera Desai, Yvonne Littleton and Irene Perez, with dozens of volunteers, and in 2012 the original muralists, joined by a new generation of artists, cleaned and restored it.",
+        place: "The Women's Building",
+        where: "3543 18th St",
+        at: [-122.42262, 37.76142],
+        source: "https://en.wikipedia.org/wiki/The_Women%27s_Building_(San_Francisco)",
+      },
+      {
+        icon: "coffee",
+        title: "A one-block food street",
+        text:
+          "The single block of 18th Street from here to Dolores is what a 2014 Star Tribune travel piece called a food block, with a bakery at this corner, an ice-cream shop at the Dolores end, and a pizzeria and a grocery in between. Long before the lines, this corner had a pastry shop known for its cakes, founded in 1950 by a husband and wife and closed by the late 1990s, when rising rents and competition from supermarket bakeries ended its run.",
+        place: "18th and Guerrero shops",
+        where: "18th St & Guerrero St",
+        at: [-122.42380, 37.76157],
+        source: "https://www.startribune.com/block-ee-for-excellent-eats/252727691/",
+      },
+      {
+        icon: "park",
+        title: "A park on old cemeteries",
+        text:
+          "From 1861 these slopes held Jewish cemeteries, among them Congregation Sherith Israel's; burials ended in the 1890s, and the remains were moved to Colma, where they lie in the Hills of Eternity and Home of Peace cemeteries. In 1903 more than 1,000 property owners formed the Mission Park Association, voters approved buying the land with 73.9 percent of the vote, and the city paid $291,350 for it in 1905; in 1906 and 1907 it sheltered more than 1,600 families left homeless by the earthquake and fire. At this entrance stands a replica of the bell Miguel Hidalgo rang in Dolores in 1810, unveiled on September 16, 1966, and presented by Mexican president Gustavo Díaz Ordaz; the park's bronze monument to Hidalgo by Juan F. Olaguibel was given by the city's Mexican community on September 16, 1962.",
+        place: "Mission Dolores Park",
+        where: "Dolores St & 19th St",
+        at: [-122.42610, 37.76015],
+        source: "https://en.wikipedia.org/wiki/Mission_Dolores_Park",
+      },
+      {
+        icon: "water",
+        title: "The hydrant that kept flowing",
+        text:
+          "When the fire that followed the 1906 earthquake swept through the Mission, this hydrant at the park's southwest corner is said to have been the only hydrant in the Mission still working, and it is credited with helping save the Mission. Dedicated on April 18, 1966, to Fire Chief Dennis Sullivan and the firefighters of the Great Fire, it gets a fresh coat of gold paint every April 18; in 2012 it came out silver, because silver paint had been bought by mistake and no one noticed until it was on.",
+        place: "Golden Fire Hydrant",
+        where: "Church St & 20th St",
+        at: [-122.42785, 37.75825],
+        source: "https://en.wikipedia.org/wiki/Golden_Fire_Hydrant",
+      },
+      {
+        icon: "house",
+        title: "Early houses the fire spared",
+        text:
+          "West of Dolores Street, beyond the reach of the 1906 fire, which burned only to the street's east edge, Chula Lane and Abbey Street hold a pocket of the neighborhood's early houses. In 2026 the city made the blocks along Chula Lane, Abbey Street, Dolores Street and 17th Street the Chula-Abbey Early Residential Historic District, which preservation staff counted at 52 buildings, 37 of them contributors, with a period of significance from 1865 to 1910; a second new district protects the early houses around Alert Alley.",
+        place: "Chula Lane and Abbey Street",
+        where: "Chula Ln & Abbey St",
+        at: [-122.42741, 37.76380],
+        source: "https://www.sfbos.org/sites/default/files/o0014-26.pdf",
       },
     ],
+    walk: {
+      intro:
+        "A loop of about 1.7 miles for visitors and would-be neighbors that starts at Mission Dolores, at 16th and Dolores streets, where the 22 Fillmore stops (the J-Church stops a block west at Church and 16th, and 16th St Mission BART is three blocks east), and ends a block away on Chula Lane. Allow about 1 hour 30 minutes for the Tanforan cottages, Valencia and 18th streets, the Women's Building and Dolores Park, and go on a clear day for the view from the top of the park.",
+      miles: 1.7,
+      minutes: 90,
+      tip:
+        "Save your breath for the climb through the park from Dolores Street up to the golden hydrant at Church and 20th, where the J-Church stops; SFMTA's Routes With A View series singles out the park's panoramic city view. Early risers can see the hydrant repainted on April 18, when a procession from the 5:12 a.m. earthquake ceremony at Lotta's Fountain downtown arrives around 5:50 a.m.",
+    },
     restaurants: [
       { name: "Tartine Bakery", address: "600 Guerrero St", phone: "(415) 487-2600", url: "https://tartinebakery.com" },
       { name: "Delfina", address: "3621 18th St", phone: "(415) 552-4055", url: "https://www.delfinasf.com" },
@@ -4054,39 +4216,67 @@ export const NEIGHBORHOODS = {
       "Pure single-family quiet",
     ],
     history:
-      "Named for Laguna Honda, Spanish for \"deep lagoon\" — a natural lake along the old wagon road over the hills, later tapped as a city reservoir. Laguna Honda Hospital opened nearby in the 1860s as the city's almshouse, growing into one of the largest public skilled-nursing facilities in the United States. The surrounding slopes filled in through the early-to-mid 20th century with single-family homes, climbing the grades between Forest Hill, Midtown Terrace, and Twin Peaks.",
+      "Laguna Honda means roughly “deep lagoon,” and the city says a spring fed this one, on the sloping land behind Twin Peaks that was once the San Miguel Rancho of José de Jesús Noé, the last alcalde of San Francisco under Mexico. By the mid-1860s the Spring Valley Water Works was carrying water from Pilarcitos by flume and pipe to the lagoon, now Laguna Honda Reservoir. In 1866 the city opened a four-story wood-frame almshouse on the old rancho for Gold Rush pioneers who had gone bust; by 1870 its 87-acre farm supplied more than 500 men, women and children.\n\nAfter the 1906 earthquake the almshouse, renamed the Relief Home, gathered in refugees from camps across the city, and a pavilion for 1,000 people was dedicated in 1909. Mayor James “Sunny Jim” Rolph turned the first spade for the Spanish Revival-style buildings that opened in 1926, and in 1934 the Public Works of Art Project paid for Glen Wessels' five murals, four of the elements and The Professions, listed by the Living New Deal in the main lobby. It became an accredited hospital in 1963, yet the publisher of God's Hotel, physician Victoria Sweet's book about her more than twenty years there, bills it as the country's last almshouse.\n\nThe Twin Peaks Tunnel's 1918 station on Laguna Honda Boulevard was named Laguna Honda, lettering still carved on the headhouse of today's Forest Hill Station. To the south rises Edgehill Mountain, sold after Adolph Sutro's death in 1898 and subdivided as Claremont Court, with houses on its western and southern slopes. The hill belongs to a western greenbelt linking Mount Davidson, Twin Peaks and the land around Laguna Honda Reservoir.",
     facts: [
       {
-        icon: "water",
-        title: "A real deep lagoon",
-        text:
-          "Laguna Honda is one of San Francisco's few natural lakes, fed by hillside springs and later pressed into service as a city reservoir.",
-      },
-      {
         icon: "house",
-        title: "Pure residential",
+        title: "From almshouse to hospital",
         text:
-          "There's no commercial strip here — just curving streets of single-family homes set into the wooded grades.",
-      },
-      {
-        icon: "bird",
-        title: "Wild green edges",
-        text:
-          "Mount Sutro's cloud forest and the Twin Peaks open space wrap the neighborhood in eucalyptus, coyote brush, and birdsong.",
-      },
-      {
-        icon: "tram",
-        title: "Through the tunnel",
-        text:
-          "Forest Hill Station feeds the K, L, and M lines straight into the Twin Peaks Tunnel and downtown, minutes away.",
+          "The almshouse that opened on this hillside in 1866 became, after the 1906 earthquake, the Relief Home, pressed into service for thousands of displaced San Franciscans. By 1910 the city had added Clarendon Hall, home to 250 people and the first building here meant for long-term medical care; it was demolished in 2008 to make room for today's hospital, which the city says can withstand an earthquake many times more powerful than the one that led to Clarendon being built.",
+        place: "Laguna Honda Hospital",
+        where: "375 Laguna Honda Blvd",
+        at: [-122.45690, 37.74920],
+        source: "https://sf.gov/laguna-honda-history-and-building",
       },
       {
         icon: "star",
-        title: "A landmark institution",
+        title: "A hilltop that won't sit still",
         text:
-          "Laguna Honda Hospital, dating to the 1860s, is among the largest skilled-nursing and rehabilitation facilities in the country.",
+          "Edgehill Mountain's summit stands 734 feet high by Wikipedia's count, on land that was part of Adolph Sutro's San Miguel Ranch until it was sold after his death in 1898 and became Claremont Court, which Wikipedia calls one of the city's first subdivisions. Building here has never been easy: winter rains in 1952 and 1953 sent part of Edgehill Way, and one home on it, sliding down the mountainside. The Frisc counts the view from up here among the city's best.",
+        place: "Edgehill Mountain",
+        where: "Summit of Edgehill Mountain",
+        at: [-122.45926, 37.74271],
+        source: "https://en.wikipedia.org/wiki/Edgehill_Mountain",
+      },
+      {
+        icon: "park",
+        title: "A blue gum forest on the slope",
+        text:
+          "Edgehill Mountain Park dates from 1985, when the city bought about an acre of the mountain's undeveloped western slope. The Recreation and Park Department's 2006 natural areas plan describes 2.3 acres bordered by Kensington Way on the west and Edgehill Way on the north, about 1.87 of them blue gum eucalyptus, crossed by some 750 feet of trails with wooden steps on the steepest slopes; Shangrila Way and Knockash Hill both dead-end at its entrances.",
+        place: "Edgehill Mountain natural area",
+        where: "Kensington Way & Edgehill Way",
+        at: [-122.46025, 37.74225],
+        source: "https://sfrecpark.org/DocumentCenter/View/8543/625EdgehillMtn",
+      },
+      {
+        icon: "road",
+        title: "When the hillside gave way",
+        text:
+          "Knockash Hill, which The Frisc calls one of San Francisco's few private streets, climbs from Ulloa Street toward the natural area's southeast entrance. In January 1997, after a torrential rainstorm, the hillside above Knockash Hill Court gave way, and a San Francisco Examiner commentary recounts how 100 tons of boulders, mud and debris overran a 10-foot retaining wall and slammed into the new homes below.",
+        place: "Knockash Hill",
+        where: "Knockash Hill & Ulloa St",
+        at: [-122.45800, 37.74170],
+        source: "https://www.sfexaminer.com/archives/monster-houses-don-t-belong-on-sf-s-edgehill-mountain/article_280e93d1-6d78-5791-a72f-b0468941f539.html",
+      },
+      {
+        icon: "factory",
+        title: "The quarry and the stolen dynamite",
+        text:
+          "The Claremont Quarries once worked this corner of Edgehill, where Waithman Way and a church now stand, on land Alfred Meyerstein bought in 1912 for his Claremont Court subdivision. After the Preparedness Day parade bombing of July 1916 killed 10 people, Meyerstein told the Chronicle that a quantity of dynamite had been stolen about two months earlier, and historian Richard Brandi, writing for OpenSFHistory, raises the possibility that dynamite from the quarry went into the bomb.",
+        place: "Claremont Quarries site",
+        where: "Portola Dr & Waithman Way",
+        at: [-122.45652, 37.74163],
+        source: "https://test.opensfhistory.org/news/2019/08/03/the-view-from-edgehill-a-closer-look/",
       },
     ],
+    walk: {
+      intro:
+        "A 1.4-mile line for visitors and would-be neighbors: start at Forest Hill Muni Metro station (K, L and M trains), across Laguna Honda Boulevard from the hospital grounds, then head south past Dewey Boulevard, climb Edgehill Way to the summit, come back down past the natural area to Kensington Way and Ulloa Street, and follow Ulloa east to Portola Drive at Waithman Way, where the 43 and 48 buses stop. Allow about 75 minutes, and go on a clear day, when the view from the top is open.",
+      miles: 1.4,
+      minutes: 75,
+      tip:
+        "This is a residential pocket with no shopping street, so bring water; the nearest cafés and shops are on West Portal Avenue, under 10 minutes' walk west along Ulloa Street from Kensington Way. Edgehill Way climbs steadily, so take it slowly; from the last stop, Forest Hill Station is 12 to 15 minutes' walk back up Laguna Honda Boulevard.",
+    },
     nearby: ["West Portal", "the Inner Sunset"],
     restaurants: [
       { name: "Elena's Mexican Restaurant", address: "255 W Portal Ave" },
