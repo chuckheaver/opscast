@@ -4520,7 +4520,7 @@ export const NEIGHBORHOODS = {
         title: "Muni's only ghost station",
         text:
           "Under Market Street a few steps south of this corner, between Diamond and Eureka streets, lies Eureka Valley station, which opened with the Twin Peaks Tunnel in 1918 and closed in 1972 during construction of the Market Street subway. Its street entrances were demolished, but K, L and M trains still run past its low platforms without stopping, and SFMTA calls it Muni's only ghost station.",
-        place: "Eureka Valley station (closed)",
+        place: "Eureka Valley ghost station",
         where: "Diamond St & 17th St",
         at: [-122.43750, 37.76258],
         source: "https://en.wikipedia.org/wiki/Eureka_Valley_station",
@@ -4550,7 +4550,7 @@ export const NEIGHBORHOODS = {
         title: "Slides won by a decade-long fight",
         text:
           "In 1963 this steep lot was slated for development, and neighbors fought for a decade to save it, staging a bulldozer-defying sit-in in 1966; their campaign also helped change city law to require a minimum of open space in new developments. The mini-park opened in 1973 with a pair of concrete slides designed by a local teenager, and riders still bring a square of cardboard to sit on.",
-        place: "Seward Street Slides (Seward Mini-Park)",
+        place: "Seward Street Slides",
         where: "30 Seward St",
         at: [-122.44039, 37.75818],
         source: "https://www.atlasobscura.com/places/seward-street-slides",
