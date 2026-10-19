@@ -1531,7 +1531,7 @@ export const NEIGHBORHOODS = {
 
   "Cow Hollow": {
     spirit:
-      "The old dairy valley's quieter western end — leafy Victorian and Edwardian blocks running from Steiner to the Presidio's edge, a short stroll from Union Street's boutiques and brunch.",
+      "Frequently combined with the neighborhood Union Street, the old dairy valley's quieter western end — leafy Victorian and Edwardian blocks running from Steiner to the Presidio's edge, a short stroll from Union Street's boutiques and brunch.",
     reasons: [
       "Steps from Union St shops",
       "Flat & walkable",
@@ -5847,7 +5847,7 @@ export const NEIGHBORHOODS = {
   },
   "Union Street": {
     spirit:
-      "Eight sunny blocks of Victorian storefronts from Van Ness to Steiner — boutiques, brunch patios, and a buzzing Fillmore Street bar corner, on what was once dairy pasture.",
+      "Frequently combined with the neighborhood Cow Hollow, eight sunny blocks of Victorian storefronts from Van Ness to Steiner — boutiques, brunch patios, and a buzzing Fillmore Street bar corner, on what was once dairy pasture.",
     reasons: [
       "Union St boutiques & brunch",
       "Lively bar scene",
