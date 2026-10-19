@@ -61,10 +61,12 @@ export default function HoodPreviewMap({ name, label, polygons }) {
         paint: { "fill-color": "#203C5F", "fill-opacity": 0.05 } });
       map.addLayer({ id: "hood-lines", type: "line", source: "hoods",
         paint: { "line-color": "#203C5F", "line-opacity": 0.45, "line-width": 1 } });
+      // This neighborhood: the main map's selection blue, shaded very lightly
+      // and outlined thinly, so the streets inside and its edges both read.
       map.addLayer({ id: "mine-fill", type: "fill", source: "mine",
-        paint: { "fill-color": "#203C5F", "fill-opacity": 0.32 } });
+        paint: { "fill-color": "#2563eb", "fill-opacity": 0.08 } });
       map.addLayer({ id: "mine-line", type: "line", source: "mine",
-        paint: { "line-color": "#131A25", "line-width": 2.6 } });
+        paint: { "line-color": "#2563eb", "line-opacity": 0.9, "line-width": 1.5 } });
       map.addLayer({ id: "hood-names", type: "symbol", source: "hood-labels",
         layout: { "text-field": ["get", "name"], "text-size": 11.5, "text-font": ["DIN Pro Medium", "Arial Unicode MS Regular"],
                   "text-max-width": 8 },
