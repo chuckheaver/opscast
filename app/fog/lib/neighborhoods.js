@@ -377,39 +377,87 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Reborn after 1989",
     history:
-      "Hayes Valley is named for Thomas Hayes, a county official who ran a private streetcar out Hayes Street in the 1860s and opened the area to development. For decades it sat in the shadow of the elevated Central Freeway. The 1989 Loma Prieta earthquake damaged that freeway; after years of debate it was torn down and replaced with surface boulevards and a park — sparking the neighborhood's reinvention into one of the city's top shopping-and-dining destinations.",
+      "Hayes Valley takes its name from Hayes Street, named for Thomas Hayes, an Irish-born landowner who reached San Francisco in 1849, served as county clerk from 1853 to 1856 and came to own a large tract here, along with the land where the Civic Center now stands. By 1855 a committee of three aldermen was laying out and naming the streets of the Western Addition, west of Larkin Street; one of them, Charles Gough, had once sold milk on horseback, a can slung on either side of his saddle. In 1860 Hayes ran a horsecar line out Hayes Street to help sell his land.\n\nOn the morning of April 18, 1906, a breakfast cooked under a quake-damaged chimney at 395 Hayes Street, near Gough, started the “ham and eggs fire,” and with the water cut off it destroyed most of the neighborhood east of Gough Street. In 1959 the double-decked Central Freeway opened, cutting through the valley with a spur north to Franklin and Gough streets at Golden Gate Avenue.\n\nThe 1989 Loma Prieta earthquake damaged the freeway, and in 1992 the stretch north of Fell Street came down. The rest was fought over in a string of ballot measures until November 1999, when voters approved Proposition I, which paid for a boulevard by selling the freed-up land for housing. Octavia Boulevard opened in 2005, ending at a green later named for Patricia Walkup, founder of the Hayes Valley Neighborhood Association. While the leftover lots waited for housing, stopgap uses bloomed on them, from a volunteer-run farm to Proxy, Envelope A+D's cluster of shops, cafés and a beer garden in shipping containers.",
     facts: [
       {
-        icon: "tram",
-        title: "Named for a streetcar man",
+        icon: "quake",
+        title: "Where the ham and eggs fire began",
         text:
-          "Thomas Hayes, a mid-1800s county clerk and entrepreneur, ran a private steam railroad out Hayes Street — the line that first opened the valley to homes.",
+          "The 1906 “ham and eggs fire” started a few steps east of this corner, at 395 Hayes Street. After the earthquake's first shocks on the morning of April 18, the people living there got up to make breakfast, not knowing the shaking had badly damaged the chimney above their stove. Firefighters found that more quake damage had cut off the water supply, and most of the neighborhood east of Gough Street was lost.",
+        place: "Ham and Eggs Fire Site",
+        where: "Hayes St & Gough St",
+        at: [-122.42333, 37.77689],
+        source: "https://hoodline.com/2013/04/the-dangers-of-cooking-after-a-quake-the-ham-and-eggs-fire",
       },
       {
-        icon: "quake",
-        title: "The freeway that fell",
+        icon: "tram",
+        title: "A landowner's horsecar line",
         text:
-          "The elevated Central Freeway loomed over Hayes Valley until the 1989 quake. Its demolition, finished in 2003, turned a blighted corridor into some of the city's hottest real estate.",
+          "Hayes Street, and the valley, are named for Thomas Hayes, who came to own a large tract here. In 1860 he built a horsecar line out this street to make his nearby land more appealing and valuable, and by 1883 it had been rebuilt as a cable car line running to the Ferry Building. For 160 years, from horsecar rails to trolley bus wires, transit on Hayes Street followed a fixed guideway, until the pandemic shutdown; the 21 Hayes came back in July 2022 as a motor coach.",
+        place: "Hayes Street",
+        where: "Hayes St & Laguna St",
+        at: [-122.42621, 37.77664],
+        source: "https://www.streetcar.org/hayes-street-transit-since-1860/",
+      },
+      {
+        icon: "stroller",
+        title: "A clubhouse with a living roof",
+        text:
+          "This playground dates to 1958. Its clubhouse had become outdated and rundown when the Trust for Public Land and the Recreation and Park Department took on a $3.9 million renovation, and the rebuilt playground reopened on June 11, 2011. WRNS Studio's new clubhouse was billed as the first Recreation and Park building in the city with a living roof and recycled denim insulation; the planted roof shelters the office, kitchen and restrooms and shades a porch-like space below.",
+        place: "Hayes Valley Playground",
+        where: "Hayes St & Buchanan St",
+        at: [-122.42791, 37.77625],
+        source: "https://www.americancityandcounty.com/?p=6553",
+      },
+      {
+        icon: "house",
+        title: "Farm rows on freeway ramps",
+        text:
+          "The block south and east of this corner, bounded by Fell, Oak, Octavia and Laguna streets, once held the Central Freeway's on- and off-ramps. Plans to build housing there stalled in the 2008 downturn, so in January 2010 the city let Hayes Valley Farm use the 2.2-acre lot under an interim-use agreement until development could go ahead. Thousands of volunteers worked the old ramps until June 2013, when the farm made way for a planned condo and retail project.",
+        place: "Hayes Valley Farm Site",
+        where: "Fell St & Laguna St",
+        at: [-122.42594, 37.77540],
+        source: "https://www.hayesvalleyfarm.org/?p=91",
+      },
+      {
+        icon: "road",
+        title: "A freeway voted down",
+        text:
+          "The double-decked Central Freeway ran overhead here from 1959, and the 1989 Loma Prieta earthquake damaged it. In November 1999 voters approved Proposition I, the last of several ballot measures on its fate, which paid for a boulevard by selling the freed-up land for housing; the last elevated section north of Market Street came down in 2003. The street's name is far older: Charles Gough, on the 1850s committee that named the Western Addition's streets, named Octavia for his sister, and Gough Street, a block east and pronounced “goff,” for himself.",
+        place: "Octavia Boulevard",
+        where: "Octavia Blvd & Fell St",
+        at: [-122.42448, 37.77559],
+        source: "https://en.wikipedia.org/wiki/Octavia_Boulevard",
       },
       {
         icon: "park",
-        title: "Patricia's Green",
+        title: "The green a neighbor fought for",
         text:
-          "The park where the freeway once stood rotates large-scale public art — it has hosted everything from Burning Man sculptures to towering installations, anchoring the neighborhood's life.",
+          "Octavia Boulevard opened on September 9, 2005, and its north end, between Hayes and Fell streets, became a park called Hayes Green. In August 2006 the Recreation and Park Commission renamed it for Patricia Walkup, founder of the Hayes Valley Neighborhood Association, who had run three campaigns to replace the freeway with a surface boulevard. Burning Man temple builder David Best put up a temple here in 2005, backed by the city's Arts Commission and the Black Rock Arts Foundation, Burning Man's nonprofit arm, and came back with another in July 2015.",
+        place: "Patricia's Green",
+        where: "Octavia Blvd & Linden St",
+        at: [-122.42458, 37.77620],
+        source: "https://www.sfexaminer.com/news/hayes-valley-park-to-be-named-after-green-activist/article_ba1af560-f491-5348-b638-59d7527bd1e8.html",
       },
       {
-        icon: "art",
-        title: "Proxy: a city built from containers",
+        icon: "coffee",
+        title: "A coffee kiosk and a living alley",
         text:
-          "On a leftover freeway parcel, Proxy turned shipping containers into a rotating village of shops, food, and a beer garden — a widely copied model of temporary urbanism.",
-      },
-      {
-        icon: "shopping",
-        title: "A designer's main street",
-        text:
-          "With the freeway gone, Hayes Street filled with independent fashion and design boutiques, making it one of San Francisco's premier walkable shopping strips.",
+          "On January 23, 2005, Blue Bottle Coffee opened a kiosk in the garage of a Hayes Valley benefactor at 315 Linden Street, which the company calls its first brick-and-mortar location, three years before its first four-walled café, at Mint Plaza. In 2010 neighbors and the Department of Public Works made this end of Linden a “living alley”: three parking spaces gave way to a wider, landscaped sidewalk on the sunny side, and street and sidewalk were brought to one level. By 2018 the living alley ran the full block to Octavia.",
+        place: "Linden Living Alley",
+        where: "315 Linden St",
+        at: [-122.42320, 37.77633],
+        source: "https://sfpublicworks.org/node/34729",
       },
     ],
+    walk: {
+      intro:
+        "A loop of about 0.7 mile for visitors and would-be neighbors that starts and ends at the Muni bus stop at Hayes and Gough streets: west on Hayes Street to the playground, then back east along Fell Street through the old freeway corridor to Patricia's Green and Linden Street. Allow about 40 minutes; a weekday morning is calmest, a weekend afternoon is liveliest.",
+      miles: 0.7,
+      minutes: 40,
+      tip:
+        "For a bonus view, detour three blocks west on Hayes Street from the playground to Alamo Square, where the Painted Ladies, seven Queen Anne houses that developer Matthew Kavanaugh built between 1892 and 1896, face the park from Steiner Street. They are private homes, so admire them from the park or the sidewalk.",
+    },
     restaurants: [
       { name: "Rich Table", address: "199 Gough St", phone: "(415) 355-9085", url: "https://richtablesf.com" },
       { name: "Nightbird", address: "330 Gough St", phone: "(415) 829-7565", url: "https://www.nightbirdrestaurant.com" },
@@ -444,39 +492,97 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Pac Heights",
     history:
-      "Pacific Heights rose as a wealthy enclave once cable cars made its steep hills reachable in the 1870s–80s. The high ground escaped the 1906 fire, so block after block of grand Victorian and Edwardian mansions survive. Today it holds some of the city's priciest real estate, with upper Fillmore Street as its refined shopping-and-dining spine.",
+      "Pacific Heights grew up around two hilltop squares that San Francisco's Van Ness Ordinances of 1855 reserved for parks, and both had to be pried loose from private claimants. At Lafayette Square, a former city attorney claimed the eastern half and built a house on the summit; the city got the last of his land only in 1935. Alta Square, long used as a quarry that left dangerous holes, was claimed by Milo Hoadley, who sued again and again until the courts turned him away in 1888.\n\nCable cars came early. Leland Stanford promoted a line on California Street because its grade was gentler than Clay Street's, and the California Street Cable Railroad began service on April 10, 1878, running about 1.7 miles from Kearny Street over Nob Hill to Fillmore Street. In the spring of 1879 it reached Central Avenue, today's Presidio Avenue, the first cable service into the Western Addition. Grand houses rose on the heights, from an 1886 Victorian on Franklin Street to Arizona sandstone and clinker brick in the 1890s.\n\nIn 1906 the fire that followed the earthquake was stopped along Van Ness Avenue, where crews dynamited rows of buildings, many of them mansions, and most of Pacific Heights was saved. Temple Sherith Israel, designed by Albert Pissis and consecrated in 1905 at California and Webster streets, came through with minor damage and served for a time as the Superior Court, where political boss Abe Ruef was tried, convicted and sentenced to San Quentin. In the 20th century a few of the grandest houses became a consulate, a school and a house museum.",
     facts: [
       {
-        icon: "money",
-        title: "Billionaires' Row",
+        icon: "house",
+        title: "One family's home for 86 years",
         text:
-          "The stretch of Broadway between Divisadero and Lyon is among the most expensive residential blocks in the U.S., home to tech moguls and old San Francisco fortunes.",
+          "Bavarian architect Peter R. Schmidt designed this house in 1886 for William and Bertha Haas, and the family lived in it until 1972. After the death of Alice Haas Lilienthal, her three adult children entrusted it in 1973 to the new Foundation for San Francisco's Architectural Heritage, now SF Heritage, which keeps it as a house museum; it is city Landmark No. 69. The rooms above the garage are a 1928 addition by architect Gardner Dailey.",
+        place: "Haas-Lilienthal House",
+        where: "2007 Franklin St",
+        at: [-122.42499, 37.79328],
+        source: "https://haas-lilienthalhouse.org/",
+      },
+      {
+        icon: "park",
+        title: "The city attorney's hilltop house",
+        text:
+          "Samuel Holladay was city attorney from 1860 to 1863, when part of his job was ousting squatters from city-owned land, yet he claimed the eastern half of this square as his own and in the 1860s built a house at its summit. In 1902 he offered the city four of his six lots for $200,000, and no deal was made. The rest of his land was finally sold to the city in 1935, and in 1936 the house came down.",
+        place: "Lafayette Park",
+        where: "Gough St & Washington St",
+        at: [-122.42778, 37.79185],
+        source: "https://hoodline.com/2016/06/legendary-land-dispute-lafayette-park-today/",
+      },
+      {
+        icon: "art",
+        title: "Big Alma's French chateau",
+        text:
+          "Adolph B. Spreckels had George Applegarth, trained at the École des Beaux-Arts in Paris, and Kenneth MacDonald Jr. design this French Baroque mansion facing Lafayette Park for himself and his wife, Alma; finished around 1912–13, it is city Landmark No. 197. KQED reports that in 1901 sculptor Robert Aitken hired the six-foot-tall Alma de Bretteville, nicknamed “Big Alma,” as his model, and she is widely credited, though accounts differ, as the model for the Victory atop Union Square's Dewey Monument. Admire the house from the sidewalk.",
+        place: "Spreckels Mansion",
+        where: "2080 Washington St",
+        at: [-122.42755, 37.79271],
+        source: "https://en.wikipedia.org/wiki/Spreckels_Mansion_(San_Francisco)",
+      },
+      {
+        icon: "flag",
+        title: "Nazi Germany's consulate",
+        text:
+          "This Arizona sandstone house was built for William Franklin Whittier between 1894 and 1896. In 1941 the family sold it to the German Reich for its San Francisco consulate, where Fritz Wiedemann, Hitler's former commanding officer, served as consul, and during World War II the U.S. Alien Property Custodian seized it. After several more owners it passed to the California Historical Society in 1956, and it is city Landmark No. 75.",
+        place: "Whittier Mansion",
+        where: "2090 Jackson St",
+        at: [-122.42945, 37.79337],
+        source: "https://en.wikipedia.org/wiki/Whittier_Mansion",
       },
       {
         icon: "house",
-        title: "A Victorian open to all",
+        title: "Before Filoli, a town house",
         text:
-          "The Haas-Lilienthal House (1886) on Franklin St is the only intact Queen Anne Victorian mansion in the city operated as a public museum.",
+          "Willis Polk designed this clinker-brick town house in the late 1890s for William Bowers Bourn II, head of the Spring Valley Water Company, whose family fortune came from the Empire Mine near Grass Valley, and his wife, Agnes Moody. It became city Landmark No. 38 in 1971. Polk later designed Filoli, the Woodside estate the Bourns built in 1915–17; the National Trust for Historic Preservation now owns it and opens it to the public.",
+        place: "Bourn Mansion",
+        where: "2550 Webster St",
+        at: [-122.43307, 37.79412],
+        source: "https://en.wikipedia.org/wiki/Bourn_Mansion",
       },
       {
         icon: "quake",
-        title: "Above the 1906 fire",
+        title: "A marble house after the fire",
         text:
-          "Because the hilltop escaped the post-earthquake fires, Pacific Heights preserves one of the densest collections of pre-1906 mansions in San Francisco.",
+          "The fire after the 1906 earthquake destroyed Maud Flood's Nob Hill home, and her husband, James L. Flood, promised her a new one: this Italian Renaissance palazzo by Bliss & Faville, built around a welded steel frame, begun about 1912 and finished in 1915. Years after James died, Maud gave the marble house to the Religious of the Sacred Heart, a gift the Chronicle reported in June 1939, and it is part of the Schools of the Sacred Heart today.",
+        place: "Flood Mansion",
+        where: "2222 Broadway",
+        at: [-122.43369, 37.79466],
+        source: "https://theclio.com/entry/1288",
       },
       {
-        icon: "star",
-        title: "Author of the Spreckels Mansion",
+        icon: "church",
+        title: "A million bricks from Union Square",
         text:
-          "Novelist Danielle Steel owns the landmark Spreckels Mansion on Washington St — one of several grand homes that have drawn famous residents to the neighborhood.",
+          "Calvary's congregation once worshiped on Union Square, at Powell and Geary streets. When it moved here, the old church was taken apart, and its pews, woodwork and more than a million bricks went into the new sanctuary, where the first service was held on Thanksgiving Day, November 27, 1902. The 1906 earthquake did it no structural damage, and afterward its basement served as a temporary courtroom for the Superior Court, while other congregations, Temple Emanu-El among them, held services here.",
+        place: "Calvary Presbyterian Church",
+        where: "Fillmore St & Jackson St",
+        at: [-122.43462, 37.79256],
+        source: "https://en.wikipedia.org/wiki/Calvary_Presbyterian_Church_(San_Francisco)",
       },
       {
-        icon: "shopping",
-        title: "Upper Fillmore's rise",
+        icon: "movie",
+        title: "The stairs cars came down",
         text:
-          "What began as a post-1906 commercial strip is now one of the city's most upscale shopping streets, lined with boutiques and sidewalk cafés.",
+          "Long used as a quarry, the square was graded from 1891 to 1899 to a plan by a designer named R. Ulrich, with walks, archways and landings. In November 1971 Peter Bogdanovich came back to film the chase for What's Up, Doc?, sending four cars, among them a Volkswagen Bug, a 1969 Cadillac DeVille convertible and a 1969 Plymouth Belvedere taxi, down the stairway that rises from Clay and Pierce streets. The production had no city permission to drive on the steps, which were badly damaged and still show the scars.",
+        place: "Alta Plaza Park",
+        where: "Clay St & Pierce St",
+        at: [-122.43752, 37.79050],
+        source: "https://en.wikipedia.org/wiki/Alta_Plaza_Park",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.3 miles for visitors and would-be neighbors, from the Haas-Lilienthal House on Franklin St (the 1 California stops a block and a half south, at Clay & Franklin) past Lafayette Park, a run of mansions and a church built with Union Square bricks to Alta Plaza Park, two blocks above the 1's stop at California & Pierce for the ride back. Allow about an hour, and pick a clear day for the views from the two hilltop parks.",
+      miles: 1.3,
+      minutes: 60,
+      tip:
+        "From Calvary, walk a block west on Jackson St into Alta Plaza, cross the park to its south side and take the wide stairway down to Clay & Pierce: the same steps the cars came down in What's Up, Doc?",
+    },
     restaurants: [
       { name: "SPQR", address: "1911 Fillmore St", phone: "(415) 771-7779", url: "https://www.spqrsf.com" },
       { name: "The Snug", address: "2301 Fillmore St", phone: "(415) 562-5092", url: "https://www.thesnugsf.com" },
@@ -655,7 +761,7 @@ export const NEIGHBORHOODS = {
           "When Jasper O'Farrell laid out the city's streets in 1847, he set aside three blocks as public squares, and this was one; in the early 1850s it became a haphazard cemetery and a goat pasture, and after the 1906 earthquake some 600 people lived here in wooden barracks and Army tents. The Benjamin Franklin statue went up on Market Street in 1879 as a water fountain given by temperance crusader Henry Cogswell and moved here in 1904. The time capsule under it, filled mostly with Cogswell's own things, was opened in 1979 and replaced with one to be opened in 2079.",
         place: "Washington Square",
         where: "Columbus Ave & Union St",
-        at: [-122.41031, 37.80039],
+        at: [-122.41023, 37.80088],
         source: "https://en.wikipedia.org/wiki/Washington_Square_(San_Francisco)",
       },
       {
@@ -738,39 +844,97 @@ export const NEIGHBORHOODS = {
       "Quiet, leafy hilltop living",
     ],
     history:
-      "Russian Hill is named for a small Russian Orthodox cemetery early settlers found at its summit — graves of sailors and fur traders, later removed. Its steep grade kept it semi-rural until cable cars arrived, after which it became an early-1900s colony of writers and artists. It remains a quiet, affluent hill famous for Lombard Street's switchbacks and its hidden pedestrian stairways.",
+      "The name comes from graves. A plaque on the crest says Gold Rush-era miners found the graves, marked by wooden crosses, of Russian-American Company sailors who died here in the early 1840s, and added graves of their own; other accounts point to seal hunters from Count Rezanov's ship as early as 1806, or to a Russian warship's crew in 1848. The graves were removed or built over in the 1850s, the decade the eight-sided house on Green Street went up. In 1891 one of the city's last entirely new cable lines began running up Hyde Street.\n\nIn 1892 the architect Willis Polk built a double house on the Vallejo Street crest for his family and for Dora Williams, and the poet Ina Coolbrith's home on the hill became a salon for artists and writers. The fire after the 1906 earthquake destroyed Coolbrith's home, but the crest escaped, an island amid the flames. From 1912 H. P. Livermore's nine-unit building program there, including Pueblo-Mission Revival houses by Charles F. Whittlesey, earned him the title “Father of Russian Hill.”\n\nLombard Street's block between Hyde and Leavenworth got its eight hairpin turns in 1922, Diego Rivera painted a fresco at the Chestnut Street art school in 1931, and in 1957 Alfred Hitchcock filmed the exterior of Scottie's apartment for Vertigo at 900 Lombard. On May 24, 1976, the San Francisco Chronicle began running Armistead Maupin's Tales of the City, whose Barbary Lane was modeled on Macondray Lane. In 1988 the Vallejo Street crest was listed on the National Register as a historic district.",
     facts: [
       {
-        icon: "pin",
-        title: "Named for a lost cemetery",
+        icon: "tram",
+        title: "The city's last new cable lines",
         text:
-          "Settlers found a small plot of Russian graves atop the hill in the 1850s. The bodies were eventually moved, but the name “Russian Hill” stuck.",
+          "The cable cars climbing Hyde Street follow a route that opened on February 9, 1891, as the California Street Cable Railroad's O'Farrell, Jones & Hyde line; it and a Jones Street shuttle that opened the same day were San Francisco's last entirely new cable lines, and its Hyde Street stretch survives in today's Powell-Hyde line. Look east along Filbert Street: its block from here to Leavenworth, at a 31.5 percent grade, tied 22nd Street for steepest on the city Bureau of Engineering's old list, though a newer independent measurement ranks it lower.",
+        place: "Hyde Street cable car",
+        where: "Hyde St & Filbert St",
+        at: [-122.41925, 37.80019],
+        source: "https://streetcar.org/hyde-at-125-2",
+      },
+      {
+        icon: "park",
+        title: "A poet's park, a champion's courts",
+        text:
+          "The park honors George Sterling, whom the Chronicle has called San Francisco's unofficial poet laureate; a plaque near its steps at Lombard and Larkin carries a verse of his 1920 poem “The Cool, Grey City of Love,” which also gave Gary Kamiya's book Cool Gray City of Love its title. The tennis courts at this corner honor Alice Marble, winner of 18 Grand Slam titles, whose July 1950 editorial in American Lawn Tennis magazine argued that Althea Gibson should be welcomed into U.S. Lawn Tennis Association competition. It is widely credited with Gibson's invitation to that year's U.S. National Championships, where she became the first African-American player at a Grand Slam event.",
+        place: "George Sterling Park",
+        where: "Hyde St & Greenwich St",
+        at: [-122.41940, 37.80100],
+        source: "https://en.wikipedia.org/wiki/List_of_memorials_to_George_Sterling",
       },
       {
         icon: "road",
-        title: "The crookedest street",
+        title: "Eight turns for a 27% grade",
         text:
-          "Lombard Street's one block of eight tight switchbacks was built in 1922 to tame a slope too steep for cars — now one of the most-visited sights in the city.",
-      },
-      {
-        icon: "stairs",
-        title: "Secret stairway streets",
-        text:
-          "Car-free garden stairways lace the hill — Vallejo, Filbert, and Macondray Lane, the last said to be the model for Armistead Maupin's fictional Barbary Lane.",
+          "In 1922 this block was rebuilt with eight hairpin turns, an idea credited to Carl Henry, to tame its natural 27 percent grade; it is now paved in brick. Look back up from the bottom here, then walk a block east to 900 Lombard St, on the corner of Jones, whose exterior Alfred Hitchcock filmed in 1957 as Scottie's apartment in Vertigo; the interiors were shot on a soundstage in Hollywood.",
+        place: "Lombard Street's crooked block",
+        where: "Lombard St & Leavenworth St",
+        at: [-122.41807, 37.80218],
+        source: "https://en.wikipedia.org/wiki/Lombard_Street_(San_Francisco)",
       },
       {
         icon: "art",
-        title: "A bohemian summit",
+        title: "Rivera painted himself in",
         text:
-          "In the early 1900s cheap rents and big views drew a colony of writers and artists, including California's first poet laureate, Ina Coolbrith, who lived on the hill.",
+          "Bakewell & Brown's bell-towered 1926 art school is city Landmark No. 85, and Paffard Keatinge-Clay's addition followed in 1968. In May 1931 Diego Rivera and his assistants painted The Making of a Fresco Showing the Building of a City in what is now the Diego Rivera Gallery, with Rivera himself at the center, seen from behind, sitting on a scaffold. After the San Francisco Art Institute's bankruptcy, a nonprofit led by Laurene Powell Jobs bought the campus and its mural for about $30 million in 2024, and the California Academy of Studio Arts, the free studio program it announced for the site, has said it will restore public access to the fresco, closed to the public in 2023.",
+        place: "San Francisco Art Institute",
+        where: "800 Chestnut St",
+        at: [-122.41669, 37.80350],
+        source: "https://commissions.sfplanning.org/hpcpackets/2021-001721DES.pdf",
       },
       {
-        icon: "bridge",
-        title: "Some of the best views in the city",
+        icon: "book",
+        title: "The real Barbary Lane",
         text:
-          "The crest looks out over the bay, Alcatraz, and both bridges — the Willis Polk-designed Vallejo Street stairway gardens (1914) frame one of the finest vantage points.",
+          "Enter this lane, originally named Lincoln Lane, from Jones St and follow it east to the wooden stairway that drops to Taylor St; the Tales of the City TV series used those stairs. Armistead Maupin's Tales of the City began running in the San Francisco Chronicle on May 24, 1976, and in time put Mary Ann Singleton in an apartment at 28 Barbary Lane. In a 2017 documentary interview, Maupin confirmed that he based Barbary Lane on Macondray.",
+        place: "Macondray Lane",
+        where: "Macondray Ln & Taylor St",
+        at: [-122.41402, 37.79935],
+        source: "https://thefrontsteps.com/2021/10/13/barbary-lane-macondray-maupin/",
+      },
+      {
+        icon: "house",
+        title: "Eight sides since the 1850s",
+        text:
+          "George Kenny built this eight-sided house in 1857–58, though one account puts its start as early as 1852, and in 1870 sold it to Louis Feusier; the third story, mansard roof and cupola came later. It became a city landmark on October 1, 1970, and is one of two octagon houses left in San Francisco; the other, the Colonial Dames Octagon House, stands on Gough Street. It is a private home, so admire it from the sidewalk.",
+        place: "Feusier Octagon House",
+        where: "1067 Green St",
+        at: [-122.41648, 37.79837],
+        source: "https://en.wikipedia.org/wiki/Feusier_Octagon_House",
+      },
+      {
+        icon: "stairs",
+        title: "Polk's ramps and a Russian plaque",
+        text:
+          "Climb the balustraded double ramps from Jones St onto the crest: Willis Polk built these Vallejo Street improvements in 1914 for the adjoining property owners. In 1892 he built 1013–1017 Vallejo for his family and 1019 next door for Dora Williams. At Russian Hill Place, a plaque put up in 2005 by the United Humanitarian Mission, with support from the Russian government, credits the hill's name to Russian-American Company sailors who died here in the early 1840s.",
+        place: "Vallejo Street Crest",
+        where: "1013 Vallejo St",
+        at: [-122.41418, 37.79788],
+        source: "https://rhnsf.org/?p=691",
+      },
+      {
+        icon: "book",
+        title: "California's first poet laureate",
+        text:
+          "This park honors Ina Coolbrith, who with Bret Harte and Charles Warren Stoddard formed the “Golden Gate Trinity” and was Harte's editorial assistant at the Overland Monthly from 1868. As a librarian in Oakland from 1874 she encouraged the early reading of Jack London and Isadora Duncan, and on June 30, 1915, she was named California's first poet laureate. Her home nearby on the hill, a salon for artists and writers, burned in the 1906 fire with much of her manuscript work.",
+        place: "Ina Coolbrith Park",
+        where: "Taylor St & Vallejo St",
+        at: [-122.41375, 37.79799],
+        source: "https://en.wikipedia.org/wiki/Ina_Coolbrith",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk for visitors and would-be neighbors, from the Powell-Hyde cable car stop at Hyde & Filbert, down Lombard Street's crooked block and across the hill's lanes and stairways to Ina Coolbrith Park, a block above the Powell-Mason cable car stop at Mason & Vallejo. It runs about 1.3 miles with steep climbs; allow 75 minutes, go on a weekday morning to beat the Lombard Street crowds, and save it for a clear day for the views.",
+      miles: 1.3,
+      minutes: 75,
+      tip:
+        "From the foot of the Macondray Lane stairs, walk south on Taylor and west on Green St to the octagon house, then south on Jones to Polk's ramps; from Ina Coolbrith Park it is downhill to Mason St and the Powell-Mason cable car, a few blocks above North Beach. Bring good shoes for Jones St and the lane's wooden stairs.",
+    },
     restaurants: [
       { name: "Nisei", address: "2316 Polk St", phone: "(415) 827-6898", url: "https://www.restaurantnisei.com" },
       { name: "Sorella", address: "1760 Polk St", phone: "(415) 359-1212", url: "https://sorellasf.com" },
@@ -804,39 +968,97 @@ export const NEIGHBORHOODS = {
     ],
     aka: "“Snob Hill”",
     history:
-      "Nob Hill became San Francisco's most prestigious address in the 1870s, when the railroad and silver tycoons known as the “Big Four” built mansions atop it — made reachable by Andrew Hallidie's new cable cars. The 1906 fire destroyed the wooden palaces; in their place rose the grand hotels and Grace Cathedral that define the hill today.",
+      "Early San Franciscans called it California Hill, after the street that climbs its steep eastern face. The way up came before dawn on August 2, 1873, when Andrew Hallidie, working the grip himself, test-ran his Clay Street Hill Railroad, the city's first cable car line, between Kearny and Jones streets. The railroad men followed. Leland Stanford built a mansion at California and Powell in 1876, and his California Street Cable Railroad opened on April 10, 1878; the Cable Car Museum says it carried more than 11,000 riders that day. His Central Pacific partners Mark Hopkins and Charles Crocker built nearby, Collis Huntington bought a neighbor's mansion in 1892, and in 1886 silver baron James C. Flood finished a brownstone. The Big Four and their wealthy neighbors were the nabobs, shortened to nobs, who gave the hill its name.\n\nThe mansions drew resentment as well as admiration. Crocker walled in the house of a neighbor who refused to sell, and on October 29, 1877, Denis Kearney led a Workingmen's Party crowd of more than a thousand to Crocker's door, giving him a month to take the fence down or see them do it.\n\nThe fire that followed the 1906 earthquake burned the mansions, leaving the stone shell of Flood's house and the damaged, unopened Fairmont. The families let the land go: the Crockers gave their block to the Episcopal diocese, which laid Grace Cathedral's cornerstone in 1910; Arabella Huntington deeded hers to the city as a park in 1915; and the Flood house became the Pacific-Union Club. The Fairmont opened in 1907 and the Stanford Court Apartments in 1912, and cable cars still climb California Street past them all.",
     facts: [
       {
-        icon: "money",
-        title: "Built by the Big Four",
-        text:
-          "Railroad barons Stanford, Crocker, Hopkins, and Huntington built their mansions here in the 1870s — the source of the hill's name (from “nabob”) and its airs.",
-      },
-      {
         icon: "tram",
-        title: "The cable car made it possible",
+        title: "Where three cable lines meet",
         text:
-          "Only after Hallidie's 1873 cable car conquered the brutal grade could the wealthy build at the top. Three cable car lines still cross Nob Hill.",
-      },
-      {
-        icon: "quake",
-        title: "Stone survived, wood didn't",
-        text:
-          "The 1906 fire leveled the wooden mansions; only the granite Flood Mansion endured — now the Pacific-Union Club — while the rubble cleared the way for the grand hotels.",
-      },
-      {
-        icon: "church",
-        title: "Grace Cathedral's golden doors",
-        text:
-          "Completed in 1964, Grace Cathedral has gilded “Ghiberti” doors cast from the Florence Baptistery originals and two labyrinths open for walking meditation.",
+          "Leland Stanford built a $2 million mansion on this corner in 1876. The fire after the 1906 earthquake destroyed it, but the ten-foot wall of basalt and granite around its two-acre grounds survived, and part of it, with a restored fence, still runs along the eastern side of the Stanford Court Hotel. Stanford's California Street line crosses the Powell Street tracks here, the one corner where all three of the city's cable car lines stop.",
+        place: "California & Powell",
+        where: "California St & Powell St",
+        at: [-122.40930, 37.79213],
+        source: "https://en.wikipedia.org/wiki/Stanford_Court_Hotel",
       },
       {
         icon: "star",
-        title: "A wartime farewell",
+        title: "Mansion, art school, sky bar",
         text:
-          "At the Top of the Mark sky lounge (1939), WWII servicemen toasted from the northwest “Squadron Corner” before shipping out across the Pacific — a ritual that became legend.",
+          "Mark Hopkins' widow, Mary, left the mansion on this corner to her second husband, Edward Searles, who in February 1893 donated it to the San Francisco Art Association; it ran the Mark Hopkins Institute of Art here until the fire after the 1906 earthquake destroyed the house. In 1939 George D. Smith, owner of the hotel that now stands here, turned its 11-room, 19th-floor penthouse into the glass-walled Top of the Mark. In World War II, wives and sweethearts of departing servicemen gathered in its northwest corner to watch the ships sail out through the Golden Gate, and it became known as Weepers' Corner.",
+        place: "Mark Hopkins Hotel",
+        where: "999 California St",
+        at: [-122.41035, 37.79155],
+        source: "https://en.wikipedia.org/wiki/Top_of_the_Mark",
+      },
+      {
+        icon: "beer",
+        title: "A tiki bar in the old pool",
+        text:
+          "Sisters Tessie Fair Oelrichs and Virginia Fair Vanderbilt began this hotel, and it had not yet opened when the 1906 earthquake and fire damaged it. Julia Morgan, hired for her skill with reinforced concrete, repaired it, and it opened a year to the day after the quake. Downstairs, the Tonga Room replaced the hotel's 75-foot indoor pool of 1929, the Fairmont Plunge, in 1945, with a band on a barge in the old pool and staged tropical rainstorms, and the hotel's timeline says Tony Bennett first sang “I Left My Heart in San Francisco” here in December 1961.",
+        place: "Fairmont San Francisco",
+        where: "950 Mason St",
+        at: [-122.41072, 37.79240],
+        source: "https://fairmont-san-francisco.com/explore/history",
+      },
+      {
+        icon: "house",
+        title: "The mansion that outlived the fire",
+        text:
+          "Silver baron James C. Flood finished this house in 1886, faced in brownstone shipped from Connecticut quarries. The 1906 fire left its stone shell standing while the mansions around it burned, and the Pacific-Union Club acquired it and had architect Willis Polk remodel it as the club's home. Now a National Historic Landmark, it is a private club, so admire it from the sidewalk.",
+        place: "Pacific-Union Club",
+        where: "1000 California St",
+        at: [-122.41137, 37.79208],
+        source: "https://en.wikipedia.org/wiki/James_C._Flood_Mansion",
+      },
+      {
+        icon: "park",
+        title: "A railroad widow's gift",
+        text:
+          "In 1872 railroad attorney David Colton built a white Neoclassical mansion here, with marble steps and tall Corinthian columns. Collis Huntington bought it in 1892, and it burned in the 1906 fire. In February 1915 Huntington's widow, Arabella, sent the mayor a deed to the land, asking that it be known from then on as Collis P. Huntington Park, a gift that came as the city celebrated its recovery with the Panama-Pacific International Exposition.",
+        place: "Huntington Park",
+        where: "California St & Taylor St",
+        at: [-122.41205, 37.79220],
+        source: "https://nobhillassociation.org/huntington-park/",
+      },
+      {
+        icon: "art",
+        title: "A window of glass and soil",
+        text:
+          "Designed by Albert Roller, the California Masonic Memorial Temple was dedicated on September 29, 1958. Its main foyer holds a 48-by-38-foot “endomosaic” window by Emile Norman, who developed the technique: more than 150 hues of crushed glass, with soil, plant matter and metals, pressed between two large panes of acrylic. Roller commissioned it after seeing one of Norman's endomosaic windows at the Casa Munras hotel in Monterey.",
+        place: "The Masonic",
+        where: "1111 California St",
+        at: [-122.41289, 37.79129],
+        source: "https://californiafreemason.org/?p=16645",
+      },
+      {
+        icon: "church",
+        title: "Built where a spite fence stood",
+        text:
+          "When undertaker Nicholas Yung refused to sell his lot on this block, Charles Crocker spent $3,000 on a towering fence around three sides of Yung's house. It stood for about 25 years, until Yung's daughters sold the lot to the Crockers in 1904, and after the 1906 fire the family gave the whole block to the Episcopal diocese. Grace Cathedral's cornerstone was laid in 1910 and it was consecrated in 1964; inside, Keith Haring's bronze altarpiece The Life of Christ, finished two weeks before his death from AIDS in 1990, stands in the AIDS Interfaith Chapel, and labyrinths lie both inside and out.",
+        place: "Grace Cathedral",
+        where: "1100 California St",
+        at: [-122.41325, 37.79195],
+        source: "https://en.wikipedia.org/wiki/Charles_Crocker",
+      },
+      {
+        icon: "tram",
+        title: "Where the cables are pulled",
+        text:
+          "The Ferries & Cliff House Railway built this powerhouse and car barn in 1887, before its Powell Street cable cars began running in March 1888, and it was rebuilt after the 1906 earthquake and fire. From the free museum's gallery you look down on the motors, gears and big sheaves that run the whole cable car system, whose cables loop out from here under the streets. The collection includes grip car No. 8, an original 1870s car from Hallidie's Clay Street Hill Railroad.",
+        place: "Cable Car Museum",
+        where: "1201 Mason St",
+        at: [-122.41165, 37.79477],
+        source: "https://www.hmdb.org/m.asp?m=259555",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk for visitors and would-be neighbors across the crest of Nob Hill: start at California & Powell, where all three cable car lines stop, pass the grand hotels, the Flood mansion, Huntington Park, the Masonic and Grace Cathedral, then head down Taylor and Washington streets to the Cable Car Museum, about 0.7 miles and an hour with stops. Leave time to step inside Grace Cathedral and the museum.",
+      miles: 0.7,
+      minutes: 60,
+      tip:
+        "Ride a cable car up to California & Powell, where all three lines stop. The Cable Car Museum at the end is free, and Powell-Hyde and Powell-Mason cars stop right outside at Washington & Mason for the ride down Powell Street toward Union Square.",
+    },
     restaurants: [
       { name: "Acquerello", address: "1722 Sacramento St", phone: "(415) 567-5432", url: "https://www.acquerellosf.com" },
       { name: "Sons & Daughters", address: "708 Bush St", phone: "(415) 994-7933", url: "https://www.sonsanddaughterssf.com" },
@@ -1177,39 +1399,77 @@ export const NEIGHBORHOODS = {
     ],
     aka: "“The Village in the City”",
     history:
-      "Glen Park grew around Glen Canyon, a rugged ravine that in the 1880s held an amusement park, a small zoo, and — less charmingly — a dynamite works that occasionally blew up. Streetcars and later BART (1973) turned it into a commuter-friendly enclave. It remains a small, leafy neighborhood with a compact “village” downtown where Diamond and Chenery meet.",
+      "Glen Park grew up beside Glen Canyon, the rocky ravine at its western edge where Islais Creek rises. In 1868 the Giant Powder Company, licensed by Alfred Nobel, began making dynamite in the canyon, until an explosion destroyed the works in 1869. Amusements came next. In 1897 Archibald S. Baldwin, the developer who gave the district its name, announced a Glen Park Company to run a zoological garden, and in 1898 his Glen Park – Mission Zoo opened. Weekend crowds of 8,000 to 15,000 came for vaudeville, daring aeronautic displays, sporting events and animal acts.\n\nBut the home lots Baldwin offered from 1899 in his Glen Park Terrace, on Glen Avenue, today's Chenery Street, sold slowly, even though Behrend Joost's San Francisco & San Mateo Railway, which the SFMTA calls the city's first electric streetcar line, had run along Chenery since 1892. By 1903 Baldwin had sold out. The canyon became a picnic ground whose company and private parties were known for boisterous drinking, until the city bought it in 1922; in the late 1930s the Works Progress Administration built its recreation center.\n\nIn the 1960s freeway plans threatened both village and canyon. Three neighbors remembered as the Gum Tree Girls, Zoanne Nordstrom, Joan Seiwald and Geri Arkush, fought for Glen Canyon, where Seiwald feared a freeway would take out second base, and the Freeway Revolt stopped the Crosstown Freeway planned beside Bosworth Street. Interstate 280 did come, and cost the neighborhood its library building. Then, on November 5, 1973, BART opened Glen Park station, a block south of the village crossroads at Diamond and Chenery streets.",
     facts: [
       {
-        icon: "park",
-        title: "A wild canyon in the city",
-        text:
-          "Glen Canyon Park is a rugged ravine with rock-climbing outcrops and Islais Creek — one of the last free-flowing creeks in San Francisco — a pocket of the landscape as it was before the city.",
-      },
-      {
-        icon: "fair",
-        title: "Amusement park & dynamite",
-        text:
-          "In the 1880s the canyon held a popular amusement park and zoo. It also hosted a dynamite-manufacturing works whose periodic explosions rattled the early neighborhood.",
-      },
-      {
         icon: "subway",
-        title: "Small neighborhood, big transit",
+        title: "BART's brutalist crown jewel",
         text:
-          "Glen Park BART (opened 1973) makes this tiny village one of the most transit-convenient spots in the city — a quick ride to downtown, the East Bay, or SFO.",
+          "Service began here on November 5, 1973. The firm Corlett & Spackman designed the station with architect Ernest Born, who also designed the graphics for the whole BART system; a Chronicle critic calls it Born's final building, a subterranean station lit by skylights, and a multicolored mural of several kinds of marble graces its light-filled concourse. Docomomo US says many consider it the architectural crown jewel of BART, and in 2019 it was listed on the National Register of Historic Places.",
+        place: "Glen Park BART Station",
+        where: "Diamond St & Bosworth St",
+        at: [-122.43411, 37.73351],
+        source: "https://www.docomomo-us.org/register/glen-park-bart-station",
       },
       {
         icon: "book",
-        title: "A bookstore with a beat",
+        title: "The library that wandered 42 years",
         text:
-          "The village's anchor is Bird & Beckett Books — a beloved independent bookstore that doubles as one of the city's most dedicated live-jazz venues.",
+          "Glen Park's library began in September 1908 as Delivery Station F, in a dry-goods store at 2975 Diamond Street, now the site of the BART station, after the Glen Park Outdoor Art League pushed for one. It became a full branch in January 1927 and settled at 700 Bosworth Street, at Lippard Avenue. After almost 38 years there, that building was demolished during construction of Interstate 280, and the branch spent 42 years in temporary quarters until it opened here, in a new mixed-use building, on October 13, 2007.",
+        place: "Glen Park Branch Library",
+        where: "2825 Diamond St",
+        at: [-122.43347, 37.73404],
+        source: "https://www.glenparkhistory.org/glen-park-s-roving-branch-library",
       },
       {
-        icon: "sun",
-        title: "A sheltered sunny pocket",
+        icon: "music",
+        title: "Jazz among the bookshelves",
         text:
-          "Tucked into a valley east of Twin Peaks, Glen Park catches more sun and less wind than the foggy neighborhoods just over the hill to the west.",
+          "This independent bookshop, founded in 1999 on the village's stretch of Chenery Street, doubles as a music room. In 2007 an allied nonprofit, the Bird & Beckett Cultural Legacy Project, was set up to take over the shop's ever-expanding slate of cultural programs, and its 2026 calendar lists live jazz among the shelves several times a week.",
+        place: "Bird & Beckett Books and Records",
+        where: "653 Chenery St",
+        at: [-122.43316, 37.73444],
+        source: "https://www.jazznearyou.com/world/events/rova-at-bird-and-beckett-books-and-records-on-june-13",
+      },
+      {
+        icon: "factory",
+        title: "Nobel's dynamite, made in this canyon",
+        text:
+          "A plaque at the Elk Street entrance to Glen Canyon Park marks California Historical Landmark No. 1002, the site of the first dynamite factory in the United States. Here the Giant Powder Company, under the personal license of inventor Alfred Nobel, began making dynamite on March 19, 1868, until an explosion on November 26, 1869, destroyed the works; the company moved on, settling at Point Pinole in 1892.",
+        place: "First Dynamite Factory Site",
+        where: "Elk St & Chenery St",
+        at: [-122.43989, 37.73627],
+        source: "https://noehill.com/SF/LANDMARKS/cal1002.asp",
+      },
+      {
+        icon: "water",
+        title: "A creek still in daylight",
+        text:
+          "Islais Creek rises in Glen Canyon, and its water still runs in the open along the canyon floor here. At the southern end of the canyon, behind the recreation center the Works Progress Administration built in the late 1930s, it enters a culvert; from its sources here, the whole creek once stretched about 3.5 miles to San Francisco Bay.",
+        place: "Islais Creek",
+        where: "70 Elk St",
+        at: [-122.44086, 37.73750],
+        source: "https://en.wikipedia.org/wiki/Islais_Creek",
+      },
+      {
+        icon: "park",
+        title: "A freeway route turned greenway",
+        text:
+          "The strip of land parallel to Bosworth Street between Brompton and Burnside is made of parcels left over from property acquired for the Crosstown Freeway, designed to carry 48,000 vehicles a day beside Bosworth until the Freeway Revolt of the 1960s stopped it. It runs along the former banks of Islais Creek. In 2012 the Glen Park Association proposed restoring it as the Glen Park Greenway, since designated a Street Park, and neighbors have planted it in work parties with the Public Works Green Team.",
+        place: "Glen Park Greenway",
+        where: "Bosworth St & Lippard Ave",
+        at: [-122.43584, 37.73388],
+        source: "https://glenparkassociation.org/greenway",
       },
     ],
+    walk: {
+      intro:
+        "A loop of about 1.3 miles for visitors and would-be neighbors that starts and ends at Glen Park BART (Diamond St & Bosworth St, also served by the J Church and the 23, 35, 36, 44 and 52 buses), through the village on Diamond and Chenery streets, out Chenery to Glen Canyon Park and its creek, and back along Bosworth St. Allow about an hour, and go by day, when the canyon trail is easiest to follow.",
+      miles: 1.3,
+      minutes: 60,
+      tip:
+        "Bird & Beckett's nonprofit presents live music at least three times a week, so check its calendar before you go and time the walk to end with a show back in the village.",
+    },
     restaurants: [
       { name: "Gialina Pizzeria", address: "2842 Diamond St", phone: "(415) 239-8500", url: "https://www.gialina.com" },
       { name: "La Corneta Taqueria", address: "2834 Diamond St", phone: "(415) 469-8757", url: "https://lacorneta.com" },
