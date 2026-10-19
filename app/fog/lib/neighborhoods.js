@@ -57,7 +57,7 @@ export const NEIGHBORHOODS = {
           "The 20-by-30-foot rainbow flag over Harvey Milk Plaza first went up on November 8, 1997, the 20th anniversary of Milk's election, and in 2024 the city made it a landmark; planners call it the only permanent Rainbow Flag installation by the flag's creator, Gilbert Baker. Across Market Street, Pink Triangle Park's 15 granite pylons, each topped with a pink triangle, form what its founders call the first permanent, free-standing U.S. memorial to LGBT people persecuted by the Nazis.",
         place: "Harvey Milk Plaza & Pink Triangle Park",
         where: "Castro St & Market St",
-        at: [-122.43495, 37.76250],
+        at: [-122.43518, 37.76267],
         source: "https://sfplanning.org/sites/default/files/documents/preserv/landmarks_designation/LM319.pdf",
       },
       {
@@ -87,7 +87,7 @@ export const NEIGHBORHOODS = {
           "The sunny corner outside the old Hibernia Bank branch here picked up the nickname “Hibernia Beach” in the 1970s, and by the early 1980s it was packed with shirtless men on warm afternoons. As AIDS spread, its wall and railing became a folk memorial for the dead, and when the bank posted signs banning memorials in 2021, a backlash got them taken down within days. The rainbow crosswalks went in in 2014, their design picked in a vote of about 4,500 people.",
         place: "Hibernia Beach",
         where: "Castro St & 18th St",
-        at: [-122.43505, 37.76105],
+        at: [-122.43499, 37.76088],
         source: "https://www.ebar.com/story/20838",
       },
       {
@@ -696,39 +696,67 @@ export const NEIGHBORHOODS = {
       "Family-friendly Edwardians",
     ],
     history:
-      "Cole Valley is a small, affluent enclave just south of Haight-Ashbury, built out as a streetcar suburb in the early 1900s — much of it just after the 1906 earthquake. It's named for Cole Street, which honors Dr. R. Beverly Cole, a prominent 19th-century physician and UC medical dean. Sitting below Tank Hill and Mount Sutro, beside UCSF and Golden Gate Park, it's prized for its quiet, village feel.",
+      "Cole Valley takes its name from Cole Street, but the name is far younger than the neighborhood. In 1883 the Haight Street cable line reached Stanyan Street at the edge of Golden Gate Park, and Henry Heagerty began running a saloon and small boarding house at Stanyan and Waller. Four years later the Haight Street Grounds ballpark opened on the land bounded by Stanyan, Waller, Shrader and Frederick streets. It drew California League baseball crowds and, in 1892, hosted the first Big Game between Stanford and California; it was torn down in 1895, and houses now stand where it was. In 1904–05 the architects Martens & Coffey built Heagerty the Park View Hotel, with his saloon keeping the corner, and Victorian houses from around 1900 still stand along Carl and Cole streets.\n\nOn October 21, 1928, the Sunset Tunnel opened under the hill beside Buena Vista Park, and the new N streetcar line came out of its west portal at Carl and Cole, still the heart of the neighborhood's shopping blocks. Cole Hardware, which the city's Legacy Business Registry dates to 1920, was already on Cole Street, and Kezar Stadium, across Stanyan, gave Heagerty's old hotel the name Stadium Hotel from the 1930s into the 1970s.\n\nFrom 1966 to 1989 Cole Street was home to Maud's, a lesbian bar that by its closing was billed as the oldest in the country. In 1975, when the area was still known as the Upper Haight, Jacob Malek-Zadeh bought Cole Street Liquor, a store in business since the 1930s, and that year it became Val de Cole; the city's Legacy Business record credits him with helping create the name Cole Valley.",
     facts: [
       {
-        icon: "mayor",
-        title: "Named for a doctor",
-        text:
-          "Cole Street and the neighborhood honor Dr. R. Beverly Cole, a leading 19th-century San Francisco physician and dean of the University of California medical school.",
-      },
-      {
         icon: "tram",
-        title: "Built by the N-Judah",
+        title: "Where the N comes out of the hill",
         text:
-          "The N-Judah streetcar (1928) dives under the hill through the Sunset Tunnel, surfacing at Cole Valley's Carl & Cole portal — the line that built and still serves the village.",
+          "N Judah trains surface here from the 4,232-foot Sunset Tunnel, first called the Duboce Tunnel, which was built from 1926 to 1928 under the hill beside Buena Vista Park. On Sunday, October 21, 1928, Mayor James Rolph took the controls of the first N car through it as crowds of thousands turned out for the opening. The small park the tracks cut through at the portal is Richard Gamble Memorial Park.",
+        place: "Sunset Tunnel West Portal",
+        where: "Carl St & Cole St",
+        at: [-122.44997, 37.76580],
+        source: "https://www.sfmta.com/blog/n-judah-turns-87",
       },
       {
-        icon: "bridge",
-        title: "Tank Hill's hidden view",
+        icon: "shop",
+        title: "No strangers, just friends",
         text:
-          "The rocky outcrop above Cole Valley — once home to a giant water tank — offers one of the city's best and least-crowded panoramas, from downtown to the Golden Gate.",
+          "The city's Legacy Business Registry dates this hardware store's Cole Valley location to 1920 and says Dave Karp bought it in 1961. He hung his motto over the register: “There are no strangers here, just friends we haven't met.” His son Rick, who started out sweeping its floors as a young teen, grew it into a chain with stores in other neighborhoods, and this is still its flagship.",
+        place: "Cole Hardware",
+        where: "956 Cole St",
+        at: [-122.44959, 37.76528],
+        source: "https://www.legacybusiness.org/business/cole-hardware",
+      },
+      {
+        icon: "beer",
+        title: "Last call at Maud's",
+        text:
+          "From 1966 to 1989 this was Maud's, the lesbian bar Rikki Streicher opened, whose patrons included Janis Joplin and the activists Del Martin and Phyllis Lyon; at its closing it was claimed to be the oldest lesbian bar in the United States, and Paris Poirier's 1993 documentary Last Call at Maud's tells its story. Streicher went on to open Amelia's and co-found the Gay Games. In 1989 Finnegans Wake, a pub founded in Noe Valley in 1976, reopened in the space.",
+        place: "Finnegans Wake",
+        where: "937 Cole St",
+        at: [-122.45005, 37.76530],
+        source: "https://en.wikipedia.org/wiki/Maud%27s_(bar)",
+      },
+      {
+        icon: "flag",
+        title: "The first Big Game kicked off here",
+        text:
+          "Despite its name, the Haight Street Grounds stood on the land bounded by Stanyan, Waller, Shrader and Frederick streets, which Beulah Street now crosses. It opened for California League baseball on April 3, 1887, and on March 19, 1892, it hosted the first Big Game, won by Stanford 14–10 over California. Stanford's student manager was a young Herbert Hoover, and by the usual telling neither team had brought a ball, so the kickoff waited about an hour while one was fetched on horseback.",
+        place: "Haight Street Grounds site",
+        where: "Stanyan St & Beulah St",
+        at: [-122.45280, 37.76760],
+        source: "https://en.wikipedia.org/wiki/Haight_Street_Grounds",
       },
       {
         icon: "house",
-        title: "An Edwardian time capsule",
+        title: "A saloon keeper's 1904 hotel",
         text:
-          "Built largely just after 1906, Cole Valley's tidy blocks of Edwardian flats stayed quietly residential even as the Haight next door became a 1960s counterculture epicenter.",
-      },
-      {
-        icon: "sun",
-        title: "On the sunny side",
-        text:
-          "Sheltered just east of Twin Peaks and Mount Sutro, Cole Valley catches noticeably more sun than the fog-bound Sunset neighborhoods immediately to the west.",
+          "Henry Heagerty had run a saloon and small boarding house on this corner since 1883 when the architects Martens & Coffey built him the Park View Hotel in 1904–05, with the saloon keeping the corner. It later went by Hotel Golden Gate, Hotel Roamer and, from the 1930s into the 1970s, the Stadium Hotel, for Kezar Stadium across the street. A later remodel stripped its ornament and covered it in faux-brick siding; restored and renamed the Stanyan Park Hotel, it was listed on the National Register of Historic Places in 1983, and its nomination calls it the oldest surviving hotel on the border of Golden Gate Park.",
+        place: "Stanyan Park Hotel",
+        where: "750 Stanyan St",
+        at: [-122.45285, 37.76815],
+        source: "https://npgallery.nps.gov/AssetDetail/NRIS/83001235",
       },
     ],
+    walk: {
+      intro:
+        "A short loop for visitors and would-be neighbors that starts and ends at the N Judah's Carl & Cole stop, takes in the shops on Cole Street, heads west on Carl Street to follow Stanyan Street along the edge of Golden Gate Park, and returns by Waller and Cole streets: about 0.8 mile and 40 minutes with stops. A weekday morning is calmest; a clear afternoon is best for lingering at the park's edge.",
+      miles: 0.8,
+      minutes: 40,
+      tip:
+        "Ride the N Judah in and you come out of the Sunset Tunnel right at the start. At the hotel corner, Golden Gate Park lies just across Stanyan Street if you want to stretch the walk; otherwise head east on Waller Street and back down Cole Street to close the loop at Carl & Cole.",
+    },
     restaurants: [
       { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
       { name: "Beit Rima", address: "86 Carl St", phone: "(415) 566-1274", url: "https://beitrimasf.com" },
@@ -770,7 +798,7 @@ export const NEIGHBORHOODS = {
           "Muralists Susan and Luis Cervantes and fellow artists founded Precita Eyes Muralists in 1977 and named it for this park; the group's original studio faces it a short way east of Folsom, at 348 Precita Ave. Its center on 24th Street in the Mission now leads guided walks past Balmy Alley and the neighborhood's other murals.",
         place: "Precita Park & Precita Eyes",
         where: "Folsom St & Precita Ave",
-        at: [-122.41364, 37.74719],
+        at: [-122.41349, 37.74710],
         source: "https://www.precitaeyes.org/about.html",
       },
       {
@@ -4522,7 +4550,7 @@ export const NEIGHBORHOODS = {
           "Under Market Street a few steps south of this corner, between Diamond and Eureka streets, lies Eureka Valley station, which opened with the Twin Peaks Tunnel in 1918 and closed in 1972 during construction of the Market Street subway. Its street entrances were demolished, but K, L and M trains still run past its low platforms without stopping, and SFMTA calls it Muni's only ghost station.",
         place: "Eureka Valley ghost station",
         where: "Diamond St & 17th St",
-        at: [-122.43750, 37.76258],
+        at: [-122.43749, 37.76241],
         source: "https://en.wikipedia.org/wiki/Eureka_Valley_station",
       },
       {
