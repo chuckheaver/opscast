@@ -165,39 +165,77 @@ export const NEIGHBORHOODS = {
     ],
     aka: "“Stroller Valley”",
     history:
-      "Noe Valley takes its name from José de Jesús Noé, the last Mexican alcalde (mayor) of Yerba Buena, whose Rancho San Miguel once covered the area. It filled in as a working-class streetcar suburb after the 1880s, and because the 1906 earthquake fires never reached it, block after block of original Victorian and Edwardian homes still stand. In recent decades it has become one of the city's most sought-after family neighborhoods.",
+      "Noe Valley takes its name from José de Jesús Noé, Yerba Buena's last Mexican alcalde, who in 1845 received Rancho San Miguel: 4,443 acres that also took in today's Eureka Valley and reached west over what is now Mount Davidson. In the early 1850s Noé sold this valley to John M. Horner, a New Jersey native who had sailed into Yerba Buena in 1846 aboard the ship Brooklyn with Sam Brannan's company of Mormons. Horner cut the land into blocks and lots as Horner's Addition and named its streets, among them Elizabeth, for his wife, and Jersey, for his home state. He died in Hawaii in 1907, but the city assessor still calls the area Horner's Addition.\n\nIn 1887 the Market Street Cable Railway opened a branch up Castro Street, and through the 1880s and 1890s builders filled the slopes with Victorian cottages and flats for working-class San Franciscans. The fires that followed the 1906 earthquake never reached the valley, and much of the valley was built up just afterward. In August 1917 the city's Municipal Railway opened the J-Church streetcar line, with Mayor James Rolph at the controls of the first car; for about eight decades its cars turned back at Church and 30th streets.\n\nIn the spring of 1977, a group of friends who drank at Finnegan's Wake, a 24th Street bar, started the Noe Valley Voice; nine people chipped in to pay for the first issue, eight typewritten tabloid pages, that May. The paper is still published, and the valley's streets are still lined with the Victorian and Edwardian houses that went up around the turn of the 20th century.",
     facts: [
       {
-        icon: "mayor",
-        title: "Named for the last Mexican mayor",
+        icon: "church",
+        title: "A Carpenter Gothic church from 1888",
         text:
-          "José de Jesús Noé was the final alcalde of Yerba Buena before it became San Francisco. His Rancho San Miguel land grant covered today's Noe Valley, the Castro, and beyond.",
+          "Charles Geddes designed this steep-gabled wooden church, built in 1888 for a congregation that had taken the name Lebanon Presbyterian Church in 1884. In 1891 the building was raised and a new ground floor, designed by William Curlett, went in beneath it; the Victorian Alliance counts it among the few wood-framed churches to come through 1906. Now the Noe Valley Ministry, it is in line to be a city landmark: in 2026 supervisors began the designation, calling it an early and rare example of Carpenter Gothic in San Francisco, with its pointed windows, tower and scroll-sawn trim.",
+        place: "Noe Valley Ministry",
+        where: "1021 Sanchez St",
+        at: [-122.42958, 37.75281],
+        source: "https://www.sfbos.org/sites/default/files/r0111-26.pdf",
       },
       {
-        icon: "quake",
-        title: "The fire that never came",
+        icon: "park",
+        title: "The church parking lot that became a park",
         text:
-          "The 1906 earthquake's fires stopped short of Noe Valley, so an unusually intact stock of pre-1906 Victorian and Edwardian homes survives — a big reason the streets feel so historic.",
+          "This lot was a gas station, then the Noe Valley Ministry's parking lot, and it first came alive as a public space with a weekly farmers' market. Neighbors raised $470,000 toward buying it, the church sold it to the city's Recreation and Park Department in June 2013 for $4.2 million, and Noe Valley Town Square opened on October 27, 2016. The farmers' market still sets up here on Saturday mornings, year-round.",
+        place: "Noe Valley Town Square",
+        where: "3861 24th St",
+        at: [-122.42874, 37.75141],
+        source: "https://sfrecpark.org/1685/Noe-Valley-Town-Square",
       },
       {
-        icon: "stroller",
-        title: "“Stroller Valley”",
+        icon: "book",
+        title: "The library a neighbor kept open",
         text:
-          "The neighborhood is famous for its density of young families. A Saturday farmers' market has run on 24th St since 2003, and the sidewalks are a well-known obstacle course of strollers.",
+          "Paid for with an Andrew Carnegie grant and designed by John Reid Jr., this two-story, Spanish-style branch of brick and terra cotta was finished in September 1916 at a cost of $45,499, furnishings included. Twice threatened with closure in the 1980s, it was saved by a campaign led by neighbor Sally Brunn, and after her death in 1991 it was renamed for her. A city landmark since 2008, it stands on the street Horner named for his home state, and its renovation, finished that March, won a Governor's Historic Preservation Award.",
+        place: "Noe Valley/Sally Brunn Library",
+        where: "451 Jersey St",
+        at: [-122.43514, 37.75027],
+        source: "https://sfpl.org/locations/noe-valley/noe-valley-library-history",
       },
       {
         icon: "tram",
-        title: "Built by the streetcar",
+        title: "Where the cable cars turned around",
         text:
-          "The J-Church line (opened 1917) climbs past Dolores Park and turned Noe Valley into a commuter-friendly suburb — still the quickest car-free run downtown.",
+          "Cable cars climbing Castro Street ended their run at this corner, where a turntable swung them around; a photo from about 1940 shows Castro car No. 4 on it. In its last years the line was a shuttle over the hill between 18th and 26th streets, and its final day was April 5, 1941. The next day the Market Street Railway replaced it, the Fillmore Street counterbalance and the 24-Divisadero streetcar with one new 24-Divisadero bus line, and Muni buses still stop at this corner.",
+        place: "Castro cable car turntable",
+        where: "Castro St & 26th St",
+        at: [-122.43376, 37.74818],
+        source: "https://www.streetcar.org/cable_car_to_castro/",
       },
       {
-        icon: "shopping",
-        title: "A fiercely independent main street",
+        icon: "house",
+        title: "A landmark for two pioneers",
         text:
-          "24th Street is a protected neighborhood commercial district; residents have long resisted chain stores, leaving a strip of independent bakeries, bookshops, and cafés.",
+          "This two-story cottage was the longtime home of Phyllis Lyon and Del Martin, pioneering lesbian-rights and feminist activists who helped found the Daughters of Bilitis in 1955. They were the first same-sex couple married in San Francisco, twice: in 2004 and again in 2008. In 2021 supervisors voted unanimously to make the house, with the neighboring lot the couple tended as a garden, city Landmark No. 292, which the AP called the first lesbian landmark in the U.S. West; please view it from the sidewalk.",
+        place: "Lyon-Martin House",
+        where: "651 Duncan St",
+        at: [-122.43459, 37.74539],
+        source: "https://sfplanninggis.org/docs/landmarks_and_districts/LM292.pdf",
+      },
+      {
+        icon: "church",
+        title: "A Sister Act star, built debt-free",
+        text:
+          "St. Paul's parish began this 1,400-seat English Gothic church in 1897 and paid as it went, taking 14 years and finishing without construction debt; Archbishop Patrick Riordan dedicated it on May 29, 1911. Designed by Frank T. Shea, it played the outside of St. Katherine's in the 1992 film Sister Act, for which the storefronts across the street were dressed to look run-down. In 2025 supervisors began the process of making it a city landmark.",
+        place: "St. Paul's Church",
+        where: "1660 Church St",
+        at: [-122.42700, 37.74420],
+        source: "https://en.wikipedia.org/wiki/St._Paul%27s_Catholic_Church_(San_Francisco)",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.8 miles for visitors and would-be neighbors, from the J-Church stop at Church & 24th streets along the 24th Street shopping blocks, then south past the old cable car turnaround and the Lyon-Martin House to St. Paul's Church, where the J runs past on Church Street for the ride back. Allow about 80 minutes; on a Saturday morning the farmers' market is running at Town Square.",
+      miles: 1.8,
+      minutes: 80,
+      tip:
+        "Save your coffee stop for 24th Street between Church and Castro, before the walk turns south. At the end, look a block south of St. Paul's: the wye track where J-Church streetcars turned back for about eight decades still sits on 30th Street.",
+    },
     restaurants: [
       { name: "Firefly", address: "4288 24th St", phone: "(415) 821-7652", url: "https://www.fireflysf.com" },
       { name: "La Ciccia", address: "291 30th St", phone: "(415) 550-8114", url: "https://laciccia.com" },
@@ -233,39 +271,77 @@ export const NEIGHBORHOODS = {
     ],
     aka: "1915 Expo grounds",
     history:
-      "The Marina was created for the 1915 Panama-Pacific International Exposition — a World's Fair celebrating the city's recovery from the 1906 earthquake and the opening of the Panama Canal — much of it built on bay fill and quake rubble. After the fair, the district filled in with Mediterranean-style homes through the 1920s. Its waterfront flats and bay views have made it one of the city's most popular young-professional neighborhoods.",
+      "Before the 1915 world's fair, the shore between Black Point, today's Fort Mason, and the Presidio was a shallow cove edged with tidal marsh. It was generally called Harbor View, after a bayside resort that opened as baths in 1864 and whose seafood restaurant became known for clam chowder, cracked crab and steam beer. Fill had crept into the cove since the late 1860s, and in 1912 a dredge pumped in sand and mud from the bay floor to make ground for the Panama-Pacific International Exposition, which celebrated the new Panama Canal and the city's recovery from 1906.\n\nThe fair ran from February to December 1915. Then its palaces came down; only Bernard Maybeck's Palace of Fine Arts still stands on the old grounds, and a 1991 study concluded that the remains of thousands of piles driven for the fair very probably still lie underground. Landscape architect Mark Daniels's 1917 plan, adopted in part as Marina Gardens, laid out diagonal boulevards, triangular blocks and curving avenues that still shape the streets between Fillmore and Scott. In 1920 the first transcontinental air mail flight ended on the cleared ground, now the Marina Green. Once houses and apartment buildings began going up in the early 1920s, developers rechristened the district the Marina, and it was built out quickly through the early 1930s in Period Revival, Streamline Moderne and Art Deco styles, with Chestnut Street as its main street.\n\nThat new ground was tested on October 17, 1989, when the Loma Prieta earthquake shook the loose, sandy fill until it liquefied. Buildings collapsed, gas lines and water mains broke, and fire broke out at Beach and Divisadero streets.",
     facts: [
       {
-        icon: "fair",
-        title: "Built for a World's Fair",
+        icon: "book",
+        title: "A landmark library on a playground",
         text:
-          "The 1915 Panama-Pacific International Exposition drew nearly 19 million visitors to a temporary city of palaces here. When it closed, the grounds became the Marina.",
+          "The city library's 23rd branch opened here in 1954, on the southwest corner of the WPA-era Funston Playground, now the George R. Moscone Recreation Center. Its architects, Appleton & Wolfard, drew on Scandinavian design, notably Finnish architect Alvar Aalto; between 1951 and 1966 they designed eight San Francisco branch libraries, which the city's landmark listing calls more than any other firm, and the building is now city Landmark No. 262.",
+        place: "Marina Branch Library",
+        where: "1890 Chestnut St",
+        at: [-122.43435, 37.80118],
+        source: "https://sfpl.org/locations/marina/marina-library-history",
       },
       {
-        icon: "mayor",
-        title: "The Palace of Fine Arts survived",
+        icon: "park",
+        title: "Where coast-to-coast air mail landed",
         text:
-          "The domed Palace of Fine Arts is the Expo's only structure left standing. Too beloved to demolish, it was rebuilt in permanent concrete in the 1960s.",
-      },
-      {
-        icon: "quake",
-        title: "Hardest hit in 1989",
-        text:
-          "Because much of the Marina sits on loose bay fill, the soil liquefied in the 1989 Loma Prieta earthquake — making it the city's most damaged neighborhood and a key reason it shows up on seismic maps today.",
+          "After the fair, this lawn became an airfield, Marina Field. At 2:33 p.m. on September 11, 1920, air mail pilot E. E. “Monte” Mouton landed here, completing the first transcontinental air mail flight three days after the relay set out from New York. He had flown the last 250 miles, from Reno, in 1 hour and 58 minutes.",
+        place: "Marina Green",
+        where: "Marina Blvd & Fillmore St",
+        at: [-122.43745, 37.80645],
+        source: "https://www.thisdayinaviation.com/11-september-1920/",
       },
       {
         icon: "wave",
-        title: "A musical seawall",
+        title: "An organ the tides play",
         text:
-          "At the tip of the Marina jetty sits the Wave Organ — a sculpture of pipes set into the breakwater that the tides play, built by the Exploratorium in 1986.",
+          "At the tip of the jetty past the yacht harbor, Exploratorium artist-in-residence Peter Richards and stonemason George Gonzales completed the Wave Organ in 1986. More than 20 PVC and concrete pipes reach down into the bay among carved granite and marble salvaged from a demolished cemetery, so the water's surges rumble, gurgle and hiss through them; it sounds best at high tide.",
+        place: "Wave Organ",
+        where: "83 Marina Green Dr",
+        at: [-122.44018, 37.80848],
+        source: "https://en.wikipedia.org/wiki/Wave_Organ",
       },
       {
-        icon: "shopping",
-        title: "Chestnut Street, since the '20s",
+        icon: "fair",
+        title: "The weeping women's missing vines",
         text:
-          "Chestnut Street has been the Marina's main drag for a century — today a tight run of cafés, fitness studios, and shops that defines the neighborhood's social scene.",
+          "Across the lagoon stands the only major structure from the 1915 fair still on its original site. Atop Bernard Maybeck's colonnade, Ulric Ellerhusen's “weeping women” turn their backs and lean on boxes meant to spill over with trailing vines that budget cuts kept from ever being planted. The hall held 18 lighted tennis courts until 1942 and an Army motor pool in World War II; after a campaign led by philanthropist Walter S. Johnson, the palace was rebuilt in permanent materials beginning in 1964, and Frank Oppenheimer's Exploratorium filled the hall from 1969 to 2013.",
+        place: "Palace of Fine Arts",
+        where: "Baker St & Beach St",
+        at: [-122.44675, 37.80340],
+        source: "https://www.kqed.org/news/11732261/whats-up-with-the-weeping-women-at-the-palace-of-fine-arts",
+      },
+      {
+        icon: "quake",
+        title: "The fire a fireboat fought",
+        text:
+          "When the Loma Prieta earthquake struck at 5:04 p.m. on October 17, 1989, the shaking snapped gas lines under the Marina, and fire broke out at this corner. The quake had also broken the water mains that fed the hydrants, so firefighters ran hose from the Phoenix, the city's only fireboat since 1955, which pumped bay water into portable hydrants while volunteers helped haul the lines toward the flames. Grateful Marina property owners later gave $50,000 toward buying and refitting a second fireboat, the Guardian, which served until 2022.",
+        place: "Beach & Divisadero",
+        where: "Beach St & Divisadero St",
+        at: [-122.44370, 37.80377],
+        source: "https://guardiansofthecity.org/sffd/fires/notable_fires/oct_17_1989.html",
+      },
+      {
+        icon: "movie",
+        title: "A Streamline Moderne movie house",
+        text:
+          "The El Presidio Theatre went up on Chestnut Street in 1937 in the Streamline Moderne style and shortened its name to the Presidio Theatre in 1951. It stayed a single-screen movie house until 2003, and in March 2026 the Board of Supervisors voted unanimously to begin making the building a city landmark.",
+        place: "Presidio Theatre",
+        where: "2340 Chestnut St",
+        at: [-122.44185, 37.80030],
+        source: "https://media.api.sf.gov/documents/r0172-26.pdf",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 2.2 miles for visitors and would-be neighbors, from the Marina Branch Library at Chestnut and Webster streets, where the 30 Stockton bus stops, north to the Marina Green, out the jetty to the Wave Organ, then west to the Palace of Fine Arts and back to Chestnut Street. Allow about an hour and a half, and go on a clear morning timed to a high tide.",
+      miles: 2.2,
+      minutes: 90,
+      tip:
+        "The Wave Organ is at its liveliest near high tide, so check a tide table before you set out. The jetty is exposed to the wind off the bay, so bring a layer even on a sunny day.",
+    },
     restaurants: [
       { name: "A16", address: "2355 Chestnut St", phone: "(415) 598-2252", url: "https://www.a16pizza.com" },
       { name: "Delarosa", address: "2175 Chestnut St", phone: "(415) 673-7100", url: "https://www.delarosasf.com" },
@@ -435,39 +511,77 @@ export const NEIGHBORHOODS = {
     ],
     aka: "La Misión",
     history:
-      "The Mission grew up around Mission San Francisco de Asís (Mission Dolores), founded in 1776 — the city's oldest building and its namesake. For generations a working-class, heavily Latino neighborhood, it's famous for its murals, its taquerias, and the sunniest weather in San Francisco. A wave of acclaimed restaurants and rising rents has reshaped it in recent decades.",
+      "Ohlone-speaking Yelamu people lived in this valley for thousands of years before the Spanish founded Mission San Francisco de Asís in 1776 beside a lagoon, Laguna Dolores; the mission moved to its present site in 1783, and the district still carries its name. In 1866 R. B. Woodward opened Woodward's Gardens on land that had belonged to John C. Frémont, an amusement park with a zoo, aquarium, museum, art gallery and botanical gardens between Mission and Valencia streets from today's Duboce Avenue to 15th Street. A state plaque at 1700 Mission Street remembers it as the city's most popular resort until it closed in 1892.\n\nIrish and German immigrant workers settled the flat valley in the late 1800s. In April 1906 the fire that followed the earthquake swept into the Mission from Hayes Valley, but firefighters halted it at 20th Street, partly with water from a cistern at 19th and Shotwell streets. Displaced businesses and residents moved in, and the rebuilt Mission Street became the “Mission Miracle Mile,” which city planners call San Francisco's largest and most important shopping destination outside Union Square in the first half of the 20th century.\n\nAfter World War II many longtime families left for the suburbs on GI Bill and federal housing loans, and a Latino community grew up with its center along Mission Street. On November 5, 1973, BART opened its 16th Street and 24th Street stations beneath Mission Street. Murals began appearing in Balmy Alley in 1972, artists and activists founded the Mission Cultural Center for Latino Arts in 1977, Carnaval first paraded in 1979, and in 1992 six neighbors started the Clarion Alley Mural Project.",
     facts: [
       {
-        icon: "church",
-        title: "The city's oldest building",
+        icon: "tower",
+        title: "The castle on Mission Street",
         text:
-          "Mission Dolores, completed in 1791, is the oldest intact structure in San Francisco and gave both the neighborhood and the city their names.",
+          "This National Guard armory and arsenal went up in 1912–14 to replace one destroyed in 1906, and it was designed to look like a medieval fortress, with octagonal corner towers, rough clinker-brick walls that curve outward toward the ground and long, narrow slit windows. From the 1920s through the 1940s it was the city's main sports venue, with at least two prizefights most weeks in its Drill Court, usually on Tuesday and Friday nights, earning it the nickname “the Madison Square Garden of the West.” It is city Landmark No. 108.",
+        place: "The Armory",
+        where: "1800 Mission St",
+        at: [-122.42056, 37.76778],
+        source: "https://en.wikipedia.org/wiki/San_Francisco_Armory",
+      },
+      {
+        icon: "flag",
+        title: "The 1934 general strike's meeting hall",
+        text:
+          "The San Francisco Labor Council built this Labor Temple in 1914 and held its grand opening on February 27, 1915. Its biggest moment came in 1934, when many of the meetings of the city's general strike were held in its main auditorium. The city made it Landmark No. 238 in 2004, and the Clarion Alley Mural Project, the next stop, has painted murals here too.",
+        place: "Redstone Building",
+        where: "2940 16th St",
+        at: [-122.41830, 37.76525],
+        source: "https://en.wikipedia.org/wiki/Redstone_Building",
       },
       {
         icon: "art",
-        title: "San Francisco's mural capital",
+        title: "Six neighbors, 700-plus murals",
         text:
-          "Balmy Alley and Clarion Alley are open-air galleries of Latino and political street art, maintained and renewed by community artists since the 1970s.",
+          "In October 1992 six North Mission residents, Aaron Noble, Michael O'Connor, Sebastiana Pastor, Rigo 92, Mary Gail Snyder and Aracely Soriano, formed the Clarion Alley Mural Project, inspired by the murals of Balmy Alley. The volunteer collective has since put up more than 700 murals on and around this one-block alley between Mission and Valencia streets.",
+        place: "Clarion Alley",
+        where: "Clarion Alley & Mission St",
+        at: [-122.41953, 37.76300],
+        source: "https://en.wikipedia.org/wiki/Clarion_Alley_Mural_Project",
       },
       {
-        icon: "burrito",
-        title: "Home of the Mission burrito",
+        icon: "movie",
+        title: "A movie palace named for Nolan",
         text:
-          "The oversized, foil-wrapped “Mission-style” burrito — rice and beans included — was born in the neighborhood's taquerias in the late 1960s and exported worldwide.",
+          "This began as a nickelodeon, the Idle Hour; in 1915 its owners hired the Reid Brothers to design a large auditorium and lobby, which opened in 1916, and in 1932 Timothy Pflueger remade it in Art Deco style, with 2,012 seats, for the Nasser brothers' theater chain. It closed in 1993, and City College bought it in 1998 for a campus that would have meant demolishing most of it, until it became a city landmark in 2004. Alamo Drafthouse reopened it in December 2015, and in 2026 renamed it the Christopher Nolan Cinema.",
+        place: "New Mission Theater",
+        where: "2550 Mission St",
+        at: [-122.41902, 37.75631],
+        source: "https://localnewsmatters.org/2026/06/12/sfs-historic-new-mission-movie-theater-to-be-renamed-after-director-christopher-nolan/",
       },
       {
-        icon: "sun",
-        title: "The sunny side of the fog",
+        icon: "book",
+        title: "The library's very first branch",
         text:
-          "Sheltered by Twin Peaks from the ocean fog, the Mission is reliably the warmest, sunniest neighborhood in the city — often 10°F above the foggy west side.",
+          "The Mission branch opened in 1888 in a storefront two blocks away, the first branch of the San Francisco Public Library. Its current home, paid for by Andrew Carnegie and designed by G. Albert Lansburgh, opened here in December 1915, four blocks south of where the 1906 fire stopped. After a renovation of about $37 million that restored its 24th Street staircase, removed in 1997, it reopens on Saturday, November 14, 2026.",
+        place: "Mission Branch Library",
+        where: "Bartlett St & 24th St",
+        at: [-122.41972, 37.75228],
+        source: "https://sfpl.org/locations/mission/mission-library-history",
       },
       {
-        icon: "subway",
-        title: "A transit crossroads",
+        icon: "art",
+        title: "Murals for Central America",
         text:
-          "Two BART stations at 16th and 24th & Mission, plus the busiest bus lines in the city, make it one of San Francisco's most connected neighborhoods.",
+          "The alley's earliest murals date to 1972, when Mia Galaviz de Gonzalez painted with children from a local child-care center, and in 1973 Patricia Rodriguez and Graciela Carrillo, who rented an apartment here and soon formed Las Mujeres Muralistas, painted a jungle-underwater scene. In 1984 muralist Ray Patlán led PLACA, a group of artists who added some two dozen murals celebrating the Indigenous cultures of Central America and protesting U.S. intervention in the region.",
+        place: "Balmy Alley",
+        where: "Balmy St & 24th St",
+        at: [-122.41245, 37.75250],
+        source: "https://en.wikipedia.org/wiki/Balmy_Alley",
       },
     ],
+    walk: {
+      intro:
+        "A 1.7-mile line for visitors and would-be neighbors, from the Armory at Mission and 14th streets (two blocks north of 16th St Mission BART; the 14 and 49 buses run along Mission St) south past the Mission's labor hall, mural alleys, movie palace and library to Balmy Alley, about a seven-minute walk east of 24th St Mission BART for the ride back. Allow about 75 minutes, and go on a sunny afternoon, when the murals are in full light.",
+      miles: 1.7,
+      minutes: 75,
+      tip:
+        "Walk Clarion Alley all the way through to Valencia St and back before continuing south on Mission St. The library reopens with a ribbon-cutting on Saturday, November 14, 2026; check SFPL's hours before planning to go inside.",
+    },
     restaurants: [
       { name: "Foreign Cinema", address: "2534 Mission St", phone: "(415) 648-7600", url: "https://foreigncinema.com" },
       { name: "Flour + Water", address: "2401 Harrison St", phone: "(415) 826-7000", url: "https://www.flourandwater.com" },
@@ -502,39 +616,97 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Little Italy",
     history:
-      "Settled by Italian immigrants around the turn of the 20th century, North Beach became San Francisco's Little Italy. In the 1950s it was the epicenter of the Beat Generation — City Lights Bookstore, Vesuvio, and poets Kerouac and Ginsberg. It remains a dense, walkable warren of Italian restaurants, cafés, and historic bars beneath Telegraph Hill and Coit Tower.",
+      "North Beach was named for a real beach. Before landfill, a large beach marked San Francisco's northeast side, its shoreline reaching about what are now Taylor and Francisco streets, and on the ground that became Washington Square, Juana Briones, a pioneer settler of Yerba Buena, raised cattle and grew vegetables to sell to ships' crews. When Jasper O'Farrell laid out the city's streets in 1847 he set that block aside as a public square, and in June 1849, during the Gold Rush, St. Francis of Assisi parish dedicated a small wooden church on Vallejo Street.\n\nItalians began arriving in large numbers in the late 19th century, many from Piedmont and Liguria and especially the port of Genoa, and those who fished settled in cheap housing near the wharves at the end of Columbus Avenue. The 1906 earthquake and fire gutted St. Francis, destroyed the first Saints Peter and Paul church and left some 600 people living in Washington Square. St. Francis was rebuilt inside its surviving walls and rededicated in 1919, the new Saints Peter and Paul was completed in 1924, and as Italian immigration rose, North Beach was known by the 1920s as Little Italy.\n\nIn the 1950s its bars and bookstores became haunts of the Beat Generation. Vesuvio opened in 1948, City Lights in 1953 and Caffe Trieste in 1956, and that November City Lights published Allen Ginsberg's Howl. Police arrested the store's manager for selling it in June 1957, and that October a judge ruled the poem was not obscene. The city made the City Lights building a landmark in 2001; Washington Square is City Landmark No. 226.",
     facts: [
       {
         icon: "book",
-        title: "Where the Beats began",
+        title: "Where Howl beat the censors",
         text:
-          "City Lights Bookstore, founded by poet Lawrence Ferlinghetti in 1953, published Ginsberg's “Howl” and anchored the Beat movement — still a fiercely independent landmark.",
+          "Poet Lawrence Ferlinghetti and Peter D. Martin opened City Lights in June 1953, naming it for Martin's magazine City Lights, itself a nod to the Chaplin film, and it has been called the nation's first all-paperback bookstore. In June 1957 police arrested its manager, Shig Murao, for selling Allen Ginsberg's Howl, which City Lights had published, to an undercover officer, and charged Ferlinghetti too; on October 3, Judge Clayton W. Horn ruled the poem was not obscene. Beside the store, Jack Kerouac Alley, renamed from Adler Alley in 1988 at Ferlinghetti's request and made pedestrian-only in 2007 with quotes from Kerouac, Maya Angelou, John Steinbeck and others set into it, runs along Vesuvio, a bar since 1948.",
+        place: "City Lights Bookstore",
+        where: "261 Columbus Ave",
+        at: [-122.40658, 37.79763],
+        source: "https://en.wikipedia.org/wiki/City_Lights_Bookstore",
       },
       {
         icon: "coffee",
-        title: "West Coast espresso, first poured here",
+        title: "Seventy years of North Beach espresso",
         text:
-          "Caffe Trieste (1956) claims to have introduced espresso to the West Coast, and North Beach's Italian café culture is among the oldest in the country.",
+          "Giovanni “Papa Gianni” Giotta, born in 1920 in Rovigno on the Istrian peninsula, in what is now Croatia, came to San Francisco in 1951 and opened this café at Vallejo and Grant on April 1, 1956. Some consider it the first espresso house on the West Coast. Giotta died in 2016 at 96, and the café marked its 70th anniversary on April 4, 2026, with 70-cent espresso and cappuccino and an afternoon of free music.",
+        place: "Caffe Trieste",
+        where: "601 Vallejo St",
+        at: [-122.40730, 37.79867],
+        source: "https://www.nbcbayarea.com/news/local/san-franciscos-iconic-caffe-trieste-turns-65-amid-pandemic-and-temporary-closure/2507168/",
       },
       {
-        icon: "tower",
-        title: "Coit Tower's murals",
+        icon: "church",
+        title: "Walls that outlasted 1906",
         text:
-          "The 1933 tower crowning Telegraph Hill is lined inside with Depression-era WPA frescoes depicting California life — free to view in the lobby.",
+          "When this parish dedicated its first church, a small wooden building, on June 17, 1849, Gold Rush Catholics had no church nearer than Mission Dolores; in 1851 Bishop Joseph Alemany consecrated an adobe church here and used it as his cathedral for three years. Its replacement, built right over the old church so services need not stop, was dedicated on March 17, 1860. The 1906 fire gutted it, but the twin towers and walls stood, and a new church built inside them was rededicated on March 2, 1919. City Landmark No. 5 since 1968, it was named the National Shrine of Saint Francis of Assisi in 1999.",
+        place: "National Shrine of St. Francis of Assisi",
+        where: "610 Vallejo St",
+        at: [-122.40752, 37.79900],
+        source: "https://en.wikipedia.org/wiki/Saint_Francis_of_Assisi_Church_(San_Francisco)",
       },
       {
-        icon: "pizza",
-        title: "The West's first pizza oven",
+        icon: "park",
+        title: "A time capsule under Ben Franklin",
         text:
-          "Tommaso's brought the first wood-fired brick pizza oven to the West Coast in 1935 — one of a string of red-sauce institutions still feeding the neighborhood.",
+          "When Jasper O'Farrell laid out the city's streets in 1847, he set aside three blocks as public squares, and this was one; in the early 1850s it became a haphazard cemetery and a goat pasture, and after the 1906 earthquake some 600 people lived here in wooden barracks and Army tents. The Benjamin Franklin statue went up on Market Street in 1879 as a water fountain given by temperance crusader Henry Cogswell and moved here in 1904. The time capsule under it, filled mostly with Cogswell's own things, was opened in 1979 and replaced with one to be opened in 2079.",
+        place: "Washington Square",
+        where: "Columbus Ave & Union St",
+        at: [-122.41031, 37.80039],
+        source: "https://en.wikipedia.org/wiki/Washington_Square_(San_Francisco)",
       },
       {
-        icon: "bird",
-        title: "The wild parrots",
+        icon: "cow",
+        title: "A pioneer's farm under the park",
         text:
-          "A flock of feral cherry-headed conures — the famous wild parrots of Telegraph Hill — roosts in the trees above North Beach, subject of a hit documentary.",
+          "California Historical Landmark No. 1024, registered in July 1997, honors Juana Briones, a pioneer settler of Yerba Buena, and its plaque, dated October 6, 1997, stands at this corner of the square. It says that on the site of this park she raised cattle and grew vegetables for sale to ships' crews, gave sanctuary to refugees, and was revered as a healer and caregiver. The state parks department placed it with the city's Recreation and Park Department, the Women's Heritage Museum and the Bay Area Network of Latinas.",
+        place: "Juana Briones plaque",
+        where: "Stockton St & Filbert St",
+        at: [-122.40946, 37.80142],
+        source: "https://ohp.parks.ca.gov/ListedResources/Detail/1024",
+      },
+      {
+        icon: "church",
+        title: "DeMille filmed its construction",
+        text:
+          "Run by the Salesians of Don Bosco, the parish lost its first church, built in 1884 at Filbert and Grant, to the 1906 earthquake and fire. Scenes for Cecil B. DeMille's 1923 film The Ten Commandments were shot here while this one was under construction, and it was completed in 1924. Joe DiMaggio married Dorothy Arnold here on November 19, 1939; with no annulment of that marriage, his 1954 wedding to Marilyn Monroe was a civil one at City Hall, after which the couple came back for photos on these steps. His funeral was held here on March 11, 1999.",
+        place: "Saints Peter and Paul Church",
+        where: "666 Filbert St",
+        at: [-122.41020, 37.80160],
+        source: "https://en.wikipedia.org/wiki/Saints_Peter_and_Paul_Church,_San_Francisco",
+      },
+      {
+        icon: "art",
+        title: "Lillie Coit's other memorial",
+        text:
+          "Haig Patigian's group of three life-size firemen, one carrying a woman in his arms, was unveiled here near Columbus Avenue on December 3, 1933, honoring the city's volunteer fire department of 1849 to 1866. Lillie Hitchcock Coit's estate paid for it: her will made two bequests, one for a memorial to the city's volunteer firefighters and one to beautify the city, which built Coit Tower, often wrongly said to be a firemen's memorial itself.",
+        place: "Volunteer Firemen Memorial",
+        where: "Columbus Ave & Powell St",
+        at: [-122.41075, 37.80098],
+        source: "https://www.sfchronicle.com/chronicle_vault/article/They-strutted-brawled-and-threw-the-best-parties-16141727.php",
+      },
+      {
+        icon: "wave",
+        title: "Where the north beach was",
+        text:
+          "The neighborhood's name was literal: before landfill, a large beach marked San Francisco's northeast side, and a Frommer's walking tour puts its shoreline at what are now Taylor and Francisco streets. Landfill later moved the water's edge north; the history blog Burrito Justice, mapping the city's 1886 Sanborn fire-insurance maps, shows Bay Street, a block north of here, then running beside the bay, with the blocks at Beach Street still water lots.",
+        place: "The old shoreline",
+        where: "Francisco St & Taylor St",
+        at: [-122.41495, 37.80438],
+        source: "https://www.frommers.com/destinations/san-francisco/walking-tours/walking-tour-2/",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about a mile for visitors and would-be neighbors, from City Lights at Columbus Ave & Broadway, a few blocks from Muni's Chinatown–Rose Pak Station, past the café and church at Grant and Vallejo, around Washington Square and out Columbus Avenue to where the old beach was. Allow about an hour, and go by day, when the cafés are open.",
+      miles: 1,
+      minutes: 60,
+      tip:
+        "Have your espresso at Caffe Trieste, the second stop, and save the bench time for Washington Square. The last stop is a Powell–Mason cable car stop; the line turns around a block north at Bay & Taylor, where you can board for the ride back to Powell & Market.",
+    },
     restaurants: [
       { name: "Tommaso's", address: "1042 Kearny St", phone: "(415) 398-9696", url: "https://tommasos.com" },
       { name: "Sotto Mare", address: "552 Green St", phone: "(415) 398-3181", url: "https://www.sottomaresf.com" },
@@ -892,39 +1064,87 @@ export const NEIGHBORHOODS = {
       "Central & freeway-close",
     ],
     history:
-      "Potrero — Spanish for “pasture” — was 19th-century grazing land that grew into a working-class, industrial neighborhood of shipyard workers and a tight Russian and Slovenian community. Sheltered from the fog by the hills to its west, it's among the sunniest parts of the city. Long overlooked, it's now prized for its sun, its big views, and its quiet streets above the old industrial flats.",
+      "In the late 1700s Spanish missionaries grazed cattle here and called the hill Potrero Nuevo, the “new pasture.” In 1844 Mexico granted it to Francisco and Ramón de Haro, 17-year-old twin sons of a onetime alcalde of Yerba Buena; in 1846 the twins were shot dead at San Rafael on John C. Frémont's orders. Their father, fearing the United States would take the land, agreed to his friend Dr. John Townsend's plan: in 1849 Townsend and Cornelius De Boom laid out a subdivision, naming north-south streets for American states and east-west ones for California counties, such as Mariposa. Hardly anyone bought the remote lots, and in 1866 the U.S. Supreme Court rejected the de Haro claim.\n\nIndustry took the shore below. Union Iron Works moved its shipyard to Potrero Point in the early 1880s, and by 1892 it employed 1,200 to 1,500 men, many living on the hill or in Irish Hill and Dogpatch. On August 7, 1906, 40 Molokans, members of a Russian Christian sect that had fled persecution, reached the foot of the hill after a failed stint on Hawaii's sugar plantations, and Slovenes who had lost their Fell Street church in the earthquake and fire that April regrouped on what they nicknamed “Carniolan Hill.” In 1922 the Molokans' English and sewing classes moved into a hall by Julia Morgan.\n\nPublic housing arrived in 1941 with Potrero Terrace, cut into the steep south slope and first housing mostly war-industry workers; Potrero Annex followed in 1955. Today US 101 runs along the hill's west side and I-280 along its eastern foot. In 1979 Fritz Maytag moved Anchor Brewing into a 1937 coffee roastery on Mariposa Street.",
     facts: [
       {
-        icon: "sun",
-        title: "The sunny pasture",
+        icon: "subway",
+        title: "Caltrain's only below-grade stop",
         text:
-          "“Potrero” means pasture in Spanish — and tucked in the lee of Twin Peaks, the hill is one of the sunniest, warmest, least foggy neighborhoods in San Francisco.",
+          "Southern Pacific opened this station in 1907, when it built the Bayshore Cutoff, and first called it 23rd Street. It is the only below-grade station on Caltrain, set in a cut beneath the I-280 viaduct between two tunnels that carry the tracks under the eastern slope of Potrero Hill.",
+        place: "22nd Street Station",
+        where: "22nd St & Pennsylvania Ave",
+        at: [-122.39250, 37.75722],
+        source: "https://en.wikipedia.org/wiki/22nd_Street_station_(Caltrain)",
+      },
+      {
+        icon: "house",
+        title: "Two of the hill's oldest houses",
+        text:
+          "The Italianate at 301 Pennsylvania, on the corner of 18th Street, was finished around 1865 on part of a 13-acre tract owned by Captain Charles Adams, who had come to the hill from New Bedford, Massachusetts, in the 1850s; in the late 1860s Adams built his own, larger house across the street. The Potrero View counts the pair among the hill's oldest mansions and among the first San Francisco houses with what became the city's signature bay windows.",
+        place: "Richards House",
+        where: "301 Pennsylvania Ave",
+        at: [-122.39340, 37.76252],
+        source: "https://www.potreroview.net/historic-buildings-and-their-stories/",
+      },
+      {
+        icon: "church",
+        title: "The church that was cut in two",
+        text:
+          "By the Dogpatch Neighborhood Association's account, Father Patrick O'Connell built St. Teresa's in 1892 at Tennessee and 19th streets, down by the shipyards in today's Dogpatch. After Irish Hill, the workers' enclave nearby, was demolished during World War I and industry crowded in, the parish moved the church uphill in 1924: movers cut it in two and hauled each half separately to this northeast corner of 19th and Connecticut.",
+        place: "St. Teresa of Avila Church",
+        where: "1490 19th St",
+        at: [-122.39718, 37.76142],
+        source: "https://www.dogpatchna.org/st-theresas-church",
       },
       {
         icon: "beer",
-        title: "Home of Anchor Steam",
+        title: "Steam beer in a coffee roastery",
         text:
-          "Anchor Brewing brewed its iconic Anchor Steam on Potrero Hill from 1979 until the brewery's closure in 2023 — a neighborhood institution for over four decades.",
+          "Fritz Maytag, who had rescued an ailing Anchor in 1965, moved the brewery into this former coffee roastery, built in 1937, and brewed the first Anchor Steam here on August 13, 1979. After its owner, Sapporo, closed the brewery in 2023, Chobani founder Hamdi Ulukaya announced in 2024 that he had bought Anchor, and new approvals for its Anchor Steam and Old Foghorn labels have since pointed to a revival.",
+        place: "Anchor Brewing",
+        where: "1705 Mariposa St",
+        at: [-122.40085, 37.76332],
+        source: "https://en.wikipedia.org/wiki/Anchor_Brewing_Company",
       },
       {
-        icon: "factory",
-        title: "A working-class, immigrant hill",
+        icon: "music",
+        title: "A substation turned Slovenian hall",
         text:
-          "Shipyard and industrial jobs drew Russian, Slovenian, and other immigrant families; the Slovenian Hall on Mariposa St still stands as a reminder of that heritage.",
+          "Around 1900 a small Slovenian settlement grew up near Vermont, Rhode Island and Kansas streets, and after the 1906 earthquake and fire destroyed the community's Fell Street church, Slovenes gathered here on what they nicknamed “Carniolan Hill,” after Carniola, a historic region of Slovenia. In 1924, the Potrero View recounts, members raised $10,000 by selling shares, bought a PG&E substation and remodeled it themselves; the hall was established in 1927 as the Slovenian Progressive Home.",
+        place: "Slovenian Hall",
+        where: "Mariposa St & Vermont St",
+        at: [-122.40440, 37.76322],
+        source: "https://www.potreroview.net/historic-buildings-and-their-stories/",
       },
       {
         icon: "road",
-        title: "The other crookedest street",
+        title: "Crookeder than Lombard",
         text:
-          "Vermont Street's tight switchbacks on Potrero Hill are often argued to be even more crooked than Lombard — with a fraction of the tourists.",
+          "The block of Vermont Street that winds down here from McKinley Square at 20th Street packs seven sharp turns, and when the Travel Channel's Fact or Fiction measured its sinuosity against Lombard Street's in 2014, Vermont came out more crooked, 1.56 to 1.2. On Easter Sunday it hosts the Bring Your Own Big Wheel race, which began on Lombard Street and moved here after neighbors there complained.",
+        place: "Vermont Street's crooked block",
+        where: "Vermont St & 22nd St",
+        at: [-122.40380, 37.75700],
+        source: "https://en.wikipedia.org/wiki/Vermont_Street_(San_Francisco)",
       },
       {
-        icon: "bridge",
-        title: "Front-row downtown views",
+        icon: "house",
+        title: "Julia Morgan's hall for the Molokans",
         text:
-          "The hill's eastern slopes look straight across at the downtown skyline and the bay — a big reason its quiet streets have become so sought-after.",
+          "The Nabe, as this center is known, dates its founding to 1907 and began with English classes; when they outgrew a small rented space, Julia Morgan, the architect of Hearst Castle, designed this hall, finished in 1922, where the hill's Russian Molokans learned English, machine sewing and other skills. In 1924 the building was moved to make way for Southern Heights Avenue, and in 1977 it became city Landmark No. 86.",
+        place: "Potrero Hill Neighborhood House",
+        where: "953 De Haro St",
+        at: [-122.40064, 37.75781],
+        source: "https://en.wikipedia.org/wiki/Potrero_Hill_Neighborhood_House",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 2 miles for visitors and would-be neighbors, starting at Caltrain's 22nd Street station: north to two of the hill's 1860s houses, west along the 18th Street shops to St. Teresa's, past the Anchor brewery and Slovenian Hall on Mariposa Street, then up Vermont Street and down its crooked block, ending at Julia Morgan's Neighborhood House on De Haro Street. Allow about 90 minutes in daylight; on Easter Sunday the Big Wheel race takes over Vermont Street.",
+      miles: 2,
+      minutes: 90,
+      tip:
+        "The hill is steep, so wear good shoes, and stop for coffee or lunch early on, along 18th Street between Texas and Connecticut streets, the hill's shopping blocks. At the end, the 19 Polk bus stops at De Haro Street and Southern Heights Avenue, and the 22nd Street station is about half a mile to the east.",
+    },
     restaurants: [
       { name: "Plow", address: "1299 18th St", phone: "(415) 821-7569", url: "https://www.eatatplow.com" },
       { name: "Chez Maman", address: "1401 18th St", phone: "(415) 655-9542", url: "https://www.chezmamanrestos.com" },
@@ -1019,27 +1239,77 @@ export const NEIGHBORHOODS = {
       "Presidio at the western edge",
     ],
     history:
-      "Cow Hollow was a marshy valley of dairy farms in the mid-1800s — dozens of dairies grazed cows here, which is exactly how it got its name. The city shut the dairies in 1891 over pollution of Washerwoman's Lagoon, filled the pond, and the area built out with Victorian and Edwardian homes. Its blocks from Steiner west to the Presidio's edge at Lyon St are mostly residential today, a short walk from the Union Street shops.",
+      "Cow Hollow is named for the dairy farms that once filled this valley below the Pacific Heights ridge; the city's Board of Health removed them in the 1880s. During the Gold Rush, Spanish and Indian women washed clothes in a spring-fed lake near today's Lombard, Filbert, Gough and Octavia streets, known as Washerwoman's Lagoon. Waste from the city's first slaughterhouses, set up in the 1850s near Pacific and Larkin, drained into the streams that fed it, and in the 1880s officials judged the lagoon a health hazard and filled it in.\n\nPierce Street was still a country road through the hollow when Henry Casebolt, a Virginia blacksmith who had brought his wife and eleven children to San Francisco in 1851, built his Italianate house on it around 1865; it survives as city Landmark No. 51. On October 23, 1880, the Presidio & Ferries Railroad opened a cable line along Union Street as far as Steiner, where a steam dummy carried riders on toward the Presidio, and in 1891 an Episcopal church rose at that corner on land given by the journalist Frank M. Pixley. In 1906 crews dynamited buildings along Van Ness Avenue to halt the fire's westward advance, well east of this end of the valley.\n\nThe Carnegie-funded branch library that opened in 1918 at Green and Octavia streets, designed by Ernest Coxhead, has always been known as the Golden Gate Valley Branch. When the Golden Gate Bridge opened in May 1937, Lombard Street, planned as its main approach, was widened from two lanes to six, and motor lodges soon lined it; it still carries U.S. 101 along the neighborhood's northern edge.",
     facts: [
       {
-        icon: "cow",
-        title: "Once an actual cow hollow",
-        text:
-          "In the 1860s this green valley held dozens of dairy farms grazing the cows that supplied the growing city's milk — hence the name.",
-      },
-      {
-        icon: "water",
-        title: "The lagoon that vanished",
-        text:
-          "The dairies and tanneries fouled Washerwoman's Lagoon, a freshwater pond once used for laundry. The city closed them in 1891 and filled the lagoon, clearing the way for homes.",
-      },
-      {
         icon: "church",
-        title: "A church on a spring",
+        title: "A church on Pixley's land",
         text:
-          "St. Mary the Virgin Episcopal Church, at Union and Steiner, dates to 1891. Its courtyard fountain is said to be fed by a natural spring — a reminder of the springs that once watered the valley's dairy herds.",
+          "The Episcopal Church of St. Mary the Virgin went up in 1891 at the southwest corner of Union and Steiner, on land given by Frank M. Pixley, the journalist and politician who owned much of the land around it. Around 1951 the church was turned around inside: the altar moved to the Steiner Street end, and the entrance moved to Union Street, facing a newly created courtyard.",
+        place: "St. Mary the Virgin Episcopal Church",
+        where: "2325 Union St",
+        at: [-122.43735, 37.79662],
+        source: "https://test.opensfhistory.org/photo/wnp58.070",
+      },
+      {
+        icon: "road",
+        title: "Where the city once ended",
+        text:
+          "In the early 1850s the Presidio reached all the way to this line, which was then also the city's western boundary; today the Presidio's edge is three blocks west, at Lyon Street. The Museum of the City of San Francisco traces Divisadero to a Spanish word for a hilltop spot with a long view, first applied to Lone Mountain, and says it became a street name on the 1856 map of the Western Addition; until 1909 it was spelled Devisadero.",
+        place: "Divisadero Street",
+        where: "Union St & Divisadero St",
+        at: [-122.44208, 37.79624],
+        source: "https://sfmuseum.org/street/stnames6.html",
+      },
+      {
+        icon: "tram",
+        title: "Where cable cars met steam",
+        text:
+          "The Presidio & Ferries Railroad's Union Street cable line was extended in 1892 over new tracks on Union and Baker streets, and from Greenwich Street a steam dummy ran on down Baker to the Harbor View resort, on the shore that later became the Marina. The 1906 earthquake damaged this line more than any other cable line in the city, and it was converted to electric power; Muni took it over in 1913, and its 45 Union–Stockton buses still stop at this corner.",
+        place: "Baker & Greenwich",
+        where: "Baker St & Greenwich St",
+        at: [-122.44569, 37.79761],
+        source: "https://cablecarmuseum.org/co-presidio-ferries.html",
+      },
+      {
+        icon: "park",
+        title: "A forest the Army planted",
+        text:
+          "An 1870s map already put the Presidio's eastern boundary on the western line of Lyon Street, and much of the forest beyond it was planted. In 1883 Maj. William A. Jones proposed trees to break the wind off the sand dunes and set the post apart from the city, and from about 1886 the Army set out eucalyptus, Monterey cypress and Monterey pine; since 2003 the Presidio Trust has been replacing the aging stands, planting 9,500 trees on 60 acres through 2024.",
+        place: "Presidio boundary",
+        where: "Lyon St & Greenwich St",
+        at: [-122.44712, 37.79745],
+        source: "https://www.nps.gov/goga/blogs/planting-with-a-purpose-eucalyptus-and-the-u-s-army.htm",
+      },
+      {
+        icon: "flag",
+        title: "The main gate to town",
+        text:
+          "The Lombard Gate's sandstone posts and the wall beside them date to about 1894–97; for much of the Presidio's history this was its main gate to town, and around 1898 the 51st Iowa Volunteer Infantry marched out through it, bound for the Philippines. Two cannons taken as Spanish-American War trophies flank it. Spain founded the post in 1776, Mexico took over in 1822 and the United States in 1846, and on October 1, 1994, the Army handed it to the National Park Service.",
+        place: "Lombard Gate",
+        where: "Lombard St & Lyon St",
+        at: [-122.44734, 37.79847],
+        source: "https://www.nps.gov/places/000/lombard-gate.htm",
+      },
+      {
+        icon: "bridge",
+        title: "Main street to the bridge",
+        text:
+          "Lombard Street was planned as the main approach to the Golden Gate Bridge, which opened to pedestrians on May 27, 1937, and to cars the next day; it still carries U.S. 101 from Van Ness Avenue to Richardson Avenue. Right after the opening, KQED reports, officials widened it from two lanes to six by clearing the south side, and dozens of motor lodges then lined that side; the first on the street, the Marina Motel on the north side, began taking guests in 1939.",
+        place: "Lombard Street motels",
+        where: "Lombard St & Divisadero St",
+        at: [-122.44267, 37.79903],
+        source: "https://www.kqed.org/news/12058829/why-are-there-so-many-motels-on-san-franciscos-lombard-street",
       },
     ],
+    walk: {
+      intro:
+        "A walk of about a mile for visitors and would-be neighbors: start at Union and Steiner streets, served by the 22 Fillmore and 45 Union–Stockton buses, follow Union west and Baker north to Greenwich, meet the Presidio at Lyon Street, then come back east along Lombard to Divisadero, where the 28 and 43 buses stop. Allow about 45 minutes, in daylight; a weekday morning is quietest.",
+      miles: 1,
+      minutes: 45,
+      tip:
+        "Before heading west, walk one block along Union to Pierce Street and turn left: just past Green Street is the Casebolt House at 2727 Pierce St, built for blacksmith Henry Casebolt around 1865 and now city Landmark No. 51. It's a private home, so admire it from the sidewalk, then rejoin Union Street.",
+    },
     nearby: ["Union Street"],
     restaurants: [
       { name: "Atelier Crenn", address: "3127 Fillmore St", phone: "(415) 440-0460", url: "https://www.ateliercrenn.com" },
