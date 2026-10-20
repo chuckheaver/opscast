@@ -48,7 +48,7 @@ export const NEIGHBORHOODS = {
       "Living LGBTQ history",
     ],
     history:
-      "Castro Street honors José Castro (1808–1860), the Californio general who was briefly acting governor of Mexican Alta California. The valley it crosses was part of Rancho San Miguel, granted in 1845 to José de Jesús Noé, Yerba Buena's last Mexican alcalde. Transit built the neighborhood: in the late 1880s a cable line ran out Market Street and over the hill on Castro to 26th Street (its Castro hill section ran until 1941), and Irish, German and Scandinavian families filled “Eureka Valley” with cottages and flats that came through the 1906 earthquake and fire largely intact. In 1918 the Twin Peaks Tunnel opened, its east portal at Market and Castro, beside today's Castro Station.\n\nBy the late 1960s families were leaving for the suburbs, and inexpensive Victorians drew gay men, many from Polk Street and the Tenderloin. They restored the houses and opened bars and shops, and the blocks around Castro and 18th took the street's name. When the old Eureka Valley merchants' group snubbed gay-owned businesses, camera-shop owner Harvey Milk became first president of the new Castro Village Association and, in 1974, started the Castro Street Fair; in 1977 he became the first openly gay man elected to office in California. After his assassination in 1978, the manslaughter verdict for his killer set off the White Night riots, and police struck back by raiding the Elephant Walk bar at 18th and Castro.\n\nWhen AIDS devastated the neighborhood in the 1980s, it built much of its own response: a parish support group and hospice, a Zen center that took in the dying, and the NAMES Project, which assembled the AIDS Memorial Quilt in a storefront at 2362 Market Street.",
+      "Castro Street honors José Castro (1808–1860), the Californio general who was briefly acting governor of Mexican Alta California. The valley it crosses was part of Rancho San Miguel, granted in 1845 to José de Jesús Noé, Yerba Buena's last Mexican alcalde. Transit built the neighborhood: in the late 1880s a cable line ran out Market Street and over the hill on Castro to 26th Street (its Castro hill section ran until 1941), and immigrants from Ireland, Germany and Scandinavia filled “Eureka Valley” with cottages and flats that came through the 1906 earthquake and fire largely intact. In 1918 the Twin Peaks Tunnel opened, its east portal at Market and Castro, beside today's Castro Station.\n\nBy the late 1960s many residents were leaving for the suburbs, and inexpensive Victorians drew gay men, many from Polk Street and the Tenderloin. They restored the houses and opened bars and shops, and the blocks around Castro and 18th took the street's name. When the old Eureka Valley merchants' group snubbed gay-owned businesses, camera-shop owner Harvey Milk became first president of the new Castro Village Association and, in 1974, started the Castro Street Fair; in 1977 he became the first openly gay man elected to office in California. After his assassination in 1978, the manslaughter verdict for his killer set off the White Night riots, and police struck back by raiding the Elephant Walk bar at 18th and Castro.\n\nWhen AIDS devastated the neighborhood in the 1980s, it built much of its own response: a parish support group and hospice, a Zen center that took in the dying, and the NAMES Project, which assembled the AIDS Memorial Quilt in a storefront at 2362 Market Street.",
     facts: [
       {
         icon: "flag",
@@ -62,7 +62,7 @@ export const NEIGHBORHOODS = {
       },
       {
         icon: "movie",
-        title: "A 1922 movie palace, reborn",
+        title: "A 1922 movie palace, reopened",
         text:
           "The Nasser family's 1922 movie palace was designed by Timothy Pflueger, later the architect of Oakland's Paramount Theatre, and became city Landmark No. 100 in 1977. It reopened on February 6, 2026, after a two-year, roughly $41 million renovation that traded the orchestra's fixed rows for tiered platforms with removable seats, while a section of cast-iron balcony seats the city deemed historic stays put.",
         place: "Castro Theatre",
@@ -156,16 +156,16 @@ export const NEIGHBORHOODS = {
 
   "Noe Valley": {
     spirit:
-      "A sunny, hilly pocket of Victorian flats and stroller-friendly sidewalks — small-town calm right in the middle of the city.",
+      "A sunny, hilly pocket of Victorian flats and a village-like main street — small-town calm right in the middle of the city.",
     reasons: [
       "Among the sunniest, calmest pockets",
       "Village-y 24th St shopping",
-      "Family-friendly",
+      "Saturday farmers' market",
       "Pre-1906 Victorians",
     ],
-    aka: "“Stroller Valley”",
+    aka: "Horner's Addition",
     history:
-      "Noe Valley takes its name from José de Jesús Noé, Yerba Buena's last Mexican alcalde, who in 1845 received Rancho San Miguel: 4,443 acres that also took in today's Eureka Valley and reached west over what is now Mount Davidson. In the early 1850s Noé sold this valley to John M. Horner, a New Jersey native who had sailed into Yerba Buena in 1846 aboard the ship Brooklyn with Sam Brannan's company of Mormons. Horner cut the land into blocks and lots as Horner's Addition and named its streets, among them Elizabeth, for his wife, and Jersey, for his home state. He died in Hawaii in 1907, but the city assessor still calls the area Horner's Addition.\n\nIn 1887 the Market Street Cable Railway opened a branch up Castro Street, and through the 1880s and 1890s builders filled the slopes with Victorian cottages and flats for working-class San Franciscans. The fires that followed the 1906 earthquake never reached the valley, and much of the valley was built up just afterward. In August 1917 the city's Municipal Railway opened the J-Church streetcar line, with Mayor James Rolph at the controls of the first car; for about eight decades its cars turned back at Church and 30th streets.\n\nIn the spring of 1977, a group of friends who drank at Finnegan's Wake, a 24th Street bar, started the Noe Valley Voice; nine people chipped in to pay for the first issue, eight typewritten tabloid pages, that May. The paper is still published, and the valley's streets are still lined with the Victorian and Edwardian houses that went up around the turn of the 20th century.",
+      "Noe Valley takes its name from José de Jesús Noé, Yerba Buena's last Mexican alcalde, who in 1845 received Rancho San Miguel: 4,443 acres that also took in today's Eureka Valley and reached west over what is now Mount Davidson. In the early 1850s Noé sold this valley to John M. Horner, a New Jersey native who had sailed into Yerba Buena in 1846 aboard the ship Brooklyn with Sam Brannan's company of Mormons. Horner cut the land into blocks and lots as Horner's Addition and named its streets, among them Elizabeth, for his wife, and Jersey, for his home state. He died in Hawaii in 1907, but the city assessor still calls the area Horner's Addition.\n\nIn 1887 the Market Street Cable Railway opened a branch up Castro Street, and through the 1880s and 1890s builders filled the slopes with Victorian cottages and flats. The fires that followed the 1906 earthquake never reached the valley, and much of the valley was built up just afterward. In August 1917 the city's Municipal Railway opened the J-Church streetcar line, with Mayor James Rolph at the controls of the first car; for about eight decades its cars turned back at Church and 30th streets.\n\nIn the spring of 1977, a group of friends who drank at Finnegan's Wake, a 24th Street bar, started the Noe Valley Voice; nine people chipped in to pay for the first issue, eight typewritten tabloid pages, that May. The paper is still published, and the valley's streets are still lined with the Victorian and Edwardian houses that went up around the turn of the 20th century.",
     facts: [
       {
         icon: "church",
@@ -272,7 +272,7 @@ export const NEIGHBORHOODS = {
 
   Marina: {
     spirit:
-      "Postcard San Francisco at sea level — bayfront promenades, the Palace of Fine Arts, and a buzzy Chestnut Street where brunch and the bay sit a block apart.",
+      "Postcard San Francisco at sea level — bayfront promenades, the Palace of Fine Arts, and Chestnut Street, where brunch and the bay sit a block apart.",
     reasons: [
       "Flat & walkable",
       "Bayfront parks & views",
@@ -378,16 +378,16 @@ export const NEIGHBORHOODS = {
 
   "Hayes Valley": {
     spirit:
-      "An ex-freeway corridor reborn as the city's most stylish stroll — design boutiques, a pocket park rotating public art, and a dense cluster of acclaimed kitchens and cocktail rooms.",
+      "An ex-freeway corridor turned boulevard — design boutiques, a pocket park rotating public art, and a dense cluster of acclaimed kitchens and cocktail rooms.",
     reasons: [
       "Boutique & design shopping",
       "Top-tier dining & cocktails",
       "Patricia's Green park",
       "Central & walkable",
     ],
-    aka: "Reborn after 1989",
+    aka: "Old Central Freeway corridor",
     history:
-      "Hayes Valley takes its name from Hayes Street, named for Thomas Hayes, an Irish-born landowner who reached San Francisco in 1849, served as county clerk from 1853 to 1856 and came to own a large tract here, along with the land where the Civic Center now stands. By 1855 a committee of three aldermen was laying out and naming the streets of the Western Addition, west of Larkin Street; one of them, Charles Gough, had once sold milk on horseback, a can slung on either side of his saddle. In 1860 Hayes ran a horsecar line out Hayes Street to help sell his land.\n\nOn the morning of April 18, 1906, a breakfast cooked under a quake-damaged chimney at 395 Hayes Street, near Gough, started the “ham and eggs fire,” and with the water cut off it destroyed most of the neighborhood east of Gough Street. In 1959 the double-decked Central Freeway opened, cutting through the valley with a spur north to Franklin and Gough streets at Golden Gate Avenue.\n\nThe 1989 Loma Prieta earthquake damaged the freeway, and in 1992 the stretch north of Fell Street came down. The rest was fought over in a string of ballot measures until November 1999, when voters approved Proposition I, which paid for a boulevard by selling the freed-up land for housing. Octavia Boulevard opened in 2005, ending at a green later named for Patricia Walkup, founder of the Hayes Valley Neighborhood Association. While the leftover lots waited for housing, stopgap uses bloomed on them, from a volunteer-run farm to Proxy, Envelope A+D's cluster of shops, cafés and a beer garden in shipping containers.",
+      "Hayes Valley takes its name from Hayes Street, named for Thomas Hayes, an Irish-born landowner who reached San Francisco in 1849, served as county clerk from 1853 to 1856 and came to own a large tract here, along with the land where the Civic Center now stands. By 1855 a committee of three aldermen was laying out and naming the streets of the Western Addition, west of Larkin Street; one of them, Charles Gough, had once sold milk on horseback, a can slung on either side of his saddle. In 1860 Hayes ran a horsecar line out Hayes Street to help sell his land.\n\nOn the morning of April 18, 1906, a breakfast cooked under a quake-damaged chimney at 395 Hayes Street, near Gough, started the “ham and eggs fire,” and with the water cut off it destroyed most of the neighborhood east of Gough Street. In 1959 the double-decked Central Freeway opened, cutting through the valley with a spur north to Franklin and Gough streets at Golden Gate Avenue.\n\nThe 1989 Loma Prieta earthquake damaged the freeway, and in 1992 the stretch north of Fell Street came down. The rest was fought over in a string of ballot measures until November 1999, when voters approved Proposition I, which paid for a boulevard by selling the freed-up land for housing. Octavia Boulevard opened in 2005, ending at a green later named for Patricia Walkup, founder of the Hayes Valley Neighborhood Association. While the leftover lots waited for housing, stopgap uses filled them, from a volunteer-run farm to Proxy, Envelope A+D's cluster of shops, cafés and a beer garden in shipping containers.",
     facts: [
       {
         icon: "quake",
@@ -401,9 +401,9 @@ export const NEIGHBORHOODS = {
       },
       {
         icon: "shop",
-        title: "A shopping street revived",
+        title: "A shopping street after the freeway",
         text:
-          "Hayes Valley's commercial center is the stretch of Hayes Street from Franklin Street west to about Laguna Street, three blocks with this corner near the middle, plus storefronts around the corners on Gough and Laguna streets. The elevated Central Freeway blighted parts of the valley, and one urban expert recalled Hayes Street as “pretty much abandoned”; after the freeway came down and Octavia Boulevard took its place, liquor stores and auto repair shops gave way to restaurants and boutiques. Today art galleries and clothing and furniture shops fill its storefronts too.",
+          "Hayes Valley's commercial center is the stretch of Hayes Street from Franklin Street west to about Laguna Street, three blocks with this corner near the middle, plus storefronts around the corners on Gough and Laguna streets. The elevated Central Freeway once cut through the valley; after it came down and Octavia Boulevard took its place, liquor stores and auto repair shops gave way to restaurants and boutiques. Today art galleries and clothing and furniture shops fill its storefronts too.",
         place: "Hayes Street shops",
         where: "Hayes St & Octavia St",
         at: [-122.42474, 37.77682],
@@ -503,10 +503,10 @@ export const NEIGHBORHOODS = {
 
   "Pacific Heights": {
     spirit:
-      "Mansion-lined hills with knockout bay views and a polished Fillmore Street — old-money San Francisco at its most genteel.",
+      "Mansion-lined hills with knockout bay views and the shops of Upper Fillmore — Victorian and Edwardian San Francisco at its grandest.",
     reasons: [
       "Grand Victorian & Edwardian mansions",
-      "Upscale Fillmore St shopping",
+      "Upper Fillmore St shopping",
       "Bay & Golden Gate views",
       "Quiet, leafy streets",
     ],
@@ -638,16 +638,16 @@ export const NEIGHBORHOODS = {
 
   Mission: {
     spirit:
-      "Sun-soaked and street-art-splashed — the city's warmest, most flavorful neighborhood, where taquerias, galleries, and destination restaurants share every block.",
+      "Sun-soaked and street-art-splashed — the city's warmest, most flavorful neighborhood, where taquerias, galleries, and restaurants share every block.",
     reasons: [
       "The city's sunniest microclimate",
       "Legendary taquerias & dining",
-      "Murals & Valencia St culture",
+      "Murals & Calle 24 cultural district",
       "Two BART stations",
     ],
     aka: "La Misión",
     history:
-      "Ohlone-speaking Yelamu people lived in this valley for thousands of years before the Spanish founded Mission San Francisco de Asís in 1776 beside a lagoon, Laguna Dolores; the mission moved to its present site in 1783, and the district still carries its name. In 1866 R. B. Woodward opened Woodward's Gardens on land that had belonged to John C. Frémont, an amusement park with a zoo, aquarium, museum, art gallery and botanical gardens between Mission and Valencia streets from today's Duboce Avenue to 15th Street. A state plaque at 1700 Mission Street remembers it as the city's most popular resort until it closed in 1892.\n\nIrish and German immigrant workers settled the flat valley in the late 1800s. In April 1906 the fire that followed the earthquake swept into the Mission from Hayes Valley, but firefighters halted it at 20th Street, partly with water from a cistern at 19th and Shotwell streets. Displaced businesses and residents moved in, and the rebuilt Mission Street became the “Mission Miracle Mile,” which city planners call San Francisco's largest and most important shopping destination outside Union Square in the first half of the 20th century.\n\nAfter World War II many longtime families left for the suburbs on GI Bill and federal housing loans, and a Latino community grew up with its center along Mission Street. On November 5, 1973, BART opened its 16th Street and 24th Street stations beneath Mission Street. Murals began appearing in Balmy Alley in 1972, artists and activists founded the Mission Cultural Center for Latino Arts in 1977, Carnaval first paraded in 1979, and in 1992 six neighbors started the Clarion Alley Mural Project.",
+      "Ohlone-speaking Yelamu people lived in this valley for thousands of years before the Spanish founded Mission San Francisco de Asís in 1776 beside a lagoon, Laguna Dolores; the mission moved to its present site in 1783, and the district still carries its name. In 1866 R. B. Woodward opened Woodward's Gardens on land that had belonged to John C. Frémont, an amusement park with a zoo, aquarium, museum, art gallery and botanical gardens between Mission and Valencia streets from today's Duboce Avenue to 15th Street. A state plaque at 1700 Mission Street remembers it as the city's most popular resort until it closed in 1892.\n\nImmigrants from Ireland and Germany settled the flat valley in the late 1800s. In April 1906 the fire that followed the earthquake swept into the Mission from Hayes Valley, but firefighters halted it at 20th Street, partly with water from a cistern at 19th and Shotwell streets. Displaced businesses and residents moved in, and the rebuilt Mission Street became the “Mission Miracle Mile,” which city planners call San Francisco's largest and most important shopping destination outside Union Square in the first half of the 20th century.\n\nAfter World War II many longtime residents left for the suburbs on GI Bill and federal housing loans, and a Latino community grew up with its center along Mission Street. On November 5, 1973, BART opened its 16th Street and 24th Street stations beneath Mission Street. Murals began appearing in Balmy Alley in 1972, artists and activists founded the Mission Cultural Center for Latino Arts in 1977, Carnaval first paraded in 1979, and in 1992 six neighbors started the Clarion Alley Mural Project.",
     facts: [
       {
         icon: "tower",
@@ -886,7 +886,7 @@ export const NEIGHBORHOODS = {
 
   "Russian Hill": {
     spirit:
-      "Steep, secret-stairway hills crowned by the crookedest street in the world — leafy and quiet above the buzz of Polk Street.",
+      "Steep, secret-stairway hills crowned by the crookedest street in the world — leafy and quiet above the shops of Polk Street.",
     reasons: [
       "Iconic Lombard St & stair-walks",
       "Polk St dining & bars",
@@ -1009,16 +1009,16 @@ export const NEIGHBORHOODS = {
 
   "Nob Hill": {
     spirit:
-      "The city's loftiest old-money summit — grand hotels, Grace Cathedral, and cable cars clanging past the ghosts of the railroad barons.",
+      "A storied summit — grand hotels, Grace Cathedral, and cable cars clanging past the ghosts of the railroad barons.",
     reasons: [
       "Historic luxury hotels",
       "Grace Cathedral",
       "Cable cars at the door",
       "Sweeping city views",
     ],
-    aka: "“Snob Hill”",
+    aka: "“California Hill”",
     history:
-      "Early San Franciscans called it California Hill, after the street that climbs its steep eastern face. The way up came before dawn on August 2, 1873, when Andrew Hallidie, working the grip himself, test-ran his Clay Street Hill Railroad, the city's first cable car line, between Kearny and Jones streets. The railroad men followed. Leland Stanford built a mansion at California and Powell in 1876, and his California Street Cable Railroad opened on April 10, 1878; the Cable Car Museum says it carried more than 11,000 riders that day. His Central Pacific partners Mark Hopkins and Charles Crocker built nearby, Collis Huntington bought a neighbor's mansion in 1892, and in 1886 silver baron James C. Flood finished a brownstone. The Big Four and their wealthy neighbors were the nabobs, shortened to nobs, who gave the hill its name.\n\nThe mansions drew resentment as well as admiration. Crocker walled in the house of a neighbor who refused to sell, and on October 29, 1877, Denis Kearney led a Workingmen's Party crowd of more than a thousand to Crocker's door, giving him a month to take the fence down or see them do it.\n\nThe fire that followed the 1906 earthquake burned the mansions, leaving the stone shell of Flood's house and the damaged, unopened Fairmont. The families let the land go: the Crockers gave their block to the Episcopal diocese, which laid Grace Cathedral's cornerstone in 1910; Arabella Huntington deeded hers to the city as a park in 1915; and the Flood house became the Pacific-Union Club. The Fairmont opened in 1907 and the Stanford Court Apartments in 1912, and cable cars still climb California Street past them all.",
+      "Early San Franciscans called it California Hill, after the street that climbs its steep eastern face. The way up came before dawn on August 2, 1873, when Andrew Hallidie, working the grip himself, test-ran his Clay Street Hill Railroad, the city's first cable car line, between Kearny and Jones streets. The railroad men followed. Leland Stanford built a mansion at California and Powell in 1876, and his California Street Cable Railroad opened on April 10, 1878; the Cable Car Museum says it carried more than 11,000 riders that day. His Central Pacific partners Mark Hopkins and Charles Crocker built nearby, Collis Huntington bought a neighbor's mansion in 1892, and in 1886 silver baron James C. Flood finished a brownstone. The Big Four and their neighbors were the nabobs, shortened to nobs, who gave the hill its name.\n\nThe mansions drew resentment as well as admiration. Crocker walled in the house of a neighbor who refused to sell, and on October 29, 1877, Denis Kearney led a Workingmen's Party crowd of more than a thousand to Crocker's door, giving him a month to take the fence down or see them do it.\n\nThe fire that followed the 1906 earthquake burned the mansions, leaving the stone shell of Flood's house and the damaged, unopened Fairmont. The families let the land go: the Crockers gave their block to the Episcopal diocese, which laid Grace Cathedral's cornerstone in 1910; Arabella Huntington deeded hers to the city as a park in 1915; and the Flood house became the Pacific-Union Club. The Fairmont opened in 1907 and the Stanford Court Apartments in 1912, and cable cars still climb California Street past them all.",
     facts: [
       {
         icon: "tram",
@@ -1137,7 +1137,7 @@ export const NEIGHBORHOODS = {
       "Village-y, walkable Cole St",
       "Steps from Golden Gate Park",
       "Sunny pocket below the hills",
-      "Family-friendly Edwardians",
+      "Edwardian flats",
     ],
     history:
       "Cole Valley takes its name from Cole Street, but the name is far younger than the neighborhood. In 1883 the Haight Street cable line reached Stanyan Street at the edge of Golden Gate Park, and Henry Heagerty began running a saloon and small boarding house at Stanyan and Waller. Four years later the Haight Street Grounds ballpark opened on the land bounded by Stanyan, Waller, Shrader and Frederick streets. It drew California League baseball crowds and, in 1892, hosted the first Big Game between Stanford and California; it was torn down in 1895, and houses now stand where it was. In 1904–05 the architects Martens & Coffey built Heagerty the Park View Hotel, with his saloon keeping the corner, and Victorian houses from around 1900 still stand along Carl and Cole streets.\n\nOn October 21, 1928, the Sunset Tunnel opened under the hill beside Buena Vista Park, and the new N streetcar line came out of its west portal at Carl and Cole, still the heart of the neighborhood's shopping blocks. Cole Hardware, which the city's Legacy Business Registry dates to 1920, was already on Cole Street, and Kezar Stadium, across Stanyan, gave Heagerty's old hotel the name Stadium Hotel from the 1930s into the 1970s.\n\nFrom 1966 to 1989 Cole Street was home to Maud's, a lesbian bar that by its closing was billed as the oldest in the country. In 1975, when the area was still known as the Upper Haight, Jacob Malek-Zadeh bought Cole Street Liquor, a store in business since the 1930s, and that year it became Val de Cole; the city's Legacy Business record credits him with helping create the name Cole Valley.",
@@ -1218,12 +1218,12 @@ export const NEIGHBORHOODS = {
     reasons: [
       "Sunny, village-y Cortland Ave",
       "Bernal Hill off-leash park & views",
-      "Family-friendly & laid-back",
+      "Small-town & laid-back",
       "Quiet hillside streets",
     ],
-    aka: "“Maternal Heights”",
+    aka: "“Nanny Goat Hill”",
     history:
-      "Bernal Heights is named for José Cornelio Bernal, whose 1839 Mexican land grant, Rancho Rincón de las Salinas y Potrero Viejo — roughly “salt-marsh corner and old pasture” — took in about 4,446 acres around the hill. After California became part of the United States, the rancho was sold off and cut into small lots. Early settlers, many of them Irish, ran dairies and kept goats on the open slopes, and the goats gave the bare hill a nickname: Nanny Goat Hill.\n\nThe hill is a knob of hard Franciscan chert, and Bernal rode out the 1906 earthquake well; the fire that followed burned itself out at 20th Street in the Mission, well to the north. Afterward the neighborhood filled in, partly with the wooden relief cottages, or “earthquake shacks,” that families hauled out of the refugee camps, and a few still hide among the later houses. In 1940 Holly Courts opened near Holly Park, southwest of the hill, as San Francisco's first public housing project, designed by City Hall architect Arthur Brown Jr.; the same year a new WPA-built branch library opened on Cortland Avenue.\n\nCheap rents and a small-town feel drew newcomers in the 1960s and '70s: antiwar activists in shared houses and collectives, artists, and lesbian households. The radicals earned Bernal another nickname, Red Hill. In 1977 muralists founded Precita Eyes beside Precita Park, and the lesbian bar Wild Side West moved onto Cortland, still the hill's village-scale main street. The treeless crest above is a city park, with views in every direction and off-leash room for the neighborhood's dogs.",
+      "Bernal Heights is named for José Cornelio Bernal, whose 1839 Mexican land grant, Rancho Rincón de las Salinas y Potrero Viejo — roughly “salt-marsh corner and old pasture” — took in about 4,446 acres around the hill. After California became part of the United States, the rancho was sold off and cut into small lots. Early settlers, many of them from Ireland, ran dairies and kept goats on the open slopes, and the goats gave the bare hill a nickname: Nanny Goat Hill.\n\nThe hill is a knob of hard Franciscan chert, and Bernal rode out the 1906 earthquake well; the fire that followed burned itself out at 20th Street in the Mission, well to the north. Afterward the neighborhood filled in, partly with the wooden relief cottages, or “earthquake shacks,” that families hauled out of the refugee camps, and a few still hide among the later houses. In 1940 Holly Courts opened near Holly Park, southwest of the hill, as San Francisco's first public housing project, designed by City Hall architect Arthur Brown Jr.; the same year a new WPA-built branch library opened on Cortland Avenue.\n\nCheap rents and a small-town feel drew newcomers in the 1960s and '70s: antiwar activists in shared houses and collectives, and artists. The radicals earned Bernal another nickname, Red Hill. In 1977 muralists founded Precita Eyes beside Precita Park, and the lesbian bar Wild Side West moved onto Cortland, still the hill's village-scale main street. The treeless crest above is a city park, with views in every direction and off-leash room for the neighborhood's dogs.",
     facts: [
       {
         icon: "art",
@@ -1392,7 +1392,7 @@ export const NEIGHBORHOODS = {
         icon: "house",
         title: "Julia Morgan's hall for the Molokans",
         text:
-          "The Nabe, as this center is known, dates its founding to 1907 and began with English classes; when they outgrew a small rented space, Julia Morgan, the architect of Hearst Castle, designed this hall, finished in 1922, where the hill's Russian Molokans learned English, machine sewing and other skills. In 1924 the building was moved to make way for Southern Heights Avenue, and in 1977 it became city Landmark No. 86.",
+          "The Nabe, as this center is known, dates its founding to 1907 and began with English classes; when they outgrew a small rented space, Julia Morgan, the architect of Hearst Castle, designed this hall, finished in 1922, where Molokan immigrants from Russia learned English, machine sewing and other skills. In 1924 the building was moved to make way for Southern Heights Avenue, and in 1977 it became city Landmark No. 86.",
         place: "Potrero Hill Neighborhood House",
         where: "953 De Haro St",
         at: [-122.40064, 37.75781],
@@ -1434,7 +1434,7 @@ export const NEIGHBORHOODS = {
     reasons: [
       "Village downtown + BART",
       "Glen Canyon Park & trails",
-      "Quiet & family-friendly",
+      "Quiet & leafy",
       "Sheltered, sunny valley",
     ],
     aka: "“The Village in the City”",
@@ -1539,7 +1539,7 @@ export const NEIGHBORHOODS = {
       "Presidio at the western edge",
     ],
     history:
-      "Cow Hollow is named for the dairy farms that once filled this valley below the Pacific Heights ridge; the city's Board of Health removed them in the 1880s. During the Gold Rush, Spanish and Indian women washed clothes in a spring-fed lake near today's Lombard, Filbert, Gough and Octavia streets, known as Washerwoman's Lagoon. Waste from the city's first slaughterhouses, set up in the 1850s near Pacific and Larkin, drained into the streams that fed it, and in the 1880s officials judged the lagoon a health hazard and filled it in.\n\nPierce Street was still a country road through the hollow when Henry Casebolt, a Virginia blacksmith who had brought his wife and eleven children to San Francisco in 1851, built his Italianate house on it around 1865; it survives as city Landmark No. 51. On October 23, 1880, the Presidio & Ferries Railroad opened a cable line along Union Street as far as Steiner, where a steam dummy carried riders on toward the Presidio, and in 1891 an Episcopal church rose at that corner on land given by the journalist Frank M. Pixley. In 1906 crews dynamited buildings along Van Ness Avenue to halt the fire's westward advance, well east of this end of the valley.\n\nThe Carnegie-funded branch library that opened in 1918 at Green and Octavia streets, designed by Ernest Coxhead, has always been known as the Golden Gate Valley Branch. When the Golden Gate Bridge opened in May 1937, Lombard Street, planned as its main approach, was widened from two lanes to six, and motor lodges soon lined it; it still carries U.S. 101 along the neighborhood's northern edge.",
+      "Cow Hollow is named for the dairy farms that once filled this valley below the Pacific Heights ridge; the city's Board of Health removed them in the 1880s. During the Gold Rush, women washed clothes in a spring-fed lake near today's Lombard, Filbert, Gough and Octavia streets, known as Washerwoman's Lagoon. Waste from the city's first slaughterhouses, set up in the 1850s near Pacific and Larkin, drained into the streams that fed it, and in the 1880s officials judged the lagoon a health hazard and filled it in.\n\nPierce Street was still a country road through the hollow when Henry Casebolt, a Virginia blacksmith who had brought his wife and eleven children to San Francisco in 1851, built his Italianate house on it around 1865; it survives as city Landmark No. 51. On October 23, 1880, the Presidio & Ferries Railroad opened a cable line along Union Street as far as Steiner, where a steam dummy carried riders on toward the Presidio, and in 1891 an Episcopal church rose at that corner on land given by the journalist Frank M. Pixley. In 1906 crews dynamited buildings along Van Ness Avenue to halt the fire's westward advance, well east of this end of the valley.\n\nThe Carnegie-funded branch library that opened in 1918 at Green and Octavia streets, designed by Ernest Coxhead, has always been known as the Golden Gate Valley Branch. When the Golden Gate Bridge opened in May 1937, Lombard Street, planned as its main approach, was widened from two lanes to six, and motor lodges soon lined it; it still carries U.S. 101 along the neighborhood's northern edge.",
     facts: [
       {
         icon: "church",
@@ -1643,13 +1643,13 @@ export const NEIGHBORHOODS = {
       "Steps from the Castro & Mission",
     ],
     history:
-      "This wedge was once part of Sans Souci Valley, which carried storm runoff from Buena Vista Hill and Lone Mountain toward today's Duboce Park, along the route cyclists now call the Wiggle. The Van Ness Ordinance set the future park aside as a public reservation, an 1861 engineer's map labeled it “hospital site,” and the area began to develop in the 1860s as a prestigious rural exurb. In 1878 the German General Benevolent Society opened its new hospital on the block bounded by 14th, Ridley, Noe and Castro streets, and when cable car lines pushed up Market Street in the 1880s, merchant builders followed with rows of nearly identical Victorians.\n\nNo hospital ever rose on the reservation. After a court awarded parts of it to two claimants in the late 1880s, houses and flats went up on those lots, many by builder Fernando Nelson and most between 1899 and about 1905. Victor Duboce, an officer of the First California Volunteer Infantry in the Philippines who won a seat on the Board of Supervisors after coming home, died in August 1900; the supervisors renamed Ridley Street for him and made the rest of the reservation Duboce Park, whose name the neighborhood now shares. After the 1906 earthquake and fire, several dozen flats and apartment buildings followed.\n\nBy the 1960s the area had been labeled “blighted” and was threatened with redevelopment, but in the 1970s residents began renovating its older houses. The park and nearly 90 houses beside it became the Duboce Park Landmark District in 2013, and in March 2026 supervisors began landmarking an 1875 Greek Revival house on 15th Street and an 1892 row on Henry Street.",
+      "This wedge was once part of Sans Souci Valley, which carried storm runoff from Buena Vista Hill and Lone Mountain toward today's Duboce Park, along the route cyclists now call the Wiggle. The Van Ness Ordinance set the future park aside as a public reservation, an 1861 engineer's map labeled it “hospital site,” and the area began to develop in the 1860s as a rural exurb. In 1878 the German General Benevolent Society opened its new hospital on the block bounded by 14th, Ridley, Noe and Castro streets, and when cable car lines pushed up Market Street in the 1880s, merchant builders followed with rows of nearly identical Victorians.\n\nNo hospital ever rose on the reservation. After a court awarded parts of it to two claimants in the late 1880s, houses and flats went up on those lots, many by builder Fernando Nelson and most between 1899 and about 1905. Victor Duboce, an officer of the First California Volunteer Infantry in the Philippines who won a seat on the Board of Supervisors after coming home, died in August 1900; the supervisors renamed Ridley Street for him and made the rest of the reservation Duboce Park, whose name the neighborhood now shares. After the 1906 earthquake and fire, several dozen flats and apartment buildings followed.\n\nBy the 1960s the area had been labeled “blighted” and was threatened with redevelopment, but in the 1970s residents began renovating its older houses. The park and nearly 90 houses beside it became the Duboce Park Landmark District in 2013, and in March 2026 supervisors began landmarking an 1875 Greek Revival house on 15th Street and an 1892 row on Henry Street.",
     facts: [
       {
         icon: "house",
         title: "A Stick-Eastlake row of 1892",
         text:
-          "These rowhouses on the south side of Henry Street went up in 1892, as Duboce Triangle was turning from an exurb of large-lot Victorian villas into a middle-class neighborhood. On March 3, 2026, supervisors began making them a city landmark, and the designation ordinance calls them a rare Stick-Eastlake rowhouse with much of its original character intact: note the wooden ornament at the cornice and porches, the bay windows, the portico turret and the compound roof. They are private homes, so admire them from the sidewalk.",
+          "These rowhouses on the south side of Henry Street went up in 1892, as Duboce Triangle was turning from an exurb of large-lot Victorian villas into a denser city neighborhood. On March 3, 2026, supervisors began making them a city landmark, and the designation ordinance calls them a rare Stick-Eastlake rowhouse with much of its original character intact: note the wooden ornament at the cornice and porches, the bay windows, the portico turret and the compound roof. They are private homes, so admire them from the sidewalk.",
         place: "Henry Street Rowhouses",
         where: "191-197 Henry St",
         at: [-122.43528, 37.76656],
@@ -1759,13 +1759,13 @@ export const NEIGHBORHOODS = {
       "The city's flat, fast-changing engine room — tech towers, world-class museums, ballpark roar, and warehouse nightlife sprawled across the blocks south of Market.",
     reasons: [
       "Museums, Moscone & the ballpark",
-      "Tech-job epicenter",
+      "Cultural districts",
       "Nightlife & clubs",
       "Transit & freeway hub",
     ],
     aka: "SoMa",
     history:
-      "South of Market grew up as the city's workshop. Near today's Transbay Transit Center the ground was once under the bay; as it was filled, shipbuilders moved in, followed by foundries and boiler works, and an archaeology report found that in the second half of the 1800s most residents of alleys there, like Natoma and Minna, came from Ireland. Market Street's iron cable-car slot gave the district its old nickname, “South of the Slot.” Jack London's 1909 story of that name put the theaters, hotels and banks north of the Slot, and south of it “the factories, slums, laundries, machine-shops, boiler works, and the abodes of the working class.”\n\nIn 1906 filled land gave way under Sixth and Howard, where big lodging houses collapsed, killing hundreds, and the GSA says only two structures south of Market survived the quake and fires: the 1874 Mint and the new post office at Seventh and Mission. While a new City Hall was built, city government worked from a Market Street building that later became the Hotel Whitcomb.\n\nLater, urban renewal pushed Filipino San Franciscans out of Manilatown on Kearny Street, the Fillmore and the Yerba Buena blocks, and SoMa's Mint Mall and Hall became a center of organizing; in 2016 the city recognized the SoMa Pilipinas cultural heritage district. In 1966 Fe-Be's opened at Folsom and 11th as Folsom Street's first leather bar, beginning what became the “Miracle Mile” of more than 30 gay bars, shops and bathhouses by the late 1970s. In 1984 Kathleen Connell and Michael Valerio started the Folsom Street Fair to show the neighborhood didn't need “revitalizing,” and in 2018 supervisors created the Leather and LGBTQ Cultural District.",
+      "South of Market grew up as the city's workshop. Near today's Transbay Transit Center the ground was once under the bay; as it was filled, shipbuilders moved in, followed by foundries and boiler works, and an archaeology report found that in the second half of the 1800s most residents of alleys there, like Natoma and Minna, came from Ireland. Market Street's iron cable-car slot gave the district its old nickname, “South of the Slot.” Jack London's 1909 story of that name put the theaters, hotels and banks north of the Slot, and south of it “the factories, slums, laundries, machine-shops, boiler works,” and the homes of the people who worked there.\n\nIn 1906 filled land gave way under Sixth and Howard, where big lodging houses collapsed, killing hundreds, and the GSA says only two structures south of Market survived the quake and fires: the 1874 Mint and the new post office at Seventh and Mission. While a new City Hall was built, city government worked from a Market Street building that later became the Hotel Whitcomb.\n\nLater, urban renewal pushed Filipino San Franciscans out of Manilatown on Kearny Street, the Fillmore and the Yerba Buena blocks, and SoMa's Mint Mall and Hall became a center of organizing; in 2016 the city recognized the SoMa Pilipinas cultural heritage district. In 1966 Fe-Be's opened at Folsom and 11th as Folsom Street's first leather bar, beginning what became the “Miracle Mile” of more than 30 gay bars, shops and bathhouses by the late 1970s. In 1984 Kathleen Connell and Michael Valerio started the Folsom Street Fair to show the neighborhood didn't need “revitalizing,” and in 2018 supervisors created the Leather and LGBTQ Cultural District.",
     facts: [
       {
         icon: "star",
@@ -1879,12 +1879,12 @@ export const NEIGHBORHOODS = {
 
   "Presidio Heights": {
     spirit:
-      "A hushed, tree-lined enclave of grand mansions and a discreet, upscale Sacramento Street, where old San Francisco money lives quietly at the edge of the Presidio.",
+      "A hushed, tree-lined enclave of grand mansions and the small shops of Sacramento Street, at the edge of the Presidio.",
     reasons: [
       "Stately mansions, leafy streets",
       "Boutique Sacramento St shopping",
       "Steps from the Presidio",
-      "Quiet, safe, and central",
+      "Quiet and central",
     ],
     aka: "Presidio Terrace area",
     history:
@@ -2000,7 +2000,7 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Goat Hill",
     history:
-      "The Spanish reportedly called it Loma Alta, the high hill, and early San Franciscans knew it by other names, Goat Hill among them. The name that stuck came in September 1849, when a semaphore station went up on the summit, its arms signaling to the merchants, wholesalers and speculators below what kind of ship was entering the Golden Gate.\n\nSailing ships that brought cargo to San Francisco needed ballast to leave, and rock for it was quarried from the hill's bay side. From their quarry at Green and Sansome streets, the Gray brothers kept blasting into the eastern face: in January 1894 one explosion set off a rockslide that crushed a duplex on Vallejo Street, and in 1895 a judge permanently barred them from blasting on the hill, yet they carried on. Around 1900 George Gray argued that cutting Telegraph Hill down would give the east side of Russian Hill a magnificent marine view. The digging ended only in 1914, when a worker who could not collect his back wages shot and killed him.\n\nBy 1906 the slopes were a working-class quarter of Irish and Italian immigrants. In that year's fire, residents fought the flames with water they had saved and with wine fermenting in Italian families' basements, and some of their simple cottages were among the few buildings the fire spared. For decades afterward the hill remained an isolated neighborhood of working-class immigrants and artists, and in 1933 Coit Tower rose on its summit. In 2003 Judy Irving's documentary The Wild Parrots of Telegraph Hill made famous the flock of cherry-headed conures, descended from escaped or abandoned pets, that roams the hill.",
+      "The Spanish reportedly called it Loma Alta, the high hill, and early San Franciscans knew it by other names, Goat Hill among them. The name that stuck came in September 1849, when a semaphore station went up on the summit, its arms signaling to the merchants, wholesalers and speculators below what kind of ship was entering the Golden Gate.\n\nSailing ships that brought cargo to San Francisco needed ballast to leave, and rock for it was quarried from the hill's bay side. From their quarry at Green and Sansome streets, the Gray brothers kept blasting into the eastern face: in January 1894 one explosion set off a rockslide that crushed a duplex on Vallejo Street, and in 1895 a judge permanently barred them from blasting on the hill, yet they carried on. Around 1900 George Gray argued that cutting Telegraph Hill down would give the east side of Russian Hill a magnificent marine view. The digging ended only in 1914, when a worker who could not collect his back wages shot and killed him.\n\nBy 1906 the slopes were home to immigrants from Ireland and Italy. In that year's fire, residents fought the flames with water they had saved and with wine fermenting in their basements, and some of their simple cottages were among the few buildings the fire spared. For decades afterward the hill remained an isolated neighborhood of immigrants and artists, and in 1933 Coit Tower rose on its summit. In 2003 Judy Irving's documentary The Wild Parrots of Telegraph Hill made famous the flock of cherry-headed conures, descended from escaped or abandoned pets, that roams the hill.",
     facts: [
       {
         icon: "shop",
@@ -2106,12 +2106,12 @@ export const NEIGHBORHOODS = {
 
   Seacliff: {
     spirit:
-      "San Francisco's most exclusive enclave, where grand mansions perch on the bluffs above China Beach and Baker Beach, framing sweeping Golden Gate views.",
+      "A 1913 residence park where grand mansions perch on the bluffs above China Beach and Baker Beach, framing sweeping Golden Gate views.",
     reasons: [
       "Grand cliffside mansions",
       "Sweeping Golden Gate views",
       "Secluded China Beach",
-      "Old-money exclusivity",
+      "Lands End trail at its edge",
     ],
     aka: "Sea Cliff",
     history:
@@ -2201,7 +2201,7 @@ export const NEIGHBORHOODS = {
 
   "Lake Street": {
     spirit:
-      "A serene enclave of stately period homes lining a leafy street between the Presidio and Mountain Lake Park, prosperous and quiet on the Richmond's northern edge.",
+      "A serene enclave of stately period homes lining a leafy street between the Presidio and Mountain Lake Park, on the Richmond's northern edge.",
     reasons: [
       "Grand period homes",
       "Steps from the Presidio",
@@ -2310,17 +2310,17 @@ export const NEIGHBORHOODS = {
       "Iconic Painted Ladies row",
       "Hilltop downtown skyline view",
       "Full House filming spot",
-      "NoPa dining at the foot",
+      "Divisadero shops at the foot",
     ],
     aka: "Postcard Row",
     history:
-      "Alamo Square takes its name from the álamo, Spanish for poplar: a lone cottonwood on the hill marked a watering hole on the horseback trail between Mission Dolores and the Presidio. After the Van Ness Ordinance of 1855 laid out the Western Addition west to Divisadero Street, then the city's western edge, Mayor James Van Ness set aside 12.7 acres on the hill in 1856 for a public square. Taking possession took longer: Charles “Dutch Charley” Duane, a onetime fire chief twice banished by the city's vigilance committees, squatted on the hilltop until the city ousted him in 1868. Grading began in 1892, and by 1896 the park had curving paths, stairways and a masonry wall.\n\nThe blocks around it filled between 1870 and 1929 with Italianate, Queen Anne and Classical Revival houses, many of them designed by architects for owners who were mostly moderately successful businessmen. Confectioner William Westerfeld's mansion went up in 1889, developer Matthew Kavanaugh's row on Steiner Street between 1892 and 1896, and Archbishop Patrick Riordan's residence in 1904. In April 1906 the fires stopped at Laguna Street, a few blocks east, and the neighborhood was spared.\n\nLater, as owners moved away, entrepreneurs carved many of the big houses into rooming houses, and redevelopment in the nearby Fillmore planned the demolition of some 2,500 Victorians. Neighbors who fought a 1963 city plan to level the hilltop for playing fields formed the Alamo Square Neighborhood Association, which also fought a freeway planned through the Panhandle. In July 1984 the city made the blocks from Golden Gate Avenue to Fell Street, between Divisadero and Webster, a historic district.",
+      "Alamo Square takes its name from the álamo, Spanish for poplar: a lone cottonwood on the hill marked a watering hole on the horseback trail between Mission Dolores and the Presidio. After the Van Ness Ordinance of 1855 laid out the Western Addition west to Divisadero Street, then the city's western edge, Mayor James Van Ness set aside 12.7 acres on the hill in 1856 for a public square. Taking possession took longer: Charles “Dutch Charley” Duane, a onetime fire chief twice banished by the city's vigilance committees, squatted on the hilltop until the city ousted him in 1868. Grading began in 1892, and by 1896 the park had curving paths, stairways and a masonry wall.\n\nThe blocks around it filled between 1870 and 1929 with Italianate, Queen Anne and Classical Revival houses, many of them designed by architects for owners who were mostly businessmen. Confectioner William Westerfeld's mansion went up in 1889, developer Matthew Kavanaugh's row on Steiner Street between 1892 and 1896, and Archbishop Patrick Riordan's residence in 1904. In April 1906 the fires stopped at Laguna Street, a few blocks east, and the neighborhood was spared.\n\nLater, as owners moved away, entrepreneurs carved many of the big houses into rooming houses, and redevelopment in the nearby Fillmore planned the demolition of some 2,500 Victorians. Neighbors who fought a 1963 city plan to level the hilltop for playing fields formed the Alamo Square Neighborhood Association, which also fought a freeway planned through the Panhandle. In July 1984 the city made the blocks from Golden Gate Avenue to Fell Street, between Divisadero and Webster, a historic district.",
     facts: [
       {
         icon: "shop",
         title: "A cable car street of shops",
         text:
-          "City zoning makes Divisadero a neighborhood commercial district for 12 blocks, from Haight Street north to O'Farrell Street, with this corner at the midpoint; the walk from Hayes Street covers two of them. Cable cars running along the street brought the traffic that made it a busy shopping strip as the blocks around it grew into a streetcar suburb from the 1870s on. Its restaurant scene took off in the mid-2000s, when the street was better known for its mechanics and corner stores, and today restaurants, bars, grocers and other shops line it.",
+          "City zoning makes Divisadero a neighborhood commercial district for 12 blocks, from Haight Street north to O'Farrell Street, with this corner at the midpoint; the walk from Hayes Street covers two of them. Cable cars running along the street brought the traffic that made it a busy shopping strip as the blocks around it grew into a streetcar suburb from the 1870s on. Restaurants multiplied along it from the mid-2000s, when the street was better known for its mechanics and corner stores, and today restaurants, bars, grocers and other shops line it.",
         place: "Divisadero Street shops",
         where: "Divisadero St & Fulton St",
         at: [-122.43803, 37.77670],
@@ -2370,7 +2370,7 @@ export const NEIGHBORHOODS = {
         icon: "park",
         title: "The hilltop they planned to flatten",
         text:
-          "After the fires of April 1906, Alamo Square became a major refuge for the homeless, with about 1,000 tents but no permanent “earthquake cottages.” In 1963 the city drew up plans to slice off the crest of this hill, level it for playing fields and build a large field house at Fulton and Steiner; the plan was dropped after neighbors appealed to Mayor Joseph Alioto.",
+          "After the fires of April 1906, Alamo Square became a major refuge for people left homeless, with about 1,000 tents but no permanent “earthquake cottages.” In 1963 the city drew up plans to slice off the crest of this hill, level it for playing fields and build a large field house at Fulton and Steiner; the plan was dropped after neighbors appealed to Mayor Joseph Alioto.",
         place: "Alamo Square Park",
         where: "Hayes St & Pierce St",
         at: [-122.43460, 37.77645],
@@ -2614,7 +2614,7 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Nihonmachi",
     history:
-      "Before 1906, San Francisco's Japanese immigrants lived in enclaves around Chinatown, South of Market and South Park. After the 1906 earthquake and fire, some went back to South Park, but most moved west to the Western Addition. The heart of the new Nihonmachi was the area bounded by Geary, Webster, Bush and Laguna streets, and by 1940 it held more than 200 Japanese American–owned businesses. Barred by the 1913 Alien Land Law from owning land, the women of the Japanese YWCA had the city's YWCA hold their Sutter Street lot in trust.\n\nIn the spring of 1942, San Francisco's 5,280 Japanese and Japanese Americans were forced from their homes into incarceration camps, and thousands of newly arrived war workers, most of them African American, moved into the empty houses. After the war, officials labeled the district blighted, and in 1948, 27 blocks of the Western Addition, including much of Japantown, were selected for the A-1 redevelopment project. Many Black and Japanese American leaders vigorously opposed redevelopment. In 1956, after wholesale evictions, A-1 began flattening entire blocks south of Post Street, and by 1960 at least 1,500 Japanese American residents and more than 60 small businesses had been displaced.\n\nIn their place rose the Japanese Cultural and Trade Center, designed by Minoru Yamasaki and dedicated by Mayor Joseph Alioto in 1968, with a Peace Pagoda paid for largely by donations from Osaka, San Francisco's sister city. In 2006, its centennial year, a Board of Supervisors resolution called it the oldest Japantown in the United States and one of only three remaining. Its prewar language school, YWCA and temple still stand on Bush and Sutter streets.",
+      "Before 1906, San Francisco's Japanese immigrants lived in enclaves around Chinatown, South of Market and South Park. After the 1906 earthquake and fire, some went back to South Park, but most moved west to the Western Addition. The heart of the new Nihonmachi was the area bounded by Geary, Webster, Bush and Laguna streets, and by 1940 it held more than 200 Japanese American–owned businesses. Barred by the 1913 Alien Land Law from owning land, the women of the Japanese YWCA had the city's YWCA hold their Sutter Street lot in trust.\n\nIn the spring of 1942, San Francisco's 5,280 Japanese and Japanese Americans were forced from their homes into incarceration camps, and thousands of newly arrived war workers, most of them African American, moved into the empty houses. After the war, officials labeled the district “blighted,” and in 1948, 27 blocks of the Western Addition, including much of Japantown, were selected for the A-1 redevelopment project. Many Black and Japanese American leaders vigorously opposed redevelopment. In 1956, after wholesale evictions, A-1 began flattening entire blocks south of Post Street, and by 1960 at least 1,500 Japanese American residents and more than 60 small businesses had been displaced.\n\nIn their place rose the Japanese Cultural and Trade Center, designed by Minoru Yamasaki and dedicated by Mayor Joseph Alioto in 1968, with a Peace Pagoda paid for largely by donations from Osaka, San Francisco's sister city. In 2006, its centennial year, a Board of Supervisors resolution called it the oldest Japantown in the United States and one of only three remaining. Its prewar language school, YWCA and temple still stand on Bush and Sutter streets.",
     facts: [
       {
         icon: "shopping",
@@ -2660,7 +2660,7 @@ export const NEIGHBORHOODS = {
         icon: "park",
         title: "The row once called Japan Street",
         text:
-          "Cottage Row anchors the Bush Street–Cottage Row Historic District, listed on the National Register in 1982 and a city landmark district since 1991; Rec and Park credits William Hollis, president of the developer Real Estate Associates, with building most of its 22 buildings. Before World War II the district was home to Japanese American families, and the walkway was popularly called Japan Street. The mini park's Sutter Street end has been remade, with the Japanese Cultural and Community Center of Northern California, as a garden honoring the Issei.",
+          "Cottage Row anchors the Bush Street–Cottage Row Historic District, listed on the National Register in 1982 and a city landmark district since 1991; Rec and Park credits William Hollis, president of the developer Real Estate Associates, with building most of its 22 buildings. Before World War II the district was home to Japanese Americans, and the walkway was popularly called Japan Street. The mini park's Sutter Street end has been remade, with the Japanese Cultural and Community Center of Northern California, as a garden honoring the Issei.",
         place: "Cottage Row",
         where: "Sutter St & Cottage Row",
         at: [-122.43226, 37.78648],
@@ -2729,7 +2729,7 @@ export const NEIGHBORHOODS = {
     ],
     aka: "The Fillmore",
     history:
-      "The name is literal. The Western Addition was the grid San Francisco added west of Larkin Street, its old western boundary: the Van Ness Ordinance of 1855 settled land titles there, reserved land for the city and approved a map of new blocks, and the name came to cover some 500 blocks out to Divisadero Street. Victorian houses and flats filled those blocks.\n\nIn 1942 Executive Order 9066 sent the district's Japanese American families to incarceration camps, and Black workers recruited for the Bay Area shipyards, many from Texas and Louisiana, moved into the emptied homes. The Fillmore became the “Harlem of the West,” where you could hear jazz, blues and R&B at dozens of clubs. Bop City, which grew out of Slim Gaillard's short-lived Vout City in 1949, soon became, as pianist Frank Jackson recalled, the after-hours spot, where touring players such as Charlie Parker and John Coltrane sat in at the jam sessions in Jimbo Edwards's back room.\n\nThen came “urban renewal,” touted as blight removal. The Redevelopment Agency's A-2 project alone covered nearly 60 square blocks and affected more than 13,000 Fillmore residents. In 2008, as the agency prepared to leave the Western Addition the next January after 40 years, city officials counted 883 businesses shuttered, 4,729 households forced out and roughly 2,500 Victorians demolished. A few houses were saved by trucking them to new lots, and in the mid-1990s the agency itself created the Fillmore Jazz Preservation District, a dining and entertainment destination meant to draw visitors back.",
+      "The name is literal. The Western Addition was the grid San Francisco added west of Larkin Street, its old western boundary: the Van Ness Ordinance of 1855 settled land titles there, reserved land for the city and approved a map of new blocks, and the name came to cover some 500 blocks out to Divisadero Street. Victorian houses and flats filled those blocks.\n\nIn 1942 Executive Order 9066 sent the district's Japanese American families to incarceration camps, and Black workers recruited for the Bay Area shipyards, many from Texas and Louisiana, moved into the emptied homes. The Fillmore became the “Harlem of the West,” where you could hear jazz, blues and R&B at dozens of clubs. Bop City, which grew out of Slim Gaillard's short-lived Vout City in 1949, soon became, as pianist Frank Jackson recalled, the after-hours spot, where touring players such as Charlie Parker and John Coltrane sat in at the jam sessions in Jimbo Edwards's back room.\n\nThen came “urban renewal,” touted as “blight removal.” The Redevelopment Agency's A-2 project alone covered nearly 60 square blocks and affected more than 13,000 Fillmore residents. In 2008, as the agency prepared to leave the Western Addition the next January after 40 years, city officials counted 883 businesses shuttered, 4,729 households forced out and roughly 2,500 Victorians demolished. A few houses were saved by trucking them to new lots, and in the mid-1990s the agency itself created the Fillmore Jazz Preservation District, meant to draw visitors back with dining and entertainment.",
     facts: [
       {
         icon: "house",
@@ -2834,10 +2834,10 @@ export const NEIGHBORHOODS = {
 
   "Laurel Heights / Jordan Park": {
     spirit:
-      "A hushed, leafy enclave of grand homes and old money south of California Street, where stately mansions, a tidy shopping village, and a buried cemetery past coexist quietly.",
+      "A hushed, leafy enclave of grand homes south of California Street, where stately mansions, a tidy shopping village, and a buried cemetery past coexist quietly.",
     reasons: [
       "Grand planned-tract homes",
-      "Quiet, affluent streets",
+      "Quiet, leafy streets",
       "Laurel Village shopping",
       "Michelin dining nearby",
     ],
@@ -3020,7 +3020,7 @@ export const NEIGHBORHOODS = {
 
   "Lower Pacific Heights": {
     spirit:
-      "The flat, walkable shelf below grand Pacific Heights, where Victorian flats meet the lower Fillmore's restaurants, jazz heritage, and a buzzing Japantown edge.",
+      "The flat, walkable shelf below grand Pacific Heights, where Victorian flats meet the lower Fillmore's restaurants, jazz heritage, and the edge of historic Japantown.",
     reasons: [
       "Fillmore Street dining strip",
       "Historic jazz heritage",
@@ -3029,7 +3029,7 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Lower Pac Heights",
     history:
-      "For most of its history this stretch between Fillmore Street and Presidio Avenue was part of the Western Addition. An 1861 street guide already listed Hamilton Square, spanning Geary between Steiner and Scott, and in 1863 Dominican friars paid $6,000 for the block at Bush and Steiner, where their first church was blessed in 1873. The California Street Cable Railroad opened to Fillmore in April 1878 and in May 1879 pushed west to Central Avenue, today's Presidio Avenue, along the neighborhood's northern edge. Victorians followed, among them an 1883 house on Broderick Street that television would make famous.\n\nWhen the 1906 fire burned out downtown, City Hall and most big department stores moved west to Fillmore, the closest thoroughfare left intact. Mayor Eugene Schmitz and the Committee of Fifty met at Franklin Hall, at Fillmore and Bush, to launch the relief effort, and refugees camped in Hamilton Square. Merchants from the burned district soon proposed electrically lit arches over the street. Mount Zion Hospital, founded by members of the city's Jewish community in 1887, came west too, with $100,000 from Isaias Hellman for a new hospital named for his late wife, Esther.\n\nDuring World War II, Black newcomers from the South moved into the Fillmore, replacing Japanese American families forced into incarceration camps. After the war Erich Mendelsohn, a leading Expressionist architect, designed the Maimonides Health Center on Sutter Street. The 1989 Loma Prieta earthquake destroyed the lantern atop St. Dominic's tower; by 1992 the tower was rebuilt and the walls braced by nine flying buttresses. In the 1980s and '90s the older name Upper Fillmore fell out of favor, and Lower Pacific Heights came into wider use.",
+      "For most of its history this stretch between Fillmore Street and Presidio Avenue was part of the Western Addition. An 1861 street guide already listed Hamilton Square, spanning Geary between Steiner and Scott, and in 1863 Dominican friars paid $6,000 for the block at Bush and Steiner, where their first church was blessed in 1873. The California Street Cable Railroad opened to Fillmore in April 1878 and in May 1879 pushed west to Central Avenue, today's Presidio Avenue, along the neighborhood's northern edge. Victorians followed, among them an 1883 house on Broderick Street that television would make famous.\n\nWhen the 1906 fire burned out downtown, City Hall and most big department stores moved west to Fillmore, the closest thoroughfare left intact. Mayor Eugene Schmitz and the Committee of Fifty met at Franklin Hall, at Fillmore and Bush, to launch the relief effort, and refugees camped in Hamilton Square. Merchants from the burned district soon proposed electrically lit arches over the street. Mount Zion Hospital, founded by members of the city's Jewish community in 1887, came west too, with $100,000 from Isaias Hellman for a new hospital named for his late wife, Esther.\n\nDuring World War II, as Japanese American families were forced into incarceration camps, Black migrants from the South moved into the Fillmore. After the war Erich Mendelsohn, a leading Expressionist architect, designed the Maimonides Health Center on Sutter Street. The 1989 Loma Prieta earthquake destroyed the lantern atop St. Dominic's tower; by 1992 the tower was rebuilt and the walls braced by nine flying buttresses. In the 1980s and '90s the older name Upper Fillmore fell out of favor, and Lower Pacific Heights came into wider use.",
     facts: [
       {
         icon: "park",
@@ -3095,7 +3095,7 @@ export const NEIGHBORHOODS = {
         icon: "star",
         title: "Fourteen arches of light",
         text:
-          "The week after the 1906 earthquake, merchants and businessmen transplanted from the burned zone formed the Fillmore Street Improvement Association. In April 1907 it asked the supervisors to let it raise decorative metal arches, fitted with electric lights, across 14 intersections of Fillmore Street from Sacramento to Fulton, this one among them. In 1943, when the lights could not be dimmed for a wartime dim-out, the merchants took the arches down and gave the iron for scrap.",
+          "The week after the 1906 earthquake, merchants and other business owners transplanted from the burned zone formed the Fillmore Street Improvement Association. In April 1907 it asked the supervisors to let it raise decorative metal arches, fitted with electric lights, across 14 intersections of Fillmore Street from Sacramento to Fulton, this one among them. In 1943, when the lights could not be dimmed for a wartime dim-out, the merchants took the arches down and gave the iron for scrap.",
         place: "Fillmore Street",
         where: "Fillmore St & Sutter St",
         at: [-122.43312, 37.78603],
@@ -3152,7 +3152,7 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Buena Vista Park",
     history:
-      "Buena Vista, Spanish for “good view,” is the hill at the eastern edge of the old Outside Lands, the ground beyond the city's 1851 charter limits, roughly west of Divisadero Street, where squatters' claims clouded titles for years. In 1867 the city reserved its hilltop as Hill Park, often called San Francisco's oldest official park, and paid squatters $88,250 to give up their claims to it. It was dedicated as Buena Vista Park in 1894.\n\nTransit and money then climbed the slopes. Cable cars began running out Haight Street to Stanyan in late 1883. In 1887 Adolph Sutro's statue, the Triumph of Light, was dedicated on Mount Olympus to the south; St. Joseph's Hospital was founded on the hill's east side in 1889; and in 1897 Richard Spreckels, of the sugar-refining family, built a house across from the park on Buena Vista Avenue West. After the 1906 earthquake, crowds spent five days on the summit watching the city burn. Around 1910 neighbors formed an improvement club, and the staircases, paths and tennis courts it won were dedicated in 1913.\n\nIn 1928 St. Joseph's opened a Spanish Renaissance Revival building that would later play the sanatorium in Hitchcock's Vertigo. In the mid-1930s WPA crews rebuilt the park's walls and gutters with broken headstones from the city's emptied Victorian cemeteries, and in the 1960s the Spreckels house's top floor held a recording studio where the Grateful Dead made early recordings. The hospital closed in 1979 and was converted into the Park Hill condominiums, and in 2026 the Board of Supervisors voted to make the Spreckels house a city landmark.",
+      "Buena Vista, Spanish for “good view,” is the hill at the eastern edge of the old Outside Lands, the ground beyond the city's 1851 charter limits, roughly west of Divisadero Street, where squatters' claims clouded titles for years. In 1867 the city reserved its hilltop as Hill Park, often called San Francisco's oldest official park, and paid squatters $88,250 to give up their claims to it. It was dedicated as Buena Vista Park in 1894.\n\nTransit and building then climbed the slopes. Cable cars began running out Haight Street to Stanyan in late 1883. In 1887 Adolph Sutro's statue, the Triumph of Light, was dedicated on Mount Olympus to the south; St. Joseph's Hospital was founded on the hill's east side in 1889; and in 1897 Richard Spreckels, of the sugar-refining family, built a house across from the park on Buena Vista Avenue West. After the 1906 earthquake, crowds spent five days on the summit watching the city burn. Around 1910 neighbors formed an improvement club, and the staircases, paths and tennis courts it won were dedicated in 1913.\n\nIn 1928 St. Joseph's opened a Spanish Renaissance Revival building that would later play the sanatorium in Hitchcock's Vertigo. In the mid-1930s WPA crews rebuilt the park's walls and gutters with broken headstones from the city's emptied Victorian cemeteries, and in the 1960s the Spreckels house's top floor held a recording studio where the Grateful Dead made early recordings. The hospital closed in 1979 and was converted into the Park Hill condominiums, and in 2026 the Board of Supervisors voted to make the Spreckels house a city landmark.",
     facts: [
       {
         icon: "shop",
@@ -3266,13 +3266,13 @@ export const NEIGHBORHOODS = {
       "Above Dolores Park",
     ],
     history:
-      "Dolores Heights rises a few blocks south of Mission Dolores, but its first neighborhood grew on the gentler ground at the hill's eastern foot. Liberty Hill, named not for a summit but for two of its streets, Liberty and Hill, was one of San Francisco's earliest residential “suburbs.” Coal dealer Marsden Kershaw built his house at Guerrero and Liberty in 1871, and in 1895 dairy farmer John Daly, who would later subdivide his ranch to begin what is now Daly City, finished a Queen Anne mansion at the crest of Guerrero at 21st.\n\nThe fire that followed the 1906 earthquake was stopped at 20th Street, so Liberty Hill still holds examples of every style of its building years. Public Works photographs show the steep hill to the west still rough, with 1906 earthquake shacks above a cliff on Cumberland Street in 1914 and Sanchez Street unpaved at 21st. The climb over it was the hardest grade on the J-Church line: at least fifteen routes were proposed, one a tunnel under Chattanooga Street, before the line opened in 1917 on its own right-of-way along Dolores Park. In 1930, by the SF Examiner's account, Mayor James Rolph, who lived on Sanchez Street, built a guesthouse next door.\n\nIn 1983, 51 houses on two blocks of Liberty Street joined the National Register, and in 1985 the city made Liberty Hill a landmark district. Today the Dolores Heights Special Use District holds new buildings to 35 feet above existing grade and requires deep rear yards, to protect views and light, and in 2003 the Dolores Heights Improvement Club and property owners along the Liberty Street stairs restored the stairway's garden.",
+      "Dolores Heights rises a few blocks south of Mission Dolores, but its first neighborhood grew on the gentler ground at the hill's eastern foot. Liberty Hill, named not for a summit but for two of its streets, Liberty and Hill, was one of San Francisco's earliest residential “suburbs.” Coal dealer Marsden Kershaw built his house at Guerrero and Liberty in 1871, and in 1895 dairy farmer John Daly, who would later subdivide his ranch to begin what is now Daly City, finished a Queen Anne mansion at the crest of Guerrero at 21st.\n\nThe fire that followed the 1906 earthquake was stopped at 20th Street, so Liberty Hill still holds examples of every style of its building years. Public Works photographs show the steep hill to the west still rugged, with 1906 earthquake shacks above a cliff on Cumberland Street in 1914 and Sanchez Street unpaved at 21st. The climb over it was the hardest grade on the J-Church line: at least fifteen routes were proposed, one a tunnel under Chattanooga Street, before the line opened in 1917 on its own right-of-way along Dolores Park. In 1930, by the SF Examiner's account, Mayor James Rolph, who lived on Sanchez Street, built a guesthouse next door.\n\nIn 1983, 51 houses on two blocks of Liberty Street joined the National Register, and in 1985 the city made Liberty Hill a landmark district. Today the Dolores Heights Special Use District holds new buildings to 35 feet above existing grade and requires deep rear yards, to protect views and light, and in 2003 the Dolores Heights Improvement Club and property owners along the Liberty Street stairs restored the stairway's garden.",
     facts: [
       {
         icon: "house",
         title: "A capsule of Victorian San Francisco",
         text:
-          "Along two blocks of Liberty Street, Nos. 15 to 188, 51 houses make up the Liberty Street Historic District, listed on the National Register on September 15, 1983; its nomination calls the enclave a capsule history of middle-class housing in San Francisco between 1867 and 1911. The houses run from early and standard San Francisco Italianates through Stick and Queen Anne to Classical Revival, and the district also sits inside the city's Liberty Hill Historic District.",
+          "Along two blocks of Liberty Street, Nos. 15 to 188, 51 houses make up the Liberty Street Historic District, listed on the National Register on September 15, 1983; its nomination calls the enclave a capsule history of housing in San Francisco between 1867 and 1911. The houses run from early and standard San Francisco Italianates through Stick and Queen Anne to Classical Revival, and the district also sits inside the city's Liberty Hill Historic District.",
         place: "Liberty Street Historic District",
         where: "Liberty St & Valencia St",
         at: [-122.42140, 37.75745],
@@ -3381,7 +3381,7 @@ export const NEIGHBORHOODS = {
 
   "Parnassus Heights": {
     spirit:
-      "A foggy hillside where med students, eucalyptus forest, and big-sky views crowd around UCSF, wedged quietly between Cole Valley, the Haight, and the Inner Sunset.",
+      "A foggy hillside where eucalyptus forest and big-sky views crowd around UCSF's medical campus, wedged quietly between Cole Valley, the Haight, and the Inner Sunset.",
     reasons: [
       "UCSF medical campus",
       "Mount Sutro forest trails",
@@ -3474,16 +3474,16 @@ export const NEIGHBORHOODS = {
 
   "Lower Haight": {
     spirit:
-      "A gritty-creative pocket of Victorian flats where DJ history, dive bars, and record shops collide along a few blocks of low-key cool.",
+      "A creative pocket of Victorian flats where DJ history, dive bars, and record shops collide along a few blocks of Haight Street.",
     reasons: [
       "Legendary beer bars",
       "DJ & record-shop roots",
       "Victorian flats",
-      "Gritty-creative vibe",
+      "Julia Morgan Zen temple",
     ],
     aka: "Haight-Fillmore",
     history:
-      "Before the street grid, these blocks lay in the Sans Souci Valley, which carried storm runoff from Buena Vista Hill and Lone Mountain through today's Panhandle toward Duboce Park, and was once the easiest walking route between Mission Dolores and the Presidio. Which Haight the main street honors has never been settled; the banker Henry Haight, his nephew Governor Henry H. Haight and a banker's wife, Weltha Haight, all have champions. Transit built the neighborhood. In 1883 the Market Street Cable Railway replaced a horse-car line on Haight Street, linking downtown with the east end of Golden Gate Park; land prices rose, and by one local history nearly every lot here was built on by the end of the decade.\n\nThe area largely came through the 1906 earthquake and fire, which is why so many of its Victorians remain. After the Redevelopment Agency declared the Western Addition blighted in 1948, the first phase of urban renewal in the Fillmore to the north cut its population almost in half and shut more than 850 businesses, most of them Black-owned. These blocks, called Haight-Fillmore by the late 1960s, were the southern tip of the Fillmore district, and in the late 1970s still an almost entirely Black community, one account notes.\n\nThe name Lower Haight turns up in a 1921 grocers' trade journal but went mainstream only in the mid-to-late 1980s. In the 1990s the strip was a hub of the city's DJ, hip-hop and rave culture; one record shop, opened around 1990, did most of its early business with local rappers hunting for records to sample, and got a mention in the Beastie Boys' 1992 song “Professor Booty.”",
+      "Before the street grid, these blocks lay in the Sans Souci Valley, which carried storm runoff from Buena Vista Hill and Lone Mountain through today's Panhandle toward Duboce Park, and was once the easiest walking route between Mission Dolores and the Presidio. Which Haight the main street honors has never been settled; the banker Henry Haight, his nephew Governor Henry H. Haight and a banker's wife, Weltha Haight, all have champions. Transit built the neighborhood. In 1883 the Market Street Cable Railway replaced a horse-car line on Haight Street, linking downtown with the east end of Golden Gate Park; land prices rose, and by one local history nearly every lot here was built on by the end of the decade.\n\nThe area largely came through the 1906 earthquake and fire, which is why so many of its Victorians remain. After the Redevelopment Agency declared the Western Addition “blighted” in 1948, the first phase of urban renewal in the Fillmore to the north cut its population almost in half and shut more than 850 businesses, most of them Black-owned. These blocks, called Haight-Fillmore by the late 1960s, were the southern tip of the Fillmore district, and in the late 1970s still an almost entirely Black community, one account notes.\n\nThe name Lower Haight turns up in a 1921 grocers' trade journal but went mainstream only in the mid-to-late 1980s. In the 1990s the strip was a hub of the city's DJ, hip-hop and rave culture; one record shop, opened around 1990, did most of its early business with local rappers hunting for records to sample, and got a mention in the Beastie Boys' 1992 song “Professor Booty.”",
     facts: [
       {
         icon: "house",
@@ -3671,11 +3671,11 @@ export const NEIGHBORHOODS = {
 
   Panhandle: {
     spirit:
-      "A leafy half-mile green arm reaching east from Golden Gate Park, flanked by grand painted Victorians and a buzzing Divisadero dining strip locals call NoPa.",
+      "A leafy half-mile green arm reaching east from Golden Gate Park, flanked by grand painted Victorians and a Divisadero dining strip in the blocks known as NoPa.",
     reasons: [
       "Half-mile green park strip",
       "Grand Victorian rowhouses",
-      "Buzzing Divisadero dining",
+      "Divisadero dining strip",
       "Bike & jog path",
     ],
     aka: "NoPa",
@@ -3784,11 +3784,11 @@ export const NEIGHBORHOODS = {
 
   "West Portal": {
     spirit:
-      "A village within the city: streetcars surface from the tunnel onto a walkable main street of family-owned trattorias, old-school pubs, and stroller-friendly sidewalks.",
+      "A village within the city: streetcars surface from the tunnel onto a walkable main street of family-owned trattorias and old-school pubs.",
     reasons: [
       "Walkable main-street shops",
       "Streetcars from the tunnel",
-      "Family-friendly village feel",
+      "Village feel within the city",
       "Beloved Italian restaurants",
     ],
     history:
@@ -3838,7 +3838,7 @@ export const NEIGHBORHOODS = {
         icon: "church",
         title: "A parish that began in a house",
         text:
-          "Archbishop Edward J. Hanna established St. Cecilia parish in 1917 and named the Rev. John P. Tobin its first pastor; a house at 1215 Taraval Street served as its first church and rectory, followed by an old converted schoolhouse on Taraval. By the parish's own count, 59 Catholic families lived within its boundaries on January 7, 1917, a territory that took in West Portal, Forest Hill, St. Francis Wood, Merritt Terrace, Sunset Terrace and the Parkside. Today the parish church stands here on 17th Avenue.",
+          "Archbishop Edward J. Hanna established St. Cecilia parish in 1917 and named the Rev. John P. Tobin its first pastor; a house at 1215 Taraval Street served as its first church and rectory, followed by an old converted schoolhouse on Taraval. By the parish's own count, it had 59 families within its boundaries on January 7, 1917, a territory that took in West Portal, Forest Hill, St. Francis Wood, Merritt Terrace, Sunset Terrace and the Parkside. Today the parish church stands here on 17th Avenue.",
         place: "St. Cecilia Church",
         where: "2555 17th Ave",
         at: [-122.47369, 37.73956],
@@ -3892,10 +3892,10 @@ export const NEIGHBORHOODS = {
       "Storybook 1920s residence park",
       "Brick entry gateposts",
       "Curving, leafy streets",
-      "Affluent & residential",
+      "Quiet & residential",
     ],
     history:
-      "Balboa Terrace fills a wedge between Junipero Serra Boulevard, Monterey Boulevard and Ocean Avenue, just south of St. Francis Wood. It was once part of Adolph Sutro's estate, whose largest piece was 1,200 acres of Rancho San Miguel, the Mexican land grant of 1845. Sutro willed those acres to a charitable trust, but after his death in 1898 his heirs broke it, and buyers including A.S. Baldwin and Duncan McDuffie took most of the land for residence parks. The homes association dates the first Balboa Terrace filing to 1912, by Baldwin & Howell.\n\nNewell-Murdoch, then developing Forest Hill, paid $100,000 for the property in May 1918, but the Western Neighborhoods Project says debts and World War I construction restrictions pushed it out of the housing business. In 1920 the John Rosenfeld's Sons Company, represented by Lang Realty, filed the official plat, designed by Punnett & Parez, and brothers Ernest C. and Oscar M. Hueter, self-described capitalists, bought the tract soon after. Hueter Homes built most of the houses in the 1920s; architect Harold G. Stoner designed as many as 60 percent of them, Walter Zweig supervised construction and Lang Realty sold them, and the Langs, Hueters and Zweigs were all related. The styles run from single-story English cottages to Spanish Colonial and Italian Renaissance Revival.\n\nDeed restrictions adopted in 1920 limited the tract to single-family detached houses, with setbacks and height limits. The 1924 covenants also barred selling or renting to anyone but white people, a restriction typical of residence parks of the era. In 1948, in Shelley v. Kraemer, the U.S. Supreme Court ruled that courts could not enforce such covenants.",
+      "Balboa Terrace fills a wedge between Junipero Serra Boulevard, Monterey Boulevard and Ocean Avenue, just south of St. Francis Wood. It was once part of Adolph Sutro's estate, whose largest piece was 1,200 acres of Rancho San Miguel, the Mexican land grant of 1845. Sutro willed those acres to a charitable trust, but after his death in 1898 his heirs broke it, and buyers including A.S. Baldwin and Duncan McDuffie took most of the land for residence parks. The homes association dates the first Balboa Terrace filing to 1912, by Baldwin & Howell.\n\nNewell-Murdoch, then developing Forest Hill, paid $100,000 for the property in May 1918, but the Western Neighborhoods Project says debts and World War I construction restrictions pushed it out of the housing business. In 1920 the John Rosenfeld's Sons Company, represented by Lang Realty, filed the official plat, designed by Punnett & Parez, and brothers Ernest C. and Oscar M. Hueter bought the tract soon after. Hueter Homes built most of the houses in the 1920s; architect Harold G. Stoner designed as many as 60 percent of them, Walter Zweig supervised construction and Lang Realty sold them, and the Langs, Hueters and Zweigs were all related. The styles run from single-story English cottages to Spanish Colonial and Italian Renaissance Revival.\n\nDeed restrictions adopted in 1920 limited the tract to single-family detached houses, with setbacks and height limits. The 1924 covenants also barred selling or renting to anyone but white people, a restriction typical of residence parks of the era. In 1948, in Shelley v. Kraemer, the U.S. Supreme Court ruled that courts could not enforce such covenants.",
     facts: [
       {
         icon: "tram",
@@ -3980,16 +3980,16 @@ export const NEIGHBORHOODS = {
 
   "Inner Richmond": {
     spirit:
-      "Foggy, food-obsessed and gloriously diverse: Edwardian flats above Clement Street's Burmese, Chinese, and Russian kitchens, with Golden Gate Park and the Presidio on its doorstep.",
+      "Foggy and food-obsessed: Edwardian flats above Clement Street's Burmese, Chinese, and Russian kitchens, with Golden Gate Park and the Presidio on its doorstep.",
     reasons: [
       "\"New Chinatown\" food scene",
       "Iconic Clement Street strip",
-      "Diverse immigrant heritage",
+      "Long immigrant history",
       "Between park & Presidio",
     ],
     aka: "New Chinatown",
     history:
-      "The Inner Richmond began as part of the Outside Lands, the sand dunes west of the young city, whose title Congress settled in 1866. Australian-born art dealer George Turner Marsh, who built a house around 1876 near today's 12th Avenue and Clement Street, is credited with the name: he called it Richmond House, after the Richmond near Melbourne, and in 1890 the Board of Supervisors made the Richmond District official. The road west was Point Lobos Avenue, today's Geary Boulevard, and in a dance hall beside it the district's Catholic families held their first Mass, on Easter Sunday 1887.\n\nTransit filled in the dunes. In 1896 Adolph Sutro underwrote an electric trolley line the length of Clement Street, and after the 1906 earthquake and fire, refugees flooded west and building boomed, bringing Irish, Jewish and Russian newcomers. In 1909 the city traded the district's lettered streets for Spanish explorers' names; on December 28, 1912, Muni's first streetcars began running out Geary; and in 1914 San Francisco's first Carnegie-funded library opened on Ninth Avenue. In 1917, to avoid confusion with the city of Richmond across the bay, the city renamed the area the Park Presidio District. The name never caught on, and a 2009 ordinance formally gave the Richmond its name back.\n\nBy the 1950s, an SFMOMA neighborhood history notes, so many Chinese American families had bought houses along Clement Street that locals called it “New Chinatown,” and Chinese immigration to the Richmond accelerated after 1965.",
+      "The Inner Richmond began as part of the Outside Lands, the sand dunes west of the young city, whose title Congress settled in 1866. Australian-born art dealer George Turner Marsh, who built a house around 1876 near today's 12th Avenue and Clement Street, is credited with the name: he called it Richmond House, after the Richmond near Melbourne, and in 1890 the Board of Supervisors made the Richmond District official. The road west was Point Lobos Avenue, today's Geary Boulevard, and in a dance hall beside it the district's new Catholic congregation held its first Mass, on Easter Sunday 1887.\n\nTransit filled in the dunes. In 1896 Adolph Sutro underwrote an electric trolley line the length of Clement Street, and after the 1906 earthquake and fire, refugees flooded west and building boomed, bringing newcomers from Irish, Jewish and Russian communities. In 1909 the city traded the district's lettered streets for Spanish explorers' names; on December 28, 1912, Muni's first streetcars began running out Geary; and in 1914 San Francisco's first Carnegie-funded library opened on Ninth Avenue. In 1917, to avoid confusion with the city of Richmond across the bay, the city renamed the area the Park Presidio District. The name never caught on, and a 2009 ordinance formally gave the Richmond its name back.\n\nBy the 1950s, an SFMOMA neighborhood history notes, so many Chinese Americans had bought houses along Clement Street that locals called it “New Chinatown,” and Chinese immigration to the Richmond accelerated after 1965.",
     facts: [
       {
         icon: "shop",
@@ -4005,7 +4005,7 @@ export const NEIGHBORHOODS = {
         icon: "church",
         title: "First Mass in a dance hall",
         text:
-          "In 1886, 41 Catholic families in the young Richmond felt ready to keep a church of their own, and their first Mass was celebrated on Easter Sunday 1887 upstairs in Farrell's Dance Hall, at Ninth Avenue and Point Lobos Avenue, as Geary was then called. Within a year they had built a 500-seat wooden church, and in 1894 the mission became a full parish under Father John P. Coyle, described as the first native San Franciscan ordained a Catholic priest; Star of the Sea marked 125 years as a parish in 2019.",
+          "In 1886, 41 families in the young Richmond felt ready to keep a Catholic church of their own, and their first Mass was celebrated on Easter Sunday 1887 upstairs in Farrell's Dance Hall, at Ninth Avenue and Point Lobos Avenue, as Geary was then called. Within a year they had built a 500-seat wooden church, and in 1894 the mission became a full parish under Father John P. Coyle, described as the first native San Franciscan ordained a Catholic priest; Star of the Sea marked 125 years as a parish in 2019.",
         place: "Star of the Sea Church",
         where: "4420 Geary Blvd",
         at: [-122.46669, 37.78106],
@@ -4137,7 +4137,7 @@ export const NEIGHBORHOODS = {
         icon: "coffee",
         title: "A one-block food street",
         text:
-          "The single block of 18th Street from here to Dolores is what a 2014 Star Tribune travel piece called a food block, with a bakery at this corner, an ice-cream shop at the Dolores end, and a pizzeria and a grocery in between. Long before the lines, this corner had a pastry shop known for its cakes, founded in 1950 by a husband and wife and closed by the late 1990s, when rising rents and competition from supermarket bakeries ended its run.",
+          "The single block of 18th Street from here to Dolores is what a 2014 Star Tribune travel piece called a food block, with a bakery at this corner, an ice-cream shop at the Dolores end, and a pizzeria and a grocery in between. Long before today's bakery, this corner had a pastry shop known for its cakes, founded in 1950 by a husband and wife and closed by the late 1990s, when rising rents and competition from supermarket bakeries ended its run.",
         place: "18th and Guerrero shops",
         where: "18th St & Guerrero St",
         at: [-122.42380, 37.76157],
@@ -4509,7 +4509,7 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Red Rock Hill",
     history:
-      "Diamond Heights spreads over three hills just south of Twin Peaks: Red Rock Hill, at 690 feet the tallest; Gold Mine Hill, at 680; and Fairmount Hill, at 540. As late as the 1950s about three-fourths of the land lay undeveloped, and until the 1960s fewer than 400 people lived here, by one account outnumbered by cows. The Board of Supervisors designated the hills a redevelopment survey area on July 24, 1950, and in 1954 a state appeals court, in San Francisco Redevelopment Agency v. Hayes, upheld treating vacant land as blighted, clearing the way.\n\nSupervisors approved the plan on October 24, 1955. Architect Vernon DeMars's master plan broke from the city grid with curving streets that follow the contours of the hills, and it protected the views of downtown and the bay with height limits, aiming for a “suburb within a city.” The Redevelopment Agency began auctioning parcels in early 1961 and used a competition to attract talented architects. Joseph Eichler built about 100 homes on Red Rock Hill, and Bay Area modernists including Warren Callister, Campbell & Wong and Joseph Esherick designed custom houses and small tracts.\n\nA cluster of high-rise towers with more than 600 apartments was meant to crown Red Rock Hill, but slow sales of the townhouses along Diamond Heights Boulevard, and later financial trouble, brought low-rise units instead. When the project was completed in 1978, the hills held more than 7,000 people. In her 2017 master's thesis, Modern Diamond Heights, architectural historian Hannah Simonson called it one of the highest concentrations of modernist architecture in San Francisco.",
+      "Diamond Heights spreads over three hills just south of Twin Peaks: Red Rock Hill, at 690 feet the tallest; Gold Mine Hill, at 680; and Fairmount Hill, at 540. As late as the 1950s about three-fourths of the land lay undeveloped, and until the 1960s fewer than 400 people lived here, by one account outnumbered by cows. The Board of Supervisors designated the hills a redevelopment survey area on July 24, 1950, and in 1954 a state appeals court, in San Francisco Redevelopment Agency v. Hayes, upheld treating vacant land as “blighted,” clearing the way.\n\nSupervisors approved the plan on October 24, 1955. Architect Vernon DeMars's master plan broke from the city grid with curving streets that follow the contours of the hills, and it protected the views of downtown and the bay with height limits, aiming for a “suburb within a city.” The Redevelopment Agency began auctioning parcels in early 1961 and used a competition to attract talented architects. Joseph Eichler built about 100 homes on Red Rock Hill, and Bay Area modernists including Warren Callister, Campbell & Wong and Joseph Esherick designed custom houses and small tracts.\n\nA cluster of high-rise towers with more than 600 apartments was meant to crown Red Rock Hill, but slow sales of the townhouses along Diamond Heights Boulevard, and later financial trouble, brought low-rise units instead. When the project was completed in 1978, the hills held more than 7,000 people. In her 2017 master's thesis, Modern Diamond Heights, architectural historian Hannah Simonson called it one of the highest concentrations of modernist architecture in San Francisco.",
     facts: [
       {
         icon: "art",
@@ -4798,7 +4798,7 @@ export const NEIGHBORHOODS = {
 
   "Chinatown": {
     spirit:
-      "The oldest Chinatown in North America — a dense, lantern-strung hillside of temples, dim sum parlors and dragon-topped alleys where over a century of Chinese-American life still hums.",
+      "The oldest Chinatown in North America — a dense, lantern-strung hillside of temples, dim sum parlors and dragon-topped alleys where over a century of Chinese-American culture still hums.",
     reasons: ["Oldest Chinatown in North America", "Incredibly walkable", "Transit-rich", "World-class dim sum"],
     history:
       "Chinatown’s main street is San Francisco’s first. In 1835 William A. Richardson pitched a tent near today’s Grant Avenue and Clay Street, the first home in Yerba Buena, and the lane mapped that year was named Calle de la Fundación, Foundation Street; it later became Dupont Street. On July 9, 1846, Marines from the USS Portsmouth raised the American flag over the plaza a block east, which took the ship’s name, and in 1847 the town became San Francisco. Chinese immigrants settled around Dupont Street, and their associations united as the Chinese Six Companies, which gave aid, settled disputes and fought anti-Chinese laws.\n\nHostility followed. In July 1877 a riot against Chinese residents left four dead, and the Chinese Exclusion Act of 1882, the first U.S. law to restrict immigration by ethnicity, stood until 1943. Within days of the 1906 earthquake and fire, which leveled the quarter, a city Committee on the Relocation of Chinatown adopted a plan to move it to Hunters Point. But the city stood to lose the taxes Chinese residents paid and the China trade, with Oakland, Los Angeles and Seattle offering their ports, and by May 10 the mayor had dissolved the committee.\n\nMerchants rebuilt on the same blocks. Look Tin Eli hired architect T. Paterson Ross and engineer A. W. Burgren, neither of whom had been to China, and their pagoda-topped buildings set the look of the street, which took the name Grant Avenue as the city rebuilt. The Dragon Gate followed in 1970, and on November 19, 2022, the Central Subway opened Chinatown–Rose Pak Station, named for the community leader who championed it but died before it opened.",
@@ -5022,11 +5022,11 @@ export const NEIGHBORHOODS = {
 
   "Tenderloin": {
     spirit:
-      "San Francisco's gritty, big-hearted downtown core — a dense grid of historic SRO hotels, Vietnamese kitchens and speakeasy cocktail dens, raw and real in equal measure.",
+      "San Francisco's big-hearted downtown core — a dense grid of historic SRO hotels, Vietnamese kitchens and speakeasy cocktail dens.",
     reasons: ["Best cheap eats in SF", "Historic speakeasy bars", "Steps from BART & Muni", "Little Saigon"],
     aka: "The TL",
     history:
-      "Long before anyone put “the Tenderloin” on a map, two institutions anchored these blocks. In 1892 the Hibernia Savings and Loan Society opened Albert Pissis's Beaux-Arts bank at Jones and McAllister, and in 1900 St. Boniface, a German Catholic parish dating to 1860, laid the cornerstones of its church on Golden Gate Avenue. People called the district “the Tenderloin” by the 1890s, though maps labeled it “Downtown” until the 1930s; the name is usually traced to New York's Tenderloin, where, the story goes, a police captain's bribes bought him better cuts of meat.\n\nThe 1906 earthquake and the backfires set to contain the fire destroyed almost every building here, but rebuilding came fast, with some hotels open by 1907. The Cadillac Hotel's marker calls it the first structure built in the Uptown Tenderloin afterward, and block after block of hotels and apartment houses followed, many of them single-room-occupancy hotels for single workers. In 2009, 408 of those buildings were listed on the National Register as the Uptown Tenderloin Historic District. By the 1920s the streets were known for speakeasies, gambling, restaurants and theaters, and from 1949 to 1963 the Black Hawk at Turk and Hyde hosted Miles Davis, John Coltrane and Billie Holiday.\n\nGlide Memorial Church, where the Rev. Cecil Williams joined the leadership in 1964, became headquarters of the Council on Religion and the Homosexual and sponsored the early gay liberation group Vanguard. In August 1966, three years before Stonewall, patrons of Compton's Cafeteria at Turk and Taylor fought back against police harassment. After the fall of Saigon in 1975, Vietnamese refugees settled here, and in 2004 the city named two blocks of Larkin Street Little Saigon.",
+      "Long before anyone put “the Tenderloin” on a map, two institutions anchored these blocks. In 1892 the Hibernia Savings and Loan Society opened Albert Pissis's Beaux-Arts bank at Jones and McAllister, and in 1900 St. Boniface, a German Catholic parish dating to 1860, laid the cornerstones of its church on Golden Gate Avenue. People called the district “the Tenderloin” by the 1890s, though maps labeled it “Downtown” until the 1930s; the name is usually traced to New York's Tenderloin, where, the story goes, a police captain's bribes bought him better cuts of meat.\n\nThe 1906 earthquake and the backfires set to contain the fire destroyed almost every building here, but rebuilding came fast, with some hotels open by 1907. The Cadillac Hotel's marker calls it the first structure built in the Uptown Tenderloin afterward, and block after block of hotels and apartment houses followed, many of them single-room-occupancy hotels for workers. In 2009, 408 of those buildings were listed on the National Register as the Uptown Tenderloin Historic District. By the 1920s the streets were known for speakeasies, gambling, restaurants and theaters, and from 1949 to 1963 the Black Hawk at Turk and Hyde hosted Miles Davis, John Coltrane and Billie Holiday.\n\nGlide Memorial Church, where the Rev. Cecil Williams joined the leadership in 1964, became headquarters of the Council on Religion and the Homosexual and sponsored the early gay liberation group Vanguard. In August 1966, three years before Stonewall, patrons of Compton's Cafeteria at Turk and Taylor fought back against police harassment. After the fall of Saigon in 1975, Vietnamese refugees settled here, and in 2004 the city named two blocks of Larkin Street Little Saigon.",
     facts: [
       {
         icon: "church",
@@ -5206,7 +5206,7 @@ export const NEIGHBORHOODS = {
         icon: "shop",
         title: "Dinner before the curtain",
         text:
-          "This block of Hayes Street, between Franklin and Gough, is the east end of Hayes Valley's shopping street, its storefronts holding restaurants, cafés and shops a short walk from the opera house and symphony hall. A Chronicle dining guide recalled that decades earlier, Hayes Valley's restaurants depended heavily on feeding diners before or after the opera, symphony and ballet. The city's Legacy Business Registry credits one restaurant, opened in 1979 while Davies Symphony Hall was going up, with pioneering Hayes Valley's revival as a commercial corridor.",
+          "This block of Hayes Street, between Franklin and Gough, is the east end of Hayes Valley's shopping street, its storefronts holding restaurants, cafés and shops a short walk from the opera house and symphony hall. A Chronicle dining guide recalled that decades earlier, Hayes Valley's restaurants depended heavily on feeding diners before or after the opera, symphony and ballet. The city's Legacy Business Registry credits one restaurant, opened in 1979 while Davies Symphony Hall was going up, with leading the way in Hayes Valley's growth as a commercial corridor.",
         place: "Hayes Street restaurants",
         where: "350 Hayes St",
         at: [-122.42246, 37.77712],
@@ -5239,10 +5239,10 @@ export const NEIGHBORHOODS = {
 
   "Fishermans Wharf": {
     spirit:
-      "A working crab fleet turned world-famous waterfront — barking sea lions at PIER 39, steaming Dungeness pots, and the cable car clanging to a stop at the bay's edge.",
+      "A working crab fleet on a world-famous waterfront — barking sea lions at PIER 39, steaming Dungeness pots, and the cable car clanging to a stop at the bay's edge.",
     reasons: ["Iconic SF waterfront", "Sea lions at PIER 39", "Dungeness crab heritage", "Cable cars & streetcars"],
     history:
-      "Long before the fishing boats moved here, Henry Meiggs's ruinous lumber wharf of the early 1850s ran out from the foot of Powell Street. From the Gold Rush to the turn of the century, the city's fishermen sailed lateen-rigged feluccas, built like the boats Italian fishermen had known at home. In 1900 the state set aside the waterfront between the foot of Taylor and Leavenworth streets for commercial fishing boats, and Sicilian families began arriving in large numbers. Fishermen sold part of their catch to housewives straight from their boats, and some set up stalls on the piers.\n\nIn 1907–09 the California Fruit Canners Association, later renamed Del Monte, built a cannery complex here that the Wharf's own history calls the world's largest fruit and vegetable cannery. From 1922 automobile ferries ran from the Hyde Street Pier to Sausalito, and from 1927 to Berkeley, until the new bridges emptied them; the last one left in 1938.\n\nAs the canneries and ferries faded, visitors took their place. In 1963 developer Leonard Martin bought the old Del Monte cannery to save it from demolition and turned it into shops and restaurants, and in 1988 the canners' brick warehouse became part of the new San Francisco Maritime National Historical Park. Months after the 1989 Loma Prieta earthquake, sea lions took over a Pier 39 dock, and they have stayed. The fleet still works: when a four-alarm fire destroyed Pier 45's Shed C on May 23, 2020, more than 30 crabbers lost some 8,000 traps, by the Port's count, and each October the Blessing of the Fleet is held at the fishermen's memorial chapel.",
+      "Long before the fishing boats moved here, Henry Meiggs's ruinous lumber wharf of the early 1850s ran out from the foot of Powell Street. From the Gold Rush to the turn of the century, the city's fishermen sailed lateen-rigged feluccas, built like the boats Italian fishermen had known at home. In 1900 the state set aside the waterfront between the foot of Taylor and Leavenworth streets for commercial fishing boats, and immigrants from Sicily began arriving in large numbers. Fishermen sold part of their catch straight from their boats, and some set up stalls on the piers.\n\nIn 1907–09 the California Fruit Canners Association, later renamed Del Monte, built a cannery complex here that the Wharf's own history calls the world's largest fruit and vegetable cannery. From 1922 automobile ferries ran from the Hyde Street Pier to Sausalito, and from 1927 to Berkeley, until the new bridges emptied them; the last one left in 1938.\n\nAs the canneries and ferries faded, visitors took their place. In 1963 developer Leonard Martin bought the old Del Monte cannery to save it from demolition and turned it into shops and restaurants, and in 1988 the canners' brick warehouse became part of the new San Francisco Maritime National Historical Park. Months after the 1989 Loma Prieta earthquake, sea lions took over a Pier 39 dock, and they have stayed. The fleet still works: when a four-alarm fire destroyed Pier 45's Shed C on May 23, 2020, more than 30 crabbers lost some 8,000 traps, by the Port's count, and each October the Blessing of the Fleet is held at the fishermen's memorial chapel.",
     facts: [
       {
         icon: "water",
@@ -5339,7 +5339,7 @@ export const NEIGHBORHOODS = {
 
   "Inner Sunset": {
     spirit:
-      "A foggy, leafy district pressed between Golden Gate Park and UCSF, where the buzzing 9th Avenue and Irving Street strip anchors one of the city's best global-food corners.",
+      "A foggy, leafy district pressed between Golden Gate Park and UCSF, where the 9th Avenue and Irving Street strip anchors one of the city's best global-food corners.",
     reasons: ["Steps from Golden Gate Park", "Strong restaurant row on 9th & Irving", "N-Judah straight downtown", "Next to UCSF Parnassus"],
     history:
       "For most of the 19th century the land south of Golden Gate Park was sand dunes, part of what San Franciscans called the “Outside Lands.” In 1887 Aurelius E. Buckingham, a former city assessor and real estate developer, laid out a residential tract around today's 5th Avenue and Lincoln Way and called it the “Sunset district”; its first buyers lived alone among the dunes. Hoodline relays another origin story, in which a neighborhood group protesting the lack of streetcar service downtown picked the name in 1895, right after a spectacular sunset. The 1894 Midwinter Exposition in the park drew crowds west of the Haight for the first time, but in the early 1900s the district filled in slowly, often in islands of two or three houses reached by plank sidewalks.\n\nA citywide renaming in 1909 turned H Street into Lincoln Way; the streets south of it run in alphabetical order: Irving, Judah, Kirkham, Lawton. A block by the park that United Railroads meant for a carhouse as early as 1907 became a streetcar storage yard instead. The Sunset Branch Library opened in 1918, and on October 21, 1928, Mayor James “Sunny Jim” Rolph led a parade of streetcars through the new Sunset Tunnel to open the N-Judah, which still runs out Judah Street to Ocean Beach.\n\nThe biggest building wave came in the 1930s. Henry Doelger, the merchant builder who covered the Sunset's dunes with thousands of single-family houses, ran his operation from a 1932 Art Deco headquarters on Judah Street, and a few blocks west the domed church of St. Anne of the Sunset rose in the early 1930s.",
@@ -5438,7 +5438,7 @@ export const NEIGHBORHOODS = {
     facts: [
       {
         icon: "shop",
-        title: "Restaurants that draw the whole city",
+        title: "A neighborhood commercial district",
         text:
           "Noriega Street is one of the Outer Sunset's shopping streets, and in 2012 the city made the commercial frontage on both sides of it, eight blocks from 19th to 27th Avenue and three more from 30th through 33rd Avenue, the Noriega Street Neighborhood Commercial District. The planning code describes the street as a source of convenience goods and services for Outer Sunset residents, with a high concentration of restaurants that draw customers from throughout the city and the region.",
         place: "Noriega Street shops",
@@ -5627,17 +5627,17 @@ export const NEIGHBORHOODS = {
   },
 
   "Dogpatch": {
-    spirit: "A sun-warmed slice of the central waterfront where 19th-century shipyards and workers' cottages have been reborn as breweries, art galleries and some of the city's most beloved restaurants.",
+    spirit: "A sun-warmed slice of the central waterfront where 19th-century shipyards and workers' cottages stand alongside breweries, art galleries and some of the city's most beloved restaurants.",
     reasons: ["Historic maker district", "Galleries & breweries", "Sunny waterfront pocket", "T-Third light rail"],
     aka: "Central Waterfront",
     history:
-      "In the last quarter of the 19th century this flat below Potrero Hill was known as Dutchman's Flat, and its historic district dates its story from 1867, when the Long Bridge opened and building began. The shipyards, rope factories, canneries and other industries around Potrero Point needed cheap labor, and developers answered with rows of inexpensive cottages, some built to free plans that architect John Cotter Pelton Jr. published in a daily newspaper in the early 1880s. In 1900 a quarter of the neighborhood's heads of household worked at the shipyard.\n\nNext door, Irish Hill, settled by Irish immigrants in the 1860s, held about 60 small houses and 40 boarding houses and hotels, and many residents were single men who worked at the Union Iron Works or the Pacific Rolling Mills. Quarrying for fill in the 1880s, then dynamiting from 1897 to make room for the Union Iron Works and later Bethlehem Steel, cut the hill to a mound under 50 feet high by 1918. Dogpatch itself was not devastated by the 1906 earthquake and fire.\n\nBy the late 1960s the planning department was considering demolishing the neighborhood and rezoning it for industry, and Central Waterfront jobs fell from 16,304 in 1965 to 11,004 in 1980, mostly in manufacturing and ship repair. Nobody knows for sure where the name Dogpatch came from: theories point to the Li'l Abner comic strip, a native plant called dogfennel, and stray dogs scavenging scraps from slaughterhouses. On April 18, 2003, Mayor Willie Brown signed the ordinance making about nine blocks here the city's 11th landmark district, which its survey called the oldest and most intact concentration of industrial workers' housing in the city.",
+      "In the last quarter of the 19th century this flat below Potrero Hill was known as Dutchman's Flat, and its historic district dates its story from 1867, when the Long Bridge opened and building began. The shipyards, rope factories, canneries and other industries around Potrero Point needed workers, and developers answered with rows of inexpensive cottages, some built to free plans that architect John Cotter Pelton Jr. published in a daily newspaper in the early 1880s. In 1900 a quarter of the neighborhood's heads of household worked at the shipyard.\n\nNext door, Irish Hill, settled by Irish immigrants in the 1860s, held about 60 small houses and 40 boarding houses and hotels, and many residents worked at the Union Iron Works or the Pacific Rolling Mills. Quarrying for fill in the 1880s, then dynamiting from 1897 to make room for the Union Iron Works and later Bethlehem Steel, cut the hill to a mound under 50 feet high by 1918. Dogpatch itself was not devastated by the 1906 earthquake and fire.\n\nBy the late 1960s the planning department was considering demolishing the neighborhood and rezoning it for industry, and Central Waterfront jobs fell from 16,304 in 1965 to 11,004 in 1980, mostly in manufacturing and ship repair. Nobody knows for sure where the name Dogpatch came from: theories point to the Li'l Abner comic strip, a native plant called dogfennel, and stray dogs scavenging scraps from slaughterhouses. On April 18, 2003, Mayor Willie Brown signed the ordinance making about nine blocks here the city's 11th landmark district, which its survey called the oldest and most intact concentration of industrial workers' housing in the city.",
     facts: [
       {
         icon: "star",
-        title: "Built to quell the rowdy",
+        title: "Built to keep the peace",
         text:
-          "City Architect John Reid Jr. designed the Potrero Police Station, finished in 1912 on the southwest corner of 20th and what was then Kentucky Street, on a site that had been an ungraded outcrop of serpentine; it served as the neighborhood's police station until the 1990s. The neighborhood association says it and the Potrero Emergency Hospital beside it, which Reid designed in 1915, were built to quell the rowdy and save the injured among the laborers of Potrero Point, then one of the West Coast's largest concentrations of industry.",
+          "City Architect John Reid Jr. designed the Potrero Police Station, finished in 1912 on the southwest corner of 20th and what was then Kentucky Street, on a site that had been an ungraded outcrop of serpentine; it served as the neighborhood's police station until the 1990s. The neighborhood association says it and the Potrero Emergency Hospital beside it, which Reid designed in 1915, were built to keep the peace and save the injured among the laborers of Potrero Point, then one of the West Coast's largest concentrations of industry.",
         place: "Old Potrero Police Station",
         where: "2300 3rd St",
         at: [-122.38880, 37.76040],
@@ -5949,7 +5949,7 @@ export const NEIGHBORHOODS = {
     reasons: ["High-rise living", "At the Bay Bridge", "Salesforce Transit Center nearby", "Walk to FiDi & SoMa"],
     aka: "The East Cut",
     history:
-      "Rincón is Spanish for “corner.” Rincon Point, which ran roughly along today's Spear Street between Harrison and Folsom, marked the southern corner of Yerba Buena Cove, and the hill rising behind it took its name; landfill has since buried the point. After the Gold Rush the hill was built up as a fashionable residential neighborhood, and in the 1860s, as the state's landmark plaque recalls, it was home to William Tecumseh Sherman, William C. Ralston, William Gwin and H. H. Bancroft.\n\nIn 1869 the Second Street Cut sliced a canyon through the hill, split the neighborhood in two and marked the beginning of the end of its fashionable era. By the 1880s, the plaque says, the partly leveled hill was a working-class district. A report after the 1906 fire recommended removing the hill entirely; the idea, revived in 1913 and 1927, discouraged builders, and the area was slowly built up instead as an industrial and maritime district.\n\nOn July 5, 1934, the “Bloody Thursday” of the waterfront strike, strikers gathered on the hill, near the Bay Bridge's rising western anchorage, and charged down toward police and strikebreakers in what became known as the Battle of Rincon Hill. In 1935 the city lowered the summit by 10 feet and cleared several blocks, tenements, shacks and an elementary school among them, for the bridge's western approach. The city's 2005 Rincon Hill Plan rezoned the area for slender residential towers of 250 to 550 feet, the tallest at the top of the hill, and the local community benefit district, renamed in 2017, now calls the neighborhood The East Cut, after the Second Street Cut.",
+      "Rincón is Spanish for “corner.” Rincon Point, which ran roughly along today's Spear Street between Harrison and Folsom, marked the southern corner of Yerba Buena Cove, and the hill rising behind it took its name; landfill has since buried the point. After the Gold Rush the hill was built up as a residential neighborhood, and in the 1860s, as the state's landmark plaque recalls, it was home to William Tecumseh Sherman, William C. Ralston, William Gwin and H. H. Bancroft.\n\nIn 1869 the Second Street Cut sliced a canyon through the hill, split the neighborhood in two and marked the beginning of the end of that era. By the 1880s, the plaque says, the partly leveled hill was a district of workers' homes. A report after the 1906 fire recommended removing the hill entirely; the idea, revived in 1913 and 1927, discouraged builders, and the area was slowly built up instead as an industrial and maritime district.\n\nOn July 5, 1934, the “Bloody Thursday” of the waterfront strike, strikers gathered on the hill, near the Bay Bridge's rising western anchorage, and charged down toward police and strikebreakers in what became known as the Battle of Rincon Hill. In 1935 the city lowered the summit by 10 feet and cleared several blocks, tenements, shacks and an elementary school among them, for the bridge's western approach. The city's 2005 Rincon Hill Plan rezoned the area for slender residential towers of 250 to 550 feet, the tallest at the top of the hill, and the local community benefit district, renamed in 2017, now calls the neighborhood The East Cut, after the Second Street Cut.",
     facts: [
       {
         icon: "coffee",
@@ -5975,7 +5975,7 @@ export const NEIGHBORHOODS = {
         icon: "bridge",
         title: "The hill's story on one plaque",
         text:
-          "California Historical Landmark No. 84 sums up the hill in three eras: a fashionable neighborhood in the 1860s, a working-class district by the 1880s, and today “nearly invisible beneath the Bay Bridge.” The plaque was first mounted in 1981 on the retaining wall of St. Mary's Hospital, built on the hill in 1861 and destroyed in the 1906 fire. When that wall was removed, a replacement plaque was installed here in October 2011, about 900 feet northeast of the original spot.",
+          "California Historical Landmark No. 84 sums up the hill in three eras: a residential neighborhood in the 1860s, a district of workers' homes by the 1880s, and today “nearly invisible beneath the Bay Bridge.” The plaque was first mounted in 1981 on the retaining wall of St. Mary's Hospital, built on the hill in 1861 and destroyed in the 1906 fire. When that wall was removed, a replacement plaque was installed here in October 2011, about 900 feet northeast of the original spot.",
         place: "Rincon Hill plaque",
         where: "Beale St & Bryant St",
         at: [-122.39010, 37.78632],
@@ -6025,7 +6025,7 @@ export const NEIGHBORHOODS = {
         icon: "road",
         title: "The cut that split the hill",
         text:
-          "Second Street climbed straight over the hill, so wagons took the flatter but slower, costlier Third Street, bypassing the Second Street property of Assemblyman John Middleton, who pushed a state bill to cut the grade. The plan lowered Second Street for the three blocks between Howard and Bryant, deepest here, 87 feet at Harrison Street, where a bridge carried Harrison across the new canyon. The 1869 cut split the neighborhood in half and drove its wealthier residents away.",
+          "Second Street climbed straight over the hill, so wagons took the flatter but slower, costlier Third Street, bypassing the Second Street property of Assemblyman John Middleton, who pushed a state bill to cut the grade. The plan lowered Second Street for the three blocks between Howard and Bryant, deepest here, 87 feet at Harrison Street, where a bridge carried Harrison across the new canyon. The 1869 cut split the neighborhood in half and drove many of its residents away.",
         place: "Second Street Cut",
         where: "2nd St & Harrison St",
         at: [-122.39506, 37.78438],
@@ -6054,7 +6054,7 @@ export const NEIGHBORHOODS = {
   },
 
   "Corona Heights": {
-    spirit: "A quiet residential hill between the Castro and the Haight, crowned by the rocky, chert-red Corona Heights Park with some of the city's best skyline views and home to the family-favorite Randall Museum.",
+    spirit: "A quiet residential hill between the Castro and the Haight, crowned by the rocky, chert-red Corona Heights Park with some of the city's best skyline views and home to the Randall Museum.",
     reasons: ["Knockout city views", "Quiet & residential", "Corona Heights Park", "Walk to the Castro"],
     aka: "Museum Hill",
     history:
@@ -6144,7 +6144,7 @@ export const NEIGHBORHOODS = {
   },
 
   "Bayview": {
-    spirit: "San Francisco's sun-warmed southeast corner — a hilly, historically African-American neighborhood where the Third Street corridor still beats with deep community roots.",
+    spirit: "San Francisco's sun-warmed southeast corner — a hilly neighborhood with a long African American history, where the Third Street corridor still beats with deep community roots.",
     reasons: ["Among the city's sunniest", "Rich cultural history", "T-Third light rail", "More space for the money"],
     aka: "Bayview–Hunters Point",
     history:
@@ -6255,8 +6255,8 @@ export const NEIGHBORHOODS = {
   },
 
   "Hunters Point": {
-    spirit: "A sun-warmed hill jutting into the bay on the city's southeastern edge — a proud, historically Black community where a former naval shipyard now holds one of the largest artist colonies in the country.",
-    reasons: ["Sunniest corner of SF", "Sweeping bay views", "Shipyard artist studios", "Major waterfront redevelopment"],
+    spirit: "A sun-warmed hill jutting into the bay on the city's southeastern edge — a proud community with a long African American history, where a former naval shipyard now holds one of the largest artist colonies in the country.",
+    reasons: ["Sunniest corner of SF", "Sweeping bay views", "Shipyard artist studios", "Hilltop parks & public art"],
     aka: "The Point",
     history:
       "The point was part of the 4,446-acre rancho granted to José Cornelio Bernal in 1839, and LocalWiki says it is named for three brothers, John, Phillip and Robert Hunter, his agents when he sold the land for development in 1849; they built homes and a dairy near today's Griffith Street and Oakdale Avenue and in 1850 began selling lots for a city they called South San Francisco. Dry docks opened here in the late 1860s, and Chinese shrimp fishermen lived along the north shore, with 12 camps in 1930, until the Navy took the land in 1939.\n\nThe Navy bought the shipyard on December 29, 1939, and at the height of World War II it provided about 18,500 jobs. In 1942 the government built 5,500 temporary homes for yard workers and their families, and by 1945 about a third of the area's roughly 20,000 residents were African American. On July 16, 1945, the cruiser USS Indianapolis sailed from the yard with components of the Little Boy atomic bomb. From 1946 to 1969 the Naval Radiological Defense Laboratory worked here, and ships contaminated in U.S. atomic tests were brought in.\n\nOn September 27, 1966, police officer Alvin Johnson shot and killed Matthew “Peanut” Johnson, an unarmed Black teenager who had run from a car the officer suspected was stolen. In the uprising that followed, through October 1, Governor Edmund G. Brown declared a state of emergency and sent in the National Guard. The Navy ended shipyard operations in 1974, the EPA named the yard a Superfund site in 1989, and the base closed on April 1, 1994; a Hilltop neighborhood of homes and parks has since opened there.",
@@ -6334,8 +6334,8 @@ export const NEIGHBORHOODS = {
   },
 
   "Excelsior": {
-    spirit: "A sunny, working-class hilltop on the city's southern edge — single-family homes lining streets named for European nations, with Mission Street's commercial spine packed with family-run immigrant kitchens.",
-    reasons: ["One of SF's most diverse districts", "Family-run eats on Mission St", "Single-family homes", "Balboa Park BART nearby"],
+    spirit: "A sunny hilltop on the city's southern edge — single-family homes lining streets named for European nations, with Mission Street's commercial spine packed with family-run kitchens.",
+    reasons: ["Avenues named for countries", "Family-run eats on Mission St", "Single-family homes", "Balboa Park BART nearby"],
     history:
       "The Excelsior was once part of Rancho Rincón de las Salinas y Potrero Viejo, José Cornelio Bernal's 1839 Mexican land grant. In the 1860s the valley's groundwater and access to Islais Creek drew immigrant farmers and dairymen, among them Ligurians, Tuscans, Swiss, Germans and Irish, who carted their produce downtown by wagon. On April 15, 1869, the Excelsior Homestead was filed at City Hall, and developer Emanuel Lewis and his daughter Jeannette are credited with giving it a street map like an atlas, naming avenues for countries and streets for capital cities. Three avenues first named China, Japan and India were later renamed amid anti-Asian feeling; today they are Excelsior, Avalon and Peru.\n\nTransit filled in the grid. On September 15, 1894, the first electric streetcars ran on Mission Street, and within a few years the line reached Daly's Hill, just over the county line. Farming lingered: one account counts some 1,200 Italian truck farmers still working about 8,000 acres of the city's south side in 1910. After the 1906 earthquake the Excelsior became a refuge for many displaced San Franciscans, and an early-1900s housing boom produced many of the Edwardian and Victorian houses still standing. In 1911 the city bought land here for a playground, and the new Epiphany parish dedicated its first wooden church.\n\nMission Street remains the main street, made a neighborhood commercial district in 2013. Jerry Garcia spent his first five years at 121 Amazon Avenue, and Mission Street plaques honor his childhood homes. In 2014 the Excelsior Action Group and the city opened a temporary plaza at the Persia Triangle, and in 2016 artists, students and volunteers made Kenny Alley a mosaic stairway garden.",
     facts: [
@@ -6458,11 +6458,11 @@ export const NEIGHBORHOODS = {
   },
 
   "Visitacion Valley": {
-    spirit: "A quiet, working-class corner of San Francisco's far southeast, where a multicultural community gathers along the little Leland Avenue main street between the Cow Palace and the green slopes of McLaren Park.",
-    reasons: ["Leland Avenue main street", "Steps from McLaren Park", "Deeply multicultural", "T-Third light rail at the door"],
+    spirit: "A quiet corner of San Francisco's far southeast, where neighbors gather along the little Leland Avenue main street between the Cow Palace and the green slopes of McLaren Park.",
+    reasons: ["Leland Avenue main street", "Steps from McLaren Park", "Six-park hillside greenway", "T-Third light rail at the door"],
     aka: "Viz Valley",
     history:
-      "When the Spanish arrived, this valley held two Yelamu settlements, Amuctac and Tubsinte, and the newcomers claimed it as pasture for their cattle. A local history gives July 2, 1777, as the date of its discovery, and tradition says friars and soldiers bound for the new Presidio were caught in fog and camped in its hills; the valley is named for the Feast of the Visitation, Mary's visit to Elizabeth in the Gospel of Luke. In 1841 Governor Juan Alvarado granted Jacob P. Leese the 6,416-acre Rancho Cañada de Guadalupe la Visitación y Rodeo Viejo, which took in parts of today's San Francisco and San Mateo counties.\n\nWindmills that pumped water to the valley's cattle farms, nurseries and vegetable gardens gave it a nickname: the Valley of the Windmills. One family history tells of Rossi relatives who came just after the Civil War and worked their farmland by hand into large vegetable gardens, and the Catholic parish's history says Peter H. Burnett, California's first American governor, built a home where the Church of the Visitacion now stands. The valley had a building boom after the 1906 earthquake and fire.\n\nIn 1926 the Schlage Lock Company dedicated its factory and office on Bayshore Boulevard; the plant ran until Schlage closed it in 1999. Joseph Eichler and architect Claude Oakland planned the 18-story twin Geneva Towers, which rose in the mid-1960s near Garrison Avenue and Schwerin Street; HUD closed them in 1995, and they were imploded on May 16, 1998. In 1995 neighbors began turning empty lots into the Visitacion Valley Greenway, and in 2022 Julia Morgan's St. James Presbyterian Church on Leland Avenue became the valley's first city landmark.",
+      "When the Spanish arrived, this valley held two Yelamu settlements, Amuctac and Tubsinte, and the newcomers claimed it as pasture for their cattle. A local history gives July 2, 1777, as the date the Spanish first came upon it, and tradition says friars and soldiers bound for the new Presidio were caught in fog and camped in its hills; the valley is named for the Feast of the Visitation, Mary's visit to Elizabeth in the Gospel of Luke. In 1841 Governor Juan Alvarado granted Jacob P. Leese the 6,416-acre Rancho Cañada de Guadalupe la Visitación y Rodeo Viejo, which took in parts of today's San Francisco and San Mateo counties.\n\nWindmills that pumped water to the valley's cattle farms, nurseries and vegetable gardens gave it a nickname: the Valley of the Windmills. One family history tells of Rossi relatives who came just after the Civil War and worked their farmland by hand into large vegetable gardens, and the Catholic parish's history says Peter H. Burnett, California's first American governor, built a home where the Church of the Visitacion now stands. The valley had a building boom after the 1906 earthquake and fire.\n\nIn 1926 the Schlage Lock Company dedicated its factory and office on Bayshore Boulevard; the plant ran until Schlage closed it in 1999. Joseph Eichler and architect Claude Oakland planned the 18-story twin Geneva Towers, which rose in the mid-1960s near Garrison Avenue and Schwerin Street; HUD closed them in 1995, and they were imploded on May 16, 1998. In 1995 neighbors began turning empty lots into the Visitacion Valley Greenway, and in 2022 Julia Morgan's St. James Presbyterian Church on Leland Avenue became the valley's first city landmark.",
     facts: [
       {
         icon: "factory",
@@ -6547,7 +6547,7 @@ export const NEIGHBORHOODS = {
     spirit: "A small, sunny, low-key residential village on the south slope below Mount Davidson, where rows of early-1900s cottages line quiet streets above an unhurried Monterey Boulevard.",
     reasons: ["Quiet residential streets", "Among the city's more affordable single-family homes", "Glen Park BART close by", "Hidden Victorian conservatory"],
     history:
-      "Sunnyside was carved from Rancho San Miguel: on January 5, 1891, Leland Stanford deeded the southernmost 200 acres of his part of the rancho to James P. McCarthy. That year the Sunnyside Land Company, with Behrend Joost as president, laid out 2,250 lots on 48 blocks, which local historians call the city's largest subdivision to that date, and named streets for wealthy associates: Flood, Spreckels, Mangels and Joost himself. Joost's real goal was transit. Powered from a plant on Sunnyside Avenue, today's Monterey Boulevard, his San Francisco & San Mateo Electric Railway, which those historians call the city's first electric railway, began running on April 27, 1892, from downtown through Sunnyside to the Baden stockyards in San Mateo County.\n\nLots sold slowly for decades. Poor management cost Joost the line to his creditors, and the slopes proved fragile: in January 1895, after heavy rain and a big street-grading job, several houses on the hillside above the avenue between Acadia and Detroit streets slid downhill. The Market Street Railway, which bought the line, later extended its No. 10 car into Sunnyside; photos show 10 cars on Monterey as late as 1942, before buses took over. Sunnyside Avenue itself became Monterey Boulevard in 1920.\n\nThe 1891 plan set aside no park; the city bought steep, empty lots for Sunnyside Playground only in the 1960s. At the neighborhood's southern edge, on land that had held the city's Industrial School and, until 1935, the sheriff's House of Correction Number Three, Mayor Angelo Rossi broke ground for San Francisco Junior College, today's City College, on April 15, 1937, and Timothy Pflueger's Science Hall was finished there in 1940.",
+      "Sunnyside was carved from Rancho San Miguel: on January 5, 1891, Leland Stanford deeded the southernmost 200 acres of his part of the rancho to James P. McCarthy. That year the Sunnyside Land Company, with Behrend Joost as president, laid out 2,250 lots on 48 blocks, which local historians call the city's largest subdivision to that date, and named streets for associates of the venture: Flood, Spreckels, Mangels and Joost himself. Joost's real goal was transit. Powered from a plant on Sunnyside Avenue, today's Monterey Boulevard, his San Francisco & San Mateo Electric Railway, which those historians call the city's first electric railway, began running on April 27, 1892, from downtown through Sunnyside to the Baden stockyards in San Mateo County.\n\nLots sold slowly for decades. Poor management cost Joost the line to his creditors, and the slopes proved fragile: in January 1895, after heavy rain and a big street-grading job, several houses on the hillside above the avenue between Acadia and Detroit streets slid downhill. The Market Street Railway, which bought the line, later extended its No. 10 car into Sunnyside; photos show 10 cars on Monterey as late as 1942, before buses took over. Sunnyside Avenue itself became Monterey Boulevard in 1920.\n\nThe 1891 plan set aside no park; the city bought steep, empty lots for Sunnyside Playground only in the 1960s. At the neighborhood's southern edge, on land that had held the city's Industrial School and, until 1935, the sheriff's House of Correction Number Three, Mayor Angelo Rossi broke ground for San Francisco Junior College, today's City College, on April 15, 1937, and Timothy Pflueger's Science Hall was finished there in 1940.",
     facts: [
       {
         icon: "factory",
@@ -6601,9 +6601,9 @@ export const NEIGHBORHOODS = {
       },
       {
         icon: "road",
-        title: "Streets named for the rich",
+        title: "Streets named for the venture's associates",
         text:
-          "Sunnyside's streets were named for wealthy associates of the venture, including Flood, Spreckels and Mangels, with Joost Avenue for the company's president. Not every name lasted: Moulton Avenue became Hearst Avenue, for George Hearst, in 1895; Spreckels Avenue, the next street south of here, became Staples, for another rich family; and Weiland Avenue became Judson.",
+          "Sunnyside's streets were named for associates of the venture, including Flood, Spreckels and Mangels, with Joost Avenue for the company's president. Not every name lasted: Moulton Avenue became Hearst Avenue, for George Hearst, in 1895; Spreckels Avenue, the next street south of here, became Staples, for another family; and Weiland Avenue became Judson.",
         place: "Flood Avenue",
         where: "Gennessee St & Flood Ave",
         at: [-122.45120, 37.72995],
@@ -6734,7 +6734,7 @@ export const NEIGHBORHOODS = {
   },
 
   "Miraloma Park": {
-    spirit: "A quiet, leafy hillside enclave on the southern slopes of Mount Davidson, where curving streets, mid-century homes, woodsy calm, and sweeping views meet one of the city's most active neighborhood associations.",
+    spirit: "A quiet, leafy hillside neighborhood on the southern slopes of Mount Davidson, where curving streets, mid-century homes, woodsy calm, and sweeping views meet one of the city's most active neighborhood associations.",
     reasons: ["Woodsy hillside calm", "Big ridge-top views", "Strong neighborhood club", "Steps from Mount Davidson"],
     history: "Miraloma Park was laid out from 1926 through the 1950s, developed largely by the Meyer Brothers, who assembled land from the Sutro estate, Wells Fargo & Company, and other owners. They marketed it as a 'City in Itself,' a suburban home center of mostly one-story-over-garage houses on curving streets that follow the hill's contours in the City Beautiful tradition. Roughly 2,400 single-family homes were built, many on the lower slopes of Mount Davidson, whose summit had been preserved as a public park in 1929. Residents organized the Miraloma Park Improvement Club, whose first meeting was held in 1930 and which incorporated in 1936. The developer built and donated a clubhouse on Del Vale Avenue, dedicated November 10, 1940, and the club remains vigorous today.",
     facts: [
@@ -6878,7 +6878,7 @@ export const NEIGHBORHOODS = {
   "Westwood Park": {
     spirit: "A serene 1916 residence park of craftsman bungalows curling along oval streets just south of City College.",
     reasons: ["Historic 1916 residence-park planning", "Distinctive curving oval streets", "Quiet single-family bungalow blocks", "Transit-rich edge on Ocean Avenue"],
-    history: "Westwood Park was developed in 1916 by the prominent San Francisco real estate firm Baldwin & Howell on roughly ninety acres of former Sutro land near the old Ingleside Racetrack area, marketed as a 'residence park' for families of average means. The firm laid out a signature plan of curving, concentric oval streets, bisected by Miramar Avenue, with nearly every street avoiding a straight line. More than 650 craftsman- and Mediterranean-style bungalows were built, the majority in the 1920s, many designed by architects Charles F. Strothoff and Ida F. McCain. Residents formed the Westwood Park Association on March 22, 1917, and the neighborhood remains governed by single-family deed restrictions. Architect Louis Christian Mullgardt designed the brick entrance gateways and pillars, now City Landmark No. 314.",
+    history: "Westwood Park was developed in 1916 by the prominent San Francisco real estate firm Baldwin & Howell on roughly ninety acres of former Sutro land near the old Ingleside Racetrack area, marketed as a 'residence park' of moderately priced homes. The firm laid out a signature plan of curving, concentric oval streets, bisected by Miramar Avenue, with nearly every street avoiding a straight line. More than 650 craftsman- and Mediterranean-style bungalows were built, the majority in the 1920s, many designed by architects Charles F. Strothoff and Ida F. McCain. Residents formed the Westwood Park Association on March 22, 1917, and the neighborhood remains governed by single-family deed restrictions. Architect Louis Christian Mullgardt designed the brick entrance gateways and pillars, now City Landmark No. 314.",
     facts: [
       { icon: "house", title: "650+ bungalows", text: "More than 650 craftsman and Mediterranean bungalows, most built in the 1920s." },
       { icon: "road", title: "Oval street plan", text: "Curving, concentric oval streets bisected by Miramar Avenue, with almost no straight street." },
@@ -6946,8 +6946,8 @@ export const NEIGHBORHOODS = {
 
   "Merced Heights": {
     spirit: "A quiet hilltop village in the city's southwest corner — modest mid-century homes along a ridgeline, big Pacific views from Brooks Park, and the deep-rooted, neighborly spirit of the historic OMI.",
-    reasons: ["Peaceful, residential hilltop streets", "Hilltop views at Brooks Park", "Steps from City College's Ocean campus", "Historic, diverse OMI community"],
-    history: "Merced Heights sits at the center of the OMI — Ocean View, Merced Heights, and Ingleside — on a ridge running between San Jose Avenue and Junipero Serra Boulevard. The name dates only to the years after World War II, when open hillside on the western slopes was subdivided into new housing. Beginning at midcentury, an influx of African-American families settled here, and Merced Heights emerged as an island of Black home ownership uphill from earlier residential parks that had barred minority buyers, making the OMI one of San Francisco's early integrated neighborhoods. City College of San Francisco's Ocean campus anchors the area's northern edge. Atop the neighborhood's peak, Brooks Park preserves rocky outcrops with native plants and a large community garden, on land once used by Ohlone families summering near Lake Merced.",
+    reasons: ["Peaceful, residential hilltop streets", "Hilltop views at Brooks Park", "Steps from City College's Ocean campus", "Historic OMI community"],
+    history: "Merced Heights sits at the center of the OMI — Ocean View, Merced Heights, and Ingleside — on a ridge running between San Jose Avenue and Junipero Serra Boulevard. The name dates only to the years after World War II, when open hillside on the western slopes was subdivided into new housing. Beginning at midcentury, African-American homebuyers settled here, and Merced Heights emerged as an island of Black home ownership uphill from earlier residential parks that had barred minority buyers, making the OMI one of San Francisco's early integrated neighborhoods. City College of San Francisco's Ocean campus anchors the area's northern edge. Atop the neighborhood's peak, Brooks Park preserves rocky outcrops with native plants and a large community garden, on land once used by Ohlone people summering near Lake Merced.",
     facts: [
       { icon: "house", title: "Island of ownership", text: "After WWII, Merced Heights became a rare hilltop enclave of African-American home ownership, helping make the OMI one of the city's early integrated neighborhoods." },
       { icon: "park", title: "Brooks Park", text: "A hilltop park at 400 Shields St with native-plant gardens, a large community garden, and sweeping Pacific views." },
@@ -6968,7 +6968,7 @@ export const NEIGHBORHOODS = {
   },
 
   "Parkside": {
-    spirit: "The outer Sunset's foggy, family-anchored southern half — mile after mile of pastel 1930s row houses, a working Main Street on Taraval, and big green breathing room at Stern Grove and the city's western edge.",
+    spirit: "The outer Sunset's foggy southern half — mile after mile of pastel 1930s row houses, a working Main Street on Taraval, and big green breathing room at Stern Grove and the city's western edge.",
     reasons: ["L-Taraval streetcar down Main Street", "Stern Grove's free summer concerts", "A real neighborhood dining strip", "Steps from the Zoo, Stern Grove and Ocean Beach"],
     aka: "the Outer Sunset",
     history: "Parkside began in 1905 when a syndicate quietly bought former Outside Lands dunes from the Adolph Sutro estate and others to launch a new residential subdivision centered on Taraval Street. Early pioneers built on bare sand far from city services and organized the Parkside District Improvement Club in 1908 to demand them. Muni's L-Taraval streetcar opened along Taraval in 1919, opening the area to wider settlement. In the 1920s through 1940s builders like Henry Doelger, the Gellerts and the Stoneson brothers used new FHA loans to fill the dunes with rows of affordable stucco single-family homes. Though planned as its own neighborhood, Parkside is today generally considered part of the larger Sunset District.",
@@ -6997,12 +6997,12 @@ export const NEIGHBORHOODS = {
   "Parkmerced": {
     spirit: "A planned garden-and-towers community on San Francisco's far southwest edge, where mid-century apartment living meets Lake Merced air and the bustle of SF State next door.",
     reasons: ["Master-planned green space", "Steps from SF State and Stonestown", "Beside Lake Merced and Stern Grove", "M-line and 19th Avenue transit at the door"],
-    history: "In 1941 the Metropolitan Life Insurance Company assembled nearly 200 acres of former Spring Valley Water Company land to build a 'city within a city' of rental housing. The garden apartments and townhouses went up between 1941 and 1951, joined in the 1950s by a ring of high-rise towers, with landscape architect Thomas Church shaping the radiating street plan and lawns. The community totals roughly 3,200 units and was designed for the post-war middle-class housing boom. In May 2011 the SF Board of Supervisors approved a long-term redevelopment plan that would phase out most low-rise garden units in favor of denser mid-rise housing over several decades.",
+    history: "In 1941 the Metropolitan Life Insurance Company assembled nearly 200 acres of former Spring Valley Water Company land to build a 'city within a city' of rental housing. The garden apartments and townhouses went up between 1941 and 1951, joined in the 1950s by a ring of high-rise towers, with landscape architect Thomas Church shaping the radiating street plan and lawns. The community totals roughly 3,200 units and was designed for the post-war housing boom. In May 2011 the SF Board of Supervisors approved a long-term redevelopment plan that would phase out most low-rise garden units in favor of denser mid-rise housing over several decades.",
     facts: [
       { icon: "house", title: "A planned community", text: "MetLife began building Parkmerced in 1941 as a 'city within a city,' with about 3,200 rental units." },
       { icon: "tower", title: "Ring of towers", text: "Thirteen-story residential towers added in the 1950s rise above the original two-story garden apartments and courtyards." },
       { icon: "water", title: "Lake Merced at the edge", text: "The neighborhood sits between 19th Avenue and Lake Merced, near Harding Park and Stern Grove." },
-      { icon: "book", title: "Next to SF State", text: "Parkmerced lies just south of San Francisco State University and is popular with students and faculty." },
+      { icon: "book", title: "Next to SF State", text: "Parkmerced lies just south of San Francisco State University." },
       { icon: "tram", title: "M-line through the door", text: "The M Ocean View Muni Metro runs the 19th Avenue median past the neighborhood and SF State." },
     ],
     nearby: ["Stonestown", "SF State"],
@@ -7018,7 +7018,7 @@ export const NEIGHBORHOODS = {
   },
 
   "Stonestown": {
-    spirit: "San Francisco's southwest crossroads, where a mid-century mall reborn as a dining-and-shopping hub meets a university campus and the open green of Lake Merced.",
+    spirit: "San Francisco's southwest crossroads, where a mid-century mall, now a dining-and-shopping hub, meets a university campus and the open green of Lake Merced.",
     reasons: ["Anchored by the Stonestown Galleria", "Next to San Francisco State University", "Steps from Lake Merced parkland", "Muni Metro and major bus lines on 19th Avenue"],
     history: "Stonestown was developed by brothers Henry and Ellis Stoneson beginning in the late 1940s on former farmland southwest of downtown. The Stonestown Shopping Center opened in 1952, with The Emporium department store as its anchor, and was one of the West's first large regional shopping centers paired with adjacent apartments housing several thousand residents. The neighborhood grew up alongside San Francisco State University, whose campus sits just across 19th Avenue. A 1980s renovation enclosed the center and rebranded it the Stonestown Galleria, and in 2024 the city approved a major redevelopment to add roughly 3,500 new homes, parks, and a new retail main street on the surrounding parking lots.",
     facts: [
@@ -7041,7 +7041,7 @@ export const NEIGHBORHOODS = {
 
   "Lakeshore": {
     spirit: "San Francisco's quiet southwest corner, where streets curve around Lake Merced and the city trades fog-bound bustle for a near-suburban calm of golf greens, lakeside trails, and Pacific air.",
-    reasons: ["Lake Merced's 4-mile loop at your doorstep", "Steps from Harding Park golf", "Quiet, family-friendly streets", "Minutes to Ocean Beach and Stonestown"],
+    reasons: ["Lake Merced's 4-mile loop at your doorstep", "Steps from Harding Park golf", "Quiet residential streets", "Minutes to Ocean Beach and Stonestown"],
     history: "Lake Merced is one of San Francisco's few natural freshwater lakes and supplied the city's drinking water from the late 1860s until 1934, when Hetch Hetchy took over. The city-run Harding Park golf course opened along its shores on July 18, 1925, designed by Willie Watson and Sam Whiting. The surrounding Lakeshore tracts were developed mid-century as planned residential subdivisions, including the Gellert brothers' Lakeshore Park, marketed from 1939 as a deluxe subdivision south of Sloat Boulevard. Lakeshore Plaza, the neighborhood's main shopping center at Sloat and Lake Merced boulevards, anchors the area's everyday commerce today.",
     facts: [
       { icon: "water", title: "A rare natural lake", text: "Lake Merced is one of the largest freshwater lakes in San Francisco and once served as the city's water source until 1934." },
@@ -7070,7 +7070,7 @@ export const NEIGHBORHOODS = {
     history: "Cayuga Terrace took shape in the early 20th century as homestead-association land in the city's southern reaches was subdivided for housing. Many of its streets carry Native-American names, mostly of peoples and languages of the northeastern United States, a naming theme shared with neighboring Mission Terrace and the Outer Mission. Before 1918 a body of water known as Lake Geneva sat near what is now Cayuga Avenue, the street that gives the neighborhood its name. Through the first half of the century the area filled in with the detached single-family homes that still define it, served by nearby rail and streetcar lines and, later, the Balboa Park transit hub.",
     facts: [
       { icon: "art", title: "A sculpture garden made on lunch breaks", text: "Gardener Demetrio Braceros, assigned to Cayuga Park in 1986, hand-carved over 375 wooden totems, figurines and statues on his breaks; the San Francisco Arts Commission later inventoried 376 of them." },
-      { icon: "park", title: "Cayuga Playground reborn", text: "The roughly four-acre playground at 301 Naglee Avenue closed in 2011 for an $8.4 million renovation and reopened in August 2013, with many of Braceros's sculptures restored." },
+      { icon: "park", title: "Cayuga Playground renovated", text: "The roughly four-acre playground at 301 Naglee Avenue closed in 2011 for an $8.4 million renovation and reopened in August 2013, with many of Braceros's sculptures restored." },
       { icon: "subway", title: "A transit powerhouse next door", text: "The nearby Balboa Park Station, opened in 1973, is one of BART's busiest stops outside downtown San Francisco and a major Muni transfer point." },
       { icon: "pin", title: "Streets named for Native peoples", text: "Cayuga Avenue and many surrounding streets are named for Native-American peoples and languages, a deliberate theme set when the area was subdivided." },
     ],
@@ -7088,9 +7088,9 @@ export const NEIGHBORHOODS = {
   },
 
   "Sunnydale": {
-    spirit: "A close-knit, working-class community at San Francisco's far southeastern edge, wrapped by the green hills of McLaren Park — long anchored by one of the city's largest public housing developments, and now in the middle of a generational rebuild into a mixed-income neighborhood.",
-    reasons: ["Borders sprawling McLaren Park", "A major HOPE SF rebuild underway", "T-Third light rail right at the door", "Tight-knit, diverse community"],
-    history: "Built during World War II, the Sunnydale (later Sunnydale-Velasco) development became one of San Francisco's largest public housing complexes. After decades of disinvestment and isolation at the city's edge, it was selected for HOPE SF, the city's effort to rebuild its most distressed public housing without displacing residents. Demolition and phased construction are transforming the roughly 50-acre site into a mixed-income community of around 1,770 homes, with new streets, parks, retail, and a community hub. The arrival of the T-Third light rail line in 2007, with its terminus at nearby Sunnydale Station, finally connected the neighborhood to downtown by rail.",
+    spirit: "A close-knit community at San Francisco's far southeastern edge, wrapped by the green hills of McLaren Park — long anchored by one of the city's largest public housing developments, and now in the middle of a generational rebuild into a mixed-income neighborhood.",
+    reasons: ["Borders sprawling McLaren Park", "A major HOPE SF rebuild underway", "T-Third light rail right at the door", "Tight-knit community"],
+    history: "Built during World War II, the Sunnydale (later Sunnydale-Velasco) development became one of San Francisco's largest public housing complexes. After decades of disinvestment and isolation at the city's edge, it was selected for HOPE SF, the city's effort to rebuild its most distressed public housing without displacing residents. Demolition and phased construction are rebuilding the roughly 50-acre site as a mixed-income community of around 1,770 homes, with new streets, parks, retail, and a community hub. The arrival of the T-Third light rail line in 2007, with its terminus at nearby Sunnydale Station, finally connected the neighborhood to downtown by rail.",
     facts: [
       { icon: "park", title: "McLaren Park at the doorstep", text: "John McLaren Park covers more than 300 acres on Sunnydale's northern edge, making it one of the largest parks in San Francisco." },
       { icon: "house", title: "A generational rebuild", text: "Through HOPE SF, the WWII-era Sunnydale-Velasco development is being rebuilt as a mixed-income community of about 1,770 homes, with new parks and neighborhood retail." },
@@ -7114,7 +7114,7 @@ export const NEIGHBORHOODS = {
     spirit: "A hidden pocket of red-tile-roofed bungalows tucked between Bayshore Boulevard and Highway 101 — one of San Francisco's quietest, most surprising residential enclaves.",
     reasons: ["Quiet, tight-knit residential pocket", "Distinctive 1920s–30s Spanish-style bungalows", "Steps from Bayshore Caltrain", "Easy freeway and transit access to the Peninsula"],
     aka: "Bayshore Tract",
-    history: "The area was developed by the Crocker Estate Company in the early 1920s as part of the 'Bayshore Tract.' In the late 1920s and early 1930s, builder William H. Grahn put up rows of Spanish- and Mediterranean-style homes, many designed by architect Charles Strothoff. Their stucco walls and red tile roofs evoked the houses of the Hollywood Hills, earning the enclave its 'Little Hollywood' nickname. Hemmed in by Bayshore Boulevard, U.S. 101, and the rail corridor, the small neighborhood remains an isolated, working-class pocket of about 1,165 residents on the city's far southeastern edge.",
+    history: "The area was developed by the Crocker Estate Company in the early 1920s as part of the 'Bayshore Tract.' In the late 1920s and early 1930s, builder William H. Grahn put up rows of Spanish- and Mediterranean-style homes, many designed by architect Charles Strothoff. Their stucco walls and red tile roofs evoked the houses of the Hollywood Hills, earning the enclave its 'Little Hollywood' nickname. Hemmed in by Bayshore Boulevard, U.S. 101, and the rail corridor, the small neighborhood remains an isolated pocket of about 1,165 residents on the city's far southeastern edge.",
     facts: [
       { icon: "movie", title: "How it got its name", text: "The 1920s–30s stucco-and-tile bungalows resembled homes in the Hollywood Hills, giving the neighborhood its 'Little Hollywood' nickname." },
       { icon: "tram", title: "Bayshore Caltrain", text: "The Bayshore station at 400 Tunnel Ave sits right beside the neighborhood, with commuter rail service down the Peninsula." },
@@ -7204,12 +7204,12 @@ export const NEIGHBORHOODS = {
   },
 
   "Polk Gulch": {
-    spirit: "A low valley that became a high-energy strip — restaurants, dive bars, cocktail dens, and corner shops packed into a walkable stretch between Nob Hill and Russian Hill, with a queer history that predates the Castro.",
+    spirit: "A low valley that became a busy commercial strip — restaurants, dive bars, cocktail dens, and corner shops packed into a walkable stretch between Nob Hill and Russian Hill, with an LGBTQ history that predates the Castro.",
     reasons: ["Dense, walkable restaurant-and-bar corridor", "Transit-rich on Polk and Van Ness", "Layered LGBTQ history", "Apartments and Victorians side by side"],
     aka: "the Polk Strip",
     history: "Polk Street was named for U.S. President James K. Polk, but the 'Gulch' comes from the low valley between Nob Hill and Russian Hill that once carried a creek. After the 1906 earthquake, the corridor grew into a busy commercial strip of shops, restaurants, and small storefronts. From the 1950s into the early 1980s, Polk Gulch was the center of San Francisco's gay life, home to dozens of gay-owned bars and businesses, and it hosted the city's first Pride march in 1970 before the scene's center shifted to the Castro.",
     facts: [
-      { icon: "flag", title: "The original gayborhood", text: "Before the Castro, the Polk Strip was San Francisco's main gay neighborhood, with dozens of gay bars and businesses by the late 1960s." },
+      { icon: "flag", title: "The original gay neighborhood", text: "Before the Castro, the Polk Strip was San Francisco's main gay neighborhood, with dozens of gay bars and businesses by the late 1960s." },
       { icon: "confetti", title: "First Pride march", text: "San Francisco's earliest Pride march stepped off along Polk Street in June 1970." },
       { icon: "water", title: "A creek under the street", text: "The 'Gulch' name reflects the low valley and old watercourse that once ran through the area between two hills." },
       { icon: "shop", title: "A true commercial strip", text: "Polk Street remains a dense, independent corridor of restaurants, bars, and shops rather than a residential pocket." },
@@ -7236,7 +7236,7 @@ export const NEIGHBORHOODS = {
     spirit: "The dense apartment-house district on Nob Hill's lower southern slope, where 1910s–1920s brick high-rises and old residential hotels stack up just steps from downtown, the cable cars climbing the hill above and a lively run of restaurants and bars at street level.",
     reasons: ["Walkable to Union Square and the Financial District", "Cable cars on the hill above", "Historic apartment-house architecture", "Dense, affordable nightlife and dining"],
     aka: "the Tendernob",
-    history: "After the 1906 earthquake and the three-day fire that leveled the area, this lower slope of Nob Hill was rebuilt almost entirely between 1906 and 1925 with fireproof brick and reinforced-concrete apartment buildings and residential hotels. Rising three to seven stories, they housed workers and middle-class residents within walking distance of downtown, below the grand mansions and hotels crowning Nob Hill above. The blocks around Bush, Sutter and Post are now recognized as the Lower Nob Hill Apartment Hotel District, listed on the National Register of Historic Places in 1991 with 296 contributing buildings. Sitting between Nob Hill proper and the Tenderloin, the neighborhood picked up the nickname the Tendernob.",
+    history: "After the 1906 earthquake and the three-day fire that leveled the area, this lower slope of Nob Hill was rebuilt almost entirely between 1906 and 1925 with fireproof brick and reinforced-concrete apartment buildings and residential hotels. Rising three to seven stories, they housed workers and other residents within walking distance of downtown, below the grand mansions and hotels crowning Nob Hill above. The blocks around Bush, Sutter and Post are now recognized as the Lower Nob Hill Apartment Hotel District, listed on the National Register of Historic Places in 1991 with 296 contributing buildings. Sitting between Nob Hill proper and the Tenderloin, the neighborhood picked up the nickname the Tendernob.",
     facts: [
       { icon: "house", title: "An apartment-house district", text: "The Lower Nob Hill Apartment Hotel District holds 296 contributing buildings, mostly three- to seven-story brick apartment houses and residential hotels rebuilt after the 1906 fire." },
       { icon: "quake", title: "Rebuilt after 1906", text: "The 1906 quake and fire destroyed everything here; the district was rebuilt almost entirely between 1906 and 1925 using fireproof materials the city newly required." },
@@ -7258,8 +7258,8 @@ export const NEIGHBORHOODS = {
   },
 
   "Downtown / Union Square": {
-    spirit: "San Francisco's grand front parlor of department stores, theater marquees, and cable-car bells, where the whole city converges around one historic plaza.",
-    reasons: ["The city's retail and luxury-shopping core", "Heart of the Theater District", "Transit hub for the entire Bay Area", "Walk-everywhere hotel and dining density"],
+    spirit: "San Francisco's grand front parlor of department stores, theater marquees, and cable-car bells, gathered around one historic plaza.",
+    reasons: ["The city's retail and department-store core", "Heart of the Theater District", "Transit hub for the entire Bay Area", "Walk-everywhere hotel and dining density"],
     history: "Union Square takes its name from the pro-Union rallies held here on the eve of the Civil War. At its center stands the Dewey Monument, a 97-foot column topped by the bronze figure 'Victory,' dedicated by President Theodore Roosevelt on May 14, 1903, to commemorate Admiral George Dewey's win at Manila Bay. The neighborhood rebuilt rapidly after the 1906 earthquake and fire, anchored by the Westin St. Francis hotel, which had opened on Powell Street in 1904. For more than a century it has remained the city's central district of flagship stores, grand hotels, and theaters.",
     facts: [
       { icon: "art", title: "The Victory statue", text: "The Dewey Monument's bronze 'Victory' was modeled by Alma de Bretteville Spreckels and sculpted by Robert Ingersoll Aitken, dedicated in 1903." },
@@ -7311,7 +7311,7 @@ export const NEIGHBORHOODS = {
 
   "Presidio Terrace": {
     spirit: "San Francisco's hidden oval of grandeur — a single private street where about three dozen century-old mansions sit behind a gate just south of the Presidio.",
-    reasons: ["One of SF's first private residence parks (1905)", "Gated, ultra-exclusive single oval street", "Steps from the Presidio and Clement Street", "Quiet, leafy, and storied"],
+    reasons: ["One of SF's first private residence parks (1905)", "Gated, privately owned single oval street", "Steps from the Presidio and Clement Street", "Quiet, leafy, and storied"],
     history: "Presidio Terrace was laid out beginning in 1905 by the real-estate firm Baldwin & Howell as one of San Francisco's first private 'residence parks,' built just south of the Presidio. About 35 to 36 grand mansions, in Beaux-Arts, Mission Revival and Tudor Revival styles, line a single privately owned oval street entered through a gate off Arguello Boulevard. It was historically and explicitly exclusionary: a 1906 brochure boasted it was a place where 'only Caucasians' could buy, a racial covenant of the sort the U.S. Supreme Court struck down in 1948. In 2015 a San Jose couple bought the private street and its common areas at a city tax auction for about $90,000 after the homeowners' association failed to pay roughly $14-a-year property taxes for decades; in November 2017 the Board of Supervisors voted to reverse the sale and return the street to the homeowners. Notable residents have included Senator Dianne Feinstein and former House Speaker Nancy Pelosi.",
     facts: [
       { icon: "house", title: "One private oval", text: "About 35 mansions ring a single privately owned oval street, entered through a gate off Arguello Boulevard." },
@@ -7433,15 +7433,15 @@ export const NEIGHBORHOODS = {
   },
 
   "University Mound": {
-    spirit: "A quiet, sun-touched hillside in the city's southeast where single-family homes climb toward a giant reservoir, and the diverse, working-class Portola flatlands hum just downhill on San Bruno Avenue.",
+    spirit: "A quiet, sun-touched hillside in the city's southeast where single-family homes climb toward a giant reservoir, and the Portola flatlands hum just downhill on San Bruno Avenue.",
     reasons: ["Calm, residential streets of single-family homes", "Steps from the Portola's diverse San Bruno Ave eats", "Minutes from sprawling McLaren Park", "Deep, layered local history"],
-    history: "The name dates to 1859, when Rev. George Burrowes founded University College (also called City College) and acquired hilltop land here by 1862, intending a grand campus that was never built; the surrounding streets were laid out and named for schools and educators. Crowning the hill is the University Mound Reservoir, an SFPUC facility holding about 140 million gallons that supplies roughly a quarter of San Francisco's tap water, second in size only to the Sunset Reservoir. Just downhill, the adjacent Portola earned the nickname the 'Garden District,' its slopes once dense with commercial greenhouses and nurseries that grew much of the city's flower crop. The University Mound Ladies Home, founded in 1884 with money from philanthropist James Lick, gave single women of modest means a place to live for 130 years before closing in 2014. The area filled in with modest single-family homes through the 20th century into the diverse, working-class neighborhood it is today.",
+    history: "The name dates to 1859, when Rev. George Burrowes founded University College (also called City College) and acquired hilltop land here by 1862, intending a grand campus that was never built; the surrounding streets were laid out and named for schools and educators. Crowning the hill is the University Mound Reservoir, an SFPUC facility holding about 140 million gallons that supplies roughly a quarter of San Francisco's tap water, second in size only to the Sunset Reservoir. Just downhill, the adjacent Portola earned the nickname the 'Garden District,' its slopes once dense with commercial greenhouses and nurseries that grew much of the city's flower crop. The University Mound Ladies Home, founded in 1884 with money from philanthropist James Lick, gave single women a place to live for 130 years before closing in 2014. The area filled in with modest single-family homes through the 20th century.",
     facts: [
       { icon: "water", title: "140 million gallons", text: "The University Mound Reservoir atop the hill holds about 140 million gallons and supplies roughly a quarter of San Francisco's tap water, second only to the Sunset Reservoir." },
       { icon: "book", title: "The university that never was", text: "The neighborhood is named for University College, founded in 1859, which acquired land here by 1862 for a campus that was ultimately never built." },
       { icon: "park", title: "McLaren Park next door", text: "John McLaren Park, one of the largest parks in San Francisco, spreads out just to the west." },
       { icon: "flag", title: "The Garden District", text: "The neighboring Portola was long called the Garden District for the greenhouses and flower nurseries that once blanketed its hillsides." },
-      { icon: "house", title: "130 years of refuge", text: "The University Mound Ladies Home, endowed by James Lick and opened in 1884, housed women of modest means until it closed in 2014." },
+      { icon: "house", title: "130 years of refuge", text: "The University Mound Ladies Home, endowed by James Lick and opened in 1884, housed women until it closed in 2014." },
     ],
     nearby: ["the Portola"],
     restaurants: [
@@ -7456,7 +7456,7 @@ export const NEIGHBORHOODS = {
   },
 
   "Silver Terrace": {
-    spirit: "A sunny, working-class pocket tucked in the crook where the 280 and 101 freeways meet — hillside homes above, the auto-and-industrial flats below, with quiet streets and big southeast-facing views.",
+    spirit: "A sunny pocket tucked in the crook where the 280 and 101 freeways meet — hillside homes above, the auto-and-industrial flats below, with quiet streets and big southeast-facing views.",
     reasons: ["Some of the city's oldest houses on quiet streets", "Sunny southeast corner with bay views", "Walk to the Portola and the Bayview's Third St", "Minutes from McLaren Park"],
     history: "Silver Terrace takes its name from Joseph S. Silver, who in the 1850s claimed and fenced a tract running from the old San Bruno turnpike (now San Bruno Avenue) east toward what is today Third Street; despite the name, there was never any silver ore here. In 1870 the land agents Duncan & Co. launched a homestead association on hundreds of lots from the Haley & O'Neill tract, and Eadweard Muybridge had been hired in 1869 to photograph the still-rural fields and marsh for promotional images. Most homes went up in the 20th century, but hidden in the streets are some of the oldest houses in San Francisco, survivors of that first tract. The hillside filled in with single-family homes while the flats along Bayshore Boulevard became an auto row of dealerships and light industry. The result is the neighborhood's enduring split character: residential slopes above, working blocks below.",
     facts: [
@@ -7479,9 +7479,9 @@ export const NEIGHBORHOODS = {
   },
 
   "India Basin": {
-    spirit: "A working bayshore reborn as parkland, where 19th-century shipwrights once launched scow schooners and a brand-new 64-acre waterfront park now opens the Bay to the Bayview.",
-    reasons: ["Brand-new India Basin Waterfront Park", "Rich shipbuilding heritage", "Bay Trail access and Heron's Head birdwatching", "Emerging new bayfront housing"],
-    history: "India Basin began as a shallow tidal cove on the Hunters Point shoreline and became a hub of 19th-century boatbuilding, where shipwrights launched scow schooners that hauled cargo around San Francisco Bay. Carpenter and shipwright John Dirks built the c. 1875 Shipwright's Cottage at 900 Innes Avenue, and boatbuilding families ran the adjacent yard for decades. The cove's industry surged during the World War II shipyard era at neighboring Hunters Point, then entered a long postwar decline that left the shoreline largely industrial. Today the city's new India Basin Waterfront Park is transforming the basin back into public space along the water.",
+    spirit: "A working bayshore becoming parkland, where 19th-century shipwrights once launched scow schooners and a brand-new 64-acre waterfront park now opens the Bay to the Bayview.",
+    reasons: ["Brand-new India Basin Waterfront Park", "Rich shipbuilding heritage", "Bay Trail access and Heron's Head birdwatching", "New bayfront housing in development"],
+    history: "India Basin began as a shallow tidal cove on the Hunters Point shoreline and became a hub of 19th-century boatbuilding, where shipwrights launched scow schooners that hauled cargo around San Francisco Bay. Carpenter and shipwright John Dirks built the c. 1875 Shipwright's Cottage at 900 Innes Avenue, and boatbuilding families ran the adjacent yard for decades. The cove's industry surged during the World War II shipyard era at neighboring Hunters Point, then entered a long postwar decline that left the shoreline largely industrial. Today the city's new India Basin Waterfront Park is turning the basin back into public space along the water.",
     facts: [
       { icon: "park", title: "A new 64-acre shoreline park", text: "India Basin Waterfront Park is being built across the basin's shoreline; its 900 Innes section opened in October 2024, with the larger shoreline portion under construction through the late 2020s." },
       { icon: "factory", title: "Shipwright's Cottage", text: "The c. 1875 cottage at 900 Innes Avenue, a San Francisco Designated Landmark since 2008, once housed boatbuilders who crafted scow schooners and now anchors the new park." },
@@ -7502,13 +7502,13 @@ export const NEIGHBORHOODS = {
 
   "Central Waterfront": {
     spirit: "San Francisco's working bayshore, where 170 years of shipbuilding meet a new waterfront of parks, lofts, and a beer hall under crane shadows.",
-    reasons: ["Historic Pier 70 shipyard setting", "New Crane Cove Park on the bay", "Emerging Pier 70 mixed-use district", "T-Third light rail to downtown"],
+    reasons: ["Historic Pier 70 shipyard setting", "New Crane Cove Park on the bay", "Pier 70 mixed-use district in development", "T-Third light rail to downtown"],
     history: "This stretch of the central-eastern waterfront grew up around the Union Iron Works, the shipyard Peter Donahue's firm established at Potrero Point in the 19th century and which built the battleship USS Oregon and early U.S. Navy submarines. Charles Schwab's Bethlehem Steel bought the yard in the early 1900s, and during World War II Pier 70 built and repaired thousands of naval vessels. Commercial ship repair continued in the two floating dry docks until the operator walked away in 2017, leaving them idle. The Port of San Francisco opened the seven-acre Crane Cove Park here in 2020, and Brookfield's Pier 70 redevelopment is restoring historic structures like the WWII-era Building 12 while adding housing, parks, and arts and maker space.",
     facts: [
       { icon: "factory", title: "Union Iron Works", text: "The Pier 70 shipyard traces to the 19th-century Union Iron Works at Potrero Point, later Bethlehem Steel, which built the battleship USS Oregon and some of the Navy's first submarines." },
       { icon: "water", title: "Idle dry docks", text: "Pier 70's two floating dry docks repaired ships for decades but have sat deserted since the operator left in 2017; the Port has budgeted to demolish the aging structures." },
       { icon: "park", title: "Crane Cove Park", text: "Opened in 2020, this seven-acre Port park off Illinois Street has a sandy beach, lawns, a dog run, and two preserved shipyard cranes on the bay." },
-      { icon: "factory", title: "Building 12 reborn", text: "Brookfield's Pier 70 project rehabilitated the WWII-era steel warehouse Building 12 into a market hall of makers, artists, food, and a taproom, the heart of the new district." },
+      { icon: "factory", title: "Building 12 rehabilitated", text: "Brookfield's Pier 70 project rehabilitated the WWII-era steel warehouse Building 12 into a market hall of makers, artists, food, and a taproom, the heart of the new district." },
       { icon: "house", title: "Pier 70 redevelopment", text: "The Pier 70 plan adds roughly 3.6 million square feet of housing, commercial, arts, and light-industrial space plus new waterfront parks to the historic district." },
     ],
     nearby: ["Dogpatch"],
@@ -7548,9 +7548,9 @@ export const NEIGHBORHOODS = {
   },
 
   "Mint Hill": {
-    spirit: "A tiny, history-soaked wedge at the seam of SoMa, the Mission, and Mid-Market, anchored by the granite hulk of the Old U.S. Mint and the buzzing pedestrian world of Mint Plaza — central, dense, and transit-rich.",
+    spirit: "A tiny, history-soaked wedge at the seam of SoMa, the Mission, and Mid-Market, anchored by the granite hulk of the Old U.S. Mint and the pedestrian square of Mint Plaza — central, dense, and transit-rich.",
     reasons: ["One of the most transit-connected spots in the city", "Walk to Mint Plaza dining and 5th Street shopping", "Built around a true 1906 survivor landmark", "Central to SoMa, Union Square, and the Mission"],
-    history: "The Old United States Mint at 5th and Mission, completed in 1874, is a neoclassical fortress nicknamed the 'Granite Lady.' When the 1906 earthquake and fire leveled the surrounding South of Market, Superintendent Frank Leach and his crew fought back the flames, and the building survived as one of the few structures left standing for blocks. At the time it held roughly a third of the nation's gold reserves and briefly served as the city's only working financial institution during the recovery. The Mint operated until 1937; a century later, in 2007, the once-neglected alley behind it was reborn as Mint Plaza, a privately funded pedestrian square that now hosts dining, markets, and events at the heart of this small, central district.",
+    history: "The Old United States Mint at 5th and Mission, completed in 1874, is a neoclassical fortress nicknamed the 'Granite Lady.' When the 1906 earthquake and fire leveled the surrounding South of Market, Superintendent Frank Leach and his crew fought back the flames, and the building survived as one of the few structures left standing for blocks. At the time it held roughly a third of the nation's gold reserves and briefly served as the city's only working financial institution during the recovery. The Mint operated until 1937; a century later, in 2007, the alley behind it became Mint Plaza, a privately funded pedestrian square that now hosts dining, markets, and events at the heart of this small, central district.",
     facts: [
       { icon: "quake", title: "Survived 1906", text: "The Old Mint was one of the few buildings left standing for blocks after the 1906 earthquake and fire, saved by its superintendent and staff." },
       { icon: "money", title: "A third of the gold", text: "At the time of the 1906 fire the Mint held about $300 million, roughly one-third of the entire nation's gold reserves." },
@@ -7570,8 +7570,8 @@ export const NEIGHBORHOODS = {
 
   "Bret Harte": {
     spirit: "A tiny, easy-to-miss residential pocket in San Francisco's far southeast, tucked between the freeways near the Bayview and Portola edges.",
-    reasons: ["Quiet, modest, residential southeast SF", "Near McLaren Park green space", "Close to Caltrain and Muni lines", "Bayview and Portola dining a short ride away"],
-    history: "The neighborhood takes its name from Bret Harte (1836–1902), the Gold Rush-era writer whose 1868 story 'The Luck of Roaring Camp' made him one of the first California authors to win an international following. The pocket itself is one of the city's smallest neighborhoods, a cluster of modest homes wedged among the freeway corridors near the U.S. 101 and Interstate 280 interchange. It sits along the Bayview's industrial southeastern edge, bordered by Silver Terrace, the Portola, and the Bayshore corridor. Largely residential and ringed by industrial blocks, it remains obscure even to many lifelong San Franciscans.",
+    reasons: ["Quiet, residential southeast SF", "Near McLaren Park green space", "Close to Caltrain and Muni lines", "Bayview and Portola dining a short ride away"],
+    history: "The neighborhood takes its name from Bret Harte (1836–1902), the Gold Rush-era writer whose 1868 story 'The Luck of Roaring Camp' made him one of the first California authors to win an international following. The pocket itself is one of the city's smallest neighborhoods, a cluster of homes wedged among the freeway corridors near the U.S. 101 and Interstate 280 interchange. It sits along the Bayview's industrial southeastern edge, bordered by Silver Terrace, the Portola, and the Bayshore corridor. Largely residential and ringed by industrial blocks, it remains obscure even to many lifelong San Franciscans.",
     facts: [
       { icon: "book", title: "Named for a Gold Rush writer", text: "Bret Harte (1836–1902) wrote 'The Luck of Roaring Camp' and was among the first California authors to gain international fame." },
       { icon: "road", title: "Wedged among freeways", text: "The small residential pocket sits near the U.S. 101 / Interstate 280 interchange in the city's far southeast." },
@@ -7589,10 +7589,10 @@ export const NEIGHBORHOODS = {
   },
 
   "Ingleside": {
-    spirit: "A diverse, down-to-earth southwest village strung along Ocean Avenue — where a 1962 burger drive-in, family taquerias, and an all-ages brewery sit in the shadow of City College, all an easy hop from the K-line and Balboa Park BART.",
-    reasons: ["Real working commercial strip on Ocean Ave", "Transit-rich: K-Ingleside Metro plus Balboa Park BART", "Next door to City College's Ocean campus", "One of the city's most diverse, neighborly districts"],
+    spirit: "A southwest village strung along Ocean Avenue — where a 1962 burger drive-in, family taquerias, and an all-ages brewery sit in the shadow of City College, all an easy hop from the K-line and Balboa Park BART.",
+    reasons: ["Real working commercial strip on Ocean Ave", "Transit-rich: K-Ingleside Metro plus Balboa Park BART", "Next door to City College's Ocean campus", "One of the city's most neighborly districts"],
     aka: "OMI (Ocean View-Merced Heights-Ingleside)",
-    history: "The neighborhood traces to the Ingleside Racetrack, which the Pacific Coast Jockey Club opened just off Ocean Road (now Ocean Avenue) on November 28, 1895, drawing thousands by special rail line and becoming the first American track with a real starting gate. Streetcar service reached Ocean Avenue the same year to serve the track, and after the racetrack era ended the area filled in with single-family homes along the new lines, accelerated when the K-Ingleside opened through the Twin Peaks Tunnel on February 3, 1918. City College of San Francisco opened its permanent Ocean campus at Ocean and Phelan avenues on August 27, 1940, anchoring the district. The old racetrack oval survives as the curving loop of Urbano Drive in the adjacent Ingleside Terraces residence park, home to a giant 1913 sundial. Today Ingleside is a middle- and working-class community known for its diversity, with the Ocean Avenue corridor as its commercial heart.",
+    history: "The neighborhood traces to the Ingleside Racetrack, which the Pacific Coast Jockey Club opened just off Ocean Road (now Ocean Avenue) on November 28, 1895, drawing thousands by special rail line and becoming the first American track with a real starting gate. Streetcar service reached Ocean Avenue the same year to serve the track, and after the racetrack era ended the area filled in with single-family homes along the new lines, accelerated when the K-Ingleside opened through the Twin Peaks Tunnel on February 3, 1918. City College of San Francisco opened its permanent Ocean campus at Ocean and Phelan avenues on August 27, 1940, anchoring the district. The old racetrack oval survives as the curving loop of Urbano Drive in the adjacent Ingleside Terraces residence park, home to a giant 1913 sundial. Today Ingleside is a residential community, with the Ocean Avenue corridor as its commercial heart.",
     facts: [
       { icon: "book", title: "City College's flagship", text: "CCSF's Ocean campus opened at Ocean and Phelan in 1940, its Timothy Pflueger-designed Science Hall a showpiece of monumental architecture." },
       { icon: "tram", title: "Streetcar since 1918", text: "The K-Ingleside began running through the Twin Peaks Tunnel on February 3, 1918, and still rolls down the middle of Ocean Avenue today." },
@@ -7615,10 +7615,10 @@ export const NEIGHBORHOODS = {
   },
 
   "Treasure Island": {
-    spirit: "A man-made island built for a 1939 World's Fair, now a fast-rising waterfront neighborhood with the most jaw-dropping head-on views of the San Francisco skyline in the city.",
+    spirit: "A man-made island built for a 1939 World's Fair, now a redeveloping waterfront neighborhood with the most jaw-dropping head-on views of the San Francisco skyline in the city.",
     reasons: ["Unmatched SF skyline views", "Brand-new waterfront homes", "8-minute ferry to the Ferry Building", "Bay-front parks & trails"],
     aka: "TI",
-    history: "Treasure Island was built in 1936-37 atop the Yerba Buena Shoals to host the 1939-40 Golden Gate International Exposition, a World's Fair celebrating the new Bay and Golden Gate bridges. It was meant to become San Francisco's airport, but the U.S. Navy took it over during World War II as Naval Station Treasure Island, which it operated until the base closed in 1997. Since the Navy's departure it has been a modest residential community, and is now the site of one of the largest redevelopment projects in the country, adding thousands of new homes, high-rises, parks, and ferry service. The Art Deco Building One, the former Administration Building, remains a city landmark.",
+    history: "Treasure Island was built in 1936-37 atop the Yerba Buena Shoals to host the 1939-40 Golden Gate International Exposition, a World's Fair celebrating the new Bay and Golden Gate bridges. It was meant to become San Francisco's airport, but the U.S. Navy took it over during World War II as Naval Station Treasure Island, which it operated until the base closed in 1997. Since the Navy's departure it has been a residential community, and is now the site of one of the largest redevelopment projects in the country, adding thousands of new homes, high-rises, parks, and ferry service. The Art Deco Building One, the former Administration Building, remains a city landmark.",
     facts: [
       { icon: "fair", title: "Born from a World's Fair", text: "The island was created in 1936-37 to host the 1939-40 Golden Gate International Exposition." },
       { icon: "flag", title: "A Navy base for 50 years", text: "Naval Station Treasure Island operated here from World War II until it closed in 1997." },
@@ -7648,7 +7648,7 @@ export const NEIGHBORHOODS = {
       "Kite Hill views",
     ],
     history:
-      "Before anyone said “the Castro,” this bowl beneath Twin Peaks was Eureka Valley, part of Rancho San Miguel, the land granted in 1845 to José de Jesús Noé, Yerba Buena's last Mexican alcalde. Transit turned it into a neighborhood. In 1887 the Market Street Cable Railway decided to convert its steam-dummy line out Market Street to cable and push it over the Castro hill to 26th Street; by 1888 its cable cars ran from the Ferry Building to Noe Valley. Irish, German and Scandinavian families filled the slopes with cottages and flats, and in 1891 Alfred “Nobby” Clarke announced a castle at the foot of Twin Peaks that was quickly dubbed his folly.\n\nThe valley came through the 1906 earthquake and fire largely intact. When the line went electric after the quake, the Castro hill proved too steep for streetcars, so a cable shuttle kept climbing it until 1941. In 1918 the Twin Peaks Tunnel opened under Market Street with a stop of its own, Eureka Valley station; it closed in 1972, during construction of the Market Street subway.\n\nBy the late 1960s families were leaving for the suburbs, and inexpensive Victorians drew gay men who restored the houses and opened bars and shops. When the old Eureka Valley merchants' group snubbed gay-owned businesses, camera-shop owner Harvey Milk became first president of the new Castro Village Association, and the shopping blocks took the street's name. Uphill, neighbors fought for a decade, sit-in included, to save a Seward Street lot that opened as a mini-park in 1973. When AIDS struck, Most Holy Redeemer's former convent became a hospice in 1987. The quieter slopes above the shops still carry the old name.",
+      "Before anyone said “the Castro,” this bowl beneath Twin Peaks was Eureka Valley, part of Rancho San Miguel, the land granted in 1845 to José de Jesús Noé, Yerba Buena's last Mexican alcalde. Transit turned it into a neighborhood. In 1887 the Market Street Cable Railway decided to convert its steam-dummy line out Market Street to cable and push it over the Castro hill to 26th Street; by 1888 its cable cars ran from the Ferry Building to Noe Valley. Immigrants from Ireland, Germany and Scandinavia filled the slopes with cottages and flats, and in 1891 Alfred “Nobby” Clarke announced a castle at the foot of Twin Peaks that was quickly dubbed his folly.\n\nThe valley came through the 1906 earthquake and fire largely intact. When the line went electric after the quake, the Castro hill proved too steep for streetcars, so a cable shuttle kept climbing it until 1941. In 1918 the Twin Peaks Tunnel opened under Market Street with a stop of its own, Eureka Valley station; it closed in 1972, during construction of the Market Street subway.\n\nBy the late 1960s families were leaving for the suburbs, and inexpensive Victorians drew gay men who restored the houses and opened bars and shops. When the old Eureka Valley merchants' group snubbed gay-owned businesses, camera-shop owner Harvey Milk became first president of the new Castro Village Association, and the shopping blocks took the street's name. Uphill, neighbors fought for a decade, sit-in included, to save a Seward Street lot that opened as a mini-park in 1973. When AIDS struck, Most Holy Redeemer's former convent became a hospice in 1987. The quieter slopes above the shops still carry the old name.",
     facts: [
       {
         icon: "subway",
@@ -7664,7 +7664,7 @@ export const NEIGHBORHOODS = {
         icon: "church",
         title: "A convent turned AIDS hospice",
         text:
-          "Most Holy Redeemer was founded in 1900 for Eureka Valley's Irish, German and Italian families, and its church was dedicated on Christmas Day 1901. As AIDS swept the neighborhood, the parish started an AIDS Support Group in 1985, and its former convent across Diamond Street opened as Coming Home Hospice in 1987.",
+          "Most Holy Redeemer was founded in 1900 to serve immigrants from Ireland, Germany and Italy who had settled in Eureka Valley, and its church was dedicated on Christmas Day 1901. As AIDS swept the neighborhood, the parish started an AIDS Support Group in 1985, and its former convent across Diamond Street opened as Coming Home Hospice in 1987.",
         place: "Most Holy Redeemer Church",
         where: "100 Diamond St",
         at: [-122.43737, 37.76064],
@@ -7744,7 +7744,7 @@ export const NEIGHBORHOODS = {
   },
   "Union Street": {
     spirit:
-      "Frequently combined with the neighborhood Cow Hollow, eight sunny blocks of Victorian storefronts from Van Ness to Steiner — boutiques, brunch patios, and a buzzing Fillmore Street bar corner, on what was once dairy pasture.",
+      "Frequently combined with the neighborhood Cow Hollow, eight sunny blocks of Victorian storefronts from Van Ness to Steiner — boutiques, brunch patios, and a Fillmore Street bar corner, on what was once dairy pasture.",
     reasons: [
       "Union St boutiques & brunch",
       "Lively bar scene",
@@ -7752,7 +7752,7 @@ export const NEIGHBORHOODS = {
       "Condos & classic flats",
     ],
     history:
-      "Named for the shopping street at its heart, this is the eastern end of greater Cow Hollow — the marshy valley where dozens of dairies supplied the young city's milk in the mid-1800s. Here lay Washerwoman's Lagoon, the freshwater pond where Gold Rush–era laundries washed the city's clothes, until dairies and tanneries fouled it; late in the century the dairies were pushed out and the pond was filled. Victorian and Edwardian homes and storefronts rose on the new lots, and in the 1950s–60s Union Street's blocks between Van Ness and Steiner reinvented themselves as a boutique-and-dining strip.",
+      "Named for the shopping street at its heart, this is the eastern end of greater Cow Hollow — the marshy valley where dozens of dairies supplied the young city's milk in the mid-1800s. Here lay Washerwoman's Lagoon, the freshwater pond where Gold Rush–era laundries washed the city's clothes, until dairies and tanneries fouled it; late in the century the dairies were pushed out and the pond was filled. Victorian and Edwardian homes and storefronts rose on the new lots, and in the 1950s–60s Union Street's blocks between Van Ness and Steiner became a boutique-and-dining strip.",
     facts: [
       {
         icon: "house",
@@ -7830,7 +7830,7 @@ export const NEIGHBORHOODS = {
   },
   "Northern Waterfront": {
     spirit:
-      "The sunny, bay-facing foot of Telegraph Hill — old cargo piers reborn as a science museum and a cruise terminal, with the F-line streetcar rolling down the Embarcadero out front.",
+      "The sunny, bay-facing foot of Telegraph Hill — old cargo piers now home to a science museum and a cruise terminal, with the F-line streetcar rolling down the Embarcadero out front.",
     reasons: ["Sunny bayfront blocks", "Embarcadero promenade", "Walk to the Financial District", "F-line streetcar at the door"],
     aka: "Northeast Waterfront",
     history:
