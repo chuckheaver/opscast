@@ -23,7 +23,6 @@ export default function Page() {
   const sfh = G.find(g => g.key === "sfh"), dx = G.find(g => g.key === "duplex");
   const thru = new Date(`${data.through}T12:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
   const gap = Math.round((dx.price / sfh.price - 1) * 100), sfgap = Math.round((dx.ppsf / sfh.ppsf - 1) * 100);
-  const bigP = Math.max(...G.map(g => g.price || 0)), bigS = Math.max(...G.map(g => g.ppsf || 0));
   return (
     <div className="lp">
       <section className="lp-guide-head">
@@ -47,18 +46,6 @@ export default function Page() {
           </table></div>
         </section>
 
-        <section className="lp-nsec">
-          <h2>Price vs. price per square foot</h2>
-          <div className="ptp-bars" role="img" aria-label="Median price and median price per square foot by property type">
-            {G.map(g => (
-              <div key={g.key} className="ptp-bar">
-                <span className="ptp-bar-l">{g.label}</span>
-                <span className="ptp-bar-v"><i style={{ width: `${(100 * (g.price || 0)) / bigP}%` }} className="ptp-p" />{m(g.price)}</span>
-                <span className="ptp-bar-v"><i style={{ width: `${(100 * (g.ppsf || 0)) / bigS}%` }} className="ptp-s" />{sf(g.ppsf)}/sf</span>
-              </div>
-            ))}
-          </div>
-        </section>
 
         <section className="lp-nsec">
           <h2>By quarter</h2>
