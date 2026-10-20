@@ -109,5 +109,7 @@ walking order, each with `place`, `where` and `at`).
 Content edits — neighborhood text, walking tours, wording, copy — are
 committed and pushed to main as they are done; the owner doesn't approve
 each one. Major structural changes to the code wait for the owner's
-approval before they are pushed. A data load follows the market report's
-rule above: show the owner the review's findings first.
+approval before they are pushed. A data load is never pushed to the live
+site until the owner has reviewed it: give them the exception report (the
+review's findings, every anomaly and every inconsistency with earlier loads
+and fields) and wait for their go-ahead.
