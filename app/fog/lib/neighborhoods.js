@@ -7896,14 +7896,78 @@ export const NEIGHBORHOODS = {
     spirit: "The outer Sunset's foggy southern half — mile after mile of pastel 1930s row houses, a working Main Street on Taraval, and big green breathing room at Stern Grove and the city's western edge.",
     reasons: ["L-Taraval streetcar down Main Street", "Stern Grove's free summer concerts", "A real neighborhood dining strip", "Steps from the Zoo, Stern Grove and Ocean Beach"],
     aka: "the Outer Sunset",
-    history: "Parkside began in 1905 when a syndicate quietly bought former Outside Lands dunes from the Adolph Sutro estate and others to launch a new residential subdivision centered on Taraval Street. Early pioneers built on bare sand far from city services and organized the Parkside District Improvement Club in 1908 to demand them. Muni's L-Taraval streetcar opened along Taraval in 1919, opening the area to wider settlement. In the 1920s through 1940s builders like Henry Doelger, the Gellerts and the Stoneson brothers used new FHA loans to fill the dunes with rows of affordable stucco single-family homes. Though planned as its own neighborhood, Parkside is today generally considered part of the larger Sunset District.",
+    history:
+      "Long before the subdivision, this corner of the Outside Lands was a homestead. Alfred Greene and his wife claimed land here in 1847, and his nephew George planted the first eucalyptus on the property. An 1887 lawsuit forced the family to give up most of their holdings, leaving them the hollow that is now Stern Grove and Pine Lake, which old-timers called Laguna Puerca, Mud Lake or Crawdad Lake. In 1892 the Greenes opened the Trocadero there, a roadhouse with dancing and roulette, and in 1907 political boss Abe Ruef hid out in it after his indictment in the graft trials.\n\nBy 1905 the Parkside Realty Company, largely controlled by William H. Crocker, owned 140 contiguous blocks bought from the estate of Adolph Sutro and others, and announced a million-dollar development. The \"park\" in its name was the stand of trees around Laguna Puerca, not Golden Gate Park; most of the tract was sand dunes. The first houses went up in 1907, and in 1908 property owners met at 26th Avenue and Taraval to form the Parkside District Improvement Club, which lobbied for streetlights, a school, sewers and a volunteer fire company. In 1909 the company asked the city to give the lettered streets names: T Street became Taraval.\n\nThe L-Taraval streetcar arrived on April 12, 1919, running from West Portal to 33rd Avenue, and by 1923 its tracks reached 48th Avenue. In 1931 Rosalie Meyer Stern bought the Greenes' 12 acres and gave them to the city in memory of her husband, the city bought Pine Lake within five years, and in 1938 she founded the festival whose concerts are free to this day.",
     facts: [
-      { icon: "tram", title: "A century on the L", text: "Muni's L-Taraval streetcar opened along Taraval Street in 1919 and still runs down the neighborhood's spine today." },
-      { icon: "music", title: "Free concerts at Stern Grove", text: "Sigmund Stern Grove, gifted to the city by Rosalie Stern, has hosted the nation's oldest free summer concert series since 1938." },
-      { icon: "house", title: "Doelger's dunes", text: "Builder Henry Doelger's company produced roughly 26,000 Bay Area homes, helping turn Parkside's sand dunes into rows of stucco houses." },
-      { icon: "park", title: "Zoo at the edge", text: "The San Francisco Zoo has sat at Sloat Boulevard and the Great Highway, just southwest of Parkside, since 1929." },
-      { icon: "flag", title: "Born from the dunes", text: "A 1905 syndicate bought former Outside Lands dunes from the Adolph Sutro estate to create the Parkside subdivision around Taraval Street." },
+      {
+        icon: "book",
+        title: "A library like a suburban house",
+        text:
+          "Opened on June 21, 1951, as the library system's 19th branch, the Parkside Branch was the first of eight postwar branches designed by Appleton & Wolfard between 1951 and 1966, with grounds by landscape architect Lawrence Halprin. Its angled windows, exposed clay-brick walls, fireplace and patio give it the feel of a midcentury house, and in 2023 the city made it a San Francisco Landmark.",
+        place: "Parkside Branch Library",
+        where: "1200 Taraval St",
+        at: [-122.47843, 37.74289],
+        source: "https://sfpl.org/node/3159",
+      },
+      {
+        icon: "park",
+        title: "A square named for a mayor",
+        text:
+          "The library sits inside McCoppin Square, the park between 22nd and 24th Avenues and Santiago and Taraval Streets, named for Frank McCoppin, the mayor who approved the plan for Golden Gate Park in 1868; a 2011 city resolution says the square was built in 1935. It reopened in October 2011 after a $3.8 million renovation, the first project finished under the 2008 parks bond, that expanded the playground and added new courts, restrooms and a contemplative garden.",
+        place: "McCoppin Square",
+        where: "Taraval St & 24th Ave",
+        at: [-122.48083, 37.74281],
+        source: "https://sfpublicworks.org/node/34527",
+      },
+      {
+        icon: "shop",
+        title: "Main Street on the L line",
+        text:
+          "City planners describe Taraval's commercial strip as running along both sides of the street from 19th through 36th Avenues, about a mile, with convenience goods and services, professional and realty offices, banks and a high concentration of restaurants. The L-Taraval streetcar has run down its middle since April 12, 1919, and at 26th Avenue property owners met in 1908 to found the Parkside District Improvement Club.",
+        place: "Taraval Street shops",
+        where: "Taraval St & 28th Ave",
+        at: [-122.48537, 37.74265],
+        source: "https://commissions.sfplanning.org/cpcpackets/2013.1223CUA.pdf",
+      },
+      {
+        icon: "house",
+        title: "Cottages from the dune days",
+        text:
+          "The Parkside Realty Company started building small houses on the sand in 1907. A July 1910 city photograph of sewer work shows its cottages on 30th and 31st Avenues near Vicente Street, with sand dunes still around them. Within a couple of years of the first houses, residents had formed their own volunteer fire company, housed in a building the realty company donated.",
+        place: "Parkside Realty cottages",
+        where: "Vicente St & 30th Ave",
+        at: [-122.48713, 37.73877],
+        source: "https://test.opensfhistory.org/photo/wnp36.00067",
+      },
+      {
+        icon: "water",
+        title: "The park in Parkside",
+        text:
+          "Pine Lake, once Laguna Puerca or Pig Lake, is fed by an underground spring, and the city's parks department calls it one of the few remaining natural lakes in San Francisco. Its stand of trees, not Golden Gate Park, is the \"park\" the Parkside Realty Company named the neighborhood for, and its eastern edge runs straight into Stern Grove.",
+        place: "Pine Lake",
+        where: "Wawona St & 31st Ave",
+        at: [-122.48889, 37.73611],
+        source: "https://en.wikipedia.org/wiki/Pine_Lake_(San_Francisco)",
+      },
+      {
+        icon: "music",
+        title: "Where a city boss hid out",
+        text:
+          "The Greenes built the Trocadero in 1892, a Stick-Eastlake roadhouse with dancing and roulette, and in 1907 indicted political boss Abe Ruef hid out here during the graft trials. The city made it a San Francisco landmark in 2022; after an 85-foot eucalyptus crushed part of its roof in a March 2023 storm, a $2.5 million restoration let it reopen for events in 2025. The grove's free summer festival has been held in the meadow since 1938.",
+        place: "Stern Grove and the Trocadero",
+        where: "19th Ave & Sloat Blvd",
+        at: [-122.47760, 37.73620],
+        source: "https://localnewsmatters.org/2025/03/04/restored-after-storm-damage-san-franciscos-trocadero-clubhouse-reopens-for-events/",
+      },
     ],
+    walk: {
+      intro:
+        "A 2-mile line from the L-Taraval stop at Taraval St & 22nd Ave, west along Taraval, south past the early cottage blocks near Vicente Street to Pine Lake, then east through the eucalyptus of Stern Grove to the Trocadero, a short climb from the buses at 19th Ave & Sloat Blvd. Allow about 75 minutes, and go in summer, when the free Stern Grove Festival concerts are on.",
+      miles: 2,
+      minutes: 75,
+      tip:
+        "Pick up coffee on Taraval before you turn south: once you drop down to Pine Lake and Stern Grove there is only the lakeside path, the meadow and the trees until you climb out at 19th Avenue.",
+    },
     restaurants: [
       { name: "Dumpling Kitchen", address: "1935 Taraval St", phone: "(415) 682-8938", url: "https://www.dumplingkitchenca.com" },
       { name: "Kingdom of Dumpling", address: "1713 Taraval St", phone: "(415) 566-6143" },
@@ -7922,14 +7986,68 @@ export const NEIGHBORHOODS = {
   "Parkmerced": {
     spirit: "A planned garden-and-towers community on San Francisco's far southwest edge, where mid-century apartment living meets Lake Merced air and the bustle of SF State next door.",
     reasons: ["Master-planned green space", "Steps from SF State and Stonestown", "Beside Lake Merced and Stern Grove", "M-line and 19th Avenue transit at the door"],
-    history: "In 1941 the Metropolitan Life Insurance Company assembled nearly 200 acres of former Spring Valley Water Company land to build a 'city within a city' of rental housing. The garden apartments and townhouses went up between 1941 and 1951, joined in the 1950s by a ring of high-rise towers, with landscape architect Thomas Church shaping the radiating street plan and lawns. The community totals roughly 3,200 units and was designed for the post-war housing boom. In May 2011 the SF Board of Supervisors approved a long-term redevelopment plan that would phase out most low-rise garden units in favor of denser mid-rise housing over several decades.",
+    history:
+      "In 1835 Governor José Castro granted Rancho Laguna de la Merced, 2,219 acres around the lake, to José Antonio Galindo, who did little with it and sold it two years later to Francisco de Haro. In 1868 the Spring Valley Water Company bought the lake's water rights, then the surrounding watershed, and the city eventually bought the company itself for $40 million. In 1940 the Metropolitan Life Insurance Company bought the last of Spring Valley's land here to build moderate-income rental housing for returning World War II veterans and their families.\n\nFollowing its Parkchester development in New York, MetLife turned to Leonard Schultze, whose firm succeeded Schultze and Weaver, and landscape architect Thomas Church, assisted by Robert Royston. Breaking with the city's street grid, their plan sends streets radiating from a wooded oval park, Juan Bautista Circle, with low-rise garden apartments and towers that face a lawn called the Meadow. The first tenants moved into the Font Boulevard buildings in early 1944, and by 1951 both phases were done: nearly 3,500 units on 191.5 acres, with a commercial zone, a school and recreation grounds. The street names, according to 7x7, come from the 1775–76 Anza expedition that brought Spanish settlers overland to San Francisco.\n\nThe Historic American Landscapes Survey documented Parkmerced as a historic district. The city later entitled a long-range plan to rebuild it with thousands more apartments, but in March 2025, after the owner defaulted on about $1.8 billion in loans, a judge put the complex into receivership, and in July 2026 a lender took the lots for the plan's first four subphases through foreclosure.",
     facts: [
-      { icon: "house", title: "A planned community", text: "MetLife began building Parkmerced in 1941 as a 'city within a city,' with about 3,200 rental units." },
-      { icon: "tower", title: "Ring of towers", text: "Thirteen-story residential towers added in the 1950s rise above the original two-story garden apartments and courtyards." },
-      { icon: "water", title: "Lake Merced at the edge", text: "The neighborhood sits between 19th Avenue and Lake Merced, near Harding Park and Stern Grove." },
-      { icon: "book", title: "Next to SF State", text: "Parkmerced lies just south of San Francisco State University." },
-      { icon: "tram", title: "M-line through the door", text: "The M Ocean View Muni Metro runs the 19th Avenue median past the neighborhood and SF State." },
+      {
+        icon: "star",
+        title: "A campus gym on Font Boulevard",
+        text:
+          "San Francisco State's Mashouf Wellness Center opened its doors on August 23, 2017, on Font Boulevard just south of Lake Merced Boulevard. The $86.5 million building, paid for with student fees and private donations, including a lead gift from Manny Mashouf, holds fitness and weight floors, an indoor jogging track, a climbing wall, racquetball courts and pools.",
+        place: "Mashouf Wellness Center",
+        where: "Font Blvd & Lake Merced Blvd",
+        at: [-122.48335, 37.72263],
+        source: "https://goldengatexpress.org/2017/08/23/mashouf-opens-for-sf-state/",
+      },
+      {
+        icon: "music",
+        title: "Named for the bold widow",
+        text:
+          "Arballo Drive honors María Feliciana Arballo, whose soldier husband died about a month before the Anza expedition set out; she joined it anyway with her two small daughters. At the camp fandangos of December 1775 she sang verses the crowd cheered, and Father Pedro Font wrote disapprovingly of \"a very bold widow.\" She never reached San Francisco: she left the party at Mission San Gabriel in January 1776 and married a soldier there that April.",
+        place: "Arballo Drive",
+        where: "Font Blvd & Arballo Dr",
+        at: [-122.48235, 37.72180],
+        source: "https://www.nps.gov/articles/000/feliciana-arballo.htm",
+      },
+      {
+        icon: "house",
+        title: "Where the first tenants moved in",
+        text:
+          "The first tenants moved into the Font Boulevard buildings in early 1944, and the rest of the 191.5-acre site followed in two phases through 1951. The boulevard is named for Father Pedro Font, the Franciscan chaplain of the 1775–76 Anza expedition, whose diary is a main account of the trip; it runs the length of the complex from Lake Merced Boulevard to Junipero Serra Boulevard.",
+        place: "Font Boulevard",
+        where: "Font Blvd & Tapia Dr",
+        at: [-122.48107, 37.72071],
+        source: "https://en.wikipedia.org/wiki/Parkmerced,_San_Francisco",
+      },
+      {
+        icon: "park",
+        title: "The oval at the center",
+        text:
+          "Thomas Church's heavily wooded, three-acre oval park anchors the plan, and Parkmerced's major and minor streets radiate out from it, crossed by a ring of connector streets. Part of the oval is now Robert Pender Park, dedicated in 2009, and west of the circle a broad lawn called the Meadow serves as the front yard for four thirteen-story towers.",
+        place: "Juan Bautista Circle",
+        where: "Font Blvd & Juan Bautista Cir",
+        at: [-122.47791, 37.71809],
+        source: "https://tclf.org/sites/default/files/landslide/2008/parkmerced/history2.html",
+      },
+      {
+        icon: "flag",
+        title: "A planned landscape on record",
+        text:
+          "The Historic American Landscapes Survey record for Parkmerced, HALS CA-114 at the Library of Congress, describes it as a historic district significant for community planning and mid-century design, with a period of significance of 1941 to 1951. It finds that most of its buildings, landscapes and features still reflect the original design from MetLife's years of ownership.",
+        place: "Chumasero Drive corner",
+        where: "Font Blvd & Chumasero Dr",
+        at: [-122.47315, 37.71508],
+        source: "https://www.loc.gov/item/ca4184",
+      },
     ],
+    walk: {
+      intro:
+        "A one-mile line down the length of Font Boulevard, from the 57 Parkmerced bus stop at Lake Merced Blvd & Font Blvd past Arballo Drive and Juan Bautista Circle to Font Blvd & Chumasero Dr, where the 57 stops again. Allow about 40 minutes, and go on a clear afternoon, when the fog has burned off the lake.",
+      miles: 1,
+      minutes: 40,
+      tip:
+        "Parkmerced is almost entirely residential, so for cafés and shops head north along 19th Avenue; or cross Lake Merced Blvd at the start for the 4.5-mile paved loop around the lake.",
+    },
     nearby: ["Stonestown", "SF State"],
     restaurants: [
       { name: "Le Soleil", address: "3251 20th Ave, Ste 221", phone: "(415) 877-8899", url: "https://www.lesoleilsf.com/stonestown" },
@@ -7945,14 +8063,68 @@ export const NEIGHBORHOODS = {
   "Stonestown": {
     spirit: "San Francisco's southwest crossroads, where a mid-century mall, now a dining-and-shopping hub, meets a university campus and the open green of Lake Merced.",
     reasons: ["Anchored by the Stonestown Galleria", "Next to San Francisco State University", "Steps from Lake Merced parkland", "Muni Metro and major bus lines on 19th Avenue"],
-    history: "Stonestown was developed by brothers Henry and Ellis Stoneson beginning in the late 1940s on former farmland southwest of downtown. The Stonestown Shopping Center opened in 1952, with The Emporium department store as its anchor, and was one of the West's first large regional shopping centers paired with adjacent apartments housing several thousand residents. The neighborhood grew up alongside San Francisco State University, whose campus sits just across 19th Avenue. A 1980s renovation enclosed the center and rebranded it the Stonestown Galleria, and in 2024 the city approved a major redevelopment to add roughly 3,500 new homes, parks, and a new retail main street on the surrounding parking lots.",
+    history:
+      "Long before the mall, this corner of the southwest belonged to the water company: a January 1903 photograph shows a Spring Valley Water Company flume crossing a gully toward a row of eucalyptus trees, between present-day Stonestown and Lowell High School. On October 6, 1925, Muni opened the M Ocean View streetcar along the west side of what would become 19th Avenue, through an area that was still mostly farmland, and the SFMTA credits the line with sparking the growth of Lakeside, Stonestown, Parkmerced and Oceanview.\n\nThe builders were Henry (1895-1958) and Ellis (1893-1952) Stoneson, brothers born in Victoria, Canada, to Icelandic immigrants, who arrived in San Francisco in 1920; the Western Neighborhoods Project credits their company with close to 25,000 Bay Area homes. A July 1949 press caption describes their $23 million plan for a small city on the shores of Lake Merced: four large apartment houses of 90 apartments each, 28 smaller ones and an extensive shopping center, with homes for 3,000 to 3,500 people. Welton Becket designed the center, which opened on July 16, 1952. Ellis died of a heart attack at 59, on the cusp of the opening.\n\nSan Francisco State College held its first semester on its new campus just south, at 19th and Holloway avenues, in fall 1953. In 1987 the center's strip of unenclosed stores was remade as the indoor mall that stands today. On June 15, 2005, the university bought the Stonestown Apartments and renamed them University Park North, and in 2024 the city unanimously approved a plan to turn the mall's parking lots into a neighborhood of up to 3,500 homes.",
     facts: [
-      { icon: "shopping", title: "Opened in 1952", text: "The original Stonestown Shopping Center opened in 1952, anchored by The Emporium, and was among the first large regional shopping centers in the western U.S." },
-      { icon: "house", title: "Built by the Stoneson brothers", text: "Brothers Henry and Ellis Stoneson developed Stonestown's mall and apartments in the late 1940s and early 1950s." },
-      { icon: "book", title: "Next to SF State", text: "San Francisco State University sits directly across 19th Avenue, bringing tens of thousands of students to the area." },
-      { icon: "house", title: "3,500 homes coming", text: "In 2024 San Francisco approved a Brookfield-led redevelopment to build about 3,500 homes, parks, and a new retail main street around the Galleria." },
-      { icon: "tram", title: "M-line on 19th Ave", text: "The Muni Metro M Ocean View light rail runs in the median of 19th Avenue with a stop adjacent to the Galleria." },
+      {
+        icon: "subway",
+        title: "A streetcar older than the town",
+        text:
+          "Muni opened the M Ocean View on October 6, 1925, as a shuttle from Broad Street and Plymouth Avenue to St. Francis Circle, with just two streetcars assigned, running along the west side of what would become 19th Avenue through an area that was then mostly farmland. The college beside the tracks came later: San Francisco State, which began on Powell Street in 1899 and rebuilt near Buchanan Street after 1906, held its first semester on this Lake Merced campus, its third home, in fall 1953.",
+        place: "San Francisco State University station",
+        where: "19th Ave & Holloway Ave",
+        at: [-122.47522, 37.72124],
+        source: "https://www.sfmta.com/blog/celebrating-100-years-m-ocean-view",
+      },
+      {
+        icon: "book",
+        title: "The city's 25th branch library",
+        text:
+          "Designed by Appleton & Wolfard and built in 1957 for $137,511, the Merced Branch opened on January 24, 1958, as the 25th branch of the San Francisco Public Library. A renovation of about $5.4 million by the city's Library Design Studio added a front addition, seismic strengthening and a doubled children's area, and the branch reopened on May 14, 2011; the library and Public Works report it was certified LEED Gold.",
+        place: "Merced Branch Library",
+        where: "155 Winston Dr",
+        at: [-122.47449, 37.72662],
+        source: "https://sfpl.org/locations/merced/merced-library-history",
+      },
+      {
+        icon: "road",
+        title: "Parking lots into a neighborhood",
+        text:
+          "The surface parking around the mall is the site of the Stonestown Development Project, approved unanimously by the Planning Commission on May 9, 2024, and then by the Board of Supervisors that July. Sponsored by Brookfield Properties, the plan would turn about 27 acres of parking into a mostly residential neighborhood of up to 3,500 homes with parks, plazas, shops and offices, keeping about 710,000 square feet of the existing mall.",
+        place: "Stonestown redevelopment site",
+        where: "20th Ave & Winston Dr",
+        at: [-122.47593, 37.72678],
+        source: "https://sfplanning.org/project/stonestown",
+      },
+      {
+        icon: "shopping",
+        title: "From open strip to indoor mall",
+        text:
+          "Filling the block between 19th and 20th avenues north of Winston Drive, the shopping center was designed in its entirety by architect Welton Becket, with Ellis Stoneson as builder and Henry as cobuilder, and opened on July 16, 1952, around a department store. In 1987 its strip of unenclosed stores was remade into the indoor mall of shops, restaurants and services standing today. After the department-store anchor closed in 2018, that building was demolished in 2019 and rebuilt to hold a supermarket and a multiplex cinema.",
+        place: "Stonestown mall shops",
+        where: "3251 20th Ave",
+        at: [-122.47670, 37.72837],
+        source: "https://en.wikipedia.org/wiki/Stonestown_Galleria",
+      },
+      {
+        icon: "tower",
+        title: "Four towers, one university landlord",
+        text:
+          "The Stonesons' 1949 plan called for four large apartment houses of 90 apartments each beside the shopping center, and today the complex holds 697 units in 14 buildings: four 10-story towers and ten two- and three-story garden apartments and flats along Buckingham Way. San Francisco State became its owner on June 15, 2005, paying $134 million, adding 24.81 acres to the campus, and renamed it University Park North, with no existing tenants required to move.",
+        place: "Stonestown Apartments",
+        where: "Buckingham Way & Winston Dr",
+        at: [-122.47891, 37.72823],
+        source: "https://www.sfsu.edu/~news/2005/summer/82.htm",
+      },
     ],
+    walk: {
+      intro:
+        "A short one-way walk for visitors and would-be neighbors from the M streetcar's San Francisco State University stop at 19th Ave & Holloway Ave north past the branch library and the mall to the Stoneson towers on Buckingham Way, about 0.8 mile and 40 minutes with stops. Go on a weekday afternoon, when the library is open.",
+      miles: 0.8,
+      minutes: 40,
+      tip:
+        "Check the Merced Branch Library's hours before you go; Lake Merced lies a few blocks west of the towers across Lake Merced Boulevard.",
+    },
     restaurants: [
       { name: "Le Soleil", address: "3251 20th Ave, Ste 221", phone: "(415) 877-8899", url: "https://www.lesoleilsf.com/stonestown" },
       { name: "Marugame Udon", address: "3251 20th Ave", phone: "(415) 680-1280", url: "https://www.marugameudon.com/locations/stonestown/" },
@@ -7967,14 +8139,88 @@ export const NEIGHBORHOODS = {
   "Lakeshore": {
     spirit: "San Francisco's quiet southwest corner, where streets curve around Lake Merced and the city trades fog-bound bustle for a near-suburban calm of golf greens, lakeside trails, and Pacific air.",
     reasons: ["Lake Merced's 4-mile loop at your doorstep", "Steps from Harding Park golf", "Quiet residential streets", "Minutes to Ocean Beach and Stonestown"],
-    history: "Lake Merced is one of San Francisco's few natural freshwater lakes and supplied the city's drinking water from the late 1860s until 1934, when Hetch Hetchy took over. The city-run Harding Park golf course opened along its shores on July 18, 1925, designed by Willie Watson and Sam Whiting. The surrounding Lakeshore tracts were developed mid-century as planned residential subdivisions, including the Gellert brothers' Lakeshore Park, marketed from 1939 as a deluxe subdivision south of Sloat Boulevard. Lakeshore Plaza, the neighborhood's main shopping center at Sloat and Lake Merced boulevards, anchors the area's everyday commerce today.",
+    history:
+      "Most accounts credit Spanish sea captain Bruno de Heceta with naming the lake at the heart of this corner Laguna de Nuestra Señora de la Merced in 1775, and in March 1776 Father Pedro Font's diary of the Anza expedition noted the Laguna de la Merced and the many bears seen near it. In 1835 the land around it became the Rancho Laguna de la Merced, granted to José Antonio Galindo. The lake was then a coastal estuary: in heavy rains it overflowed and cut a stream to the ocean.\n\nIn 1868 the Spring Valley Water Company bought the lake's water rights, then almost 3,000 acres nearby, and in 1895 it dammed the lake off from the sea. In 1922 parks commissioner Herbert Fleishhacker bought a 30-acre oceanside site from the company for a zoo, stocked at first with animals moved from Golden Gate Park. His giant saltwater pool opened in 1925, and on July 18, 1925, the city's new golf course opened beside the lake, named for President Warren G. Harding, who had died in San Francisco in 1923. Between 1931 and 1933 city crews built the south end of Sunset Boulevard, carrying it beneath Sloat Boulevard.\n\nAfter World War II the land around the lake filled quickly with single-family homes, in tracts such as Lakeshore Acres and Crestlake, served by the small shopping center of Lakeshore Plaza. The pool closed in 1971, and in 1998 Harding Park was used as a parking lot for the U.S. Open next door; restored, it hosted the 2020 PGA Championship. The lake itself, city-owned since San Francisco bought Spring Valley in 1930, now serves as an emergency, non-drinking water supply.",
     facts: [
-      { icon: "water", title: "A rare natural lake", text: "Lake Merced is one of the largest freshwater lakes in San Francisco and once served as the city's water source until 1934." },
-      { icon: "park", title: "The four-mile loop", text: "A flat, paved multi-use path circles Lake Merced, drawing walkers, runners, cyclists, and birders past golf courses and eucalyptus groves." },
-      { icon: "flag", title: "Championship golf", text: "Harding Park opened in 1925 and, as TPC Harding Park, has hosted PGA Tour and major championship events along the lakeshore." },
-      { icon: "bird", title: "Pine Lake Park", text: "Just north, Pine Lake is one of the city's few remaining natural lakes, ringed by a birding trail into Stern Grove." },
-      { icon: "wave", title: "Boathouse on the water", text: "The Lake Merced Boathouse at 1 Harding Road offers picnic areas, a fishing pier, and a boat launch on the lake's edge." },
+      {
+        icon: "shop",
+        title: "A shopping center built for the tracts",
+        text:
+          "Lakeshore Plaza fills a single nine-acre block bounded by Sloat Boulevard, Everglade Drive, Ocean Avenue and Clearfield Drive, with three large, low buildings set back from the street and surrounded by parking. The city's planning code says it was built to work as a small neighborhood shopping center, entirely surrounded by the single-family tracts of Lakeshore Acres, Crestlake and Merced Manor, and its special use district aims to keep the goods and services that serve them.",
+        place: "Lakeshore Plaza shops",
+        where: "Sloat Blvd & Everglade Dr",
+        at: [-122.48968, 37.73396],
+        source: "https://gocodebook.com/library/us/ca/san-francisco-planning/article-7-neighborhood-commercial-districts/sec.-780.-neighborhood-commercial-special-use-districts/sec.-780.1.-lakeshore-plaza-special-use-district",
+      },
+      {
+        icon: "road",
+        title: "A boulevard dug under Sloat",
+        text:
+          "Sunset Boulevard's south end dips beneath Sloat Boulevard here, and Department of Public Works photographs record how it was built: initial excavation for the Sloat overpass in October 1931, the underpass under construction that November, sand fill dumped along the shore of Lake Merced in September 1932, and the roads connecting Sunset to Sloat in March 1933.",
+        place: "Sunset Boulevard at Ocean Ave",
+        where: "Sunset Blvd & Ocean Ave",
+        at: [-122.49375, 37.73177],
+        source: "https://test.opensfhistory.org/neighborhood/lakeshore?page=10",
+      },
+      {
+        icon: "water",
+        title: "An estuary turned reservoir",
+        text:
+          "Lake Merced was once a coastal estuary that overflowed in heavy rains and cut a stream to the ocean. The Spring Valley Water Company bought its water rights in 1868, and in 1895 it dammed the lake off from the sea and began delivering its water to the city; San Francisco bought the company in 1930, and the Public Utilities Commission now keeps the lake as an emergency, non-drinking water supply.",
+        place: "Lake Merced",
+        where: "Skyline Blvd & Lake Merced Blvd",
+        at: [-122.49922, 37.73115],
+        source: "https://www.sfpuc.gov/sites/default/files/documents/2022-0215_Lake-Merced-History_FactSheetrev.pdf",
+      },
+      {
+        icon: "flag",
+        title: "From parking lot to a major",
+        text:
+          "Designed by William Watson and Sam Whiting, who had finished the Olympic Club's Lake Course the year before, the city's course opened on July 18, 1925, and was named for President Warren G. Harding. In 1998 it served as a parking lot for the U.S. Open at the Olympic Club across the lake; former USGA president Sandy Tatum drove its restoration, and in 2020 it hosted the PGA Championship, won by Collin Morikawa.",
+        place: "TPC Harding Park",
+        where: "Skyline Blvd & Harding Rd",
+        at: [-122.50245, 37.72639],
+        source: "https://en.wikipedia.org/wiki/TPC_Harding_Park",
+      },
+      {
+        icon: "wave",
+        title: "A boathouse back on the water",
+        text:
+          "The 15,200-square-foot boathouse on Harding Road was built in 1958, and its second floor sat empty after its concessionaire left in 2003. The city's water and parks departments shared the cost of cleaning it up and remodeling it, and in 2021 a $1.68 million project replaced the old gangway and wooden dock on North Lake, across from the boathouse.",
+        place: "Lake Merced Boathouse",
+        where: "1 Harding Rd",
+        at: [-122.49892, 37.72561],
+        source: "https://www.sfexaminer.com/news/lake-merced-boathouse-renovations-revealed/article_8ff80138-b07e-5bc3-91de-f1b99d5cf05c.html",
+      },
+      {
+        icon: "art",
+        title: "Noah's Ark in a memorial",
+        text:
+          "The 1925 Mothers Building, designed by George W. Kelham and given to the city by Herbert Fleishhacker, is officially the Delia Fleishhacker Memorial Building, after his mother. Helen Forbes and Dorothy Puccinelli covered its walls with WPA-era murals of the Noah's Ark story between 1933 and 1938. It has been on the National Register and a California Historical Landmark since 1979 and became a San Francisco landmark in 2022, but it has been closed as seismically unsafe since 2002.",
+        place: "Mothers Building",
+        where: "Zoo Rd & Sloat Blvd",
+        at: [-122.50250, 37.73472],
+        source: "https://en.wikipedia.org/wiki/Mother%27s_Building",
+      },
+      {
+        icon: "pin",
+        title: "A pool 1,000 feet long",
+        text:
+          "Fleishhacker Pool opened beside the zoo in 1925, 1,000 feet long and 150 feet wide, with room for 10,000 swimmers. After a January 1971 storm damaged its drain pipe and its saltwater pumps failed, it closed that year; the pool was later filled and paved for the zoo's parking lot, and after its abandoned bathhouse burned in December 2012, crews tore it down but saved its grand entrance, which still stands at the west end of the lot.",
+        place: "Fleishhacker Pool site",
+        where: "Sloat Blvd & 47th Ave",
+        at: [-122.50570, 37.73490],
+        source: "https://en.wikipedia.org/wiki/Fleishhacker_Pool",
+      },
     ],
+    walk: {
+      intro:
+        "A 2.4-mile one-way walk from Lakeshore Plaza at Sloat Blvd & Everglade Dr, served by Muni buses on Sloat, down Sunset Boulevard to Lake Merced, along Skyline Boulevard to Harding Park and the boathouse, then north to the zoo and the old pool site, where buses stop on Sloat again. Allow about 90 minutes, and go in the morning, before the afternoon ocean breeze sets in.",
+      miles: 2.4,
+      minutes: 90,
+      tip:
+        "The walk is nearly flat but runs close to the ocean, so bring a windproof layer; pick up coffee or a snack at the plaza before you set out, since there is little else along the lake.",
+    },
     nearby: ["Stonestown", "West Portal"],
     restaurants: [
       { name: "Chipotle Mexican Grill", address: "1523 Sloat Blvd", phone: "(415) 592-2187", url: "https://locations.chipotle.com/ca/san-francisco/1523-sloat-blvd" },
@@ -7992,13 +8238,78 @@ export const NEIGHBORHOODS = {
     spirit: "A hushed pocket of single-family homes tucked between Alemany, Geneva and I-280 in the city's deep south, trading nightlife for front gardens, quiet streets, and one of San Francisco's most surprising public treasures: a playground filled with hundreds of hand-carved wooden folk-art sculptures.",
     reasons: ["Calm, walkable residential streets", "Steps from Cayuga Playground's folk-art garden", "Minutes to the Balboa Park BART/Muni hub", "Close to the Outer Mission's food corridor"],
     aka: "Cayuga Terrace",
-    history: "Cayuga Terrace took shape in the early 20th century as homestead-association land in the city's southern reaches was subdivided for housing. Many of its streets carry Native-American names, mostly of peoples and languages of the northeastern United States, a naming theme shared with neighboring Mission Terrace and the Outer Mission. Before 1918 a body of water known as Lake Geneva sat near what is now Cayuga Avenue, the street that gives the neighborhood its name. Through the first half of the century the area filled in with the detached single-family homes that still define it, served by nearby rail and streetcar lines and, later, the Balboa Park transit hub.",
+    history:
+      "Into the twentieth century, the gully between the old San Jose and Mission roads was open farmland, with Islais Creek running through it toward the bay. The street names came long before the houses: most are Native American tribe names that appear on the West End Homestead maps filed with the city in the 1860s, which is why the map here shows Seneca, Onondaga, Navajo, Seminole, Shawnee and Ottawa avenues. Cayuga Avenue itself appears as Wyoming Avenue on an old sales map of West End lots. A Southern Pacific stop stood near today's Balboa Park station in the 1800s, on a route that the I-280 freeway now follows.\n\nIn 1901 the San Francisco and San Mateo Electric Railway, which landmark records call the city's first electric railroad company, built its brick office and powerhouse at San Jose and Geneva avenues. Alemany Boulevard was later laid along the former right-of-way of the Ocean Shore Railroad. In the 1910s the city buried Islais Creek in a sewer project, and in the late 1920s the real estate firm Baldwin & Howell began filling the old farmland south of Geneva Avenue with the stucco bungalows of Geneva Terraces.\n\nReal estate agents began calling the area Cayuga Terrace shortly after World War II. BART opened Balboa Park station in 1973, and Muni Metro followed in 1979. The 1989 Loma Prieta earthquake put the old railway office out of service; Recreation and Park took over the complex in 2004, and its restored powerhouse is now an arts education center. In 2013 the city made Mission Street a neighborhood commercial district, and in 2022 the SFMTA Board approved Cayuga Avenue as a Slow Street.",
     facts: [
-      { icon: "art", title: "A sculpture garden made on lunch breaks", text: "Gardener Demetrio Braceros, assigned to Cayuga Park in 1986, hand-carved over 375 wooden totems, figurines and statues on his breaks; the San Francisco Arts Commission later inventoried 376 of them." },
-      { icon: "park", title: "Cayuga Playground renovated", text: "The roughly four-acre playground at 301 Naglee Avenue closed in 2011 for an $8.4 million renovation and reopened in August 2013, with many of Braceros's sculptures restored." },
-      { icon: "subway", title: "A transit powerhouse next door", text: "The nearby Balboa Park Station, opened in 1973, is one of BART's busiest stops outside downtown San Francisco and a major Muni transfer point." },
-      { icon: "pin", title: "Streets named for Native peoples", text: "Cayuga Avenue and many surrounding streets are named for Native-American peoples and languages, a deliberate theme set when the area was subdivided." },
+      {
+        icon: "subway",
+        title: "A rail stop older than BART",
+        text:
+          "BART opened Balboa Park station in November 1973, and Muni Metro joined it in 1979; today it is a hub for BART, three Muni Metro lines and a string of bus routes. Long before either, the Southern Pacific Railroad had a stop at almost the same spot, on a route that the I-280 freeway now follows.",
+        place: "Balboa Park Station",
+        where: "401 Geneva Ave",
+        at: [-122.44738, 37.72095],
+        source: "https://www.sfmta.com/blog/geneva-car-house-115-years-transit-history-balboa-park",
+      },
+      {
+        icon: "tram",
+        title: "Office of an early electric railway",
+        text:
+          "Built in 1901 for the San Francisco and San Mateo Electric Railway, which landmark records call the city's first electric railroad company, this red-brick office building and its powerhouse are San Francisco Landmark No. 180 and were listed on the National Register in 2010. Knocked out of service by the 1989 Loma Prieta earthquake, the complex passed to Recreation and Park in 2004, and the restored Powerhouse is now an arts education center.",
+        place: "Geneva Office Building and Powerhouse",
+        where: "2301 San Jose Ave",
+        at: [-122.44673, 37.72065],
+        source: "https://noehill.com/SF/LANDMARKS/sf180.asp",
+      },
+      {
+        icon: "house",
+        title: "Bungalows on a buried creek",
+        text:
+          "The triangle south of Geneva Avenue between Alemany Boulevard and I-280 is known as Geneva Terraces. It was farmland with Islais Creek running through it until the city buried the creek in a sewer project in the 1910s; in the late 1920s the real estate firm Baldwin & Howell began filling the land with stucco bungalows, including five-room Mediterranean-inspired houses by architect Charles Strothoff.",
+        place: "Geneva Terraces",
+        where: "Niagara Ave & Seminole Ave",
+        at: [-122.44497, 37.71888],
+        source: "https://www.sanfranciscostory.com/where-is-geneva-terraces/",
+      },
+      {
+        icon: "pin",
+        title: "When Cayuga was Wyoming",
+        text:
+          "Most streets here carry Native American tribe names that appear on the West End Homestead maps filed with the city in the 1860s, though an old sales map held by the Huntington Library shows this one as Wyoming Avenue. In 2022 the SFMTA Board approved Cayuga Avenue as a 1.7-mile Slow Street from Rousseau Street to Naglee Avenue, with a median diverter planned at this corner.",
+        place: "Cayuga Avenue Slow Street",
+        where: "Geneva Ave & Cayuga Ave",
+        at: [-122.44355, 37.71882],
+        source: "https://www.sfmta.com/projects/cayuga-avenue-slow-street",
+      },
+      {
+        icon: "road",
+        title: "A boulevard on a railbed",
+        text:
+          "Alemany Boulevard follows the former right-of-way of the Ocean Shore Railroad, a short-lived line that ran south from San Francisco down the coast; 1926 Public Works photographs show the proposed boulevard tracing the old railbed near Islais Creek. It is named for Joseph Sadoc Alemany, who became San Francisco's first archbishop in 1853.",
+        place: "Alemany Boulevard at Cayuga",
+        where: "2030 Alemany Blvd",
+        at: [-122.44030, 37.71975],
+        source: "https://en.wikipedia.org/wiki/Alemany_Boulevard",
+      },
+      {
+        icon: "shop",
+        title: "Where the Mission line ran south",
+        text:
+          "Mission Street along the neighborhood's eastern edge is a strip of small shops and eateries, part of the Excelsior Outer Mission Neighborhood Commercial District the city created in 2013 for Mission Street from Alemany Boulevard to the county line. Streetcars helped it grow: the first electric line on Mission opened in 1894, with a shuttle running down Mission toward Excelsior Avenue, then called China Avenue.",
+        place: "Mission Street shops by Italy Ave",
+        where: "Mission St & Italy Ave",
+        at: [-122.43918, 37.71890],
+        source: "https://sfplanning.org/sites/default/files/documents/legis/code-summaries/130084.pdf",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 0.8 miles for visitors and would-be neighbors, starting at Balboa Park BART and Muni station: past the old railway office at San Jose and Geneva, down Niagara Avenue into the bungalows of Geneva Terraces, along Cayuga Avenue and Alemany Boulevard, and out to the Mission Street shops at Italy Avenue. Allow about 30 minutes; a weekday or Saturday daytime walk finds the Mission Street storefronts open.",
+      miles: 0.8,
+      minutes: 30,
+      tip:
+        "The route is nearly flat; save a coffee or meal for Mission Street, the neighborhood's one shopping strip, where the 14 and 14R buses stop at Italy Avenue for the ride back.",
+    },
     nearby: ["the Outer Mission", "Balboa Park"],
     restaurants: [
       { name: "Taqueria Guadalajara", address: "4798 Mission St", phone: "(415) 469-5480" },
