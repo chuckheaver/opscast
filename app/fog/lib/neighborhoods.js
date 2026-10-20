@@ -5342,14 +5342,77 @@ export const NEIGHBORHOODS = {
       "A foggy, leafy district pressed between Golden Gate Park and UCSF, where the buzzing 9th Avenue and Irving Street strip anchors one of the city's best global-food corners.",
     reasons: ["Steps from Golden Gate Park", "Strong restaurant row on 9th & Irving", "N-Judah straight downtown", "Next to UCSF Parnassus"],
     history:
-      "Through the 1860s–1880s the Inner Sunset was open sand dunes dotted with dairies, roadhouses, and dynamite works on the city's western edge. Development took hold after entrepreneur Aurelius Buckingham began building near 5th Avenue and Lincoln Way in 1887, and accelerated with the 1894 California Midwinter Exposition staged in adjacent Golden Gate Park. UCSF planted its medical campus uphill on Parnassus Heights in 1897, a presence that still shapes the neighborhood. Streetcar service through the new Sunset Tunnel and the N-Judah line (Mayor 'Sunny Jim' Rolph drove the first car in 1928) finally tied the once-remote 'outside lands' to downtown, filling the blocks with homes.",
+      "For most of the 19th century the land south of Golden Gate Park was sand dunes, part of what San Franciscans called the “Outside Lands.” In 1887 Aurelius E. Buckingham, a former city assessor and real estate developer, laid out a residential tract around today's 5th Avenue and Lincoln Way and called it the “Sunset district”; its first buyers lived alone among the dunes. Hoodline relays another origin story, in which a neighborhood group protesting the lack of streetcar service downtown picked the name in 1895, right after a spectacular sunset. The 1894 Midwinter Exposition in the park drew crowds west of the Haight for the first time, but in the early 1900s the district filled in slowly, often in islands of two or three houses reached by plank sidewalks.\n\nA citywide renaming in 1909 turned H Street into Lincoln Way; the streets south of it run in alphabetical order: Irving, Judah, Kirkham, Lawton. A block by the park that United Railroads meant for a carhouse as early as 1907 became a streetcar storage yard instead. The Sunset Branch Library opened in 1918, and on October 21, 1928, Mayor James “Sunny Jim” Rolph led a parade of streetcars through the new Sunset Tunnel to open the N-Judah, which still runs out Judah Street to Ocean Beach.\n\nThe biggest building wave came in the 1930s. Henry Doelger, the merchant builder who covered the Sunset's dunes with thousands of single-family houses, ran his operation from a 1932 Art Deco headquarters on Judah Street, and a few blocks west the domed church of St. Anne of the Sunset rose in the early 1930s.",
     facts: [
-      { icon: "park", title: "Park at the doorstep", text: "Golden Gate Park borders the neighborhood to the north, putting the de Young Museum, Academy of Sciences, and Botanical Garden within a short walk." },
-      { icon: "subway", title: "N-Judah lifeline", text: "The N-Judah Muni Metro line runs through Inner Sunset along Irving and 9th, connecting the neighborhood to downtown and the ballpark." },
-      { icon: "house", title: "UCSF on the hill", text: "UCSF established its medical center on Parnassus Heights, just uphill, in 1897 — still a major employer and presence." },
-      { icon: "beer", title: "SF's oldest bar", text: "The Little Shamrock on Lincoln Way has poured drinks since 1893, making it one of San Francisco's oldest continuously operating bars." },
-      { icon: "fair", title: "Born of a world's fair", text: "Growth surged after the 1894 California Midwinter International Exposition drew crowds to neighboring Golden Gate Park." },
+      {
+        icon: "road",
+        title: "The street that was H Street",
+        text:
+          "Lincoln Way, along the southern edge of Golden Gate Park, was H Street until a citywide renaming in 1909; several smaller streets already named for Lincoln were renamed once the more prominent H Street took the name. The Park and Ocean Railroad ran out H Street toward the Great Highway, and historian David Gallagher of the Western Neighborhoods Project calls the street and its railroad the first route that let ordinary San Franciscans get out to Ocean Beach.",
+        place: "Lincoln Way",
+        where: "9th Ave & Lincoln Way",
+        at: [-122.46646, 37.76585],
+        source: "https://hoodline.com/2015/09/then-and-now-lincoln-way-formerly-h-street",
+      },
+      {
+        icon: "shop",
+        title: "Shops where the streetcar turns",
+        text:
+          "The Inner Sunset's shopping streets run seven blocks along Irving Street, from 5th to 12th Avenue, and two blocks down 9th Avenue from Lincoln Way to Judah Street, with restaurants, bakeries, bookstores, coffee shops and clothing and shoe stores clustered thickest around this corner. The strip grew up with the streetcar: local merchants formed their association in 1928, the year the N-Judah opened. The N still comes in along Irving and turns down 9th Avenue for a single block before heading out Judah Street.",
+        place: "9th Avenue and Irving Street shops",
+        where: "Irving St & 9th Ave",
+        at: [-122.46632, 37.76380],
+        source: "https://en.wikipedia.org/wiki/Sunset_District,_San_Francisco",
+      },
+      {
+        icon: "house",
+        title: "Doelger's Art Deco headquarters",
+        text:
+          "Henry Doelger, the merchant builder who put thousands of single-family houses on the Sunset's sand dunes, ran his business from this building, a 1932 Art Deco design by Charles O. Clausen. Its roof was raised in 1936 for another mezzanine, and in 1940 a Streamline Moderne addition on the lot to the west doubled its street frontage, giving room for design workshops, sales and administrative offices, and storage for lumber and hardware. In 2013 the city made it Landmark No. 265.",
+        place: "Doelger Building",
+        where: "320 Judah St",
+        at: [-122.46555, 37.76235],
+        source: "https://default.sfplanning.org/Preservation/landmarks_designation/Approved_Doelger_Final_LM_Report.pdf",
+      },
+      {
+        icon: "church",
+        title: "A dome over Judah Street",
+        text:
+          "St. Anne's parish was founded in 1904, when the Sunset was still sand dunes, and its first church, a small wood-frame building seating up to 450, went up in 1905 and was destroyed by the 1906 earthquake. The present Romanesque Revival church by Shea & Lofquist, begun in 1930, is known for its massive dome, uneven twin towers, great rose windows and the frieze over the entrance by Sister Justina Niemierski of Mission San Jose. Out front, the N-Judah runs on a slightly raised right-of-way between 9th and 19th Avenues.",
+        place: "St. Anne of the Sunset",
+        where: "850 Judah St",
+        at: [-122.47110, 37.76250],
+        source: "https://en.wikipedia.org/wiki/St._Anne_of_the_Sunset_Church_in_San_Francisco",
+      },
+      {
+        icon: "tram",
+        title: "The streetcar boneyard",
+        text:
+          "As far back as 1907, United Railroads planned an “H Street Carhouse” for the block bounded by Lincoln Way, Irving Street, Funston Avenue and 14th Avenue, but it was never built and the land served only as a storage yard. After the Market Street Railway merged with Muni in 1944, Muni kept parking surplus cars there until neighbors complained about the run-down, vandalized cars; Muni scrapped them, and by the late 1950s the block had been redeveloped. Funston Avenue, on its east side, was 13th Avenue until 1923, when the allegedly unlucky number gave way to the name of Gen. Frederick Funston.",
+        place: "Streetcar boneyard site",
+        where: "Irving St & 14th Ave",
+        at: [-122.47140, 37.76390],
+        source: "https://www.sfmta.com/blog/inner-sunsets-streetcar-graveyard",
+      },
+      {
+        icon: "book",
+        title: "A library where a barn stood",
+        text:
+          "The Sunset Branch opened on March 25, 1918, as the eighth branch of the San Francisco Public Library, on the site of an old barn that had become a neighborhood nuisance because boys used it for gun practice. It is a Carnegie library, designed by architect G. Albert Lansburgh at a cost of $43,955, and the city has designated it Landmark No. 239.",
+        place: "Sunset Branch Library",
+        where: "1305 18th Ave",
+        at: [-122.47630, 37.76330],
+        source: "https://sfpl.org/locations/sunset/sunset-library-history",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about a mile for visitors and would-be neighbors, from 9th Ave & Lincoln Way at the edge of Golden Gate Park (7 and 44 buses; the N-Judah stops a block south at 9th & Irving) along the shops of 9th Avenue and Irving Street, out Judah Street and back up to Irving at 18th Avenue, a block from the 28 bus on 19th Avenue and a short walk from the N at 19th Ave & Judah St. Allow about 45 minutes; weekday mornings are quietest, weekend late mornings the busiest.",
+      miles: 1,
+      minutes: 45,
+      tip:
+        "From the library, walk two blocks east and two blocks south, about 10 minutes, to the mosaic-tiled Hidden Garden Steps, which climb 16th Avenue from Kirkham Street to Lawton Street; artists Aileen Barr and Colette Crutcher designed them, and they opened in December 2013.",
+    },
     restaurants: [
       { name: "Marnee Thai", address: "1243 9th Ave", phone: "(415) 731-9999", url: "https://www.marneethaisf.com" },
       { name: "San Tung", address: "1031 Irving St", phone: "(415) 242-0828", url: "https://www.santungsf.com" },
@@ -5371,14 +5434,87 @@ export const NEIGHBORHOODS = {
     reasons: ["Steps from Ocean Beach", "Surf culture", "Quieter, more space for the money", "Beloved café scene"],
     aka: "the Outside Lands",
     history:
-      "Now-residential streets here were once the windswept sand dunes of the 'Outside Lands' on San Francisco's far west side, long considered too remote to settle. The Park and Ocean Railroad began bringing weekend crowds to Ocean Beach in 1883, but the dunes remained mostly empty until the 1920s and 1930s. Developers including Henry Doelger took advantage of new FHA loans to build row upon row of affordable stucco single-family homes. From 1934 to 1941 Doelger was the largest homebuilder in the country, putting up roughly two houses a day, and by just after World War II the dunes had been filled with a sea of these row houses.",
+      "In the 19th century these dunes were part of the Outside Lands, the sandy western end of San Francisco, considered inaccessible and all but uninhabitable; in 1866 Congress settled title to it against squatters' claims. In January 1878 the clipper King Philip drifted onto Ocean Beach when her anchor failed to hold, and on December 1, 1883, the Park and Ocean Railroad began running trains out H Street, now Lincoln Way, to the beach.\n\nIn 1895 the Market Street Railway started selling retired horsecars for $20, and buyers turned them into homes, cafés, shops and clubhouses on the sand. By one estimate some 2,000 people lived in this colony, nicknamed Carville, in the early 1900s, but a neighborhood improvement club saw the cars as blight, and on Independence Day 1913 it ceremonially burned the clubhouse of the Falcons, a women's bicycle club. The N-Judah streetcar reached the beach in 1928, and in 1931 jobless workers in a city program helped build Sunset Boulevard across bare dunes.\n\nBuilders then covered the sand with stucco single-family houses. The city's landmark report credits Henry Doelger with pioneering assembly-line house building, his houses built to Federal Housing Administration specifications; by one account he was the country's most prolific homebuilder from 1934 to 1941, at his peak finishing as many as two houses a day, and in 1946 the Chronicle called him “the poor man's Frank Lloyd Wright.” A city survey later found 13 scattered tracts of Picturesque Period Revival homes, 253 buildings put up from 1931 to 1938, eligible for the National Register as a historic district. On April 12, 2025, the Upper Great Highway reopened as Sunset Dunes, a two-mile car-free park.",
     facts: [
-      { icon: "wave", title: "Ocean Beach surf", text: "The neighborhood fronts Ocean Beach, one of the most powerful and challenging surf breaks on the West Coast." },
-      { icon: "house", title: "Doelger row houses", text: "Builder Henry Doelger raised much of the Sunset in the 1930s, at his peak the nation's largest homebuilder, completing about two stucco houses a day." },
-      { icon: "park", title: "Sunset Dunes park", text: "The 77-acre car-free Sunset Dunes park opened along the former Upper Great Highway on April 12, 2025 — California's largest pedestrianization project." },
-      { icon: "sun", title: "Sunset Reservoir solar", text: "The 5-megawatt Sunset Reservoir solar array, completed in 2009 with nearly 24,000 panels, was one of the largest municipal solar projects in the country at the time." },
-      { icon: "coffee", title: "Café and surf culture", text: "Spots like Trouble Coffee, Andytown and Outerlands helped define a low-key beachside café culture that draws visitors from across the city." },
+      {
+        icon: "shop",
+        title: "Restaurants that draw the whole city",
+        text:
+          "Noriega Street is one of the Outer Sunset's shopping streets, and in 2012 the city made the commercial frontage on both sides of it, eight blocks from 19th to 27th Avenue and three more from 30th through 33rd Avenue, the Noriega Street Neighborhood Commercial District. The planning code describes the street as a source of convenience goods and services for Outer Sunset residents, with a high concentration of restaurants that draw customers from throughout the city and the region.",
+        place: "Noriega Street shops",
+        where: "Noriega St & 31st Ave",
+        at: [-122.48933, 37.75367],
+        source: "https://gocodebook.com/library/us/ca/san-francisco-planning/article-7-neighborhood-commercial-districts",
+      },
+      {
+        icon: "road",
+        title: "A parkway built on bare sand",
+        text:
+          "Sunset Boulevard was built in 1931, while this part of the district was still undeveloped dunes; a Public Works account says a city program of street and boulevard work, employing jobless workers and run by the Bureau of Engineering, helped build it. A photo from April 2, 1931, shows bare sand on both sides of the new roadway, and the trees planted since have turned it into a park-like thoroughfare.",
+        place: "Sunset Boulevard",
+        where: "Sunset Blvd & Noriega St",
+        at: [-122.49520, 37.75344],
+        source: "https://www.streetcar.org/?p=7867",
+      },
+      {
+        icon: "water",
+        title: "A clipper ship under the sand",
+        text:
+          "Buried in the beach near the foot of Noriega Street lie the remains of the King Philip, a wooden clipper built in 1856 in Alna, Maine. On January 25, 1878, bound without cargo for Port Gamble, she was being towed out when her tug was called away to help another vessel; her anchor failed to hold and she drifted onto Ocean Beach. The wreck is on the National Register of Historic Places together with that of the schooner Reporter, and when the sand shifts, her timbers can reappear at low tide, as they did in 2007.",
+        place: "King Philip shipwreck",
+        where: "Great Hwy & Noriega St",
+        at: [-122.51050, 37.75300],
+        source: "https://en.wikipedia.org/wiki/King_Philip_(clipper)",
+      },
+      {
+        icon: "park",
+        title: "A highway handed to walkers",
+        text:
+          "Until April 12, 2025, this was the Upper Great Highway; that day its two miles from Lincoln Way to Sloat Boulevard reopened as Sunset Dunes, a car-free park billed as the largest pedestrianization project in California history, and about 13,000 people came on the first day. Sculptures, murals, seating and a bike and skate play area now line the old roadway, and beneath the Great Highway runs the Westside Transport, a 2.5-mile box that stores up to 49.3 million gallons of combined sewage and storm runoff in wet weather. The park logged about 1.7 million visits in its first year, and Proposition G on the November 3, 2026, ballot asks voters whether to let cars back on weekdays.",
+        place: "Sunset Dunes",
+        where: "Great Hwy & Moraga St",
+        at: [-122.50930, 37.75480],
+        source: "https://abc7news.com/post/great-highway-san-franciscos-newest-park-sunset-dunes-attracts-thousands-day-1/16162559/",
+      },
+      {
+        icon: "house",
+        title: "Streetcars inside a beach house",
+        text:
+          "In 1895 the Market Street Railway began selling retired horsecars for $20, or $10 without seats, and buyers turned them into homes, cafés, shops and clubhouses on the dunes here, a colony nicknamed Carville; the Falcons, a women's bicycle club, kept their clubhouse in one until a neighborhood improvement club ceremonially burned it on Independence Day 1913. By the 1920s little of Carville remained, though some cars were built into newer houses. This one at 1632 Great Highway has two side-by-side cable cars as its second floor and a horsecar as a guest bedroom, and Carville historian Woody LaBounty knows of no other surviving structure; it is a private home, so view it from the sidewalk.",
+        place: "Carville house",
+        where: "1632 Great Hwy",
+        at: [-122.50859, 37.75595],
+        source: "https://www.atlasobscura.com/places/last-known-carville-house",
+      },
+      {
+        icon: "shop",
+        title: "Storefronts near the last stop",
+        text:
+          "Cafés, restaurants and small shops cluster along the last few blocks of Judah Street before the beach, from about 44th to 47th Avenue, on the line the N-Judah has run since 1928. Photographs from the 1950s show a drugstore, a variety store, a hardware store and a grocery on the block just west of 46th Avenue, then known as a shopping center of its own.",
+        place: "Judah Street shops",
+        where: "Judah St & 46th Ave",
+        at: [-122.50595, 37.76045],
+        source: "https://missionlocal.org/2026/07/sunset-buzz-sunset-village-is-almost-open-and-the-snowy-plovers-are-back/",
+      },
+      {
+        icon: "tram",
+        title: "Speeches and leaflets by the ocean",
+        text:
+          "When the N-Judah opened on October 21, 1928, Mayor James Rolph piloted a streetcar on an hour-and-a-half tour from Duboce Avenue to the Ferries and then all the way back out to the end of the line here at Judah and La Playa. The ride ended at a stage set up by the Pacific, where city officials gave speeches while an airplane overhead dropped congratulatory leaflets on the crowd. Nearly a century later the N still ends here, steps from Sunset Dunes and the beach.",
+        place: "N-Judah terminus",
+        where: "Judah St & La Playa St",
+        at: [-122.50843, 37.76033],
+        source: "https://www.sfmta.com/node/13351",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 2.3 miles for visitors and would-be neighbors, from the shops of Noriega Street at 31st Avenue, on the 7 Haight-Noriega bus line, west past Sunset Boulevard to Ocean Beach, north along the Sunset Dunes park, then east on Lawton Street and up 44th Avenue to walk the shops of Judah Street back west to the end of the N-Judah line at La Playa for the ride downtown. Allow about 90 minutes, and go near low tide, when the beach is widest and the King Philip's timbers have their best chance of showing.",
+      miles: 2.3,
+      minutes: 90,
+      tip:
+        "Noriega Street runs gently downhill all the way from 31st Avenue to the beach, so the walk is easy going; save your coffee stop for the cafés on Judah Street near the finish, and bring a windproof layer for the beach.",
+    },
     restaurants: [
       { name: "Outerlands", address: "4001 Judah St", phone: "(415) 661-6140", url: "https://www.outerlandssf.com" },
       { name: "Thanh Long", address: "4101 Judah St", phone: "(415) 665-1146", url: "https://www.thanhlongsf.com" },
@@ -5402,14 +5538,77 @@ export const NEIGHBORHOODS = {
     reasons: ["Near Lands End & Ocean Beach", "Clement St food scene", "Calm, residential", "38-Geary buses downtown"],
     aka: "The Avenues",
     history:
-      "At the turn of the 20th century the area west of Arguello was windswept sand dunes and potato fields, lumped with the rest of the western city as the “Outside Lands.” New cable and electric streetcar lines opened it to the public, carrying San Franciscans out to Golden Gate Park, Ocean Beach, and Adolph Sutro's Cliff House and Sutro Baths. After the 1906 earthquake and fire, displaced residents settled the avenues in large numbers. Waves of Russian refugees arrived after the Russian Revolution, and from the 1950s onward — especially after 1965 — Chinese immigrants made the district home, giving Geary Boulevard and Clement Street their distinctive Russian and Cantonese character.",
+      "Before the avenues were laid out, getting from the built-up city to the sea meant a ride of some six miles through rolling sand dunes, and the Outer Richmond lay at the far end of those Outside Lands. In February 1863 the Point Lobos Road Company, formed by Senator James Buckley and James Phelan, began a toll road out to the Cliff House; the city bought it in 1878 for $26,587. Down by the beach, a squatters' settlement called Mooneysville-by-the-Sea, named for the Workingmen's Party orator Con Mooney, came first, and rides such as Shoot-the-Chutes and, in 1922, the Big Dipper roller coaster followed.\n\nStreetcars came next. Adolph Sutro's electric railroad opened on February 1, 1896, running out Clement Street and down 33rd Avenue on its way to his baths, and the city's B-Geary line started with Muni's first day of service, December 28, 1912; by June 1913 its cars ran all the way to Ocean Beach. The Great Highway was built along the beach in 1929, and under George Whitney, general manager from 1926, the seaside rides grew into Playland-at-the-Beach.\n\nRussian émigrés reached San Francisco in two big waves: after the Bolshevik victory ended the Russian Civil War, and again after World War II, when the émigré communities of Shanghai and Harbin fled China as a communist takeover loomed. Between 1961 and 1965 the Russian Orthodox Church Outside Russia raised Holy Virgin Cathedral on Geary Boulevard. Playland closed on Labor Day weekend in 1972, but the 38-Geary buses that replaced the B's streetcars in 1956 still run the length of Geary.",
     facts: [
-      { icon: "wave", title: "Sutro Baths ruins", text: "The 1894 Sutro Baths, once the world's largest indoor saltwater swimming complex, survive as dramatic oceanfront ruins at Lands End." },
-      { icon: "art", title: "Legion of Honor", text: "The Legion of Honor fine-arts museum, a replica of Paris's Palais de la Légion d'Honneur, sits on a bluff above Lands End." },
-      { icon: "church", title: "Holy Virgin Cathedral", text: "The gold-domed Holy Virgin Cathedral (6210 Geary), completed in 1965, is the largest cathedral of the Russian Orthodox Church Outside Russia." },
-      { icon: "park", title: "Lands End", text: "Lands End offers cliffside coastal trails with Golden Gate Bridge views, plus Mile Rock Beach and the old Fort Miley." },
-      { icon: "beer", title: "Oldest U.S. tiki bar", text: "Trad'r Sam on Geary, opened in 1937, bills itself as the oldest continuously operating tiki bar in the United States." },
+      {
+        icon: "shop",
+        title: "A main street on Sutro's line",
+        text:
+          "Clement Street runs about three miles, from Arguello Boulevard to 45th Avenue, and in 1896 Adolph Sutro underwrote an electric trolley line along its whole length that helped make it a major commercial corridor. Out here, from about 19th to 26th Avenue, it is a little less busy than the inner blocks, with shops and restaurants along the way. The city zones this stretch the Outer Clement Street Neighborhood Commercial District, which barred full-service and self-service restaurants until a 2011 ordinance opened the door to them with a conditional use permit.",
+        place: "Outer Clement Street shops",
+        where: "Clement St & 23rd Ave",
+        at: [-122.48255, 37.78216],
+        source: "https://www.tclf.org/clement-street",
+      },
+      {
+        icon: "church",
+        title: "A saint's shrine on Geary",
+        text:
+          "Ground was broken on June 25, 1961, for this cathedral of the Russian Orthodox Church Outside Russia, also called Joy of All Who Sorrow, completed in 1965 and described as the largest of that church's six cathedrals. Archbishop John Maximovitch, who came to San Francisco in 1962 to help finish it, died suddenly while visiting Seattle in 1966, and the Board of Supervisors amended a city ordinance so he could be interred here; glorified as a saint in 1994, he now lies in a golden shrine in the nave. The crosses on the domes came down for restoration on July 24, 2026, and went back up after the work was finished on September 4, ahead of the parish's 100th anniversary in 2027.",
+        place: "Holy Virgin Cathedral",
+        where: "6210 Geary Blvd",
+        at: [-122.48624, 37.78043],
+        source: "https://richmondsunsetnews.com/2023/08/07/outer-richmonds-landmark-cathedral-is-home-to-saints-relics/",
+      },
+      {
+        icon: "tram",
+        title: "Where the B-Geary turned",
+        text:
+          "Muni's B-Geary line began with the city railway's first day of service in December 1912, and by June 1913 its cars ran from downtown to Ocean Beach, turning south at this corner onto 33rd Avenue and continuing by way of Balboa Street, 45th Avenue and Cabrillo Street. Adolph Sutro's electric railroad, opened on February 1, 1896, came down 33rd Avenue from Clement Street and turned west here toward his baths; its car barn stood a block north, at 33rd and Clement. The last B streetcars ran on December 29, 1956, and the next day 38-Geary buses took over.",
+        place: "33rd Avenue streetcar corner",
+        where: "Geary Blvd & 33rd Ave",
+        at: [-122.49330, 37.77969],
+        source: "https://www.streetcar.org/end-of-the-b-geary-60-years-ago/",
+      },
+      {
+        icon: "book",
+        title: "A library won at the ballot box",
+        text:
+          "Residents of the Park-Presidio area felt the Richmond branch on Ninth Avenue no longer served them, and in 1930 voters approved a charter amendment raising taxes to build this branch on the site of the old Lafayette School. Designed and landscaped by architect John Reid Jr., the two-story stucco building with a red tile roof opened on April 10, 1932, as the library system's 17th branch, with 11,823 books, at a cost of $57,117.29 with its furnishings. Look up in the main rooms for the hand-stenciled ceilings; the branch reopened on June 18, 2011, after a two-year renovation.",
+        place: "Anza Branch Library",
+        where: "550 37th Ave",
+        at: [-122.49719, 37.77856],
+        source: "https://sfpl.org/locations/anza/anza-library-history",
+      },
+      {
+        icon: "shop",
+        title: "Balboa Street's movie-house blocks",
+        text:
+          "Balboa Street's shops, cafés and restaurants gather around this corner, where, as a local paper puts it, specialty shops and cafés abound. The movie house on the north side of the next block west opened on February 27, 1926, designed by the Reid brothers, and was split into two screens after a 1978 fire. By June 1913 the B-Geary's streetcars ran along Balboa from 33rd to 45th Avenue on their way to the beach; the tracks are gone, but the 31 Balboa bus still runs the street.",
+        place: "Balboa Street shops",
+        where: "Balboa St & 37th Ave",
+        at: [-122.49731, 37.77571],
+        source: "https://richmondsunsetnews.com/tag/outer-balboa/",
+      },
+      {
+        icon: "fair",
+        title: "Where Playland stood",
+        text:
+          "Playland-at-the-Beach stood here beside the Great Highway from the early 1920s until 1972; under George Whitney, its general manager from 1926, it grew to more than ten acres of rides, among them the Big Dipper roller coaster, built in 1922 and torn down in 1955. The park closed on Labor Day weekend in 1972, and it is remembered as the birthplace of the It's-It ice cream sandwich. Two markers at this corner tell its story: one dedicated by Mayor Dianne Feinstein on May 19, 1981, and a 1996 plaque recalling the bumper cars, Ferris wheel, merry-go-round and Fun House.",
+        place: "Playland at the Beach markers",
+        where: "La Playa St & Cabrillo St",
+        at: [-122.51002, 37.77321],
+        source: "https://www.hmdb.org/m.asp?m=132043",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 2.2 miles for visitors and would-be neighbors: from the 38 and 38R stop at Geary Blvd & 23rd Ave, go a block north to the shops of Clement Street, back down 26th Avenue to the gold domes on Geary, out Geary past 33rd Avenue to the Anza library, then south to Balboa Street and along the old B-Geary route on Balboa, 45th Avenue and Cabrillo to the site of Playland by Ocean Beach. Allow about 1 hour 40 minutes; late morning or early afternoon, when the shops are open, is best.",
+      miles: 2.2,
+      minutes: 100,
+      tip:
+        "The Balboa Street blocks around 37th Avenue make the walk's coffee and snack stop. At the end, Ocean Beach is a block west across the Great Highway, and the 5, 5R, 18 and 31 buses stop at La Playa & Cabrillo for the ride back; bring a warm layer for the ocean end.",
+    },
     restaurants: [
       { name: "Pearl 6101", address: "6101 California St", phone: "(415) 592-9777", url: "https://www.pearl6101.com" },
       { name: "Violet's Tavern", address: "2301 Clement St", phone: "(415) 682-4861", url: "https://www.violets-sf.com" },
@@ -5431,14 +5630,98 @@ export const NEIGHBORHOODS = {
     spirit: "A sun-warmed slice of the central waterfront where 19th-century shipyards and workers' cottages have been reborn as breweries, art galleries and some of the city's most beloved restaurants.",
     reasons: ["Historic maker district", "Galleries & breweries", "Sunny waterfront pocket", "T-Third light rail"],
     aka: "Central Waterfront",
-    history: "Dogpatch grew up in the 1870s as an informal company town for the ironworks, refineries and shipyards along the bay's edge. Three-quarters of its households worked for big employers like the Union Iron Works (later Bethlehem Steel) at Pier 70, and developers threw up rows of cheap Victorian and Edwardian cottages, including a cluster of identical Eastlake-style homes built to plans by architect John Cotter Pelton, Jr. Spared by the 1906 earthquake and fire, much of that worker housing survives, making Dogpatch one of the city's most intact pre-1910 neighborhoods. Shipbuilding faded after World War II, and in recent decades the old industrial blocks have been reborn as an arts, maker and dining district anchored by the Minnesota Street Project galleries.",
+    history:
+      "In the last quarter of the 19th century this flat below Potrero Hill was known as Dutchman's Flat, and its historic district dates its story from 1867, when the Long Bridge opened and building began. The shipyards, rope factories, canneries and other industries around Potrero Point needed cheap labor, and developers answered with rows of inexpensive cottages, some built to free plans that architect John Cotter Pelton Jr. published in a daily newspaper in the early 1880s. In 1900 a quarter of the neighborhood's heads of household worked at the shipyard.\n\nNext door, Irish Hill, settled by Irish immigrants in the 1860s, held about 60 small houses and 40 boarding houses and hotels, and many residents were single men who worked at the Union Iron Works or the Pacific Rolling Mills. Quarrying for fill in the 1880s, then dynamiting from 1897 to make room for the Union Iron Works and later Bethlehem Steel, cut the hill to a mound under 50 feet high by 1918. Dogpatch itself was not devastated by the 1906 earthquake and fire.\n\nBy the late 1960s the planning department was considering demolishing the neighborhood and rezoning it for industry, and Central Waterfront jobs fell from 16,304 in 1965 to 11,004 in 1980, mostly in manufacturing and ship repair. Nobody knows for sure where the name Dogpatch came from: theories point to the Li'l Abner comic strip, a native plant called dogfennel, and stray dogs scavenging scraps from slaughterhouses. On April 18, 2003, Mayor Willie Brown signed the ordinance making about nine blocks here the city's 11th landmark district, which its survey called the oldest and most intact concentration of industrial workers' housing in the city.",
     facts: [
-      { icon: "factory", title: "Birthplace of warships", text: "The Union Iron Works, founded 1883, built vessels like the battleship USS Oregon along this waterfront." },
-      { icon: "quake", title: "Survived 1906", text: "Much of Dogpatch escaped the earthquake and fire, leaving a rare intact district of 1870s–1910 workers' cottages." },
-      { icon: "house", title: "Pelton cottages", text: "Clusters of identical Eastlake-style cottages were built to plans by architect John Cotter Pelton, Jr." },
-      { icon: "art", title: "An arts hub", text: "The Minnesota Street Project at 1275 Minnesota St houses more than a dozen independent fine-art galleries." },
-      { icon: "dog", title: "A name nobody agrees on", text: "Theories trace 'Dogpatch' to dogfennel weed, packs of stray dogs, or the Li'l Abner comic strip." },
+      {
+        icon: "star",
+        title: "Built to quell the rowdy",
+        text:
+          "City Architect John Reid Jr. designed the Potrero Police Station, finished in 1912 on the southwest corner of 20th and what was then Kentucky Street, on a site that had been an ungraded outcrop of serpentine; it served as the neighborhood's police station until the 1990s. The neighborhood association says it and the Potrero Emergency Hospital beside it, which Reid designed in 1915, were built to quell the rowdy and save the injured among the laborers of Potrero Point, then one of the West Coast's largest concentrations of industry.",
+        place: "Old Potrero Police Station",
+        where: "2300 3rd St",
+        at: [-122.38880, 37.76040],
+        source: "https://sfplanninggis.org/docs/DPRForms/4108036.pdf",
+      },
+      {
+        icon: "park",
+        title: "A company lawn turned city park",
+        text:
+          "The clothing company Esprit built this lawn in 1982 as a private park for its employees, and when the company prepared to leave San Francisco, a neighborhood campaign saw it handed to the city's Recreation and Park Department in 2001. It reopened on February 5, 2025, after the first major makeover in its 43-year history, an $8.5 million renovation with about $5 million from UCSF that brought an off-leash dog meadow on the north side, a dog-free meadow on the south and an accessible path that rings and crosses both.",
+        place: "Esprit Park",
+        where: "19th St & Minnesota St",
+        at: [-122.39100, 37.76120],
+        source: "https://www.sfrecpark.org/1136/Esprit-Park-Renovation-Project",
+      },
+      {
+        icon: "art",
+        title: "A dead-end street became a stage",
+        text:
+          "This 8,000-square-foot plaza at 19th and Indiana streets was a dead-end street until it opened in the fall of 2017 as an arts-focused pedestrian space, with live-music events in 2017 and 2018. The developer of the apartments next door had brought in CMG Landscape Architecture and Place Lab, now part of the San Francisco Parks Alliance, in 2014 to create it, though the plaza's formal Public Works permit came only in February 2019.",
+        place: "Dogpatch Arts Plaza",
+        where: "19th St & Indiana St",
+        at: [-122.39210, 37.76190],
+        source: "https://sanfranciscoparksalliance.org/our-work/projects/dogpatch-arts-plaza/",
+      },
+      {
+        icon: "tram",
+        title: "Where Muni builds cable cars",
+        text:
+          "A 1974 aerial photo, taken to study this area before Muni built a bus facility here, centers on two plots at 22nd and Indiana streets, just east of the I-280 freeway; by the end of 1977 they had become Woods Division, replacing aging, undersized facilities, on the former Tubbs Cordage Company property, which had sat idle for about ten years. The division remains a key part of Muni's fleet maintenance, and the San Francisco Examiner has reported that cable car construction and restoration start in its carpentry shop, which keeps the original cable car blueprints.",
+        place: "Woods Division",
+        where: "22nd St & Indiana St",
+        at: [-122.39123, 37.75777],
+        source: "https://www.sfmta.com/blog/little-patch-dogpatch",
+      },
+      {
+        icon: "book",
+        title: "A schoolhouse named for a shipbuilder",
+        text:
+          "The San Francisco School Department built an eight-room schoolhouse here in 1877 to serve the nearby heavy industries. In 1895 architect Thomas J. Welsh added a freestanding Classical Revival building, and the school was renamed for Irving Murray Scott, the Union Iron Works superintendent who helped pay for it; the 1877 schoolhouse was torn down in the early 1920s. The 1895 building, city Landmark No. 138 and on the National Register since 1985, is what San Francisco Heritage calls the city's oldest surviving public school building.",
+        place: "Irving M. Scott School",
+        where: "1060 Tennessee St",
+        at: [-122.38945, 37.75850],
+        source: "https://www.sfheritage.org/news/irving-m-scott-school-city-landmark-138/",
+      },
+      {
+        icon: "house",
+        title: "Cottages from free newspaper plans",
+        text:
+          "Architect John Cotter Pelton Jr. published his “Cheap Dwellings,” plans and specifications for inexpensive workers' houses, in the San Francisco Evening Bulletin between 1880 and 1883; historian Christopher VerPlanck called it the first and only known case of a California architect publishing free plans for workers' dwellings in a daily newspaper. The cottages at 1002 through 1014 Tennessee Street, and seven more back to back with them at 903 through 915 Minnesota Street, form a cluster of thirteen identical Eastlake-style cottages built to his designs.",
+        place: "Pelton cottages",
+        where: "1010 Tennessee St",
+        at: [-122.38952, 37.75920],
+        source: "https://www.foundsf.org/Pelton's_Cheap_Dwellings",
+      },
+      {
+        icon: "shop",
+        title: "Horsecars on Kentucky Street",
+        text:
+          "Third Street is Dogpatch's main commercial artery, lined with retail and service businesses, and at this corner it meets 22nd Street, whose blocks to the west hold cafés, bakeries and restaurants. In the 19th century this stretch of Third was Kentucky Street: Potrero and Bay View Railroad horsecars began running on it on May 5, 1867, electric streetcars followed in January 1895, and buses replaced them in 1941. Rail returned in 2007 with the T Third.",
+        place: "Third and 22nd Street shops",
+        where: "3rd St & 22nd St",
+        at: [-122.38824, 37.75807],
+        source: "https://en.wikipedia.org/wiki/T_Third_Street",
+      },
+      {
+        icon: "factory",
+        title: "A can factory's second life",
+        text:
+          "The American Can Company bought a two-block tract here in 1915 and in June 1916 finished a concrete-frame plant with room for 1,200 workers; the complex, completed in stages through 1955, ran along Third Street from 20th to 23rd Street, and after World War II the company was the neighborhood's single largest employer. The plant shut down in 1969, and in 1975 Angelo Markoulis bought the vacant complex and filled it with warehousing and light-industrial tenants, more than 300 of them by 1985.",
+        place: "American Can Company factory",
+        where: "2565 3rd St",
+        at: [-122.38785, 37.75640],
+        source: "https://www.dogpatchna.org/american-can-building",
+      },
     ],
+    walk: {
+      intro:
+        "A walk of about a mile and a quarter for visitors and would-be neighbors, from the T Third light rail's 20th Street stop west to Esprit Park, south on Indiana Street to the Muni yard, east on 22nd and up Tennessee Street past the old schoolhouse and cottages, then down Third Street's shops to the old can factory near the 23rd Street stop. Allow about 50 minutes; a weekend late morning is a good time.",
+      miles: 1.2,
+      minutes: 50,
+      tip:
+        "Save your coffee stop for 22nd Street, which the walk follows east from the Muni yard. At the end, walk north on Illinois Street, a block east of Third: just south of 20th Street, a serpentinite outcrop about 30 feet high is all that is left of Irish Hill.",
+    },
     restaurants: [
       { name: "Piccino", address: "1001 Minnesota St", phone: "(415) 824-4224", url: "https://www.piccino.com" },
       { name: "Long Bridge Pizza Co.", address: "2347 3rd St", phone: "(415) 829-8999", url: "https://www.longbridgepizza.com" },
