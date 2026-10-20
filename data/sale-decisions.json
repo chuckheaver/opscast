@@ -98,6 +98,60 @@
         "keep": "425089255",
         "address": "1786 36th Ave",
         "reason": "Entered twice; counted once (owner, Oct 16 2026): Sold Off MLS at $995,000 (11/21/25), Closed at $1,400,000 (12/8/25); the Closed record kept."
+      },
+      {
+        "id": "426134873",
+        "keep": "426161513",
+        "address": "129 Scott St",
+        "reason": "The same sale in both MLS feeds (or twice in one): counted once, as the Residential Income record, typed by the city's land use (owner, Oct 20 2026)."
+      },
+      {
+        "id": "425049029",
+        "keep": "425057328",
+        "address": "67-69 Belcher St",
+        "reason": "The same sale in both MLS feeds (or twice in one): counted once, as the Residential Income record, typed by the city's land use (owner, Oct 20 2026)."
+      },
+      {
+        "id": "426160409",
+        "keep": "426162265",
+        "address": "2921 Octavia St",
+        "reason": "The same sale in both MLS feeds (or twice in one): counted once, as the Residential Income record, typed by the city's land use (owner, Oct 20 2026)."
+      },
+      {
+        "id": "426144430",
+        "keep": "426145188",
+        "address": "687 Kansas St",
+        "reason": "The same sale in both MLS feeds (or twice in one): counted once, as the Residential Income record, typed by the city's land use (owner, Oct 20 2026)."
+      },
+      {
+        "id": "426106919",
+        "keep": "426109234",
+        "address": "134-136A 17th Ave",
+        "reason": "The same sale in both MLS feeds (or twice in one): counted once, as the Residential Income record, typed by the city's land use (owner, Oct 20 2026)."
+      },
+      {
+        "id": "426158203",
+        "keep": "426158788",
+        "address": "2419-2421 16th Ave",
+        "reason": "The same sale in both MLS feeds (or twice in one): counted once, as the Residential Income record, typed by the city's land use (owner, Oct 20 2026)."
+      },
+      {
+        "id": "41146636",
+        "keep": "41146637",
+        "address": "83-85 Stanyan St",
+        "reason": "The same sale in both MLS feeds (or twice in one): counted once, as the Residential Income record, typed by the city's land use (owner, Oct 20 2026)."
+      },
+      {
+        "id": "426149827",
+        "keep": "426152720",
+        "address": "109-111 Masonic Ave",
+        "reason": "The same sale in both MLS feeds (or twice in one): counted once, as the Residential Income record, typed by the city's land use (owner, Oct 20 2026)."
+      },
+      {
+        "id": "426123139",
+        "keep": "82033620",
+        "address": "1270-1272 Hampshire St",
+        "reason": "The same sale in both MLS feeds (or twice in one): counted once, as the Residential Income record, typed by the city's land use (owner, Oct 20 2026)."
       }
     ]
   },
@@ -113,7 +167,8 @@
   ],
   "pointOut": {
     "overPrice": 25000000,
-    "note": "Over $25M is probably an entry error: kept, but always pointed out in the monthly review (owner, Oct 16 2026)."
+    "note": "Over $25M is probably an entry error: kept, but always pointed out in the monthly review (owner, Oct 16 2026).",
+    "overPriceOther": 50000000
   },
   "edits": [
     {
@@ -149,6 +204,116 @@
       },
       "reason": "A condo in both 2025 and 2026 (owner, Oct 16 2026); the Mar 2025 sale was typed Single Family Residence.",
       "footnote": "117 Telegraph Hill Blvd’s Mar 2025 sale is counted as a condo; the MLS entry typed it single-family."
+    },
+    {
+      "id": "41146637",
+      "address": "83-85 Stanyan St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Residential Income Other"
+      },
+      "reason": "Typed by the city's land use: 2 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
+    },
+    {
+      "id": "426109234",
+      "address": "134-136A 17th Ave",
+      "set": {
+        "propType": "Triplex"
+      },
+      "from": {
+        "propType": "Duplex"
+      },
+      "reason": "Typed by the city's land use: 3 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
+    },
+    {
+      "id": "425045835",
+      "address": "2758-2760 23rd St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Typed by the city's land use: 2 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
+    },
+    {
+      "id": "426109941",
+      "address": "1020-1022 Plymouth Ave",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Typed by the city's land use: 2 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
+    },
+    {
+      "id": "426110442",
+      "address": "102-104 Santa Marina St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Typed by the city's land use: 2 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
+    },
+    {
+      "id": "426129864",
+      "address": "46-48 S Wilmot St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Typed by the city's land use: 2 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
+    },
+    {
+      "id": "425074405",
+      "address": "1701-1711 Funston Ave #1703",
+      "set": {
+        "propType": "Triplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Typed by the city's land use: 3 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
+    },
+    {
+      "id": "426138577",
+      "address": "55-57 Coleridge St",
+      "set": {
+        "propType": "Triplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Typed by the city's land use: 3 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
+    },
+    {
+      "id": "426096180",
+      "address": "1066-1070 Bryant St",
+      "set": {
+        "propType": "Fourplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Typed by the city's land use: 4 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
+    },
+    {
+      "id": "426113372",
+      "address": "626-628 Shotwell St",
+      "set": {
+        "propType": "5+ Units"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Typed by the city's land use: 7 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
     }
   ],
   "confirmed": [
@@ -233,6 +398,11 @@
       "id": "41118737",
       "address": "661 Peralta Ave Unit 3",
       "reason": "Not a sale in the owner's MLS: no 2025 or 2026 activity (owner, Oct 16 2026)."
+    },
+    {
+      "id": "426156005",
+      "address": "1285-1287 Pacific Ave",
+      "reason": "A commercial listing, not a home sale (owner, Oct 20 2026)."
     }
   ]
 }

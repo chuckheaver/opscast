@@ -313,9 +313,13 @@ for x in WS:
                        + ", ".join(f"{r['address'].split(',')[0]} ({r.get('propType')}, {r['sellingDate'][:10]})" for r in co[:3]), related=[r["id"] for r in co])
 
 # E8 over-$25M: probably an entry error (the owner's rule) — kept, and pointed out every month.
+# "Other" (Residential Income and the rest: apartment buildings) sells higher, so its line is higher (owner, Oct 20 2026).
+OTHER_TYPES = {"Duplex", "Triplex", "Fourplex", "5+ Units", "Residential Income Other", "Other", "3+ Houses on Lot"}
+OVER_OTHER = DEC.get("pointOut", {}).get("overPriceOther", 50_000_000)
 for x in WS:
-    if P(x) > OVER:
-        flag("E8", x, f"{M(P(x))} is over {M(OVER)}: probably an entry error — confirm the price"
+    line = OVER_OTHER if x.get("propType") in OTHER_TYPES else OVER
+    if P(x) > line:
+        flag("E8", x, f"{M(P(x))} is over {M(line)}: probably an entry error — confirm the price"
                       + (f" (${P(x) / x['sqft']:,.0f}/sf on {x['sqft']:,} sf)" if x.get("sqft") else " (no sqft)"))
 
 # R1 big-sale-no-sqft; R1b every no-sqft sale → out/outliers.csv (outliers.py's list, unchanged).
