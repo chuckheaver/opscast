@@ -4801,13 +4801,97 @@ export const NEIGHBORHOODS = {
       "The oldest Chinatown in North America — a dense, lantern-strung hillside of temples, dim sum parlors and dragon-topped alleys where over a century of Chinese-American life still hums.",
     reasons: ["Oldest Chinatown in North America", "Incredibly walkable", "Transit-rich", "World-class dim sum"],
     history:
-      "Chinatown grew up around Portsmouth Square and old Dupont Street (now Grant Avenue) after the 1848 Gold Rush, when San Francisco became the port of entry for Chinese miners and merchants bound for “Gold Mountain.” Grant Avenue is the city’s oldest street, and the quarter became the cultural anchor for Chinese immigrants across North America. Leveled by the 1906 earthquake and fire, the community rebuilt on the same blocks in a deliberately ornate style to draw tourism and resist relocation. Today its roughly 30 blocks remain one of the most densely populated neighborhoods in San Francisco.",
+      "Chinatown’s main street is San Francisco’s first. In 1835 William A. Richardson pitched a tent near today’s Grant Avenue and Clay Street, the first home in Yerba Buena, and the lane mapped that year was named Calle de la Fundación, Foundation Street; it later became Dupont Street. On July 9, 1846, Marines from the USS Portsmouth raised the American flag over the plaza a block east, which took the ship’s name, and in 1847 the town became San Francisco. Chinese immigrants settled around Dupont Street, and their associations united as the Chinese Six Companies, which gave aid, settled disputes and fought anti-Chinese laws.\n\nHostility followed. In July 1877 a riot against Chinese residents left four dead, and the Chinese Exclusion Act of 1882, the first U.S. law to restrict immigration by ethnicity, stood until 1943. Within days of the 1906 earthquake and fire, which leveled the quarter, a city Committee on the Relocation of Chinatown adopted a plan to move it to Hunters Point. But the city stood to lose the taxes Chinese residents paid and the China trade, with Oakland, Los Angeles and Seattle offering their ports, and by May 10 the mayor had dissolved the committee.\n\nMerchants rebuilt on the same blocks. Look Tin Eli hired architect T. Paterson Ross and engineer A. W. Burgren, neither of whom had been to China, and their pagoda-topped buildings set the look of the street, which took the name Grant Avenue as the city rebuilt. The Dragon Gate followed in 1970, and on November 19, 2022, the Central Subway opened Chinatown–Rose Pak Station, named for the community leader who championed it but died before it opened.",
     facts: [
-      { icon: "tower", title: "A gift from across the Pacific", text: "The Dragon Gate at Grant Ave and Bush St was built in 1970 as a gift from the Republic of China (Taiwan); its inscription reads “All under heaven is for the good of the people.”" },
-      { icon: "church", title: "One of the oldest Taoist temples in the U.S.", text: "Tin How Temple on Waverly Place, dedicated to the sea goddess Mazu, traces its roots to the 1850s and still operates several flights up a narrow stairway." },
-      { icon: "factory", title: "Fortune cookies folded by hand", text: "The Golden Gate Fortune Cookie Factory has hand-folded cookies in tiny Ross Alley since 1962 — you can watch them come off the press." },
-      { icon: "quake", title: "Rebuilt after 1906", text: "After the earthquake and fire destroyed it, the community rebuilt Chinatown on its original site with the flamboyant pagoda rooflines that define Grant Avenue today." },
+      {
+        icon: "tower",
+        title: "A gate born of a design contest",
+        text:
+          "The city sponsored a design competition for Chinatown’s ceremonial south entrance, with a $70,000 budget, open to architects of Chinese descent; architect Clayton Lee won it with landscape architects Melvin H. Lee and Joseph Yee. The Republic of China (Taiwan) donated much of the material, and the gate was dedicated on October 18, 1970. Its central plaque carries a motto of Sun Yat-sen, translated “All under heaven is for the good of the people,” and Sun himself stands two blocks north.",
+        place: "Dragon Gate",
+        where: "Grant Ave & Bush St",
+        at: [-122.40566, 37.79069],
+        source: "https://en.wikipedia.org/wiki/Dragon_Gate_(San_Francisco)",
+      },
+      {
+        icon: "art",
+        title: "A revolutionary in granite and steel",
+        text:
+          "Beniamino Bufano’s 14-foot statue of Sun Yat-sen, in red granite and stainless steel, went up in this square in 1937. Sun had come to San Francisco in political exile to rally support for overthrowing China’s Manchu rulers, and in 1912 he became the first president of the Chinese Republic he helped found. A second, privately funded statue, honoring the “comfort women,” was added in 2017.",
+        place: "St. Mary's Square",
+        where: "651 California St",
+        at: [-122.40524, 37.79200],
+        source: "https://en.wikipedia.org/wiki/Saint_Mary%27s_Square_(San_Francisco)",
+      },
+      {
+        icon: "church",
+        title: "A clock with a warning",
+        text:
+          "Archbishop Joseph Alemany dedicated St. Mary’s at Christmas midnight Mass in 1854, making it the first cathedral of the Archdiocese of San Francisco; its foundation granite was quarried and cut in China, and its bricks were made in New England and carried around Cape Horn as ships’ ballast. It came through the 1906 earthquake only to be gutted by fire a day later, a blaze hot enough to melt its bells and marble altar, and it was rededicated in 1909. Under the clock face, a line from Ecclesiasticus, “Son, observe the time and fly from evil,” was aimed at the men who frequented the brothels around it in the 1850s; the city lists the church as Landmark No. 2.",
+        place: "Old St. Mary's Cathedral",
+        where: "660 California St",
+        at: [-122.40572, 37.79264],
+        source: "https://en.wikipedia.org/wiki/Old_St._Mary%27s_Cathedral",
+      },
+      {
+        icon: "shop",
+        title: "Four blocks of bazaars",
+        text:
+          "San Francisco’s planning code sets aside Grant Avenue from California Street to Jackson Street, four blocks, as the Chinatown Visitor Retail District, noting its concentration of shopping bazaars, art goods stores and restaurants, and it bars chain stores there. The pagoda roofs and dragon motifs along the way date from the rebuilding after 1906, when architects often set them on otherwise American-style buildings.",
+        place: "Grant Avenue shops",
+        where: "Grant Ave & Clay St",
+        at: [-122.40639, 37.79425],
+        source: "https://dev-codelibrary.amlegal.com/codes/san_francisco/latest/sf_planning/0-0-0-26717",
+      },
+      {
+        icon: "flag",
+        title: "Where the American flag went up",
+        text:
+          "On July 9, 1846, Marines from the USS Portsmouth under Second Lieutenant Henry Bulls Watson rowed ashore, marched to the pueblo’s main plaza and raised the American flag here, and later that year the square took the ship’s name; a marker notes that the first public school building went up at its southwest corner in 1847. The park closed on June 10, 2026, for its first major renovation in nearly 50 years, a $73 million rebuild expected to take about two years that removes the 240-foot pedestrian bridge over Kearny Street and adds an 8,300-square-foot community clubhouse and a larger playground, so for now it is seen from the sidewalk.",
+        place: "Portsmouth Square",
+        where: "Kearny St & Clay St",
+        at: [-122.40530, 37.79482],
+        source: "https://en.wikipedia.org/wiki/Portsmouth_Square",
+      },
+      {
+        icon: "church",
+        title: "Three flights up to the sea goddess",
+        text:
+          "Waverly Place is sometimes called Tin How Temple Street in Chinese, after this temple to the sea goddess Mazu, known in Cantonese as Tin How, Empress of Heaven. By tradition it was founded around 1852 by Day Ju, one of the first Chinese people in San Francisco, and Wikipedia calls it the oldest extant Taoist temple in the city’s Chinatown. The 1906 fire destroyed the building, but the goddess’s image, the temple bell and part of the altar survived, and in 1910 the Sue Hing Benevolent Association reopened the temple on the top floor of a new four-story building, three flights up.",
+        place: "Tin How Temple",
+        where: "125 Waverly Pl",
+        at: [-122.40701, 37.79456],
+        source: "https://en.wikipedia.org/wiki/Tin_How_Temple",
+      },
+      {
+        icon: "movie",
+        title: "An alley Hollywood keeps casting",
+        text:
+          "Ross Alley was laid out in 1849 beside the house of pioneer merchant Charles L. Ross and was first called Stout’s Alley, after Dr. Arthur Breese Stout, who bought that house; many sources call it the city’s oldest alley, and it was also known as Spanish Lane. On September 28, 1912, police raided the Siberia Club, a gambling hall at 25–29 Ross Alley, and arrested 46 people, and a raid days later arrested 50 more. Indiana Jones and the Temple of Doom, Big Trouble in Little China and The Karate Kid Part II all filmed here.",
+        place: "Ross Alley",
+        where: "Ross Alley & Washington St",
+        at: [-122.40726, 37.79535],
+        source: "https://en.wikipedia.org/wiki/Ross_Alley",
+      },
+      {
+        icon: "shopping",
+        title: "Chinatown's own Main Street",
+        text:
+          "The planning code calls Stockton Street a major transit corridor that serves as “Main Street” for the Chinatown neighborhood, and zones it a neighborhood commercial district for five blocks, from Sacramento Street to Broadway. It describes a daytime-oriented district of local and regional specialty food stores selling fresh produce, poultry, fish and meat, busiest on weekends, and it limits tourist-oriented businesses there. At this corner, Chinatown–Rose Pak Station opened on November 19, 2022, about 100 feet below the street; it is named for Rose Pak, who built community support for the Central Subway but died in 2016, before it opened.",
+        place: "Stockton Street shops",
+        where: "Stockton St & Washington St",
+        at: [-122.40801, 37.79486],
+        source: "https://dev-codelibrary.amlegal.com/codes/san_francisco/latest/sf_planning/0-0-0-26729",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 0.8 mile for visitors and would-be neighbors, from the Dragon Gate at Grant Avenue and Bush Street, a few blocks north of Market Street’s Montgomery Station, up Grant past Old St. Mary’s to Portsmouth Square, then through Waverly Place and Ross Alley to Stockton Street, ending at Chinatown–Rose Pak Station on Muni’s T Third line. Allow about an hour, and go while Stockton Street’s food markets are open.",
+      miles: 0.8,
+      minutes: 60,
+      tip:
+        "Chinatown–Rose Pak Station sits about 100 feet underground, among what SFMTA calls its deepest Muni Metro stations, so allow a few minutes to get down to the platform; the next T Third stop south is Union Square/Market Street.",
+    },
     restaurants: [
       { name: "Mister Jiu's", address: "28 Waverly Pl", phone: "(415) 857-9688", url: "https://misterjius.com" },
       { name: "R&G Lounge", address: "631 Kearny St", phone: "(415) 982-7877", url: "https://www.rnglounge.com" },
@@ -4830,14 +4914,97 @@ export const NEIGHBORHOODS = {
     reasons: ["Walk to work downtown", "BART + Muni hub", "Historic dining institutions", "Steps from the waterfront"],
     aka: "Barbary Coast",
     history:
-      "The Financial District grew out of the 1849 Gold Rush as San Francisco's first commercial center, rising on land that was once shoreline and buried ships near the old Long Wharf. Its northern edge overlaps the Barbary Coast, a notorious 19th-century district of saloons, dance halls and brothels named after the pirate-plagued coast of North Africa. As banks and trading houses replaced the vice trade, the area became one of the largest and oldest financial districts in the western United States. Montgomery Street, its main spine, earned the nickname 'the Wall Street of the West.'",
+      "When gold seekers poured in through 1849, the shore of Yerba Buena Cove curved inland as far as today's Montgomery Street, and hundreds of ships crowded the anchorage, many left without crews. Some were beached as warehouses and even a hotel; the fire of May 1851 destroyed many more, and the cove was filled with sand, burying their hulls. By the early 1870s a seawall along today's Embarcadero had closed it off, and some 45 ships are known to lie beneath downtown.\n\nBanks followed the gold. The Bank of California opened in July 1864 with D.O. Mills as president and William Ralston as cashier, and Ralston became president in 1873. When news of failed mining investments set off a run, the bank closed its doors on August 26, 1875. The next day the board took Ralston's resignation, and hours later he was found dead after his usual swim in the bay; whether he drowned by accident or took his own life remains a mystery. A 1908 newspaper counted more than half the city's larger banks on or near Montgomery Street, later called the Wall Street of the West.\n\nWhen Transamerica showed a model of its pyramid in 1969, critics warned of the Manhattanization of San Francisco, the city's own planning department lined up against it, and Telegraph Hill residents protested at the site in dunce caps; the company answered with fortune cookies holding pro-pyramid messages. It was finished in 1972. The 1985 Downtown Plan set a temporary yearly limit on new office space, which voters made permanent with Proposition M in 1986; it still releases 950,000 square feet a year.",
     facts: [
-      { icon: "tower", title: "An 853-foot landmark", text: "The Transamerica Pyramid, completed in 1972, was the city's tallest building until Salesforce Tower surpassed it in 2018." },
-      { icon: "park", title: "A redwood grove downtown", text: "Transamerica Redwood Park, planted in 1974, holds nearly 50 mature redwoods transplanted from the Santa Cruz area, now towering over 100 feet." },
-      { icon: "road", title: "Pony Express headquarters", text: "601 Montgomery St was the western business headquarters of the company that ran the 1860–61 Pony Express; a historic marker still stands there." },
-      { icon: "money", title: "Bank of America's old HQ", text: "555 California St, finished in 1969, was the tallest building west of the Mississippi until 1972 and served as Bank of America's world headquarters." },
-      { icon: "money", title: "California's oldest restaurant", text: "Tadich Grill traces its roots to an 1849 coffee stand on Long Wharf, making it the oldest continuously run restaurant in the state." },
+      {
+        icon: "tower",
+        title: "A seaport tower freed from a freeway",
+        text:
+          "A. Page Brown designed this terminal, which opened on July 13, 1898, with a clock tower modeled on the 12th-century Giralda in Seville; the city made it Landmark No. 90 in 1977, and it is also on the National Register of Historic Places. From 1957 the double-deck Embarcadero Freeway left only its tower in view, until the freeway, damaged in the 1989 Loma Prieta earthquake, came down in 1991. A 10-year, $110 million renovation then reopened the building in 2003 as a public marketplace.",
+        place: "Ferry Building",
+        where: "The Embarcadero & Market St",
+        at: [-122.39366, 37.79550],
+        source: "https://en.wikipedia.org/wiki/San_Francisco_Ferry_Building",
+      },
+      {
+        icon: "factory",
+        title: "A foundry father's bronze salute",
+        text:
+          "Peter Donahue built his business into the Union Iron Works, which Wikipedia calls the first foundry on the Pacific Coast, and his son James Mervyn Donahue left a $25,000 bequest for a memorial fountain in his father's honor. Douglas Tilden's bronze of five men straining to punch a plate was completed on March 30, 1901. Its base carries symbols of Donahue's trades: an anvil for his foundries, a propeller for shipping, and a driving wheel and connecting rod for railroads.",
+        place: "Mechanics Monument",
+        where: "Market St & Battery St",
+        at: [-122.39917, 37.79111],
+        source: "https://en.wikipedia.org/wiki/Mechanics_Monument",
+      },
+      {
+        icon: "money",
+        title: "Granite giants and a Rivera fresco",
+        text:
+          "Built in 1915 as a U.S. sub-treasury to J. Milton Dyer's design, this building was gutted in 1930 when Miller & Pflueger remodeled it for the stock exchange, keeping only the front, with its ten Tuscan columns and granite stairs. Ralph Stackpole carved the massive Yosemite granite sculptures out front, which one account says show the polarity of agriculture and industry, and from December 1930 to March 1931 Diego Rivera painted his fresco Allegory of California in the exchange's lunch club in the tower next door at 155 Sansome. The exchange closed its San Francisco trading floor in 2002.",
+        place: "Pacific Coast Stock Exchange",
+        where: "301 Pine St",
+        at: [-122.40127, 37.79182],
+        source: "https://noehill.com/SF/LANDMARKS/poi_pacific_coast_stock_exchange.asp",
+      },
+      {
+        icon: "shop",
+        title: "A pioneer's alley of open-air tables",
+        text:
+          "This one-block alley between Bush and Pine is named for Josiah Belden, a California pioneer, San Jose's first mayor and a real estate man, who owned part of this block on the east side of Kearny Street, running through to the alley. A walking tour recounts that in 1990 a café began setting a few tables out at lunch, and within a decade about a dozen restaurants lined the lane. The surrounding blocks are sometimes called San Francisco's French Quarter for their historic ties to early French immigrants.",
+        place: "Belden Place restaurants",
+        where: "Belden Pl & Pine St",
+        at: [-122.40355, 37.79145],
+        source: "https://en.wikipedia.org/wiki/Belden_Place",
+      },
+      {
+        icon: "art",
+        title: "Ship paintings in a quake survivor",
+        text:
+          "D.H. Burnham and Company, with Willis Polk as lead architect, designed this office tower, finished in 1903 and one of the very few tall towers to withstand the 1906 earthquake. Polk and Julia Morgan managed repairs to the heavily damaged building, and Morgan, who kept her office here from 1907 for the rest of her career, designed its skylit lobby and great hall, where maritime artist William Coulter painted five nautical murals. Like the exchange's earlier home on Battery Street, it was built with an observation tower for watching ships, since removed.",
+        place: "Merchants Exchange Building",
+        where: "465 California St",
+        at: [-122.40215, 37.79272],
+        source: "https://en.wikipedia.org/wiki/Merchants_Exchange_Building_(San_Francisco)",
+      },
+      {
+        icon: "money",
+        title: "Columns of nearly 100 tons",
+        text:
+          "Walter Bliss and William Faville, who had worked at McKim, Mead & White in New York, modeled this banking temple on that city's Knickerbocker Trust Company building; the 1906 earthquake and fire interrupted the work, and it was finished in 1908. Granite Corinthian columns, each weighing nearly 100 tons by one account, line three sides, along California, Sansome and Halleck streets. The 22-story tower beside it was added in 1967, and a year later the city made the banking hall Landmark No. 3.",
+        place: "Bank of California Building",
+        where: "400 California St",
+        at: [-122.40142, 37.79335],
+        source: "https://noehill.com/SF/LANDMARKS/sf003.asp",
+      },
+      {
+        icon: "water",
+        title: "A hotel built on a beached ship",
+        text:
+          "The whaler Niantic was hauled in and beached on this corner in 1849 and served as a storeship until a fire in May 1851 burned all but its submerged hull, which then became the foundation of the Niantic Hotel, standing until 1872. Remains of the ship were partly excavated and removed in 1978 during construction here. A 1919 plaque placed by the Native Sons of the Golden West, now at the office building on the corner, marks California Historical Landmark No. 88.",
+        place: "Site of the Niantic",
+        where: "Clay St & Sansome St",
+        at: [-122.40172, 37.79486],
+        source: "https://noehill.com/SF/LANDMARKS/cal0088.asp",
+      },
+      {
+        icon: "park",
+        title: "Redwoods where the Monkey Block stood",
+        text:
+          "From 1853 to 1959 this site held the four-story Montgomery Block, built by Henry Wager Halleck on a raft of redwood logs and nicknamed the Monkey Block, where financiers, lawyers and artists kept offices and apartments for more than a century. It was torn down for a parking lot, and William Pereira's 853-foot pyramid rose on part of the site from 1969 to 1972, staying the city's tallest building until the rising Salesforce Tower passed it in 2017. Beside it, Thomas Galli's Transamerica Redwood Park was planted with 80 mature redwoods from the Santa Cruz Mountains, and the Cultural Landscape Foundation counts 50 of the originals still standing.",
+        place: "Transamerica Pyramid & Redwood Park",
+        where: "600 Montgomery St",
+        at: [-122.40271, 37.79527],
+        source: "https://tclf.org/landscapes/transamerica-redwood-park",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk for visitors and would-be neighbors from the Ferry Building, a short walk from Embarcadero Station (BART and Muni Metro) with the F streetcar out front, up Market Street and through the old banking blocks to the Transamerica Pyramid, where the 1 California bus stops at Clay and Montgomery. Allow about an hour; a weekday late morning shows the district at work.",
+      miles: 1.3,
+      minutes: 60,
+      tip:
+        "Start on a Tuesday, Thursday or Saturday and you'll find a farmers market of about 70 farmers and 50 food makers outside the Ferry Building: 10 a.m. to 2 p.m. on Tuesdays and Thursdays, and 8 a.m. to 2 p.m. on Saturdays. Holidays and events change the hours, so check before you go.",
+    },
     restaurants: [
       { name: "Tadich Grill", address: "240 California St", phone: "(415) 391-1849", url: "https://tadichgrillsf.com" },
       { name: "Kokkari Estiatorio", address: "200 Jackson St", phone: "(415) 981-0983", url: "https://kokkari.com" },
@@ -4859,13 +5026,87 @@ export const NEIGHBORHOODS = {
     reasons: ["Best cheap eats in SF", "Historic speakeasy bars", "Steps from BART & Muni", "Little Saigon"],
     aka: "The TL",
     history:
-      "The 'Tenderloin' nickname is widely traced to a vice-era police culture in which officers working this lucrative beat could afford the finest cut of meat — the tenderloin — borrowing the name from a similar district in New York. After the 1906 earthquake the area filled with single-room-occupancy (SRO) hotels for transient workers, and by the 1920s it was the city's nightlife and speakeasy quarter. The fall of Saigon in 1975 brought waves of Vietnamese, Cambodian and Laotian refugees, who built the businesses that became 'Little Saigon' along Larkin Street. Today the Uptown Tenderloin Historic District protects the world's largest collection of historic SRO hotels.",
+      "Long before anyone put “the Tenderloin” on a map, two institutions anchored these blocks. In 1892 the Hibernia Savings and Loan Society opened Albert Pissis's Beaux-Arts bank at Jones and McAllister, and in 1900 St. Boniface, a German Catholic parish dating to 1860, laid the cornerstones of its church on Golden Gate Avenue. People called the district “the Tenderloin” by the 1890s, though maps labeled it “Downtown” until the 1930s; the name is usually traced to New York's Tenderloin, where, the story goes, a police captain's bribes bought him better cuts of meat.\n\nThe 1906 earthquake and the backfires set to contain the fire destroyed almost every building here, but rebuilding came fast, with some hotels open by 1907. The Cadillac Hotel's marker calls it the first structure built in the Uptown Tenderloin afterward, and block after block of hotels and apartment houses followed, many of them single-room-occupancy hotels for single workers. In 2009, 408 of those buildings were listed on the National Register as the Uptown Tenderloin Historic District. By the 1920s the streets were known for speakeasies, gambling, restaurants and theaters, and from 1949 to 1963 the Black Hawk at Turk and Hyde hosted Miles Davis, John Coltrane and Billie Holiday.\n\nGlide Memorial Church, where the Rev. Cecil Williams joined the leadership in 1964, became headquarters of the Council on Religion and the Homosexual and sponsored the early gay liberation group Vanguard. In August 1966, three years before Stonewall, patrons of Compton's Cafeteria at Turk and Taylor fought back against police harassment. After the fall of Saigon in 1975, Vietnamese refugees settled here, and in 2004 the city named two blocks of Larkin Street Little Saigon.",
     facts: [
-      { icon: "house", title: "World's largest SRO collection", text: "The Uptown Tenderloin Historic District, listed on the National Register in 2009, has over 400 contributing buildings and the world's largest concentration of historic single-room-occupancy hotels." },
-      { icon: "burrito", title: "Little Saigon", text: "In 2004 the city designated the Larkin Street corridor between Eddy and O'Farrell as 'Little Saigon,' honoring the Vietnamese community rooted here since the 1970s." },
-      { icon: "beer", title: "Prohibition-era speakeasy", text: "Bourbon & Branch at 501 Jones operated as a real speakeasy from 1921–1933, hidden behind a sign reading 'Anti-Saloon League.'" },
-      { icon: "subway", title: "Transit-rich downtown", text: "Powell and Civic Center stations — both BART and Muni Metro — sit within a five-minute walk, plus the historic F-Market streetcar." },
+      {
+        icon: "church",
+        title: "A cattleman's memorial church",
+        text:
+          "The Methodist philanthropist Lizzie Glide founded this church in 1929 in memory of her husband, a cattleman, and its Mediterranean Revival building, by architect James Plachek, was finished in 1931. After the Rev. Cecil Williams joined its leadership in 1964, Glide became headquarters of the Council on Religion and the Homosexual in 1965 and sponsored Vanguard, which the National Park Service calls one of the country's first gay liberation groups. In 2022 the church was listed on the National Register in its own right.",
+        place: "Glide Memorial Church",
+        where: "330 Ellis St",
+        at: [-122.41139, 37.78528],
+        source: "https://www.nps.gov/places/glide-memorial-church.htm",
+      },
+      {
+        icon: "park",
+        title: "A park named for a friar",
+        text:
+          "Father Alfred E. Boeddeker Park honors the Franciscan friar who served the Tenderloin for more than 40 years and founded the St. Anthony Dining Room. The park, which runs along Eddy, Jones and Ellis streets, first opened in 1985, and it reopened in December 2014 after a rebuilding of about $9 million backed by a Trust for Public Land grant.",
+        place: "Boeddeker Park",
+        where: "Eddy St & Jones St",
+        at: [-122.41225, 37.78420],
+        source: "https://en.wikipedia.org/wiki/Boeddeker_Park",
+      },
+      {
+        icon: "house",
+        title: "Where a young Ali trained",
+        text:
+          "A historical marker calls the Cadillac the first structure built in the Uptown Tenderloin after the 1906 earthquake and fire, and the city lists it as Landmark No. 176. In 1924 a boxing gym opened in its former dining room, later run as Newman's Gym, and the marker says Cassius Clay, the future Muhammad Ali, trained there in 1960 after winning Olympic gold, and that Jerry Garcia lived in the hotel in 1961. The Tenderloin Museum moved into its ground floor in 2015.",
+        place: "Cadillac Hotel",
+        where: "380 Eddy St",
+        at: [-122.41400, 37.78395],
+        source: "https://www.hmdb.org/m.asp?m=63863",
+      },
+      {
+        icon: "shop",
+        title: "Little Saigon's two blocks",
+        text:
+          "In 2004 the city named the two blocks of Larkin Street from Eddy to O'Farrell Little Saigon. The strip grew after the fall of Saigon in 1975, when Vietnamese refugees moved into the Tenderloin and opened restaurants, barbershops and other small businesses along it, and two marble pillars topped with lions mark its entrance at Larkin and Eddy.",
+        place: "Larkin Street shops",
+        where: "Larkin St & Ellis St",
+        at: [-122.41762, 37.78420],
+        source: "https://abc7news.com/archive/6267078",
+      },
+      {
+        icon: "church",
+        title: "The city's oldest German parish",
+        text:
+          "Founded in 1860 and run by Franciscans since 1887, St. Boniface is the oldest German Catholic church in San Francisco, its city landmark listing says, and was long a mainstay of the city's large early German community. A Bancroft Library photograph shows its cornerstones being laid on July 28, 1900; the Romanesque Revival church was rebuilt after the 1906 earthquake and fire and finished in 1908. The city made it Landmark No. 172.",
+        place: "St. Boniface Church",
+        where: "133 Golden Gate Ave",
+        at: [-122.41282, 37.78190],
+        source: "https://noehill.com/SF/LANDMARKS/sf172.asp",
+      },
+      {
+        icon: "money",
+        title: "A bank that reopened after 1906",
+        text:
+          "The Hibernia Savings and Loan Society, incorporated in 1859, held a design competition in 1891, and Albert Pissis's entry became this Beaux-Arts bank, completed in 1892 and enlarged to his design in 1908. It was one of the few downtown buildings to survive the 1906 earthquake and fire, and the bank reopened within weeks. After the bank left in the 1980s the San Francisco Police Department used the building, and after years empty it was restored in 2016; it is city Landmark No. 130.",
+        place: "Hibernia Bank Building",
+        where: "1 Jones St",
+        at: [-122.41218, 37.78098],
+        source: "https://en.wikipedia.org/wiki/Hibernia_Bank_Building_(San_Francisco)",
+      },
+      {
+        icon: "flag",
+        title: "Three years before Stonewall",
+        text:
+          "On a night in August 1966, its exact date unrecorded, police tried to evict transgender women from Compton's Cafeteria at 101 Taylor St, and patrons fought back; accounts describe thrown coffee, plates, cups, trays and silverware, overturned tables and smashed windows. A sidewalk plaque marked the 40th anniversary in 2006, the city later made this intersection and the building Landmark No. 307, and in January 2025 the building was listed on the National Register, described in local press as the first known property so recognized for its importance to the trans community.",
+        place: "Compton's Cafeteria site",
+        where: "Turk St & Taylor St",
+        at: [-122.41091, 37.78320],
+        source: "https://www.ebar.com/story/152825",
+      },
     ],
+    walk: {
+      intro:
+        "A 1.8-mile loop for visitors and would-be neighbors from Powell Street station (BART and Muni Metro): west along Ellis Street to Glide, through the historic district's early-1900s hotels and apartment houses to Little Saigon, south down Larkin Street from O'Farrell, then east along Golden Gate Avenue and Market Street to Turk and Taylor, two blocks from the station. Allow about 80 minutes; a weekday late morning puts you on Larkin Street at lunchtime.",
+      miles: 1.8,
+      minutes: 80,
+      tip:
+        "The Tenderloin Museum, on the Cadillac Hotel's ground floor at 398 Eddy St, leads walking tours of the neighborhood's history, usually Saturdays at 2 p.m.; the museum itself was temporarily closed in mid-2026 while tours still met at its door, so check its website before you go.",
+    },
     restaurants: [
       { name: "Saigon Sandwich", address: "560 Larkin St", phone: "(415) 474-5698" },
       { name: "Pho 2000", address: "637 Larkin St", phone: "(415) 474-1188" },
@@ -4889,14 +5130,97 @@ export const NEIGHBORHOODS = {
       "San Francisco's grand Beaux-Arts heart — a monumental plaza ringed by the gilded-dome City Hall, world-class opera and symphony, and the city's great library.",
     reasons: ["Beaux-Arts grandeur", "Arts and culture hub", "Major BART/Muni hub", "Walk to City Hall"],
     history:
-      "After the 1906 earthquake and fire leveled the area, San Francisco rebuilt it as a 'City Beautiful' showpiece — a unified Beaux-Arts civic complex of monumental buildings framing a formal plaza. The centerpiece, City Hall, opened in 1915 with a gilded dome rising about 301 feet, taller than the U.S. Capitol's. Over following decades the surrounding Performing Arts district took shape, anchored by the War Memorial Opera House (1932) and, later, Davies Symphony Hall. In 1945 delegates of fifty nations met here, adopting the United Nations Charter at the Opera House and signing it next door at the War Memorial's Herbst Theatre.",
+      "Before the domes and colonnades, this ground held the Yerba Buena Cemetery, spread across land around today's U.N. Plaza, Main Library and Asian Art Museum. As the city grew, the big, unloved parcel became the favored site for a new City Hall: a state act of 1869–70 abolished the cemetery, a court challenge failed, and from 1870 to 1876 remains were moved to the new City Cemetery. Not all of them: writers on the city's lost cemeteries estimate that thousands still lie under the library and museum. The City Hall begun there in the 1870s was destroyed in the 1906 earthquake and fire.\n\nDaniel Burnham's 1905 plan had proposed a civic center at Market Street and Van Ness Avenue, with grand boulevards radiating from it, but the disaster kept it from being carried out. Voters first turned down a bond for the project; then, in March 1912, with the city planning a world's fair, they approved $8.8 million by eleven to one. Mayor James Rolph Jr. named an advisory board of architects: John Galen Howard, Frederick H. Meyer and John Reid Jr. City Hall, by Arthur Brown Jr. and John Bakewell Jr., was finished in 1915, followed by the Main Library in 1917 and the War Memorial Opera House in 1932.\n\nIn 1945 the conference that drafted the United Nations Charter met in the Opera House and the Veterans Building beside it. Today the buildings form a National Historic Landmark District. After the 1989 Loma Prieta earthquake, a new Main Library opened in 1996, a retrofitted City Hall reopened in 1999, and the old library became the Asian Art Museum in 2003.",
     facts: [
-      { icon: "tower", title: "A dome taller than the Capitol", text: "City Hall's gilded Beaux-Arts dome rises about 301 feet, higher than the U.S. Capitol in Washington." },
-      { icon: "flag", title: "Birthplace of the U.N.", text: "The United Nations Charter was adopted at the War Memorial Opera House and signed at the adjacent Herbst Theatre in June 1945." },
-      { icon: "book", title: "A grand main library", text: "The San Francisco Main Library at 100 Larkin St opened in 1996 with over 376,000 square feet across seven floors." },
-      { icon: "art", title: "Asian art treasure house", text: "The Asian Art Museum holds one of the world's most comprehensive collections of Asian art, in the former Main Library building." },
-      { icon: "music", title: "Opera, symphony and ballet", text: "The War Memorial Opera House and Davies Symphony Hall make Civic Center the city's performing-arts district." },
+      {
+        icon: "flag",
+        title: "A sit-in for disability rights",
+        text:
+          "United Nations Plaza, finished in 1975, was designed by a joint venture led by Lawrence Halprin, John Carl Warnecke and Mario Ciampi. On its north side stands Arthur Brown Jr.'s 1936 Federal Building, where in April 1977 disability-rights activists began a sit-in of nearly four weeks; on April 28, HEW Secretary Joseph Califano signed the rules enforcing Section 504 of the Rehabilitation Act. In October 1985 protesters chained themselves to its doors, starting the ten-year AIDS/ARC Vigil, and in 2017 the building was added to the National Register on its own.",
+        place: "United Nations Plaza & Federal Building",
+        where: "50 United Nations Plaza",
+        at: [-122.41420, 37.78000],
+        source: "https://en.wikipedia.org/wiki/50_United_Nations_Plaza_Federal_Office_Building_(San_Francisco)",
+      },
+      {
+        icon: "book",
+        title: "A monument moved for books",
+        text:
+          "Frank Happersberger's granite-and-bronze Pioneer Monument, paid for by James Lick's estate and dedicated in 1894, first stood outside the old City Hall at Hyde and Grove streets and survived the 1906 earthquake and fire. Plans for a new Main Library moved it here in the early 1990s, when American Indian groups wanted it gone altogether; after years more of controversy, its “Early Days” figure group came down in 2018. The library behind it, by James Ingo Freed of Pei Cobb Freed and Partners with Cathy Simon of Simon Martin-Vegue Winkelstein Moris, opened in 1996.",
+        place: "Pioneer Monument & Main Library",
+        where: "Fulton St & Hyde St",
+        at: [-122.41595, 37.77970],
+        source: "https://en.wikipedia.org/wiki/Pioneer_Monument_(San_Francisco)",
+      },
+      {
+        icon: "art",
+        title: "Bones beneath the museum",
+        text:
+          "George Kelham designed this Beaux-Arts building as the city's Main Library, which opened in 1917. Gae Aulenti, best known for turning a derelict Beaux-Arts building in Paris into the Musée d'Orsay, led its conversion into the Asian Art Museum, which opened here on March 20, 2003. In May 2001 crews working on the conversion found remains of people buried in the old Yerba Buena Cemetery, and a 2004 report said Cypress Lawn Memorial Park in Colma had offered to take the remains of 97 people from the dig.",
+        place: "Asian Art Museum",
+        where: "200 Larkin St",
+        at: [-122.41685, 37.78008],
+        source: "https://sfstandard.com/2023/09/26/san-francisco-city-hall-haunted-cemetery/",
+      },
+      {
+        icon: "fair",
+        title: "Built for a world's fair",
+        text:
+          "John Galen Howard, Frederick H. Meyer and John Reid Jr., the three architects on Mayor Rolph's Civic Center advisory board, designed this hall, which opened in 1915 as the Exposition Auditorium for the Panama-Pacific International Exposition and was the San Francisco Civic Auditorium from 1916 to 1992. In 1920 it hosted the Democratic National Convention. In 1992 it was renamed for rock promoter Bill Graham, who had died the year before.",
+        place: "Bill Graham Civic Auditorium",
+        where: "99 Grove St",
+        at: [-122.41730, 37.77850],
+        source: "https://en.wikipedia.org/wiki/Bill_Graham_Civic_Auditorium",
+      },
+      {
+        icon: "tower",
+        title: "Where DiMaggio wed Monroe",
+        text:
+          "Arthur Brown Jr. and his partner John Bakewell Jr. designed this Beaux-Arts City Hall, completed in 1915 in time for the Panama-Pacific International Exposition. On January 14, 1954, Joe DiMaggio and Marilyn Monroe were married here, in the chambers of Judge Charles S. Peery. After the 1989 Loma Prieta earthquake damaged the building, engineers set it on base isolators, in what the structural firm Forell/Elsesser calls the largest base-isolation retrofit of its time, and it reopened in January 1999.",
+        place: "City Hall",
+        where: "1 Dr Carlton B Goodlett Pl",
+        at: [-122.41925, 37.77925],
+        source: "https://forell.com/projects/san-francisco-city-hall-seismic-retrofit",
+      },
+      {
+        icon: "music",
+        title: "A charter and a peace treaty",
+        text:
+          "Arthur Brown Jr. also designed the War Memorial Opera House, which opened on October 15, 1932, with Puccini's Tosca, conducted by Gaetano Merola and broadcast nationally; it has been the San Francisco Opera's home ever since. Delegates to the 1945 conference that drafted the United Nations Charter met here and in the Veterans Building next door, and signed the charter on June 26, 1945. In 1951 the peace treaty with Japan, drawn up in the Veterans Building, was signed here in the Opera House.",
+        place: "War Memorial Opera House",
+        where: "301 Van Ness Ave",
+        at: [-122.42040, 37.77860],
+        source: "https://en.wikipedia.org/wiki/War_Memorial_Opera_House",
+      },
+      {
+        icon: "music",
+        title: "The symphony gets its own hall",
+        text:
+          "Louise M. Davies Symphony Hall, designed by Skidmore, Owings & Merrill with Pietro Belluschi, opened in September 1980, built for $28 million to give the San Francisco Symphony a permanent home. Outside, at the corner of Grove Street and Van Ness Avenue, sits Henry Moore's Large Four Piece Reclining Figure, made in 1972–73.",
+        place: "Davies Symphony Hall",
+        where: "Van Ness Ave & Grove St",
+        at: [-122.42000, 37.77795],
+        source: "https://en.wikipedia.org/wiki/Louise_M._Davies_Symphony_Hall",
+      },
+      {
+        icon: "shop",
+        title: "Dinner before the curtain",
+        text:
+          "This block of Hayes Street, between Franklin and Gough, is the east end of Hayes Valley's shopping street, its storefronts holding restaurants, cafés and shops a short walk from the opera house and symphony hall. A Chronicle dining guide recalled that decades earlier, Hayes Valley's restaurants depended heavily on feeding diners before or after the opera, symphony and ballet. The city's Legacy Business Registry credits one restaurant, opened in 1979 while Davies Symphony Hall was going up, with pioneering Hayes Valley's revival as a commercial corridor.",
+        place: "Hayes Street restaurants",
+        where: "350 Hayes St",
+        at: [-122.42246, 37.77712],
+        source: "https://www.sfchronicle.com/food/restaurants/article/Where-to-dine-near-the-Symphony-Ballet-and-Opera-12404301.php",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk for visitors and would-be neighbors that starts at Civic Center Station (BART and Muni Metro) beneath U.N. Plaza, passes the library and museum on Fulton Street, crosses Civic Center Plaza to City Hall and the War Memorial, and ends on Hayes Street. Allow about 45 minutes for 0.8 mile; check opening hours if you want to step inside City Hall, the library or the museum.",
+      miles: 0.8,
+      minutes: 45,
+      tip:
+        "Step into the Main Library to see the wall that artists Ann Hamilton and Ann Chamberlain surfaced, across three levels, with nearly 50,000 cards from the old card catalogs, which nearly 200 writers annotated by hand in more than a dozen languages. To head home from Hayes Street, Van Ness Station, at Market Street and Van Ness Avenue, is about a quarter mile southeast.",
+    },
     nearby: ["Hayes Valley", "Tenderloin"],
     restaurants: [
       { name: "Zuni Café", address: "1658 Market St", phone: "(415) 552-2522", url: "https://zunicafe.com" },
@@ -4918,14 +5242,87 @@ export const NEIGHBORHOODS = {
       "A working crab fleet turned world-famous waterfront — barking sea lions at PIER 39, steaming Dungeness pots, and the cable car clanging to a stop at the bay's edge.",
     reasons: ["Iconic SF waterfront", "Sea lions at PIER 39", "Dungeness crab heritage", "Cable cars & streetcars"],
     history:
-      "The Wharf grew in the late 1800s as Italian immigrant fishermen — many from Genoa — launched lateen-rigged feluccas and Monterey clippers to chase herring and Dungeness crab, selling their catch from stalls along the pier. It was here that Genoese fishermen created cioppino, the communal seafood stew. After the 1906 earthquake the area was rebuilt over the rubble of the old Meiggs Wharf, and through the 20th century the shrinking fishing fleet gave way to a tourism economy of crab stands, restaurants, and shops. In October 1989, following the Loma Prieta earthquake, California sea lions began hauling out on PIER 39's K-Dock; by 1990 hundreds had taken over, and they have lived there ever since. Today a small commercial fishing fleet still works alongside one of America's most-visited waterfronts.",
+      "Long before the fishing boats moved here, Henry Meiggs's ruinous lumber wharf of the early 1850s ran out from the foot of Powell Street. From the Gold Rush to the turn of the century, the city's fishermen sailed lateen-rigged feluccas, built like the boats Italian fishermen had known at home. In 1900 the state set aside the waterfront between the foot of Taylor and Leavenworth streets for commercial fishing boats, and Sicilian families began arriving in large numbers. Fishermen sold part of their catch to housewives straight from their boats, and some set up stalls on the piers.\n\nIn 1907–09 the California Fruit Canners Association, later renamed Del Monte, built a cannery complex here that the Wharf's own history calls the world's largest fruit and vegetable cannery. From 1922 automobile ferries ran from the Hyde Street Pier to Sausalito, and from 1927 to Berkeley, until the new bridges emptied them; the last one left in 1938.\n\nAs the canneries and ferries faded, visitors took their place. In 1963 developer Leonard Martin bought the old Del Monte cannery to save it from demolition and turned it into shops and restaurants, and in 1988 the canners' brick warehouse became part of the new San Francisco Maritime National Historical Park. Months after the 1989 Loma Prieta earthquake, sea lions took over a Pier 39 dock, and they have stayed. The fleet still works: when a four-alarm fire destroyed Pier 45's Shed C on May 23, 2020, more than 30 crabbers lost some 8,000 traps, by the Port's count, and each October the Blessing of the Fleet is held at the fishermen's memorial chapel.",
     facts: [
-      { icon: "bird", title: "Sea lions since 1990", text: "Hundreds of California sea lions haul out on PIER 39's K-Dock; a record 2,000-plus crowded the docks in April 2024." },
-      { icon: "factory", title: "Ghirardelli Square", text: "The former Ghirardelli chocolate factory, with roots to 1852, became one of the first major U.S. adaptive-reuse projects in the 1960s." },
-      { icon: "water", title: "Birthplace of cioppino", text: "Genoese fishermen invented the Dungeness-crab stew cioppino here in the late 1800s." },
-      { icon: "tram", title: "Cable-car turnarounds", text: "The Powell-Hyde and Powell-Mason cable car lines both terminate at the Wharf, at Hyde & Beach and Taylor & Bay." },
-      { icon: "coffee", title: "Irish coffee's U.S. debut", text: "The Buena Vista, near the Hyde Street turnaround, is credited with introducing Irish coffee to America in 1952." },
+      {
+        icon: "water",
+        title: "The sea lions came after Loma Prieta",
+        text:
+          "By the pier's own account, a few California sea lions began hauling out on its K-Dock soon after the Loma Prieta earthquake of October 1989, and by January 1990 more than 500 had taken it over, to the exasperation of the marina's tenants. Experts from the Marine Mammal Center recommended letting them stay, and in May and June 2024 its count topped 2,100, the most it has ever recorded.",
+        place: "Pier 39 sea lions",
+        where: "Beach St & The Embarcadero",
+        at: [-122.41029, 37.80835],
+        source: "https://www.pier39.com/sealions/",
+      },
+      {
+        icon: "money",
+        title: "The wharf that ruined its builder",
+        text:
+          "In the early 1850s Henry Meiggs built a wharf reaching 1,600 feet or more into the bay from the foot of Powell Street, meant to draw the lumber trade to the North Beach land he was developing; part of its site is now covered by Fisherman's Wharf, Pier 39 and Pier 45. The venture ruined him: he paid his debts with a book of signed city street-work warrants, sailed off with his family in October 1854, and went on to build railroads in Chile and Peru.",
+        place: "Meiggs Wharf site",
+        where: "Jefferson St & Powell St",
+        at: [-122.41336, 37.80859],
+        source: "https://maritimeheritage.org/vips/meiggsHenry.html",
+      },
+      {
+        icon: "tram",
+        title: "A ferry arch for freight cars",
+        text:
+          "The decorated tower here, finished in 1914, is the headhouse of a rail-car ferry slip: a hoisting tower that loaded freight cars on and off ferries for the waterfront's Belt Railroad, letting it trade cars with the Northwestern Pacific, Western Pacific and Santa Fe railroads. Damaged by fire in 1998, it was rehabilitated in 2002–2003 to the Secretary of the Interior's Standards, and it contributes to the Port's Embarcadero Historic District, listed on the National Register in 2006.",
+        place: "Pier 43 Ferry Arch",
+        where: "Pier 43",
+        at: [-122.41335, 37.80929],
+        source: "https://noehill.com/SF/LANDMARKS/poi_pier_43.asp",
+      },
+      {
+        icon: "shop",
+        title: "Jefferson Street, rebuilt for walkers",
+        text:
+          "Jefferson Street runs five blocks from Powell to Hyde through the heart of the Wharf, where fishermen once sold their catch straight from their boats and then from stalls on the piers; seafood restaurants, crab stands, shops and attractions line it today. The city rebuilt its two western blocks, Hyde to Jones, in 2013, and a second phase, funded by the Board of Supervisors in 2019, carried widened sidewalks, new trees and patterned paving east to Powell, with two-way traffic the whole way.",
+        place: "Jefferson Street shops and restaurants",
+        where: "Jefferson St & Taylor St",
+        at: [-122.41551, 37.80832],
+        source: "https://www.fishermanswharf.org/fwcbd/district-projects-data/jefferson-street-development/",
+      },
+      {
+        icon: "flag",
+        title: "The submarine that rescued POWs",
+        text:
+          "Moored at Pier 45 is the USS Pampanito, a World War II submarine launched at Portsmouth Naval Shipyard in July 1943 and now a National Historic Landmark; the Park Service credits it with sinking five enemy ships on six war patrols. In September 1944 it sank the transport Kachidoki Maru, then returned to the area and picked up survivors: the convoy had carried Allied prisoners of war, and its crew rescued 73 of the 2,218 Australian and British POWs who had been aboard the Kachidoki Maru and the Rakuyo Maru.",
+        place: "USS Pampanito",
+        where: "Pier 45",
+        at: [-122.41650, 37.80980],
+        source: "https://www.nps.gov/parkhistory/online_books/butowsky1/pampanito.htm",
+      },
+      {
+        icon: "wave",
+        title: "Ferry slips turned ship museum",
+        text:
+          "This pier began as a single-slip landing for automobile ferries to Sausalito, and its first run left on May 28, 1922; in 1927 it was extended several hundred feet, with two more slips for ferries to Berkeley. The Bay Bridge and Golden Gate Bridge ended the service, and the last ferry left on July 25, 1938. Today the pier holds the Maritime park's historic fleet, among them the Balclutha, built in Scotland in 1886, which carried California grain around Cape Horn, and the 1890 ferryboat Eureka, two of the park's five vessels named National Historic Landmarks.",
+        place: "Hyde Street Pier",
+        where: "Hyde St & Jefferson St",
+        at: [-122.42082, 37.80800],
+        source: "https://www.nps.gov/safr/learn/historyculture/hyde-street-pier.htm",
+      },
+      {
+        icon: "factory",
+        title: "The canners' warehouse, now a landmark",
+        text:
+          "The California Fruit Canners Association, later renamed Del Monte, built this four-story timber and brick warehouse in 1907–1909 as part of its cannery complex. The city named it a landmark in 1974, it joined the National Register of Historic Places in 1975, and the National Park Service took it over in 1978. A 2002 fire gutted its interior during renovation; it reopened in 2003, and today it holds maritime park space, with the rest leased to a hotel.",
+        place: "Haslett Warehouse",
+        where: "680 Beach St",
+        at: [-122.42035, 37.80705],
+        source: "https://noehill.com/SF/LANDMARKS/nat1975000172.asp",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way waterfront stroll for visitors and would-be neighbors, from the F-line streetcar stop at Pier 39 west along the Embarcadero and Jefferson Street to the historic ships of the Hyde Street Pier, ending at the Powell-Hyde cable car stop at Hyde & Beach. It runs about 1.4 miles with short detours out onto Pier 39, Pier 45 and the Hyde Street Pier; allow about 75 minutes, more if you board the ships, and go on a weekday morning, before the midday crowds.",
+      miles: 1.4,
+      minutes: 75,
+      tip:
+        "Across from Pier 45, look for the small Fishermen's and Seamen's Memorial Chapel, built in 1978–1981 on the site of a former Coast Guard building to remember those lost at sea. It opens only a couple of hours a week, on Saturdays from 11 a.m. to 1 p.m. at last report, so check before you go.",
+    },
     restaurants: [
       { name: "Scoma's", address: "1965 Al Scoma Way (Pier 47)", phone: "(415) 771-4383", url: "https://scomas.com" },
       { name: "Fog Harbor Fish House", address: "PIER 39, Suite A202", phone: "(415) 421-2442", url: "https://fogharbor.com" },
