@@ -4,7 +4,8 @@ Convert a BrokerMetrics / SFAR MLS history export (.xlsx or .csv) into the
 canonical CSV the geocode pipeline reads. Drops the output in data/raw/.
 
 Usage:
-    python3 scripts/convert-mls-history.py [--sold-only] <input.xlsx|.csv> [output-name.csv]
+    python3 scripts/convert-mls-history.py [--sold-only] [--income] <input.xlsx|.csv> [output-name.csv]
+  (a Residential Income export, …_INCP_…, is detected by name; --income forces it)
 
 Example:
     python3 scripts/convert-mls-history.py ~/Downloads/2026MLSSFHistory.xlsx closed_2026.csv
@@ -103,9 +104,20 @@ SUBTYPE_CODES = {
     "LOFT": "Loft",
     "OTHR": "Other",
 }
+# The Residential Income export (…_INCP_…) is a second MLS feed with its own
+# subtype codes; its OTHR is income "other", not the Residential class's.
+INCOME_CODES = {
+    "DPLX": "Duplex",
+    "TPLX": "Triplex",
+    "FPLX": "Fourplex",
+    "PLS5": "5+ Units",
+    "OTHR": "Residential Income Other",
+}
+INCOME = False   # set from the input file name (…_INCP_…) or --income
 def normalize_subtype(s):
     key = str(s or "").strip().upper()
-    return SUBTYPE_CODES.get(key, s)
+    if INCOME and key in INCOME_CODES: return INCOME_CODES[key]
+    return SUBTYPE_CODES.get(key, INCOME_CODES.get(key, s))
 
 # Agent columns in some exports embed the agent's MLS ID and phone numbers:
 #   "Jane Doe (ID:811150)  Primary:415-555-0100 Secondary:415-555-0101"
@@ -190,6 +202,11 @@ def as_num(v):
 def main():
     args = sys.argv[1:]
     sold_only = False
+    global INCOME
+    if "--income" in args:
+        INCOME = True
+        args = [a for a in args if a != "--income"]
+    if any("_INCP_" in os.path.basename(a).upper() for a in args if not a.startswith("--")): INCOME = True
     if "--sold-only" in args:
         sold_only = True
         args = [a for a in args if a != "--sold-only"]

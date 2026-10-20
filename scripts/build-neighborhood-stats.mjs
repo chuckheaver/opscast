@@ -16,6 +16,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { listNeighborhoods } from "../app/fog/lib/neighborhoods.js";
 import { statsThrough, throughStamp } from "./stats-through.mjs";
+import { segOf } from "../app/lib/segments.js";
 
 const LISTINGS = "public/data/sf-listings.geojson";
 const ZONES = "public/data/neighborhood-fog-zones.json";
@@ -54,8 +55,7 @@ for (const f of geo.features || []) {
     sqft: Number(p.sqft) || 0,
     dom: Number.isFinite(Number(p.dom)) ? Number(p.dom) : null,
     fog: Number(p.fogHours),
-    house: /single family/i.test(p.propType || ""),
-    condo: /condo|tenancy in common/i.test(p.propType || ""),
+    seg: segOf(p.propType),           // sfh | condo | other (app/lib/segments.js)
   });
 }
 
@@ -72,8 +72,9 @@ for (const { key } of listNeighborhoods()) {
   const rows = byHood.get(key) || [];
   const fogs = rows.map(r => r.fog).filter(Number.isFinite);
   const fog = median(fogs);
-  const houses = rows.filter(r => r.house).map(r => r.price);
-  const condos = rows.filter(r => r.condo).map(r => r.price);
+  const houses = rows.filter(r => r.seg === "sfh").map(r => r.price);
+  const condos = rows.filter(r => r.seg === "condo").map(r => r.price);
+  const others = rows.filter(r => r.seg === "other").map(r => r.price);
   const ppsf = rows.filter(r => r.sqft > 0).map(r => r.price / r.sqft);
   const doms = rows.map(r => r.dom).filter(v => v != null);
   if (rows.length) withSales++;
@@ -81,6 +82,7 @@ for (const { key } of listNeighborhoods()) {
     n: rows.length,
     sfhMedian: median(houses), sfhN: houses.length,
     condoMedian: median(condos), condoN: condos.length,
+    otherMedian: median(others), otherN: others.length,
     ppsf: median(ppsf),
     dom: median(doms),
     fogHours: fog,

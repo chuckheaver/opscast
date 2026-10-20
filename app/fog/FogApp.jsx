@@ -20,6 +20,7 @@ import { findNeighborhoodForPoint, findContourForPoint, findFeatureByName, centr
 import { reverseGeocode, elevationAtPoint } from "./lib/geocode";
 import { ALL_TRANSIT_KEYS, isAllSelected, routesForSelection } from "./lib/transit";
 import { ALL_BIKE_KEYS } from "./lib/bikes";
+import { SEG } from "../lib/segments";
 
 // Where each overlay's saved default selection is stored.
 const TRANSIT_PREF_KEY = "mysf.transit.v1";
@@ -679,7 +680,7 @@ export default function FogApp() {
 
   // From a neighborhood pop-up's "N sold" link → focus the Homes overlay on
   // that neighborhood + segment and open the Stats sheet (the address grid).
-  const SEG_TYPES = { sfh: ["Single Family Residence"], condo: ["Condominium", "Tenancy in Common"] };
+  const SEG_TYPES = { sfh: SEG.sfh.types, condo: SEG.condo.types, other: SEG.other.types };   // app/lib/segments.js
   const showNeighborhoodProperties = useCallback((nbhd, seg) => {
     setHomesFilter({ ...defaultFilter(listingsGeo?.metadata?.statsThrough), fogNeighborhood: nbhd, subtypes: new Set(SEG_TYPES[seg] || []) });
     setActivityWanted(true);

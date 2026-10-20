@@ -44,10 +44,11 @@ export default function Page() {
             <p className="lp-hood-spirit">{h.content.spirit}</p>
             {/* Every median is shown, with its sale count beside it; a
                 neighborhood with no sales this year gets no empty line. */}
-            {h.stats?.sfhMedian || h.stats?.condoMedian ? (
+            {h.stats?.sfhMedian || h.stats?.condoMedian || h.stats?.otherMedian ? (
               <div className="lp-hood-nums">
                 {h.stats.sfhMedian ? <span><b>{money(h.stats.sfhMedian)}</b> house <i>({h.stats.sfhN})</i></span> : null}
-                {h.stats.condoMedian ? <span><b>{money(h.stats.condoMedian)}</b> condo <i>({h.stats.condoN})</i></span> : null}
+                {h.stats.condoMedian ? <span><b>{money(h.stats.condoMedian)}</b> condo/TIC/co-op <i>({h.stats.condoN})</i></span> : null}
+                {h.stats.otherMedian ? <span><b>{money(h.stats.otherMedian)}</b> other <i>({h.stats.otherN})</i></span> : null}
               </div>
             ) : null}
           </Link>

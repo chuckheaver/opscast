@@ -61,7 +61,9 @@ def hood(r):
 PERIOD=os.path.join(ROOT,"data","reporting-period.json")
 SEG={"Single Family Residences":{"Single Family Residence","2 Houses on Lot","Halfplex"},
      # Every sale that is not a single-family house: two segments, nothing left over.
-     "Condo / TIC / Other":{"Condominium","Tenancy in Common","Stock Cooperative","Co-Ownership","Townhouse","Other","3+ Houses on Lot"}}
+     # Residential Income (the second feed, …_INCP_…) counts here too, 5+ unit buildings included (owner, Oct 20 2026).
+     "Condo / TIC / Other":{"Condominium","Tenancy in Common","Stock Cooperative","Co-Ownership","Townhouse","Other","3+ Houses on Lot",
+                            "Duplex","Triplex","Fourplex","5+ Units","Residential Income Other"}}
 # The site's zones at a point (app/lib/fog-zones.js, reports/market/micro.py).
 ZONES=[("Sun","#FDE68A","8 hrs or less",lambda h:h<=8),
        ("Transition","#E7E5E4","8.5 hrs",lambda h:8<h<9),

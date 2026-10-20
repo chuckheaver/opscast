@@ -18,11 +18,11 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { NAME_OVERRIDES, getBuilding, RENTAL_OBJECTIDS, FORCE_COMMERCIAL_OBJECTIDS, OCCUPANCY_OVERRIDES, ADDRESS_OVERRIDES } from "./lib/buildings";
 import { fogZone } from "../lib/fog-zones";
+import { SEGMENTS, SEG, segColorExpr } from "../lib/segments";
 
-// Sold homes in the market report's segment colours (its Units Sold chart):
-// single-family navy, Condo/TIC/Other gold — the same on every map.
-const SFH_DOT = "#203C5F", CTO_DOT = "#E9BC3F";
-const SEG_DOT = ["match", ["get", "propType"], ["Single Family Residence", "2 Houses on Lot", "Halfplex"], SFH_DOT, CTO_DOT];
+// Sold homes in the site's three categories (app/lib/segments.js): single-
+// family navy, condo/TIC/co-op gold, other terracotta — the same on every map.
+const SEG_DOT = segColorExpr("propType");
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const SF_CENTER = [-122.447, 37.7649];
@@ -1211,7 +1211,7 @@ export default function FogMap({
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 5, 14, 8, 16, 11],
           // the Details list it came from (seg), else the sale's own type
-          "circle-color": ["match", ["get", "seg"], "sfh", SFH_DOT, "condo", CTO_DOT, SEG_DOT],
+          "circle-color": ["match", ["get", "seg"], "sfh", SEG.sfh.color, "condo", SEG.condo.color, "other", SEG.other.color, SEG_DOT],
           "circle-stroke-color": "#ffffff",
           "circle-stroke-width": 2,
           "circle-opacity": 0.95,
@@ -2585,15 +2585,14 @@ export default function FogMap({
     );
   }
 
-  // The key to the sale dots' two colours, whenever any are on the map.
+  // The key to the sale dots' three colours, whenever any are on the map.
   const showSegKey = (activityData?.features?.length || 0) > 0 || (comps?.features?.length || 0) > 0;
   return (
     <>
       <div ref={containerRef} className="fog-map" />
       {showSegKey && (
         <ul className="fog-seg-key" style={{ bottom: bottomInset + 34 }} aria-label="Map key: sold homes">
-          <li><i style={{ background: SFH_DOT }} />SFH</li>
-          <li><i style={{ background: CTO_DOT }} />Condo/TIC/Other</li>
+          {SEGMENTS.map(s => <li key={s.key}><i style={{ background: s.color }} />{s.short}</li>)}
         </ul>
       )}
     </>

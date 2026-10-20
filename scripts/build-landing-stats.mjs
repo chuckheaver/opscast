@@ -12,6 +12,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import { statsThrough, throughStamp } from "./stats-through.mjs";
 import { fogZone } from "../app/lib/fog-zones.js";
+import { segOf, SEGMENTS } from "../app/lib/segments.js";
 
 const LISTINGS = "public/data/sf-listings.geojson";
 const PARCELS = "public/data/parcel-res-by-neighborhood.json";
@@ -43,7 +44,7 @@ for (const f of geo.features || []) {
     zone: zoneOf(p.fogHours),
     price,
     sqft: Number(p.sqft) || 0,
-    house: /single family/i.test(p.propType || ""),
+    house: segOf(p.propType) === "sfh",
   });
 }
 
@@ -82,8 +83,7 @@ const bucket = yr => {
       price,
       list: Number(p.listPrice) || 0,
       dom: Number.isFinite(Number(p.dom)) ? Number(p.dom) : null,
-      house: /single family/i.test(p.propType || ""),
-      condo: /condo|tenancy in common/i.test(p.propType || ""),
+      seg: segOf(p.propType),        // sfh | condo | other (app/lib/segments.js)
     });
   }
   return rows;
@@ -106,8 +106,9 @@ const seg = (rows, pick) => {
   };
 };
 const marketFor = rows => ({
-  sfh: seg(rows, r => r.house),
-  condo: seg(rows, r => r.condo),
+  sfh: seg(rows, r => r.seg === "sfh"),
+  condo: seg(rows, r => r.seg === "condo"),
+  other: seg(rows, r => r.seg === "other"),
   volume: rows.reduce((a, r) => a + r.price, 0),
   n: rows.length,
 });
@@ -139,19 +140,18 @@ writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
 // Where this year's sales are, and nothing else — the home page's live map
 // draws these as dots. A few KB instead of the multi-MB listings file.
 const POINTS = "public/data/sold-points-ytd.json";
-// Each point carries its segment, as the market report splits them:
-// 0 = single-family (Single Family Residence, 2 Houses on Lot, Halfplex),
-// 1 = Condo / TIC / Other — the map colours them navy and gold to match.
-const SFH_TYPES = new Set(["Single Family Residence", "2 Houses on Lot", "Halfplex"]);
+// Each point carries its segment, by index into SEGMENTS (app/lib/segments.js):
+// 0 = SFH, 1 = Condo / TIC / Co-op, 2 = Other — the map colours them to match.
+const SEG_INDEX = Object.fromEntries(SEGMENTS.map((s, i) => [s.key, i]));
 const pts = [];
 for (const f of geo.features || []) {
   const p = f.properties || {};
   if (!(Number(p.sellingPrice) > 0) || !String(p.sellingDate || "").startsWith(year) || !upTo(p.sellingDate)) continue;
   if (p.noLocation) continue;                   // no real location — not drawn
   const [lng, lat] = f.geometry?.coordinates || [];
-  if (Number.isFinite(lng) && Number.isFinite(lat)) pts.push([+lng.toFixed(5), +lat.toFixed(5), SFH_TYPES.has(p.propType) ? 0 : 1]);
+  if (Number.isFinite(lng) && Number.isFinite(lat)) pts.push([+lng.toFixed(5), +lat.toFixed(5), SEG_INDEX[segOf(p.propType)]]);
 }
-writeFileSync(POINTS, JSON.stringify({ year, through: built, segments: ["SFH", "Condo/TIC/Other"], points: pts }));
+writeFileSync(POINTS, JSON.stringify({ year, through: built, segments: SEGMENTS.map(s => s.short), points: pts }));
 console.log(`wrote ${POINTS} (${pts.length.toLocaleString()} points)`);
 console.log(`wrote ${OUT}`);
 console.log(`  ${out.salesThisYear.toLocaleString()} ${year} sales · ${out.parcels.toLocaleString()} parcels`);

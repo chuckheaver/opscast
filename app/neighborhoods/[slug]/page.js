@@ -12,6 +12,7 @@ import {
   money, ZONE_COLOR, windowLabel, statsYear,
 } from "../lib";
 import ZoneMix from "../ZoneMix";
+import { SEG } from "../../lib/segments";
 
 export function generateStaticParams() {
   return NAMES.map(n => ({ slug: slugify(n) }));
@@ -73,8 +74,9 @@ export default async function Page({ params }) {
 
         {s && s.n > 0 && (
           <section className="lp-nstats">
-            <Stat label="Median house" value={money(s.sfhMedian)} sub={s.sfhN ? `${s.sfhN} sold` : null} href={salesMap(name, "sfh")} />
-            <Stat label="Median condo / TIC" value={money(s.condoMedian)} sub={s.condoN ? `${s.condoN} sold` : null} href={salesMap(name, "condo")} />
+            <Stat label={SEG.sfh.median} value={money(s.sfhMedian)} sub={s.sfhN ? `${s.sfhN} sold` : null} href={salesMap(name, "sfh")} />
+            <Stat label={SEG.condo.median} value={money(s.condoMedian)} sub={s.condoN ? `${s.condoN} sold` : null} href={salesMap(name, "condo")} />
+            <Stat label={SEG.other.median} value={money(s.otherMedian)} sub={s.otherN ? `${s.otherN} sold` : null} href={salesMap(name, "other")} />
             <Stat label="Per square foot" value={s.ppsf ? `$${Math.round(s.ppsf).toLocaleString("en-US")}` : null} href={salesMap(name, "all")} />
             <Stat label="Days to sell" value={s.dom != null ? Math.round(s.dom) : null} sub="median" href={salesMap(name, "all")} />
             <Stat label="Homes sold" value={s.n} sub={statsYear} href={salesMap(name, "all")} />

@@ -237,8 +237,8 @@ function loadAllListings() {
   for (const l of byId.values()) types[l.propType || "(blank)"] = (types[l.propType || "(blank)"] || 0) + 1;
   console.log(`  property types: ${Object.entries(types).sort((a, b) => b[1] - a[1]).map(([t, n]) => `${t} ${n}`).join(" · ")}`);
   if (!Object.keys(types).some(t => /income|\bunits?\b|duplex|triplex|fourplex|multi/i.test(t)))
-    console.warn("  ! REMINDER for the owner: this load has no Residential Income properties. Add Residential Income to the MLS export"
-      + " and reload; those sales count with Condo / TIC / Other (see AGENTS.md).");
+    console.warn("  ! REMINDER for the owner: this load has no Residential Income properties. The MLS gives them as a second export"
+      + " (…_INCP_….csv) beside the Residential one (…_RESI_….csv): ask for both and load them together (see AGENTS.md).");
   // The site shows SOLD comps only (Closed / Sold Off MLS — the same set as
   // SOLD_STATUSES in app/listings/lib/filter.js). Older exports left in
   // data/raw/ carry Active / Pending / Hold / Coming Soon rows; drop them here

@@ -17,12 +17,18 @@ export const SUBTYPE_ABBREV = {
   "Co-Ownership": "CO-",
   "Halfplex": "HAL",
   "Stock Cooperative": "STO",
+  // Residential Income (the MLS's second feed)
+  "Duplex": "DUP",
+  "Triplex": "TRI",
+  "Fourplex": "4PX",
+  "5+ Units": "5+U",
+  "Residential Income Other": "RIO",
 };
 export const subtypeAbbrev = t => SUBTYPE_ABBREV[t] || (t || "").slice(0, 3).toUpperCase();
 
 // Display order for the chips. Only sold statuses exist in the UI now.
 const STATUS_ORDER = ["Closed", "Sold Off MLS"];
-const SUBTYPE_ORDER = ["Single Family Residence", "Condominium", "Tenancy in Common", "Townhouse", "3+ Houses on Lot", "Other", "2 Houses on Lot", "Co-Ownership", "Halfplex", "Stock Cooperative"];
+const SUBTYPE_ORDER = ["Single Family Residence", "Condominium", "Tenancy in Common", "Townhouse", "3+ Houses on Lot", "Other", "2 Houses on Lot", "Co-Ownership", "Halfplex", "Stock Cooperative", "Duplex", "Triplex", "Fourplex", "5+ Units", "Residential Income Other"];
 
 export const SOLD_STATUSES = new Set(["Closed", "Sold Off MLS"]);
 export const isSoldStatus = s => SOLD_STATUSES.has(s);

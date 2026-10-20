@@ -13,6 +13,7 @@ import { entryKeyFor } from "./lib/neighborhoods";
 import { statsFor, slugify, money, ZONE_COLOR, statsYear } from "../neighborhoods/lib";
 import NEIGHBORHOOD_ZONES from "../../public/data/neighborhood-fog-zones.json";
 import ZoneMix from "../neighborhoods/ZoneMix";
+import { SEG, segOf } from "../lib/segments";
 
 const LISTINGS_URL = "/data/sf-listings.geojson";
 const RES_COUNTS_URL = "/data/parcel-res-by-neighborhood.json";
@@ -60,9 +61,9 @@ function summarize(homes, fn) {
   return { list: col("list"), sale: col("sale"), sqft: col("sqft"), ppsf: col("ppsf"), pctList: col("pctList"), dom: col("dom") };
 }
 
-// The market report's segment colours, as the map's sale dots use them: the
-// price line's dot is the key to its homes on the map.
-const SEG_COLOR = { sfh: "#203C5F", condo: "#E9BC3F" };
+// The site's three categories (app/lib/segments.js), as the map's sale dots
+// colour them: the price line's dot is the key to its homes on the map.
+const SEG_COLOR = { sfh: SEG.sfh.color, condo: SEG.condo.color, other: SEG.other.color };
 
 function PriceLine({ data, label, gap, sect, reportComps, onFocusComp, autoOpen }) {
   const [open, setOpen] = useState(false);
@@ -84,7 +85,7 @@ function PriceLine({ data, label, gap, sect, reportComps, onFocusComp, autoOpen 
   return (
     <div style={{ marginBottom: gap ? 10 : 2 }}>
     <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
-      <span aria-hidden="true" title={sect === "sfh" ? "Single-family homes on the map" : "Condos / TICs on the map"}
+      <span aria-hidden="true" title={`${SEG[sect].label} sales on the map`}
         style={{ alignSelf: "center", width: 12, height: 12, borderRadius: "50%", background: SEG_COLOR[sect],
           boxShadow: "0 0 0 1.5px #fff, 0 0 0 2.5px rgba(19,26,37,0.2)" }} />
       <span style={{ fontSize: 24, fontWeight: 700, color: data ? "#131A25" : "#8A8E93" }}>{data ? data.value : "—"}</span>
@@ -219,15 +220,15 @@ export default function NeighborhoodModal({
   // map, its marker and the layer chips all stay visible and usable above.
   sheet, name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict,
   zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties, onToggleLayer, layerStates, onComps, onFocusComp,
-  autoDetails, onAutoDetailsDone, // "sfh" | "condo" | "all": the Details list(s) to open with
+  autoDetails, onAutoDetailsDone, // "sfh" | "condo" | "other" | "all": the Details list(s) to open with
 }) {
-  const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo } | null
+  const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo, other } | null
   // Which Details lists are expanded → map dots. Each PriceLine reports its
   // features here; we merge them and hand the set to the map.
-  const compsRef = useRef({ sfh: null, condo: null });
+  const compsRef = useRef({ sfh: null, condo: null, other: null });
   const reportComps = useCallback((sect, feats) => {
     compsRef.current[sect] = feats && feats.length ? feats : null;
-    const all = [...(compsRef.current.sfh || []), ...(compsRef.current.condo || [])];
+    const all = [...(compsRef.current.sfh || []), ...(compsRef.current.condo || []), ...(compsRef.current.other || [])];
     onComps?.(all.length ? { type: "FeatureCollection", features: all } : null);
   }, [onComps]);
   const [dataThrough, setDataThrough] = useState(""); // M/D/YY of the last data load
@@ -263,12 +264,12 @@ export default function NeighborhoodModal({
         const feats = g.features || [];
         // Only homes physically IN this neighborhood (strict point-in-polygon
         // fogNeighborhood match) — not ones merely MLS-tagged to it.
-        const collectFor = typeRe => {
+        const collectFor = seg => {
           const homes = feats
             .filter(f => {
               const p = f.properties || {};
               return p.fogNeighborhood === name
-                && typeRe.test(p.propType || "")
+                && segOf(p.propType) === seg
                 && Number(p.sellingPrice) > 0
                 && String(p.sellingDate || "").slice(0, 4) === (through ? through.slice(0, 4) : CUR_YEAR)
                 && (!through || String(p.sellingDate).slice(0, 10) <= through);
@@ -297,7 +298,7 @@ export default function NeighborhoodModal({
           const median = _median(prices);
           return { value: fmtPrice(median), n: homes.length, homes };
         };
-        setPrices({ sfh: collectFor(/single family/i), condo: collectFor(/condo|tenancy in common/i) });
+        setPrices({ sfh: collectFor("sfh"), condo: collectFor("condo"), other: collectFor("other") });
       })
       .catch(() => { if (!cancelled) setPrices(null); });
     return () => { cancelled = true; };
@@ -371,8 +372,9 @@ export default function NeighborhoodModal({
         {st && st.n > 0 && (
           <div className="nhm-stats">
             {[
-              ["Median house", money(st.sfhMedian), st.sfhN ? `${st.sfhN} sold` : null],
-              ["Median condo / TIC", money(st.condoMedian), st.condoN ? `${st.condoN} sold` : null],
+              [SEG.sfh.median, money(st.sfhMedian), st.sfhN ? `${st.sfhN} sold` : null],
+              [SEG.condo.median, money(st.condoMedian), st.condoN ? `${st.condoN} sold` : null],
+              [SEG.other.median, money(st.otherMedian), st.otherN ? `${st.otherN} sold` : null],
               ["Per square foot", st.ppsf ? `$${Math.round(st.ppsf).toLocaleString("en-US")}` : null, null],
               ["Days to sell", st.dom != null ? Math.round(st.dom) : null, "median"],
               ["Homes sold", st.n, statsYear],
@@ -431,8 +433,10 @@ export default function NeighborhoodModal({
             <div style={{ marginBottom: 2 }}>
               <PriceLine data={prices.sfh} label="Median Single-Family" gap sect="sfh" reportComps={reportComps} onFocusComp={onFocusComp}
                 autoOpen={autoDetails === "sfh" || autoDetails === "all"} />
-              <PriceLine data={prices.condo} label="Median Condo/TIC" sect="condo" reportComps={reportComps} onFocusComp={onFocusComp}
+              <PriceLine data={prices.condo} label="Median Condo/TIC/Co-op" gap sect="condo" reportComps={reportComps} onFocusComp={onFocusComp}
                 autoOpen={autoDetails === "condo" || autoDetails === "all"} />
+              <PriceLine data={prices.other} label="Median Other" sect="other" reportComps={reportComps} onFocusComp={onFocusComp}
+                autoOpen={autoDetails === "other" || autoDetails === "all"} />
             </div>
           ) : (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#6B6F75" }}>Market data unavailable.</span></div>
