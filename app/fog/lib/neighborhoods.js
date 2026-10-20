@@ -3610,9 +3610,9 @@ export const NEIGHBORHOODS = {
       },
       {
         icon: "park",
-        title: "Blue Mountain's Easter cross",
+        title: "Blue Mountain's first Easter",
         text:
-          "Monterey Heights sits on the south slope of Mount Davidson, which was called Blue Mountain when Adolph Sutro bought it and was later named for George Davidson, a charter member of the Sierra Club. More than 5,000 people braved rain to hike up before dawn for an Easter sunrise service at a 40-foot cross on the summit in 1923; that cross burned in December 1925, and the present 103-foot concrete cross was dedicated in 1934, when President Franklin D. Roosevelt lit it by telegraph from the White House.",
+          "Monterey Heights sits on the south slope of Mount Davidson, which was called Blue Mountain when Adolph Sutro bought it and was later named for George Davidson, a charter member of the Sierra Club. In 1923 more than 5,000 people braved rain to hike up before dawn for an Easter sunrise service at a 40-foot cross on the summit; the cross that stands there now is a stop on the Sherwood Forest walk.",
         place: "Mount Davidson's south slope",
         where: "Yerba Buena Ave & Hazelwood Ave",
         at: [-122.45968, 37.73448],
@@ -7036,14 +7036,78 @@ export const NEIGHBORHOODS = {
   "Miraloma Park": {
     spirit: "A quiet, leafy hillside neighborhood on the southern slopes of Mount Davidson, where curving streets, mid-century homes, woodsy calm, and sweeping views meet one of the city's most active neighborhood associations.",
     reasons: ["Woodsy hillside calm", "Big ridge-top views", "Strong neighborhood club", "Steps from Mount Davidson"],
-    history: "Miraloma Park was laid out from 1926 through the 1950s, developed largely by the Meyer Brothers, who assembled land from the Sutro estate, Wells Fargo & Company, and other owners. They marketed it as a 'City in Itself,' a suburban home center of mostly one-story-over-garage houses on curving streets that follow the hill's contours in the City Beautiful tradition. Roughly 2,400 single-family homes were built, many on the lower slopes of Mount Davidson, whose summit had been preserved as a public park in 1929. Residents organized the Miraloma Park Improvement Club, whose first meeting was held in 1930 and which incorporated in 1936. The developer built and donated a clubhouse on Del Vale Avenue, dedicated November 10, 1940, and the club remains vigorous today.",
+    history:
+      "In 1881 Adolph Sutro bought 1,400 acres of the old Rancho San Miguel, including the western slope of Mount Davidson, and planted a eucalyptus forest around the mountain. In 1926 the Meyer Brothers home-building company bought 26 acres of that forest, uprooted the trees with tractors, and within about two months had the first houses on sale along Portola Drive. They promised “some of the atmosphere of the early Spanish period”: stucco facades, red clay tile roofs and Spanish street names. Most houses of the mid to late 1920s, though, are English- or Norman-inspired, and by the decade's end the tract, built from its northern end near Portola, was about a quarter built out.\n\nThe company assembled 208 acres, 350 home sites from the Sutro estate and 1,650 from Wells Fargo & Company and owners as far away as France, and marketed the tract as a “City in Itself,” a “suburban home center” of one-story-over-garage houses on contour-hugging streets, and the neighborhood filled in through the 1950s. Meanwhile Madie Brown joined the Federation of Women's Clubs in lobbying Mayor James Rolph to keep the summit from being subdivided; supervisors approved $15,000 for a park in 1927, and in 1929 the city closed on its first 20 acres and dedicated Mount Davidson Park.\n\nResidents first met as the Miraloma Park Improvement Club on August 22, 1930. In January 1942 the company announced 210 “low-cost” homes along Teresita Boulevard and its cross streets, but a February 6 mudslide was linked to a street its crews had recently cut, and the City Attorney charged the brothers with negligence. The company closed that summer and sold its remaining lots to other builders.",
     facts: [
-      { icon: "park", title: "San Francisco's highest peak", text: "Mount Davidson rises 928 feet, the highest natural point in the city, and its summit and slopes form Mount Davidson Park." },
-      { icon: "church", title: "The summit cross", text: "A 103-foot concrete cross, dedicated in 1934, stands atop Mount Davidson and has been a landmark of the city's skyline for generations." },
-      { icon: "house", title: "A planned hillside subdivision", text: "Roughly 2,400 mostly single-family homes were built from the late 1920s on, on curving streets that follow the hill's contours in the City Beautiful style." },
-      { icon: "flag", title: "An old, active improvement club", text: "The Miraloma Park Improvement Club traces its first meeting to 1930 and meets in a clubhouse donated by the developer and dedicated in 1940." },
-      { icon: "tram", title: "Residents won their bus line", text: "Early club efforts brought transit to the hill; Mayor Rossi piloted the first 36 bus from Forest Hill Station on July 23, 1939." },
+      {
+        icon: "shop",
+        title: "Where the first houses went on sale",
+        text:
+          "Miraloma Park's shops line the 600 and 700 blocks of Portola Drive around this corner, storefronts that have held a grocery store, places to eat and other neighborhood shops. Portola is where the neighborhood began: in 1926 the Meyer Brothers had their first houses on sale along it within about two months of buying the land. By 1939 it was the neighborhood's business district, where a parade of American Legionnaires, Boy Scouts and school bands celebrated the new bus line.",
+        place: "Portola Drive shops",
+        where: "Portola Dr & Fowler Ave",
+        at: [-122.45323, 37.74436],
+        source: "https://www.sanfranciscostory.com/lost-in-miraloma-park",
+      },
+      {
+        icon: "tram",
+        title: "The bus line residents won",
+        text:
+          "Getting public transportation to the new tract was one of the improvement club's first projects. Service began on July 23, 1939, from Forest Hill Station by way of Laguna Honda Boulevard, Portola Drive, Evelyn Way and Teresita Boulevard, and the club put out a flyer, “Hooray for the Buses,” and invited residents to watch Mayor Angelo Rossi drive the first bus. First listed as the 7 Miraloma, the line is today's 36-Teresita, and it still stops at this corner.",
+        place: "Teresita Boulevard",
+        where: "Teresita Blvd & Evelyn Way",
+        at: [-122.45118, 37.74306],
+        source: "https://jacquieproctor.com/?p=1433",
+      },
+      {
+        icon: "flag",
+        title: "A clubhouse from the builders",
+        text:
+          "The Meyer Brothers built this clubhouse for the neighborhood in 1940, and it was dedicated on November 10 of that year; on May 1, 1942, the company gave the building and its property to the Miraloma Park Improvement Club. The Department of Public Works graded its parking lot in exchange for permission to store tools and equipment while it built O'Shaughnessy Boulevard. Since July 23, 1943, the club has leased the adjacent lot and green space from the city for $1 a year.",
+        place: "Miraloma Park Clubhouse",
+        where: "350 O'Shaughnessy Blvd",
+        at: [-122.44600, 37.74124],
+        source: "https://miralomapark.org/clubhouse/",
+      },
+      {
+        icon: "bird",
+        title: "A seagull, a stream and a rest",
+        text:
+          "A 2025 article in the neighborhood newsletter translates the tract's Spanish street names: Gaviota Way, which meets Teresita Boulevard here, means seagull, Teresita is “little Teresa,” Reposa is rest, Arroyo stream, Bella Vista beautiful view and El Sereno the serene. Del Vale, by the clubhouse, comes out as “of the voucher,” and the writer guesses Del Valle, “of the valley,” was meant. Stillings Avenue, on the other hand, honors Calvin and Ada Stillings, who built a farmhouse at what is now Stillings and Nordhoff after the 1906 earthquake destroyed their home.",
+        place: "Gaviota Way",
+        where: "Teresita Blvd & Gaviota Way",
+        at: [-122.44787, 37.73987],
+        source: "https://miralomapark.org/wp-content/uploads/2025-02-MiralomaLife.pdf",
+      },
+      {
+        icon: "star",
+        title: "The rocks that spelled Miraloma",
+        text:
+          "In 1927 the Meyer Brothers laid out a sign of white-painted rocks on Mount Davidson's northeast slope, the side of the mountain that rises southwest of this corner, spelling MIRALOMA PARK in large block letters. One morning, February 17, 1947, the stones were found rearranged to read “L.A. City-Limit.” The sign was eventually removed.",
+        place: "Mount Davidson's northeast slope",
+        where: "Myra Way & Reposa Way",
+        at: [-122.45058, 37.74012],
+        source: "https://miralomapark.org/wp-content/uploads/2025-10-MiralomaLife.pdf",
+      },
+      {
+        icon: "park",
+        title: "Up to the city's highest point",
+        text:
+          "The 36 stops at this entrance to Mount Davidson Park, whose trails climb through the forest to the summit, at 928 feet the highest natural point in San Francisco, where a plaque on a boulder honors Madie Brown. President Franklin Roosevelt lit the cross at the top by telegraph from the White House on March 24, 1934, and it appears in the 1971 film Dirty Harry.",
+        place: "Mount Davidson Park",
+        where: "Myra Way & Dalewood Way",
+        at: [-122.45379, 37.73671],
+        source: "https://en.wikipedia.org/wiki/Mount_Davidson_(California)",
+      },
     ],
+    walk: {
+      intro:
+        "A 1.4-mile one-way walk for visitors and would-be neighbors, from the shops on Portola Drive, where the 36 and 48 buses stop at Fowler Avenue, through the Meyer Brothers' curving streets to the Dalewood Way entrance of Mount Davidson Park, where the 36 stops for the ride back. Allow about an hour, and save it for a clear day if you plan to climb to the summit.",
+      miles: 1.4,
+      minutes: 60,
+      tip:
+        "Mount Davidson's trails aren't marked, but they all lead up to the summit and the cross, so wear sturdy shoes for the climb above the entrance. For a snack or a meal, head back to the Portola Drive shops where the walk began.",
+    },
     nearby: ["Glen Park", "West Portal"],
     restaurants: [
       { name: "Gialina Pizzeria", address: "2842 Diamond St (Glen Park)", phone: "(415) 239-8500", url: "https://www.gialina.com" },
@@ -7061,13 +7125,88 @@ export const NEIGHBORHOODS = {
   "Golden Gate Heights": {
     spirit: "A hushed, hilltop maze of winding streets and artful stairways crowned by some of the city's most sweeping ocean-to-bay views.",
     reasons: ["Hilltop park panoramas", "Famous tiled staircases", "Quiet residential streets", "Steps from the Inner Sunset"],
-    history: "Once part of the windswept Outside Lands dunes west of downtown, the hills here were graded and laced with stairways around 1927 and built out as a residential district through the 1910s to 1950s. The neighborhood wraps around a chain of rocky peaks, including Grand View Park atop 'Turtle Hill,' which looks out over the Pacific, Golden Gate Park, the Marin Headlands and the Financial District. In 2003, residents Jessie Audette and Alice Yee Xavier launched a community project to beautify the 16th Avenue stairway; artists Aileen Barr and Colette Crutcher designed 163 mosaic panels, and the now-famous Tiled Steps opened on August 27, 2005. The nearby Hidden Garden Steps on 16th Avenue followed as a second community mosaic stairway.",
+    history:
+      "Golden Gate Heights is a north–south ridge west of Twin Peaks, a rocky spine in a district of sand dunes. Its rock is Franciscan chert, about 140 million years old, formed on an ancient sea floor; on Grandview Park's summit only a thin layer of sand covers it. Many nineteenth-century maps drew a uniform street grid that failed to match the ground, a map dealer notes, especially on this ridge. In 1888 Carl G. Larsen, a Danish restaurant and hotel owner, bought his first Sunset District land, a city block of dunes, at auction; he later gave the city the land for Golden Gate Heights Park.\n\nThe ridge got streets of its own in the 1920s. Photographs from 1926 and 1927 record its construction and terracing, and H. A. Candrian's 1927 city map shows the new streets pasted onto the sheet. Where slopes were too steep, stairways went in: photos show one being built on Moraga Street near 14th Avenue in July 1927 and a switchback stair at the head of Moraga Street and Funston Avenue in January 1928.\n\nFour hilltops remain open: the city's natural areas plan treats Grandview Park, Rocky Outcrop, Hawk Hill and part of Golden Gate Heights Park as remnants of a ridge-top dune system, with some of San Francisco's last sand dune plant communities. In 2003 neighbors Jessie Audette and Alice Yee Xavier proposed covering the Moraga Street stairway in mosaic; the 16th Avenue Tiled Steps opened in 2005, and the Hidden Garden Steps followed in 2013. Nature in the City and neighbors have planted coast buckwheat and nectar plants along the streets to link the two hilltops where the green hairstreak butterfly survives.",
     facts: [
-      { icon: "stairs", title: "The 16th Avenue Tiled Steps", text: "163 mosaic panels climb sea-to-stars to the base of Grandview Park; opened in 2005." },
-      { icon: "park", title: "Grand View Park", text: "Atop 'Turtle Hill,' it offers panoramas of the ocean, Golden Gate Park and the bay." },
-      { icon: "art", title: "A second mosaic stairway", text: "The Hidden Garden Steps add another community-built tiled climb nearby." },
-      { icon: "house", title: "Built on the old dunes", text: "Streets were graded and stairways built around 1927 on the former Outside Lands sand hills." },
+      {
+        icon: "art",
+        title: "The salamander on the stairs",
+        text:
+          "At Kirkham Street, 16th Avenue dead-ends against the north edge of Turtle Hill and climbs on to Lawton Street as a stairway of 148 steps in nine flights, flanked by public gardens. Aileen Barr and Colette Crutcher, the artists behind the Moraga Street mosaic just up the hill, designed its tiles: flowers, leaves, snails, dragonflies, butterflies and bees, and a salamander, the largest figure, that runs up more than two dozen steps. It was finished in December 2013, and many tiles carry messages chosen by the project's donors.",
+        place: "Hidden Garden Steps",
+        where: "16th Ave & Kirkham St",
+        at: [-122.47398, 37.75967],
+        source: "https://inspiredimperfection.com/?p=10013",
+      },
+      {
+        icon: "stairs",
+        title: "A stairway inspired by Rio",
+        text:
+          "Neighbors Jessie Audette and Alice Yee Xavier proposed this project in 2003, inspired by the tiled Escadaria Selarón in Rio de Janeiro, and artists Aileen Barr and Colette Crutcher turned the Moraga Street stairway's 163 steps, which rise about 90 feet from 16th Avenue to 15th Avenue, into a single mosaic of more than 2,000 unique tiles made from over 75,000 fragments. Sponsorships of more than 220 named tiles covered most of the cost. The steps opened on August 27, 2005, with lion dancers, and Supervisor Sean Elsbernd declared the day 16th Avenue Tiled Steps Day.",
+        place: "16th Avenue Tiled Steps",
+        where: "16th Ave & Moraga St",
+        at: [-122.47365, 37.75633],
+        source: "https://en.wikipedia.org/wiki/16th_Avenue_Tiled_Steps",
+      },
+      {
+        icon: "star",
+        title: "The summit called Turtle Hill",
+        text:
+          "Locals call this hilltop Turtle Hill, by one account for its shell-like shape seen from above. Its summit, about 666 feet up, is an outcrop of Franciscan chert under a thin layer of sand, and a mix of wooden stairs and sandy paths leads to the top. From there the view takes in downtown, Golden Gate Park, the Pacific Ocean, the Marin Headlands and Sutro Tower; the city manages the park's four acres as a natural area.",
+        place: "Grandview Park",
+        where: "15th Ave & Moraga St",
+        at: [-122.47174, 37.75641],
+        source: "https://en.wikipedia.org/wiki/Grandview_Park",
+      },
+      {
+        icon: "bird",
+        title: "Stepping stones for a butterfly",
+        text:
+          "Once found across San Francisco, the green hairstreak butterfly now survives in only three places: the Presidio bluffs and two hilltops in Golden Gate Heights, this cliff-faced outcrop beside 14th Avenue and Hawk Hill, four blocks south. The two colonies are cut off from each other, and an adult lives about two weeks and flies up to about 300 feet from its home patch, so Nature in the City and neighbors have been planting coast buckwheat, its host plant, and nectar plants along the streets in between as stepping stones.",
+        place: "Rocky Outcrop",
+        where: "14th Ave & Ortega St",
+        at: [-122.47100, 37.75400],
+        source: "https://abc30.com/archive/6920812",
+      },
+      {
+        icon: "park",
+        title: "Larsen's hilltop park",
+        text:
+          "The Chronicle counts Carl G. Larsen, the Danish restaurant and hotel owner who began buying Sunset District land in 1888, among the first San Franciscans to fall in love with the view from here, and the park stands on land he gave the city: seven acres on a 725-foot peak. The city manages a 0.8-acre part of it as a natural area, and in July 2021 its playground reopened after a $2.8 million renovation that added a climbing wall, monkey bars and a nature play area.",
+        place: "Golden Gate Heights Park",
+        where: "12th Ave & Rockridge Dr",
+        at: [-122.46960, 37.75050],
+        source: "https://www.sfchronicle.com/totalsf/article/golden-gate-heights-park-sunset-20011788.php",
+      },
+      {
+        icon: "stairs",
+        title: "A stairway that starts as two",
+        text:
+          "Below this corner, Quintara Street turns from street to path at 15th Avenue and climbs here as the Quintara Steps, which begin as two parallel flights side by side and merge as they approach 14th Avenue. A 7x7 hiking loop through the neighborhood starts at their foot and, in about 3.1 miles with roughly 990 feet of elevation change, climbs 12 stairways in all.",
+        place: "Quintara Steps",
+        where: "Quintara St & 14th Ave",
+        at: [-122.47071, 37.74888],
+        source: "https://www.7x7.com/step-up-in-golden-gate-heights-for-the-ultimate-weekend-hike-1786844990.html",
+      },
+      {
+        icon: "sun",
+        title: "A dune on a hilltop",
+        text:
+          "The southernmost of the ridge's four city natural areas, 4.5-acre Hawk Hill is what the city calls a magnificent remnant hilltop dune, with ocean views over southwestern San Francisco. Its shifting sand supports dune plants including the locally rare California croton and the San Francisco wallflower, as well as the green hairstreak's second colony. The slopes erode easily, so the city has no designated trails here and discourages walking on the hill: take in the plants and the view from the sidewalk.",
+        place: "Hawk Hill",
+        where: "Rivera St & Funston Ave",
+        at: [-122.46980, 37.74710],
+        source: "https://sfrecpark.org/facilities/facility/details/Hawk-Hill-340",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.5 miles for visitors and would-be neighbors, from the N-Judah stop at Judah St & 16th Ave, a block north of the first stop (the 66 bus also climbs 16th Avenue), up two mosaic stairways to the top of Grandview Park, then south along the ridge past its other hilltop parks to Hawk Hill, a block from the 48 bus at 14th Ave & Santiago St. Allow about 90 minutes with stops, and pick a clear day: the views are the point, and fog on the ridge can hide them entirely.",
+      miles: 1.5,
+      minutes: 90,
+      tip:
+        "The first stretch climbs more than 300 steps, 148 on the Hidden Garden Steps and 163 on the Moraga Street mosaic, before the paths to the top of Grandview Park, so wear good shoes and take it slowly; at the Quintara Steps, walk down to 15th Avenue and back to see the twin flights. Golden Gate Heights has no shopping street of its own: the nearest restaurants and shops are in the Inner Sunset's commercial district along Irving Street, a block north of Judah Street.",
+    },
     nearby: ["the Inner Sunset"],
     restaurants: [
       { name: "San Tung", address: "1031 Irving St", phone: "(415) 242-0828", url: "https://www.santungsf.com" },
@@ -7085,13 +7224,78 @@ export const NEIGHBORHOODS = {
   "Midtown Terrace": {
     spirit: "A quiet 1950s hilltop tract of near-identical view homes spread across the western slope of Twin Peaks, directly beneath the soaring Sutro Tower.",
     reasons: ["Sweeping westside and ocean views", "Peaceful residential streets", "Under the iconic Sutro Tower", "Minutes from Twin Peaks and Forest Hill Station"],
-    history: "The neighborhood rose on 150 acres of the old Rancho San Miguel land that Adolph Sutro later planted with eucalyptus. Beginning in 1953, the Standard Building Company, owned by brothers Carl and Fred Gellert, developed roughly 1,000 modest two- and three-bedroom single-family homes across seven terraced streets engineered to capture the view. By February 1959 about 900 of the planned homes were complete, with a covered Sutro Reservoir and a playground built into the tract. Since 1973 the 977-foot Sutro Tower has loomed directly over the rooftops, becoming the neighborhood's defining landmark.",
+    history:
+      "Midtown Terrace spreads across about 150 acres on the western slope of Twin Peaks, once part of Rancho San Miguel, the 4,400-acre Mexican land grant of José de Jesús Noé. Adolph Sutro bought the land around 1880 and covered much of it with eucalyptus, part of what became Sutro Forest. After his death in 1898 most heirs wanted to sell, but his will barred any sale of Rancho San Miguel until ten years after the last heir's death, a battle that took twenty years to resolve. An old photo from the top of Twin Peaks shows cattle grazing on the future tract.\n\nBuilding began in 1953, when brothers Carl and Fred Gellert's Standard Building Company started on about 800 modest two- and three-bedroom houses, work that went on for about six years. A photo dated April 13, 1953, is captioned as the first street, Midcrest, and prices started at around $13,000. By October 1954 the slope was being graded, with a pit for the covered Sutro Reservoir. Standard went on to plan about 1,000 homes here, and one account counted 900 of them finished.\n\nOn July 4, 1973, the 977-foot Sutro Tower began broadcasting from the ridge just to the north. The San Francisco Chronicle had fought it at Planning Commission and Board of Supervisors hearings, warning that it stood within striking distance of reservoirs and hundreds of homes; the supervisors voted 6 to 4 against it, two votes short of overturning its approval. In the late 1990s neighbors in Midtown Terrace and Forest Knolls sued, unsuccessfully, to block a retrofit. Above the houses, this map's boundary climbs to Noe Peak, the southern of the two summits.",
     facts: [
-      { icon: "tower", title: "Sutro Tower overhead", text: "The 977-foot Sutro Tower, completed in 1973 with first transmissions on July 4 of that year, rises on the ridge directly above the neighborhood." },
-      { icon: "house", title: "A mid-century tract", text: "Beginning in 1953 the Gellert brothers' Standard Building Company built roughly 1,000 near-uniform single-family homes terraced across the hillside for their views." },
-      { icon: "water", title: "Built atop a reservoir", text: "A covered Sutro Reservoir was incorporated into the tract, with the Midtown Terrace Playground built nearby." },
-      { icon: "park", title: "Beneath Twin Peaks", text: "The homes climb the western slope just below Twin Peaks, one of the highest points in San Francisco." },
+      {
+        icon: "water",
+        title: "A playground on a reservoir's bank",
+        text:
+          "A photo dated October 21, 1954, shows this slope being graded, with Clarendon cutting across the middle and, at middle right, the large pit its caption says would become the covered Sutro Reservoir. Rec and Park notes that the east bank of Midtown Terrace Playground is actually an earthen dam, holding a reservoir where the land forms a natural bowl, and that Adolph Sutro once kept his cattle here. Today the playground has an athletic field, an outdoor basketball court, a children's play area and a clubhouse.",
+        place: "Sutro Reservoir & Midtown Terrace Playground",
+        where: "Olympia Way & Clarendon Ave",
+        at: [-122.45620, 37.75156],
+        source: "https://www.sfrecpark.org/Facilities/Facility/Details/Midtown-Terrace-Playground-258",
+      },
+      {
+        icon: "tower",
+        title: "Neighbors of a 977-foot tower",
+        text:
+          "Sutro Tower rises over the ridge just north of this corner, and a Planning Department report on the tower puts the nearest home on Dellbrook Avenue, about 200 feet away. Neighbors in Midtown Terrace and Forest Knolls sued in the late 1990s to block a retrofit of the tower and lost. In March 2015 Sutro Tower Inc. and three neighborhood groups, the Midtown Terrace Neighborhood Association among them, agreed to set up a web page about tower work that could affect nearby residents.",
+        place: "Below Sutro Tower",
+        where: "Panorama Dr & Dellbrook Ave",
+        at: [-122.45263, 37.75346],
+        source: "https://www.sutrotower.com/for-our-neighbors",
+      },
+      {
+        icon: "house",
+        title: "Seven levels, one view",
+        text:
+          "In March 1954 the San Francisco News reported that this slope had been mapped into seven levels, each designed for a new street, with the building lots largely confined to one side, the “down” side, to cash in on the view. The paper listed what the houses would take in: Sutro Forest, Laguna Honda Reservoir, Mount Davidson, St. Francis Wood and Forest Hill, with the glittering Pacific for a backdrop.",
+        place: "Panorama Drive",
+        where: "Olympia Way & Panorama Dr",
+        at: [-122.45227, 37.75130],
+        source: "http://www.outsidelands.org/midtown-terrace.php",
+      },
+      {
+        icon: "road",
+        title: "Streets named for the view",
+        text:
+          "The same 1954 News story predicted that within a few years many San Franciscans would know intimately such new street names as Skyview, Cityview, Longview and Knollview. All four are on the map today, and Cityview and Knollview meet at this corner; nearby Starview, Gladeview, Dawnview, Marview, Glenview, Sunview and Aquavista keep up the theme.",
+        place: "Cityview Way",
+        where: "Cityview Way & Knollview Way",
+        at: [-122.45138, 37.74890],
+        source: "https://www.foundsf.org/index.php?title=Brief_History_of_Midtown_Terrace",
+      },
+      {
+        icon: "flag",
+        title: "Where the tract began",
+        text:
+          "A photograph dated April 13, 1953, is captioned as Midtown Terrace's first street, Midcrest Drive, on the southern slope of Twin Peaks; today it is Midcrest Way. Prices for the new houses started at around $13,000, and the Gellerts' Standard Building Company, founded in 1922 with Carl as president and Fred in charge of construction, kept building across the hillside for about six years.",
+        place: "Midcrest Way",
+        where: "100 block of Midcrest Way",
+        at: [-122.44824, 37.74933],
+        source: "https://www.foundsf.org/Brief_History_of_Midtown_Terrace",
+      },
+      {
+        icon: "park",
+        title: "Home of the Mission blue",
+        text:
+          "Noe Peak is the southern of Twin Peaks' two summits, each just over 900 feet high. The federally endangered Mission blue butterfly is named for the Mission because its original population was found on Twin Peaks, then considered part of the Mission, and it lays its eggs only on lupine; in 1998 a fungus destroyed most of the lupine here. Rec and Park began bringing it back in 2008, planting lupine from San Bruno Mountain seed, and in 2009 released 22 females brought from San Bruno Mountain.",
+        place: "Noe Peak",
+        where: "South summit of Twin Peaks",
+        at: [-122.44778, 37.75185],
+        source: "https://baynature.org/biodiversity/mission-blue",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 2 miles for visitors and would-be neighbors, from the 36 Teresita stop at Clarendon Avenue and Olympia Way, past the Sutro Reservoir, along Panorama Drive below Sutro Tower and through the view-named streets to Midcrest Way, the tract's first street, then up the trail that starts near Portola Drive and Twin Peaks Boulevard to Noe Peak. Allow about 90 minutes, and go on a clear day, when the summit view opens up.",
+      miles: 2,
+      minutes: 90,
+      tip:
+        "Save your energy for the end, a climb to a summit just over 900 feet high, and check Rec and Park's Twin Peaks page first: work on the Twin Peaks Promenade, which broke ground in April 2026 and may run into 2027, has closed parts of the summit. Midtown Terrace has no shops of its own; back down on Portola Drive, the 48 runs from Glenview Drive west to the shops around Fowler Avenue in Miraloma Park.",
+    },
     nearby: ["West Portal"],
     restaurants: [
       { name: "Trattoria da Vittorio", address: "150 West Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
@@ -7107,14 +7311,68 @@ export const NEIGHBORHOODS = {
   "Mt. Davidson Manor": {
     spirit: "A quiet 1920s tract of tile-roofed single-family homes tucked below Mount Davidson, San Francisco's highest peak.",
     reasons: ["Calm, well-kept residential streets", "Steps from Mount Davidson Park's trails", "Walkable to West Portal's shops", "Muni Metro and bus lines close by"],
-    history: "Mt. Davidson Manor was developed beginning in 1923 by Fernando Nelson, one of San Francisco's most prolific homebuilders, who bought roughly 50 acres and filled the blocks with affordable single-family homes in a Spanish-Mediterranean style with tile roofs. It is one of the residence-park-adjacent tracts west of Twin Peaks, sitting between Westwood Park and Balboa Terrace near St. Francis Wood. The neighborhood takes its name from Mount Davidson, which rises just to the northeast and, at 928 feet, is the highest natural point in the city. In 1929 the city acquired about 20 acres at the summit for a public park. A 103-foot concrete cross was erected at the peak in 1934 and remains a landmark visible across the southern city.",
+    history:
+      "Mt. Davidson Manor fills the slope between Ocean Avenue and Monterey Boulevard, between Westwood Park and Balboa Terrace, and in the early 1920s much of it was still Adolph Sutro's forest. Muni's K Ingleside began running out Ocean Avenue on February 21, 1919, and the Western Neighborhoods Project dates the opening of Homewood Terrace, the Pacific Hebrew Orphan Asylum's new home, to June 13, 1921: a campus of cottages on 13 acres of Sutro's woods along the avenue, its new name chosen to leave the stigmatized word “orphan” behind.\n\nFernando Nelson arrived in 1923. He had come to San Francisco from New York in 1876, built his first house at 16 and, by the Mt. Davidson history site's count, more than 4,000 homes, keeping prices low by mass-producing them. After the Richmond, the Sunset and West Portal, he cleared Sutro's trees here, developed the tract's streets and sewers as well, an undertaking that site calls unusual for the time, and filled the blocks with tile-roofed single-family houses. Five vacant Ocean Avenue lots that Fernando Nelson & Sons sold to Samuel H. Levin became the site of the El Rey, designed by Miller & Pflueger, which opened in 1931 with an aircraft beacon atop its tower.\n\nNelson spent his last years at 201 Westgate Drive, where he died in 1953 at 93. Homewood Terrace closed in the late 1960s, its buildings took years to come down, and in the early 1980s a housing and retail complex rose on the north side of Ocean Avenue. The El Rey, a church since the late 1970s, became city Landmark No. 274 in 2017, and another church bought it in 2025.",
     facts: [
-      { icon: "tower", title: "City's highest peak", text: "Mount Davidson rises 928 feet, the highest natural point in San Francisco." },
-      { icon: "church", title: "Summit cross", text: "A 103-foot concrete cross was built atop Mount Davidson in 1934." },
-      { icon: "park", title: "Park since 1929", text: "About 20 acres at the summit were set aside as city parkland in 1929." },
-      { icon: "house", title: "Fernando Nelson homes", text: "The tract was built from 1923 by Fernando Nelson, who constructed thousands of SF homes." },
-      { icon: "movie", title: "Big-screen cameo", text: "The summit cross appears in the climactic scene of the 1971 film Dirty Harry." },
+      {
+        icon: "pin",
+        title: "An orphanage in Sutro's woods",
+        text:
+          "The Western Neighborhoods Project dates the opening of Homewood Terrace, the Pacific Hebrew Orphan Asylum's new home, to June 13, 1921, on Ocean Avenue between Faxon Avenue and Keystone Way, on 13 acres of Adolph Sutro's forest that its trustees had bought. In place of one big institutional building, it was a campus of 17 buildings on the wooded slope: nine residential cottages, each housing a small group of children with a house mother, plus a gymnasium, a synagogue, a small hospital and a laundry. It closed in the late 1960s, its buildings took years to come down, and in the early 1980s a housing and retail complex rose on this north side of Ocean Avenue.",
+        place: "Homewood Terrace site",
+        where: "Ocean Ave & Dorado Ter",
+        at: [-122.46106, 37.72496],
+        source: "https://www.outsidelands.org/homewood-terrace.php",
+      },
+      {
+        icon: "shopping",
+        title: "A shopping strip built on rails",
+        text:
+          "The city's Ocean Avenue Neighborhood Commercial Transit District runs along Ocean Avenue from Howth Street west to Manor Drive, and its storefronts line this north side of the avenue from here to its western end; until a 2016 extension, it began in the east at Phelan Avenue. The Planning Code says Ocean Avenue was developed as a streetcar-oriented commercial district in the 1920s and still serves that function with the K line; streetcars have stopped along this stretch since December 4, 1895. The code describes a mix of convenience goods and services, specialty shops, restaurants and neighborhood offices.",
+        place: "Ocean Avenue storefronts",
+        where: "Ocean Ave & Ashton Ave",
+        at: [-122.46299, 37.72579],
+        source: "https://dev-codelibrary.amlegal.com/codes/san_francisco/latest/sf_planning/0-0-0-57081",
+      },
+      {
+        icon: "movie",
+        title: "A movie palace on Nelson's lots",
+        text:
+          "Samuel H. Levin's San Francisco Theatres, Inc. built this movie palace on five vacant lots Levin had bought from Fernando Nelson & Sons, the developer of Mt. Davidson Manor, and the El Rey, designed by Timothy Pflueger's firm, Miller & Pflueger, opened on November 14, 1931, with about 1,800 seats. Its stepped tower, about 150 feet tall, was originally capped by an aircraft beacon and carried neon lights. It closed as a movie house in 1977 and became a church, the city made it Landmark No. 274 in 2017, and after a plan for 42 condominiums went to the Planning Department for review, another church bought it in 2025.",
+        place: "El Rey Theatre",
+        where: "1970 Ocean Ave",
+        at: [-122.46389, 37.72639],
+        source: "https://default.sfplanning.org/Preservation/landmarks_designation/hp_el_ray_theater_DesignationReport_FINAL.pdf",
+      },
+      {
+        icon: "road",
+        title: "Nelson built his own streets",
+        text:
+          "Fernando Nelson came to this slope in 1923, after building in the Richmond, the Sunset and West Portal, and a photograph on the Mt. Davidson history site shows him removing trees from Sutro Forest to make way for Mount Davidson Manor. He also developed the streets, sewer systems and other facilities, an undertaking that site calls unusual for the time, and filled the blocks between Ocean Avenue and Monterey Boulevard with tile-roofed single-family detached houses. The same site says he had kept his prices low by mass-producing houses as early as 1880.",
+        place: "Manor Drive",
+        where: "Manor Dr & Upland Dr",
+        at: [-122.46372, 37.72931],
+        source: "https://mtdavidson.org/mount-davidson-manor/",
+      },
+      {
+        icon: "house",
+        title: "The builder's last address",
+        text:
+          "Fernando Nelson came to San Francisco from New York in 1876 and built his first house at 16, and he built more than 4,000 homes in the city. He lived in his own house in Parkway Terrace, at 2701 Lincoln Way, until about 1942, and the Western Neighborhoods Project says he spent his last years here at 201 Westgate Drive, where he died in 1953 at 93. It is a private home, so admire it from the sidewalk.",
+        place: "Fernando Nelson's last home",
+        where: "201 Westgate Dr",
+        at: [-122.46484, 37.73008],
+        source: "https://www.outsidelands.org/parkway_terrace_jewel.php",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 0.7 mile for visitors and would-be neighbors: ride the K Ingleside to the Ocean and Dorado stop, walk west past the storefronts on Ocean Avenue's north side to the El Rey Theatre, then climb Manor Drive, turn left on Upland Drive and right on Westgate Drive to Fernando Nelson's last home, and finish a short walk north on Monterey Boulevard, where the 23 bus stops. Allow about 35 minutes; a clear afternoon is best.",
+      miles: 0.7,
+      minutes: 35,
+      tip:
+        "The only shops on the route are the Ocean Avenue storefronts at the start, so pick up coffee or a snack there before heading uphill; the residential streets above have none. The houses along the way, Nelson's included, are private homes, so enjoy them from the sidewalk.",
+    },
     nearby: ["West Portal", "Ingleside"],
     restaurants: [
       { name: "Spiazzo Ristorante", address: "33 W Portal Ave", phone: "(415) 664-9511", url: "https://www.spiazzoristorante.com" },
@@ -7131,14 +7389,68 @@ export const NEIGHBORHOODS = {
   "Sherwood Forest": {
     spirit: "A tiny, leafy enclave of custom homes on Mount Davidson's southern slope, named for Robin Hood and prized for its hush and its big-sky views.",
     reasons: ["One of the city's quietest pockets", "Big westside and bay views", "Steps from Mount Davidson Park", "A short ride to West Portal"],
-    history: "Sherwood Forest is a mid-20th-century subdivision laid out across the wooded southern and western slopes of Mount Davidson, San Francisco's highest natural hill. Its developers gave the winding streets a Robin Hood theme, with names like Robinhood Drive, Sherwood Court, Dalewood Way, Lansdale Avenue and Idora Avenue. The homes are large single-family residences, some dating to the 1930s, set among the eucalyptus that Adolph Sutro planted decades earlier. The neighborhood sits just below Mount Davidson Park, whose 20 hilltop acres the city acquired as parkland in 1929. Robinhood Drive is often cited as the highest residential street in San Francisco.",
+    history:
+      "Adolph Sutro once owned Mount Davidson, San Francisco's highest hill, and in 1912 his heirs sold land here to the Residential Development Co. From 1923 the company hosted Easter sunrise services on the summit, a tradition begun by James Decatur, a Western Union official, after a hike that year. Madie Brown, inspired at one of those services, set out to keep subdividers from clearing the hilltop: in 1927 $15,000 was approved toward its first 20 acres, with the support of Mayor James Rolph and Margaret M. Morgan, the first woman elected to the Board of Supervisors, and Mount Davidson Park was dedicated on December 20, 1929, parks superintendent John McLaren's 84th birthday.\n\nAbout six years after that first service, the Easter site passed to August J. Lang Jr., who was beginning to build homes on the slopes. The earliest newspaper mention of the neighborhood, a 1930 San Francisco Examiner story, found it “thickly wooded with pine and cypress.” Nobody seems to know for certain why it was named for Robin Hood's forest, a theme its streets, Robinhood Drive among them, carry on; one blog guesses a developer's whim, perhaps inspired by the very trees that were cleared away.\n\nLang began building in the 1930s, when Julia Morgan, Timothy and Milton Pflueger and Harold G. Stoner designed custom houses on some of the largest lots, and so many doctors settled here that the hill was nicknamed “Pill Hill.” Building took off only in the 1950s, when ads pitched Robinhood homes to GIs. Today about 200 houses fill the slope above St. Francis Wood.",
     facts: [
-      { icon: "house", title: "Robin Hood streets", text: "Streets carry a Sherwood theme, including Robinhood Drive, Sherwood Court, Dalewood Way, Lansdale Avenue and Idora Avenue." },
-      { icon: "tower", title: "City's highest hill", text: "Mount Davidson rises 928 feet, the highest natural point in San Francisco, crowned by a 103-foot concrete cross." },
-      { icon: "park", title: "Mount Davidson Park", text: "The city bought 20 acres atop the hill for parkland in 1929; its trails wind just above the neighborhood." },
-      { icon: "stairs", title: "Highest homes in the city", text: "Robinhood Drive is frequently described as the highest residential street in San Francisco." },
-      { icon: "tram", title: "Highest bus stop in town", text: "The 36-Teresita climbs through the neighborhood to Myra at Dalewood, the highest Muni bus stop in San Francisco." },
+      {
+        icon: "house",
+        title: "The house Willie Mays bought",
+        text:
+          "In late 1957, as the Giants prepared to move west from New York, Willie Mays and his wife, Marghuerite, made an all-cash offer on a new house here at 175 Miraloma Drive, and the builder, Walter Gnesdiloff, backed away, saying his business would suffer; neighbors and neighborhood improvement clubs had besieged him with phone calls. Mayor George Christopher stepped in and persuaded him to sell, for $37,500. Later, photos in the OpenSFHistory archive record, a soda bottle was tossed through a window; the house is private, so view it from the sidewalk.",
+        place: "Willie Mays house",
+        where: "175 Miraloma Dr",
+        at: [-122.46094, 37.73627],
+        source: "https://www.theringer.com/mlb/2024/6/20/24182201/willie-mays-baseball-obit-san-francisco-giants-racism-1960s",
+      },
+      {
+        icon: "house",
+        title: "Pill Hill, or Pflueger Hill",
+        text:
+          "Timothy Pflueger, architect of the Castro Theatre, designed two of Sherwood Forest's earliest houses, among them a Streamline Moderne house on Lansdale for the Delprats, and his brother Dr. Otto Pflueger, partner of Dr. Dan Delprat, moved into a Mediterranean-style house at this corner of Lansdale Avenue and Robinhood Drive. With so many doctors, the hill was nicknamed “Pill Hill,” and the Western Neighborhoods Project suggests “Pflueger Hill” would fit too. George Moscone moved to a house on Lansdale, at No. 90, before he was elected mayor, and later moved to St. Francis Wood.",
+        place: "Lansdale Avenue",
+        where: "Lansdale Ave & Robinhood Dr",
+        at: [-122.45871, 37.73677],
+        source: "https://www.outsidelands.org/sherwood-forest.php",
+      },
+      {
+        icon: "road",
+        title: "Globe lamps on the highest street",
+        text:
+          "Local histories call Robinhood Drive the highest residential street in San Francisco, still lined with its original globe streetlights. Milton Pflueger built his family home farther up Robinhood from the Lansdale corner in 1950, and the Pacific Coast Architecture Database lists him at No. 60 in 1981. In 1964 Mayor John F. Shelley had a large house on Robinhood designed by architect Robert Bachelor and built by Alex Maisin, but by the Western Neighborhoods Project's account his family never lived in it.",
+        place: "Robinhood Drive",
+        where: "100 Robinhood Dr",
+        at: [-122.45729, 37.73677],
+        source: "https://www.outsidelands.org/sherwood-forest.php",
+      },
+      {
+        icon: "tower",
+        title: "A landmark cross on private land",
+        text:
+          "Mount Davidson's summit, at 928 feet, is the highest natural point in San Francisco, and the 103-foot concrete cross here, designed by George Kelham with engineer Henry J. Brunnier and dedicated in 1934, had four predecessors, beginning with a 40-foot cross put up in 1923 that burned in December 1925. The cross is city Landmark No. 219, yet it stands on private land: in 1997 the city sold the ground beneath it at public auction to the Council of Armenian American Organizations of Northern California, and voters approved the conveyance on November 4, 1997.",
+        place: "Mount Davidson Cross",
+        where: "Summit of Mount Davidson",
+        at: [-122.45472, 37.73833],
+        source: "https://noehill.com/sf/landmarks/sf219.asp",
+      },
+      {
+        icon: "stairs",
+        title: "Down the 1930s stone stairs",
+        text:
+          "Mount Davidson Park's land runs between Myra Way on the east, Dalewood Way on the southwest and Juanita Way on the north, and from the summit this walk comes down a stone staircase, built in the 1930s, that winds down to Juanita Way. Rec and Park says the mountain has some of San Francisco's best examples of WPA-era rock stairs and retaining walls, and a January 1940 photo in the OpenSFHistory archive shows a WPA stairway on its side. Juanita Way meets Miraloma Drive at this corner, where the 43 stops.",
+        place: "Juanita Way",
+        where: "Miraloma Dr & Juanita Way",
+        at: [-122.46006, 37.73929],
+        source: "https://thefrisc.com/mount-davidson-will-give-you-sfs-highest-view-and-edgehill-mountain-one-of-its-best-55874a322263/",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.4 miles for visitors and would-be neighbors: start at the 43 bus stop at Miraloma Drive and Yerba Buena Avenue, pass the house Willie Mays bought in 1957, climb Lansdale Avenue and Robinhood Drive to Dalewood Way, where the 36 ends at Myra Way, follow a trail through the trees to the cross, and come down the stone stairs to Juanita Way and Miraloma Drive, where the 43 stops again. Allow about 75 minutes and pick a clear day: for the 1971 film Dirty Harry, cinematographer Bruce Surtees rode a crane to the top of the cross every night for a month, hampered by fog, until the weather cleared and the shot was made in one night.",
+      miles: 1.4,
+      minutes: 75,
+      tip:
+        "Sherwood Forest has no shopping street of its own; the nearest strip of shops lines Portola Drive's 600 and 700 blocks near Fowler Avenue, about half a mile northeast of where the walk ends, and the 48 runs along Portola.",
+    },
     nearby: ["West Portal"],
     restaurants: [
       { name: "Trattoria da Vittorio", address: "150 W Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
