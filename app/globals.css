@@ -6069,7 +6069,7 @@ a.lp-nstat-link:hover .lp-nstat-l::after { opacity: 1; }
 .rp-sheet.sheetA .nb12 table.top th { font-size: 6.6px; }
 
 /* Product types (/market/product-types) */
-.ptp { max-width: 1040px; margin: 0 auto; padding: 0 16px 40px; }
+.ptp { max-width: 1180px; margin: 0 auto; padding: 0 16px 40px; }
 .ptp-scroll { overflow-x: auto; }
 .ptp-t { border-collapse: collapse; width: 100%; font-size: 14.5px; }
 .ptp-t th, .ptp-t td { padding: 8px 10px; border-bottom: 1px solid var(--lp-line); text-align: right; white-space: nowrap; }
@@ -6077,3 +6077,11 @@ a.lp-nstat-link:hover .lp-nstat-l::after { opacity: 1; }
 .ptp-t th:first-child { text-align: left; }
 .ptp-t small { color: var(--lp-muted); }
 .ptp-facts { padding-left: 18px; line-height: 1.6; } .ptp-facts li { margin: 6px 0; }
+.ptp-sub { margin: -4px 0 10px; color: var(--lp-muted); font-size: 14px; }
+.ptp-yoy tbody th { vertical-align: top; border-bottom: 2px solid var(--lp-line); }
+.ptp-yoy tbody td:first-of-type, .ptp-yoy thead th:nth-child(2) { text-align: left; }
+.ptp-yoy tr.y1 td, .ptp-yoy tr.y0 td { border-bottom: none; padding-bottom: 3px; }
+.ptp-yoy tr.y0 td { color: var(--lp-muted); padding-top: 3px; }
+.ptp-yoy tr.yc td { font-size: 13px; padding-top: 3px; border-bottom: 2px solid var(--lp-line); }
+.ptp-other td:last-child, .ptp-other th:last-child { text-align: left; white-space: normal; min-width: 130px; }
+.ptp-up { color: #1F6F43; } .ptp-dn { color: #A3332B; }
