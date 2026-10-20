@@ -87,3 +87,19 @@ walking order, each with `place`, `where` and `at`).
 - No store, restaurant, café or bar is named in a tour unless the business
   or its building is a designated landmark (city, California, or National
   Register).
+- No labels that classify people: never "working class", "middle class",
+  "class", "blue collar", "white collar", and no phrases that sort a group,
+  family, sex or race ("Irish families", "wealthy families", "young
+  professionals", "family-friendly"). History and facts stay accurate:
+  say what happened and who it happened to (the Japanese American
+  incarceration, the Chinese Exclusion Act, wartime migration, the Compton's
+  Cafeteria uprising) without attaching labels to residents or households.
+  Describe what people did or built ("dockworkers' cottages", "built for
+  Union Iron Works employees"), not what class they were.
+- Write with 2026 in mind: these communities are changing with an influx of
+  new money and there is real tension between people who have lived here
+  for decades and newcomers. Don't celebrate change or the new money
+  ("renaissance", "revitalized", "up-and-coming", "transformed", "buzzing",
+  "hip", "gritty", "the whole city comes here"); describe change neutrally
+  and factually, and give longtime residents, institutions and traditions
+  their due.
