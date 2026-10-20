@@ -42,6 +42,7 @@ def stats(rows):
         "price": med([r["price"] for r in rows]),
         "ppsf": med([r["price"] / r["sqft"] for r in sq]),
         "ppsfN": len(sq),
+        "sqft": med([r["sqft"] for r in sq]),       # median building size, sales with reported sf
         "noSqft": len(rows) - len(sq),
         "pctList": med([100 * r["price"] / r["list"] for r in rows if r["list"]]),
         "dom": med([r["dom"] for r in rows if r["dom"] is not None]),
@@ -107,9 +108,10 @@ def page_html(d, thru, yy):
     ppsf = lambda g: f"${g['ppsf']:,.0f}" if g["ppsf"] else "—"
     pct = lambda g: f"{g['pctList']:.0f}%" if g["pctList"] else "—"
     dom = lambda g: f"{g['dom']:.0f}" if g["dom"] is not None else "—"
+    size = lambda g: f"{g['sqft']:,.0f} sf" if g.get("sqft") else "—"
     nosf = lambda g: f"<small> ({g['noSqft']} no sf)</small>" if g["noSqft"] else ""
     rows = "".join(f"<tr><td class='l'><b>{g['label']}</b></td><td>{g['n']:,}</td><td><b>{_m(g['price'])}</b></td>"
-                   f"<td>{ppsf(g)}{nosf(g)}</td><td>{pct(g)}</td><td>{dom(g)}</td></tr>" for g in G)
+                   f"<td>{size(g)}</td><td>{ppsf(g)}{nosf(g)}</td><td>{pct(g)}</td><td>{dom(g)}</td></tr>" for g in G)
     qh = "".join(f"<th>Q{q}</th>" for q in qs)
     trend = "".join(f"<tr><td class='l'>{g['label']}</td>" + "".join(
         f"<td>{_m(g['byQuarter'][str(q)]['price'])}<small> · {('$' + format(round(g['byQuarter'][str(q)]['ppsf']), ',')) if g['byQuarter'][str(q)]['ppsf'] else '—'}/sf</small></td>"
@@ -134,14 +136,14 @@ def page_html(d, thru, yy):
       ({_m(sf['price'])}) — but at <b>${dx['ppsf']:,.0f}/sf</b>, {sfgap:+.0f}% per square foot, because it is more building.</div>
       <div class='pt-grid'><div>
       <h2>Year to date by product type</h2>
-      <table class='pt'><tr><th class='l'>Type</th><th>Units sold</th><th>Median price</th><th>Median $/sf</th><th>% of list</th><th>DOM</th></tr>{rows}</table>
+      <table class='pt'><tr><th class='l'>Type</th><th>Units sold</th><th>Median price</th><th>Median size</th><th>Median $/sf</th><th>% of list</th><th>DOM</th></tr>{rows}</table>
       <h2>Median price · $/sf by quarter</h2>
       <table class='pt'><tr><th class='l'>Type</th>{qh}</tr>{trend}</table></div>
       <div><h2>Inside “Other”</h2>
       <table class='pt'><tr><th class='l'>Type</th><th>Sold</th><th>Median</th><th>$/sf</th><th class='l'>Most sold in</th></tr>{other}</table>
       <h2>Where each type sells</h2><ul class='pt-facts'>{facts}</ul></div></div>
       <h2>Left out of $/sf: no square footage</h2><div class='pt-note'>{nsf_box}</div>
-      <div class='foot'><span>Closed sales (SFAR MLS), Jan 1 – {thru}, 20{yy}. Medians; $/sf uses only sales with reported square footage. 
+      <div class='foot'><span>Closed sales (SFAR MLS), Jan 1 – {thru}, 20{yy}. Medians throughout; size and $/sf use only sales with reported square footage. 
       2025 Residential Income is not yet loaded, so there is no year-over-year comparison by type.</span><span>page 7 / 9</span></div></div>"""
 
 

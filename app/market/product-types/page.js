@@ -38,9 +38,10 @@ export default function Page() {
         <section className="lp-nsec">
           <h2>Year to date by product type</h2>
           <div className="ptp-scroll"><table className="ptp-t">
-            <thead><tr><th>Type</th><th>Units sold</th><th>Median price</th><th>Median $/sf</th><th>% of list</th><th>Days on market</th></tr></thead>
+            <thead><tr><th>Type</th><th>Units sold</th><th>Median price</th><th>Median size</th><th>Median $/sf</th><th>% of list</th><th>Days on market</th></tr></thead>
             <tbody>{G.map(g => (
               <tr key={g.key}><th scope="row">{g.label}</th><td>{g.n.toLocaleString("en-US")}</td><td><b>{m(g.price)}</b></td>
+                <td>{g.sqft ? `${Math.round(g.sqft).toLocaleString("en-US")} sf` : "—"}</td>
                 <td>{sf(g.ppsf)}{g.noSqft ? <small> ({g.noSqft} no sf)</small> : null}</td><td>{pct(g.pctList)}</td><td>{g.dom == null ? "—" : Math.round(g.dom)}</td></tr>
             ))}</tbody>
           </table></div>
@@ -86,7 +87,7 @@ export default function Page() {
         </section>
       </main>
 
-      <SiteFooter note={<>Closed sales from SFAR MLS (Residential and Residential Income), Jan 1 – {thru}. Medians; $/sf uses only sales with
+      <SiteFooter note={<>Closed sales from SFAR MLS (Residential and Residential Income), Jan 1 – {thru}. Medians throughout; size and $/sf use only sales with
         reported square footage. Duplex / 2 Homes includes 2 Houses on Lot; Condo includes townhouses; TIC includes co-ownership. 2025 Residential
         Income is not yet loaded, so there is no year-over-year comparison by type. Deemed reliable, not guaranteed.</>} />
     </div>
