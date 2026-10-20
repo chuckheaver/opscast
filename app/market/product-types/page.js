@@ -20,17 +20,14 @@ export const metadata = {
 
 export default function Page() {
   const G = data.groups;
-  const sfh = G.find(g => g.key === "sfh"), dx = G.find(g => g.key === "duplex");
   const thru = new Date(`${data.through}T12:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-  const gap = Math.round((dx.price / sfh.price - 1) * 100), sfgap = Math.round((dx.ppsf / sfh.ppsf - 1) * 100);
   return (
     <div className="lp">
       <section className="lp-guide-head">
         <p className="lp-kicker">Market Report · Jan 1 – {thru}</p>
         <h1 className="lp-guide-h1">What each kind of property sells for</h1>
         <p className="lp-guide-lede">
-          Duplexes are not the cheaper buy. The median duplex sold for <b>{m(dx.price)}</b>, {gap >= 0 ? "+" : ""}{gap}% against
-          the median house ({m(sfh.price)}), but at <b>{sf(dx.ppsf)}/sf</b>, {sfgap}% per square foot, because it is more building.
+          Median sale price, size, price per square foot, sale-to-list and days on market for each kind of San Francisco property, year to date.
         </p>
       </section>
 
@@ -51,10 +48,10 @@ export default function Page() {
         <section className="lp-nsec">
           <h2>By quarter</h2>
           <div className="ptp-scroll"><table className="ptp-t">
-            <thead><tr><th>Type</th>{data.quarters.map(q => <th key={q}>Q{q} median · $/sf · size</th>)}</tr></thead>
+            <thead><tr><th>Type</th>{data.quarters.map(q => <th key={q}>Q{q} median · $/sf · size · units sold</th>)}</tr></thead>
             <tbody>{G.map(g => (
               <tr key={g.key}><th scope="row">{g.label}</th>{data.quarters.map(q => { const s = g.byQuarter[q]; return (
-                <td key={q}>{m(s.price)} <small>· {sf(s.ppsf)}/sf · {s.sqft ? `${Math.round(s.sqft).toLocaleString("en-US")} sf` : "—"} · {s.n} sold</small></td>); })}</tr>
+                <td key={q}>{m(s.price)} <small>· {sf(s.ppsf)}/sf · {s.sqft ? `${Math.round(s.sqft).toLocaleString("en-US")} sf` : "—"} · {s.n.toLocaleString("en-US")} sold</small></td>); })}</tr>
             ))}</tbody>
           </table></div>
         </section>

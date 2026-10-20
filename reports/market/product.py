@@ -115,7 +115,7 @@ def page_html(d, thru, yy):
     qh = "".join(f"<th>Q{q}</th>" for q in qs)
     trend = "".join(f"<tr><td class='l'>{g['label']}</td>" + "".join(
         f"<td>{_m(g['byQuarter'][str(q)]['price'])}<small> · {('$' + format(round(g['byQuarter'][str(q)]['ppsf']), ',')) if g['byQuarter'][str(q)]['ppsf'] else '—'}/sf"
-        f" · {format(round(g['byQuarter'][str(q)]['sqft']), ',') + ' sf' if g['byQuarter'][str(q)].get('sqft') else '—'}</small></td>"
+        f" · {format(round(g['byQuarter'][str(q)]['sqft']), ',') + ' sf' if g['byQuarter'][str(q)].get('sqft') else '—'} · {g['byQuarter'][str(q)]['n']:,} sold</small></td>"
         for q in qs) + "</tr>" for g in G)
     other = "".join(f"<tr><td class='l'>{o['type']}</td><td>{o['n']}</td><td>{_m(o['price'])}</td><td>{format(round(o['sqft']), ',') + ' sf' if o.get('sqft') else '—'}</td><td>{('$' + format(round(o['ppsf']), ',')) if o['ppsf'] else '—'}</td>"
                     f"<td class='l'>{o['topHood']['hood'] if o['topHood'] else '—'} ({o['topHood']['n'] if o['topHood'] else 0})</td></tr>" for o in d["other"])
@@ -133,12 +133,11 @@ def page_html(d, thru, yy):
     return f"""<div class='page'><div class='mast'><div><div class='t'>Product Types</div>
       <div class='p'>What each kind of property really sells for — Jan 1 – {thru}, 20{yy}</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, SFAR MLS (Residential + Residential Income)</div></div>
-      <div class='pt-lead'>Duplexes are not the cheaper buy: the median duplex sold for <b>{_m(dx['price'])}</b>, {gap:+.0f}% against the median house
-      ({_m(sf['price'])}) — but at <b>${dx['ppsf']:,.0f}/sf</b>, {sfgap:+.0f}% per square foot, because it is more building.</div>
+
       <div class='pt-grid'><div>
       <h2>Year to date by product type</h2>
       <table class='pt'><tr><th class='l'>Type</th><th>Units sold</th><th>Median price</th><th>Median size</th><th>Median $/sf</th><th>% of list</th><th>DOM</th></tr>{rows}</table>
-      <h2>Median price · $/sf · size by quarter</h2>
+      <h2>By quarter: median price · $/sf · size · units sold</h2>
       <table class='pt'><tr><th class='l'>Type</th>{qh}</tr>{trend}</table></div>
       <div><h2>Inside “Other”</h2>
       <table class='pt'><tr><th class='l'>Type</th><th>Sold</th><th>Median</th><th>Size</th><th>$/sf</th><th class='l'>Most sold in</th></tr>{other}</table>
