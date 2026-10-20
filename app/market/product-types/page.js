@@ -51,10 +51,10 @@ export default function Page() {
         <section className="lp-nsec">
           <h2>By quarter</h2>
           <div className="ptp-scroll"><table className="ptp-t">
-            <thead><tr><th>Type</th>{data.quarters.map(q => <th key={q}>Q{q} median · $/sf</th>)}</tr></thead>
+            <thead><tr><th>Type</th>{data.quarters.map(q => <th key={q}>Q{q} median · $/sf · size</th>)}</tr></thead>
             <tbody>{G.map(g => (
               <tr key={g.key}><th scope="row">{g.label}</th>{data.quarters.map(q => { const s = g.byQuarter[q]; return (
-                <td key={q}>{m(s.price)} <small>· {sf(s.ppsf)}/sf · {s.n}</small></td>); })}</tr>
+                <td key={q}>{m(s.price)} <small>· {sf(s.ppsf)}/sf · {s.sqft ? `${Math.round(s.sqft).toLocaleString("en-US")} sf` : "—"} · {s.n} sold</small></td>); })}</tr>
             ))}</tbody>
           </table></div>
         </section>
@@ -62,9 +62,9 @@ export default function Page() {
         <section className="lp-nsec">
           <h2>Inside “Other”</h2>
           <div className="ptp-scroll"><table className="ptp-t">
-            <thead><tr><th>Type</th><th>Sold</th><th>Median price</th><th>Median $/sf</th><th>Most sold in</th></tr></thead>
+            <thead><tr><th>Type</th><th>Sold</th><th>Median price</th><th>Median size</th><th>Median $/sf</th><th>Most sold in</th></tr></thead>
             <tbody>{data.other.map(o => (
-              <tr key={o.type}><th scope="row">{o.type}</th><td>{o.n}</td><td>{m(o.price)}</td><td>{sf(o.ppsf)}</td>
+              <tr key={o.type}><th scope="row">{o.type}</th><td>{o.n}</td><td>{m(o.price)}</td><td>{o.sqft ? `${Math.round(o.sqft).toLocaleString("en-US")} sf` : "—"}</td><td>{sf(o.ppsf)}</td>
                 <td>{o.topHood ? <Link href={mapHref(o.topHood.hood)}>{o.topHood.hood}</Link> : "—"}{o.topHood ? ` (${o.topHood.n})` : ""}</td></tr>
             ))}</tbody>
           </table></div>
