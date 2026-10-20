@@ -103,3 +103,11 @@ walking order, each with `place`, `where` and `at`).
   "hip", "gritty", "the whole city comes here"); describe change neutrally
   and factually, and give longtime residents, institutions and traditions
   their due.
+
+# Publishing
+
+Content edits — neighborhood text, walking tours, wording, copy — are
+committed and pushed to main as they are done; the owner doesn't approve
+each one. Major structural changes to the code wait for the owner's
+approval before they are pushed. A data load follows the market report's
+rule above: show the owner the review's findings first.
