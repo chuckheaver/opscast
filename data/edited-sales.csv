@@ -12,6 +12,7 @@ id,address,field,from,to,reason
 "425017722","2278-2278A 42nd Ave, San Francisco, CA 94116","propType","Single Family Residence","Duplex","Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
 "425022869","4033 25th St, San Francisco, CA 94114","sqft","","1195","Square footage from the duplicate entry of the same sale (MLS 425037665, 4035 25th St), which reported 1,195 sf (owner, Oct 16 2026)."
 "425027962","3975-3977 Cesar Chavez St, San Francisco, CA 94131","propType","Single Family Residence","Duplex","Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+"425028351","682-684 37th Ave, San Francisco, CA 94121","propType","Single Family Residence","Fourplex","A 4-unit Residential Income building (owner, Oct 20 2026)."
 "425021662","2534-2536 Pacheco Ave, San Francisco, CA 94116","propType","Single Family Residence","Duplex","Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
 "425042600","2279-2281a 15th St, San Francisco, CA 94114","propType","2 Houses on Lot","Fourplex","Two addresses, 4 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
 "425049882","2675-2677 Sutter St, San Francisco, CA 94115","propType","2 Houses on Lot","Duplex","Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."

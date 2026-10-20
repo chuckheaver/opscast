@@ -260,6 +260,18 @@
         "keep": "425040528",
         "address": "375-377 Hearst Ave",
         "reason": "The same 2025 sale in both MLS feeds: counted once, as the Duplex (2 units on the parcel by the city's land use) (owner's rule, Oct 20 2026)."
+      },
+      {
+        "id": "425077416",
+        "keep": "425091535",
+        "address": "109-111 Telegraph Hill Blvd",
+        "reason": "The same sale in both feeds: the Duplex record ($9,050,000) stands, the single-family record ($11,300,000) is removed (owner, Oct 20 2026)."
+      },
+      {
+        "id": "425014877",
+        "keep": "425016665",
+        "address": "1632 North Point St",
+        "reason": "The same sale in both feeds: Residential Income (owner, Oct 20 2026)."
       }
     ]
   },
@@ -271,6 +283,13 @@
       ],
       "address": "115 Navajo Ave",
       "note": "A quick flip: two real sales, both count (owner, Oct 16 2026)."
+    },
+    {
+      "ids": [
+        "425030444"
+      ],
+      "address": "737-741 Minna St",
+      "reason": "2 Houses on Lot is correct (owner, Oct 20 2026)."
     }
   ],
   "pointOut": {
@@ -708,6 +727,17 @@
         "propType": "2 Houses on Lot"
       },
       "reason": "Two addresses, 4 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425028351",
+      "address": "682-684 37th Ave",
+      "set": {
+        "propType": "Fourplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "A 4-unit Residential Income building (owner, Oct 20 2026)."
     }
   ],
   "confirmed": [
