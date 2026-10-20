@@ -67,3 +67,23 @@ The owner's rules:
 - Before applying a correction, check the record against its neighbors (same
   address, APN, agents, dates): the sale the owner means may be a different
   listing already in the data.
+
+# Neighborhood guides: the owner's rules
+
+Each neighborhood page (`app/fog/lib/neighborhoods.js`) carries a history,
+"Did You Know?" facts and a walking tour through them (numbered stops in
+walking order, each with `place`, `where` and `at`).
+- Every claim is confirmed by a source; what can't be confirmed is left out.
+- Fair housing: describe places, history, architecture and streets. Never
+  say who lives there now or whom a neighborhood suits, and make no claims
+  about crime, safety or schools. Historical settlement is fine.
+- Keep sourced historical facts a buyer should know, as written, even when
+  they are hard ones: environmental history (the Hunters Point shipyard's
+  radiological lab and its 1989 Superfund listing), redevelopment and
+  displacement, deed covenants, notable incidents. It is important for
+  people to know the facts when buying property.
+- Every tour passes along the neighborhood's shopping street, if it has one,
+  as a numbered stop described without naming any business.
+- No store, restaurant, café or bar is named in a tour unless the business
+  or its building is a designated landmark (city, California, or National
+  Register).
