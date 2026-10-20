@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T15:16:24.620Z",
+  "generatedAt": "2026-10-20T05:20:12.581Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -229,13 +229,13 @@
       }
     },
     "Civic Center": {
-      "n": 20,
+      "n": 21,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 870000,
-      "condoN": 20,
+      "condoMedian": 865000,
+      "condoN": 21,
       "ppsf": 1141.0402361269976,
-      "dom": 14.5,
+      "dom": 15,
       "fogHours": 7.5,
       "zone": "Sun",
       "zoneMix": {
@@ -467,11 +467,11 @@
       }
     },
     "Financial District": {
-      "n": 26,
+      "n": 27,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 1493444,
-      "condoN": 26,
+      "condoMedian": 1598888,
+      "condoN": 27,
       "ppsf": 1297.843798286276,
       "dom": 21,
       "fogHours": 7,
@@ -535,12 +535,12 @@
       }
     },
     "Glen Park": {
-      "n": 24,
+      "n": 25,
       "sfhMedian": 2400000,
       "sfhN": 21,
-      "condoMedian": 775000,
-      "condoN": 3,
-      "ppsf": 1406.4362336114423,
+      "condoMedian": 1100000,
+      "condoN": 4,
+      "ppsf": 1347.976852246653,
       "dom": 12,
       "fogHours": 10,
       "zone": "Fog",
@@ -552,12 +552,12 @@
       }
     },
     "Golden Gate Heights": {
-      "n": 53,
+      "n": 54,
       "sfhMedian": 2200000,
       "sfhN": 47,
-      "condoMedian": 1530000,
-      "condoN": 6,
-      "ppsf": 1211.0726643598616,
+      "condoMedian": 1300000,
+      "condoN": 7,
+      "ppsf": 1198.0986533895752,
       "dom": 12,
       "fogHours": 9.5,
       "zone": "Fog",
@@ -773,13 +773,13 @@
       }
     },
     "Lakeshore": {
-      "n": 17,
+      "n": 18,
       "sfhMedian": 1864000,
       "sfhN": 8,
       "condoMedian": 732500,
       "condoN": 4,
-      "ppsf": 775.9456838021339,
-      "dom": 13,
+      "ppsf": 720.1745877788555,
+      "dom": 13.5,
       "fogHours": 12.5,
       "zone": "Persistent Fog",
       "zoneMix": {
@@ -977,12 +977,12 @@
       }
     },
     "Miraloma Park": {
-      "n": 36,
-      "sfhMedian": 2005000,
-      "sfhN": 35,
+      "n": 37,
+      "sfhMedian": 2027500,
+      "sfhN": 36,
       "condoMedian": null,
       "condoN": 0,
-      "ppsf": 1204.7945205479452,
+      "ppsf": 1213.5399549868775,
       "dom": 10,
       "fogHours": 10.5,
       "zone": "Fog",
@@ -1011,13 +1011,13 @@
       }
     },
     "Mission Bay": {
-      "n": 74,
+      "n": 75,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 1299500,
-      "condoN": 74,
-      "ppsf": 1174.6280344557556,
-      "dom": 13.5,
+      "condoMedian": 1300000,
+      "condoN": 75,
+      "ppsf": 1175.549311345525,
+      "dom": 14,
       "fogHours": 7.5,
       "zone": "Sun",
       "zoneMix": {
@@ -1096,13 +1096,13 @@
       }
     },
     "Nob Hill": {
-      "n": 85,
+      "n": 86,
       "sfhMedian": 1700000,
       "sfhN": 5,
-      "condoMedian": 1440000,
-      "condoN": 62,
-      "ppsf": 1096.4912280701753,
-      "dom": 33,
+      "condoMedian": 1380000,
+      "condoN": 63,
+      "ppsf": 1085.7456140350878,
+      "dom": 34.5,
       "fogHours": 7,
       "zone": "Sun",
       "zoneMix": {
@@ -1113,12 +1113,12 @@
       }
     },
     "Noe Valley": {
-      "n": 113,
+      "n": 114,
       "sfhMedian": 3832902.5,
       "sfhN": 62,
-      "condoMedian": 1580000,
-      "condoN": 50,
-      "ppsf": 1540.5405405405406,
+      "condoMedian": 1600000,
+      "condoN": 51,
+      "ppsf": 1543.6515652342991,
       "dom": 10,
       "fogHours": 8.5,
       "zone": "Transition",
@@ -1130,12 +1130,12 @@
       }
     },
     "North Beach": {
-      "n": 24,
-      "sfhMedian": 3148500,
+      "n": 25,
+      "sfhMedian": 3357500,
       "sfhN": 2,
-      "condoMedian": 1052500,
-      "condoN": 22,
-      "ppsf": 1102.9411764705883,
+      "condoMedian": 1130000,
+      "condoN": 23,
+      "ppsf": 1118.1372549019607,
       "dom": 9,
       "fogHours": 6.5,
       "zone": "Sun",
@@ -1232,12 +1232,12 @@
       }
     },
     "Pacific Heights": {
-      "n": 188,
+      "n": 189,
       "sfhMedian": 7942500,
       "sfhN": 42,
-      "condoMedian": 1600000,
-      "condoN": 137,
-      "ppsf": 1314.2174432497013,
+      "condoMedian": 1615000,
+      "condoN": 138,
+      "ppsf": 1334.5599790422002,
       "dom": 11,
       "fogHours": 7.5,
       "zone": "Sun",
@@ -1249,12 +1249,12 @@
       }
     },
     "Panhandle": {
-      "n": 33,
+      "n": 34,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 1750229,
-      "condoN": 33,
-      "ppsf": 1261.3289082785564,
+      "condoMedian": 1743114.5,
+      "condoN": 34,
+      "ppsf": 1253.4562211981568,
       "dom": 12,
       "fogHours": 8.5,
       "zone": "Transition",
@@ -1419,12 +1419,12 @@
       }
     },
     "Rincon Hill": {
-      "n": 123,
+      "n": 124,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 1190000,
-      "condoN": 123,
-      "ppsf": 1182.4324324324325,
+      "condoMedian": 1194000,
+      "condoN": 124,
+      "ppsf": 1184.1771955582208,
       "dom": 22,
       "fogHours": 7,
       "zone": "Sun",
@@ -1521,13 +1521,13 @@
       }
     },
     "South Beach": {
-      "n": 51,
+      "n": 52,
       "sfhMedian": null,
       "sfhN": 0,
-      "condoMedian": 1375000,
-      "condoN": 51,
-      "ppsf": 1105.521472392638,
-      "dom": 24,
+      "condoMedian": 1370000,
+      "condoN": 52,
+      "ppsf": 1098.8600269764609,
+      "dom": 24.5,
       "fogHours": 7,
       "zone": "Sun",
       "zoneMix": {
@@ -1538,13 +1538,13 @@
       }
     },
     "South of Market": {
-      "n": 218,
+      "n": 222,
       "sfhMedian": 2226662.5,
       "sfhN": 2,
-      "condoMedian": 897000,
-      "condoN": 216,
-      "ppsf": 913.937547600914,
-      "dom": 34,
+      "condoMedian": 899000,
+      "condoN": 220,
+      "ppsf": 912.2533266459855,
+      "dom": 34.5,
       "fogHours": 7,
       "zone": "Sun",
       "zoneMix": {
@@ -1572,13 +1572,13 @@
       }
     },
     "St. Marys Park": {
-      "n": 15,
+      "n": 16,
       "sfhMedian": 1700000,
       "sfhN": 13,
-      "condoMedian": 1047062.5,
-      "condoN": 2,
-      "ppsf": 981.5302259552822,
-      "dom": 14,
+      "condoMedian": 1280000,
+      "condoN": 3,
+      "ppsf": 950.1965923984272,
+      "dom": 13.5,
       "fogHours": 9.5,
       "zone": "Fog",
       "zoneMix": {
@@ -1657,12 +1657,12 @@
       }
     },
     "Telegraph Hill": {
-      "n": 49,
+      "n": 50,
       "sfhMedian": 5200625,
       "sfhN": 8,
-      "condoMedian": 1046500,
-      "condoN": 40,
-      "ppsf": 1032.132862212911,
+      "condoMedian": 1032000,
+      "condoN": 41,
+      "ppsf": 1031.3315926892951,
       "dom": 13,
       "fogHours": 6.5,
       "zone": "Sun",
@@ -1725,13 +1725,13 @@
       }
     },
     "University Mound": {
-      "n": 21,
-      "sfhMedian": 1561000,
-      "sfhN": 21,
+      "n": 22,
+      "sfhMedian": 1490500,
+      "sfhN": 22,
       "condoMedian": null,
       "condoN": 0,
-      "ppsf": 791.4151576123407,
-      "dom": 13,
+      "ppsf": 799.4575788061704,
+      "dom": 12.5,
       "fogHours": 10,
       "zone": "Fog",
       "zoneMix": {
@@ -1776,13 +1776,13 @@
       }
     },
     "West Portal": {
-      "n": 21,
-      "sfhMedian": 2237500,
-      "sfhN": 16,
+      "n": 22,
+      "sfhMedian": 2325000,
+      "sfhN": 17,
       "condoMedian": 901000,
       "condoN": 5,
-      "ppsf": 1248.9981414169422,
-      "dom": 13,
+      "ppsf": 1253.7829658452226,
+      "dom": 12,
       "fogHours": 11,
       "zone": "Fog",
       "zoneMix": {

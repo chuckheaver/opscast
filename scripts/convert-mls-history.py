@@ -99,6 +99,7 @@ SUBTYPE_CODES = {
     "COOP": "Stock Cooperative",
     "HALF": "Halfplex",
     "COOW": "Co-Ownership",
+    "COWN": "Co-Ownership",   # the code later RESI exports use
     "LOFT": "Loft",
     "OTHR": "Other",
 }

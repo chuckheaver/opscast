@@ -105,7 +105,12 @@ def split_addr(a):
         if m: unit, s = m.group(1), s[:m.start()] + " " + s[m.end():]
     unit = re.sub(r"^(?:apt|unit)\b\.?\s*", "", unit.strip(), flags=re.I)
     s = re.sub(r"[^\w\s]", "", s.lower())
-    return " ".join(t for t in s.split() if t not in SUFFIX), re.sub(r"[^a-z0-9]", "", unit.lower()), unit.upper()
+    # The suffix is dropped ('Divisadero St' = 'Divisadero'), except after a
+    # numbered street: San Francisco has a 16th Street and a 16th Avenue.
+    t = s.split()
+    keep = [w if w not in SUFFIX else ("ave" if w.startswith("av") else "st") for i, w in enumerate(t)
+            if w not in SUFFIX or (i and re.fullmatch(r"\d+(?:st|nd|rd|th)", t[i - 1]) and w in ("st", "street", "ave", "avenue"))]
+    return " ".join(keep), re.sub(r"[^a-z0-9]", "", unit.lower()), unit.upper()
 
 def day(s):
     try: return datetime.date.fromisoformat(str(s)[:10])
