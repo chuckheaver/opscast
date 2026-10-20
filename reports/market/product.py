@@ -99,26 +99,6 @@ def _m(v):
     return f"${v / 1e6:.2f}M" if v >= 995_000 else f"${v / 1e3:.0f}K"
 
 
-def chart(G):
-    """Two bars per type: median price (navy, $) and median $/sf (gold), each
-    on its own scale, so the duplex story reads at a glance."""
-    W, rowh, lab = 560, 25, 118
-    mp = max(g["price"] or 0 for g in G); ms = max(g["ppsf"] or 0 for g in G)
-    bw = (W - lab - 70) 
-    out = [f"<svg viewBox='0 0 {W} {rowh * len(G) + 18}' width='100%' style='font-family:inherit'>",
-           f"<text x='{lab}' y='10' font-size='9' fill='#203C5F'>■ median price</text><text x='{lab + 110}' y='10' font-size='9' fill='#B8901F'>■ median $/sf</text>"]
-    for i, g in enumerate(G):
-        y = 18 + i * rowh
-        out.append(f"<text x='0' y='{y + 13}' font-size='10.5' font-weight='700' fill='#131A25'>{g['label']}</text>")
-        if g["price"]:
-            w = bw * g["price"] / mp
-            out.append(f"<rect x='{lab}' y='{y + 1}' width='{w:.1f}' height='9' fill='#203C5F'/><text x='{lab + w + 4:.1f}' y='{y + 9}' font-size='9'>{_m(g['price'])}</text>")
-        if g["ppsf"]:
-            w = bw * g["ppsf"] / ms
-            out.append(f"<rect x='{lab}' y='{y + 12}' width='{w:.1f}' height='9' fill='#E9BC3F'/><text x='{lab + w + 4:.1f}' y='{y + 20}' font-size='9'>${g['ppsf']:,.0f}</text>")
-    return "".join(out) + "</svg>"
-
-
 def page_html(d, thru, yy):
     """The report page: the six-way table, the quarterly trend, the
     neighborhood facts and the no-square-footage note."""
@@ -160,8 +140,7 @@ def page_html(d, thru, yy):
       <div><h2>Inside “Other”</h2>
       <table class='pt'><tr><th class='l'>Type</th><th>Sold</th><th>Median</th><th>$/sf</th><th class='l'>Most sold in</th></tr>{other}</table>
       <h2>Where each type sells</h2><ul class='pt-facts'>{facts}</ul></div></div>
-      <div class='pt-grid'><div><h2>Price vs. price per square foot</h2>{chart(G)}</div>
-      <div><h2>Left out of $/sf: no square footage</h2><div class='pt-note'>{nsf_box}</div></div></div>
+      <h2>Left out of $/sf: no square footage</h2><div class='pt-note'>{nsf_box}</div>
       <div class='foot'><span>Closed sales (SFAR MLS), Jan 1 – {thru}, 20{yy}. Medians; $/sf uses only sales with reported square footage. 
       2025 Residential Income is not yet loaded, so there is no year-over-year comparison by type.</span><span>page 7 / 9</span></div></div>"""
 
