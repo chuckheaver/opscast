@@ -6438,14 +6438,78 @@ export const NEIGHBORHOODS = {
     spirit: "A sunny, working-class corner of southeast San Francisco once carpeted with flower greenhouses, where the multicultural San Bruno Avenue strip still hums with bakeries, taquerias and pho.",
     reasons: ["Sunny southeast pocket", "Diverse San Bruno Ave eats", "Historic Garden District", "Near McLaren Park"],
     aka: "the Garden District",
-    history: "In the early 1900s, Italian, Maltese and Jewish immigrants settled the Portola and built greenhouses to grow cut flowers for the city. By the 1920s dozens of family nurseries blanketed the neighborhood, supplying most of the flowers sold at the San Francisco Flower Mart and earning Portola its nickname as the city's Garden District. After World War II most growers moved south and greenhouses gave way to single-family homes, though the Garibaldi family's University Mound Nursery on Woolsey Street kept growing roses until 1990. San Bruno Avenue grew into the neighborhood's Main Street, and today the area is among the city's most Asian-majority, with a deeply multicultural commercial strip.",
+    history:
+      "Maltese, Jewish and Italian immigrants were among the Portola's early settlers, and the neighborhood has been known as Little Jerusalem and the Flat; it once even had a Maltese consulate. One of the lines behind today's 9 San Bruno bus dates to 1899, its streetcars running from Folsom and Army streets down Bayshore Boulevard and onto San Bruno Avenue. The avenue, which locals called simply “The Road,” came to hold bakeries, grocery stores, pharmacies and, from July 1927, a movie house, the Avenue Theatre.\n\nThen came the glass. The Portola's greenhouses went up in the 1920s, when its warm climate and undeveloped land drew immigrants from Italy and Malta to grow cut flowers; by one account the neighborhood had 19 nurseries, most of them owned by Italian families. The growers joined an interethnic coalition that helped establish the San Francisco Flower Terminal, today's Flower Mart, and the city's 1938 scale model shows dozens of greenhouses here. The Garibaldi family's University Mound Nursery on Woolsey Street, begun in 1922, kept San Francisco's last active commercial greenhouses going until the early 1990s.\n\nThe nickname outlived the growers. In 2016 the Board of Supervisors, recalling a neighborhood once widely known as “San Francisco's Garden,” recognized the Portola as the city's Garden District and backed the Portola Green Plan; the resolution marked the Portola Garden Tour's tenth consecutive annual tour, on September 24, 2016. In September 2017, after five years of work by residents, the Avenue Theatre's restored neon sign was switched back on, and in 2020 three new murals went up along San Bruno Avenue, among them Kseniya Makarova's “Portola Blossoms,” its flowers a nod to the cut-flower past.",
     facts: [
-      { icon: "sun", title: "San Francisco's Garden District", text: "A 2016 city resolution officially recognized the Portola as San Francisco's Garden District, honoring its flower-growing past." },
-      { icon: "factory", title: "The last greenhouses", text: "The Garibaldi family's University Mound Nursery at 770 Woolsey St grew roses for the SF Flower Mart until 1990; its redwood-and-glass greenhouses are the last of their kind in the district." },
-      { icon: "movie", title: "The Avenue Theatre", text: "This 1927 San Bruno Ave movie house was famed for its Wurlitzer organ before closing in 1984; the building still stands." },
-      { icon: "park", title: "Next to McLaren Park", text: "John McLaren Park, the city's second-largest park at over 300 acres, borders the neighborhood." },
-      { icon: "house", title: "A family neighborhood", text: "Portola is a quiet district of low-slung single-family homes that replaced the old nurseries after World War II." },
+      {
+        icon: "movie",
+        title: "A 1927 movie house relit",
+        text:
+          "The Avenue opened here, between Burrows and Bacon streets, as a movie house on July 20, 1927, and showed films until 1984. In 1966 the Lyric Photoplay Film Society installed a three-manual Wurlitzer that had been the organ of Chicago's State Lake Theater, and its first organ show, on October 7, 1966, accompanied the silent film The Lost World. The theater had stood empty since 2013 when its neon sign, 99 pieces of glass restored for $300,000 in city funds, was switched back on in September 2017; by analyzing the sign's capacitors, the contractor recreated its original flashing sequence.",
+        place: "Avenue Theatre",
+        where: "2650 San Bruno Ave",
+        at: [-122.40402, 37.72822],
+        source: "https://en.wikipedia.org/wiki/Avenue_Theatre_(San_Francisco)",
+      },
+      {
+        icon: "shop",
+        title: "Nine blocks once called The Road",
+        text:
+          "Locals once called San Bruno Avenue simply “The Road,” and its business strip, a busy nine blocks by one community newsletter's count, has long held bakeries, grocery stores and pharmacies, now alongside restaurants and cafés. In 2006 a Public Works streetscape project from Silver Avenue to Mansell Street, which the department calls the first completed project of the city's Great Streets program, planted 120 new street trees in enlarged tree wells. In 2020 three murals went up along the strip, among them Kseniya Makarova's “Portola Blossoms” at 2600 San Bruno Avenue, its flowers recalling the neighborhood's cut-flower history.",
+        place: "San Bruno Avenue shops",
+        where: "San Bruno Ave & Wayland St",
+        at: [-122.40301, 37.72637],
+        source: "https://sfpublicworks.org/node/34923",
+      },
+      {
+        icon: "book",
+        title: "Wildflowers in glass",
+        text:
+          "The Portola's library opened in 1927 as a deposit station, the 14th branch in the city's system, and spent eight decades in leased sites on San Bruno Avenue, its first known home at the corner of Bacon Street. On February 28, 2009, this permanent 6,300-square-foot branch, designed by Stoner Meek/Noll and Tam, opened on a corner of the Martin Luther King Jr. Middle School grounds, across from E.R. Taylor Elementary School, with skylights and a north-facing view garden. Dana Zed's glass-shutter artwork, California Wildflowers, was inspired by the garden nurseries that once filled the neighborhood.",
+        place: "Portola Branch Library",
+        where: "380 Bacon St",
+        at: [-122.40639, 37.72712],
+        source: "https://sfpl.org/locations/portola/portola-library-history",
+      },
+      {
+        icon: "park",
+        title: "A mosaic of greenhouses",
+        text:
+          "Public Works called this five-acre complex 80 years old when it reopened on November 16, 2013, after a $21.2 million makeover paid for by the city's 2008 Clean and Safe Neighborhood Parks Bond: a renovated recreation building with a gym and multipurpose rooms, basketball and tennis courts, and new soccer, baseball and softball fields. Behind the clubhouse portico, a mosaic mural of greenhouses and windmills recalls, Public Works says, the Portola's days as the center of the city's commercial flower industry.",
+        place: "Palega Recreation Center",
+        where: "500 Felton St",
+        at: [-122.40970, 37.72890],
+        source: "https://sfpublicworks.org/node/34530",
+      },
+      {
+        icon: "sun",
+        title: "The city's last flower greenhouses",
+        text:
+          "The Garibaldi family ran University Mound Nursery, a rose nursery, in glass-and-wood greenhouses on this 2.2-acre block from 1922, and they were San Francisco's last active commercial greenhouses until they shut down in the early 1990s. For years neighbors and the Greenhouse Project fought for an urban farm here instead of housing, and in 2022 the developer turned down the group's $15 million offer in favor of building 62 townhomes.",
+        place: "University Mound Nursery site",
+        where: "770 Woolsey St",
+        at: [-122.40905, 37.72375],
+        source: "https://www.sfchronicle.com/local/article/S-F-s-historic-Portola-greenhouses-could-be-16064809.php",
+      },
+      {
+        icon: "tram",
+        title: "A streetcar line from 1899",
+        text:
+          "One of the two lines behind today's 9 San Bruno dates to 1899: its streetcars started at Folsom Street and Army Street, now Cesar Chavez, ran east on Army and turned south down Bayshore Boulevard, continuing as Bayshore becomes San Bruno Avenue. As the 25 San Bruno it kept running streetcars until buses replaced them in 1948, and in 1983 the San Bruno Avenue route got back its old 1939 Muni number, which it still carries as the 9.",
+        place: "San Bruno Avenue streetcar route",
+        where: "San Bruno Ave & Woolsey St",
+        at: [-122.40275, 37.72531],
+        source: "https://www.sfmta.com/blog/historic-line-fine-9-san-bruno",
+      },
     ],
+    walk: {
+      intro:
+        "A walk of about 1.7 miles for visitors and would-be neighbors that circles back to San Bruno Avenue: start at San Bruno Ave & Silver Ave, where the 8, 9, 9R and 44 buses stop, walk south on San Bruno Avenue past the Avenue Theatre and the shops, turn west on Wayland Street and up Goettingen Street to the library, continue to Palega Recreation Center on Felton Street, come down Hamilton Street to the old nursery block on Woolsey Street, and follow Woolsey east back to San Bruno Avenue, where the 8, 9 and 9R stop. Allow about 75 minutes; late morning or early afternoon, when the avenue's shops are open, is best.",
+      miles: 1.7,
+      minutes: 75,
+      tip:
+        "Save your meal or coffee stop for the end: the walk finishes back on San Bruno Avenue among its bakeries, restaurants and cafés, and the strip continues south from Woolsey Street toward Mansell Street.",
+    },
     restaurants: [
       { name: "Pho Nation", address: "2428 San Bruno Ave", phone: "(415) 347-7115" },
       { name: "Ming Hing Restaurant", address: "2550 San Bruno Ave", phone: "(415) 468-5309" },
@@ -6645,14 +6709,68 @@ export const NEIGHBORHOODS = {
     spirit: "A quiet, diverse, working-class residential corner in San Francisco's far southwest, anchored by City College and the Ocean Avenue corridor as the historic heart of the OMI district.",
     reasons: ["Part of historic OMI", "Quiet residential streets", "Near City College", "Transit to downtown via Ocean Ave"],
     aka: "Part of OMI",
-    history: "Ocean View grew up around a stop on the San Francisco and San Jose Railroad, which began service in 1860, and was successfully subdivided in 1883 into a self-contained village with its own school, post office, and churches along Broad Street. The nearby Ingleside Racetrack opened in 1895 off the old Ocean Road, drawing roadhouses and gambling before an 1899 anti-betting ordinance shut the track down. After World War II, Ocean View became one of the few places in San Francisco where African-American families could buy homes, and during Western Addition redevelopment in the 1960s and 1970s many more families moved in. Residents coined the name 'OMI' — Ocean View, Merced Heights, Ingleside — in the 1960s to lobby together for city services, and the area became one of the city's earliest racially integrated communities.",
+    history:
+      "For much of the 1800s Ocean View was farmland. The San Francisco and San Jose Railroad opened in 1863 and crossed it on a 3% grade that needed helper engines, and the settlement grew up around the line. The Western Neighborhoods Project describes it as a crossroads of steam trains, streetcar lines and farm wagons hauling produce downtown. In 1896 Engine Company No. 33 was organized in a redwood firehouse on Broad Street. After the flatter Bayshore Cutoff opened in 1907, little through traffic used the old main line, which became Southern Pacific's Ocean View Branch.\n\nOcean View drew few residents until after the 1906 earthquake, when it filled in with the homes of German, Swedish and Irish immigrants. On October 6, 1925, Muni opened the M Ocean View as a shuttle from St. Francis Circle to Broad Street and Plymouth Avenue; Muni says the area was still mostly farmland then and credits the line with helping spark Oceanview's growth. The neighborhood is also called Lakeview, a name that refers not to Lake Merced but to the former Lake Geneva.\n\nAfter World War II, many wartime migrants who had found well-paid jobs settled in new homes in Ocean View, Merced Heights and Ingleside, and Ocean View was one of the few residential areas in the city open to Black families. A 2010 historic context statement, citing the census, puts the African American share of the three neighborhoods' census tracts at 5% in 1950 and 62% in 1970. In the mid-1980s neighbors Minnie and Lovie Ward started a group that grew into OMI Neighbors in Action, and the recreation center at the neighborhood's heart bears their names.",
     facts: [
-      { icon: "flag", title: "An early integrated community", text: "Post-WWII Ocean View was one of the few SF neighborhoods where Black families could buy property, making the OMI one of the city's earliest racially integrated areas." },
-      { icon: "book", title: "City College's Ocean Campus", text: "City College of San Francisco opened in 1935 and built its 56-acre Ocean Campus just north of the neighborhood at 50 Frida Kahlo Way." },
-      { icon: "road", title: "A racetrack frozen in the street grid", text: "Just west in Ingleside Terraces, Urbano Drive forms an oval traced on the loop of the 1895 Ingleside Racetrack, paved over when the residence park opened in 1912." },
-      { icon: "church", title: "A 19th-century village core", text: "Ocean View functioned as its own village, with St. Michael's Church established on Broad Street in 1899 and a Congregational church there since 1895." },
-      { icon: "tram", title: "Streetcars named for the area", text: "The M Ocean View streetcar line, built in 1927, and the K Ingleside both still run, terminating at Balboa Park Station." },
+      {
+        icon: "flag",
+        title: "The department's last horse company",
+        text:
+          "Engine 33 has been based at this firehouse, on the short dead-end stretch of Capitol Avenue at Sagamore Street, since May 11, 1974. On August 29, 1921, while still at its first house on Broad Street, it became the last company in the department to give up horse-drawn apparatus, taking delivery of a 1914 American LaFrance engine. From November 2003 to September 2004 it worked out of Engine 15's quarters at 1000 Ocean Avenue while this station was retrofitted for earthquakes.",
+        place: "Fire Station 33",
+        where: "8 Capitol Ave",
+        at: [-122.45900, 37.71105],
+        source: "https://guardiansofthecity.org/sffd/companies/engines/engine33.html",
+      },
+      {
+        icon: "tower",
+        title: "A firehouse built of redwood",
+        text:
+          "Engine Company No. 33 was organized here in 1896, in a firehouse designed by Charles R. Wilson and built entirely of redwood, with 20-foot ceilings on two floors and a hose-drying tower more than 60 feet high. The company moved out in 1974, the city sold the building at public auction in 1977, and it has been privately owned since. In 2026 the Board of Supervisors began the process of making it a city landmark, calling it among the oldest standing firehouses in San Francisco and citing an 1896 fire in Colma, which the resolution calls San Francisco's first mutual-aid response to a neighboring department.",
+        place: "Engine Company No. 33 firehouse",
+        where: "117 Broad St",
+        at: [-122.45667, 37.71302],
+        source: "https://media.api.sf.gov/documents/r0147-26.pdf",
+      },
+      {
+        icon: "tram",
+        title: "The M's old end of the line",
+        text:
+          "Muni opened the M Ocean View on October 6, 1925, as a shuttle between St. Francis Circle and this corner. With development slow and ridership low, buses replaced the streetcars in August 1939, and rail service returned on December 17, 1944. A wye for turning streetcars went into service here on December 6, 1957, and on August 30, 1980, the line was extended along San Jose Avenue to Balboa Park.",
+        place: "Broad and Plymouth",
+        where: "Broad St & Plymouth Ave",
+        at: [-122.45607, 37.71325],
+        source: "https://en.wikipedia.org/wiki/Broad_and_Plymouth_station",
+      },
+      {
+        icon: "subway",
+        title: "Helper engines on the main line",
+        text:
+          "The San Francisco and San Jose Railroad opened in 1863, climbing over the hills near San Bruno Mountain, and its trains needed helper engines for the 3% grade at Oceanview. After the flatter Bayshore Cutoff opened in 1907, little through traffic used the old line, which became Southern Pacific's Ocean View Branch and stayed in use until 1942, with some sections lasting into the 1970s. Interstate 280, just east of this corner, and BART now run on its right-of-way between Glen Park and San Bruno.",
+        place: "Ocean View Branch right-of-way",
+        where: "San Jose Ave & Farallones St",
+        at: [-122.45221, 37.71406],
+        source: "https://en.wikipedia.org/wiki/Ocean_View_Branch",
+      },
+      {
+        icon: "park",
+        title: "A rec center named for neighbors",
+        text:
+          "Oceanview Playground fills a two-square-block area in the middle of the neighborhood, between Plymouth and Capitol avenues and Lobos and Montana streets. Its recreation center is named for Minnie and Lovie Ward, who lived a few doors from the park and in the mid-1980s started a neighborhood group that grew into Oceanview-Merced Heights-Ingleside Neighbors in Action, which carries on today. The center, completed in June 2008 on a $16.75 million budget, is a campus of four separate buildings joined by a loggia, including a 1,000-square-foot building for teenagers and young adults.",
+        place: "Minnie and Lovie Ward Recreation Center",
+        where: "650 Capitol Ave",
+        at: [-122.45865, 37.71580],
+        source: "https://sfpublicworks.org/node/34528",
+      },
     ],
+    walk: {
+      intro:
+        "A one-mile walk for visitors and would-be neighbors that starts at Fire Station 33, beside the 54 Felton stop at Capitol Ave & Sagamore St (the M Ocean View stops a short walk north, at Broad St & Capitol Ave), follows Broad Street east past the old firehouse and the M's first terminal to the old main line on San Jose Avenue, and returns west along Farallones Street to the recreation center at the neighborhood's heart. Allow about 45 minutes; a clear afternoon, after any morning fog has lifted, is a good time to go.",
+      miles: 1,
+      minutes: 45,
+      tip:
+        "Both firehouses are best seen from the sidewalk: Station 33 is a working fire station, so keep its driveway clear, and the old firehouse at 117 Broad St is privately owned. For coffee or lunch afterward, the shops and restaurants of Ocean Avenue are about half a mile north of the recreation center, up Capitol Avenue.",
+    },
     nearby: ["Ingleside", "Ocean Avenue"],
     restaurants: [
       { name: "Beep's Burgers", address: "1051 Ocean Ave", phone: "(415) 584-2650", url: "https://www.beepsburgers.com" },
@@ -6669,14 +6787,68 @@ export const NEIGHBORHOODS = {
     spirit: "A sunny, working-class stretch at the southern tip of Mission Street, where modest single-family homes back up to a lively Latino, Filipino, and Asian commercial corridor running toward the Daly City line.",
     reasons: ["Latino & Asian food corridor", "Family-friendly single-family homes", "Transit hub at Balboa Park BART", "Tucked-away Cayuga Park"],
     aka: "Cayuga Terrace",
-    history: "The Outer Mission grew up in the 1910s as a southern extension of the Mission District, along the old road out of town that became Mission Street. The neighborhood's southern blocks of Mission Street follow the route of El Camino Real, the historic road linking San Francisco down the Peninsula. Once farmland that supplied the city with produce, it filled in during the early 20th century with modest single-family homes served by streetcar and Southern Pacific rail lines. Early residents were largely Irish and Italian American; by the late 20th century the area became a working-class enclave home to many Latino and Filipino/Asian families. Many of its streets carry Native American tribe names — Cayuga, Onondaga, Seneca — drawn from 1860s 'West End Homestead' maps.",
+    history:
+      "The Outer Mission is San Francisco's last stretch before Daly City, a wedge of streets between Mission Street and Interstate 280. In October 1863 the San Francisco and San Jose Railroad opened its line south from the city through the Bernal Cut and along the corridor that I-280 and BART follow past the neighborhood today. When Southern Pacific opened its Bayshore Cutoff in December 1907, that original main line was reduced to a branch, the Ocean View Branch.\n\nElectric streetcars began running on Mission Street on September 15, 1894, the start of today's 14 Mission. Sometime between 1889 and 1905, agent Thomas Moran was selling “109 West End Garden Lots” between Mission Street and San Jose Avenue on a lithographed map that shows a Wyoming Avenue where Cayuga Avenue runs now. In 1905 the Ocean Shore Railroad began building a planned electric railway down the coast toward Santa Cruz, on a city right-of-way along what is now Alemany Boulevard; the 1906 earthquake sent coastal cliffs, track and equipment into the ocean, the line was never completed, and by 1920 it had been abandoned.\n\nJust over the county line, dairyman John Daly opened his farmland to refugees of the 1906 earthquake and fire, and the town that grew there took his name in 1911. Interstate 280 and BART were later built along the old branch line's corridor, and BART trains began running past in 1973. In 1986 Recreation and Park gardener Demetrio Braceros was assigned to Cayuga Park and began carving fallen cypress into a folk-art garden; in 2013 the city made Mission Street, from Alemany Boulevard to the county line, a neighborhood commercial district.",
     facts: [
-      { icon: "road", title: "On El Camino Real", text: "The southern blocks of Mission Street trace the historic El Camino Real, the road that once linked San Francisco's mission down the Peninsula." },
-      { icon: "art", title: "Cayuga Park's carved wonderland", text: "Gardener Demetrio Braceros, a Filipino immigrant, spent 1986–2008 transforming Cayuga Playground, carving hundreds of wooden statues — the Arts Commission later counted 376." },
-      { icon: "subway", title: "One of BART's busiest stops", text: "Balboa Park Station at the neighborhood's edge is the busiest BART station outside downtown San Francisco, an intermodal hub for BART, Muni Metro, and many bus lines." },
-      { icon: "house", title: "A single-family enclave", text: "The district is overwhelmingly attached single-family homes, long one of the city's few remaining low-rent and middle-class residential pockets." },
-      { icon: "burrito", title: "Salvadoran & Peruvian corridor", text: "The Mission Street strip is lined with pupuserias, panaderias, and Peruvian and Guatemalan kitchens rather than national chains." },
+      {
+        icon: "shop",
+        title: "The last blocks of Mission Street",
+        text:
+          "These blocks are the southern end of the Excelsior Outer Mission Street Neighborhood Commercial District, which a 2013 ordinance drew along Mission Street from Alemany Boulevard to the San Mateo County line; in the Outer Mission it lines about two-thirds of a mile of Mission, from Ottawa Avenue to the line. The Planning Code describes the street as mixed use, with street-fronting retail businesses on the ground floor and housing on the floors above. Electric streetcars began running on Mission Street on September 15, 1894; the last one ran in 1949, and since 1952 the line, today's 14 Mission, has run trolleybuses, which carry on into Daly City.",
+        place: "Outer Mission Street shops",
+        where: "Mission St & Lowell St",
+        at: [-122.44639, 37.71145],
+        source: "https://sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances13/o0261-13.pdf",
+      },
+      {
+        icon: "road",
+        title: "When Cayuga was Wyoming",
+        text:
+          "Sometime between 1889 and 1905, real estate agent Thomas Moran put out a lithographed sales map of “109 West End Garden Lots” lying between Mission Street and San Jose Avenue, then on the city's outskirts. On it this street is Wyoming Avenue; the Huntington Library, which holds the map, notes that it is now Cayuga Avenue, and that the map exaggerates how close Huron Street sits to Mission Street. A block southwest, the city vacated part of the avenue for the rebuilding of Cayuga Park, which grew by about 8,400 square feet.",
+        place: "Cayuga Avenue",
+        where: "Cayuga Ave & Foote Ave",
+        at: [-122.44842, 37.71520],
+        source: "https://calisphere.org/item/245d2d08a5034dc0ac5655ae4466d342",
+      },
+      {
+        icon: "art",
+        title: "A gardener's carved forest",
+        text:
+          "Demetrio Braceros, who had come from the Philippines in 1973, was assigned to this park as its Recreation and Park gardener in 1986 and worked on it for more than 20 years, retiring in 2008; he carved more than 375 figures, totem poles and statues, mostly from cypress trees that had fallen in the park. A rebuilding completed on August 17, 2013, added a new clubhouse and renovated the play area and the tennis and basketball courts, and his carvings were cleaned and refurbished, though some went into storage. The BART tracks that loom over one side of the park follow the corridor of the railroad that opened south from San Francisco in 1863.",
+        place: "Cayuga Park",
+        where: "301 Naglee Ave",
+        at: [-122.45028, 37.71389],
+        source: "https://sfpublicworks.org/node/34520",
+      },
+      {
+        icon: "tram",
+        title: "A boulevard in a railroad cut",
+        text:
+          "Alemany Boulevard is named for Joseph Sadoc Alemany, a Dominican born in Catalonia who became San Francisco's first archbishop in 1853, and it was built on the right-of-way of the Ocean Shore Railroad. Construction of that planned electric railway down the coast toward Santa Cruz began at both ends in 1905, but the 1906 earthquake sent cliffs, track and equipment into the ocean; the line was never completed, and by 1920 it was abandoned. A photograph taken on February 24, 1926, a short way southwest at Sickles Avenue and Winnipeg Avenue, a street Alemany later absorbed, shows the old line running below grade along the boulevard's proposed route.",
+        place: "Alemany Boulevard",
+        where: "Alemany Blvd & Laura St",
+        at: [-122.45237, 37.71171],
+        source: "https://test.opensfhistory.org/photo/wnp36.03345",
+      },
+      {
+        icon: "cow",
+        title: "The dairy over the county line",
+        text:
+          "About a block southwest of this corner, Mission Street crosses the county line into Daly City. The town is named for John Daly, whose 250-acre dairy ranch operated near the top of the hill from 1868 to 1907; he opened his farmland to refugees of the 1906 earthquake and fire, subdivided it in 1907, and when the town incorporated in 1911 it took his name. Beyond the line, Mission Street carries on through Daly City and Colma as part of State Route 82, which for much of its length down the Peninsula is named El Camino Real.",
+        place: "Daly City line",
+        where: "Mission St & Sickles Ave",
+        at: [-122.45332, 37.70866],
+        source: "https://www.hmdb.org/m.asp?m=52311",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.1 miles for visitors and would-be neighbors: start at the Mission St & Lowell St stop of the 14 and 14R buses, follow Mission Street northeast to Foote Avenue, walk up Foote to Cayuga Avenue and its carved-wood park, then follow Alemany Boulevard southwest to Laura Street, walk down Laura to Mission and finish at Sickles Avenue, by the Daly City line. Allow about 50 minutes, and go in daylight, when the park's carvings are easiest to see.",
+      miles: 1.1,
+      minutes: 50,
+      tip:
+        "Cayuga Park, with its playground and 2013 clubhouse, makes the natural rest stop. For the ride back downtown, the inbound 14 and 14R stop at Mission and Acton Street, half a block northeast of the finish; save a meal for the Mission Street blocks you walked at the start and end.",
+    },
     restaurants: [
       { name: "El Porteno", address: "5173 Mission St", phone: "(415) 586-1206" },
       { name: "Reina's Restaurant", address: "5479 Mission St", phone: "(415) 585-7694", url: "https://www.reinasrestaurant.com" },
@@ -6689,14 +6861,78 @@ export const NEIGHBORHOODS = {
   "Mission Terrace": {
     spirit: "A quiet, sunny pocket of 1920s bungalows tucked between the Excelsior and Balboa Park, in the shadow of City College.",
     reasons: ["Single-family bungalow streets", "Steps from Balboa Park BART", "City College next door", "Easy Mission St dining"],
-    history: "The land was surveyed for residential development by the Baldwin & Howell Company in 1911, on former farmland once worked by Italian and French truck gardeners. Most of the homes went up in the 1920s and 1930s, when streetcar lines along the Mission corridor let working families commute without a car. The neighborhood sits just east of Balboa Park, and City College of San Francisco opened its permanent Ocean Campus on adjacent parkland on August 27, 1940. Decades later, the construction of Interstate 280 and BART's Balboa Park station reshaped the neighborhood's southern and western edges. Many of the original 1920s bungalows still stand today, largely unchanged.",
+    history:
+      "In 1865 a right-of-way across the House of Refuge lot, home of the Industrial School and the old county jail, was sold to the San Jose railroad, whose line Southern Pacific later ran; BART and Interstate 280 share its route today. Late in 1897, on land donated by Archbishop Riordan, work began on a church for Italian immigrants living among what a Salesian historian calls the “farmers' gardens” along Mission Street. Named Corpus Christi and established in 1898, it is still a Salesian parish, at 62 Santa Rosa Avenue.\n\nIn December 1907 Southern Pacific opened its Bayshore Cutoff, and the old main line here became the lightly used Ocean View Branch. In April 1910 the real estate firm Baldwin & Howell incorporated the Mission Terrace Company; that October the House of Refuge tract across San Jose Avenue was dedicated as Balboa Park, and by January 1911 the company had a tract office on Santa Rosa Avenue. Most of the original tract, between San Jose, Capistrano and Santa Ynez avenues, was built out by the end of the 1920s, and a Mission Terrace Improvement Club was making the papers by 1921.\n\nBalboa Park's soccer stadium opened in 1953, and the Excelsior branch library's building on Mission Street in 1967. Interstate 280 was built partly on the old railroad's right-of-way, BART reused it, and Balboa Park station opened on November 5, 1973. In 2025 the city named the one block of Harrington Street where Jerry Garcia grew up in his grandparents' house Jerry Garcia Street.",
     facts: [
-      { icon: "house", title: "Bungalow subdivision", text: "Surveyed by Baldwin & Howell in 1911 and built out mostly in the 1920s–30s as modest single-family bungalows." },
-      { icon: "book", title: "City College next door", text: "CCSF's Ocean Campus opened on adjacent land on August 27, 1940, after a land swap with Balboa Park." },
-      { icon: "subway", title: "Balboa Park BART", text: "The Balboa Park hub at 401 Geneva Ave sits at the neighborhood's edge, served by four BART lines and three Muni Metro lines." },
-      { icon: "cow", title: "Truck-garden farmland", text: "Before development, the area was truck-garden farmland; early streetcars literally ran through the fields." },
-      { icon: "road", title: "Reshaped by I-280", text: "Interstate 280 and BART construction in the 1960s–70s redrew the neighborhood's southern and western edges." },
+      {
+        icon: "subway",
+        title: "Where the old main line ran",
+        text:
+          "In 1865 the San Jose railroad bought a right-of-way past this corner, and its line was Southern Pacific's main line down the Peninsula until the Bayshore Cutoff opened in December 1907; by 1913 this route, by then the Ocean View Branch, saw just three or four round trips a day. Interstate 280 was built partly on its right-of-way and BART reused it: Balboa Park station, just south of here, opened on November 5, 1973. The J Church, which stops at this corner, has run to the station full-time since 1993.",
+        place: "Old main line at Ocean Avenue",
+        where: "Ocean Ave & San Jose Ave",
+        at: [-122.44481, 37.72298],
+        source: "https://en.wikipedia.org/wiki/Ocean_View_Branch",
+      },
+      {
+        icon: "park",
+        title: "A park on the House of Refuge lot",
+        text:
+          "In 1909 the Ingleside Improvement Club and the Mission Promotion Association asked that the House of Refuge tract be made a park, and on October 9, 1910, it was dedicated as Balboa Park, a “breathing space” for the neighborhoods south of the Mission; it first reached west all the way to today's Frida Kahlo Way. Its soccer stadium opened on September 27, 1953, built for $150,000, and in the 1990s it was renamed for Matthew J. Boxer, late president of the San Francisco Soccer Football League, whose home ground it is.",
+        place: "Balboa Park & Boxer Stadium",
+        where: "166 Havelock St",
+        at: [-122.44472, 37.72583],
+        source: "https://inglesidelight.com/balboa-park-formerly-known-as-the-house-of-refuge-lot-has-never-looked-better",
+      },
+      {
+        icon: "house",
+        title: "Sold from a 1911 tract office",
+        text:
+          "In April 1910 Baldwin & Howell incorporated the Mission Terrace Company, and by January 1911 it had a tract office at 275 Santa Rosa Avenue, just east of this corner. Most of the original tract, between San Jose, Capistrano and Santa Ynez avenues, was finished by the end of the 1920s, and a Mission Terrace Improvement Club was in the papers by 1921. The firm's “Record of Sales Mission Terrace,” logging lot, purchaser and terms from 1911 to 1923, survives among its records.",
+        place: "Mission Terrace tract",
+        where: "San Jose Ave & Santa Rosa Ave",
+        at: [-122.43997, 37.72899],
+        source: "https://sfhistorydays.org/new-mission/",
+      },
+      {
+        icon: "music",
+        title: "Jerry Garcia's childhood block",
+        text:
+          "After his father drowned in 1947, Jerry Garcia and his brother lived with their maternal grandparents, Bill and Tillie Clifford, at 87 Harrington Street, and he attended Monroe Elementary School; his illustrated book about those years, Harrington Street, was published shortly after his death in 1995. In 2025 the city named this one-block street, between Alemany Boulevard and Mission Street, Jerry Garcia Street, and a few hundred people turned out to see the signs unveiled on August 1, 2025, which would have been his 83rd birthday.",
+        place: "Jerry Garcia Street",
+        where: "87 Harrington St",
+        at: [-122.43600, 37.72590],
+        source: "https://www.news4jax.com/entertainment/2025/08/01/grateful-dead-guitarist-jerry-garcia-has-childhood-street-named-for-him-in-san-francisco/",
+      },
+      {
+        icon: "book",
+        title: "The first branch rebuilt",
+        text:
+          "The Excelsior branch, the tenth in the city's library system, began as a “library station” in rented quarters at 7 Bauer Street, then moved to Ocean Avenue and to 4465 Mission Street. This building, designed by Appleton and Wolfard and built for $248,000, opened on October 1, 1967. It was the first branch renovated under the city's Branch Library Improvement Program, paid for by a bond voters passed in November 2000, and reopened on July 8, 2005.",
+        place: "Excelsior Branch Library",
+        where: "4400 Mission St",
+        at: [-122.43329, 37.72712],
+        source: "https://sfpl.org/locations/excelsior/excelsior-library-history",
+      },
+      {
+        icon: "shop",
+        title: "A streetcar main street",
+        text:
+          "Mission Street, along the neighborhood's eastern side, is its shopping street. Electric streetcars began running on Mission on September 15, 1894, and a 1935–36 rebuild laid new track from 16th Street to Daly City; buses replaced the streetcars in 1949, and electric trolley buses arrived in 1952. In 2013 the city made Mission from Alemany Boulevard to the San Mateo County line a neighborhood commercial district, capping parking at one space per home and making liquor stores a prohibited use, though grocery stores may still sell alcohol.",
+        place: "Mission Terrace Mission Street shops",
+        where: "Mission St & Silver Ave",
+        at: [-122.43128, 37.72876],
+        source: "https://sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances13/o0261-13.pdf",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.3 miles for visitors and would-be neighbors: start at Ocean Ave & San Jose Ave, where J and K trains and the 29 and 49 buses stop just north of Balboa Park BART, cross Balboa Park to Boxer Stadium, walk up San Jose Avenue and follow Santa Rosa Avenue through the original Mission Terrace tract, then take Alemany Boulevard a block to Jerry Garcia Street and follow it to Mission Street, passing the library on the way to the shops at Mission & Silver. Allow about an hour, and go on a clear afternoon.",
+      miles: 1.3,
+      minutes: 60,
+      tip:
+        "To get back to BART without retracing your steps, the 44 and 52 buses at Mission & Silver both run to Glen Park BART; for a bite or a coffee first, look along Mission Street's storefronts at the end of the walk.",
+    },
     nearby: ["the Excelsior", "Balboa Park"],
     restaurants: [
       { name: "El Farolito", address: "4817 Mission St", phone: "(415) 337-5500", url: "https://elfarolitosf.com" },
@@ -6715,14 +6951,78 @@ export const NEIGHBORHOODS = {
     spirit: "A sunny, quiet pocket of single-family homes tucked into San Francisco's far southeast corner, hard against the Daly City line and the green edge of McLaren Park.",
     reasons: ["Quiet family residential", "Big playground and parks", "Among the city's sunnier corners", "Borders McLaren Park"],
     aka: "Crocker-Amazon",
-    history: "The neighborhood sits on land once part of the holdings associated with railroad magnate Charles Crocker, and it takes the second half of its name from Amazon Avenue in the adjacent Excelsior. Subdivided in the early 20th century, it was built out largely with modest single-family homes through the mid-century, in a mix of Marina, Arts and Crafts, Victorian, Edwardian, and Mid-Century Modern styles. It remains slightly more affluent than the neighboring Excelsior while sharing much of that district's diversity, including a large Filipino community. The large Crocker Amazon Playground borders the neighborhood to the north, and John McLaren Park, the city's third-largest park, sits just to the east.",
+    history:
+      "Crocker Amazon takes its name from the land holdings of Charles Crocker, one of the Central Pacific Railroad's Big Four, and from Amazon Avenue in the Excelsior next door. In 1912 the Crocker Estate Company was laying out wide, landscaped streets south of Geneva Avenue, with a reported 1,000 acacia trees, and its Crocker-Amazon Tract developed in earnest from then on: the first commercial buildings went up in 1913, and by the mid-1920s many houses and businesses had appeared. In 1925 the company built a small Spanish Colonial sales office at Geneva Avenue and South Hill Boulevard.\n\nIn 1934 the Recreation Commission won permission to turn the Crocker Amazon Reservoir site, 55 acres of Public Utilities Commission land at Geneva Avenue and Moscow Street, into a playground, and WPA workers graded its baseball diamonds. WPA crews also rebuilt Geneva Avenue east to the county line, linking the outer Mission to the Bay Shore Highway and the Livestock Pavilion, today's Cow Palace. In World War II the Navy made the playground its Naval Receiving Hospital for battle casualties evacuated from overseas; when the Navy left in 1946, the grounds went to the San Francisco Housing Authority to house veterans.\n\nMost of its homes are single-family houses, and its winding streets straddle the county line, blending into Daly City's Crocker and Southern Hills neighborhoods. Its shopping edge is Mission Street, where the 40-line interurban streetcars ran to San Mateo from 1902 until 1949. In 2010 a Pavement to Parks project replanted the Naples Street median, where the city photographer had pictured classical pergolas in 1928, and in 2023 the playground's five soccer fields got new turf blended with natural cork.",
     facts: [
-      { icon: "park", title: "Crocker Amazon Playground", text: "A sprawling sports complex at Moscow St and Geneva Ave with five full-size lighted soccer fields, plus baseball, tennis, basketball, and bocce courts." },
-      { icon: "money", title: "Named for a railroad baron", text: "The 'Crocker' honors land once tied to Central Pacific Railroad magnate Charles Crocker; 'Amazon' comes from nearby Amazon Avenue." },
-      { icon: "house", title: "Homes with elbow room", text: "Unusually for San Francisco, many houses here sit on lots with roughly ten feet of space on either side rather than wall-to-wall." },
-      { icon: "sun", title: "A sunnier corner", text: "Set in the city's southeast, the neighborhood tends to escape the heaviest coastal fog." },
-      { icon: "park", title: "Next to McLaren Park", text: "John McLaren Park, the city's third-largest park after Golden Gate and the Presidio, sits just east with trails, lakes, and the Jerry Garcia Amphitheater." },
+      {
+        icon: "shop",
+        title: "Streetcars to San Mateo",
+        text:
+          "The east side of Mission Street, from Geneva Avenue to the county line, is Crocker Amazon's shopping street, a stretch of nearly a mile lined with storefront shops, restaurants and services. It belongs to the Excelsior Outer Mission Street Neighborhood Commercial District, which the city created in 2013 for Mission from Alemany Boulevard to the San Mateo County line. From 1902 until January 1949 the 40-line interurban streetcars ran out Mission here on their way past the Colma cemeteries to San Mateo; the 14 and 14R buses follow the street today.",
+        place: "Crocker Amazon Mission Street shops",
+        where: "Mission St & Guttenberg St",
+        at: [-122.44475, 37.71251],
+        source: "https://sfmuseum.org/hist10/interurban.html",
+      },
+      {
+        icon: "park",
+        title: "Colonnades in the median",
+        text:
+          "In 1928 city photographer Horace Chaffee pictured classical colonnades in this median of Naples Street, between Geneva Avenue and Rolph Street: pergolas, built to carry climbing vines. Neighborhood lore ties them to a “Naples Piazza” from the 1915 Panama-Pacific International Exposition, but a San Francisco history site dates them to about 1912, when the Crocker Estate Company was laying out the tract's landscaped streets. In 2010 a Pavement to Parks project backed by a Plant SF grant turned about 7,500 square feet of concrete and asphalt here into Naples Green, with hundreds of plants and 18 new trees.",
+        place: "Naples Green",
+        where: "Naples St & Rolph St",
+        at: [-122.43641, 37.71388],
+        source: "https://www.sanfranciscostory.com/naples-temple/",
+      },
+      {
+        icon: "park",
+        title: "A reservoir site turned ball fields",
+        text:
+          "In 1933 these 55 acres at Geneva Avenue and Moscow Street were the Crocker Amazon Reservoir site, Public Utilities Commission land. In 1934 the Recreation Commission won permission to develop it, the truck farmers working the land were paid for their leases, and from 1934 to 1937 WPA workers graded the baseball diamonds and put in a sprinkler system; the WPA's report describes 11 diamonds, room for 33 games on a Sunday or holiday. In 2023 the city replaced the turf on the park's five soccer fields, in three phases, with synthetic blades blended with natural cork pebbles.",
+        place: "Crocker Amazon Playground",
+        where: "Moscow St & Geneva Ave",
+        at: [-122.43280, 37.71380],
+        source: "https://livingnewdeal.org/projects/crocker-amazon-playground-and-recreation-center-san-francisco-ca/",
+      },
+      {
+        icon: "flag",
+        title: "A wartime hospital on the diamonds",
+        text:
+          "During World War II the Navy took over the playground for the Naval Receiving Hospital, San Francisco, also known as Fleet Hospital 113. A 1945 Navy anniversary booklet says it was set up solely to give hospital quarters and treatment to battle casualties evacuated from hostile theaters, who were then screened, regrouped and sent by train to naval hospitals around the country. When the Navy left in 1946, the grounds were turned over to the San Francisco Housing Authority to house veterans during the postwar housing shortage.",
+        place: "Naval Receiving Hospital site",
+        where: "Geneva Ave & Prague St",
+        at: [-122.43180, 37.71370],
+        source: "https://militarymuseum.org/NavRecvHospSF.html",
+      },
+      {
+        icon: "road",
+        title: "Where the tract's lots were sold",
+        text:
+          "The Pacific Coast Architecture Database records the Crocker Estate Company's one-story Spanish Colonial sales office, built in 1925 at 1400 Geneva Avenue on this corner, at the center of the company's Crocker-Amazon Tract; an OpenSFHistory photo caption notes the building is gone. In the 1930s the WPA rebuilt Geneva Avenue from Mission Street east to the county line near Bayshore Boulevard, with grading and fill, sewers, catch basins, manholes and culverts. A 1939 report on the city's WPA projects says the road linked the outer Mission to the Bay Shore Highway and the Livestock Pavilion, today's Cow Palace.",
+        place: "Crocker Estate Company office site",
+        where: "Geneva Ave & South Hill Blvd",
+        at: [-122.43153, 37.71245],
+        source: "https://pcad.lib.washington.edu/building/22454",
+      },
+      {
+        icon: "house",
+        title: "Pictured in the developer's album",
+        text:
+          "The Crocker Estate Company's own photo album, now in the Western Neighborhoods Project's OpenSFHistory collection, includes a view captioned “Crocker Amazon Tract - Winding Way Looking N.E. From Naylor St - 1924.” A second OpenSFHistory photo, of the northeast corner of the two streets, notes that 83 Winding Way was built in 1923 and 95 Winding Way in 1926. A few blocks south, the neighborhood's winding streets straddle the county line and blend into Daly City's Crocker and Southern Hills neighborhoods.",
+        place: "Winding Way",
+        where: "Naylor St & Winding Way",
+        at: [-122.43290, 37.71030],
+        source: "https://test.opensfhistory.org/photo/wnp27.4601",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.5 miles for visitors and would-be neighbors: start at Mission St & Geneva Ave, where the 8, 14, 14R, 43 and 54 buses stop about half a mile from Balboa Park BART, follow Mission's shops a few blocks south to Guttenberg Street, cut east through the old Crocker-Amazon Tract to the Naples Street median, cross Geneva into Crocker Amazon Playground, then follow South Hill Boulevard and Chicago Way to finish on Winding Way. Allow about 70 minutes, and go in daylight, when the 1920s houses and the playground are easy to take in.",
+      miles: 1.5,
+      minutes: 70,
+      tip:
+        "Save your coffee or meal stop for the storefronts on Mission Street at the start. At the end, the 43 Masonic stops at Chicago Way & Naylor St, a few steps from Winding Way, and runs back to Geneva Ave & Mission St and Balboa Park BART.",
+    },
     nearby: ["the Excelsior"],
     restaurants: [
       { name: "El Farolito", address: "4817 Mission St", phone: "(415) 337-5500", url: "https://elfarolitosf.com" },
