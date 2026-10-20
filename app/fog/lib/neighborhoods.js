@@ -6258,14 +6258,68 @@ export const NEIGHBORHOODS = {
     spirit: "A sun-warmed hill jutting into the bay on the city's southeastern edge — a proud, historically Black community where a former naval shipyard now holds one of the largest artist colonies in the country.",
     reasons: ["Sunniest corner of SF", "Sweeping bay views", "Shipyard artist studios", "Major waterfront redevelopment"],
     aka: "The Point",
-    history: "The Hunters Point drydocks date to the 1860s and were billed as one of the world's great shipyards by the early 1900s. The U.S. Navy took over the site in 1940, and during World War II the Hunters Point Naval Shipyard employed roughly 18,500 people, drawing a large Black workforce in the wartime Great Migration that put down lasting roots here. After the Navy established a Naval Radiological Defense Laboratory in 1946, decades of military and industrial use left soil and groundwater badly contaminated; the yard closed in 1974 and was named a federal Superfund site in 1989. Today the old shipyard hosts the Hunters Point Shipyard Artists — one of the nation's largest artist communities, with hundreds of studios — while the surrounding land undergoes a long, contested environmental cleanup and a multi-thousand-home redevelopment.",
+    history:
+      "The point was part of the 4,446-acre rancho granted to José Cornelio Bernal in 1839, and LocalWiki says it is named for three brothers, John, Phillip and Robert Hunter, his agents when he sold the land for development in 1849; they built homes and a dairy near today's Griffith Street and Oakdale Avenue and in 1850 began selling lots for a city they called South San Francisco. Dry docks opened here in the late 1860s, and Chinese shrimp fishermen lived along the north shore, with 12 camps in 1930, until the Navy took the land in 1939.\n\nThe Navy bought the shipyard on December 29, 1939, and at the height of World War II it provided about 18,500 jobs. In 1942 the government built 5,500 temporary homes for yard workers and their families, and by 1945 about a third of the area's roughly 20,000 residents were African American. On July 16, 1945, the cruiser USS Indianapolis sailed from the yard with components of the Little Boy atomic bomb. From 1946 to 1969 the Naval Radiological Defense Laboratory worked here, and ships contaminated in U.S. atomic tests were brought in.\n\nOn September 27, 1966, police officer Alvin Johnson shot and killed Matthew “Peanut” Johnson, an unarmed Black teenager who had run from a car the officer suspected was stolen. In the uprising that followed, through October 1, Governor Edmund G. Brown declared a state of emergency and sent in the National Guard. The Navy ended shipyard operations in 1974, the EPA named the yard a Superfund site in 1989, and the base closed on April 1, 1994; a Hilltop neighborhood of homes and parks has since opened there.",
     facts: [
-      { icon: "water", title: "World-class drydocks", text: "The Hunters Point drydocks opened in the 1860s and were promoted as one of the greatest shipyards on earth by the early 1900s." },
-      { icon: "factory", title: "WWII shipyard", text: "The Navy acquired the yard in 1940; at its WWII peak the Hunters Point Naval Shipyard employed about 18,500 workers." },
-      { icon: "art", title: "Huge artist colony", text: "The Hunters Point Shipyard Artists run hundreds of working studios at 451 Galvez Ave and hold free Open Studios each spring and fall." },
-      { icon: "house", title: "Shipyard redevelopment", text: "The former Navy land is being rebuilt as The San Francisco Shipyard, a master-planned community slated for thousands of new homes plus parks and commercial space." },
-      { icon: "park", title: "New waterfront parks", text: "The India Basin Waterfront Park project is knitting together more than 60 acres of shoreline, connecting Heron's Head Park and its EcoCenter to future Northside Park." },
+      {
+        icon: "cow",
+        title: "A dairy that named a point",
+        text:
+          "San Francisco's LocalWiki says the point is named for three brothers, John, Phillip and Robert Hunter, who were José Cornelio Bernal's agents when he sold his land for development in 1849, and who built their homes and a dairy farm near this corner. In 1850, it says, they began trying to sell lots in an entirely new city on the point that they called South San Francisco, though accounts of the brothers' names and dates vary.",
+        place: "Hunter brothers' dairy",
+        where: "Oakdale Ave & Griffith St",
+        at: [-122.37932, 37.72822],
+        source: "https://localwiki.org/sf/Hunters_Point",
+      },
+      {
+        icon: "house",
+        title: "5,500 homes built for a war",
+        text:
+          "In 1942, BlackPast notes, the federal government built 5,500 temporary housing units in Hunters Point for Navy yard workers and their families, and because they were open to all of the yard's workers, the area became one of the city's most integrated. Two decades later the community's Joint Housing Committee started a renewal plan, Hunters Point Project Area A, mostly covering a residential area of those wartime units: supervisors designated the survey area on December 23, 1963, and approved the plan on January 20, 1969, aiming for low- to moderate-priced private housing.",
+        place: "Hunters Point Hill",
+        where: "Kiska Rd & Ingalls St",
+        at: [-122.37953, 37.73109],
+        source: "https://digitalsf.org/islandora/object/islandora%3A197544",
+      },
+      {
+        icon: "factory",
+        title: "The docks that went to war",
+        text:
+          "Dry docks opened on the point in the late 1860s, and the docks built here in 1916, more than 1,000 feet long, were thought to be the largest in the world. The Navy bought the yard on December 29, 1939, and at the peak of World War II it provided about 18,500 jobs. On July 16, 1945, within hours of the Trinity test, the cruiser USS Indianapolis left the yard carrying components of the Little Boy bomb, which it delivered to Tinian on July 26.",
+        place: "Hunters Point Naval Shipyard",
+        where: "Innes Ave & Donahue St",
+        at: [-122.37003, 37.72895],
+        source: "https://missionlocal.org/2025/10/sf-hunters-point-shipyard-superfund-timeline/",
+      },
+      {
+        icon: "park",
+        title: "A new hilltop on Navy land",
+        text:
+          "The Shipyard's Hilltop neighborhood is open to the public with over 500 new homes, 13 parks and 8 pieces of public art, and the city's Recreation and Park Department began taking over its parks on July 1, 2025. Hillpoint Park, across the street from Innes Court Playground and its crane-inspired play structure, is a promontory overlook with a large community lawn and reservable picnic tables. In it, Mildred Howard's Frame (2015), an enlarged 22-by-20-foot rococo bronze frame, frames Walter Hood's Refrain, a cluster of vertical steel rods downhill.",
+        place: "Hillpoint Park",
+        where: "Innes Ct & Hudson Ave",
+        at: [-122.36787, 37.72816],
+        source: "https://sfrecpark.org/1835/Hunters-Point-Shipyard-Parks",
+      },
+      {
+        icon: "art",
+        title: "Studios in a Navy yard",
+        text:
+          "After the Navy ended operations in 1974, most of the yard was leased to a ship-repair company, and artists began subleasing space from it. Today the Hunters Point Shipyard Artists, almost 300 artists in working studios, call themselves the largest artist community in the United States, and they open their studios to the public each spring and fall. For their 40th anniversary, on October 19, 2024, the yard's 450-foot gantry crane, which the SF Standard calls once the world's largest crane, was covered in video projections and searchlights set to music.",
+        place: "Hunters Point Shipyard Artists",
+        where: "Galvez Ave & Hill Ave",
+        at: [-122.36703, 37.72880],
+        source: "https://www.shipyardartists.com/about-hunters-point-shipyard-artists/",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.3 miles for visitors and would-be neighbors, from the 23 Monterey's stop at Oakdale Avenue and Griffith Street up over Hunters Point Hill and down Innes Avenue to the old Navy shipyard, ending at the last stop of the outbound 19 Polk, at Galvez and Hill avenues. Allow about an hour, and go on a spring or fall Open Studios weekend, when the Shipyard Artists open their doors.",
+      miles: 1.3,
+      minutes: 60,
+      tip:
+        "The one real climb comes first, roughly 150 feet up from Oakdale Avenue to Kiska Road near the top of the hill. The route passes no shopping street: for food and coffee, the nearest shops and restaurants line Third Street, where the T Third runs, about three-quarters of a mile west of the start.",
+    },
     nearby: ["Bayview"],
     restaurants: [
       { name: "Old Skool Cafe", address: "1429 Mendell St", phone: "(415) 822-8531", url: "https://www.oldskoolcafe.org" },
@@ -6282,14 +6336,88 @@ export const NEIGHBORHOODS = {
   "Excelsior": {
     spirit: "A sunny, working-class hilltop on the city's southern edge — single-family homes lining streets named for European nations, with Mission Street's commercial spine packed with family-run immigrant kitchens.",
     reasons: ["One of SF's most diverse districts", "Family-run eats on Mission St", "Single-family homes", "Balboa Park BART nearby"],
-    history: "The Excelsior was laid out in the late 1860s as an out-of-town subdivision: in 1869 the Excelsior Homestead Association filed a plat defining its distinctive 'around-the-world' grid, with streets named for capitals and avenues for countries (Paris, Lisbon, Madrid, Naples, London, Munich, and more). Developer plans aimed to lure working families out of the crowded inner city, and the 1906 earthquake spurred a wave of new home-buyers. Early residents were largely Irish, German, and Italian farm and dairy workers; some street names such as China and Japan were later changed to Avalon and Excelsior amid anti-Asian sentiment of the era. Through the 20th century the district drew successive immigrant communities, and today it is one of San Francisco's most ethnically diverse neighborhoods, with large Asian and Latino populations.",
+    history:
+      "The Excelsior was once part of Rancho Rincón de las Salinas y Potrero Viejo, José Cornelio Bernal's 1839 Mexican land grant. In the 1860s the valley's groundwater and access to Islais Creek drew immigrant farmers and dairymen, among them Ligurians, Tuscans, Swiss, Germans and Irish, who carted their produce downtown by wagon. On April 15, 1869, the Excelsior Homestead was filed at City Hall, and developer Emanuel Lewis and his daughter Jeannette are credited with giving it a street map like an atlas, naming avenues for countries and streets for capital cities. Three avenues first named China, Japan and India were later renamed amid anti-Asian feeling; today they are Excelsior, Avalon and Peru.\n\nTransit filled in the grid. On September 15, 1894, the first electric streetcars ran on Mission Street, and within a few years the line reached Daly's Hill, just over the county line. Farming lingered: one account counts some 1,200 Italian truck farmers still working about 8,000 acres of the city's south side in 1910. After the 1906 earthquake the Excelsior became a refuge for many displaced San Franciscans, and an early-1900s housing boom produced many of the Edwardian and Victorian houses still standing. In 1911 the city bought land here for a playground, and the new Epiphany parish dedicated its first wooden church.\n\nMission Street remains the main street, made a neighborhood commercial district in 2013. Jerry Garcia spent his first five years at 121 Amazon Avenue, and Mission Street plaques honor his childhood homes. In 2014 the Excelsior Action Group and the city opened a temporary plaza at the Persia Triangle, and in 2016 artists, students and volunteers made Kenny Alley a mosaic stairway garden.",
     facts: [
-      { icon: "road", title: "An atlas in street signs", text: "Streets are named for European capitals and avenues for countries — Paris, Madrid, Naples, London, Munich, Lisbon — a naming scheme set by the Excelsior Homestead Association in 1869." },
-      { icon: "house", title: "Out-of-town subdivision", text: "Platted in the late 1860s as a homestead tract of modest single-family cottages well beyond the built-up city; the 1906 earthquake drove a surge of buyers seeking new homes." },
-      { icon: "flag", title: "Among SF's most diverse", text: "Roughly half of residents were born abroad, with Spanish, Mandarin, and Tagalog among the most common languages spoken at home." },
-      { icon: "subway", title: "Balboa Park transit hub", text: "Balboa Park BART at 401 Geneva Ave is one of the busiest BART stations outside downtown and a terminus for three Muni Metro light-rail lines." },
-      { icon: "burrito", title: "Immigrant restaurant row", text: "Mission Street through the Excelsior is lined with family-run Salvadoran pupuserías, Filipino diners, Vietnamese bánh mì shops, Italian delis, and taquerías." },
+      {
+        icon: "tram",
+        title: "The shuttle that ended at China Avenue",
+        text:
+          "When the first electric streetcars ran on Mission Street on September 15, 1894, the line went from the Ferry Building to 29th and Noe streets, and a shuttle carried riders on down Mission to this corner, where Excelsior Avenue was then called China Avenue. It was one of three avenues, with Japan and India, renamed amid anti-Asian feeling; today they are Excelsior, Avalon and Peru. The rest of the 1869 Excelsior Homestead's atlas of names survives: avenues such as Brazil, Persia, Russia and France cross streets named for capitals such as London, Paris, Lisbon, Madrid and Vienna.",
+        place: "Excelsior Avenue",
+        where: "Mission St & Excelsior Ave",
+        at: [-122.43355, 37.72626],
+        source: "https://www.sfmta.com/blog/14-mission-yesterday-today-tomorrow",
+      },
+      {
+        icon: "park",
+        title: "The “Heart of the Excelsior”",
+        text:
+          "Where Ocean and Persia avenues meet Mission Street, this small triangle is fondly known as the “Heart of the Excelsior.” In September 2014 the city's Pavement to Parks program and the Excelsior Action Group opened a temporary plaza here, with parklets and a graphic crosswalk, and its ribbon-cutting on September 28 kicked off that year's Sunday Streets in the Excelsior. Public Works then planned permanent wider sidewalks, pedestrian lighting and a community kiosk to take its place.",
+        place: "Persia Triangle",
+        where: "Mission St & Persia Ave",
+        at: [-122.43581, 37.72318],
+        source: "https://default.sfplanning.org/Citywide/pavement2parks/pavement2parks_Transforming_Persia_Triangle.pdf",
+      },
+      {
+        icon: "shop",
+        title: "A main street to the county line",
+        text:
+          "In 2013 the city made Mission Street from Alemany Boulevard to the San Mateo County line the Excelsior Outer Mission Street Neighborhood Commercial District, a mixed-use, transit-oriented strip of ground-floor shops, restaurants and services with homes upstairs; the Excelsior's community benefit district alone covers about 17 whole or partial blocks of Mission between Silver and France avenues. The streetcar line that reached China Avenue in 1894 was extended within a few years to Daly's Hill, just over the county line, and the 14 Mission bus still runs the route.",
+        place: "Excelsior Mission Street shops",
+        where: "Mission St & Russia Ave",
+        at: [-122.43712, 37.72147],
+        source: "https://sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances13/o0261-13.pdf",
+      },
+      {
+        icon: "park",
+        title: "A playground bought in 1911",
+        text:
+          "A chronology of San Francisco's playgrounds records that in 1911 the Board of Supervisors bought land in the Excelsior for the city's Playground Commission. Photographs in the Western Neighborhoods Project's OpenSFHistory collection show Mayor Elmer Robinson at the dedication of Excelsior Playground, at Madrid Street and Russia Avenue, on October 29, 1951, an event organized by a citizens' committee. On the way here along Russia Avenue, the southwest corner of Paris Street is where the neighborhood's Catholic parish built its first church.",
+        place: "Excelsior Playground",
+        where: "579 Madrid St",
+        at: [-122.43300, 37.72065],
+        source: "https://test.opensfhistory.org/photo/wnp28.3593",
+      },
+      {
+        icon: "church",
+        title: "The church pushed up the hill",
+        text:
+          "Epiphany parish began as a mission of St. John the Evangelist, and its first church, a wood-frame building seating about 300 on the southwest corner of Russia Avenue and Paris Street, was dedicated on January 21, 1911. When it grew too small, the building was cut in two, and the halves were set on barrels and logs and pushed up the hill to a new lot filling the whole block bounded by Naples, Vienna, Amazon and Italy; the move took place in 1922. The present church on that block was completed in 1950.",
+        place: "Church of the Epiphany",
+        where: "827 Vienna St",
+        at: [-122.43440, 37.71580],
+        source: "https://20735.sites.ecatholic.com/history",
+      },
+      {
+        icon: "stairs",
+        title: "Forty-seven steps of “Waterfall”",
+        text:
+          "Between France and Italy avenues, this alley climbs 47 steps from Mission Street up to London Street. Local artists and students covered the steps in a tile mosaic called “Waterfall,” its water spilling onto the walls, and with new landscaping, lighting and a vertical cactus garden the alley held its grand opening on December 10, 2016. It is legally a city street, but Public Works has not accepted it, so volunteers from the Friends of Kenny Alley look after it.",
+        place: "Kenny Alley",
+        where: "4941 Mission St",
+        at: [-122.43839, 37.71915],
+        source: "https://www.awesomefoundation.org/en/projects/219459-dazzling-lights-over-water",
+      },
+      {
+        icon: "music",
+        title: "Where Jerry Garcia started out",
+        text:
+          "Jerry Garcia spent the first five years of his life at 121 Amazon Avenue, a short way east along this street, before he and his brother, Tiff, moved in with their maternal grandparents at 87 Harrington Street, just across Mission from where this walk began. The city chose to set his plaques on Mission Street where each of those streets meets it: the Harrington plaque went in in October 2016, and this one was unveiled in 2017, the year Garcia would have turned 75. In 2025 the city gave Harrington Street a second, commemorative name, Jerry Garcia Street, and unveiled the signs on August 1.",
+        place: "Jerry Garcia plaque",
+        where: "Mission St & Amazon Ave",
+        at: [-122.44020, 37.71720],
+        source: "https://www.sfexaminer.com/news/sf-to-install-second-jerry-garcia-commemorative-plaque/article_cd2580bb-404a-5cab-908e-73931c1a1398.html",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.6 miles for visitors and would-be neighbors: start at Mission St & Excelsior Ave (14, 14R, 49 and 52 buses), follow Mission past the Persia Triangle, turn onto Russia Avenue into the grid of country and capital street names for the playground and the Church of the Epiphany, then come back to Mission down the mosaic steps of Kenny Alley and finish at the Jerry Garcia plaque, a block from the Mission & Geneva bus stops and about half a mile from Balboa Park BART. Allow about 75 minutes, and go in daylight, when the alley's mosaic is easy to see.",
+      miles: 1.6,
+      minutes: 75,
+      tip:
+        "From the church, walk west on Italy Avenue to London Street and turn right; the top of Kenny Alley is partway along the block, and its 47 mosaic steps take you down to Mission Street. Save your meal or coffee stop for the end, when you are back among the restaurants and cafés of Mission Street.",
+    },
     restaurants: [
       { name: "Taqueria El Farolito", address: "4817 Mission St", phone: "(415) 337-5500", url: "https://elfarolitosf.com" },
       { name: "Calabria Bros Deli", address: "4763 Mission St", phone: "(415) 239-2555", url: "https://calabriabrosdeli.com" },
@@ -6333,14 +6461,78 @@ export const NEIGHBORHOODS = {
     spirit: "A quiet, working-class corner of San Francisco's far southeast, where a multicultural community gathers along the little Leland Avenue main street between the Cow Palace and the green slopes of McLaren Park.",
     reasons: ["Leland Avenue main street", "Steps from McLaren Park", "Deeply multicultural", "T-Third light rail at the door"],
     aka: "Viz Valley",
-    history: "Spanish friars and soldiers bound for the new Presidio camped in this bayside valley in 1777 on the Catholic Feast of the Visitation, giving the area its name. Through the 19th century it was a landscape of farms and dairies on the old Rancho Cañada de Guadalupe la Visitacion y Rodeo Viejo. In 1926 the Schlage Lock Company opened a factory here that made locks and anchored the local economy for more than seventy years, drawing a working-class immigrant community. Schlage closed in 1999, and the former plant is now being redeveloped as the mixed-use Baylands North community, approved in 2014 with roughly 1,670 new homes. Today Visitacion Valley is one of the city's most diverse neighborhoods, with Asian residents making up over half the population.",
+    history:
+      "When the Spanish arrived, this valley held two Yelamu settlements, Amuctac and Tubsinte, and the newcomers claimed it as pasture for their cattle. A local history gives July 2, 1777, as the date of its discovery, and tradition says friars and soldiers bound for the new Presidio were caught in fog and camped in its hills; the valley is named for the Feast of the Visitation, Mary's visit to Elizabeth in the Gospel of Luke. In 1841 Governor Juan Alvarado granted Jacob P. Leese the 6,416-acre Rancho Cañada de Guadalupe la Visitación y Rodeo Viejo, which took in parts of today's San Francisco and San Mateo counties.\n\nWindmills that pumped water to the valley's cattle farms, nurseries and vegetable gardens gave it a nickname: the Valley of the Windmills. One family history tells of Rossi relatives who came just after the Civil War and worked their farmland by hand into large vegetable gardens, and the Catholic parish's history says Peter H. Burnett, California's first American governor, built a home where the Church of the Visitacion now stands. The valley had a building boom after the 1906 earthquake and fire.\n\nIn 1926 the Schlage Lock Company dedicated its factory and office on Bayshore Boulevard; the plant ran until Schlage closed it in 1999. Joseph Eichler and architect Claude Oakland planned the 18-story twin Geneva Towers, which rose in the mid-1960s near Garrison Avenue and Schwerin Street; HUD closed them in 1995, and they were imploded on May 16, 1998. In 1995 neighbors began turning empty lots into the Visitacion Valley Greenway, and in 2022 Julia Morgan's St. James Presbyterian Church on Leland Avenue became the valley's first city landmark.",
     facts: [
-      { icon: "church", title: "Named for a feast day", text: "A 1777 expedition camped here on the Catholic Feast of the Visitation, and the valley has carried the name 'Visitacion' ever since." },
-      { icon: "factory", title: "Schlage Lock town", text: "The Schlage Lock factory opened in 1926 and made locks here for over 70 years until it closed in 1999." },
-      { icon: "house", title: "Baylands North rising", text: "The former Schlage Lock site, approved for redevelopment in 2014, is being rebuilt as a mixed-use community with around 1,670 homes." },
-      { icon: "park", title: "The Greenway", text: "The Visitacion Valley Greenway, begun in 2000, links six one-block parks and community gardens from Leland Avenue toward McLaren Park." },
-      { icon: "tram", title: "T-Third terminus", text: "The neighborhood's Sunnydale Station anchors the south end of Muni's T-Third light rail line, which since 2023 runs through to Chinatown." },
+      {
+        icon: "factory",
+        title: "The lock factory's surviving office",
+        text:
+          "Across Bayshore Boulevard, at 2201 Bayshore by Blanken Avenue, stands the original office of the Schlage Lock Company, dedicated along with the factory on June 25, 1926, at a ceremony with Mayor James Rolph. The plant closed in 1999 and all of its manufacturing buildings were demolished, but community advocates, among them the Visitacion Valley History Project, saved the office. Restored in 2021–2022, it now holds a community meeting space and the headquarters of the company redeveloping the old factory land.",
+        place: "Schlage Lock office building",
+        where: "Bayshore Blvd & Arleta Ave",
+        at: [-122.40317, 37.71213],
+        source: "https://specialcity.sfheritage.org/schlage-lock-and-8-400-tons-of-steel/",
+      },
+      {
+        icon: "shop",
+        title: "A main street since the 1900s",
+        text:
+          "Leland Avenue, the valley's main shopping street, runs about four blocks from Bayshore Boulevard to Cora Street, its storefronts filled with cafés, restaurants and small shops. Local histories recall a hotel at Leland and Bayshore in the early 1900s and the valley's first dry goods store at 7 and 9 Leland. A 2009–2010 Public Works makeover of the blocks from Bayshore to Rutland Street planted 63 trees and added 45 pedestrian lights, 15 corner bulb-outs and Street Life, a public artwork designed by Rebar for the San Francisco Arts Commission.",
+        place: "Leland Avenue shops",
+        where: "Leland Ave & Alpha St",
+        at: [-122.40577, 37.71190],
+        source: "https://sfpublicworks.org/node/34932",
+      },
+      {
+        icon: "park",
+        title: "Six parks from empty lots",
+        text:
+          "From Hans Schiller Plaza, its gateway on Leland Avenue, the Visitacion Valley Greenway climbs the hillside through formerly vacant lots as a long, narrow chain of six small parks, with a community garden, two greenhouses, a playground, a native plant garden, an agricultural lot and an herb garden. Neighbors began organizing in 1995 with a picnic on one of the empty lots, and the plaza, the first piece finished, was paid for by a $300,000 Columbia Foundation grant to the Trust for Public Land in memory of Hans J. Schiller. Since 2019 the greenway has been part of the 17-mile Crosstown Trail from Candlestick Point to Lands End.",
+        place: "Visitacion Valley Greenway",
+        where: "Campbell Ave & Rutland St",
+        at: [-122.40619, 37.71534],
+        source: "https://sanfranciscoparksalliance.org/inspiration/visitacion-valley-greenway/",
+      },
+      {
+        icon: "book",
+        title: "A library on the old hall's site",
+        text:
+          "Library service here began in 1934 with a deposit collection, making this the 18th branch established in the San Francisco Public Library system; it later moved into a leased storefront at 45 Leland Avenue. This building at the corner of Leland and Rutland opened on July 30, 2011, on the site of Bayshore Hall, where the Sunday school that grew into St. James Presbyterian Church began meeting in 1906.",
+        place: "Visitacion Valley Branch Library",
+        where: "201 Leland Ave",
+        at: [-122.40739, 37.71245],
+        source: "https://sfpl.org/locations/visitacion-valley/visitacion-valley-library-history",
+      },
+      {
+        icon: "church",
+        title: "The valley's first city landmark",
+        text:
+          "Put forward as one of three historic buildings vying to become Visitacion Valley's first designated landmark, this church became San Francisco Landmark No. 308 when supervisors approved it on December 13, 2022. Julia Morgan designed the building, finished in the early 1920s, for a congregation that began in 1906 as a Sunday school started by members of University Mound Presbyterian Church and organized on April 26, 1908, with 69 members.",
+        place: "St. James Presbyterian Church",
+        where: "240 Leland Ave",
+        at: [-122.40827, 37.71303],
+        source: "https://sfplanninggis.org/docs/landmarks_and_districts/LM308.pdf",
+      },
+      {
+        icon: "church",
+        title: "A governor's grove",
+        text:
+          "The parish history says Peter H. Burnett, California's first American governor, built a home on land that came to be known as Burnett Grove, where this Catholic church now stands. The parish dates from 1907 and its present church was dedicated in 1952; its history also says Franciscan friars arriving in 1777 said their first Mass in the valley on the Feast of the Visitation.",
+        place: "Church of the Visitacion",
+        where: "655 Sunnydale Ave",
+        at: [-122.40881, 37.70969],
+        source: "https://visitacionchurch.org/?p=150",
+      },
     ],
+    walk: {
+      intro:
+        "A 1.2-mile line from the T Third Street light-rail stop at Bayshore Blvd & Arleta Ave, along Leland Avenue's main street, up the Visitacion Valley Greenway to Campbell Ave, back down Rutland St to the library and two churches, and on to the T stop at Bayshore Blvd & Sunnydale Ave. Allow about an hour; late morning, when Leland Avenue's shops are open, is a good time to go.",
+      miles: 1.2,
+      minutes: 60,
+      tip:
+        "The greenway is the walk's only real climb, rising from Hans Schiller Plaza on Leland Ave to Campbell Ave; pick up a coffee at one of the cafés on Leland Avenue before you start up.",
+    },
     restaurants: [
       { name: "Pho Luen Fat", address: "110 Leland Ave", phone: "(415) 585-1167" },
     ],
@@ -6354,14 +6546,88 @@ export const NEIGHBORHOODS = {
   "Sunnyside": {
     spirit: "A small, sunny, low-key residential village on the south slope below Mount Davidson, where rows of early-1900s cottages line quiet streets above an unhurried Monterey Boulevard.",
     reasons: ["Quiet residential streets", "Among the city's more affordable single-family homes", "Glen Park BART close by", "Hidden Victorian conservatory"],
-    history: "Sunnyside was laid out in 1891 by the Sunnyside Land Company, whose president, Behrend Joost, had bought the farmland from Leland Stanford. Joost's real ambition was transit: in 1892 he built the Sunnyside Powerhouse on what was then Sunnyside Avenue (today's Monterey Boulevard) to power the San Francisco and San Mateo Electric Railway, the city's first electric streetcar line, which opened April 27, 1892, running from Steuart and Market out past Glen Park to the Colma cemeteries. The streetcar drew buyers to the new subdivision, and through the early 1900s the tract filled in with modest cottages and single-family homes. Around 1901, British mining engineer W.A. Merralls built the octagonal redwood Sunnyside Conservatory, which still stands amid its palms as a city landmark.",
+    history:
+      "Sunnyside was carved from Rancho San Miguel: on January 5, 1891, Leland Stanford deeded the southernmost 200 acres of his part of the rancho to James P. McCarthy. That year the Sunnyside Land Company, with Behrend Joost as president, laid out 2,250 lots on 48 blocks, which local historians call the city's largest subdivision to that date, and named streets for wealthy associates: Flood, Spreckels, Mangels and Joost himself. Joost's real goal was transit. Powered from a plant on Sunnyside Avenue, today's Monterey Boulevard, his San Francisco & San Mateo Electric Railway, which those historians call the city's first electric railway, began running on April 27, 1892, from downtown through Sunnyside to the Baden stockyards in San Mateo County.\n\nLots sold slowly for decades. Poor management cost Joost the line to his creditors, and the slopes proved fragile: in January 1895, after heavy rain and a big street-grading job, several houses on the hillside above the avenue between Acadia and Detroit streets slid downhill. The Market Street Railway, which bought the line, later extended its No. 10 car into Sunnyside; photos show 10 cars on Monterey as late as 1942, before buses took over. Sunnyside Avenue itself became Monterey Boulevard in 1920.\n\nThe 1891 plan set aside no park; the city bought steep, empty lots for Sunnyside Playground only in the 1960s. At the neighborhood's southern edge, on land that had held the city's Industrial School and, until 1935, the sheriff's House of Correction Number Three, Mayor Angelo Rossi broke ground for San Francisco Junior College, today's City College, on April 15, 1937, and Timothy Pflueger's Science Hall was finished there in 1940.",
     facts: [
-      { icon: "tram", title: "City's first electric streetcar", text: "The San Francisco and San Mateo Electric Railway, powered from the Sunnyside Powerhouse on Monterey Blvd, opened April 27, 1892." },
-      { icon: "house", title: "Planned in 1891", text: "The Sunnyside Land Company, led by Behrend Joost, subdivided the tract from former Leland Stanford farmland in 1891." },
-      { icon: "park", title: "Sunnyside Conservatory", text: "An octagonal redwood Victorian conservatory built around 1901 by engineer W.A. Merralls, now a city landmark surrounded by mature palms at 236 Monterey Blvd." },
-      { icon: "road", title: "Monterey Boulevard was 'Sunnyside Avenue'", text: "The neighborhood's main commercial street was originally named Sunnyside Avenue before becoming Monterey Boulevard." },
-      { icon: "sun", title: "Named for its sunshine", text: "The 'Sunnyside' name reflects the open, sunny south-facing slope the subdivision was marketed on." },
+      {
+        icon: "factory",
+        title: "Powerhouse for the first electric line",
+        text:
+          "Behrend Joost's San Francisco & San Mateo Electric Railway, which Sunnyside's historians call the city's first electric railway, drew its power from a plant on this block of what was then Sunnyside Avenue when it opened in April 1892. The powerhouse fronted the street from today's 127 to 151 Monterey, and a photo archive dates its service to 1892 through 1902; the houses that line the block now were built in the 1940s.",
+        place: "Sunnyside Powerhouse site",
+        where: "127-151 Monterey Blvd",
+        at: [-122.43845, 37.73145],
+        source: "https://sunnysidehistory.org/category/streetcar",
+      },
+      {
+        icon: "park",
+        title: "A conservatory saved from the wreckers",
+        text:
+          "William Augustus Merralls, a British engineer who designed mining equipment, built this two-story octagonal redwood conservatory around 1902, and in 1975 it became San Francisco Landmark No. 78. At the end of 1978 an owner who planned apartments got a demolition permit and began tearing it down, until neighbors' repeated calls to City Hall halted the work, though part of the building was already gone. The city bought it in 1980 with Open Space Fund money, and a multimillion-dollar renovation was completed in December 2009.",
+        place: "Sunnyside Conservatory",
+        where: "236 Monterey Blvd",
+        at: [-122.44073, 37.73181],
+        source: "https://en.wikipedia.org/wiki/Sunnyside_Conservatory",
+      },
+      {
+        icon: "stairs",
+        title: "Steps where a street never went",
+        text:
+          "Detroit Street was planned to run up this hill, but the slope was too steep for a street, so its route became a two-block public stairway from Hearst Avenue up across Monterey Boulevard to Joost Avenue: 186 steps by the Glen Park Association's count, 185 in a 2025 city ordinance. A 1940 photo of Monterey at Detroit already shows the top of the lower flight. On November 3, 2018, the Sunnyside Neighborhood Association and neighbors launched a multi-year project to beautify the long-neglected stairway.",
+        place: "Detroit Street steps",
+        where: "Monterey Blvd & Detroit St",
+        at: [-122.44429, 37.73157],
+        source: "https://www.glenparkassociation.org/pandemic-or-no-the-detroit-street-steps-are-getting-the-love-they-deserve",
+      },
+      {
+        icon: "park",
+        title: "The park the plan forgot",
+        text:
+          "Sunnyside's 1891 plan set aside no park space at all. A Sunnyside Park up the hill, at about where Molimo meets Teresita Boulevard, existed mostly on paper: deeded to the city when the Sunnyside Addition, today's Miraloma Park, was laid out in 1892, it was never used for recreation. Only in the 1960s did the city buy up lots that had been too steep to build on and, folding in parts of unbuilt Edna Street and Melrose Avenue, create this playground.",
+        place: "Sunnyside Playground",
+        where: "Foerster St & Melrose Ave",
+        at: [-122.44820, 37.73370],
+        source: "https://sunnysidehistory.org/2016/03/10/a-park-for-sunnyside",
+      },
+      {
+        icon: "shop",
+        title: "Main street of a streetcar suburb",
+        text:
+          "Monterey Boulevard, called Sunnyside Avenue until 1920, is the neighborhood's main street, with storefronts along the 400 to 700 blocks from Edna Street west to Ridgewood Avenue. City assessor's photos from the 1950s to the 1970s show a barber shop, a delicatessen and other neighborhood businesses here; a gas station on this corner came down in 1966, and nearby a grocery chain bought up a strip of shops in the 1960s and razed it in the early 1970s. Today the blocks hold restaurants, cafés, bars and everyday services.",
+        place: "Monterey Boulevard shops",
+        where: "Monterey Blvd & Foerster St",
+        at: [-122.44882, 37.73160],
+        source: "https://sunnysidehistory.org/2020/10/29/monterey-boulevard-shops-some-midcentury-photos",
+      },
+      {
+        icon: "road",
+        title: "Streets named for the rich",
+        text:
+          "Sunnyside's streets were named for wealthy associates of the venture, including Flood, Spreckels and Mangels, with Joost Avenue for the company's president. Not every name lasted: Moulton Avenue became Hearst Avenue, for George Hearst, in 1895; Spreckels Avenue, the next street south of here, became Staples, for another rich family; and Weiland Avenue became Judson.",
+        place: "Flood Avenue",
+        where: "Gennessee St & Flood Ave",
+        at: [-122.45120, 37.72995],
+        source: "https://sunnysidehistory.org/2018/06/14/sunnyside-street-name-changes-new-and-old",
+      },
+      {
+        icon: "book",
+        title: "Pflueger's hall on Pneumonia Hill",
+        text:
+          "Timothy Pflueger designed Science Hall, finished in 1940, to be longer than City Hall; the college paper puts it at 489 feet, and inside are Frederick Olmsted's twin murals, Theory and Science. It sits atop the Ocean Campus's highest plateau, reached from Phelan Avenue, today's Frida Kahlo Way, by 87 stairs and 11 landings. Winds of up to 40 miles an hour, strong enough to make its heavy entrance doors hard to open, earned the approach the nickname Pneumonia Hill.",
+        place: "Science Hall",
+        where: "50 Frida Kahlo Way",
+        at: [-122.45150, 37.72571],
+        source: "https://www.theguardsman.com/2_science-building_pratt/",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.6 miles for visitors and would-be neighbors: start at the Monterey Boulevard and Acadia Street stop of the 23 and 36 buses, a short walk west of Glen Park BART, and head west past the conservatory, up the Detroit Street steps and around by the playground to the Monterey Boulevard shops, then down Gennessee Street to City College. Allow about 75 minutes, and go on a clear afternoon.",
+      miles: 1.6,
+      minutes: 75,
+      tip:
+        "Bring a windbreaker for the end: the climb to Science Hall was nicknamed Pneumonia Hill for its wind. The Detroit Street steps are the walk's big climb. From City College, the 43 stops on Frida Kahlo Way and the K Ingleside on Ocean Avenue at the campus's south edge, and Balboa Park BART is about half a mile southeast.",
+    },
     restaurants: [
       { name: "Big Joe's", address: "717 Monterey Blvd", phone: "(415) 333-2878" },
       { name: "Won Kok Restaurant", address: "700 Monterey Blvd", phone: "(415) 587-1826", url: "https://won-kok.com" },
