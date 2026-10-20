@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T17:46:31.439Z",
+  "generatedAt": "2026-10-20T21:16:26.800Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -1566,14 +1566,14 @@
       }
     },
     "Presidio Terrace": {
-      "n": 11,
+      "n": 12,
       "sfhMedian": 3750000,
       "sfhN": 5,
       "condoMedian": 1528560,
       "condoN": 4,
-      "otherMedian": 3575000,
-      "otherN": 2,
-      "ppsf": 1286.5278080943326,
+      "otherMedian": 5550000,
+      "otherN": 3,
+      "ppsf": 1317.1063829787233,
       "dom": 10,
       "fogHours": 9,
       "zone": "Fog",
@@ -1718,15 +1718,15 @@
       }
     },
     "South of Market": {
-      "n": 233,
+      "n": 232,
       "sfhMedian": 1653325,
       "sfhN": 1,
       "condoMedian": 899000,
       "condoN": 219,
-      "otherMedian": 2000000,
-      "otherN": 13,
-      "ppsf": 892.1933085501859,
-      "dom": 36,
+      "otherMedian": 1940000,
+      "otherN": 12,
+      "ppsf": 890.4724268338074,
+      "dom": 36.5,
       "fogHours": 7,
       "zone": "Sun",
       "zoneMix": {

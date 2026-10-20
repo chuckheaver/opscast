@@ -170,6 +170,96 @@
         "keep": "426145865",
         "address": "322 Duncan St",
         "reason": "The same sale in both feeds; Residential Income, 3 units (owner, Oct 20 2026)."
+      },
+      {
+        "id": "425082828",
+        "keep": "425083058",
+        "address": "118-120 15th Ave",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "82028824",
+        "keep": "425042364",
+        "address": "157-167 Vicksburg St",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "425013870",
+        "keep": "425029101",
+        "address": "843-845 Dolores St",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "425036552",
+        "keep": "425036556",
+        "address": "2481 Folsom St",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "425017730",
+        "keep": "425018093",
+        "address": "431-433 Broderick St",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "425026584",
+        "keep": "425026705",
+        "address": "1612-1614 Anza St",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "41085454",
+        "keep": "41085455",
+        "address": "44 Cortland Ave",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "41086663",
+        "keep": "41085455",
+        "address": "44 Cortland Ave",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "425014037",
+        "keep": "425028905",
+        "address": "1347-1349 Kearny St",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "41104807",
+        "keep": "41104808",
+        "address": "2033-2035 Clement St",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "425086883",
+        "keep": "425086913",
+        "address": "12 28th St",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "41096081",
+        "keep": "41093618",
+        "address": "1554-1556 Powell St",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "425045113",
+        "keep": "82008970",
+        "address": "19-21 Castillo St",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "82010651",
+        "keep": "82012170",
+        "address": "324 Holloway Ave",
+        "reason": "The same 2025 sale in both MLS feeds (or twice in one): counted once (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "425040331",
+        "keep": "425040528",
+        "address": "375-377 Hearst Ave",
+        "reason": "The same 2025 sale in both MLS feeds: counted once, as the Duplex (2 units on the parcel by the city's land use) (owner's rule, Oct 20 2026)."
       }
     ]
   },
@@ -376,6 +466,248 @@
         "address": "150 Lombard #205 St, San Francisco, CA 94111"
       },
       "reason": "The unit was typed before 'St' (owner, Oct 20 2026)."
+    },
+    {
+      "id": "425036556",
+      "address": "2481 Folsom St",
+      "set": {
+        "propType": "Triplex"
+      },
+      "from": {
+        "propType": "Duplex"
+      },
+      "reason": "Typed by the city's land use: 3 units on the parcel (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425026705",
+      "address": "1612-1614 Anza St",
+      "set": {
+        "propType": "Fourplex"
+      },
+      "from": {
+        "propType": "Duplex"
+      },
+      "reason": "Typed by the city's land use: 4 units on the parcel (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "424073976",
+      "address": "254-256 8th Ave",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "424074344",
+      "address": "463-465 28th Ave",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "2 Houses on Lot"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "424078669",
+      "address": "2840-2842 Anza St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "2 Houses on Lot"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425014722",
+      "address": "138-140 Lower Ter",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Halfplex"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "424077747",
+      "address": "3946-3948 19th St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425017722",
+      "address": "2278-2278A 42nd Ave",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425027962",
+      "address": "3975-3977 Cesar Chavez St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425021662",
+      "address": "2534-2536 Pacheco Ave",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425049882",
+      "address": "2675-2677 Sutter St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "2 Houses on Lot"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425042163",
+      "address": "1579-1579A 46th Ave",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425052342",
+      "address": "2448-2450 Greenwich St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "2 Houses on Lot"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425052607",
+      "address": "2055-2055A 42nd Ave",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425062578",
+      "address": "75-77 Peralta Ave",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425075545",
+      "address": "687-689 Kansas St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425074582",
+      "address": "31-31A Coleridge St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425088204",
+      "address": "3137-3139 Steiner St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "2 Houses on Lot"
+      },
+      "reason": "Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "424103909",
+      "address": "2443-2445 47th Ave",
+      "set": {
+        "propType": "Triplex"
+      },
+      "from": {
+        "propType": "Single Family Residence"
+      },
+      "reason": "Two addresses, 3 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425010126",
+      "address": "241-245 Collins St",
+      "set": {
+        "propType": "Triplex"
+      },
+      "from": {
+        "propType": "2 Houses on Lot"
+      },
+      "reason": "Two addresses, 3 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425089267",
+      "address": "3630-3632 Market St",
+      "set": {
+        "propType": "Triplex"
+      },
+      "from": {
+        "propType": "2 Houses on Lot"
+      },
+      "reason": "Two addresses, 3 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
+    },
+    {
+      "id": "425042600",
+      "address": "2279-2281a 15th St",
+      "set": {
+        "propType": "Fourplex"
+      },
+      "from": {
+        "propType": "2 Houses on Lot"
+      },
+      "reason": "Two addresses, 4 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
     }
   ],
   "confirmed": [
