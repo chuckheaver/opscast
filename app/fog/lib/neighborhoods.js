@@ -7466,13 +7466,68 @@ export const NEIGHBORHOODS = {
   "Forest Knolls": {
     spirit: "A quiet, woodsy 1960s hillside enclave of mid-century modern homes wrapped in the eucalyptus of Mount Sutro's cloud-like fog.",
     reasons: ["Tucked into the Mount Sutro forest", "Winding, low-traffic streets", "Mid-century modern architecture", "Steps from UCSF and Cole Valley"],
-    history: "Forest Knolls sits on the western slopes of Mount Sutro and was built out between roughly 1959 and 1963 as a subdivision of single-family homes, many in the mid-century modern style with the living areas upstairs over a ground-floor garage. The hillside above it is the Mount Sutro Open Space Reserve, a forest that traces back to Adolph Sutro, who bought hundreds of acres west of Twin Peaks in 1880. Beginning around San Francisco's first Arbor Day in 1886, Sutro planted the slopes with blue gum eucalyptus, Monterey pine and Monterey cypress, creating the woods that still shade the neighborhood. The reserve is now owned and managed by UC San Francisco, whose Parnassus campus sits just over the hill.",
+    history:
+      "Forest Knolls climbs the southwest slope of Mount Sutro, on part of the old San Miguel Ranch that Adolph Sutro bought. In 1886 Sutro marked San Francisco's first Arbor Day by planting thousands of trees on his land, mostly blue gum eucalyptus along with Monterey pine and cypress, and the forest that grew from them still surrounds the neighborhood's upper streets. At the foot of the slope, where a natural spring fed a deep lagoon, the Spring Valley Water Works drained and lined the lake in the 1860s to make Laguna Honda Reservoir.\n\nSutro's forest did not stay a park. In 1909 his estate announced a deal with the Consolidated Eucalyptus Company to log and process trees across 1,538 acres, and the hill ran as a commercial lumber operation until 1934, when logging stopped after a fire. A January 1954 aerial photograph shows Forest Knolls being cleared and graded while Midtown Terrace went up next door, and the Gellert brothers' Standard Building Company built the houses in the late 1950s and around 1960, along winding drives linked by four public stairways.\n\nIn 1961 the new tract became a civil rights flashpoint. Its developers refused to show homes to Black buyers, and Willie Brown, a young lawyer active in the NAACP, staged a sit-in at a model home with his family. The protest went on for days, white supporters joined the picket line, and Mayor George Christopher urged the developer to show Brown a home; Brown declined to be made an exception. He went on to become the longest-serving Speaker of the California Assembly and San Francisco's first Black mayor.",
     facts: [
-      { icon: "park", title: "Mount Sutro forest", text: "The neighborhood wraps around the Mount Sutro Open Space Reserve, a roughly 61-acre eucalyptus forest crisscrossed with trails." },
-      { icon: "park", title: "Sutro's trees", text: "Adolph Sutro planted the hillside with blue gum eucalyptus, Monterey pine and Monterey cypress starting around 1886." },
-      { icon: "house", title: "Mid-century modern", text: "Most homes were built between about 1959 and 1963, many with sleek mid-century facades and living space stacked over a garage." },
-      { icon: "sun", title: "Foggy and green", text: "Fog drifting through the dense canopy gives the slopes a cloud-forest feel even in summer." },
+      {
+        icon: "water",
+        title: "A deep lagoon turned reservoir",
+        text:
+          "Laguna Honda means deep lagoon: the city's history of Laguna Honda Hospital describes a natural spring that fed one on the sloping land behind Twin Peaks. In 1865 the Spring Valley Water Works built a 13-mile redwood pipeline to bring drinking water here from Pilarcitos Lake, and a May 1906 report found that line wrecked beyond repair by the earthquake, which also cracked the empty reservoir's bottom and sides. A June 1928 photograph shows the water under netting meant to keep sea gulls off; the San Francisco Public Utilities Commission runs the reservoir today.",
+        place: "Laguna Honda Reservoir",
+        where: "Laguna Honda Blvd & Clarendon Ave",
+        at: [-122.46222, 37.75250],
+        source: "https://en.wikipedia.org/wiki/Laguna_Honda_Reservoir",
+      },
+      {
+        icon: "flag",
+        title: "The sit-in of 1961",
+        text:
+          "In May 1961 Willie Brown and his wife Blanche were refused a look at a model home in the Standard Building Company's Forest Knolls development, because the developers would not show homes to Black buyers. Brown came back with his family, friends and reporters, sat down in the model's garage and stayed the day; he told KPIX he was not interested in buying a home in that roughly $27,000 price range but would keep protesting. KPIX filmed the family outside the model home again on June 30, 1961.",
+        place: "Forest Knolls Drive",
+        where: "Oak Park Dr & Forest Knolls Dr",
+        at: [-122.45541, 37.75530],
+        source: "https://library.sfsu.edu/bata-db/kpix-11075-african-american-sit-forest-knolls",
+      },
+      {
+        icon: "house",
+        title: "Cut from Sutro's forest",
+        text:
+          "Forest Knolls was built on part of the San Miguel Ranch that Adolph Sutro had bought, on ground still wooded in the early 1950s. A January 1954 aerial photograph in the Western Neighborhoods Project's OpenSFHistory collection is captioned with Forest Knolls being cleared and graded while Midtown Terrace was under construction next door, and another caption there records the clear-cutting of trees beginning for the new tract. Here near the top of Forest Knolls Drive, the eucalyptus of Mount Sutro still rises above the houses.",
+        place: "Christopher Drive",
+        where: "Christopher Dr & Forest Knolls Dr",
+        at: [-122.45510, 37.75670],
+        source: "https://test.opensfhistory.org/neighborhood/forest-knolls?page=3",
+      },
+      {
+        icon: "park",
+        title: "At the forest's edge",
+        text:
+          "Crestmont Drive runs along the edge of the Mount Sutro Open Space Reserve, the forest Adolph Sutro planted. UCSF set aside 58 acres of it as permanent open space in 1976 and later enlarged the reserve to 61, while the city's Recreation and Park Department manages another 20 acres on the east side. The Sutro Stewards, founded in 2006, count more than 5.5 miles of multi-use trail in the woods, built and cared for mostly by volunteers.",
+        place: "Crestmont Drive",
+        where: "Crestmont Dr & Oakhurst Ln",
+        at: [-122.46005, 37.75724],
+        source: "https://www.sutrostewards.org/mount-sutro",
+      },
+      {
+        icon: "stairs",
+        title: "The city's longest unbroken stairway",
+        text:
+          "From Crestmont Drive, Oakhurst Lane drops 355 steps to Warren Drive. San Francisco Public Works, as KQED reports, ranks it the city's longest continuous stairway: it has fewer steps than the Filbert or Greenwich steps, but no street interrupts it, and it falls an estimated 290 feet. A stairway guide counts three more public stairways in Forest Knolls: Glenhaven Lane with 167 steps, Ashwood Lane with 92 and Blairwood Lane with 337.",
+        place: "Oakhurst Lane",
+        where: "Warren Dr & Oakhurst Ln",
+        at: [-122.46130, 37.75688],
+        source: "https://www.kqed.org/news/12056338/stairways-crisscross-the-hills-of-san-francisco-heres-why-people-love-them",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.5 miles, from the 36, 43 and 44 stop at Laguna Honda Boulevard and Clarendon Avenue, past Laguna Honda Reservoir, up Clarendon Avenue and Forest Knolls Drive to the forest edge on Christopher and Crestmont drives, then down Oakhurst Lane's 355 steps to Warren Drive and the 36, 43 and 44 stop at 7th Avenue and Lawton Street. Allow about 80 minutes; a clear morning brings out the views, and a foggy summer day shows the forest at its moodiest.",
+      miles: 1.5,
+      minutes: 80,
+      tip:
+        "The route takes Oakhurst Lane downhill on purpose: the 355 steps are steep and uninterrupted, so go slowly and save the climb for another day. Forest Knolls has no shops of its own; the nearest cafés, restaurants and shops line Irving Street and 9th Avenue in the Inner Sunset, and the half-acre Garden for the Environment, started on vacant SFPUC land during the 1990 drought, is at 7th Avenue and Lawton Street, where the walk ends.",
+    },
     nearby: ["the Inner Sunset", "Cole Valley"],
     restaurants: [
       { name: "Marnee Thai", address: "1243 9th Ave", phone: "(415) 731-9999", url: "https://www.marneethaisf.com" },
@@ -7490,14 +7545,98 @@ export const NEIGHBORHOODS = {
   "Westwood Park": {
     spirit: "A serene 1916 residence park of craftsman bungalows curling along oval streets just south of City College.",
     reasons: ["Historic 1916 residence-park planning", "Distinctive curving oval streets", "Quiet single-family bungalow blocks", "Transit-rich edge on Ocean Avenue"],
-    history: "Westwood Park was developed in 1916 by the prominent San Francisco real estate firm Baldwin & Howell on roughly ninety acres of former Sutro land near the old Ingleside Racetrack area, marketed as a 'residence park' of moderately priced homes. The firm laid out a signature plan of curving, concentric oval streets, bisected by Miramar Avenue, with nearly every street avoiding a straight line. More than 650 craftsman- and Mediterranean-style bungalows were built, the majority in the 1920s, many designed by architects Charles F. Strothoff and Ida F. McCain. Residents formed the Westwood Park Association on March 22, 1917, and the neighborhood remains governed by single-family deed restrictions. Architect Louis Christian Mullgardt designed the brick entrance gateways and pillars, now City Landmark No. 314.",
+    history:
+      "Westwood Park began with a land deal. In 1911 Archibald S. Baldwin of Baldwin & Howell, who had surveyed Adolph Sutro's properties for his heirs, assembled investors to buy 724 acres of Sutro land on Mount Davidson's west side, keeping 93 acres north of Ocean Avenue for a park of his own. Residence parks usually courted doctors and lawyers; Westwood Park, launched in 1916, courted their clerks and accountants. A Baldwin & Howell brochure offered “Attractive Bungalows of Moderate Cost for Westwood Park, a restricted residence park on the sunny southern slope of Sutro Forest.” The Twin Peaks Tunnel opened in February 1918, and on February 21, 1919, the K Ingleside reached Ocean and Miramar, the park's front door.\n\nThe engineer John M. Punnett laid the streets out around two large ovals, with “not a single straight street” besides Miramar Avenue's esplanade and a few short ones. Louis Christian Mullgardt, architect of the 1915 exposition's Court of the Ages, designed the entrance gates, pillars and 128 lampposts. Charles F. Strothoff designed nearly 500 of the roughly 650 bungalows, the Nelson Brothers built about 350 of them, and Ida McCain designed 101 between 1917 and 1923. Residents incorporated the Westwood Park Association on March 22, 1917, and in February 2024 the gates and pillars became city Landmark No. 314.\n\nOn the park's eastern edge lies the 42-acre lot Sutro sold to the Spring Valley Water Company in 1894 for a reservoir that never held water. The Navy housed WAVES there from 1945, basins dug in the late 1950s were never finished, and City College parked on it for decades. Work on about 1,100 homes began in November 2025.",
     facts: [
-      { icon: "house", title: "650+ bungalows", text: "More than 650 craftsman and Mediterranean bungalows, most built in the 1920s." },
-      { icon: "road", title: "Oval street plan", text: "Curving, concentric oval streets bisected by Miramar Avenue, with almost no straight street." },
-      { icon: "star", title: "City Landmark No. 314", text: "The 1916 Mullgardt-designed gateway pillars were designated a San Francisco landmark in 2024." },
-      { icon: "flag", title: "Born 1916", text: "Opened by Baldwin & Howell in 1916 as a planned 'residence park' near the old Ingleside Racetrack land." },
-      { icon: "house", title: "Westwood Park Association", text: "Residents organized the Westwood Park Association on March 22, 1917, still active today." },
+      {
+        icon: "park",
+        title: "A plaza by the bus loop",
+        text:
+          "Unity Plaza grew out of the city's Balboa Park Station Area Plan and fills the space between the old Phelan bus loop, now the City College Terminal, and the housing at 1100 Ocean Avenue. It has benches, artistic paving, a domed play structure and photographs on the history of the area, and the steps of its walkway toward City College carry tiled pictures by local artist Kelly Ording, made with the San Francisco Arts Commission.",
+        place: "Unity Plaza",
+        where: "Ocean Ave & Frida Kahlo Way",
+        at: [-122.45290, 37.72352],
+        source: "https://www.sfmta.com/projects/unity-plaza",
+      },
+      {
+        icon: "water",
+        title: "The reservoir that never held water",
+        text:
+          "Just north of this corner lies the 42-acre lot Adolph Sutro sold to the Spring Valley Water Company in 1894 for a reservoir it never built; for decades it was leased out, for a dog-racing track, an airfield and farm plots. In July 1945 the Navy opened a compound there for the WAVES, the Women's Reserve, and after the war City College used its buildings as a West Campus. Basins dug and paved in the late 1950s were never filled, the site became the college's parking lot, and in November 2025 work began on about 1,100 homes, roughly half of them affordable, with Lee Avenue to be extended north from here into the site.",
+        place: "Balboa Reservoir",
+        where: "Ocean Ave & Lee Ave",
+        at: [-122.45420, 37.72372],
+        source: "https://sunnysidehistory.org/2018/02/03/waves-west-campus-and-waterless-basins-the-history-of-the-balboa-reservoir-1945-1983/amp/",
+      },
+      {
+        icon: "book",
+        title: "A library with an egg-shaped room",
+        text:
+          "Fougeron Architecture's design for this branch won a national competition the San Francisco Public Library held in 2002, and the one-story building of just over 6,000 square feet opened on the site of the old Sunset Garage on September 12, 2009. Its most prominent feature is the egg-shaped children's reading room at the front corner, with a large bench-seat window that puts its readers on display. For the eight years before, the branch had made do in a former bank building at Ocean and Faxon.",
+        place: "Ingleside Branch Library",
+        where: "1298 Ocean Ave",
+        at: [-122.45579, 37.72409],
+        source: "https://sfpl.org/locations/ingleside/ingleside-library-history",
+      },
+      {
+        icon: "shop",
+        title: "A main street built for streetcars",
+        text:
+          "San Francisco's Planning Code says Ocean Avenue developed as a streetcar-oriented commercial district in the 1920s, and the city zones it today as the Ocean Avenue Neighborhood Commercial Transit District. Along this north side, from Frida Kahlo Way west to Miramar Avenue, storefronts with restaurants, cafés and shops face the K Ingleside's tracks in the middle of the avenue.",
+        place: "Ocean Avenue shops by Miramar",
+        where: "Ocean Ave & Plymouth Ave",
+        at: [-122.45627, 37.72406],
+        source: "https://www.sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances15/o0209-15.pdf",
+      },
+      {
+        icon: "tram",
+        title: "The end of the line, briefly",
+        text:
+          "The pillars at this corner, designed by Louis Christian Mullgardt for Baldwin & Howell, are part of city Landmark No. 314, and Public Works has since put landmark plaques on two of the park's pillars. The K Ingleside was extended to Ocean and Miramar on February 21, 1919, and this corner was the end of the line until May 18, 1919, when the tracks went on east along Ocean Avenue and south on Brighton Avenue to Grafton Avenue.",
+        place: "Miramar Avenue pillars",
+        where: "Ocean Ave & Miramar Ave",
+        at: [-122.45819, 37.72433],
+        source: "https://en.wikipedia.org/wiki/Ocean_and_Miramar_station",
+      },
+      {
+        icon: "road",
+        title: "Ovals that stand out on a map",
+        text:
+          "The engineer John M. Punnett planned Westwood Park with “not a single straight street” apart from Miramar Avenue's esplanade and a few short streets near the center, and the two large oval streets at its heart make it easy to pick out on a map or aerial photo. Westwood Drive leaves Miramar here and curves west and then north. Charles F. Strothoff designed nearly 500 of the park's 650 houses, and the Nelson Brothers built about 350 of them, most between 1918 and 1923.",
+        place: "Westwood Drive",
+        where: "Miramar Ave & Westwood Dr",
+        at: [-122.45822, 37.72582],
+        source: "https://westwoodparksf.org/?p=109",
+      },
+      {
+        icon: "house",
+        title: "Ida McCain's bungalows",
+        text:
+          "Born in Fort Collins, Colorado, in 1884, Ida McCain is said to have been the first woman to take an architecture course at Colorado State Agricultural College, and after drafting work in Los Angeles she came to San Francisco, where Baldwin & Howell hired her and ran ads for Westwood Park with her photograph. Between 1917 and 1923 she designed 101 of the park's roughly 650 bungalows. She is credited with this house, 701 Miramar farther up the avenue and 141 Westwood Drive; all are private homes, so admire them from the sidewalk.",
+        place: "Ida McCain houses",
+        where: "600 Miramar Ave",
+        at: [-122.45788, 37.72752],
+        source: "https://en.wikipedia.org/wiki/Ida_F._McCain",
+      },
+      {
+        icon: "star",
+        title: "Gates by the Court of the Ages' architect",
+        text:
+          "Mullgardt, who designed the Court of the Ages for the 1915 Panama-Pacific International Exposition and the M. H. de Young Memorial Museum in Golden Gate Park, drew Westwood Park's entrance gates, pillars and, according to the Board of Supervisors, 128 lampposts. The supervisors voted 10-1 to make these gates and the park's pillars a single historic landmark, and in February 2024 they became city Landmark No. 314.",
+        place: "Westwood Park Entrance Gates",
+        where: "Miramar Ave & Monterey Blvd",
+        at: [-122.45820, 37.73075],
+        source: "https://inglesidelight.com/westwood-park-entrance-gateways-and-pillars",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about three-quarters of a mile: start at Unity Plaza beside the City College bus terminal at Ocean Avenue and Frida Kahlo Way (the 8, 43 and 49 buses use the terminal, and the K Ingleside and the 29 stop on Ocean at Lee Avenue), head west past the Ocean Avenue shops to Miramar Avenue, then follow Miramar north through the bungalows to the gates at Monterey Boulevard. Allow about 35 minutes; daylight is best for the house fronts and the landmark plaques.",
+      miles: 0.8,
+      minutes: 35,
+      tip:
+        "Ocean Avenue is the only place on the route for coffee or a snack, so stop there before turning up Miramar. At the end, the 23 and 43 buses stop on Monterey Boulevard at Plymouth Avenue, a few steps east of the gates.",
+    },
     nearby: ["the Ocean Avenue strip"],
     restaurants: [
       { name: "Beep's Burgers", address: "1051 Ocean Ave", phone: "(415) 584-2650", url: "https://www.beepsburgers.com" },
@@ -7513,14 +7652,68 @@ export const NEIGHBORHOODS = {
   "Westwood Highlands": {
     spirit: "A hushed, hilly tract of period-revival homes curving along the southern slopes of Mount Davidson, the city's highest peak.",
     reasons: ["Quiet single-family streets", "Steps from Mount Davidson Park", "Minutes to West Portal and Ocean Ave", "Curving hillside street plan"],
-    history: "Westwood Highlands was laid out in the 1920s as one of San Francisco's early 'residence parks' on the southern slope of Mount Davidson, the city's highest natural point. The 283 custom-built homes of the original tract were constructed from 1924 to 1929 under the realtors Baldwin and Howell. Rather than follow the city's grid, the developers used curvilinear streets that fit the steep terrain, with detached single-family houses, rear garages, and utility poles set behind the homes. Each house was given a different architectural design from its neighbor, ranging from English cottages to Spanish-influenced stuccoed homes. It was among the first residential communities in the United States to adopt a shared set of covenants and restrictions.",
+    history:
+      "Westwood Highlands climbs the southern slope of Mount Davidson on land that was once part of Rancho San Miguel, the 4,443-acre grant Mexican Governor Pío Pico made to José de Jesús Noé in 1845, and later part of Adolph Sutro's vast holdings west of Twin Peaks. In 1910 Archibald S. Baldwin of the realty firm Baldwin & Howell surveyed Sutro's properties for his heirs, then pulled together the investors of the Residential Development Company, which bought the land around the mountain. The company built Westwood Park first, south of Sunnyside Avenue, today's Monterey Boulevard, and the Twin Peaks Tunnel, opened on February 3, 1918, put these slopes within a streetcar ride of downtown.\n\nThe company launched Westwood Highlands in 1924, with Baldwin & Howell as its realtors, builder Hans Nelson and architect Charles Strothoff. By local historians' count, all 283 custom-built houses of the original tract went up by 1929, each with a different design from its neighbor, with detached garages and utility poles set at the rear of the lots. A photograph from January 1926 shows a new Tudor-style house on Plymouth Avenue, more construction behind it and eucalyptus trees in view.\n\nOwners agreed to a common set of controls and restrictions on the design and layout of their houses, making it one of the early planned residential communities of its kind, and in 1932 the company handed its powers to the newly incorporated Westwood Highlands Association. Transit came early: by 1927 the Park bus line turned at Monterey and Plymouth, and Muni's 43 follows Plymouth and Yerba Buena today. Mangels and Joost avenues run in from Sunnyside, carrying names from its 1891 tract.",
     facts: [
-      { icon: "tower", title: "Below the city's high point", text: "The neighborhood climbs the southern slope of Mount Davidson, at 928 feet the highest natural point in San Francisco, crowned by a 103-foot concrete cross." },
-      { icon: "park", title: "Mount Davidson Park", text: "Roughly 40 acres of wooded open space and trails sit at the top of the hill, just northeast of the neighborhood." },
-      { icon: "house", title: "283 custom homes", text: "The original tract was built out from 1924 to 1929, each home given a different architectural design from its neighbor." },
-      { icon: "road", title: "Curving by design", text: "Streets were laid out as curvilinear routes to fit the steep terrain, a deliberate break from San Francisco's grid." },
-      { icon: "star", title: "Active neighborhood association", text: "The Westwood Highlands Association represents homeowners and is a member of the West of Twin Peaks Central Council." },
+      {
+        icon: "road",
+        title: "Where the Park bus turned",
+        text:
+          "The Mt. Davidson Conservancy's history of Westwood Highlands shows a 1927 photograph of early transportation to the area taken at this intersection, along with the route of the Park bus line, Route No. 1: from 10th Avenue and California Street out Portola Drive, then down Yerba Buena and Plymouth avenues to this corner and along Monterey Boulevard to Ridgewood, Hearst and Edna. Muni's 43 still turns here, climbing Plymouth and Yerba Buena on its way north.",
+        place: "Park bus corner",
+        where: "Monterey Blvd & Plymouth Ave",
+        at: [-122.45743, 37.73112],
+        source: "https://mtdavidson.org/westwood_highlands",
+      },
+      {
+        icon: "money",
+        title: "Streets named for investors",
+        text:
+          "Mangels Avenue, which meets Plymouth here, and Joost Avenue, farther east, both run into Westwood Highlands from Sunnyside, where Behrend Joost formed the Sunnyside Land Company in 1891 with himself as president. Its streets were named for or by its first investors, and Joost, credited with naming them, gave them the names of backers, among them Mangels, Spreckels and himself. Claus Mangels, like Joost and Claus Spreckels a native of Hanover, Germany, was Spreckels's brother-in-law.",
+        place: "Mangels Avenue",
+        where: "Plymouth Ave & Mangels Ave",
+        at: [-122.45771, 37.73216],
+        source: "https://sunnysidehistory.org/street-names",
+      },
+      {
+        icon: "house",
+        title: "A new Tudor in 1926",
+        text:
+          "A photograph dated January 30, 1926, in the Western Neighborhoods Project's OpenSFHistory collection shows the newly built house at 1661 Plymouth Avenue, on the short stretch of Plymouth that climbs to this corner from Monterey Boulevard, with Tudor-style features, more construction under way behind it and eucalyptus trees nearby. The houses along here are private homes, so admire them from the sidewalk.",
+        place: "Plymouth Avenue",
+        where: "Plymouth Ave & Yerba Buena Ave",
+        at: [-122.45851, 37.73261],
+        source: "https://test.opensfhistory.org/photo/wnp27.5592",
+      },
+      {
+        icon: "flag",
+        title: "No two houses alike",
+        text:
+          "According to the Mt. Davidson Conservancy, all 283 custom-built houses of the original Westwood Highlands tract went up between 1924 and 1929, each with a different architectural design from its neighbor, with detached garages and utility poles set at the rear of the lots. Here Hazelwood Avenue bends: from Yerba Buena Avenue it runs east along the slope, then turns south and down to Monterey Boulevard. By the same history's count, eight iron signs identify the neighborhood's boundaries.",
+        place: "Hazelwood Avenue bend",
+        where: "345 Hazelwood Ave",
+        at: [-122.45617, 37.73345],
+        source: "https://mtdavidson.org/westwood_highlands",
+      },
+      {
+        icon: "star",
+        title: "The last original streetlight",
+        text:
+          "Up Valdez Avenue from this corner, the last of the neighborhood's original streetlights stands at No. 345, according to the Mt. Davidson Conservancy's history of Westwood Highlands. Across the boulevard lies Westwood Park, the earlier residence park the Residential Development Company built on the same slope, and the 23 and 43 buses stop on both sides of Monterey here.",
+        place: "Valdez Avenue",
+        where: "Monterey Blvd & Valdez Ave",
+        at: [-122.45574, 37.73136],
+        source: "https://mtdavidson.org/westwood_highlands",
+      },
     ],
+    walk: {
+      intro:
+        "A loop of about 0.7 mile: start at the 43 bus stop at Monterey Boulevard and Plymouth Avenue, follow Plymouth up to Yerba Buena Avenue, climb Yerba Buena to Hazelwood Avenue and follow Hazelwood's curve east and back down to Monterey Boulevard, ending a block east of the start at Valdez Avenue. Allow about 35 minutes, and go in daylight, when the 1920s house fronts are easiest to see.",
+      miles: 0.7,
+      minutes: 35,
+      tip:
+        "The loop climbs from Monterey Boulevard up Plymouth Avenue and Yerba Buena Avenue to Hazelwood, and from there it's downhill back to the boulevard. Westwood Highlands has no shopping street of its own: the nearest storefronts line Monterey Boulevard in Sunnyside, a few blocks east of where the walk ends.",
+    },
     nearby: ["West Portal", "Ingleside", "Sunnyside"],
     restaurants: [
       { name: "Elena's Mexican Restaurant", address: "255 West Portal Ave", phone: "(415) 622-4440", url: "https://www.elenasmexican.com" },
@@ -7537,13 +7730,78 @@ export const NEIGHBORHOODS = {
   "Merced Manor": {
     spirit: "A hushed pocket of 1930s storybook homes tucked between Stern Grove and Lake Merced in San Francisco's quiet southwest.",
     reasons: ["Quiet, tree-lined streets", "Steps from Stern Grove's free summer concerts", "Walkable to West Portal", "Easy Muni Metro and 19th Ave access"],
-    history: "Merced Manor was laid out as a residential subdivision in the 1930s on former Rancho Laguna de la Merced lands near Lake Merced, on terrain that had once been windswept coastal sand dunes. The tract filled in with the Spanish- and Mediterranean-influenced single-family homes that still define it today. Its signature landmark is the Merced Manor Reservoir, a covered 9.6-million-gallon SFPUC facility along Sloat Boulevard, fronted by a classical valve house. Just to the north lies Sigmund Stern Grove, the eucalyptus-and-redwood canyon that has hosted the free Stern Grove Festival concerts since 1938.",
+    history:
+      "Merced Manor lies between Stern Grove and Lake Merced, just south of Sloat Boulevard, on land that was farmed before the Gold Rush. William Green's son George recalled that his father arrived in 1847, staked a claim here and worked it, turning sand dunes into a ranch of potatoes and barley. An 1863 map shows the land west of today's 24th Avenue held by Alfred Green, who called it Rancho Laguna Puerca, and the land east of that line held by William.\n\nTravelers on the old Ocean Road could stop at the Ocean House, a roadhouse with dining rooms, parlors, a billiard salon and stabling for a hundred horses, which stood about where Lowell High School is today. It was a local landmark for some thirty years before it burned in the early 1880s. Water shaped what came next: the Spring Valley Water Company had to pump Lake Merced's water uphill to Laguna Honda Reservoir, and it kept a pumping station at Sloat and 22nd Avenue.\n\nTransit arrived before the houses. On October 6, 1925, Muni opened the M as a shuttle to St. Francis Circle with just two streetcars, when the area was mostly farmland. An early aerial view captioned as plotted for development shows Merced Manor's streets being graded beside Sloat, and in 1936 a reservoir rose between 22nd and 23rd avenues, its grounds landscaped by WPA crews. In 2020 the city made Ocean Avenue's block between Junipero Serra Boulevard and 19th Avenue its own zoning district, the Lakeside Village Neighborhood Commercial District, where commercial buildings are limited to one story.",
     facts: [
-      { icon: "music", title: "Free summer concerts", text: "Sigmund Stern Grove, just north of the neighborhood, has hosted the free Stern Grove Festival concert series since 1938." },
-      { icon: "water", title: "The reservoir at the edge", text: "The Merced Manor Reservoir, a covered 9.6-million-gallon SFPUC facility with a classical valve house, sits along Sloat Boulevard at the neighborhood's northern edge." },
-      { icon: "house", title: "1930s storybook tract", text: "The neighborhood was subdivided in the 1930s and is filled with Spanish- and Mediterranean-style single-family homes from that era." },
-      { icon: "wave", title: "Beside Lake Merced", text: "Built on former Rancho Laguna de la Merced lands, the tract sits just east of Lake Merced and its surrounding parkland and trails." },
+      {
+        icon: "shop",
+        title: "One block called a village",
+        text:
+          "Lakeside Village is a single long block of Ocean Avenue between Junipero Serra Boulevard and 19th Avenue, which the city describes as a neighborhood shopping corridor of small ground-floor shops, restaurants and medical offices set among houses. A 2020 ordinance made it its own zoning district, the Lakeside Village Neighborhood Commercial District, whose rules keep commercial buildings to one story to match the scale of the street.",
+        place: "Lakeside Village shops",
+        where: "Ocean Ave & 19th Ave",
+        at: [-122.47495, 37.73246],
+        source: "https://www.sfbos.org/sites/default/files/o0007-20.pdf",
+      },
+      {
+        icon: "pin",
+        title: "Potatoes and barley on the dunes",
+        text:
+          "The Green family was working this land before the Gold Rush: William Green's son George recalled that his father arrived in 1847, staked the land and turned its sand dunes into a ranch for potatoes and barley. An 1863 map shows the land west of the line of today's 24th Avenue as Alfred Green's, called Rancho Laguna Puerca, and the land from 24th Avenue eastward as William's.",
+        place: "Green ranch line",
+        where: "Ocean Ave & 24th Ave",
+        at: [-122.48030, 37.73240],
+        source: "https://en.wikipedia.org/wiki/Merced_Manor,_San_Francisco",
+      },
+      {
+        icon: "house",
+        title: "A roadhouse by the lake",
+        text:
+          "Lake Merced was ringed by roadhouse resorts from the 1850s to the early 1880s, and the Ocean House, on the old Ocean Road, offered dining rooms, parlors, a billiard salon, a bowling alley and stabling for a hundred horses. It stood just south of the road, about where Lowell High School is today across Eucalyptus Drive, and was a local landmark for some thirty years before it burned in the early 1880s.",
+        place: "Ocean House site",
+        where: "Middlefield Dr & Eucalyptus Dr",
+        at: [-122.48586, 37.73110],
+        source: "https://twainsgeography.com/location/ocean-house-san-francisco",
+      },
+      {
+        icon: "road",
+        title: "Streets graded from the dunes",
+        text:
+          "An aerial view in the Western Neighborhoods Project's Open SF History archive is captioned as plotted for development, with Sloat Boulevard at center and Merced Manor in the process of grading its streets. The boulevard itself is named for Commodore John Drake Sloat, who raised the American flag at Monterey on July 7, 1846, and proclaimed California part of the United States.",
+        place: "Sloat Boulevard",
+        where: "Sloat Blvd & Sylvan Dr",
+        at: [-122.48583, 37.73413],
+        source: "https://test.opensfhistory.org/neighborhood/merced-manor?page=2",
+      },
+      {
+        icon: "water",
+        title: "First called the Central Pumps",
+        text:
+          "Open SF History photographs from March and May 1936 show the Merced Manor Reservoir, on Sloat between 22nd and 23rd avenues, under construction, and their captions say it was first called the Central Pumps reservoir, after the nearby Central Pump Building. The Living New Deal records that WPA crews landscaped the reservoir and its paths and readied its top for future tennis courts, at a total cost of $28,244.",
+        place: "Merced Manor Reservoir",
+        where: "Sloat Blvd & 23rd Ave",
+        at: [-122.47962, 37.73440],
+        source: "https://livingnewdeal.org/sites/merced-manor-san-francisco-ca/",
+      },
+      {
+        icon: "music",
+        title: "A grove bought from the Greenes",
+        text:
+          "Across Sloat lies Sigmund Stern Grove: on April 14, 1931, Rosalie Meyer Stern bought the Greene family's 12 acres there for $50,000 and named the site for her husband, Sigmund. In 1938 she founded the Stern Grove Festival Association, requiring that its concerts be free, and the first festival concert was played there on July 10, 1938, by the Bay Region Symphony of the Federal Music Project.",
+        place: "19th Avenue and Sloat",
+        where: "19th Ave & Sloat Blvd",
+        at: [-122.47498, 37.73464],
+        source: "https://sterngrove.org/history",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.7 miles: start at the Muni stops at Ocean Avenue and Junipero Serra Boulevard, walk west through Lakeside Village and along Ocean Avenue, dip south on Middlefield Drive to Eucalyptus Drive, then head north to Sloat Boulevard and follow it east past the reservoir to the Muni stops at 19th Avenue. Allow about 50 minutes; a clear afternoon is best.",
+      miles: 1.7,
+      minutes: 50,
+      tip:
+        "Lakeside Village, at the start, is the only shopping block on the route, so pick up coffee or lunch there before heading west; in summer, check the Stern Grove Festival's schedule for its free concerts across Sloat from the finish.",
+    },
     nearby: ["West Portal"],
     restaurants: [
       { name: "Trattoria da Vittorio", address: "150 West Portal Ave", phone: "(415) 742-0300", url: "https://www.trattoriadavittorio.com" },
@@ -7559,13 +7817,68 @@ export const NEIGHBORHOODS = {
   "Merced Heights": {
     spirit: "A quiet hilltop village in the city's southwest corner — modest mid-century homes along a ridgeline, big Pacific views from Brooks Park, and the deep-rooted, neighborly spirit of the historic OMI.",
     reasons: ["Peaceful, residential hilltop streets", "Hilltop views at Brooks Park", "Steps from City College's Ocean campus", "Historic OMI community"],
-    history: "Merced Heights sits at the center of the OMI — Ocean View, Merced Heights, and Ingleside — on a ridge running between San Jose Avenue and Junipero Serra Boulevard. The name dates only to the years after World War II, when open hillside on the western slopes was subdivided into new housing. Beginning at midcentury, African-American homebuyers settled here, and Merced Heights emerged as an island of Black home ownership uphill from earlier residential parks that had barred minority buyers, making the OMI one of San Francisco's early integrated neighborhoods. City College of San Francisco's Ocean campus anchors the area's northern edge. Atop the neighborhood's peak, Brooks Park preserves rocky outcrops with native plants and a large community garden, on land once used by Ohlone people summering near Lake Merced.",
+    history:
+      "Merced Heights lies along an east-west ridgeline in the city's southwest corner, at the center of the OMI: Ocean View, Merced Heights and Ingleside. Maps drawn as early as the 1860s laid streets and street names over the tops of the Merced hills with no regard for the steep grades. In 1862 George Black surveyed and filed a map for \"San Miguel City\" on the northeast slope, and today's Howth and Tara streets trace back to it; a few years later the City Land Association mapped its own property on the hill. Some of those streets took eighty years to become more than lines on a map; by 1900 only a few houses, mostly railroad workers', clung to the hillside.\n\nRails came first. The Ocean Shore Railway's right-of-way crossed the southern slope until the line stopped running in 1920, and the city later traced Alemany Boulevard along it. On October 6, 1925, the M Ocean View streetcar opened, running down 19th Avenue and east along Randolph Street. Still, the hill had only a handful of homes before World War II, and locals called its open summit Kite Hill or Poppy Hill.\n\nThe name Merced Heights dates only from the first years after the war, when most of the open hillside on the west filled with new houses. A 2010 historic context statement by Richard Brandi and Woody LaBounty of the Western Neighborhoods Project describes the postwar neighborhood as an island of African American home ownership, uphill from earlier residential parks and apartment complexes that banned minority ownership or occupation. The city bought the Brooks family's hilltop in 1978, and since 1987 neighbors have tended it as Brooks Park.",
     facts: [
-      { icon: "house", title: "Island of ownership", text: "After WWII, Merced Heights became a rare hilltop enclave of African-American home ownership, helping make the OMI one of the city's early integrated neighborhoods." },
-      { icon: "park", title: "Brooks Park", text: "A hilltop park at 400 Shields St with native-plant gardens, a large community garden, and sweeping Pacific views." },
-      { icon: "book", title: "City College", text: "CCSF's Ocean campus at 50 Frida Kahlo Way, the college's largest, borders the neighborhood." },
-      { icon: "burrito", title: "Beep's since 1962", text: "Beep's Burgers has flipped patties at its original Ocean Avenue drive-in since 1962." },
+      {
+        icon: "tram",
+        title: "Where the M turns east",
+        text:
+          "Here the M Ocean View leaves 19th Avenue and turns east onto Randolph Street, the route it follows to Broad Street and Plymouth Avenue. Muni says construction began in early 1924, after planners dropped a proposal to run down from the K line's terminal at Brighton and Grafton avenues to Randolph because of its cost and slow travel on the steep grade. The line opened on October 6, 1925, as a shuttle to St. Francis Circle with just two streetcars, and riders bound downtown changed to the K Ingleside.",
+        place: "19th Avenue and Randolph",
+        where: "19th Ave & Randolph St",
+        at: [-122.47012, 37.71465],
+        source: "https://www.sfmta.com/blog/celebrating-100-years-m-ocean-view",
+      },
+      {
+        icon: "park",
+        title: "A playground rebuilt in phases",
+        text:
+          "This hillside playground on the south side of Shields Street reopened after a first phase of upgrades worth $2.9 million, which added a timber play structure, climbers, a spinner and a bowl swing along with new lighting, fencing, sports courts and clubhouse improvements. The final phase, a $1.67 million renovation of the lower terrace celebrated on May 19, 2023, added a dog play area, a butterfly and hummingbird garden and a mosaic whose tiles carry the names of neighbors who championed the park over the years.",
+        place: "Merced Heights Playground",
+        where: "Shields St & Byxbee St",
+        at: [-122.47028, 37.71755],
+        source: "https://www.inglesidelight.com/merced-heights-playground-lower-terrace-renovation-unveiled",
+      },
+      {
+        icon: "park",
+        title: "The hilltop the Brooks family left",
+        text:
+          "The Brooks family bought a half-acre on this hilltop in the 1920s, and Mrs. Brooks composted, kept beehives and taught visitors about native plants; when the family moved to La Honda in 1978, the city bought the land as parkland. After the house burned and the park fell into neglect, neighbor Peter Vaernet and others formed the Friends of Brooks Park in 1987, and the city added more land in 1994. Two of its 3.5 acres are a Natural Area where blue-dicks, a bulb Native Americans roasted and ate, still blooms, and the views reach the Pacific, the Farallon Islands and Mount Tamalpais.",
+        place: "Brooks Park",
+        where: "373 Ramsell St",
+        at: [-122.46660, 37.71740],
+        source: "https://sfrecpark.org/facilities/facility/details/Brooks-Park-153",
+      },
+      {
+        icon: "shop",
+        title: "Corner shops on the streetcar line",
+        text:
+          "Randolph Street carries the M Ocean View along the neighborhood's southern slope, and with Broad Street just to the east it forms a small commercial corridor of corner shops rather than an unbroken row of storefronts. In 2014 San Francisco Beautiful and neighbors put about $30,000 from a community design process and micro-grant program into streetscape work along Broad and Randolph, including planter boxes and a custom-designed crosswalk at Broad and Randolph streets.",
+        place: "Randolph Street shops",
+        where: "Randolph St & Victoria St",
+        at: [-122.46530, 37.71430],
+        source: "https://sfbeautiful.org/broad-randolph-street-improvements-2014/",
+      },
+      {
+        icon: "road",
+        title: "A railroad that became a boulevard",
+        text:
+          "Alemany Boulevard here follows the former right-of-way of the Ocean Shore Railway, and city Public Works photographs from early 1926 look west along it from Head Street, just east of this corner, when the boulevard was still only a plan. The Ocean Shore was built to link San Francisco with Santa Cruz along the coast but never closed a 26-mile gap; it quit running scheduled trains in August 1920 and closed altogether on October 20, 1920, and most of its right-of-way down the coast was later paved over as Highway 1.",
+        place: "Ocean Shore right-of-way",
+        where: "Alemany Blvd & Victoria St",
+        at: [-122.46513, 37.71176],
+        source: "https://test.opensfhistory.org/photo/wnp36.03347",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about a mile for visitors and would-be neighbors, from the M Ocean View stop at 19th Ave & Randolph St up the hill to the playground on Shields Street, east along the ridge to Brooks Park, then down to the corner shops of Randolph Street and the old railroad line on Alemany Boulevard, ending at the Muni stop at Alemany Blvd & Victoria St. Allow about 45 minutes; a clear afternoon, once any fog has lifted, gives the best views from the summit.",
+      miles: 1.1,
+      minutes: 45,
+      tip:
+        "The climb comes first, from Randolph Street up to Shields Street, so the rest of the walk is level or downhill. Save time at the top of Brooks Park for the view west to the Pacific and the Farallon Islands; for coffee or lunch, the shops and restaurants of Ocean Avenue lie about half a mile north of the park.",
+    },
     nearby: ["Ingleside", "the Ocean Avenue strip"],
     restaurants: [
       { name: "Beep's Burgers", address: "1051 Ocean Ave", phone: "(415) 584-2650", url: "https://www.beepsburgers.com" },
