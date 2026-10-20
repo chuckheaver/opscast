@@ -25,9 +25,10 @@
     "note": "142 Josiah Ave: no coordinates in the MLS file; Oceanview confirmed"
   },
   "82058462": {
-    "nid": "10c",
+    "lat": 37.72965,
+    "lng": -122.43215,
     "confirmed": true,
-    "note": "60 Camellia Ave: no coordinates in the MLS file; Excelsior confirmed"
+    "note": "60 Camellia Ave: no coordinates in the MLS file; placed on its parcel block (6801) beside 245 Silver Ave, Mission Terrace (owner, Oct 20 2026)"
   },
   "82058643": {
     "nid": "10f",
@@ -84,5 +85,23 @@
     "lng": -122.468,
     "confirmed": true,
     "note": "674 10th Ave: the MLS pin sat at 10th & Lake; the 600 block of 10th Ave is Balboa to Cabrillo, Inner Richmond (owner, Oct 20 2026)"
+  },
+  "424083756": {
+    "lat": 37.715342,
+    "lng": -122.47577,
+    "confirmed": true,
+    "note": "151 Summit Way: its own MLS pin, in Parkmerced with the other Summit Way sales (owner, Oct 20 2026)"
+  },
+  "41114049": {
+    "lat": 37.804393,
+    "lng": -122.40416,
+    "confirmed": true,
+    "note": "150 Lombard St #205: at the building, North Waterfront (owner, Oct 20 2026)"
+  },
+  "82058315": {
+    "lat": 37.73531,
+    "lng": -122.45628,
+    "confirmed": true,
+    "note": "680 Los Palmos Dr: no coordinates in the MLS file; placed on its parcel block (3005C) beside 628 Los Palmos, Westwood Highlands (owner, Oct 20 2026)"
   }
 }

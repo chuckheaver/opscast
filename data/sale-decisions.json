@@ -365,6 +365,17 @@
         "propType": "2 Houses on Lot"
       },
       "reason": "Zoned RH-2: Residential Income (2 houses) (owner, Oct 20 2026)."
+    },
+    {
+      "id": "41114049",
+      "address": "150 Lombard St #205",
+      "set": {
+        "address": "150 Lombard St #205, San Francisco, CA 94111"
+      },
+      "from": {
+        "address": "150 Lombard #205 St, San Francisco, CA 94111"
+      },
+      "reason": "The unit was typed before 'St' (owner, Oct 20 2026)."
     }
   ],
   "confirmed": [

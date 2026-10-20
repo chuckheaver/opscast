@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T16:10:00.424Z",
+  "generatedAt": "2026-10-20T16:17:53.546Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -483,14 +483,14 @@
       }
     },
     "Excelsior": {
-      "n": 73,
-      "sfhMedian": 1188000,
-      "sfhN": 69,
+      "n": 72,
+      "sfhMedian": 1176500,
+      "sfhN": 68,
       "condoMedian": null,
       "condoN": 0,
       "otherMedian": 1245000,
       "otherN": 4,
-      "ppsf": 881.9813857983015,
+      "ppsf": 882.7238335435056,
       "dom": 12,
       "fogHours": 10.5,
       "zone": "Fog",
@@ -1091,14 +1091,14 @@
       }
     },
     "Miraloma Park": {
-      "n": 37,
-      "sfhMedian": 2027500,
-      "sfhN": 36,
+      "n": 36,
+      "sfhMedian": 2005000,
+      "sfhN": 35,
       "condoMedian": 847000,
       "condoN": 1,
       "otherMedian": null,
       "otherN": 0,
-      "ppsf": 1213.5399549868775,
+      "ppsf": 1204.7945205479452,
       "dom": 10,
       "fogHours": 10.5,
       "zone": "Fog",
@@ -1167,16 +1167,16 @@
       }
     },
     "Mission Terrace": {
-      "n": 29,
-      "sfhMedian": 1410000,
-      "sfhN": 27,
+      "n": 30,
+      "sfhMedian": 1412500,
+      "sfhN": 28,
       "condoMedian": 1180000,
       "condoN": 1,
       "otherMedian": 1500000,
       "otherN": 1,
-      "ppsf": 909.923595488781,
+      "ppsf": 903.4051424600417,
       "dom": 13,
-      "fogHours": 11,
+      "fogHours": 10.75,
       "zone": "Fog",
       "zoneMix": {
         "Sun": 0,
@@ -1642,15 +1642,15 @@
       }
     },
     "Sherwood Forest": {
-      "n": 12,
-      "sfhMedian": 2595000,
-      "sfhN": 12,
+      "n": 13,
+      "sfhMedian": 2600000,
+      "sfhN": 13,
       "condoMedian": null,
       "condoN": 0,
       "otherMedian": null,
       "otherN": 0,
-      "ppsf": 924.2864719821379,
-      "dom": 13,
+      "ppsf": 984.7328244274809,
+      "dom": 15,
       "fogHours": 11.5,
       "zone": "Fog",
       "zoneMix": {

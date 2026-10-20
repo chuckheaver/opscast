@@ -62,6 +62,8 @@ listing,address,field,before,now
 426147186,"215 Arkansas St, San Francisco, CA 94107",Location,file coordinates 289 m from the address,moved to the address (between 121 and 401 arkansas st)
 82056639,"1737 McKinnon, San Francisco, CA 94124",Location,no location in the file,placed at the address (between 1547 and 1789 mckinnon ave)
 82057850,"177 Edinburgh St, San Francisco, CA 94112",Location,no location in the file,placed at the address (next to 207 edinburgh st)
+82058315,"680 Los Palmos Dr, San Francisco, CA 94127",Location,no location in the file,placed at the address (location given by hand)
+82058462,"60 Camellia Ave, San Francisco, CA 94112",Location,no location in the file,placed at the address (location given by hand)
 82058585,"724 16th Ave #2, San Francisco, CA 94118",Location,no location in the file,placed at the address (next to 718 16th ave)
 82058731,"425 1st St #3201, San Francisco, CA 94105",Location,no location in the file,placed at the address (same address in 35 other sales)
 82058851,"388 Fulton St #510, San Francisco, CA 94102",Location,no location in the file,placed at the address (same address in 5 other sales)
@@ -77,6 +79,7 @@ listing,address,field,before,now
 41087227,"717 Kirkham St, San Francisco, CA 94122",Location,MLS placeholder coordinates,"stand-in point in Inner Sunset (2f, given by hand)"
 41099833,"805 Red Leaf Ct, San Francisco, CA 94134",Location,MLS placeholder coordinates,"stand-in point in Crocker Amazon (10b, given by hand)"
 41110291,"5177 Diamond Heights Blvd #114, San Francisco, CA 94131",SFAR District,SF District 4,SF District 5 (5c)
+41114049,"150 Lombard #205 St, San Francisco, CA 94111",Location,file coordinates 763 m from the address,moved to the address (location given by hand)
 82009452,"1165 Holloway Ave, San Francisco, CA 94132",SFAR District,SF District 4,SF District 3 (3b)
 82017945,"17 30th St, San Francisco, CA 94110",SFAR District,SF District 5,SF District 9 (9a)
 82019009,"1269 S Van Ness Ave #Unit, San Francisco, CA 94110",SFAR District,SF District 8,SF District 9 (9c)
@@ -85,7 +88,6 @@ listing,address,field,before,now
 424028567,"2829 California St #1C, San Francisco, CA 94116",SFAR District,SF District 7,SF District 6 (6f)
 424075554,"127 Mendosa Ave, San Francisco, CA 94116",SFAR District,SF District 4,SF District 2 (2a)
 424078468,"436 Capp St, San Francisco, CA 94110",Location,file coordinates 448 m from the address,moved to the address (between 368 and 600 capp st)
-424083756,"151 Summit Way, San Francisco, CA 94132",Location,file coordinates 1903 m from the address,moved to the address (next to 165 summit way)
 425004006,"2307 9th Ave, San Francisco, CA 94116",SFAR District,SF District 4,SF District 2 (2a)
 425005022,"1817 California St #2C, San Francisco, CA 94109",SFAR District,SF District 7,SF District 6 (6f)
 425005069,"88 Summit Way, San Francisco, CA 94132",Location,MLS placeholder coordinates,placed at the address (between 52 and 118 summit way)
@@ -206,7 +208,6 @@ listing,address,field,before,now
 424028567,"2829 California St #1C, San Francisco, CA 94116",ZIP,94116,94115 (3 of 3 other sales on the block use 94115)
 424073110,"3425 Divisadero St, San Francisco, CA 94127",ZIP,94127,94123 (3 of 3 other sales on the block use 94123)
 424082339,"1177 California St #1702, San Francisco, CA 94109",ZIP,94109,94108 (14 of 14 other sales on the block use 94108)
-424083756,"151 Summit Way, San Francisco, CA 94132",ZIP,94132,94112 (94132 is 0.5 mi away; ZIP map at the location)
 424084345,"795 Sutter St #403, San Francisco, CA 94019",ZIP,94019,94109 (5 other sale(s) on the block use 94109)
 424084508,"1466 Revere Ave, San Francisco, CA 94121",ZIP,94121,94124 (3 of 3 other sales on the block use 94124)
 425002759,"804 Balboa St, San Francisco, CA 94122",ZIP,94122,94118 (94122 is 0.3 mi away; the block's other sales use 94118)

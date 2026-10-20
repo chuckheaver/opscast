@@ -11,6 +11,7 @@ id,address,field,from,to,reason
 "426129864","46-48 S Wilmot St, San Francisco, CA 94115","propType","Single Family Residence","Duplex","Typed by the city's land use: 2 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
 "426133023","138-140 ord St, San Francisco, CA 94114","propType","2 Houses on Lot","Duplex","Zoned RH-2: Residential Income (2 houses) (owner, Oct 20 2026)."
 "426138577","55-57 Coleridge St, San Francisco, CA 94110","propType","Single Family Residence","Triplex","Typed by the city's land use: 3 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
+"41114049","150 Lombard St #205, San Francisco, CA 94111","address","150 Lombard #205 St, San Francisco, CA 94111","150 Lombard St #205, San Francisco, CA 94111","The unit was typed before 'St' (owner, Oct 20 2026)."
 "82018546","1483 Sutter St #517, San Francisco, CA 94109","propType","Single Family Residence","Condominium","A condo, and typed Condominium in the MLS (owner, Oct 16 2026); the 2025 history feed had Single Family Residence."
 "424073940","117 Telegraph Hill Blvd, San Francisco, CA 94133","propType","Single Family Residence","Condominium","A condo in both 2025 and 2026 (owner, Oct 16 2026); the Mar 2025 sale was typed Single Family Residence."
 "425022869","4033 25th St, San Francisco, CA 94114","sqft","","1195","Square footage from the duplicate entry of the same sale (MLS 425037665, 4035 25th St), which reported 1,195 sf (owner, Oct 16 2026)."
