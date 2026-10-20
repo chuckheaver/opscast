@@ -152,6 +152,24 @@
         "keep": "82033620",
         "address": "1270-1272 Hampshire St",
         "reason": "The same sale in both MLS feeds (or twice in one): counted once, as the Residential Income record, typed by the city's land use (owner, Oct 20 2026)."
+      },
+      {
+        "id": "82038160",
+        "keep": "82038397",
+        "address": "2750 Cabrillo St",
+        "reason": "The same sale in both feeds; zoned RH-2, a two-family Residential Income property, not a single-family house (owner, Oct 20 2026)."
+      },
+      {
+        "id": "426156930",
+        "keep": "426158378",
+        "address": "494-496 Pacheco St",
+        "reason": "The same sale in both feeds; a TIC (reclassified between 2025 and 2026), so the TIC records stand and the income record goes (owner, Oct 20 2026)."
+      },
+      {
+        "id": "426161830",
+        "keep": "426145865",
+        "address": "322 Duncan St",
+        "reason": "The same sale in both feeds; Residential Income, 3 units (owner, Oct 20 2026)."
       }
     ]
   },
@@ -314,6 +332,39 @@
         "propType": "Single Family Residence"
       },
       "reason": "Typed by the city's land use: 7 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
+    },
+    {
+      "id": "82038397",
+      "address": "2750 Cabrillo St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "Residential Income Other"
+      },
+      "reason": "Zoned RH-2: Residential Income, two-family (owner, Oct 20 2026)."
+    },
+    {
+      "id": "426145865",
+      "address": "322 Duncan St",
+      "set": {
+        "propType": "Triplex"
+      },
+      "from": {
+        "propType": "Duplex"
+      },
+      "reason": "Residential Income, 3 units (owner, Oct 20 2026)."
+    },
+    {
+      "id": "426133023",
+      "address": "138-140 Ord St",
+      "set": {
+        "propType": "Duplex"
+      },
+      "from": {
+        "propType": "2 Houses on Lot"
+      },
+      "reason": "Zoned RH-2: Residential Income (2 houses) (owner, Oct 20 2026)."
     }
   ],
   "confirmed": [
@@ -404,5 +455,8 @@
       "address": "1285-1287 Pacific Ave",
       "reason": "A commercial listing, not a home sale (owner, Oct 20 2026)."
     }
+  ],
+  "rules": [
+    "Property type follows the city: land use (units on the parcel) and zoning — RH-1 is a single-family house even with two addresses; RH-2 is Residential Income, two-family. When records of a sale disagree, use the city's; if still unclear, ask the owner (Oct 20 2026)."
   ]
 }

@@ -113,3 +113,9 @@ approval before they are pushed. A data load is never pushed to the live
 site until the owner has reviewed it: give them the exception report (the
 review's findings, every anomaly and every inconsistency with earlier loads
 and fields) and wait for their go-ahead.
+- A sale's property type follows the city. Check the land-use layer (units
+  on the parcel, `public/tiles/parcels`) and the zoning (`public/data/
+  sf-zoning.geojson`): RH-1 is a single-family house even when it has two
+  addresses; RH-2 is Residential Income, two-family. When two records of a
+  sale disagree, use the city's type; if that still leaves a question, ask
+  the owner.

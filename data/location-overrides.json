@@ -78,5 +78,11 @@
     "nid": "2f",
     "confirmed": true,
     "note": "717 Kirkham St (realtor District 2): realtor code given by Chuck"
+  },
+  "426110052": {
+    "lat": 37.77555,
+    "lng": -122.468,
+    "confirmed": true,
+    "note": "674 10th Ave: the MLS pin sat at 10th & Lake; the 600 block of 10th Ave is Balboa to Cabrillo, Inner Richmond (owner, Oct 20 2026)"
   }
 }
