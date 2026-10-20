@@ -5739,14 +5739,98 @@ export const NEIGHBORHOODS = {
   "Mission Bay": {
     spirit: "San Francisco's newest neighborhood from the ground up — a master-planned waterfront district of biotech labs, modern mid-rises and arena lights rising where rail yards once stood.",
     reasons: ["New construction", "UCSF & biotech jobs", "Chase Center events", "Waterfront parks"],
-    history: "Mission Bay began as tidal marsh, filled in over the late 1800s to become wharves and Southern Pacific railroad yards. After the rail yards shut down, the land sat largely vacant for decades until a roughly 300-acre redevelopment — the city's largest since Golden Gate Park — broke ground in the late 1990s. UCSF opened its Mission Bay research campus in 2003 with Genentech Hall, anchoring what became one of the nation's largest biomedical university expansions and seeding a cluster of biotech companies. The Warriors' Chase Center arena followed in 2019, and new waterfront parks have continued to open into the 2020s.",
+    history:
+      "Mission Bay was once just that: a tidal lagoon of San Francisco Bay inside more than 500 acres of salt marsh. Mud and sand built up at its edges, and islands of cordgrass and pickleweed grew into a marsh laced with winding sloughs fed by freshwater springs. In the mid-1860s the Long Bridge, a private toll road on pilings some 3,500 feet long, was built across the open water: starting near today's Caltrain station, it carried Fourth Street a quarter mile into the marsh, then angled straight for Potrero Point, near today's Third and 16th streets.\n\nSouthern Pacific bought most of the Mission Bay property in 1868 and 1869 and filled the bay gradually through the late 1800s and early 1900s, refuse from building projects included. Rubble from the 1906 earthquake and fire was the last big wave of fill, and the made land became rail yards and industry. Mission Creek survived as a narrow channel, crossed by drawbridges at Fourth Street in 1917 and Third Street in 1933, and in the early 1960s a small houseboat community began to take shape on it.\n\nMuch of the old rail yard passed to Catellus Development Corporation, spun off in the aborted merger of the Southern Pacific and Santa Fe railroads. In the fall of 1998 the Board of Supervisors adopted redevelopment plans for Mission Bay North and South, about 303 acres in all, and in 1999 UCSF broke ground on a 43-acre research campus whose first building opened in 2003. Chase Center followed in 2019, and in 2024 two waterfront parks opened on the bay: China Basin Park in April and Bayfront Park in October.",
     facts: [
-      { icon: "factory", title: "Built on old rail yards", text: "The neighborhood rose on former Southern Pacific railroad yards, redeveloped from the late 1990s in a roughly 300-acre plan." },
-      { icon: "money", title: "A biotech hub", text: "UCSF's Mission Bay campus opened in 2003 and helped grow the city's biotech sector from one company to more than 100 within a decade." },
-      { icon: "star", title: "Home of the Warriors", text: "Chase Center opened in 2019 as a privately financed arena seating about 18,000 for Golden State Warriors basketball and concerts." },
-      { icon: "water", title: "New waterfront parks", text: "Bayfront Park sits between Chase Center and the Bay, and China Basin Park opened in 2024 at the mouth of Mission Creek." },
-      { icon: "tram", title: "A streetcar district", text: "The T Third Muni Metro line runs up Third Street with a stop right at UCSF/Chase Center." },
+      {
+        icon: "bridge",
+        title: "The Long Bridge's last link",
+        text:
+          "SFMTA traces a crossing here to the Long Bridge, whose first span it says was completed in 1867, and notes that the drawbridge over Mission Creek is the part of that route still in place, though not in its original form. Today's 94-foot span went up in 1917 to a design by J.B. Strauss, and a Caltrans-based historic-bridge inventory calls it California's only Strauss overhead-counterweight bascule bridge. Formally the Peter R. Maloney Bridge, it was retrofitted in 2006 for earthquakes and to carry Muni's T Third light rail, whose trains still cross it.",
+        place: "Fourth Street Bridge",
+        where: "4th St & Channel St",
+        at: [-122.39236, 37.77500],
+        source: "https://www.sfmta.com/blog/bridge-nowhere",
+      },
+      {
+        icon: "house",
+        title: "A floating neighborhood",
+        text:
+          "About 20 floating homes line this dock on the south shore of Mission Creek, just under the I-280 freeway, in a community that began taking form in the early 1960s. The Port of San Francisco, which leases the berths, has capped the harbor at 55 slips, with boats in the other 35, and the leases run through 2055. The houseboats are private homes, so enjoy them from the creek path.",
+        place: "Mission Creek houseboats",
+        where: "300 Channel St",
+        at: [-122.39570, 37.77200],
+        source: "https://sfstandard.com/2023/11/04/san-francisco-floating-home-for-sale-rare-find/",
+      },
+      {
+        icon: "shop",
+        title: "A main street that took its time",
+        text:
+          "Fourth Street's 1100 block, running south from Channel Street toward this corner, became the new neighborhood's shopping block, but retail was slow to arrive as Mission Bay filled in. In 2017 the Chronicle reported dining and retail beginning to stir at last, as an apartment complex on the block leased its ground floor to five businesses, among them a café, a spa, a frame shop and two restaurants, and a 10,000-square-foot neighborhood grocery opened at the Channel Street corner at the end of 2018.",
+        place: "Fourth Street shops",
+        where: "4th St & Mission Bay Blvd North",
+        at: [-122.39087, 37.77106],
+        source: "https://www.sfchronicle.com/politics/article/Dining-and-retail-begin-to-stir-at-last-in-11292649.php",
+      },
+      {
+        icon: "book",
+        title: "A campus on donated land",
+        text:
+          "UCSF broke ground here in 1999 on 43 acres of donated land: Catellus agreed in 1997 to give 30 acres, and by October 1998 the Board of Supervisors had voted unanimously to donate the rest. The first building, the 434,000-square-foot Genentech Hall, opened in 2003, and the campus was dedicated on October 28 that year; UCSF billed it as the country's largest biomedical university expansion.",
+        place: "UCSF Mission Bay campus",
+        where: "4th St & 16th St",
+        at: [-122.39081, 37.76682],
+        source: "https://ucsf.edu/news/2013/01/129181/ucsf-milestones-mission-bay",
+      },
+      {
+        icon: "star",
+        title: "An arena with its own plazas",
+        text:
+          "The Golden State Warriors' privately financed arena opened in September 2019 with 18,064 seats. Around it, the Thrive City district was laid out with 3.2 acres of publicly accessible plazas and open space and 100,000 square feet of leasable restaurant and retail space. Muni's UCSF/Chase Center platform is on Third Street out front.",
+        place: "Chase Center & Thrive City",
+        where: "3rd St & Warriors Way",
+        at: [-122.38931, 37.76888],
+        source: "https://chasecenter.com/news/1MxI8XiKGf4YmFeGKeyecx",
+      },
+      {
+        icon: "park",
+        title: "A park built for a changing climate",
+        text:
+          "Nearly ten years in the making as part of the Mission Bay plan, this 5.4-acre park between Chase Center and the bay opened on October 22, 2024. The city says it was designed to be resilient to climate change, with bioretention gardens that manage stormwater runoff and coastal scrub plantings, and some of its structures are made from steel reclaimed from the old Bay Bridge. A section of the Bay Trail runs through it.",
+        place: "Bayfront Park",
+        where: "Terry A Francois Blvd & 16th St",
+        at: [-122.38605, 37.76706],
+        source: "https://www.sf.gov/news/mayor-london-breed-celebrates-grand-opening-bayfront-park-mission-bay",
+      },
+      {
+        icon: "wave",
+        title: "A park on 1906 rubble",
+        text:
+          "More than 15 years in the making, this five-acre park opened on April 25, 2024, just across from Oracle Park, anchoring Mission Rock, the district the Port and the Giants' and Tishman Speyer's Mission Rock Partners are building on old ballpark parking lots. Its builder, Webcor, says the lot stood on rubble pushed into the bay after the 1906 earthquake, so heavy dirt was swapped for foam and lightweight cellular concrete to limit sinking. The name Mission Rock first belonged to an island in the bay; Pier 50, a short way down the shore, was extended in the 1940s to surround it.",
+        place: "China Basin Park",
+        where: "Terry A Francois Blvd & Toni Stone Crossing",
+        at: [-122.38810, 37.77620],
+        source: "https://www.webcor.com/webcor-articles/webcor-delivers-state-of-the-art-china-basin-park-transforming-sf-waterfront",
+      },
+      {
+        icon: "bridge",
+        title: "A city landmark drawbridge",
+        text:
+          "This drawbridge on Third Street opened on May 12, 1933, at a ceremony attended by Mayor Angelo Rossi. It is a heel-trunnion steel truss bascule designed by the Strauss Engineering Company, the firm behind the Golden Gate Bridge: its span tips up on a pivot, one end weighted to counterbalance the other. It is San Francisco Landmark No. 194 and carries the name of baseball's Lefty O'Doul.",
+        place: "Lefty O'Doul Bridge",
+        where: "3rd St & Berry St",
+        at: [-122.39025, 37.77667],
+        source: "https://en.wikipedia.org/wiki/Lefty_O%27Doul_Bridge",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 2.5 miles for visitors and would-be neighbors, from the 4th & King Caltrain station (also served by Muni's N and T): over Mission Creek, out along the creek path to the houseboats and back, south down Fourth Street's shopping block to the UCSF campus and Chase Center, then north past the bayfront parks to the Lefty O'Doul Bridge, a short walk from the N at 2nd & King. Allow about 90 minutes; a weekday morning with no game or concert is calmest.",
+      miles: 2.5,
+      minutes: 90,
+      tip:
+        "Check the Chase Center and Giants schedules before you go: on game and concert days crowds fill Third Street and the T line. The Fourth Street shops, about a third of the way in, are the natural place for a break.",
+    },
     restaurants: [
       { name: "Che Fico Pizzeria", address: "1 Warriors Way, Ste 300", phone: "(415) 655-9675", url: "https://www.chefico.com" },
       { name: "Dumpling Time", address: "191 Warriors Way", url: "https://www.dumplingtime.com/thrive-city" },
@@ -5764,13 +5848,88 @@ export const NEIGHBORHOODS = {
   "South Beach": {
     spirit: "San Francisco's waterfront ballpark village — Bay Bridge views, a yacht-filled harbor, and Giants energy wrapped around Oracle Park.",
     reasons: ["Steps from Oracle Park", "Waterfront promenade", "Bay Bridge views", "Ferry & Muni access"],
-    history: "Once a working stretch of industrial piers, rail yards, and warehouses along China Basin, South Beach spent more than a century as a blue-collar waterfront. Redevelopment began in the 1980s, anchored by the South Beach Harbor marina, which opened in 1986 on Port of San Francisco land. The neighborhood's transformation accelerated when the Giants broke ground for a new ballpark at Third and King in 1997. Pacific Bell Park opened on April 11, 2000 (later SBC Park, AT&T Park, and now Oracle Park), turning the sleepy district into a dense neighborhood of condos, restaurants, and bars. Today it blends marina living, waterfront parks, and game-day crowds.",
+    history:
+      "In the 1850s South Beach was a real shore. Along it and at Steamboat Point, a headland at the northeastern edge of Mission Bay named for its shipyards, the boatyards of John G. North, Domingo Marcucci and Patrick H. Tiernan built and repaired many of the steamboats and ferries that served the bay and its rivers; North opened his first yard at Steamboat Point in 1854. By the mid-1860s the yards had moved south across Mission Bay, and the shoreline was rapidly filled.\n\nWarehouses rose on the new land. In 1867 the Pacific Mail Steamship Company, which carried mail, passengers and trade between the U.S. and Asia, built the brick Oriental Warehouse for imports such as coffee, tea, rice and silk. A few buildings survive from before the 1906 earthquake, but most of the brick and concrete-frame lofts of today's South End Historic District went up between 1906 and 1929, tied to the ships and the railroads. Piers 38 and 40 belong to the Embarcadero Historic District, three miles of waterfront listed on the National Register in May 2006.\n\nBy 1980 the Redevelopment Agency's Rincon Point–South Beach plan was under review; the agency studied a small-boat harbor and park here in 1982 and built South Beach Harbor in 1986. The city designated the South End Historic District in 1990, and in 1996 the Oriental Warehouse, its brick walls left unsafe by the 1989 earthquake and its roof burned in 1995, was converted to lofts. The Giants' ballpark opened at Third and King on April 11, 2000, and in July 2013 the Brannan Street Wharf turned the sites of two old piers into a park.",
     facts: [
-      { icon: "star", title: "A privately financed ballpark", text: "Oracle Park opened April 11, 2000 at Third and King as Pacific Bell Park — the first privately financed Major League ballpark since Dodger Stadium in 1962." },
-      { icon: "water", title: "McCovey Cove", text: "The slice of San Francisco Bay beyond Oracle Park's right-field wall is nicknamed McCovey Cove, where kayakers wait to fish out home-run 'splash hits.'" },
-      { icon: "wave", title: "A 700-slip harbor", text: "South Beach Harbor, built in 1986 between Pier 40 and the ballpark, holds about 700 slips on concrete docks just half a mile south of the Bay Bridge." },
-      { icon: "bridge", title: "Cupid's Span", text: "The 60-foot bow-and-arrow sculpture by Claes Oldenburg and Coosje van Bruggen was installed in 2002 at Rincon Park on the Embarcadero, framing the waterfront's Bay Bridge views." },
+      {
+        icon: "money",
+        title: "A landmark from the China trade",
+        text:
+          "The Pacific Mail Steamship Company, which ran mail, passenger and trade service between the U.S. and Asia, built this brick warehouse in 1867 for imports such as coffee, tea, rice and silk, and the city made it Landmark No. 101 in 1977. The 1989 Loma Prieta earthquake left its brick walls unsafe and a 1995 fire burned the old roof; in a 1996 conversion a new structure built inside the brick shell became 66 lofts, so admire it from the sidewalk.",
+        place: "Oriental Warehouse",
+        where: "650 Delancey St",
+        at: [-122.38969, 37.78278],
+        source: "https://en.wikipedia.org/wiki/Oriental_Warehouse",
+      },
+      {
+        icon: "factory",
+        title: "Older than the 1906 earthquake",
+        text:
+          "A few of the South End Historic District's warehouses predate the 1906 earthquake, among them John Hooper's South End Grain Warehouse at 64–72 Townsend, built in 1874; most went up between 1906 and 1929, brick and concrete-frame lofts tied to the ships and railroads. The city designated the district, six blocks and 84 parcels, in 1990, and Planning counts 55 contributing buildings. On the same block, the 1882 California Warehouse at 88 Townsend was gutted in the early 2000s for more than a hundred homes.",
+        place: "South End warehouses",
+        where: "64 Townsend St",
+        at: [-122.39035, 37.78139],
+        source: "https://noehill.com/SF/LANDMARKS/sf_south_end.asp",
+      },
+      {
+        icon: "shop",
+        title: "Restaurants on the baseball calendar",
+        text:
+          "Restaurants and bars line Second Street in the blocks north of this corner, where Second ends at King Street across from the ballpark. A restaurant opened on this corner in 1998, two years before the park, and business follows the baseball calendar: as one season ended, the Chronicle reported, several nearby restaurants closed, among them two big sports bars facing the park.",
+        place: "Second and King Street restaurants",
+        where: "2nd St & King St",
+        at: [-122.38979, 37.77969],
+        source: "https://www.sfchronicle.com/food/restaurants/article/King-Street-blues-Restaurants-struggling-in-a-14510210.php",
+      },
+      {
+        icon: "star",
+        title: "Twenty-four palms for number 24",
+        text:
+          "William Behrends' bronze of Willie Mays, commissioned by Giants managing partner Peter Magowan when ground was broken in 1997, was unveiled at the ballpark's main entrance on March 31, 2000, ringed by 24 palm trees for the uniform number the Giants retired. The park, at 24 Willie Mays Plaza, opened on April 11, 2000, and is cited as the first privately financed major league ballpark since Dodger Stadium in 1962; its right-field wall is 24 feet high in Mays' honor.",
+        place: "Willie Mays Plaza",
+        where: "3rd St & King St",
+        at: [-122.39149, 37.77817],
+        source: "https://en.wikipedia.org/wiki/Statue_of_Willie_Mays",
+      },
+      {
+        icon: "water",
+        title: "A cove named by two sportswriters",
+        text:
+          "The water beyond the right-field wall is officially China Basin, the mouth of Mission Creek. Mark Purdy of the San Jose Mercury News proposed naming it for Willie McCovey, and fellow sportswriter Leonard Koppett suggested the more lyrical “McCovey Cove,” a name that has never become official. Barry Bonds hit the first splash hit, a Giants home run that lands in the cove on the fly, on May 1, 2000, and from the Portwalk between the wall and the water, passers-by can glimpse the game through openings in the wall.",
+        place: "McCovey Cove & the Portwalk",
+        where: "Portwalk along the right-field wall",
+        at: [-122.38930, 37.77760],
+        source: "https://en.wikipedia.org/wiki/McCovey_Cove",
+      },
+      {
+        icon: "wave",
+        title: "A harbor the city built",
+        text:
+          "The San Francisco Redevelopment Agency, which had studied a small-boat harbor and park here in 1982, built this 700-slip harbor in 1986 on land leased from the Port. When the agency was dissolved in July 2012, the Port took over the harbor, Pier 40 and its buildings, and the transfer, state boating loans included, was finalized in April 2019. Pier 40 and its neighbor Pier 38 are contributing piers of the Embarcadero Historic District.",
+        place: "South Beach Harbor & Pier 40",
+        where: "Pier 40",
+        at: [-122.38778, 37.78150],
+        source: "https://www.sfport.com/sites/default/files/Commission/Documents/Item%2012A%20%20South%20Beach%20Harbor%202.14.20%20v.2.pdf",
+      },
+      {
+        icon: "park",
+        title: "A park where two piers stood",
+        text:
+          "Opened in July 2013 on the former sites of Piers 34 and 36, between Pier 30-32 and Pier 38, this $26 million park adds about 57,000 square feet of public open space over the water. About 830 feet long, it has a neighborhood lawn in a raised planter ringed by a seat wall, a waterside walkway with seating and picnic tables, and a shade structure.",
+        place: "Brannan Street Wharf",
+        where: "The Embarcadero & Brannan St",
+        at: [-122.38750, 37.78380],
+        source: "https://www.baycrossings.com/?p=11690",
+      },
     ],
+    walk: {
+      intro:
+        "A loop of about 1.3 miles for visitors and would-be neighbors, starting and ending at the N Judah's Embarcadero & Brannan stop: past the old warehouses of the South End, along the restaurants of Second and King streets, around the ballpark by McCovey Cove and back up the Embarcadero past South Beach Harbor. Allow about an hour; a weekday morning with no game is calmest, a game day the liveliest.",
+      miles: 1.3,
+      minutes: 60,
+      tip:
+        "Check the Giants' schedule before you go: game days bring big crowds to King Street and the Portwalk. For a rest at the end, the lawn on the Brannan Street Wharf is a few steps from the Embarcadero & Brannan stop.",
+    },
     restaurants: [
       { name: "MoMo's", address: "760 2nd St", phone: "(415) 227-8660", url: "https://www.sfmomos.com" },
       { name: "Marlowe", address: "500 Brannan St", phone: "(415) 777-1413", url: "https://www.marlowesf.com" },
@@ -5789,14 +5948,98 @@ export const NEIGHBORHOODS = {
     spirit: "A vertical neighborhood of glass residential towers rising at the foot of the Bay Bridge's western anchorage — one of San Francisco's densest, newest skylines.",
     reasons: ["High-rise living", "At the Bay Bridge", "Salesforce Transit Center nearby", "Walk to FiDi & SoMa"],
     aka: "The East Cut",
-    history: "In the 1850s and 1860s Rincon Hill was San Francisco's first fashionable address, a pre-Nob Hill enclave of garden mansions where figures like Leland Stanford and William T. Sherman lived. The controversial Second Street Cut of 1869 carved a deep chasm through the hill to ease access to the waterfront wharves, and the neighborhood lost its cachet. Through the 20th century it became an industrial district of warehouses, residential hotels, and the bridge's western approach. Rezoned for high density in 1985 and again in 2005, it has since filled with luxury condominium towers and was branded part of 'The East Cut' community-benefit district in 2015.",
+    history:
+      "Rincón is Spanish for “corner.” Rincon Point, which ran roughly along today's Spear Street between Harrison and Folsom, marked the southern corner of Yerba Buena Cove, and the hill rising behind it took its name; landfill has since buried the point. After the Gold Rush the hill was built up as a fashionable residential neighborhood, and in the 1860s, as the state's landmark plaque recalls, it was home to William Tecumseh Sherman, William C. Ralston, William Gwin and H. H. Bancroft.\n\nIn 1869 the Second Street Cut sliced a canyon through the hill, split the neighborhood in two and marked the beginning of the end of its fashionable era. By the 1880s, the plaque says, the partly leveled hill was a working-class district. A report after the 1906 fire recommended removing the hill entirely; the idea, revived in 1913 and 1927, discouraged builders, and the area was slowly built up instead as an industrial and maritime district.\n\nOn July 5, 1934, the “Bloody Thursday” of the waterfront strike, strikers gathered on the hill, near the Bay Bridge's rising western anchorage, and charged down toward police and strikebreakers in what became known as the Battle of Rincon Hill. In 1935 the city lowered the summit by 10 feet and cleared several blocks, tenements, shacks and an elementary school among them, for the bridge's western approach. The city's 2005 Rincon Hill Plan rezoned the area for slender residential towers of 250 to 550 feet, the tallest at the top of the hill, and the local community benefit district, renamed in 2017, now calls the neighborhood The East Cut, after the Second Street Cut.",
     facts: [
-      { icon: "bridge", title: "Bridge anchorage", text: "Rincon Hill is the western land anchorage of the San Francisco–Oakland Bay Bridge, whose suspension span lands here." },
-      { icon: "road", title: "The Second Street Cut", text: "In 1869 crews dug a roughly 100-foot-deep cut through the hill along Second Street from Folsom to Bryant to reach the wharves — a project that ended its mansion era." },
-      { icon: "tower", title: "One Rincon Hill", text: "The One Rincon Hill South Tower, completed in 2008, rises 60 stories and about 641 feet at the hill's apex." },
-      { icon: "house", title: "Built for density", text: "The 2005 rezoning planned for thousands of new residents, making Rincon Hill one of the city's densest residential districts." },
-      { icon: "star", title: "The East Cut", text: "Formed in 2015 (originally the Greater Rincon Hill CBD), 'The East Cut' unites Rincon Hill, Folsom Street, and the Transbay area under one community-benefit district." },
+      {
+        icon: "coffee",
+        title: "Roasting coffee on Rincon Point",
+        text:
+          "Rincon Point, the “corner” of Yerba Buena Cove that named the hill, ran roughly along Spear Street from Harrison to Folsom, the western edge of this block. Hills Bros. moved its coffee operations here in 1926, into a Romanesque Revival plant by architect George W. Kelham that is now San Francisco Landmark No. 157; a 1950s addition was razed in the late 1980s for the 21-story Hills Plaza tower. The company left in 1997, and the plant, still crowned by its big Hills Bros. Coffee sign, has since housed offices.",
+        place: "Hills Bros. Coffee Plant",
+        where: "2 Harrison St",
+        at: [-122.38905, 37.78970],
+        source: "https://pcad.lib.washington.edu/building/1355",
+      },
+      {
+        icon: "water",
+        title: "Fireboats at the foot of Harrison",
+        text:
+          "The pier's 1915 firehouse, San Francisco Landmark No. 225, was built at the edge of the Panama-Pacific International Exposition and moved here by barge after the fair, and the fireboat Phoenix, long based here, is credited with helping save the Marina District after the 1989 Loma Prieta earthquake by serving as a floating hydrant. The city's new two-story fireboat station at the same pier sits on a 173-by-96-foot steel float that rises and falls with the tides. It was built on Treasure Island and pushed across the bay overnight, and the Fire Department calls it the first floating firehouse in the Western Hemisphere.",
+        place: "Fireboat Station 35",
+        where: "The Embarcadero & Harrison St",
+        at: [-122.38792, 37.78989],
+        source: "https://en.wikipedia.org/wiki/Phoenix_(fireboat)",
+      },
+      {
+        icon: "bridge",
+        title: "The hill's story on one plaque",
+        text:
+          "California Historical Landmark No. 84 sums up the hill in three eras: a fashionable neighborhood in the 1860s, a working-class district by the 1880s, and today “nearly invisible beneath the Bay Bridge.” The plaque was first mounted in 1981 on the retaining wall of St. Mary's Hospital, built on the hill in 1861 and destroyed in the 1906 fire. When that wall was removed, a replacement plaque was installed here in October 2011, about 900 feet northeast of the original spot.",
+        place: "Rincon Hill plaque",
+        where: "Beale St & Bryant St",
+        at: [-122.39010, 37.78632],
+        source: "https://www.hmdb.org/m.asp?m=135535",
+      },
+      {
+        icon: "shop",
+        title: "The street planned for shops",
+        text:
+          "The 2005 Rincon Hill Plan put the neighborhood's shops and services along Folsom Street and required see-through storefronts there, and a city streetscape project from Second to Spear set out to make it a neighborhood “main street,” with widened sidewalks, rain gardens and protected bike lanes on part of it. Across the street, the Folsom side of the Transbay Block 8 towers is lined with retail shops and residential lobbies. The East Cut district's logo, an abstract E, gives its middle bar to Folsom Street, between bars for Rincon Hill and the Transbay district.",
+        place: "Folsom Street shops",
+        where: "Folsom St & Fremont St",
+        at: [-122.39346, 37.78795],
+        source: "https://sfplanning.org/project/rincon-hill-plan",
+      },
+      {
+        icon: "factory",
+        title: "A century at the forge",
+        text:
+          "Fred V. Wilbert opened a forge in this two-story wood-frame building in 1912; Edwin A. Klockars joined him in 1928 and owned the shop from 1938 to 1970, and his son-in-law Tony Rosellini kept it running until 2017. Klockars' tools reportedly went into building both the Bay Bridge and the Golden Gate Bridge. The little shop is San Francisco Landmark No. 149.",
+        place: "Klockars Blacksmith Shop",
+        where: "443 Folsom St",
+        at: [-122.39411, 37.78747],
+        source: "https://www.theclio.com/entry/88758",
+      },
+      {
+        icon: "park",
+        title: "A pocket park the towers paid for",
+        text:
+          "The Rincon Hill Community Improvements Fund, paid for by fees on new development, bought this lot in 2007, and the Recreation and Park Department opened the $4.5 million, 3,500-square-foot Guy Place Mini Park here on July 20, 2020. It is laid out as three outdoor “rooms,” with living columns of native California grapevines and eight river birch and dogwood trees, behind a water-cut steel gate and fence by a local artist chosen through the city's Arts Commission.",
+        place: "Guy Place Mini Park",
+        where: "4 Guy Pl",
+        at: [-122.39422, 37.78668],
+        source: "https://sf.streetsblog.org/2020/07/20/guy-place-mini-park-opens",
+      },
+      {
+        icon: "tower",
+        title: "A sailors' hall and a sloshing tower",
+        text:
+          "The Sailors' Union of the Pacific put up its nautical, Streamline Moderne office building at 450 Harrison in 1950, designed by William Gladstone Merchant, who also drew Pacific House, the theme building of San Francisco's 1939–40 world's fair; its Maritime Hall was a concert venue from 1995 to 2001, and city planners list the building as a proposed landmark. Just south, at 425 First Street, two water tanks at the top of the 2008 One Rincon Hill South Tower slosh to damp its sway in the wind, and a state strong-motion study calls it the first building in California with a liquid tuned mass damper.",
+        place: "Sailors' Union hall and One Rincon Hill",
+        where: "Harrison St & 1st St",
+        at: [-122.39284, 37.78613],
+        source: "https://pcad.lib.washington.edu/building/24070",
+      },
+      {
+        icon: "road",
+        title: "The cut that split the hill",
+        text:
+          "Second Street climbed straight over the hill, so wagons took the flatter but slower, costlier Third Street, bypassing the Second Street property of Assemblyman John Middleton, who pushed a state bill to cut the grade. The plan lowered Second Street for the three blocks between Howard and Bryant, deepest here, 87 feet at Harrison Street, where a bridge carried Harrison across the new canyon. The 1869 cut split the neighborhood in half and drove its wealthier residents away.",
+        place: "Second Street Cut",
+        where: "2nd St & Harrison St",
+        at: [-122.39506, 37.78438],
+        source: "https://geologywriter.com/?p=1575",
+      },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.2 miles for visitors and would-be neighbors, starting at the N Judah's Folsom Street stop on the Embarcadero: past the coffee plant and the fireboat pier, south under the Bay Bridge and in along Bryant Street to Beale, up Beale to the shops of Folsom Street, then up First Street toward the top of the hill at Harrison and along Harrison to Second Street, where Muni's 12 stops at the corner. Allow about an hour, in daylight so the plaques are easy to read.",
+      miles: 1.2,
+      minutes: 60,
+      tip:
+        "After dark, come back to the Embarcadero, where the Bay Bridge passes overhead: The Bay Lights, Leo Villareal's LED artwork along the western span, came back on March 20, 2026, after going dark in 2023, rebuilt to shine nightly from dusk to dawn.",
+    },
     nearby: ["The East Cut", "Embarcadero", "SoMa"],
     restaurants: [
       { name: "EPIC Steak", address: "369 The Embarcadero", phone: "(415) 369-9955", url: "https://www.epicsteak.com" },
@@ -5814,14 +6057,78 @@ export const NEIGHBORHOODS = {
     spirit: "A quiet residential hill between the Castro and the Haight, crowned by the rocky, chert-red Corona Heights Park with some of the city's best skyline views and home to the family-favorite Randall Museum.",
     reasons: ["Knockout city views", "Quiet & residential", "Corona Heights Park", "Walk to the Castro"],
     aka: "Museum Hill",
-    history: "The hill was once Rock Hill, site of the Gray Brothers' quarry and brick factory, which began blasting into the slope around 1899 and exposed the deep-red Franciscan chert that still defines the summit. The Gray brothers, George and Harry, ran several quarries across the city, but their substandard bricks and rough operations drew lasting complaints. In 1941, San Francisco's first Superintendent of Recreation, Josephine D. Randall, persuaded the city to buy the land for public recreation, and the renamed Corona Heights opened as a park. The Josephine D. Randall Junior Museum opened on the site in 1951 in a building by architect William Merchant, carrying forward Randall's vision of a hands-on museum for children.",
+    history:
+      "Before it was a park, this neighborhood's hill was called Rocky Hill or Rock Hill. In 1899 George and Harry Gray, whom the Chronicle has called the city's most prolific and morally challenged quarrymen, began excavating it for a quarry and brick factory. Their works removed tons of rock and turned out tens of thousands of bricks; those laid in cable car track beds were later judged substandard and replaced. Neighbors were enraged when falling rocks injured adults and children and flying debris damaged homes, and the brothers faced repeated lawsuits.\n\nQuarrying here ended after George Gray was shot dead by a former worker demanding back wages at the brothers' quarry at 30th and Castro streets, and by the 1920s both quarry and brickworks had closed. By October 1925 the Vulcan Stairway climbed the slope from Ord Street. In 1928 Josephine Randall, a Stanford-trained zoologist and the city's first Superintendent of Recreation, proposed buying the hill's 16 acres for recreation. It took 13 years, but in 1941 the city paid $27,333 and named the land Corona Heights.\n\nRandall's Junior Museum, founded in 1937 in the city's old jail, moved up the hill in 1951 into a new building bearing her name, and the museum, tennis courts and playing fields all sit on former quarry ground. The quarrying also laid bare a polished fault face that climbers now scale. In 1986 the park's entrance meadow and a path were named for Bill Kraus, a gay-rights activist and political aide who died that year. Today much of the park is a city natural area, mostly grassland, that blooms with native wildflowers each spring.",
     facts: [
-      { icon: "factory", title: "Born from a brickyard", text: "The park's jagged red summit is exposed Franciscan chert, blasted bare by the Gray Brothers' quarry and brick factory beginning around 1899." },
-      { icon: "art", title: "Randall Museum", text: "The free Josephine D. Randall Museum at 199 Museum Way has offered hands-on science, art and nature programs for kids since opening here in 1951." },
-      { icon: "star", title: "Big-city panorama", text: "The rocky peak rises to about 520 feet, opening up sweeping views of downtown, the bay and beyond." },
-      { icon: "dog", title: "Off-leash hill", text: "Corona Heights Park includes a dedicated dog play area, a playground and tennis courts alongside its trails." },
-      { icon: "park", title: "A hilltop preserved", text: "Recreation Superintendent Josephine Randall convinced the city to buy the old quarry in 1941 and turn its roughly 16 acres into public parkland." },
+      {
+        icon: "stairs",
+        title: "A stairway finished in 1925",
+        text:
+          "This public stairway climbs west from Ord Street up to Levant Street, and a city Public Works photograph dated October 23, 1925 shows it finished, looking west up the steps from Ord. Some of the houses along it, such as 1 Vulcan, have no street frontage at all: their addresses are on the stairway, and the only way to the front door is on foot.",
+        place: "Vulcan Stairway",
+        where: "Ord St & Vulcan Stairway",
+        at: [-122.44140, 37.76347],
+        source: "https://test.opensfhistory.org/photo/wnp36.03288",
+      },
+      {
+        icon: "factory",
+        title: "The brickworks in a 1912 photo",
+        text:
+          "A photograph dated March 18, 1912 looks west along a still-unpaved States Street toward the Gray Brothers' brick factory on the hill's south side, with Mount Olympus behind it; by 2020 tennis courts stood on the factory's site, and a record from the same day places the quarry at 208 States. In a companion view looking east down the street, some of the houses on the right, starting with 155 States, still stand. Bricks from these works that went into cable car track beds were later judged substandard and had to be replaced.",
+        place: "States Street",
+        where: "208 States St",
+        at: [-122.44013, 37.76411],
+        source: "https://test.opensfhistory.org/photo/wnp36.00140",
+      },
+      {
+        icon: "park",
+        title: "A meadow named for Bill Kraus",
+        text:
+          "The triangular lawn at this park entrance is Bill Kraus Meadow, and Bill Kraus Pathway leads from it toward the park's off-leash dog area; both were dedicated in his honor in 1986. Kraus, a gay-rights activist, was a political aide to Congressman Phillip Burton and, after Burton's death in 1983, to his widow and successor, Sala Burton, and he died in 1986 at 38 while battling AIDS. A bench with a plaque in his honor stands at the end of the field.",
+        place: "Bill Kraus Meadow",
+        where: "Roosevelt Way & Museum Way",
+        at: [-122.44102, 37.76536],
+        source: "https://sfrecpark.org/450/Corona-Heights-Trail",
+      },
+      {
+        icon: "art",
+        title: "The jailhouse museum's hilltop home",
+        text:
+          "Josephine Randall founded the Junior Museum in 1937 in the city's old jail, and on September 23, 1951 it reopened here in a new building paid for by a 1947 bond; to name it for her, the Recreation and Park Commission suspended its rule against naming buildings after living people. In the basement, the Golden Gate Model Railroad Club built the Sierra Nevada and Pacific, a 2,100-square-foot layout with about 800 feet of track, and turned it over to the museum's nonprofit friends group in December 2015. A volunteer software engineer then added digital controls so the trains can run unattended whenever the museum is open.",
+        place: "Randall Museum",
+        where: "199 Museum Way",
+        at: [-122.43813, 37.76439],
+        source: "https://en.wikipedia.org/wiki/Randall_Museum",
+      },
+      {
+        icon: "star",
+        title: "Rock Hill, later called the Fist",
+        text:
+          "Before the city bought it in 1941 and named it Corona Heights, this hill was known as Rocky Hill or Rock Hill, and later as the Fist, for the chert boulders at its peak, more than 500 feet above sea level. In 1928 Josephine Randall coaxed James D. Phelan, Sigmund Stern and John McLaren up to this crest, and they took her side in her push to buy it. In spring, Rec and Park says, the grassland blooms with checkerbloom, California poppy, Douglas iris, mule's ears and Johnny jump-up, the only host plant of the callippe silverspot butterfly.",
+        place: "Corona Heights summit",
+        where: "Top of Corona Heights Park",
+        at: [-122.43937, 37.76489],
+        source: "https://en.wikipedia.org/wiki/Corona_Heights_Park",
+      },
+      {
+        icon: "quake",
+        title: "A polished fault you can climb",
+        text:
+          "The rock face overlooking Peixotto Playground is a slickenside, a surface of the hill's chert polished along a fault as the rocks rubbed against each other, and later uncovered by quarrying; KQED's Quest calls it one of the largest such exposures in the world. KQED describes the 60-foot slab as open to climbing, mostly on top ropes, and climbers know it as the Beaver Street Wall.",
+        place: "Peixotto Playground & Beaver Street Wall",
+        where: "Roosevelt Way & 15th St",
+        at: [-122.43950, 37.76649],
+        source: "https://www.kqed.org/news/12094577/the-san-francisco-rock-climbing-spot-known-for-its-shiny-surface",
+      },
     ],
+    walk: {
+      intro:
+        "A loop of about 1.6 miles and 80 minutes with stops, for visitors and would-be neighbors: from Castro Station (Muni Metro K, L and M; the F streetcar ends a few steps away), walk west on 17th Street to Ord Street, climb the Vulcan Stairway, take a short detour down States Street to the old brickworks site, follow Roosevelt Way to Museum Way and the Randall Museum, take the trail over the summit and down to 15th Street, then walk back down 15th and Castro streets. Go on a clear day, ideally in spring, when the hill's grassland is in bloom.",
+      miles: 1.6,
+      minutes: 80,
+      tip:
+        "Rec and Park's Corona Heights Trail page has reported the North and Peak trails closed after storm damage, so check it before you go; if they are still closed, skip the summit and follow Roosevelt Way from Museum Way down to 15th Street. The hill itself is residential: for shops, cafés and restaurants, head down Castro Street across Market Street toward 18th Street, or follow Market Street east from Castro.",
+    },
     nearby: ["the Castro", "Cole Valley"],
     restaurants: [
       { name: "Frances", address: "3870 17th St", phone: "(415) 621-3870", url: "https://frances-sf.com" },
@@ -5840,14 +6147,98 @@ export const NEIGHBORHOODS = {
     spirit: "San Francisco's sun-warmed southeast corner — a hilly, historically African-American neighborhood where the Third Street corridor still beats with deep community roots.",
     reasons: ["Among the city's sunniest", "Rich cultural history", "T-Third light rail", "More space for the money"],
     aka: "Bayview–Hunters Point",
-    history: "Bayview grew up around Butchertown, the slaughterhouse district where cattle were once driven down Third Street, and the heavy industry of the city's southeastern flats. During World War II, thousands of African-American workers came to labor at the Hunters Point Naval Shipyard, and the neighborhood became the heart of Black San Francisco. For decades the area was underserved by transit until the Third Street Light Rail Project brought the Muni Metro T line to the corridor in 2007. Today the Third Street corridor holds the largest concentration of Black-owned businesses in the city, anchored by the 1888 Bayview Opera House.",
+    history:
+      "Bayview's first big industry was meat. After an 1868 ordinance banned slaughtering in the city proper, a group of butchers set up a “Butchers' Reservation” on 81 acres of tidal marshland near Islais Creek, and by 1877 all 18 of San Francisco's slaughterhouses stood in the district, one of whose edges was Railroad Avenue, later folded into Third Street. Houses went up on the surrounding grid, two of them now city landmarks, and in 1888 a Masonic lodge's members built the South San Francisco Opera House, named before the city of South San Francisco incorporated.\n\nElectric streetcars arrived on Third Street in 1895. After the 1906 earthquake, the city dumped debris from fallen buildings around Islais Creek, and much of the creek was diverted into culverts and buried. The butchers' trade faded as the district grew more residential, though the last slaughterhouse held on until 1971.\n\nWorld War II remade the neighborhood. The Navy bought the Hunters Point drydocks in December 1939, and as war work drew Black workers west, San Francisco's Black population leapt from about 5,000 in 1940 to 32,000 in 1945. Restrictive covenants kept Black families out of most of the city, and when urban renewal razed homes in the Fillmore, many moved here; by 1960 Black residents were a majority in Bayview–Hunters Point. Third Street became its main street: Sam Jordan opened his tavern there in 1959 and in 1963 became the first African American to run for mayor of San Francisco, and the old opera house was renamed for producer, playwright and actress Ruth Williams. Rail returned to Third Street in 2007 with the T Third.",
     facts: [
-      { icon: "factory", title: "Shipyard heritage", text: "The WWII-era Hunters Point Naval Shipyard drew thousands of African-American workers, shaping Bayview into the heart of Black San Francisco." },
-      { icon: "music", title: "City's oldest theatre", text: "The Bayview Opera House at 4705 Third St, built in 1888, is reputed to be the oldest surviving theatre in San Francisco — a City Landmark and on the National Register of Historic Places." },
-      { icon: "tram", title: "T-Third light rail", text: "The Third Street Light Rail brought Muni Metro's T line to the long-underserved corridor in 2007, with stations the length of Third Street." },
-      { icon: "cow", title: "Butchertown roots", text: "Bayview grew up around Butchertown, the city's old slaughterhouse district, where cowboys once drove cattle down Third Street." },
-      { icon: "shop", title: "Black-owned business hub", text: "The Third Street corridor is home to the largest concentration of Black-owned businesses in San Francisco." },
+      {
+        icon: "cow",
+        title: "Where the butchers were banished",
+        text:
+          "After an 1868 ordinance banned slaughtering in the city proper, a group of butchers set up a “Butchers' Reservation” on 81 acres of tidal marshland near Islais Creek, and by 1877 all 18 of San Francisco's slaughterhouses were there; Railroad Avenue, today's Third Street, was one of the district's edges. In 1888 city inspectors reported a foul smell, decaying animal parts and live pigs under the slaughterhouses. The trade declined after the 1906 earthquake, and the last slaughterhouse closed in 1971.",
+        place: "Butchertown",
+        where: "3rd St & Evans Ave",
+        at: [-122.38797, 37.74261],
+        source: "https://en.wikipedia.org/wiki/Islais_Creek",
+      },
+      {
+        icon: "beer",
+        title: "The Mayor of Butchertown's tavern",
+        text:
+          "Sam Jordan, a longshoreman who had boxed in the Golden Gloves, bought this building, renovated it and reopened it in 1959 as Sam Jordan's Tavern. In 1963 he became the first African American to run for mayor of San Francisco, and by his death in 2003 he was known as the “Mayor of Butchertown,” after the neighborhood's old trade. The city designated the building Landmark No. 263 in 2013; the bar closed in 2019 after 60 years, and the building was sold in 2023.",
+        place: "Sam Jordan's Bar",
+        where: "4004 3rd St",
+        at: [-122.38886, 37.74108],
+        source: "https://en.wikipedia.org/wiki/Sam_Jordan%27s_Bar",
+      },
+      {
+        icon: "road",
+        title: "An alphabet you can walk",
+        text:
+          "From this corner south, Third Street crosses Bayview's avenues in alphabetical order: Kirkwood, La Salle, McKinnon, Newcomb, Oakdale, Palou, Quesada, Revere. KALW's “Hey Area” tied the grid's names to the street renaming the Board of Supervisors took up after the 1906 earthquake, when names repeated or changed from block to block, and asked why one of Bayview's alphabetical runs has no O street; historian John Freeman concluded that “it was just left out, accidentally.”",
+        place: "Bayview's alphabet avenues",
+        where: "3rd St & Kirkwood Ave",
+        at: [-122.38962, 37.73793],
+        source: "https://www.kalw.org/post/hey-area-case-san-franciscos-missing-o-street",
+      },
+      {
+        icon: "house",
+        title: "Mrs. Quinn's house by 1875",
+        text:
+          "No one knows exactly when this house was built, but Mrs. Mary Quinn was living in it by 1875, and it is dated to between 1870 and 1875. The Quinn family kept it until 1958. The city made it Landmark No. 63 on July 6, 1974; it is a private home, so admire it from the sidewalk.",
+        place: "Quinn House",
+        where: "1562 McKinnon Ave",
+        at: [-122.38850, 37.73595],
+        source: "https://en.wikipedia.org/wiki/Quinn_House,_San_Francisco",
+      },
+      {
+        icon: "house",
+        title: "A landmark that moved in 1913",
+        text:
+          "Stephen L. Piper, a prominent carpenter and house builder in the southern part of San Francisco, built this Italianate house, dated to between 1865 and 1870. It first stood on the south side of Sumatra Street, later renamed Quesada, and was moved to this lot on Revere in 1913. The city made it Landmark No. 61 in 1974; like the Quinn House, it is a private home.",
+        place: "Sylvester House",
+        where: "1556 Revere Ave",
+        at: [-122.38911, 37.73135],
+        source: "https://sfplanninggis.org/docs/landmarks_and_districts/LM61.pdf",
+      },
+      {
+        icon: "book",
+        title: "A library renamed for its librarian",
+        text:
+          "Bayview's branch library opened in a storefront in 1927 as the city's 13th branch, and a bequest from Anna E. Waden paid for the red-brick building that opened at Third and Revere in 1969. Its replacement opened in February 2013 and earned LEED Gold certification. In 2014 the Library Commission voted unanimously to add the name of Linda Brooks-Burton, the branch's librarian from 1995 to 2011, who died in September 2013.",
+        place: "Bayview/Linda Brooks-Burton Branch Library",
+        where: "5075 3rd St",
+        at: [-122.39117, 37.73256],
+        source: "https://sfbayview.com/2014/10/unanimous-vote-renames-bayview-library-for-linda-brooks-burton/",
+      },
+      {
+        icon: "shop",
+        title: "Bayview's main street",
+        text:
+          "San Francisco's planning code calls Third Street the primary neighborhood commercial district for Bayview Hunters Point, and its storefronts around the Opera House hold shops, restaurants and cafés. This stretch was Railroad Avenue until it was folded into Third Street early in the 20th century. Electric streetcars began running on Third in 1895, buses replaced them in 1940, and rail returned in 2007 with the T Third.",
+        place: "Third Street shops",
+        where: "3rd St & Palou Ave",
+        at: [-122.39087, 37.73399],
+        source: "https://www.sfmta.com/node/13465",
+      },
+      {
+        icon: "music",
+        title: "The opera house the Masons built",
+        text:
+          "In 1888 members of the Masonic lodge next door had German-born architect Henry Geilfuss build this public hall and theater, and “South San Francisco Opera House” is still carved over the entrance, a name from before the city of South San Francisco incorporated. It survived the 1906 earthquake, became city Landmark No. 8 in 1968 and joined the National Register in 2011, and SFMTA calls it the city's oldest theatre. Renamed for producer, playwright and actress Ruth Williams, it was renovated from 2014 to 2016 for $5.7 million, gaining an outdoor stage with permanent seating on a plaza redesigned by landscape architect Walter Hood.",
+        place: "Bayview Opera House",
+        where: "4705 3rd St",
+        at: [-122.39013, 37.73515],
+        source: "https://en.wikipedia.org/wiki/Bayview_Opera_House",
+      },
     ],
+    walk: {
+      intro:
+        "A 1.3-mile walk for visitors and would-be neighbors, from the T Third's Evans Avenue stop south along Third Street, east into the avenues to two landmark houses from the 1860s and '70s, then back to Third past the library and shops to the Bayview Opera House, steps from the T's Oakdale/Palou stop. Allow about an hour, and check the Opera House's calendar for events on its plaza before you go.",
+      miles: 1.3,
+      minutes: 60,
+      tip:
+        "Between the library and the shops, detour a few steps west across Third onto the 1700 block of Quesada Avenue: in 2002 neighbors Annette Smith and Karl Paige began planting its bare median, under palms planted in the 1920s, and by 2006 neighbors had turned the whole median into a vegetable and flower garden.",
+    },
     restaurants: [
       { name: "Gumbo Social", address: "5176 3rd St", phone: "(415) 655-9195", url: "https://www.gumbosocial.com" },
       { name: "Smoke Soul Kitchen", address: "4618 3rd St", phone: "(415) 900-6093", url: "https://www.smokesoulkitchen.com" },
