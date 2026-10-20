@@ -36,6 +36,7 @@ def placement(title):
     if t.startswith("heat map"):                          return ("stats", 58, "microclimates")
     if t.startswith("microclimates and real estate"):    return ("stats", 60, "")
     if t.startswith("by the numbers"):                    return ("stats", 70, "")
+    if t.startswith("product types"):                     return ("stats", 75, "product-types")
     if t.startswith("the cost of ownership"):             return ("cost", 10, "")
     raise SystemExit(f"web.py: no section for page titled {title!r}")
 

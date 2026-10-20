@@ -1,0 +1,479 @@
+{
+ "year": "2026",
+ "through": "2026-09-30",
+ "quarters": [
+  1,
+  2,
+  3
+ ],
+ "groups": [
+  {
+   "key": "sfh",
+   "label": "SFH",
+   "types": [
+    "Single Family Residence",
+    "Halfplex"
+   ],
+   "n": 1721,
+   "price": 2050000.0,
+   "ppsf": 1174.5445344129555,
+   "ppsfN": 1638,
+   "noSqft": 83,
+   "pctList": 122.0,
+   "dom": 12.0,
+   "volume": 4718847211.0,
+   "byQuarter": {
+    "1": {
+     "n": 423,
+     "price": 1976000.0,
+     "ppsf": 1133.3333333333333,
+     "ppsfN": 405,
+     "noSqft": 18,
+     "pctList": 116.05351170568562,
+     "dom": 11.0,
+     "volume": 1148197865.0
+    },
+    "2": {
+     "n": 782,
+     "price": 2140000.0,
+     "ppsf": 1202.72322255264,
+     "ppsfN": 738,
+     "noSqft": 44,
+     "pctList": 123.52941176470588,
+     "dom": 12.0,
+     "volume": 2272353431.0
+    },
+    "3": {
+     "n": 516,
+     "price": 1987500.0,
+     "ppsf": 1164.0649786455156,
+     "ppsfN": 495,
+     "noSqft": 21,
+     "pctList": 123.63851527712207,
+     "dom": 12.0,
+     "volume": 1298295915.0
+    }
+   },
+   "topHood": {
+    "hood": "Outer Sunset",
+    "n": 191,
+    "price": 1860000.0,
+    "share": 0.11098198721673445
+   },
+   "topSale": {
+    "addr": "2830 Pacific Ave",
+    "price": 27500000.0,
+    "hood": "Pacific Heights",
+    "date": "2026-04-27"
+   }
+  },
+  {
+   "key": "duplex",
+   "label": "Duplex / 2 Homes",
+   "types": [
+    "Duplex",
+    "2 Houses on Lot"
+   ],
+   "n": 257,
+   "price": 2138000.0,
+   "ppsf": 790.273556231003,
+   "ppsfN": 253,
+   "noSqft": 4,
+   "pctList": 109.01001112347052,
+   "dom": 14.0,
+   "volume": 681705314.0,
+   "byQuarter": {
+    "1": {
+     "n": 56,
+     "price": 2087750.0,
+     "ppsf": 733.1896551724137,
+     "ppsfN": 54,
+     "noSqft": 2,
+     "pctList": 103.99100086966385,
+     "dom": 15.0,
+     "volume": 140821238.0
+    },
+    "2": {
+     "n": 98,
+     "price": 2100000.0,
+     "ppsf": 796.0691790479025,
+     "ppsfN": 96,
+     "noSqft": 2,
+     "pctList": 112.3865452451237,
+     "dom": 15.0,
+     "volume": 263212938.0
+    },
+    "3": {
+     "n": 103,
+     "price": 2310000.0,
+     "ppsf": 847.457627118644,
+     "ppsfN": 103,
+     "noSqft": 0,
+     "pctList": 113.56993736951983,
+     "dom": 13.0,
+     "volume": 277671138.0
+    }
+   },
+   "topHood": {
+    "hood": "Outer Richmond",
+    "n": 28,
+    "price": 2014444.0,
+    "share": 0.10894941634241245
+   },
+   "topSale": {
+    "addr": "1629 Taylor St",
+    "price": 11500000.0,
+    "hood": "Russian Hill",
+    "date": "2026-09-14"
+   }
+  },
+  {
+   "key": "condo",
+   "label": "Condo",
+   "types": [
+    "Condominium",
+    "Townhouse",
+    "Loft Condominium",
+    "Loft"
+   ],
+   "n": 1913,
+   "price": 1280000.0,
+   "ppsf": 1119.1860465116279,
+   "ppsfN": 1807,
+   "noSqft": 106,
+   "pctList": 101.11336032388664,
+   "dom": 15.0,
+   "volume": 2922155253.0,
+   "byQuarter": {
+    "1": {
+     "n": 493,
+     "price": 1225000.0,
+     "ppsf": 1063.4441087613293,
+     "ppsfN": 469,
+     "noSqft": 24,
+     "pctList": 100.37174721189591,
+     "dom": 14.0,
+     "volume": 742737063.0
+    },
+    "2": {
+     "n": 758,
+     "price": 1300000.0,
+     "ppsf": 1138.7900355871886,
+     "ppsfN": 705,
+     "noSqft": 53,
+     "pctList": 101.34234234234233,
+     "dom": 15.0,
+     "volume": 1181137998.0
+    },
+    "3": {
+     "n": 662,
+     "price": 1280000.0,
+     "ppsf": 1127.7777777777778,
+     "ppsfN": 633,
+     "noSqft": 29,
+     "pctList": 101.41137063190295,
+     "dom": 14.0,
+     "volume": 998280192.0
+    }
+   },
+   "topHood": {
+    "hood": "South of Market",
+    "n": 219,
+    "price": 899000.0,
+    "share": 0.11447987454260324
+   },
+   "topSale": {
+    "addr": "488 Folsom St #5502",
+    "price": 10500000.0,
+    "hood": "South of Market",
+    "date": "2026-04-24"
+   }
+  },
+  {
+   "key": "tic",
+   "label": "TIC",
+   "types": [
+    "Tenancy in Common",
+    "Co-Ownership"
+   ],
+   "n": 243,
+   "price": 1200000.0,
+   "ppsf": 1061.8308935984269,
+   "ppsfN": 184,
+   "noSqft": 59,
+   "pctList": 103.03030303030303,
+   "dom": 18.0,
+   "volume": 322781066.0,
+   "byQuarter": {
+    "1": {
+     "n": 66,
+     "price": 1137500.0,
+     "ppsf": 1037.037037037037,
+     "ppsfN": 53,
+     "noSqft": 13,
+     "pctList": 100.03849114703618,
+     "dom": 25.5,
+     "volume": 80966267.0
+    },
+    "2": {
+     "n": 101,
+     "price": 1275000.0,
+     "ppsf": 1084.9346990848285,
+     "ppsfN": 74,
+     "noSqft": 27,
+     "pctList": 107.00876095118899,
+     "dom": 15.0,
+     "volume": 143823350.0
+    },
+    "3": {
+     "n": 76,
+     "price": 1112500.0,
+     "ppsf": 1060.4651162790697,
+     "ppsfN": 57,
+     "noSqft": 19,
+     "pctList": 102.97377023040741,
+     "dom": 17.5,
+     "volume": 97991449.0
+    }
+   },
+   "topHood": {
+    "hood": "Mission",
+    "n": 19,
+    "price": 880000.0,
+    "share": 0.07818930041152264
+   },
+   "topSale": {
+    "addr": "1854 Jefferson St",
+    "price": 4995000.0,
+    "hood": "Marina",
+    "date": "2026-06-05"
+   }
+  },
+  {
+   "key": "coop",
+   "label": "Co-op",
+   "types": [
+    "Stock Cooperative"
+   ],
+   "n": 67,
+   "price": 1610000.0,
+   "ppsf": 1156.515034695451,
+   "ppsfN": 63,
+   "noSqft": 4,
+   "pctList": 100.0,
+   "dom": 46.0,
+   "volume": 142722320.0,
+   "byQuarter": {
+    "1": {
+     "n": 21,
+     "price": 1600000.0,
+     "ppsf": 1037.5722543352601,
+     "ppsfN": 19,
+     "noSqft": 2,
+     "pctList": 99.2,
+     "dom": 103.0,
+     "volume": 39639000.0
+    },
+    "2": {
+     "n": 27,
+     "price": 1870000.0,
+     "ppsf": 1253.2383419689118,
+     "ppsfN": 26,
+     "noSqft": 1,
+     "pctList": 100.0,
+     "dom": 38.0,
+     "volume": 66369125.0
+    },
+    "3": {
+     "n": 19,
+     "price": 1610000.0,
+     "ppsf": 1153.2575173477255,
+     "ppsfN": 18,
+     "noSqft": 1,
+     "pctList": 98.87359198998749,
+     "dom": 42.0,
+     "volume": 36714195.0
+    }
+   },
+   "topHood": {
+    "hood": "Nob Hill",
+    "n": 18,
+    "price": 1772500.0,
+    "share": 0.26865671641791045
+   },
+   "topSale": {
+    "addr": "2500 Steiner St #3",
+    "price": 9900000.0,
+    "hood": "Pacific Heights",
+    "date": "2026-04-10"
+   }
+  },
+  {
+   "key": "other",
+   "label": "Other",
+   "types": [
+    "5+ Units",
+    "Fourplex",
+    "Other",
+    "Residential Income Other",
+    "Triplex"
+   ],
+   "n": 318,
+   "price": 2287500.0,
+   "ppsf": 506.8493150684931,
+   "ppsfN": 309,
+   "noSqft": 9,
+   "pctList": 100.0,
+   "dom": 30.0,
+   "volume": 959453475.0,
+   "byQuarter": {
+    "1": {
+     "n": 79,
+     "price": 2300000.0,
+     "ppsf": 499.13194444444446,
+     "ppsfN": 77,
+     "noSqft": 2,
+     "pctList": 99.2063492063492,
+     "dom": 37.0,
+     "volume": 230109000.0
+    },
+    "2": {
+     "n": 134,
+     "price": 2400000.0,
+     "ppsf": 515.2488456522506,
+     "ppsfN": 130,
+     "noSqft": 4,
+     "pctList": 100.0,
+     "dom": 27.0,
+     "volume": 424671676.0
+    },
+    "3": {
+     "n": 105,
+     "price": 2200000.0,
+     "ppsf": 501.5251382289279,
+     "ppsfN": 102,
+     "noSqft": 3,
+     "pctList": 100.0,
+     "dom": 33.0,
+     "volume": 304672799.0
+    }
+   },
+   "topHood": {
+    "hood": "Mission",
+    "n": 22,
+    "price": 1805000.0,
+    "share": 0.06918238993710692
+   },
+   "topSale": {
+    "addr": "1690 Broadway",
+    "price": 35300000.0,
+    "hood": "Pacific Heights",
+    "date": "2026-05-06"
+   }
+  }
+ ],
+ "other": [
+  {
+   "type": "Triplex",
+   "n": 84,
+   "price": 2200000.0,
+   "ppsf": 592.0872752539892,
+   "ppsfN": 80,
+   "noSqft": 4,
+   "pctList": 103.49478149485738,
+   "dom": 21.0,
+   "volume": 203436800.0,
+   "topHood": {
+    "hood": "Mission",
+    "n": 8,
+    "price": 1121500.0,
+    "share": 0.09523809523809523
+   }
+  },
+  {
+   "type": "Fourplex",
+   "n": 76,
+   "price": 1837500.0,
+   "ppsf": 524.0380529602023,
+   "ppsfN": 74,
+   "noSqft": 2,
+   "pctList": 100.0,
+   "dom": 26.0,
+   "volume": 159673887.0,
+   "topHood": {
+    "hood": "Outer Richmond",
+    "n": 7,
+    "price": 1700000.0,
+    "share": 0.09210526315789473
+   }
+  },
+  {
+   "type": "5+ Units",
+   "n": 140,
+   "price": 2899500.0,
+   "ppsf": 450.6344784896317,
+   "ppsfN": 139,
+   "noSqft": 1,
+   "pctList": 98.34920634920636,
+   "dom": 38.0,
+   "volume": 555991000.0,
+   "topHood": {
+    "hood": "Pacific Heights",
+    "n": 10,
+    "price": 4175000.0,
+    "share": 0.07142857142857142
+   }
+  },
+  {
+   "type": "Residential Income Other",
+   "n": 14,
+   "price": 2168500.0,
+   "ppsf": 638.667805950518,
+   "ppsfN": 12,
+   "noSqft": 2,
+   "pctList": 96.27888013047024,
+   "dom": 45.0,
+   "volume": 34832900.0,
+   "topHood": {
+    "hood": "Pacific Heights",
+    "n": 2,
+    "price": 4985700.0,
+    "share": 0.14285714285714285
+   }
+  },
+  {
+   "type": "Other",
+   "n": 4,
+   "price": 1425000.0,
+   "ppsf": 866.7480988593156,
+   "ppsfN": 4,
+   "noSqft": 0,
+   "pctList": 101.1006289308176,
+   "dom": 7.0,
+   "volume": 5518888.0,
+   "topHood": {
+    "hood": "Outer Richmond",
+    "n": 1,
+    "price": 1625000.0,
+    "share": 0.25
+   }
+  }
+ ],
+ "noSqftBig": [
+  {
+   "addr": "2445-2447 Buchanan St",
+   "type": "Triplex",
+   "price": 6850000.0,
+   "hood": "Pacific Heights",
+   "date": "2026-09-09"
+  },
+  {
+   "addr": "716-716A Douglass St",
+   "type": "Duplex",
+   "price": 3000000.0,
+   "hood": "Upper Market",
+   "date": "2026-03-13"
+  }
+ ],
+ "noSqftBigTotal": 2
+}

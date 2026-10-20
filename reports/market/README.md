@@ -12,6 +12,7 @@ bash reports/market/build.sh
 |---|---|---|
 | Narrative pages | `cover3.py` (uses `cover.py`, `market-grid-v2.py`) | `out/cover3.html` |
 | Market grids | `market-grid-v2.py` | `out/market-grid-v2.html` |
+| Product types (one computation for the report page and the site's /market/product-types) | `product.py` (called by `cover3.py`) | the Product Types page in `out/cover3.html`, `app/lib/product-types.json` |
 | Sales-data review (flags only; changes no outputs) | `review.py` | `out/review.json`, `out/review.csv`, `out/outliers.csv` |
 | Proof viewer | `proof.py` | `out/sf-briefing-proof.html` |
 | Web edition | `web.py` | `app/market/report/generated/` (committed) |

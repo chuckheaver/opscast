@@ -4,6 +4,7 @@
 import datetime, html, json, math, re, statistics, importlib.util
 spec=importlib.util.spec_from_file_location("cv",__import__("os").path.join(__import__("os").path.dirname(__import__("os").path.abspath(__file__)),"cover.py")); cv=importlib.util.module_from_spec(spec); spec.loader.exec_module(cv)
 mg=cv.mg; NAV,NAV_LT,GOLD,GOLD_LT,GOLD_MID,UP,DOWN,INK,MUTED,LINE=cv.NAV,cv.NAV_LT,cv.GOLD,cv.GOLD_LT,cv.GOLD_MID,cv.UP,cv.DOWN,cv.INK,cv.MUTED,cv.LINE
+_spec=importlib.util.spec_from_file_location("product", __import__("os").path.join(__import__("os").path.dirname(__import__("os").path.abspath(__file__)),"product.py")); pt=importlib.util.module_from_spec(_spec); _spec.loader.exec_module(pt)
 M,D,sgn=cv.M,cv.D,cv.sgn
 RENTS=[("May",3480,4000),("Jun",3560,4060),("Jul",3400,4180),("Sep",3400,4250)]
 RENT_NOW=4400; RENT_YOY=25.4; RENT_2BR=6340   # Zumper, September 2026 report (Sept 29)
@@ -703,7 +704,7 @@ def build():
     loan=RENT_NOW/pmt(1,cv.RATE_NOW)
     pac=[x for x in s['top']+s['bot'] if 'Pacific / Presidio' in x[1]]; pacpct=sgn(pac[0][0]) if pac else "+7"
 
-    css=mg.FONT_CSS+f"""
+    css=mg.FONT_CSS+pt.CSS+f"""
     @page {{ size: letter landscape; margin: 0.32in 0.35in; }}
     body {{ margin:0; font-family: {mg.SANS}; color:{INK}; }}
     .mast .t, h2, .sig b {{ font-family:{mg.DISPLAY}; }}
@@ -1058,6 +1059,9 @@ def build():
       {weekly_bars(wrows,h=150,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"Jan 1 – {thru}, both years · 2025 full year {w25y:,}"))}
       <div class='cap'>Grey bars after week {wcut} show where last year kept going — {week_peak_after(wrows,wcut)}, which is what a full autumn looks like.</div></div>""")
     o.append(f"<div class='foot'><span>Closed sales (SFAR MLS), Jan 1 – {thru}, 20{yy}; comparisons with 20{py} use the same stretch, and 20{py} activity marked “full year” runs Jan 1 – Dec 31. Days on market as reported; list-to-sale ratios use the final list price.</span><span>page 6 / 9</span></div></div>")
+
+    # Product types (product.py): SFH, Duplex / 2 Homes, Condo, TIC, Co-op, Other.
+    o.append(pt.page_html(pt.compute(mg.period_end() or W["m1"][1]), thru, yy))
 
     o.append("</body></html>")
     # The Cost of Ownership is the report's last page, after the grids and the

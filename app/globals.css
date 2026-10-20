@@ -6067,3 +6067,20 @@ a.lp-nstat-link:hover .lp-nstat-l::after { opacity: 1; }
 /* The 10s (twelve tables) has room for larger type than the old eight-panel page. */
 .rp-sheet.sheetA .nb12 table.top { font-size: 7.6px; }
 .rp-sheet.sheetA .nb12 table.top th { font-size: 6.6px; }
+
+/* Product types (/market/product-types) */
+.ptp { max-width: 1040px; margin: 0 auto; padding: 0 16px 40px; }
+.ptp-scroll { overflow-x: auto; }
+.ptp-t { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+.ptp-t th, .ptp-t td { padding: 8px 10px; border-bottom: 1px solid var(--lp-line); text-align: right; white-space: nowrap; }
+.ptp-t thead th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--lp-muted); }
+.ptp-t th:first-child { text-align: left; }
+.ptp-t small { color: var(--lp-muted); }
+.ptp-bars { display: grid; gap: 10px; }
+.ptp-bar { display: grid; grid-template-columns: 150px 1fr; gap: 2px 12px; align-items: center; font-size: 13.5px; }
+.ptp-bar-l { grid-row: span 2; font-weight: 700; }
+.ptp-bar-v { display: flex; align-items: center; gap: 6px; }
+.ptp-bar-v i { display: block; height: 10px; border-radius: 2px; }
+.ptp-p { background: #203C5F; } .ptp-s { background: #E9BC3F; }
+.ptp-facts { padding-left: 18px; line-height: 1.6; } .ptp-facts li { margin: 6px 0; }
+@media (max-width: 640px) { .ptp-bar { grid-template-columns: 1fr; } .ptp-bar-l { grid-row: auto; } }
