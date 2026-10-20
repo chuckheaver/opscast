@@ -4311,39 +4311,77 @@ export const NEIGHBORHOODS = {
       "Bridges Castro & Duboce",
     ],
     history:
-      "Upper Market Street grew up as a transit spine, carrying cable cars and then electric streetcars up from downtown toward Eureka Valley. The 1980 opening of the Castro Street Muni Metro station cemented it as a transfer hub, while the historic F-line streetcars still rumble past. In recent decades the corridor between the Castro and Church Street filled in with mixed-use development, new condos rising beside Victorian flats and linking the Castro, Duboce Triangle, and Mission Dolores into one walkable, transit-rich strip.",
+      "Upper Market, on this map, is the hillside where Market Street ends its long climb from downtown, curving around the eastern slope of Twin Peaks, whose two summits are also known as Eureka and Noe. The land was part of Rancho San Miguel, the 4,443-acre grant made in 1845 to José de Jesús Noé, which reached from Eureka Valley past Mount Davidson. Corbett Road, a dirt track across these slopes dating from the 1860s, began as a toll road built to collect nickels from day-trippers; by 1902 its franchise had expired, and it was free and open, if not well maintained.\n\nMarket Street arrived with the Twin Peaks Tunnel. While the tunnel was being built, between 1914 and 1917, Market Street, which had ended at Castro Street, was extended up and over the hill until it met Corbett, and from there the road became Portola Drive; a December 1915 photo caption calls it “Portola (then Corbett Road).” Downhill, in the 1930s and 1940s, the Market Street Railway’s 11-Line streetcars ended at 24th Street and Hoffman Avenue, and on September 29, 1944, the company handed its lines and more than 500 streetcars to the city’s Municipal Railway.\n\nThe road was rebuilt again in the 1960s. The 1964 straightening of Upper Market took out a 1928 retaining wall and ramp at 23rd Street, and a viaduct, built where houses had stood, bypassed an older stretch of the road that survives as Cuesta Court. Walkers cross Market on Romain Street’s spiraling overpass, and uphill, a rebuilt trail from Crestline Drive to the summit reopened in August 2025, the last piece of a trail renovation that began at Portola Drive.",
     facts: [
       {
-        icon: "subway",
-        title: "Castro Station hub",
-        text:
-          "Castro Muni Metro station opened in 1980, putting the K, L, M, S, and F lines underfoot at Market and Castro.",
-      },
-      {
         icon: "tram",
-        title: "Historic streetcars",
+        title: "Where the 11-Line streetcars ended",
         text:
-          "The F-line runs restored vintage streetcars from cities around the world up Market Street past the corridor.",
+          "Streetcars once ended their run at this corner. An August 26, 1938, photo looks east down 24th Street to Market Street Railway 11-Line car No. 797 at the terminus here, out over Noe Valley to Potrero Hill, and photos from 1943 show other 11-Line cars at the same 24th and Hoffman terminal. On September 29, 1944, the private company turned over its lines and more than 500 streetcars to the city’s Municipal Railway; today the 35 Eureka bus stops at the corner.",
+        place: "11-Line streetcar terminal",
+        where: "24th St & Hoffman Ave",
+        at: [-122.44050, 37.75098],
+        source: "https://test.opensfhistory.org/photo/wnp67.0357",
       },
       {
-        icon: "flag",
-        title: "Castro at the west end",
+        icon: "road",
+        title: "A ramp lost to a straighter Market",
         text:
-          "The corridor's western edge opens into the historic LGBTQ Castro and Harvey Milk Plaza.",
+          "A May 3, 1928, Public Works photo, looking south from 23rd Street, shows a newly finished retaining wall and ramp leading up to Upper Market Street. Both were demolished in the 1964 straightening of Upper Market, and none of the nearby houses in that view remain. A 1921 photo of the same intersection, taken during the Market Street Extension work, shows it before the wall was built; every home in that view was later demolished or moved.",
+        place: "Old 23rd Street ramp",
+        where: "Grand View Ave & 23rd St",
+        at: [-122.44197, 37.75263],
+        source: "https://test.opensfhistory.org/photo/wnp36.03656",
       },
       {
-        icon: "house",
-        title: "New flats meet old",
+        icon: "bridge",
+        title: "A spiral bridge over Market",
         text:
-          "Recent mixed-use buildings rose alongside classic Victorian flats, reshaping the upper Market streetscape.",
+          "Romain Street runs just three blocks from Douglass Street, and between its second and third blocks a spiraling pedestrian overpass carries it over Market Street; the walk crosses it to reach this corner. A 1921 Public Works photo records the corner of Market and Romain; today the site has a pedestrian overcrossing, and Romain has no automobile access from Market.",
+        place: "Romain Street overpass",
+        where: "Corbett Ave & Romain St",
+        at: [-122.44281, 37.75541],
+        source: "https://choisser.com/hiking/twinpeaks.html",
       },
       {
-        icon: "shopping",
-        title: "Walkable strip",
+        icon: "road",
+        title: "A stub of the old Market Street",
         text:
-          "Restaurants, bars, and shops line the corridor, stitching the Castro to Duboce Triangle and Mission Dolores.",
+          "Cuesta Court was once part of Grand View Avenue and then of Market Street, which the original Market Street Extension work connected with Corbett at this spot. In the 1960s a widening project bypassed it with a viaduct built where houses had stood, and the houses were demolished. The old roadway survives as this short court off Corbett Avenue.",
+        place: "Cuesta Court",
+        where: "Corbett Ave & Cuesta Ct",
+        at: [-122.44396, 37.75085],
+        source: "https://test.opensfhistory.org/neighborhood/upper-market?page=3",
+      },
+      {
+        icon: "money",
+        title: "A toll road for day-trippers",
+        text:
+          "Portola Drive starts near here, where Market Street ends, and follows the old Corbett Road: a December 1915 photo caption calls it “Portola (then Corbett Road).” An April 27, 1902, photo taken from roughly this spot looks south along Corbett Road toward today’s Diamond Heights, and the cabin in it is reputedly the road’s old toll house. The road began as a toll road built to collect nickels from day-trippers, but by then its franchise had expired, and the dirt road was free and open, if not well maintained.",
+        place: "Old Corbett Road",
+        where: "6 Portola Dr",
+        at: [-122.44348, 37.74995],
+        source: "https://test.opensfhistory.org/news/2018/08/12/corbett-road-a-closer-look/",
+      },
+      {
+        icon: "stairs",
+        title: "A rebuilt trail to the summit",
+        text:
+          "Rec and Park rebuilt the trail from Crestline Drive to the summit of Twin Peaks, with new box steps, retaining walls and stringer stairs on its steeper sections, and on August 25, 2025, announced the Crestline Connector Trail complete and open, the final piece of a trail renovation that began at Portola Drive. Work on a new Twin Peaks Promenade at the top broke ground in April 2026 and is expected to finish in mid-2027, and a 2026 Secret San Francisco report says the footpath to Crestline Drive is closed in the meantime. Check Rec and Park’s Twin Peaks page before you climb.",
+        place: "Crestline Connector Trail",
+        where: "74 Crestline Dr",
+        at: [-122.44620, 37.75176],
+        source: "https://sfrecpark.org/634/Twin-Peaks-Trails-Improvement-Project",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.6 miles for visitors and would-be neighbors, from the 35 Eureka stop at 24th Street and Hoffman Avenue along Hoffman and Grand View avenues, over Market Street on the Romain Street overpass, along Corbett Avenue past Cuesta Court to the head of Portola Drive, then up Burnett Avenue to Crestline Drive, where the 37 bus stops. Allow about 75 minutes, and pick a clear day.",
+      miles: 1.6,
+      minutes: 75,
+      tip:
+        "Wear comfortable shoes: this is a hillside walk that ends with the climb up Burnett Avenue to Crestline Drive. There are no shops on the route; the shops and cafés of 24th Street in Noe Valley begin at Diamond Street, two blocks east of the start.",
+    },
     restaurants: [
       { name: "Catch French Bistro", address: "2362 Market St", phone: "(415) 431-5000", url: "https://catchfrenchbistro.com" },
       { name: "La Méditerranée", address: "288 Noe St", phone: "(415) 431-7210", url: "https://lamednoe.com" },
@@ -4377,39 +4415,67 @@ export const NEIGHBORHOODS = {
       "Historic Muni station",
     ],
     history:
-      "Forest Hill was laid out from 1912–1913 by the Newell-Murdoch Company as one of San Francisco's first planned residence parks. Engineers carved curving, tree-lined streets into the slopes below Mount Sutro and filled them with large architect-designed homes in Tudor, Spanish, and Mediterranean styles. The neighborhood's social heart is the Forest Hill Clubhouse, designed by Bernard Maybeck in 1919 and now a city landmark. Purely residential, it remains one of the city's most serene addresses.",
+      "Forest Hill rose on land that had belonged to Adolph Sutro. The Newell-Murdoch Company bought the tract from his heirs, and development began in 1912, the year Mark Daniels surveyed it. Daniels soon worked on a national stage: on June 4, 1914, he was appointed general superintendent and landscape engineer of the national parks, with headquarters in San Francisco. That same year, Forest Hill's first house was finished.\n\nTransit arrived early. On February 3, 1918, the new Twin Peaks Tunnel opened with a station at the neighborhood's edge, first called Laguna Honda and later renamed Forest Hill. Bernard Maybeck, the Berkeley architect, left his mark here as well: a house the Pacific Coast Architecture Database dates to 1913, the Erlanger house of 1916 and, in 1919, a clubhouse for the homeowners' association. A second wave of building came in the 1920s, when the Lang Realty Company began further development.\n\nForest Hill is one of eight master-planned residence parks in San Francisco, and like the others it was bound by deed restrictions. The city Planning Department's history of the residence parks notes that these barred commercial activity, set minimum construction costs and, at first, included racial covenants. Public stairways climb between its curving streets, some of them photographed before the houses around them were built.",
     facts: [
       {
-        icon: "house",
-        title: "Architect-designed homes",
-        text:
-          "Built as a residence park, Forest Hill is full of large custom homes in Tudor, Spanish, and Mediterranean revival styles set on winding wooded streets.",
-      },
-      {
-        icon: "star",
-        title: "A Maybeck masterpiece",
-        text:
-          "The Forest Hill Clubhouse was designed by legendary Bay Area architect Bernard Maybeck in 1919 and is a designated San Francisco landmark.",
-      },
-      {
         icon: "subway",
-        title: "One of America's oldest subway stops",
+        title: "Its first name is still carved",
         text:
-          "Forest Hill Station opened in 1918 as Laguna Honda Station, among the first municipal underground rail stations built in the United States.",
+          "Built from 1916 to 1918 as part of the Twin Peaks Tunnel, the station opened as Laguna Honda, and that name is still carved on its headhouse. It lies deeper underground than any other Muni Metro station, which is why most riders take its elevators. In 2004 the city made it San Francisco Landmark No. 231.",
+        place: "Forest Hill Station",
+        where: "Laguna Honda Blvd & Dewey Blvd",
+        at: [-122.45919, 37.74817],
+        source: "https://en.wikipedia.org/wiki/Forest_Hill_station_(Muni_Metro)",
+      },
+      {
+        icon: "stairs",
+        title: "135 steps up from Magellan",
+        text:
+          "A 1916 photograph of this corner shows the Forest Hill stairway beside the planted intersection of Pacheco Street and Magellan Avenue, when Magellan had no houses yet. A 1974 view shows vases and hedges along the staircase, and the San Francisco Outdoor Gazette's stairway list counts 135 steps on the Pacheco flight.",
+        place: "Pacheco Street stairway",
+        where: "Magellan Ave & Pacheco St",
+        at: [-122.46278, 37.74643],
+        source: "https://test.opensfhistory.org/neighborhood/forest-hill?page=4",
+      },
+      {
+        icon: "house",
+        title: "Maybeck's English manor",
+        text:
+          "Bernard Maybeck designed this three-story house, with engineer John White, in 1916 for S.H. Erlanger and his wife, who had chosen a medieval Lancashire manor, Samlesbury Hall, as its prototype. Maybeck called it an attempt to suggest an English character in California: a house that would never happen in England, yet has an English feeling. It is a private home, best admired from the sidewalk.",
+        place: "Erlanger House",
+        where: "270 Castenada Ave",
+        at: [-122.46262, 37.74702],
+        source: "https://socketsite.com/archives/2008/02/too_beautiful_to_describe_except_by_the_architect_270_c.html",
       },
       {
         icon: "road",
-        title: "A planned residence park",
+        title: "Up the steps, May 1921",
         text:
-          "Developed from 1912–1913 by the Newell-Murdoch Company, its curving streets and stone gateways were designed to follow the natural hillside.",
+          "A photograph dated May 3, 1921, in the Western Neighborhoods Project's archive looks from Castenada Avenue up the Forest Hill Steps toward this corner of San Marcos and 9th avenues. Mark Daniels, who surveyed the tract in 1912, was known for plans that kept a site's existing natural features to preserve a sense of local character, and Forest Hill's streets wind along the contours of the hill.",
+        place: "Forest Hill Steps",
+        where: "San Marcos Ave & 9th Ave",
+        at: [-122.46601, 37.74705],
+        source: "https://test.opensfhistory.org/photo/wnp26.249",
       },
       {
-        icon: "park",
-        title: "Under Mount Sutro",
+        icon: "star",
+        title: "A clubhouse styled as a pub",
         text:
-          "Tucked below the forested slopes of Mount Sutro and near Laguna Honda, the area stays leafy, quiet, and almost entirely residential.",
+          "Forest Hill's homeowners' association commissioned Berkeley architect Bernard Maybeck (1862–1957) to design its clubhouse, and the two-story building, completed in 1919, was styled after a quaint medieval English pub. It still stands on Magellan Avenue as the neighborhood's clubhouse.",
+        place: "Forest Hill Clubhouse",
+        where: "381 Magellan Ave",
+        at: [-122.46410, 37.74548],
+        source: "https://pcad.lib.washington.edu/building/20634",
       },
     ],
+    walk: {
+      intro:
+        "A loop of about 1.3 miles for visitors and would-be neighbors, starting and ending at Forest Hill Station (Muni Metro K, L and M trains, plus the 36, 43, 44 and 52 buses): out Magellan Avenue to the Pacheco Street stairway, up to Castenada Avenue past Maybeck's Erlanger House, up a second flight toward San Marcos and 9th avenues, then down to his 1919 clubhouse and back along Magellan. Allow about an hour, and go in daylight, since the stairways are the heart of the route.",
+      miles: 1.3,
+      minutes: 60,
+      tip:
+        "Forest Hill has no shopping street of its own: for coffee or lunch afterward, ride one stop west to West Portal Station, or walk about 10 minutes downhill from the clubhouse, where cafés and restaurants line West Portal Avenue. Wear good shoes, since the route climbs two stairways.",
+    },
     nearby: ["West Portal"],
     restaurants: [
       { name: "Elena's Mexican Restaurant", address: "255 W Portal Ave", phone: "(415) 622-4440", url: "https://www.elenasmexican.com" },
@@ -4443,39 +4509,77 @@ export const NEIGHBORHOODS = {
     ],
     aka: "Red Rock Hill",
     history:
-      "One of San Francisco's redevelopment-era projects. The steep, rocky \"Red Rock\" hills above Glen Canyon sat largely undeveloped for decades, too rugged to build on cheaply. In the late 1950s and 1960s the SF Redevelopment Agency carved curving streets into the slopes and built Diamond Heights as a planned mid-century community of homes, condos, and townhouses, anchored by a new shopping center. It takes its name from nearby Diamond Street below.",
+      "Diamond Heights spreads over three hills just south of Twin Peaks: Red Rock Hill, at 690 feet the tallest; Gold Mine Hill, at 680; and Fairmount Hill, at 540. As late as the 1950s about three-fourths of the land lay undeveloped, and until the 1960s fewer than 400 people lived here, by one account outnumbered by cows. The Board of Supervisors designated the hills a redevelopment survey area on July 24, 1950, and in 1954 a state appeals court, in San Francisco Redevelopment Agency v. Hayes, upheld treating vacant land as blighted, clearing the way.\n\nSupervisors approved the plan on October 24, 1955. Architect Vernon DeMars's master plan broke from the city grid with curving streets that follow the contours of the hills, and it protected the views of downtown and the bay with height limits, aiming for a “suburb within a city.” The Redevelopment Agency began auctioning parcels in early 1961 and used a competition to attract talented architects. Joseph Eichler built about 100 homes on Red Rock Hill, and Bay Area modernists including Warren Callister, Campbell & Wong and Joseph Esherick designed custom houses and small tracts.\n\nA cluster of high-rise towers with more than 600 apartments was meant to crown Red Rock Hill, but slow sales of the townhouses along Diamond Heights Boulevard, and later financial trouble, brought low-rise units instead. When the project was completed in 1978, the hills held more than 7,000 people. In her 2017 master's thesis, Modern Diamond Heights, architectural historian Hannah Simonson called it one of the highest concentrations of modernist architecture in San Francisco.",
     facts: [
       {
-        icon: "road",
-        title: "A planned community",
+        icon: "art",
+        title: "A redwood wall against runaway cars",
         text:
-          "Diamond Heights was master-planned by the SF Redevelopment Agency in the late 1950s–60s — one of the few city neighborhoods designed largely from scratch, with curving streets that follow the hillside contours.",
-      },
-      {
-        icon: "star",
-        title: "Views in every direction",
-        text:
-          "Built high on the slopes near Twin Peaks, homes here capture sweeping panoramas of downtown, the bay, and the surrounding hills.",
-      },
-      {
-        icon: "park",
-        title: "Glen Canyon Park",
-        text:
-          "On the western edge, this rugged park preserves Islais Creek, dramatic rock outcrops, and trails through one of the city's last natural canyons.",
+          "When Eichler Homes built on the slope below, it deeded an uphill sliver of land here back to the Redevelopment Agency for a “safety wall” to keep runaway vehicles from careening down onto the new houses. Bay Area artist and architect Stefan Alexander Novak's abstract design was chosen in 1966, and the redwood wall, 32 feet high and 50 feet long, went up in 1968, worked with dragonfly and flower motifs that stood for his wife and two daughters. It became a city landmark in 2018.",
+        place: "Diamond Heights Safety Wall",
+        where: "Diamond Heights Blvd & Clipper St",
+        at: [-122.44395, 37.74668],
+        source: "https://commissions.sfplanning.org/hpcpackets/2017-011910DES122017.pdf",
       },
       {
         icon: "house",
-        title: "Mid-century by design",
+        title: "Eichlers on the tallest hill",
         text:
-          "The housing stock skews modern — 1960s-era homes, townhouses, and condos reflecting the redevelopment era rather than the Victorians common elsewhere in SF.",
+          "Red Rock Hill, at 690 feet the tallest of Diamond Heights' three hills, is where Joseph Eichler built about 100 homes, roughly from 1962 to 1964, on Amethyst Way, Amber Drive, Cameo Way and Duncan Street. Claude Oakland & Associates designed them for these steep slopes, and none of the half-dozen or so models turns up in any other Eichler tract. Unusually for Eichler, they are attached row houses, from split-levels to two- and three-story homes, many with atriums.",
+        place: "Red Rock Hill Eichlers",
+        where: "Duncan St & Cameo Way",
+        at: [-122.44304, 37.74519],
+        source: "https://www.eichlernetwork.com/article/suburbia-sky",
       },
       {
-        icon: "bird",
-        title: "Wildlife in the canyon",
+        icon: "park",
+        title: "Modernist play sculptures, kept",
         text:
-          "Glen Canyon's wild slopes draw red-tailed hawks, great horned owls, and coyotes — a pocket of nature minutes from the shopping center.",
+          "Tucked between the shopping center and the northeastern rim of Glen Canyon, this 6.8-acre park is named for former mayor George Christopher, who came to its dedication on April 7, 1971, seven years after he left office. Planners took an interest in its original playground because its 1961 schematic design was by modernist landscape architect Robert Royston. A $5.2 million renovation reopened the park in 2021, with two historic modernist play sculptures and a replica set in a new play area beside the ballfield fence.",
+        place: "George Christopher Playground",
+        where: "Diamond Heights Blvd & Duncan St",
+        at: [-122.44007, 37.74525],
+        source: "https://www.glenparkassociation.org/christopher-park-playground-opens-after-remodel/",
+      },
+      {
+        icon: "shop",
+        title: "Shops planned with the hills",
+        text:
+          "Like the neighborhood's churches and parks, its shops came out of the redevelopment's community planning, unlike those of most of the city's older neighborhoods, and they cluster in this one center: 75,630 square feet at 5214–5290 Diamond Heights Boulevard. When it sold in a deal reported in early 2018, the broker said it was the first time in nearly 40 years the center had come on the investment market; its grocery store had operated here for more than half a century, alongside a drugstore, a bank and a post office.",
+        place: "Diamond Heights Shopping Center",
+        where: "Diamond Heights Blvd & Gold Mine Dr",
+        at: [-122.43769, 37.74361],
+        source: "https://www.nmrk.com/insights/press-releases/nkf-capital-markets-handles-sale-of-diamond-heights-shopping-center",
+      },
+      {
+        icon: "church",
+        title: "A church on the developers' land",
+        text:
+          "According to the parish's history, St. Aidan's congregation was founded in 1954 and first worshipped in an existing church in Cole Valley. In 1962 the Diamond Heights developers granted it this hilltop site at the corner of Diamond Heights Boulevard and Gold Mine Drive, and the church, which the Pacific Coast Architecture Database credits to Skidmore, Owings & Merrill, opened for worship in 1963.",
+        place: "St. Aidan's Episcopal Church",
+        where: "101 Gold Mine Dr",
+        at: [-122.43812, 37.74319],
+        source: "https://pcad.lib.washington.edu/building/16796/",
+      },
+      {
+        icon: "road",
+        title: "The street that named the hills",
+        text:
+          "Diamond Street climbs the eastern slopes of these hills from Noe Valley and runs on downhill into Glen Park, and it gave the neighborhood its name: the Redevelopment Agency proposed “Diamond Heights” because Diamond Street, when extended, would lead into the central part of the area as one of its principal arteries. Up the hill, the new curving streets took the names of precious minerals, among them Amber, Amethyst, Topaz and Turquoise, and even the public stairways got names, some for semiprecious stones and others for women.",
+        place: "Diamond Street",
+        where: "Diamond St & Diamond Heights Blvd",
+        at: [-122.43557, 37.74177],
+        source: "https://www.glenparkhistory.org/diamond-heights-c1l4v",
       },
     ],
+    walk: {
+      intro:
+        "A 0.8-mile one-way walk for visitors and would-be neighbors, from Clipper St & Portola Dr, where the 37, 48 and 52 buses stop, past the redwood Safety Wall, down through the Eichler streets of Red Rock Hill and along Diamond Heights Blvd past the shopping center to Diamond St, where the 35 and 52 stop. Allow about 40 minutes, and go on a clear day, when the views from the hills open up.",
+      miles: 0.8,
+      minutes: 40,
+      tip:
+        "From the last stop, Diamond Street runs downhill a little over half a mile to Glen Park's village shops and its BART station, or catch the 35 or 52 back at the corner.",
+    },
     nearby: ["Glen Park", "Noe Valley"],
     restaurants: [
       { name: "Fiorella Noe", address: "4042 24th St" },
@@ -4508,39 +4612,77 @@ export const NEIGHBORHOODS = {
       "Pure residential calm",
     ],
     history:
-      "Built around 1910–1911 by Joseph A. Leonard's Urban Realty Improvement Company on the site of the former Ingleside Racetrack (1895–1905), once the last horse-racing venue in San Francisco. Leonard reimagined the land as a planned residence park of single-family homes with curving, landscaped streets. The oval Urbano Drive traces the exact loop of the old track, and a massive sundial, dedicated in 1913 as a marketing stunt, became the neighborhood's lasting landmark.",
+      "Ingleside Terraces is built on a racetrack. Ed Corrigan and others bought the land from Adolph Sutro for $165,000, and their Pacific Coast Jockey Club opened the Ingleside Racetrack on Thanksgiving Day, November 28, 1895. Six days later a streetcar spur out Ocean Avenue reached Victoria Street for the crowds. A ban on gambling closed the track in March 1899, but racing came back, and the track ran until December 31, 1905. The 1906 earthquake ended plans to reopen it: the track's owner, Thomas Williams, offered the grounds to the city as a refugee camp, which also took in patients from today's Laguna Honda Hospital and served 1,287 people before closing in January 1908.\n\nWilliams optioned the property for $400,000 to Joseph A. Leonard, who had built a neighborhood of Victorian homes in Alameda and laid out Jordan Park, and in March 1910 the Urban Realty Improvement Company, or Urico, which Leonard managed, bought it. The track and grandstand came down, but the clubhouse stayed on as the sales office. Urico laid out 613 parcels on 148 acres, with stone gateways and a loop road, Urbano Drive, paved on the old racecourse by 1912; one local history calls it the city's first tract with wide, smooth streets built for the automobile. On the night of October 10, 1913, about 1,500 people came to dedicate a giant sundial meant to draw buyers.\n\nToday the tract, one of nine master-planned residence parks in the city, holds about 750 detached homes. In 2021 San Francisco made the sundial and its little park a city landmark, calling it an excellent example of the public landscape features common to the residence parks of the period.",
     facts: [
       {
-        icon: "sun",
-        title: "One of the world's largest sundials",
-        text:
-          "The Ingleside Terraces Sundial, dedicated October 10, 1913, stands about 28 feet tall in marble and concrete on Entrada Court. Promoted as the largest in the world at the time, some 1,500 people attended its unveiling.",
-      },
-      {
-        icon: "road",
-        title: "Streets shaped like a racetrack",
-        text:
-          "The oval Urbano Drive is laid out exactly along the loop of the old Ingleside Racetrack, so residents today live around the curve of a vanished horse-racing course.",
-      },
-      {
         icon: "star",
-        title: "A planned residence park",
+        title: "Twelve gateways, 67 columns",
         text:
-          "Laid out as a self-contained residence park, the neighborhood was given curving streets, generous lots, gates, and entry monuments to attract upper-income buyers in the early 1910s.",
+          "The neighborhood's homes archive counts 12 gateways around Ingleside Terraces with a total of 67 imposing stone columns, and its record of them includes this entrance at Ocean and Cerritos avenues, with photographs from about 1912 held by the San Francisco Public Library's History Center. Through the pillars, Cerritos Avenue curves southwest toward the old racetrack grounds.",
+        place: "Cerritos Avenue gateway",
+        where: "Ocean Ave & Cerritos Ave",
+        at: [-122.46678, 37.72722],
+        source: "https://sfog.us/homes/Gateways.htm",
       },
       {
         icon: "house",
-        title: "Purely residential",
+        title: "The clubhouse that sold the lots",
         text:
-          "There are no shops or restaurants inside Ingleside Terraces itself — it is almost entirely single-family homes; daily errands happen a few blocks north on Ocean Avenue.",
+          "The racetrack's clubhouse stood at the southeast corner of Cerritos Avenue and Moncada Way, with its carriage entrance on Cerritos and its south side facing the track, today's Urbano Drive. Urico kept it as its sales office through the 1910s and '20s, at 85 Cerritos, while the track's old stables became the company's planing mill. The homes association met in the clubhouse until it gave way to houses, in 1930 by one account and 1938 by another; the homes here are private, so look from the sidewalk.",
+        place: "Racetrack clubhouse site",
+        where: "85 Cerritos Ave",
+        at: [-122.46890, 37.72617],
+        source: "https://sfog.us/homes/Clubhouse.htm",
+      },
+      {
+        icon: "sun",
+        title: "A sundial dedicated at night",
+        text:
+          "Urico built the giant dial as a marketing device and dedicated it on the night of October 10, 1913, the same day the Atlantic and Pacific waters first met at the Panama Canal; about 1,500 people came. Its gnomon stands 26 or 28 feet tall, depending on the source, and the four columns around the circle represent the Doric, Ionic, Corinthian and Tuscan orders, each topped by an urn whose friezes show the four ages of life, the four seasons and the four periods of the day. In 2021 the dial and its park became San Francisco Landmark No. 293.",
+        place: "Ingleside Terraces Sundial",
+        where: "West end of Entrada Ct",
+        at: [-122.46876, 37.72469],
+        source: "https://sundials.org/index.php/sundial-registry/onedial/82",
+      },
+      {
+        icon: "road",
+        title: "A street on a one-mile racetrack",
+        text:
+          "Urbano Drive follows the course of the old one-mile oval and was paved along the loop by 1912, so its long curves are the track's own. About 12,000 people braved heavy rain for the track's inaugural meeting in 1895, and after the 1906 earthquake the grounds became a refugee camp that also housed patients from today's Laguna Honda Hospital. The houses along the curve are private, so enjoy them from the sidewalk.",
+        place: "Urbano Drive",
+        where: "26 Urbano Dr",
+        at: [-122.46319, 37.72482],
+        source: "https://en.wikipedia.org/wiki/Ingleside_Terraces,_San_Francisco",
+      },
+      {
+        icon: "shop",
+        title: "Groceries, bakeries and a movie palace",
+        text:
+          "This block of Ocean Avenue, between Ashton Avenue and Victoria Street, is zoned as part of the city's Ocean Avenue Neighborhood Commercial Transit District, and the racetrack streetcar of 1895 ran along it, as the K Ingleside does today. The 1940 city directory listed three grocery stores, two bakeries, two hardware stores, a pharmacy and a drug store on the 1900 block. Across the street stands the El Rey Theatre, an Art Deco movie house designed by Timothy Pflueger and built in 1931, which became city Landmark No. 274 in 2017 and has been a church since 1978.",
+        place: "Ocean Avenue shops",
+        where: "Ocean Ave & Ashton Ave",
+        at: [-122.46276, 37.72532],
+        source: "https://sfog.us/homes/Ocean.htm",
       },
       {
         icon: "tram",
-        title: "The tunnel sealed the deal",
+        title: "Where the racetrack streetcar ended",
         text:
-          "The development was timed to benefit from the Twin Peaks Tunnel streetcar line, which promised fast, clean transit to downtown for buyers settling these outer blocks.",
+          "On December 4, 1895, six days after the Ingleside Racetrack opened, the Market Street Railway opened a spur off its Mission Street line out Ocean Avenue to Victoria Street to serve it, and that terminus is today's Ocean and Victoria stop on the K Ingleside. A photograph of the Victoria gateway from about 1912 appears, according to the neighborhood's homes archive, to show Urico's manager, Joseph A. Leonard, and his son George, both architects who designed many Ingleside Terraces homes.",
+        place: "Victoria Street gateway",
+        where: "Ocean Ave & Victoria St",
+        at: [-122.46435, 37.72601],
+        source: "https://en.wikipedia.org/wiki/Ocean_and_Fairfield_/_Ocean_and_Victoria_stations",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk of about 1.2 miles for visitors and would-be neighbors: ride the K Ingleside to Ocean and Cerritos avenues, pass through the stone gateway, follow Cerritos Avenue to the old clubhouse site, detour to the sundial at the west end of Entrada Court inside the oval, then follow Urbano Drive along the racetrack's curve and finish on Ocean Avenue at the K stop at Victoria Street. Allow about 50 minutes, and go on a clear afternoon.",
+      miles: 1.2,
+      minutes: 50,
+      tip:
+        "A sundial needs sun, and on a foggy day this one casts no shadow, so go when the fog has burned off; the walk ends on the commercial 1900 block of Ocean Avenue, beside the K stop.",
+    },
     nearby: ["Ocean Avenue"],
     restaurants: [
       { name: "Beep's Burgers", address: "1051 Ocean Ave", phone: "(415) 584-2650" },
@@ -4571,39 +4713,67 @@ export const NEIGHBORHOODS = {
       "Quiet, leafy, residential",
     ],
     history:
-      "Clarendon Heights took shape as a mid-20th-century residential area climbing the north slopes below Mount Sutro and Twin Peaks, named for Clarendon Avenue, which threads up the hill. Single-family homes filled the steep lots through the 1940s and 1950s. The 977-foot Sutro Tower, completed in 1973, rose directly above the enclave, and the wooded Interior Greenbelt and Mount Sutro forest at its back have long defined its quiet, view-rich character.",
+      "Clarendon Heights climbs the northern shoulder of Twin Peaks, from Corbett Avenue up to the hilltop beneath Sutro Tower and west along Clarendon Avenue. The land was part of Adolph Sutro's largest purchase, 1,200 acres of Rancho San Miguel, and in 1886, the year he helped launch California's first Arbor Day, he planted neighboring Mount Sutro with blue gum eucalyptus, Monterey pine and Monterey cypress. The neighborhood's name was in use early: an August 1894 photo of the Spring Valley Water Company building a 500,000-gallon tank on the knob now called Tank Hill shows a Clarendon Heights sign.\n\nAfter Sutro's death his estate was in litigation for almost twenty years, and around 1930 much of the developable, eucalyptus-covered land began to be cleared, work that went on into the 1960s. That year his grandson, Adolph Gilbert Sutro, had architect Harold G. Stoner build La Avanzada, a medieval-style mansion of 15 rooms with stone lions at its entrance, on family land at the top. Houses filled the streets below, among them a mid-century house on Palo Alto Avenue custom built in 1953 for Mayor Elmer E. Robinson.\n\nIn August 1948 the younger Sutro sold La Avanzada to ABC, and its new station, KGO-TV, went on the air on May 5, 1949, producing its shows in the mansion. In the 1960s this site won out over Mount San Bruno, judged too close to the airport for a taller tower, and the city, calling the mansion a firetrap, required its demolition as part of the permit. The 977-foot Sutro Tower began transmitting on July 4, 1973, and was San Francisco's tallest structure until Salesforce Tower passed it in 2018.",
     facts: [
       {
         icon: "tower",
-        title: "Sutro Tower looms overhead",
+        title: "The restaurant that never was",
         text:
-          "The 977-foot red-and-white TV and radio tower, completed in 1973, sits directly above the neighborhood and is visible across much of the city.",
+          "Initial designs envisioned a 1,200-foot tower with a restaurant and observation deck, and a December 1962 Chronicle story floated its tourist appeal, but the tower raised a decade later stops at 977 feet with no restaurant; its tip stands 1,811 feet above sea level. Albert C. Martin & Associates of Los Angeles designed the three-legged tower, and Kline Towers, a subsidiary of South Carolina's Kline Iron and Steel, fabricated and erected it in a $4 million project begun in 1971 after years of hearings and litigation. The Sutro mansion that held KGO-TV's studios was torn down to make way for it.",
+        place: "Sutro Tower",
+        where: "1 La Avanzada St",
+        at: [-122.45284, 37.75523],
+        source: "https://www.sutrotower.com/tower-history",
       },
       {
-        icon: "star",
-        title: "Views in every direction",
+        icon: "mayor",
+        title: "A mayor's house on the Ridge Trail",
         text:
-          "Hillside homes here capture sweeping panoramas, from the bay and downtown to the Pacific and the western avenues.",
+          "The Bay Area Ridge Trail climbs through here: from the Clarendon trailhead of the Mount Sutro forest, its route crosses Clarendon Avenue to Dellbrook Avenue, curves onto La Avanzada Street and turns onto Palo Alto Avenue just before the Sutro Tower gate, then takes Marview Way and a trail by the Twin Peaks Reservoir up to Twin Peaks Boulevard. On Palo Alto, the mid-century house at No. 100 was custom built in 1953 for Mayor Elmer E. Robinson.",
+        place: "Palo Alto Avenue",
+        where: "Palo Alto Ave & Glenbrook Ave",
+        at: [-122.45037, 37.75705],
+        source: "https://ridgetrail.org/mount-sutro-twin-peaks/",
       },
       {
-        icon: "bird",
-        title: "Backed by a hidden forest",
+        icon: "park",
+        title: "A road cut through Sutro's trees",
         text:
-          "The Interior Greenbelt and the eucalyptus woods of Mount Sutro climb right behind the homes, with trails just steps away.",
-      },
-      {
-        icon: "house",
-        title: "Purely residential enclave",
-        text:
-          "There are no shops or restaurants within Clarendon Heights itself — it's a small, affluent pocket of large single-family homes.",
+          "City Public Works photographers recorded Clarendon Avenue's construction on November 19, 1930: one view shows the new road running just inside Sutro Forest, past a house that still stands as 114–116 Clarendon, and another shows trees being cleared for it; on December 30 the forest slash was being burned. Logging by Sutro's heirs was halted in 1934 after a fire, and the forest was logged again during World War II.",
+        place: "Clarendon Avenue",
+        where: "Mountain Spring Ave & Clarendon Ave",
+        at: [-122.44951, 37.75841],
+        source: "https://test.opensfhistory.org/neighborhood/clarendon-heights?page=9",
       },
       {
         icon: "road",
-        title: "Named for Clarendon Avenue",
+        title: "A figure eight around two peaks",
         text:
-          "The neighborhood takes its name from the winding avenue that climbs the hill, connecting it toward Twin Peaks and Laguna Honda.",
+          "From Clarendon Avenue, Twin Peaks Boulevard climbs south toward the two summits, Eureka to the north and Noe to the south, about 660 feet apart, and runs a figure eight around them. Each peak is just over 900 feet high, and Wikipedia ranks them the city's second- and third-highest natural points, after 928-foot Mount Davidson.",
+        place: "Twin Peaks Boulevard",
+        where: "Twin Peaks Blvd & Clarendon Ave",
+        at: [-122.44790, 37.75888],
+        source: "https://en.wikipedia.org/wiki/Twin_Peaks_(San_Francisco)",
+      },
+      {
+        icon: "stairs",
+        title: "Old stone above, pink cement below",
+        text:
+          "Just north of Clayton and Corbett, the Pemberton Place steps climb the hill toward Graystone and Crown terraces, crossing Villa Terrace, with benches and handrails along the way. An OpenSFHistory photo taken from Villa Terrace shows the original steps, which its caption says were replaced in the 1990s; in 2009 a Streetsblog writer found the top flight still old stone and the lower two flights redone in pink cement with a water fountain, and tied water seeping from the hillside at Clayton and Corbett to a historic spring.",
+        place: "Pemberton Place steps",
+        where: "Clayton St & Corbett Ave",
+        at: [-122.44650, 37.75900],
+        source: "https://sf.streetsblog.org/2009/07/07/water-wars-past-and-future",
       },
     ],
+    walk: {
+      intro:
+        "A one-way, mostly downhill walk of about a mile for visitors and would-be neighbors: from the 36 bus stop at Panorama Drive and Dellbrook Avenue, climb Dellbrook and La Avanzada Street to the Sutro Tower gate, wind down Palo Alto Avenue and the side streets below it to Clarendon Avenue, follow Clarendon to Twin Peaks Boulevard, then take Crown Terrace to the Pemberton Place steps and descend to Clayton Street at Corbett Avenue, where the 33 and 37 buses stop. Allow about 50 minutes, and pick a clear day for the views east over the city.",
+      miles: 1.1,
+      minutes: 50,
+      tip:
+        "There are no shops on these residential streets; the nearest cafés and shops are in Cole Valley, on Cole Street around Carl Street, or along Castro and 18th streets, which the 33 bus reaches from the last stop. With energy to spare, Twin Peaks Boulevard climbs on from Clarendon Avenue to the summits; check Rec and Park for any closures before you go.",
+    },
     nearby: ["Cole Valley", "the Haight"],
     restaurants: [
       { name: "Zazie", address: "941 Cole St", phone: "(415) 564-5332", url: "https://www.zaziesf.com" },
