@@ -245,25 +245,6 @@ export const SUN_TOOLS = [
 
 // ----------------------------------------------------------------- 6. Fog
 
-export const FOG_WHAT = [
-  {
-    h: "What it is",
-    bullets: [
-      "Air cooled to its dew point — the water it can no longer hold condenses.",
-      "Ours is advection fog: humid ocean air crossing water colder than itself.",
-      "Not tule fog — that forms on cold, still winter nights in the Central Valley.",
-    ],
-  },
-  {
-    h: "Why summer",
-    bullets: [
-      "Every driver peaks May to August: strongest High, coldest water, hottest Valley.",
-      "Foggiest month: July.",
-      "September and October relax the pattern — our warmest, clearest months.",
-    ],
-  },
-];
-
 export const DECK = [
   { k: "Shallow", ft: 600, sub: "under 800 ft", p: "Peaks in sun above the fog" },
   { k: "Typical", ft: 1200, sub: "800 – 1,500 ft", p: "Burns off late morning" },

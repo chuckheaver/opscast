@@ -20,7 +20,7 @@ import { LotPlan, NeighborShadow, SlopeCompare, FieldRules, SkyChart } from "./s
 import {
   LEDE, KOPPEN, LATITUDE, ENGINE, ENGINE_BULLETS,
   BAY_ZONES, BAY_BULLETS, BAY_NOTE, BELTS_LEAD, MICRO_FACTORS, BELTS, FOG_HOURS, FOG_HOURS_NOTE,
-  BLOCK, LOT_BULLETS, SUN_TOOLS, FOG_WHAT, DECK, FOG_TOPO, YEAR_BULLETS, DISCLAIMER,
+  BLOCK, LOT_BULLETS, SUN_TOOLS, DECK, FOG_TOPO, YEAR_BULLETS, DISCLAIMER,
 } from "./content";
 
 export const metadata = {
@@ -190,11 +190,10 @@ export default function Page() {
           {/* Fog first — it is what draws the city's lines. The menu's
               "Fog Map" item lands here. */}
           <div className="mc-sub-sec" id="fog">
-            <h3 className="mc-h3">Fog</h3>
+            <h3 className="mc-h3">Advection Fog</h3>
             <FogMapCard />
             <FogClock />
             <FogStory />
-            <Cards items={FOG_WHAT} />
             <DeckHeights decks={DECK} />
             <Cards items={FOG_TOPO} cols={3} />
           </div>
