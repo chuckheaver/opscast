@@ -5038,6 +5038,8 @@ a.lp-nstat-link:hover .lp-nstat-l::after { opacity: 1; }
 .walk-intro { margin: 0 0 8px; }
 .walk-meta { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13.5px; color: #505050; margin-bottom: 8px; }
 .walk-meta b { color: #131A25; }
+.walk-gmaps { color: #203C5F; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.walk-gmaps::after { content: " ↗"; }
 .walk-map { width: 100%; height: 440px; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px var(--lp-line), 0 10px 26px rgba(16,23,32,.10); }
 @media (max-width: 720px) { .walk-map { height: 340px; } }
 .walk-tip { margin: 8px 0 0; font-size: 14px; color: #505050; }

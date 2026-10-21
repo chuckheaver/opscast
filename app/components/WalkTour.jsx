@@ -21,6 +21,15 @@ function bboxOf(coords) {
   return [[x0, y0], [x1, y1]];
 }
 
+// The tour as Google Maps walking directions: stop 1 to the last stop, through
+// the others in order (Google takes up to 9 in between; our tours have at most 9 stops).
+const googleWalk = stops => {
+  const ll = s => `${s.at[1]},${s.at[0]}`;
+  const q = new URLSearchParams({ api: "1", travelmode: "walking", origin: ll(stops[0]), destination: ll(stops.at(-1)) });
+  if (stops.length > 2) q.set("waypoints", stops.slice(1, -1).slice(0, 9).map(ll).join("|"));
+  return `https://www.google.com/maps/dir/?${q}`;
+};
+
 // The walking route through the stops, from the browser's store or Mapbox.
 async function walkingRoute(stops, key) {
   try { const hit = JSON.parse(localStorage.getItem(key) || "null"); if (hit?.geometry) return hit; } catch {}
@@ -122,6 +131,7 @@ export default function WalkTour({ name, polygons = [], stops = [], walk }) {
         <b>{located.length} stops</b>
         {miles ? <span>{miles.toFixed(1)} mi</span> : null}
         {minutes ? <span>about {Math.round(minutes / 5) * 5} min on foot</span> : null}
+        <a className="walk-gmaps" href={googleWalk(located)} target="_blank" rel="noopener noreferrer">Launch Walking Tour in Google Maps</a>
       </div>
       <div ref={ref} className="walk-map" role="region" aria-label={`Walking tour of ${name}: ${located.length} stops on a map`} />
       {walk?.tip && <p className="walk-tip"><b>Tip.</b> {walk.tip}</p>}
