@@ -115,6 +115,10 @@ export default function WalkTour({ name, polygons = [], stops = [], walk }) {
         const r = await walkingRoute(located, key);
         if (cancelled) return;
         map.getSource("walk")?.setData({ type: "Feature", geometry: r.geometry, properties: {} });
+        // The streets can run past the stops (a dog-leg around a block, a
+        // stair at the edge), so frame the whole route, not just the pins.
+        const all = [...(r.geometry?.coordinates || []), ...located.map(s => s.at)];
+        map.fitBounds(bboxOf(all), { padding: 56, duration: 0 });
         setMeasure({ miles: r.meters / 1609.34, minutes: r.seconds / 60 });
       } catch { /* the straight line stays */ }
     });
