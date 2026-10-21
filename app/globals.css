@@ -4863,7 +4863,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-stat-l { margin-top: 8px; font-size: 12px; line-height: 1.45; color: rgba(255,255,255,0.72); }
 
 /* Six layers ---------------------------------------------------------- */
-.lp-layers { padding: clamp(54px, 8vw, 92px) clamp(18px, 5vw, 56px); }
+.lp-layers { padding: clamp(54px, 8vw, 92px) clamp(18px, 5vw, 56px) clamp(16px, 2vw, 24px); }
 .lp-layers .lp-section-head, .lp-layer-grid { max-width: 1240px; margin-inline: auto; }
 .lp-layer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .lp-layer {
@@ -4883,7 +4883,7 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
 .lp-mapshow-body { margin-top: 16px; font-size: 15.5px; line-height: 1.75; color: var(--lp-body); }
 
 /* About ---------------------------------------------------------------- */
-.lp-about { padding: clamp(54px, 8vw, 92px) clamp(18px, 5vw, 56px); }
+.lp-about { padding: clamp(18px, 2.2vw, 28px) clamp(18px, 5vw, 56px) clamp(54px, 8vw, 92px); }
 .lp-about-inner {
   max-width: 1240px; margin-inline: auto;
   display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr);
@@ -5122,10 +5122,12 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 /* Guide promo on the landing page ---------------------------------------- */
 .lp-guide-promo {
   background: var(--lp-cream);
-  padding: clamp(46px, 7vw, 78px) clamp(18px, 5vw, 56px);
+  padding: clamp(14px, 1.8vw, 22px) clamp(18px, 5vw, 56px);
 }
 .lp-guide-promo > div { max-width: 1240px; margin-inline: auto; }
-.lp-guide-promo .lp-h2 { margin-top: 10px; }
+.lp-guide-promo .lp-h2 { margin-top: 6px; }
+.lp-guide-promo .lp-mapshow-body { margin-top: 6px; }
+.lp-guide-promo .lp-btn { margin-top: 14px; }
 .lp .lp-h2 a.lp-h2-link { color: var(--lp-accent); text-decoration: underline; text-decoration-color: #E9BC3F; text-decoration-thickness: 4px; text-underline-offset: 7px; }
 .lp .lp-h2 a.lp-h2-link:hover, .lp .lp-h2 a.lp-h2-link:focus-visible { color: var(--lp-navy-2); }
 
