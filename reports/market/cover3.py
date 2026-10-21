@@ -632,28 +632,33 @@ def zip_of(r):
     return None
 
 def site_kpis():
-    """The home page's By the Numbers band, figure for figure: same file
-    (app/lib/landing-stats.json), same rounding as Landing.jsx, so the
-    report and the site can never show different numbers."""
+    """The home page's By the Numbers boxes, figure for figure: same file
+    (app/lib/landing-stats.json), same labels and rounding as Landing.jsx, so
+    the report and the site can never show different numbers. Four boxes:
+    SFH, Condo / TIC / Co-op and Other (the site's three categories), then
+    All sales."""
     import os, math
     L=json.load(open(os.path.join(mg.ROOT,"app/lib/landing-stats.json")))
     m,p=L["market"]["current"],L["market"]["prior"]
     rnd=lambda v: math.floor(v+0.5)                                  # JS Math.round
     money=lambda v: f"${v/1e6:.2f}M"
-    pct=lambda a,b: f"{'+' if a/b-1>=0 else ''}{rnd((a/b-1)*100)}%"
+    usd=lambda v: f"${rnd(v):,}" if v is not None else "—"
+    pct=lambda a,b: f"{'+' if a/b-1>=0 else ''}{rnd((a/b-1)*100)}%" if a is not None and b else ""
     unit=lambda a,b,one,many: f"{'+' if a-b>=0 else ''}{rnd(a-b)} {one if abs(rnd(a)-rnd(b))==1 else many}"
-    rows=[("SFH Median Sale",money(m["sfh"]["median"]),money(p["sfh"]["median"]),pct(m["sfh"]["median"],p["sfh"]["median"])),
-          ("Condo Median Sale",money(m["condo"]["median"]),money(p["condo"]["median"]),pct(m["condo"]["median"],p["condo"]["median"])),
-          ("Total Units Sold — All",f"{m['n']:,}",f"{p['n']:,}",pct(m["n"],p["n"])),
-          ("Total Sales Volume",f"${m['volume']/1e9:.2f}B",f"${p['volume']/1e9:.2f}B",pct(m["volume"],p["volume"])),
-          ("SFH DOM",rnd(m["sfh"]["dom"]),rnd(p["sfh"]["dom"]),unit(m["sfh"]["dom"],p["sfh"]["dom"],"day","days")),
-          ("Condo DOM",rnd(m["condo"]["dom"]),rnd(p["condo"]["dom"]),unit(m["condo"]["dom"],p["condo"]["dom"],"day","days")),
-          ("SFH Sale Price vs List",f"{rnd(m['sfh']['saleToList'])}%",f"{rnd(p['sfh']['saleToList'])}%",unit(m["sfh"]["saleToList"],p["sfh"]["saleToList"],"pt","pts")),
-          ("Condo Sale Price vs List",f"{rnd(m['condo']['saleToList'])}%",f"{rnd(p['condo']['saleToList'])}%",unit(m["condo"]["saleToList"],p["condo"]["saleToList"],"pt","pts"))]
+    def seg(k):
+        a,b=m[k],p[k]
+        return [("Median sale",money(a["median"]),money(b["median"]),pct(a["median"],b["median"]),True),
+                ("Units sold",f"{a['n']:,}",f"{b['n']:,}",pct(a["n"],b["n"]),False),
+                ("Median $/sf",usd(a.get("ppsf")),usd(b.get("ppsf")),pct(a.get("ppsf"),b.get("ppsf")),False),
+                ("DOM",rnd(a["dom"]),rnd(b["dom"]),unit(a["dom"],b["dom"],"day","days"),False),
+                ("Sale price vs list",f"{rnd(a['saleToList'])}%",f"{rnd(b['saleToList'])}%",unit(a["saleToList"],b["saleToList"],"pt","pts"),False)]
+    boxes=[("sfh","SFH",seg("sfh")),("condo","Condo / TIC / Co-op",seg("condo")),("other","Other",seg("other")),
+           ("all","All sales",[("Total sales volume",f"${m['volume']/1e9:.2f}B",f"${p['volume']/1e9:.2f}B",pct(m["volume"],p["volume"]),True),
+                               ("Total units sold",f"{m['n']:,}",f"{p['n']:,}",pct(m["n"],p["n"]),True)])]
     d=datetime.date.fromisoformat(L["market"]["through"])
     through=d.strftime("%b %-d, %Y").replace("Sep ","Sept ")
     yy,py=L["market"]["year"][2:],L["market"]["priorYear"][2:]
-    return rows,through,yy,py
+    return boxes,through,yy,py
 
 def mtg_pmt(P,r,yrs=30):
     i=r/100/12; n=yrs*12; return P*i/(1-(1+i)**-n)
@@ -694,14 +699,16 @@ def build():
     .sband {{ background:#131A25; border-radius:6px; padding:9px 16px 2px; margin-bottom:7px; }}
     .sband-h {{ font-size:9.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#CEE2E6; margin-bottom:3px; }}
     .sband-h span {{ color:rgba(255,255,255,0.50); }}
-    .sband-row {{ display:grid; grid-template-columns:repeat(4,1fr); }}
-    .sb {{ padding:6px 12px 7px; border-right:1px solid rgba(255,255,255,0.09); border-bottom:1px solid rgba(255,255,255,0.09); }}
-    .sb:nth-child(4n) {{ border-right:none; }} .sb:nth-child(4n+1) {{ padding-left:0; }}
-    .sb:nth-child(n+5) {{ border-bottom:none; }}
-    .sb-v {{ font-family:Georgia,'Times New Roman',serif; line-height:1.05; font-size:21px; font-weight:700; color:#CEE2E6; white-space:nowrap; }}
-    .sb-v span {{ margin-left:0.44em; font-size:0.66em; font-weight:600; color:rgba(255,255,255,0.50); }}
-    .sb-l {{ margin-top:3px; font-size:8.6px; line-height:1.35; color:rgba(255,255,255,0.72); }}
-    .sb-l b {{ color:#fff; font-weight:700; }}
+    .sband-row {{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding-bottom:8px; }}
+    .sbx {{ border:1px solid rgba(255,255,255,0.14); border-radius:7px; padding:5px 9px 2px; background:rgba(255,255,255,0.025); }}
+    .sbx-h {{ font-size:8px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#fff; margin-bottom:1px; }}
+    .sbx-r {{ display:flex; justify-content:space-between; align-items:baseline; gap:6px; padding:2px 0; border-top:1px solid rgba(255,255,255,0.09); }}
+    .sbx-l {{ font-size:7.4px; line-height:1.25; color:rgba(255,255,255,0.72); }} .sbx-l b {{ color:#fff; font-weight:700; white-space:nowrap; }}
+    .sbx-v {{ font-family:Georgia,'Times New Roman',serif; font-weight:700; color:#CEE2E6; font-size:10.5px; line-height:1.2; white-space:nowrap; text-align:right; }}
+    .sbx-v span {{ margin-left:0.44em; font-size:0.66em; font-weight:600; color:rgba(255,255,255,0.50); }}
+    .sbx-r.big .sbx-v {{ font-size:14.5px; }}
+    .sbx-all .sbx-r {{ flex-direction:column; align-items:flex-start; gap:1px; padding:4px 0; }}
+    .sbx-all .sbx-v {{ font-size:17px; }}
     .kpi {{ flex:1; min-width:0; background:{NAV_LT}; border-radius:8px; padding:10px 8px 11px; border-left:5px solid {GOLD_MID}; text-align:center; display:flex; flex-direction:column; justify-content:space-between; height:62px; }}
     .kl {{ font-size:8.6px; color:{INK}; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
     .kv {{ font-family:Georgia,'Bitstream Charter','Liberation Serif',serif; font-size:22px; font-weight:700; letter-spacing:-0.6px; line-height:1; margin:0; color:{NAV}; white-space:nowrap; font-variant-numeric:tabular-nums; }}
@@ -815,9 +822,12 @@ def build():
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>San Francisco Real Estate</div>
       <div class='p'>YTD through <b>{mname} {mo.year}</b> vs {mo.year-1}.</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, SFAR MLS · run {datetime.date.today().strftime('%B %-d, %Y')}</div></div>""")
-    krows,kthru,kyy,kpy=site_kpis()
+    kboxes,kthru,kyy,kpy=site_kpis()
     o.append(f"<div class='sband'><div class='sband-h'>By the Numbers: \u2019{kyy} vs <span>\u2019{kpy}</span> YTD ({kthru})</div><div class='sband-row'>"
-        +"".join(f"<div class='sb'><div class='sb-v'>{now}<span>{then}</span></div><div class='sb-l'>{lab}: <b>{chg}</b></div></div>" for lab,now,then,chg in krows)
+        +"".join(f"<div class='sbx sbx-{k}'><div class='sbx-h'>{t}</div>"
+                 +"".join(f"<div class='sbx-r{' big' if big else ''}'><div class='sbx-l'>{lab}{': <b>'+chg+'</b>' if chg else ''}</div>"
+                          f"<div class='sbx-v'>{now}<span>{then}</span></div></div>" for lab,now,then,chg,big in rows)
+                 +"</div>" for k,t,rows in kboxes)
         +"</div></div>")
     o.append("<div class='cols' style='margin-top:7px'>")
     o.append(f"""<div class='col'><h2>Units Sold</h2>

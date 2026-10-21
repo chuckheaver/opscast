@@ -25,15 +25,17 @@
 .sheetA .sband { background:#131A25; border-radius:6px; padding:9px 16px 2px; margin-bottom:7px; }
 .sheetA .sband-h { font-size:9.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#CEE2E6; margin-bottom:3px; }
 .sheetA .sband-h span { color:rgba(255,255,255,0.50); }
-.sheetA .sband-row { display:grid; grid-template-columns:repeat(4,1fr); }
-.sheetA .sb { padding:6px 12px 7px; border-right:1px solid rgba(255,255,255,0.09); border-bottom:1px solid rgba(255,255,255,0.09); }
-.sheetA .sb:nth-child(4n) { border-right:none; }
-.sheetA .sb:nth-child(4n+1) { padding-left:0; }
-.sheetA .sb:nth-child(n+5) { border-bottom:none; }
-.sheetA .sb-v { font-family:Georgia,'Times New Roman',serif; line-height:1.05; font-size:21px; font-weight:700; color:#CEE2E6; white-space:nowrap; }
-.sheetA .sb-v span { margin-left:0.44em; font-size:0.66em; font-weight:600; color:rgba(255,255,255,0.50); }
-.sheetA .sb-l { margin-top:3px; font-size:8.6px; line-height:1.35; color:rgba(255,255,255,0.72); }
-.sheetA .sb-l b { color:#fff; font-weight:700; }
+.sheetA .sband-row { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding-bottom:8px; }
+.sheetA .sbx { border:1px solid rgba(255,255,255,0.14); border-radius:7px; padding:5px 9px 2px; background:rgba(255,255,255,0.025); }
+.sheetA .sbx-h { font-size:8px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#fff; margin-bottom:1px; }
+.sheetA .sbx-r { display:flex; justify-content:space-between; align-items:baseline; gap:6px; padding:2px 0; border-top:1px solid rgba(255,255,255,0.09); }
+.sheetA .sbx-l { font-size:7.4px; line-height:1.25; color:rgba(255,255,255,0.72); }
+.sheetA .sbx-l b { color:#fff; font-weight:700; white-space:nowrap; }
+.sheetA .sbx-v { font-family:Georgia,'Times New Roman',serif; font-weight:700; color:#CEE2E6; font-size:10.5px; line-height:1.2; white-space:nowrap; text-align:right; }
+.sheetA .sbx-v span { margin-left:0.44em; font-size:0.66em; font-weight:600; color:rgba(255,255,255,0.50); }
+.sheetA .sbx-r.big .sbx-v { font-size:14.5px; }
+.sheetA .sbx-all .sbx-r { flex-direction:column; align-items:flex-start; gap:1px; padding:4px 0; }
+.sheetA .sbx-all .sbx-v { font-size:17px; }
 .sheetA .kpi { flex:1; min-width:0; background:#E4EEF0; border-radius:8px; padding:10px 8px 11px; border-left:5px solid #E9BC3F; text-align:center; display:flex; flex-direction:column; justify-content:space-between; height:62px; }
 .sheetA .kl { font-size:8.6px; color:#131A25; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .sheetA .kv { font-family:Georgia,'Bitstream Charter','Liberation Serif',serif; font-size:22px; font-weight:700; letter-spacing:-0.6px; line-height:1; margin:0; color:#203C5F; white-space:nowrap; font-variant-numeric:tabular-nums; }
