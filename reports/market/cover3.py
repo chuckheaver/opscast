@@ -503,7 +503,6 @@ def spread_chart(w=470,h=158):
     return "".join(o)+"</svg>"
 
 PROP_TAX=0.0118        # San Francisco property tax, roughly 1.18% of assessed value
-LUX_EVENTS={6:"Nasdaq peak",7:"Nasdaq −10%",8:"OpenAI $7B tender"}
 
 def lux_series(cy,lo=5e6,hi=float("inf")):
     """Monthly count of sales in a price band: all of the prior year, and the
@@ -533,10 +532,6 @@ def lux_chart(cy,w=470,h=176,through=9):
             o.append(f"<rect x='{x:.1f}' y='{Y(v):.1f}' width='{bw-1.5:.1f}' height='{h-pad_b-Y(v):.1f}' fill='{col}' rx='1.5'/>")
             o.append(f"<text x='{x+(bw-1.5)/2:.1f}' y='{Y(v)-2.5:.1f}' font-size='6.4' font-weight='700' fill='{col if j else MUTED}' text-anchor='middle'>{v}</text>")
         o.append(f"<text x='{cx:.1f}' y='{h-5}' font-size='6.8' fill='{MUTED}' text-anchor='middle'>{MON[i]}</text>")
-        if m in LUX_EVENTS and m<=through:
-            yy=Y(c[cy_].get(m,0))-12
-            o.append(f"<line x1='{cx:.1f}' y1='{yy+3:.1f}' x2='{cx:.1f}' y2='{Y(c[cy_].get(m,0))-4:.1f}' stroke='{DOWN}' stroke-width='0.7'/>")
-            o.append(f"<text x='{cx:.1f}' y='{yy:.1f}' font-size='5.8' font-weight='700' fill='{DOWN}' text-anchor='middle'>{LUX_EVENTS[m]}</text>")
     for j,(lab,col) in enumerate(((f"{py_} (full year)","#B9BDC4"),(str(cy_),"#203C5F"))):
         lxx=pad_l+j*82
         o.append(f"<rect x='{lxx}' y='2' width='8' height='8' fill='{col}' rx='1.5'/><text x='{lxx+11}' y='9' font-size='7' fill='{INK}'>{lab}</text>")
@@ -904,21 +899,6 @@ def build():
         <li class='tot'>Total <b>${round(8e6*TEN_NOW/100,-3)+8e6*PROP_TAX:,.0f}</b></li>
       </ul></div>""")
     o.append("</div>")
-    o.append(f"""<div class='cols' style='margin-top:7px'>
-      <div class='col'><div class='sig'><b>What moves the financed buyer</b>
-        <ul class='sigl'>
-          <li>The 10-year Treasury leads; home loans run about {MTG_NOW-TEN_NOW:.1f} points above it.</li>
-          <li>Treasury under <b>4.5%</b> → loans in the low 6s → buyers come back.</li>
-          <li>Treasury above <b>5%</b> → loans above 7% → fewer buyers qualify.</li>
-          <li>Watch the bond, not the Fed.</li>
-        </ul></div></div>
-      <div class='col'><div class='sig'><b>What moves the cash buyer</b>
-        <ul class='sigl'>
-          <li><b>1. Need</b> — a family that has outgrown the house buys this year, at whatever the market asks. Outranks the other two.</li>
-          <li><b>2. Liquidity</b> — can they get at the money: share sales, tender offers, IPOs.</li>
-          <li><b>3. Opportunity cost</b> — cash left in 10-year Treasuries earns <b>{TEN_NOW:.2f}%</b>, free of California tax.</li>
-        </ul></div></div>
-    </div>""")
     o.append(f"""<div class='foot'><span>Monthly payment on the {M(MED_SFH)} SFH and {M(MED_CO)} Condo/TIC/Other medians with 20% down; principal and interest only. Foregone yield uses the 10-year Treasury; property tax at {100*PROP_TAX:.2f}%. Insurance, upkeep and illiquidity are additional.</span><span>page 4 / 9</span></div></div>""")
 
     cost_end=len(o)
