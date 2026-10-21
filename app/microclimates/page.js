@@ -14,6 +14,7 @@ import {
   BarRows, SeasonRows, KoppenTests, OceanSection, CityProfile, SunAngle, FogClock, DeckHeights, TempChart, RainChart,
   ClimateTable, ClimateExtremes,
 } from "./charts";
+import { FogStory } from "./fogstory";
 import { BayMap, FogMapCard } from "./bay";
 import { LotPlan, NeighborShadow, SlopeCompare, FieldRules, SkyChart } from "./sun";
 import {
@@ -192,6 +193,7 @@ export default function Page() {
             <h3 className="mc-h3">Fog</h3>
             <FogMapCard />
             <FogClock />
+            <FogStory />
             <Cards items={FOG_WHAT} />
             <DeckHeights decks={DECK} />
             <Cards items={FOG_TOPO} cols={3} />

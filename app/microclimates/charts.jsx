@@ -109,7 +109,7 @@ export function SeasonRows({ rows, tempMax = 95, rainMax = 48, caption }) {
 
 // A typical July day on the west side: darker is more fog. The pattern is well
 // established; the shading is a schematic of it, not an hourly measurement.
-const CLOCK = [
+export const CLOCK = [
   4, 4, 4, 4, 4, 4, 4, 4,   // midnight – 8am
   3, 2, 1, 0,               // 8am – noon
   0, 0, 1, 2,               // noon – 4pm
