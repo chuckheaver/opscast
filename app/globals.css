@@ -4842,6 +4842,24 @@ a.fog-topbar-lbl:hover { text-decoration: underline; }
   font-size: clamp(22px, 2.2vw, 29px); font-weight: 700; color: var(--lp-accent-dk);
   white-space: nowrap;
 }
+/* By the Numbers as four boxes: SFH, Condo / TIC / Co-op, Other, All sales. */
+.lp-sbox-row { max-width: 1240px; margin: 0 auto; padding-bottom: 18px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.lp-sbox { border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; padding: 10px 16px 4px; background: rgba(255,255,255,0.025); }
+.lp-sbox-h { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #fff; margin-bottom: 2px; }
+.lp-sbox-r { display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+  padding: 4px 0; border-top: 1px solid rgba(255,255,255,0.09); }
+.lp-sbox-r:first-of-type { border-top: none; }
+.lp-sbox-l { font-size: 12px; line-height: 1.25; color: rgba(255,255,255,0.72); }
+.lp-sbox-l b { color: #fff; font-weight: 700; white-space: nowrap; }
+.lp-sbox-v { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; color: var(--lp-accent-dk);
+  font-size: 16px; line-height: 1.2; white-space: nowrap; text-align: right; }
+.lp-sbox-big .lp-sbox-v { font-size: clamp(19px, 1.7vw, 23px); }
+.lp-sbox-all { display: flex; flex-direction: column; }
+.lp-sbox-all .lp-sbox-r { flex-direction: column; align-items: flex-start; gap: 2px; padding: 8px 0; }
+.lp-sbox-all .lp-sbox-v { font-size: clamp(21px, 2vw, 27px); }
+@media (max-width: 1100px) { .lp-sbox-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .lp-sbox-row { grid-template-columns: 1fr; } }
 .lp-stat-l { margin-top: 8px; font-size: 12px; line-height: 1.45; color: rgba(255,255,255,0.72); }
 
 /* Six layers ---------------------------------------------------------- */

@@ -82,6 +82,7 @@ const bucket = yr => {
     rows.push({
       price,
       list: Number(p.listPrice) || 0,
+      sqft: Number(p.sqft) || 0,
       dom: Number.isFinite(Number(p.dom)) ? Number(p.dom) : null,
       seg: segOf(p.propType),        // sfh | condo | other (app/lib/segments.js)
     });
@@ -97,6 +98,7 @@ const seg = (rows, pick) => {
     n: v.length,
     median: median(v.map(r => r.price)),
     avg: mean(v.map(r => r.price)),
+    ppsf: median(v.filter(r => r.sqft > 0).map(r => r.price / r.sqft)),
     dom: median(doms),
     // Two different things, and they get confused for each other:
     // overAsk is the SHARE of sales that closed above list; saleToList is

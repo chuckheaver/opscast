@@ -7,6 +7,7 @@
 // live sales file by scripts/build-landing-stats.mjs. Nothing is typed by hand.
 
 import Link from "next/link";
+import { SEG } from "../lib/segments";
 import stats from "../lib/landing-stats.json";
 import hoodStats from "../lib/neighborhood-stats.json";
 
@@ -71,26 +72,28 @@ export default function Landing() {
     `${pts(a, b)} ${Math.abs(r(a) - r(b)) === 1 ? one : many}`;
   const days = (a, b) => unit(a, b, "day", "days");
   const ptsOf = (a, b) => unit(a, b, "pt", "pts");
-  const KPIS = [
-    { label: "SFH Median Sale", now: money(m.sfh.median), then: money(p.sfh.median),
-      chg: pct(m.sfh.median, p.sfh.median) },
-    { label: "Condo Median Sale", now: money(m.condo.median), then: money(p.condo.median),
-      chg: pct(m.condo.median, p.condo.median) },
-    { label: "Total Units Sold — All", now: num(m.n), then: num(p.n),
-      chg: pct(m.n, p.n) },
-    { label: "Total Sales Volume", now: `$${(m.volume / 1e9).toFixed(2)}B`, then: `$${(p.volume / 1e9).toFixed(2)}B`,
-      chg: pct(m.volume, p.volume) },
-    { label: "SFH DOM", now: r(m.sfh.dom), then: r(p.sfh.dom),
-      chg: days(m.sfh.dom, p.sfh.dom) },
-    { label: "Condo DOM", now: r(m.condo.dom), then: r(p.condo.dom),
-      chg: days(m.condo.dom, p.condo.dom) },
+  // Four boxes, laid out like a neighborhood page's: one per sales category,
+  // then the city's totals. Each row is this year, last year beside it in the
+  // lighter tone, and the change after the label.
+  const usd = v => (v == null ? null : `$${Math.round(v).toLocaleString("en-US")}`);
+  const segRows = k => [
+    { label: "Median sale", now: money(m[k].median), then: money(p[k].median), chg: pct(m[k].median, p[k].median), big: true },
+    { label: "Units sold", now: num(m[k].n), then: num(p[k].n), chg: pct(m[k].n, p[k].n) },
+    { label: "Median $/sf", now: usd(m[k].ppsf), then: usd(p[k].ppsf), chg: pct(m[k].ppsf, p[k].ppsf) },
+    { label: "DOM", now: r(m[k].dom), then: r(p[k].dom), chg: days(m[k].dom, p[k].dom) },
     // The typical sale as a percentage OF list — the actual premium, not
     // the share of sales that went over. overAsk is still computed in the
     // stats file if it is ever wanted back.
-    { label: "SFH Sale Price vs List", now: `${r(m.sfh.saleToList)}%`, then: `${r(p.sfh.saleToList)}%`,
-      chg: ptsOf(m.sfh.saleToList, p.sfh.saleToList) },
-    { label: "Condo Sale Price vs List", now: `${r(m.condo.saleToList)}%`, then: `${r(p.condo.saleToList)}%`,
-      chg: ptsOf(m.condo.saleToList, p.condo.saleToList) },
+    { label: "Sale price vs list", now: `${r(m[k].saleToList)}%`, then: `${r(p[k].saleToList)}%`, chg: ptsOf(m[k].saleToList, p[k].saleToList) },
+  ];
+  const BOXES = [
+    { key: "sfh", title: SEG.sfh.short, rows: segRows("sfh") },
+    { key: "condo", title: SEG.condo.label, rows: segRows("condo") },
+    { key: "other", title: SEG.other.label, rows: segRows("other") },
+    { key: "all", title: "All sales", rows: [
+      { label: "Total sales volume", now: `$${(m.volume / 1e9).toFixed(2)}B`, then: `$${(p.volume / 1e9).toFixed(2)}B`, chg: pct(m.volume, p.volume), big: true },
+      { label: "Total units sold", now: num(m.n), then: num(p.n), chg: pct(m.n, p.n), big: true },
+    ] },
   ];
 
   return (
@@ -144,14 +147,16 @@ export default function Landing() {
             By the Numbers: &rsquo;{String(stats.market.year).slice(2)} vs <span className="lp-stats-key">&rsquo;{String(stats.market.priorYear).slice(2)}</span> YTD{through ? ` (${through})` : ""}
           </p>
         </div>
-        <div className="lp-stats-row">
-          {KPIS.map(k => (
-            <div className="lp-stat" key={k.label}>
-              <div className="lp-stat-v">
-                {k.now}
-                <span className="lp-stat-prior">{k.then}</span>
-              </div>
-              <div className="lp-stat-l">{k.label}: <b>{k.chg}</b></div>
+        <div className="lp-sbox-row">
+          {BOXES.map(bx => (
+            <div className={`lp-sbox lp-sbox-${bx.key}`} key={bx.key}>
+              <div className="lp-sbox-h">{bx.title}</div>
+              {bx.rows.map(row => (
+                <div className={`lp-sbox-r${row.big ? " lp-sbox-big" : ""}`} key={row.label}>
+                  <div className="lp-sbox-l">{row.label}{row.chg ? <>: <b>{row.chg}</b></> : null}</div>
+                  <div className="lp-sbox-v">{row.now}<span className="lp-stat-prior">{row.then}</span></div>
+                </div>
+              ))}
             </div>
           ))}
         </div>
