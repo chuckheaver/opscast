@@ -70,6 +70,10 @@
 .sheetA .nb12 table.top th { font-size:7.2px; }
 .sheetA .nb12 table.top td { padding-top:1.9px; padding-bottom:1.9px; }
 .sheetA .nb12 h2 { font-size:11.5px; margin-top:6px; }
+.sheetA .nb16 table.top { font-size:7.3px; margin-bottom:2px; }
+.sheetA .nb16 table.top th { font-size:6.3px; padding-top:1.2px; padding-bottom:1.2px; }
+.sheetA .nb16 table.top td { padding-top:0.7px; padding-bottom:0.7px; }
+.sheetA .nb16 h2 { font-size:10px; margin-top:3px; margin-bottom:2px; padding-top:2px; padding-bottom:2px; }
 .sheetA table.top th { background:#203C5F; color:#fff; font-size:6.9px; text-transform:uppercase; padding:2px 4px; text-align:right; }
 .sheetA table.top th.l, .sheetA table.top td.l { text-align:left; }
 .sheetA table.top td { padding:1.9px 4px; text-align:right; border-bottom:0.4px solid #DCDDDE; white-space:nowrap; overflow:hidden; }
@@ -144,11 +148,13 @@
 .sheetB .fm-idx .hr { color:#6B6F75; }
 .sheetB .fm-idx .md { flex:0 0 24px; text-align:right; font-weight:800; color:#203C5F; }
 .sheetB .fm-idx .md.cto { color:#94700F; }
+.sheetB .fm-idx .md.oth { color:#6B6F75; }
 .sheetB .hdr .p b.sfh, .sheetB .fm-h b.sfh { color:#203C5F; }
 .sheetB .hdr .p b.cto { color:#94700F; }
 .sheetB .fm-h b { font-weight:800; }
 .sheetB .fm-h b.sfh { color:#fff; }
 .sheetB .fm-h b.cto { color:#E9BC3F; }
+.sheetB .fm-h b.oth { color:#C9CCD0; }
 .sheetB .fm-note { font-size:7.4px; color:#6B6F75; margin-top:5px; line-height:1.35; }
 .sheetB .mz-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:4px 0 5px; }
 .sheetB .mz-card { border-radius:7px; padding:7px 9px 6px; background:#E4EEF0; border-top:6px solid var(--z); position:relative; }
@@ -170,6 +176,21 @@
 .sheetB table.mz .zc { display:inline-block; width:9px; height:9px; border-radius:2px; font-size:6px; font-weight:800; text-align:center; line-height:9px; margin-right:3px; vertical-align:-1px; }
 .sheetB .mz-facts { display:grid; grid-template-columns:repeat(4,1fr); gap:5px; }
 .sheetB .mz-fact { background:#FBF3D9; border-left:3px solid #E9BC3F; border-radius:5px; padding:3px 7px; font-size:7.3px; line-height:1.25; }
+.sheetB /* Three closings grids (SFH, .sheetB Condo/TIC/Co-op, .sheetB Other) share the page: tighter rows. */
+    .mzp .mz-cards { margin:2px 0 3px; }
+.sheetB .mzp .mz-card { padding:4px 9px 3px; border-top-width:4px; }
+.sheetB .mzp .mz-card .tp { font-size:16px; margin-top:0; }
+.sheetB .mzp .mz-card .L { font-size:19px; }
+.sheetB .mzp .mz-card .row { margin-top:0; }
+.sheetB .mzp table.mz td { padding-top:0.3px; padding-bottom:0.3px; }
+.sheetB .mzp .zh { margin:3px 0 1px; }
+.sheetB .mzp table.zone tbody td, .sheetB .mzp table.zone tfoot td { padding-top:0.5px; padding-bottom:0.5px; }
+.sheetB .mzp table.zone thead th { padding-top:1px; padding-bottom:1px; }
+.sheetB .mzp .mz-facts { grid-template-columns:repeat(7,1fr); gap:4px; }
+.sheetB .mzp .mz-fact { padding:2px 5px; font-size:6.6px; line-height:1.15; }
+.sheetB .mzp .mz-fact b { font-size:11px; }
+.sheetB .mzp table.mz { font-size:7.2px; }
+.sheetB .mzp .mz-h { padding:1.5px 7px; margin-bottom:2px; }
 .sheetB .mz-fact b { display:block; font-family:Georgia,serif; font-size:12.5px; color:#203C5F; line-height:1.1; }
 .sheetB .mz-cap { font-size:7px; color:#6B6F75; margin-top:2px; line-height:1.3; }
 .sheetB { margin:0; font-family: 'Lato', Helvetica, Arial, sans-serif; color:#131A25; }

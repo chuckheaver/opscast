@@ -230,8 +230,8 @@ function loadAllListings() {
     console.log(`  ${f.split("/").pop()}: ${rows.length} rows`);
   }
   if (dupes) console.log(`  (skipped ${dupes} duplicate listing numbers across files)`);
-  // The owner's rule: every load includes Residential Income (2-4 unit
-  // buildings), counted with Condo / TIC / Other. Their MLS export leaves
+  // The owner's rule: every load includes Residential Income (duplexes to
+  // 5+ unit buildings), counted in Other. Their MLS export leaves
   // that class out unless it is ticked, so say so loudly when it is missing.
   const types = {};
   for (const l of byId.values()) types[l.propType || "(blank)"] = (types[l.propType || "(blank)"] || 0) + 1;

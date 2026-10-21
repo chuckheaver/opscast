@@ -46,7 +46,7 @@ pages, css_all = [], []
 for path, cls in SRC:
     css, body = split(path)
     css_all.append(scope(css, cls))
-    for p in re.findall(r"<div class='page'>.*?(?=<div class='page'>|$)", body, re.S):
+    for p in re.findall(r"<div class='page(?: [\w -]+)?'>.*?(?=<div class='page(?: [\w -]+)?'>|$)", body, re.S):
         pages.append((cls, p.rstrip()))
 
 PAGE_LABELS = [page_title(b) for _, b in pages]

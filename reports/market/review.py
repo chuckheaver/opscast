@@ -65,7 +65,11 @@ try: LY_THRU = THRU.replace(year=LY)
 except ValueError: LY_THRU = THRU.replace(year=LY, day=28)      # Feb 29
 WINDOWS = {TY: (f"{TY}-01-01", THRU.isoformat()), LY: (f"{LY}-01-01", LY_THRU.isoformat())}
 TODAY = datetime.date.today()
-SFH, CONDO = mg.SEG["Single Family Residences"], mg.SEG["Condo / TIC / Other"]
+SFH, CONDO, OTHER = mg.SEG[mg.SF], mg.SEG[mg.CO], mg.SEG[mg.OT]
+CTC = mg.TITLE[mg.CO]                       # "Condo/TIC/Co-op"
+def segname(pt):
+    """The report's category for a property type: SFH, Condo/TIC/Co-op or Other."""
+    return "SFH" if pt in SFH else CTC if pt in CONDO else "Other" if pt in OTHER else ""
 
 CHECKS = [  # id, title — in report order
     ("E1", "duplicate-sale"), ("E1b", "conflicting-duplicate"),
@@ -126,7 +130,7 @@ for i, (f, r) in enumerate(zip(RAW, F)):
     x["_key"] = b + ("#" + u if u else "")
     a = re.sub(r"[^0-9A-Z]", "", str(r.get("apn") or "").upper())
     x["_apn"] = a if len(re.sub(r"\D", "", a)) >= 5 else ""          # 'UNDEFINED', block-only stubs → none
-    x["_seg"] = "SFH" if r.get("propType") in SFH else "Condo/TIC/Other" if r.get("propType") in CONDO else ""
+    x["_seg"] = segname(r.get("propType"))
     x["_sfar"] = mg.FIX.get(r.get("neighborhood") or "", r.get("neighborhood") or "")
     x["_d"] = day(r["sellingDate"]); d = r["sellingDate"][:10]
     if not x["_d"]: continue                       # not a date: the grids can't place it either
@@ -264,7 +268,7 @@ HELD = []
 try: HELD = [f["properties"] for f in json.load(open(os.path.join(ROOT, "data", "held-sales.geojson")))["features"]]
 except FileNotFoundError: pass
 held = [dict(h, _win=None, _span=False, _d=day(h.get("sellingDate")), _sfar=mg.FIX.get(h.get("neighborhood") or "", h.get("neighborhood") or ""),
-             _seg="SFH" if h.get("propType") in SFH else "Condo/TIC/Other" if h.get("propType") in CONDO else "") for h in HELD]
+             _seg=segname(h.get("propType"))) for h in HELD]
 for x in S:
     if x["_d"] > TODAY: flag("E6", x, f"closing date {x['_d']} is in the future (today {TODAY})", year=x["_d"].year)
     elif x["_d"] > THRU:     # apply-sale-decisions.mjs holds these out; one still here is a leak
@@ -277,10 +281,10 @@ for x in held:
     else:                    # the period moved past it but the holdback was not rerun
         flag("E6", x, f"closed {x['_d']}, inside the period (through {THRU}) but still held out: run scripts/apply-sale-decisions.mjs", year=x["_d"].year)
 
-# E7b one address typed both single-family and condo.
+# E7b one address typed in two categories (SFH, Condo/TIC/Co-op, Other).
 for rs in by_key.values():
-    segs = {r["_seg"] for r in rs}
-    if not {"SFH", "Condo/TIC/Other"} <= segs: continue
+    segs = {r["_seg"] for r in rs} - {""}
+    if len(segs) < 2: continue
     for x in rs:
         if not x["_span"]: continue
         other = [r for r in rs if r["_seg"] and r["_seg"] != x["_seg"]]
@@ -288,7 +292,7 @@ for rs in by_key.values():
              related=[r["id"] for r in other])
 
 # E7c sfh-in-a-condo-building: typed single-family where the building's other sales (any year) are
-# condos/TICs — by building, a range address ('254-256 8th') matching each of its numbers, or by
+# condos, TICs, co-ops or income units — by building, a range address ('254-256 8th') matching each of its numbers, or by
 # parcel number (1483 Sutter St #517, 254-256 8th Ave, Oct 2026: the 2025 history feed's type).
 def bkeys(x):
     m = re.match(r"(\d+)[a-z]?\s*-\s*(\d+)[a-z]?\s+(.*)", (x.get("address") or "").split(",")[0].split("#")[0].strip().lower())
@@ -297,7 +301,7 @@ def bkeys(x):
     return {x["_bldg"], f"{m.group(1)} {rest}", f"{m.group(2)} {rest}"}
 cobld, coapn = defaultdict(list), defaultdict(list)
 for r in S:
-    if r["_seg"] != "Condo/TIC/Other": continue
+    if r["_seg"] in ("", "SFH"): continue
     for k in bkeys(r): cobld[k].append(r)
     if r["_apn"]: coapn[r["_apn"]].append(r)
 for x in WS:
@@ -309,12 +313,12 @@ for x in WS:
         co.update({r["id"]: r for r in coapn[x["_apn"]]})
     co = list(co.values())
     if co:
-        flag("E7c", x, f"typed {x.get('propType')}, but the same {how} has {len(co)} Condo/TIC/Other sale(s): "
+        flag("E7c", x, f"typed {x.get('propType')}, but the same {how} has {len(co)} non-SFH sale(s): "
                        + ", ".join(f"{r['address'].split(',')[0]} ({r.get('propType')}, {r['sellingDate'][:10]})" for r in co[:3]), related=[r["id"] for r in co])
 
 # E8 over-$25M: probably an entry error (the owner's rule) — kept, and pointed out every month.
 # "Other" (Residential Income and the rest: apartment buildings) sells higher, so its line is higher (owner, Oct 20 2026).
-OTHER_TYPES = {"Duplex", "Triplex", "Fourplex", "5+ Units", "Residential Income Other", "Other", "3+ Houses on Lot"}
+OTHER_TYPES = OTHER
 OVER_OTHER = DEC.get("pointOut", {}).get("overPriceOther", 50_000_000)
 for x in WS:
     line = OVER_OTHER if x.get("propType") in OTHER_TYPES else OVER
@@ -333,7 +337,7 @@ for yr, (lo, hi) in WINDOWS.items():
         if r.get("sellingPrice") and lo <= (r.get("sellingDate") or "")[:10] <= hi and not r.get("sqft"):
             rows.append(dict(year=yr, id=r.get("id"), address=r["address"].split(",")[0],
                              neighborhood=r.get("fogNeighborhood") or "", type=r["propType"],
-                             segment="SFH" if r["propType"] in SFH else "Condo/TIC/Other",
+                             segment=segname(r["propType"]),
                              date=r["sellingDate"][:10], price=r["sellingPrice"], list=r.get("listPrice") or "",
                              status=r.get("status") or "", why="no square footage reported"))
 rows.sort(key=lambda x: (-x["year"], x["segment"], x["price"]))
@@ -460,7 +464,7 @@ if need("R10", "agent"):
                  related=[r["id"] for r in other])
 
 # N1 top-sales, each segment's #1, and whether this year's #1 beats last year's.
-TOP = {"SFH": 15_000_000, "Condo/TIC/Other": 7_500_000}
+TOP = {"SFH": 15_000_000, CTC: 7_500_000, "Other": 15_000_000}
 full_ly = [x for x in S if x["_d"].year == LY]
 for seg, floor in TOP.items():
     best = {y: max((x for x in W if x["_win"] == y and x["_seg"] == seg), key=P, default=None) for y in WINDOWS}
@@ -517,7 +521,7 @@ COUNTS["N5"] = Counter(x["_win"] for x in W if P(x) < 500_000 and P(x) % 1000)
 if need("N6", "fogNeighborhood"):
     cn = defaultdict(list)
     for x in W:
-        if x["_seg"] == "Condo/TIC/Other" and x.get("fogNeighborhood"): cn[(x["_win"], x["fogNeighborhood"])].append(x)
+        if x["_seg"] == CTC and x.get("fogNeighborhood"): cn[(x["_win"], x["fogNeighborhood"])].append(x)
     for (y, nb_), rs in sorted(cn.items()):
         if len(rs) < 5: continue
         b, k = Counter(r["_bldg"] for r in rs).most_common(1)[0]
@@ -525,7 +529,7 @@ if need("N6", "fogNeighborhood"):
         inb = [r for r in rs if r["_bldg"] == b]
         flag("N6", None, f"{k} of its {len(rs)} condo sales ({100 * k / len(rs):.0f}%) are in one building, so its condo figures lean on {inb[0]['address'].split(',')[0].split('#')[0].strip()}",
              related=[r["id"] for r in inb], year=y, key=nb_, address=inb[0]["address"].split(",")[0].split("#")[0].strip(), neighborhood=nb_,
-             sfar=inb[0]["_sfar"], segment="Condo/TIC/Other", price=round(med(list(map(P, inb)))))
+             sfar=inb[0]["_sfar"], segment=CTC, price=round(med(list(map(P, inb)))))
 
 # X1 left out by the owner's decisions (data/removed-sales.csv, written by scripts/apply-sale-decisions.mjs).
 REMOVED = []
@@ -537,7 +541,7 @@ for r in REMOVED:
     y = next((yy for yy, (lo, hi) in WINDOWS.items() if lo <= d <= hi), int(d[:4]) if d[:4].isdigit() else None)
     pt = r.get("propType") or ""
     FIND[("X1", y, r["id"])] = dict(check="X1", severity="owner-decision", title=TITLE["X1"], year=y, id=r["id"], address=(r.get("address") or "").split(",")[0],
-        neighborhood=r.get("fogNeighborhood") or "", sfar="", segment="SFH" if pt in SFH else "Condo/TIC/Other" if pt in CONDO else "",
+        neighborhood=r.get("fogNeighborhood") or "", sfar="", segment=segname(pt),
         propType=pt, date=d, price=int(float(r["sellingPrice"])) if r.get("sellingPrice") else None, list=None, sqft=None, beds=None,
         status=r.get("status") or "", why=r.get("reason") or "", related_ids=[])
 

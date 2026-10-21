@@ -19,7 +19,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.pat
 NAV = "#203C5F"; NAV_LT = "#E4EEF0"; GOLD_MID = "#E9BC3F"; GOLD_LT = "#FBF3D9"; GOLD_TXT = "#94700F"
 INK = "#131A25"; MUTED = "#6B6F75"; LINE = "#DCDDDE"
 # The Heat Map's two numbers, in the report's segment colors (navy single-
-# family, gold Condo/TIC/Other, as in the Units Sold chart).
+# family, gold Condo/TIC/Co-op, as in the Units Sold chart).
 SFH_INK = NAV; CTO_INK = GOLD_TXT
 
 # The four zones, numbered 1 (sunniest) to 4 (foggiest) — the site's rule (app/lib/fog-zones.js). A POINT
@@ -147,7 +147,7 @@ def fog_map(hoods, w=560, h=560, bbox=(-122.516, 37.703, -122.355, 37.833)):
     for hd in hoods:
         o.append(f"<path d='{path(hd['geom'])}' fill='none' stroke='#ffffff' stroke-width='0.6' stroke-linejoin='round'/>")
     # This year's medians, in millions, side by side: single-family in navy,
-    # then Condo/TIC/Other a size smaller in gold (the page's subtitle says
+    # then Condo/TIC/Co-op a size smaller in gold (the page's subtitle says
     # which is which); one figure where only one type sold, no label where
     # nothing sold. A white halo keeps both readable on every shade.
     labels = []
@@ -208,9 +208,9 @@ def year_chart(months, w=300, h=112):
     return "".join(o) + "</svg>"
 
 # ── data ─────────────────────────────────────────────────────────────────
-def neighborhoods(sales_y1, sfh_types, stats, cto_types=()):
+def neighborhoods(sales_y1, sfh_types, stats, cto_types=(), oth_types=()):
     """Every map neighborhood, numbered zone by zone, sunniest (1) to foggiest, with its
-    zone, estimated temperature and this year's single-family and Condo/TIC/Other medians."""
+    zone, estimated temperature and this year's SFH, Condo/TIC/Co-op and Other medians."""
     fc = json.load(open(os.path.join(ROOT, "public/data/sf-fog-neighborhoods.geojson")))
     try: stock = json.load(open(os.path.join(ROOT, "public/data/parcel-res-by-fog.json")))
     except Exception: stock = {}
@@ -226,7 +226,8 @@ def neighborhoods(sales_y1, sfh_types, stats, cto_types=()):
                         mix=(NZ.get(nm) or {}).get("mix") or {zone(nm, p["fogHours"])["name"]: 1},
                         geom=f["geometry"], homes=(st.get("u1", 0) + st.get("units2", 0)),
                         sfh=stats([r for r in rs if r.get("propType") in sfh_types]),
-                        cto=stats([r for r in rs if r.get("propType") in cto_types]), all=stats(rs), sales=len(rs)))
+                        cto=stats([r for r in rs if r.get("propType") in cto_types]),
+                        oth=stats([r for r in rs if r.get("propType") in oth_types]), all=stats(rs), sales=len(rs)))
     for i, hd in enumerate(out): hd["n"] = i + 1
     return out
 
@@ -250,9 +251,9 @@ CSS = f"""
     .fm-idx .nm {{ flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
     .fm-idx .hr {{ color:{MUTED}; }}
     .fm-idx .md {{ flex:0 0 24px; text-align:right; font-weight:800; color:{SFH_INK}; }}
-    .fm-idx .md.cto {{ color:{CTO_INK}; }}
+    .fm-idx .md.cto {{ color:{CTO_INK}; }} .fm-idx .md.oth {{ color:{MUTED}; }}
     .hdr .p b.sfh, .fm-h b.sfh {{ color:{SFH_INK}; }} .hdr .p b.cto {{ color:{CTO_INK}; }}
-    .fm-h b {{ font-weight:800; }} .fm-h b.sfh {{ color:#fff; }} .fm-h b.cto {{ color:{GOLD_MID}; }}
+    .fm-h b {{ font-weight:800; }} .fm-h b.sfh {{ color:#fff; }} .fm-h b.cto {{ color:{GOLD_MID}; }} .fm-h b.oth {{ color:#C9CCD0; }}
     .fm-note {{ font-size:7.4px; color:{MUTED}; margin-top:5px; line-height:1.35; }}
     .mz-cards {{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:4px 0 5px; }}
     .mz-card {{ border-radius:7px; padding:7px 9px 6px; background:{NAV_LT}; border-top:6px solid var(--z); position:relative; }}
@@ -274,6 +275,15 @@ CSS = f"""
     table.mz .zc {{ display:inline-block; width:9px; height:9px; border-radius:2px; font-size:6px; font-weight:800; text-align:center; line-height:9px; margin-right:3px; vertical-align:-1px; }}
     .mz-facts {{ display:grid; grid-template-columns:repeat(4,1fr); gap:5px; }}
     .mz-fact {{ background:{GOLD_LT}; border-left:3px solid {GOLD_MID}; border-radius:5px; padding:3px 7px; font-size:7.3px; line-height:1.25; }}
+    /* Three closings grids (SFH, Condo/TIC/Co-op, Other) share the page: tighter rows. */
+    .mzp .mz-cards {{ margin:2px 0 3px; }} .mzp .mz-card {{ padding:4px 9px 3px; border-top-width:4px; }}
+    .mzp .mz-card .tp {{ font-size:16px; margin-top:0; }} .mzp .mz-card .L {{ font-size:19px; }} .mzp .mz-card .row {{ margin-top:0; }}
+    .mzp table.mz td {{ padding-top:0.3px; padding-bottom:0.3px; }}
+    .mzp .zh {{ margin:3px 0 1px; }}
+    .mzp table.zone tbody td, .mzp table.zone tfoot td {{ padding-top:0.5px; padding-bottom:0.5px; }}
+    .mzp table.zone thead th {{ padding-top:1px; padding-bottom:1px; }}
+    .mzp .mz-facts {{ grid-template-columns:repeat(7,1fr); gap:4px; }} .mzp .mz-fact {{ padding:2px 5px; font-size:6.6px; line-height:1.15; }} .mzp .mz-fact b {{ font-size:11px; }}
+    .mzp table.mz {{ font-size:7.2px; }} .mzp .mz-h {{ padding:1.5px 7px; margin-bottom:2px; }}
     .mz-fact b {{ display:block; font-family:Georgia,serif; font-size:12.5px; color:{NAV}; line-height:1.1; }}
     .mz-cap {{ font-size:7px; color:{MUTED}; margin-top:2px; line-height:1.3; }}
 """
@@ -281,9 +291,9 @@ CSS = f"""
 def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
     """Both microclimate pages, as HTML. zone_rows: [(title, byZ, tot)] for
     the closings-by-zone grids, rendered with the grid's own head/cells."""
-    sfh = mg.SEG["Single Family Residences"]; cto = mg.SEG["Condo / TIC / Other"]
+    sfh = mg.SEG[mg.SF]; cto = mg.SEG[mg.CO]; oth = mg.SEG[mg.OT]
     y1 = [r for r in F if r.get("sellingDate") and W["y1"][0] <= r["sellingDate"] <= W["y1"][1]]
-    hoods = neighborhoods(y1, sfh, mg.stats, cto)
+    hoods = neighborhoods(y1, sfh, mg.stats, cto, oth)
     clim = json.load(open(os.path.join(ROOT, "app/lib/sf-climate.json")))
     thru = datetime.date.fromisoformat(W["y1"][1]).strftime("%b %-d, %Y")
     mprior = datetime.date.fromisoformat(W["m0"][0]).strftime("%b %Y")      # the same month last year
@@ -297,7 +307,8 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
         f"<i style='width:{100 * h['mix'].get(z['name'], 0):.0f}%;background:{z['fill']}'></i>" for z in ZONES) + "</span>")
     item = lambda h: (f"<div>{zc(h['zone'])}{mixbar(h)}<span class='nm'>{html.escape(h['name'])}</span>"
                   f"<span class='md'>{Mm(h['sfh']['price']) if h['sfh']['price'] else '—'}</span>"
-                  f"<span class='md cto'>{Mm(h['cto']['price']) if h['cto']['price'] else '—'}</span></div>")
+                  f"<span class='md cto'>{Mm(h['cto']['price']) if h['cto']['price'] else '—'}</span>"
+                  f"<span class='md oth'>{Mm(h['oth']['price']) if h['oth']['price'] else '—'}</span></div>")
     az = sorted(hoods, key=lambda h: (ZONES.index(h["zone"]), h["name"].lower()))   # zone by zone, A–Z
     half = -(-len(az) // 2)
     idx = "".join("<section>" + "".join(item(h) for h in part) + "</section>" for part in (az[:half], az[half:]))
@@ -305,13 +316,13 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
         f"<div style='background:{z['fill']};color:{z['ink']}'><b>{z['k']}</b><span>{z['name']}</span><br>"
         f"{sum(1 for h in hoods if h['zone'] is z)} neighborhoods · ~{min(h['temp'] for h in hoods if h['zone'] is z)}–{max(h['temp'] for h in hoods if h['zone'] is z)}°F</div>" for z in ZONES)
     o = [f"<div class='page'><div class='hdr'><div><div class='t'>Heat Map</div>"
-         f"<div class='p'>Median sale price by neighborhood, in millions, Jan 1 – {thru}: <b class='sfh'>SFH in navy</b> · <b class='cto'>Condo/TIC/Other in gold</b> · on the city's four fog zones, 1 to 4</div></div></div>",
+         f"<div class='p'>Median sale price by neighborhood, in millions, Jan 1 – {thru}: <b class='sfh'>SFH in navy</b> · <b class='cto'>Condo/TIC/Co-op in gold</b> · on the city's four fog zones, 1 to 4</div></div></div>",
          "<div class='fm-wrap'><div class='fm-map'>",
          f"<div class='mapbox'>{fog_map(hoods, w=612, h=628)}</div><div class='fm-zkey'>{zkey}</div></div>",
-         "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>median: <b class='sfh'>SFH</b> · <b class='cto'>Condo/TIC/Other</b></i></div>",
+         "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>median: <b class='sfh'>SFH</b> · <b class='cto'>Condo/TIC/Co-op</b> · <b class='oth'>Other</b></i></div>",
          f"<div class='fm-idx'>{idx}</div>",
          "</div></div>",
-         foot(FOG_NOTE + " Shading: the fog contours. Number: each neighborhood's zone; bar: its mix of zones. Medians this year: single-family (navy), then Condo/TIC/Other (gold); one figure = only that type sold; no label = no sales. °F estimated.")]
+         foot(FOG_NOTE + " Shading: the fog contours. Number: each neighborhood's zone; bar: its mix of zones. Map labels: this year's medians, SFH (navy) then Condo/TIC/Co-op (gold); one figure = only that type sold; no label = neither sold. The index adds Other (grey). °F estimated.")]
 
     # ── page 2: microclimates and real estate ──
     zst = {z["k"]: mg.stats([r for r in y1 if r.get("propType") in sfh and sale_zone(r) is z]) for z in ZONES}
@@ -347,7 +358,7 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
     ]
     facts.append(("800–1,500 ft", "the usual top of the summer fog deck."))
     fact_html = "".join(f"<div class='mz-fact'><b>{a}</b>{b}</div>" for a, b in facts[:8])
-    o += [f"<div class='page'><div class='hdr'><div><div class='t'>Microclimates and Real Estate</div>"
+    o += [f"<div class='page mzp'><div class='hdr'><div><div class='t'>Microclimates and Real Estate</div>"
           f"<div class='p'>{html.escape(plabel)}</div></div></div>",
           f"<div class='mz-cards'>{''.join(cards)}</div>",
           "<div class='mz-mid'>",

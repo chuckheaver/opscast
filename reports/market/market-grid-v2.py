@@ -59,11 +59,16 @@ def hood(r):
     n=r.get("fogNeighborhood")
     return LABEL.get(n,n) if n else None
 PERIOD=os.path.join(ROOT,"data","reporting-period.json")
-SEG={"Single Family Residences":{"Single Family Residence","2 Houses on Lot","Halfplex"},
-     # Every sale that is not a single-family house: two segments, nothing left over.
-     # Residential Income (the second feed, …_INCP_…) counts here too, 5+ unit buildings included (owner, Oct 20 2026).
-     "Condo / TIC / Other":{"Condominium","Tenancy in Common","Stock Cooperative","Co-Ownership","Townhouse","Other","3+ Houses on Lot",
-                            "Duplex","Triplex","Fourplex","5+ Units","Residential Income Other"}}
+# The report's three categories, the same as the site's (app/lib/segments.js;
+# the owner, Oct 21 2026): SFH, Condo / TIC / Co-op, and Other — Residential
+# Income (the second feed, …_INCP_…, 5+ unit buildings included) and every
+# other type. Every sale lands in exactly one; a new MLS type goes here and in
+# app/lib/segments.js.
+SF, CO, OT = "Single Family Residences", "Condo / TIC / Co-op", "Other"
+SEG={SF:{"Single Family Residence","2 Houses on Lot","Halfplex"},
+     CO:{"Condominium","Tenancy in Common","Stock Cooperative","Co-Ownership","Townhouse","Loft Condominium","Loft"},
+     OT:{"Other","3+ Houses on Lot","Duplex","Triplex","Fourplex","5+ Units","Residential Income Other"}}
+TITLE={SF:"SFH",CO:"Condo/TIC/Co-op",OT:"Other"}
 # The site's zones at a point (app/lib/fog-zones.js, reports/market/micro.py).
 ZONES=[("Sun","#FDE68A","8 hrs or less",lambda h:h<=8),
        ("Transition","#E7E5E4","8.5 hrs",lambda h:8<h<9),
@@ -146,14 +151,14 @@ def last_full_month(F=None):
     return first.replace(day=1), first
 
 def check_segments(F):
-    """Stop if a sale's property type is in neither segment: every closed sale
+    """Stop if a sale's property type is in no category: every closed sale
     counts (the owner's rule), so a new type must be placed, never dropped.
-    Residential Income (2-4 unit buildings) goes in Condo / TIC / Other."""
+    Residential Income goes in Other."""
     known=set().union(*SEG.values())
     new=sorted({r.get("propType") or "(blank)" for r in F} - known)
     if new:
         raise SystemExit(f"property type(s) in no segment: {', '.join(new)}. Add each to SEG in reports/market/market-grid-v2.py "
-                         f"(Residential Income goes in 'Condo / TIC / Other') and to the site's segment lists (AGENTS.md lists them).")
+                         f"(Residential Income goes in 'Other') and to app/lib/segments.js.")
 
 def build(anchor=None):
     d=json.load(open(SRC)); F=[f["properties"] for f in d["features"]]
@@ -208,8 +213,7 @@ def micro_page(pages,plabel,labels,W,head,cells,groups,run_date):
     Microclimates and Real Estate with the closings grids by fog zone."""
     import micro
     F=[f["properties"] for f in json.load(open(SRC))["features"]]
-    title={"Single Family Residences":"SFH","Condo / TIC / Other":"Condo/TIC/Other"}
-    zone_rows=[(title[seg],byZ,tot) for seg,byA,tot,byZ,byD,*_ in pages]
+    zone_rows=[(TITLE[seg],byZ,tot) for seg,byA,tot,byZ,byD,*_ in pages]
     return micro.pages(F=F,W=W,plabel=plabel,mg=sys.modules[__name__],head=head,cells=cells,groups=groups,zone_rows=zone_rows)
 
 def render(pages,plabel,labels,W,run_date):
@@ -291,7 +295,7 @@ def render(pages,plabel,labels,W,run_date):
     out=[f"<!doctype html><html><head><meta charset='utf-8'><style>{css}</style></head><body>"]
     ROWS=47                                   # table rows per page
     for seg,byA,tot,byZ,byD,notes in pages:
-        title={"Single Family Residences":"SFH","Condo / TIC / Other":"Condo/TIC/Other"}[seg]
+        title=TITLE[seg]
         items=[("h",nm,nid,st) for nm,nid,st in byD]
         per=-(-len(items)//(-(-len(items)//ROWS)))        # even split across pages
         chunks=[items[k:k+per] for k in range(0,len(items),per)]

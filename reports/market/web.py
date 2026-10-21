@@ -6,7 +6,7 @@ out/market-grid-v2.html), splits them into their pages, and regroups the pages
 into the three sections of the site's Market menu:
 
   Market Stats      — SF Real Estate, Detail — Allocation, Grid SFH,
-                      Grid Condo/TIC, The 10s, By the Numbers (in that order)
+                      Grid Condo/TIC/Co-op, Grid Other, The 10s, By the Numbers (in that order)
   Cost of Ownership — the cost of money: rates, bonds, the cash buyer
 
 On the way through it turns report text into drill-downs on the live map:
@@ -32,6 +32,7 @@ def placement(title):
     if t.startswith("detail"):                            return ("stats", 20, "")
     if "market grid - sfh" in t:                          return ("stats", 30, "grid-sfh")
     if "market grid - condo" in t:                        return ("stats", 40, "grid-condo")
+    if "market grid - other" in t:                        return ("stats", 45, "grid-other")
     if t.startswith("the 10s"):                           return ("stats", 50, "neighborhoods")
     if t.startswith("heat map"):                          return ("stats", 58, "microclimates")
     if t.startswith("microclimates and real estate"):    return ("stats", 60, "")
@@ -120,7 +121,7 @@ for src, cls in [(OUT / "cover3.html", "sheetA"), (OUT / "market-grid-v2.html", 
     c, body = split(src)
     c = re.sub(r"@font-face\s*\{[^}]*\}", "", c)   # the site already serves these faces
     if src.name != "cover3-cost.html": css.append(scope(c, cls))
-    for p in re.findall(r"<div class='page'>.*?(?=<div class='page'>|$)", body, re.S):
+    for p in re.findall(r"<div class='page(?: [\w -]+)?'>.*?(?=<div class='page(?: [\w -]+)?'>|$)", body, re.S):
         pages.append((cls, p.rstrip()))
 PAGES = []
 for k, (_, body) in enumerate(pages):

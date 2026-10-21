@@ -7,9 +7,10 @@
       "Detail \u2014 Allocation of Money",
       "San Francisco Market Grid - SFH 1 of 2",
       "San Francisco Market Grid - SFH 2 of 2",
-      "San Francisco Market Grid - Condo/TIC/Other 1 of 3",
-      "San Francisco Market Grid - Condo/TIC/Other 2 of 3",
-      "San Francisco Market Grid - Condo/TIC/Other 3 of 3",
+      "San Francisco Market Grid - Condo/TIC/Co-op 1 of 2",
+      "San Francisco Market Grid - Condo/TIC/Co-op 2 of 2",
+      "San Francisco Market Grid - Other 1 of 2",
+      "San Francisco Market Grid - Other 2 of 2",
       "The 10s of 2026",
       "Heat Map",
       "Microclimates and Real Estate",
@@ -22,7 +23,7 @@
     ]
   },
   "links": {
-    "areas": 386,
-    "sales": 80
+    "areas": 469,
+    "sales": 110
   }
 }

@@ -63,7 +63,7 @@ def tile(v,l,s=None,c=None):
 
 def build_cover():
     pages,plabel,labels,W,seg,top,S,mon=facts()
-    SF="Single Family Residences"; CO="Condo / TIC / Other"
+    SF,CO=mg.SF,mg.CO
     s,c=seg[SF],seg[CO]; st,ct=s["tot"],c["tot"]
     mlabel=datetime.date.fromisoformat(W["m1"][0]).strftime("%B %Y")
     ylabel=f"January 1 – {datetime.date.fromisoformat(W['m1'][1]).strftime('%B %-d, %Y')}"
@@ -111,7 +111,7 @@ def build_cover():
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, SFAR MLS · run {datetime.date.today().strftime('%B %-d, %Y')}</div></div>""")
     o.append("<div class='kpis'>"
         +tile(M(st['y1']['price']),"SFH median, YTD",f"{sgn(D(st['y1']['price'],st['y0']['price']))}% vs {labels['y0'][-2:]}",UP)
-        +tile(M(ct['y1']['price']),"Condo/TIC median, YTD",f"{sgn(D(ct['y1']['price'],ct['y0']['price']))}% vs {labels['y0'][-2:]}",UP)
+        +tile(M(ct['y1']['price']),"Condo/TIC/Co-op median, YTD",f"{sgn(D(ct['y1']['price'],ct['y0']['price']))}% vs {labels['y0'][-2:]}",UP)
         +tile(f"${allv1/1e9:.2f}B","Total closed volume, YTD",f"{sgn(D(allv1,allv0))}% vs {labels['y0'][-2:]}",UP)
         +tile(f"{len(S['y1']):,}","Homes sold, YTD",f"{sgn(D(len(S['y1']),len(S['y0'])))}% vs {labels['y0'][-2:]}",UP)
         +tile(f"{st['y1']['dom']:.0f} / {ct['y1']['dom']:.0f}","Median days on market, SFH / condo","fastest since 2019",UP)
@@ -143,7 +143,7 @@ def build_cover():
       {s['dm_slow'][-1][1]} remains the slowest market at {s['dm_slow'][-1][0]:.0f} days against a citywide {st['y1']['dom']:.0f}.</p></div>""")
     # Condo column
     ct3=c['top']; cb=c['bot']
-    o.append(f"""<div class='col'><h2>Condo / TIC / Other</h2>
+    o.append(f"""<div class='col'><h2>Condo / TIC / Co-op</h2>
       <p><b>The month.</b> The condo recovery is the real story of {mlabel.split()[0]}. {ct['m1']['n']} closings, <span class='up'>{sgn(D(ct['m1']['n'],ct['m0']['n']))}%</span> year over year, at a
       median of <b>{M(ct['m1']['price'])}</b> (<span class='up'>{sgn(D(ct['m1']['price'],ct['m0']['price']))}%</span>). Median market time collapsed from <b>{ct['m0']['dom']:.0f} days to {ct['m1']['dom']:.0f}</b>,
       and the share selling over asking nearly doubled to <b>{ct['m1']['over']:.0f}%</b> from {ct['m0']['over']:.0f}%. After six years in the shadow of the house market, condominiums are moving at house-market speed.</p>
