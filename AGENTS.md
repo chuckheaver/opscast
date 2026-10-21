@@ -57,6 +57,11 @@ The owner's rules:
   recorded sets a sale's segment; question a type only when records of the
   same property disagree (same address, building or parcel typed differently).
   Otherwise review the numbers: prices, $/sf, dates, duplicates, sale vs list.
+- Stats pages (the report's pages and the site's market pages) state the
+  stats and nothing else: no summary comments, takeaways, leads or
+  explanatory lines under headings. Anything a reader must know (periods
+  compared, definitions, what is left out) goes in the footnotes at the
+  bottom of the page.
 - Listing data isn't reviewed — the report uses sold data (list price only
   feeds the Overbids tables).
 - Never drop or edit a sale without the owner's decision. Decisions live in

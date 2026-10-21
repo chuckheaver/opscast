@@ -19,7 +19,7 @@ const mapHref = hood => `/fog?${new URLSearchParams({ hood, details: "all" })}`;
 const ch = (v, unit = "%") => {
   if (v == null) return "—";
   let t = unit === "%" ? `${v > 0 ? "+" : ""}${r(v, 1)}%` : `${v > 0 ? "+" : ""}${Math.round(v)}${unit}`;
-  if (unit === " days" && Math.abs(Math.round(v)) === 1) t = t.slice(0, -1);
+  if ((unit === " days" || unit === " pts") && Math.abs(Math.round(v)) === 1) t = t.slice(0, -1);
   return <span className={v > 0.05 ? "ptp-up" : v < -0.05 ? "ptp-dn" : ""}>{t}</span>;
 };
 const pc = (a, b) => (a != null && b ? (a / b - 1) * 100 : null);
@@ -35,26 +35,23 @@ export default function Page() {
   const thru = new Date(`${data.through}T12:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric" });
   const pthru = new Date(`${data.priorThrough}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric" });
   const Y = data.year, PY = data.priorYear;
+  // The year-to-date table breaks "Other" out: each of its types is a row of its own, after Co-op.
+  const TR = [...G.filter(g => g.key !== "other"), ...data.other.map(o => ({ ...o, key: o.type, label: o.type }))];
   const allQ = [...new Set([...data.quarters, ...data.priorQuarters])].sort();
   const qCell = s => (s && s.n ? <>{m(s.price)} <small>· {sf(s.ppsf)}/sf · {size(s.sqft)} · {n(s.n)}</small></> : "—");
   return (
     <div className="lp">
       <section className="lp-guide-head">
         <p className="lp-kicker">Market Report · {Y} vs {PY}, Jan 1 – {thru}</p>
-        <h1 className="lp-guide-h1">What each kind of property sells for</h1>
-        <p className="lp-guide-lede">
-          Median sale price, size, price per square foot, sale-to-list and days on market for each kind of San Francisco property: {Y} year to
-          date against the same stretch of {PY}, and each quarter against the same quarter a year earlier.
-        </p>
+        <h1 className="lp-guide-h1">By Product Type</h1>
       </section>
 
       <main className="ptp">
         <section className="lp-nsec">
-          <h2>Year to date by product type: {Y} vs {PY}</h2>
-          <p className="ptp-sub">Jan 1 – {thru} in both years.</p>
+          <h2>Year to date: Jan 1 – {thru}, {Y} vs {PY}</h2>
           <div className="ptp-scroll"><table className="ptp-t ptp-yoy">
             <thead><tr><th>Type</th><th>Year</th><th>Units sold</th><th>Median price</th><th>Median size</th><th>Median $/sf</th><th>% of list</th><th>Days on market</th></tr></thead>
-            {G.map(g => { const p = g.prior, c = g.yoy; return (
+            {TR.map(g => { const p = g.prior, c = g.yoy; return (
               <tbody key={g.key}>
                 <tr className="y1"><th scope="row" rowSpan={3}>{g.label}</th><td>{Y}</td><td>{n(g.n)}</td><td><b>{m(g.price)}</b></td><td>{size(g.sqft)}</td>
                   <td>{sf(g.ppsf)}{g.noSqft ? <small> ({g.noSqft} no sf)</small> : null}</td><td>{pct(g.pctList)}</td><td>{g.dom == null ? "—" : Math.round(g.dom)}</td></tr>
@@ -66,8 +63,7 @@ export default function Page() {
         </section>
 
         <section className="lp-nsec">
-          <h2>By quarter: median price · $/sf · size · units sold</h2>
-          <p className="ptp-sub">Each quarter of {Y} against the same quarter of {PY}; {PY} is shown in full.</p>
+          <h2>By quarter: median price · $/sf · size · units sold ({PY} full year)</h2>
           <div className="ptp-scroll"><table className="ptp-t ptp-yoy">
             <thead><tr><th>Type</th><th>Year</th>{allQ.map(q => <th key={q}>Q{q}</th>)}</tr></thead>
             {G.map(g => (
@@ -82,38 +78,22 @@ export default function Page() {
         </section>
 
         <section className="lp-nsec">
-          <h2>Inside “Other”: {Y} vs {PY}</h2>
-          <p className="ptp-sub">Jan 1 – {thru} in both years.</p>
-          <div className="ptp-scroll"><table className="ptp-t ptp-other">
-            <thead><tr><th>Type</th><th>Sold {Y}</th><th>Sold {PY}</th><th>Median {Y}</th><th>Median {PY}</th><th>YoY</th><th>Median size {Y}</th><th>Median $/sf {Y}</th><th>Most sold in, {Y}</th></tr></thead>
-            <tbody>{data.other.map(o => (
-              <tr key={o.type}><th scope="row">{o.type}</th><td>{o.n}</td><td>{o.prior.n}</td><td>{m(o.price)}</td><td>{m(o.prior.price)}</td><td>{ch(o.yoy.price)}</td><td>{size(o.sqft)}</td><td>{sf(o.ppsf)}</td>
-                <td>{o.topHood ? <><Link href={mapHref(o.topHood.hood)}>{o.topHood.hood}</Link> ({o.topHood.n})</> : "—"}</td></tr>
+          <h2>Most sales by neighborhood, {Y}</h2>
+          <div className="ptp-scroll"><table className="ptp-t ptp-where">
+            <thead><tr><th>Type</th><th>Neighborhood</th><th>Units sold</th><th>Share of type</th><th>Median price</th><th>Top sale</th><th>Top sale address</th></tr></thead>
+            <tbody>{G.filter(g => g.topHood).map(g => (
+              <tr key={g.key}><th scope="row">{g.label}</th><td><Link href={mapHref(g.topHood.hood)}>{g.topHood.hood}</Link></td><td>{n(g.topHood.n)}</td>
+                <td>{Math.round(100 * g.topHood.share)}%</td><td>{m(g.topHood.price)}</td><td>{m(g.topSale.price)}</td><td>{g.topSale.addr}</td></tr>
             ))}</tbody>
           </table></div>
-        </section>
-
-        <section className="lp-nsec">
-          <h2>Where each type sells, {Y}</h2>
-          <ul className="ptp-facts">{G.filter(g => g.topHood).map(g => (
-            <li key={g.key}><b>{g.label}:</b> <Link href={mapHref(g.topHood.hood)}>{g.topHood.hood}</Link> sold the most, {g.topHood.n} ({Math.round(100 * g.topHood.share)}% of
-              all), median {m(g.topHood.price)}. The top sale was {m(g.topSale.price)}, {g.topSale.addr}.</li>
-          ))}</ul>
-        </section>
-
-        <section className="lp-nsec">
-          <h2>Left out of $/sf: no square footage</h2>
-          <p>{G.map(g => `${g.label} ${g.noSqft} of ${n(g.n)}`).join(" · ")} {Y} sales report no square footage. They count in every figure except $/sf.</p>
-          {data.noSqftBig.length ? (
-            <p>Big ones: {data.noSqftBig.map(r => `${r.addr} (${r.type}, ${m(r.price)}, ${r.hood})`).join("; ")}.</p>
-          ) : null}
         </section>
       </main>
 
       <SiteFooter note={<>Closed sales from SFAR MLS (Residential and Residential Income). {Y}: Jan 1 – {thru}; {PY}: Jan 1 – {pthru} for year over
         year, the full year by quarter. Medians throughout; size and $/sf use only sales with reported square footage. YoY is the % change; % of list
-        in points, days on market in days. Duplex / 2 Homes includes 2 Houses on Lot; Condo includes townhouses; TIC includes co-ownership. Deemed
-        reliable, not guaranteed.</>} />
+        in points, days on market in days. Sales with no reported square footage count in every figure except $/sf; the count is shown beside each
+        $/sf{data.noSqftBig.length ? <>; $3M+ duplex and Residential Income sales without it: {data.noSqftBig.map(r => `${r.addr} (${r.type}, ${m(r.price)})`).join("; ")}</> : null}.
+        Duplex / 2 Homes includes 2 Houses on Lot; Condo includes townhouses; TIC includes co-ownership. Deemed reliable, not guaranteed.</>} />
     </div>
   );
 }

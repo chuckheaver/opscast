@@ -6112,12 +6112,10 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .ptp-t thead th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--lp-muted); }
 .ptp-t th:first-child { text-align: left; }
 .ptp-t small { color: var(--lp-muted); }
-.ptp-facts { padding-left: 18px; line-height: 1.6; } .ptp-facts li { margin: 6px 0; }
-.ptp-sub { margin: -4px 0 10px; color: var(--lp-muted); font-size: 14px; }
 .ptp-yoy tbody th { vertical-align: top; border-bottom: 2px solid var(--lp-line); }
 .ptp-yoy tbody td:first-of-type, .ptp-yoy thead th:nth-child(2) { text-align: left; }
 .ptp-yoy tr.y1 td, .ptp-yoy tr.y0 td { border-bottom: none; padding-bottom: 3px; }
 .ptp-yoy tr.y0 td { color: var(--lp-muted); padding-top: 3px; }
 .ptp-yoy tr.yc td { font-size: 13px; padding-top: 3px; border-bottom: 2px solid var(--lp-line); }
-.ptp-other td:last-child, .ptp-other th:last-child { text-align: left; white-space: normal; min-width: 130px; }
+.ptp-where td:nth-child(2), .ptp-where td:last-child, .ptp-where th:nth-child(2), .ptp-where th:last-child { text-align: left; }
 .ptp-up { color: #1F6F43; } .ptp-dn { color: #A3332B; }

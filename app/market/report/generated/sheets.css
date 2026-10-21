@@ -1,6 +1,4 @@
-.sheetA .pt-lead { font-size:12.5px; line-height:1.45; margin:4px 0 8px; padding:7px 10px; background:#F6F1E2; border-left:4px solid #C9A227; }
-.sheetA .pt-grid { display:grid; grid-template-columns:1.15fr 1fr; gap:14px; }
-.sheetA .pt-grid h2, .sheetA h2.pt-h { font-size:13px; margin:6px 0 4px; }
+.sheetA h2.pt-h { font-size:13px; margin:6px 0 4px; }
 .sheetA table.pt tr.y0 td { color:#6B6F75; }
 .sheetA table.pt tr.yc td { font-size:9.5px; border-bottom:1.5px solid #C9C6BC; }
 .sheetA table.pt tr.y1 td, .sheetA table.pt tr.y0 td { border-bottom:none; }
@@ -9,17 +7,12 @@
 .sheetA table.pt .dn { color:#A3332B; }
 .sheetA table.pt.pt-q td { font-size:11.5px; padding:6px 5px; }
 .sheetA table.pt.pt-q small { font-size:10px; }
-.sheetA .pt-grid { margin-top:4px; }
 .sheetA table.pt { border-collapse:collapse; width:100%; font-size:10.5px; }
 .sheetA table.pt th, .sheetA table.pt td { padding:3px 5px; border-bottom:1px solid #E3E1DA; text-align:right; }
 .sheetA table.pt th { font-size:9px; text-transform:uppercase; letter-spacing:.04em; color:#6B6F75; }
 .sheetA table.pt td { white-space:nowrap; }
 .sheetA table.pt .l { text-align:left; white-space:normal; }
 .sheetA table.pt small { color:#6B6F75; font-size:8.5px; }
-.sheetA .pt-note { font-size:10.3px; line-height:1.45; }
-.sheetA .pt-note p { margin:2px 0 5px; }
-.sheetA ul.pt-facts { margin:0; padding-left:15px; font-size:10.3px; line-height:1.45; }
-.sheetA ul.pt-facts li { margin:2px 0; }
 .sheetA { margin:0; font-family: 'Lato', Helvetica, Arial, sans-serif; color:#131A25; }
 .sheetA .mast .t, .sheetA h2, .sheetA .sig b { font-family:'Montserrat', 'Lato', Helvetica, Arial, sans-serif; }
 .sheetA .page { width:10.3in; height:7.6in; page-break-after:always; position:relative; box-sizing:border-box; background:#fff; }
