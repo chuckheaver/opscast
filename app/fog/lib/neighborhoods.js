@@ -8647,14 +8647,68 @@ export const NEIGHBORHOODS = {
     spirit: "A hushed, leafy pocket of curving streets tucked on the south slope below Bernal Heights, where mid-century and earlier homes line streets famously laid out in the shape of a bell — a nod to the old St. Mary's College that once crowned this hill.",
     reasons: ["Quiet streets with little through traffic", "A small neighborhood park at its heart", "Minutes from Cortland Ave and Mission St dining", "14-Mission and BART put downtown within reach"],
     aka: "College Hill",
-    history: "The hill takes its name from St. Mary's College, founded by Roman Catholic archbishop Joseph Alemany, who bought 60 acres from Jesus Bernal for $1,600 and laid the college cornerstone on August 3, 1862. The college operated here until 1889, when it moved to Oakland and later to Moraga, leaving the area known for decades as College Hill. In 1924 the land was surveyed and opened as a residential subdivision, its streets famously platted in the shape of a bell to honor the school; Justin, Genebern, and Agnon streets were named for teaching brothers of the college. The St. Mary's Park Improvement Club, founded in 1941, has worked to preserve the neighborhood's character ever since.",
+    history:
+      "Long before its bell-shaped streets, this slope on the south side of Bernal Heights was a place of artichoke fields, dairies, tanneries and grassy gullies. Archbishop Joseph Alemany bought 60 acres here from Jesus Bernal for $1,600 and, on August 3, 1862, laid the cornerstone of St. Mary's College, which opened in August 1863; the Christian Brothers took charge of it in 1868. Fog and wind helped push the college to Oakland in 1889, and in 1928 it moved again, to Moraga, where it remains.\n\nThe old campus grounds stayed farmland for decades. During the 1920s building boom the archdiocese chose to subdivide, and in 1924 Archbishop Edward Hanna signed the property over to a residential development company, forming St. Mary's Park. The architect Mark Daniels is credited with its trademark plan: streets curving in the shape of a bell, a nod to the college's church bell. Justin Drive and Genebern Way were named for Christian Brothers of the college.\n\nWorks Progress Administration crews graded the hillside for St. Mary's Playground in the 1930s, and most of the rest of the park followed in the 1940s and '50s. In 1962, a century after the cornerstone, a state plaque marking the college's site as California Historical Landmark No. 772 was set in the College Avenue median. For the neighborhood's centennial, a committee member pieced together where the vanished campus stood from the archdiocese's old insurance documents and topographic maps, and the celebration closed with a model of the original college. The college's cast-iron bell is in Moraga today.",
     facts: [
-      { icon: "church", title: "A college on the hill", text: "Archbishop Alemany laid the cornerstone of St. Mary's College here on August 3, 1862; it stayed until 1889 before moving to Oakland and eventually Moraga." },
-      { icon: "book", title: "College Hill", text: "Because of that early college, the area was long known as College Hill, and several streets carry the names of the teaching brothers." },
-      { icon: "house", title: "Streets shaped like a bell", text: "When the subdivision opened in 1924, the curving streets were laid out in the shape of a bell as a tribute to St. Mary's College." },
-      { icon: "park", title: "A park at its center", text: "The neighborhood is organized around St. Mary's Recreation Center and park just to the east, set aside by the city in the 1920s." },
-      { icon: "flag", title: "An improvement club since 1941", text: "The St. Mary's Park Improvement Club, founded in 1941, has championed the neighborhood for more than eight decades." },
+      {
+        icon: "church",
+        title: "A landmark in the median",
+        text:
+          "A plaque in the College Avenue median, just east of Mission Street, marks the original site of St. Mary's College, California Historical Landmark No. 772. It was placed on September 29, 1962, by the California State Park Commission with the college, its alumni and the California Historical Society, and it notes that Archbishop Alemany opened the college here in August 1863.",
+        place: "St. Mary's College plaque",
+        where: "College Ave & Mission St",
+        at: [-122.42437, 37.73513],
+        source: "https://www.hmdb.org/m.asp?m=115443",
+      },
+      {
+        icon: "road",
+        title: "Streets drawn as a bell",
+        text:
+          "Follow College Avenue as it curves downhill and you are tracing the rim of a bell. When the archdiocese subdivided the old campus in the 1920s, the architect Mark Daniels planned the neighborhood's trademark shape as a nod to the college's original church bell; a 1938 aerial photograph already shows the bell-shaped street plan.",
+        place: "College Avenue",
+        where: "300 College Ave",
+        at: [-122.42418, 37.73441],
+        source: "https://bernalwood.com/2011/12/12/st-marys-park-in-sundays-new-york-times/",
+      },
+      {
+        icon: "park",
+        title: "A WPA hillside playground",
+        text:
+          "Works Progress Administration crews prepared this slope for St. Mary's Playground, grading it and building fencing, landscaping and rubble-and-concrete walls for a total of $41,386, according to Clyde Healy's 1939 report on the WPA in San Francisco. Most of the rest of the park, now St. Mary's Recreation Center, was added in the 1940s and '50s.",
+        place: "St. Mary's Recreation Center",
+        where: "Murray St & Justin Dr",
+        at: [-122.42100, 37.73420],
+        source: "https://livingnewdeal.org/sites/saint-marys-playground-san-francisco-ca/",
+      },
+      {
+        icon: "house",
+        title: "Named for the Christian Brothers",
+        text:
+          "Genebern Way and nearby Justin Drive, laid out on the original college site, were named for Christian Brothers, the teaching order that ran St. Mary's College from 1868. The college archive at Moraga keeps the record of the names.",
+        place: "Genebern Way",
+        where: "235 Genebern Way",
+        at: [-122.42503, 37.73241],
+        source: "https://smc-archives.libraryhost.com/repositories/2/archival_objects/612",
+      },
+      {
+        icon: "road",
+        title: "On the old El Camino Real",
+        text:
+          "Mission Street, the neighborhood's western edge, takes its name from Mission Dolores, several blocks from its modern route, and only its southern half follows the historic El Camino Real, the road that connected California's missions. The 14, 14R and 49 buses stop at this corner.",
+        place: "Mission Street",
+        where: "Mission St & Bosworth St",
+        at: [-122.42676, 37.73353],
+        source: "https://en.wikipedia.org/wiki/Mission_Street",
+      },
     ],
+    walk: {
+      intro:
+        "A loop of just under a mile, starting at the Muni stop at Mission St & Crescent Ave, served by the 14, 14R and 49 buses: down the curve of College Avenue to St. Mary's Recreation Center, then back by Genebern Way to Mission St & Bosworth St. Allow about 35 minutes, and go in daylight when the recreation center is open.",
+      miles: 0.9,
+      minutes: 35,
+      tip:
+        "St. Marys Park has no shopping street of its own; for shops, cafés and restaurants, Cortland Avenue in Bernal Heights is a short ride north, and Mission Street's shops run south through the Excelsior.",
+    },
     nearby: ["Bernal Heights", "the Mission St corridor"],
     restaurants: [
       { name: "Emmy's Spaghetti Shack", address: "3230 Mission St", phone: "(415) 206-2086", url: "https://www.sfspaghettishack.com" },
