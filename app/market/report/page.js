@@ -15,8 +15,8 @@ const read = f => readFileSync(path.join(G, f), "utf8");
 // the menu's SF Market item both land on it. SF Neighborhoods jumps to the
 // Neighborhoods page inside it (#neighborhoods, set by web.py).
 const SECTIONS = [
-  { id: "sf", file: "stats.html", h: "Market Stats", p: "San Francisco real estate, where the money went, the grids by neighborhood and fog zone, the neighborhoods, the year in numbers, and what is waiting to sell." },
-  { id: "cost", file: "cost.html", h: "The Cost of Ownership", p: "What money costs a financed buyer and a cash buyer right now: rates, bonds and the opportunity cost of owning." },
+  { id: "sf", file: "stats.html", h: "Market Stats" },
+  { id: "cost", file: "cost.html", h: "The Cost of Ownership" },
 ];
 
 export const metadata = {
@@ -34,10 +34,6 @@ export default function Page() {
         <section className="lp-guide-head">
           <p className="lp-kicker">Market Report · {meta.period}</p>
           <h1 className="lp-guide-h1">San Francisco Market Briefing</h1>
-          <p className="lp-guide-lede">
-            Closed sales from SFAR MLS, mapped to the neighborhood and the microclimate each home sits in.
-            Click any neighborhood or top sale to see those sold homes on the map, street by street.
-          </p>
           <div className="rp-actions">
             <a className="lp-btn lp-btn-gold" href="/reports/sf-market-briefing.pdf" download>Download the PDF</a>
             <Link className="lp-btn lp-btn-ghost" href="/fog?preset=homes">Sold homes on the map</Link>
@@ -53,15 +49,14 @@ export default function Page() {
           <section key={s.id} id={s.id} className="rp-sec">
             <div className="rp-sec-head">
               <h2>{s.h}</h2>
-              <p>{s.p}</p>
             </div>
-            <p className="rp-hint">Scroll each page sideways on a phone — or download the PDF.</p>
             <div className="rp-sheets" dangerouslySetInnerHTML={{ __html: read(s.file) }} />
           </section>
         ))}
         <p className="rp-foot">
-          Report run {meta.run}. Source: SFAR MLS closed sales. Deemed reliable, not guaranteed.
-          Rate figures from Freddie Mac and the U.S. Treasury as cited on the page.
+          Report run {meta.run}. Source: SFAR MLS closed sales, mapped to the neighborhood and microclimate each home sits in;
+          neighborhoods and top sales link to those sold homes on the map. Rate figures from Freddie Mac and the U.S. Treasury
+          as cited on the page. On a phone, scroll each page sideways. Deemed reliable, not guaranteed.
         </p>
       </main>
 

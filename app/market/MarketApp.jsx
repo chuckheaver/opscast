@@ -126,11 +126,6 @@ export default function MarketApp() {
           </select>
         </div>
       </header>
-      {isPartial && <p className="mk-partial">⚠ {monthLabel(selected)} is still in progress — figures are partial and MoM/YoY will look skewed until the month closes.</p>}
-      <p className="mk-sub">
-        {selected ? `${selected.slice(0, 4)} year to date` : "Year to date"} from SFAR MLS closed sales · MoM vs the prior month this year · YoY vs the same month last year.
-        Cells marked “—” await data the export doesn’t carry yet ($/sq ft, contracts, month-end inventory).
-      </p>
 
       {SEGMENTS.map(seg => {
         const cur = statsFor(seg.key, selected);
@@ -252,8 +247,9 @@ export default function MarketApp() {
       })}
 
       <p className="mk-foot">
-        * small sample (n&lt;50). Source: SFAR MLS closed sales, geocoded. $/sq ft, “Went Into Contract,”
-        and “# For Sale” populate once the export includes square footage, contract dates, and active inventory.
+        * small sample (n&lt;50). {isPartial ? `${monthLabel(selected)} is a partial month. ` : ""}Source: SFAR MLS closed sales, geocoded;
+        {selected ? ` ${selected.slice(0, 4)} year to date.` : " year to date."} MoM: against the prior month this year. YoY: against the same month last year.
+        “—”: data the export does not carry ($/sq ft, contracts, month-end inventory).
       </p>
     </div>
     </div>

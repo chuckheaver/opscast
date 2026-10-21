@@ -230,17 +230,6 @@ def neighborhoods(sales_y1, sfh_types, stats, cto_types=()):
     for i, hd in enumerate(out): hd["n"] = i + 1
     return out
 
-def fog_price_slope(sales_y1, sfh_types):
-    """Single-family $/sf against fog hours, least squares across every
-    house sale: what an extra hour of summer fog is worth per square foot."""
-    pts = [(r["fogHours"], r["sellingPrice"] / r["sqft"]) for r in sales_y1
-           if r.get("propType") in sfh_types and r.get("fogHours") is not None and r.get("sqft") and r.get("sellingPrice")]
-    if len(pts) < 50: return None, 0
-    mx = statistics.mean(x for x, _ in pts); my = statistics.mean(y for _, y in pts)
-    b = sum((x - mx) * (y - my) for x, y in pts) / sum((x - mx) ** 2 for x, _ in pts)
-    return b, len(pts)
-
-# ── pages ────────────────────────────────────────────────────────────────
 CSS = f"""
     .fm-wrap {{ display:flex; gap:14px; margin-top:4px; }}
     .fm-map {{ flex:0 0 612px; position:relative; }}
@@ -343,23 +332,20 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
     th = "<tr><th class='l'>Neighborhood</th><th>Est. °F</th><th>Median</th><th>Sales</th></tr>"
     colg = "<colgroup><col style='width:54%'><col style='width:15%'><col style='width:18%'><col style='width:13%'></colgroup>"
     warm = res[:10]; cool = list(reversed(res[-10:]))
-    slope, npts = fog_price_slope(y1, sfh)
     months = clim["months"]; hot = max(months, key=lambda m: m["high"])
     jul = next(m for m in months if m["m"] == "Jul")
     ext = {e["k"]: e for e in clim["extremes"]}
     spread = warm[0]["temp"] - cool[0]["temp"]
     sun_k, pf_k = zst["1"], zst["4"]
     facts = [
-        (f"{hot['m']}", f"is the city's warmest month — a {hot['high']}°F normal high, against {jul['high']}°F in July. Summer arrives in the fall."),
+        (f"{hot['m']}", f"is the city's warmest month — a {hot['high']}°F normal high, against {jul['high']}°F in July."),
         (f"{spread}°F", f"between the warmest and coolest neighborhoods on a typical summer afternoon: {html.escape(warm[0]['name'])} and {html.escape(cool[0]['name'])}."),
-        ("928 ft", "Mount Davidson, the top of the ridge (Twin Peaks 922, Sutro 909) that splits the city into a fog side and a sun side."),
-        ("52–56°F", "the ocean off Ocean Beach in August. Wind pulls cold water up from below — that cold water is what makes the fog."),
-        (ext.get("Hottest day on record", {}).get("v", "106°F"), f"the hottest day on record downtown, {ext.get('Hottest day on record', {}).get('when', 'Sep 1, 2017')} — in September, naturally."),
-        (f"{(sun_k['price'] or 0)/(pf_k['price'] or 1):.1f}×", f"what an SFH costs in Zone 1 against Zone 4 this year: {M(sun_k['price'])} vs {M(pf_k['price'])} median."),
+        ("928 ft", "Mount Davidson, the city's highest point (Twin Peaks 922, Sutro 909)."),
+        ("52–56°F", "the ocean off Ocean Beach in August."),
+        (ext.get("Hottest day on record", {}).get("v", "106°F"), f"the hottest day on record downtown, {ext.get('Hottest day on record', {}).get('when', 'Sep 1, 2017')}."),
+        (f"{(sun_k['price'] or 0)/(pf_k['price'] or 1):.1f}×", f"SFH median, Zone 1 vs Zone 4 this year: {M(sun_k['price'])} vs {M(pf_k['price'])}."),
     ]
-    if slope is not None:
-        facts.append((f"${abs(slope):,.0f}/sf", f"lower price per square foot, on average, for each extra hour of daily summer fog — {npts:,} house sales this year."))
-    facts.append(("800–1,500 ft", "the usual top of the fog deck. Above it, the peaks sit in sunshine looking down on a white sea."))
+    facts.append(("800–1,500 ft", "the usual top of the summer fog deck."))
     fact_html = "".join(f"<div class='mz-fact'><b>{a}</b>{b}</div>" for a, b in facts[:8])
     o += [f"<div class='page'><div class='hdr'><div><div class='t'>Microclimates and Real Estate</div>"
           f"<div class='p'>{html.escape(plabel)}</div></div></div>",
@@ -368,7 +354,7 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
           f"<div class='mz-col'><div class='mz-h'>Warmest 10 ☀</div><table class='mz'>{colg}{th}{rows(warm)}</table></div>",
           f"<div class='mz-col'><div class='mz-h'>Coolest 10 ☁</div><table class='mz'>{colg}{th}{rows(cool)}</table></div>",
           f"<div class='mz-col' style='flex:0.95'><div class='mz-h'>The year downtown, °F</div>{year_chart(months, w=250, h=104)}"
-          f"<div class='mz-cap'>Normal high and low by month, downtown, NOAA 1991–2020. September is the high point.</div></div>",
+          f"<div class='mz-cap'>Normal high and low by month, downtown, NOAA 1991–2020.</div></div>",
           "</div>"]
     for title, byZ, tot in zone_rows:
         o.append(f"<div class='zh'>Closings by Fog Zone — {title}</div>")

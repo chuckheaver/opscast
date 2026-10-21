@@ -4104,7 +4104,6 @@ body {
 .mk-controls { display: flex; align-items: center; gap: 8px; }
 .mk-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); font-weight: 600; }
 .mk-select { border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; font: inherit; font-size: 14px; background: #fff; }
-.mk-sub { font-size: 12px; color: var(--muted); line-height: 1.5; margin: 10px 0 22px; }
 .mk-err { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 10px 12px; border-radius: 8px; }
 .mk-loading { color: var(--muted); }
 
@@ -4176,7 +4175,6 @@ body {
   .mk-table th, .mk-table td { padding: 6px 6px; }
 }
 
-.mk-partial { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; padding: 8px 12px; border-radius: 8px; font-size: 12px; margin: 0 0 16px; }
 
 .mk-page { min-height: 100vh; background: #f0ece6; }
 
@@ -5823,7 +5821,6 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .rp-sec { max-width: 1080px; margin: 0 auto; padding-top: 28px; scroll-margin-top: 80px; }
 .rp-sec-head h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(24px, 3vw, 32px); font-weight: 800; color: #131A25; margin: 0; letter-spacing: -0.02em; }
 .rp-sec-head p { margin: 6px 0 0; font-size: 15px; line-height: 1.55; color: #505050; max-width: 70ch; }
-.rp-hint { display: none; margin: 10px 0 0; font-size: 12.5px; color: #6B6F75; }
 .rp-sheets { margin-top: 16px; display: grid; gap: 22px; }
 /* Each printed page keeps its designed size and scrolls sideways if the
    screen is narrower, so tables and charts never reflow out of shape. */
@@ -5851,7 +5848,7 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .rp-sheet a.rp-link:hover { color: #203C5F; background: #FAEEDA; }
 .rp-sheet svg a.rp-link { text-decoration: underline; }
 .rp-foot { max-width: 1080px; margin: 28px auto 0; font-size: 12.5px; color: #6B6F75; line-height: 1.6; }
-@media (max-width: 1060px) { .rp-hint { display: block; } }
+
 .nv-panel-right { left: auto; right: 0; }
 .nv-panel-foot { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 6px 4px 2px; padding: 10px 8px 2px; border-top: 1px solid #DCDDDE; }
 .nv-panel-foot a { font-size: 13px; font-weight: 700; color: #203C5F; }

@@ -385,7 +385,7 @@ def hood_bars(rank,tot,w=300,h=300,top=11):
         if half_y is None and cum>=tot/2: half_y=y+rowh-1.5
     if half_y:
         o.append(f"<line x1='0' y1='{half_y:.1f}' x2='{w}' y2='{half_y:.1f}' stroke='{GOLD_MID}' stroke-width='1.5' stroke-dasharray='4 3'/>")
-        o.append(f"<text x='{w}' y='{half_y-3.5:.1f}' font-size='7.4' font-weight='800' fill='{mg.GOLD_TXT}' text-anchor='end'>↑ half of all the money in the city</text>")
+        o.append(f"<text x='{w}' y='{half_y-3.5:.1f}' font-size='7.4' font-weight='800' fill='{mg.GOLD_TXT}' text-anchor='end'>↑ 50% of city dollar volume</text>")
     return "".join(o)+"</svg>"
 
 def type_mirror(rows,w=470,h=168):
@@ -471,7 +471,6 @@ def curve_chart(w=228,h=116):
         o.append(f"<circle cx='{X(i):.1f}' cy='{Y(v):.1f}' r='2.4' fill='{GOLD_MID}'/>")
         o.append(f"<text x='{X(i):.1f}' y='{Y(v)-5:.1f}' font-size='6.6' font-weight='700' fill='{mg.GOLD_TXT}' text-anchor='middle'>{v:.2f}</text>")
         o.append(f"<text x='{X(i):.1f}' y='{h-4}' font-size='6.6' fill='{MUTED}' text-anchor='middle'>{lab}</text>")
-    o.append(f"<text x='{w-pad_l}' y='10' font-size='6.2' fill='{UP}' text-anchor='end' font-weight='700'>rising = normal</text>")
     return "".join(o)+"</svg>"
 
 def spread_chart(w=470,h=158):
@@ -542,23 +541,6 @@ def lux_chart(cy,w=470,h=176,through=9):
         lxx=pad_l+j*82
         o.append(f"<rect x='{lxx}' y='2' width='8' height='8' fill='{col}' rx='1.5'/><text x='{lxx+11}' y='9' font-size='7' fill='{INK}'>{lab}</text>")
     return "".join(o)+"</svg>"
-
-def lux_caption(lc,through):
-    """The over-$5M story in one sentence, from the counts: the peak month,
-    the July dip (the Nasdaq's 10% drop) when the peak came before it, and
-    where the last month landed."""
-    MONTH="January February March April May June July August September October November December".split()
-    months=range(1,through+1)
-    pk=max(months,key=lambda m:lc.get(m,0))
-    out=f"Sales peaked at {lc.get(pk,0)} in {MONTH[pk-1]}"
-    if pk<7<=through:
-        out+=f", fell to {lc.get(7,0)} in July — the month the Nasdaq dropped 10%"
-    last=through
-    if last!=pk and last>1:
-        prev=lc.get(last-1,0); now=lc.get(last,0)
-        verb="came back to" if now>prev else "slipped to" if now<prev else "held at"
-        out+=f" — and {verb} {now} in {MONTH[last-1]}"
-    return out+"."
 
 def carry_chart(w=228,h=120,price=8e6):
     """What the 10-year yield costs a cash buyer each year on an $8M house."""
@@ -833,8 +815,8 @@ def build():
     USEG=[("SFH","#AFC0D0","#203C5F","sfh"),("Condo/TIC","#F6E3A6","#E9BC3F","cd"),("Other","#C9CCD0","#6B6F75","oth")]
     VSEG=[("SFH","#AFC0D0","#203C5F","sfh_v"),("Condo/TIC","#F6E3A6","#E9BC3F","cd_v"),("Other","#C9CCD0","#6B6F75","oth_v")]
     # ── PAGE 1 — San Francisco right now ─────────────────────────────────
-    # The local snapshot. Headline numbers, then four charts. One sentence
-    # under each; anything longer belongs on the In Depth page.
+    # The local snapshot. Headline numbers, then four charts. Stats only, no
+    # captions (the owner, Oct 21 2026): definitions go in the footer.
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>San Francisco Real Estate</div>
       <div class='p'>YTD through <b>{mname} {mo.year}</b> vs {mo.year-1}.</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, SFAR MLS · run {datetime.date.today().strftime('%B %-d, %Y')}</div></div>""")
@@ -844,21 +826,17 @@ def build():
         +"</div></div>")
     o.append("<div class='cols' style='margin-top:7px'>")
     o.append(f"""<div class='col'><h2>Units Sold</h2>
-      {stacked(urows,USEG,uytd,h=212)}
-      <div class='cap'>Light bars are last year, dark bars this year. <span class='st'>{u26:,}</span> homes have sold, against <span class='st'>{u25:,}</span> by this point last year.</div></div>""")
-    o.append(f"""<div class='col'><h2>Volume Allocation</h2>
-      {stacked(vrows,VSEG,vytd,h=212,fmt=lambda v:f"{v/1e6:.0f}")}
-      <div class='cap'>Millions of dollars a month. <span class='st'>{BN(v26)}</span> so far against <span class='st'>{BN(v25)}</span> — far more money on only {sgn(D(u26,u25))}% more sales.</div></div>""")
+      {stacked(urows,USEG,uytd,h=212)}</div>""")
+    o.append(f"""<div class='col'><h2>Volume Allocation ($M a month)</h2>
+      {stacked(vrows,VSEG,vytd,h=212,fmt=lambda v:f"{v/1e6:.0f}")}</div>""")
     o.append("</div>")
     o.append("<div class='cols' style='margin-top:7px'>")
     o.append(f"""<div class='col'><h2>Sale vs List — SFH</h2>
-      {lines(mlrows,[("What sellers asked","#E9BC3F","mlist"),("What buyers paid","#203C5F","msold")],h=196,dkey="d")}
-      <div class='cap'>Navy sits above yellow every month this year: buyers paid over asking all year. The figure under each month is the change from last year.</div></div>""")
+      {lines(mlrows,[("What sellers asked","#E9BC3F","mlist"),("What buyers paid","#203C5F","msold")],h=196,dkey="d")}</div>""")
     o.append(f"""<div class='col'><h2>Sale vs List — Condo/TIC/Other</h2>
-      {lines(clrows,[("What sellers asked","#E9BC3F","clist"),("What buyers paid","#203C5F","csold")],h=196,dkey="d")}
-      <div class='cap'>Same story for Condo/TIC/Other, with a narrower gap — sellers ask about {M(statistics.median([r['clist'] for r in clrows if r['clist']]))} and get about {M(statistics.median([r['csold'] for r in clrows if r['csold']]))}.</div></div>""")
+      {lines(clrows,[("What sellers asked","#E9BC3F","clist"),("What buyers paid","#203C5F","csold")],h=196,dkey="d")}</div>""")
     o.append("</div>")
-    o.append(f"<div class='foot'><span>Source: SFAR MLS via BrokerMetrics, closed sales (Closed + Sold Off MLS), geocoded to the site's fog-contour layer. Data through {W['m1'][1]}. Deemed reliable, not guaranteed.</span><span>page 1 / 9</span></div></div>")
+    o.append(f"<div class='foot'><span>Source: SFAR MLS via BrokerMetrics, closed sales (Closed + Sold Off MLS), geocoded to the site's fog-contour layer. Data through {W['m1'][1]}. Sale vs List: monthly medians; the figure under each month is the change in the median sale from the same month last year. Deemed reliable, not guaranteed.</span><span>page 1 / 9</span></div></div>")
 
     # (The National Picture page was removed; these values still feed the Cost of Ownership page.)
     urows2=[dict(m=m_,us=u,ca=c_,sf=f_) for m_,u,c_,f_ in UNEMP]
@@ -871,21 +849,17 @@ def build():
     top3=sum(v for _,v in hrank[:3])
     cheap=msplit[0]; rich=msplit[-1]
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>Detail — Allocation of Money</div>
-      <div class='p'><b>{BN(mtot)}</b> changed hands in <b>{mn:,}</b> sales this year.</div></div>
+      <div class='p'>{BN(mtot)} · {mn:,} sales · Jan 1 – {thru}, 20{yy}</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, Jan 1 – {thru}</div></div>""")
     o.append("<div class='cols'>")
     o.append(f"""<div class='col' style='flex:1.5'><h2>Allocation by Tier</h2>
       {mirror_bars(msplit)}
-      <div class='cap'>The top bar counts <b>units</b>, the bottom counts <b>dollars</b> — same four price ranges, completely different shapes.
-      <span class='st'>{cheap['n']:,}</span> units sold under $1M and brought <span class='st'>{BN(cheap['v'])}</span>; just <span class='st'>{rich['n']}</span> sold over $5M and brought <span class='st'>{BN(rich['v'])}</span>.</div>
       <h2 style='margin-top:6px'>Allocation by Type</h2>
-      {type_mirror(S["y1"])}
-      <div class='cap'>More Condo/TIC/Other units change hands than SFH, yet SFH bring in more money.</div></div>""")
-    o.append(f"""<div class='col' style='flex:1.1'><h2>Allocation by Neighborhood</h2>
-      {hood_bars(hrank,mtot,w=380,h=470,top=20)}
-      <div class='cap'>Top twenty by dollars closed. <span class='st'>{hrank[0][0]}</span> alone took <span class='st'>${hrank[0][1]/1e6:,.0f}M</span> — <span class='st'>{100*hrank[0][1]/mtot:.0f}%</span> of the city — on {100*len([r for r in S['y1'] if mg.hood(r)==hrank[0][0]])/mn:.0f}% of its sales.</div></div>""")
+      {type_mirror(S["y1"])}</div>""")
+    o.append(f"""<div class='col' style='flex:1.1'><h2>Allocation by Neighborhood: Top 20 by Dollars</h2>
+      {hood_bars(hrank,mtot,w=380,h=470,top=20)}</div>""")
     o.append("</div>")
-    o.append(f"""<div class='foot'><span>All closed sales, Jan 1 – {thru}. Tiers by final sale price. Every neighborhood counted on its own.</span><span>page 3 / 9</span></div></div>""")
+    o.append(f"""<div class='foot'><span>All closed sales, Jan 1 – {thru}. Tiers by final sale price; top bar units, bottom bar dollars. Every neighborhood counted on its own.</span><span>page 3 / 9</span></div></div>""")
 
     # ── PAGE 4 — who's buying ────────────────────────────────────────────
     # The two buyers side by side. They respond to completely different
@@ -903,7 +877,6 @@ def build():
         for r in (6.10,6.50,MTG_NOW,7.50))
     lux=[r for r in S["y1"] if r["sellingPrice"]>=5e6]
     lux0=[r for r in S["y0"] if r["sellingPrice"]>=5e6]
-    lc=lux_series(mo.year)[mo.year]         # month → count, for the caption
     lux_py=sum(lux_series(mo.year)[mo.year-1].values())   # the prior year's whole-year count
     top5=[r for r in S["y1"] if r["sellingPrice"]>=5e6]
     luxv=sum(r["sellingPrice"] for r in lux); top5v=sum(r["sellingPrice"] for r in top5)
@@ -911,25 +884,18 @@ def build():
     carry=lambda p,y: p*y/100+p*PROP_TAX
     cost_at=len(o)                        # The Cost of Ownership prints last (see build's end)
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The Cost of Ownership</div>
-      <div class='p'>The cost of money</div></div>
+      <div class='p'>Rates as of Sept 30, 2026</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales · rates as of Sept 30 (mortgage: Sept 24 survey)</div></div>""")
     o.append("<div class='cols'>")
     o.append(f"""<div class='col'><h2 class='band'>The Financed Buyer</h2>
-      <div class='cap' style='margin-bottom:5px'><b>Watching Interest Rates</b></div>
       <h2>The Cost of Financing an Average Home</h2>
       <table class='top'><tr><th class='l'>30-yr rate</th><th>SFH median</th><th>vs 6.10%</th><th>Condo median</th><th>vs 6.10%</th></tr>{rate_rows}</table>
-      <div class='cap'>Monthly payment on a typical {M(MED_SFH)} SFH and {M(MED_CO)} Condo/TIC/Other with 20% down.
-      January's {6.10:.2f}% to {MTG_NOW:.2f}% on September 24 costs an SFH buyer <span class='st'>${P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10):,.0f} more a month</span> — <span class='st'>${12*(P(MED_SFH,MTG_NOW)-P(MED_SFH,6.10)):,.0f} a year</span> — for the same house.</div>
-      <h2 style='margin-top:6px'>Home Loans Follow the Bond</h2>{spread_chart(h=140)}
-      <div class='cap'>Yellow is your home loan, navy is what the government pays. The gap between them barely moves, so the bond leads and your rate follows.</div>
-      <h2 style='margin-top:5px'>The Yield Curve, Sept 30</h2>{curve_chart(w=470,h=92)}
-      <div class='cap'>Lend longer, earn more — the line rises, as it should. When it tips the other way it is <b>inverted</b>, which has come before every U.S. recession since the 1970s. We are not there.</div></div>""")
+      <h2 style='margin-top:6px'>30-yr Mortgage vs 10-yr Treasury</h2>{spread_chart(h=140)}
+      <h2 style='margin-top:5px'>The Yield Curve, Sept 30</h2>{curve_chart(w=470,h=92)}</div>""")
     o.append(f"""<div class='col'><h2 class='band'>The Cash Buyer</h2>
-      <div class='cap' style='margin-bottom:5px'><b>Watching Bond Yields</b></div>
       <h2>Over $5M — Sales by Month, 20{py} vs 20{yy}</h2>
       {lux_chart(mo.year,h=190,through=mo.month)}
-      <div class='cap'><span class='st'>{len(lux)}</span> sales Jan 1 – {thru} against <span class='st'>{len(lux0)}</span> in the same stretch of 20{py}, <span class='st'>{sgn(D(len(lux),len(lux0)))}%</span> (20{py} full year: {lux_py}).
-      {lux_caption(lc,mo.month)}</div>
+      <div class='cap'><span class='st'>{len(lux)}</span> sales Jan 1 – {thru} against <span class='st'>{len(lux0)}</span> in the same stretch of 20{py}, <span class='st'>{sgn(D(len(lux),len(lux0)))}%</span> (20{py} full year: {lux_py}).</div>
       <h2 style='margin-top:6px'>Annual Opportunity Cost of Owning an $8M Home</h2>
       {carry_chart(w=470,h=112)}
       <ul class='math'>
@@ -953,7 +919,7 @@ def build():
           <li><b>3. Opportunity cost</b> — cash left in 10-year Treasuries earns <b>{TEN_NOW:.2f}%</b>, free of California tax.</li>
         </ul></div></div>
     </div>""")
-    o.append(f"""<div class='foot'><span>Payments are principal and interest only. Foregone yield uses the 10-year Treasury; property tax at {100*PROP_TAX:.2f}%. Insurance, upkeep and illiquidity are additional.</span><span>page 4 / 9</span></div></div>""")
+    o.append(f"""<div class='foot'><span>Monthly payment on the {M(MED_SFH)} SFH and {M(MED_CO)} Condo/TIC/Other medians with 20% down; principal and interest only. Foregone yield uses the 10-year Treasury; property tax at {100*PROP_TAX:.2f}%. Insurance, upkeep and illiquidity are additional.</span><span>page 4 / 9</span></div></div>""")
 
     cost_end=len(o)
     # ── PAGE 5 — the neighborhoods ───────────────────────────────────────
@@ -1040,12 +1006,12 @@ def build():
     bn=by_numbers(S["y1"], W["m1"][1])
     T_=lambda cls,v,lab,sub="": f"<div class='bn-t {cls}'><b>{v}</b><span>{lab}</span>{f'<i>{sub}</i>' if sub else ''}</div>"
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>By the Numbers</div>
-      <div class='p'>San Francisco real estate in figures most people never see — Jan 1 – {thru}, 20{yy}</div></div>
+      <div class='p'>Jan 1 – {thru}, 20{yy}</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, SFAR MLS</div></div>
       <div class='bn'>"""
       +T_("navy big", bn['per_day'], "Avg Daily Sales Volume", f"{bn['vol']} over {bn['days']} days")
-      +T_("gold wide", bn['every'], "A property sold, around the clock")
-      +T_("light wide", bn['off'], "properties sold off-market", f"That is {bn['offpct']} of total {bn['n']} sales.")
+      +T_("gold wide", bn['every'], "between sales, on average")
+      +T_("light wide", bn['off'], "properties sold off-market", f"{bn['offpct']} of {bn['n']} sales")
       +T_("light", bn['topday'], f"Most frequent Close Day, {bn['toppct']} of total")
       +T_("light", bn['week'], "sold within a week")
       +T_("navy wide", f"{bn['bid150']}<small> of {bn['bidn']} ({bn['bidpct']})</small>", "homes sold for 150% of list or more", f"{bn['bid130']} went for 130%+")
@@ -1056,9 +1022,8 @@ def build():
       +T_("navy pair", f"{bn['sqft'][:-3]} / {bn['csqft'][:-3]}", "sq ft — the typical SFH, Condo/TIC/Other")
       +"</div>")
     o.append(f"""<div style='margin-top:7px'><h2>Units Sold by Week — Every Week of Both Years</h2>
-      {weekly_bars(wrows,h=150,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"Jan 1 – {thru}, both years · 2025 full year {w25y:,}"))}
-      <div class='cap'>Grey bars after week {wcut} show where last year kept going — {week_peak_after(wrows,wcut)}, which is what a full autumn looks like.</div></div>""")
-    o.append(f"<div class='foot'><span>Closed sales (SFAR MLS), Jan 1 – {thru}, 20{yy}; comparisons with 20{py} use the same stretch, and 20{py} activity marked “full year” runs Jan 1 – Dec 31. Days on market as reported; list-to-sale ratios use the final list price.</span><span>page 6 / 9</span></div></div>")
+      {weekly_bars(wrows,h=150,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"Jan 1 – {thru}, both years · 2025 full year {w25y:,}"))}</div>""")
+    o.append(f"<div class='foot'><span>Closed sales (SFAR MLS), Jan 1 – {thru}, 20{yy}; comparisons with 20{py} use the same stretch, and 20{py} activity marked “full year” runs Jan 1 – Dec 31. Days on market as reported; list-to-sale ratios use the final list price. Units by week: grey bars after week {wcut} are 20{py} only.</span><span>page 6 / 9</span></div></div>")
 
     # Product types (product.py): SFH, Duplex / 2 Homes, Condo, TIC, Co-op, Other.
     o.append(pt.page_html(pt.compute(mg.period_end() or W["m1"][1]), thru, yy))
