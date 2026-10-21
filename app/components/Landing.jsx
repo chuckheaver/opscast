@@ -20,11 +20,7 @@ import SiteFooter, { EMAIL, PHONE_DISPLAY, PHONE_HREF, DRE } from "./SiteFooter"
 import HeroSearch from "./HeroSearch";
 import LiveBlockMap from "./LiveBlockMap";
 import FogZoneKey from "./FogZoneKey";
-import LiveHoodMap from "./LiveHoodMap";
-import { allHoods } from "../neighborhoods/lib";
 
-// Map name → guide page slug, for the neighborhood map's click-through.
-const GUIDE_SLUGS = Object.fromEntries(allHoods().map(h => [h.name, h.slug]));
 import WeatherChip from "./WeatherChip";
 
 const money = v => `$${(v / 1e6).toFixed(2)}M`;
@@ -166,7 +162,7 @@ export default function Landing() {
       <section className="lp-layers">
         <div className="lp-section-head">
           <p className="lp-kicker lp-kicker-lg">Street level</p>
-          <h2 className="lp-h2">What&rsquo;s on your block.</h2>
+          <h2 className="lp-h2">What&rsquo;s on your block. Neighborhood Vibes. <Link href="/neighborhoods" className="lp-h2-link">Explore</Link></h2>
         </div>
         {/* The live map, with every home sold this year on it. The pill on
             top is a real address search that lands on the full map with the
@@ -206,10 +202,6 @@ export default function Landing() {
             What each one is like, what homes are selling for, and the microclimate it sits in.
           </p>
           <Link className="lp-btn lp-btn-navy" href="/neighborhoods">Open the neighborhood guide</Link>
-        </div>
-        {/* Every neighborhood, outlined — click one to open its guide page. */}
-        <div className="lp-hood-map-wrap">
-          <LiveHoodMap guides={GUIDE_SLUGS} />
         </div>
       </section>
 

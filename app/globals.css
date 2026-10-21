@@ -5126,6 +5126,8 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 }
 .lp-guide-promo > div { max-width: 1240px; margin-inline: auto; }
 .lp-guide-promo .lp-h2 { margin-top: 10px; }
+.lp .lp-h2 a.lp-h2-link { color: var(--lp-accent); text-decoration: underline; text-decoration-color: #E9BC3F; text-decoration-thickness: 4px; text-underline-offset: 7px; }
+.lp .lp-h2 a.lp-h2-link:hover, .lp .lp-h2 a.lp-h2-link:focus-visible { color: var(--lp-navy-2); }
 
 @media (max-width: 1000px) {
   .lp-guide-grid { grid-template-columns: repeat(2, 1fr); }
