@@ -738,6 +738,28 @@
         "propType": "Single Family Residence"
       },
       "reason": "A 4-unit Residential Income building (owner, Oct 20 2026)."
+    },
+    {
+      "id": "425089871",
+      "address": "723 Minna St",
+      "set": {
+        "listPrice": 1200000
+      },
+      "from": {
+        "listPrice": 120000
+      },
+      "reason": "List price corrected to $1.2M: the feed's $120K dropped a digit (sold $1.16M) (owner, Oct 21 2026)."
+    },
+    {
+      "id": "426100642",
+      "address": "2953-2955 Sacramento St",
+      "set": {
+        "sqft": null
+      },
+      "from": {
+        "sqft": 1000
+      },
+      "reason": "Reported 1,000 sf on an $8.15M duplex ($8,150/sf) is treated as missing: the sale counts in every figure except $/sf (owner, Oct 21 2026)."
     }
   ],
   "confirmed": [
@@ -810,6 +832,16 @@
       "id": "426131655",
       "address": "2628 Lawton St",
       "note": "A single-family home; the recorded type stands (owner, Oct 16 2026)."
+    },
+    {
+      "id": "425022515",
+      "address": "469 Ivy St",
+      "note": "Two real sales: the whole building as a Duplex (Apr 2025), then a TIC unit (Oct 2025); each counts in its own category (owner, Oct 21 2026)."
+    },
+    {
+      "id": "425073520",
+      "address": "469 Ivy St",
+      "note": "Two real sales: the whole building as a Duplex (Apr 2025), then a TIC unit (Oct 2025); each counts in its own category (owner, Oct 21 2026)."
     }
   ],
   "remove": [

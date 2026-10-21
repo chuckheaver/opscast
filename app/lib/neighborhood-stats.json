@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T12:11:34.198Z",
+  "generatedAt": "2026-10-21T15:36:10.908Z",
   "dataThrough": "2026-09-30T12:00:00-07:00",
   "year": "2026",
   "window": {
@@ -1819,9 +1819,9 @@
       "sfhDom": 10.5,
       "condoPpsf": 1271.7391304347825,
       "condoDom": 12,
-      "otherPpsf": 686.7233485938522,
+      "otherPpsf": 651.1144244278846,
       "otherDom": 27,
-      "ppsf": 1292.0353982300885,
+      "ppsf": 1290.1666352852571,
       "dom": 12,
       "fogHours": 7.5,
       "zone": "Sun",
