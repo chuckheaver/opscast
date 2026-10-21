@@ -31,17 +31,25 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// Every figure is reported, however few sales are behind it. The sale count
-// rides with each median so the reader can weigh it themselves. Each one opens
-// the map on this neighborhood's pop-up, with that segment's Details list
-// (both, for the all-sales figures) open and its sales dotted on the map.
-const Stat = ({ label, value, sub, href }) =>
-  value == null ? null : (
-    <Link className="lp-nstat lp-nstat-link" href={href} title="See these sales on the map">
-      <div className="lp-nstat-v">{value}</div>
-      <div className="lp-nstat-l">{label}{sub ? <span className="lp-fine"> {sub}</span> : null}</div>
+// Every figure is reported, however few sales are behind it, and the sale
+// count sits in each box so the reader can weigh it themselves. Each box
+// opens the map on this neighborhood's pop-up, with that category's Details
+// list open and its sales dotted on the map.
+const SegBox = ({ seg, s, href }) => {
+  const n = s[`${seg.key}N`];
+  const ppsf = s[`${seg.key}Ppsf`], dom = s[`${seg.key}Dom`];
+  return (
+    <Link className="lp-nseg" href={href} title="See these sales on the map">
+      <div className="lp-nseg-h">{seg.short}</div>
+      <dl>
+        <dt>Median sale</dt><dd className="lp-nseg-v">{n ? money(s[`${seg.key}Median`]) : "—"}</dd>
+        <dt>Sold</dt><dd>{n || 0}</dd>
+        <dt>Median $/sf</dt><dd>{ppsf ? `$${Math.round(ppsf).toLocaleString("en-US")}` : "—"}</dd>
+        <dt>Days on market</dt><dd>{dom != null ? Math.round(dom) : "—"}</dd>
+      </dl>
     </Link>
   );
+};
 const salesMap = (name, seg) => `/fog?${new URLSearchParams({ hood: name, details: seg })}`;
 
 export default async function Page({ params }) {
@@ -66,20 +74,9 @@ export default async function Page({ params }) {
         {s?.zone && <ZoneMix mix={s.zoneMix} className="lp-nh-mix" />}
         <p className="lp-nh-spirit">{c.spirit}</p>
 
-        {c.reasons?.length ? (
-          <ul className="lp-reasons">
-            {c.reasons.map(r => <li key={r}>{r}</li>)}
-          </ul>
-        ) : null}
-
         {s && s.n > 0 && (
-          <section className="lp-nstats">
-            <Stat label={SEG.sfh.median} value={money(s.sfhMedian)} sub={s.sfhN ? `${s.sfhN} sold` : null} href={salesMap(name, "sfh")} />
-            <Stat label={SEG.condo.median} value={money(s.condoMedian)} sub={s.condoN ? `${s.condoN} sold` : null} href={salesMap(name, "condo")} />
-            <Stat label={SEG.other.median} value={money(s.otherMedian)} sub={s.otherN ? `${s.otherN} sold` : null} href={salesMap(name, "other")} />
-            <Stat label="Per square foot" value={s.ppsf ? `$${Math.round(s.ppsf).toLocaleString("en-US")}` : null} href={salesMap(name, "all")} />
-            <Stat label="Days to sell" value={s.dom != null ? Math.round(s.dom) : null} sub="median" href={salesMap(name, "all")} />
-            <Stat label="Homes sold" value={s.n} sub={statsYear} href={salesMap(name, "all")} />
+          <section className="lp-nsegs">
+            {["sfh", "condo", "other"].map(k => <SegBox key={k} seg={SEG[k]} s={s} href={salesMap(name, k)} />)}
           </section>
         )}
 
@@ -174,26 +171,14 @@ export default async function Page({ params }) {
           </section>
         )}
 
-        <section className="lp-nh-cta">
-          <div>
-            <h2>Thinking about {name}?</h2>
-            <p>
-              Send me an address and I will come back with its sun, wind and fog,
-              what is under it, and what has closed on the block.
-            </p>
-          </div>
-          <div className="lp-nh-cta-btns">
-            <a className="lp-btn lp-btn-gold" href={`mailto:chuck.heaver@vanguardproperties.com?subject=${encodeURIComponent(name)}`}>Ask me about {name}</a>
-            <Link className="lp-btn lp-btn-ghost" href={`/fog?hood=${encodeURIComponent(name)}`}>See it on the map</Link>
-          </div>
-        </section>
       </article>
 
       <SiteFooter note={
         <>
           Prices are {statsYear} closed sales from SFAR MLS{windowLabel ? ` (${windowLabel})` : ""},
           matched to the neighborhood each home physically sits in. Every sale is included,
-          and the &ldquo;sold&rdquo; count beside each median says how many it is drawn from.
+          and the &ldquo;sold&rdquo; count in each box says how many its figures are drawn from.
+          Median $/sf uses only sales with reported square footage.
           Deemed reliable, not guaranteed.
         </>
       } />

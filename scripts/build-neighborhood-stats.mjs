@@ -77,12 +77,21 @@ for (const { key } of listNeighborhoods()) {
   const others = rows.filter(r => r.seg === "other").map(r => r.price);
   const ppsf = rows.filter(r => r.sqft > 0).map(r => r.price / r.sqft);
   const doms = rows.map(r => r.dom).filter(v => v != null);
+  // Each category's own $/sf and days on market, for its box on the page.
+  const seg = k => {
+    const r = rows.filter(x => x.seg === k);
+    return { ppsf: median(r.filter(x => x.sqft > 0).map(x => x.price / x.sqft)), dom: median(r.map(x => x.dom).filter(v => v != null)) };
+  };
+  const [sfh, condo, other] = ["sfh", "condo", "other"].map(seg);
   if (rows.length) withSales++;
   out.hoods[key] = {
     n: rows.length,
     sfhMedian: median(houses), sfhN: houses.length,
     condoMedian: median(condos), condoN: condos.length,
     otherMedian: median(others), otherN: others.length,
+    sfhPpsf: sfh.ppsf, sfhDom: sfh.dom,
+    condoPpsf: condo.ppsf, condoDom: condo.dom,
+    otherPpsf: other.ppsf, otherDom: other.dom,
     ppsf: median(ppsf),
     dom: median(doms),
     fogHours: fog,
