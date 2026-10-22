@@ -41,3 +41,4 @@ id,address,field,from,to,reason
 "426133023","138-140 ord St, San Francisco, CA 94114","propType","2 Houses on Lot","Duplex","Zoned RH-2: Residential Income (2 houses) (owner, Oct 20 2026)."
 "426138577","55-57 Coleridge St, San Francisco, CA 94110","propType","Single Family Residence","Triplex","Typed by the city's land use: 3 units on the parcel; a property with two addresses is not a single-family house (owner, Oct 20 2026)."
 "426145865","322 Duncan St, San Francisco, CA 94131","propType","Duplex","Triplex","Residential Income, 3 units (owner, Oct 20 2026)."
+"426161949","53-55 Sanchez St, San Francisco, CA 94114","sqft","2376","3152","Square footage corrected to 3,152 sf; the MLS entry had 2,376 (owner, Oct 22 2026)."

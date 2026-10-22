@@ -760,6 +760,17 @@
         "sqft": 1000
       },
       "reason": "Reported 1,000 sf on an $8.15M duplex ($8,150/sf) is treated as missing: the sale counts in every figure except $/sf (owner, Oct 21 2026)."
+    },
+    {
+      "id": "426161949",
+      "address": "53-55 Sanchez St",
+      "set": {
+        "sqft": 3152
+      },
+      "from": {
+        "sqft": 2376
+      },
+      "reason": "Square footage corrected to 3,152 sf; the MLS entry had 2,376 (owner, Oct 22 2026)."
     }
   ],
   "confirmed": [
