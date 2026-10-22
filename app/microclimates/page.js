@@ -116,7 +116,9 @@ export default function Page() {
         </section>
         <section className="pt-sec" id="koppen">
           <h2>Köppen: {KOPPEN.code}</h2>
-          <p className="mc-lead">{KOPPEN.name}</p>
+          <p className="mc-lead">{KOPPEN.about}</p>
+          <Bullets items={KOPPEN.system} />
+          <p className="mc-lead mc-lead-here">{KOPPEN.here}</p>
           <div className="mc-letters">
             {KOPPEN.letters.map(l => (
               <div className="mc-letter" key={l.k}>

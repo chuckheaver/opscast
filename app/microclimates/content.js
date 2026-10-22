@@ -18,6 +18,14 @@ export const LEDE =
 export const KOPPEN = {
   code: "Csb",
   name: "Warm-summer Mediterranean",
+  about: "The Köppen system sorts every climate on Earth into a short letter code, using only monthly temperature and rainfall.",
+  system: [
+    "First letter, the main group: A tropical, B dry, C temperate, D continental, E polar.",
+    "Second letter, the rainfall pattern: f no dry season, s dry summer, w dry winter.",
+    "Third letter, the summer heat: a hot, b warm, c cool.",
+    "Devised by the German climatologist Wladimir Köppen from 1884; Rudolf Geiger later revised it.",
+  ],
+  here: "San Francisco is Csb: a warm-summer Mediterranean climate.",
   letters: [
     { k: "C", label: "Temperate", p: "Coldest month averages above 32°F (or 26.6°F)." },
     { k: "s", label: "Dry summer", p: "Driest summer month under 1.6 in, and a third or less of the wettest winter month." },
