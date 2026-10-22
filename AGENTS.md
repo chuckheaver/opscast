@@ -61,6 +61,12 @@ The owner's rules:
   explanatory lines under headings. Anything a reader must know (periods
   compared, definitions, what is left out) goes in the footnotes at the
   bottom of the page.
+- `/market/duplex-vs-sfh` (SFH vs Duplex by neighborhood) is the one page that
+  includes the closings after the period end (the October closings held in
+  `data/held-sales.geojson`), by the owner's decision (Oct 22 2026). Its data is
+  built by hand — `python3 reports/market/duplex_sfh.py` — never by build.sh, so
+  nothing else picks those sales up. 67-69 Belcher St (a flex/loft building) is
+  left out of it and footnoted.
 - Listing data isn't reviewed — the report uses sold data (list price only
   feeds the Overbids tables).
 - Never drop or edit a sale without the owner's decision. Decisions live in

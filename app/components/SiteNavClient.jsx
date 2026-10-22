@@ -21,6 +21,7 @@ const MARKET = [
   { href: "/market/report#sf", label: "SF Market", sub: "Market stats, grids, by the numbers, inventory" },
   { href: "/market/report#neighborhoods", label: "SF Neighborhoods", sub: "Every sale by neighborhood and fog zone" },
   { href: "/market/product-types", label: "Product Types", sub: "Houses, duplexes, condos, TICs, co-ops and more, compared" },
+  { href: "/market/duplex-vs-sfh", label: "Duplex vs SFH", sub: "Price, over list and $/sf by neighborhood, with the sales" },
 ];
 
 export default function SiteNavClient({ hoods, guide }) {
