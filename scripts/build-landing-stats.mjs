@@ -97,6 +97,7 @@ const seg = (rows, pick) => {
   return {
     n: v.length,
     median: median(v.map(r => r.price)),
+    volume: v.reduce((a, r) => a + r.price, 0),
     avg: mean(v.map(r => r.price)),
     ppsf: median(v.filter(r => r.sqft > 0).map(r => r.price / r.sqft)),
     dom: median(doms),

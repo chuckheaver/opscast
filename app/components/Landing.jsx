@@ -71,10 +71,12 @@ export default function Landing() {
   // Five boxes, laid out like a neighborhood page's: one per sales category,
   // then the city's totals. Each row is this year, last year beside it in the
   // lighter tone, and the change after the label.
+  const vol = v => (v >= 1e9 ? `$${(v / 1e9).toFixed(2)}B` : `$${Math.round(v / 1e6)}M`);
   const usd = v => (v == null ? null : `$${Math.round(v).toLocaleString("en-US")}`);
   const segRows = k => [
     { label: "Median sale", now: money(m[k].median), then: money(p[k].median), chg: pct(m[k].median, p[k].median), big: true },
     { label: "Units sold", now: num(m[k].n), then: num(p[k].n), chg: pct(m[k].n, p[k].n) },
+    { label: "Total volume", now: vol(m[k].volume), then: vol(p[k].volume), chg: pct(m[k].volume, p[k].volume) },
     { label: "Median $/sf", now: usd(m[k].ppsf), then: usd(p[k].ppsf), chg: pct(m[k].ppsf, p[k].ppsf) },
     { label: "DOM", now: r(m[k].dom), then: r(p[k].dom), chg: days(m[k].dom, p[k].dom) },
     // The typical sale as a percentage OF list — the actual premium, not
