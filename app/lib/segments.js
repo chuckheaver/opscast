@@ -16,7 +16,7 @@ export const SEGMENTS = [
     types: ["Condominium", "Tenancy in Common", "Stock Cooperative", "Co-Ownership", "Townhouse", "Loft Condominium", "Loft"] },
   { key: "duplex", label: "Duplex", short: "Duplex", median: "Median duplex", color: "#3C8D7F",
     types: ["Duplex"] },
-  { key: "other", label: "Other", short: "Other", median: "Median other", color: "#B8613A",
+  { key: "other", label: "Other (Tri+)", short: "Other (Tri+)", median: "Median other (tri+)", color: "#B8613A",
     // the types known today; any type not listed above also lands here
     types: ["Triplex", "Fourplex", "5+ Units", "Residential Income Other", "Other", "3+ Houses on Lot"] },
 ];

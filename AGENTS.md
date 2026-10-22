@@ -43,7 +43,7 @@ The owner's rules:
   prints the property types and warns when there is no Residential Income).
   The site has four categories (owner, Oct 22 2026): (1) SFH — Single Family
   Residence, Halfplex and 2 Houses on Lot, (2) Condo/TIC/Co-op, (3) Duplex,
-  (4) Other (triplexes, fourplexes, 5+ units and the other types). Never
+  (4) "Other (Tri+)" (triplexes, fourplexes, 5+ units and the other types). Never
   "Condo/TIC/Other". The site's list is `app/lib/segments.js` (pages, map dots,
   pop-ups and the stats scripts all read it). The monthly report still has
   three — SFH, Condo/TIC/Co-op and Other, with the duplexes inside Other — in

@@ -438,7 +438,7 @@ export default function NeighborhoodModal({
                 autoOpen={autoDetails === "condo" || autoDetails === "all"} />
               <PriceLine data={prices.duplex} label="Median Duplex" gap sect="duplex" reportComps={reportComps} onFocusComp={onFocusComp}
                 autoOpen={autoDetails === "duplex" || autoDetails === "all"} />
-              <PriceLine data={prices.other} label="Median Other" sect="other" reportComps={reportComps} onFocusComp={onFocusComp}
+              <PriceLine data={prices.other} label="Median Other (Tri+)" sect="other" reportComps={reportComps} onFocusComp={onFocusComp}
                 autoOpen={autoDetails === "other" || autoDetails === "all"} />
             </div>
           ) : (
