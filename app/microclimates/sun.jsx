@@ -260,10 +260,11 @@ export function SlopeCompare() {
           const inc = dec + p.face * tilt;              // angle between sunbeam and ground
           const gain = Math.sin(inc * R) / Math.sin(dec * R) - 1;
           const a = p.face * tilt * R;
-          // ground line through (120,110), rising toward the south (left) when it faces south
+          // ground line through (120,110). South is left, so a south-facing slope is
+          // low on the south (left) and rises to the north (right): it tilts toward the sun.
           const gx = 90;
-          const g1 = [120 - gx * Math.cos(a), 110 - gx * Math.sin(a)];
-          const g2 = [120 + gx * Math.cos(a), 110 + gx * Math.sin(a)];
+          const g1 = [120 - gx * Math.cos(a), 110 + gx * Math.sin(a)];
+          const g2 = [120 + gx * Math.cos(a), 110 - gx * Math.sin(a)];
           const sun = [120 - 95 * Math.cos(dec * R), 110 - 95 * Math.sin(dec * R)];
           return (
             <div key={p.k} className="sn-slope">
