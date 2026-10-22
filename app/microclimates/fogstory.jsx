@@ -7,20 +7,31 @@
 // clock above, so the two graphics read as one.
 //
 // Temperatures are typical July values for the west side — a schematic of the
-// pattern, not a measurement.
+// pattern, not a measurement. Place names follow the owner's cross-section
+// (Oct 22 2026): Pacific Ocean, Cold California Current water, Warm moist air,
+// Sea breeze, Golden Gate Gap, Cool fog layer, East Bay hills.
 
 import { C, CLOCK } from "./charts";
 
-const SKY = "#F7F9FA", WATER = "#B5CCDC", WATER_D = "#8FB0C8", LAND = "#CBC4B8";
-const WARM_SKY = "#FBF1DC", FOG = "#DCE6EE", SUN = "#E9B949";
-const FP = { fill: FOG, stroke: "#7F9DB5", strokeWidth: 1.5 };
+// Gradients, soft-edged fog and halo'd labels give the scenes depth; fill
+// colours are url() references defined once in <Defs/>.
+const SKY = "url(#fsSky)", WATER = "url(#fsWater)", WATER_D = "url(#fsWaterD)", LAND = "url(#fsLand)";
+const FOG = "url(#fsFog)";
+const SUN = "#E9B949";
+const HALO = { paintOrder: "stroke", stroke: "rgba(255,255,255,0.92)", strokeWidth: 3.2, strokeLinejoin: "round" };
 
-// Arrowheads and the warm→cool air gradient, defined once for every scene.
+// Arrowheads, gradients and filters, defined once for every scene.
 function Defs() {
   const head = (id, color) => (
     <marker id={id} markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
       <path d="M0,0 L8,4 L0,8 Z" fill={color} />
     </marker>
+  );
+  const v = (id, a, b, extra = {}) => (
+    <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stopColor={a} stopOpacity={extra.a ?? 1} />
+      <stop offset="1" stopColor={b} stopOpacity={extra.b ?? 1} />
+    </linearGradient>
   );
   return (
     <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true" focusable="false">
@@ -32,10 +43,32 @@ function Defs() {
           <stop offset="0" stopColor={C.warm} />
           <stop offset="1" stopColor={C.barHi} />
         </linearGradient>
+        {v("fsSky", "#A9CBE6", "#DCEBF6")}
+        {v("fsWarmSky", "#F6D993", "#FBEBC4")}
+        {v("fsWater", "#8DB5D0", "#5F8EAE")}
+        {v("fsWaterD", "#74A1C0", "#4A7A9C")}
+        {v("fsLand", "#DAD1C1", "#B5AB99")}
+        {v("fsHill", "#CBC9BC", "#A3A08F")}
+        {v("fsValley", "#F4E6C8", "#E2CDA0")}
+        {v("fsFog", "#FFFFFF", "#A9BED0", { a: 1, b: 0.96 })}
+        <radialGradient id="fsSunG">
+          <stop offset="0" stopColor="#FFE7A3" stopOpacity="0.95" />
+          <stop offset="1" stopColor="#FFE7A3" stopOpacity="0" />
+        </radialGradient>
+        <filter id="fsBlur" x="-12%" y="-45%" width="124%" height="190%"><feGaussianBlur stdDeviation="2.4" /></filter>
+        <filter id="fsBlur2" x="-35%" y="-90%" width="170%" height="280%"><feGaussianBlur stdDeviation="3.6" /></filter>
+        <clipPath id="fsLandClip">
+          <path d={LAND_D} />
+        </clipPath>
       </defs>
     </svg>
   );
 }
+
+// The peninsula profile, west → east: Pacific shore, a low rounded hill, the
+// bayside shore, then the higher East Bay hills across the water.
+const LAND_D = "M62,152 L80,146 C110,140 140,134 160,120 C180,104 196,98 216,98 C240,98 258,112 276,130 C288,142 296,148 300,150 L345,152 L345,150 C355,138 365,118 380,104 C390,96 396,94 400,94 V200 H62 Z";
+const EAST_D = "M345,150 C355,138 365,118 380,104 C390,96 396,94 400,94 V152 H345 Z";
 
 function Scene({ label, children }) {
   return (
@@ -46,15 +79,35 @@ function Scene({ label, children }) {
   );
 }
 
-const T = ({ x, y, children, k = "s", ...rest }) => (
-  <text className={`fs-t-${k}`} x={x} y={y} {...rest}>{children}</text>
+const T = ({ x, y, children, k = "s", halo, ...rest }) => (
+  <text className={`fs-t-${k}`} x={x} y={y} style={halo ? HALO : undefined} {...rest}>{children}</text>
+);
+
+// Soft-edged fog, and wisps (blurred ellipses) to break up its flat top.
+const Fog = ({ d, op = 0.95 }) => <path d={d} fill={FOG} opacity={op} filter="url(#fsBlur)" />;
+const Wisps = ({ pts }) => pts.map(([cx, cy, rx, ry], i) => (
+  <ellipse key={i} cx={cx} cy={cy} rx={rx} ry={ry} fill="#fff" opacity="0.8" filter="url(#fsBlur2)" />
+));
+
+// Wave lines along a stretch of water.
+const Waves = ({ x0, x1, ys }) => ys.map((y, i) => (
+  <path key={y} d={`M${x0 + (i % 2) * 7},${y} ${"q6,-3 12,0 t12,0 ".repeat(Math.ceil((x1 - x0) / 24))}`}
+    fill="none" stroke="#fff" strokeOpacity="0.4" strokeWidth="1.2" />
+));
+
+// An arrow with a white halo so it reads over fog and sky alike.
+const Arrow = ({ d, color = C.barHi, head = "fsN", w = 3 }) => (
+  <g fill="none" strokeLinecap="round">
+    <path d={d} stroke="#fff" strokeOpacity="0.9" strokeWidth={w + 4} />
+    <path d={d} stroke={color} strokeWidth={w} markerEnd={`url(#${head})`} />
+  </g>
 );
 
 // A scatter of dots: vapour (small, faint) or fog droplets (larger, outlined).
 function Dots({ pts, r = 2, drop }) {
   return pts.map(([x, y], i) => (
     <circle key={i} cx={x} cy={y} r={r}
-      fill={drop ? "#fff" : C.ramp[1]} fillOpacity={drop ? 0.9 : 0.55}
+      fill={drop ? "#fff" : C.ramp[1]} fillOpacity={drop ? 0.95 : 0.6}
       stroke={drop ? C.ramp[2] : "none"} strokeWidth="1" />
   ));
 }
@@ -69,16 +122,16 @@ function S1() {
     <Scene label="Wind along the coast pushes surface water out to sea, and cold deep water rises to replace it.">
       <rect y="104" width="400" height="96" fill={WATER} />
       <rect y="140" width="400" height="60" fill={WATER_D} />
+      <Waves x0={0} x1={300} ys={[110, 118]} />
       <path d="M296,200 L326,114 L400,104 V200 Z" fill={LAND} />
-      <path d="M20,40 H132" stroke="#6B6F75" strokeWidth="2" markerEnd="url(#fsK)" />
-      <T x="20" y="30">Wind along the coast</T>
-      <path d="M300,86 H196" stroke="#6B6F75" strokeWidth="2" markerEnd="url(#fsK)" />
-      <T x="20" y="90">Surface water pushed out</T>
-      {[170, 220, 268].map(x => (
-        <path key={x} d={`M${x},190 V132`} stroke={C.barHi} strokeWidth="2.5" markerEnd="url(#fsN)" />
-      ))}
-      <T x="16" y="162" k="l">Cold water rises</T>
-      <T x="16" y="180">52–56°F, even in July</T>
+      <Arrow d="M20,40 H132" color="#6B6F75" head="fsK" />
+      <T x="20" y="30" halo>Wind along the coast</T>
+      <Arrow d="M300,86 H196" color="#6B6F75" head="fsK" />
+      <T x="20" y="90" halo>Surface water pushed out</T>
+      {[196, 236, 276].map(x => <Arrow key={x} d={`M${x},190 V132`} w={3.2} />)}
+      <T x="16" y="156" k="l" fill="#fff">Cold California</T>
+      <T x="16" y="170" k="l" fill="#fff">Current water</T>
+      <T x="16" y="186" fill="#EAF3F9">52–56°F, even in July</T>
     </Scene>
   );
 }
@@ -87,16 +140,17 @@ function S2() {
   return (
     <Scene label="Warm, humid air carrying invisible water vapor blows in over the cold ocean.">
       <rect y="150" width="400" height="50" fill={WATER_D} />
+      <Waves x0={0} x1={400} ys={[158]} />
       <Dots pts={VAPOUR} />
       {[48, 82, 116].map(y => (
         <path key={y} d={`M20,${y} C100,${y - 12} 160,${y + 12} 230,${y} S340,${y - 8} 382,${y}`}
-          fill="none" stroke="url(#fsAir)" strokeWidth="2.5" markerEnd="url(#fsN)" />
+          fill="none" stroke="url(#fsAir)" strokeWidth="2.8" strokeLinecap="round" markerEnd="url(#fsN)" />
       ))}
-      <T x="20" y="24" k="l" fill={C.warmText}>Warm, humid air</T>
-      <T x="190" y="24">Air 62°F</T>
-      <T x="20" y="146">invisible water vapor</T>
-      <T x="16" y="180" k="l">Ocean 54°F</T>
-      <T x="250" y="146">dew point 54°F</T>
+      <T x="20" y="24" k="l" fill={C.warmText} halo>Warm moist air</T>
+      <T x="190" y="24" halo>Air 62°F</T>
+      <T x="20" y="146" halo>invisible water vapor</T>
+      <T x="16" y="182" k="l" fill="#fff">Ocean 54°F</T>
+      <T x="250" y="146" halo>dew point 54°F</T>
     </Scene>
   );
 }
@@ -105,19 +159,21 @@ function S3() {
   return (
     <Scene label="Air cooled to its dew point is saturated: the water vapor condenses into fog droplets.">
       <rect y="150" width="400" height="50" fill={WATER_D} />
-      <path d="M190,150 V104 Q300,84 400,100 V150 Z" {...FP} fillOpacity="0.8" />
+      <Waves x0={0} x1={400} ys={[158]} />
+      <Fog d="M186,152 V108 Q250,88 300,92 T400,100 V152 Z" op={0.92} />
+      <Wisps pts={[[250, 100, 26, 6], [330, 98, 30, 6], [376, 108, 20, 5]]} />
       <Dots pts={VAPOUR.slice(0, 7).map(([x, y]) => [x * 0.45, y + 12])} />
       <Dots pts={DROPS} r={3.4} drop />
-      <T x="16" y="30">Air</T>
+      <T x="16" y="30" halo>Air</T>
       <rect x="96" y="20" width="96" height="11" rx="3" fill={C.warm} />
-      <T x="198" y="30" k="v">54°F</T>
-      <T x="16" y="54">Dew point</T>
+      <T x="198" y="30" k="v" halo>54°F</T>
+      <T x="16" y="54" halo>Dew point</T>
       <rect x="96" y="44" width="96" height="11" rx="3" fill={C.barHi} />
-      <T x="198" y="54" k="v">54°F</T>
-      <T x="250" y="40" k="l">equal = saturated</T>
-      <T x="250" y="58">100% humidity</T>
-      <T x="236" y="146" k="l" fill={C.barHi}>FOG</T>
-      <T x="16" y="180" k="l">Ocean 54°F</T>
+      <T x="198" y="54" k="v" halo>54°F</T>
+      <T x="250" y="40" k="l" halo>equal = saturated</T>
+      <T x="250" y="58" halo>100% humidity</T>
+      <T x="236" y="82" k="l" fill={C.barHi} halo>Fog droplets forming</T>
+      <T x="16" y="182" k="l" fill="#fff">Ocean 54°F</T>
     </Scene>
   );
 }
@@ -125,23 +181,23 @@ function S3() {
 function S4() {
   return (
     <Scene label="Sinking air from the North Pacific High forms a warm lid, an inversion, that traps a flat marine layer of cool fog-filled air beneath it.">
-      <rect width="400" height="68" fill={WARM_SKY} />
-      <circle cx="44" cy="34" r="19" fill="none" stroke={C.barHi} strokeWidth="2" />
+      <rect width="400" height="68" fill="url(#fsWarmSky)" />
+      <circle cx="44" cy="34" r="19" fill="#fff" fillOpacity="0.7" stroke={C.barHi} strokeWidth="2" />
       <T x="44" y="41" k="big" textAnchor="middle">H</T>
-      {[96, 136, 176].map(x => (
-        <path key={x} d={`M${x},14 V52`} stroke={C.warm} strokeWidth="2" markerEnd="url(#fsW)" />
-      ))}
+      {[96, 136, 176].map(x => <Arrow key={x} d={`M${x},14 V52`} color={C.warm} head="fsW" w={2.6} />)}
       <T x="206" y="30" fill={C.warmText}>Warm, dry air</T>
       <T x="206" y="48">sinks from above</T>
       <path d="M0,68 H400" stroke={C.warm} strokeWidth="3" />
-      <T x="206" y="86" k="l" fill={C.warmText}>Inversion: the lid</T>
-      <path d="M0,102 Q100,90 200,100 T400,98 V146 H0 Z" {...FP} />
+      <T x="206" y="86" k="l" fill={C.warmText} halo>Inversion: the lid</T>
+      <Fog d="M0,102 Q100,90 200,100 T400,98 V146 H0 Z" />
+      <Wisps pts={[[60, 100, 34, 6], [190, 98, 40, 6], [330, 100, 36, 6]]} />
       <T x="20" y="126" k="k" fill={C.barHi}>MARINE LAYER</T>
-      <path d="M300,140 V108" stroke={C.barHi} strokeWidth="2" markerEnd="url(#fsN)" />
+      <Arrow d="M300,140 V108" w={2.6} />
       <path d="M290,102 H312" stroke={C.warm} strokeWidth="3" />
       <T x="322" y="132">can’t rise</T>
       <rect y="146" width="400" height="54" fill={WATER_D} />
-      <T x="16" y="180" k="l">Cold ocean</T>
+      <Waves x0={0} x1={400} ys={[154]} />
+      <T x="16" y="182" k="l" fill="#fff">Cold ocean</T>
     </Scene>
   );
 }
@@ -149,25 +205,25 @@ function S4() {
 function S5() {
   return (
     <Scene label="Hot air rises over the Central Valley, leaving low pressure. Higher pressure over the cool ocean pushes air toward it, through the Golden Gate.">
-      <path d="M0,112 H150 L172,86 H400 V150 H0 Z" {...FP} fillOpacity="0.7" />
+      <Fog d="M0,112 H150 L172,86 H400 V150 H0 Z" op={0.8} />
       <rect y="150" width="130" height="50" fill={WATER_D} />
+      <Waves x0={0} x1={130} ys={[158]} />
       <path d="M130,200 L148,150 L170,108 L186,146 L192,150 L216,112 L244,150 L252,200 Z" fill={LAND} />
-      <rect x="252" y="150" width="148" height="50" fill="#F0E6D2" />
-      <circle cx="40" cy="34" r="17" fill="none" stroke={C.barHi} strokeWidth="2" />
+      <rect x="252" y="150" width="148" height="50" fill="url(#fsValley)" />
+      <circle cx="40" cy="34" r="17" fill="#fff" fillOpacity="0.7" stroke={C.barHi} strokeWidth="2" />
       <T x="40" y="41" k="big" textAnchor="middle">H</T>
-      <T x="68" y="30" k="l">High pressure</T>
-      <T x="68" y="48">cool ocean air</T>
-      <circle cx="356" cy="34" r="17" fill="none" stroke={C.warm} strokeWidth="2" />
+      <T x="68" y="30" k="l" halo>High pressure</T>
+      <T x="68" y="48" halo>cool ocean air</T>
+      <circle cx="356" cy="34" r="17" fill="#fff" fillOpacity="0.7" stroke={C.warm} strokeWidth="2" />
       <T x="356" y="41" k="big" textAnchor="middle" fill={C.warmText}>L</T>
-      <T x="326" y="30" k="l" textAnchor="end" fill={C.warmText}>Low pressure</T>
-      <T x="326" y="48" textAnchor="end">hot rising air</T>
-      {[290, 330, 370].map(x => (
-        <path key={x} d={`M${x},146 V82`} stroke={C.warm} strokeWidth="2.5" markerEnd="url(#fsW)" />
-      ))}
-      <path d="M24,134 H300" stroke={C.barHi} strokeWidth="3" markerEnd="url(#fsN)" />
-      <T x="16" y="176" k="l">Pacific</T>
-      <T x="140" y="184" k="l">Golden Gate</T>
-      <T x="262" y="176" k="l">Valley</T>
+      <T x="326" y="30" k="l" textAnchor="end" fill={C.warmText} halo>Low pressure</T>
+      <T x="326" y="48" textAnchor="end" halo>hot rising air</T>
+      {[290, 330, 370].map(x => <Arrow key={x} d={`M${x},146 V82`} color={C.warm} head="fsW" w={2.8} />)}
+      <Arrow d="M24,134 H300" w={3.4} />
+      <T x="30" y="122" k="l" halo>Sea breeze</T>
+      <T x="16" y="176" k="l" fill="#fff">Pacific Ocean</T>
+      <T x="140" y="184" k="l">Golden Gate Gap</T>
+      <T x="262" y="176" k="l">Central Valley</T>
       <T x="262" y="192">95–105°F</T>
     </Scene>
   );
@@ -175,29 +231,41 @@ function S5() {
 
 // ---------------------------------------------------- steps 6 – 10 (peninsula)
 
-// West → east: Pacific · west side · the ridge (Mount Davidson / Twin Peaks) ·
-// the bayside neighborhoods · the Bay. `fog` is drawn behind the land so the
-// land line cuts it; `tongue` is drawn in front, spilling over the ridge.
-function Peninsula({ label, fog, tongue, sun, children }) {
+// West → east: Pacific Ocean · the west side · the hill (Mount Davidson / Twin
+// Peaks, low and rounded) · the bayside neighborhoods · San Francisco Bay · the
+// East Bay hills. The fog (`fogD`) sits behind the land so the shore cuts it,
+// and a veil of the same shape, clipped to the land, drapes over the slopes it
+// covers. `tongue` lies on the hill's east slope; `children` draw over the fog.
+function Peninsula({ label, fogD, fogOp = 0.95, wisps, tongue, sun, children }) {
   return (
     <Scene label={label}>
-      <rect y="152" width="66" height="48" fill={WATER} />
-      {fog}
-      <path d="M62,152 L90,142 L140,138 L180,110 L215,72 L245,98 L285,128 L305,148 L372,150 L372,140 L400,112 V200 H62 Z" fill={LAND} />
-      <rect x="308" y="154" width="64" height="46" fill={WATER} />
-      {tongue}
       {sun}
-      <T x="14" y="188">Pacific</T>
-      <T x="112" y="176">West side</T>
-      <T x="215" y="62" textAnchor="middle">Ridge</T>
-      <T x="258" y="176">Bayside</T>
-      <T x="340" y="188" textAnchor="middle">Bay</T>
+      <rect y="152" width="62" height="48" fill={WATER} />
+      <Waves x0={0} x1={62} ys={[160, 170]} />
+      <Fog d={fogD} op={fogOp} />
+      <path d={LAND_D} fill={LAND} />
+      <path d={EAST_D} fill="url(#fsHill)" />
+      <rect x="300" y="152" width="45" height="48" fill={WATER} />
+      <Waves x0={300} x1={345} ys={[160, 170]} />
+      <g clipPath="url(#fsLandClip)"><Fog d={fogD} op={0.8} /></g>
+      {wisps && <Wisps pts={wisps} />}
+      {tongue}
+      {children}
+      <T x="10" y="176" fill="#fff">Pacific</T>
+      <T x="10" y="188" fill="#fff">Ocean</T>
+      <T x="96" y="172">West side</T>
+      <T x="172" y="192" k="l">San Francisco</T>
+      <T x="244" y="172">Bayside</T>
+      <T x="322" y="188" textAnchor="middle" fill="#fff">SF Bay</T>
+      <T x="372" y="176" textAnchor="middle">East Bay</T>
+      <T x="372" y="188" textAnchor="middle">hills</T>
     </Scene>
   );
 }
 
 const sunAt = (x, y) => (
   <g>
+    <circle cx={x} cy={y} r="38" fill="url(#fsSunG)" />
     <circle cx={x} cy={y} r="13" fill={SUN} />
     {[0, 45, 90, 135, 180, 225, 270, 315].map(a => (
       <line key={a} x1={x + 18 * Math.cos(a * Math.PI / 180)} y1={y + 18 * Math.sin(a * Math.PI / 180)}
@@ -210,11 +278,11 @@ const sunAt = (x, y) => (
 function S6() {
   return (
     <Peninsula
-      label="Midnight to 8am: a thick fog deck fills the west side and stacks against the west slope of the ridge."
-      fog={<path d="M0,98 L120,92 L196,88 L226,108 L226,152 H0 Z" {...FP} fillOpacity="0.95" />}
-      tongue={<path d="M214,80 Q226,86 236,100 L228,104 Q220,94 212,90 Z" {...FP} fillOpacity="0.9" />}
+      label="Midnight to 8am: a thick fog deck fills the west side, rises just over the hill and reaches across the Bay to the East Bay hills."
+      fogD="M0,90 L110,88 L216,86 L300,88 L345,92 Q372,96 392,112 L392,152 H0 Z"
+      wisps={[[60, 90, 36, 6], [170, 86, 40, 6], [270, 88, 38, 6], [350, 96, 24, 6]]}
     >
-      {null}
+      <T x="14" y="108" k="l" fill={C.barHi} halo>Cool fog layer</T>
     </Peninsula>
   );
 }
@@ -224,15 +292,13 @@ function S7() {
     <Peninsula
       label="8am to noon: the sun warms the land and the fog burns back toward the ocean, bayside first."
       sun={sunAt(330, 40)}
-      fog={
-        <g>
-          <path d="M0,112 L70,108 L150,126 L170,152 H0 Z" {...FP} fillOpacity="0.8" />
-          {[110, 140, 168].map(x => (
-            <path key={x} d={`M${x},124 V100`} stroke="#6B6F75" strokeWidth="1.8" strokeDasharray="3 3" markerEnd="url(#fsK)" />
-          ))}
-        </g>
-      }
-    />
+      fogD="M0,112 L70,108 L150,126 L170,152 H0 Z"
+      fogOp={0.85}
+    >
+      {[110, 140, 168].map(x => (
+        <path key={x} d={`M${x},124 V100`} stroke="#6B6F75" strokeWidth="1.8" strokeDasharray="3 3" markerEnd="url(#fsK)" />
+      ))}
+    </Peninsula>
   );
 }
 
@@ -241,7 +307,8 @@ function S8() {
     <Peninsula
       label="Noon to 3pm: the city is in full sun and the fog sits as a bank offshore."
       sun={sunAt(330, 40)}
-      fog={<path d="M0,128 L30,124 L60,134 L66,152 H0 Z" {...FP} fillOpacity="0.7" />}
+      fogD="M0,128 L30,124 L60,134 L66,152 H0 Z"
+      fogOp={0.8}
     />
   );
 }
@@ -251,28 +318,31 @@ function S9() {
     <Peninsula
       label="3pm to 7pm: the Valley is at its hottest and pulls the fog bank back in through the Golden Gate and onto the west side."
       sun={sunAt(330, 40)}
-      fog={
-        <g>
-          <path d="M0,112 L60,104 L128,116 L150,152 H0 Z" {...FP} fillOpacity="0.9" />
-          <path d="M26,92 H134" stroke={C.barHi} strokeWidth="2.5" markerEnd="url(#fsN)" />
-        </g>
-      }
-    />
+      fogD="M0,112 L60,104 L128,116 L150,152 H0 Z"
+    >
+      <Arrow d="M20,86 H138" w={3.2} />
+      <T x="24" y="76" k="l" halo>Sea breeze</T>
+    </Peninsula>
   );
 }
 
 function S10() {
   return (
     <Peninsula
-      label="7pm to midnight: the fog thickens over the west side and spills over the saddles of the ridge into the bayside neighborhoods."
-      fog={<path d="M0,96 L120,90 L196,84 L246,104 L262,128 L262,152 H0 Z" {...FP} fillOpacity="0.95" />}
+      label="7pm to midnight: the fog deepens over the west side, spills over the hill and runs down its east slope to the edge of the Bay."
+      fogD="M0,74 L110,72 L196,70 L244,76 Q290,98 314,152 H0 Z"
+      wisps={[[70, 74, 36, 6], [160, 70, 40, 6]]}
       tongue={
         <g>
-          <path d="M214,78 Q244,84 262,112 L276,134 Q246,122 214,96 Z" {...FP} fillOpacity="0.9" />
-          <path d="M226,70 Q262,76 286,100" fill="none" stroke={C.barHi} strokeWidth="2.5" markerEnd="url(#fsN)" />
+          <path d="M190,70 C242,70 268,90 286,112 C296,124 304,138 308,150 L294,149 C282,142 266,130 252,116 C236,100 220,94 190,94 Z"
+            fill={FOG} opacity="0.94" filter="url(#fsBlur)" />
+          <Arrow d="M228,60 C266,60 296,84 308,120" w={3.2} />
         </g>
       }
-    />
+    >
+      <T x="14" y="92" k="l" fill={C.barHi} halo>Cool fog layer</T>
+      <T x="236" y="54" k="l" halo>Sea breeze</T>
+    </Peninsula>
   );
 }
 
@@ -307,7 +377,7 @@ const STEPS = [
   },
   {
     h: "Thickest", when: "Midnight – 8am", Scene: S6,
-    p: "Nights are cool and the lid holds. Air stays within a degree or two of its dew point, so the fog is solid. It stacks against the west slope of the ridge and leaks through the saddles.",
+    p: "Nights are cool and the lid holds. Air stays within a degree or two of its dew point, so the fog is solid. It fills the west side, rises just over the hill and reaches across the Bay to the East Bay hills.",
     read: [["Air", "55°F"], ["Dew point", "54°F"], ["Gap", "1°", "closed"]],
   },
   {
@@ -326,8 +396,8 @@ const STEPS = [
     read: [["Air", "62 → 56°F"], ["Dew point", "55°F"], ["Gap", "7 → 1°"]],
   },
   {
-    h: "Over the ridge", when: "7pm – midnight", Scene: S10,
-    p: "After sunset the land cools and the lid still holds. The deck deepens and spills over the ridge’s saddles into the bayside neighborhoods overnight. Tomorrow it starts again.",
+    h: "Over the hill", when: "7pm – midnight", Scene: S10,
+    p: "After sunset the land cools and the lid still holds. The deck deepens, spills over the hill and runs down its east slope to the edge of the Bay overnight. Tomorrow it starts again.",
     read: [["Air", "56°F"], ["Dew point", "54°F"], ["Gap", "2°", "closed"]],
   },
 ];
