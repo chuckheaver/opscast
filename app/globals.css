@@ -5998,7 +5998,7 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 @media (max-width: 960px) { .nv-ig { justify-content: flex-start; gap: 10px; } .nv-ig-t { display: inline; } }
 
 /* Lot from above, v2: a labelled 2×2 grid, yards coloured by sun hours. */
-.sn-lotgrid { display: grid; grid-template-columns: 120px repeat(2, minmax(0, 260px)); gap: 10px 16px; align-items: center; }
+.sn-lotgrid { display: grid; grid-template-columns: 120px repeat(2, minmax(0, 300px)); gap: 10px 16px; align-items: center; }
 .sn-lotgrid .sn-col-h { text-align: center; margin: 0; }
 .sn-lotgrid .sn-row-h { font-size: 14px; color: var(--lp-body); line-height: 1.35; }
 .sn-lotgrid .sn-row-h b { color: var(--lp-ink); }

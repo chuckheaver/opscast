@@ -84,20 +84,23 @@ function rect(f, r) {                                  // a transformed rectangl
 }
 function block(yard) {
   const H = 30;
+  // Our house, two row-house neighbors each side, and the row behind.
   const rel = [
     { x0: 0, x1: 25, y0: 0, y1: 55, h: H, me: true },
     { x0: -25, x1: 0, y0: 0, y1: 55, h: H },
     { x0: 25, x1: 50, y0: 0, y1: 55, h: H },
-    { x0: -25, x1: 50, y0: 145, y1: 200, h: H },           // the houses behind
+    { x0: -50, x1: -25, y0: 0, y1: 55, h: H },
+    { x0: 50, x1: 75, y0: 0, y1: 55, h: H },
+    { x0: -50, x1: 75, y0: 145, y1: 200, h: H },           // the houses behind
   ];
   const f = TURN[yard];
   const buildings = rel.map(b => rect(f, b));
   const yardBox = rect(f, { x0: 0, x1: 25, y0: 55, y1: 100 });
   const street = rect(f, { x0: -80, x1: 105, y0: -14, y1: -2 });       // the strip drawn in the view
   const fence = rect(f, { x0: -80, x1: 105, y0: 100, y1: 100 });
-  // The view: the lot, the street in front and the back fence, in the north layout
-  // (x −20…45, y −14…114), carried through the same turn.
-  const v = rect(f, { x0: -20, x1: 45, y0: -14, y1: 114 });
+  // The view: the same 128 × 128 ft square for all four, centred on the lot — so
+  // every house is drawn at the same size — carried through the same turn.
+  const v = rect(f, { x0: -51.5, x1: 76.5, y0: -14, y1: 114 });
   const house = f([12.5, 27]), yardMid = f([12.5, 77.5]), streetMid = f([12.5, -8]);
   return { buildings, yardBox, street, fence, view: v, house, yardMid, streetMid };
 }
@@ -140,9 +143,8 @@ function LotPanel({ yard, season }) {
   const X0 = view.x0, X1 = view.x1, Y0 = view.y0, Y1 = view.y1;
   const W = (X1 - X0) * S, H = (Y1 - Y0) * S;
   const px = x => (x - X0) * S, py = y => (Y1 - y) * S;
-  // Labels keep the same size on screen whatever the panel's shape: the wide
-  // east and west panels are scaled down to the column, so their type is scaled up.
-  const fs = { fontSize: 11 * Math.max(1, W / 169) };
+  // Every panel is the same square, so the labels are one size throughout.
+  const fs = { fontSize: 15 };
   const cls = `lot-${yard}-${season}`;
   const sideways = yard === "east" || yard === "west";
   const k = fs.fontSize / 11;
@@ -189,8 +191,8 @@ export function LotPlan() {
       <p className="mc-fig-h">The lot from above</p>
       <div className="sn-lotgrid">
         <span />
-        <span className="sn-col-h">June 21</span>
-        <span className="sn-col-h">December 21</span>
+        <span className="sn-col-h">Summer · Jun 21</span>
+        <span className="sn-col-h">Winter · Dec 21</span>
 
         <span className="sn-row-h">Yard <b>north</b> of the house</span>
         <LotPanel yard="north" season="jun" />
