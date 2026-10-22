@@ -63,47 +63,7 @@ function shadow(b, sun) {
   return hull(base.concat(base.map(([x, y]) => [x + dx, y + dy])));
 }
 
-// ------------------------------------------------------ 1. the lot from above
-
-// A 25 × 100 ft lot between two row-house neighbors, backing onto the rear
-// neighbor's yard. Houses 30 ft tall and 55 ft deep, yards 45 ft.
-// `yard` is which way our rear yard faces: north, south, east or west. The
-// layout is drawn once, with the yard to the north and the street to the south,
-// then rotated or mirrored as a rigid body into the other three — so the sun
-// and the shadows are the same geometry in every panel, nothing else changes.
-// Coordinates: x east, y north, feet.
-const TURN = {
-  north: ([x, y]) => [x, y],
-  south: ([x, y]) => [x, 100 - y],
-  east: ([x, y]) => [y, -x],
-  west: ([x, y]) => [-y, x],
-};
-function rect(f, r) {                                  // a transformed rectangle, axis-aligned
-  const [ax, ay] = f([r.x0, r.y0]), [bx, by] = f([r.x1, r.y1]);
-  return { ...r, x0: Math.min(ax, bx), x1: Math.max(ax, bx), y0: Math.min(ay, by), y1: Math.max(ay, by) };
-}
-function block(yard) {
-  const H = 30;
-  // Our house, two row-house neighbors each side, and the row behind.
-  const rel = [
-    { x0: 0, x1: 25, y0: 0, y1: 55, h: H, me: true },
-    { x0: -25, x1: 0, y0: 0, y1: 55, h: H },
-    { x0: 25, x1: 50, y0: 0, y1: 55, h: H },
-    { x0: -50, x1: -25, y0: 0, y1: 55, h: H },
-    { x0: 50, x1: 75, y0: 0, y1: 55, h: H },
-    { x0: -50, x1: 75, y0: 145, y1: 200, h: H },           // the houses behind
-  ];
-  const f = TURN[yard];
-  const buildings = rel.map(b => rect(f, b));
-  const yardBox = rect(f, { x0: 0, x1: 25, y0: 55, y1: 100 });
-  const street = rect(f, { x0: -80, x1: 105, y0: -14, y1: -2 });       // the strip drawn in the view
-  const fence = rect(f, { x0: -80, x1: 105, y0: 100, y1: 100 });
-  // The view: the same 128 × 128 ft square for all four, centred on the lot — so
-  // every house is drawn at the same size — carried through the same turn.
-  const v = rect(f, { x0: -51.5, x1: 76.5, y0: -14, y1: 114 });
-  const house = f([12.5, 27]), yardMid = f([12.5, 77.5]), streetMid = f([12.5, -8]);
-  return { buildings, yardBox, street, fence, view: v, house, yardMid, streetMid };
-}
+// ------------------------------------------------------ 1. the sun on a yard
 
 // Hours of direct sun at each 2.5 ft cell of the rear yard, sunrise to
 // sunset, with every house on the block casting its shadow.
@@ -132,101 +92,7 @@ const heat = h => {
   return `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * t)).join(",")})`;
 };
 
-// One panel: north up, our house (navy) and its rear yard coloured by how
-// many hours of sun each part of it gets. Neighbors are drawn because their
-// shadows count; nothing else is on the drawing.
-function LotPanel({ yard, season }) {
-  const decl = DEC[season];
-  const { buildings, yardBox, street, fence, view, house, yardMid, streetMid } = block(yard);
-  const { cells, avg } = yardCells(buildings, yardBox, decl);
-  const S = 2.6;
-  const X0 = view.x0, X1 = view.x1, Y0 = view.y0, Y1 = view.y1;
-  const W = (X1 - X0) * S, H = (Y1 - Y0) * S;
-  const px = x => (x - X0) * S, py = y => (Y1 - y) * S;
-  // Every panel is the same square, so the labels are one size throughout.
-  const fs = { fontSize: 15 };
-  const cls = `lot-${yard}-${season}`;
-  const sideways = yard === "east" || yard === "west";
-  const k = fs.fontSize / 11;
-  const arrowX = yard === "west" ? 16 * k : W - 14 * k;           // the west street is on the right: keep the arrow clear of it
-  const dirs = { north: "north", south: "south", east: "east", west: "west" };
-
-  return (
-    <div className="sn-lot">
-      <svg viewBox={`0 0 ${W} ${H}`} className="mc-svg" role="img"
-        aria-label={`Rear yard facing ${dirs[yard]} on ${season === "jun" ? "June 21" : "December 21"}: about ${avg.toFixed(1)} hours of direct sun on average.`}>
-        <defs><clipPath id={cls}><rect width={W} height={H} rx="10" /></clipPath></defs>
-        <g clipPath={`url(#${cls})`}>
-          <rect width={W} height={H} fill="#F5F6F7" />
-          <rect x={px(street.x0)} y={py(street.y1)} width={(street.x1 - street.x0) * S} height={(street.y1 - street.y0) * S} fill="#DCDFE3" />
-          {/* East and west panels have the street down a narrow side: its label runs vertically. */}
-          <text className="sn-t" style={fs} x={px(streetMid[0])} y={py(streetMid[1]) + 4 * fs.fontSize / 11} textAnchor="middle"
-            transform={sideways ? `rotate(-90 ${px(streetMid[0])} ${py(streetMid[1])})` : undefined}>street</text>
-          {cells.map((c, i) => (
-            <rect key={i} x={px(c.x - CELL / 2)} y={py(c.y + CELL / 2)} width={CELL * S + 0.4} height={CELL * S + 0.4} fill={heat(c.h)} />
-          ))}
-          {buildings.filter(b => b.x0 < X1 && b.x1 > X0 && b.y0 < Y1 && b.y1 > Y0).map((b, i) => (
-            <rect key={i} x={px(b.x0)} y={py(b.y1)} width={(b.x1 - b.x0) * S} height={(b.y1 - b.y0) * S}
-                  fill={b.me ? "#4E7398" : "#B9C0C7"} stroke="#fff" strokeWidth="1.5" />
-          ))}
-          <rect x={px(yardBox.x0)} y={py(yardBox.y1)} width={(yardBox.x1 - yardBox.x0) * S} height={(yardBox.y1 - yardBox.y0) * S}
-                fill="none" stroke="#131A25" strokeWidth="1.5" />
-          <line x1={px(fence.x0)} x2={px(fence.x1)} y1={py(fence.y0)} y2={py(fence.y1)} stroke="#8E98A1" strokeWidth="1" />
-          <text className="sn-t sn-t-light" style={fs} x={px(yardMid[0])} y={py(yardMid[1]) + 4 * fs.fontSize / 11} textAnchor="middle">yard</text>
-          <text className="sn-t sn-t-w2" style={fs} x={px(house[0])} y={py(house[1]) + 4 * fs.fontSize / 11} textAnchor="middle">house</text>
-          <g transform={`translate(${arrowX},${16 * k}) scale(${k})`}>
-            <path d="M0,-9 L5,4 L0,1 L-5,4 Z" fill="#131A25" />
-            <text className="sn-t" x="0" y="16" textAnchor="middle">N</text>
-          </g>
-        </g>
-      </svg>
-      <b>{fmtH(avg)}<span> of sun on the yard</span></b>
-    </div>
-  );
-}
-
-export function LotPlan() {
-  return (
-    <figure className="mc-fig">
-      <p className="mc-fig-h">The lot from above</p>
-      <div className="sn-lotgrid">
-        <span />
-        <span className="sn-col-h sn-col-sum"><b>Summer</b> · Jun 21</span>
-        <span className="sn-col-h sn-col-win"><b>Winter</b> · Dec 21</span>
-
-        <span className="sn-row-h">Yard <b>north</b> of the house</span>
-        <LotPanel yard="north" season="jun" />
-        <LotPanel yard="north" season="dec" />
-
-        <span className="sn-row-h">Yard <b>south</b> of the house</span>
-        <LotPanel yard="south" season="jun" />
-        <LotPanel yard="south" season="dec" />
-
-        <span className="sn-row-h">Yard <b>east</b> of the house</span>
-        <LotPanel yard="east" season="jun" />
-        <LotPanel yard="east" season="dec" />
-
-        <span className="sn-row-h">Yard <b>west</b> of the house</span>
-        <LotPanel yard="west" season="jun" />
-        <LotPanel yard="west" season="dec" />
-      </div>
-      <div className="sn-heatkey">
-        <span>Sun on the yard:</span>
-        <span>0 h</span>
-        <i style={{ background: `linear-gradient(90deg, ${heat(0)}, ${heat(HEAT_MAX / 2)}, ${heat(HEAT_MAX)})` }} />
-        <span className="sn-heatkey-r">{HEAT_MAX} h</span>
-        <em><i style={{ background: "#4E7398" }} /> the house</em>
-        <em><i style={{ background: "#B9C0C7" }} /> neighbors</em>
-      </div>
-      <figcaption className="mc-cap">
-        The winter sun stays low in the southern sky, so a yard north of its house sits in the house&rsquo;s
-        shadow — and a yard south of it doesn&rsquo;t. 25 × 100 ft lot, 30 ft row houses, flat ground.
-      </figcaption>
-    </figure>
-  );
-}
-
-// ------------------------------------------ 1b. one house, four yards
+// ------------------------------------------ 1b. the difference direction makes
 
 // One structure seen from above: two typical San Francisco houses (the owner's
 // dimensions, Oct 22 2026: 25 × 55 ft footprint, 30 ft tall) laid across each
@@ -301,7 +167,7 @@ function CrossPanel({ season }) {
 export function LotCross() {
   return (
     <figure className="mc-fig">
-      <p className="mc-fig-h">One house, four yards</p>
+      <p className="mc-fig-h">The Difference Direction Makes</p>
       <div className="sn-crossgrid">
         <span className="sn-col-h sn-col-sum"><b>Summer</b> · Jun 21</span>
         <span className="sn-col-h sn-col-win"><b>Winter</b> · Dec 21</span>

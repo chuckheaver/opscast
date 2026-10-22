@@ -5997,16 +5997,7 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .nv-ig-t { display: none; }
 @media (max-width: 960px) { .nv-ig { justify-content: flex-start; gap: 10px; } .nv-ig-t { display: inline; } }
 
-/* Lot from above, v2: a labelled 2×2 grid, yards coloured by sun hours. */
-.sn-lotgrid { display: grid; grid-template-columns: 120px repeat(2, minmax(0, 300px)); gap: 10px 16px; align-items: center; }
-.sn-lotgrid .sn-col-h { text-align: center; margin: 0; font-size: 13px; }
-.sn-lotgrid .sn-col-h b { font-size: 17px; font-weight: 800; letter-spacing: 0.06em; color: var(--lp-ink); }
-.sn-lotgrid .sn-col-sum b { color: #8A5F12; }
-.sn-lotgrid .sn-col-win b { color: #2F5C8A; }
-.sn-lotgrid .sn-row-h { font-size: 14px; color: var(--lp-body); line-height: 1.35; }
-.sn-lotgrid .sn-row-h b { color: var(--lp-ink); }
-.sn-lotgrid .sn-lot b { text-align: center; }
-.sn-lotgrid .sn-lot b span { display: inline; margin-left: 4px; }
+/* The difference direction makes: the cross figure, yards coloured by sun hours. */
 .sn-t-w2 { fill: #fff; }
 .sn-crossgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 420px)); gap: 8px 20px; justify-content: start; }
 .sn-crossgrid .sn-col-h { text-align: center; font-size: 13px; }
@@ -6019,12 +6010,6 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .sn-heatkey-r { margin-right: 14px; }
 .sn-heatkey em { font-style: normal; display: inline-flex; align-items: center; gap: 5px; }
 .sn-heatkey em i { display: inline-block; width: 14px; height: 10px; border-radius: 3px; }
-@media (max-width: 720px) {
-  .sn-lotgrid { grid-template-columns: 70px repeat(2, minmax(0, 1fr)); gap: 8px 10px; }
-  .sn-lotgrid .sn-row-h { font-size: 12px; }
-  .sn-lotgrid .sn-lot b { font-size: 14px; }
-  .sn-lotgrid .sn-lot b span { display: block; margin: 0; font-size: 11px; }
-}
 
 /* Buyer guide, short form ----------------------------------------------------- */
 .pt-cmp-wrap { margin-top: 14px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
