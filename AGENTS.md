@@ -69,6 +69,12 @@ The owner's rules:
   built by hand — `python3 reports/market/duplex_sfh.py` — never by build.sh, so
   nothing else picks those sales up. 67-69 Belcher St (a flex/loft building) is
   left out of it and footnoted.
+- `/microclimates/real-estate` (Microclimates and Real Estate: the fog-zone map,
+  neighborhood index and closings-by-fog-zone grid, interactive) reads
+  `app/lib/microclimate-market.json`, built by hand —
+  `python3 reports/market/microclimate_market.py` — from the published sales
+  (through the period end) with the report's fog zones and the site's four
+  categories. Re-run it after every data refresh, like the Duplex vs SFH page.
 - Listing data isn't reviewed — the report uses sold data (list price only
   feeds the Overbids tables).
 - Never drop or edit a sale without the owner's decision. Decisions live in

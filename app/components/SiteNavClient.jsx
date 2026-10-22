@@ -15,6 +15,7 @@ const MICRO = [
   { href: "/microclimates#bay", label: "Bay Micro", sub: "The Bay Area's microclimates" },
   { href: "/microclimates#sf", label: "SF Micro", sub: "Four fog zones, your block, sun on the lot" },
   { href: "/microclimates#fog", label: "Fog Map", sub: "How fog forms and moves" },
+  { href: "/microclimates/real-estate", label: "Prices by Microclimate", sub: "Fog zones and neighborhoods, interactive" },
 ];
 
 const MARKET = [
