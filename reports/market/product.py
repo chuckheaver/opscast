@@ -1,4 +1,4 @@
-"""Product types: SFH, Duplex / 2 Homes, Condo, TIC, Co-op and Other (broken
+"""Product types: SFH, Duplex, Condo, TIC, Co-op and Other (broken
 out), side by side, this year against the same stretch of last year — median sale price, median sold $/sf, % of list, days on
 market and units sold, year to date and by quarter, with the neighborhood
 that sold the most of each and the sales left out of $/sf for want of square
@@ -14,8 +14,8 @@ OUT_JSON = os.path.join(ROOT, "app", "lib", "product-types.json")
 
 # The product groups (the owner, Oct 20 2026). Anything not named lands in Other.
 GROUPS = [
-    ("sfh", "SFH", ["Single Family Residence", "Halfplex"]),
-    ("duplex", "Duplex / 2 Homes", ["Duplex", "2 Houses on Lot"]),
+    ("sfh", "SFH", ["Single Family Residence", "Halfplex", "2 Houses on Lot"]),
+    ("duplex", "Duplex", ["Duplex"]),
     ("condo", "Condo", ["Condominium", "Townhouse", "Loft Condominium", "Loft"]),
     ("tic", "TIC", ["Tenancy in Common", "Co-Ownership"]),
     ("coop", "Co-op", ["Stock Cooperative"]),

@@ -68,7 +68,7 @@ export default function Landing() {
     `${pts(a, b)} ${Math.abs(r(a) - r(b)) === 1 ? one : many}`;
   const days = (a, b) => unit(a, b, "day", "days");
   const ptsOf = (a, b) => unit(a, b, "pt", "pts");
-  // Four boxes, laid out like a neighborhood page's: one per sales category,
+  // Five boxes, laid out like a neighborhood page's: one per sales category,
   // then the city's totals. Each row is this year, last year beside it in the
   // lighter tone, and the change after the label.
   const usd = v => (v == null ? null : `$${Math.round(v).toLocaleString("en-US")}`);
@@ -85,6 +85,7 @@ export default function Landing() {
   const BOXES = [
     { key: "sfh", title: SEG.sfh.short, rows: segRows("sfh") },
     { key: "condo", title: SEG.condo.label, rows: segRows("condo") },
+    { key: "duplex", title: SEG.duplex.label, rows: segRows("duplex") },
     { key: "other", title: SEG.other.label, rows: segRows("other") },
     { key: "all", title: "All sales", rows: [
       { label: "Total sales volume", now: `$${(m.volume / 1e9).toFixed(2)}B`, then: `$${(p.volume / 1e9).toFixed(2)}B`, chg: pct(m.volume, p.volume), big: true },

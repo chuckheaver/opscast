@@ -1211,7 +1211,7 @@ export default function FogMap({
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 5, 14, 8, 16, 11],
           // the Details list it came from (seg), else the sale's own type
-          "circle-color": ["match", ["get", "seg"], "sfh", SEG.sfh.color, "condo", SEG.condo.color, "other", SEG.other.color, SEG_DOT],
+          "circle-color": ["match", ["get", "seg"], "sfh", SEG.sfh.color, "condo", SEG.condo.color, "duplex", SEG.duplex.color, "other", SEG.other.color, SEG_DOT],
           "circle-stroke-color": "#ffffff",
           "circle-stroke-width": 2,
           "circle-opacity": 0.95,

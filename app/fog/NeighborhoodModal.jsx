@@ -61,9 +61,9 @@ function summarize(homes, fn) {
   return { list: col("list"), sale: col("sale"), sqft: col("sqft"), ppsf: col("ppsf"), pctList: col("pctList"), dom: col("dom") };
 }
 
-// The site's three categories (app/lib/segments.js), as the map's sale dots
+// The site's four categories (app/lib/segments.js), as the map's sale dots
 // colour them: the price line's dot is the key to its homes on the map.
-const SEG_COLOR = { sfh: SEG.sfh.color, condo: SEG.condo.color, other: SEG.other.color };
+const SEG_COLOR = { sfh: SEG.sfh.color, condo: SEG.condo.color, duplex: SEG.duplex.color, other: SEG.other.color };
 
 function PriceLine({ data, label, gap, sect, reportComps, onFocusComp, autoOpen }) {
   const [open, setOpen] = useState(false);
@@ -220,15 +220,15 @@ export default function NeighborhoodModal({
   // map, its marker and the layer chips all stay visible and usable above.
   sheet, name, data, fogHrs, zoneLabel, supervisorDistrict, realtorDistrict,
   zipCode, elevationFt, seismicYN, tsunamiYN, loc, onClose, onShowProperties, onToggleLayer, layerStates, onComps, onFocusComp,
-  autoDetails, onAutoDetailsDone, // "sfh" | "condo" | "other" | "all": the Details list(s) to open with
+  autoDetails, onAutoDetailsDone, // "sfh" | "condo" | "duplex" | "other" | "all": the Details list(s) to open with
 }) {
-  const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo, other } | null
+  const [prices, setPrices] = useState("loading"); // "loading" | { sfh, condo, duplex, other } | null
   // Which Details lists are expanded → map dots. Each PriceLine reports its
   // features here; we merge them and hand the set to the map.
-  const compsRef = useRef({ sfh: null, condo: null, other: null });
+  const compsRef = useRef({ sfh: null, condo: null, duplex: null, other: null });
   const reportComps = useCallback((sect, feats) => {
     compsRef.current[sect] = feats && feats.length ? feats : null;
-    const all = [...(compsRef.current.sfh || []), ...(compsRef.current.condo || []), ...(compsRef.current.other || [])];
+    const all = [...(compsRef.current.sfh || []), ...(compsRef.current.condo || []), ...(compsRef.current.duplex || []), ...(compsRef.current.other || [])];
     onComps?.(all.length ? { type: "FeatureCollection", features: all } : null);
   }, [onComps]);
   const [dataThrough, setDataThrough] = useState(""); // M/D/YY of the last data load
@@ -298,7 +298,7 @@ export default function NeighborhoodModal({
           const median = _median(prices);
           return { value: fmtPrice(median), n: homes.length, homes };
         };
-        setPrices({ sfh: collectFor("sfh"), condo: collectFor("condo"), other: collectFor("other") });
+        setPrices({ sfh: collectFor("sfh"), condo: collectFor("condo"), duplex: collectFor("duplex"), other: collectFor("other") });
       })
       .catch(() => { if (!cancelled) setPrices(null); });
     return () => { cancelled = true; };
@@ -374,6 +374,7 @@ export default function NeighborhoodModal({
             {[
               [SEG.sfh.median, money(st.sfhMedian), st.sfhN ? `${st.sfhN} sold` : null],
               [SEG.condo.median, money(st.condoMedian), st.condoN ? `${st.condoN} sold` : null],
+              [SEG.duplex.median, money(st.duplexMedian), st.duplexN ? `${st.duplexN} sold` : null],
               [SEG.other.median, money(st.otherMedian), st.otherN ? `${st.otherN} sold` : null],
               ["Per square foot", st.ppsf ? `$${Math.round(st.ppsf).toLocaleString("en-US")}` : null, null],
               ["Days to sell", st.dom != null ? Math.round(st.dom) : null, "median"],
@@ -435,6 +436,8 @@ export default function NeighborhoodModal({
                 autoOpen={autoDetails === "sfh" || autoDetails === "all"} />
               <PriceLine data={prices.condo} label="Median Condo/TIC/Co-op" gap sect="condo" reportComps={reportComps} onFocusComp={onFocusComp}
                 autoOpen={autoDetails === "condo" || autoDetails === "all"} />
+              <PriceLine data={prices.duplex} label="Median Duplex" gap sect="duplex" reportComps={reportComps} onFocusComp={onFocusComp}
+                autoOpen={autoDetails === "duplex" || autoDetails === "all"} />
               <PriceLine data={prices.other} label="Median Other" sect="other" reportComps={reportComps} onFocusComp={onFocusComp}
                 autoOpen={autoDetails === "other" || autoDetails === "all"} />
             </div>

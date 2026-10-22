@@ -41,13 +41,15 @@ The owner's rules:
   income). The MLS can't put both in one feed, so always ask the owner for
   both, and don't rebuild with only one (`scripts/geocode-listings.mjs`
   prints the property types and warns when there is no Residential Income).
-  The report and the site use the same three categories (owner, Oct 21
-  2026): (1) SFH, (2) Condo/TIC/Co-op, (3) Other (all Residential Income,
-  5+ units included, and the other types). Never "Condo/TIC/Other". The
-  site's list is `app/lib/segments.js` (pages, map dots, pop-ups and the
-  stats scripts all read it); the report's is `SEG` in
-  `reports/market/market-grid-v2.py`, which stops on a type in no category —
-  a new MLS type goes in both, in the same category.
+  The site has four categories (owner, Oct 22 2026): (1) SFH — Single Family
+  Residence, Halfplex and 2 Houses on Lot, (2) Condo/TIC/Co-op, (3) Duplex,
+  (4) Other (triplexes, fourplexes, 5+ units and the other types). Never
+  "Condo/TIC/Other". The site's list is `app/lib/segments.js` (pages, map dots,
+  pop-ups and the stats scripts all read it). The monthly report still has
+  three — SFH, Condo/TIC/Co-op and Other, with the duplexes inside Other — in
+  `SEG` in `reports/market/market-grid-v2.py` (which stops on a type in no
+  category); it is being brought to four, site first. A new MLS type goes in
+  both lists, in the same category.
 - A sale under $100K is parking, a rental or an entry error: it is left out.
 - A duplicated sale counts once, keeping the Closed record.
 - A sale over $25M is probably an entry error: it stays in, but always point

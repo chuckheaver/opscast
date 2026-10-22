@@ -64,7 +64,7 @@ export default function LiveBlockMap({ fallback }) {
       map.addLayer({ id: "sold-dots", type: "circle", source: "sold",
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 11, 2.6, 13, 4, 15, 6],
-          "circle-color": ["match", ["get", "s"], 1, SEG[1].color, 2, SEG[2].color, SEG[0].color],
+          "circle-color": ["match", ["get", "s"], 1, SEG[1].color, 2, SEG[2].color, 3, SEG[3].color, SEG[0].color],
           "circle-stroke-color": "#ffffff", "circle-stroke-width": 1,
           "circle-opacity": 0.9,
         } });

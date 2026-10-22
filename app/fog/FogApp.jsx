@@ -680,7 +680,7 @@ export default function FogApp() {
 
   // From a neighborhood pop-up's "N sold" link → focus the Homes overlay on
   // that neighborhood + segment and open the Stats sheet (the address grid).
-  const SEG_TYPES = { sfh: SEG.sfh.types, condo: SEG.condo.types, other: SEG.other.types };   // app/lib/segments.js
+  const SEG_TYPES = { sfh: SEG.sfh.types, condo: SEG.condo.types, duplex: SEG.duplex.types, other: SEG.other.types };   // app/lib/segments.js
   const showNeighborhoodProperties = useCallback((nbhd, seg) => {
     setHomesFilter({ ...defaultFilter(listingsGeo?.metadata?.statsThrough), fogNeighborhood: nbhd, subtypes: new Set(SEG_TYPES[seg] || []) });
     setActivityWanted(true);
@@ -689,7 +689,7 @@ export default function FogApp() {
     setStatsExpanded(true);
   }, [listingsGeo]);
 
-  // ?hood=<name>&details=sfh|condo|all — a guide page's stat tile: the
+  // ?hood=<name>&details=sfh|condo|duplex|other|all — a guide page's stat tile: the
   // neighborhood's pop-up opens with that segment's Details list (or both)
   // expanded, its sales dotted on the map. Used once, on the first opening.
   // (`homes` is the parameter's earlier name.)

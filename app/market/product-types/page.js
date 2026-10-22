@@ -93,7 +93,7 @@ export default function Page() {
         year, the full year by quarter. Medians throughout; size and $/sf use only sales with reported square footage. YoY is the % change; % of list
         in points, days on market in days. Sales with no reported square footage count in every figure except $/sf; the count is shown beside each
         $/sf{data.noSqftBig.length ? <>; $3M+ duplex and Residential Income sales without it: {data.noSqftBig.map(r => `${r.addr} (${r.type}, ${m(r.price)})`).join("; ")}</> : null}.
-        Duplex / 2 Homes includes 2 Houses on Lot; Condo includes townhouses; TIC includes co-ownership. Deemed reliable, not guaranteed.</>} />
+        SFH includes Halfplex and 2 Houses on Lot; Condo includes townhouses; TIC includes co-ownership. Deemed reliable, not guaranteed.</>} />
     </div>
   );
 }

@@ -84,7 +84,7 @@ const bucket = yr => {
       list: Number(p.listPrice) || 0,
       sqft: Number(p.sqft) || 0,
       dom: Number.isFinite(Number(p.dom)) ? Number(p.dom) : null,
-      seg: segOf(p.propType),        // sfh | condo | other (app/lib/segments.js)
+      seg: segOf(p.propType),        // sfh | condo | duplex | other (app/lib/segments.js)
     });
   }
   return rows;
@@ -110,6 +110,7 @@ const seg = (rows, pick) => {
 const marketFor = rows => ({
   sfh: seg(rows, r => r.seg === "sfh"),
   condo: seg(rows, r => r.seg === "condo"),
+  duplex: seg(rows, r => r.seg === "duplex"),
   other: seg(rows, r => r.seg === "other"),
   volume: rows.reduce((a, r) => a + r.price, 0),
   n: rows.length,

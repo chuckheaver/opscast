@@ -11,7 +11,7 @@ a data refresh:
     python3 reports/market/duplex_sfh.py     →  app/lib/duplex-vs-sfh.json
 
 Medians throughout. SFH = Single Family Residence and Halfplex; Duplex =
-Duplex and 2 Houses on Lot (product.py's groups). Every sale of the year so far
+Duplex (product.py's groups; 2 Houses on Lot is SFH, the owner, Oct 22 2026). Every sale of the year so far
 counts except the ones in LEFT_OUT.
 """
 import json, os, statistics, sys

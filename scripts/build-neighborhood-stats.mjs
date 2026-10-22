@@ -55,7 +55,7 @@ for (const f of geo.features || []) {
     sqft: Number(p.sqft) || 0,
     dom: Number.isFinite(Number(p.dom)) ? Number(p.dom) : null,
     fog: Number(p.fogHours),
-    seg: segOf(p.propType),           // sfh | condo | other (app/lib/segments.js)
+    seg: segOf(p.propType),           // sfh | condo | duplex | other (app/lib/segments.js)
   });
 }
 
@@ -74,6 +74,7 @@ for (const { key } of listNeighborhoods()) {
   const fog = median(fogs);
   const houses = rows.filter(r => r.seg === "sfh").map(r => r.price);
   const condos = rows.filter(r => r.seg === "condo").map(r => r.price);
+  const duplexes = rows.filter(r => r.seg === "duplex").map(r => r.price);
   const others = rows.filter(r => r.seg === "other").map(r => r.price);
   const ppsf = rows.filter(r => r.sqft > 0).map(r => r.price / r.sqft);
   const doms = rows.map(r => r.dom).filter(v => v != null);
@@ -82,15 +83,17 @@ for (const { key } of listNeighborhoods()) {
     const r = rows.filter(x => x.seg === k);
     return { ppsf: median(r.filter(x => x.sqft > 0).map(x => x.price / x.sqft)), dom: median(r.map(x => x.dom).filter(v => v != null)) };
   };
-  const [sfh, condo, other] = ["sfh", "condo", "other"].map(seg);
+  const [sfh, condo, duplex, other] = ["sfh", "condo", "duplex", "other"].map(seg);
   if (rows.length) withSales++;
   out.hoods[key] = {
     n: rows.length,
     sfhMedian: median(houses), sfhN: houses.length,
     condoMedian: median(condos), condoN: condos.length,
+    duplexMedian: median(duplexes), duplexN: duplexes.length,
     otherMedian: median(others), otherN: others.length,
     sfhPpsf: sfh.ppsf, sfhDom: sfh.dom,
     condoPpsf: condo.ppsf, condoDom: condo.dom,
+    duplexPpsf: duplex.ppsf, duplexDom: duplex.dom,
     otherPpsf: other.ppsf, otherDom: other.dom,
     ppsf: median(ppsf),
     dom: median(doms),
