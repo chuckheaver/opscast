@@ -191,8 +191,8 @@ export function LotPlan() {
       <p className="mc-fig-h">The lot from above</p>
       <div className="sn-lotgrid">
         <span />
-        <span className="sn-col-h">Summer · Jun 21</span>
-        <span className="sn-col-h">Winter · Dec 21</span>
+        <span className="sn-col-h sn-col-sum"><b>Summer</b> · Jun 21</span>
+        <span className="sn-col-h sn-col-win"><b>Winter</b> · Dec 21</span>
 
         <span className="sn-row-h">Yard <b>north</b> of the house</span>
         <LotPanel yard="north" season="jun" />
@@ -221,6 +221,102 @@ export function LotPlan() {
       <figcaption className="mc-cap">
         The winter sun stays low in the southern sky, so a yard north of its house sits in the house&rsquo;s
         shadow — and a yard south of it doesn&rsquo;t. 25 × 100 ft lot, 30 ft row houses, flat ground.
+      </figcaption>
+    </figure>
+  );
+}
+
+// ------------------------------------------ 1b. one house, four yards
+
+// One structure seen from above: two typical San Francisco houses (the owner's
+// dimensions, Oct 22 2026: 25 × 55 ft footprint, 30 ft tall) laid across each
+// other, so the footprint is a cross with the same size in both directions. A
+// yard on the end of each of its four arms, 25 × 45 ft (a 100 ft lot less the
+// house). Both wings are 30 ft tall and cast shadows; nothing else is on the plot.
+const CROSS_WINGS = [
+  { x0: -12.5, x1: 12.5, y0: -27.5, y1: 27.5, h: 30, me: true },       // north–south wing
+  { x0: -27.5, x1: 27.5, y0: -12.5, y1: 12.5, h: 30, me: true },       // east–west wing
+];
+// The house (a cross, arms to ±27.5 ft) and the whole plot (the same cross, arms
+// to ±72.5 ft, yards included), as corner lists, clockwise from the north arm.
+const plus = r => [[-12.5, r], [12.5, r], [12.5, 12.5], [r, 12.5], [r, -12.5], [12.5, -12.5], [12.5, -r], [-12.5, -r], [-12.5, -12.5], [-r, -12.5], [-r, 12.5], [-12.5, 12.5]];
+const CROSS_HOUSE_PTS = plus(27.5), CROSS_PLOT_PTS = plus(72.5);
+// Where the house meets each yard: four short lines across the arm ends.
+const CROSS_JOINTS = [[[-12.5, 27.5], [12.5, 27.5]], [[-12.5, -27.5], [12.5, -27.5]], [[27.5, -12.5], [27.5, 12.5]], [[-27.5, -12.5], [-27.5, 12.5]]];
+const CROSS_YARDS = [
+  ["North", { x0: -12.5, x1: 12.5, y0: 27.5, y1: 72.5 }],
+  ["South", { x0: -12.5, x1: 12.5, y0: -72.5, y1: -27.5 }],
+  ["East", { x0: 27.5, x1: 72.5, y0: -12.5, y1: 12.5 }],
+  ["West", { x0: -72.5, x1: -27.5, y0: -12.5, y1: 12.5 }],
+];
+
+function CrossPanel({ season }) {
+  const decl = DEC[season];
+  const S = 2.9, R0 = 78;
+  const W = 2 * R0 * S;
+  const px = x => (x + R0) * S, py = y => (R0 - y) * S;
+  const yards = CROSS_YARDS.map(([name, box]) => ({ name, box, ...yardCells(CROSS_WINGS, box, decl) }));
+  const mid = b => [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2];
+  const clip = `cross-${season}`;
+  const poly = pts => pts.map(([x, y], i) => `${i ? "L" : "M"}${px(x)},${py(y)}`).join(" ") + " Z ";
+  return (
+    <div className="sn-lot">
+      <svg viewBox={`0 0 ${W} ${W}`} className="mc-svg" role="img"
+        aria-label={`One house with a rear yard on each side, ${season === "jun" ? "June 21" : "December 21"}: ${yards.map(y => `${y.name} ${fmtH(y.avg)}`).join(", ")} of direct sun.`}>
+        <defs>
+          <clipPath id={clip}><rect width={W} height={W} rx="10" /></clipPath>
+          <clipPath id={`${clip}-plot`}><path d={poly(CROSS_PLOT_PTS)} /></clipPath>
+        </defs>
+        <g clipPath={`url(#${clip})`}>
+          <rect width={W} height={W} fill="#F5F6F7" />
+          <g clipPath={`url(#${clip}-plot)`}>
+            {yards.map(y => y.cells.map((c, i) => (
+              <rect key={`${y.name}${i}`} x={px(c.x - CELL / 2)} y={py(c.y + CELL / 2)} width={CELL * S + 0.4} height={CELL * S + 0.4} fill={heat(c.h)} />
+            )))}
+          </g>
+          <path d={poly(CROSS_HOUSE_PTS)} fill="#4E7398" />
+          {/* One connected outline: the whole plot, then the four joints, same stroke, round joins. */}
+          <path d={poly(CROSS_PLOT_PTS) + CROSS_JOINTS.map(([[ax, ay], [bx, by]]) => `M${px(ax)},${py(ay)} L${px(bx)},${py(by)}`).join(" ")}
+            fill="none" stroke="#131A25" strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round" />
+          <text className="sn-t sn-t-w2" style={{ fontSize: 17 }} x={px(0)} y={py(0) + 6} textAnchor="middle">house</text>
+          {yards.map(y => {
+            const [cx, cy] = mid(y.box);
+            return (
+              <g key={y.name}>
+                <text className="sn-t sn-t-light" style={{ fontSize: 13 }} x={px(cx)} y={py(cy) - 6} textAnchor="middle">{y.name}</text>
+                <text className="sn-t sn-t-light" style={{ fontSize: 17, fontWeight: 800 }} x={px(cx)} y={py(cy) + 14} textAnchor="middle">{fmtH(y.avg)}</text>
+              </g>
+            );
+          })}
+          <g transform={`translate(${W - 22},24) scale(1.3)`}>
+            <path d="M0,-9 L5,4 L0,1 L-5,4 Z" fill="#131A25" />
+            <text className="sn-t" x="0" y="16" textAnchor="middle">N</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+export function LotCross() {
+  return (
+    <figure className="mc-fig">
+      <p className="mc-fig-h">One house, four yards</p>
+      <div className="sn-crossgrid">
+        <span className="sn-col-h sn-col-sum"><b>Summer</b> · Jun 21</span>
+        <span className="sn-col-h sn-col-win"><b>Winter</b> · Dec 21</span>
+        <CrossPanel season="jun" />
+        <CrossPanel season="dec" />
+      </div>
+      <div className="sn-heatkey">
+        <span>Sun on the yard:</span>
+        <span>0 h</span>
+        <i style={{ background: `linear-gradient(90deg, ${heat(0)}, ${heat(HEAT_MAX / 2)}, ${heat(HEAT_MAX)})` }} />
+        <span className="sn-heatkey-r">{HEAT_MAX} h</span>
+        <em><i style={{ background: "#4E7398" }} /> the house</em>
+      </div>
+      <figcaption className="mc-cap">
+        Average hours of direct sun across each yard, sunrise to sunset. Two 25 × 55 ft houses, 30 ft tall, laid across each other; each yard is 25 × 45 ft, on flat ground. Nothing else is on the plot, so the only shadows are the house’s own.
       </figcaption>
     </figure>
   );

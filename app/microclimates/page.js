@@ -16,7 +16,7 @@ import {
 } from "./charts";
 import { FogStory } from "./fogstory";
 import { BayMap, FogMapCard } from "./bay";
-import { LotPlan, NeighborShadow, SlopeCompare, FieldRules, SkyChart } from "./sun";
+import { LotPlan, LotCross, NeighborShadow, SlopeCompare, FieldRules, SkyChart } from "./sun";
 import {
   LEDE, KOPPEN, LATITUDE, ENGINE, ENGINE_BULLETS,
   BAY_ZONES, BAY_BULLETS, BAY_NOTE, BELTS_LEAD, MICRO_FACTORS, BELTS, FOG_HOURS, FOG_HOURS_NOTE,
@@ -255,6 +255,7 @@ export default function Page() {
           <h3 className="mc-h3" id="sun">Sun on the Lot</h3>
           <SunAngle />
           <LotPlan />
+          <LotCross />
           <Bullets items={LOT_BULLETS} />
           <NeighborShadow />
           <SlopeCompare />
