@@ -21,7 +21,7 @@ export default function Page() {
     <div className="lp">
       <section className="lp-guide-head">
         <p className="lp-kicker">Market Report · Jan 1 – {dateLong(data.through)}</p>
-        <h1 className="lp-guide-h1">SFH vs Duplex by Neighborhood (Median Numbers)</h1>
+        <h1 className="lp-guide-h1">SFH vs Duplex by Neighborhood<span className="dv-sub">(Median Numbers)</span></h1>
       </section>
 
       <main className="dv">

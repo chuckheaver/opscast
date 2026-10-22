@@ -6189,3 +6189,4 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .dv-list td.l i { font-style: normal; font-size: 11px; font-weight: 700; color: #8A5F12; }
 .dv-list td.l small { display: block; color: var(--lp-muted); font-size: 11.5px; }
 @media (max-width: 720px) { .dv-panel { width: 100%; } .dv-t { font-size: 13px; } }
+.dv-sub { display: block; margin-top: 6px; font-size: 0.5em; font-weight: 600; letter-spacing: .02em; opacity: .85; }
