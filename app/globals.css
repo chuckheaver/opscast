@@ -5073,12 +5073,18 @@ a.lp-nstat-link:hover .lp-nstat-l::after { opacity: 1; }
 /* A neighborhood page's three sales boxes: SFH, Condo / TIC / Co-op, Other. */
 .lp-nsegs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 26px; }
 @media (max-width: 1000px) { .lp-nsegs { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 720px) { .lp-nsegs { grid-template-columns: 1fr; } }
-a.lp-nseg { display: block; background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; padding: 16px 14px 14px;
+@media (max-width: 720px) { .lp-nsegs { grid-template-columns: 1fr; } .nhm-segs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+a.lp-nseg, button.lp-nseg { display: block; box-sizing: border-box; width: 100%; text-align: left; font: inherit; cursor: pointer; appearance: none; background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; padding: 16px 14px 14px;
   color: inherit; text-decoration: none; transition: background .15s, border-color .15s; }
-a.lp-nseg:hover, a.lp-nseg:focus-visible { background: #F4F7FA; border-color: #203C5F; }
+a.lp-nseg:hover, a.lp-nseg:focus-visible, button.lp-nseg:hover:not(:disabled), button.lp-nseg:focus-visible { background: #F4F7FA; border-color: #203C5F; }
+button.lp-nseg:disabled { cursor: default; opacity: .6; }
+button.lp-nseg.on { border-color: var(--seg); box-shadow: inset 0 0 0 2px var(--seg); background: #FBFCFD; }
+.lp-nseg-h::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; vertical-align: -1px;
+  background: var(--seg); box-shadow: 0 0 0 1.5px #fff, 0 0 0 2.5px rgba(19,26,37,.2); }
 .lp-nseg-h { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--lp-accent); margin-bottom: 8px; }
 a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
+.nhm-segs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+.nhm-segs .lp-nseg { padding: 12px 11px 10px; } .nhm-segs .lp-nseg dd.lp-nseg-v { font-size: 19px; } .nhm-segs .lp-nseg dt { font-size: 12px; }
 .lp-nseg dl { display: grid; grid-template-columns: 1fr auto; gap: 6px 8px; margin: 0; align-items: baseline; }
 .lp-nseg dt { font-size: 12.5px; color: var(--lp-muted); }
 .lp-nseg dd { margin: 0; text-align: right; font-size: 15.5px; font-weight: 700; color: var(--lp-navy-2); }
@@ -5475,10 +5481,11 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .fs-t-k { font-size: 12.5px; font-weight: 800; letter-spacing: 0.12em; }
 .fs-t-v { font-size: 14px; font-weight: 800; fill: var(--lp-navy); }
 .fs-t-big { font-size: 20px; font-weight: 800; fill: var(--lp-navy); }
-.fs-words { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 0; }
-.fs-words > div { background: #fff; border: 1px solid var(--lp-line); border-radius: 12px; padding: 12px 14px 14px; }
-.fs-words dt { font-size: 14px; font-weight: 800; color: var(--lp-ink); }
-.fs-words dd { margin: 4px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--lp-body); }
+.fs-words { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 0; }
+.fs-words > div { background: #fff; border: 1px solid var(--lp-line); border-radius: 10px; padding: 9px 11px 10px; }
+.fs-words dt { font-size: 13px; font-weight: 800; color: var(--lp-ink); }
+.fs-words dd { margin: 3px 0 0; font-size: 12px; line-height: 1.4; color: var(--lp-body); }
+@media (max-width: 1000px) { .fs-words { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }
 .fs-part {
   margin: 26px 0 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--lp-navy);
@@ -6065,13 +6072,6 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .nhm-reasons { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; padding: 0; }
 .nhm-reasons li { font-size: 11.5px; font-weight: 600; color: #505050; background: #fff;
   border: 1px solid #DCDDDE; border-radius: 999px; padding: 4px 10px; }
-/* Wrapping flex like .lp-nstats, so a row of fewer tiles fills its width
-   instead of leaving an empty cell. */
-.nhm-stats { display: flex; flex-wrap: wrap; gap: 1px; margin-top: 14px;
-  background: #fff; border: 1px solid #DCDDDE; border-radius: 12px; overflow: hidden; }
-.nhm-stat { flex: 1 1 96px; background: #fff; padding: 10px 11px 11px; box-shadow: 0 0 0 1px #DCDDDE; }
-.nhm-stat-v { font-family: Georgia, serif; font-size: 18px; font-weight: 700; color: #131A25; white-space: nowrap; }
-.nhm-stat-l { margin-top: 2px; font-size: 11px; line-height: 1.3; color: #6B6F75; }
 .nhm-guide { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 700; color: #203C5F;
   text-decoration: none; border-bottom: 1px solid #DCDDDE; }
 .nhm-guide:hover { border-bottom-color: #203C5F; }

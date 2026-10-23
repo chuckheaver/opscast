@@ -112,10 +112,10 @@ export default function Page() {
 
         {/* CLIMATE — classification, the ocean, the year */}
         <section className="pt-sec mc-group" id="climate">
-          <p className="lp-kicker mc-group-k">Climate</p>
+          <p className="lp-kicker mc-group-k">Climate Classification</p>
         </section>
         <section className="pt-sec" id="koppen">
-          <h2>Köppen: {KOPPEN.code}</h2>
+          <h2>Köppen-Geiger: {KOPPEN.code}</h2>
           <p className="mc-lead">{KOPPEN.about}</p>
           <Bullets items={KOPPEN.system} />
           <p className="mc-lead mc-lead-here">{KOPPEN.here}</p>

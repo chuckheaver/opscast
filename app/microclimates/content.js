@@ -18,7 +18,7 @@ export const LEDE =
 export const KOPPEN = {
   code: "Csb",
   name: "Warm-summer Mediterranean",
-  about: "The Köppen system sorts every climate on Earth into a short letter code, using only monthly temperature and rainfall.",
+  about: "The Köppen-Geiger system sorts every climate on Earth into a short letter code, using only monthly temperature and rainfall.",
   system: [
     "First letter, the main group: A tropical, B dry, C temperate, D continental, E polar.",
     "Second letter, the rainfall pattern: f no dry season, s dry summer, w dry winter.",

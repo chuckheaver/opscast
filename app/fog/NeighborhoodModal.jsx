@@ -14,6 +14,7 @@ import { statsFor, slugify, money, ZONE_COLOR, statsYear } from "../neighborhood
 import NEIGHBORHOOD_ZONES from "../../public/data/neighborhood-fog-zones.json";
 import ZoneMix from "../neighborhoods/ZoneMix";
 import { SEG, segOf } from "../lib/segments";
+import SegBox from "../components/SegBox";
 
 const LISTINGS_URL = "/data/sf-listings.geojson";
 const RES_COUNTS_URL = "/data/parcel-res-by-neighborhood.json";
@@ -65,23 +66,13 @@ function summarize(homes, fn) {
 // colour them: the price line's dot is the key to its homes on the map.
 const SEG_COLOR = { sfh: SEG.sfh.color, condo: SEG.condo.color, duplex: SEG.duplex.color, other: SEG.other.color };
 
-function PriceLine({ data, label, gap, sect, reportComps, onFocusComp, autoOpen }) {
-  const [open, setOpen] = useState(false);
+// `open` and `onToggle` come from the pop-up, which keeps one on/off state per
+// category: this line's Details button and that category's box at the top of the
+// pop-up both flip it, and it plots or removes the category's homes on the map.
+function PriceLine({ data, label, gap, sect, open, onToggle, onFocusComp }) {
   const homes = data?.homes || [];
   const summaries = homes.length ? [["Average", summarize(homes, _mean)], ["Median", summarize(homes, _median)]] : [];
-  const toggle = () => {
-    const nx = !open;
-    setOpen(nx);
-    // Expanding plots this list's homes as map dots; collapsing removes them.
-    // (Dots persist if the pop-up is simply closed, so they stay clickable.)
-    // Each dot carries its list's segment, so its colour matches this line.
-    reportComps?.(sect, nx ? homes.map(h => h.feat).filter(Boolean)
-      .map(f => ({ ...f, properties: { ...f.properties, seg: sect } })) : null);
-  };
-  // Opened from a guide page's stat tile: start expanded, dots on the map.
-  useEffect(() => {
-    if (autoOpen && homes.length && !open) toggle();
-  }, [autoOpen, homes.length]); // eslint-disable-line react-hooks/exhaustive-deps
+  const toggle = onToggle;
   return (
     <div style={{ marginBottom: gap ? 10 : 2 }}>
     <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
@@ -231,6 +222,20 @@ export default function NeighborhoodModal({
     const all = [...(compsRef.current.sfh || []), ...(compsRef.current.condo || []), ...(compsRef.current.duplex || []), ...(compsRef.current.other || [])];
     onComps?.(all.length ? { type: "FeatureCollection", features: all } : null);
   }, [onComps]);
+  // Which categories' Details are expanded, i.e. whose homes are dotted on the map.
+  const [openSects, setOpenSects] = useState({});
+  const setSect = useCallback((sect, homes, on) => {
+    setOpenSects(o => ({ ...o, [sect]: on }));
+    // Expanding plots the category's homes as map dots; collapsing removes them.
+    // (Dots persist if the pop-up is simply closed, so they stay clickable.)
+    // Each dot carries its category, so its colour matches the box and the line.
+    reportComps(sect, on ? homes.map(h => h.feat).filter(Boolean)
+      .map(f => ({ ...f, properties: { ...f.properties, seg: sect } })) : null);
+  }, [reportComps]);
+  const toggleSect = sect => {
+    const homes = (prices && prices !== "loading" && prices[sect]?.homes) || [];
+    if (homes.length) setSect(sect, homes, !openSects[sect]);
+  };
   const [dataThrough, setDataThrough] = useState(""); // M/D/YY of the last data load
   const [resCounts, setResCounts] = useState(undefined); // undefined loading | counts obj | null
   // "By the Numbers" starts collapsed to save space; the header shows the
@@ -304,11 +309,18 @@ export default function NeighborhoodModal({
     return () => { cancelled = true; };
   }, [name]);
 
-  // The price lines open their lists from autoDetails as the prices arrive
-  // (children's effects run first); after that it is spent.
+  // Opened from a guide page's box: open that category's list (all of them for
+  // "all") as the prices arrive; after that it is spent.
   useEffect(() => {
-    if (autoDetails && prices !== "loading") onAutoDetailsDone?.();
-  }, [autoDetails, prices, onAutoDetailsDone]);
+    if (!autoDetails || prices === "loading") return;
+    if (prices) {
+      for (const sect of autoDetails === "all" ? ["sfh", "condo", "duplex", "other"] : [autoDetails]) {
+        const homes = prices[sect]?.homes || [];
+        if (homes.length) setSect(sect, homes, true);
+      }
+    }
+    onAutoDetailsDone?.();
+  }, [autoDetails, prices]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Esc to close.
   useEffect(() => {
@@ -370,20 +382,9 @@ export default function NeighborhoodModal({
           <ul className="nhm-reasons">{data.reasons.map(r => <li key={r}>{r}</li>)}</ul>
         ) : null}
         {st && st.n > 0 && (
-          <div className="nhm-stats">
-            {[
-              [SEG.sfh.median, money(st.sfhMedian), st.sfhN ? `${st.sfhN} sold` : null],
-              [SEG.condo.median, money(st.condoMedian), st.condoN ? `${st.condoN} sold` : null],
-              [SEG.duplex.median, money(st.duplexMedian), st.duplexN ? `${st.duplexN} sold` : null],
-              [SEG.other.median, money(st.otherMedian), st.otherN ? `${st.otherN} sold` : null],
-              ["Per square foot", st.ppsf ? `$${Math.round(st.ppsf).toLocaleString("en-US")}` : null, null],
-              ["Days to sell", st.dom != null ? Math.round(st.dom) : null, "median"],
-              ["Homes sold", st.n, statsYear],
-            ].filter(([, v]) => v != null).map(([l, v, sub]) => (
-              <div className="nhm-stat" key={l}>
-                <div className="nhm-stat-v">{v}</div>
-                <div className="nhm-stat-l">{l}{sub ? <span> {sub}</span> : null}</div>
-              </div>
+          <div className="lp-nsegs nhm-segs">
+            {["sfh", "condo", "duplex", "other"].map(k => (
+              <SegBox key={k} seg={SEG[k]} s={st} active={!!openSects[k]} onClick={() => toggleSect(k)} />
             ))}
           </div>
         )}
@@ -432,14 +433,10 @@ export default function NeighborhoodModal({
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 14, color: "#6B6F75" }}>Loading…</span></div>
           ) : prices ? (
             <div style={{ marginBottom: 2 }}>
-              <PriceLine data={prices.sfh} label="Median Single-Family" gap sect="sfh" reportComps={reportComps} onFocusComp={onFocusComp}
-                autoOpen={autoDetails === "sfh" || autoDetails === "all"} />
-              <PriceLine data={prices.condo} label="Median Condo/TIC/Co-op" gap sect="condo" reportComps={reportComps} onFocusComp={onFocusComp}
-                autoOpen={autoDetails === "condo" || autoDetails === "all"} />
-              <PriceLine data={prices.duplex} label="Median Duplex" gap sect="duplex" reportComps={reportComps} onFocusComp={onFocusComp}
-                autoOpen={autoDetails === "duplex" || autoDetails === "all"} />
-              <PriceLine data={prices.other} label="Median Other (Tri+)" sect="other" reportComps={reportComps} onFocusComp={onFocusComp}
-                autoOpen={autoDetails === "other" || autoDetails === "all"} />
+              <PriceLine data={prices.sfh} label="Median Single-Family" gap sect="sfh" open={!!openSects.sfh} onToggle={() => toggleSect("sfh")} onFocusComp={onFocusComp} />
+              <PriceLine data={prices.condo} label="Median Condo/TIC/Co-op" gap sect="condo" open={!!openSects.condo} onToggle={() => toggleSect("condo")} onFocusComp={onFocusComp} />
+              <PriceLine data={prices.duplex} label="Median Duplex" gap sect="duplex" open={!!openSects.duplex} onToggle={() => toggleSect("duplex")} onFocusComp={onFocusComp} />
+              <PriceLine data={prices.other} label="Median Other (Tri+)" sect="other" open={!!openSects.other} onToggle={() => toggleSect("other")} onFocusComp={onFocusComp} />
             </div>
           ) : (
             <div style={{ marginBottom: 8 }}><span style={{ fontSize: 13, color: "#6B6F75" }}>Market data unavailable.</span></div>

@@ -12,6 +12,7 @@ import {
   money, ZONE_COLOR, windowLabel, statsYear,
 } from "../lib";
 import ZoneMix from "../ZoneMix";
+import SegBox from "../../components/SegBox";
 import { SEG } from "../../lib/segments";
 
 export function generateStaticParams() {
@@ -35,21 +36,6 @@ export async function generateMetadata({ params }) {
 // count sits in each box so the reader can weigh it themselves. Each box
 // opens the map on this neighborhood's pop-up, with that category's Details
 // list open and its sales dotted on the map.
-const SegBox = ({ seg, s, href }) => {
-  const n = s[`${seg.key}N`];
-  const ppsf = s[`${seg.key}Ppsf`], dom = s[`${seg.key}Dom`];
-  return (
-    <Link className="lp-nseg" href={href} title="See these sales on the map">
-      <div className="lp-nseg-h">{seg.short}</div>
-      <dl>
-        <dt>Median sale</dt><dd className="lp-nseg-v">{n ? money(s[`${seg.key}Median`]) : "—"}</dd>
-        <dt>Sold</dt><dd>{n || 0}</dd>
-        <dt>Median $/sf</dt><dd>{ppsf ? `$${Math.round(ppsf).toLocaleString("en-US")}` : "—"}</dd>
-        <dt>Days on market</dt><dd>{dom != null ? Math.round(dom) : "—"}</dd>
-      </dl>
-    </Link>
-  );
-};
 const salesMap = (name, seg) => `/fog?${new URLSearchParams({ hood: name, details: seg })}`;
 
 export default async function Page({ params }) {
