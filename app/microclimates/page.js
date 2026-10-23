@@ -119,6 +119,7 @@ export default function Page() {
           <h2>Köppen-Geiger: {KOPPEN.code}</h2>
           <p className="mc-lead">{KOPPEN.about}</p>
           <Bullets items={KOPPEN.system} />
+          <KoppenMap />
           <p className="mc-lead mc-lead-here">{KOPPEN.here}</p>
           <div className="mc-letters">
             {KOPPEN.letters.map(l => (
@@ -134,11 +135,6 @@ export default function Page() {
           <KoppenTests />
           <BarRows rows={LATITUDE} max={100} unit="°F" head="July afternoon, same latitude" labelW={190} />
           <Bullets items={KOPPEN.bullets} />
-        </section>
-
-        <section className="pt-sec" id="koppen-map">
-          <h2>Climate Map</h2>
-          <KoppenMap />
         </section>
 
         {/* 2 — The ocean */}
