@@ -102,6 +102,16 @@ for i, c in enumerate(codes):
         y, x = np.unravel_index(np.argmax(np.where(mk, dist, 0)), dist.shape)
         if dist[y, x] < 28 or not (4 < 100 * x / Wz < 96 and 5 < 100 * y / Hz < 95): continue
         labels.append(dict(code=c, name=names[c], color=hexc[c], x=round(100 * x / Wz, 2), y=round(100 * y / Hz, 2), area=int(sizes[k])))
+# every class in the key gets at least one label: its deepest point inside the picture's margins
+yy, xx = np.mgrid[0:Hz, 0:Wz]
+inner = (xx > 0.06 * Wz) & (xx < 0.94 * Wz) & (yy > 0.05 * Hz) & (yy < 0.95 * Hz)
+for i, c in enumerate(codes):
+    if c not in present or any(l["code"] == c for l in labels): continue
+    m = lab == i
+    if (m & inner).sum() < 0.004 * Hz * Wz: continue
+    d = ndi.distance_transform_edt(m)
+    y, x = np.unravel_index(np.argmax(np.where(inner, d, 0)), d.shape)
+    labels.append(dict(code=c, name=names[c], color=hexc[c], x=round(100 * x / Wz, 2), y=round(100 * y / Hz, 2), area=int(m.sum())))
 shares = {c: float((lab == codes.index(c)).sum()) for c in present}
 tot = sum(shares.values())
 out = dict(w=Wz, h=Hz, view=V, labels=labels,

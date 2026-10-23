@@ -22,7 +22,7 @@ export default function KoppenMap() {
       <div className="kg-map" style={{ aspectRatio: `${MAP.w} / ${MAP.h}` }}>
         <img src="/data/koppen-bay.png" alt="Köppen-Geiger climate types of the Bay Area and Central California. San Francisco is Csb, warm-summer Mediterranean." />
         {MAP.labels.map((l, i) => (
-          <span key={i} className="kg-area" style={{ left: `${l.x}%`, top: `${l.y + (l.code === "Csa" ? 9 : 0)}%` }}><b>{l.code}</b>{l.name}</span>
+          <span key={i} className="kg-area" style={{ left: `${Math.min(l.x, 88)}%`, top: `${Math.min(l.y + (l.code === "Csa" ? 9 : 0), 89)}%` }}><b>{l.code}</b>{l.name}</span>
         ))}
         {CITIES.map(c => (
           <span key={c.n} className={`kg-city${c.me ? " me" : ""}${c.left ? " l" : ""}`} style={pos(c)}><i />{c.n}</span>
