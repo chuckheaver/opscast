@@ -6256,48 +6256,18 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 }
 
 /* ---- Climate Map (Köppen-Geiger) on /microclimates ---- */
-.kg-bar { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-bottom: 12px; }
-.kg-seg2 { display: inline-flex; border: 1px solid var(--lp-line); border-radius: 8px; overflow: hidden; background: #fff; }
-.kg-seg2 button { font: inherit; font-size: 13px; padding: 8px 14px; border: 0; background: transparent; color: var(--lp-body); cursor: pointer; }
-.kg-seg2 button + button { border-left: 1px solid var(--lp-line); }
-.kg-seg2 button.on { background: var(--lp-navy); color: #fff; font-weight: 600; }
-.kg-main { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 18px; align-items: start; }
 .kg-map { position: relative; border: 1px solid var(--lp-line); border-radius: 10px; overflow: hidden; background: #BCD3E1; }
-.kg-map canvas { display: block; width: 100%; height: auto; cursor: crosshair; }
-.kg-load { position: absolute; inset: 0; display: grid; place-items: center; font-size: 13px; color: var(--lp-muted); }
-.kg-places { position: absolute; inset: 0; pointer-events: none; }
-.kg-city { position: absolute; transform: translate(6px, -50%); font-size: 11px; font-weight: 600; color: #131A25; white-space: nowrap; text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 2px #fff; }
-.kg-city i { position: absolute; left: -9px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: #131A25; border: 1px solid #fff; }
+.kg-map img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.kg-area { position: absolute; transform: translate(-50%, -50%); text-align: center; font-size: 12px; line-height: 1.25; color: #131A25; max-width: 130px; pointer-events: none; text-shadow: 0 0 3px rgba(255,255,255,.9), 0 0 2px rgba(255,255,255,.9); }
+.kg-area b { display: block; font-size: 17px; font-weight: 800; }
+.kg-city { position: absolute; transform: translate(8px, -50%); font-size: 11px; font-weight: 600; color: #131A25; white-space: nowrap; pointer-events: none; text-shadow: 0 0 3px #fff, 0 0 3px #fff; }
+.kg-city i { position: absolute; left: -11px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: #131A25; border: 1px solid #fff; }
 .kg-city.l { transform: translate(calc(-100% - 8px), -50%); }
 .kg-city.l i { left: auto; right: -11px; }
 .kg-city.me { font-size: 12.5px; font-weight: 800; }
-.kg-city.me i { width: 9px; height: 9px; margin-top: -4.5px; left: -11px; background: var(--lp-navy); }
-.kg-tip { position: absolute; z-index: 3; pointer-events: none; width: 196px; background: #fff; border: 1px solid var(--lp-line); border-radius: 8px; padding: 8px 10px; box-shadow: 0 4px 14px rgba(19, 26, 37, .18); font-size: 12px; color: var(--lp-body); display: flex; flex-direction: column; gap: 2px; }
-.kg-tip b { display: flex; align-items: center; gap: 6px; color: var(--lp-ink); font-size: 14px; }
-.kg-tip b i { width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(0, 0, 0, .2); }
-.kg-tip small { color: var(--lp-muted); font-size: 11px; }
-.kg-side { position: sticky; top: 76px; }
-.kg-sun { width: 100%; height: auto; display: block; }
-.kg-seg { cursor: pointer; outline: none; }
-.kg-seg:hover path, .kg-seg:focus-visible path { stroke: var(--lp-navy); stroke-width: 2.5; }
-.kg-t { pointer-events: none; font-size: 9.5px; font-weight: 600; fill: #131A25; }
-.kg-t-g { font-size: 9px; font-weight: 800; fill: #fff; }
-.kg-t-m { font-size: 9px; fill: #505050; }
-.kg-t-c { font-size: 8px; }
-.kg-cc { font-size: 22px; font-weight: 800; fill: #131A25; }
-.kg-cc-s { font-size: 12px; }
-.kg-cs { font-size: 11px; font-weight: 600; fill: #6B6F75; }
-.kg-hint { min-height: 38px; text-align: center; font-size: 12.5px; color: var(--lp-muted); }
-.kg-hint b { color: var(--lp-ink); }
-.kg-detail { text-align: center; margin: 2px 0 0; font-size: 13px; color: var(--lp-body); }
-.kg-clear { display: block; margin: 8px auto 0; font: inherit; font-size: 12px; padding: 5px 12px; border: 1px solid var(--lp-line); border-radius: 999px; background: #fff; cursor: pointer; }
-.kg-share { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 12px; }
-.kg-sh { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--lp-body); }
-.kg-sh i { width: 12px; height: 12px; border-radius: 3px; }
-.kg-sh b { color: var(--lp-ink); }
-@media (max-width: 900px) {
-  .kg-main { grid-template-columns: 1fr; }
-  .kg-side { position: static; max-width: 420px; margin: 0 auto; }
-  .kg-seg2 button { padding: 8px 10px; font-size: 12px; }
-  .kg-city { font-size: 9.5px; }
-}
+.kg-key { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 13px; color: var(--lp-body); }
+.kg-key li { display: flex; align-items: center; gap: 6px; }
+.kg-key i { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,.15); }
+.kg-key b { color: var(--lp-ink); }
+.kg-key span { color: var(--lp-muted); }
+@media (max-width: 700px) { .kg-area { font-size: 9.5px; max-width: 80px; } .kg-area b { font-size: 13px; } .kg-city { font-size: 9.5px; } }
