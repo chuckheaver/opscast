@@ -15,6 +15,7 @@ import {
   ClimateTable, ClimateExtremes,
 } from "./charts";
 import { FogStory } from "./fogstory";
+import KoppenMap from "./KoppenMap";
 import { BayMap, FogMapCard } from "./bay";
 import { LotCross, NeighborShadow, SlopeCompare, FieldRules, SkyChart } from "./sun";
 import {
@@ -133,6 +134,11 @@ export default function Page() {
           <KoppenTests />
           <BarRows rows={LATITUDE} max={100} unit="°F" head="July afternoon, same latitude" labelW={190} />
           <Bullets items={KOPPEN.bullets} />
+        </section>
+
+        <section className="pt-sec" id="koppen-map">
+          <h2>Climate Map</h2>
+          <KoppenMap />
         </section>
 
         {/* 2 — The ocean */}
