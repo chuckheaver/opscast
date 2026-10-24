@@ -6343,3 +6343,6 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
   .lp-hero-gap { display: none; }
   .lp-hero .lp-claim-row, .lp-hero-search-top { width: 100%; }
 }
+.lp-portrait figcaption .lp-portrait-contact { display: block; width: fit-content; margin-top: 3px; font-size: 13px; color: rgba(255,255,255,0.68); text-decoration: none; }
+.lp-portrait figcaption .lp-portrait-contact:hover { color: var(--lp-accent-dk); text-decoration: underline; }
+@media (max-width: 720px) { .lp-portrait figcaption .lp-portrait-contact { font-size: 12px; } }

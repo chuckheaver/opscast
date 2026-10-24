@@ -125,6 +125,8 @@ export default function Landing() {
               <Link href="/market/report#sf" className="lp-stats-pill lp-stats-pill-hero">Market Stats - {statsMonth}<span className="lp-stats-pill-arrow" aria-hidden="true">&rarr;</span></Link>
               <b>Chuck Heaver</b>
               <span>Realtor &amp; Meteorologist · DRE #{DRE} · Vanguard Properties</span>
+              <a className="lp-portrait-contact" href="mailto:chuck.heaver@vanguardproperties.com">chuck.heaver@<wbr />vanguardproperties.com</a>
+              <a className="lp-portrait-contact" href="tel:+14155491777">415.549.1777</a>
             </figcaption>
           </figure>
           <figure className="lp-hero-map">
