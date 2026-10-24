@@ -5,9 +5,9 @@
 import Link from "next/link";
 import SiteFooter from "../../components/SiteFooter";
 import { BarRows } from "../charts";
-import { Defs, Pacific, Jet, KELVIN_SCENES, Strength, Stack } from "./graphics";
+import { Defs, Pacific, Jet, KELVIN_SCENES, Strength, Stack, PacificStorms, RiverLands } from "./graphics";
 import {
-  AS_OF, LEDE, TOPLINE, WORDS, STATES, KELVIN, STACK, HISTORY, TAHOE, WINE, CHECKLIST, DEALS, SOURCES, DISCLAIMER,
+  AS_OF, LEDE, TOPLINE, WORDS, STATES, STORMS, KELVIN, STACK, HISTORY, TAHOE, WINE, CHECKLIST, DEALS, SOURCES, DISCLAIMER,
 } from "./content";
 
 export const metadata = {
@@ -19,6 +19,7 @@ export const metadata = {
 
 const TOC = [
   ["how", "How it works"],
+  ["storms", "Storms"],
   ["strength", "This year"],
   ["history", "Past events"],
   ["seas", "Higher seas"],
@@ -90,6 +91,22 @@ export default function Page() {
             ))}
           </ol>
           <p className="mc-cap">Schematic cross-sections along the equator, west to east, and storm-track maps; not to scale [3].</p>
+        </section>
+
+        <section className="pt-sec" id="storms">
+          <h2>How El Niño Feeds Storms: The Pineapple Express</h2>
+          <figure className="mc-fig">
+            <div className="mc-scroll"><PacificStorms /></div>
+            <ol className="en-steps5">
+              {STORMS.steps.map((s, i) => <li key={s.h}><span className="fs-n" aria-hidden="true">{i + 1}</span><div><b>{s.h}</b><p>{s.p}</p></div></li>)}
+            </ol>
+          </figure>
+          <figure className="mc-fig">
+            <p className="mc-fig-h">When the river reaches land</p>
+            <div className="mc-scroll"><RiverLands /></div>
+          </figure>
+          <Bullets items={STORMS.facts} />
+          <p className="mc-cap">Schematic maps, not to scale; an El Niño winter pattern, not a forecast for any storm [3][18].</p>
         </section>
 
         <section className="pt-sec" id="strength">

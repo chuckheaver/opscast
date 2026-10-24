@@ -69,6 +69,21 @@ export const KELVIN = [
   },
 ];
 
+export const STORMS = {
+  steps: [
+    { h: "Warm water", p: "In El Niño the warmest water spreads into the central and eastern Pacific along the equator." },
+    { h: "Storms over it", p: "Warm water heats and moistens the air above it. It rises in towering thunderstorms, which move east with the warm water." },
+    { h: "A stronger jet stream", p: "The heat those storms release strengthens the subtropical jet stream and stretches it east, toward California." },
+    { h: "Atmospheric rivers", p: "Long, narrow bands of water vapor ride the jet. When one draws its moisture from the tropics near Hawaii, forecasters call it the Pineapple Express." },
+    { h: "Landfall", p: "Storms along the jet steer the river ashore. Hills and mountains lift the moist air, and it falls as heavy rain, and as snow high in the Sierra." },
+  ],
+  facts: [
+    "Atmospheric rivers bring 30 to 50% of the West Coast's yearly rain and snow, often in a few big storms [18].",
+    "A strong one carries up to 15 times the water of the Mississippi River at its mouth, as vapor [18].",
+    "They come every winter. In El Niño the extended jet stream tends to aim more of them at California, and farther south than usual.",
+  ],
+};
+
 export const STACK = {
   lead: "None of these floods a street on its own. It is the stack, on the same day, that reaches shoreline streets, beaches and bluffs.",
   layers: [
@@ -219,6 +234,7 @@ export const SOURCES = [
   "1998 Sonoma and Napa vintage reports.",
   "San Francisco Public Utilities Commission: Floodwater Grant Program; Adopt-a-Drain.",
   "San Francisco Public Utilities Commission: 100-Year Storm Flood Risk Map and FAQs.",
+  "NOAA, What are atmospheric rivers? (noaa.gov).",
 ];
 
 export const DISCLAIMER =

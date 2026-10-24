@@ -274,3 +274,168 @@ export function Stack({ layers }) {
     </figure>
   );
 }
+
+// ---------------------------------------------------------------- storms across the Pacific
+
+// A map of the Pacific basin, 110°E to 70°W and 60°N to 30°S, plate carrée.
+const LX = lon => ((lon - 110) * 1000) / 180;           // lon in degrees east (0–360)
+const LY = lat => ((60 - lat) * 520) / 90;
+const poly = pts => pts.map(([lo, la], i) => `${i ? "L" : "M"}${LX(lo).toFixed(1)},${LY(la).toFixed(1)}`).join(" ") + " Z";
+const NAM = [[204, 60], [212, 60], [218, 60], [222, 59], [226, 57], [229, 54], [232, 50], [235, 47], [236, 43], [236, 40], [237.5, 38], [239, 35], [241, 34],
+  [243, 32], [245, 29], [247, 26], [249, 23], [251, 21], [254, 19], [258, 17], [263, 15.5], [267, 13.5], [271, 11], [276, 8.5], [280, 4], [281, 0], [279.5, -3],
+  [279, -6], [282, -12], [285, -17], [289, -22], [290, -30], [290, 60]];
+const ASI = [[110, 60], [160, 60], [162, 56], [157, 51], [143, 47], [141, 41], [140, 35], [132, 33], [122, 30], [120, 24], [116, 22], [110, 20]];
+const AUS = [[113, -22], [122, -17], [130, -12], [136, -12], [142, -10.5], [146, -18], [153, -25], [153.5, -30], [113, -30]];
+const ISL = [[[110, 2], [118, 6], [119, 1], [117, -3], [110, -3]], [[131, -1], [141, -2.5], [150, -6], [147, -10], [138, -8], [132, -4]], [[120, 18], [124, 13], [126, 7], [122, 8], [120, 14]]];
+
+function PinIcon({ x, y, me }) {
+  return <circle cx={x} cy={y} r={me ? 5 : 4} fill={me ? C.barHi : "#3D4650"} stroke="#fff" strokeWidth="1.5" />;
+}
+function Num({ n, x, y }) {
+  return (
+    <g>
+      <circle cx={x} cy={y} r="13" fill={C.barHi} stroke="#fff" strokeWidth="2" />
+      <text x={x} y={y + 5} textAnchor="middle" className="en-num">{n}</text>
+    </g>
+  );
+}
+
+export function PacificStorms() {
+  const eq = LY(0);
+  // the atmospheric river: a narrow plume curving from the tropics near Hawaii
+  // to the Bay Area, sampled from a cubic and tapered toward landfall
+  const B = (t, a, b, c, d) => (1 - t) ** 3 * a + 3 * (1 - t) ** 2 * t * b + 3 * (1 - t) * t * t * c + t ** 3 * d;
+  const P0 = [191, 13], P1 = [198, 19], P2 = [218, 30], P3 = [237.6, 37.8];
+  const ctr = Array.from({ length: 21 }, (_, i) => { const t = i / 20; return [B(t, P0[0], P1[0], P2[0], P3[0]), B(t, P0[1], P1[1], P2[1], P3[1])]; });
+  const half = i => 3.6 - (i / 20) * 2.2;
+  const norm = i => { const a = ctr[Math.max(0, i - 1)], b = ctr[Math.min(20, i + 1)]; const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy); return [-dy / L, dx / L]; };
+  const arD = poly([...ctr.map((p, i) => [p[0] + norm(i)[0] * half(i), p[1] + norm(i)[1] * half(i)]),
+    ...ctr.map((p, i) => [p[0] - norm(i)[0] * half(i), p[1] - norm(i)[1] * half(i)]).reverse()]);
+  const arMid = ctr.map(([lo, la], i) => `${i ? "L" : "M"}${LX(lo).toFixed(1)},${LY(la).toFixed(1)}`).join(" ");
+  const jet = `M${LX(132)},${LY(34)} C${LX(165)},${LY(33)} ${LX(195)},${LY(31)} ${LX(215)},${LY(34)} S${LX(232)},${LY(38)} ${LX(239)},${LY(37.5)}`;
+  return (
+    <svg viewBox="0 0 1000 520" className="mc-svg en-basin" role="img"
+      aria-label="Map of the Pacific in an El Niño winter: unusually warm water along the equator in the central and eastern Pacific, thunderstorms over it, a stronger jet stream reaching California, and an atmospheric river, the Pineapple Express, carrying tropical moisture from near Hawaii to the Bay Area.">
+      <defs>
+        <linearGradient id="enOcean" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#7FA9C9" /><stop offset="0.6" stopColor="#9CC3DE" /><stop offset="1" stopColor="#86B2D2" />
+        </linearGradient>
+        <radialGradient id="enAnom" cx="0.55" cy="0.5" r="0.55">
+          <stop offset="0" stopColor="#D9481F" stopOpacity="0.95" />
+          <stop offset="0.55" stopColor="#EE8A45" stopOpacity="0.75" />
+          <stop offset="1" stopColor="#F6C27A" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id="enAR" gradientUnits="userSpaceOnUse" x1={LX(191)} y1={LY(13)} x2={LX(237.6)} y2={LY(37.8)}>
+          <stop offset="0" stopColor="#F4FAFE" stopOpacity="0.55" />
+          <stop offset="0.5" stopColor="#F4FAFE" stopOpacity="0.92" />
+          <stop offset="1" stopColor="#FFFFFF" stopOpacity="1" />
+        </linearGradient>
+        <filter id="enSoft"><feGaussianBlur stdDeviation="5" /></filter>
+        <filter id="enSoft2"><feGaussianBlur stdDeviation="2.5" /></filter>
+      </defs>
+      <rect width="1000" height="520" fill="url(#enOcean)" />
+      {/* latitude guides */}
+      {[30, -15, 45, 15].map(la => <line key={la} x1="0" x2="1000" y1={LY(la)} y2={LY(la)} stroke="#fff" strokeOpacity="0.18" />)}
+      <line x1="0" x2="1000" y1={eq} y2={eq} stroke="#fff" strokeWidth="1.4" strokeDasharray="6 6" strokeOpacity="0.7" />
+      <text className="en-mt" x={LX(158)} y={eq - 8} style={{ fill: "#fff" }}>Equator</text>
+
+      {/* 1 — the warm water */}
+      <ellipse cx={LX(225)} cy={eq + 4} rx="300" ry="46" fill="url(#enAnom)" filter="url(#enSoft)" />
+      <ellipse cx={LX(262)} cy={eq + 8} rx="70" ry="26" fill="#D9481F" opacity="0.55" filter="url(#enSoft)" />
+
+      {/* land */}
+      <path d={poly(NAM)} fill="url(#enLand)" stroke="#9D937F" strokeWidth="0.8" />
+      <path d={poly(ASI)} fill="url(#enLand)" stroke="#9D937F" strokeWidth="0.8" />
+      <path d={poly(AUS)} fill="url(#enLand)" stroke="#9D937F" strokeWidth="0.8" />
+      {ISL.map((p, i) => <path key={i} d={poly(p)} fill="url(#enLand)" stroke="#9D937F" strokeWidth="0.8" />)}
+      <path d={`M${LX(236.5)},${LY(41.5)} C${LX(238.5)},${LY(39.5)} ${LX(240.5)},${LY(37.5)} ${LX(242)},${LY(35.6)}`} stroke="#8E9C7C" strokeWidth="6" strokeLinecap="round" opacity="0.8" />
+
+      {/* 2 — thunderstorms over the warm water */}
+      {[[186, 2], [204, -1], [222, 3], [244, 0]].map(([lo, la], i) => (
+        <g key={i}>
+          <Cloud x={LX(lo)} y={LY(la) - 26} s={0.85} />
+          <path d={`M${LX(lo) + 6},${LY(la) - 4} l-6,10 h6 l-5,11`} fill="none" stroke="#F2C94C" strokeWidth="2.2" strokeLinejoin="round" />
+        </g>
+      ))}
+      <path d={`M${LX(215)},${LY(6)} C${LX(214)},${LY(14)} ${LX(214)},${LY(20)} ${LX(216)},${LY(27)}`} fill="none" stroke="#3D4650" strokeWidth="2" markerEnd="url(#enK)" opacity="0.55" strokeDasharray="5 4" />
+
+      {/* 3 — the jet stream */}
+      <path d={jet} fill="none" stroke="#fff" strokeWidth="12" opacity="0.45" strokeLinecap="round" />
+      <path d={jet} fill="none" stroke={C.barHi} strokeWidth="4" markerEnd="url(#enN)" strokeLinecap="round" />
+
+      {/* 4 — the atmospheric river and its storm */}
+      <path d={arD} fill="url(#enAR)" filter="url(#enSoft2)" />
+      <path d={arD} fill="none" stroke="#2F6FA8" strokeWidth="1.2" strokeOpacity="0.45" />
+      <path d={arMid} fill="none" stroke="#2F6FA8" strokeWidth="2" strokeDasharray="2 5" strokeLinecap="round" opacity="0.8" />
+      <g transform={`translate(${LX(222)},${LY(45)})`} opacity="0.95">
+        <path d="M-46,-6 C-30,-34 18,-38 40,-14 C52,0 40,18 20,20 C8,22 -2,14 -6,6 C-12,22 -28,30 -40,24" fill="#fff" opacity="0.92" filter="url(#enSoft2)" />
+        <text className="en-L" x="4" y="6" textAnchor="middle">L</text>
+      </g>
+      <text className="en-mt" x={LX(222) - 52} y={LY(45) - 20} textAnchor="end" style={HALO}>Storm</text>
+
+      {/* places */}
+      <PinIcon x={LX(202.2)} y={LY(20.8)} />
+      <text className="en-mt" x={LX(202.2) - 10} y={LY(20.8) + 18} textAnchor="end" style={HALO}>Hawaii</text>
+      <PinIcon x={LX(237.6)} y={LY(37.8)} me />
+      <text className="en-mt en-mt-b" x={LX(237.6) + 10} y={LY(37.8) + 4} style={HALO}>San Francisco</text>
+      <text className="en-mt" x={LX(242)} y={LY(35.6) + 18} style={HALO}>Sierra Nevada</text>
+      <text className="en-mt" x={LX(150)} y={LY(52)} style={HALO}>Asia</text>
+      <text className="en-mt" x={LX(132)} y={LY(-22)} style={HALO}>Australia</text>
+      <text className="en-mt" x={LX(256)} y={LY(48)} style={HALO}>North America</text>
+      <text className="en-mt" x={LX(283)} y={LY(-26)} textAnchor="end" style={HALO}>South America</text>
+      <text className="en-mt" x={LX(150)} y={LY(14)} style={{ fill: "#fff" }}>Pacific Ocean</text>
+
+      {/* callouts */}
+      <text className="en-ml" x={LX(230)} y={eq + 62} textAnchor="middle" style={{ fill: "#7A2A0E", ...HALO }}>Unusually warm water</text>
+      <text className="en-ml" x={LX(160)} y={LY(37) - 8} style={HALO}>Stronger jet stream</text>
+      <text className="en-ml" x={LX(222)} y={LY(19)} style={HALO}>Atmospheric river</text>
+      <text className="en-mt" x={LX(222)} y={LY(19) + 17} style={HALO}>the &ldquo;Pineapple Express&rdquo;</text>
+      <Num n={1} x={LX(268)} y={eq + 30} />
+      <Num n={2} x={LX(176)} y={LY(2) - 22} />
+      <Num n={3} x={LX(148)} y={LY(37) - 13} />
+      <Num n={4} x={LX(214)} y={LY(17)} />
+      <Num n={5} x={LX(244)} y={LY(42)} />
+    </svg>
+  );
+}
+
+// ---------------------------------------------------------------- the river reaches land
+
+export function RiverLands() {
+  return (
+    <svg viewBox="0 0 800 260" className="mc-svg en-land" role="img"
+      aria-label="Cross-section from the Pacific to the Sierra Nevada: the atmospheric river's moist air is lifted by the coast hills and the Sierra, cools and drops heavy rain on the Bay Area, and snow above the snow level in the Sierra.">
+      <defs>
+        <linearGradient id="enStormSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#8FA3B5" /><stop offset="1" stopColor="#C9D6E0" />
+        </linearGradient>
+      </defs>
+      <rect width="800" height="260" fill="url(#enStormSky)" />
+      <rect x="0" y="200" width="160" height="60" fill="url(#enSea)" />
+      {/* terrain: coast hills, the valley, the Sierra */}
+      <path d="M150,204 C170,196 190,170 214,160 C236,152 252,166 266,182 C280,196 300,204 330,206 L470,206 C520,200 560,170 600,128 C630,96 660,70 690,58 C712,52 730,64 750,92 C770,120 785,150 800,170 L800,260 L150,260 Z" fill="url(#enLand)" />
+      <path d="M612,116 C632,94 660,70 690,58 C712,52 730,64 748,88 L726,96 C712,80 700,78 688,82 C664,92 640,106 624,122 Z" fill="#fff" opacity="0.95" />
+      <line x1="560" x2="800" y1="120" y2="120" stroke="#fff" strokeWidth="1.2" strokeDasharray="5 4" />
+      <text className="en-mt" x="796" y="114" textAnchor="end" style={HALO}>snow level</text>
+      {/* the moist flow, lifted */}
+      {[0, 1, 2].map(i => (
+        <path key={i} d={`M0,${150 + i * 16} C120,${148 + i * 16} 180,${120 + i * 12} 230,${108 + i * 12} C330,${96 + i * 12} 480,${100 + i * 10} 560,${78 + i * 10} C620,${50 + i * 10} 660,${36 + i * 10} 700,${30 + i * 8}`}
+          fill="none" stroke="#2F6FA8" strokeWidth="2.4" markerEnd="url(#enB)" opacity={0.85 - i * 0.2} />
+      ))}
+      <Cloud x={220} y={66} s={1.15} />
+      <Cloud x={290} y={76} s={0.9} />
+      <Cloud x={630} y={34} s={1.1} />
+      <Cloud x={690} y={26} s={0.95} />
+      {[600, 630, 660, 690, 715].map(x => <text key={x} x={x} y={x > 640 ? 76 : 96} className="en-snow">✻</text>)}
+      <text className="en-mt en-mt-b" x="40" y="236" style={{ fill: "#fff" }}>Pacific</text>
+      <PinIcon x={214} y={160} me />
+      <text className="en-mt en-mt-b" x="214" y="186" textAnchor="middle" style={HALO}>Bay Area hills</text>
+      <text className="en-mt" x="400" y="226" textAnchor="middle" style={HALO}>Central Valley</text>
+      <text className="en-mt en-mt-b" x="690" y="170" textAnchor="middle" style={HALO}>Sierra Nevada · Lake Tahoe</text>
+      <text className="en-ml" x="12" y="190" style={HALO}>Warm, moist air</text>
+      <text className="en-mt" x="12" y="208" style={HALO}>from the tropics</text>
+      <text className="en-mt" x="340" y="70" style={HALO}>Lifted by the hills: heavy rain</text>
+      <text className="en-mt" x="664" y="190" textAnchor="middle" style={HALO}>Lifted again: rain below, snow above</text>
+    </svg>
+  );
+}

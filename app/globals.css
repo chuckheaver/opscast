@@ -6346,3 +6346,16 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .lp-portrait figcaption .lp-portrait-contact { display: block; width: fit-content; margin-top: 3px; font-size: 13px; color: rgba(255,255,255,0.68); text-decoration: none; }
 .lp-portrait figcaption .lp-portrait-contact:hover { color: var(--lp-accent-dk); text-decoration: underline; }
 @media (max-width: 720px) { .lp-portrait figcaption .lp-portrait-contact { font-size: 12px; } }
+.en-basin, .en-land { border-radius: 14px; min-width: 640px; }
+.en-mt { font-size: 14px; fill: #3D4650; }
+.en-mt-b { font-weight: 800; fill: var(--lp-ink); }
+.en-ml { font-size: 17px; font-weight: 800; fill: var(--lp-navy); }
+.en-num { font-size: 14px; font-weight: 800; fill: #fff; }
+.en-L { font-size: 22px; font-weight: 800; fill: #B3261E; }
+.en-snow { font-size: 16px; fill: #fff; }
+.en-steps5 { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.en-steps5 li { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 1px solid var(--lp-line); border-radius: 12px; padding: 10px 12px; }
+.en-steps5 .fs-n { flex: 0 0 auto; }
+.en-steps5 b { display: block; font-size: 14px; color: var(--lp-ink); }
+.en-steps5 p { margin: 3px 0 0; font-size: 12.5px; line-height: 1.45; color: var(--lp-body); }
+@media (max-width: 900px) { .en-steps5 { grid-template-columns: 1fr; } }
