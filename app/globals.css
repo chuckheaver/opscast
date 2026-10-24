@@ -6327,7 +6327,11 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 @media (min-width: 721px) {
   .lp-hv-b .lp-city { font-size: clamp(34px, 3.7vw, 54px); }
   .lp-hv-b .lp-claim { font-size: clamp(17px, 2vw, 28px); white-space: nowrap; }
-  .lp-hv-b .lp-hero-search-top { flex: 0 1 440px; min-width: 220px; }
+  /* The search takes three quarters of the space between the tagline and the
+     forecast chip; the last quarter is the gap before the chip. */
+  .lp-hv-b .lp-claim-row { flex: 1 1 auto; }
+  .lp-hv-b .lp-hero-search-top { flex: 3 1 0; min-width: 240px; width: auto; }
+  .lp-hv-b .lp-hero-gap { flex: 1 1 0; }
 }
 .lp-hero-search-top { width: min(440px, 100%); position: relative; z-index: 4; }
 .lp-hero-search-top .hero-search { margin: 0; max-width: none; }
@@ -6336,5 +6340,6 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
   .lp-hero .lp-city { font-size: clamp(32px, 9vw, 44px); }
   .lp-hero .lp-claim { font-size: 18px; white-space: nowrap; }
   .lp-hero .lp-claim-row { flex-wrap: wrap; }
+  .lp-hero-gap { display: none; }
   .lp-hero .lp-claim-row, .lp-hero-search-top { width: 100%; }
 }

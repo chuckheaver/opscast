@@ -112,6 +112,7 @@ export default function Landing() {
                 {/* Typing an address goes to the map with the pin already
                     dropped on it, via the ?lat=&lng=&name= deep-link. */}
                 <div className="lp-hero-search-top"><HeroSearch /></div>
+                <span className="lp-hero-gap" aria-hidden="true" />
               </div>
               <WeatherChip />
             </div>
