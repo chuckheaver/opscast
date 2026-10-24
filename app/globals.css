@@ -6316,24 +6316,25 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
   .en-band b { font-size: 11px; } .en-band span { display: none; }
 }
 
-/* Hero headline + search at the top (owner, Oct 24 2026) */
+/* Hero headline + search at the top (owner, Oct 24 2026): the headline runs
+   the full width, then the tagline and search share a row with the forecast
+   chip at the right; the portrait and map start below. */
 .lp-hero .lp-city { white-space: normal; text-wrap: balance; }
-.lp-hv-a .lp-city { font-size: clamp(30px, 3.9vw, 56px); white-space: nowrap; }
-.lp-hv-a .lp-city span { display: block; }
-.lp-hero-sub { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
-.lp-hero-search-top { margin-top: 18px; width: min(460px, 100%); position: relative; z-index: 4; }
+.lp-hero-sub { display: flex; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; width: 100%; }
+.lp-hv-b .lp-hero-grid { grid-template-areas: "copy copy" "portrait map"; }
+.lp-hv-b .lp-hero-copy { margin-bottom: clamp(16px, 2.4vw, 28px); }
+.lp-hero .lp-claim-row { flex-wrap: nowrap; max-width: 100%; }
+@media (min-width: 721px) {
+  .lp-hv-b .lp-city { font-size: clamp(34px, 3.7vw, 54px); }
+  .lp-hv-b .lp-claim { font-size: clamp(17px, 2vw, 28px); white-space: nowrap; }
+  .lp-hv-b .lp-hero-search-top { flex: 0 1 440px; min-width: 220px; }
+}
+.lp-hero-search-top { width: min(440px, 100%); position: relative; z-index: 4; }
 .lp-hero-search-top .hero-search { margin: 0; max-width: none; }
-.lp-hv-b .lp-hero-grid, .lp-hv-c .lp-hero-grid { grid-template-areas: "copy copy" "portrait map"; }
-.lp-hv-b .lp-hero-copy, .lp-hv-c .lp-hero-copy { margin-bottom: clamp(16px, 2.4vw, 28px); }
-.lp-hv-b .lp-hero-sub { flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
-.lp-hv-b .lp-hero-search-top { margin-top: 6px; }
-.lp-hv-c .lp-hero-copy { align-items: center; text-align: center; }
-.lp-hv-c .lp-hero-sub { align-items: center; }
-.lp-hv-c .lp-claim-row { justify-content: center; }
-.lp-hv-c .lp-hero-search-top { margin: 0 0 20px; width: min(600px, 100%); }
 @media (max-width: 720px) {
-  .lp-hv-b .lp-hero-grid, .lp-hv-c .lp-hero-grid { grid-template-areas: "copy" "map" "portrait"; }
+  .lp-hv-b .lp-hero-grid { grid-template-areas: "copy" "map" "portrait"; }
   .lp-hero .lp-city { font-size: clamp(32px, 9vw, 44px); }
-  .lp-hero .lp-claim-row { flex-wrap: wrap; width: auto; }
   .lp-hero .lp-claim { font-size: 18px; white-space: nowrap; }
+  .lp-hero .lp-claim-row { flex-wrap: wrap; }
+  .lp-hero .lp-claim-row, .lp-hero-search-top { width: 100%; }
 }

@@ -23,9 +23,6 @@ import FogZoneKey from "./FogZoneKey";
 
 import WeatherChip from "./WeatherChip";
 
-// Hero layout preview (a | b | c); set at build time while the owner chooses.
-const HERO_V = process.env.NEXT_PUBLIC_HERO_V || "a";
-
 const money = v => `$${(v / 1e6).toFixed(2)}M`;
 const pct = (a, b) => (a == null || !b ? null : `${a / b - 1 >= 0 ? "+" : ""}${Math.round((a / b - 1) * 100)}%`);
 const pts = (a, b) => (a == null || b == null ? null : `${a - b >= 0 ? "+" : ""}${Math.round(a - b)}`);
@@ -105,19 +102,18 @@ export default function Landing() {
 
       {/* Hero — the map is the subject. The city is the headline, the
           portrait is a byline, and there is no paragraph at all. */}
-      <section className={`lp-hero lp-hv-${HERO_V}`}>
+      <section className="lp-hero lp-hv-b">
         <div className="lp-hero-grid">
           <div className="lp-hero-copy">
-            {HERO_V === "c" && <div className="lp-hero-search-top"><HeroSearch /></div>}
-            <h1 className="lp-city">Find Your Home <span>in San Francisco</span></h1>
+            <h1 className="lp-city">What&rsquo;s your <span>San Francisco Microclimate?</span></h1>
             <div className="lp-hero-sub">
               <div className="lp-claim-row">
                 <p className="lp-claim">Real Estate · Microclimates · Fog</p>
-                <WeatherChip />
+                {/* Typing an address goes to the map with the pin already
+                    dropped on it, via the ?lat=&lng=&name= deep-link. */}
+                <div className="lp-hero-search-top"><HeroSearch /></div>
               </div>
-              {/* Typing an address goes to the map with the pin already
-                  dropped on it, via the ?lat=&lng=&name= deep-link. */}
-              {HERO_V !== "c" && <div className="lp-hero-search-top"><HeroSearch /></div>}
+              <WeatherChip />
             </div>
           </div>
           <figure className="lp-portrait">
