@@ -6271,3 +6271,47 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .kg-key b { color: var(--lp-ink); }
 .kg-key span { color: var(--lp-muted); }
 @media (max-width: 700px) { .kg-area { font-size: 9.5px; max-width: 80px; } .kg-area b { font-size: 13px; } .kg-city { font-size: 9.5px; } }
+
+/* ---- El Niño 2026–27 (/microclimates/el-nino) ---- */
+.en-states { grid-template-columns: 1fr; }
+.en-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.en-sub { margin: 0 0 6px !important; font-size: 12px !important; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--lp-muted) !important; }
+.fs-step.en-warm { border-top: 4px solid #E0703A; }
+.fs-step.en-cool { border-top: 4px solid #2F5E86; }
+.en-strength .en-scale { position: relative; height: 96px; margin: 8px 0 4px; }
+.en-band { position: absolute; top: 0; height: 46px; display: flex; flex-direction: column; justify-content: center; padding: 0 8px; border-right: 2px solid #fff; color: #131A25; }
+.en-band b { font-size: 13px; } .en-band span { font-size: 11.5px; color: #4A3A2A; }
+.en-mark { position: absolute; top: 40px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; text-align: center; }
+.en-mark i { display: block; width: 3px; height: 16px; background: var(--lp-navy); }
+.en-mark.rec i { background: #7A3B12; }
+.en-mark b { margin-top: 4px; font-size: 13px; color: var(--lp-ink); white-space: nowrap; }
+.en-mark span { font-size: 11px; color: var(--lp-muted); white-space: nowrap; }
+.en-hist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.en-hist-c { background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; padding: 14px 16px; }
+.en-hist-c.now { border-color: #E0703A; box-shadow: inset 0 4px 0 #E0703A; }
+.en-hist-h { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.en-hist-h b { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800; color: var(--lp-navy); }
+.en-hist-h span { font-size: 12px; font-weight: 700; color: #8A5F12; text-transform: uppercase; letter-spacing: .06em; }
+.en-hist-c ul, .en-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.en-hist-c li { position: relative; padding-left: 14px; font-size: 14px; line-height: 1.5; color: var(--lp-body); }
+.en-hist-c li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--lp-navy); }
+.en-body .en-lead { font-size: clamp(18px, 2.4vw, 22px) !important; }
+.en-h3 { margin-top: 22px; font-size: 18px; font-weight: 800; color: var(--lp-ink); }
+.en-stack-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column-reverse; gap: 4px; }
+.en-stack-list li { display: grid; grid-template-columns: 120px 1fr; gap: 14px; align-items: center; }
+.en-stack-list i { display: block; height: var(--h); background: var(--c); border-radius: 4px; }
+.en-stack-list b { display: block; font-size: 14.5px; color: var(--lp-ink); }
+.en-stack-list span { font-size: 13.5px; line-height: 1.45; color: var(--lp-body); }
+.en-checks { margin-top: 10px; }
+.en-checks li { position: relative; padding-left: 26px; font-size: 14.5px; line-height: 1.55; color: var(--lp-body); }
+.en-checks li::before { content: ""; position: absolute; left: 0; top: .25em; width: 15px; height: 15px; border: 2px solid var(--lp-navy); border-radius: 4px; }
+.en-plan { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 12px; }
+.en-plan-c { background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; padding: 14px 16px 16px; }
+.en-plan-c h3 { font-size: 16.5px; font-weight: 800; color: var(--lp-navy); }
+.en-sources ol { margin: 10px 0 0; padding-left: 22px; font-size: 12.5px; line-height: 1.55; color: var(--lp-muted); }
+@media (max-width: 900px) {
+  .en-pair { grid-template-columns: 1fr; }
+  .en-hist, .en-plan { grid-template-columns: 1fr; }
+  .en-stack-list li { grid-template-columns: 70px 1fr; }
+  .en-band b { font-size: 11px; } .en-band span { display: none; }
+}

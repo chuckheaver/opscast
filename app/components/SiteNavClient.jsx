@@ -16,6 +16,7 @@ const MICRO = [
   { href: "/microclimates#sf", label: "SF Micro", sub: "Four fog zones, your block, sun on the lot" },
   { href: "/microclimates#fog", label: "Fog Map", sub: "How fog forms and moves" },
   { href: "/microclimates/real-estate", label: "Prices by Microclimate", sub: "Fog zones and neighborhoods, interactive" },
+  { href: "/microclimates/el-nino", label: "El Niño 2026–27", sub: "How it works, past events, protecting your home" },
 ];
 
 const MARKET = [
