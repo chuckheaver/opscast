@@ -1,0 +1,101 @@
+{
+ "w": 474,
+ "h": 680,
+ "sf": [
+  56,
+  292
+ ],
+ "tahoe": [
+  186,
+  258
+ ],
+ "bins": [
+  "under 5%",
+  "5–10%",
+  "10–25%",
+  "25–50%",
+  "50–75%",
+  "75–125%",
+  "125–150%",
+  "150–175%",
+  "175–200%",
+  "200–250%",
+  "over 250%"
+ ],
+ "colors": [
+  "#5A3608",
+  "#7D5214",
+  "#A8741A",
+  "#C99A4E",
+  "#E8D0A0",
+  "#F4F2EE",
+  "#B5CCDD",
+  "#86A8C6",
+  "#5A80A6",
+  "#33587F",
+  "#1A3352"
+ ],
+ "maps": [
+  {
+   "name": "1957–58",
+   "src": "/data/el-nino/precip-1957.png",
+   "bay": 8
+  },
+  {
+   "name": "1963–64",
+   "src": "/data/el-nino/precip-1963.png",
+   "bay": 3
+  },
+  {
+   "name": "1965–66",
+   "src": "/data/el-nino/precip-1965.png",
+   "bay": 4
+  },
+  {
+   "name": "1972–73",
+   "src": "/data/el-nino/precip-1972.png",
+   "bay": 5
+  },
+  {
+   "name": "1982–83",
+   "src": "/data/el-nino/precip-1982.png",
+   "bay": 8
+  },
+  {
+   "name": "1986–87",
+   "src": "/data/el-nino/precip-1986.png",
+   "bay": 4
+  },
+  {
+   "name": "1991–92",
+   "src": "/data/el-nino/precip-1991.png",
+   "bay": 5
+  },
+  {
+   "name": "1997–98",
+   "src": "/data/el-nino/precip-1997.png",
+   "bay": 8
+  },
+  {
+   "name": "2002–03",
+   "src": "/data/el-nino/precip-2002.png",
+   "bay": 5
+  },
+  {
+   "name": "2009–10",
+   "src": "/data/el-nino/precip-2009.png",
+   "bay": 5
+  },
+  {
+   "name": "2015–16",
+   "src": "/data/el-nino/precip-2015.png",
+   "bay": 5
+  },
+  {
+   "name": "Composite",
+   "src": "/data/el-nino/precip-composite.png",
+   "bay": 5
+  }
+ ],
+ "source": "NOAA NCEI, Strong El Niño Precipitation Percent of Average, West Climate Region, December–May; nClimGrid Monthly; average 1991–2020"
+}

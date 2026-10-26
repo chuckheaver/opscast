@@ -5,7 +5,8 @@
 import Link from "next/link";
 import SiteFooter from "../../components/SiteFooter";
 import { BarRows } from "../charts";
-import { Defs, Pacific, Jet, KELVIN_SCENES, Strength, Stack, PacificStorms, RiverLands } from "./graphics";
+import { Defs, Pacific, Jet, KELVIN_SCENES, Strength, Stack, PacificStorms, RiverLands, HistoryMaps } from "./graphics";
+import HMAPS from "./history-maps.json";
 import {
   AS_OF, LEDE, TOPLINE, WORDS, STATES, STORMS, KELVIN, STACK, HISTORY, TAHOE, WINE, CHECKLIST, DEALS, SOURCES, DISCLAIMER,
 } from "./content";
@@ -132,6 +133,7 @@ export default function Page() {
             max={210} unit="%"
             caption="Water years run October to September [4]."
           />
+          <HistoryMaps data={HMAPS} />
           <div className="en-hist">
             {HISTORY.map(h => (
               <div key={h.yr} className={`en-hist-c${h.now ? " now" : ""}`}>

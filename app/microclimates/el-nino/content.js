@@ -33,18 +33,18 @@ export const WORDS = [
 export const STATES = [
   {
     key: "normal", h: "Neutral", when: "The usual Pacific",
-    p: "Trade winds pile warm water up near Asia, where it rises as storms. Off South America cold water wells up. The storm track over the North Pacific aims mostly at the Pacific Northwest.",
+    p: "Trade winds pile warm water up near Asia, where it rises as storms. Off South America cold water wells up. The Pacific jet stream reaches about halfway across the ocean, and the storm track aims mostly at the Pacific Northwest.",
     read: [["Trade winds", "steady"], ["Warm pool", "west"], ["Bay Area winter", "average"]],
   },
   {
     key: "nino", h: "El Niño", when: "Trade winds weaken",
-    p: "The trade winds weaken and the warm water slides east. Storms follow it to the central and eastern Pacific, and a stronger jet stream runs straight at California, often farther south.",
+    p: "The trade winds weaken and the warm water slides east, and storms follow it. The core of the Pacific jet stream shifts south and reaches farther east, steering storms into California and across the southern third of the country [19].",
     read: [["Trade winds", "weak"], ["Warm pool", "east"], ["Bay Area winter", "wetter odds"]],
     tone: "warm",
   },
   {
     key: "nina", h: "La Niña", when: "Trade winds strengthen",
-    p: "The opposite: stronger trade winds push the warm water farther west and more cold water wells up in the east. The storm track lifts north, and California winters lean dry, especially in the south.",
+    p: "The opposite: stronger trade winds push the warm water farther west. The Pacific jet retracts west and meanders north around high pressure, so storms favor the Pacific Northwest and the southern tier, California included, leans dry [19].",
     read: [["Trade winds", "strong"], ["Warm pool", "far west"], ["Bay Area winter", "drier odds"]],
     tone: "cool",
   },
@@ -235,6 +235,8 @@ export const SOURCES = [
   "San Francisco Public Utilities Commission: Floodwater Grant Program; Adopt-a-Drain.",
   "San Francisco Public Utilities Commission: 100-Year Storm Flood Risk Map and FAQs.",
   "NOAA, What are atmospheric rivers? (noaa.gov).",
+  "NOAA Climate.gov, How El Niño and La Niña affect the winter jet stream and U.S. climate; and ENSO in a nutshell.",
+  "NOAA National Centers for Environmental Information, Strong El Niño Precipitation Percent of Average, West Climate Region, December–May (nClimGrid Monthly, average 1991–2020).",
 ];
 
 export const DISCLAIMER =

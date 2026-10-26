@@ -114,37 +114,126 @@ export function Pacific({ state }) {
 
 // ---------------------------------------------------------------- the jet stream, map view
 
-const COAST = "M236,0 C240,18 244,32 248,46 C252,62 256,82 262,104 C266,120 272,138 280,156 C286,170 292,186 300,206 L306,230 L400,230 L400,0 Z";
-const JET = {
-  normal: "M0,74 C90,48 170,34 248,50 C300,60 350,64 400,62",
-  nino: "M0,128 C110,118 200,122 272,134 C322,142 360,140 400,134",
-  nina: "M0,116 C70,126 140,50 196,26 C236,10 262,26 282,60 C312,116 350,150 400,166",
+// The North Pacific and North America, 120°E to 60°W, 10°N to 70°N. Jet paths
+// follow NOAA Climate.gov's winter patterns: in El Niño the Pacific jet's core
+// shifts south and reaches farther east, steering storms across the southern
+// third of the continent; in La Niña it retracts west and meanders north.
+const JX = lon => ((lon - 120) * 400) / 180;
+const JY = lat => ((70 - lat) * 230) / 60;
+const jpoly = pts => pts.map(([lo, la], i) => `${i ? "L" : "M"}${JX(lo).toFixed(1)},${JY(la).toFixed(1)}`).join(" ") + " Z";
+// a smooth curve through the points (Catmull-Rom as cubic Béziers)
+const smooth = pts => {
+  const P = pts.map(([lo, la]) => [JX(lo), JY(la)]);
+  let d = `M${P[0][0].toFixed(1)},${P[0][1].toFixed(1)}`;
+  for (let i = 0; i < P.length - 1; i++) {
+    const p0 = P[Math.max(0, i - 1)], p1 = P[i], p2 = P[i + 1], p3 = P[Math.min(P.length - 1, i + 2)];
+    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6], c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+    d += ` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+  }
+  return d;
+};
+const NA2 = [[188, 70], [192, 66], [197, 62], [200, 58.5], [205, 57], [210, 59.5], [215, 60], [220, 59.5], [225, 57], [229, 54], [232, 50], [235, 47], [236, 43],
+  [236, 40], [237.6, 37.8], [239, 35], [241, 34], [243, 32], [245, 29], [247, 26], [249, 23], [251, 21], [254, 19], [258, 17], [263, 15.5], [267, 13.5], [271, 11],
+  [276, 10], [277, 13], [273, 16], [272, 21], [269, 19], [264, 19], [262, 22], [262.5, 26], [263, 28], [266, 29.5], [270, 30], [275, 30], [277, 29], [278, 27],
+  [279, 25], [280, 25.5], [280, 27.5], [279, 30], [279.5, 31], [281, 32], [283, 34.5], [284, 36], [286, 38.5], [288, 40.5], [290, 41.5], [293, 43], [295, 44.5],
+  [300, 46], [300, 70]];
+const AS2 = [[120, 70], [180, 70], [178, 65], [170, 60], [163, 58], [162, 54], [158, 51], [156, 51], [156, 57], [150, 59], [143, 54], [141, 48], [135, 43],
+  [130, 42], [129, 36], [126, 35], [122, 30], [121, 25], [120, 22]];
+const JP2 = [[130, 31], [135, 34], [140, 35.5], [142, 39], [141.5, 42], [145, 43.5], [141, 45.5], [139.5, 41], [136, 36.5], [131, 34]];
+const PAT = {
+  normal: {
+    core: [[130, 35], [150, 35], [170, 35.6], [190, 37]],
+    jet: [[190, 37], [210, 41], [228, 45], [238, 47], [252, 46], [270, 43], [285, 42], [298, 43]],
+    low: [190, 52],
+    storms: [[226, 46.5]],
+  },
+  nino: {
+    core: [[130, 33], [150, 32], [170, 31], [190, 30.5], [210, 31], [228, 32]],
+    jet: [[228, 32], [240, 32.5], [255, 32], [270, 32.5], [285, 35], [298, 38]],
+    polar: [[195, 60], [215, 62], [240, 58], [260, 54], [280, 52], [298, 50]],
+    low: [206, 47],
+    storms: [[222, 33], [238, 34], [256, 33.5]],
+    wet: [258, 33, 26, 5.5], dry: [244, 47.5, 9, 3.2],
+  },
+  nina: {
+    core: [[130, 37], [150, 38], [168, 40]],
+    jet: [[168, 40], [185, 48], [200, 56], [212, 59], [225, 56], [235, 50], [243, 46], [255, 43], [268, 41], [282, 40], [298, 42]],
+    high: [203, 46],
+    storms: [[233, 50.5]],
+    wet: [241, 47.5, 8, 3.4], dry: [258, 32.5, 24, 4.6],
+  },
 };
 export function Jet({ state }) {
+  const p = PAT[state];
   const label = {
-    normal: "Neutral: the jet stream and storm track aim mostly at the Pacific Northwest.",
-    nino: "El Niño: a stronger, straighter jet stream aims at California, often farther south.",
-    nina: "La Niña: high pressure off California bends the jet stream north toward the Pacific Northwest and Canada.",
+    normal: "Neutral winter: the Pacific jet stream reaches about halfway across the Pacific and the storm track aims mostly at the Pacific Northwest.",
+    nino: "El Niño winter: the core of the Pacific jet stream shifts south and reaches farther east, steering storms into California and across the southern United States; the polar jet stays over Canada.",
+    nina: "La Niña winter: the Pacific jet stream retracts west and meanders north around high pressure in the North Pacific, steering storms into the Pacific Northwest; the southern tier, California included, leans dry.",
   }[state];
-  const storms = { normal: [[176, 32], [236, 46]], nino: [[150, 114], [214, 118], [270, 128]], nina: [[196, 14]] }[state];
+  const ell = ([lo, la, rlo, rla], fill, text, tfill) => (
+    <g>
+      <ellipse cx={JX(lo)} cy={JY(la)} rx={(rlo * 400) / 180} ry={(rla * 230) / 60} fill={fill} opacity="0.55" filter="url(#enBlur)" />
+      <text className="fs-t-s en-wd" x={JX(lo)} y={JY(la) + 4} textAnchor="middle" style={{ fill: tfill }}>{text}</text>
+    </g>
+  );
   return (
     <svg viewBox="0 0 400 230" className="mc-svg fs-scene" role="img" aria-label={label}>
       <rect width="400" height="230" fill="url(#enSea)" />
-      <path d={COAST} fill="url(#enLand)" />
-      <path d={JET[state]} fill="none" stroke="#fff" strokeWidth="9" opacity="0.55" strokeLinecap="round" />
-      <path d={JET[state]} fill="none" stroke={C.barHi} strokeWidth="3.2" markerEnd="url(#enN)" strokeLinecap="round" />
-      {storms.map(([x, y], i) => <Cloud key={i} x={x} y={y - 14} s={0.62} />)}
-      {state === "nina" && <text className="fs-t-big" x="190" y="150" textAnchor="middle" fill={C.warmText}>H</text>}
-      {state === "nina" && <text className="fs-t-s" x="190" y="168" textAnchor="middle" style={HALO}>High pressure</text>}
-      {[["Seattle", 249, 48], ["San Francisco", 263, 108, true], ["Los Angeles", 283, 160]].map(([n, x, y, me]) => (
+      <path d={jpoly(AS2)} fill="url(#enLand)" />
+      <path d={jpoly(JP2)} fill="url(#enLand)" />
+      <path d={jpoly(NA2)} fill="url(#enLand)" />
+      {p.wet && ell(p.wet, "#5A80A6", "Wetter", "#0F2236")}
+      {p.dry && ell(p.dry, "#C99A4E", "Drier", "#4A3410")}
+      {p.polar && <path d={smooth(p.polar)} fill="none" stroke="#5F86AA" strokeWidth="2" strokeDasharray="6 4" markerEnd="url(#enN)" />}
+      {p.polar && <text className="fs-t-s" x={JX(238)} y={JY(60.5)} style={HALO}>Polar jet</text>}
+      <path d={smooth([...p.core, ...p.jet.slice(1)])} fill="none" stroke="#fff" strokeWidth="8" opacity="0.5" strokeLinecap="round" />
+      <path d={smooth(p.core)} fill="none" stroke={C.barHi} strokeWidth="6.5" strokeLinecap="round" />
+      <path d={smooth(p.jet)} fill="none" stroke={C.barHi} strokeWidth="2.6" markerEnd="url(#enN)" strokeLinecap="round" />
+      <text className="fs-t-s en-wd" x={JX(p.core[1][0])} y={JY(p.core[1][1]) - 9} style={HALO}>Pacific jet stream</text>
+      {p.storms.map(([lo, la], i) => <Cloud key={i} x={JX(lo)} y={JY(la) - 16} s={0.5} />)}
+      {p.low && <text className="fs-t-big" x={JX(p.low[0])} y={JY(p.low[1])} textAnchor="middle" fill="#B3261E">L</text>}
+      {p.high && <text className="fs-t-big" x={JX(p.high[0])} y={JY(p.high[1])} textAnchor="middle" fill={C.warmText}>H</text>}
+      {[["Seattle", 237.7, 47.6], ["San Francisco", 237.6, 37.8, true], ["Los Angeles", 241.8, 34.05]].map(([n, lo, la, me]) => (
         <g key={n}>
-          <circle cx={x} cy={y} r={me ? 4 : 3} fill={me ? C.barHi : "#3D4650"} stroke="#fff" strokeWidth="1.2" />
-          <text className={me ? "fs-t-l" : "fs-t-s"} x={x + 8} y={y + 4} style={HALO}>{n}</text>
+          <circle cx={JX(lo)} cy={JY(la)} r={me ? 3.6 : 2.6} fill={me ? C.barHi : "#3D4650"} stroke="#fff" strokeWidth="1.1" />
+          {me && <text className="fs-t-l en-sm" x={JX(lo) - 6} y={JY(la) + 4} textAnchor="end" style={HALO}>SF</text>}
         </g>
       ))}
-      <text className="fs-t-s" x="10" y="220" style={HALO}>Pacific Ocean</text>
-      <text className="fs-t-s" x="10" y={state === "normal" ? 66 : state === "nino" ? 120 : 108} style={HALO}>Jet stream</text>
+      <circle cx={JX(202.2)} cy={JY(20.8)} r="2.4" fill="#3D4650" stroke="#fff" strokeWidth="1" />
+      <text className="fs-t-s" x={JX(202.2) + 6} y={JY(20.8) + 4} style={HALO}>Hawaii</text>
+      <text className="fs-t-s" x="8" y="222" style={HALO}>Pacific Ocean</text>
     </svg>
+  );
+}
+
+// ---------------------------------------------------------------- past strong El Niños, rain and snow
+
+export function HistoryMaps({ data }) {
+  const pos = ([x, y]) => ({ left: `${(100 * x) / data.w}%`, top: `${(100 * y) / data.h}%` });
+  return (
+    <figure className="mc-fig en-hmaps">
+      <p className="mc-fig-h">Strong El Niño winters: rain and snow, December–May, percent of average</p>
+      <div className="en-hm-key" aria-label="Color key: percent of average precipitation">
+        {data.bins.map((b, i) => <span key={b} style={{ "--c": data.colors[i] }}><i />{b}</span>)}
+      </div>
+      <ol className="en-hm-grid">
+        {data.maps.map(m => (
+          <li key={m.name} className={m.name === "Composite" ? "comp" : undefined}>
+            <b>{m.name === "Composite" ? "All 11, averaged" : m.name}</b>
+            <div className="en-hm-map">
+              <img src={m.src} alt={`California and Nevada, December–May ${m.name}: percent of average precipitation. Bay Area ${data.bins[m.bay]}.`} width={data.w} height={data.h} loading="lazy" />
+              <i className="en-hm-sf" style={pos(data.sf)} />
+              <i className="en-hm-th" style={pos(data.tahoe)} />
+            </div>
+            <span className="en-hm-bay" style={{ "--c": data.colors[m.bay] }}><i />Bay Area {data.bins[m.bay]}</span>
+          </li>
+        ))}
+      </ol>
+      <figcaption className="mc-cap">
+        Redrawn from NOAA NCEI, Strong El Niño Precipitation Percent of Average, West Climate Region (data: nClimGrid Monthly; average 1991–2020); NOAA&rsquo;s color bins,
+        the site&rsquo;s colors [20]. Dots: San Francisco and Lake Tahoe. &ldquo;Bay Area&rdquo; is the bin on the Peninsula, read from the map.
+      </figcaption>
+    </figure>
   );
 }
 
