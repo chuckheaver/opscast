@@ -5,10 +5,10 @@
 import Link from "next/link";
 import SiteFooter from "../../components/SiteFooter";
 import { BarRows } from "../charts";
-import { Defs, Pacific, Jet, KELVIN_SCENES, Strength, Stack, PacificStorms, RiverLands, HistoryMaps } from "./graphics";
+import { Defs, Pacific, Jet, KELVIN_SCENES, Strength, Stack, PacificStorms, RiverLands, HistoryMaps, RUNOFF_SCENES, DrainScene } from "./graphics";
 import HMAPS from "./history-maps.json";
 import {
-  AS_OF, LEDE, TOPLINE, WORDS, STATES, STORMS, KELVIN, STACK, HISTORY, TAHOE, WINE, CHECKLIST, DEALS, SOURCES, DISCLAIMER,
+  AS_OF, LEDE, TOPLINE, WORDS, STATES, STORMS, RUNOFF, KELVIN, STACK, HISTORY, TAHOE, WINE, CHECKLIST, DEALS, SOURCES, DISCLAIMER,
 } from "./content";
 
 export const metadata = {
@@ -24,6 +24,7 @@ const TOC = [
   ["strength", "This year"],
   ["history", "Past events"],
   ["seas", "Higher seas"],
+  ["runoff", "Rain & runoff"],
   ["tahoe", "Lake Tahoe"],
   ["wine", "Wine country"],
   ["protect", "Protect your home"],
@@ -157,6 +158,26 @@ export default function Page() {
           <Stack layers={STACK.layers} />
           <h3 className="en-h3">Where it shows up</h3>
           <Bullets items={STACK.where} />
+        </section>
+
+        <section className="pt-sec" id="runoff">
+          <h2>Rain, Soil and Runoff: Slow Is Better</h2>
+          <p className="mc-lead mc-lead-here en-lead">{RUNOFF.lead}</p>
+          <ol className="fs-steps">
+            {RUNOFF.steps.map((k, i) => {
+              const S = RUNOFF_SCENES[i];
+              return <Card key={k.h} n={i + 1} h={k.h} when={k.when} p={k.p}><S /></Card>;
+            })}
+          </ol>
+          <p className="mc-cap">Schematic, not to scale [22][23][28].</p>
+          <h3 className="en-h3">{RUNOFF.city.h}</h3>
+          <figure className="mc-fig">
+            <div className="mc-scroll"><DrainScene /></div>
+            <figcaption className="mc-cap">Schematic of a shoreline street in a storm at high tide; not to scale and not any one street [21][25][26].</figcaption>
+          </figure>
+          <Bullets items={RUNOFF.city.facts} />
+          <h3 className="en-h3">What helps</h3>
+          <ul className="en-checks">{RUNOFF.help.map(t => <li key={t}>{t}</li>)}</ul>
         </section>
 
         <section className="pt-sec" id="tahoe">

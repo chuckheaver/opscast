@@ -549,3 +549,134 @@ export function RiverLands() {
     </svg>
   );
 }
+
+// ---------------------------------------------------------------- rain, soil and runoff
+
+const SOIL = "#8A6A4A", SOIL_D = "#6E5238", WET = "#4E6E8C";
+const GROUND = "M0,96 C80,108 170,128 250,148 C300,160 350,166 400,168";
+const below = d => `${d} L400,220 L0,220 Z`;
+function RainLines({ n, heavy, x0 = 0, x1 = 400, y1 = 92 }) {
+  return Array.from({ length: n }, (_, i) => {
+    const x = x0 + ((i * 97) % (x1 - x0)), y = 8 + ((i * 53) % 40);
+    return <line key={i} x1={x} y1={y} x2={x - (heavy ? 8 : 4)} y2={Math.min(y + (heavy ? 46 : 22), y1)} stroke={heavy ? "#2F5E86" : "#7FA3C2"} strokeWidth={heavy ? 2.2 : 1.3} strokeLinecap="round" />;
+  });
+}
+const surfY = x => 96 + (72 * x) / 400 + (x > 250 ? 0 : -6 * Math.sin((x / 250) * Math.PI));
+function Slope({ children, label, soil = SOIL }) {
+  return (
+    <svg viewBox="0 0 400 220" className="mc-svg fs-scene" role="img" aria-label={label}>
+      <rect width="400" height="220" fill="url(#enSky)" />
+      <path d={below(GROUND)} fill={soil} />
+      <path d={`${GROUND} L400,180 C340,178 290,172 250,162 C170,142 80,122 0,110 Z`} fill="#7E8F5A" opacity="0.9" />
+      {children}
+    </svg>
+  );
+}
+export function SoakScene() {
+  return (
+    <Slope label="Steady rain soaks into the soil: most of it sinks in and recharges the ground, and little runs off.">
+      <Cloud x={120} y={20} s={1.1} /><Cloud x={290} y={26} s={1} />
+      <RainLines n={22} />
+      {[40, 90, 140, 190, 240, 300, 350].map(x => <path key={x} d={`M${x},${surfY(x) + 12} V${surfY(x) + 40}`} stroke="#BFE0F5" strokeWidth="2.4" markerEnd="url(#enB)" />)}
+      <path d="M0,200 C120,196 260,198 400,204" stroke="#9CC3DE" strokeWidth="10" opacity="0.55" />
+      <text className="fs-t-s" x="12" y="214" style={{ fill: "#fff" }}>Soil and groundwater refill</text>
+      <path d="M330,168 L380,172" stroke="#2F6FA8" strokeWidth="1.6" markerEnd="url(#enB)" opacity="0.7" />
+      <text className="fs-t-s" x="392" y="160" textAnchor="end" style={HALO}>a little runoff</text>
+    </Slope>
+  );
+}
+export function BurstScene() {
+  return (
+    <Slope label="A heavy burst falls faster than the soil can take it: most of it runs off the surface into creeks and drains, which overflow.">
+      <Cloud x={110} y={18} s={1.3} /><Cloud x={230} y={14} s={1.4} /><Cloud x={340} y={20} s={1.2} />
+      <RainLines n={60} heavy />
+      {[30, 110, 190].map(x => <path key={x} d={`M${x},${surfY(x) - 4} C${x + 30},${surfY(x + 30) - 4} ${x + 50},${surfY(x + 50) - 4} ${x + 70},${surfY(x + 70) - 4}`} fill="none" stroke="#2F6FA8" strokeWidth="3.4" markerEnd="url(#enB)" />)}
+      {[60, 160].map(x => <path key={x} d={`M${x},${surfY(x) + 12} V${surfY(x) + 22}`} stroke="#BFE0F5" strokeWidth="2" markerEnd="url(#enB)" />)}
+      <rect x="318" y="164" width="40" height="7" fill="#3D4650" />
+      {[322, 330, 338, 346, 354].map(x => <line key={x} x1={x} x2={x} y1="164" y2="171" stroke="#9AA0A6" />)}
+      <path d="M300,166 C320,150 356,150 378,166" fill="#6E9DC0" opacity="0.85" />
+      <text className="fs-t-l" x="392" y="140" textAnchor="end" style={HALO}>Drain overloaded</text>
+      <text className="fs-t-s" x="12" y="214" style={{ fill: "#fff" }}>Little soaks in</text>
+    </Slope>
+  );
+}
+export function BurnScene() {
+  return (
+    <Slope soil={SOIL_D} label="On a burned slope, a water-repellent layer and bare ground send rain off the surface, carrying ash and soil downhill as a debris flow toward homes below.">
+      <path d={`${GROUND} L400,174 C340,172 290,166 250,156 C170,136 80,116 0,104 Z`} fill="#4A4A4A" />
+      {[50, 100, 160].map(x => (
+        <g key={x}><line x1={x} x2={x} y1={surfY(x)} y2={surfY(x) - 34} stroke="#2B2B2B" strokeWidth="3" />
+          <line x1={x} x2={x - 9} y1={surfY(x) - 22} y2={surfY(x) - 30} stroke="#2B2B2B" strokeWidth="2" /><line x1={x} x2={x + 8} y1={surfY(x) - 16} y2={surfY(x) - 25} stroke="#2B2B2B" strokeWidth="2" /></g>
+      ))}
+      <Cloud x={200} y={18} s={1.2} />
+      <RainLines n={34} heavy x0={120} x1={300} />
+      <path d={`M120,${surfY(120) - 3} C200,${surfY(200) - 6} 260,${surfY(260) - 8} 318,${surfY(318) - 9}`} fill="none" stroke="#7A5A3A" strokeWidth="9" strokeLinecap="round" opacity="0.9" />
+      <path d={`M120,${surfY(120) - 3} C200,${surfY(200) - 6} 260,${surfY(260) - 8} 318,${surfY(318) - 9}`} fill="none" stroke="#B8956A" strokeWidth="2" markerEnd="url(#enK)" strokeDasharray="5 4" />
+      <rect x="334" y="142" width="34" height="24" fill="#fff" stroke="#8D8573" /><path d="M330,142 L351,128 L372,142 Z" fill="#B78D6A" />
+      <text className="fs-t-l" x="200" y={surfY(200) + 26} textAnchor="middle" style={{ fill: "#fff" }}>Debris flow</text>
+      <text className="fs-t-s" x="12" y="214" style={{ fill: "#fff" }}>Water-repellent burned layer: rain runs off</text>
+    </Slope>
+  );
+}
+export function SlideScene() {
+  return (
+    <Slope soil={WET} label="After a wet season the hillside soil is nearly saturated; an intense storm on top of it can set off a shallow landslide.">
+      <Cloud x={200} y={18} s={1.2} />
+      <RainLines n={34} heavy x0={110} x1={300} />
+      <path d={`M150,${surfY(150) - 1} C175,${surfY(175) + 26} 230,${surfY(230) + 30} 262,${surfY(262) + 2}`} fill="none" stroke="#fff" strokeWidth="2" strokeDasharray="5 4" />
+      <path d={`M150,${surfY(150) - 1} C175,${surfY(175) + 26} 230,${surfY(230) + 30} 262,${surfY(262) + 2} L292,${surfY(292) - 6} C250,${surfY(240) - 14} 200,${surfY(200) - 10} 160,${surfY(160) + 6} Z`} fill="#7A6040" opacity="0.92" />
+      <path d={`M180,${surfY(180) + 4} L250,${surfY(250) + 4}`} stroke="#3D4650" strokeWidth="2" markerEnd="url(#enK)" />
+      <rect x="92" y={surfY(110) - 26} width="32" height="22" fill="#fff" stroke="#8D8573" /><path d={`M88,${surfY(110) - 26} L108,${surfY(110) - 40} L128,${surfY(110) - 26} Z`} fill="#B78D6A" />
+      <text className="fs-t-l" x="226" y={surfY(226) + 48} textAnchor="middle" style={{ fill: "#fff" }}>Shallow landslide</text>
+      <text className="fs-t-s" x="12" y="214" style={{ fill: "#fff" }}>Soil near saturation after about 10 inches of season rain</text>
+    </Slope>
+  );
+}
+export const RUNOFF_SCENES = [SoakScene, BurstScene, BurnScene, SlideScene];
+
+// The shoreline street at a high tide: the drain can't empty, Bay water pushes
+// back up the pipe, water rises through drains and manholes, and runs down
+// into the station below.
+export function DrainScene() {
+  return (
+    <svg viewBox="0 0 800 300" className="mc-svg en-land" role="img"
+      aria-label="Cross-section of a San Francisco shoreline street in a storm at high tide: rain fills the combined sewer, the Bay covers the outfall so the pipe can't drain, Bay water pushes back into the pipe, water rises out of drains and manholes onto the street and runs down the entrance into the subway station below.">
+      <rect width="800" height="300" fill="url(#enStormSky)" />
+      <Cloud x={160} y={22} s={1.2} /><Cloud x={300} y={18} s={1.3} /><Cloud x={450} y={24} s={1.1} />
+      <RainLines n={70} heavy x0={60} x1={560} y1={104} />
+      {/* buildings */}
+      <rect x="20" y="40" width="70" height="66" fill="#C9C1B2" /><rect x="96" y="58" width="52" height="48" fill="#D7D0C2" />
+      {/* street and ground */}
+      <rect x="0" y="106" width="610" height="10" fill="#5C6168" />
+      <rect x="0" y="116" width="610" height="184" fill="#B5AB99" />
+      {/* seawall and the Bay at high tide */}
+      <rect x="604" y="96" width="14" height="204" fill="#8D8573" />
+      <rect x="618" y="128" width="182" height="172" fill="url(#enSea)" />
+      <path d="M618,128 C660,120 700,134 740,124 C770,118 790,126 800,122 L800,300 L618,300 Z" fill="#6E9DC0" opacity="0.6" />
+      <line x1="618" x2="800" y1="170" y2="170" stroke="#fff" strokeDasharray="6 4" strokeWidth="1.2" />
+      <text className="fs-t-s" x="794" y="164" textAnchor="end" style={{ fill: "#fff" }}>normal high tide</text>
+      <text className="fs-t-l" x="794" y="146" textAnchor="end" style={HALO}>King Tide + El Niño + surge</text>
+      {/* the combined sewer and its outfall */}
+      <path d="M40,214 H620" stroke="#4F5A64" strokeWidth="26" />
+      <path d="M40,214 H620" stroke="#6E9DC0" strokeWidth="20" />
+      <text className="fs-t-s" x="60" y="248" style={{ fill: "#131A25" }}>Combined sewer: rain and sewage share one pipe</text>
+      <path d="M520,214 H460" stroke="#2F6FA8" strokeWidth="3" markerEnd="url(#enB)" />
+      <path d="M600,214 H540" stroke="#2F6FA8" strokeWidth="3" markerEnd="url(#enB)" />
+      <text className="fs-t-s" x="560" y="200" textAnchor="middle" style={HALO}>Bay water pushes back</text>
+      <text className="fs-t-s" x="700" y="236" textAnchor="middle" style={{ fill: "#fff" }}>outfall under water</text>
+      {/* drain inlet and manhole overflowing */}
+      <rect x="196" y="106" width="16" height="108" fill="#4F5A64" opacity="0.6" />
+      <path d="M180,104 C190,84 218,84 228,104" fill="#6E9DC0" />
+      <path d="M204,140 V92" stroke="#2F6FA8" strokeWidth="2.6" markerEnd="url(#enB)" />
+      <text className="fs-t-l" x="204" y="76" textAnchor="middle" style={HALO}>Water rises out of drains</text>
+      {/* subway station below the street */}
+      <rect x="300" y="132" width="230" height="60" rx="4" fill="#E9E4DA" stroke="#8D8573" />
+      <rect x="312" y="176" width="206" height="10" fill="#9AA0A6" />
+      <path d="M300,106 L300,116 L330,116 L360,150 L372,150" fill="none" stroke="#8D8573" strokeWidth="3" />
+      <path d="M302,108 C320,118 340,132 362,146" fill="none" stroke="#2F6FA8" strokeWidth="3" markerEnd="url(#enB)" />
+      <path d="M330,186 H500" stroke="#6E9DC0" strokeWidth="6" opacity="0.8" />
+      <text className="fs-t-l" x="415" y="160" textAnchor="middle" style={{ fill: "#131A25" }}>Subway station</text>
+      <text className="fs-t-s" x="470" y="124" textAnchor="middle" style={HALO}>runs down entrances; pumps fall behind</text>
+    </svg>
+  );
+}

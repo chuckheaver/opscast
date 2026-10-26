@@ -84,6 +84,39 @@ export const STORMS = {
   ],
 };
 
+export const RUNOFF = {
+  lead: "The best El Niño winter is a long run of soaking rains with breaks between them. Steady rain sinks in and refills the ground; the same water in a few hours runs off, overloads drains and loosens hillsides.",
+  steps: [
+    { h: "Steady, soaking rain", when: "What the ground wants",
+      p: "Rain that falls no faster than the soil can take it soaks in. It refills the soil and groundwater, and little runs off. Dry spells between storms let the ground drain and take more." },
+    { h: "A heavy burst", when: "Faster than the soil can drink",
+      p: "When rain arrives faster than the ground can absorb it, the extra runs off the surface. Intense rain makes runoff start sooner and run larger, even on dry ground, and creeks and storm drains fill fast [28]." },
+    { h: "Burned ground", when: "The first winters after a fire",
+      p: "Fire can leave soil water-repellent and strip the plants that slow water down, so rain runs off and gathers ash and soil into debris flows. Burned slopes fail in far less rain than unburned ones [23]." },
+    { h: "A saturated hillside", when: "Late in a wet season",
+      p: "Bay Area hillsides need about 10 inches of season rain to come close to saturation. After that, an intense storm can set off shallow landslides; the January 1982 storm set off 18,000 debris flows in the Bay region and killed 25 people [22]." },
+  ],
+  city: {
+    h: "In the city: drains, tides and the subway",
+    facts: [
+      "San Francisco's sewer is combined: rain and sewage share one system. It is built to collect and treat everything in a three-hour storm of about 1.3 inches [21].",
+      "In heavier rain it can fill, clog at the drains or reach capacity, and combined water can come up through storm drains and manholes, mostly in low-lying areas [21].",
+      "On a high tide the shoreline outfalls sit under water, so street water can't drain and the Bay can push back up the pipes; rain on a King Tide is the worst timing [25].",
+      "Jan 2017: a King Tide and a storm backed up drains on the Embarcadero and closed a lane of the roadway [25].",
+      "Dec 31, 2022: about 5.5 inches fell downtown, the second-wettest day in more than 170 years; Marina Boulevard and Highway 101 flooded and closed [24].",
+      "Muni Metro has shut down for hours when surface water overwhelmed the tunnel pumps at Church Street Station; Van Ness Station has also closed for flooding [27].",
+      "The Port of San Francisco says a 100-year flood would send Bay water over the seawall and into the BART and Muni tunnels [26].",
+    ],
+  },
+  help: [
+    "Keep gutters, downspouts and the street drain clear, and carry roof water away from foundations and slopes.",
+    "Don't send downspouts or irrigation onto a hillside; turn sprinklers off for the wet season.",
+    "Cover bare or burned soil before the rain: straw, mulch or wattles.",
+    "Garages and rooms below the street: a backwater valve, sandbags at the entry and a sump with battery backup.",
+    "Watch the tide table with the forecast: rain on a King Tide is when shoreline streets flood.",
+  ],
+};
+
 export const STACK = {
   lead: "None of these floods a street on its own. It is the stack, on the same day, that reaches shoreline streets, beaches and bluffs.",
   layers: [
@@ -237,6 +270,14 @@ export const SOURCES = [
   "NOAA, What are atmospheric rivers? (noaa.gov).",
   "NOAA Climate.gov, How El Niño and La Niña affect the winter jet stream and U.S. climate; and ENSO in a nutshell.",
   "NOAA National Centers for Environmental Information, Strong El Niño Precipitation Percent of Average, West Climate Region, December–May (nClimGrid Monthly, average 1991–2020).",
+  "San Francisco Public Utilities Commission, Our Sewer System and Storms; SFPUC testimony, San Francisco Bay Regional Water Board hearing, 2019 (the three-hour, 1.3-inch storm).",
+  "U.S. Geological Survey, Rainfall and Landslides in Northern California.",
+  "Rengers et al., U.S. Geological Survey, post-wildfire debris flows and landslides, San Gabriel Mountains (Geological Society of America, 2020); USGS rainfall thresholds for post-fire debris flows.",
+  "NASA Earth Observatory, Jan 2023; CBS News Bay Area, Dec 31, 2022.",
+  "KGO-TV, Jan 2017: King Tides cause flooding along the Embarcadero; NC State Extension, tidal backflow in storm drains.",
+  "Port of San Francisco: Embarcadero Seawall program; Designing for Resilience, 2017.",
+  "CBS News Bay Area: flooding at Church Street and Van Ness Muni Metro stations.",
+  "Hydrology references on infiltration and runoff (ASDSO Dam Safety Toolbox, Rainfall Losses) and a 2024 study of rainfall intensity and runoff.",
 ];
 
 export const DISCLAIMER =
