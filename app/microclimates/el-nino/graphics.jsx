@@ -252,7 +252,7 @@ export function HistoryMaps({ data }) {
       </section>
       <figcaption className="mc-cap">
         Redrawn from NOAA NCEI, Strong El Niño Precipitation Percent of Average, West Climate Region (data: nClimGrid Monthly; average 1991–2020); NOAA&rsquo;s color bins,
-        the site&rsquo;s colors [20]. Dots: San Francisco and Lake Tahoe. &ldquo;Bay Area&rdquo; is the bin on the Peninsula, read from the map; winters are grouped by it.
+        the site&rsquo;s colors. Dots: San Francisco and Lake Tahoe. &ldquo;Bay Area&rdquo; is the bin on the Peninsula, read from the map; winters are grouped by it.
       </figcaption>
     </figure>
   );
@@ -356,12 +356,12 @@ export function Strength() {
             <b>{b.k}</b><span>+{b.a.toFixed(1)}{b.b < 3 ? `–${b.b.toFixed(1)}` : "+"}</span>
           </div>
         ))}
-        <div className="en-mark now" style={{ left: pct(2.1) }}><i /><b>Now +2.1°C</b><span>Oct 2026 [1]</span></div>
-        <div className="en-mark rec" style={{ left: pct(2.5) }}><i /><b>+2.5°C</b><span>record level [1]</span></div>
+        <div className="en-mark now" style={{ left: pct(2.1) }}><i /><b>Now +2.1°C</b><span>Oct 2026</span></div>
+        <div className="en-mark rec" style={{ left: pct(2.5) }}><i /><b>+2.5°C</b><span>record level</span></div>
       </div>
       <figcaption className="mc-cap">
         Very strong events since 1950: 1982–83, 1997–98 and 2015–16. In September NOAA gave a 75% chance this event reaches +2.5°C or more for October–December, beyond any
-        since 1950 [1]. NOAA has measured the index against the whole tropics (RONI) since February 2026 [2].
+        since 1950. NOAA has measured the index against the whole tropics (RONI) since February 2026.
       </figcaption>
     </figure>
   );

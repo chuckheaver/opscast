@@ -1,7 +1,8 @@
 // Words for /microclimates/el-nino. Informational only: nothing in the market
-// stats, reports or other pages reads this file. Every figure carries its
-// source in SOURCES (numbered, printed in the footnotes); the "as of" status is
-// NOAA's monthly ENSO discussion and is updated after each one.
+// stats, reports or other pages reads this file. Figures are from NOAA, USGS,
+// SFPUC, the Port of San Francisco and news reports (not printed on the page, by
+// the owner's choice, Oct 26 2026); the "as of" status is NOAA's monthly ENSO
+// discussion and is updated after each one.
 
 export const AS_OF = {
   date: "October 8, 2026",
@@ -16,10 +17,10 @@ export const LEDE =
   "homeowners can do before the storms.";
 
 export const TOPLINE = [
-  { v: "+2.1°C", k: "Niño-3.4 sea surface temperature above normal", s: "NOAA, Oct 8, 2026 [1]" },
-  { v: ">83%", k: "Chance of a strong to very strong El Niño through Jan–Mar 2027", s: "NOAA, Oct 8, 2026 [1]" },
-  { v: "6–12 in", k: "Bay Area sea level above normal expected this fall and winter", s: "Forecasters, Sep–Oct 2026 [6][7]" },
-  { v: "Not a promise", k: "2015–16 was very strong and San Francisco got a normal year of rain", s: "[4]" },
+  { v: "+2.1°C", k: "Niño-3.4 sea surface temperature above normal", s: "NOAA, Oct 8, 2026" },
+  { v: ">83%", k: "Chance of a strong to very strong El Niño through Jan–Mar 2027", s: "NOAA, Oct 8, 2026" },
+  { v: "6–12 in", k: "Bay Area sea level above normal expected this fall and winter", s: "Forecasters, Sep–Oct 2026" },
+  { v: "Not a promise", k: "2015–16 was very strong and San Francisco got a normal year of rain", s: "Downtown San Francisco" },
 ];
 
 export const WORDS = [
@@ -38,13 +39,13 @@ export const STATES = [
   },
   {
     key: "nino", h: "El Niño", when: "Trade winds weaken",
-    p: "The trade winds weaken and the warm water slides east, and storms follow it. The core of the Pacific jet stream shifts south and reaches farther east, steering storms into California and across the southern third of the country [19].",
+    p: "The trade winds weaken and the warm water slides east, and storms follow it. The core of the Pacific jet stream shifts south and reaches farther east, steering storms into California and across the southern third of the country.",
     read: [["Trade winds", "weak"], ["Warm pool", "east"], ["Bay Area winter", "wetter odds"]],
     tone: "warm",
   },
   {
     key: "nina", h: "La Niña", when: "Trade winds strengthen",
-    p: "The opposite: stronger trade winds push the warm water farther west. The jet stream retracts west and a variable polar jet meanders north around high pressure, so storms favor the Pacific Northwest and the southern tier, California included, leans dry [19].",
+    p: "The opposite: stronger trade winds push the warm water farther west. The jet stream retracts west and a variable polar jet meanders north around high pressure, so storms favor the Pacific Northwest and the southern tier, California included, leans dry.",
     read: [["Trade winds", "strong"], ["Warm pool", "far west"], ["Bay Area winter", "drier odds"]],
     tone: "cool",
   },
@@ -78,8 +79,8 @@ export const STORMS = {
     { h: "Landfall", p: "Storms along the jet steer the river ashore. Hills and mountains lift the moist air, and it falls as heavy rain, and as snow high in the Sierra." },
   ],
   facts: [
-    "Atmospheric rivers bring 30 to 50% of the West Coast's yearly rain and snow, often in a few big storms [18].",
-    "A strong one carries up to 15 times the water of the Mississippi River at its mouth, as vapor [18].",
+    "Atmospheric rivers bring 30 to 50% of the West Coast's yearly rain and snow, often in a few big storms.",
+    "A strong one carries up to 15 times the water of the Mississippi River at its mouth, as vapor.",
     "They come every winter. In El Niño the extended jet stream tends to aim more of them at California, and farther south than usual.",
   ],
 };
@@ -90,22 +91,22 @@ export const RUNOFF = {
     { h: "Steady, soaking rain", when: "What the ground wants",
       p: "Rain that falls no faster than the soil can take it soaks in. It refills the soil and groundwater, and little runs off. Dry spells between storms let the ground drain and take more." },
     { h: "A heavy burst", when: "Faster than the soil can drink",
-      p: "When rain arrives faster than the ground can absorb it, the extra runs off the surface. Intense rain makes runoff start sooner and run larger, even on dry ground, and creeks and storm drains fill fast [28]." },
+      p: "When rain arrives faster than the ground can absorb it, the extra runs off the surface. Intense rain makes runoff start sooner and run larger, even on dry ground, and creeks and storm drains fill fast." },
     { h: "Burned ground", when: "The first winters after a fire",
-      p: "Fire can leave soil water-repellent and strip the plants that slow water down, so rain runs off and gathers ash and soil into debris flows. Burned slopes fail in far less rain than unburned ones [23]." },
+      p: "Fire can leave soil water-repellent and strip the plants that slow water down, so rain runs off and gathers ash and soil into debris flows. Burned slopes fail in far less rain than unburned ones." },
     { h: "A saturated hillside", when: "Late in a wet season",
-      p: "Bay Area hillsides need about 10 inches of season rain to come close to saturation. After that, an intense storm can set off shallow landslides; the January 1982 storm set off 18,000 debris flows in the Bay region and killed 25 people [22]." },
+      p: "Bay Area hillsides need about 10 inches of season rain to come close to saturation. After that, an intense storm can set off shallow landslides; the January 1982 storm set off 18,000 debris flows in the Bay region and killed 25 people." },
   ],
   city: {
     h: "In the city: drains, tides and the subway",
     facts: [
-      "San Francisco's sewer is combined: rain and sewage share one system. It is built to collect and treat everything in a three-hour storm of about 1.3 inches [21].",
-      "In heavier rain it can fill, clog at the drains or reach capacity, and combined water can come up through storm drains and manholes, mostly in low-lying areas [21].",
-      "On a high tide the shoreline outfalls sit under water, so street water can't drain and the Bay can push back up the pipes; rain on a King Tide is the worst timing [25].",
-      "Jan 2017: a King Tide and a storm backed up drains on the Embarcadero and closed a lane of the roadway [25].",
-      "Dec 31, 2022: about 5.5 inches fell downtown, the second-wettest day in more than 170 years; Marina Boulevard and Highway 101 flooded and closed [24].",
-      "Muni Metro has shut down for hours when surface water overwhelmed the tunnel pumps at Church Street Station; Van Ness Station has also closed for flooding [27].",
-      "The Port of San Francisco says a 100-year flood would send Bay water over the seawall and into the BART and Muni tunnels [26].",
+      "San Francisco's sewer is combined: rain and sewage share one system. It is built to collect and treat everything in a three-hour storm of about 1.3 inches.",
+      "In heavier rain it can fill, clog at the drains or reach capacity, and combined water can come up through storm drains and manholes, mostly in low-lying areas.",
+      "On a high tide the shoreline outfalls sit under water, so street water can't drain and the Bay can push back up the pipes; rain on a King Tide is the worst timing.",
+      "Jan 2017: a King Tide and a storm backed up drains on the Embarcadero and closed a lane of the roadway.",
+      "Dec 31, 2022: about 5.5 inches fell downtown, the second-wettest day in more than 170 years; Marina Boulevard and Highway 101 flooded and closed.",
+      "Muni Metro has shut down for hours when surface water overwhelmed the tunnel pumps at Church Street Station; Van Ness Station has also closed for flooding.",
+      "The Port of San Francisco says a 100-year flood would send Bay water over the seawall and into the BART and Muni tunnels.",
     ],
   },
   help: [
@@ -122,8 +123,8 @@ export const STACK = {
   layers: [
     { k: "Normal high tide", p: "Twice a day." },
     { k: "King Tide", p: "The year's highest tides, near the new and full moon in December and January." },
-    { k: "El Niño", p: "6 to 12 inches added for months, from the Kelvin waves and warm water [6][7]. In 1982–83 and 1997–98, 6 to 10 inches from fall to late spring [9]." },
-    { k: "Storm surge", p: "Low pressure and wind. On Feb 3, 1998 the tide at Fort Point ran about 2 feet above prediction [10]." },
+    { k: "El Niño", p: "6 to 12 inches added for months, from the Kelvin waves and warm water. In 1982–83 and 1997–98, 6 to 10 inches from fall to late spring." },
+    { k: "Storm surge", p: "Low pressure and wind. On Feb 3, 1998 the tide at Fort Point ran about 2 feet above prediction." },
     { k: "Waves and runoff", p: "Big surf on the open coast; rain that can't drain on a high tide." },
   ],
   where: [
@@ -138,33 +139,33 @@ export const HISTORY = [
   {
     yr: "1982–83", tag: "Very strong",
     facts: [
-      "San Francisco rain: 167% of normal for the water year [4].",
-      "Central Sierra Snow Lab: 671 inches of snow, third most since records began in 1946 [11].",
+      "San Francisco rain: 167% of normal for the water year.",
+      "Central Sierra Snow Lab: 671 inches of snow, third most since records began in 1946.",
     ],
   },
   {
     yr: "1997–98", tag: "Very strong",
     facts: [
-      "San Francisco rain: 47.22 inches, the second-wettest season since 1849 [5].",
-      "Tide at Fort Point on Feb 3, 1998: about 2 feet above prediction [10].",
-      "Landslides across the 10-county Bay region: over $150 million in damage [12].",
-      "Rio Nido, Sonoma County: a slide forced 140 homes to evacuate on Feb 6–7 [12].",
-      "Pacifica: homes on Esplanade Drive declared uninhabitable as the bluffs eroded [13].",
+      "San Francisco rain: 47.22 inches, the second-wettest season since 1849.",
+      "Tide at Fort Point on Feb 3, 1998: about 2 feet above prediction.",
+      "Landslides across the 10-county Bay region: over $150 million in damage.",
+      "Rio Nido, Sonoma County: a slide forced 140 homes to evacuate on Feb 6–7.",
+      "Pacifica: homes on Esplanade Drive declared uninhabitable as the bluffs eroded.",
     ],
   },
   {
     yr: "2015–16", tag: "Very strong",
     facts: [
-      "San Francisco rain: 101% of normal, an average year; Los Angeles got 48% [4].",
-      "Pacifica: two apartment buildings on Esplanade, emptied in 2010 for bluff erosion, were demolished in Feb–Mar 2016 [13].",
+      "San Francisco rain: 101% of normal, an average year; Los Angeles got 48%.",
+      "Pacifica: two apartment buildings on Esplanade, emptied in 2010 for bluff erosion, were demolished in Feb–Mar 2016.",
     ],
   },
   {
     yr: "2026–27", tag: "Under way",
     facts: [
-      "A Kelvin wave raised Southern California sea level about 6 to 8 inches above normal in early October [8].",
-      "Bay Area sea level is expected to run 6 to 12 inches high into spring 2027 [6][7].",
-      "More waves are expected from October through February [7].",
+      "A Kelvin wave raised Southern California sea level about 6 to 8 inches above normal in early October.",
+      "Bay Area sea level is expected to run 6 to 12 inches high into spring 2027.",
+      "More waves are expected from October through February.",
     ],
     now: true,
   },
@@ -172,9 +173,9 @@ export const HISTORY = [
 
 export const TAHOE = {
   facts: [
-    "Under the strongest El Niños, the Reno–Tahoe region has averaged about 20% more winter precipitation than normal; weaker events have run drier [14].",
-    "Whether it falls as snow or rain depends on elevation. Warm, wet storms can bring rain onto the snowpack [14].",
-    "1982–83 brought 671 inches to the Central Sierra Snow Lab near Donner Summit [11].",
+    "Under the strongest El Niños, the Reno–Tahoe region has averaged about 20% more winter precipitation than normal; weaker events have run drier.",
+    "Whether it falls as snow or rain depends on elevation. Warm, wet storms can bring rain onto the snowpack.",
+    "1982–83 brought 671 inches to the Central Sierra Snow Lab near Donner Summit.",
   ],
   todo: [
     "Know your roof's design snow load (the county building department has it) and have a contractor clear heavy, wet snow before it builds up.",
@@ -189,8 +190,8 @@ export const TAHOE = {
 export const WINE = {
   facts: [
     "Winter rain mostly falls while the vines are dormant; the risks are to land, roads and houses more than to the vines.",
-    "1997–98: about 60 inches of rain in Napa from November to February, with widespread mildew and botrytis and a much smaller crop [15].",
-    "1997–98: the Rio Nido slide on the Russian River forced 140 homes to evacuate [12].",
+    "1997–98: about 60 inches of rain in Napa from November to February, with widespread mildew and botrytis and a much smaller crop.",
+    "1997–98: the Rio Nido slide on the Russian River forced 140 homes to evacuate.",
     "Wet years refill reservoirs and groundwater.",
   ],
   todo: [
@@ -209,7 +210,7 @@ export const CHECKLIST = [
     items: [
       "Flood insurance: a new federal (NFIP) policy usually takes 30 days to start. Homeowners policies don't cover flood; earthquake and landslide are separate too.",
       "Photograph rooms, belongings and the outside of the house for any claim.",
-      "Backwater valve: stops sewage backing up into the house in heavy rain. SFPUC's Floodwater Grant reimburses up to $100,000 for flood protection [16].",
+      "Backwater valve: stops sewage backing up into the house in heavy rain. SFPUC's Floodwater Grant reimburses up to $100,000 for flood protection.",
       "Have the roof, flashing and skylights inspected; trim trees over the house and power lines.",
     ],
   },
@@ -217,7 +218,7 @@ export const CHECKLIST = [
     h: "Before the first big storm",
     items: [
       "Clean gutters and downspouts; carry water at least a few feet from the foundation.",
-      "Clear the storm drain in front of the house (the city's Adopt-a-Drain program) [16].",
+      "Clear the storm drain in front of the house (the city's Adopt-a-Drain program).",
       "Test the sump pump, and add a battery backup.",
       "Check retaining walls and hillside drainage; on a slope, ask a geotechnical engineer.",
       "Sandbags for doorways and garage entries on low ground.",
@@ -243,41 +244,10 @@ export const CHECKLIST = [
 ];
 
 export const DEALS = [
-  "San Francisco sellers and landlords must disclose whether a property is in SFPUC's 100-Year Storm Flood Risk Zone. The map shows flooding from heavy rain only, not from the Bay or the ocean [17].",
+  "San Francisco sellers and landlords must disclose whether a property is in SFPUC's 100-Year Storm Flood Risk Zone. The map shows flooding from heavy rain only, not from the Bay or the ocean.",
   "California's Natural Hazard Disclosure covers FEMA flood zones, dam inundation, fire and seismic zones.",
   "Ask the seller about past water in the basement or garage, sewer backups, drainage work and roof leaks.",
   "Inspections to consider: roof, drainage and grading, sewer lateral (camera), and a geotechnical review on a slope or bluff.",
-];
-
-export const SOURCES = [
-  "NOAA Climate Prediction Center, ENSO Diagnostic Discussion, Oct 8, 2026 (cpc.ncep.noaa.gov). The Sep 10, 2026 discussion gave a 75% chance of a record event (+2.5°C or more) in Oct–Dec 2026.",
-  "NOAA Climate Prediction Center, Relative Oceanic Niño Index (RONI), effective Feb 1, 2026.",
-  "NOAA Climate.gov, ENSO blog: how El Niño and La Niña work.",
-  "SFBayWeather, El Niño in the Bay Area and California: 1997–98 vs. 2026–27 (downtown San Francisco, percent of normal by water year).",
-  "Jan Null, Golden Gate Weather Services, 1997–1998 San Francisco Rainfall Season in Review (ggweather.com).",
-  "KGO-TV, Sep 18, 2026: El Niño-driven Kelvin wave could raise Bay Area sea levels by up to 1 foot.",
-  "Associated Press, Oct 3, 2026: A pulse of warm water hitting the Pacific coast could mean erosion and flooding.",
-  "NPR, Oct 19, 2026: A Kelvin wave raised sea levels on the West Coast. More are coming.",
-  "California Ocean Protection Council, memo on record-breaking sea levels, Dec 2015.",
-  "U.S. Geological Survey, Fact Sheet 175-99, and Sea level response to ENSO along the central California coast.",
-  "Associated Press, the Sierra Nevada's snowiest seasons, Central Sierra Snow Lab records since 1946.",
-  "U.S. Geological Survey, landslides caused by El Niño rainstorms, winter 1997–98 (Open-File Report 98-089; MF-2325).",
-  "KGO-TV, 1998 and 2016 coverage of Esplanade Drive, Pacifica; City of Pacifica releases, 2016.",
-  "Reno Gazette Journal, Jan 2016: El Niño making snow now (Reno–Tahoe precipitation in strong events).",
-  "1998 Sonoma and Napa vintage reports.",
-  "San Francisco Public Utilities Commission: Floodwater Grant Program; Adopt-a-Drain.",
-  "San Francisco Public Utilities Commission: 100-Year Storm Flood Risk Map and FAQs.",
-  "NOAA, What are atmospheric rivers? (noaa.gov).",
-  "NOAA Climate.gov, How El Niño and La Niña affect the winter jet stream and U.S. climate; and ENSO in a nutshell.",
-  "NOAA National Centers for Environmental Information, Strong El Niño Precipitation Percent of Average, West Climate Region, December–May (nClimGrid Monthly, average 1991–2020).",
-  "San Francisco Public Utilities Commission, Our Sewer System and Storms; SFPUC testimony, San Francisco Bay Regional Water Board hearing, 2019 (the three-hour, 1.3-inch storm).",
-  "U.S. Geological Survey, Rainfall and Landslides in Northern California.",
-  "Rengers et al., U.S. Geological Survey, post-wildfire debris flows and landslides, San Gabriel Mountains (Geological Society of America, 2020); USGS rainfall thresholds for post-fire debris flows.",
-  "NASA Earth Observatory, Jan 2023; CBS News Bay Area, Dec 31, 2022.",
-  "KGO-TV, Jan 2017: King Tides cause flooding along the Embarcadero; NC State Extension, tidal backflow in storm drains.",
-  "Port of San Francisco: Embarcadero Seawall program; Designing for Resilience, 2017.",
-  "CBS News Bay Area: flooding at Church Street and Van Ness Muni Metro stations.",
-  "Hydrology references on infiltration and runoff (ASDSO Dam Safety Toolbox, Rainfall Losses) and a 2024 study of rainfall intensity and runoff.",
 ];
 
 export const DISCLAIMER =

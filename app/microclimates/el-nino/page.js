@@ -8,7 +8,7 @@ import { BarRows } from "../charts";
 import { Defs, Pacific, Jet, KELVIN_SCENES, Strength, Stack, PacificStorms, RiverLands, HistoryMaps, RUNOFF_SCENES, DrainScene } from "./graphics";
 import HMAPS from "./history-maps.json";
 import {
-  AS_OF, LEDE, TOPLINE, WORDS, STATES, STORMS, RUNOFF, KELVIN, STACK, HISTORY, TAHOE, WINE, CHECKLIST, DEALS, SOURCES, DISCLAIMER,
+  AS_OF, LEDE, TOPLINE, WORDS, STATES, STORMS, RUNOFF, KELVIN, STACK, HISTORY, TAHOE, WINE, CHECKLIST, DEALS, DISCLAIMER,
 } from "./content";
 
 export const metadata = {
@@ -92,7 +92,7 @@ export default function Page() {
               </Card>
             ))}
           </ol>
-          <p className="mc-cap">Schematic cross-sections along the equator, west to east, and storm-track maps; not to scale [3].</p>
+          <p className="mc-cap">Schematic cross-sections along the equator, west to east, and storm-track maps; not to scale.</p>
         </section>
 
         <section className="pt-sec" id="storms">
@@ -108,14 +108,14 @@ export default function Page() {
             <div className="mc-scroll"><RiverLands /></div>
           </figure>
           <Bullets items={STORMS.facts} />
-          <p className="mc-cap">Schematic maps, not to scale; an El Niño winter pattern, not a forecast for any storm [3][18].</p>
+          <p className="mc-cap">Schematic maps, not to scale; an El Niño winter pattern, not a forecast for any storm.</p>
         </section>
 
         <section className="pt-sec" id="strength">
           <h2>This Year&rsquo;s Event</h2>
           <Strength />
           <Bullets items={[
-            `NOAA: ${AS_OF.status}. A strong to very strong El Niño is likely through January–March 2027 (greater than 83% chance) [1].`,
+            `NOAA: ${AS_OF.status}. A strong to very strong El Niño is likely through January–March 2027 (greater than 83% chance).`,
             "El Niño tilts the odds toward a wet California winter, and the tilt is strongest in Southern California. It does not decide any one storm.",
             `NOAA updates its outlook monthly; the next is ${AS_OF.next}.`,
           ]} />
@@ -132,7 +132,7 @@ export default function Page() {
               { k: "2015–16", v: 101 },
             ]}
             max={210} unit="%"
-            caption="Water years run October to September [4]."
+            caption="Water years run October to September."
           />
           <HistoryMaps data={HMAPS} />
           <div className="en-hist">
@@ -153,7 +153,7 @@ export default function Page() {
               return <Card key={k.h} n={i + 1} h={k.h} when={k.when} p={k.p}><S /></Card>;
             })}
           </ol>
-          <p className="mc-cap">Schematic, not to scale. Sea-level figures [6][7][8][9].</p>
+          <p className="mc-cap">Schematic, not to scale.</p>
           <p className="mc-lead mc-lead-here en-lead">{STACK.lead}</p>
           <Stack layers={STACK.layers} />
           <h3 className="en-h3">Where it shows up</h3>
@@ -169,11 +169,11 @@ export default function Page() {
               return <Card key={k.h} n={i + 1} h={k.h} when={k.when} p={k.p}><S /></Card>;
             })}
           </ol>
-          <p className="mc-cap">Schematic, not to scale [22][23][28].</p>
+          <p className="mc-cap">Schematic, not to scale.</p>
           <h3 className="en-h3">{RUNOFF.city.h}</h3>
           <figure className="mc-fig">
             <div className="mc-scroll"><DrainScene /></div>
-            <figcaption className="mc-cap">Schematic of a shoreline street in a storm at high tide; not to scale and not any one street [21][25][26].</figcaption>
+            <figcaption className="mc-cap">Schematic of a shoreline street in a storm at high tide; not to scale and not any one street.</figcaption>
           </figure>
           <Bullets items={RUNOFF.city.facts} />
           <h3 className="en-h3">What helps</h3>
@@ -209,11 +209,6 @@ export default function Page() {
         <section className="pt-sec" id="deals">
           <h2>Buying and Selling</h2>
           <Bullets items={DEALS} />
-        </section>
-
-        <section className="pt-sec en-sources">
-          <h3 className="en-h3">Sources</h3>
-          <ol>{SOURCES.map(s => <li key={s}>{s}</li>)}</ol>
         </section>
 
         <p className="pt-disclaimer">{DISCLAIMER} See also <Link href="/microclimates">San Francisco Microclimates</Link>.</p>
