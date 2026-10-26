@@ -208,6 +208,27 @@ export function Jet({ state }) {
 
 // ---------------------------------------------------------------- past strong El Niños, rain and snow
 
+// Grouped by the Bay Area's bin: wetter above 125% of average, normal 75–125%,
+// drier below 75%. NOAA's bins 0–4 are the dry side, 5 is 75–125%, 6+ wet.
+const HM_GROUPS = [
+  { k: "Wetter", d: "Bay Area above 125% of average", has: m => m.name !== "Composite" && m.bay >= 6 },
+  { k: "Normal", d: "Bay Area 75–125% of average", has: m => m.name !== "Composite" && m.bay === 5 },
+  { k: "Drier", d: "Bay Area below 75% of average", has: m => m.name !== "Composite" && m.bay <= 4 },
+];
+function HmCard({ m, data, pos }) {
+  return (
+    <li className={m.name === "Composite" ? "comp" : undefined}>
+      <b>{m.name === "Composite" ? "Average" : m.name}</b>
+      <div className="en-hm-map">
+        <img src={m.src} alt={`California and Nevada, December–May ${m.name}: percent of average precipitation. Bay Area ${data.bins[m.bay]}.`} width={data.w} height={data.h} loading="lazy" />
+        <i className="en-hm-sf" style={pos(data.sf)} />
+        <i className="en-hm-th" style={pos(data.tahoe)} />
+      </div>
+      <span className="en-hm-bay" style={{ "--c": data.colors[m.bay] }}><i />Bay Area {data.bins[m.bay]}</span>
+    </li>
+  );
+}
+
 export function HistoryMaps({ data }) {
   const pos = ([x, y]) => ({ left: `${(100 * x) / data.w}%`, top: `${(100 * y) / data.h}%` });
   return (
@@ -216,22 +237,22 @@ export function HistoryMaps({ data }) {
       <div className="en-hm-key" aria-label="Color key: percent of average precipitation">
         {data.bins.map((b, i) => <span key={b} style={{ "--c": data.colors[i] }}><i />{b}</span>)}
       </div>
-      <ol className="en-hm-grid">
-        {data.maps.map(m => (
-          <li key={m.name} className={m.name === "Composite" ? "comp" : undefined}>
-            <b>{m.name === "Composite" ? "All 11, averaged" : m.name}</b>
-            <div className="en-hm-map">
-              <img src={m.src} alt={`California and Nevada, December–May ${m.name}: percent of average precipitation. Bay Area ${data.bins[m.bay]}.`} width={data.w} height={data.h} loading="lazy" />
-              <i className="en-hm-sf" style={pos(data.sf)} />
-              <i className="en-hm-th" style={pos(data.tahoe)} />
-            </div>
-            <span className="en-hm-bay" style={{ "--c": data.colors[m.bay] }}><i />Bay Area {data.bins[m.bay]}</span>
-          </li>
-        ))}
-      </ol>
+      {HM_GROUPS.map(g => {
+        const maps = data.maps.filter(g.has);
+        return (
+          <section key={g.k} className={`en-hm-group en-hm-${g.k}`}>
+            <h4 className="en-hm-gh"><b>{g.k}</b><span>{g.d} · {maps.length} of {data.maps.length - 1} winters</span></h4>
+            <ol className="en-hm-grid">{maps.map(m => <HmCard key={m.name} m={m} data={data} pos={pos} />)}</ol>
+          </section>
+        );
+      })}
+      <section className="en-hm-group">
+        <h4 className="en-hm-gh"><b>All 11, averaged</b><span>the strong El Niño winters together</span></h4>
+        <ol className="en-hm-grid">{data.maps.filter(m => m.name === "Composite").map(m => <HmCard key={m.name} m={m} data={data} pos={pos} />)}</ol>
+      </section>
       <figcaption className="mc-cap">
         Redrawn from NOAA NCEI, Strong El Niño Precipitation Percent of Average, West Climate Region (data: nClimGrid Monthly; average 1991–2020); NOAA&rsquo;s color bins,
-        the site&rsquo;s colors [20]. Dots: San Francisco and Lake Tahoe. &ldquo;Bay Area&rdquo; is the bin on the Peninsula, read from the map.
+        the site&rsquo;s colors [20]. Dots: San Francisco and Lake Tahoe. &ldquo;Bay Area&rdquo; is the bin on the Peninsula, read from the map; winters are grouped by it.
       </figcaption>
     </figure>
   );
