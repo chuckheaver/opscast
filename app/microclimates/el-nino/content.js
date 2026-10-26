@@ -44,7 +44,7 @@ export const STATES = [
   },
   {
     key: "nina", h: "La Niña", when: "Trade winds strengthen",
-    p: "The opposite: stronger trade winds push the warm water farther west. The Pacific jet retracts west and meanders north around high pressure, so storms favor the Pacific Northwest and the southern tier, California included, leans dry [19].",
+    p: "The opposite: stronger trade winds push the warm water farther west. The jet stream retracts west and a variable polar jet meanders north around high pressure, so storms favor the Pacific Northwest and the southern tier, California included, leans dry [19].",
     read: [["Trade winds", "strong"], ["Warm pool", "far west"], ["Bay Area winter", "drier odds"]],
     tone: "cool",
   },

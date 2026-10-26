@@ -168,7 +168,7 @@ export function Jet({ state }) {
   const label = {
     normal: "Neutral winter: the Pacific jet stream reaches about halfway across the Pacific and the storm track aims mostly at the Pacific Northwest.",
     nino: "El Niño winter: the core of the Pacific jet stream shifts south and reaches farther east, steering storms into California and across the southern United States; the polar jet stays over Canada.",
-    nina: "La Niña winter: the Pacific jet stream retracts west and meanders north around high pressure in the North Pacific, steering storms into the Pacific Northwest; the southern tier, California included, leans dry.",
+    nina: "La Niña winter: the jet stream retracts west and a variable polar jet meanders north around high pressure in the North Pacific, steering storms into the Pacific Northwest; the southern tier, California included, leans dry.",
   }[state];
   const ell = ([lo, la, rlo, rla], fill, text, tfill) => (
     <g>
@@ -189,7 +189,7 @@ export function Jet({ state }) {
       <path d={smooth([...p.core, ...p.jet.slice(1)])} fill="none" stroke="#fff" strokeWidth="8" opacity="0.5" strokeLinecap="round" />
       <path d={smooth(p.core)} fill="none" stroke={C.barHi} strokeWidth="6.5" strokeLinecap="round" />
       <path d={smooth(p.jet)} fill="none" stroke={C.barHi} strokeWidth="2.6" markerEnd="url(#enN)" strokeLinecap="round" />
-      <text className="fs-t-s en-wd" x={JX(p.core[1][0])} y={JY(p.core[1][1]) - 9} style={HALO}>Pacific jet stream</text>
+      <text className="fs-t-s en-wd" x={JX(p.core[1][0])} y={JY(p.core[1][1]) - 9} style={HALO}>{{ nino: "Pacific Jet", nina: "Variable Polar Jet" }[state] || "Pacific jet stream"}</text>
       {p.storms.map(([lo, la], i) => <Cloud key={i} x={JX(lo)} y={JY(la) - 16} s={0.5} />)}
       {p.low && <text className="fs-t-big" x={JX(p.low[0])} y={JY(p.low[1])} textAnchor="middle" fill="#B3261E">L</text>}
       {p.high && <text className="fs-t-big" x={JX(p.high[0])} y={JY(p.high[1])} textAnchor="middle" fill={C.warmText}>H</text>}
