@@ -50,7 +50,9 @@ export const STATUS_GROUPS = [
 // Type groups: the site's four sales categories (app/lib/segments.js), so the
 // chips match the map's dot colours, the pop-ups and the stats. A group's
 // members are the MLS types in the data that fall in that category.
-export const TYPE_GROUPS = SEGMENTS.map(s => ({ key: s.key, label: s.short, color: s.color }));
+// Chip order (owner, Oct 27 2026): SFH, Duplex, Condo/TIC/Co-op, Other (Tri+).
+const CHIP_ORDER = ["sfh", "duplex", "condo", "other"];
+export const TYPE_GROUPS = CHIP_ORDER.map(k => SEGMENTS.find(s => s.key === k)).map(s => ({ key: s.key, label: s.short, color: s.color }));
 export const typeMembers = (g, universe) => (universe || []).filter(t => segOf(t) === g.key);
 
 // A group chip is "on" when nothing is selected (empty Set = all) or all its
