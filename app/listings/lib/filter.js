@@ -4,6 +4,7 @@
 // dots) and the "Stats" pop-up (drives the report) so they stay identical.
 
 import { fogZoneLabel } from "./stats";
+import { SEGMENTS, segOf } from "../../lib/segments";
 
 // Property-type → short chip label, matching the original design.
 export const SUBTYPE_ABBREV = {
@@ -46,15 +47,11 @@ export const STATUS_GROUPS = [
   { key: "SOM", statuses: ["Sold Off MLS"] },
 ];
 
-// Type groups; OTH = every subtype that isn't one of the three named ones.
-const NAMED_TYPES = ["Single Family Residence", "Condominium", "Tenancy in Common"];
-export const TYPE_GROUPS = [
-  { key: "SFH", types: ["Single Family Residence"] },
-  { key: "CND", types: ["Condominium"] },
-  { key: "TIC", types: ["Tenancy in Common"] },
-  { key: "OTH", other: true },
-];
-export const otherTypes = universe => (universe || []).filter(t => !NAMED_TYPES.includes(t));
+// Type groups: the site's four sales categories (app/lib/segments.js), so the
+// chips match the map's dot colours, the pop-ups and the stats. A group's
+// members are the MLS types in the data that fall in that category.
+export const TYPE_GROUPS = SEGMENTS.map(s => ({ key: s.key, label: s.short, color: s.color }));
+export const typeMembers = (g, universe) => (universe || []).filter(t => segOf(t) === g.key);
 
 // A group chip is "on" when nothing is selected (empty Set = all) or all its
 // members are in the Set.

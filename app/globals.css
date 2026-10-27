@@ -6384,3 +6384,7 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .en-hm-Wetter .en-hm-gh { border-color: #33587F; }
 .en-hm-Normal .en-hm-gh { border-color: #C9C5BC; }
 .en-hm-Drier .en-hm-gh { border-color: #A8741A; }
+/* Homes filter: the four sales categories, each with its map-dot colour */
+.fog-fchip-seg { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+.fog-fchip-seg i { width: 8px; height: 8px; border-radius: 50%; background: var(--seg); opacity: 0.35; }
+.fog-fchip-seg.on i { opacity: 1; }

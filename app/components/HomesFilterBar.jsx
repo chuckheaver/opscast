@@ -5,7 +5,7 @@
 // match count and a Stats button. Drives the map dots and (via the same filter)
 // the Stats sheet. The selection persists in the parent's filter state.
 
-import { STATUS_GROUPS, TYPE_GROUPS, otherTypes, groupOn, toggleGroup, ALL_STATUSES } from "../listings/lib/filter";
+import { STATUS_GROUPS, TYPE_GROUPS, typeMembers, groupOn, toggleGroup, ALL_STATUSES } from "../listings/lib/filter";
 
 const monthEnd = ym => {
   if (!ym) return "";
@@ -33,8 +33,7 @@ export default function HomesFilterBar({ filter, options, count, onChange, onOpe
   const set = patch => onChange({ ...filter, ...patch });
   const toggleStatus = g => set({ statuses: toggleGroup(filter.statuses, g.statuses, ALL_STATUSES) });
   const toggleType = g => {
-    const members = g.other ? otherTypes(subUniverse) : g.types;
-    set({ subtypes: toggleGroup(filter.subtypes, members, subUniverse) });
+    set({ subtypes: toggleGroup(filter.subtypes, typeMembers(g, subUniverse), subUniverse) });
   };
 
   return (
@@ -48,10 +47,11 @@ export default function HomesFilterBar({ filter, options, count, onChange, onOpe
         })}
         <span className="fog-fsep" aria-hidden="true" />
         {TYPE_GROUPS.map(g => {
-          const members = g.other ? otherTypes(subUniverse) : g.types;
-          const on = groupOn(filter.subtypes, members);
+          const on = groupOn(filter.subtypes, typeMembers(g, subUniverse));
           return (
-            <button key={g.key} type="button" className={"fog-fchip" + (on ? " on" : "")} onClick={() => toggleType(g)} aria-pressed={on}>{g.key}</button>
+            <button key={g.key} type="button" className={"fog-fchip fog-fchip-seg" + (on ? " on" : "")} style={{ "--seg": g.color }} onClick={() => toggleType(g)} aria-pressed={on}>
+              <i aria-hidden="true" />{g.label}
+            </button>
           );
         })}
         <span className="fog-fsep" aria-hidden="true" />
