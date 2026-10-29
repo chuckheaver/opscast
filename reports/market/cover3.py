@@ -428,11 +428,12 @@ def type_mirror(rows,w=470,h=168):
 
 # ── Bond market ──────────────────────────────────────────────────────────
 # 10-year Treasury, month-end readings (U.S. Treasury via Advisor Perspectives,
-# CNBC and Bloomberg reporting of the daily close). Sept 2026 is the Sept 30 close.
-TEN_Y=[("Sep'25",4.04),("Oct",4.11),("Nov",4.14),("Dec",4.16),("Jan'26",4.24),("Feb",4.04),
-       ("Mar",4.38),("Apr",4.30),("May",4.50),("Jun",4.44),("Jul",4.75),("Aug",4.78),("Sep'26",5.29)]
-CURVE=[("3 mo",4.20),("2 yr",4.90),("10 yr",5.29),("30 yr",5.63)]   # constant-maturity curve, Sept 30 2026
-TWO_NOW, TEN_NOW, MTG_NOW = 4.90, 5.29, 7.03                        # Sept 30 closes; PMMS Sept 24 (Fed hiked to 3.75–4.00% Sept 16)
+# CNBC and Bloomberg reporting of the daily close). Oct 2026 is the Oct 28 close
+# (the interim update, owner Oct 29 2026); the month-end reading replaces it on Nov 1.
+TEN_Y=[("Oct'25",4.11),("Nov",4.14),("Dec",4.16),("Jan'26",4.24),("Feb",4.04),("Mar",4.38),
+       ("Apr",4.30),("May",4.50),("Jun",4.44),("Jul",4.75),("Aug",4.78),("Sep",5.29),("Oct 28",5.02)]
+CURVE=[("3 mo",4.13),("2 yr",4.71),("10 yr",5.02),("30 yr",5.35)]   # Oct 28 2026 closes (CNBC, Kiplinger, Investing.com)
+TWO_NOW, TEN_NOW, MTG_NOW = 4.71, 5.02, cv.RATE_NOW                 # Oct 28 closes; PMMS Oct 22 (Fed held at 3.75–4.00% Oct 28)
 def _ytd_medians():
     """Year-to-date SFH and Condo/TIC/Co-op medians, same window as the report, so the
     payment example always prices the typical home of the current data."""
@@ -482,11 +483,12 @@ def spread_chart(w=470,h=158):
     """The 10-year and the 30-year mortgage on one scale: the shaded band
     between them is the lender spread, and it barely moves."""
     # September = the 10-year's Sept 30 close against the last Freddie Mac
-    # survey of the month (Sept 24) — the report's data date, not "now".
-    ten={"Jan":4.24,"Feb":4.04,"Mar":4.38,"Apr":4.30,"May":4.50,"Jun":4.44,"Jul":4.75,"Aug":4.78,"Sep":TEN_NOW}
-    mtg=dict(cv.RATES); mtg["Sep"]=cv.RATE_NOW
+    # survey of the month (Sept 24); October = the Oct 28 close against the
+    # latest survey (Oct 22) — the report's data date, not "now".
+    ten={"Jan":4.24,"Feb":4.04,"Mar":4.38,"Apr":4.30,"May":4.50,"Jun":4.44,"Jul":4.75,"Aug":4.78,"Sep":5.29,"Oct":TEN_NOW}
+    mtg=dict(cv.RATES); mtg["Sep"]=cv.RATE_SEP_END; mtg["Oct"]=cv.RATE_NOW
     labs=[k for k in ten if k in mtg]
-    lo,hi=3.8,7.3; pad_l,pad_b,pad_t=8,26,16
+    lo,hi=3.8,7.6; pad_l,pad_b,pad_t=8,26,16
     n=len(labs); gw=(w-2*pad_l)/(n-1)
     X=lambda i:pad_l+i*gw; Y=lambda v:h-pad_b-(v-lo)/(hi-lo)*(h-pad_b-pad_t)
     top=[(X(i),Y(mtg[k])) for i,k in enumerate(labs)]
@@ -802,13 +804,17 @@ def build():
     # monthly series feeding the two stacked charts
     ms=monthly_series(); r26=[r for r in ms[2026] if r["m"]<=mo.month]; r25=ms[2025]
     r25m={r["m"]:r for r in r25}; r26m={r["m"]:r for r in r26}
-    def two_year(keys,dfmt):
+    partial = mthru!=mname     # an interim, partial-month update (owner's decision)
+    def two_year(keys,dfmt,m0_total=None):
         rows=[]
         for m_ in range(1,13):
             a_=r25m.get(m_); b_=r26m.get(m_); row=dict(m=m_); ta=tb=0
             for k in keys:
                 va=a_[k] if a_ else None; vb=b_[k] if b_ else None
                 row[k]=va; row[k+"_b"]=vb; ta+=va or 0; tb+=vb or 0
+            # The partial month is compared with the same days of last year's month,
+            # not with last year's whole month (whose full bar still shows).
+            if partial and m_==mo.month and m0_total is not None: ta=m0_total
             row["d"]=dfmt(tb-ta) if (ta and tb) else ""
             rows.append(row)
         return rows
@@ -816,13 +822,15 @@ def build():
     clrows=[dict(r, d=(100*(r["csold"]-r25m[r["m"]]["csold"])/r25m[r["m"]]["csold"]) if r["m"] in r25m and r25m[r["m"]]["csold"] else None) for r in r26]
     olrows=[dict(r, d=(100*(r["osold"]-r25m[r["m"]]["osold"])/r25m[r["m"]]["osold"]) if r["m"] in r25m and r25m[r["m"]]["osold"] else None) for r in r26]
     ukeys=["sfh","cd","oth"]; vkeys=["sfh_v","cd_v","oth_v"]
-    urows=two_year(ukeys,lambda d:f"{d:+.0f}")
-    vrows=two_year(vkeys,lambda d:f"{d/1e6:+.0f}M")
+    urows=two_year(ukeys,lambda d:f"{d:+.0f}",len(S["m0"]))
+    vrows=two_year(vkeys,lambda d:f"{d/1e6:+.0f}M",sum(r["sellingPrice"] for r in S["m0"]))
     tot=lambda rows,keys,suf: sum((r.get(k+suf) or 0) for r in rows for k in keys)
     ytd_now=lambda rows,keys: sum((r.get(k+"_b") or 0) for r in rows for k in keys)
     ytd_then=lambda rows,keys: sum((r.get(k) or 0) for r in rows for k in keys if r["m"] in r26m)
     u26,u25=ytd_now(urows,ukeys),ytd_then(urows,ukeys); u25y=tot(urows,ukeys,"")
     v26,v25=ytd_now(vrows,vkeys),ytd_then(vrows,vkeys); v25y=tot(vrows,vkeys,"")
+    if partial:   # last year's same stretch, Jan 1 to the same day
+        u25=len(S["y0"]); v25=sum(r["sellingPrice"] for r in S["y0"])
     uytd=dict(label=f"{u26:,} vs {u25:,}  {sgn(D(u26,u25))}%", sub=f"through {mthru} · 2025 full year {u25y:,}")
     vytd=dict(label=f"{BN(v26)} vs {BN(v25)}  {sgn(D(v26,v25))}%", sub=f"through {mthru} · 2025 full year {BN(v25y)}")
     USEG=[("SFH","#AFC0D0","#203C5F","sfh"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","cd"),("Other","#C9CCD0","#6B6F75","oth")]
@@ -900,14 +908,14 @@ def build():
     carry=lambda p,y: p*y/100+p*PROP_TAX
     cost_at=len(o)                        # The Cost of Ownership prints last (see build's end)
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The Cost of Ownership</div>
-      <div class='p'>Rates as of Sept 30, 2026</div></div>
-      <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales · rates as of Sept 30 (mortgage: Sept 24 survey)</div></div>""")
+      <div class='p'>Rates as of Oct 28, 2026</div></div>
+      <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales · rates as of Oct 28 (mortgage: Oct 22 survey)</div></div>""")
     o.append("<div class='cols'>")
     o.append(f"""<div class='col'><h2 class='band'>The Financed Buyer</h2>
       <h2>The Cost of Financing an Average Home</h2>
       <table class='top'><tr><th class='l'>30-yr rate</th><th>SFH median</th><th>vs 6.10%</th><th>Condo/TIC/Co-op median</th><th>vs 6.10%</th></tr>{rate_rows}</table>
       <h2 style='margin-top:6px'>30-yr Mortgage vs 10-yr Treasury</h2>{spread_chart(h=140)}
-      <h2 style='margin-top:5px'>The Yield Curve, Sept 30</h2>{curve_chart(w=470,h=92)}</div>""")
+      <h2 style='margin-top:5px'>The Yield Curve, Oct 28</h2>{curve_chart(w=470,h=92)}</div>""")
     o.append(f"""<div class='col'><h2 class='band'>The Cash Buyer</h2>
       <h2>Over $5M — Sales by Month, 20{py} vs 20{yy}</h2>
       {lux_chart(mo.year,h=190,through=mo.month)}

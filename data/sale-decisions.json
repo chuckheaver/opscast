@@ -272,6 +272,12 @@
         "keep": "425016665",
         "address": "1632 North Point St",
         "reason": "The same sale in both feeds: Residential Income (owner, Oct 20 2026)."
+      },
+      {
+        "id": "82051055",
+        "keep": "82051722",
+        "address": "1427 Grant Ave",
+        "reason": "The same sale entered twice (1427 Grant Ave, typed single-family, and 1427-1431 Grant Ave, a fourplex; same parcel 0116-008, $3.40M): counted once, as the Fourplex (owner, Oct 29 2026)."
       }
     ]
   },
@@ -898,6 +904,21 @@
       "id": "426105660",
       "address": "1556 Revere Ave",
       "note": "Square footage and price are correct as recorded (owner, Oct 22 2026)."
+    },
+    {
+      "id": "426167252",
+      "address": "20 Cherry St",
+      "note": "$28,500,000 is correct (owner, Oct 29 2026)."
+    },
+    {
+      "id": "426168573",
+      "address": "312 Connecticut St",
+      "note": "9,940 sf is correct (owner, Oct 29 2026)."
+    },
+    {
+      "id": "426166722",
+      "address": "2162 14th Ave",
+      "note": "Sold $2,360,000 on a $1,200,000 list: correct (owner, Oct 29 2026)."
     }
   ],
   "remove": [

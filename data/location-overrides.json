@@ -103,5 +103,17 @@
     "lng": -122.45628,
     "confirmed": true,
     "note": "680 Los Palmos Dr: no coordinates in the MLS file; placed on its parcel block (3005C) beside 628 Los Palmos, Westwood Highlands (owner, Oct 20 2026)"
+  },
+  "82039692": {
+    "lat": 37.78345,
+    "lng": -122.40955,
+    "confirmed": true,
+    "note": "30 Mason St #502: no coordinates in the MLS file (it had been put at a Hayes Valley stand-in); placed at its building at Market & Mason, parcel block 0341 (owner, Oct 29 2026)"
+  },
+  "426124442": {
+    "lat": 37.72875,
+    "lng": -122.36975,
+    "confirmed": true,
+    "note": "263 Friedell St: the MLS placeholder pin; placed on Friedell St between Innes and Jerrold, Hunters Point, beside 201 Friedell St (parcel block 4591C) (owner, Oct 29 2026)"
   }
 }
