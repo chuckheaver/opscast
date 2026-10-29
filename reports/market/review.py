@@ -65,11 +65,11 @@ try: LY_THRU = THRU.replace(year=LY)
 except ValueError: LY_THRU = THRU.replace(year=LY, day=28)      # Feb 29
 WINDOWS = {TY: (f"{TY}-01-01", THRU.isoformat()), LY: (f"{LY}-01-01", LY_THRU.isoformat())}
 TODAY = datetime.date.today()
-SFH, CONDO, OTHER = mg.SEG[mg.SF], mg.SEG[mg.CO], mg.SEG[mg.OT]
+SFH, CONDO, DUPLEX, OTHER = mg.SEG[mg.SF], mg.SEG[mg.CO], mg.SEG[mg.DU], mg.SEG[mg.OT]
 CTC = mg.TITLE[mg.CO]                       # "Condo/TIC/Co-op"
 def segname(pt):
-    """The report's category for a property type: SFH, Condo/TIC/Co-op or Other."""
-    return "SFH" if pt in SFH else CTC if pt in CONDO else "Other" if pt in OTHER else ""
+    """The report's category for a property type: SFH, Condo/TIC/Co-op, Duplex or Other."""
+    return "SFH" if pt in SFH else CTC if pt in CONDO else "Duplex" if pt in DUPLEX else "Other" if pt in OTHER else ""
 
 CHECKS = [  # id, title — in report order
     ("E1", "duplicate-sale"), ("E1b", "conflicting-duplicate"),
@@ -318,7 +318,7 @@ for x in WS:
 
 # E8 over-$25M: probably an entry error (the owner's rule) — kept, and pointed out every month.
 # "Other" (Residential Income and the rest: apartment buildings) sells higher, so its line is higher (owner, Oct 20 2026).
-OTHER_TYPES = OTHER
+OTHER_TYPES = OTHER | DUPLEX
 OVER_OTHER = DEC.get("pointOut", {}).get("overPriceOther", 50_000_000)
 for x in WS:
     line = OVER_OTHER if x.get("propType") in OTHER_TYPES else OVER
@@ -464,7 +464,7 @@ if need("R10", "agent"):
                  related=[r["id"] for r in other])
 
 # N1 top-sales, each segment's #1, and whether this year's #1 beats last year's.
-TOP = {"SFH": 15_000_000, CTC: 7_500_000, "Other": 15_000_000}
+TOP = {"SFH": 15_000_000, CTC: 7_500_000, "Duplex": 7_500_000, "Other": 15_000_000}
 full_ly = [x for x in S if x["_d"].year == LY]
 for seg, floor in TOP.items():
     best = {y: max((x for x in W if x["_win"] == y and x["_seg"] == seg), key=P, default=None) for y in WINDOWS}

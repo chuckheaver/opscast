@@ -11,11 +11,15 @@
       "San Francisco Market Grid - Condo/TIC/Co-op 1 of 3",
       "San Francisco Market Grid - Condo/TIC/Co-op 2 of 3",
       "San Francisco Market Grid - Condo/TIC/Co-op 3 of 3",
-      "San Francisco Market Grid - Other 1 of 2",
-      "San Francisco Market Grid - Other 2 of 2",
-      "The 10s of 2026",
+      "San Francisco Market Grid - Duplex 1 of 2",
+      "San Francisco Market Grid - Duplex 2 of 2",
+      "San Francisco Market Grid - Other (Tri+) 1 of 2",
+      "San Francisco Market Grid - Other (Tri+) 2 of 2",
+      "The 10s of 2026 1 of 2",
+      "The 10s of 2026 2 of 2",
       "Heat Map",
       "Microclimates and Real Estate",
+      "Closings by Fog Zone",
       "By the Numbers",
       "Product Types",
       "Product Types by Quarter"
@@ -25,7 +29,7 @@
     ]
   },
   "links": {
-    "areas": 474,
-    "sales": 110
+    "areas": 544,
+    "sales": 140
   }
 }

@@ -15,9 +15,10 @@ export const median = a => {
   const m = v.length >> 1;
   return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2;
 };
-// The report's three categories and colours (navy, gold, grey).
+// The report's four categories and colours (navy, gold, the site's duplex teal, grey).
 export const SEGS = [
   { k: "sfh", label: "SFH", color: "#203C5F", light: "#AFC0D0" },
   { k: "co", label: "Condo/TIC/Co-op", color: "#E9BC3F", light: "#F6E3A6" },
-  { k: "ot", label: "Other", color: "#6B6F75", light: "#C9CCD0" },
+  { k: "du", label: "Duplex", color: "#3C8D7F", light: "#B5D6CF" },
+  { k: "ot", label: "Other (Tri+)", color: "#6B6F75", light: "#C9CCD0" },
 ];

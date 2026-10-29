@@ -58,15 +58,19 @@ def monthly_series():
             if not rs: continue
             sf=[r for r in rs if r["propType"] in SFH]
             cd=[r for r in rs if r["propType"] in CO]
+            du=[r for r in rs if r["propType"] in mg.SEG[mg.DU]]
             ot=[r for r in rs if r["propType"] in mg.SEG[mg.OT]]
             sl=[r["listPrice"] for r in sf if r.get("listPrice")]
             cl=[r["listPrice"] for r in cd if r.get("listPrice")]
             cs=[r["sellingPrice"] for r in cd]
+            dl=[r["listPrice"] for r in du if r.get("listPrice")]
             ol=[r["listPrice"] for r in ot if r.get("listPrice")]
             os_=[r["sellingPrice"] for r in ot]
             V=lambda g: sum(r["sellingPrice"] for r in g)
-            rows.append(dict(m=m,sfh=len(sf),cd=len(cd),oth=len(ot),co=len(cd)+len(ot),
-                             sfh_v=V(sf),cd_v=V(cd),oth_v=V(ot),vol=V(rs),
+            rows.append(dict(m=m,sfh=len(sf),cd=len(cd),du=len(du),oth=len(ot),co=len(cd)+len(du)+len(ot),
+                             sfh_v=V(sf),cd_v=V(cd),du_v=V(du),oth_v=V(ot),vol=V(rs),
+                             dlist=statistics.median(dl) if dl else None,
+                             dsold=statistics.median([r["sellingPrice"] for r in du]) if du else None,
                              mlist=statistics.median(sl) if sl else None,
                              msold=statistics.median([r["sellingPrice"] for r in sf]) if sf else None,
                              clist=statistics.median(cl) if cl else None,
@@ -77,6 +81,7 @@ def monthly_series():
     return out
 
 MON="Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
+DUP, DUP_LT = "#3C8D7F", "#B5D6CF"    # Duplex: the site's teal (app/lib/segments.js)
 def bars(rows,series,w=468,h=176,fmt=lambda v:f"{v:.0f}",ymax=None,legend=None,lab=7,val=6.2):
     """Grouped column chart. series = (label, colour, key[, delta-key]).
     A delta key draws the year-over-year change inside the bar."""
@@ -226,7 +231,7 @@ def txt(col):
     yellow series are set in the darker gold."""
     return mg.GOLD_TXT if col.upper()==GOLD_MID.upper() else col
 
-def lines(rows,series,w=468,h=176,fmt=lambda v:f"{v/1e6:.2f}M",dkey=None):
+def lines(rows,series,w=468,h=176,fmt=lambda v:f"{v/1e6:.2f}M",dkey=None,lab=True):
     """Line chart. With dkey, each point's year-over-year change is printed
     under its month label so the trend reads straight off the axis."""
     pad_l,pad_b,pad_t=17,(26 if dkey else 16),14
@@ -241,15 +246,16 @@ def lines(rows,series,w=468,h=176,fmt=lambda v:f"{v/1e6:.2f}M",dkey=None):
         o.append(f"<polyline points='{' '.join(f'{x:.1f},{y:.1f}' for x,y in pts)}' fill='none' stroke='{col}' stroke-width='2'/>")
         for i,(x,y) in enumerate(pts):
             o.append(f"<circle cx='{x:.1f}' cy='{y:.1f}' r='2.1' fill='{col}'/>")
-            o.append(f"<text x='{x:.1f}' y='{y-5:.1f}' font-size='6.2' font-weight='700' fill='{txt(col)}' text-anchor='middle'>{fmt(rows[i][key])}</text>")
+            if lab or i in (0,len(pts)-1) or col!="#E9BC3F":
+                o.append(f"<text x='{x:.1f}' y='{y-5:.1f}' font-size='{6.2 if lab else 5.6}' font-weight='700' fill='{txt(col)}' text-anchor='middle'>{fmt(rows[i][key]) if lab else fmt(rows[i][key]).replace('.00M','M')}</text>")
     for i,r in enumerate(rows):
         o.append(f"<text x='{X(i):.1f}' y='{h-(16 if dkey else 5)}' font-size='7' fill='{MUTED}' text-anchor='middle'>{MON[r['m']-1]}</text>")
         if dkey and r.get(dkey) is not None:
             col=UP if r[dkey]>=0 else DOWN
             o.append(f"<text x='{X(i):.1f}' y='{h-4}' font-size='6.6' font-weight='700' fill='{col}' text-anchor='middle'>{r[dkey]:+.0f}%</text>")
-    for j,(lab,col,_) in enumerate(series):
-        lxx=pad_l+j*120
-        o.append(f"<rect x='{lxx}' y='2' width='8' height='8' fill='{col}' rx='1.5'/><text x='{lxx+11}' y='9' font-size='7' fill='{INK}'>{lab}</text>")
+    for j,(lab_,col,_) in enumerate(series):
+        lxx=pad_l+j*(120 if lab else 100)
+        o.append(f"<rect x='{lxx}' y='2' width='8' height='8' fill='{col}' rx='1.5'/><text x='{lxx+11}' y='9' font-size='7' fill='{INK}'>{lab_}</text>")
     return "".join(o)+"</svg>"
 
 # Parcel-stock neighborhoods use SF planning names; the listings use MLS names.
@@ -394,10 +400,10 @@ def hood_bars(rank,tot,w=300,h=300,top=11):
     return "".join(o)+"</svg>"
 
 def type_mirror(rows,w=470,h=168):
-    """The three categories, counted the same two ways as the chart above."""
+    """The four categories, counted the same two ways as the chart above."""
     n=len(rows); tot=sum(r["sellingPrice"] for r in rows)
     segs=[]
-    for k,col in ((mg.SF,"#203C5F"),(mg.CO,"#E9BC3F"),(mg.OT,"#6B6F75")):
+    for k,col in ((mg.SF,"#203C5F"),(mg.CO,"#E9BC3F"),(mg.DU,DUP),(mg.OT,"#6B6F75")):
         g=[r for r in rows if r["propType"] in mg.SEG[k]]
         segs.append((mg.TITLE[k],col,len(g),sum(r["sellingPrice"] for r in g)))
     pad_l,gap=2,34; bw=w-pad_l-2; y1=22; y2=y1+BARH+gap
@@ -423,7 +429,7 @@ def type_mirror(rows,w=470,h=168):
     for lab,col,_,_ in segs:
         o.append(f"<rect x='{lx:.1f}' y='{ly-8}' width='9' height='9' fill='{col}' rx='1.5'/>")
         o.append(f"<text x='{lx+12:.1f}' y='{ly-1}' font-size='7.6' fill='{INK}'>{lab}</text>")
-        lx+=bw/3
+        lx+=bw/len(segs)
     return "".join(o)+"</svg>"
 
 # ── Bond market ──────────────────────────────────────────────────────────
@@ -606,6 +612,7 @@ def by_numbers(rows, thru):
         tenm=f"{sum(1 for r in rows if r['sellingPrice']>=10e6)}",
         sqft=f"{sq(sfh):,.0f} sf", csqft=f"{sq([r for r in rows if r['propType'] in CO]):,.0f} sf",
         osqft=f"{sq([r for r in rows if r['propType'] in OT]):,.0f} sf",
+        dsqft=f"{sq([r for r in rows if r['propType'] in mg.SEG[mg.DU]]):,.0f} sf",
     )
 
 def BN(v):
@@ -660,7 +667,7 @@ def site_kpis():
                 ("Median $/sf",usd(a.get("ppsf")),usd(b.get("ppsf")),pct(a.get("ppsf"),b.get("ppsf")),False),
                 ("DOM",rnd(a["dom"]),rnd(b["dom"]),unit(a["dom"],b["dom"],"day","days"),False),
                 ("Sale price vs list",f"{rnd(a['saleToList'])}%",f"{rnd(b['saleToList'])}%",unit(a["saleToList"],b["saleToList"],"pt","pts"),False)]
-    boxes=[("sfh","SFH",seg("sfh")),("condo","Condo / TIC / Co-op",seg("condo")),("other","Other",seg("other")),
+    boxes=[("sfh","SFH",seg("sfh")),("condo","Condo / TIC / Co-op",seg("condo")),("duplex","Duplex",seg("duplex")),("other","Other (Tri+)",seg("other")),
            ("all","All sales",[("Total sales volume",f"${m['volume']/1e9:.2f}B",f"${p['volume']/1e9:.2f}B",pct(m["volume"],p["volume"]),True),
                                ("Total units sold",f"{m['n']:,}",f"{p['n']:,}",pct(m["n"],p["n"]),True)])]
     d=datetime.date.fromisoformat(L["market"]["through"])
@@ -709,14 +716,14 @@ def build():
     .sband {{ background:#131A25; border-radius:6px; padding:9px 16px 2px; margin-bottom:7px; }}
     .sband-h {{ font-size:9.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#CEE2E6; margin-bottom:3px; }}
     .sband-h span {{ color:rgba(255,255,255,0.50); }}
-    .sband-row {{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding-bottom:8px; }}
+    .sband-row {{ display:grid; grid-template-columns:repeat(5,1fr); gap:7px; padding-bottom:8px; }}
     .sbx {{ border:1px solid rgba(255,255,255,0.14); border-radius:7px; padding:5px 9px 2px; background:rgba(255,255,255,0.025); }}
     .sbx-h {{ font-size:8px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#fff; margin-bottom:1px; }}
     .sbx-r {{ display:flex; justify-content:space-between; align-items:baseline; gap:6px; padding:2px 0; border-top:1px solid rgba(255,255,255,0.09); }}
     .sbx-l {{ font-size:7.4px; line-height:1.25; color:rgba(255,255,255,0.72); }} .sbx-l b {{ color:#fff; font-weight:700; white-space:nowrap; }}
-    .sbx-v {{ font-family:Georgia,'Times New Roman',serif; font-weight:700; color:#CEE2E6; font-size:10.5px; line-height:1.2; white-space:nowrap; text-align:right; }}
+    .sbx-v {{ font-family:Georgia,'Times New Roman',serif; font-weight:700; color:#CEE2E6; font-size:9.6px; line-height:1.2; white-space:nowrap; text-align:right; }}
     .sbx-v span {{ margin-left:0.44em; font-size:0.66em; font-weight:600; color:rgba(255,255,255,0.50); }}
-    .sbx-r.big .sbx-v {{ font-size:14.5px; }}
+    .sbx-r.big .sbx-v {{ font-size:13px; }}
     .sbx-all .sbx-r {{ flex-direction:column; align-items:flex-start; gap:1px; padding:4px 0; }}
     .sbx-all .sbx-v {{ font-size:17px; }}
     .kpi {{ flex:1; min-width:0; background:{NAV_LT}; border-radius:8px; padding:10px 8px 11px; border-left:5px solid {GOLD_MID}; text-align:center; display:flex; flex-direction:column; justify-content:space-between; height:62px; }}
@@ -740,6 +747,7 @@ def build():
     .nb4 {{ gap:9px; }} .nb4 table.top {{ font-size:7.9px; table-layout:auto; }} .nb4 h2 {{ font-size:10.5px; }}
     .nb4 .col {{ min-width:0; }} .nn {{ font-weight:400; color:{MUTED}; font-size:0.85em; }} .nb4 table.top {{ table-layout:auto; font-size:7.2px; }}
     .nb4 table.top td, .nb4 table.top th {{ white-space:nowrap; overflow:visible; padding-left:3px; padding-right:3px; }}
+    .nb8 table.top {{ font-size:9.4px; }} .nb8 table.top th {{ font-size:7.6px; }} .nb8 table.top td {{ padding-top:2.6px; padding-bottom:2.6px; }} .nb8 h2 {{ font-size:12px; margin-top:8px; }}
     .nb12 table.top {{ font-size:8.3px; }} .nb12 table.top th {{ font-size:7.2px; }} .nb12 table.top td {{ padding-top:1.9px; padding-bottom:1.9px; }} .nb12 h2 {{ font-size:11.5px; margin-top:6px; }}
     .nb16 table.top {{ font-size:7.3px; margin-bottom:2px; }} .nb16 table.top th {{ font-size:6.3px; padding-top:1.2px; padding-bottom:1.2px; }}
     .nb16 table.top td {{ padding-top:0.7px; padding-bottom:0.7px; }} .nb16 h2 {{ font-size:10px; margin-top:3px; margin-bottom:2px; padding-top:2px; padding-bottom:2px; }}
@@ -775,7 +783,7 @@ def build():
     .bn-t.navy {{ background:{NAV}; color:#fff; }}
     .bn-t.gold {{ background:{GOLD_MID}; color:#131A25; }}
     .bn-t.light {{ background:{NAV_LT}; color:{NAV}; }}
-    .bn-t.pair b {{ font-size:19px; white-space:nowrap; }}   /* two figures in one tile */
+    .bn-t.pair b {{ font-size:15px; white-space:nowrap; }}   /* two figures in one tile */
     .bn-t b small {{ font-size:0.45em; font-weight:600; opacity:.85; letter-spacing:0; }}
     .bn-t.light span {{ color:{INK}; }}
     ul.math {{ list-style:none; margin:4px 0 0; padding:0; font-size:9px; }}
@@ -821,7 +829,8 @@ def build():
     mlrows=[dict(r, d=(100*(r["msold"]-r25m[r["m"]]["msold"])/r25m[r["m"]]["msold"]) if r["m"] in r25m and r25m[r["m"]]["msold"] else None) for r in r26]
     clrows=[dict(r, d=(100*(r["csold"]-r25m[r["m"]]["csold"])/r25m[r["m"]]["csold"]) if r["m"] in r25m and r25m[r["m"]]["csold"] else None) for r in r26]
     olrows=[dict(r, d=(100*(r["osold"]-r25m[r["m"]]["osold"])/r25m[r["m"]]["osold"]) if r["m"] in r25m and r25m[r["m"]]["osold"] else None) for r in r26]
-    ukeys=["sfh","cd","oth"]; vkeys=["sfh_v","cd_v","oth_v"]
+    dlrows=[dict(r, d=(100*(r["dsold"]-r25m[r["m"]]["dsold"])/r25m[r["m"]]["dsold"]) if r["m"] in r25m and r25m[r["m"]].get("dsold") and r.get("dsold") else None) for r in r26]
+    ukeys=["sfh","cd","du","oth"]; vkeys=["sfh_v","cd_v","du_v","oth_v"]
     urows=two_year(ukeys,lambda d:f"{d:+.0f}",len(S["m0"]))
     vrows=two_year(vkeys,lambda d:f"{d/1e6:+.0f}M",sum(r["sellingPrice"] for r in S["m0"]))
     tot=lambda rows,keys,suf: sum((r.get(k+suf) or 0) for r in rows for k in keys)
@@ -833,8 +842,8 @@ def build():
         u25=len(S["y0"]); v25=sum(r["sellingPrice"] for r in S["y0"])
     uytd=dict(label=f"{u26:,} vs {u25:,}  {sgn(D(u26,u25))}%", sub=f"through {mthru} · 2025 full year {u25y:,}")
     vytd=dict(label=f"{BN(v26)} vs {BN(v25)}  {sgn(D(v26,v25))}%", sub=f"through {mthru} · 2025 full year {BN(v25y)}")
-    USEG=[("SFH","#AFC0D0","#203C5F","sfh"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","cd"),("Other","#C9CCD0","#6B6F75","oth")]
-    VSEG=[("SFH","#AFC0D0","#203C5F","sfh_v"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","cd_v"),("Other","#C9CCD0","#6B6F75","oth_v")]
+    USEG=[("SFH","#AFC0D0","#203C5F","sfh"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","cd"),("Duplex",DUP_LT,DUP,"du"),("Other (Tri+)","#C9CCD0","#6B6F75","oth")]
+    VSEG=[("SFH","#AFC0D0","#203C5F","sfh_v"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","cd_v"),("Duplex",DUP_LT,DUP,"du_v"),("Other (Tri+)","#C9CCD0","#6B6F75","oth_v")]
     # ── PAGE 1 — San Francisco right now ─────────────────────────────────
     # The local snapshot. Headline numbers, then four charts. Stats only, no
     # captions (the owner, Oct 21 2026): definitions go in the footer.
@@ -856,9 +865,9 @@ def build():
     o.append("</div>")
     o.append("<div class='cols' style='margin-top:7px'>")
     SL=[("What sellers asked","#E9BC3F"),("What buyers paid","#203C5F")]
-    for t_,rows_,k_ in (("SFH",mlrows,"m"),("Condo/TIC/Co-op",clrows,"c"),("Other",olrows,"o")):
+    for t_,rows_,k_ in (("SFH",mlrows,"m"),("Condo/TIC/Co-op",clrows,"c"),("Duplex",dlrows,"d"),("Other (Tri+)",olrows,"o")):
         o.append(f"""<div class='col'><h2>Sale vs List — {t_}</h2>
-      {lines(rows_,[(SL[0][0],SL[0][1],k_+"list"),(SL[1][0],SL[1][1],k_+"sold")],w=318,h=196,dkey="d")}</div>""")
+      {lines(rows_,[(SL[0][0],SL[0][1],k_+"list"),(SL[1][0],SL[1][1],k_+"sold")],w=300,h=224,dkey="d",lab=False)}</div>""")
     o.append("</div>")
     o.append(f"<div class='foot'><span>Source: SFAR MLS via BrokerMetrics, closed sales (Closed + Sold Off MLS), geocoded to the site's fog-contour layer. Data through {W['m1'][1]}. Sale vs List: monthly medians; the figure under each month is the change in the median sale from the same month last year. Deemed reliable, not guaranteed.</span><span>page 1 / 9</span></div></div>")
 
@@ -879,7 +888,7 @@ def build():
     o.append(f"""<div class='col' style='flex:1.5'><h2>Allocation by Tier</h2>
       {mirror_bars(msplit)}
       <h2 style='margin-top:6px'>Allocation by Type</h2>
-      {type_mirror(S["y1"])}</div>""")
+      {type_mirror(S["y1"],h=196)}</div>""")
     o.append(f"""<div class='col' style='flex:1.1'><h2>Allocation by Neighborhood: Top 20 by Dollars</h2>
       {hood_bars(hrank,mtot,w=380,h=470,top=20)}</div>""")
     o.append("</div>")
@@ -986,32 +995,30 @@ def build():
     low_sales=lambda seg: sorted([r for r in seg_sales(seg) if r.get("sqft")],key=lambda r:r["sellingPrice"])[:10]
     # Biggest overbids by sale-to-list, every sale with a list price.
     overbids=lambda seg: sorted([r for r in seg_sales(seg) if ratio(r)],key=lambda r:-ratio(r))[:10]
-    o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The 10s of {datetime.date.fromisoformat(W['m1'][1]).year}</div>
-      <div class='p'>Year to date: Jan 1 – {datetime.date.fromisoformat(W['m1'][1]).strftime('%b %-d, %Y')}</div></div>
-      <div class='by'>Chuck Heaver · Vanguard Properties</div></div>""")
     TH=lambda *cols: "<tr>"+"".join(f"<th class='l'>{c[1:]}</th>" if c.startswith("<") else f"<th>{c}</th>" for c in cols)+"</tr>"
     NB=TH("<Neighborhood","Median","Sales")
     SALE=TH("<Address","Closed","% list")
     PSF=TH("<Address","$/sf","Closed")
     panel=lambda title,head,rows: f"<h2>{title}</h2><table class='top'>{head}{rows}</table>"
-    COT,OTT=mg.TITLE[CO],mg.TITLE[OT]
-    # Four across: a row each for SFH, Condo/TIC/Co-op and Other, then the lows
-    # and the busiest neighborhoods.
-    cols=[
-        [("Neighborhood SFH",NB,nb_median_rows(SFHs)), (f"Neighborhood {COT}",NB,nb_median_rows(COs)), (f"Neighborhood {OTT}",NB,nb_median_rows(OTs)),
-         ("Lowest Neighborhood SFH",NB,nb_median_rows(SFHs,low=True))],
-        [("Top 10 SFH",SALE,sales_rows(top_sales(SFHs))), (f"Top 10 {COT}",SALE,sales_rows(top_sales(COs))), (f"Top 10 {OTT}",SALE,sales_rows(top_sales(OTs))),
-         ("Lowest 10 SFH",SALE,sales_rows(low_sales(SFHs)))],
-        [("Top $/sf SFH",PSF,ppsf_sales_rows(SFHs)), (f"Top $/sf {COT}",PSF,ppsf_sales_rows(COs)), (f"Top $/sf {OTT}",PSF,ppsf_sales_rows(OTs)),
-         (f"Lowest 10 {COT}",SALE,sales_rows(low_sales(COs)))],
-        [("Overbids - SFH",SALE,sales_rows(overbids(SFHs))), (f"Overbids - {COT}",SALE,sales_rows(overbids(COs))), (f"Overbids - {OTT}",SALE,sales_rows(overbids(OTs))),
-         ("Top # Units Sold (All)",TH("<Neighborhood","Sales","Median"),nb_count_rows())],
-    ]
-    o.append("<div class='cols nb4 nb16'>")
-    for col in cols:
-        o.append("<div class='col'>"+"".join(panel(*p) for p in col)+"</div>")
-    o.append("</div>")
-    o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS), this year only. * fewer than 10 sales. Every sale counts, BMR units included; sales under $100K (parking, rentals, entry errors) and duplicate entries left out. Top $/sf and Lowest 10 leave out sales with no sq ft reported.</span><span>page 5 / 9</span></div></div>")
+    # Four categories (owner, Oct 29 2026), so The 10s is two pages: a row per
+    # category — its neighborhoods, top sales, top $/sf and overbids — with the
+    # lows and the busiest neighborhoods as the second page's last row.
+    yr10=datetime.date.fromisoformat(W['m1'][1]).year
+    def seg_row(segk):
+        T=mg.TITLE[segk]; types=mg.SEG[segk]
+        return [(f"Neighborhood {T}",NB,nb_median_rows(types)), (f"Top 10 {T}",SALE,sales_rows(top_sales(types))),
+                (f"Top $/sf {T}",PSF,ppsf_sales_rows(types)), (f"Overbids - {T}",SALE,sales_rows(overbids(types)))]
+    low_row=[("Lowest Neighborhood SFH",NB,nb_median_rows(SFHs,low=True)), ("Lowest 10 SFH",SALE,sales_rows(low_sales(SFHs))),
+             (f"Lowest 10 {mg.TITLE[CO]}",SALE,sales_rows(low_sales(COs))), ("Top # Units Sold (All)",TH("<Neighborhood","Sales","Median"),nb_count_rows())]
+    for part,rows_ in ((1,[seg_row(SF),seg_row(CO)]),(2,[seg_row(mg.DU),seg_row(OT),low_row])):
+        o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The 10s of {yr10} <span class='part'>{part} of 2</span></div>
+      <div class='p'>Year to date: Jan 1 – {datetime.date.fromisoformat(W['m1'][1]).strftime('%b %-d, %Y')}</div></div>
+      <div class='by'>Chuck Heaver · Vanguard Properties</div></div>""")
+        o.append(f"<div class='cols nb4 {'nb12' if len(rows_)==3 else 'nb8'}'>")
+        for c in range(4):
+            o.append("<div class='col'>"+"".join(panel(*row[c]) for row in rows_)+"</div>")
+        o.append("</div>")
+        o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS), this year only. * fewer than 10 sales. Every sale counts, BMR units included; sales under $100K (parking, rentals, entry errors) and duplicate entries left out. Top $/sf and Lowest 10 leave out sales with no sq ft reported. SFH = Single Family Residence, Halfplex and 2 Houses on Lot; Other (Tri+) = triplexes, fourplexes, 5+ units and the other types.</span><span>page 5 / 9</span></div></div>")
 
     # ── PAGE 6 — in depth ────────────────────────────────────────────────
     # Everything a reader can skip. The narrative pages stay light because
@@ -1033,7 +1040,7 @@ def build():
       +T_("gold", bn['zip'], "highest volume ZIP", f"{bn['zipv']} · {bn['zhoods']}")
       +T_("light", bn['under'], "sold below asking")
       +T_("light", bn['tenm'], "sales of $10M or more")
-      +T_("navy pair", f"{bn['sqft'][:-3]} / {bn['csqft'][:-3]} / {bn['osqft'][:-3]}", "median sq ft — SFH, Condo/TIC/Co-op, Other")
+      +T_("navy pair", f"{bn['sqft'][:-3]} / {bn['csqft'][:-3]} / {bn['dsqft'][:-3]} / {bn['osqft'][:-3]}", "median sq ft — SFH, Condo/TIC/Co-op, Duplex, Other (Tri+)")
       +"</div>")
     o.append(f"""<div style='margin-top:7px'><h2>Units Sold by Week — Every Week of Both Years</h2>
       {weekly_bars(wrows,h=150,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"Jan 1 – {thru}, both years · 2025 full year {w25y:,}"))}</div>""")

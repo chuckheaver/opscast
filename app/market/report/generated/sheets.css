@@ -25,15 +25,15 @@
 .sheetA .sband { background:#131A25; border-radius:6px; padding:9px 16px 2px; margin-bottom:7px; }
 .sheetA .sband-h { font-size:9.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#CEE2E6; margin-bottom:3px; }
 .sheetA .sband-h span { color:rgba(255,255,255,0.50); }
-.sheetA .sband-row { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding-bottom:8px; }
+.sheetA .sband-row { display:grid; grid-template-columns:repeat(5,1fr); gap:7px; padding-bottom:8px; }
 .sheetA .sbx { border:1px solid rgba(255,255,255,0.14); border-radius:7px; padding:5px 9px 2px; background:rgba(255,255,255,0.025); }
 .sheetA .sbx-h { font-size:8px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#fff; margin-bottom:1px; }
 .sheetA .sbx-r { display:flex; justify-content:space-between; align-items:baseline; gap:6px; padding:2px 0; border-top:1px solid rgba(255,255,255,0.09); }
 .sheetA .sbx-l { font-size:7.4px; line-height:1.25; color:rgba(255,255,255,0.72); }
 .sheetA .sbx-l b { color:#fff; font-weight:700; white-space:nowrap; }
-.sheetA .sbx-v { font-family:Georgia,'Times New Roman',serif; font-weight:700; color:#CEE2E6; font-size:10.5px; line-height:1.2; white-space:nowrap; text-align:right; }
+.sheetA .sbx-v { font-family:Georgia,'Times New Roman',serif; font-weight:700; color:#CEE2E6; font-size:9.6px; line-height:1.2; white-space:nowrap; text-align:right; }
 .sheetA .sbx-v span { margin-left:0.44em; font-size:0.66em; font-weight:600; color:rgba(255,255,255,0.50); }
-.sheetA .sbx-r.big .sbx-v { font-size:14.5px; }
+.sheetA .sbx-r.big .sbx-v { font-size:13px; }
 .sheetA .sbx-all .sbx-r { flex-direction:column; align-items:flex-start; gap:1px; padding:4px 0; }
 .sheetA .sbx-all .sbx-v { font-size:17px; }
 .sheetA .kpi { flex:1; min-width:0; background:#E4EEF0; border-radius:8px; padding:10px 8px 11px; border-left:5px solid #E9BC3F; text-align:center; display:flex; flex-direction:column; justify-content:space-between; height:62px; }
@@ -66,6 +66,10 @@
 .sheetA .nn { font-weight:400; color:#6B6F75; font-size:0.85em; }
 .sheetA .nb4 table.top { table-layout:auto; font-size:7.2px; }
 .sheetA .nb4 table.top td, .sheetA .nb4 table.top th { white-space:nowrap; overflow:visible; padding-left:3px; padding-right:3px; }
+.sheetA .nb8 table.top { font-size:9.4px; }
+.sheetA .nb8 table.top th { font-size:7.6px; }
+.sheetA .nb8 table.top td { padding-top:2.6px; padding-bottom:2.6px; }
+.sheetA .nb8 h2 { font-size:12px; margin-top:8px; }
 .sheetA .nb12 table.top { font-size:8.3px; }
 .sheetA .nb12 table.top th { font-size:7.2px; }
 .sheetA .nb12 table.top td { padding-top:1.9px; padding-bottom:1.9px; }
@@ -110,7 +114,7 @@
 .sheetA .bn-t.navy { background:#203C5F; color:#fff; }
 .sheetA .bn-t.gold { background:#E9BC3F; color:#131A25; }
 .sheetA .bn-t.light { background:#E4EEF0; color:#203C5F; }
-.sheetA .bn-t.pair b { font-size:19px; white-space:nowrap; }
+.sheetA .bn-t.pair b { font-size:15px; white-space:nowrap; }
 .sheetA /* two figures in one tile */
     .bn-t b small { font-size:0.45em; font-weight:600; opacity:.85; letter-spacing:0; }
 .sheetA .bn-t.light span { color:#131A25; }

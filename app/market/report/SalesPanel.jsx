@@ -22,7 +22,7 @@ export function useSales() {
   return rows;
 }
 
-const SEGNAME = { sfh: "SFH", co: "Condo/TIC/Co-op", ot: "Other" };
+const SEGNAME = { sfh: "SFH", co: "Condo/TIC/Co-op", du: "Duplex", ot: "Other (Tri+)" };
 const mapSale = id => `/fog?${new URLSearchParams({ preset: "homes", sale: id })}`;
 const pctList = s => (s.l ? (100 * s.p) / s.l : null);
 const ppsf = s => (s.s ? s.p / s.s : null);

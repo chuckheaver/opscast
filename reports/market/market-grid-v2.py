@@ -59,16 +59,17 @@ def hood(r):
     n=r.get("fogNeighborhood")
     return LABEL.get(n,n) if n else None
 PERIOD=os.path.join(ROOT,"data","reporting-period.json")
-# The report's three categories, the same as the site's (app/lib/segments.js;
-# the owner, Oct 21 2026): SFH, Condo / TIC / Co-op, and Other — Residential
-# Income (the second feed, …_INCP_…, 5+ unit buildings included) and every
-# other type. Every sale lands in exactly one; a new MLS type goes here and in
+# The report's four categories, the same as the site's (app/lib/segments.js;
+# the owner, Oct 22 and Oct 29 2026): SFH, Condo / TIC / Co-op, Duplex, and
+# Other (Tri+) — triplexes, fourplexes, 5+ unit buildings and every other
+# type. Every sale lands in exactly one; a new MLS type goes here and in
 # app/lib/segments.js.
-SF, CO, OT = "Single Family Residences", "Condo / TIC / Co-op", "Other"
+SF, CO, DU, OT = "Single Family Residences", "Condo / TIC / Co-op", "Duplex", "Other"
 SEG={SF:{"Single Family Residence","2 Houses on Lot","Halfplex"},
      CO:{"Condominium","Tenancy in Common","Stock Cooperative","Co-Ownership","Townhouse","Loft Condominium","Loft"},
-     OT:{"Other","3+ Houses on Lot","Duplex","Triplex","Fourplex","5+ Units","Residential Income Other"}}
-TITLE={SF:"SFH",CO:"Condo/TIC/Co-op",OT:"Other"}
+     DU:{"Duplex"},
+     OT:{"Other","3+ Houses on Lot","Triplex","Fourplex","5+ Units","Residential Income Other"}}
+TITLE={SF:"SFH",CO:"Condo/TIC/Co-op",DU:"Duplex",OT:"Other (Tri+)"}
 # The site's zones at a point (app/lib/fog-zones.js, reports/market/micro.py).
 ZONES=[("Sun","#FDE68A","8 hrs or less",lambda h:h<=8),
        ("Transition","#E7E5E4","8.5 hrs",lambda h:8<h<9),

@@ -263,7 +263,7 @@ function Numbers({ data }) {
         {T("gold", b.zip, "highest volume ZIP", `${b.zipv} · ${b.zhoods}`)}
         {T("light", b.under, "sold below asking")}
         {T("light", b.tenm, "sales of $10M or more")}
-        {T("navy pair", `${b.sqft.replace(" sf", "")} / ${b.csqft.replace(" sf", "")} / ${b.osqft.replace(" sf", "")}`, "median sq ft — SFH, Condo/TIC/Co-op, Other")}
+        {T("navy pair", `${b.sqft.replace(" sf", "")} / ${b.csqft.replace(" sf", "")} / ${b.dsqft.replace(" sf", "")} / ${b.osqft.replace(" sf", "")}`, "median sq ft — SFH, Condo/TIC/Co-op, Duplex, Other (Tri+)")}
       </div>
       <h3 className="mr-h3">Units sold by week, every week of both years</h3>
       <div className="mr-fig-top">

@@ -124,7 +124,7 @@ export default function Page() {
           <h3>Notes</h3>
           <ul>
             <li>Closed sales (Closed and Sold Off MLS) from SFAR MLS, Residential and Residential Income, Jan 1 – {thru}; comparisons with {P.prior} use the same stretch of {P.prior}{P.partial ? `, and the month is ${dateShort(P.m1[0])} – ${dateShort(P.m1[1])} against the same days of ${P.prior}` : ""}. Where {P.prior} is shown as a year it is the full year.</li>
-            <li>Categories: SFH = Single Family Residence, Halfplex and 2 Houses on Lot; Condo/TIC/Co-op; Other = duplexes, triplexes, fourplexes, 5+ units and the other types.</li>
+            <li>Categories: SFH = Single Family Residence, Halfplex and 2 Houses on Lot; Condo/TIC/Co-op; Duplex; Other (Tri+) = triplexes, fourplexes, 5+ units and the other types.</li>
             <li>Every sale counts, BMR units included; sales under $100K (parking, rentals, entry errors) and duplicate entries are left out. Median $/sf, Top $/sf and the Lowest 10 leave out sales with no square footage. * fewer than 10 sales.</li>
             <li>Sale vs list: monthly medians; the figure under each month is the change in the median sale from the same month last year. Days on market as reported; list-to-sale ratios use the final list price.</li>
             <li>Fog zones: daily summer fog hours from GOES satellite imagery; each sale counts in the zone at its address. Neighborhoods are where each home sits.</li>

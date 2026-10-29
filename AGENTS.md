@@ -50,10 +50,9 @@ The owner's rules:
   Residence, Halfplex and 2 Houses on Lot, (2) Condo/TIC/Co-op, (3) Duplex,
   (4) "Other (Tri+)" (triplexes, fourplexes, 5+ units and the other types). Never
   "Condo/TIC/Other". The site's list is `app/lib/segments.js` (pages, map dots,
-  pop-ups and the stats scripts all read it). The monthly report still has
-  three — SFH, Condo/TIC/Co-op and Other, with the duplexes inside Other — in
-  `SEG` in `reports/market/market-grid-v2.py` (which stops on a type in no
-  category); it is being brought to four, site first. A new MLS type goes in
+  pop-ups and the stats scripts all read it). The monthly report has the same
+  four (owner, Oct 29 2026), in `SEG` in `reports/market/market-grid-v2.py`
+  (which stops on a type in no category). A new MLS type goes in
   both lists, in the same category.
 - A sale under $100K is parking, a rental or an entry error: it is left out.
 - A duplicated sale counts once, keeping the Closed record.

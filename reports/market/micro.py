@@ -291,7 +291,9 @@ CSS = f"""
 def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
     """Both microclimate pages, as HTML. zone_rows: [(title, byZ, tot)] for
     the closings-by-zone grids, rendered with the grid's own head/cells."""
-    sfh = mg.SEG[mg.SF]; cto = mg.SEG[mg.CO]; oth = mg.SEG[mg.OT]
+    # The heat map's index has room for three medians: SFH, Condo/TIC/Co-op, and
+    # Duplex & Other together; the grids below break the four categories out.
+    sfh = mg.SEG[mg.SF]; cto = mg.SEG[mg.CO]; oth = mg.SEG[mg.DU] | mg.SEG[mg.OT]
     y1 = [r for r in F if r.get("sellingDate") and W["y1"][0] <= r["sellingDate"] <= W["y1"][1]]
     hoods = neighborhoods(y1, sfh, mg.stats, cto, oth)
     clim = json.load(open(os.path.join(ROOT, "app/lib/sf-climate.json")))
@@ -319,10 +321,10 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
          f"<div class='p'>Median sale price by neighborhood, in millions, Jan 1 – {thru}: <b class='sfh'>SFH in navy</b> · <b class='cto'>Condo/TIC/Co-op in gold</b> · on the city's four fog zones, 1 to 4</div></div></div>",
          "<div class='fm-wrap'><div class='fm-map'>",
          f"<div class='mapbox'>{fog_map(hoods, w=612, h=628)}</div><div class='fm-zkey'>{zkey}</div></div>",
-         "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>median: <b class='sfh'>SFH</b> · <b class='cto'>Condo/TIC/Co-op</b> · <b class='oth'>Other</b></i></div>",
+         "<div class='fm-side'><div class='fm-h'>Neighborhood index<i>median: <b class='sfh'>SFH</b> · <b class='cto'>Condo/TIC/Co-op</b> · <b class='oth'>Duplex &amp; Other</b></i></div>",
          f"<div class='fm-idx'>{idx}</div>",
          "</div></div>",
-         foot(FOG_NOTE + " Shading: the fog contours. Number: each neighborhood's zone; bar: its mix of zones. Map labels: this year's medians, SFH (navy) then Condo/TIC/Co-op (gold); one figure = only that type sold; no label = neither sold. The index adds Other (grey). °F estimated.")]
+         foot(FOG_NOTE + " Shading: the fog contours. Number: each neighborhood's zone; bar: its mix of zones. Map labels: this year's medians, SFH (navy) then Condo/TIC/Co-op (gold); one figure = only that type sold; no label = neither sold. The index adds Duplex &amp; Other together (grey). °F estimated.")]
 
     # ── page 2: microclimates and real estate ──
     zst = {z["k"]: mg.stats([r for r in y1 if r.get("propType") in sfh and sale_zone(r) is z]) for z in ZONES}
@@ -367,14 +369,20 @@ def pages(*, F, W, plabel, mg, head, cells, groups, zone_rows):
           f"<div class='mz-col' style='flex:0.95'><div class='mz-h'>The year downtown, °F</div>{year_chart(months, w=250, h=104)}"
           f"<div class='mz-cap'>Normal high and low by month, downtown, NOAA 1991–2020.</div></div>",
           "</div>"]
+    # Four categories (owner, Oct 29 2026): the closings-by-zone grids get a
+    # page of their own after this one.
+    o.append(f"<div class='mz-h' style='margin-top:8px'>Microclimate facts</div><div class='mz-facts'>{fact_html}</div>")
+    note = (f"{FOG_NOTE} Sales: SFAR MLS closed sales, Jan 1 – {thru}, against {mprior} and the same stretch of {pyear}, each counted by the fog zone at the property — not a valuation of "
+            "any property. Weather and climate figures are approximations.")
+    o.append(foot(note + " Warmest/coolest: 300+ homes and 5+ sales; °F estimated."))
+    o.append(f"<div class='page mzp'><div class='hdr'><div><div class='t'>Closings by Fog Zone</div>"
+             f"<div class='p'>{html.escape(plabel)}</div></div></div>")
     for title, byZ, tot in zone_rows:
-        o.append(f"<div class='zh'>Closings by Fog Zone — {title}</div>")
+        o.append(f"<div class='zh'>{title}</div>")
         o.append("<table class='zone'>" + head().replace("<th class='name'>Neighborhood</th>", "<th class='name'>Fog Zone</th>") + "<tbody>")
         for (zn, _, _, st), z in zip(byZ, ZONES):
             o.append(f"<tr><td class='name'>{zc(z)}{html.escape(zn)}</td>"
                      + "".join(cells(st, kind, key) for _, _, kind, key in groups) + "</tr>")
         o.append("</tbody><tfoot><tr><td class='name'>Total — all zones</td>" + "".join(cells(tot, kind, key) for _, _, kind, key in groups) + "</tr></tfoot></table>")
-    o.append(f"<div class='mz-h' style='margin-top:5px'>Microclimate facts</div><div class='mz-facts'>{fact_html}</div>")
-    o.append(foot(f"{FOG_NOTE} Sales: SFAR MLS closed sales, Jan 1 – {thru}, against {mprior} and the same stretch of {pyear}, each counted by the fog zone at the property — not a valuation of "
-                  "any property. Weather and climate figures are approximations. Warmest/coolest: 300+ homes and 5+ sales; °F estimated."))
+    o.append(foot(note))
     return "".join(o)

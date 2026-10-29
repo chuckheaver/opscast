@@ -19,8 +19,8 @@ cv, mg, pt = c3.cv, c3.mg, c3.pt
 import micro
 
 ROOT = mg.ROOT
-SF, CO, OT = mg.SF, mg.CO, mg.OT
-SEGS = [("sfh", SF), ("co", CO), ("ot", OT)]
+SF, CO, DU, OT = mg.SF, mg.CO, mg.DU, mg.OT
+SEGS = [("sfh", SF), ("co", CO), ("du", DU), ("ot", OT)]
 SEGKEY = {t: k for k, s in SEGS for t in mg.SEG[s]}
 
 
@@ -46,18 +46,18 @@ def main():
     months = []
     for m in range(1, 13):
         a, b = r25m.get(m), r26m.get(m)
-        row = dict(m=m, prior=dict(sfh=a["sfh"], co=a["cd"], ot=a["oth"], sfh_v=a["sfh_v"], co_v=a["cd_v"], ot_v=a["oth_v"]) if a else None,
-                   cur=dict(sfh=b["sfh"], co=b["cd"], ot=b["oth"], sfh_v=b["sfh_v"], co_v=b["cd_v"], ot_v=b["oth_v"]) if b else None,
-                   list=dict(sfh=b["mlist"], co=b["clist"], ot=b["olist"]) if b else None,
-                   sold=dict(sfh=b["msold"], co=b["csold"], ot=b["osold"]) if b else None,
-                   priorSold=dict(sfh=a["msold"], co=a["csold"], ot=a["osold"]) if a else None)
+        row = dict(m=m, prior=dict(sfh=a["sfh"], co=a["cd"], du=a["du"], ot=a["oth"], sfh_v=a["sfh_v"], co_v=a["cd_v"], du_v=a["du_v"], ot_v=a["oth_v"]) if a else None,
+                   cur=dict(sfh=b["sfh"], co=b["cd"], du=b["du"], ot=b["oth"], sfh_v=b["sfh_v"], co_v=b["cd_v"], du_v=b["du_v"], ot_v=b["oth_v"]) if b else None,
+                   list=dict(sfh=b["mlist"], co=b["clist"], du=b["dlist"], ot=b["olist"]) if b else None,
+                   sold=dict(sfh=b["msold"], co=b["csold"], du=b["dsold"], ot=b["osold"]) if b else None,
+                   priorSold=dict(sfh=a["msold"], co=a["csold"], du=a["dsold"], ot=a["osold"]) if a else None)
         # The partial month is compared with the same days of last year's month.
         if partial and m == mo.month:
             row["priorSame"] = dict({k: len(v) for k, v in m0seg.items()}, **{k + "_v": sum(r["sellingPrice"] for r in v) for k, v in m0seg.items()},
                                     **{"sold_" + k: (statistics.median([r["sellingPrice"] for r in v]) if v else None) for k, v in m0seg.items()})
         months.append(row)
     ytd = dict(units=len(S["y1"]), unitsPrior=len(S["y0"]), vol=sum(r["sellingPrice"] for r in S["y1"]), volPrior=sum(r["sellingPrice"] for r in S["y0"]),
-               unitsPriorYear=sum(r["sfh"] + r["cd"] + r["oth"] for r in ms[py]), volPriorYear=sum(r["vol"] for r in ms[py]))
+               unitsPriorYear=sum(r["sfh"] + r["cd"] + r["du"] + r["oth"] for r in ms[py]), volPriorYear=sum(r["vol"] for r in ms[py]))
 
     # ── allocation of money ──
     split, n, tot = c3.money_split(S["y1"])
@@ -107,7 +107,7 @@ def main():
     pick = lambda st: {w: {k: st[w].get(k) for k in keys} for w in ("m1", "m0", "y1", "y0")}
     grids = []
     for name, byA, tot_, byZ, byD, notes in pages:
-        k = {SF: "sfh", CO: "co", OT: "ot"}[name]
+        k = {SF: "sfh", CO: "co", DU: "du", OT: "ot"}[name]
         grids.append(dict(key=k, title=mg.TITLE[name],
                           rows=[dict(name=nm, code=nid, st=pick(st), note=notes.get(nm)) for nm, nid, st in byD],
                           total=pick(tot_),
