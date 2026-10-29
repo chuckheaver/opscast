@@ -20,4 +20,5 @@ python3 review.py            # sales-data review    → out/review.json (flags o
 python3 renumber.py         # page n / N across both documents
 python3 proof.py             # side-by-side proof   → out/sf-briefing-proof.html
 python3 web.py               # web edition          → app/market/report/generated/
+python3 webdata.py           # interactive Market Stats → app/market/report/web-stats.json + public/data/report-sales.json
 node pdf.mjs                 # the PDF              → public/reports/sf-market-briefing.pdf
