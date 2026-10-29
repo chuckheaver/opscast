@@ -39,7 +39,7 @@ const COLS = [
 
 export default function SalesPanel({ open, onClose }) {
   const all = useSales();
-  const [sort, setSort] = useState({ k: "p", dir: -1 });
+  const [sort, setSort] = useState({ k: "d", dir: -1 });   // newest closing first (owner, Oct 29 2026)
   const [yr, setYr] = useState(0);                 // 0 this year, 1 last year's same stretch (when offered)
   const list = useMemo(() => {
     if (!all) return null;

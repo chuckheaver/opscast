@@ -35,11 +35,12 @@ const COLS = [
 ];
 
 function SalesList({ list, onClose }) {
-  const [sort, setSort] = useState({ k: "p", dir: -1 });
+  const [sort, setSort] = useState({ k: "d", dir: -1 });   // newest closing first (owner, Oct 29 2026)
   const rows = useMemo(() => {
     const r = [...list.sales];
     r.sort((a, b) => {
       if (sort.k === "a") return sort.dir * a.a.localeCompare(b.a, "en", { numeric: true });
+      if (sort.k === "d") return sort.dir * a.d.localeCompare(b.d) || b.p - a.p;
       const x = a[sort.k], y = b[sort.k];
       if (x == null && y == null) return 0;
       if (x == null) return 1;                      // blanks last, whichever way it sorts
