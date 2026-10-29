@@ -2328,13 +2328,27 @@ export default function FogMap({
     if (!feat) return;
     const c = feat.geometry?.coordinates;
     if (!Array.isArray(c) || !Number.isFinite(c[0]) || !Number.isFinite(c[1])) return;
-    map.once("moveend", () => {
+    // The pop-up opens once the glide settles. On a deep link (?sale=) the
+    // listings can arrive before the map's layers and pop-up opener exist, so
+    // it waits for them (up to ~10 s) instead of silently skipping the pop-up.
+    let done = false, tries = 0, timer = null;
+    const open = () => {
+      if (done) return;
+      if (!openPropPopupRef.current || !map.getLayer("comp-focus")) {
+        if (++tries < 50) timer = setTimeout(open, 200);
+        return;
+      }
+      done = true;
       setRing();
-      openPropPopupRef.current?.({ features: [feat], lngLat: { lng: c[0], lat: c[1] } });
-    });
+      openPropPopupRef.current({ features: [feat], lngLat: { lng: c[0], lat: c[1] } });
+    };
+    map.once("moveend", () => { timer = setTimeout(open, 60); });
     // Land the dot below center so its pop-up opens in clear space under
     // the search bar and layer chips rather than behind them.
     map.easeTo({ center: c, zoom: Math.max(map.getZoom(), 15.5), duration: 900, offset: [0, 170] });
+    // If another camera move swallows this one's moveend, open anyway.
+    const backup = setTimeout(open, 1500);
+    return () => { done = true; clearTimeout(timer); clearTimeout(backup); };
   }, [focusComp]);
 
   // Reset button → re-frame all of San Francisco. Bumped counter animates once.
