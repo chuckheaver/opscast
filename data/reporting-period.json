@@ -1,5 +1,9 @@
 {
-  "_about": "The reporting period end: the last closing date any published statistic counts (site, map counts, monthly report) \u2014 the last day of the last FULL calendar month in the latest data load; a month the load is still in is never reported. Closings after it are held out of public/data/sf-listings.geojson (data/held-sales.geojson) until a later load completes the month and the period moves. The owner confirms this date before every rebuild; scripts/apply-sale-decisions.mjs stops if it falls inside an unfinished month.",
-  "periodEnd": "2026-09-30",
-  "confirmedByOwner": "2026-10-20"
+  "_about": "The reporting period end: the last closing date any published statistic counts (site, map counts, monthly report) — the last day of the last FULL calendar month in the latest data load; a month the load is still in is never reported. Closings after it are held out of public/data/sf-listings.geojson (data/held-sales.geojson) until a later load completes the month and the period moves. The owner confirms this date before every rebuild; scripts/apply-sale-decisions.mjs stops if it falls inside an unfinished month.",
+  "periodEnd": "2026-10-28",
+  "confirmedByOwner": "2026-10-29",
+  "partialMonth": {
+    "allowed": true,
+    "why": "Owner, Oct 29 2026: update the whole site through this load (sales through Oct 28) now; the final October load comes Nov 1 and moves the period end to Oct 31."
+  }
 }

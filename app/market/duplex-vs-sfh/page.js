@@ -28,12 +28,10 @@ export default function Page() {
         <DuplexVsSfh data={data} />
       </main>
 
-      <SiteFooter note={<>Closed sales from SFAR MLS, Jan 1 – {dateLong(data.through)}. This report includes October closings; the site’s other market reports
-        run through the last full month. SFH = Single Family Residence, Halfplex and 2 Houses on Lot; Duplex = Duplex. Medians. % over list = sale price over
+      <SiteFooter note={<>Closed sales from SFAR MLS, Jan 1 – {dateLong(data.through)}. SFH = Single Family Residence, Halfplex and 2 Houses on Lot; Duplex = Duplex. Medians. % over list = sale price over
         list price; $/sf uses only sales with reported square footage. * Fewer than 4 duplex sales: read with care. Difference = Duplex against SFH in the same
         neighborhood (shown where there are 3+ SFH sales); price and $/sf in %, % over list in points. Outliers: a duplex sale above 1.5× the city’s duplex
-        median $/sf (${data.cityDuplexPpsf.toLocaleString("en-US")}) or sold 50%+ over list. October closings are not on the map yet, so their addresses open the
-        neighborhood. {data.excluded.join(" ")} Deemed reliable, not guaranteed.</>} />
+        median $/sf (${data.cityDuplexPpsf.toLocaleString("en-US")}) or sold 50%+ over list. {data.excluded.join(" ")} Deemed reliable, not guaranteed.</>} />
     </div>
   );
 }

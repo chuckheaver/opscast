@@ -13,8 +13,13 @@ load) is never reported until a later load completes it. Before every
 rebuild, tell the owner that date and have them confirm it, then set it in
 `data/reporting-period.json` (`periodEnd`, and the day they confirmed it in
 `confirmedByOwner`); `scripts/apply-sale-decisions.mjs` stops if it falls
-inside an unfinished month. The monthly report and the site's Market Update
-PDF are always the whole city.
+inside an unfinished month. One exception, the owner's own: when the owner
+asks for an interim update through the load's last date (Oct 29 2026: the
+site through Oct 28, before the final October load on Nov 1), set
+`partialMonth.allowed` in `data/reporting-period.json` and the period end to
+that date (never past the load); the report compares the same days of last
+year's month. Take it out again with the next full-month load. The monthly
+report and the site's Market Update PDF are always the whole city.
 No closing after that date goes into any statistic — site, map counts or
 report: `scripts/apply-sale-decisions.mjs` holds them out of the sales file
 (`data/held-sales.geojson`) until the period moves. `build.sh` applies the

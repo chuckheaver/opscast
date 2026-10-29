@@ -682,6 +682,8 @@ def build():
     SF,CO,OT=mg.SF,mg.CO,mg.OT
     s,c=seg[SF],seg[CO]; st,ct=s["tot"],c["tot"]
     mo=datetime.date.fromisoformat(W["m1"][0]); mname=mo.strftime("%B"); yy=str(mo.year)[2:]; py=str(mo.year-1)[2:]
+    # Through the end of the month, or through its last day when the owner runs a partial month.
+    _end=datetime.date.fromisoformat(W["m1"][1]); mthru=mname if (_end+datetime.timedelta(days=1)).day==1 else f"{mname} {_end.day}"
     thru=datetime.date.fromisoformat(W["m1"][1]).strftime("%B %-d")
     allv1=sum(r["sellingPrice"] for r in S["y1"]); allv0=sum(r["sellingPrice"] for r in S["y0"])
     zs={z[0]:z[3] for z in s["byZ"]}; zc={z[0]:z[3] for z in c["byZ"]}
@@ -821,15 +823,15 @@ def build():
     ytd_then=lambda rows,keys: sum((r.get(k) or 0) for r in rows for k in keys if r["m"] in r26m)
     u26,u25=ytd_now(urows,ukeys),ytd_then(urows,ukeys); u25y=tot(urows,ukeys,"")
     v26,v25=ytd_now(vrows,vkeys),ytd_then(vrows,vkeys); v25y=tot(vrows,vkeys,"")
-    uytd=dict(label=f"{u26:,} vs {u25:,}  {sgn(D(u26,u25))}%", sub=f"through {mname} · 2025 full year {u25y:,}")
-    vytd=dict(label=f"{BN(v26)} vs {BN(v25)}  {sgn(D(v26,v25))}%", sub=f"through {mname} · 2025 full year {BN(v25y)}")
+    uytd=dict(label=f"{u26:,} vs {u25:,}  {sgn(D(u26,u25))}%", sub=f"through {mthru} · 2025 full year {u25y:,}")
+    vytd=dict(label=f"{BN(v26)} vs {BN(v25)}  {sgn(D(v26,v25))}%", sub=f"through {mthru} · 2025 full year {BN(v25y)}")
     USEG=[("SFH","#AFC0D0","#203C5F","sfh"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","cd"),("Other","#C9CCD0","#6B6F75","oth")]
     VSEG=[("SFH","#AFC0D0","#203C5F","sfh_v"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","cd_v"),("Other","#C9CCD0","#6B6F75","oth_v")]
     # ── PAGE 1 — San Francisco right now ─────────────────────────────────
     # The local snapshot. Headline numbers, then four charts. Stats only, no
     # captions (the owner, Oct 21 2026): definitions go in the footer.
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>San Francisco Real Estate</div>
-      <div class='p'>YTD through <b>{mname} {mo.year}</b> vs {mo.year-1}.</div></div>
+      <div class='p'>YTD through <b>{mthru}{',' if mthru!=mname else ''} {mo.year}</b> vs {mo.year-1}.</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales, SFAR MLS · run {datetime.date.today().strftime('%B %-d, %Y')}</div></div>""")
     kboxes,kthru,kyy,kpy=site_kpis()
     o.append(f"<div class='sband'><div class='sband-h'>By the Numbers: \u2019{kyy} vs <span>\u2019{kpy}</span> YTD ({kthru})</div><div class='sband-row'>"

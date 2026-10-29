@@ -46,8 +46,14 @@ const END = statsThrough(geo);
 
 // Only full calendar months are reported (the owner's rule): the period end
 // may not fall inside the month the latest load is still in.
+// The one exception is the owner's own: data/reporting-period.json
+// partialMonth.allowed lets the period end run into the load's month (an
+// interim update), but never past the load's last date.
 const FULL = lastFullMonth(geo.features), LOADED = latestLoadDate(geo.features);
-if (FULL && END > FULL) {
+const PARTIAL = JSON.parse(readFileSync(join(ROOT, "data", "reporting-period.json"), "utf8")).partialMonth?.allowed === true;
+if (PARTIAL && END > LOADED) throw new Error(`period end ${END} is after the last date in the data load (${LOADED}).`);
+if (PARTIAL && END > FULL) console.warn(`  ! partial month by the owner's decision (data/reporting-period.json): the period end ${END} is inside a month the load runs to ${LOADED}`);
+if (FULL && END > FULL && !PARTIAL) {
   throw new Error(`period end ${END} is inside a month the data load hasn't finished (it runs to ${LOADED}); `
     + `the last full month ends ${FULL}. Set data/reporting-period.json periodEnd to ${FULL} or earlier.`);
 }
@@ -55,7 +61,7 @@ if (FULL && END < FULL) {
   console.warn(`  ! the latest data load is complete through ${FULL} (it runs to ${LOADED}); the period end is ${END}.`
     + ` Ask the owner whether to move data/reporting-period.json periodEnd to ${FULL}.`);
 }
-console.log(`  period end ${END}: the last full month of a data load that runs to ${LOADED}`);
+console.log(`  period end ${END}: ${END > FULL ? "a partial month (owner's decision)" : "the last full month"} of a data load that runs to ${LOADED}`);
 
 // What an earlier run already took out stays on the list.
 const csvq = v => `"${String(v ?? "").replace(/"/g, '""')}"`;

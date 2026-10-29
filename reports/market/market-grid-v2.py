@@ -175,7 +175,10 @@ def build(anchor=None):
     mlab=mt.strftime("%b %y").replace(" 2"," 2"); 
     labels={"m1":mt.strftime("%b %y"),"m0":mt.replace(year=mt.year-1).strftime("%b %y"),
             "y1":f"YTD {str(mt.year)[2:]}","y0":f"YTD {str(mt.year-1)[2:]}"}
-    plabel=(f"Month: {mf.strftime('%b %-d')} \u2013 {mt.strftime('%b %-d, %Y')} vs {mt.replace(year=mt.year-1).strftime('%b %Y')}"
+    # A partial month (the owner's interim update) is compared with the same days of last year's month.
+    full_month = (mt + datetime.timedelta(days=1)).day == 1
+    m0lab = mt.replace(year=mt.year-1).strftime('%b %Y') if full_month else f"{mf.strftime('%b %-d')} \u2013 {mt.replace(year=mt.year-1).strftime('%b %-d, %Y')}"
+    plabel=(f"Month: {mf.strftime('%b %-d')} \u2013 {mt.strftime('%b %-d, %Y')} vs {m0lab}"
             f"   \u00b7   Year to date: {yf.strftime('%b %-d')} \u2013 {mt.strftime('%b %-d, %Y')} vs same period {mt.year-1}")
     inw=lambda r,w: r.get("sellingDate") and w[0]<=r["sellingDate"]<=w[1]
     pages=[]

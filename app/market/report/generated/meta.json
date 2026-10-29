@@ -1,14 +1,16 @@
 {
-  "period": "Jan 1 \u2013 Sep 30, 2026",
-  "run": "Oct 21, 2026",
+  "period": "Jan 1 \u2013 Oct 28, 2026",
+  "run": "Oct 29, 2026",
   "pages": {
     "stats": [
       "San Francisco Real Estate",
       "Detail \u2014 Allocation of Money",
-      "San Francisco Market Grid - SFH 1 of 2",
-      "San Francisco Market Grid - SFH 2 of 2",
-      "San Francisco Market Grid - Condo/TIC/Co-op 1 of 2",
-      "San Francisco Market Grid - Condo/TIC/Co-op 2 of 2",
+      "San Francisco Market Grid - SFH 1 of 3",
+      "San Francisco Market Grid - SFH 2 of 3",
+      "San Francisco Market Grid - SFH 3 of 3",
+      "San Francisco Market Grid - Condo/TIC/Co-op 1 of 3",
+      "San Francisco Market Grid - Condo/TIC/Co-op 2 of 3",
+      "San Francisco Market Grid - Condo/TIC/Co-op 3 of 3",
       "San Francisco Market Grid - Other 1 of 2",
       "San Francisco Market Grid - Other 2 of 2",
       "The 10s of 2026",
@@ -23,7 +25,7 @@
     ]
   },
   "links": {
-    "areas": 469,
+    "areas": 474,
     "sales": 110
   }
 }
