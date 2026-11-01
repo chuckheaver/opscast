@@ -1,5 +1,6 @@
 id,address,field,from,to,reason
 "425026705","1612-1614 Anza St, San Francisco, CA 94118","propType","Duplex","Fourplex","Typed by the city's land use: 4 units on the parcel (owner's rule: the city's land use decides, Oct 20 2026)."
+"81999369","1522-1524 Waller St, San Francisco, CA 94117","propType","Duplex","Fourplex","A four-unit building: the 2025 sale was typed Duplex in error; the 2026 sale of the same parcel (1246-013) is a Fourplex (owner, Nov 1 2026)."
 "425036556","2481 Folsom St, San Francisco, CA 94110","propType","Duplex","Triplex","Typed by the city's land use: 3 units on the parcel (owner's rule: the city's land use decides, Oct 20 2026)."
 "424073976","254-256 8th Ave, San Francisco, CA 94118","propType","Single Family Residence","Duplex","Two addresses, 2 units on the parcel by the city's land use (owner's rule: the city's land use decides, Oct 20 2026)."
 "424073940","117 Telegraph Hill Blvd, San Francisco, CA 94133","propType","Single Family Residence","Condominium","A condo in both 2025 and 2026 (owner, Oct 16 2026); the Mar 2025 sale was typed Single Family Residence."

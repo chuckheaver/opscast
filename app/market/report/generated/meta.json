@@ -8,9 +8,8 @@
       "San Francisco Market Grid - SFH 1 of 3",
       "San Francisco Market Grid - SFH 2 of 3",
       "San Francisco Market Grid - SFH 3 of 3",
-      "San Francisco Market Grid - Condo/TIC/Co-op 1 of 3",
-      "San Francisco Market Grid - Condo/TIC/Co-op 2 of 3",
-      "San Francisco Market Grid - Condo/TIC/Co-op 3 of 3",
+      "San Francisco Market Grid - Condo/TIC/Co-op 1 of 2",
+      "San Francisco Market Grid - Condo/TIC/Co-op 2 of 2",
       "San Francisco Market Grid - Duplex 1 of 2",
       "San Francisco Market Grid - Duplex 2 of 2",
       "San Francisco Market Grid - Other (Tri+) 1 of 2",
@@ -29,7 +28,7 @@
     ]
   },
   "links": {
-    "areas": 546,
+    "areas": 545,
     "sales": 140
   }
 }

@@ -160,10 +160,10 @@
         "reason": "The same sale in both feeds; zoned RH-2, a two-family Residential Income property, not a single-family house (owner, Oct 20 2026)."
       },
       {
-        "id": "426156930",
-        "keep": "426158378",
-        "address": "494-496 Pacheco St",
-        "reason": "The same sale in both feeds; a TIC (reclassified between 2025 and 2026), so the TIC records stand and the income record goes (owner, Oct 20 2026)."
+        "id": "426158378",
+        "keep": "426156930",
+        "address": "494 Pacheco St",
+        "reason": "The same sale entered three times (494 Pacheco St and 496 Pacheco St, each typed Tenancy in Common, and 494-496 Pacheco St, a duplex; parcel 2126-023, $4,995,000, 10/14/26): counted once, as the Duplex (owner, Nov 1 2026; replaces the Oct 20 decision that kept the TIC)."
       },
       {
         "id": "426161830",
@@ -290,6 +290,12 @@
         "keep": "82063908",
         "address": "2700-2702 Diamond St",
         "reason": "The same sale entered twice (typed single-family 10/30/26 and duplex 10/27/26; parcel 6740-024, $2.35M): counted once, as the Duplex: two addresses on an RH-2 (two-family) lot (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "426158415",
+        "keep": "426156930",
+        "address": "496 Pacheco St",
+        "reason": "The same sale entered twice (496 Pacheco St, typed Tenancy in Common, and 494-496 Pacheco St, a duplex; parcel 2126-023, $4,995,000, both 10/14/26): counted once, as the Duplex (owner, Nov 1 2026)."
       }
     ]
   },
@@ -789,6 +795,17 @@
         "sqft": 2376
       },
       "reason": "Square footage corrected to 3,152 sf; the MLS entry had 2,376 (owner, Oct 22 2026)."
+    },
+    {
+      "id": "81999369",
+      "address": "1522-1524 Waller St",
+      "set": {
+        "propType": "Fourplex"
+      },
+      "from": {
+        "propType": "Duplex"
+      },
+      "reason": "A four-unit building: the 2025 sale was typed Duplex in error; the 2026 sale of the same parcel (1246-013) is a Fourplex (owner, Nov 1 2026)."
     }
   ],
   "confirmed": [
@@ -931,6 +948,16 @@
       "id": "426166722",
       "address": "2162 14th Ave",
       "note": "Sold $2,360,000 on a $1,200,000 list: correct (owner, Oct 29 2026)."
+    },
+    {
+      "id": "424076746",
+      "address": "30 Bernard St",
+      "note": "5+ Units is correct for the 2025 sale (owner, Nov 1 2026)."
+    },
+    {
+      "id": "426159216",
+      "address": "30 Bernard St",
+      "note": "A TIC unit in the building whose 2025 sale is 5+ Units: both types stand (owner, Nov 1 2026)."
     }
   ],
   "remove": [
