@@ -6556,3 +6556,13 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .hs-rail { position: sticky; top: 50vh; height: 0; z-index: 3; }
 .hs-rail .hs-btn { top: -17px; }
 .hs-rail .hs-chip { top: -60px; }
+
+/* Long grids keep their column headers in view: the table scrolls inside its
+   own box (both ways) and the header rows stick to the top of it. A sticky
+   header can't follow the page itself because the box already scrolls
+   sideways. */
+.dv-scroll-x:has(> table.dv-t) { max-height: max(320px, min(calc(100svh - 240px), 900px)); overflow: auto; overscroll-behavior: contain; }
+.dv-t thead { position: sticky; top: 0; z-index: 2; }
+.dv-t thead tr:not(.grp) th { background: #fff; box-shadow: inset 0 -1px 0 var(--lp-navy); }
+.dv-t thead tr.grp th.gap { background: #fff; }
+.dv-t tfoot { position: sticky; bottom: 0; z-index: 1; }
