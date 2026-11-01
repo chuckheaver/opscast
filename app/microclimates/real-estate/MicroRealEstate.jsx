@@ -202,7 +202,7 @@ export default function MicroRealEstate({ data, guides }) {
                 <div><b>{cur.name}</b><span className="mre-tz" style={{ background: data.zones[cur.zone].fill, color: data.zones[cur.zone].ink }}>{data.zones[cur.zone].name}</span></div>
                 <button type="button" className="mre-x" onClick={() => setSel(null)} aria-label="Clear the selection">×</button>
               </div>
-              <p className="mre-sm">{cur.temp}°F typical summer afternoon · {cur.hours} fog hours a day{cur.hd.homes ? ` · ${num(cur.hd.homes)} homes` : ""}</p>
+              <p className="mre-sm">{cur.temp}°F typical summer afternoon · {cur.hours} fog hours a day</p>
               <span className="mre-mix" aria-hidden="true">{data.zones.map(z => <i key={z.name} style={{ width: `${100 * (cur.hd.mix[z.name] || 0)}%`, background: z.fill }} />)}</span>
               <table className="mre-st">
                 <thead><tr><th className="l">{data.year} (last year lighter)</th><th># Sold</th><th>Median price</th><th>vs {data.year - 1}</th><th>$/sf</th><th>DOM</th></tr></thead>
