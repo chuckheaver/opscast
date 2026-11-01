@@ -434,12 +434,12 @@ def type_mirror(rows,w=470,h=168):
 
 # ── Bond market ──────────────────────────────────────────────────────────
 # 10-year Treasury, month-end readings (U.S. Treasury via Advisor Perspectives,
-# CNBC and Bloomberg reporting of the daily close). Oct 2026 is the Oct 28 close
-# (the interim update, owner Oct 29 2026); the month-end reading replaces it on Nov 1.
+# CNBC and Bloomberg reporting of the daily close). Oct 2026 is the Oct 30 close,
+# the last trading day of the month.
 TEN_Y=[("Oct'25",4.11),("Nov",4.14),("Dec",4.16),("Jan'26",4.24),("Feb",4.04),("Mar",4.38),
-       ("Apr",4.30),("May",4.50),("Jun",4.44),("Jul",4.75),("Aug",4.78),("Sep",5.29),("Oct 28",5.02)]
-CURVE=[("3 mo",4.13),("2 yr",4.71),("10 yr",5.02),("30 yr",5.35)]   # Oct 28 2026 closes (CNBC, Kiplinger, Investing.com)
-TWO_NOW, TEN_NOW, MTG_NOW = 4.71, 5.02, cv.RATE_NOW                 # Oct 28 closes; PMMS Oct 22 (Fed held at 3.75–4.00% Oct 28)
+       ("Apr",4.30),("May",4.50),("Jun",4.44),("Jul",4.75),("Aug",4.78),("Sep",5.29),("Oct'26",4.94)]
+CURVE=[("3 mo",4.09),("2 yr",4.60),("10 yr",4.94),("30 yr",5.31)]   # Oct 30 2026 closes (U.S. Treasury, CNBC, Trading Economics, Forbes)
+TWO_NOW, TEN_NOW, MTG_NOW = 4.60, 4.94, cv.RATE_NOW                 # Oct 30 closes; PMMS Oct 29 (Fed held at 3.75–4.00% Oct 28)
 def _ytd_medians():
     """Year-to-date SFH and Condo/TIC/Co-op medians, same window as the report, so the
     payment example always prices the typical home of the current data."""
@@ -489,8 +489,8 @@ def spread_chart(w=470,h=158):
     """The 10-year and the 30-year mortgage on one scale: the shaded band
     between them is the lender spread, and it barely moves."""
     # September = the 10-year's Sept 30 close against the last Freddie Mac
-    # survey of the month (Sept 24); October = the Oct 28 close against the
-    # latest survey (Oct 22) — the report's data date, not "now".
+    # survey of the month (Sept 24); October = the Oct 30 close against the
+    # last survey of the month (Oct 29) — the report's data date, not "now".
     ten={"Jan":4.24,"Feb":4.04,"Mar":4.38,"Apr":4.30,"May":4.50,"Jun":4.44,"Jul":4.75,"Aug":4.78,"Sep":5.29,"Oct":TEN_NOW}
     mtg=dict(cv.RATES); mtg["Sep"]=cv.RATE_SEP_END; mtg["Oct"]=cv.RATE_NOW
     labs=[k for k in ten if k in mtg]
@@ -917,14 +917,14 @@ def build():
     carry=lambda p,y: p*y/100+p*PROP_TAX
     cost_at=len(o)                        # The Cost of Ownership prints last (see build's end)
     o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The Cost of Ownership</div>
-      <div class='p'>Rates as of Oct 28, 2026</div></div>
-      <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales · rates as of Oct 28 (mortgage: Oct 22 survey)</div></div>""")
+      <div class='p'>Rates as of Oct 30, 2026</div></div>
+      <div class='by'>Chuck Heaver · Vanguard Properties<br>Closed sales · rates as of Oct 30 (mortgage: Oct 29 survey)</div></div>""")
     o.append("<div class='cols'>")
     o.append(f"""<div class='col'><h2 class='band'>The Financed Buyer</h2>
       <h2>The Cost of Financing an Average Home</h2>
       <table class='top'><tr><th class='l'>30-yr rate</th><th>SFH median</th><th>vs 6.10%</th><th>Condo/TIC/Co-op median</th><th>vs 6.10%</th></tr>{rate_rows}</table>
       <h2 style='margin-top:6px'>30-yr Mortgage vs 10-yr Treasury</h2>{spread_chart(h=140)}
-      <h2 style='margin-top:5px'>The Yield Curve, Oct 28</h2>{curve_chart(w=470,h=92)}</div>""")
+      <h2 style='margin-top:5px'>The Yield Curve, Oct 30</h2>{curve_chart(w=470,h=92)}</div>""")
     o.append(f"""<div class='col'><h2 class='band'>The Cash Buyer</h2>
       <h2>Over $5M — Sales by Month, 20{py} vs 20{yy}</h2>
       {lux_chart(mo.year,h=190,through=mo.month)}

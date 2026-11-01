@@ -40,11 +40,16 @@ export function latestLoadDate(features) {
 }
 
 // The last day of the last full calendar month in the load: the month the
-// load's latest date falls in is still coming in, so it ends the month before.
+// load's latest date falls in is still coming in, so it ends the month before —
+// unless the load reaches that month's last day.
 export function lastFullMonth(features) {
   const latest = latestLoadDate(features);
   if (!latest) return "";
   const [y, m] = latest.split("-").map(Number);
+  // A load that carries the month's last day (e.g. status dates through Oct 31)
+  // was pulled at the month's end: that month is complete.
+  const monthEnd = new Date(Date.UTC(y, m, 0)).toISOString().slice(0, 10);
+  if (latest === monthEnd) return latest;
   return new Date(Date.UTC(y, m - 1, 0)).toISOString().slice(0, 10);
 }
 

@@ -117,7 +117,7 @@ def main():
     rates = [6.10, 6.50, c3.MTG_NOW, 7.50]
     P = lambda price, r: c3.mtg_pmt(price * 0.8, r)
     cost = dict(
-        asOf="Oct 28, 2026", survey="Oct 22", medSfh=c3.MED_SFH, medCo=c3.MED_CO, propTax=c3.PROP_TAX,
+        asOf="Oct 30, 2026", survey="Oct 29", medSfh=c3.MED_SFH, medCo=c3.MED_CO, propTax=c3.PROP_TAX,
         mtgNow=c3.MTG_NOW, tenNow=c3.TEN_NOW, twoNow=c3.TWO_NOW,
         payments=[dict(rate=r, sfh=P(c3.MED_SFH, r), co=P(c3.MED_CO, r)) for r in rates],
         spread=[dict(m=m, mtg=v, ten=t) for (m, v), t in zip(

@@ -73,7 +73,8 @@ def rnd(st):
 
 def main():
     rows = load()
-    last = max(r["d"] for r in rows)
+    # Through the reporting period end, or the latest held closing when there is one.
+    last = max([r["d"] for r in rows] + [json.load(open(os.path.join(ROOT, "data", "reporting-period.json")))["periodEnd"]])
     city_pp = med([r["pp"] for r in rows if r["g"] == "duplex"])
     out = dict(from_="2026-01-01", through=last, cityDuplexPpsf=round(city_pp),
                excluded=list(LEFT_OUT.values()), hoods=[])

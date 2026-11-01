@@ -223,7 +223,13 @@ for (const f of geo.features) {
   const addr = ov && Number.isFinite(ov.lat) && Number.isFinite(ov.lng)
     ? { pt: [ov.lng, ov.lat], how: "location given by hand" } : locateAddress(p);
   let pt = file, status;
-  if (addr && fileOk) {
+  const byHand = ov && Number.isFinite(ov.lat) && Number.isFinite(ov.lng);
+  // A location given by hand always stands, even when a geocoder finds the
+  // address nearby (the owner's decision outranks every source).
+  if (byHand && fileOk && meters(addr.pt, file) > 1) {
+    status = "moved"; pt = round6(addr.pt);
+    log.push([p.id, p.address, "Location", `file coordinates ${Math.round(meters(addr.pt, file))} m from the location given by hand`, "placed where given by hand"]);
+  } else if (addr && fileOk) {
     const d = meters(addr.pt, file);
     if (d <= (addr.interp ? 250 : 150)) { status = "verified"; p.addrMatch = "verified"; }
     else {

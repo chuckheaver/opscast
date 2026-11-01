@@ -1,6 +1,6 @@
 {
-  "period": "Jan 1 \u2013 Oct 28, 2026",
-  "run": "Oct 29, 2026",
+  "period": "Jan 1 \u2013 Oct 31, 2026",
+  "run": "Nov 1, 2026",
   "pages": {
     "stats": [
       "San Francisco Real Estate",
@@ -29,7 +29,7 @@
     ]
   },
   "links": {
-    "areas": 544,
+    "areas": 546,
     "sales": 140
   }
 }

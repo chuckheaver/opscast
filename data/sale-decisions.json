@@ -278,6 +278,18 @@
         "keep": "82051722",
         "address": "1427 Grant Ave",
         "reason": "The same sale entered twice (1427 Grant Ave, typed single-family, and 1427-1431 Grant Ave, a fourplex; same parcel 0116-008, $3.40M): counted once, as the Fourplex (owner, Oct 29 2026)."
+      },
+      {
+        "id": "426161937",
+        "keep": "426162039",
+        "address": "23 Peralta Ave",
+        "reason": "The same sale entered twice (23 Peralta Ave, typed single-family, and 23-25 Peralta Ave, a duplex; parcel 5531-016, $3.20M, both 10/30/26): counted once, as the Duplex: 2 units on the parcel by the city's land use, zoned RH-2 (owner's rule: the city's land use decides, Oct 20 2026)."
+      },
+      {
+        "id": "426166814",
+        "keep": "82063908",
+        "address": "2700-2702 Diamond St",
+        "reason": "The same sale entered twice (typed single-family 10/30/26 and duplex 10/27/26; parcel 6740-024, $2.35M): counted once, as the Duplex: two addresses on an RH-2 (two-family) lot (owner's rule: the city's land use decides, Oct 20 2026)."
       }
     ]
   },
