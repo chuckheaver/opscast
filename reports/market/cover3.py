@@ -150,6 +150,8 @@ def stacked(rows,segs,ytd,w=468,h=150,fmt=lambda v:f"{v:.0f}",legend_gap=54):
     o.append(f"<text x='{w-pad_l}' y='19' font-size='7.4' fill='{MUTED}' text-anchor='end'>{ytd['sub']}</text>")
     return "".join(o)+"</svg>"
 
+WSEG=[("SFH","#AFC0D0","#203C5F","sfh"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","co"),("Duplex",DUP_LT,DUP,"du"),("Other (Tri+)","#C9CCD0","#6B6F75","ot")]
+
 def weekly_bars(rows,w=960,h=172,ytd=None):
     """52-week grid, prior year vs current, with the % change above each
     current-year column and the unit counts for both years below the axis."""
@@ -165,10 +167,15 @@ def weekly_bars(rows,w=960,h=172,ytd=None):
     o.append(f"<text x='{pad_l-8}' y='{ax+27}' font-size='5.4' fill='{MUTED}' text-anchor='end'>wk</text>")
     for i,r in enumerate(rows):
         cx=pad_l+i*gw+gw/2
-        for j,(v,col) in enumerate(((r["a"],"#B9BDC4"),(r.get("b"),"#203C5F"))):
+        for j,(v,sg) in enumerate(((r["a"],r.get("aseg")),(r.get("b"),r.get("bseg")))):
             if not v: continue
-            x=cx-bw+j*bw
-            o.append(f"<rect x='{x:.1f}' y='{Y(v):.1f}' width='{bw-1.1:.1f}' height='{ax-Y(v):.1f}' fill='{col}' rx='1'/>")
+            x=cx-bw+j*bw; base=ax
+            for lab_,lt,dk,k in WSEG:
+                n_=(sg or {}).get(k,0)
+                if not n_: continue
+                hgt=(n_/hi)*(h-pad_b-pad_t)
+                o.append(f"<rect x='{x:.1f}' y='{base-hgt:.1f}' width='{bw-1.1:.1f}' height='{max(hgt-0.5,0.3):.1f}' fill='{dk if j else lt}'/>")
+                base-=hgt
         if r.get("d"):
             yy=min(Y(r["a"] or 0),Y(r.get("b") or 0))-3
             o.append(f"<text transform='rotate(-90 {cx:.1f} {yy:.1f})' x='{cx:.1f}' y='{yy:.1f}' font-size='5.4' font-weight='700' fill='{r['dc']}' text-anchor='start' dominant-baseline='middle'>{r['d']}</text>")
@@ -176,9 +183,11 @@ def weekly_bars(rows,w=960,h=172,ytd=None):
         o.append(f"<text x='{cx:.1f}' y='{ax+17}' font-size='5.2' font-weight='700' fill='{NAV}' text-anchor='middle'>{r.get('b') if r.get('b') is not None else ''}</text>")
         if r["w"]==1 or r["w"]%4==0:
             o.append(f"<text x='{cx:.1f}' y='{ax+27}' font-size='5.4' fill='{MUTED}' text-anchor='middle'>{r['w']}</text>")
-    for j,(lab,col) in enumerate((("2025","#B9BDC4"),("2026","#203C5F"))):
-        lxx=pad_l+j*54
-        o.append(f"<rect x='{lxx}' y='2' width='8' height='8' fill='{col}' rx='1.5'/><text x='{lxx+11}' y='9' font-size='7' fill='{INK}'>{lab}</text>")
+    lxx=pad_l
+    for lab,lt,dk,k in WSEG:
+        o.append(f"<rect x='{lxx}' y='2' width='8' height='8' fill='{dk}' rx='1.5'/><text x='{lxx+11}' y='9' font-size='7' fill='{INK}'>{lab}</text>")
+        lxx+=11+len(lab)*3.8+12
+    o.append(f"<text x='{lxx+4}' y='9' font-size='6.6' fill='{MUTED}'>light = 2025 · dark = 2026</text>")
     if ytd:
         o.append(f"<text x='{w-6}' y='9' font-size='8.4' font-weight='800' fill='{NAV}' text-anchor='end'>YTD {ytd['label']}</text>")
         o.append(f"<text x='{w-6}' y='19' font-size='7.4' fill='{MUTED}' text-anchor='end'>{ytd['sub']}</text>")
@@ -195,11 +204,17 @@ def weekly_series(through):
     day=lambda d:(_dt.date.fromisoformat(d[:10])-_dt.date(int(d[:4]),1,1)).days
     W=lambda d:min(day(d)//7+1,52)
     cut=W(through)
-    cnt={}
+    cnt={}; seg={}
+    SK={t:k for k,s_ in (("sfh",mg.SF),("co",mg.CO),("du",mg.DU),("ot",mg.OT)) for t in mg.SEG[s_]}
     for yr in (2025,2026):
-        cnt[yr]=_c.Counter(W(r["sellingDate"]) for r in F
-                           if (r.get("sellingDate") or "").startswith(str(yr)) and r.get("sellingPrice")
-                           and (yr==2025 or r["sellingDate"][:10]<=through))
+        rs=[r for r in F if (r.get("sellingDate") or "").startswith(str(yr)) and r.get("sellingPrice")
+            and (yr==2025 or r["sellingDate"][:10]<=through)]
+        cnt[yr]=_c.Counter(W(r["sellingDate"]) for r in rs)
+        # The same four categories as the monthly chart, units and dollar volume.
+        seg[yr]=_c.defaultdict(lambda:_c.Counter())
+        for r in rs:
+            k=SK.get(r.get("propType"),"ot"); wk=W(r["sellingDate"])
+            seg[yr][wk][k]+=1; seg[yr][wk][k+"_v"]+=r["sellingPrice"]
     last=max(max(cnt[2025] or [0]),cut)
     rows=[]
     for k in range(1,last+1):
@@ -209,7 +224,7 @@ def weekly_series(through):
         # no % change against a full week of last year.
         partial=k==cut and day(through)%7!=6
         if a_ and b_ and not partial: p=100*(b_-a_)/a_; d=f"{p:+.0f}%"; dc=UP if p>=0 else DOWN
-        rows.append(dict(w=k,a=a_,b=b_,d=d,dc=dc))
+        rows.append(dict(w=k,a=a_,b=b_,d=d,dc=dc,aseg=dict(seg[2025].get(k,{})),bseg=dict(seg[2026].get(k,{})) if k<=cut else None))
     # Year to date against the same calendar date last year.
     ly=str(int(through[:4])-1)+through[4:10]
     ytd25=sum(1 for r in F if (r.get("sellingDate") or "")[:4]=="2025" and r["sellingDate"][:10]<=ly and r.get("sellingPrice"))
@@ -783,7 +798,7 @@ def build():
     .bn-t.navy {{ background:{NAV}; color:#fff; }}
     .bn-t.gold {{ background:{GOLD_MID}; color:#131A25; }}
     .bn-t.light {{ background:{NAV_LT}; color:{NAV}; }}
-    .bn-t.pair b {{ font-size:15px; white-space:nowrap; }}   /* two figures in one tile */
+    .bn-t.pair b {{ font-size:11.5px; white-space:nowrap; }}   /* four figures in one tile */
     .bn-t b small {{ font-size:0.45em; font-weight:600; opacity:.85; letter-spacing:0; }}
     .bn-t.light span {{ color:{INK}; }}
     ul.math {{ list-style:none; margin:4px 0 0; padding:0; font-size:9px; }}
@@ -1043,8 +1058,8 @@ def build():
       +T_("navy pair", f"{bn['sqft'][:-3]} / {bn['csqft'][:-3]} / {bn['dsqft'][:-3]} / {bn['osqft'][:-3]}", "median sq ft — SFH, Condo/TIC/Co-op, Duplex, Other (Tri+)")
       +"</div>")
     o.append(f"""<div style='margin-top:7px'><h2>Units Sold by Week — Every Week of Both Years</h2>
-      {weekly_bars(wrows,h=150,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"Jan 1 – {thru}, both years · 2025 full year {w25y:,}"))}</div>""")
-    o.append(f"<div class='foot'><span>Closed sales (SFAR MLS), Jan 1 – {thru}, 20{yy}; comparisons with 20{py} use the same stretch, and 20{py} activity marked “full year” runs Jan 1 – Dec 31. Days on market as reported; list-to-sale ratios use the final list price. Units by week: grey bars after week {wcut} are 20{py} only.</span><span>page 6 / 9</span></div></div>")
+      {weekly_bars(wrows,h=215,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"Jan 1 – {thru}, both years · 2025 full year {w25y:,}"))}</div>""")
+    o.append(f"<div class='foot'><span>Closed sales (SFAR MLS), Jan 1 – {thru}, 20{yy}; comparisons with 20{py} use the same stretch, and 20{py} activity marked “full year” runs Jan 1 – Dec 31. Days on market as reported; list-to-sale ratios use the final list price. Units by week: light bars after week {wcut} are 20{py} only.</span><span>page 6 / 9</span></div></div>")
 
     # Product types (product.py): SFH, Duplex / 2 Homes, Condo, TIC, Co-op, Other.
     o.append(pt.page_html(pt.compute(mg.period_end() or W["m1"][1]), thru, yy))

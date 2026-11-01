@@ -100,7 +100,7 @@ def main():
     # ── By the Numbers tiles and units by week ──
     bn = c3.by_numbers(Y1, W["m1"][1])
     wrows, wcut, w25y, w26, wlast, w25 = c3.weekly_series(W["m1"][1])
-    weeks = [dict(w=r["w"], a=r["a"], b=r["b"], d=r["d"]) for r in wrows]
+    weeks = [dict(w=r["w"], a=r["a"], b=r["b"], d=r["d"], aseg=r["aseg"], bseg=r["bseg"]) for r in wrows]
 
     # ── market grids: every neighborhood, each segment, with the fog-zone rows ──
     keys = ("n", "price", "avg", "ppsf", "dom", "pct")

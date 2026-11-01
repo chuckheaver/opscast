@@ -114,8 +114,8 @@
 .sheetA .bn-t.navy { background:#203C5F; color:#fff; }
 .sheetA .bn-t.gold { background:#E9BC3F; color:#131A25; }
 .sheetA .bn-t.light { background:#E4EEF0; color:#203C5F; }
-.sheetA .bn-t.pair b { font-size:15px; white-space:nowrap; }
-.sheetA /* two figures in one tile */
+.sheetA .bn-t.pair b { font-size:11.5px; white-space:nowrap; }
+.sheetA /* four figures in one tile */
     .bn-t b small { font-size:0.45em; font-weight:600; opacity:.85; letter-spacing:0; }
 .sheetA .bn-t.light span { color:#131A25; }
 .sheetA ul.math { list-style:none; margin:4px 0 0; padding:0; font-size:9px; }

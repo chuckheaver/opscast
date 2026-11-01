@@ -242,13 +242,8 @@ function Tens({ data, onDrill }) {
 }
 
 // ───────────────────────────────── by the numbers
-function Numbers({ data }) {
+function Numbers({ data, onDrill }) {
   const b = data.bn;
-  const [at, off, tipEl] = useTip();
-  const { rows, cut, ytd, ytdPrior, priorYear } = data.weeks;
-  const max = Math.max(...rows.map(r => Math.max(r.a || 0, r.b || 0))) * 1.1;
-  const W = 960, H = 210, pl = 6, pb = 20, pt = 12, gw = (W - 2 * pl) / rows.length, bw = gw * 0.42;
-  const Y = v => H - pb - (v / max) * (H - pb - pt);
   const T = (cls, v, l, s) => <div className={`mr-bn ${cls}`}><b>{v}</b><span>{l}</span>{s ? <i>{s}</i> : null}</div>;
   return (
     <>
@@ -266,22 +261,66 @@ function Numbers({ data }) {
         {T("navy pair", `${b.sqft.replace(" sf", "")} / ${b.csqft.replace(" sf", "")} / ${b.dsqft.replace(" sf", "")} / ${b.osqft.replace(" sf", "")}`, "median sq ft — SFH, Condo/TIC/Co-op, Duplex, Other (Tri+)")}
       </div>
       <h3 className="mr-h3">Units sold by week, every week of both years</h3>
+      <WeekChart data={data} onDrill={onDrill} />
+    </>
+  );
+}
+
+// ───────────────────────────────── units sold / volume by week, by category
+function WeekChart({ data, onDrill }) {
+  const [mode, setMode] = useState("units");
+  const [at, off, tipEl] = useTip();
+  const { rows, cut } = data.weeks, { period, ytd } = data;
+  const key = s => (mode === "units" ? s : `${s}_v`);
+  const total = o => (o ? SEGS.reduce((t, s) => t + (o[key(s.k)] || 0), 0) : 0);
+  const max = Math.max(...rows.map(r => Math.max(total(r.aseg), total(r.bseg)))) * 1.1;
+  const W = 960, H = 230, pl = 6, pb = 20, pt = 12, gw = (W - 2 * pl) / rows.length, bw = gw * 0.42;
+  const fmt = v => (v == null ? "—" : mode === "units" ? int(v) : `$${(v / 1e6).toFixed(1)}M`);
+  const bar = (o, x, light) => {
+    let y0 = H - pb;
+    return SEGS.map(s => {
+      const v = o?.[key(s.k)] || 0; if (!v) return null;
+      const h = (v / max) * (H - pb - pt); y0 -= h;
+      return <rect key={s.k} x={x} y={y0 + 0.5} width={bw - 1} height={Math.max(h - 1, 0.4)} fill={light ? s.light : s.color} />;
+    });
+  };
+  const iso = d => d.toISOString().slice(0, 10);
+  return (
+    <figure className="mr-fig">
       <div className="mr-fig-top">
-        <Legend items={[{ label: `${data.period.prior}`, color: "#B9BDC4" }, { label: `${data.period.year}`, color: "#203C5F" }]} />
-        <div className="mr-ytd"><b>YTD {int(ytd)} vs {int(ytdPrior)} {pctTxt(sgnPct(ytd, ytdPrior))}</b><span>{data.period.prior} full year {int(priorYear)}</span></div>
+        <Tabs value={mode} onChange={setMode} label="Measure" items={[{ k: "units", label: "Units sold" }, { k: "vol", label: "Dollar volume" }]} />
+        <div className="mr-ytd">
+          <b>YTD {mode === "units" ? `${int(ytd.units)} vs ${int(ytd.unitsPrior)}` : `${bn(ytd.vol)} vs ${bn(ytd.volPrior)}`} {pctTxt(sgnPct(mode === "units" ? ytd.units : ytd.vol, mode === "units" ? ytd.unitsPrior : ytd.volPrior))}</b>
+          <span>{period.prior} full year {mode === "units" ? int(ytd.unitsPriorYear) : bn(ytd.volPriorYear)}</span>
+        </div>
       </div>
+      <Legend items={[...SEGS.map(s => ({ label: s.label, color: s.color })), { label: `${period.prior} (lighter)`, color: "#D5D9DE" }]} />
       <div className="mr-chart">
-        <svg viewBox={`0 0 ${W} ${H}`} className="mr-svg" role="img" aria-label="Units sold by week, both years">
+        <svg viewBox={`0 0 ${W} ${H}`} className="mr-svg" role="img" aria-label={`${mode === "units" ? "Units sold" : "Dollar volume"} by week, ${period.prior} and ${period.year}, by category`}>
           <line x1={pl} x2={W - pl} y1={H - pb} y2={H - pb} stroke="#DCDDDE" />
           {rows.map((r, i) => {
             const x = pl + i * gw;
-            const d0 = new Date(Date.UTC(data.period.year, 0, 1 + 7 * (r.w - 1)));
+            const d0 = new Date(Date.UTC(period.year, 0, 1 + 7 * (r.w - 1)));
+            const d1 = new Date(Date.UTC(period.year, 0, r.w === 52 ? 365 : 7 * r.w));
             const lab = `${MON[d0.getUTCMonth()]} ${d0.getUTCDate()}`;
+            const lab1 = `${MON[d1.getUTCMonth()]} ${d1.getUTCDate()}`;
+            const tc = total(r.bseg), tp = total(r.aseg);
+            const body = (
+              <>
+                <b>Week {r.w} · {lab} – {lab1}</b>
+                {SEGS.map(s => <div key={s.k}><i style={{ background: s.color }} />{s.label}: {fmt(r.bseg ? r.bseg[key(s.k)] || 0 : null)} <em>vs {fmt(r.aseg?.[key(s.k)] || 0)}</em></div>)}
+                <div className="t">Total {fmt(r.bseg ? tc : null)} <em>vs {fmt(tp)}</em> {r.bseg && tp ? pctTxt(sgnPct(tc, tp)) : ""}</div>
+                {r.w === cut && !r.d && r.bseg ? <small>Partial week: through {MON[+period.y1[1].slice(5, 7) - 1]} {+period.y1[1].slice(8)}</small> : null}
+                {r.bseg && tc ? <small>Click for the sales</small> : null}
+              </>
+            );
+            const from = iso(d0), to = [iso(d1), period.y1[1]].sort()[0];
             return (
-              <g key={r.w} className="mr-hit" onMouseMove={e => at(e, <><b>Week {r.w} · from {lab}</b><div>{data.period.prior}: {int(r.a)}</div><div>{data.period.year}: {r.b == null ? "—" : int(r.b)}</div>{r.d ? <div className="t">{r.d}</div> : null}</>)} onMouseLeave={off}>
+              <g key={r.w} className="mr-hit" onMouseMove={e => at(e, body)} onMouseLeave={off}
+                onClick={() => r.bseg && tc && onDrill({ title: `Week ${r.w}, ${period.year}`, sub: `${lab} – ${lab1} · Closed sales`, filter: s => s.d >= from && s.d <= to })}>
                 <rect x={x} y={pt} width={gw} height={H - pt - pb} fill="transparent" />
-                {r.a ? <rect x={x + gw / 2 - bw} y={Y(r.a)} width={bw - 1} height={H - pb - Y(r.a)} rx="1.5" fill="#B9BDC4" /> : null}
-                {r.b ? <rect x={x + gw / 2} y={Y(r.b)} width={bw - 1} height={H - pb - Y(r.b)} rx="1.5" fill="#203C5F" /> : null}
+                {bar(r.aseg, x + gw / 2 - bw, true)}
+                {bar(r.bseg, x + gw / 2, false)}
                 {r.w % 4 === 1 ? <text x={x + gw / 2} y={H - 5} className="mr-ax" textAnchor="middle">{lab}</text> : null}
               </g>
             );
@@ -290,7 +329,7 @@ function Numbers({ data }) {
         </svg>
         {tipEl}
       </div>
-    </>
+    </figure>
   );
 }
 
@@ -500,7 +539,10 @@ export function TensSection({ data }) {
   const [open, setOpen] = useState(null);
   return (<><Tens data={data} onDrill={setOpen} />{open && <SalesPanel open={open} onClose={() => setOpen(null)} />}</>);
 }
-export function NumbersSection({ data }) { return <Numbers data={data} />; }
+export function NumbersSection({ data }) {
+  const [open, setOpen] = useState(null);
+  return (<><Numbers data={data} onDrill={setOpen} />{open && <SalesPanel open={open} onClose={() => setOpen(null)} />}</>);
+}
 export function GridsSection({ data }) {
   const [open, setOpen] = useState(null);
   return (<><Grids data={data} onDrill={setOpen} />{open && <SalesPanel open={open} onClose={() => setOpen(null)} />}</>);
