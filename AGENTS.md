@@ -9,7 +9,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 Always build from the latest data load, and report only full calendar
 months: the period end is the last day of the last FULL month in that load.
 A month the load is still in (e.g. the early-October closings of an Oct 1
-load) is never reported until a later load completes it. Before every
+load) is never reported until a later load completes it. A load whose dates reach the month's
+last day (e.g. status dates through Oct 31) completes that month. Before every
 rebuild, tell the owner that date and have them confirm it, then set it in
 `data/reporting-period.json` (`periodEnd`, and the day they confirmed it in
 `confirmedByOwner`); `scripts/apply-sale-decisions.mjs` stops if it falls
