@@ -237,6 +237,7 @@ function Tens({ data, onDrill }) {
         <TenCard title="Top # units sold (all)" head={["Neighborhood", "Sales", "Median"]} rows={data.tens.busiest.map((h, i) => (
           <tr key={h.name}><td className="l"><button type="button" className="mr-link" onClick={() => onDrill({ title: h.name, sub: `All sales, Jan 1 – ${y1[1]}`, filter: s => inWin(y1, s.d) && s.h === h.name })}>{i + 1}. {h.name}</button></td><td className="b">{int(h.n)}</td><td>{money(h.med)}</td></tr>))} />
       </div>
+      <p className="mr-note">* Fewer than 10 sales. A median drawn from so few sales can turn on one or two closings and may not represent the neighborhood.</p>
     </>
   );
 }

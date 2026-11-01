@@ -1033,7 +1033,7 @@ def build():
         for c in range(4):
             o.append("<div class='col'>"+"".join(panel(*row[c]) for row in rows_)+"</div>")
         o.append("</div>")
-        o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS), this year only. * fewer than 10 sales. Every sale counts, BMR units included; sales under $100K (parking, rentals, entry errors) and duplicate entries left out. Top $/sf and Lowest 10 leave out sales with no sq ft reported. SFH = Single Family Residence, Halfplex and 2 Houses on Lot; Other (Tri+) = triplexes, fourplexes, 5+ units and the other types.</span><span>page 5 / 9</span></div></div>")
+        o.append(f"<div class='foot'><span>Closed sales, Jan 1 – {thru} (SFAR MLS), this year only. * Fewer than 10 sales: a median drawn from so few sales can turn on one or two closings and may not represent the neighborhood. Every sale counts, BMR units included; sales under $100K (parking, rentals, entry errors) and duplicate entries left out. Top $/sf and Lowest 10 leave out sales with no sq ft reported. SFH = Single Family Residence, Halfplex and 2 Houses on Lot; Other (Tri+) = triplexes, fourplexes, 5+ units and the other types.</span><span>page 5 / 9</span></div></div>")
 
     # ── PAGE 6 — in depth ────────────────────────────────────────────────
     # Everything a reader can skip. The narrative pages stay light because
