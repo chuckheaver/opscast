@@ -6,6 +6,7 @@
 // the sale on the map; October closings (not on the map yet) open the neighborhood.
 
 import { useEffect, useMemo, useState } from "react";
+import HScroll from "../../components/HScroll";
 
 const mapHood = name => `/fog?${new URLSearchParams({ hood: name, details: "all" })}`;
 const mapSale = (s, hood) => (s.late
@@ -128,7 +129,7 @@ export default function DuplexVsSfh({ data }) {
 
   return (
     <>
-      <div className="dv-scroll-x">
+      <HScroll className="dv-scroll-x">
         <table className="dv-t">
           <thead>
             <tr className="grp"><th rowSpan="2" className="gap" /><th colSpan="4" className="g1">SFH</th><th colSpan="4" className="g2">Duplex</th><th colSpan="3" className="g3">Difference</th><th className="g4">Outliers</th></tr>
@@ -148,7 +149,7 @@ export default function DuplexVsSfh({ data }) {
             ))}
           </tbody>
         </table>
-      </div>
+      </HScroll>
       {open && <SalesList list={open} onClose={() => setOpen(null)} />}
     </>
   );

@@ -8,6 +8,7 @@
 import { useMemo, useState } from "react";
 import SalesPanel from "./SalesPanel";
 import { money, bn, usd, int, sgnPct, pctTxt, MON, SEGS } from "./fmt";
+import HScroll from "../../components/HScroll";
 
 const mapHood = name => `/fog?${new URLSearchParams({ hood: name, details: "all" })}`;
 const mapSale = id => `/fog?${new URLSearchParams({ preset: "homes", sale: id })}`;
@@ -71,7 +72,7 @@ function MonthChart({ data, onDrill }) {
         </div>
       </div>
       <Legend items={[...SEGS.map(s => ({ label: s.label, color: s.color })), { label: `${period.prior} (lighter)`, color: "#D5D9DE" }]} />
-      <div className="mr-chart">
+      <HScroll className="mr-chart">
         <svg viewBox={`0 0 ${W} ${H}`} className="mr-svg" role="img" aria-label={`${mode === "units" ? "Units sold" : "Dollar volume"} by month, ${period.prior} and ${period.year}, by category`}>
           <line x1={pl} x2={W - pl} y1={H - pb} y2={H - pb} stroke="#DCDDDE" />
           {months.map((m, i) => {
@@ -99,7 +100,7 @@ function MonthChart({ data, onDrill }) {
           })}
         </svg>
         {tipEl}
-      </div>
+      </HScroll>
     </figure>
   );
 }
@@ -124,7 +125,7 @@ function SaleVsList({ data }) {
         <Tabs value={seg} onChange={setSeg} label="Category" items={SEGS.map(s => ({ k: s.k, label: s.label, color: s.color }))} />
       </div>
       <Legend items={[{ label: "Median list price", color: "#E9BC3F" }, { label: "Median sale price", color: "#203C5F" }]} />
-      <div className="mr-chart">
+      <HScroll className="mr-chart">
         <svg viewBox={`0 0 ${W} ${H}`} className="mr-svg" role="img" aria-label={`Median list and sale price by month, ${SEGT[seg].label}`}>
           <path d={path("list")} fill="none" stroke="#E9BC3F" strokeWidth="2.4" />
           <path d={path("sold")} fill="none" stroke="#203C5F" strokeWidth="2.4" />
@@ -141,7 +142,7 @@ function SaleVsList({ data }) {
           ))}
         </svg>
         {tipEl}
-      </div>
+      </HScroll>
     </figure>
   );
 }
@@ -296,7 +297,7 @@ function WeekChart({ data, onDrill }) {
         </div>
       </div>
       <Legend items={[...SEGS.map(s => ({ label: s.label, color: s.color })), { label: `${period.prior} (lighter)`, color: "#D5D9DE" }]} />
-      <div className="mr-chart">
+      <HScroll className="mr-chart">
         <svg viewBox={`0 0 ${W} ${H}`} className="mr-svg" role="img" aria-label={`${mode === "units" ? "Units sold" : "Dollar volume"} by week, ${period.prior} and ${period.year}, by category`}>
           <line x1={pl} x2={W - pl} y1={H - pb} y2={H - pb} stroke="#DCDDDE" />
           {rows.map((r, i) => {
@@ -329,7 +330,7 @@ function WeekChart({ data, onDrill }) {
           <line x1={pl + cut * gw} x2={pl + cut * gw} y1={pt} y2={H - pb} stroke="#9AA0A6" strokeDasharray="3 3" />
         </svg>
         {tipEl}
-      </div>
+      </HScroll>
     </figure>
   );
 }
@@ -391,7 +392,7 @@ function Grids({ data, onDrill }) {
         </select>
         <input type="search" placeholder="Find a neighborhood" value={q} onChange={e => setQ(e.target.value)} aria-label="Find a neighborhood" />
       </div>
-      <div className="dv-scroll-x">
+      <HScroll className="dv-scroll-x">
         <table className="dv-t mr-grid">
           <thead>
             <tr className="grp"><th rowSpan="2" className="l">{sortBtn("name", "y1", "Neighborhood")}</th>{mets.map(m => <th key={m.k} colSpan="4" className="g1">{m.label}</th>)}</tr>
@@ -409,9 +410,9 @@ function Grids({ data, onDrill }) {
             <tr className="city dv-hit" onClick={() => drill("All San Francisco", () => true)}><td className="l">All San Francisco (pooled)</td>{cells(g.total)}</tr>
           </tfoot>
         </table>
-      </div>
+      </HScroll>
       <h3 className="mr-h3">By fog zone</h3>
-      <div className="dv-scroll-x">
+      <HScroll className="dv-scroll-x">
         <table className="dv-t mr-grid">
           <thead>
             <tr className="grp"><th rowSpan="2" className="l">Fog zone</th>{mets.map(m => <th key={m.k} colSpan="4" className="g1">{m.label}</th>)}</tr>
@@ -426,7 +427,7 @@ function Grids({ data, onDrill }) {
           </tbody>
           <tfoot><tr className="city"><td className="l">Total — all zones</td>{cells(g.total)}</tr></tfoot>
         </table>
-      </div>
+      </HScroll>
       {notes.length ? <p className="mr-note">{notes.map(r => <span key={r.name}>† {r.name}: {r.note.join(" ")} </span>)}</p> : null}
     </>
   );
@@ -461,15 +462,15 @@ function Cost({ data }) {
           </div>
           <button type="button" className="mr-more" onClick={() => setRate(c.mtgNow)}>Today&rsquo;s rate ({c.mtgNow.toFixed(2)}%, Freddie Mac {c.survey})</button>
         </div>
-        <div className="dv-scroll-x"><table className="dv-t mr-pay">
+        <HScroll className="dv-scroll-x"><table className="dv-t mr-pay">
           <thead><tr><th className="l">30-yr rate</th><th>SFH median</th><th>vs 6.10%</th><th>Condo/TIC/Co-op</th><th>vs 6.10%</th></tr></thead>
           <tbody>{c.payments.map(p => (
             <tr key={p.rate}><td className="l">{p.rate.toFixed(2)}%</td><td className="b">{usd(p.sfh)}</td><td className={p.rate > base ? "dn" : ""}>{diff(p.sfh - pmt(c.medSfh, base))}</td>
               <td className="b">{usd(p.co)}</td><td className={p.rate > base ? "dn" : ""}>{diff(p.co - pmt(c.medCo, base))}</td></tr>))}</tbody>
-        </table></div>
+        </table></HScroll>
         <h3 className="mr-h3">30-year mortgage vs 10-year Treasury</h3>
         <Legend items={[{ label: "30-yr mortgage (Freddie Mac)", color: "#E9BC3F" }, { label: "10-yr Treasury", color: "#203C5F" }]} />
-        <div className="mr-chart">
+        <HScroll className="mr-chart">
           <svg viewBox={`0 0 ${W} ${H}`} className="mr-svg" role="img" aria-label="30-year mortgage rate and 10-year Treasury yield by month">
             <polygon points={`${c.spread.map((r, i) => `${X(i)},${Y(r.mtg)}`).join(" ")} ${[...c.spread].reverse().map((r, i) => `${X(c.spread.length - 1 - i)},${Y(r.ten)}`).join(" ")}`} fill="#E9BC3F" fillOpacity="0.15" />
             {["mtg", "ten"].map(k => <path key={k} d={c.spread.map((r, i) => `${i ? "L" : "M"}${X(i)},${Y(r[k])}`).join(" ")} fill="none" stroke={k === "mtg" ? "#E9BC3F" : "#203C5F"} strokeWidth="2.4" />)}
@@ -484,14 +485,14 @@ function Cost({ data }) {
             ))}
           </svg>
           {tipEl}
-        </div>
+        </HScroll>
         <h3 className="mr-h3">The yield curve, {c.asOf}</h3>
         <div className="mr-curve">{c.curve.map(p => <div key={p.t}><b>{p.v.toFixed(2)}%</b><span>{p.t}</span></div>)}</div>
       </div>
       <div>
         <h3 className="mr-h3">Over $5M — sales by month</h3>
         <Legend items={[{ label: `${years[0]} (full year)`, color: "#B9BDC4" }, { label: years[1], color: "#203C5F" }]} />
-        <div className="mr-chart">
+        <HScroll className="mr-chart">
           <svg viewBox={`0 0 ${LW} ${LH}`} className="mr-svg" role="img" aria-label="Sales over $5 million by month, both years">
             <line x1="10" x2={LW - 10} y1={LH - 24} y2={LH - 24} stroke="#DCDDDE" />
             {MON.map((m, i) => {
@@ -508,7 +509,7 @@ function Cost({ data }) {
             })}
           </svg>
           {tip2}
-        </div>
+        </HScroll>
         <p className="mr-stat"><b>{c.luxYtd}</b> sales Jan 1 – {longDate(data.period.y1[1])} against <b>{c.luxYtdPrior}</b> in the same stretch of {years[0]}, {pctTxt(sgnPct(c.luxYtd, c.luxYtdPrior))}.</p>
         <h3 className="mr-h3">Annual opportunity cost of owning an $8M home</h3>
         <ul className="mr-math">

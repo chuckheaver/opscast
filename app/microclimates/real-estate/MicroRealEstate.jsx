@@ -9,6 +9,7 @@
 
 import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import HScroll from "../../components/HScroll";
 
 const mShort = v => (v == null ? "—" : v >= 995_000 ? `$${(v / 1e6).toFixed(v >= 1e7 ? 0 : 1)}M` : `$${Math.round(v / 1e3)}K`);
 const money = v => (v == null ? "—" : v >= 995_000 ? `$${(v / 1e6).toFixed(2)}M` : `$${Math.round(v / 1e3)}K`);
@@ -231,7 +232,7 @@ export default function MicroRealEstate({ data, guides }) {
       <section className="mre-sec">
         <div className="mre-sech"><h2>Neighborhood index</h2>
           <input type="search" value={q} onChange={e => setQ(e.target.value)} placeholder="Find a neighborhood" aria-label="Find a neighborhood" /></div>
-        <div className="mre-scroll"><table className="mre-t">
+        <HScroll className="mre-scroll"><table className="mre-t">
           <thead><tr>{th("name", "Neighborhood", "l")}{th("zone", "Zone")}{th("temp", "Est. °F")}{th("hours", "Fog hrs")}{th("n", "# Sold")}{th("price", "Median price")}{th("vs", `vs ${data.year - 1}`)}{th("ppsf", "$/sf")}{th("dom", "DOM")}</tr></thead>
           <tbody>{sorted.map(r => (
             <tr key={r.name} className={sel === r.name ? "sel" : ""} onClick={() => setSel(r.name)}>
@@ -240,12 +241,12 @@ export default function MicroRealEstate({ data, guides }) {
               <td>{r.temp}°</td><td>{r.hours}</td><td>{num(r.n)}</td><td>{money(r.price)}</td><td>{sgn(r.vs)}</td><td>{usd(r.ppsf)}</td><td>{num(r.dom)}</td>
             </tr>
           ))}</tbody>
-        </table></div>
+        </table></HScroll>
       </section>
 
       <section className="mre-sec">
         <div className="mre-sech"><h2>Closings by fog zone — {data.cats.find(c => c.key === cat).label}</h2></div>
-        <div className="mre-scroll"><table className="mre-g">
+        <HScroll className="mre-scroll"><table className="mre-g">
           <thead>
             <tr><th className="l" rowSpan="2">Fog zone</th>{GROUPS.map(([t]) => <th key={t} colSpan="4" className="grp">{t}</th>)}</tr>
             <tr>{GROUPS.flatMap(([t]) => PERIODS.map(([k, l], j) => <th key={`${t}${k}`} className={`${j === 0 ? "g0" : ""}${k === "y1" || k === "y0" ? " ytd" : ""}`}>{l}</th>))}</tr>
@@ -261,7 +262,7 @@ export default function MicroRealEstate({ data, guides }) {
               </tr>
             ))}
           </tbody>
-        </table></div>
+        </table></HScroll>
       </section>
     </>
   );

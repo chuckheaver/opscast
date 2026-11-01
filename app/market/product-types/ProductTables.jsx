@@ -2,6 +2,7 @@
 // reports/market/product.py): shown on /market/product-types and in Market Stats.
 
 import Link from "next/link";
+import HScroll from "../../components/HScroll";
 
 // Halves round up (Math.round) here and in the report's product.py, so the two agree.
 const r = (v, nd) => (Math.round(v * 10 ** nd) / 10 ** nd).toFixed(nd);
@@ -33,7 +34,7 @@ export default function ProductTables({ data, headings = true }) {
       <main className={headings ? "ptp" : "ptp ptp-embed"}>
         <section className="lp-nsec">
           <h2>Year to date: Jan 1 – {thru}, {Y} vs {PY}</h2>
-          <div className="ptp-scroll"><table className="ptp-t ptp-yoy">
+          <HScroll className="ptp-scroll"><table className="ptp-t ptp-yoy">
             <thead><tr><th>Type</th><th>Year</th><th>Units sold</th><th>Median price</th><th>Median size</th><th>Median $/sf</th><th>% of list</th><th>Days on market</th></tr></thead>
             {TR.map(g => { const p = g.prior, c = g.yoy; return (
               <tbody key={g.key}>
@@ -43,12 +44,12 @@ export default function ProductTables({ data, headings = true }) {
                   <td>{sf(p.ppsf)}{p.noSqft ? <small> ({p.noSqft} no sf)</small> : null}</td><td>{pct(p.pctList)}</td><td>{p.dom == null ? "—" : Math.round(p.dom)}</td></tr>
                 <tr className="yc"><td>YoY</td><td>{ch(c.n)}</td><td>{ch(c.price)}</td><td>{ch(c.sqft)}</td><td>{ch(c.ppsf)}</td><td>{ch(c.pctList, " pts")}</td><td>{ch(c.dom, " days")}</td></tr>
               </tbody>); })}
-          </table></div>
+          </table></HScroll>
         </section>
 
         <section className="lp-nsec">
           <h2>By quarter: median price · $/sf · size · units sold ({PY} full year)</h2>
-          <div className="ptp-scroll"><table className="ptp-t ptp-yoy">
+          <HScroll className="ptp-scroll"><table className="ptp-t ptp-yoy">
             <thead><tr><th>Type</th><th>Year</th>{allQ.map(q => <th key={q}>Q{q}</th>)}</tr></thead>
             {G.map(g => (
               <tbody key={g.key}>
@@ -58,18 +59,18 @@ export default function ProductTables({ data, headings = true }) {
                   <td key={q}>{a && b && a.n ? <>{ch(pc(a.price, b.price))} <small>· $/sf {ch(pc(a.ppsf, b.ppsf))} · units {ch(pc(a.n, b.n))}</small></> : "—"}</td>); })}</tr>
               </tbody>
             ))}
-          </table></div>
+          </table></HScroll>
         </section>
 
         <section className="lp-nsec">
           <h2>Most sales by neighborhood, {Y}</h2>
-          <div className="ptp-scroll"><table className="ptp-t ptp-where">
+          <HScroll className="ptp-scroll"><table className="ptp-t ptp-where">
             <thead><tr><th>Type</th><th>Neighborhood</th><th>Units sold</th><th>Share of type</th><th>Median price</th><th>Top sale</th><th>Top sale address</th></tr></thead>
             <tbody>{G.filter(g => g.topHood).map(g => (
               <tr key={g.key}><th scope="row">{g.label}</th><td><Link href={mapHref(g.topHood.hood)}>{g.topHood.hood}</Link></td><td>{n(g.topHood.n)}</td>
                 <td>{Math.round(100 * g.topHood.share)}%</td><td>{m(g.topHood.price)}</td><td>{m(g.topSale.price)}</td><td>{g.topSale.addr}</td></tr>
             ))}</tbody>
-          </table></div>
+          </table></HScroll>
         </section>
       </main>
   );
