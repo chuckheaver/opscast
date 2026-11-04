@@ -20,7 +20,7 @@ export const TOPLINE = [
   { v: "+2.1°C", k: "Niño-3.4 sea surface temperature above normal", s: "NOAA, Oct 8, 2026" },
   { v: ">83%", k: "Chance of a strong to very strong El Niño through Jan–Mar 2027", s: "NOAA, Oct 8, 2026" },
   { v: "6–12 in", k: "Bay Area sea level above normal expected this fall and winter", s: "Forecasters, Sep–Oct 2026" },
-  { v: "Not a promise", k: "2015–16 was very strong and San Francisco got a normal year of rain", s: "Downtown San Francisco" },
+  { v: "2015–16", k: "A very strong El Niño; downtown San Francisco had a normal year of rain", s: "Downtown San Francisco" },
 ];
 
 export const WORDS = [
