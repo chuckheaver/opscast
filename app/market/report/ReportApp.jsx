@@ -5,7 +5,7 @@
 // report's own code); here every chart has a hover read-out, and every
 // neighborhood, fog zone, tier, month and sale opens the sales behind it.
 
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import SalesPanel from "./SalesPanel";
 import { money, bn, usd, int, sgnPct, pctTxt, MON, SEGS } from "./fmt";
 import HScroll from "../../components/HScroll";
@@ -352,8 +352,13 @@ function tone(st, w, m) {
   const better = m.lowGood ? v < p : v > p;
   return better ? "cur up" : "cur dn";
 }
+// SFAR's Realtor Districts; a neighborhood's code ("5c") starts with its district.
+const DISTRICTS = { 1: "Northwest", 2: "Central West", 3: "Southwest", 4: "Twin Peaks West", 5: "Central", 6: "Central North", 7: "North", 8: "Northeast", 9: "Central East", 10: "Southeast" };
+const distOf = code => parseInt(code, 10) || 99;
+
 function Grids({ data, onDrill }) {
   const [seg, setSeg] = useState("sfh");
+  const [order, setOrder] = useState("hood");     // "hood" A–Z, or "district" grouped by Realtor District
   const [metric, setMetric] = useState("all");
   const [q, setQ] = useState("");
   const [sort, setSort] = useState({ k: "name", w: "y1", dir: 1 });
@@ -363,7 +368,8 @@ function Grids({ data, onDrill }) {
   const rows = useMemo(() => {
     const r = g.rows.filter(x => !q || x.name.toLowerCase().includes(q.toLowerCase()));
     r.sort((a, b) => {
-      if (sort.k === "name") return sort.dir * a.name.localeCompare(b.name);
+      if (order === "district" && distOf(a.code) !== distOf(b.code)) return distOf(a.code) - distOf(b.code);
+      if (sort.k === "name") return order === "district" ? sort.dir * a.code.localeCompare(b.code, "en", { numeric: true }) : sort.dir * a.name.localeCompare(b.name);
       const x = a.st[sort.w][sort.k], y = b.st[sort.w][sort.k];
       if (x == null && y == null) return 0;
       if (x == null) return 1;
@@ -371,7 +377,7 @@ function Grids({ data, onDrill }) {
       return sort.dir * (x - y);
     });
     return r;
-  }, [g, q, sort]);
+  }, [g, q, sort, order]);
   const P = data.period;
   const drill = (title, f) => onDrill({ title, sub: g.title, filter: s => s.seg === seg && inWin(P.y1, s.d) && f(s), prior: s => s.seg === seg && inWin(P.y0, s.d) && f(s), years: [P.year, P.prior] });
   const cells = st => mets.map(m => WINS.map((w, j) => (
@@ -390,6 +396,7 @@ function Grids({ data, onDrill }) {
           <option value="all">All measures</option>
           {METRICS.map(m => <option key={m.k} value={m.k}>{m.label}</option>)}
         </select>
+        <Tabs value={order} onChange={setOrder} label="Order" items={[{ k: "hood", label: "Neighborhood" }, { k: "district", label: "Realtor District" }]} />
         <input type="search" placeholder="Find a neighborhood" value={q} onChange={e => setQ(e.target.value)} aria-label="Find a neighborhood" />
       </div>
       <HScroll className="dv-scroll-x">
@@ -399,12 +406,20 @@ function Grids({ data, onDrill }) {
             <tr>{mets.map(m => WINS.map((w, j) => <th key={m.k + w} className={`${j === 0 ? "g1" : ""} ${w[0] === "y" ? "ytd" : ""}`}>{sortBtn(m.k, w, lab[w])}</th>))}</tr>
           </thead>
           <tbody>
-            {rows.map(r => (
-              <tr key={r.name} className="dv-hit" onClick={() => drill(r.name, s => s.h === r.name)}>
+            {rows.map((r, k) => (<Fragment key={r.name}>
+              {order === "district" && (k === 0 || distOf(rows[k - 1].code) !== distOf(r.code)) ? (() => {
+                const dn = distOf(r.code), names = new Set(rows.filter(x => distOf(x.code) === dn).map(x => x.name));
+                return (
+                  <tr className="dv-dist dv-hit" onClick={() => drill(`District ${dn} · ${DISTRICTS[dn] || ""}`, s => names.has(s.h))}>
+                    <td className="l" colSpan={1 + mets.length * 4}>District {dn}{DISTRICTS[dn] ? ` · ${DISTRICTS[dn]}` : ""}<small>{names.size} neighborhoods</small></td>
+                  </tr>
+                );
+              })() : null}
+              <tr className="dv-hit" onClick={() => drill(r.name, s => s.h === r.name)}>
                 <td className="l"><button type="button" className="dv-n" onClick={e => { e.stopPropagation(); drill(r.name, s => s.h === r.name); }}>{r.name}{r.note ? "†" : ""}</button> <small>{r.code}</small></td>
                 {cells(r.st)}
               </tr>
-            ))}
+            </Fragment>))}
           </tbody>
           <tfoot>
             <tr className="city dv-hit" onClick={() => drill("All San Francisco", () => true)}><td className="l">All San Francisco (pooled)</td>{cells(g.total)}</tr>

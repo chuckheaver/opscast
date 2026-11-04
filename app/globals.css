@@ -6566,3 +6566,6 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .dv-t thead tr:not(.grp) th { background: #fff; box-shadow: inset 0 -1px 0 var(--lp-navy); }
 .dv-t thead tr.grp th.gap { background: #fff; }
 .dv-t tfoot { position: sticky; bottom: 0; z-index: 1; }
+.mr-grid tr.dv-dist td { background: #E9EEF4; color: var(--lp-navy); font-weight: 800; font-size: 13px; letter-spacing: .02em; border-top: 2px solid var(--lp-navy); cursor: pointer; }
+.mr-grid tr.dv-dist td small { margin-left: 8px; font-weight: 400; color: var(--lp-muted); }
+.mr-grid tr.dv-dist:hover td { background: #DCE4EE; }
