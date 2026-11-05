@@ -1,0 +1,302 @@
+{
+ "source": "San Francisco Assessor, secured roll (DataSF wv5m-vpq2)",
+ "buildings": 138614,
+ "types": [
+  "sfh",
+  "condo",
+  "duplex",
+  "other"
+ ],
+ "decades": [
+  {
+   "d": 1890,
+   "units": {
+    "sfh": 618,
+    "condo": 1672,
+    "duplex": 624,
+    "other": 1452
+   },
+   "buildings": {
+    "sfh": 599,
+    "condo": 455,
+    "duplex": 312,
+    "other": 325
+   }
+  },
+  {
+   "d": 1900,
+   "units": {
+    "sfh": 13092,
+    "condo": 9479,
+    "duplex": 11262,
+    "other": 37148
+   },
+   "buildings": {
+    "sfh": 12866,
+    "condo": 2946,
+    "duplex": 5630,
+    "other": 6844
+   }
+  },
+  {
+   "d": 1910,
+   "units": {
+    "sfh": 9033,
+    "condo": 3336,
+    "duplex": 3836,
+    "other": 23723
+   },
+   "buildings": {
+    "sfh": 8950,
+    "condo": 938,
+    "duplex": 1917,
+    "other": 2807
+   }
+  },
+  {
+   "d": 1920,
+   "units": {
+    "sfh": 21908,
+    "condo": 4592,
+    "duplex": 5501,
+    "other": 33969
+   },
+   "buildings": {
+    "sfh": 21840,
+    "condo": 1128,
+    "duplex": 2750,
+    "other": 3286
+   }
+  },
+  {
+   "d": 1930,
+   "units": {
+    "sfh": 11881,
+    "condo": 1120,
+    "duplex": 1316,
+    "other": 3603
+   },
+   "buildings": {
+    "sfh": 11870,
+    "condo": 277,
+    "duplex": 658,
+    "other": 415
+   }
+  },
+  {
+   "d": 1940,
+   "units": {
+    "sfh": 19542,
+    "condo": 795,
+    "duplex": 3164,
+    "other": 4774
+   },
+   "buildings": {
+    "sfh": 19519,
+    "condo": 328,
+    "duplex": 1581,
+    "other": 492
+   }
+  },
+  {
+   "d": 1950,
+   "units": {
+    "sfh": 10202,
+    "condo": 701,
+    "duplex": 1084,
+    "other": 8351
+   },
+   "buildings": {
+    "sfh": 10189,
+    "condo": 191,
+    "duplex": 542,
+    "other": 965
+   }
+  },
+  {
+   "d": 1960,
+   "units": {
+    "sfh": 3624,
+    "condo": 3609,
+    "duplex": 864,
+    "other": 19037
+   },
+   "buildings": {
+    "sfh": 3619,
+    "condo": 442,
+    "duplex": 432,
+    "other": 1611
+   }
+  },
+  {
+   "d": 1970,
+   "units": {
+    "sfh": 1933,
+    "condo": 2799,
+    "duplex": 640,
+    "other": 10588
+   },
+   "buildings": {
+    "sfh": 1932,
+    "condo": 539,
+    "duplex": 320,
+    "other": 796
+   }
+  },
+  {
+   "d": 1980,
+   "units": {
+    "sfh": 1400,
+    "condo": 6463,
+    "duplex": 912,
+    "other": 5929
+   },
+   "buildings": {
+    "sfh": 1392,
+    "condo": 795,
+    "duplex": 456,
+    "other": 394
+   }
+  },
+  {
+   "d": 1990,
+   "units": {
+    "sfh": 1365,
+    "condo": 6250,
+    "duplex": 420,
+    "other": 3392
+   },
+   "buildings": {
+    "sfh": 1358,
+    "condo": 719,
+    "duplex": 210,
+    "other": 178
+   }
+  },
+  {
+   "d": 2000,
+   "units": {
+    "sfh": 671,
+    "condo": 14916,
+    "duplex": 232,
+    "other": 4711
+   },
+   "buildings": {
+    "sfh": 662,
+    "condo": 882,
+    "duplex": 116,
+    "other": 92
+   }
+  },
+  {
+   "d": 2010,
+   "units": {
+    "sfh": 271,
+    "condo": 7968,
+    "duplex": 104,
+    "other": 14195
+   },
+   "buildings": {
+    "sfh": 259,
+    "condo": 409,
+    "duplex": 52,
+    "other": 138
+   }
+  },
+  {
+   "d": 2020,
+   "units": {
+    "sfh": 45,
+    "condo": 2387,
+    "duplex": 34,
+    "other": 5284
+   },
+   "buildings": {
+    "sfh": 44,
+    "condo": 79,
+    "duplex": 17,
+    "other": 51
+   }
+  }
+ ],
+ "zones": [
+  {
+   "name": "Sun",
+   "buildings": 27914,
+   "median": 1909,
+   "pre1940": 0.834,
+   "units": {
+    "sfh": 7594.0,
+    "condo": 49356.0,
+    "duplex": 10086.0,
+    "other": 122691.0
+   },
+   "unitShare": {
+    "sfh": 0.04,
+    "condo": 0.26,
+    "duplex": 0.053,
+    "other": 0.647
+   }
+  },
+  {
+   "name": "Transition",
+   "buildings": 9380,
+   "median": 1908,
+   "pre1940": 0.774,
+   "units": {
+    "sfh": 4621.0,
+    "condo": 4881.0,
+    "duplex": 3269.0,
+    "other": 9910.0
+   },
+   "unitShare": {
+    "sfh": 0.204,
+    "condo": 0.215,
+    "duplex": 0.144,
+    "other": 0.437
+   }
+  },
+  {
+   "name": "Fog",
+   "buildings": 83750,
+   "median": 1937,
+   "pre1940": 0.556,
+   "units": {
+    "sfh": 66696.0,
+    "condo": 10642.0,
+    "duplex": 15962.0,
+    "other": 37869.0
+   },
+   "unitShare": {
+    "sfh": 0.508,
+    "condo": 0.081,
+    "duplex": 0.122,
+    "other": 0.289
+   }
+  },
+  {
+   "name": "Persistent Fog",
+   "buildings": 17570,
+   "median": 1937,
+   "pre1940": 0.553,
+   "units": {
+    "sfh": 16674.0,
+    "condo": 1208.0,
+    "duplex": 676.0,
+    "other": 5686.0
+   },
+   "unitShare": {
+    "sfh": 0.688,
+    "condo": 0.05,
+    "duplex": 0.028,
+    "other": 0.235
+   }
+  }
+ ],
+ "w": 612,
+ "h": 628,
+ "scale": 50,
+ "record": 6,
+ "yearsMin": 1808,
+ "yearsMax": 2025
+}

@@ -30,7 +30,7 @@ const num = v => v.toLocaleString("en-US");
 
 // Each of these is a layer that actually exists on the map, so the page
 // never promises a reading the site cannot produce.
-const LAYERS = [
+export const LAYERS = [
   { k: "Sun", href: "/fog?preset=sun",
     d: "Hours of direct sun the property gets, season by season." },
   { k: "Wind", href: "/fog?preset=wind",
