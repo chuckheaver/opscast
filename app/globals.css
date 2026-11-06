@@ -6718,3 +6718,4 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 @media (max-width: 1100px) { .dk-age { grid-template-columns: minmax(0, 1fr); } }
 .dk-age { grid-template-columns: minmax(0, 1fr); gap: 10px; }
 .dk-age .dk-dec svg { max-height: 230px; }
+.nv-list > li > .nv-link { white-space: nowrap; }

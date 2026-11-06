@@ -90,20 +90,7 @@ export default function SiteNavClient({ hoods, guide }) {
         <nav id="nv-menu" className="nv-menu" aria-label="Site">
           <ul className="nv-list">
             <li><Link href="/" className="nv-link" onClick={closeAll}>Home</Link></li>
-
-            <li className={`nv-dd${open === "micro" ? " is-open" : ""}`} {...hover("micro")}>
-              <button type="button" className="nv-link nv-dd-btn" aria-expanded={open === "micro"} onClick={toggle("micro")}>
-                Microclimates <span className="nv-caret" aria-hidden="true">▾</span>
-              </button>
-              <div className="nv-panel nv-panel-micro">
-                {MICRO.map(m => (
-                  <Link key={m.href} href={m.href} className="nv-item" onClick={closeAll}>
-                    <b>{m.label}</b><span>{m.sub}</span>
-                  </Link>
-                ))}
-              </div>
-            </li>
-
+            <li><Link href="/fog?preset=fog" className="nv-link" onClick={closeAll}>Map</Link></li>
             <li className={`nv-dd${open === "hoods" ? " is-open" : ""}`} {...hover("hoods")}>
               <button type="button" className="nv-link nv-dd-btn" aria-expanded={open === "hoods"} onClick={toggle("hoods")}>
                 Neighborhoods <span className="nv-caret" aria-hidden="true">▾</span>
@@ -122,28 +109,16 @@ export default function SiteNavClient({ hoods, guide }) {
                 </div>
               </div>
             </li>
-
-            <li><Link href="/fog?preset=fog" className="nv-link" onClick={closeAll}>The Map</Link></li>
-            <li className={`nv-dd${open === "guide" ? " is-open" : ""}`} {...hover("guide")}>
-              <button type="button" className="nv-link nv-dd-btn" aria-expanded={open === "guide"} onClick={toggle("guide")}>
-                Buyer Guide <span className="nv-caret" aria-hidden="true">▾</span>
+            <li className={`nv-dd${open === "micro" ? " is-open" : ""}`} {...hover("micro")}>
+              <button type="button" className="nv-link nv-dd-btn" aria-expanded={open === "micro"} onClick={toggle("micro")}>
+                Microclimates <span className="nv-caret" aria-hidden="true">▾</span>
               </button>
-              <div className="nv-panel nv-panel-guide">
-                <Link href="/property-types" className="nv-all" onClick={closeAll}>The full guide &rarr;</Link>
-                <div className="nv-guide">
-                  <div>
-                    <span className="nv-az-L">Types of property</span>
-                    {guide.types.map(t => (
-                      <Link key={t.id} href={`/property-types#${t.id}`} onClick={closeAll}>{t.label}</Link>
-                    ))}
-                  </div>
-                  <div>
-                    <span className="nv-az-L">Buying</span>
-                    {guide.topics.map(t => (
-                      <Link key={t.id} href={`/property-types#${t.id}`} onClick={closeAll}>{t.label}</Link>
-                    ))}
-                  </div>
-                </div>
+              <div className="nv-panel nv-panel-micro">
+                {MICRO.map(m => (
+                  <Link key={m.href} href={m.href} className="nv-item" onClick={closeAll}>
+                    <b>{m.label}</b><span>{m.sub}</span>
+                  </Link>
+                ))}
               </div>
             </li>
             <li className={`nv-dd${open === "market" ? " is-open" : ""}`} {...hover("market")}>
@@ -158,6 +133,28 @@ export default function SiteNavClient({ hoods, guide }) {
                 ))}
                 <div className="nv-panel-foot">
                   <a href="/reports/sf-market-briefing.pdf" download>Download the PDF</a>
+                </div>
+              </div>
+            </li>
+            <li className={`nv-dd${open === "guide" ? " is-open" : ""}`} {...hover("guide")}>
+              <button type="button" className="nv-link nv-dd-btn" aria-expanded={open === "guide"} onClick={toggle("guide")}>
+                Guide <span className="nv-caret" aria-hidden="true">▾</span>
+              </button>
+              <div className="nv-panel nv-panel-guide nv-panel-right">
+                <Link href="/property-types" className="nv-all" onClick={closeAll}>The full guide &rarr;</Link>
+                <div className="nv-guide">
+                  <div>
+                    <span className="nv-az-L">Types of property</span>
+                    {guide.types.map(t => (
+                      <Link key={t.id} href={`/property-types#${t.id}`} onClick={closeAll}>{t.label}</Link>
+                    ))}
+                  </div>
+                  <div>
+                    <span className="nv-az-L">Buying</span>
+                    {guide.topics.map(t => (
+                      <Link key={t.id} href={`/property-types#${t.id}`} onClick={closeAll}>{t.label}</Link>
+                    ))}
+                  </div>
                 </div>
               </div>
             </li>
