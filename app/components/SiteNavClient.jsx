@@ -20,9 +20,11 @@ const MICRO = [
 ];
 
 const MARKET = [
-  { href: "/market/report#sf", label: "SF Market", sub: "Market stats, grids, by the numbers, inventory" },
-  { href: "/market/report#neighborhoods", label: "SF Neighborhoods", sub: "Every sale by neighborhood and fog zone" },
+  { href: "/market/report#sf", label: "Market Stats Summary", sub: "Year to date, by the numbers, the 10s" },
+  { href: "/market/report#neighborhoods", label: "Stats by Neighborhood", sub: "Every neighborhood's grid, by Realtor District" },
+  { href: "/market/report#zones", label: "Stats by Microclimate", sub: "Prices and sales by fog zone" },
   { href: "/market/product-types", label: "Product Types", sub: "Houses, duplexes, condos, TICs, co-ops and more, compared" },
+  { href: "/market/report#cost", label: "National – What to Watch", sub: "Mortgage rates, Treasury yields, the yield curve" },
   { href: "/market/duplex-vs-sfh", label: "Duplex vs SFH", sub: "Price, over list and $/sf by neighborhood, with the sales" },
 ];
 
