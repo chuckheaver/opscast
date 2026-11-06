@@ -27,7 +27,7 @@ export const SITE_URL = "https://www.chuckheaver.com";
 const SITE = SITE_URL;
 
 export const metadata = {
-  // Relative URLs in metadata (like /og-chuck-heaver-2.png) resolve against this
+  // Relative URLs in metadata (like /og-chuck-heaver-3.png) resolve against this
   // when rendered on any deploy.
   metadataBase: new URL(SITE),
   title: { default: TITLE, template: "%s" },
@@ -40,14 +40,14 @@ export const metadata = {
     siteName: "Chuck Heaver · San Francisco",
     locale: "en_US",
     images: [
-      { url: "/og-chuck-heaver-2.png", width: 1200, height: 630, alt: "Chuck Heaver, San Francisco Realtor & Meteorologist" },
+      { url: "/og-chuck-heaver-3.png", width: 1200, height: 630, alt: "Chuck Heaver, San Francisco Realtor & Meteorologist" },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESC,
-    images: ["/og-chuck-heaver-2.png"],
+    images: ["/og-chuck-heaver-3.png"],
   },
 };
 
