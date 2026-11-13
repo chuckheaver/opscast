@@ -6719,3 +6719,10 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .dk-age { grid-template-columns: minmax(0, 1fr); gap: 10px; }
 .dk-age .dk-dec svg { max-height: 230px; }
 .nv-list > li > .nv-link { white-space: nowrap; }
+/* Market Grids: the city-wide row pinned under the headers; the stacked view's type rows. */
+.mr-grid thead tr.city td { background: #FBF4E1; border-bottom: 2px solid #E9BC3F; font-weight: 800; }
+.mr-grid tbody tr.mr-type td { background: #F3F5F7; font-weight: 800; border-top: 2px solid var(--lp-line); cursor: pointer; }
+.mr-grid tbody tr.mr-type td.l { box-shadow: inset 5px 0 0 var(--seg); padding-left: 14px; }
+.mr-grid tbody tr.mr-type:hover td { background: #E8EFF7; }
+.mr-caret { display: inline-block; width: 16px; color: var(--lp-navy); }
+.mr-grid-hint { font-size: 13px; color: var(--lp-muted); margin: -4px 0 8px; }

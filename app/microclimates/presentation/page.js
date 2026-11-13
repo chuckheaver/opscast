@@ -97,7 +97,7 @@ const Facts = ({ sec }) => (
 
 // Fog zones × the four property types (app/lib/microclimate-market.json, this
 // year to date): how each zone's sales split by type, then the medians.
-const ZCATS = [["sfh", "SFH"], ["condo", "Condo/TIC/Co-op"], ["duplex", "Duplex"], ["other", "Other (Tri+)"]];
+const ZCATS = [["sfh", "SFH"], ["duplex", "Duplex"], ["condo", "Condo/TIC/Co-op"], ["other", "Other (Tri+)"]];
 const ZCOL = { sfh: "#203C5F", condo: "#E9BC3F", duplex: "#3C8D7F", other: "#6B6F75" };
 const zy = (cat, z) => MARKET.grid[cat][z].y1;           // [n, median, avg, $/sf, dom, % of list]
 const star = n => (n < 10 ? "*" : "");

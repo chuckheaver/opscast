@@ -20,7 +20,7 @@ import micro
 
 ROOT = mg.ROOT
 SF, CO, DU, OT = mg.SF, mg.CO, mg.DU, mg.OT
-SEGS = [("sfh", SF), ("co", CO), ("du", DU), ("ot", OT)]
+SEGS = [("sfh", SF), ("du", DU), ("co", CO), ("ot", OT)]
 SEGKEY = {t: k for k, s in SEGS for t in mg.SEG[s]}
 
 

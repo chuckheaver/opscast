@@ -314,7 +314,7 @@ export default function NeighborhoodModal({
   useEffect(() => {
     if (!autoDetails || prices === "loading") return;
     if (prices) {
-      for (const sect of autoDetails === "all" ? ["sfh", "condo", "duplex", "other"] : [autoDetails]) {
+      for (const sect of autoDetails === "all" ? ["sfh", "duplex", "condo", "other"] : [autoDetails]) {
         const homes = prices[sect]?.homes || [];
         if (homes.length) setSect(sect, homes, true);
       }
@@ -383,7 +383,7 @@ export default function NeighborhoodModal({
         ) : null}
         {st && st.n > 0 && (
           <div className="lp-nsegs nhm-segs">
-            {["sfh", "condo", "duplex", "other"].map(k => (
+            {["sfh", "duplex", "condo", "other"].map(k => (
               <SegBox key={k} seg={SEG[k]} s={st} active={!!openSects[k]} onClick={() => toggleSect(k)} />
             ))}
           </div>

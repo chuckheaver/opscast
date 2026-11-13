@@ -150,7 +150,7 @@ def stacked(rows,segs,ytd,w=468,h=150,fmt=lambda v:f"{v:.0f}",legend_gap=54):
     o.append(f"<text x='{w-pad_l}' y='19' font-size='7.4' fill='{MUTED}' text-anchor='end'>{ytd['sub']}</text>")
     return "".join(o)+"</svg>"
 
-WSEG=[("SFH","#AFC0D0","#203C5F","sfh"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","co"),("Duplex",DUP_LT,DUP,"du"),("Other (Tri+)","#C9CCD0","#6B6F75","ot")]
+WSEG=[("SFH","#AFC0D0","#203C5F","sfh"),("Duplex",DUP_LT,DUP,"du"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","co"),("Other (Tri+)","#C9CCD0","#6B6F75","ot")]
 
 def weekly_bars(rows,w=960,h=172,ytd=None):
     """52-week grid, prior year vs current, with the % change above each
@@ -418,7 +418,7 @@ def type_mirror(rows,w=470,h=168):
     """The four categories, counted the same two ways as the chart above."""
     n=len(rows); tot=sum(r["sellingPrice"] for r in rows)
     segs=[]
-    for k,col in ((mg.SF,"#203C5F"),(mg.CO,"#E9BC3F"),(mg.DU,DUP),(mg.OT,"#6B6F75")):
+    for k,col in ((mg.SF,"#203C5F"),(mg.DU,DUP),(mg.CO,"#E9BC3F"),(mg.OT,"#6B6F75")):
         g=[r for r in rows if r["propType"] in mg.SEG[k]]
         segs.append((mg.TITLE[k],col,len(g),sum(r["sellingPrice"] for r in g)))
     pad_l,gap=2,34; bw=w-pad_l-2; y1=22; y2=y1+BARH+gap
@@ -682,7 +682,7 @@ def site_kpis():
                 ("Median $/sf",usd(a.get("ppsf")),usd(b.get("ppsf")),pct(a.get("ppsf"),b.get("ppsf")),False),
                 ("DOM",rnd(a["dom"]),rnd(b["dom"]),unit(a["dom"],b["dom"],"day","days"),False),
                 ("Sale price vs list",f"{rnd(a['saleToList'])}%",f"{rnd(b['saleToList'])}%",unit(a["saleToList"],b["saleToList"],"pt","pts"),False)]
-    boxes=[("sfh","SFH",seg("sfh")),("condo","Condo / TIC / Co-op",seg("condo")),("duplex","Duplex",seg("duplex")),("other","Other (Tri+)",seg("other")),
+    boxes=[("sfh","SFH",seg("sfh")),("duplex","Duplex",seg("duplex")),("condo","Condo / TIC / Co-op",seg("condo")),("other","Other (Tri+)",seg("other")),
            ("all","All sales",[("Total sales volume",f"${m['volume']/1e9:.2f}B",f"${p['volume']/1e9:.2f}B",pct(m["volume"],p["volume"]),True),
                                ("Total units sold",f"{m['n']:,}",f"{p['n']:,}",pct(m["n"],p["n"]),True)])]
     d=datetime.date.fromisoformat(L["market"]["through"])
@@ -845,7 +845,7 @@ def build():
     clrows=[dict(r, d=(100*(r["csold"]-r25m[r["m"]]["csold"])/r25m[r["m"]]["csold"]) if r["m"] in r25m and r25m[r["m"]]["csold"] else None) for r in r26]
     olrows=[dict(r, d=(100*(r["osold"]-r25m[r["m"]]["osold"])/r25m[r["m"]]["osold"]) if r["m"] in r25m and r25m[r["m"]]["osold"] else None) for r in r26]
     dlrows=[dict(r, d=(100*(r["dsold"]-r25m[r["m"]]["dsold"])/r25m[r["m"]]["dsold"]) if r["m"] in r25m and r25m[r["m"]].get("dsold") and r.get("dsold") else None) for r in r26]
-    ukeys=["sfh","cd","du","oth"]; vkeys=["sfh_v","cd_v","du_v","oth_v"]
+    ukeys=["sfh","du","cd","oth"]; vkeys=["sfh_v","du_v","cd_v","oth_v"]
     urows=two_year(ukeys,lambda d:f"{d:+.0f}",len(S["m0"]))
     vrows=two_year(vkeys,lambda d:f"{d/1e6:+.0f}M",sum(r["sellingPrice"] for r in S["m0"]))
     tot=lambda rows,keys,suf: sum((r.get(k+suf) or 0) for r in rows for k in keys)
@@ -857,8 +857,8 @@ def build():
         u25=len(S["y0"]); v25=sum(r["sellingPrice"] for r in S["y0"])
     uytd=dict(label=f"{u26:,} vs {u25:,}  {sgn(D(u26,u25))}%", sub=f"through {mthru} · 2025 full year {u25y:,}")
     vytd=dict(label=f"{BN(v26)} vs {BN(v25)}  {sgn(D(v26,v25))}%", sub=f"through {mthru} · 2025 full year {BN(v25y)}")
-    USEG=[("SFH","#AFC0D0","#203C5F","sfh"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","cd"),("Duplex",DUP_LT,DUP,"du"),("Other (Tri+)","#C9CCD0","#6B6F75","oth")]
-    VSEG=[("SFH","#AFC0D0","#203C5F","sfh_v"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","cd_v"),("Duplex",DUP_LT,DUP,"du_v"),("Other (Tri+)","#C9CCD0","#6B6F75","oth_v")]
+    USEG=[("SFH","#AFC0D0","#203C5F","sfh"),("Duplex",DUP_LT,DUP,"du"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","cd"),("Other (Tri+)","#C9CCD0","#6B6F75","oth")]
+    VSEG=[("SFH","#AFC0D0","#203C5F","sfh_v"),("Duplex",DUP_LT,DUP,"du_v"),("Condo/TIC/Co-op","#F6E3A6","#E9BC3F","cd_v"),("Other (Tri+)","#C9CCD0","#6B6F75","oth_v")]
     # ── PAGE 1 — San Francisco right now ─────────────────────────────────
     # The local snapshot. Headline numbers, then four charts. Stats only, no
     # captions (the owner, Oct 21 2026): definitions go in the footer.
@@ -880,7 +880,7 @@ def build():
     o.append("</div>")
     o.append("<div class='cols' style='margin-top:7px'>")
     SL=[("What sellers asked","#E9BC3F"),("What buyers paid","#203C5F")]
-    for t_,rows_,k_ in (("SFH",mlrows,"m"),("Condo/TIC/Co-op",clrows,"c"),("Duplex",dlrows,"d"),("Other (Tri+)",olrows,"o")):
+    for t_,rows_,k_ in (("SFH",mlrows,"m"),("Duplex",dlrows,"d"),("Condo/TIC/Co-op",clrows,"c"),("Other (Tri+)",olrows,"o")):
         o.append(f"""<div class='col'><h2>Sale vs List — {t_}</h2>
       {lines(rows_,[(SL[0][0],SL[0][1],k_+"list"),(SL[1][0],SL[1][1],k_+"sold")],w=300,h=224,dkey="d",lab=False)}</div>""")
     o.append("</div>")
@@ -1025,7 +1025,7 @@ def build():
                 (f"Top $/sf {T}",PSF,ppsf_sales_rows(types)), (f"Overbids - {T}",SALE,sales_rows(overbids(types)))]
     low_row=[("Lowest Neighborhood SFH",NB,nb_median_rows(SFHs,low=True)), ("Lowest 10 SFH",SALE,sales_rows(low_sales(SFHs))),
              (f"Lowest 10 {mg.TITLE[CO]}",SALE,sales_rows(low_sales(COs))), ("Top # Units Sold (All)",TH("<Neighborhood","Sales","Median"),nb_count_rows())]
-    for part,rows_ in ((1,[seg_row(SF),seg_row(CO)]),(2,[seg_row(mg.DU),seg_row(OT),low_row])):
+    for part,rows_ in ((1,[seg_row(SF),seg_row(mg.DU)]),(2,[seg_row(CO),seg_row(OT),low_row])):
         o.append(f"""<div class='page'><div class='mast'><div><div class='t'>The 10s of {yr10} <span class='part'>{part} of 2</span></div>
       <div class='p'>Year to date: Jan 1 – {datetime.date.fromisoformat(W['m1'][1]).strftime('%b %-d, %Y')}</div></div>
       <div class='by'>Chuck Heaver · Vanguard Properties</div></div>""")
@@ -1055,7 +1055,7 @@ def build():
       +T_("gold", bn['zip'], "highest volume ZIP", f"{bn['zipv']} · {bn['zhoods']}")
       +T_("light", bn['under'], "sold below asking")
       +T_("light", bn['tenm'], "sales of $10M or more")
-      +T_("navy pair", f"{bn['sqft'][:-3]} / {bn['csqft'][:-3]} / {bn['dsqft'][:-3]} / {bn['osqft'][:-3]}", "median sq ft — SFH, Condo/TIC/Co-op, Duplex, Other (Tri+)")
+      +T_("navy pair", f"{bn['sqft'][:-3]} / {bn['dsqft'][:-3]} / {bn['csqft'][:-3]} / {bn['osqft'][:-3]}", "median sq ft — SFH, Duplex, Condo/TIC/Co-op, Other (Tri+)")
       +"</div>")
     o.append(f"""<div style='margin-top:7px'><h2>Units Sold by Week — Every Week of Both Years</h2>
       {weekly_bars(wrows,h=215,ytd=dict(label=f"{w26:,} vs {w25:,}  {sgn(D(w26,w25))}%", sub=f"Jan 1 – {thru}, both years · 2025 full year {w25y:,}"))}</div>""")

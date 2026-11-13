@@ -9,13 +9,14 @@
 // Other, which holds the duplexes — in reports/market/market-grid-v2.py until
 // it is brought across.)
 
+// Duplex follows SFH everywhere the four are listed (owner, Nov 13 2026).
 export const SEGMENTS = [
   { key: "sfh", label: "Single-family", short: "SFH", median: "Median house", color: "#203C5F",
     types: ["Single Family Residence", "2 Houses on Lot", "Halfplex"] },
-  { key: "condo", label: "Condo / TIC / Co-op", short: "Condo/TIC/Co-op", median: "Median condo / TIC / co-op", color: "#E9BC3F",
-    types: ["Condominium", "Tenancy in Common", "Stock Cooperative", "Co-Ownership", "Townhouse", "Loft Condominium", "Loft"] },
   { key: "duplex", label: "Duplex", short: "Duplex", median: "Median duplex", color: "#3C8D7F",
     types: ["Duplex"] },
+  { key: "condo", label: "Condo / TIC / Co-op", short: "Condo/TIC/Co-op", median: "Median condo / TIC / co-op", color: "#E9BC3F",
+    types: ["Condominium", "Tenancy in Common", "Stock Cooperative", "Co-Ownership", "Townhouse", "Loft Condominium", "Loft"] },
   { key: "other", label: "Other (Tri+)", short: "Other (Tri+)", median: "Median other (tri+)", color: "#B8613A",
     // the types known today; any type not listed above also lands here
     types: ["Triplex", "Fourplex", "5+ Units", "Residential Income Other", "Other", "3+ Houses on Lot"] },

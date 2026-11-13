@@ -65,9 +65,10 @@ PERIOD=os.path.join(ROOT,"data","reporting-period.json")
 # type. Every sale lands in exactly one; a new MLS type goes here and in
 # app/lib/segments.js.
 SF, CO, DU, OT = "Single Family Residences", "Condo / TIC / Co-op", "Duplex", "Other"
+# Order is the order of the grid pages: Duplex follows SFH (owner, Nov 13 2026).
 SEG={SF:{"Single Family Residence","2 Houses on Lot","Halfplex"},
-     CO:{"Condominium","Tenancy in Common","Stock Cooperative","Co-Ownership","Townhouse","Loft Condominium","Loft"},
      DU:{"Duplex"},
+     CO:{"Condominium","Tenancy in Common","Stock Cooperative","Co-Ownership","Townhouse","Loft Condominium","Loft"},
      OT:{"Other","3+ Houses on Lot","Triplex","Fourplex","5+ Units","Residential Income Other"}}
 TITLE={SF:"SFH",CO:"Condo/TIC/Co-op",DU:"Duplex",OT:"Other (Tri+)"}
 # The site's zones at a point (app/lib/fog-zones.js, reports/market/micro.py).

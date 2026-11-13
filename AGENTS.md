@@ -47,8 +47,9 @@ The owner's rules:
   income). The MLS can't put both in one feed, so always ask the owner for
   both, and don't rebuild with only one (`scripts/geocode-listings.mjs`
   prints the property types and warns when there is no Residential Income).
-  The site has four categories (owner, Oct 22 2026): (1) SFH — Single Family
-  Residence, Halfplex and 2 Houses on Lot, (2) Condo/TIC/Co-op, (3) Duplex,
+  The site has four categories (owner, Oct 22 2026), always listed in this
+  order — Duplex follows SFH (owner, Nov 13 2026): (1) SFH — Single Family
+  Residence, Halfplex and 2 Houses on Lot, (2) Duplex, (3) Condo/TIC/Co-op,
   (4) "Other (Tri+)" (triplexes, fourplexes, 5+ units and the other types). Never
   "Condo/TIC/Other". The site's list is `app/lib/segments.js` (pages, map dots,
   pop-ups and the stats scripts all read it). The monthly report has the same

@@ -62,7 +62,7 @@ export default async function Page({ params }) {
 
         {s && s.n > 0 && (
           <section className="lp-nsegs">
-            {["sfh", "condo", "duplex", "other"].map(k => <SegBox key={k} seg={SEG[k]} s={s} href={salesMap(name, k)} />)}
+            {["sfh", "duplex", "condo", "other"].map(k => <SegBox key={k} seg={SEG[k]} s={s} href={salesMap(name, k)} />)}
           </section>
         )}
 

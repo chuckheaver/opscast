@@ -86,8 +86,8 @@ export default function Landing() {
   ];
   const BOXES = [
     { key: "sfh", title: SEG.sfh.short, rows: segRows("sfh") },
-    { key: "condo", title: SEG.condo.label, rows: segRows("condo") },
     { key: "duplex", title: SEG.duplex.label, rows: segRows("duplex") },
+    { key: "condo", title: SEG.condo.label, rows: segRows("condo") },
     { key: "other", title: SEG.other.label, rows: segRows("other") },
     { key: "all", title: "All sales", rows: [
       { label: "Total sales volume", now: `$${(m.volume / 1e9).toFixed(2)}B`, then: `$${(p.volume / 1e9).toFixed(2)}B`, chg: pct(m.volume, p.volume), big: true },

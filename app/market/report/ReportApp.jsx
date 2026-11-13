@@ -260,7 +260,7 @@ function Numbers({ data, onDrill }) {
         {T("gold", b.zip, "highest volume ZIP", `${b.zipv} · ${b.zhoods}`)}
         {T("light", b.under, "sold below asking")}
         {T("light", b.tenm, "sales of $10M or more")}
-        {T("navy pair", `${b.sqft.replace(" sf", "")} / ${b.csqft.replace(" sf", "")} / ${b.dsqft.replace(" sf", "")} / ${b.osqft.replace(" sf", "")}`, "median sq ft — SFH, Condo/TIC/Co-op, Duplex, Other (Tri+)")}
+        {T("navy pair", `${b.sqft.replace(" sf", "")} / ${b.dsqft.replace(" sf", "")} / ${b.csqft.replace(" sf", "")} / ${b.osqft.replace(" sf", "")}`, "median sq ft — SFH, Duplex, Condo/TIC/Co-op, Other (Tri+)")}
       </div>
       <h3 className="mr-h3">Units sold by week, every week of both years</h3>
       <WeekChart data={data} onDrill={onDrill} />
@@ -357,16 +357,19 @@ const DISTRICTS = { 1: "Northwest", 2: "Central West", 3: "Southwest", 4: "Twin 
 const distOf = code => parseInt(code, 10) || 99;
 
 function Grids({ data, onDrill }) {
-  const [seg, setSeg] = useState("sfh");
+  const [seg, setSeg] = useState("all");          // "all" stacks the four types; or one type's key
+  const [open, setOpen] = useState(() => new Set());   // types opened in the stacked view
   const [order, setOrder] = useState("hood");     // "hood" A–Z, or "district" grouped by Realtor District
   const [metric, setMetric] = useState("all");
   const [q, setQ] = useState("");
   const [sort, setSort] = useState({ k: "name", w: "y1", dir: 1 });
-  const g = data.grids.find(x => x.key === seg);
   const lab = data.labels;
   const mets = metric === "all" ? METRICS : METRICS.filter(m => m.k === metric);
-  const rows = useMemo(() => {
-    const r = g.rows.filter(x => !q || x.name.toLowerCase().includes(q.toLowerCase()));
+  const span = 1 + mets.length * 4;
+  const grid = k => data.grids.find(x => x.key === k);
+  const segs = seg === "all" ? SEGS : SEGS.filter(s => s.k === seg);
+  const sorted = useMemo(() => Object.fromEntries(SEGS.map(({ k }) => {
+    const r = grid(k).rows.filter(x => !q || x.name.toLowerCase().includes(q.toLowerCase()));
     r.sort((a, b) => {
       if (order === "district" && distOf(a.code) !== distOf(b.code)) return distOf(a.code) - distOf(b.code);
       if (sort.k === "name") return order === "district" ? sort.dir * a.code.localeCompare(b.code, "en", { numeric: true }) : sort.dir * a.name.localeCompare(b.name);
@@ -376,10 +379,10 @@ function Grids({ data, onDrill }) {
       if (y == null) return -1;
       return sort.dir * (x - y);
     });
-    return r;
-  }, [g, q, sort, order]);
+    return [k, r];
+  })), [data, q, sort, order]);
   const P = data.period;
-  const drill = (title, f) => onDrill({ title, sub: g.title, filter: s => s.seg === seg && inWin(P.y1, s.d) && f(s), prior: s => s.seg === seg && inWin(P.y0, s.d) && f(s), years: [P.year, P.prior] });
+  const drill = (k, title, f) => onDrill({ title, sub: grid(k).title, filter: s => s.seg === k && inWin(P.y1, s.d) && f(s), prior: s => s.seg === k && inWin(P.y0, s.d) && f(s), years: [P.year, P.prior] });
   const cells = st => mets.map(m => WINS.map((w, j) => (
     <td key={m.k + w} className={`${tone(st, w, m)}${j === 0 ? " g0" : j === 2 ? " g2" : ""}`}>{m.fmt(st[w][m.k])}</td>)));
   const sortBtn = (k, w, text) => (
@@ -387,11 +390,43 @@ function Grids({ data, onDrill }) {
       {text}{sort.k === k && sort.w === w ? (sort.dir > 0 ? " ▲" : " ▼") : ""}
     </button>
   );
-  const notes = g.rows.filter(r => r.note);
+  const head = (first, sortable) => (
+    <>
+      <tr className="grp"><th rowSpan="2" className="l">{sortable ? sortBtn("name", "y1", first) : first}</th>{mets.map(m => <th key={m.k} colSpan="4" className="g1">{m.label}</th>)}</tr>
+      <tr>{mets.map(m => WINS.map((w, j) => <th key={m.k + w} className={`${j === 0 ? "g1" : ""} ${w[0] === "y" ? "ytd" : ""}`}>{sortable ? sortBtn(m.k, w, lab[w]) : lab[w]}</th>))}</tr>
+    </>
+  );
+  const toggle = k => setOpen(o => { const n = new Set(o); n.has(k) ? n.delete(k) : n.add(k); return n; });
+  const stacked = seg === "all";
+  const shown = k => !stacked || open.has(k) || !!q;
+  // A type's city-wide row: pinned at the top of a single type's grid; in the
+  // stacked view, the row that opens the type's neighborhoods.
+  const typeRow = (sg, label) => (
+    <tr className={`city dv-hit${stacked ? " mr-type" : ""}`} style={stacked ? { "--seg": sg.color } : undefined}
+        onClick={() => (stacked ? toggle(sg.k) : drill(sg.k, "All San Francisco", () => true))}>
+      <td className="l">{stacked ? <span className="mr-caret" aria-hidden="true">{shown(sg.k) ? "▾" : "▸"}</span> : null}{label}</td>
+      {cells(grid(sg.k).total)}
+    </tr>
+  );
+  const hoodRows = sg => sorted[sg.k].map((r, k, rows) => (<Fragment key={sg.k + r.name}>
+    {order === "district" && (k === 0 || distOf(rows[k - 1].code) !== distOf(r.code)) ? (() => {
+      const dn = distOf(r.code), names = new Set(rows.filter(x => distOf(x.code) === dn).map(x => x.name));
+      return (
+        <tr className="dv-dist dv-hit" onClick={() => drill(sg.k, `District ${dn} · ${DISTRICTS[dn] || ""}`, s => names.has(s.h))}>
+          <td className="l" colSpan={span}>District {dn}{DISTRICTS[dn] ? ` · ${DISTRICTS[dn]}` : ""}<small>{names.size} neighborhoods</small></td>
+        </tr>
+      );
+    })() : null}
+    <tr className="dv-hit" onClick={() => drill(sg.k, r.name, s => s.h === r.name)}>
+      <td className="l"><button type="button" className="dv-n" onClick={e => { e.stopPropagation(); drill(sg.k, r.name, s => s.h === r.name); }}>{r.name}{r.note ? "†" : ""}</button> <small>{r.code}</small></td>
+      {cells(r.st)}
+    </tr>
+  </Fragment>));
+  const notes = segs.flatMap(sg => grid(sg.k).rows.filter(r => r.note).map(r => ({ ...r, key: sg.k + r.name })));
   return (
     <>
       <div className="mr-fig-top mr-grid-ctl">
-        <Tabs value={seg} onChange={setSeg} label="Category" items={SEGS.map(s => ({ k: s.k, label: s.label, color: s.color }))} />
+        <Tabs value={seg} onChange={setSeg} label="Category" items={[{ k: "all", label: "All types" }, ...SEGS.map(s => ({ k: s.k, label: s.label, color: s.color }))]} />
         <select value={metric} onChange={e => setMetric(e.target.value)} aria-label="Measures shown">
           <option value="all">All measures</option>
           {METRICS.map(m => <option key={m.k} value={m.k}>{m.label}</option>)}
@@ -399,51 +434,46 @@ function Grids({ data, onDrill }) {
         <Tabs value={order} onChange={setOrder} label="Order" items={[{ k: "hood", label: "Neighborhood" }, { k: "district", label: "Realtor District" }]} />
         <input type="search" placeholder="Find a neighborhood" value={q} onChange={e => setQ(e.target.value)} aria-label="Find a neighborhood" />
       </div>
+      {stacked ? (
+        <p className="mr-grid-hint">
+          Click a type to open its neighborhoods.{" "}
+          <button type="button" className="mr-link" onClick={() => setOpen(open.size === SEGS.length ? new Set() : new Set(SEGS.map(s => s.k)))}>{open.size === SEGS.length ? "Close all" : "Open all"}</button>
+        </p>
+      ) : null}
       <HScroll className="dv-scroll-x">
         <table className="dv-t mr-grid">
           <thead>
-            <tr className="grp"><th rowSpan="2" className="l">{sortBtn("name", "y1", "Neighborhood")}</th>{mets.map(m => <th key={m.k} colSpan="4" className="g1">{m.label}</th>)}</tr>
-            <tr>{mets.map(m => WINS.map((w, j) => <th key={m.k + w} className={`${j === 0 ? "g1" : ""} ${w[0] === "y" ? "ytd" : ""}`}>{sortBtn(m.k, w, lab[w])}</th>))}</tr>
+            {head(stacked ? "Type / Neighborhood" : "Neighborhood", true)}
+            {stacked ? null : typeRow(segs[0], "All San Francisco (pooled)")}
           </thead>
-          <tbody>
-            {rows.map((r, k) => (<Fragment key={r.name}>
-              {order === "district" && (k === 0 || distOf(rows[k - 1].code) !== distOf(r.code)) ? (() => {
-                const dn = distOf(r.code), names = new Set(rows.filter(x => distOf(x.code) === dn).map(x => x.name));
-                return (
-                  <tr className="dv-dist dv-hit" onClick={() => drill(`District ${dn} · ${DISTRICTS[dn] || ""}`, s => names.has(s.h))}>
-                    <td className="l" colSpan={1 + mets.length * 4}>District {dn}{DISTRICTS[dn] ? ` · ${DISTRICTS[dn]}` : ""}<small>{names.size} neighborhoods</small></td>
-                  </tr>
-                );
-              })() : null}
-              <tr className="dv-hit" onClick={() => drill(r.name, s => s.h === r.name)}>
-                <td className="l"><button type="button" className="dv-n" onClick={e => { e.stopPropagation(); drill(r.name, s => s.h === r.name); }}>{r.name}{r.note ? "†" : ""}</button> <small>{r.code}</small></td>
-                {cells(r.st)}
-              </tr>
-            </Fragment>))}
-          </tbody>
-          <tfoot>
-            <tr className="city dv-hit" onClick={() => drill("All San Francisco", () => true)}><td className="l">All San Francisco (pooled)</td>{cells(g.total)}</tr>
-          </tfoot>
+          {segs.map(sg => (
+            <tbody key={sg.k}>
+              {stacked ? typeRow(sg, `${sg.label} · All San Francisco`) : null}
+              {shown(sg.k) ? hoodRows(sg) : null}
+            </tbody>
+          ))}
         </table>
       </HScroll>
       <h3 className="mr-h3">By fog zone</h3>
       <HScroll className="dv-scroll-x">
         <table className="dv-t mr-grid">
           <thead>
-            <tr className="grp"><th rowSpan="2" className="l">Fog zone</th>{mets.map(m => <th key={m.k} colSpan="4" className="g1">{m.label}</th>)}</tr>
-            <tr>{mets.map(m => WINS.map((w, j) => <th key={m.k + w} className={`${j === 0 ? "g1" : ""} ${w[0] === "y" ? "ytd" : ""}`}>{lab[w]}</th>))}</tr>
+            {head(stacked ? "Type / Fog zone" : "Fog zone", false)}
+            {stacked ? null : <tr className="city"><td className="l">Total — all zones</td>{cells(grid(segs[0].k).total)}</tr>}
           </thead>
-          <tbody>
-            {g.zones.map((z, i) => (
-              <tr key={z.name} className="dv-hit" onClick={() => drill(`${z.name} zone`, s => s.z === z.name)}>
-                <td className="l"><span className="mr-zone" style={{ background: z.color }}>{i + 1}</span>{z.name}</td>{cells(z.st)}
-              </tr>
-            ))}
-          </tbody>
-          <tfoot><tr className="city"><td className="l">Total — all zones</td>{cells(g.total)}</tr></tfoot>
+          {segs.map(sg => (
+            <tbody key={sg.k}>
+              {stacked ? typeRow(sg, `${sg.label} · all zones`) : null}
+              {shown(sg.k) ? grid(sg.k).zones.map((z, i) => (
+                <tr key={z.name} className="dv-hit" onClick={() => drill(sg.k, `${z.name} zone`, s => s.z === z.name)}>
+                  <td className="l"><span className="mr-zone" style={{ background: z.color }}>{i + 1}</span>{z.name}</td>{cells(z.st)}
+                </tr>
+              )) : null}
+            </tbody>
+          ))}
         </table>
       </HScroll>
-      {notes.length ? <p className="mr-note">{notes.map(r => <span key={r.name}>† {r.name}: {r.note.join(" ")} </span>)}</p> : null}
+      {notes.length ? <p className="mr-note">{notes.map(r => <span key={r.key}>† {r.name}: {r.note.join(" ")} </span>)}</p> : null}
     </>
   );
 }

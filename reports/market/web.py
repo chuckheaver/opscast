@@ -31,8 +31,8 @@ def placement(title):
     if t.startswith("san francisco real estate"):        return ("stats", 10, "")
     if t.startswith("detail"):                            return ("stats", 20, "")
     if "market grid - sfh" in t:                          return ("stats", 30, "grid-sfh")
-    if "market grid - condo" in t:                        return ("stats", 40, "grid-condo")
-    if "market grid - duplex" in t:                       return ("stats", 42, "grid-duplex")
+    if "market grid - condo" in t:                        return ("stats", 42, "grid-condo")
+    if "market grid - duplex" in t:                       return ("stats", 40, "grid-duplex")   # Duplex follows SFH
     if "market grid - other" in t:                        return ("stats", 45, "grid-other")
     if t.startswith("the 10s"):                           return ("stats", 50, "neighborhoods")
     if t.startswith("heat map"):                          return ("stats", 58, "microclimates")
