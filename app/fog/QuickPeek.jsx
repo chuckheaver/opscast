@@ -52,8 +52,8 @@ export default function QuickPeek({
   const zone = zoneOf(fogHrs);
   const wait = <span className="qp-wait">…</span>;
   const hazards = (() => {
-    if (seismicYN == null && tsunamiYN == null && floodYN == null) return wait;
-    const hit = [seismicYN === "Yes" && "Seismic", tsunamiYN === "Yes" && "Tsunami", floodYN === "Yes" && "100-yr storm flood"].filter(Boolean);
+    if (seismicYN == null && tsunamiYN == null) return wait;
+    const hit = [seismicYN === "Yes" && "Seismic", tsunamiYN === "Yes" && "Tsunami"].filter(Boolean);
     return hit.length ? <b className="qp-yes">{hit.join(", ")}</b> : "No";
   })();
   const elev = Number.isFinite(elevationFt) ? `${Math.round(elevationFt).toLocaleString("en-US")} ft` : null;
@@ -71,6 +71,8 @@ export default function QuickPeek({
       : slope === undefined ? <>{elev} / {wait}</>
       : slope ? `${elev} / ${slope.pct}% (${slope.label})` : elev],
     ["Hazards", hazards],
+    // SFPUC 100-Year Storm Flood Risk Zone (the map's Hazards › Flood layer).
+    ["100-Yr Flood Zone", floodYN == null ? wait : floodYN === "Yes" ? <b className="qp-yes">Yes</b> : "No"],
     ["Muni", muni === undefined ? wait : muni ? <>{routesShort(muni.routes) || muni.name} <i>· {muni.dist}</i></> : "—"],
     ["Bike Path", bike === undefined ? wait : bike ? <>{bike.street} / {bike.cls} <i>· {bike.dist}</i></> : "—"],
     ["Land Use", land === undefined ? wait
