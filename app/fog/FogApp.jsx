@@ -282,6 +282,10 @@ export default function FogApp() {
     const lat = Number(searchParams.get("lat"));
     const lng = Number(searchParams.get("lng"));
     if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+    // San Francisco only: a linked location elsewhere (a weather-page city
+    // such as New York, passed on by an old link) is ignored, so the map
+    // opens blank instead.
+    if (lng < -122.53 || lng > -122.35 || lat < 37.70 || lat > 37.84) return null;
     // ?bz=1 (building zoom) — from a "View building structure" link — flies in
     // to the footprint instead of framing the whole city.
     const zoom = searchParams?.get("bz") ? 15.5 : null;

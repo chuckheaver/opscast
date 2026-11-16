@@ -19,7 +19,10 @@ const LOC_STORAGE_KEY = "opscast.loc.v1";
 // winds + radiation map.
 function buildLocUrl(base, loc, extra = {}) {
   const qs = new URLSearchParams();
-  if (loc?.latitude != null && loc?.longitude != null) {
+  // Only a San Francisco location is passed on to the maps; the weather
+  // page's city can be anywhere.
+  const inSF = loc && loc.longitude >= -122.53 && loc.longitude <= -122.35 && loc.latitude >= 37.70 && loc.latitude <= 37.84;
+  if (inSF) {
     qs.set("lat", String(loc.latitude));
     qs.set("lng", String(loc.longitude));
     if (loc.name) qs.set("name", loc.name);
