@@ -2,7 +2,7 @@
 
 // Modal host for the map. Renders the Neighborhood-highlights pop-up and the
 // Building profile pop-up — there is no longer a visible bottom panel; the
-// point-level facts (ZIP, elevation, seismic, tsunami) that used to live in a
+// point-level facts (ZIP, elevation, seismic, tsunami, flood) that used to live in a
 // bottom strip are now folded into the neighborhood summary modal. The
 // Neighborhoods / Buildings lists and layer toggles live in the on-map toolbar
 // (FogMapTools).
@@ -32,6 +32,7 @@ export default function FogPanel({
   realtorNeighborhoods,
   seismicHazards,
   tsunamiHazard,
+  floodHazard,
   buildingProfiles, openBuilding, onCloseBuilding,
   peekEl, onClosePeek, onOpenHood,
 }) {
@@ -64,6 +65,7 @@ export default function FogPanel({
   };
   const seismicYN = hazardYN(seismicHazards);
   const tsunamiYN = hazardYN(tsunamiHazard);
+  const floodYN = hazardYN(floodHazard);
 
   // The neighborhood whose pop-up is open. Point-derived facts only apply when
   // the picked point is actually inside the open neighborhood.
@@ -108,6 +110,7 @@ export default function FogPanel({
           elevationFt={elevationFt}
           seismicYN={seismicYN}
           tsunamiYN={tsunamiYN}
+          floodYN={floodYN}
           onMore={neighborhoodName && getNeighborhood(neighborhoodName) ? () => onOpenHood?.(neighborhoodName) : null}
           onClose={onClosePeek}
         />,

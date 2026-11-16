@@ -22,7 +22,7 @@ const routesShort = r => {
 
 export default function QuickPeek({
   point, address, neighborhood, district, supDistrict, zip, fogHrs, elevationFt,
-  seismicYN, tsunamiYN, onMore, onClose,
+  seismicYN, tsunamiYN, floodYN, onMore, onClose,
 }) {
   const [muni, setMuni] = useState(undefined);
   const [bike, setBike] = useState(undefined);
@@ -52,8 +52,8 @@ export default function QuickPeek({
   const zone = zoneOf(fogHrs);
   const wait = <span className="qp-wait">…</span>;
   const hazards = (() => {
-    if (seismicYN == null && tsunamiYN == null) return wait;
-    const hit = [seismicYN === "Yes" && "Seismic", tsunamiYN === "Yes" && "Tsunami"].filter(Boolean);
+    if (seismicYN == null && tsunamiYN == null && floodYN == null) return wait;
+    const hit = [seismicYN === "Yes" && "Seismic", tsunamiYN === "Yes" && "Tsunami", floodYN === "Yes" && "100-yr storm flood"].filter(Boolean);
     return hit.length ? <b className="qp-yes">{hit.join(", ")}</b> : "No";
   })();
   const elev = Number.isFinite(elevationFt) ? `${Math.round(elevationFt).toLocaleString("en-US")} ft` : null;

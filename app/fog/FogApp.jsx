@@ -72,6 +72,7 @@ export default function FogApp() {
   const [realtorNeighborhoods, setRealtorNeighborhoods] = useState(null);
   const [seismicHazards, setSeismicHazards] = useState(null);
   const [tsunamiHazard, setTsunamiHazard] = useState(null);
+  const [floodHazard, setFloodHazard] = useState(null);
   const [dataErr, setDataErr] = useState("");
   // The address in the search bar, and its pin. Deliberately separate from
   // `picked`: tapping a neighborhood or the map changes `picked`, but the
@@ -142,7 +143,7 @@ export default function FogApp() {
   // Bikes: which facility classes are shown (a Set of BIKE_CLASSES keys).
   const [bikeSel, setBikeSel] = useState(() => new Set(ALL_BIKE_KEYS));
   // Hazards: which hazard layers are shown when the overlay is on.
-  const [hazardDefault, setHazardDefault] = useState({ seismic: true, tsunami: true, faults: true });
+  const [hazardDefault, setHazardDefault] = useState({ seismic: true, tsunami: true, flood: true, faults: true });
   // Microclimates: which zones are shown when the overlay is on.
   const [microDefault, setMicroDefault] = useState({ sun: true, cool: true, wind: true });
 
@@ -159,7 +160,7 @@ export default function FogApp() {
     const b = loadSet(BIKE_PREF_KEY, ALL_BIKE_KEYS); if (b) setBikeSel(b);
     try {
       const h = JSON.parse(localStorage.getItem(HAZARD_PREF_KEY) || "null");
-      if (h && typeof h === "object") setHazardDefault({ seismic: !!h.seismic, tsunami: !!h.tsunami, faults: !!h.faults });
+      if (h && typeof h === "object") setHazardDefault({ seismic: !!h.seismic, tsunami: !!h.tsunami, flood: h.flood === undefined ? true : !!h.flood, faults: !!h.faults });
     } catch {}
     try {
       const m = JSON.parse(localStorage.getItem(MICRO_PREF_KEY) || "null");
@@ -217,18 +218,20 @@ export default function FogApp() {
   const [showSeismic, setShowSeismic] = useState(preset === "hazards");
   // CGS Tsunami Hazard Area for Emergency Planning, 2021 update.
   const [showTsunami, setShowTsunami] = useState(preset === "hazards");
+  // SFPUC 100-Year Storm Flood Risk Zone (scripts/build-flood-zone.sh).
+  const [showFlood, setShowFlood] = useState(preset === "hazards");
   // USGS active fault traces (San Andreas, Hayward, Calaveras, …).
   const [showFaults, setShowFaults] = useState(preset === "hazards");
 
   // Hazards selector handlers. The bar's picks ARE the saved default; opening
   // restores them, and turning the chip off hides without clobbering them.
-  const applyHaz = d => { setShowSeismic(d.seismic); setShowTsunami(d.tsunami); setShowFaults(d.faults); };
+  const applyHaz = d => { setShowSeismic(d.seismic); setShowTsunami(d.tsunami); setShowFlood(d.flood); setShowFaults(d.faults); };
   const persistHaz = d => { setHazardDefault(d); try { localStorage.setItem(HAZARD_PREF_KEY, JSON.stringify(d)); } catch {} };
   const openHazards = () => applyHaz(hazardDefault);
-  const hideHazards = () => applyHaz({ seismic: false, tsunami: false, faults: false });
-  const toggleHazard = key => { const d = { seismic: showSeismic, tsunami: showTsunami, faults: showFaults }; d[key] = !d[key]; applyHaz(d); persistHaz(d); };
-  const showAllHazards = () => { const d = { seismic: true, tsunami: true, faults: true }; applyHaz(d); persistHaz(d); };
-  const selectNoneHazards = () => { const d = { seismic: false, tsunami: false, faults: false }; applyHaz(d); persistHaz(d); };
+  const hideHazards = () => applyHaz({ seismic: false, tsunami: false, flood: false, faults: false });
+  const toggleHazard = key => { const d = { seismic: showSeismic, tsunami: showTsunami, flood: showFlood, faults: showFaults }; d[key] = !d[key]; applyHaz(d); persistHaz(d); };
+  const showAllHazards = () => { const d = { seismic: true, tsunami: true, flood: true, faults: true }; applyHaz(d); persistHaz(d); };
+  const selectNoneHazards = () => { const d = { seismic: false, tsunami: false, flood: false, faults: false }; applyHaz(d); persistHaz(d); };
 
   // Microclimates selector handlers. The overlay is Wind corridors + Sun
   // exposure; the older sun-pocket / cool-
@@ -327,6 +330,7 @@ export default function FogApp() {
     loadLookup("/data/sf-realtor-neighborhoods.geojson", setRealtorNeighborhoods);
     loadLookup("/data/sf-seismic-hazards.geojson", setSeismicHazards);
     loadLookup("/data/sf-tsunami-hazard.geojson", setTsunamiHazard);
+    loadLookup("/data/sf-flood-risk.geojson", setFloodHazard);
 
     return () => {
       cancelled = true;
@@ -586,7 +590,7 @@ export default function FogApp() {
     setShowContours(false); setShowMuni(false); setShowBikes(false);
     setShowDistricts(false); setShowZips(false); setShowTerrain(false);
     setShowSatellite(false); setShowElevation(false);
-    setShowSeismic(false); setShowTsunami(false); setShowFaults(false);
+    setShowSeismic(false); setShowTsunami(false); setShowFlood(false); setShowFaults(false);
     setShowRealtor(false); setShowCBD(false);
     setShowResBuildings(false); setShowComBuildings(false);
     setShowMicroSun(false); setShowMicroCool(false); setShowMicroWind(false);
@@ -754,6 +758,7 @@ export default function FogApp() {
           showElevation={showElevation}
           showSeismic={showSeismic}
           showTsunami={showTsunami}
+          showFlood={showFlood}
           showFaults={showFaults}
           showMuni={showMuni}
           showBikes={showBikes}
@@ -814,6 +819,8 @@ export default function FogApp() {
           onToggleSeismic={setShowSeismic}
           showTsunami={showTsunami}
           onToggleTsunami={setShowTsunami}
+          showFlood={showFlood}
+          onToggleFlood={setShowFlood}
           showFaults={showFaults}
           showRealtor={showRealtor}
           onToggleRealtor={setShowRealtor}
@@ -910,6 +917,7 @@ export default function FogApp() {
         realtorNeighborhoods={realtorNeighborhoods}
         seismicHazards={seismicHazards}
         tsunamiHazard={tsunamiHazard}
+        floodHazard={floodHazard}
         buildingProfiles={buildingProfiles}
         openBuilding={openBuilding}
         onCloseBuilding={() => setOpenBuilding(null)}

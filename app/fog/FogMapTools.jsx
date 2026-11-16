@@ -42,6 +42,7 @@ export default function FogMapTools({
   showElevation, onToggleElevation,
   showSeismic, onToggleSeismic,
   showTsunami, onToggleTsunami,
+  showFlood, onToggleFlood,
   showFaults,
   showRealtor, onToggleRealtor,
   showParcelsRes, onToggleParcelsRes,
@@ -152,6 +153,7 @@ export default function FogMapTools({
       items: [
         ["Seismic", showSeismic, onToggleSeismic],
         ["Tsunami Zone", showTsunami, onToggleTsunami],
+        ["100-Yr Storm Flood", showFlood, onToggleFlood],
       ],
     },
     {
@@ -179,6 +181,7 @@ export default function FogMapTools({
   const hazardItems = [
     showSeismic && ["#dc2626", "Seismic zone"],
     showTsunami && ["#0ea5e9", "Tsunami zone"],
+    showFlood && ["#1d4ed8", "100-year storm flood risk"],
     showFaults && ["#b91c1c", "Fault lines"],
   ].filter(Boolean);
   // Transit + Bikes legends mirror the user's current selection.
@@ -336,13 +339,13 @@ export default function FogMapTools({
         {/* Hazards — seismic + tsunami + fault lines selector */}
         <button
           type="button"
-          className={"fog-chip" + ((showSeismic || showTsunami || showFaults) ? " on" : "")}
+          className={"fog-chip" + ((showSeismic || showTsunami || showFlood || showFaults) ? " on" : "")}
           onClick={() => {
-            if (showSeismic || showTsunami || showFaults) { onHazardsHide?.(); if (menu === "hazards") setMenu(null); }
+            if (showSeismic || showTsunami || showFlood || showFaults) { onHazardsHide?.(); if (menu === "hazards") setMenu(null); }
             else { onHazardsOpen?.(); setMenu("hazards"); }
           }}
-          aria-pressed={showSeismic || showTsunami || showFaults}
-          title="Hazards — seismic, tsunami + fault lines"
+          aria-pressed={showSeismic || showTsunami || showFlood || showFaults}
+          title="Hazards — seismic, tsunami, flood + fault lines"
         >
           <HazardIcon /> Hazards
         </button>
@@ -543,6 +546,7 @@ export default function FogMapTools({
           items={[
             { key: "seismic", short: "Seismic", color: "#dc2626", on: showSeismic },
             { key: "tsunami", short: "Tsunami", color: "#0ea5e9", on: showTsunami },
+            { key: "flood", short: "Flood", color: "#1d4ed8", on: showFlood },
             { key: "faults", short: "Faults", color: "#b91c1c", on: showFaults },
           ]}
           onToggle={onToggleHazard}

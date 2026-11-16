@@ -49,6 +49,7 @@ export default function FogMap({
   showElevation,
   showSeismic,
   showTsunami,
+  showFlood,
   showFaults,
   showSatellite,
   showMuni,
@@ -1393,6 +1394,26 @@ export default function FogMap({
         },
       });
 
+      // SFPUC 100-Year Storm Flood Risk Zone (scripts/build-flood-zone.sh): where deep,
+      // contiguous flooding from storm runoff is highly likely in a 100-year
+      // storm. Deeper blue with a solid edge, so it reads apart from the light,
+      // dashed tsunami zone.
+      map.addSource("flood", { type: "geojson", data: "/data/sf-flood-risk.geojson" });
+      map.addLayer({
+        id: "flood-fill",
+        type: "fill",
+        source: "flood",
+        layout: { visibility: "none" },
+        paint: { "fill-color": "#1d4ed8", "fill-opacity": 0.3 },
+      });
+      map.addLayer({
+        id: "flood-outline",
+        type: "line",
+        source: "flood",
+        layout: { visibility: "none", "line-join": "round" },
+        paint: { "line-color": "#1e3a8a", "line-width": 1, "line-opacity": 0.9 },
+      });
+
       // Active fault traces (USGS — San Andreas, Hayward, Calaveras, etc.).
       // A white casing under a bold dark-red line so the trace reads on any
       // basemap and stays distinct from the translucent seismic fill.
@@ -1988,6 +2009,20 @@ export default function FogMap({
     apply();
     map.once("load", apply);
   }, [showTsunami]);
+
+  // Toggle the SFPUC 100-year storm flood risk zone (fill + outline).
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    const apply = () => {
+      const vis = showFlood ? "visible" : "none";
+      ["flood-fill", "flood-outline"].forEach(id => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+      });
+    };
+    apply();
+    map.once("load", apply);
+  }, [showFlood]);
 
   // Toggle the fault traces (casing + line + labels).
   useEffect(() => {
