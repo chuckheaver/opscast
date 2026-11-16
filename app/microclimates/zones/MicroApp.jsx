@@ -154,6 +154,8 @@ export default function MicroApp() {
     const lat = Number(stored?.latitude);
     const lng = Number(stored?.longitude);
     if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+    // The weather page's saved city can be anywhere; only an SF point carries over.
+    if (lng < -122.53 || lng > -122.35 || lat < 37.70 || lat > 37.84) return;
     urlLocAppliedRef.current = true;
     setPicked({ point: [lng, lat], address: stored.name || null });
   }, [urlLoc, neighborhoods]);

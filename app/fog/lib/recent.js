@@ -7,7 +7,7 @@
 // trusts its own shape.
 
 const KEY = "fog:recent-locations";
-export const MAX_RECENTS = 3;
+export const MAX_RECENTS = 5;
 
 const valid = r =>
   r && typeof r.label === "string" && r.label.trim().length > 0

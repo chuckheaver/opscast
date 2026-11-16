@@ -6726,3 +6726,7 @@ a.lp-nseg:hover .lp-nseg-h::after { content: " →"; }
 .mr-grid tbody tr.mr-type:hover td { background: #E8EFF7; }
 .mr-caret { display: inline-block; width: 16px; color: var(--lp-navy); }
 .mr-grid-hint { font-size: 13px; color: var(--lp-muted); margin: -4px 0 8px; }
+/* Recenter on the searched address — same round button as Back. */
+.fog-recenter { flex: 0 0 auto; width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center;
+  background: #fff; border: 1px solid var(--border); border-radius: 999px; color: #203C5F; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18); cursor: pointer; padding: 0; }
+.fog-recenter:hover { background: #faf6ec; }

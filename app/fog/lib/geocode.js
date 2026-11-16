@@ -1,10 +1,7 @@
 // Address search for the fog map shares the app-wide Mapbox geocoder
-// (geoSuggest in app/lib/weather-api.js) but is San Francisco-first: this
-// is an SF-only app, so a query is resolved INSIDE the city limits before
-// anything else. Only when nothing in SF matches do we fall back to a
-// proximity-biased national search (so a Daly City or Oakland address a
-// user really wants still resolves), and even then SF-labelled results
-// float to the top.
+// (geoSuggest in app/lib/weather-api.js), limited to San Francisco: queries
+// are resolved inside the city limits and only San Francisco results are
+// offered.
 import { geoSuggest } from "../../lib/weather-api";
 
 // San Francisco city centre — the proximity bias point.
@@ -15,13 +12,12 @@ const SF_BBOX = [-122.53, 37.70, -122.35, 37.84];
 const isSF = r =>
   /san francisco/i.test(r?.place_name || "") || /san francisco/i.test(r?.label || "");
 
+// San Francisco addresses only (owner, Nov 16 2026): the search looks inside
+// the city limits and keeps only results labelled San Francisco — no
+// nationwide fallback.
 export async function geocodeSuggest(q) {
-  const inSF = await geoSuggest(q, SF_CENTER, { bbox: SF_BBOX, limit: 6 });
-  if (inSF.length) return inSF;
-  const results = await geoSuggest(q, SF_CENTER);
-  // Stable sort: SF results first, original (relevance) order preserved within
-  // each group.
-  return [...results].sort((a, b) => (isSF(b) ? 1 : 0) - (isSF(a) ? 1 : 0));
+  const inSF = await geoSuggest(q, SF_CENTER, { bbox: SF_BBOX, limit: 8 });
+  return inSF.filter(isSF).slice(0, 6);
 }
 
 const TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;

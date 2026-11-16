@@ -507,37 +507,9 @@ export default function FogApp() {
     setPeekOpen(true);
   }, [urlLoc, geojson, contours]);
 
-  // Fallback initial pick from localStorage when no URL params present.
-  // Ur4cast writes the user's selected location to opscast.loc.v1 — so
-  // navigating to /fog directly carries that location over without needing
-  // to round-trip through the Fog Forecast button's query string.
-  useEffect(() => {
-    if (urlLocAppliedRef.current) return;
-    if (autoGeoTriedRef.current) return;
-    if (urlLoc) return;
-    if (!geojson) return;
-    let stored;
-    try {
-      const raw = localStorage.getItem("opscast.loc.v1");
-      if (raw) stored = JSON.parse(raw);
-    } catch {}
-    const lat = Number(stored?.latitude);
-    const lng = Number(stored?.longitude);
-    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
-    urlLocAppliedRef.current = true;
-    autoGeoTriedRef.current = true;
-    const point = [lng, lat];
-    const feature = findNeighborhoodForPoint(geojson, point);
-    const contour = findContourForPoint(contours, point);
-    setAddressPin({ point, address: stored.name || null });
-    setPicked({
-      point,
-      address: stored.name || null,
-      source: "address",
-      feature,
-      contour,
-    });
-  }, [urlLoc, geojson, contours]);
+  // No fallback to a saved location: the map opens blank unless a link names
+  // an address (owner, Nov 16 2026). It used to restore the weather page's
+  // saved city (opscast.loc.v1), which could be anywhere — New York, say.
 
   // When a picked point lands, ask Mapbox for the terrain elevation at
   // that lng/lat. Updates `picked.elevation_ft` once the async lookup
@@ -879,6 +851,7 @@ export default function FogApp() {
           onSelectSolarSeason={selectSolarSeason}
           onMicroOpen={openMicro}
           onPickFromAddress={pickFromAddress}
+          onRecenter={addressPin?.point ? () => setFlyTo({ center: addressPin.point, zoom: ADDRESS_ZOOM }) : null}
           onClearLocation={clearLocation}
           onUseGeoLocation={requestGeoLocation}
           onResetView={resetView}

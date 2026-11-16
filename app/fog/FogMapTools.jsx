@@ -70,7 +70,7 @@ export default function FogMapTools({
   showMicroSolar, onToggleMicroSolar, solarSeason, onSelectSolarSeason,
   // Location / search
   onPickFromAddress,
-  onClearLocation, onUseGeoLocation, onResetView, ready, geoLoading, picked,
+  onClearLocation, onUseGeoLocation, onResetView, onRecenter, ready, geoLoading, picked,
   dataErr, geoErr,
   // Optional menu to open on first load (e.g. "activity" from the Market entry)
   initialMenu,
@@ -236,6 +236,16 @@ export default function FogMapTools({
             showGeoButton={false}
           />
         </div>
+        {/* Back to the searched address after panning or zooming away. */}
+        {onRecenter ? (
+          <button type="button" className="fog-recenter" onClick={onRecenter} title="Recenter on the searched address" aria-label="Recenter on the searched address">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="3.2" fill="currentColor" />
+              <circle cx="12" cy="12" r="7" stroke="currentColor" strokeWidth="2" />
+              <path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </button>
+        ) : null}
         {/* Brand mark — this service is offered by Chuck Heaver / Vanguard
             Properties. The logo links to email; email + phone sit beneath. */}
         <div className="fog-brand">
