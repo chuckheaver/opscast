@@ -100,6 +100,38 @@ export const TYPES = [
 // Each section: a one-line lead, then short facts. `h` is the fact; `p` is
 // at most one supporting line.
 export const SECTIONS = [
+  // Buyer representation. Checked Nov 2026: California DRE consumer alert on
+  // AB 2992 (in force Jan 1 2025), NAR's written-buyer-agreement rule (Aug 17
+  // 2024), Civil Code §§ 2079.14–2079.21 (agency disclosure, dual agency).
+  {
+    id: "buyer-rep",
+    nav: "Buyer Brokerage Rep",
+    kicker: "Before you tour",
+    title: "Buyer brokerage representation",
+    lead: "The listing agent works for the seller. A buyer's agent, under a signed agreement, works only for you.",
+    steps: [
+      { h: "Choose your agent", p: "Interview. Ask about their market, recent sales, and how they handle multiple offers." },
+      { h: "Sign the agreement", p: "Before the first tour. It sets the services, the fee and an end date of 3 months or less." },
+      { h: "Search and offer", p: "Your agent prices the home from the comps and writes the offer, including who pays their fee." },
+      { h: "Close", p: "Your broker is paid at closing, by you, the seller or both, as the contract says." },
+    ],
+    body: [
+      { h: "Why your own agent", p: "The seller's agent negotiates for the seller. Your agent negotiates for you: price, terms, inspections, disclosures and every deadline." },
+      { h: "Market knowledge", p: "What similar homes actually sold for, which listings are priced low to draw offers, and what a disclosure package or 3R report means for the price." },
+      { h: "Fiduciary duty", p: "By law your agent owes you utmost care, integrity, honesty and loyalty. Your top price and your timing stay confidential." },
+      { h: "Two sides, two agreements", p: "The seller signs a listing agreement with the listing broker. You sign a Buyer Representation agreement with your broker. Each sets that broker's pay on its own." },
+      { h: "When it is signed", p: "Before an agent tours a home with you (required since August 2024), and by state law no later than when you sign an offer." },
+      { h: "How long it lasts", p: "At most 3 months for a residential purchase (California, since January 2025). Renewals must be in writing, 3 months at most each; nothing renews automatically." },
+      { h: "What it says", p: "The services, the fee as an amount or a rate, when it is paid, and the end date. It can cover a single property or a short period." },
+      { h: "The fee is negotiable", p: "Not set by law. The amount you agree to is the most your broker can be paid, from any source." },
+      { h: "Who pays", p: "The agreement makes you responsible. Your offer can ask the seller to pay some or all of it, as a term like price or closing date, or leave it out." },
+      { h: "Leaving it out of the offer", p: "An offer that asks nothing of the seller for your agent nets the seller more and reads cleaner. In multiple offers, paying your broker yourself can set your offer apart without raising the price." },
+      { h: "Paying it yourself", p: "It is paid in cash at closing, not added to the loan. Ask your lender how it changes your cash to close." },
+      { h: "Agency disclosure", p: "Before you sign an offer, you receive and sign the state's “Disclosure Regarding Real Estate Agency Relationship”, which says who represents whom." },
+      { h: "Dual agency", p: "One agent or brokerage for both sides is legal only with both parties' written consent. That agent cannot push the price for either side." },
+      { h: "Without an agent", p: "You can buy unrepresented or with a real estate attorney. The listing agent still represents the seller." },
+    ],
+  },
   {
     id: "financing",
     nav: "Financing Steps",
