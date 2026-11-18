@@ -8323,16 +8323,68 @@ export const NEIGHBORHOODS = {
     transit: "Balboa Park Station nearby serves BART and Muni Metro J, K and M lines, plus many bus routes; the 29-Sunset, 49, 14-Mission and 8-Bayshore run along the Mission Street corridor to the east.",
   },
 
-  "Sunnydale": {
-    spirit: "A close-knit community at San Francisco's far southeastern edge, wrapped by the green hills of McLaren Park — long anchored by one of the city's largest public housing developments, and now in the middle of a generational rebuild into a mixed-income neighborhood.",
-    reasons: ["Borders sprawling McLaren Park", "A major HOPE SF rebuild underway", "T-Third light rail right at the door", "Tight-knit community"],
-    history: "Built during World War II, the Sunnydale (later Sunnydale-Velasco) development became one of San Francisco's largest public housing complexes. After decades of disinvestment and isolation at the city's edge, it was selected for HOPE SF, the city's effort to rebuild its most distressed public housing without displacing residents. Demolition and phased construction are rebuilding the roughly 50-acre site as a mixed-income community of around 1,770 homes, with new streets, parks, retail, and a community hub. The arrival of the T-Third light rail line in 2007, with its terminus at nearby Sunnydale Station, finally connected the neighborhood to downtown by rail.",
-    facts: [
-      { icon: "park", title: "McLaren Park at the doorstep", text: "John McLaren Park covers more than 300 acres on Sunnydale's northern edge, making it one of the largest parks in San Francisco." },
-      { icon: "house", title: "A generational rebuild", text: "Through HOPE SF, the WWII-era Sunnydale-Velasco development is being rebuilt as a mixed-income community of about 1,770 homes, with new parks and neighborhood retail." },
-      { icon: "tram", title: "Light rail terminus nearby", text: "The T-Third line's southern end, Sunnydale Station, opened in 2007 in the median of Bayshore Boulevard, linking the area to downtown." },
-      { icon: "music", title: "Cow Palace next door", text: "The historic Cow Palace arena, just over the line in Daly City, has hosted everyone from The Beatles to the Grand National Rodeo since 1941." },
+  // sources: https://foundsf.org/San_Francisco_Housing_Authority_1937-1965:_The_Early_Decades https://sfha.org/about/our-story https://default.sfplanning.org/devagreements/HOPE-SF/Sunnydale/HOPE-SF_Sunnydale_Design_Controls_Guidelines.pdf https://www.mercyhousing.org/2019/05/demolition-begins-at-sunnydale/ https://www.sf.gov/news--mayor-london-breed-celebrates-grand-opening-new-community-center-sunnydale-hope-sf https://www.sf.gov/news-mayor-lurie-celebrates-new-affordable-housing-in-sunnydale https://sfstandard.com/2026/05/04/sunnydale-market-bi-rite-non-profit-grocery-store/ https://www.hope-sf.org/four-communities/ https://www.relatedcalifornia.com/our-company/properties/casala https://lmsarch.com/projects/sunnydale-community-center/
+  Sunnydale: {
+    spirit:
+      "A 50-acre slope below McLaren Park where San Francisco's largest public housing community, opened in 1941, is being rebuilt block by block.",
+    reasons: [
+      "Borders McLaren Park",
+      "Opened as public housing in 1941",
+      "HOPE SF rebuild under way",
+      "New community Hub at the park's edge",
     ],
+    history:
+      "Sunnydale was one of the first developments of the San Francisco Housing Authority, which the Board of Supervisors created in 1938. Construction was under way in November 1940, and the first residents moved into its 767 apartments on March 3, 1941, as war workers were pouring into the city. It was planned as a garden community on 50 acres below McLaren Park, overlooking the bay, with wide shared lawns designed by landscape architect Thomas Church; Visitacion Valley around it was still mostly farms and greenhouses. When Sunnydale and the Authority's other early projects outside the Western Addition opened, none had Black tenants, and in 1942 the Authority adopted a “neighborhood pattern policy” meant to keep the racial makeup of each project as it was. The NAACP and labor groups urged its repeal in 1945, and the Authority refused.\n\nAs the valley built up around it, Sunnydale stayed cut off. Only four streets led in, at Sunnydale, Blythdale, Brookdale and Santos, and a golf course laid out in 1962 in the southeastern corner of McLaren Park put another barrier between the housing and the park. The Housing Authority stopped maintaining the landscape in 1982, and city planners later found that the buildings' plumbing, heating, electrical and sewer systems all needed full replacement.\n\nSunnydale, also called Sunnydale-Velasco, is the largest of the four sites in HOPE SF, the city's program to rebuild public housing without mass displacement of the people living there. The plan replaces its 775 public housing apartments with about 1,700 homes, adds new streets, utilities and open space, and reserves 75 percent of the apartments in the new affordable buildings for current Sunnydale households. Demolition began in May 2019, and Mercy Housing said then that some residents had waited more than 30 years for it. By October 2025 more than 390 new homes were finished and 184 more were under construction. Pastor Sonya Brunswick, who has lived in Sunnydale since the 1960s, told the San Francisco Standard in 2026 that grocery stores had come and gone in the neighborhood without surviving.",
+    facts: [
+      {
+        icon: "star",
+        title: "The Hub at the park's corner",
+        text:
+          "The Hub, a $46 million community center, opened in October 2024 at the southeast corner of McLaren Park. It holds a Boys & Girls Clubhouse, an early childhood center run by Wu Yee Children's Services, a recording studio, a community kitchen and rooms for classes and meetings. Its architects laid a diagonal path from this corner into the park, answering the long separation between Sunnydale and McLaren Park. On the far side of Hahn Street, Casala at 1491 Sunnydale Ave was the first new building of the master plan, with 55 apartments.",
+        place: "The Hub",
+        where: "Sunnydale Ave & Hahn St",
+        at: [-122.4163, 37.71225],
+        source: "https://www.sf.gov/news--mayor-london-breed-celebrates-grand-opening-new-community-center-sunnydale-hope-sf",
+      },
+      {
+        icon: "shopping",
+        title: "Shops at the foot of new housing",
+        text:
+          "Amani and Nia, built as Blocks 3A and 3B, opened in October 2025 with 170 homes, 75 percent of them reserved for current Sunnydale public housing households. Amani's ground floor holds more than 20,000 square feet of neighborhood space, planned for a grocery store, a food hall, a city health wellness center, an early childhood center and a resident services office; together the two buildings have the largest commercial space at any HOPE SF site. A nonprofit-run market planned for 1515 Sunnydale Ave was expected to open by late 2027.",
+        place: "Amani and Nia",
+        where: "1515 Sunnydale Ave (at Hahn St)",
+        at: [-122.4164, 37.7116],
+        source: "https://www.sf.gov/news-mayor-lurie-celebrates-new-affordable-housing-in-sunnydale",
+      },
+      {
+        icon: "house",
+        title: "The 1941 garden plan",
+        text:
+          "Sunnydale was built as rows of barrack-style buildings set among open lawns designed by Thomas Church, with picket fences at the front yards. The Housing Authority later took the fences down as maintenance barriers and stopped tending the landscape in 1982. The old buildings are coming down in phases: the first, in May 2019, took 120 homes in 16 buildings. At this corner, Block 9, a five-story building with 95 homes, broke ground in October 2025.",
+        place: "Sunnydale Ave & Santos St",
+        where: "Sunnydale Ave & Santos St",
+        at: [-122.41803, 37.71243],
+        source: "https://default.sfplanning.org/devagreements/HOPE-SF/Sunnydale/HOPE-SF_Sunnydale_Design_Controls_Guidelines.pdf",
+      },
+      {
+        icon: "road",
+        title: "Streets that once went nowhere",
+        text:
+          "In the original layout, streets around Sunnydale ended at its edge; Sunrise Way finishes in a cul-de-sac, unusual for San Francisco, because it had nothing to connect to. The rebuild lays new streets and utilities through the site. Block 7, at the corner of Sunrise Way and Malosi Street, broke ground in October 2025 with 89 homes, 75 percent of them reserved for existing Sunnydale households.",
+        place: "Block 7",
+        where: "Malosi St near Sunrise Way",
+        at: [-122.41798, 37.71094],
+        source: "https://www.sf.gov/news-mayor-lurie-celebrates-new-affordable-housing-in-sunnydale",
+      },
+    ],
+    walk: {
+      intro:
+        "A short loop of about 0.6 miles from Sunnydale Avenue and Hahn Street, west along Sunnydale Avenue to Santos Street and back by way of Malosi Street, past new buildings, construction sites and the remaining 1940s blocks. Allow about 25 minutes. Construction is ongoing, so expect fenced sites and changed sidewalks.",
+      miles: 0.6,
+      minutes: 25,
+      tip:
+        "The diagonal path from the Hub's corner leads up into McLaren Park, at 312 acres San Francisco's second-largest park.",
+    },
     nearby: ["Visitacion Valley"],
     restaurants: [
       { name: "Pho Luen Fat", address: "110 Leland Ave", phone: "(415) 585-1167" },
@@ -8346,18 +8398,69 @@ export const NEIGHBORHOODS = {
     transit: "T-Third light rail terminates nearby at Sunnydale Station, in the median of Bayshore Boulevard at Sunnydale Avenue. Muni buses include the 8-Bayshore, 9/9R-San Bruno, 29-Sunset, and 56-Rutland serving the surrounding Visitacion Valley area.",
   },
 
+  // sources: https://en.wikipedia.org/wiki/Little_Hollywood,_San_Francisco https://foundsf.org/Little_Hollywood_Origins https://thefrisc.com/the-heart-of-little-hollywood-is-for-sale-6f98566ec2fe https://en.wikipedia.org/wiki/Bayshore_Cutoff https://sfrecpark.org/646/Little-Hollywood-Park-Improvement-Projec https://www.sfrecpark.org/DocumentCenter/View/2095/Meeting-Notice-PDF https://en.wikipedia.org/wiki/Bayshore_station_(Caltrain)
   "Little Hollywood": {
-    spirit: "A hidden pocket of red-tile-roofed bungalows tucked between Bayshore Boulevard and Highway 101 — one of San Francisco's quietest, most surprising residential enclaves.",
-    reasons: ["Quiet, tight-knit residential pocket", "Distinctive 1920s–30s Spanish-style bungalows", "Steps from Bayshore Caltrain", "Easy freeway and transit access to the Peninsula"],
-    aka: "Bayshore Tract",
-    history: "The area was developed by the Crocker Estate Company in the early 1920s as part of the 'Bayshore Tract.' In the late 1920s and early 1930s, builder William H. Grahn put up rows of Spanish- and Mediterranean-style homes, many designed by architect Charles Strothoff. Their stucco walls and red tile roofs evoked the houses of the Hollywood Hills, earning the enclave its 'Little Hollywood' nickname. Hemmed in by Bayshore Boulevard, U.S. 101, and the rail corridor, the small neighborhood remains an isolated pocket of about 1,165 residents on the city's far southeastern edge.",
-    facts: [
-      { icon: "movie", title: "How it got its name", text: "The 1920s–30s stucco-and-tile bungalows resembled homes in the Hollywood Hills, giving the neighborhood its 'Little Hollywood' nickname." },
-      { icon: "tram", title: "Bayshore Caltrain", text: "The Bayshore station at 400 Tunnel Ave sits right beside the neighborhood, with commuter rail service down the Peninsula." },
-      { icon: "house", title: "A pocket-sized enclave", text: "Spanning only about a quarter square kilometer, Little Hollywood is home to roughly 1,165 residents." },
-      { icon: "music", title: "Cow Palace nearby", text: "The historic Cow Palace arena (2600 Geneva Ave) sits just to the southwest, hosting concerts and events for generations." },
-      { icon: "road", title: "Wedged by the freeway", text: "Tucked between Bayshore Boulevard and U.S. Highway 101 near the San Mateo county line, it is one of the city's most tucked-away neighborhoods." },
+    spirit:
+      "A few blocks of late-1920s and 1930s houses on Blanken Avenue, between Bayshore Boulevard, Highway 101 and the rail line at the city's southern edge.",
+    reasons: [
+      "Late-1920s and 1930s stucco houses",
+      "Laid out as the Bayshore Tract",
+      "Little Hollywood Park",
+      "Next to Bayshore Caltrain",
     ],
+    aka: "Bayshore Tract",
+    history:
+      "The Southern Pacific's Bayshore Cutoff came first: opened on December 8, 1907, it carried trains through Tunnel 4, at 3,547 feet the longest of the cutoff's tunnels, from Salinas Avenue to a portal at Blanken Avenue. In the early 1920s the Crocker Estate Company laid out the land beside the tracks as the “Bayshore Tract,” sold as the place “where land and water meet,” after nearby Candlestick Cove. Photographs from 1924 show open land with Bayview Hill beyond, the cove where Executive Park now stands, and a single new row of houses on Tunnel Avenue.\n\nThe neighborhood's name comes from the first houses, built in the late 1920s and early 1930s, many of which resembled homes in the Hollywood Hills. Highway 101 later cut along its eastern side, and today Little Hollywood is bounded by Bayshore Boulevard, the freeway, the Caltrain tracks and the Recology site. Little Hollywood Park, on Lathrop Avenue, was dedicated in 1983 to resident Clarence Fleming, who helped establish it.\n\nThe land around it is changing. In 2018 the former Schlage Lock factory site in Visitacion Valley was slated for roughly 1,600 to 1,700 homes, and the unfinished Executive Park office complex nearby was planned for housing.",
+    facts: [
+      {
+        icon: "house",
+        title: "The first row of houses",
+        text:
+          "A 1924 photograph taken from above San Bruno Avenue shows the Crocker tract outlined on open land, with one row of new houses on this block of Tunnel Avenue; those first houses still stand. Another view from January 8, 1924, looks north up today's Bayshore Boulevard from Blanken Avenue toward Bayview Hill, with the Tunnel Avenue houses at right.",
+        place: "100 block of Tunnel Avenue",
+        where: "Tunnel Ave north of Blanken Ave",
+        at: [-122.40067, 37.71284],
+        source: "https://foundsf.org/Little_Hollywood_Origins",
+      },
+      {
+        icon: "movie",
+        title: "Why it's called Little Hollywood",
+        text:
+          "Blanken Avenue is the neighborhood's center, running between Bayshore Boulevard and U.S. 101. The Crocker Estate Company developed the area in the early 1920s as the Bayshore Tract, and the first houses, built in the late 1920s and early 1930s, gave it its present name: many of them resembled homes in the Hollywood Hills.",
+        place: "Blanken Avenue",
+        where: "Blanken Ave & Peninsula Ave",
+        at: [-122.39923, 37.71159],
+        source: "https://en.wikipedia.org/wiki/Little_Hollywood,_San_Francisco",
+      },
+      {
+        icon: "house",
+        title: "Casa Bahia Loma",
+        text:
+          "This Mission Revival house, called Casa Bahia Loma, was built in 1933, reportedly for the German brewmaster of a brewery about a mile north on Bayshore Boulevard. Local lore says Mae West stayed here, but historians have not confirmed it. When it went up for sale in 2018 it had been in one family for about 60 years. It is a private home; view it from the sidewalk.",
+        place: "Casa Bahia Loma",
+        where: "294 Tocoloma Ave",
+        at: [-122.39824, 37.71158],
+        source: "https://thefrisc.com/the-heart-of-little-hollywood-is-for-sale-6f98566ec2fe",
+      },
+      {
+        icon: "park",
+        title: "A park in two levels",
+        text:
+          "The park's entrance is at the end of Tocoloma Avenue, just south of Lathrop Avenue. Its lower section has a basketball court, a children's play area, a lawn and benches; the upper section is a grass field with picnic tables and barbecues that is used as a dog run, and Rec and Park rebuilt it with an accessible path after a 2013 community meeting. The park was dedicated in 1983 to resident Clarence Fleming, who helped establish it.",
+        place: "Little Hollywood Park",
+        where: "Lathrop Ave & Tocoloma Ave",
+        at: [-122.39815, 37.71002],
+        source: "https://sfrecpark.org/646/Little-Hollywood-Park-Improvement-Projec",
+      },
+    ],
+    walk: {
+      intro:
+        "A short loop of about half a mile from Bayshore Boulevard and Blanken Avenue: up Tunnel Avenue to the first houses, then east on Blanken and down Tocoloma Avenue to the park. Allow about 25 minutes.",
+      miles: 0.5,
+      minutes: 25,
+      tip:
+        "Bayshore Caltrain station, at 400 Tunnel Ave just south of the neighborhood, straddles the county line: its parking lot is in San Francisco and its platform is in Brisbane.",
+    },
     nearby: ["Visitacion Valley"],
     restaurants: [
       { name: "La Joya Mexican Cafe", address: "28 Leland Ave", phone: "(415) 508-9192", url: "https://la-joya-cafe.com" },
@@ -9518,17 +9621,68 @@ export const NEIGHBORHOODS = {
     transit: "Muni buses serve the area via the 9 San Bruno and 9R San Bruno Rapid along San Bruno Avenue, plus the 8 Bayshore, 29 Sunset, and 54 Felton. Bayshore Caltrain is a short ride east.",
   },
 
+  // sources: https://www.sanfranciscostory.com/selling-silver-terrace/ https://sfplanning.s3.amazonaws.com/default/files/meetingarchive/planning_dept/commissions.sfplanning.org/hpcpackets/900_Innes_2613.pdf https://en.wikipedia.org/wiki/Bayshore_Cutoff https://gocodebook.com/library/us/ca/san-francisco-planning/article-6/sec.-249.14.-third-street-special-use-district https://www.sfmta.com/blog/brief-history-t-third-part-2-1980s-2023 https://sfrecpark.org/1751/Silver-Terrace-Playground-Renovation https://sfrecpark.org/1171/Silver-Terrace-Synthetic-Turf-Replacemen https://en.wikipedia.org/wiki/Silver_Terrace,_San_Francisco
   "Silver Terrace": {
-    spirit: "A sunny pocket tucked in the crook where the 280 and 101 freeways meet — hillside homes above, the auto-and-industrial flats below, with quiet streets and big southeast-facing views.",
-    reasons: ["Some of the city's oldest houses on quiet streets", "Sunny southeast corner with bay views", "Walk to the Portola and the Bayview's Third St", "Minutes from McLaren Park"],
-    history: "Silver Terrace takes its name from Joseph S. Silver, who in the 1850s claimed and fenced a tract running from the old San Bruno turnpike (now San Bruno Avenue) east toward what is today Third Street; despite the name, there was never any silver ore here. In 1870 the land agents Duncan & Co. launched a homestead association on hundreds of lots from the Haley & O'Neill tract, and Eadweard Muybridge had been hired in 1869 to photograph the still-rural fields and marsh for promotional images. Most homes went up in the 20th century, but hidden in the streets are some of the oldest houses in San Francisco, survivors of that first tract. The hillside filled in with single-family homes while the flats along Bayshore Boulevard became an auto row of dealerships and light industry. The result is the neighborhood's enduring split character: residential slopes above, working blocks below.",
-    facts: [
-      { icon: "money", title: "Not actually silver", text: "The name honors landowner Joseph S. Silver, not any mine; no silver was ever dug here." },
-      { icon: "road", title: "Bayshore auto row", text: "The flat blocks along Bayshore Boulevard grew into a strip of car dealerships and light industry." },
-      { icon: "house", title: "Some of SF's oldest homes", text: "A few Haley & O'Neill tract houses tucked in the streets are among the oldest in the city." },
-      { icon: "park", title: "McLaren Park next door", text: "John McLaren Park, one of San Francisco's largest at over 300 acres, sits just west." },
-      { icon: "sun", title: "Sunny southeast corner", text: "Sitting in the elbow of the 280 and 101, the hillside catches sun and wide bay-facing views." },
+    spirit:
+      "A hillside between Bayshore Boulevard and Third Street, named for an 1850s landowner, with 1860s farmhouses on its lower streets and a 1907 railroad tunnel running underneath.",
+    reasons: [
+      "Named for 1850s landowner Joseph S. Silver",
+      "1860s houses on Oakdale Avenue",
+      "Third Street shops and the T Third",
+      "Silver Terrace Playground fields",
     ],
+    history:
+      "The name goes back to Joseph S. Silver, who claimed and fenced land here in the late 1850s, a tract running roughly from the San Bruno road, now San Bruno Avenue, east toward today's Third Street. There was never any silver ore. On the northeast his land met the Haley & O'Neill tract, where the land agents Duncan & Co. bought more than 400 lots; in February 1870 they launched a homestead association to sell them, although most of the streets existed only on paper and many lots were marsh. They had hired Eadweard Muybridge in the winter of 1869 to photograph the site for their advertising. By 1873 Duncan & Co. faced foreclosure on the land they still held. A few houses from that first tract survive on Oakdale Avenue and nearby streets and are among the oldest in San Francisco.\n\nIn 1907 the Southern Pacific opened its Bayshore Cutoff, a straighter rail route into the city, and dug Tunnel 3 beneath the ridge from Palou Avenue to Williams Avenue, under St. Joseph's orphan asylum. Caltrain still runs through it. The neighborhood is roughly bounded by Third Street on the east, Palou and Silver avenues on the north, Williams Avenue on the south, and Bayshore Boulevard and U.S. 101 on the west.\n\nThird Street, along the neighborhood's eastern edge, is the Bayview's main shopping street. Rail returned to it on April 7, 2007, when the T Third light rail line began full service, the first rail service on the eastern waterfront in 50 years.",
+    facts: [
+      {
+        icon: "shop",
+        title: "The Bayview's main street",
+        text:
+          "Silver Terrace's eastern edge is the west side of Third Street. The city's planning code names Third Street the primary neighborhood commercial district for the Bayview Hunters Point area, and its Third Street Special Use District, covering the commercially zoned property fronting Third from Cesar Chavez Street to Meade Avenue, aims to bring in more neighborhood-serving retail.",
+        place: "Third Street shops",
+        where: "Third St, 5000 block",
+        at: [-122.39148, 37.73318],
+        source: "https://gocodebook.com/library/us/ca/san-francisco-planning/article-6/sec.-249.14.-third-street-special-use-district",
+      },
+      {
+        icon: "house",
+        title: "Two houses from the first tract",
+        text:
+          "The houses at 1863 and 1867 Oakdale Avenue survive from the Haley & O'Neill tract and are among the oldest in San Francisco. Muybridge's 1869 photographs for the land agents, now at UC Berkeley's Bancroft Library, show Oakdale Avenue when it was called South 15th Avenue, the Islais Creek marsh, a Methodist church and the Catholic orphanage. City planners date the farmhouse at 1863 Oakdale to the late 1860s. Both are private homes; view them from the sidewalk.",
+        place: "Haley & O'Neill tract houses",
+        where: "1863 & 1867 Oakdale Ave",
+        at: [-122.39541, 37.73724],
+        source: "https://www.sanfranciscostory.com/selling-silver-terrace/",
+      },
+      {
+        icon: "subway",
+        title: "A railroad tunnel under the ridge",
+        text:
+          "Caltrain runs beneath Silver Terrace through Tunnel 3 of the Southern Pacific's Bayshore Cutoff, 2,364 feet long, from a portal at Palou Avenue to one at Williams Avenue. It was dug under St. Joseph's orphan asylum, with the tracks about 175 feet below the surface. Work on the cutoff began in October 1904, and the 1906 earthquake interrupted it without damaging this tunnel; the line opened on December 8, 1907.",
+        place: "Tunnel 3, Bayshore Cutoff",
+        where: "Palou Ave & Quint St",
+        at: [-122.39696, 37.73732],
+        source: "https://en.wikipedia.org/wiki/Bayshore_Cutoff",
+      },
+      {
+        icon: "park",
+        title: "Fields on the hilltop",
+        text:
+          "Silver Terrace Playground has soccer and baseball fields, whose synthetic turf was replaced in 2020. Rec and Park has planned a new children's play area and nature exploration area here with money from the 2020 Health and Recovery Bond and KaBOOM!, but in April 2026 it said it was reassessing the project after setbacks in philanthropic funding and rising costs.",
+        place: "Silver Terrace Playground",
+        where: "Off Silver Ave, east of Bayshore Blvd",
+        at: [-122.40313, 37.73275],
+        source: "https://sfrecpark.org/1751/Silver-Terrace-Playground-Renovation",
+      },
+    ],
+    walk: {
+      intro:
+        "A walk of about 1.1 miles that starts on Third Street, takes in the 1860s houses on Oakdale Avenue, and climbs over the railroad tunnel to the playground on the ridge. Allow about 50 minutes; the streets west of Phelps are steep.",
+      miles: 1.1,
+      minutes: 50,
+      tip:
+        "The T Third runs along Third Street between Sunnydale and Chinatown, so the walk's starting point is a train stop away from the rest of the city.",
+    },
     nearby: ["the Portola", "the Bayview"],
     restaurants: [
       { name: "Breakfast at Tiffany's", address: "2499 San Bruno Ave", phone: "(415) 468-8805" },
@@ -9541,16 +9695,69 @@ export const NEIGHBORHOODS = {
     transit: "Muni buses 9-San Bruno, 8-Bayshore, 23-Monterey, 44-O'Shaughnessy and 54-Felton serve the area; the T-Third light rail runs along Third St in the Bayview, a ride east.",
   },
 
+  // sources: https://archives.sfplanning.org/documents/4049-Final_India%20Basin_05.01.08.pdf https://sfplanning.s3.amazonaws.com/default/files/meetingarchive/planning_dept/commissions.sfplanning.org/hpcpackets/900_Innes_2613.pdf https://www.sfrecpark.org/1153/India-Basin-Shoreline-Park https://www.nps.gov/safr/learn/historyculture/alma.htm https://www.nrc.gov/info-finder/decommissioning/complex/hunters-point-naval-shipyard https://www.sfenvironment.org/press/pge-shuts-down-hunters-point-power-plant https://www.pge.com/en/about/corporate-responsibility-and-sustainability/environmental-remediation/power-plant.html https://indiabasin.org/?p=1843 https://sfbayview.com/?p=106577 https://en.wikipedia.org/wiki/Heron%27s_Head_Park
   "India Basin": {
-    spirit: "A working bayshore becoming parkland, where 19th-century shipwrights once launched scow schooners and a brand-new 64-acre waterfront park now opens the Bay to the Bayview.",
-    reasons: ["Brand-new India Basin Waterfront Park", "Rich shipbuilding heritage", "Bay Trail access and Heron's Head birdwatching", "New bayfront housing in development"],
-    history: "India Basin began as a shallow tidal cove on the Hunters Point shoreline and became a hub of 19th-century boatbuilding, where shipwrights launched scow schooners that hauled cargo around San Francisco Bay. Carpenter and shipwright John Dirks built the c. 1875 Shipwright's Cottage at 900 Innes Avenue, and boatbuilding families ran the adjacent yard for decades. The cove's industry surged during the World War II shipyard era at neighboring Hunters Point, then entered a long postwar decline that left the shoreline largely industrial. Today the city's new India Basin Waterfront Park is turning the basin back into public space along the water.",
-    facts: [
-      { icon: "park", title: "A new 64-acre shoreline park", text: "India Basin Waterfront Park is being built across the basin's shoreline; its 900 Innes section opened in October 2024, with the larger shoreline portion under construction through the late 2020s." },
-      { icon: "factory", title: "Shipwright's Cottage", text: "The c. 1875 cottage at 900 Innes Avenue, a San Francisco Designated Landmark since 2008, once housed boatbuilders who crafted scow schooners and now anchors the new park." },
-      { icon: "bird", title: "Heron's Head Park", text: "Just north along the shore, this reclaimed salt marsh is one of the city's best birdwatching spots and home to the off-grid, LEED Platinum EcoCenter." },
-      { icon: "water", title: "Built on a boatbuilding cove", text: "The basin was a center of San Francisco Bay scow-schooner construction; the historic schooner Alma, built nearby in 1891, survives at the Maritime National Historical Park." },
+    spirit:
+      "A shoreline of 19th-century scow schooner yards, a closed power plant site and a restored marsh, between the Hunters Point shipyard and the Port's cargo piers.",
+    reasons: [
+      "Landmark Shipwright's Cottage",
+      "Bay Trail shoreline parks",
+      "Heron's Head salt marsh",
+      "Scow schooner boatyard history",
     ],
+    aka: "Hunters Point",
+    history:
+      "In 1868 the State Board of Tide Land Commissioners named the inlet between Potrero Point and Hunters Point “India Basin” and reserved it for docks, piers and commerce. Shipwright Johnson J. Dircks set up a yard in the area that year, and from about 1870 the builders of the San Francisco Bay scow schooner, a shallow-draft sailing vessel that brought hay, bricks and lumber to the city from around the bay and the Delta, moved here from Potrero Point and Islais Creek for the cheap land and deep water. Their yards lined the south shore of India Cove for about 130 years. Most were family businesses run by immigrants from England, Germany, Denmark and other parts of Scandinavia, and owners and workers lived side by side in frame houses along 9th Avenue South, now Innes Avenue. Chinese shrimp camps stood on the shore nearby until they were burned in the 1930s. The scow Alma, built at Hunters Point in 1891 by Fred Siemer for his son-in-law, is the last survivor of more than 400 scows built around the bay; she has been a National Historic Landmark since 1988 and is moored at Hyde Street Pier.\n\nGasoline launches and trucks ended the scow trade between 1925 and 1930, and only one yard, Anderson & Cristofani, carried on, doing repair work for another half century. A steam power plant opened on the cove's western point in 1929 and ran until 2006. In 1939 the U.S. Navy agreed to buy the Hunters Point dry docks next door; war workers filled new houses along Innes Avenue and temporary housing on the ridge above, and India Basin was absorbed into the larger Hunters Point community. In 1946 the Navy set up the Naval Radiological Defense Laboratory at the shipyard, which ran until 1969. The shipyard was deactivated in 1974; in 1986 officials identified hazardous chemical and low-level radiological contamination there, and in 1989 the EPA placed the site on the National Priorities List, the Superfund list.\n\nIn a 2008 survey for the Bayview Historical Society, historians noted new multi-family buildings going up on empty lots along Innes Avenue. The Recreation and Park Department has owned the old boatyard since 2014. It cleaned the site of contamination from boat building and repair, opened a park at 900 Innes Avenue in 2024, and is joining it with India Basin Shoreline Park into one 10-acre park. That park is the midpoint of a mile-and-a-half shoreline of seven properties totaling 64 acres, six of them in some stage of development.",
+    facts: [
+      {
+        icon: "bird",
+        title: "A terminal that became a marsh",
+        text:
+          "In the early 1970s the Port of San Francisco began filling this point with material dug from the slopes of San Bruno Mountain for a shipping terminal to be called Pier 98. The project was abandoned long before it was finished, and a salt marsh grew on the unfinished fill. The Port cleaned up and replanted the site in the late 1990s, and in 1999 it reopened as Heron's Head Park.",
+        place: "Heron's Head Park",
+        where: "Cargo Way & Jennings St",
+        at: [-122.37464, 37.73889],
+        source: "https://clui.org/ludb/site/port-san-francisco-pier-98",
+      },
+      {
+        icon: "factory",
+        title: "The power plant residents fought",
+        text:
+          "A steam power plant opened on this point on December 3, 1929; PG&E bought it that year and ran it for more than 75 years. Residents and activists campaigned against the oil-fired plant, and in 1996 the Board of Supervisors voted to block a new plant on the site. PG&E shut it down on May 15, 2006, once a new transmission line could replace its power, demolished it in 2008, and committed to clean the land to California EPA standards for residential use. PG&E now lists the site's cleanup as complete; the shoreline path around it is part of the San Francisco Bay Trail.",
+        place: "Former Hunters Point Power Plant site",
+        where: "1000 Evans Ave",
+        at: [-122.37639, 37.7375],
+        source: "https://en.wikipedia.org/wiki/Hunters_Point_Power_Plant",
+      },
+      {
+        icon: "water",
+        title: "A shrimp camp cove and a park under rebuild",
+        text:
+          "The small cove between the power plant site and India Basin Shoreline Park held one of Hunters Point's Chinese shrimp camps, which were burned in the 1930s; nothing of them survives above ground. The 7.5-acre park, built in the 1990s, closed for a rebuild in August 2025 that is scheduled to run into early 2028, with regraded slopes, a gravel beach, a boathouse and pier, and a deck looking out on the wreck of the ferry Bay City.",
+        place: "India Basin Shoreline Park",
+        where: "Hunters Point Blvd",
+        at: [-122.37599, 37.73464],
+        source: "https://www.sfrecpark.org/1153/India-Basin-Shoreline-Park",
+      },
+      {
+        icon: "house",
+        title: "The Shipwright's Cottage",
+        text:
+          "This Italianate cottage, built about 1875, stood at the center of San Francisco's scow schooner trade for more than 60 years; William Stone moved his yard to this stretch of Innes Avenue in 1871, and Johnson J. Dircks moved in next door in 1876. The city made the cottage Landmark No. 250 in 2008. Rec and Park restored it for the 900 Innes park, opened in October 2024 with two piers, a floating dock, a Bay Trail segment and the old marine way rails, salvaged and restored. Across Innes stand William Stone's farmhouse at 911 Innes, built between 1868 and 1873, and the 1870 stone Albion Brewery at 881 Innes, City Landmark No. 60 since 1974; both are private.",
+        place: "Shipwright's Cottage",
+        where: "900 Innes Ave",
+        at: [-122.37576, 37.7322],
+        source: "https://sfplanning.s3.amazonaws.com/default/files/meetingarchive/planning_dept/commissions.sfplanning.org/hpcpackets/900_Innes_2613.pdf",
+      },
+    ],
+    walk: {
+      intro:
+        "A short shoreline walk of about 0.9 miles from Heron's Head Park, past the old power plant site and India Basin Shoreline Park, to the Shipwright's Cottage at 900 Innes Avenue. Allow about 35 minutes, more if you take the paths out into the marsh.",
+      miles: 0.9,
+      minutes: 35,
+      tip:
+        "India Basin Shoreline Park is closed for its rebuild until early 2028, so follow the sidewalk on Hunters Point Boulevard and Innes Avenue between the power plant site and 900 Innes. The restored Shipwright's Cottage is the welcome center of the 900 Innes park.",
+    },
     nearby: ["the Bayview"],
     restaurants: [
       { name: "Gumbo Social", address: "5176 3rd St", phone: "(415) 655-9195", url: "https://www.gumbosocial.com" },
@@ -9827,16 +10034,78 @@ export const NEIGHBORHOODS = {
     transit: "Powell Street BART/Muni Metro station is a block away, serving BART (Red, Yellow, Green, Blue) and Muni Metro lines J, K, L, M, N. The F-Market streetcar and Powell-Hyde and Powell-Mason cable cars run nearby on Market Street.",
   },
 
+  // sources: https://www.cde.ca.gov/sdprofile/details.aspx?cds=38684786040760 https://www.sfusd.edu/school/bret-harte-elementary-school/details https://en.wikipedia.org/wiki/Bret_Harte https://en.wikipedia.org/wiki/Bayshore_Cutoff https://gocodebook.com/library/us/ca/san-francisco-planning/article-6/sec.-249.14.-third-street-special-use-district https://www.sfmta.com/blog/brief-history-t-third-part-2-1980s-2023 https://livingnewdeal.org/projects/gilman-playground-san-francisco-ca/ https://www.sfrecpark.org/556/Gilman-Playground https://en.wikipedia.org/wiki/Candlestick_Park https://www.hope-sf.org/four-communities/
   "Bret Harte": {
-    spirit: "A tiny, easy-to-miss residential pocket in San Francisco's far southeast, tucked between the freeways near the Bayview and Portola edges.",
-    reasons: ["Quiet, residential southeast SF", "Near McLaren Park green space", "Close to Caltrain and Muni lines", "Bayview and Portola dining a short ride away"],
-    history: "The neighborhood takes its name from Bret Harte (1836–1902), the Gold Rush-era writer whose 1868 story 'The Luck of Roaring Camp' made him one of the first California authors to win an international following. The pocket itself is one of the city's smallest neighborhoods, a cluster of homes wedged among the freeway corridors near the U.S. 101 and Interstate 280 interchange. It sits along the Bayview's industrial southeastern edge, bordered by Silver Terrace, the Portola, and the Bayshore corridor. Largely residential and ringed by industrial blocks, it remains obscure even to many lifelong San Franciscans.",
-    facts: [
-      { icon: "book", title: "Named for a Gold Rush writer", text: "Bret Harte (1836–1902) wrote 'The Luck of Roaring Camp' and was among the first California authors to gain international fame." },
-      { icon: "road", title: "Wedged among freeways", text: "The small residential pocket sits near the U.S. 101 / Interstate 280 interchange in the city's far southeast." },
-      { icon: "park", title: "McLaren Park nearby", text: "John McLaren Park, San Francisco's second-largest park at roughly 313 acres, sits just to the west above the Portola." },
-      { icon: "tram", title: "Bayshore Caltrain close by", text: "The Bayshore Caltrain station at 400 Tunnel Ave is a short hop south, linking the area down the Peninsula." },
+    spirit:
+      "A few blocks along Third Street and Gilman Avenue at the city's southeast edge, where the Caltrain line enters a 1907 tunnel.",
+    reasons: [
+      "Third Street shops",
+      "T Third at Gilman/Paul",
+      "WPA-era Gilman Playground",
+      "1907 railroad tunnel",
     ],
+    history:
+      "The neighborhood shares its name with Bret Harte Elementary School at 1035 Gilman Avenue, and both carry the name of the writer Bret Harte (1836–1902). Harte came to California in 1853 and later worked as secretary of the San Francisco Mint. In 1860, as an assistant editor in Union, now Arcata, he condemned the killing of Wiyot people at Tuluwat near Eureka and fled after threats on his life; his story “The Luck of Roaring Camp,” published in the Overland Monthly in 1868, the year he became its editor, made him famous across the country.\n\nThe Southern Pacific's Bayshore Cutoff, opened in 1907, runs along the neighborhood's western edge and enters Tunnel 4 at Salinas Avenue. Gilman Playground was built with federal work relief in the 1930s. In 1960 Candlestick Park opened on Candlestick Point to the southeast, at 602 Jamestown Avenue, and in 1962 the Alice Griffith public housing went up beside it; the stadium closed after a final concert in 2014 and was demolished in 2015.\n\nThe T Third light rail line began full service on Third Street in 2007, with a stop at Gilman and Paul. Alice Griffith has been rebuilt under HOPE SF, the city's program to rebuild public housing without mass displacement, and by 2019 all of its original households had moved into new homes.",
+    facts: [
+      {
+        icon: "subway",
+        title: "Into Tunnel 4",
+        text:
+          "At Salinas Avenue the Caltrain tracks enter Tunnel 4 of the Southern Pacific's Bayshore Cutoff and run 3,547 feet, the longest of the cutoff's tunnels, to a portal at Blanken Avenue in Little Hollywood. A spring broke into the tunnel after the 1906 earthquake and was not capped until 1911. The cutoff opened on December 8, 1907.",
+        place: "Tunnel 4, Bayshore Cutoff",
+        where: "Salinas Ave, west of Third St",
+        at: [-122.39913, 37.72133],
+        source: "https://en.wikipedia.org/wiki/Bayshore_Cutoff",
+      },
+      {
+        icon: "shop",
+        title: "Third Street's southern blocks",
+        text:
+          "This stretch of Third Street lies within the Third Street Special Use District, which runs from Cesar Chavez Street to Meade Avenue. The city's planning code says the district exists to strengthen Third Street as the primary neighborhood commercial district for the Bayview Hunters Point area and to encourage neighborhood-serving retail.",
+        place: "Third Street shops",
+        where: "Third St, 6400 block",
+        at: [-122.39683, 37.72018],
+        source: "https://gocodebook.com/library/us/ca/san-francisco-planning/article-6/sec.-249.14.-third-street-special-use-district",
+      },
+      {
+        icon: "tram",
+        title: "Rail back on Third Street",
+        text:
+          "Ground was broken for the T Third on May 28, 2002, and building its 5.1 miles of new track took five years. Free weekend shuttles began on January 13, 2007, and full service on April 7, the first rail service on the eastern waterfront in 50 years. Since January 2023 T trains have run from Sunnydale to Chinatown, through the Central Subway.",
+        place: "Gilman/Paul station",
+        where: "Third St at Gilman Ave & Paul Ave",
+        at: [-122.3959, 37.722],
+        source: "https://www.sfmta.com/blog/brief-history-t-third-part-2-1980s-2023",
+      },
+      {
+        icon: "park",
+        title: "A WPA playground",
+        text:
+          "Gilman Playground was built by federal work relief crews; a 1933 photograph shows it under construction, and a 1939 city engineer's report lists the Works Progress Administration completing it as a standardized playground for $3,170. Today it covers about 224,000 square feet with playfields, a basketball court, a play area and a clubhouse, renovated with $1.8 million from the 2012 parks bond and reopened in summer 2016.",
+        place: "Gilman Playground",
+        where: "Gilman Ave & Ingerson Ave",
+        at: [-122.38818, 37.71713],
+        source: "https://livingnewdeal.org/projects/gilman-playground-san-francisco-ca/",
+      },
+      {
+        icon: "house",
+        title: "Alice Griffith, rebuilt",
+        text:
+          "Alice Griffith, public housing built in 1962 beside Candlestick Park, has been rebuilt as part of HOPE SF and the larger Hunters Point Shipyard and Candlestick Point plan. The project won a $30.5 million federal Choice Neighborhood award in 2012, and by 2019 all of its original households had been rehoused, nearly 90 percent of them staying on.",
+        place: "Alice Griffith",
+        where: "Arelious Walker Dr",
+        at: [-122.38521, 37.71843],
+        source: "https://www.hope-sf.org/four-communities/",
+      },
+    ],
+    walk: {
+      intro:
+        "A walk of about 1.1 miles from Salinas Avenue to Third Street, north to the Gilman/Paul light rail stop, then out Gilman Avenue past the playground to Arelious Walker Drive. Allow about 45 minutes.",
+      miles: 1.1,
+      minutes: 45,
+      tip:
+        "The T Third stops at Gilman/Paul, so you can begin or end the walk on the train.",
+    },
     nearby: ["the Bayview", "the Portola"],
     restaurants: [
       { name: "The Old Clam House", address: "299 Bayshore Blvd", phone: "(415) 695-2866", url: "https://theoldclamhouse.com" },
