@@ -9563,17 +9563,88 @@ export const NEIGHBORHOODS = {
     transit: "The 19-Polk bus runs into India Basin along Innes Avenue toward Hunters Point. The T-Third Muni Metro line stops at the Hudson/Innes platform on Third Street, with the 44-O'Shaughnessy and 54-Felton buses connecting there; the 23-Monterey serves the wider Bayview.",
   },
 
+  // sources: https://sfport.com/sites/default/files/FileCenter/Documents/1085-F-%20NR%20Registration%20Form%20%28Sections%201%20thru%208%29_web.pdf https://www.sfport.com/node/4965 https://commissions.sfplanning.org/hpcpackets/2017-011878ENV_ARC.pdf https://spur.org/news/2011-01-25/it-takes-village-close-power-plant https://preview-prod.w.sfchronicle.com/bayarea/article/S-F-has-a-new-bayside-park-including-a-sandy-15610559.php https://perkinswill.com/project/building-12/
   "Central Waterfront": {
-    spirit: "San Francisco's working bayshore, where 170 years of shipbuilding meet a new waterfront of parks, lofts, and a beer hall under crane shadows.",
-    reasons: ["Historic Pier 70 shipyard setting", "New Crane Cove Park on the bay", "Pier 70 mixed-use district in development", "T-Third light rail to downtown"],
-    history: "This stretch of the central-eastern waterfront grew up around the Union Iron Works, the shipyard Peter Donahue's firm established at Potrero Point in the 19th century and which built the battleship USS Oregon and early U.S. Navy submarines. Charles Schwab's Bethlehem Steel bought the yard in the early 1900s, and during World War II Pier 70 built and repaired thousands of naval vessels. Commercial ship repair continued in the two floating dry docks until the operator walked away in 2017, leaving them idle. The Port of San Francisco opened the seven-acre Crane Cove Park here in 2020, and Brookfield's Pier 70 redevelopment is restoring historic structures like the WWII-era Building 12 while adding housing, parks, and arts and maker space.",
-    facts: [
-      { icon: "factory", title: "Union Iron Works", text: "The Pier 70 shipyard traces to the 19th-century Union Iron Works at Potrero Point, later Bethlehem Steel, which built the battleship USS Oregon and some of the Navy's first submarines." },
-      { icon: "water", title: "Idle dry docks", text: "Pier 70's two floating dry docks repaired ships for decades but have sat deserted since the operator left in 2017; the Port has budgeted to demolish the aging structures." },
-      { icon: "park", title: "Crane Cove Park", text: "Opened in 2020, this seven-acre Port park off Illinois Street has a sandy beach, lawns, a dog run, and two preserved shipyard cranes on the bay." },
-      { icon: "factory", title: "Building 12 rehabilitated", text: "Brookfield's Pier 70 project rehabilitated the WWII-era steel warehouse Building 12 into a market hall of makers, artists, food, and a taproom, the heart of the new district." },
-      { icon: "house", title: "Pier 70 redevelopment", text: "The Pier 70 plan adds roughly 3.6 million square feet of housing, commercial, arts, and light-industrial space plus new waterfront parks to the historic district." },
+    spirit:
+      "The bay edge of old Potrero Point, where brick shipyard shops, a WWII plate shop and a 300-foot power plant stack stand along the water.",
+    reasons: [
+      "Union Iron Works Historic District",
+      "Crane Cove Park on the bay",
+      "Shipyard buildings from the 1880s",
+      "Shoreline paths along the bay",
     ],
+    history:
+      "This shoreline was Potrero Point, a point of deep water that drew industries the city wanted away from downtown. Du Pont made black powder here from 1854; the Pacific Rolling Mills, the first steel mill on the West Coast, opened in 1868; and wooden shipbuilders moved down from the crowded South of Market shore in the 1860s. The Long Bridge across Mission Bay, finished in 1867, made the point easier to reach, and the Irish Hill and Dogpatch neighborhoods grew up as workers moved in. Irish Hill, a 70- to 100-foot rise that divided the shipyard from the rolling mills, held lodging houses, restaurants and saloons where Scottish and Irish immigrants who worked in the factories lived.\n\nIn 1884 the Union Iron Works, founded during the Gold Rush by Peter and James Donahue, moved here from First and Mission streets and opened the West Coast's first steel shipyard. It launched the Argo in 1885 and built the warships Oregon and Olympia for the Navy. Bethlehem Steel bought the yard in 1905. Its destroyer plant turned out 66 destroyers in World War I, and around 1917 most of Irish Hill was leveled and dumped into the bay for shipyard expansion. In World War II the Navy built a new yard here and the shipyard repaired some 2,500 ships. It kept building ships into the 1970s; in the early 1980s a bankrupt Bethlehem sold it to the Port of San Francisco for one dollar, and ship repair continued on leased parts of the yard. The 68-acre Union Iron Works Historic District was listed on the National Register in 2014.\n\nSouth of 22nd Street a sugar refinery ran from 1881 to 1951 and a power plant from 1902 to 2011. Critics blamed the plant, the city's last fossil-fuel commercial power plant, for environmental health problems in the southeast of the city, and neighborhood and environmental groups pressed for nearly a decade to close it. The Port opened Crane Cove Park in 2020, and the old shipyard and power plant sites are being redeveloped with housing, offices and shops.",
+    facts: [
+      {
+        icon: "park",
+        title: "A park on a shipyard slipway",
+        text:
+          "The seven-acre Crane Cove Park opened on September 30, 2020, after planning that began in 2011. It is built around Slipway 4, a 1930s, 550-foot concrete ramp where military ships once slid into the water, with two headless gantry cranes standing over it and painted outlines on the ground marking ships that once berthed at the yard. The shipyard's last major job was the BART Transbay Tube, opened in 1974, whose sections left from here.",
+        place: "Crane Cove Park",
+        where: "Illinois St & 19th St",
+        at: [-122.38711, 37.76255],
+        source: "https://preview-prod.w.sfchronicle.com/bayarea/article/S-F-has-a-new-bayside-park-including-a-sandy-15610559.php",
+      },
+      {
+        icon: "mayor",
+        title: "The shipyard's front door",
+        text:
+          "In the 1910s Bethlehem Steel turned 20th Street into a grand entrance to its yard. The Renaissance Revival administration building at the corner of Illinois, Building 101, was designed by Frederick H. Meyer in 1917, and the iron fence along 20th and Illinois went up the same year; Building 104, the Union Iron Works' first dedicated office building, dates from 1896. Houses and saloons of the Irish Hill neighborhood once stood at this corner, outside the yard's 12-foot picket fence, until they were razed by 1914.",
+        place: "Union Iron Works offices",
+        where: "20th St & Illinois St",
+        at: [-122.38606, 37.76084],
+        source: "https://sfport.com/sites/default/files/FileCenter/Documents/1085-F-%20NR%20Registration%20Form%20%28Sections%201%20thru%208%29_web.pdf",
+      },
+      {
+        icon: "factory",
+        title: "The machine shop from the 1880s",
+        text:
+          "Union Iron Works opened its Potrero Point yard in 1884 with a machine shop, plate shop, pattern shop, foundry and slipways, and laid it out with 20th Street dividing the machine shops from the hull yard. The red-brick, round-arched machine shop and blacksmith shop of the 1880s survive as Buildings 113 and 114, the only buildings left of the original complex. The shop made engines, boilers and the other parts that went into steel ships.",
+        place: "Machine Shop (Building 113)",
+        where: "20th St east of Illinois St",
+        at: [-122.38562, 37.76041],
+        source: "https://sfport.com/sites/default/files/FileCenter/Documents/1085-F-%20NR%20Registration%20Form%20%28Sections%201%20thru%208%29_web.pdf",
+      },
+      {
+        icon: "factory",
+        title: "A WWII plate shop, raised ten feet",
+        text:
+          "Building 12, Plate Shop No. 2, was built in 1941 on ground leveled where Irish Hill once stood, the core of the Navy's New Yard. Steel plates for ship hulls were cut and shaped here and carried by crane and rail to four slipways. Rehabilitated and reopened in 2022, it was raised 10 feet for projected sea-level rise; the ground floor is a market hall, with studios above and offices in the old mold loft.",
+        place: "Building 12",
+        where: "Maryland St near 21st St",
+        at: [-122.3842, 37.7595],
+        source: "https://perkinswill.com/project/building-12/",
+      },
+      {
+        icon: "house",
+        title: "What's left of Irish Hill",
+        text:
+          "This rocky serpentine outcrop, about 24 feet tall with a few trees on its east side, is the last of Irish Hill, which rose 70 to 100 feet and once ran from the bay toward Potrero Hill. By the 1880s its slopes held a compact neighborhood of lodging houses, restaurants and saloons for Scottish and Irish immigrants who worked in the factories nearby. Around 1917 most of the hill was flattened and dumped into the bay as fill for the shipyard; the National Register listing counts the remnant as part of the historic district.",
+        place: "Irish Hill",
+        where: "Illinois St & 22nd St",
+        at: [-122.38603, 37.75897],
+        source: "https://sfport.com/sites/default/files/FileCenter/Documents/1085-F-%20NR%20Registration%20Form%20%28Sections%201%20thru%208%29_web.pdf",
+      },
+      {
+        icon: "tower",
+        title: "The last power plant's stack",
+        text:
+          "The block from 22nd to 23rd Street between Illinois Street and the bay held a sugar refinery from 1881 to 1951 and a power plant from 1902 to 2011. Its brick Station A dates to 1901–02, and Unit 3 and its 300-foot boiler stack to 1965; the 2018 redevelopment proposal kept the stack and called for strengthening it. Groups including the Potrero Boosters and San Francisco Community Power pressed for nearly a decade to close what was the city's last fossil-fuel commercial power plant, which critics blamed for environmental health disparities in the southeast of the city.",
+        place: "Potrero Power Station",
+        where: "1201 Illinois St (at 23rd St)",
+        at: [-122.38383, 37.75674],
+        source: "https://commissions.sfplanning.org/hpcpackets/2017-011878ENV_ARC.pdf",
+      },
+    ],
+    walk: {
+      intro:
+        "A walk of about three-quarters of a mile south along Illinois Street through the Union Iron Works Historic District, from Crane Cove Park to the brick shops of 20th Street, the WWII plate shop and the last of Irish Hill, ending at the power plant's stack at 23rd Street.",
+      miles: 0.8,
+      minutes: 35,
+      tip:
+        "At Crane Cove Park, look for the painted outlines on the ground that trace the ships once berthed at the yard.",
+    },
     nearby: ["Dogpatch"],
     restaurants: [
       { name: "Piccino", address: "1001 Minnesota St", phone: "(415) 824-4224", url: "https://www.piccino.com" },
@@ -9587,17 +9658,79 @@ export const NEIGHBORHOODS = {
     transit: "T-Third light rail runs on Third Street with the 20th Street (Dogpatch) and 23rd Street stops; Muni buses 22-Fillmore and 48 serve the area.",
   },
 
+  // sources: https://default.sfplanning.org/Preservation/showplace_survey/Final_Context_10.22.09.pdf https://noehill.com/sf/landmarks/sf193.asp https://noehill.com/sf/landmarks/sf283.asp https://noehill.com/sf/landmarks/sf305.asp https://en.wikipedia.org/wiki/List_of_San_Francisco_Designated_Landmarks
   "Showplace Square": {
-    spirit: "San Francisco's design district in the flats northwest of Potrero Hill, where brick warehouses turned interior-design showrooms, tech offices, and breweries — home of the San Francisco Design Center, trading in furniture, fabric, and light.",
-    reasons: ["Heart of SF's design and showroom trade", "Handsome early-1900s brick warehouse architecture", "Walkable to Potrero Hill and the Mission", "Brewery taprooms and design-district dining"],
-    aka: "Design District",
-    history: "The district grew up in the early 20th century as a flatland of brick-and-timber warehouses and light industry serving the rail and port economy. In the 1970s developer Henry Adams assembled several adjacent brick buildings (one wing had been cold storage) into the San Francisco Design Center, adding the dramatic glass-roofed Galleria atrium and bringing in the first interior-design showrooms as tenants. The cluster of showrooms gave the area its name, Showplace Square, after the Showplace building. Today the Design Center still houses more than 100 showrooms representing thousands of manufacturers, while the surrounding warehouse blocks have filled with tech offices, breweries, and new live/work lofts.",
-    facts: [
-      { icon: "art", title: "San Francisco Design Center", text: "The SF Design Center spans two buildings, the Showplace and the Galleria, with over 100 showrooms representing more than 2,000 manufacturers of furniture, fabric, lighting, and more." },
-      { icon: "star", title: "The Galleria atrium", text: "Henry Adams joined four brick buildings around a dramatic skylit atrium in the 1970s; the Galleria at 101 Henry Adams St is now a landmark event hall." },
-      { icon: "factory", title: "Brick warehouse roots", text: "The Showplace building at 2 Henry Adams St dates to about 1915, typical of the district's early-1900s brick-and-timber warehouse stock." },
-      { icon: "beer", title: "Brewery scene", text: "Ballast Point's San Francisco tasting room and kitchen anchors the 16th Street edge of the district." },
+    spirit:
+      "Brick and heavy-timber warehouses on filled Mission Bay marsh, with design showrooms in the old wholesale buildings below the freeways.",
+    reasons: [
+      "Early 1900s brick warehouses",
+      "Three city landmarks",
+      "Design showroom district",
+      "Between SoMa and Potrero Hill",
     ],
+    aka: "New Wholesale District",
+    history:
+      "Before the city grew south, most of this ground north of 16th Street and east of 8th Street lay under the shallow waters and tidal flats of Mission Bay, and Mission Creek wound along the line of today's Division Street to meet the bay near 8th Street. The eastern half of the district was part of the De Haro family's Rancho Potrero Nuevo. After the state sold off its Mission Bay tidelands under an 1868 law, the bay was filled and railroads laid tracks across it.\n\nIn 1905 the Pacific Hardware & Steel Company, later Baker & Hamilton, finished a huge brick warehouse at 7th and Townsend beside the Southern Pacific and Santa Fe tracks, and other wholesalers followed. Before and after the 1906 earthquake the area was called the \"New Wholesale District,\" and the brick and concrete warehouses built here through the 1920s held hardware, farm machinery, mattresses and other goods. In the late 1950s and early 1960s the state built the elevated Bayshore and Central freeways through and over the district.\n\nBy the late 1960s many of the buildings had emptied out. In the early 1970s Henry Adams, president of the Western Merchandise Mart, began buying the big brick warehouses for interior-design showrooms, which had been centered in Jackson Square, and by the late 1970s the area had taken the name Showplace Square. In the dotcom years of the late 1990s it became a center of the fight over new live-work lofts built in industrial zones.",
+    facts: [
+      {
+        icon: "factory",
+        title: "\"Largest business structure west of the Mississippi\"",
+        text:
+          "The Pacific Hardware & Steel Company, later Baker & Hamilton, built this three-story brick and granite warehouse in 1905 on Southern Pacific land at 7th and Townsend, with rail sidings to both the Southern Pacific and Santa Fe lines. Designed by Sutton & Weeks, it cost half a million dollars and was billed as the largest business structure west of the Mississippi. Its move here started the \"New Wholesale District.\" It is city Landmark No. 193 and is listed on the National Register.",
+        place: "Baker & Hamilton Building",
+        where: "700 7th St (at Townsend St)",
+        at: [-122.40166, 37.77174],
+        source: "https://default.sfplanning.org/Preservation/showplace_survey/Final_Context_10.22.09.pdf",
+      },
+      {
+        icon: "factory",
+        title: "Concrete giant at 8th and Brannan",
+        text:
+          "The National Carbon Company Building, a massive concrete industrial building designed by engineer Maurice Couchot, was finished in 1916; it is one of the district's buildings listed on the National Register. In the 1980s it was converted into the 400,000-square-foot Jewelry/Gift Mart, one of the conversions that followed the first design showrooms.",
+        place: "National Carbon Company Building",
+        where: "8th St & Brannan St",
+        at: [-122.40542, 37.77138],
+        source: "https://default.sfplanning.org/Preservation/showplace_survey/Final_Context_10.22.09.pdf",
+      },
+      {
+        icon: "art",
+        title: "Where Showplace Square began",
+        text:
+          "Leo Devlin designed this brick warehouse for the Dunham, Carrigan & Hayden Company in 1915, built with heavy, slow-burning timbers after the 1906 fire. In the early 1970s Henry Adams bought it and turned it into the San Francisco Design Center, the first of the showroom conversions on what was then Kansas Street. It became city Landmark No. 283 in 2019. Mission Creek once flowed along the line of Division Street, at the north end of this block.",
+        place: "Dunham, Carrigan & Hayden Building",
+        where: "2 Henry Adams St (at Division St)",
+        at: [-122.40405, 37.76937],
+        source: "https://noehill.com/sf/landmarks/sf283.asp",
+      },
+      {
+        icon: "shopping",
+        title: "The showroom blocks",
+        text:
+          "Three nearly identical brick warehouses by Meyers & Ward went up on this block in 1906. In 1974 Henry Adams bought the two on Henry Adams Street and converted them into a second design center, and by the early 1980s he and his colleagues owned most of the buildings around it. Interior-design and furnishings showrooms still fill buildings along Henry Adams and the neighboring streets.",
+        place: "Henry Adams St showrooms",
+        where: "101 Henry Adams St",
+        at: [-122.4038, 37.76854],
+        source: "https://default.sfplanning.org/Preservation/showplace_survey/Final_Context_10.22.09.pdf",
+      },
+      {
+        icon: "house",
+        title: "A family business moved by redevelopment",
+        text:
+          "G. Albert Lansburgh, better known for theaters, designed this five-story brick warehouse in 1912; its trapezoid plan fits a triangular lot beside an old Western Pacific Railroad right-of-way that still cuts across the block. Henri and Tomoye Takahashi founded the Takahashi Trading Company in Japantown after their release from the Topaz War Relocation Center in 1945, and bought this building in 1965 after the Redevelopment Agency demolished their Japantown building. It became city Landmark No. 305 in 2022.",
+        place: "Takahashi Trading Company",
+        where: "200 Rhode Island St",
+        at: [-122.40287, 37.76731],
+        source: "https://noehill.com/sf/landmarks/sf305.asp",
+      },
+    ],
+    walk: {
+      intro:
+        "A short walk of about two-thirds of a mile through the warehouse district, from the Baker & Hamilton Building at 7th and Townsend west along Townsend and down 8th Street, then south past the landmark warehouses and showrooms of Henry Adams Street to Rhode Island Street.",
+      miles: 0.7,
+      minutes: 30,
+      tip:
+        "Watch for the one-story buildings with long, angled footprints cutting across blocks: they were built along abandoned railway spurs.",
+    },
     nearby: ["Potrero Hill", "SoMa"],
     restaurants: [
       { name: "Niku Steakhouse", address: "61 Division St", phone: "(415) 829-7817", url: "https://www.nikusteakhouse.com" },
@@ -9610,16 +9743,79 @@ export const NEIGHBORHOODS = {
     transit: "Muni buses 22-Fillmore (to Mission Bay), 19-Polk, 10-Townsend, and 55-Dogpatch serve the district; the 16th St corridor and Mission Bay are nearby.",
   },
 
+  // sources: https://archives.sfplanning.org/documents/682-MO_Context_Final_202007.pdf https://npgallery.nps.gov/AssetDetail/NRIS/88000026 https://en.wikipedia.org/wiki/San_Francisco_Mint https://home.treasury.gov/about/history/curator/us-mint-buildings/san-francisco-mint https://en.wikipedia.org/wiki/Fallon_Building https://noehill.com/sf/landmarks/sf164.asp https://noehill.com/SF/LANDMARKS/sf256.asp https://en.wikipedia.org/wiki/List_of_San_Francisco_Designated_Landmarks
   "Mint Hill": {
-    spirit: "A tiny, history-soaked wedge at the seam of SoMa, the Mission, and Mid-Market, anchored by the granite hulk of the Old U.S. Mint and the pedestrian square of Mint Plaza — central, dense, and transit-rich.",
-    reasons: ["One of the most transit-connected spots in the city", "Walk to Mint Plaza dining and 5th Street shopping", "Built around a true 1906 survivor landmark", "Central to SoMa, Union Square, and the Mission"],
-    history: "The Old United States Mint at 5th and Mission, completed in 1874, is a neoclassical fortress nicknamed the 'Granite Lady.' When the 1906 earthquake and fire leveled the surrounding South of Market, Superintendent Frank Leach and his crew fought back the flames, and the building survived as one of the few structures left standing for blocks. At the time it held roughly a third of the nation's gold reserves and briefly served as the city's only working financial institution during the recovery. The Mint operated until 1937; a century later, in 2007, the alley behind it became Mint Plaza, a privately funded pedestrian square that now hosts dining, markets, and events at the heart of this small, central district.",
-    facts: [
-      { icon: "quake", title: "Survived 1906", text: "The Old Mint was one of the few buildings left standing for blocks after the 1906 earthquake and fire, saved by its superintendent and staff." },
-      { icon: "money", title: "A third of the gold", text: "At the time of the 1906 fire the Mint held about $300 million, roughly one-third of the entire nation's gold reserves." },
-      { icon: "factory", title: "The Granite Lady", text: "Built 1869 to 1874 in neoclassical style, the Old U.S. Mint earned its nickname and coined gold and silver until 1937." },
-      { icon: "fair", title: "Mint Plaza", text: "In 2007 the alley behind the Mint became Mint Plaza, San Francisco's first privately funded conversion of a city street into a public pedestrian plaza." },
+    spirit:
+      "A serpentine hill above Market and Duboce, crowned by the 1937 U.S. Mint, with a teachers' college campus and Victorians on the blocks below.",
+    reasons: [
+      "The 1937 U.S. Mint",
+      "Five city landmarks",
+      "Market Street at the door",
+      "A 1920s teachers' college campus",
     ],
+    aka: "Reservoir Hill",
+    history:
+      "The hill takes its name from the United States Mint on its summit. Before that it was Reservoir Hill: in the 1860s the Spring Valley Water Company built a large reservoir on top, near Market and Buchanan, which supplied water to the Mission District. The hill, with its outcrops of serpentine, and the sand dunes between Mission and Dolores streets kept Market Street from running farther west until the 1870s. On the flats to the north, the Protestant Orphan Asylum went up in 1853–54 on the block bounded by Laguna, Waller, Buchanan and Hermann streets.\n\nThe 1906 earthquake heavily damaged the orphanage, and refugees camped on its grounds and on the corner block at Market, Hermann and Buchanan. The State Normal School, forerunner of San Francisco State, took over the orphanage site after 1906 and built a new campus there from 1924 through the 1930s, before moving to Lake Merced after World War II. In 1937 the Treasury finished a new mint on the hilltop, a New Deal public works project designed by Gilbert Stanley Underwood that took over the work of the Old Mint at Fifth and Mission streets.\n\nAfter the 1989 Loma Prieta earthquake damaged the Central Freeway, its viaduct north of Market was torn down in the late 1990s and replaced by Octavia Boulevard. The city's planning history of the area notes that this change, together with the dotcom boom and the real estate boom of 1998–2005, put pressure on longtime residents, particularly renters.",
+    facts: [
+      {
+        icon: "flag",
+        title: "Saved by a landmark vote",
+        text:
+          "This Queen Anne building was put up in 1894 for Carmel Lodge Fallon, a Californio landowner, to a design by Edward D. Goodrich. The San Francisco LGBT Community Center bought it in December 1996; after a 1997 plan to raze it, preservationists formed Friends of 1800 Market Street to save it. It became city Landmark No. 223 on November 8, 1998, and has been part of the Center since 2002, joined to a modern building facing Market Street.",
+        place: "Carmel Fallon Building",
+        where: "1800 Market St (at Octavia St)",
+        at: [-122.42377, 37.77178],
+        source: "https://en.wikipedia.org/wiki/Fallon_Building",
+      },
+      {
+        icon: "house",
+        title: "A Victorian time capsule",
+        text:
+          "Two houses built in 1883 and 1889 and a barn on Laguna Street make up the McMorry-Lagan complex, city Landmark No. 164. When the fire of 1906 approached, the family was ordered out at 2 a.m. on April 19, soldiers from the Presidio fighting the fire slept in the barn, and the fire was stopped two blocks to the east. When the city made it a landmark in 1983, the family that built it still owned it, with original gaslights, fixtures and wallpaper inside.",
+        place: "McMorry-Lagan House",
+        where: "188–198 Haight St (at Laguna St)",
+        at: [-122.4254, 37.77262],
+        source: "https://noehill.com/sf/landmarks/sf164.asp",
+      },
+      {
+        icon: "book",
+        title: "From orphanage to teachers' college",
+        text:
+          "The Protestant Orphan Asylum stood here from 1853–54 until the 1906 earthquake heavily damaged it, and refugees camped on its grounds afterward. The State Normal School then used the old orphanage buildings until it built a new campus to a master plan by State Architect George MacDougall; the 1925 Kindergarten Training Building at Laguna and Hermann is now Richardson Hall. The school became San Francisco State Teachers' College in the 1920s and moved to Lake Merced after World War II. Richardson Hall, Woods Hall and Woods Hall Annex became city landmarks in 2007, and the campus is listed on the National Register.",
+        place: "Former San Francisco State campus",
+        where: "55 Laguna St (at Hermann St)",
+        at: [-122.42527, 37.77115],
+        source: "https://archives.sfplanning.org/documents/682-MO_Context_Final_202007.pdf",
+      },
+      {
+        icon: "money",
+        title: "The third San Francisco Mint",
+        text:
+          "Designed by Gilbert Stanley Underwood in the stripped classical style, the Mint was dedicated on May 15, 1937, days after about $595 million in gold and silver was moved here from the Old Mint in post office vans under police and Secret Service guard. It stopped striking circulating coins in 1955, served as an assay office from 1962 to 1988, and since 1975 has made almost only proof coins, marked with an S. It was listed on the National Register in 1988, and it admits visitors only on rare occasions.",
+        place: "U.S. Mint",
+        where: "155 Hermann St (at Buchanan St)",
+        at: [-122.42767, 37.77049],
+        source: "https://en.wikipedia.org/wiki/San_Francisco_Mint",
+      },
+      {
+        icon: "road",
+        title: "The hill that blocked Market Street",
+        text:
+          "The Mint stands on one of the area's few serpentine outcrops, and the city's planning history names the hill, then called Reservoir Hill, among the obstacles that kept Market Street ending at Dolores Street until the 1870s. Duboce Avenue was Ridley Street until 1900, when supervisors renamed it for Colonel Victor D. Duboce, a Spanish-American War veteran and supervisor who had pushed for a park nearby and died before it was approved.",
+        place: "Mint Hill from Duboce Avenue",
+        where: "Duboce Ave west of Market St",
+        at: [-122.427, 37.76962],
+        source: "https://archives.sfplanning.org/documents/682-MO_Context_Final_202007.pdf",
+      },
+    ],
+    walk: {
+      intro:
+        "A half-mile loop around the hill, starting at the Fallon Building on Market Street, north to Haight and Laguna, past the old teachers' college campus on Laguna Street, along Hermann Street to the Mint, and down to Duboce Avenue below it.",
+      miles: 0.6,
+      minutes: 25,
+      tip:
+        "Duboce Park, a few blocks west along Duboce Avenue, is the park Colonel Duboce pushed for: built in 1901 and finished within a year, it became a refugee camp after the 1906 earthquake.",
+    },
     nearby: ["SoMa", "Union Square"],
     restaurants: [
       { name: "54 Mint Cucina Romana", address: "16 Mint Plaza", phone: "(415) 543-5100", url: "https://www.54mint.com" },
@@ -9738,18 +9934,69 @@ export const NEIGHBORHOODS = {
     transit: "K-Ingleside Muni Metro runs along Ocean Avenue; M-Ocean View and Balboa Park BART meet at the neighborhood's eastern edge. Buses 29-Sunset, 49 Van Ness-Mission, 8-Bayshore and 54-Felton serve the area.",
   },
 
+  // sources: https://www.treasureislandmuseum.org/island-history https://dtsc.cdev.sites.ca.gov/wp-content/uploads/sites/112/2019/04/Former-Naval-Station-Treasure-Island-Public-Presentation01152019v1-mm.pdf https://thebulletin.org/2014/02/treasure-island-cleanup-exposes-navys-mishandling-of-its-nuclear-past/ https://sf.gov/information/us-navy-cleanup-program-information https://en.wikipedia.org/wiki/Administration_Building,_Treasure_Island https://en.wikipedia.org/wiki/Palace_of_Fine_and_Decorative_Arts https://www.treasureislandmuseum.org/youarehere/pan-american-airlines https://www.cbsnews.com/sanfrancisco/news/ferry-service-to-san-franciscos-treasure-island-begins-as-thousands-of-new-homes-set-to-be-built/
   "Treasure Island": {
-    spirit: "A man-made island built for a 1939 World's Fair, now a redeveloping waterfront neighborhood with the most jaw-dropping head-on views of the San Francisco skyline in the city.",
-    reasons: ["Unmatched SF skyline views", "Brand-new waterfront homes", "8-minute ferry to the Ferry Building", "Bay-front parks & trails"],
-    aka: "TI",
-    history: "Treasure Island was built in 1936-37 atop the Yerba Buena Shoals to host the 1939-40 Golden Gate International Exposition, a World's Fair celebrating the new Bay and Golden Gate bridges. It was meant to become San Francisco's airport, but the U.S. Navy took it over during World War II as Naval Station Treasure Island, which it operated until the base closed in 1997. Since the Navy's departure it has been a residential community, and is now the site of one of the largest redevelopment projects in the country, adding thousands of new homes, high-rises, parks, and ferry service. The Art Deco Building One, the former Administration Building, remains a city landmark.",
-    facts: [
-      { icon: "fair", title: "Born from a World's Fair", text: "The island was created in 1936-37 to host the 1939-40 Golden Gate International Exposition." },
-      { icon: "flag", title: "A Navy base for 50 years", text: "Naval Station Treasure Island operated here from World War II until it closed in 1997." },
-      { icon: "star", title: "Head-on skyline views", text: "The island is famous for its straight-on panoramas of the downtown San Francisco skyline." },
-      { icon: "house", title: "A new waterfront district", text: "One of the country's largest redevelopment projects is building thousands of new homes, towers, and parks." },
-      { icon: "bridge", title: "On the Bay Bridge", text: "Treasure Island connects to SF and the East Bay via the Yerba Buena Island tunnel on the Bay Bridge." },
+    spirit:
+      "A 400-acre island of dredged bay mud, built for a 1939 world's fair, with a Moderne terminal and hangars from the Clipper era and a former Navy base still under cleanup.",
+    reasons: [
+      "1939 World's Fair island",
+      "National Register buildings",
+      "Ferry to the Ferry Building",
+      "Shoreline facing the city",
     ],
+    aka: "TI",
+    history:
+      "Treasure Island did not exist until 1936–37, when the Army Corps of Engineers built it of mud dredged from the bay on the shoals of Yerba Buena Island. It was made for the Golden Gate International Exposition of 1939–40, the world's fair themed \"A Pageant of the Pacific.\" The federal government paid for three permanent buildings meant to serve a future airport, and Pan American Airways moved its Clipper flying boats here in 1938, flying across the Pacific from the sheltered water of Clipper Cove. The island never became an airport.\n\nIn 1940 the Navy leased the island from the city, and during World War II Naval Station Treasure Island became a major training center; the island's museum puts the number of personnel shipped overseas from here at 4.5 million. For decades the Navy also ran schools here that used radioactive material: by 1948 a radiological training school, and later classes in radiation detection, ship decontamination and atomic damage control, including on a full-size mock ship, the \"USS Pandemonium.\" Radium pieces ended up in the base's waste pits, and the cleanup of a 1950 radium spill filled dozens of barrels that were dumped at sea near the Farallon Islands. Some Navy housing of the 1960s and '70s was built over a former dump where radioactive items may have been buried.\n\nThe base closed in 1997. Cleanup under the Navy, with the state Department of Toxic Substances Control as lead regulator and the Department of Public Health as its radiological expert, turned up hundreds of radium pieces in old waste pits and in soil around the former Navy apartments; in 2014 reporters described state health officials' long criticism of the Navy's surveys. Much of the island has been cleaned and transferred to the city's Treasure Island Development Authority and other agencies, but several parcels, including the Site 12 housing and old disposal areas, remain in federal hands until the Navy finishes the radiological cleanup the law requires. Redevelopment plans call for up to 8,000 homes.",
+    facts: [
+      {
+        icon: "road",
+        title: "The Navy's main street",
+        text:
+          "The Navy took over the island as the country prepared for World War II, and Naval Station Treasure Island became a major training and education center; the Treasure Island Museum puts the number of personnel shipped overseas from here during the war at 4.5 million. The station closed in 1997 and the island was leased to the City of San Francisco.",
+        place: "Avenue of the Palms",
+        where: "Avenue of the Palms, west shore",
+        at: [-122.37343, 37.81999],
+        source: "https://www.treasureislandmuseum.org/island-history",
+      },
+      {
+        icon: "water",
+        title: "A ferry for the new neighborhood",
+        text:
+          "Ferry service between this terminal and Gate B of the San Francisco Ferry Building began on March 1, 2022, run by Prop SF and paid for by the island's master developer, Treasure Island Community Development. The redevelopment plans call for 8,000 new homes when complete.",
+        place: "Treasure Island Ferry Terminal",
+        where: "Avenue of the Palms at Waterfront Plaza",
+        at: [-122.37215, 37.8164],
+        source: "https://www.cbsnews.com/sanfrancisco/news/ferry-service-to-san-franciscos-treasure-island-begins-as-thousands-of-new-homes-set-to-be-built/",
+      },
+      {
+        icon: "fair",
+        title: "The fair's building, meant for an airport",
+        text:
+          "George W. Kelham and William Peyton Day designed this Moderne building, finished in 1938, together with Buildings 2 and 3, two hangars planned for Pan American's flying boats. It was the administrative center of the 1939–40 exposition and the terminal for Pan Am's Clipper service; afterward the Navy made it an administration building and its headquarters. Building 1 and Building 3 were listed on the National Register in 2008. The Navy keeps its public repository of cleanup reports, fact sheets and meeting records in Building 1.",
+        place: "Building 1 (Administration Building)",
+        where: "1 Avenue of the Palms",
+        at: [-122.37161, 37.81607],
+        source: "https://en.wikipedia.org/wiki/Administration_Building,_Treasure_Island",
+      },
+      {
+        icon: "bridge",
+        title: "Where the Clippers took off",
+        text:
+          "Pan American moved its West Coast flying-boat base from Alameda to Treasure Island in 1938, and its Clippers took off and landed on the water of Clipper Cove, the narrow inlet between Treasure Island and Yerba Buena Island. Passengers boarded from a floating dock in the cove. The Clippers flew from here until about 1945, when the flying boats were obsolete.",
+        place: "Clipper Cove",
+        where: "Clipper Cove Way",
+        at: [-122.3686, 37.81704],
+        source: "https://www.treasureislandmuseum.org/youarehere/pan-american-airlines",
+      },
+    ],
+    walk: {
+      intro:
+        "A walk of about two-thirds of a mile down the island's west shore on Avenue of the Palms, past the ferry terminal to Building 1, then east along Clipper Cove. The Navy's cleanup is still under way on some parcels, so keep to public streets and paths.",
+      miles: 0.7,
+      minutes: 30,
+      tip:
+        "Ferries run from Gate B at the San Francisco Ferry Building to the terminal, a few steps from Building 1.",
+    },
     restaurants: [
       { name: "Mersea Restaurant & Bar", address: "699 Avenue of the Palms", phone: "(415) 999-9836", url: "https://www.mersea.restaurant" },
       { name: "Aracely Cafe", address: "401 13th St", phone: "(415) 366-5091", url: "https://www.aracelysf.com" },
@@ -10048,20 +10295,108 @@ export const NEIGHBORHOODS = {
     hospital: { name: "UCSF Health Stanyan Hospital (formerly St. Mary's)", address: "450 Stanyan St", dist: "about 3 mi", phone: "(415) 668-1000", url: "https://sfcommunityhospitals.ucsfhealth.org/st-marys" },
     transit: "The 38-Geary runs out to 48th Ave & Point Lobos at the park gate and, with the 38R-Geary Rapid, runs the length of Geary Blvd to downtown; the 31-Balboa runs along Balboa St at the southern edge, and the 5-Fulton and 5R-Fulton Rapid run along Fulton, two blocks south.",
   },
+  // sources: https://www.sfport.com/node/4965 https://gocodebook.com/library/us/ca/san-francisco-planning/part-xvi/article-10-preservation-of-historical-architectural-and-aesthetic-landmarks/sec.-1015.-severability/appendix-d-to-article-10-northeast-waterfront-historic-district https://sfbos.org/sites/default/files/r0099-23.pdf https://sfbos.org/sites/default/files/o0202-23.pdf https://www.spur.org/publications/urbanist-article/2009-06-01/agents-change https://www.spur.org/publications/urbanist-article/2010-02-01/when-freeways-came-down https://www.sfomuseum.org/node/3731 https://www.baycrossings.com/san-francisco-celebrates-the-grand-opening-of-the-james-r-herman-cruise-terminal-at-pier-27/
   "Northern Waterfront": {
     spirit:
-      "The sunny, bay-facing foot of Telegraph Hill — old cargo piers now home to a science museum and a cruise terminal, with the F-line streetcar rolling down the Embarcadero out front.",
-    reasons: ["Sunny bayfront blocks", "Embarcadero promenade", "Walk to the Financial District", "F-line streetcar at the door"],
-    aka: "Northeast Waterfront",
-    history:
-      "The name is plain geography: this is the northern stretch of San Francisco's port waterfront — the flat, bay-facing strip along the Embarcadero from Washington Street, past the foot of Telegraph Hill, to the edge of Fisherman's Wharf. Most of it is made land. In Gold Rush days the bay reached the foot of Telegraph Hill, and wharves, rubble and rock quarried from the hill pushed the shoreline east. From the late 1870s a state-built seawall, and later finger piers and the State Belt Railroad, made it a working port of warehouses and cargo sheds, with the city's wholesale produce market crowded around Washington and Davis streets. When shipping moved to Oakland's container terminals in the 1960s and '70s the piers emptied; the Golden Gateway redevelopment replaced the produce district, and the 1991 demolition of the Embarcadero Freeway reopened the shoreline. Today old brick warehouses hold offices, newer condos and apartments fill the blocks below the hill, and the piers host a science museum and a cruise terminal.",
-    facts: [
-      { icon: "road", title: "The freeway that came down", text: "The double-deck Embarcadero Freeway ended at Broadway, where the city's freeway revolt stopped its planned run toward the Golden Gate Bridge. Damaged in the 1989 Loma Prieta earthquake, it was torn down in 1991." },
-      { icon: "star", title: "A museum on the piers", text: "The Exploratorium, founded in 1969 by physicist Frank Oppenheimer at the Palace of Fine Arts, moved to Pier 15 at the foot of Green Street in 2013." },
-      { icon: "factory", title: "Blue-jeans headquarters", text: "Levi's Plaza was built in the early 1980s at the foot of Telegraph Hill as Levi Strauss & Co.'s headquarters; its plaza and park were designed by landscape architect Lawrence Halprin." },
-      { icon: "house", title: "Once the produce market", text: "Into the early 1960s the blocks around Washington, Front and Davis streets were the city's wholesale produce market. After it moved to its present site on Jerrold Avenue in 1963, the Golden Gateway apartments, townhouses and Sydney G. Walton Square took its place." },
-      { icon: "water", title: "Cruise ships at the door", text: "The James R. Herman Cruise Terminal opened at Pier 27 in 2014, named for longtime longshore union leader Jimmy Herman." },
+      "Brick warehouses, a Gold Rush landing site and a row of Embarcadero piers on made land at the foot of Telegraph Hill.",
+    reasons: [
+      "Two historic districts",
+      "Embarcadero promenade",
+      "Brick warehouse blocks",
+      "Piers 15 to 27",
     ],
+    history:
+      "The name is geography: this is the northern stretch of San Francisco's port, along the Embarcadero below Telegraph Hill. Most of it is made land. City records say the first vessel to moor at a wharf here tied up and unloaded cargo in 1848, at Clark's Point, and clipper ships of the Gold Rush trade crowded in after it. Fill pushed the shoreline east into the bay, much of it rock dug out of Telegraph Hill, and a seawall followed in the late 1800s. Brick warehouses came first; after the 1906 fire, reinforced concrete ones. Biscuit and lime companies, ice and cold storage plants, meat packers, wine and canning firms, and later printers worked here, and warehouses stayed in use from the Gold Rush to the mid-1960s, when offices, showrooms and shops began moving into the renovated buildings. The city made nine of these blocks the Northeast Waterfront Historic District in 1983.\n\nJust south, the blocks around Front and Washington streets held the city's wholesale produce district, which grew up around the Colombo Market, built by Italian immigrants in 1874 and rebuilt in brick in 1894. In the early 1960s the Redevelopment Agency demolished the market and the rest of the district to build the Golden Gateway Center, and only one brick arch was kept.\n\nThe double-deck Embarcadero Freeway was under construction along the shore in 1959 when, after years of opposition to the city's planned freeway network, supervisors canceled seven of the ten proposed routes. The 1989 Loma Prieta earthquake badly damaged it, and it was torn down in 1991, replaced by the promenade along the Embarcadero. The piers and bulkhead buildings are part of the Port's Embarcadero Historic District, listed on the National Register in 2006.",
+    facts: [
+      {
+        icon: "shop",
+        title: "The produce market's last arch",
+        text:
+          "This brick arch is all that is left of the Colombo Market, a wholesale market for fruit and vegetables founded by immigrants from northern Italy in 1874 and rebuilt in 1894 to a design by Clinton Day. City records call it the first purpose-built, enclosed wholesale produce market in San Francisco and the start of the produce district, and say it incubated Italian American businesses including the Del Monte Corporation and A.P. Giannini's agricultural ventures. It came through the 1906 earthquake and fire; the Redevelopment Agency tore down the market and the district in the early 1960s for the Golden Gateway Center but kept the arch. The city made it a landmark on October 3, 2023.",
+        place: "Colombo Market Arch",
+        where: "Front St between Jackson St & Pacific Ave (Sydney Walton Square)",
+        at: [-122.39965, 37.7976],
+        source: "https://sfbos.org/sites/default/files/o0202-23.pdf",
+      },
+      {
+        icon: "road",
+        title: "Where the freeway stood",
+        text:
+          "The double-deck Embarcadero Freeway was going up along this shoreline in 1959. San Franciscans had fought the city's planned freeway network since a 1956 newspaper map showed the routes, and that year supervisors canceled seven of the ten. The Loma Prieta earthquake badly damaged the Embarcadero Freeway in 1989, and it came down in 1991. The bulkhead buildings and piers along this side of the street are part of the Embarcadero Historic District, three miles of seawall, wharves and pier buildings from Pier 45 to Pier 48, with a period of significance of 1878 to 1945.",
+        place: "The Embarcadero at Broadway",
+        where: "The Embarcadero & Broadway",
+        at: [-122.39778, 37.7991],
+        source: "https://www.spur.org/publications/urbanist-article/2009-06-01/agents-change",
+      },
+      {
+        icon: "star",
+        title: "A science museum on a cargo pier",
+        text:
+          "Physicist Frank Oppenheimer opened the Exploratorium in 1969 in an empty gallery of the Palace of Fine Arts, built for the 1915 Panama-Pacific International Exposition. The museum outgrew it, and on April 17, 2013, it reopened here in the renovated Pier 15 shed, which keeps the pier's original structure and gave it almost three times the floor space.",
+        place: "Pier 15",
+        where: "The Embarcadero & Green St",
+        at: [-122.39853, 37.8009],
+        source: "https://www.sfomuseum.org/node/3731",
+      },
+      {
+        icon: "factory",
+        title: "The city's brick warehouse block",
+        text:
+          "The ordinance that created the Northeast Waterfront Historic District in 1983 singles out the block bounded by Front, Battery, Union and Green streets as the most cohesive brick warehouse complex left from the Gold Rush era in the city. Look for the district's features: big plain walls, deep-set windows and large ground-floor arches, mostly in red brick. Fill for these blocks came partly from Telegraph Hill, which was dug away for it.",
+        place: "Front St warehouses",
+        where: "Front St & Green St",
+        at: [-122.4004, 37.8006],
+        source: "https://gocodebook.com/library/us/ca/san-francisco-planning/part-xvi/article-10-preservation-of-historical-architectural-and-aesthetic-landmarks/sec.-1015.-severability/appendix-d-to-article-10-northeast-waterfront-historic-district",
+      },
+      {
+        icon: "park",
+        title: "Halprin's plaza and a 1907 landmark",
+        text:
+          "Levi Strauss & Co. built this campus for its employees, and the plaza and park were dedicated on April 8, 1982. Landscape architect Lawrence Halprin designed them: a paved plaza around a fountain set with a large piece of carnelian granite, and to the east a park with a stream, small waterfalls and grassy knolls; his office stood beside it on Battery Street until 2003. At the corner of Battery and Union, the two-story brick Independent Wood Company building of 1907, city Landmark No. 104, is built into the base of a 1982 office building.",
+        place: "Levi's Plaza",
+        where: "Battery St & Union St",
+        at: [-122.4018, 37.802],
+        source: "https://www.tclf.org/landscapes/levis-plaza",
+      },
+      {
+        icon: "factory",
+        title: "A wine warehouse like a palazzo",
+        text:
+          "This 1903 warehouse, designed by Hemenway and Miller for the Italian Swiss Colony wine company, is city Landmark No. 102. The Planning Commission called it one of the finest examples of industrial warehouse architecture left on the Northern Waterfront, and its Battery and Greenwich street fronts were designed to recall the palazzi of Italy.",
+        place: "Italian Swiss Colony Building",
+        where: "1265 Battery St",
+        at: [-122.40198, 37.80289],
+        source: "https://noehill.com/sf/landmarks/sf102.asp",
+      },
+      {
+        icon: "tram",
+        title: "The Belt Railroad's roundhouse",
+        text:
+          "The State Belt Railroad tied every pier on the waterfront to the nation's rail lines, and this 1918 roundhouse is the only one of its kind left in San Francisco. It became city Landmark No. 114 in 1980; the Planning Commission noted that its shape comes entirely from its function, with none of the ornament usually found even on utilitarian buildings of the time.",
+        place: "Belt Railroad Roundhouse",
+        where: "Sansome St, Lombard St & The Embarcadero",
+        at: [-122.40328, 37.80409],
+        source: "https://noehill.com/sf/landmarks/sf114.asp",
+      },
+      {
+        icon: "water",
+        title: "A cruise terminal named for a longshoreman",
+        text:
+          "The Port held the grand opening of the James R. Herman Cruise Terminal on September 25, 2014. It is named for James R. Herman, a former president of the International Longshore and Warehouse Union and a former port commissioner. The 2½-acre Cruise Terminal Plaza beside it has a lawn and more than 50 benches.",
+        place: "Pier 27",
+        where: "The Embarcadero & Lombard St",
+        at: [-122.40108, 37.80556],
+        source: "https://www.baycrossings.com/san-francisco-celebrates-the-grand-opening-of-the-james-r-herman-cruise-terminal-at-pier-27/",
+      },
+    ],
+    walk: {
+      intro:
+        "A line walk of about a mile from the old produce district at Sydney Walton Square up the Embarcadero to Pier 15, then inland through the brick warehouse blocks of Front and Battery streets to the Belt Railroad roundhouse and the cruise terminal at Pier 27.",
+      miles: 1.1,
+      minutes: 45,
+      tip:
+        "Detour to the foot of Commerce Street, off Battery, where the 1983 historic district ordinance points out cobblestone paving and belt-line railroad track still in place.",
+    },
     nearby: ["the Financial District", "North Beach", "Fisherman's Wharf"],
     restaurants: [
       { name: "Kokkari Estiatorio", address: "200 Jackson St", phone: "(415) 981-0983", url: "https://kokkari.com" },
@@ -10076,8 +10411,7 @@ export const NEIGHBORHOODS = {
       { name: "Specs' Twelve Adler Museum Cafe", address: "12 William Saroyan Pl", phone: "(415) 421-4112", url: "https://www.specsbarsf.com" },
     ],
     hospital: { name: "Chinese Hospital", address: "845 Jackson St", dist: "about 0.6 mi", phone: "(415) 982-2400", url: "https://chinesehospital-sf.org" },
-    transit:
-      "The F-Market & Wharves historic streetcar runs the length of the neighborhood on the Embarcadero, with stops from Washington St up to Sansome St on its way to Fisherman's Wharf. The 1 California and the 12 stop a block south on Clay St, and the 12 also runs on Sansome St and Broadway just to the west. Embarcadero BART and Muni Metro station and the Ferry Building's ferry terminal are just to the south.",
+    transit: "The F-Market & Wharves historic streetcar runs the length of the neighborhood on the Embarcadero, with stops from Washington St up to Sansome St on its way to Fisherman's Wharf. The 1 California and the 12 stop a block south on Clay St, and the 12 also runs on Sansome St and Broadway just to the west. Embarcadero BART and Muni Metro station and the Ferry Building's ferry terminal are just to the south.",
   },
 };
 
