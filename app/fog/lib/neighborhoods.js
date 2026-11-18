@@ -8370,17 +8370,68 @@ export const NEIGHBORHOODS = {
     transit: "Bayshore Caltrain station (400 Tunnel Ave) is adjacent. Muni buses 9-San Bruno, 8-Bayshore and 56-Rutland serve the area, with the T-Third Muni Metro line nearby in Visitacion Valley.",
   },
 
+  // sources: https://www.foundsf.org/index.php?title=Cemeteries_at_foot_of_Lone_Mountain https://www.foundsf.org/index.php?title=Old_Cemeteries_in_the_City https://www.foundsf.org/index.php?title=LONE_MOUNTAIN https://www.opensfhistory.org/osfhcrucible/2018/04/01/calvary-cemetery-a-closer-look/ https://www.kqed.org/arts/13917340/hidden-old-tombstones-guide-san-francisco-history https://www.usfca.edu/who-we-are/san-franciscos-university/our-history https://sfplanninggis.org/docs/landmarks_and_districts/LM209.pdf https://www.ktvu.com/news/preserved-child-found-in-glass-coffin-under-sf-home-to-be-buried-under-her-real-name
   "Lone Mountain": {
-    spirit: "A quiet hilltop crown above the city's north-central neighborhoods, where steep streets of Edwardian flats climb toward the University of San Francisco's dramatic Gothic campus and the views open up in every direction.",
-    reasons: ["Among the city's best skyline and Golden Gate views", "Calm streets of historic Edwardian homes", "Steps from USF's landmark hilltop campus", "Walkable to Clement Street and Divisadero"],
-    history: "Lone Mountain takes its name from a prominent hill that, beginning in the 1850s, anchored a cluster of grand Victorian-era cemeteries — Laurel Hill (1854), Calvary (1860), and the Masonic and Odd Fellows grounds. After the city banned burials, the dead were removed to Colma and the land was redeveloped through the early 1940s. The Religious of the Sacred Heart built a Spanish-Gothic main building atop the hill in 1932 for the San Francisco College for Women, reached by a grand garden staircase. The college went co-ed as Lone Mountain College in 1969 and was acquired by the University of San Francisco in 1978, which still operates it as the Lone Mountain campus next to St. Ignatius Church.",
-    facts: [
-      { icon: "church", title: "Cemetery hill", text: "The neighborhood sits atop the former Laurel Hill, Calvary, Masonic, and Odd Fellows cemeteries; burials were relocated to Colma by the early 1940s." },
-      { icon: "book", title: "College for women", text: "The 1932 Spanish-Gothic building atop the hill housed the San Francisco College for Women until it became co-ed Lone Mountain College in 1969." },
-      { icon: "tower", title: "USF's hilltop campus", text: "The University of San Francisco acquired the site in 1978 and runs it today as its Lone Mountain campus." },
-      { icon: "stairs", title: "The grand staircase", text: "A garden stairway nicknamed the Spanish Steps climbs the hillside to the landmark Gothic main building." },
-      { icon: "bridge", title: "Big views", text: "The hilltop offers panoramic vistas across the city, out to the Golden Gate Bridge and the ocean." },
+    spirit:
+      "A hill once ringed by cemeteries, now crowned by a 1932 Spanish Gothic campus building, with a domed 1898 columbarium on its north side and a twin-towered 1914 church at its foot on Fulton Street.",
+    reasons: [
+      "Hilltop university campus",
+      "An 1898 domed columbarium, a city landmark",
+      "Rossi Playground on Arguello",
+      "Twin-towered 1914 church",
     ],
+    history:
+      "From the 1850s, San Francisco buried its dead around the base of Lone Mountain, then well beyond the built city. Laurel Hill Cemetery was dedicated in 1854, Calvary Cemetery followed in 1860, and the Masonic and Odd Fellows cemeteries opened in the 1860s; Masonic Avenue takes its name from the Masonic Cemetery. This neighborhood covers the Masonic grounds, where the University of San Francisco stands, and part of the Odd Fellows grounds to the west, which reached from Geary Boulevard most of the way to Golden Gate Park.\n\nAs the Richmond District grew, the cemeteries stood in the way. In 1900 Mayor James D. Phelan signed an order banning burials in the city after August 1, 1901, and after years of fights between removal campaigners and groups defending the cemeteries, the bodies were moved to Colma. The Masonic and Odd Fellows cemeteries went first, in the 1920s and 1930s: the Jesuits bought Masonic Cemetery land, a subdivision called Franciscan Heights went up on Odd Fellows land, and some 26,000 Odd Fellows burials were moved to Greenlawn Memorial Park in Colma. Not every grave was moved: in 2016 a remodel uncovered a child's coffin left behind under a house on the old Odd Fellows land.\n\nAfter the 1906 fire destroyed St. Ignatius Church at Hayes and Van Ness, the Jesuits built a new church on former Masonic Cemetery land at Fulton and Parker, completed in 1914; their college moved beside it by 1927 and was renamed the University of San Francisco in 1930. The last wooden crosses came down from the top of Lone Mountain in 1930, and in 1932 construction began on the Spanish Gothic building of the San Francisco College for Women. USF bought the Lone Mountain property in 1978.",
+    facts: [
+      {
+        icon: "church",
+        title: "All that's left of a cemetery",
+        text:
+          "The copper-domed, Neo-Classical Columbarium, designed by architect Bernard J.S. Cahill and completed in 1898, was the centerpiece of the Odd Fellows Cemetery. When the cemetery was cleared it was the only structure left standing, and it is now one of the few places in the city where remains are still kept. The Board of Supervisors made it city Landmark No. 209.",
+        place: "Odd Fellows Columbarium",
+        where: "1 Loraine Ct, off Anza St",
+        at: [-122.45708, 37.78065],
+        source: "https://sfplanninggis.org/docs/landmarks_and_districts/LM209.pdf",
+      },
+      {
+        icon: "park",
+        title: "A playground on a graveyard",
+        text:
+          "Workers cleared this part of the Odd Fellows Cemetery for Rossi Playground in December 1933, after its 26,000 burials were moved to Greenlawn Memorial Park in Colma. Unclaimed Odd Fellows headstones were reused in the sea wall at Aquatic Park. The move was not complete: in May 2016 a contractor remodeling a nearby house dug up a child's coffin, later identified as Edith Howard Cook, who died in 1876.",
+        place: "Rossi Playground",
+        where: "Arguello Blvd & Anza St",
+        at: [-122.45824, 37.77836],
+        source: "https://www.kqed.org/arts/13917340/hidden-old-tombstones-guide-san-francisco-history",
+      },
+      {
+        icon: "stairs",
+        title: "Lone Mountain's Spanish Steps",
+        text:
+          "The last wooden crosses on top of Lone Mountain were torn down in 1930, and in 1932 construction began on the Spanish Gothic building of the San Francisco College for Women. A garden stairway called the “Spanish Steps,” after those in Rome, marks its entrance on Turk Street. The University of San Francisco bought the property in 1978.",
+        place: "Lone Mountain campus",
+        where: "2800 Turk Blvd",
+        at: [-122.45192, 37.7791],
+        source: "https://www.foundsf.org/index.php?title=LONE_MOUNTAIN",
+      },
+      {
+        icon: "church",
+        title: "A church on the Masonic Cemetery",
+        text:
+          "After the 1906 fire destroyed St. Ignatius Church at Hayes and Van Ness, the Jesuits began a new church on former Masonic Cemetery land here. Built from 1910 to 1914, it has a steel frame, more than 250,000 bricks and 128 clerestory windows, and twin towers that could be seen by ships at sea. The 5,824-pound bell in its campanile was saved from the church on Hayes Street.",
+        place: "St. Ignatius Church",
+        where: "Fulton St & Parker Ave",
+        at: [-122.45248, 37.77547],
+        source: "https://www.foundsf.org/index.php?title=LONE_MOUNTAIN",
+      },
+    ],
+    walk: {
+      intro:
+        "A one-way walk through the old cemetery ground: from the Columbarium on Loraine Court to Rossi Playground on Arguello, east along Turk Street to the foot of Lone Mountain's garden stairway, and down to St. Ignatius Church on Fulton Street. The neighborhood is mostly houses and campus, with no shopping street of its own.",
+      miles: 0.9,
+      minutes: 30,
+      tip:
+        "The Columbarium is a working columbarium; check its visiting hours before you go.",
+    },
     nearby: ["Inner Richmond", "NoPa", "Laurel Heights"],
     restaurants: [
       { name: "Chapeau!", address: "126 Clement St", phone: "(415) 750-9787", url: "https://www.chapeausf.com" },
@@ -8393,17 +8444,68 @@ export const NEIGHBORHOODS = {
     transit: "Muni buses 31-Balboa, 33-Ashbury/18th St, 38-Geary, 43-Masonic and 5-Fulton serve the neighborhood's edges.",
   },
 
+  // sources: https://www.opensfhistory.org/osfhcrucible/2018/04/01/calvary-cemetery-a-closer-look/ https://www.foundsf.org/index.php?title=Old_Cemeteries_in_the_City https://www.foundsf.org/index.php?title=Cemeteries_at_foot_of_Lone_Mountain https://www.sfexaminer.com/national-news/tucked-away-midcentury-gem-flourishes https://sfist.com/2026/04/21/kaiser-has-plans-for-big-new-hospital-at-geary-and-divis/
   "Anza Vista": {
-    spirit: "A quiet mid-century pocket on the hill where San Francisco once buried its dead and then built its postwar future — tidy 1940s–50s homes and apartments climbing the slope between Geary and the Western Addition, with Kaiser's big medical campus and the Divisadero corridor a short walk away.",
-    reasons: ["Calm, residential, and central", "Steps from Kaiser's main SF hospital", "Easy reach to NoPa and Divisadero dining", "38-Geary puts downtown within one ride"],
-    history: "The neighborhood sits atop the former Calvary Cemetery, one of the large Catholic burying grounds near Lone Mountain. After San Francisco banned new burials in 1902, the graves here were disinterred and moved to Colma through the 1930s and 1940s. The cleared land was redeveloped in the late 1940s and 1950s into the mid-century homes and apartments that define Anza Vista today. The neighborhood and its central avenue are named for Juan Bautista de Anza, who led the 1775–1776 Spanish expedition that reached San Francisco Bay and chose the sites of the Presidio and Mission. Kaiser Permanente's San Francisco Medical Center anchors the neighborhood's northern edge along Geary Boulevard.",
-    facts: [
-      { icon: "quake", title: "Built on a former cemetery", text: "Anza Vista rose on the site of Calvary Cemetery; the graves were moved to Colma in the 1930s–40s before homes went up." },
-      { icon: "house", title: "A postwar neighborhood", text: "Most of the homes and apartments date to a late-1940s and 1950s building boom on the cleared cemetery land." },
-      { icon: "flag", title: "Named for an explorer", text: "Anza Vista honors Juan Bautista de Anza, who led 240-plus colonists overland to San Francisco Bay in 1775–1776." },
-      { icon: "pin", title: "Kaiser's SF home base", text: "Kaiser Permanente's San Francisco Medical Center sits right along Geary Boulevard at the neighborhood's edge." },
-      { icon: "shopping", title: "City Center retail", text: "The Target-anchored City Center shopping center stands at Geary and Masonic in the neighborhood's northwest corner." },
+    spirit:
+      "A hillside of postwar houses and apartments between Geary, Masonic, Turk and Divisadero, built in the early 1950s on the cleared ground of Calvary Cemetery.",
+    reasons: [
+      "Midcentury houses, no Victorians",
+      "Hillside streets with views east",
+      "Shopping center at Geary & Masonic",
+      "Kaiser's 1954 hospital on Geary",
     ],
+    history:
+      "This hillside was Calvary Cemetery, the city's Roman Catholic burial ground. The archdiocese bought the land on August 16, 1860, when Divisadero Street was the western edge of San Francisco, and it was one of four large cemeteries around Lone Mountain. From 1864 a horse-car line carried visitors up Bush Street to Cemetery Avenue, now Presidio Avenue, where travelers paid a toll to drive the Point Lobos Road, today's Geary Boulevard, out to Ocean Beach. The cemetery's first gate was at that corner, until saloons there led the archbishop to open a new entrance on the east side, at Ellis Street.\n\nThe city banned new burials in 1901, and Richmond District groups, real-estate interests and city leaders pushed to remove the cemeteries altogether. The archdiocese dropped its opposition to moving Calvary in 1937, the supervisors ordered the removal that year and voters upheld it, and exhumations ran from 1939 into the 1940s. The remains went to Holy Cross Cemetery in Colma, though not always their headstones.\n\nIn the early 1950s the cleared land was built up as Anza Vista, with houses and apartments on the slope and a large Sears department store at Geary and Masonic, now a shopping center. Kaiser Permanente built its hospital on Geary in 1954. Because the neighborhood rose all at once after the war, it has no Victorian or Edwardian houses.",
+    facts: [
+      {
+        icon: "pin",
+        title: "Kaiser's 1954 hospital",
+        text:
+          "Kaiser Permanente's San Francisco hospital was built here on Geary in 1954, on part of the former Calvary Cemetery. In April 2026 Kaiser unveiled plans for a 14-story, 300-bed hospital across Geary at Divisadero, on a corner that was once a gas station and later a community garden; the 1954 building would become medical offices.",
+        place: "Kaiser Permanente San Francisco Medical Center",
+        where: "2425 Geary Blvd",
+        at: [-122.44066, 37.7827],
+        source: "https://sfist.com/2026/04/21/kaiser-has-plans-for-big-new-hospital-at-geary-and-divis/",
+      },
+      {
+        icon: "house",
+        title: "No Victorians here",
+        text:
+          "Anza Vista has no Victorian or Edwardian houses: until the 1940s this slope was Calvary Cemetery. Its houses are midcentury, and some look east across the city to Twin Peaks.",
+        place: "Anzavista Avenue",
+        where: "100 block of Anzavista Ave",
+        at: [-122.44493, 37.77934],
+        source: "https://www.sfexaminer.com/national-news/tucked-away-midcentury-gem-flourishes",
+      },
+      {
+        icon: "road",
+        title: "The cemetery's gate on the toll road",
+        text:
+          "Calvary Cemetery's first entrance was at this corner, where the horse cars up Bush Street ended at Cemetery Avenue (now Presidio Avenue) and travelers paid a toll to drive the Point Lobos Road, today's Geary, out to Ocean Beach. From 1880 cable cars of the Geary Street Park & Ocean Railroad ran here, where riders bound for Golden Gate Park changed to a small steam train.",
+        place: "Geary & Masonic",
+        where: "Geary Blvd & Masonic Ave",
+        at: [-122.4472, 37.78225],
+        source: "https://www.opensfhistory.org/osfhcrucible/2018/04/01/calvary-cemetery-a-closer-look/",
+      },
+      {
+        icon: "shopping",
+        title: "Headstones under the parking lot",
+        text:
+          "The shopping complex on Geary between Masonic and Lyon began in the early 1950s as a large Sears department store, built on the cleared cemetery. Today it holds a large chain store and smaller shops and quick-food places. In March 2018, excavation in one of its parking lots turned up dozens of grave markers; the bodies had been moved to Colma, but some of their headstones had not, and Holy Cross Cemetery agreed to take them.",
+        place: "Shopping center at Geary & Masonic",
+        where: "2675 Geary Blvd at Masonic Ave",
+        at: [-122.44587, 37.78184],
+        source: "https://www.opensfhistory.org/osfhcrucible/2018/04/01/calvary-cemetery-a-closer-look/",
+      },
+    ],
+    walk: {
+      intro:
+        "A one-way walk from Kaiser's hospital on Geary up through the hillside streets of Anza Vista to Geary and Masonic, where Calvary Cemetery's first gate stood, ending at the shopping center built on the cemetery's northwest corner. Allow about 25 minutes.",
+      miles: 0.8,
+      minutes: 25,
+      tip:
+        "To see more of the old cemetery country, continue west across Masonic to the Odd Fellows Columbarium on Loraine Court, off Anza Street, the one structure left from the Odd Fellows Cemetery.",
+    },
     nearby: ["NoPa", "Laurel Heights", "Western Addition"],
     restaurants: [
       { name: "Nopa", address: "560 Divisadero St", phone: "(415) 864-8643", url: "https://nopasf.com" },
@@ -8545,17 +8647,78 @@ export const NEIGHBORHOODS = {
     transit: "Powell St and Montgomery St stations (BART and Muni Metro) sit two blocks north; the Yerba Buena/Moscone Station serves the Muni Metro T Third line. The F-Market streetcar runs along Market Street, with many bus lines nearby.",
   },
 
+  // sources: https://noehill.com/SF/LANDMARKS/poi_presidio_terrace.asp https://www.kqed.org/news/11610533/wealthy-san-francisco-neighborhood-fails-to-pay-taxes-loses-private-street https://abc7news.com/post/battle-for-ownership-of-san-franciscos-presidio-terrace-ends-as-sale-rescinded/2709254/ https://en.wikipedia.org/wiki/Presidio_Terrace https://noehill.com/sf/landmarks/sf083.asp https://noehill.com/SF/LANDMARKS/poi_temple_emanu_el.asp https://presidio.gov/about/press/presidios-historic-arguello-gate-gets-facelift https://www.nps.gov/places/000/mountain-lake-park.htm https://jweekly.com/2023/06/07/dedicated-to-the-cause-of-judaism-years-after-devastating-1906-quake-emanu-el-rose-again/
   "Presidio Terrace": {
-    spirit: "San Francisco's hidden oval of grandeur — a single private street where about three dozen century-old mansions sit behind a gate just south of the Presidio.",
-    reasons: ["One of SF's first private residence parks (1905)", "Gated, privately owned single oval street", "Steps from the Presidio and Clement Street", "Quiet, leafy, and storied"],
-    history: "Presidio Terrace was laid out beginning in 1905 by the real-estate firm Baldwin & Howell as one of San Francisco's first private 'residence parks,' built just south of the Presidio. About 35 to 36 grand mansions, in Beaux-Arts, Mission Revival and Tudor Revival styles, line a single privately owned oval street entered through a gate off Arguello Boulevard. It was historically and explicitly exclusionary: a 1906 brochure boasted it was a place where 'only Caucasians' could buy, a racial covenant of the sort the U.S. Supreme Court struck down in 1948. In 2015 a San Jose couple bought the private street and its common areas at a city tax auction for about $90,000 after the homeowners' association failed to pay roughly $14-a-year property taxes for decades; in November 2017 the Board of Supervisors voted to reverse the sale and return the street to the homeowners. Notable residents have included Senator Dianne Feinstein and former House Speaker Nancy Pelosi.",
-    facts: [
-      { icon: "house", title: "One private oval", text: "About 35 mansions ring a single privately owned oval street, entered through a gate off Arguello Boulevard." },
-      { icon: "money", title: "The $90,000 street", text: "In 2015 a couple bought the private street at a city tax auction for about $90,000 after the HOA missed roughly $14-a-year taxes for decades." },
-      { icon: "mayor", title: "Sale reversed", text: "In November 2017 the Board of Supervisors voted 7-4 to reverse the sale and return the street to the homeowners." },
-      { icon: "star", title: "Notable residents", text: "Past residents include Senator Dianne Feinstein and former House Speaker Nancy Pelosi." },
-      { icon: "flag", title: "An early residence park", text: "Begun in 1905 by Baldwin & Howell, it was among San Francisco's first private 'residence parks,' with underground utilities and electric street lights." },
+    spirit:
+      "One private oval street of early-1900s houses behind a gate on Arguello Boulevard, with the Presidio wall to the north and Lake Street running west to Mountain Lake Park.",
+    reasons: [
+      "Begun in 1905 as a residence park",
+      "Houses by noted early-1900s architects",
+      "A 1926 temple and a landmark 1905 church",
+      "Presidio and Mountain Lake Park at the edge",
     ],
+    history:
+      "Presidio Terrace was laid out beginning in 1905 by the real-estate firm Baldwin & Howell, just south of the Presidio. It was the first master-planned community built in the western part of San Francisco: thirty-six large lots on a single, circular street, with electric street lights, underground utilities and roads designed for automobile traffic, all unusual for a residential development of the time. Most of the houses went up after the 1906 earthquake and fire, as owners rebuilt outside the destroyed eastern neighborhoods, and they were designed by leading local architects of the day, among them George Applegarth, Albert Farr, Louis Hobart, Bliss & Faville and Julia Morgan.\n\nThe tract was sold as a whites-only enclave. A 1906 advertisement for it read: “There is only one spot in San Francisco where only Caucasians are permitted to buy or lease real estate.” Racial covenants there barred nonwhite ownership until 1948, the year the U.S. Supreme Court ruled in Shelley v. Kraemer that such covenants could not be enforced.\n\nThe street and its common areas have belonged to the homeowners' association for more than a century. After the association left a property-tax bill of less than $14 a year unpaid, the city auctioned the street, and in 2015 a San Jose couple bought it for about $90,000. On November 28, 2017, the Board of Supervisors voted 7–4 to rescind the sale and return the street to the association.",
+    facts: [
+      {
+        icon: "flag",
+        title: "The Army's Arguello Gate",
+        text:
+          "Where Arguello Boulevard enters the Presidio, the U.S. Army built the Arguello Gate in 1896. Unlike the post's other gates, each of its sandstone piers carries a different emblem facing south. The Presidio Trust restored the piers in 2008 for about $100,000, reshaping the worn carvings from old photographs and resetting a capstone a truck had knocked off in 1996.",
+        place: "Arguello Gate",
+        where: "Arguello Blvd at the Presidio wall",
+        at: [-122.4595, 37.7894],
+        source: "https://presidio.gov/about/press/presidios-historic-arguello-gate-gets-facelift",
+      },
+      {
+        icon: "house",
+        title: "A residence park, and its covenant",
+        text:
+          "The gate here opens onto Presidio Terrace's private oval, begun in 1905 with thirty-six large lots, underground utilities and electric street lights. Its houses are by architects including George Applegarth, Albert Farr, Louis Hobart and Julia Morgan (No. 36). A 1906 advertisement sold it as the one spot in the city where “only Caucasians” could buy or lease, and covenants kept nonwhite buyers out until 1948. The street is private and its houses are homes; look from the gate.",
+        place: "Presidio Terrace gate",
+        where: "Presidio Terrace at Arguello Blvd",
+        at: [-122.45947, 37.7883],
+        source: "https://noehill.com/SF/LANDMARKS/poi_presidio_terrace.asp",
+      },
+      {
+        icon: "church",
+        title: "A domed temple on Lake Street",
+        text:
+          "Congregation Emanu-El's Sutter Street temple was destroyed in the 1906 earthquake and fire, and the congregation rebuilt here. Its Byzantine temple, influenced by Istanbul's Hagia Sophia, was designed by Bakewell & Brown with Bernard Maybeck and Gustav Albert Lansburgh and dedicated in 1926; Arthur Brown Jr., of the firm, also designed City Hall.",
+        place: "Temple Emanu-El",
+        where: "2 Lake St at Arguello Blvd",
+        at: [-122.45971, 37.78741],
+        source: "https://noehill.com/SF/LANDMARKS/poi_temple_emanu_el.asp",
+      },
+      {
+        icon: "church",
+        title: "First service, three days before the quake",
+        text:
+          "St. John's Presbyterian Church, a shingle-style church by architects George Dodge and J. Walter Dolliver, was built in 1905. Its first service was held on Easter Sunday, April 15, 1906; three days later the earthquake brought its chimney down into the rear of the building, damaging furniture and the organ. It is city Landmark No. 83 and on the National Register.",
+        place: "St. John's Presbyterian Church",
+        where: "25 Lake St at Arguello Blvd",
+        at: [-122.45969, 37.7867],
+        source: "https://noehill.com/sf/landmarks/sf083.asp",
+      },
+      {
+        icon: "park",
+        title: "Anza's 1776 campsite",
+        text:
+          "Walk west on Lake Street to Mountain Lake Park, a city park along the Presidio's edge. Mountain Lake, at its north end inside the Presidio, was campsite #95 for Juan Bautista de Anza's colonizing expedition, which reached it in March 1776.",
+        place: "Mountain Lake Park",
+        where: "Lake St & 8th Ave",
+        at: [-122.468, 37.787],
+        source: "https://www.nps.gov/places/000/mountain-lake-park.htm",
+      },
+    ],
+    walk: {
+      intro:
+        "A short line walk that starts at the Presidio's Arguello Gate, passes the gate of the private Presidio Terrace oval and Temple Emanu-El and St. John's Presbyterian Church at Arguello and Lake, then follows Lake Street west to Mountain Lake Park. Presidio Terrace's street is private, so the tour views it from the gate on Arguello. The neighborhood has no shopping street of its own.",
+      miles: 0.7,
+      minutes: 20,
+      tip:
+        "From Mountain Lake Park you can continue north into the Presidio to walk around Mountain Lake itself.",
+    },
     nearby: ["Inner Richmond", "Laurel Heights", "Presidio Heights"],
     restaurants: [
       { name: "Spruce", address: "3640 Sacramento St", phone: "(415) 931-5100", url: "https://www.sprucesf.com" },
@@ -9032,43 +9195,88 @@ export const NEIGHBORHOODS = {
     transit:
       "Buses do the climbing: the 24 Divisadero runs along Castro St, the 33 Ashbury–18th along 18th St, the 35 Eureka along Eureka St and the 37 Corbett along Corbett Ave. Castro Station (Muni Metro K, L and M) and the historic F-Market streetcar are just downhill at Market & Castro.",
   },
+  // sources: https://www.foundsf.org/index.php?title=AND_THEY_CALLED_IT_%22COW_HOLLOW%22 https://www.foundsf.org/index.php?title=WASHERWOMAN%27S_LAGOON https://www.sanfranciscostory.com/living-off-the-grid/ https://en.wikipedia.org/wiki/McElroy_Octagon_House https://noehill.com/sf/landmarks/sf017.asp https://noehill.com/sf/landmarks/sf261.asp https://noehill.com/sf/landmarks/sf049.asp https://sfvedanta.org/?p=5018 https://gocodebook.com/library/us/ca/san-francisco-planning/article-7-neighborhood-commercial-districts/sec.-725.-union-street-neighborhood-commercial-district
   "Union Street": {
     spirit:
-      "Frequently combined with the neighborhood Cow Hollow, eight sunny blocks of Victorian storefronts from Van Ness to Steiner — boutiques, brunch patios, and a Fillmore Street bar corner, on what was once dairy pasture.",
+      "The shopping blocks of Union Street from Van Ness to Steiner, in the old Cow Hollow dairy valley, with an 1861 octagon house at one end and an 1879 Victorian music-room mansion near the other.",
     reasons: [
-      "Union St boutiques & brunch",
-      "Lively bar scene",
-      "Sunny & walkable",
-      "Condos & classic flats",
+      "Shops along Union, Van Ness to Steiner",
+      "1861 Octagon House museum",
+      "Landmark 1924 movie theater building",
+      "1905 Vedanta temple on Webster",
     ],
     history:
-      "Named for the shopping street at its heart, this is the eastern end of greater Cow Hollow — the marshy valley where dozens of dairies supplied the young city's milk in the mid-1800s. Here lay Washerwoman's Lagoon, the freshwater pond where Gold Rush–era laundries washed the city's clothes, until dairies and tanneries fouled it; late in the century the dairies were pushed out and the pond was filled. Victorian and Edwardian homes and storefronts rose on the new lots, and in the 1950s–60s Union Street's blocks between Van Ness and Steiner became a boutique-and-dining strip.",
+      "Before the name Cow Hollow stuck, this valley was called Spring Valley. In 1861 George Hatman bought the block bounded by Union, Filbert, Franklin and Gough streets for $500 and started one of its first dairies; by the early 1870s at least 30 dairies stood between Van Ness Avenue and the Presidio. Below them, in a hollow centered on today's Gough Street between Greenwich and Chestnut, lay Washerwoman's Lagoon. Gold Rush laundries set up beside it, and people carted their washing out to scrub it by hand on the shore, but laundries, tanneries and slaughterhouses fouled the water, and the lagoon was filled in during the late 1800s. In the 1880s the Board of Health moved the dairies to other parts of the city.\n\nHouses rose on the old pasture. William McElroy, a wood miller, built his eight-sided house on Gough Street in 1861, and in 1879 Leander Sherman, founder of a piano store, built a house on Green Street with a three-story music room. In 1905 the Vedanta Society began a temple at Webster and Filbert, and in 1924 a movie theater opened on Union Street.\n\nToday the city's planning code defines the Union Street commercial district as Union Street between Van Ness Avenue and Steiner, with an arm north on Fillmore to Lombard. It describes eating and drinking places and specialty shops that draw customers from a wide area, as well as offices, and its controls require a conditional-use permit for any additional bars and limit new entertainment and financial-service uses.",
     facts: [
       {
-        icon: "house",
-        title: "An eight-sided survivor",
+        icon: "water",
+        title: "Where Washerwoman's Lagoon lay",
         text:
-          "The Octagon House on Gough St at Union dates to 1861, when eight-sided homes were a national fad. One of only two left in the city, it is now a small museum run by the National Society of the Colonial Dames of America.",
+          "Washerwoman's Lagoon filled a hollow centered on Gough Street between Greenwich and Chestnut, fed by a spring up the hill near Pacific Avenue and Larkin Street. In Gold Rush San Francisco, when laundry was so scarce that some shipped their shirts to Hawaii or China, laundries opened beside it and people brought their washing by wheelbarrow. Tanneries and slaughterhouses followed, and the polluted lagoon was filled in during the late 1800s.",
+        place: "Site of Washerwoman's Lagoon",
+        where: "Gough St & Greenwich St",
+        at: [-122.4277, 37.79998],
+        source: "https://www.sanfranciscostory.com/living-off-the-grid/",
+      },
+      {
+        icon: "house",
+        title: "An eight-sided house, moved across the street",
+        text:
+          "Wood miller William McElroy and his wife Harriet built this octagonal house across the street between 1860 and 1861. It was badly damaged in 1906 and stood vacant and neglected in 1951, when the National Society of the Colonial Dames of America bought it, moved it to this side of Gough and restored it; it opened as a museum by 1953. It is city Landmark No. 17 and on the National Register.",
+        place: "McElroy Octagon House",
+        where: "2645 Gough St at Union St",
+        at: [-122.4274, 37.79775],
+        source: "https://en.wikipedia.org/wiki/McElroy_Octagon_House",
+      },
+      {
+        icon: "shop",
+        title: "Union Street's shops",
+        text:
+          "The planning code's Union Street district runs from Van Ness to Steiner, with an arm up Fillmore to Lombard. It describes restaurants, bars and specialty shops that draw customers from a wide area, clothing and antique stores and galleries busy on weekends, and professional and real-estate offices upstairs. To protect the remaining convenience businesses, new bars need a conditional-use permit and new entertainment and financial-service uses are limited.",
+        place: "Union Street shops",
+        where: "Union St & Buchanan St",
+        at: [-122.43206, 37.79761],
+        source: "https://gocodebook.com/library/us/ca/san-francisco-planning/article-7-neighborhood-commercial-districts/sec.-725.-union-street-neighborhood-commercial-district",
+      },
+      {
+        icon: "movie",
+        title: "A landmark movie house",
+        text:
+          "The Reid Brothers designed this 1924 theater in the Spanish Colonial Revival style with tiered seating, and the city calls it the only remaining San Francisco movie theater with its original tiered layout. A 1941 remodel gave it an Art Deco front and side-wall murals by the Heinsbergen Decorating Company. The first San Francisco International Film Festival opened here on December 4, 1957. The Metro closed as a theater in 2006 and became city Landmark No. 261 in 2009.",
+        place: "Metro Theatre",
+        where: "2055 Union St",
+        at: [-122.43309, 37.79734],
+        source: "https://noehill.com/sf/landmarks/sf261.asp",
       },
       {
         icon: "church",
-        title: "A temple of many towers",
+        title: "Towers for the harmony of religions",
         text:
-          "The Vedanta Society's Old Temple at Webster and Filbert, built in 1905, is often called the first Hindu temple in the Western world. Its rooftop mixes domes and towers from several traditions — a nod to the Vedanta teaching that all religions lead to the same truth.",
+          "Swami Trigunatitananda designed the Vedanta Society's Old Temple with architect Joseph A. Leonard. Its first two stories were built in 1905, and a third floor and towers were added in 1908: a crenelated European castle tower, a Bengal-style bulb dome, an octagonal dome modeled on the Shiva temples at Dakshineswar and a Taj Mahal-style dome, meant to symbolize the harmony of all religions.",
+        place: "Vedanta Society Old Temple",
+        where: "2963 Webster St at Filbert St",
+        at: [-122.43404, 37.79786],
+        source: "https://sfvedanta.org/?p=5018",
       },
       {
-        icon: "shopping",
-        title: "An early boutique row",
+        icon: "music",
+        title: "Paderewski played the music room",
         text:
-          "In the 1950s–60s, shopkeepers converted Union Street's old Victorians into shops and cafés, making it one of San Francisco's first boutique shopping strips.",
-      },
-      {
-        icon: "star",
-        title: "A 1913 power saloon",
-        text:
-          "The Balboa Cafe (1913), at Fillmore and Greenwich, is one of the city's oldest saloons and a longtime see-and-be-seen hangout for San Francisco's political set.",
+          "Leander Sherman, founder of a San Francisco piano and music firm, built this house in 1879. A three-story, skylighted music and reception room fills its west wing, and performers including the pianist Paderewski and the singer Madame Schumann-Heink appeared on its platform. It is city Landmark No. 49.",
+        place: "Sherman House",
+        where: "2160 Green St",
+        at: [-122.43466, 37.7963],
+        source: "https://noehill.com/sf/landmarks/sf049.asp",
       },
     ],
+    walk: {
+      intro:
+        "A one-way walk that starts at the filled-in site of Washerwoman's Lagoon on Gough Street, passes the Octagon House, follows Union Street's shops west past the landmark Metro Theatre, turns up Webster to the Vedanta Society's Old Temple and ends at the Sherman House on Green Street.",
+      miles: 0.8,
+      minutes: 25,
+      tip:
+        "The Octagon House is a museum open to the public for tours; check its schedule before you go.",
+    },
     restaurants: [
       { name: "Flores", address: "2030 Union St", phone: "(415) 796-2926", url: "https://www.floressf.com" },
       { name: "Roaming Goat", address: "1830 Union St", phone: "(415) 769-7281", url: "https://www.roaminggoatsf.com" },
@@ -9080,29 +9288,81 @@ export const NEIGHBORHOODS = {
       { name: "Palm House", address: "2032 Union St", phone: "(415) 400-4355", url: "https://www.palmhousesf.com" },
       { name: "Bar Crenn", address: "3131 Fillmore St", phone: "(415) 440-0460", url: "https://www.barcrenn.com" },
     ],
-    hospital: {
-      name: "CPMC Van Ness Campus",
-      address: "1101 Van Ness Ave",
-      dist: "about 1.4 mi",
-      phone: "(415) 600-6000",
-      url: "https://www.sutterhealth.org/cpmc",
-    },
-    transit:
-      "The 45 Union–Stockton bus runs the length of Union Street toward downtown, with the 22 Fillmore crossing at Fillmore St, the 49 Van Ness along the eastern edge, and the 28 and 43 on Lombard St at the northern edge. There's no Muni Metro or BART nearby — it's a bus-and-walk neighborhood.",
+    hospital: { name: "CPMC Van Ness Campus", address: "1101 Van Ness Ave", dist: "about 1.4 mi", phone: "(415) 600-6000", url: "https://www.sutterhealth.org/cpmc" },
+    transit: "The 45 Union–Stockton bus runs the length of Union Street toward downtown, with the 22 Fillmore crossing at Fillmore St, the 49 Van Ness along the eastern edge, and the 28 and 43 on Lombard St at the northern edge. There's no Muni Metro or BART nearby — it's a bus-and-walk neighborhood.",
   },
+  // sources: https://www.nps.gov/people/adolphsutro.htm https://home.nps.gov/goga/learn/historyculture/vestiges-sutro-heights.htm https://home.nps.gov/goga/learn/historyculture/sutro-heights.htm https://www.nps.gov/goga/learn/historyculture/cliff-house.htm https://www.nps.gov/places/000/sutro-baths.htm https://home.nps.gov/goga/learn/historyculture/john-harris-civil-rights.htm https://www.opensfhistory.org/osfhcrucible/2018/04/01/calvary-cemetery-a-closer-look/ https://www.kqed.org/arts/13917340/hidden-old-tombstones-guide-san-francisco-history https://www.nps.gov/goga/planyourvisit/oceanbeach.htm
   "Sutro Heights": {
     spirit:
-      "Where Geary runs out of city — a fog-draped bluff of Adolph Sutro's old gardens, the Cliff House perched on the rocks below, and nothing to the west but the Pacific.",
-    reasons: ["Clifftop park at the door", "Ocean Beach starts here", "Lands End trails next door", "Quiet end-of-the-line blocks"],
-    history:
-      "Sutro Heights is named for Adolph Sutro (1830–1898), the Prussian-born engineer who made his fortune on the Sutro Tunnel, which drained the silver mines of Nevada's Comstock Lode, and who later served as mayor of San Francisco. In 1881 he bought a cottage on this windswept bluff above the Cliff House and made it his home and showpiece garden. He rebuilt the Cliff House below after the first one burned in 1894, and built the giant Sutro Baths in the cove just to the north. His family later deeded the Heights to the city; the house is long gone, but its foundations and the old parapet survive in Sutro Heights Park, now part of the Golden Gate National Recreation Area. Around the park, the western ends of Geary Boulevard and Point Lobos Avenue, Seal Rock Drive and the avenues from 42nd to 48th filled in as a quiet residential corner at the Richmond District's far western edge.",
-    facts: [
-      { icon: "park", title: "A millionaire's garden, open to all", text: "Sutro planted his clifftop estate with gardens and trees, lined its paths with dozens of statues, many of them copies of classical works, and opened it to the public. The grounds are now Sutro Heights Park, run by the National Park Service." },
-      { icon: "pin", title: "The parapet lookout", text: "The parapet from Sutro's estate still stands at the bluff's edge, looking out over Seal Rocks and the long sweep of Ocean Beach." },
-      { icon: "house", title: "Three Cliff Houses", text: "The first Cliff House went up on the rocks below the Heights in 1863. Sutro's turreted château replaced it in 1896, rode out the 1906 earthquake, then burned in 1907; the neoclassical building of 1909 still stands." },
-      { icon: "wave", title: "Where Ocean Beach begins", text: "Ocean Beach, about 3.5 miles of sand, starts at the foot of the Cliff House and runs south to Fort Funston, with the Great Highway setting off beside it from Point Lobos Avenue." },
-      { icon: "mayor", title: "The mayor who owned a twelfth of SF", text: "Sutro served as mayor from 1895 to 1897 and at one point owned roughly a twelfth of San Francisco's land, from these bluffs to the forested hill now called Mount Sutro." },
+      "The western end of Point Lobos Avenue, where Adolph Sutro's clifftop garden, now a national park, looks down on the Cliff House, Seal Rocks and the north end of Ocean Beach.",
+    reasons: [
+      "Sutro Heights Park at the door",
+      "Cliff House and Sutro Baths ruins below",
+      "North end of Ocean Beach",
+      "Part of Golden Gate National Recreation Area",
     ],
+    history:
+      "Sutro Heights is named for Adolph Sutro (1830–1898), born in Aachen, Prussia, who made his fortune in the late 1860s and 1870s with a tunnel that drained and ventilated the flooded silver mines of Nevada's Comstock Lode. In 1881 he bought more than 22 acres of undeveloped land at the city's western edge, including the bluff above the Cliff House, and by 1885 had made it a formal garden open to the public, with flower beds, forest, hedge mazes, a glass conservatory and more than 200 concrete copies of Greek and Roman statues imported from Belgium. He rebuilt the Cliff House after the first one burned in 1894, built the Sutro Baths in the cove to the north, and served as mayor from 1895 to 1897. Visitors reached this corner by the Point Lobos Road, a toll road that is now Geary Boulevard.\n\nThe Sutro family gave Sutro Heights to the city in 1920. When Sutro's daughter Emma Sutro Merritt died in 1938, the city's parks department took it over, and in 1939 the Works Progress Administration tore down the decaying residence, the main gate, the observatory and other buildings. In 1976 Sutro Heights was turned over to the Golden Gate National Recreation Area, part of the National Park Service, which acquired the Cliff House the next year.",
+    facts: [
+      {
+        icon: "park",
+        title: "The lions at the gate",
+        text:
+          "Sutro bought more than 22 acres here in 1881 and made them a public garden. Two reclining lion statues flanked the main entrance; the 25-foot gate itself was torn down in 1939, but replicas of the lions still mark the entrance. The family gave the park to the city in 1920, and in 1976 it became part of the Golden Gate National Recreation Area.",
+        place: "Sutro Heights Park entrance",
+        where: "Point Lobos Ave & 48th Ave",
+        at: [-122.5096, 37.77895],
+        source: "https://home.nps.gov/goga/learn/historyculture/vestiges-sutro-heights.htm",
+      },
+      {
+        icon: "pin",
+        title: "The Parapet",
+        text:
+          "Sutro's builders made an observation platform at the edge of the bluff, overlooking the Cliff House and Seal Rocks; its stone remains, the Parapet, still stand above the Great Highway. Most of the garden is gone: of the buildings Sutro commissioned, only a partly restored well house still stands, and only traces of the conservatory's tiled floor remain at the end of Palm Avenue. The original statues still on the grounds in 1976 went into storage and were replaced with copies.",
+        place: "The Parapet",
+        where: "Sutro Heights Park, west edge",
+        at: [-122.51218, 37.77785],
+        source: "https://home.nps.gov/goga/learn/historyculture/vestiges-sutro-heights.htm",
+      },
+      {
+        icon: "house",
+        title: "The third Cliff House",
+        text:
+          "The first Cliff House opened on the cliff above Seal Rocks in 1863 and burned on Christmas Day 1894. Sutro replaced it with an eight-story, castle-like building with turrets and spires, which burned in September 1907. The concrete, neoclassical building that opened in 1909 still stands; the National Park Service acquired it in 1977 and restored its original design in 2005.",
+        place: "Cliff House",
+        where: "1090 Point Lobos Ave",
+        at: [-122.51408, 37.77855],
+        source: "https://www.nps.gov/goga/learn/historyculture/cliff-house.htm",
+      },
+      {
+        icon: "wave",
+        title: "A civil rights case at the baths",
+        text:
+          "Just north of the Cliff House lie the concrete ruins of Sutro Baths, a three-acre bathhouse with seven pools that a fire destroyed in 1966. On July 4, 1897, the baths turned away John Harris, a Black San Franciscan who had paid the fee, while admitting his white friends. Harris sued Sutro under California's new Dibble Civil Rights Act, and a jury ruled in his favor.",
+        place: "Sutro Baths overlook",
+        where: "Point Lobos Ave above Sutro Baths",
+        at: [-122.5135, 37.7789],
+        source: "https://home.nps.gov/goga/learn/historyculture/john-harris-civil-rights.htm",
+      },
+      {
+        icon: "water",
+        title: "Headstones in the sand",
+        text:
+          "Below the Cliff House is the north end of Ocean Beach, 3.5 miles of sand along the city's western edge; the water is frigid and the currents hazardous. When Laurel Hill Cemetery was cleared in the 1930s and 1940s, its monuments were broken up and hauled here for erosion walls and as bedding for the Great Highway, and intact headstones still wash up on the shore.",
+        place: "North end of Ocean Beach",
+        where: "Great Highway at Point Lobos Ave",
+        at: [-122.5127, 37.7762],
+        source: "https://www.kqed.org/arts/13917340/hidden-old-tombstones-guide-san-francisco-history",
+      },
+    ],
+    walk: {
+      intro:
+        "A short walk that starts at the lions at Sutro Heights Park's entrance on Point Lobos Avenue, crosses Sutro's old garden to the Parapet, then drops down Point Lobos Avenue to the Cliff House, the Sutro Baths ruins and the north end of Ocean Beach. The neighborhood is residential, with no shopping street of its own.",
+      miles: 0.7,
+      minutes: 25,
+      tip:
+        "The Sutro Baths ruins sit on the beach at Lands End, just north of the Cliff House, and are part of Golden Gate National Recreation Area; you can continue there from the Cliff House.",
+    },
     nearby: ["the Outer Richmond"],
     restaurants: [
       { name: "Pacific Cafe", address: "7000 Geary Blvd", phone: "(415) 387-7091", url: "https://pacificcafesf.com" },
@@ -9115,8 +9375,7 @@ export const NEIGHBORHOODS = {
       { name: "The Blarney Stone", address: "5625 Geary Blvd", phone: "(415) 386-9914" },
     ],
     hospital: { name: "UCSF Health Stanyan Hospital (formerly St. Mary's)", address: "450 Stanyan St", dist: "about 3 mi", phone: "(415) 668-1000", url: "https://sfcommunityhospitals.ucsfhealth.org/st-marys" },
-    transit:
-      "The 38-Geary runs out to 48th Ave & Point Lobos at the park gate and, with the 38R-Geary Rapid, runs the length of Geary Blvd to downtown; the 31-Balboa runs along Balboa St at the southern edge, and the 5-Fulton and 5R-Fulton Rapid run along Fulton, two blocks south.",
+    transit: "The 38-Geary runs out to 48th Ave & Point Lobos at the park gate and, with the 38R-Geary Rapid, runs the length of Geary Blvd to downtown; the 31-Balboa runs along Balboa St at the southern edge, and the 5-Fulton and 5R-Fulton Rapid run along Fulton, two blocks south.",
   },
   "Northern Waterfront": {
     spirit:
