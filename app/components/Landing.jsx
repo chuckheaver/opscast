@@ -76,7 +76,7 @@ export default function Landing() {
   const segRows = k => [
     { label: "Median sale", now: money(m[k].median), then: money(p[k].median), chg: pct(m[k].median, p[k].median), big: true },
     { label: "Units sold", now: num(m[k].n), then: num(p[k].n), chg: pct(m[k].n, p[k].n) },
-    { label: "Total volume", now: vol(m[k].volume), then: vol(p[k].volume), chg: pct(m[k].volume, p[k].volume) },
+    { label: "Total sales volume", now: vol(m[k].volume), then: vol(p[k].volume), chg: pct(m[k].volume, p[k].volume) },
     { label: "Median $/sf", now: usd(m[k].ppsf), then: usd(p[k].ppsf), chg: pct(m[k].ppsf, p[k].ppsf) },
     { label: "DOM", now: r(m[k].dom), then: r(p[k].dom), chg: days(m[k].dom, p[k].dom) },
     // The typical sale as a percentage OF list — the actual premium, not

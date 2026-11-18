@@ -665,8 +665,7 @@ def site_kpis():
     """The home page's By the Numbers boxes, figure for figure: same file
     (app/lib/landing-stats.json), same labels and rounding as Landing.jsx, so
     the report and the site can never show different numbers. Four boxes:
-    SFH, Condo / TIC / Co-op and Other (the site's three categories), then
-    All sales."""
+    SFH, Duplex, Condo / TIC / Co-op and Other (Tri+), then All sales."""
     import os, math
     L=json.load(open(os.path.join(mg.ROOT,"app/lib/landing-stats.json")))
     m,p=L["market"]["current"],L["market"]["prior"]
@@ -674,11 +673,13 @@ def site_kpis():
     money=lambda v: f"${v/1e6:.2f}M"
     usd=lambda v: f"${rnd(v):,}" if v is not None else "—"
     pct=lambda a,b: f"{'+' if a/b-1>=0 else ''}{rnd((a/b-1)*100)}%" if a is not None and b else ""
+    vol=lambda v: f"${v/1e9:.2f}B" if v>=1e9 else f"${rnd(v/1e6):,}M"     # Landing.jsx vol()
     unit=lambda a,b,one,many: f"{'+' if a-b>=0 else ''}{rnd(a-b)} {one if abs(rnd(a)-rnd(b))==1 else many}"
     def seg(k):
         a,b=m[k],p[k]
         return [("Median sale",money(a["median"]),money(b["median"]),pct(a["median"],b["median"]),True),
                 ("Units sold",f"{a['n']:,}",f"{b['n']:,}",pct(a["n"],b["n"]),False),
+                ("Total sales volume",vol(a["volume"]),vol(b["volume"]),pct(a["volume"],b["volume"]),False),
                 ("Median $/sf",usd(a.get("ppsf")),usd(b.get("ppsf")),pct(a.get("ppsf"),b.get("ppsf")),False),
                 ("DOM",rnd(a["dom"]),rnd(b["dom"]),unit(a["dom"],b["dom"],"day","days"),False),
                 ("Sale price vs list",f"{rnd(a['saleToList'])}%",f"{rnd(b['saleToList'])}%",unit(a["saleToList"],b["saleToList"],"pt","pts"),False)]
