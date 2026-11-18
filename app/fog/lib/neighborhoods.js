@@ -8519,16 +8519,98 @@ export const NEIGHBORHOODS = {
     transit: "Served by the 38-Geary and 38R-Geary Rapid along the north edge, plus the 31-Balboa, 43-Masonic, and 24-Divisadero buses.",
   },
 
+  // sources: https://sfocii.org/node/123 https://www.foundsf.org/index.php?title=Redevelopment_A-1_and_Origin_of_St._Francis_Square https://en.wikipedia.org/wiki/Cathedral_of_Saint_Mary_of_the_Assumption_(San_Francisco) https://sfmuseum.org/hist10/06timeline.html https://noehill.com/sf/landmarks/sf041.asp https://noehill.com/sf/landmarks/sf112.asp https://en.wikipedia.org/wiki/List_of_San_Francisco_Designated_Landmarks
   "Cathedral Hill": {
-    spirit: "A mid-rise corridor of apartment towers and big institutions strung along Van Ness and Geary, anchored by the soaring white sails of St. Mary's Cathedral — north-central San Francisco at its most modern and practical, tucked between Japantown, Pacific Heights, and Polk Gulch.",
-    reasons: ["Transit-rich, with Van Ness BRT and 38-Geary at the door", "Major hospital care right in the neighborhood", "Walkable to Japantown and Polk Street", "Striking modern architecture and apartment living"],
-    history: "The district takes its name from the Cathedral of Saint Mary of the Assumption, dedicated in 1971 at Gough and Geary, designed by Pietro Belluschi and engineer Pier Luigi Nervi with local architects John Michael Lee, Paul A. Ryan, and Angus McSweeney. Its hyperbolic-paraboloid roof rises 190 feet and reads as a great white cupola over the corridor, earning the nickname the 'washing-machine' cathedral. Through the mid-20th century the Van Ness and Geary corridor filled with apartment buildings and hotels, including the modernist Jack Tar Hotel of 1960, later the Cathedral Hill Hotel, which occupied the full block at Geary and Van Ness until it closed in 2009 and was demolished in 2013. On that site, California Pacific Medical Center opened its new Van Ness Campus hospital in 2019, and the long-awaited Van Ness Bus Rapid Transit busway opened in 2022.",
-    facts: [
-      { icon: "church", title: "The 'washing-machine' cathedral", text: "St. Mary's Cathedral (1971), at 1111 Gough St, rises 190 feet under a roof of eight hyperbolic-paraboloid segments, topped by a 55-foot golden cross." },
-      { icon: "house", title: "CPMC Van Ness, opened 2019", text: "California Pacific Medical Center's Van Ness Campus hospital opened in 2019 on the block once occupied by the old Jack Tar / Cathedral Hill Hotel." },
-      { icon: "tram", title: "Van Ness Bus Rapid Transit", text: "The Van Ness BRT busway opened in 2022, giving the 49 and 47 lines dedicated center-running lanes down the avenue." },
-      { icon: "star", title: "A hofbrau since 1947", text: "Tommy's Joynt, the corner carvery at Geary and Van Ness, has been slicing pastrami and turkey at 1101 Geary Blvd since 1947." },
+    spirit:
+      "Churches from the 1880s and 1890s, a few surviving Italianate houses and the 1971 St. Mary's Cathedral on the blocks west of Van Ness Avenue, renamed during the Western Addition's redevelopment.",
+    reasons: [
+      "St. Mary's Cathedral, consecrated 1971",
+      "Six city landmarks within a few blocks",
+      "Van Ness Avenue's center-running busway",
+      "1880 Italianate houses on Eddy Street",
     ],
+    history:
+      "In April 1906 the fire that followed the earthquake reached Van Ness Avenue, and the army dynamited the mansions along it to make a firebreak. Blocks just west of the avenue survived: St. Mark's Lutheran Church, a block away, was saved by the dynamiting, and Italianate row houses from the 1880s still lined streets such as Eddy. Archbishop Patrick Riordan had built the first St. Mary's Cathedral at Van Ness and O'Farrell, dedicated in 1891.\n\nThe neighborhood's present name came out of redevelopment. The Western Addition A-1 project, established in 1956, began clearing the area between Franklin Street and St. Joseph's Avenue, from Post Street to Eddy Street; residents and businesses were removed by eminent domain, Geary Street was widened into an expressway, and the cleared land sat empty for years. By its completion in 1973 the project had relocated 1,350 households and 358 businesses. The first rebuilding plans called for high-rise apartment towers on what the plans newly called “Cathedral Hill,” crowned by a new St. Mary's Cathedral. The old cathedral on Van Ness burned on September 7, 1962, and the new one, designed by Pietro Belluschi and Pier Luigi Nervi with San Francisco architects John Michael Lee, Paul A. Ryan and Angus McSweeney, was consecrated on May 5, 1971.\n\nAt the Geary corner of Van Ness, residents of the Goodman Building, a residential hotel and artists' home, spent about ten years fighting the Redevelopment Agency's plan to demolish it after the agency bought it in 1973. On Van Ness itself, a bus rapid transit busway opened on April 1, 2022, with center-running bus lanes from Mission Street to Lombard Street.",
+    facts: [
+      {
+        icon: "road",
+        title: "The 1906 firebreak, now a busway",
+        text:
+          "In April 1906 the army dynamited mansions along Van Ness Avenue to stop the fire at this street. Today center-running transit lanes and boarding islands run down the middle of the avenue between Mission and Lombard Streets; the busway opened on April 1, 2022, after utility replacement that began in 2016.",
+        place: "Van Ness Avenue at Geary",
+        where: "Van Ness Ave & Geary Blvd (west side)",
+        at: [-122.4215, 37.7856],
+        source: "https://www.sfmta.com/media/41987/download",
+      },
+      {
+        icon: "house",
+        title: "The artists who fought redevelopment",
+        text:
+          "This nineteenth-century building was remodeled by Abraham and Sarah Goodman around 1900 and enlarged into a residential hotel after 1906. In the 1960s and early 1970s it housed an artists' community, the Goodman Group. The Redevelopment Agency bought it in 1973 to demolish it; residents led by Martha Senger fought for about ten years, and 25 were evicted in 1983. It was named City Landmark No. 71 and a California Historical Landmark, and listed on the National Register, in 1975, for its value as an artists' community.",
+        place: "Goodman Building (City Landmark No. 71)",
+        where: "1117 Geary Blvd",
+        at: [-122.42176, 37.78558],
+        source: "https://en.wikipedia.org/wiki/Goodman_Building_(San_Francisco,_California)",
+      },
+      {
+        icon: "church",
+        title: "Thomas Starr King's congregation",
+        text:
+          "San Francisco's Unitarian church was founded in 1850. Under Thomas Starr King it built a church on Union Square at 133 Geary Street, and in 1889 it moved here, to a rough-hewn granite church designed by Percy & Hamilton in the Richardsonian Romanesque style. The 1906 earthquake and fire destroyed its bell tower and steeple, which were replaced with a square turret. It became City Landmark No. 40 in 1971.",
+        place: "First Unitarian Church (City Landmark No. 40)",
+        where: "1187 Franklin St (Franklin St & Geary Blvd)",
+        at: [-122.4233, 37.78521],
+        source: "https://noehill.com/sf/landmarks/sf040.asp",
+      },
+      {
+        icon: "church",
+        title: "A cathedral built in a redevelopment area",
+        text:
+          "The Western Addition A-1 redevelopment project, which relocated 1,350 households and 358 businesses, lists St. Mary's Cathedral among the things it built. Its cornerstone was laid in 1967, and it was consecrated on May 5, 1971. The building is 190 feet high, its roof made of eight hyperbolic-paraboloid segments that rise from a square base to a cross at the top, under a 55-foot golden cross.",
+        place: "St. Mary's Cathedral",
+        where: "1111 Gough St (Gough St & Geary Blvd)",
+        at: [-122.42534, 37.78402],
+        source: "https://sfocii.org/node/123",
+      },
+      {
+        icon: "church",
+        title: "Saved by the dynamite on Van Ness",
+        text:
+          "Henry Geilfuss designed this Romanesque Revival church, built in 1895. It came through the 1906 earthquake with little damage and was saved from the fire by the dynamiting of buildings on Van Ness Avenue a block away. The round apartment tower beside it went up after the Redevelopment Agency cleared the Victorian houses around it. It became City Landmark No. 41 in 1971.",
+        place: "St. Mark's Lutheran Church (City Landmark No. 41)",
+        where: "1135 O'Farrell St",
+        at: [-122.42349, 37.78419],
+        source: "https://noehill.com/sf/landmarks/sf041.asp",
+      },
+      {
+        icon: "house",
+        title: "Maybeck's building for a charity",
+        text:
+          "Bernard Maybeck designed this Mediterranean-style building in 1928 for the Associated Charities of San Francisco, founded in 1889, which renamed itself the Family Service Agency in 1938. When it was new, its neighbors were Italianate row houses such as the 1880 Hugo Rothschild House next door at 964 Eddy, City Landmark No. 112. It became City Landmark No. 111 in 1980.",
+        place: "Family Service Agency building (City Landmark No. 111)",
+        where: "1010 Gough St (Gough St & Eddy St)",
+        at: [-122.42406, 37.78258],
+        source: "https://noehill.com/sf/landmarks/sf111.asp",
+      },
+      {
+        icon: "house",
+        title: "An 1880 Italianate house",
+        text:
+          "Peter R. Schmidt designed this Italianate house, with its portico and bay windows, in 1880 for Frederick D. Stadtmuller, a German-born merchant who imported and sold timber and liquor. It became City Landmark No. 35 in 1970 and was listed on the National Register and as a California Historical Landmark in 1976. It is a private home.",
+        place: "Stadtmuller House (City Landmark No. 35)",
+        where: "819 Eddy St",
+        at: [-122.42145, 37.78276],
+        source: "https://en.wikipedia.org/wiki/Stadtmuller_House",
+      },
+    ],
+    walk: {
+      intro:
+        "A loop of under a mile that starts on Van Ness at Geary, heads west past the Goodman Building and the First Unitarian Church to St. Mary's, then south past St. Mark's to the landmark houses on Gough and Eddy before returning toward Van Ness. Van Ness Avenue's buses and the 38 Geary stop near the start.",
+      miles: 0.8,
+      minutes: 35,
+      tip:
+        "Step inside St. Mary's when it is open to see the roof's segments meet in a cross overhead.",
+    },
     nearby: ["Japantown", "Polk Gulch", "Pacific Heights"],
     restaurants: [
       { name: "Tommy's Joynt", address: "1101 Geary Blvd", phone: "(415) 949-0399", url: "http://tommysjoynt.com" },
@@ -8541,18 +8623,98 @@ export const NEIGHBORHOODS = {
     transit: "Van Ness Bus Rapid Transit (49 Van Ness/Mission and 47 Van Ness) runs the corridor; the 38-Geary and 38R Geary Rapid cross at Geary. Also the 2 Sutter, 3 Jackson, and 19 Polk.",
   },
 
+  // sources: https://gocodebook.com/library/us/ca/san-francisco-planning/article-7-neighborhood-commercial-districts/sec.-723.-polk-street-neighborhood-commercial-district https://default.sfplanning.org/Preservation/lgbt_HCS/FinalLGBTQ_HCS_March2016.pdf https://en.wikipedia.org/wiki/Polk_Street https://sfmuseum.org/hist10/06timeline.html
   "Polk Gulch": {
-    spirit: "A low valley that became a busy commercial strip — restaurants, dive bars, cocktail dens, and corner shops packed into a walkable stretch between Nob Hill and Russian Hill, with an LGBTQ history that predates the Castro.",
-    reasons: ["Dense, walkable restaurant-and-bar corridor", "Transit-rich on Polk and Van Ness", "Layered LGBTQ history", "Apartments and Victorians side by side"],
-    aka: "the Polk Strip",
-    history: "Polk Street was named for U.S. President James K. Polk, but the 'Gulch' comes from the low valley between Nob Hill and Russian Hill that once carried a creek. After the 1906 earthquake, the corridor grew into a busy commercial strip of shops, restaurants, and small storefronts. From the 1950s into the early 1980s, Polk Gulch was the center of San Francisco's gay life, home to dozens of gay-owned bars and businesses, and it hosted the city's first Pride march in 1970 before the scene's center shifted to the Castro.",
-    facts: [
-      { icon: "flag", title: "The original gay neighborhood", text: "Before the Castro, the Polk Strip was San Francisco's main gay neighborhood, with dozens of gay bars and businesses by the late 1960s." },
-      { icon: "confetti", title: "First Pride march", text: "San Francisco's earliest Pride march stepped off along Polk Street in June 1970." },
-      { icon: "water", title: "A creek under the street", text: "The 'Gulch' name reflects the low valley and old watercourse that once ran through the area between two hills." },
-      { icon: "shop", title: "A true commercial strip", text: "Polk Street remains a dense, independent corridor of restaurants, bars, and shops rather than a residential pocket." },
-      { icon: "star", title: "Swan Oyster Depot", text: "The family-run seafood counter at 1517 Polk has been a San Francisco institution since 1912." },
+    spirit:
+      "A mile of small storefronts with apartments above, running along Polk Street through the gulch between Nob Hill, Russian Hill and Pacific Heights.",
+    reasons: [
+      "Polk Street's storefront strip",
+      "LGBTQ history from before the Castro",
+      "The California Street cable car crosses Polk",
+      "A 1926 movie palace on Polk",
     ],
+    history:
+      "The city's planning code describes the Polk Street commercial district as sitting in the gulch between Nob and Russian Hills and Pacific Heights, a north–south strip about a mile long. The street is named for President James K. Polk. On the district's western edge, Van Ness Avenue is where the army dynamited mansions in April 1906 to make a firebreak against the fire. Frank Norris set his 1899 novel McTeague on this street: its title character is a dentist with an office on Polk Street, and the book became the 1924 film Greed.\n\nIn the mid-1950s Mattachine Society bar guides already listed Polk Street, and in the 1960s gay men's bars and shops spread north along it from the Civic Center end. A gay couple opened a clothing store on Polk in 1961, a record store followed, and the city's LGBTQ historic context statement calls Polk Street San Francisco's first modern gay neighborhood. The Tavern Guild, organized by bar owners and workers in 1962 and regarded as the country's first gay business association, met at a Polk Street bar. In June 1970 the city's first gay rights march went down Polk Street from Aquatic Park to City Hall, and in 1971 the Christopher Street West parade drew 50,000 onlookers along a route from Pine and Polk to City Hall.\n\nIn the 1970s the Castro drew gay life away from Polk Street. Historian Joey Plaster has described Polk Street in the decades that followed as “a home, refuge, and family for queer runaway and homeless youth.” Today the planning code describes the street as a continuous run of ground-floor shops with homes above, with Larkin Street and the side streets more residential.",
+    facts: [
+      {
+        icon: "flag",
+        title: "The first marches came down Polk",
+        text:
+          "San Francisco's first gay rights march, in June 1970, ran down Polk Street from Aquatic Park to City Hall, one of a handful of events in a few cities marking the Stonewall riots of the year before. The next year's Christopher Street West parade drew 50,000 onlookers, who watched 4,000 marchers and dozens of floats go from Pine and Polk Streets to City Hall.",
+        place: "Pine and Polk",
+        where: "Polk St & Pine St",
+        at: [-122.42043, 37.78969],
+        source: "https://default.sfplanning.org/Preservation/lgbt_HCS/FinalLGBTQ_HCS_March2016.pdf",
+      },
+      {
+        icon: "tram",
+        title: "A cable car crossing",
+        text:
+          "The California Street cable car crosses Polk Street here, and the planning code lists it among the features of the Polk Street commercial district. California Street is one of the city's three cable car lines, which were named a National Historic Landmark in 1964.",
+        place: "California Street cable car at Polk",
+        where: "Polk St & California St",
+        at: [-122.42063, 37.79064],
+        source: "https://www.sfmta.com/cable-cars",
+      },
+      {
+        icon: "star",
+        title: "Where the Tavern Guild began",
+        text:
+          "In 1962 gay bar owners and workers organized the Tavern Guild of San Francisco, regarded as the first gay business association in the United States. Its members met at a bar in this building and elected one of its bartenders, Phil Doganiero, as president. The guild kept lawyers and bail bondsmen on call for anyone arrested in or near a gay bar, and gave bar owners a network to resist police and liquor-board raids.",
+        place: "1741 Polk Street",
+        where: "1741 Polk St",
+        at: [-122.4212, 37.79274],
+        source: "https://default.sfplanning.org/Preservation/lgbt_HCS/FinalLGBTQ_HCS_March2016.pdf",
+      },
+      {
+        icon: "shopping",
+        title: "Small storefronts by design",
+        text:
+          "Polk Street's buildings put homes above ground-floor shops, and the street keeps an almost unbroken run of storefronts for most of its length. To keep them small, the planning code generally prohibits merging storefronts and controls lot mergers. In 1971 a gay magazine called Polk “the gayest street in San Francisco,” listing its florists, clothing and gift shops, a record store, a bookshop and a framing business along with its bars.",
+        place: "Polk Street shops",
+        where: "Polk St between Jackson St & Pacific Ave",
+        at: [-122.42142, 37.7946],
+        source: "https://gocodebook.com/library/us/ca/san-francisco-planning/article-7-neighborhood-commercial-districts/sec.-723.-polk-street-neighborhood-commercial-district",
+      },
+      {
+        icon: "church",
+        title: "A church for all peoples",
+        text:
+          "The Church for the Fellowship of All Peoples, one of the first interracial, intercultural and interdenominational churches in the United States, bought this building in 1949. Theologian Howard Thurman, a co-founder, was its pastor from 1944 to 1953 and an intellectual influence on the nonviolent civil rights movement; Sue Bailey Thurman worked for interracial and international understanding. The city made it a landmark in 2023.",
+        place: "Church for the Fellowship of All Peoples (City Landmark)",
+        where: "2041 Larkin St",
+        at: [-122.42028, 37.79655],
+        source: "https://sfbos.org/sites/default/files/o0125-23.pdf",
+      },
+      {
+        icon: "book",
+        title: "The bar Life magazine found",
+        text:
+          "In the mid-1960s a bar in this commercial building was featured in a 1964 Life magazine article that called San Francisco the “Gay Capital of America.” The city's LGBTQ historic context statement counts the article among the factors in Polk Street's rise as a gay neighborhood and lists the building as potentially significant for that history.",
+        place: "2111 Polk Street",
+        where: "2111 Polk St",
+        at: [-122.42187, 37.79608],
+        source: "https://default.sfplanning.org/Preservation/lgbt_HCS/FinalLGBTQ_HCS_March2016.pdf",
+      },
+      {
+        icon: "movie",
+        title: "A Moorish movie palace",
+        text:
+          "Timothy Pflueger of Miller & Pflueger, who also designed the Castro Theatre and Oakland's Paramount, designed this Moorish Revival theater, which opened on November 5, 1926, with 1,625 seats. It was split into two screens in 1976, went back to one in 1988 and closed as a movie theater in 1998. It became City Landmark No. 217 in 1996, and a gym now uses the building, its big screen still in place.",
+        place: "Alhambra Theatre (City Landmark No. 217)",
+        where: "2330 Polk St",
+        at: [-122.42195, 37.79837],
+        source: "https://en.wikipedia.org/wiki/Alhambra_Theatre_(San_Francisco)",
+      },
+    ],
+    walk: {
+      intro:
+        "A walk of about a mile up Polk Street from Pine to Green, past the cable car crossing at California, the storefront blocks of the 1700s through 2100s, and a short detour to Larkin Street for the Fellowship Church. The 19 Polk bus runs the length of the street, and the Van Ness buses are a block west.",
+      miles: 1,
+      minutes: 40,
+      tip:
+        "For a quieter way back, walk south on Larkin Street: the planning code notes that Larkin and the side streets are more residential than Polk.",
+    },
     restaurants: [
       { name: "Swan Oyster Depot", address: "1517 Polk St", phone: "(415) 673-1101" },
       { name: "Dunya Bistro", address: "1609 Polk St", phone: "(415) 400-5770", url: "https://dunyabistrosf.com" },
@@ -8570,18 +8732,89 @@ export const NEIGHBORHOODS = {
     transit: "Served by the 19-Polk and 1-California Muni buses, plus the 47 and 49 Van Ness routes (49 Van Ness BRT) and the 2 and 3 lines a block over. Van Ness Avenue carries north-south bus rapid transit.",
   },
 
+  // sources: https://npgallery.nps.gov/pdfhost/docs/NRHP/Text/91000957.pdf https://en.wikipedia.org/wiki/Lower_Nob_Hill_Apartment_Hotel_District https://www.ala.org/united/products_services/literarylandmarks/landmarksbyyear/2005/hammett https://gocodebook.com/library/us/ca/san-francisco-planning/article-7-neighborhood-commercial-districts/sec.-723.-polk-street-neighborhood-commercial-district https://noehill.com/sf/landmarks/sf042.asp https://en.wikipedia.org/wiki/List_of_San_Francisco_Designated_Landmarks
   "Lower Nob Hill": {
-    spirit: "The dense apartment-house district on Nob Hill's lower southern slope, where 1910s–1920s brick high-rises and old residential hotels stack up just steps from downtown, the cable cars climbing the hill above and a lively run of restaurants and bars at street level.",
-    reasons: ["Walkable to Union Square and the Financial District", "Cable cars on the hill above", "Historic apartment-house architecture", "Dense, affordable nightlife and dining"],
-    aka: "the Tendernob",
-    history: "After the 1906 earthquake and the three-day fire that leveled the area, this lower slope of Nob Hill was rebuilt almost entirely between 1906 and 1925 with fireproof brick and reinforced-concrete apartment buildings and residential hotels. Rising three to seven stories, they housed workers and other residents within walking distance of downtown, below the grand mansions and hotels crowning Nob Hill above. The blocks around Bush, Sutter and Post are now recognized as the Lower Nob Hill Apartment Hotel District, listed on the National Register of Historic Places in 1991 with 296 contributing buildings. Sitting between Nob Hill proper and the Tenderloin, the neighborhood picked up the nickname the Tendernob.",
-    facts: [
-      { icon: "house", title: "An apartment-house district", text: "The Lower Nob Hill Apartment Hotel District holds 296 contributing buildings, mostly three- to seven-story brick apartment houses and residential hotels rebuilt after the 1906 fire." },
-      { icon: "quake", title: "Rebuilt after 1906", text: "The 1906 quake and fire destroyed everything here; the district was rebuilt almost entirely between 1906 and 1925 using fireproof materials the city newly required." },
-      { icon: "book", title: "On the National Register", text: "The district was listed on the National Register of Historic Places on July 31, 1991, and designated a California Historical Landmark the same day." },
-      { icon: "tram", title: "Cable cars overhead", text: "The Powell-Hyde, Powell-Mason and California Street cable car lines run along the crest of Nob Hill just above the neighborhood." },
-      { icon: "pin", title: "The Tendernob", text: "Wedged between Nob Hill and the Tenderloin, the area earned the blended nickname the Tendernob." },
+    spirit:
+      "Block after block of three- to seven-story brick and stucco apartment houses and residential hotels, built on Nob Hill's south slope in the twenty years after the 1906 fire.",
+    reasons: [
+      "A National Register district of 296 buildings",
+      "Apartment houses built 1906–1925",
+      "Walking distance to downtown",
+      "Polk Street shops at its west end",
     ],
+    aka: "the Tendernob",
+    history:
+      "The 1906 earthquake and fire burned this slope clean of all but one of its earlier buildings. It was rebuilt almost entirely between 1906 and 1925, and the northern edge of the district follows the line the city drew after the fire, inside which every new building had to be fireproof. Many of the buildings went up for the builders and visitors of the 1915 Panama-Pacific International Exposition. What resulted was a close-packed district of three- to seven-story apartment houses, residential hotels and apartment hotels built out to the front of their lots, almost all with galvanized-iron cornices and fire escapes and many with bay windows. Early buildings have simple brick fronts; after about 1912 many took Mission and Spanish Colonial Revival ornament, and the last, from 1929 to 1935, lean to Art Deco.\n\nIn 1991 the apartment blocks of Bush, Sutter and Post Streets and their cross streets, bounded on the west by the Polk–Van Ness corridor, were listed on the National Register of Historic Places as the Lower Nob Hill Apartment Hotel District: about 57 acres with 296 contributing buildings. The nomination described the district as still “the dwelling place of a great many people who can walk to work,” with residential use on almost every block and few office conversions. The area is sometimes called the Tendernob, for its place between Nob Hill and the Tenderloin.\n\nThe district has its own literary history: Dashiell Hammett lived at 891 Post Street from 1926 to 1929 and wrote his first three novels there, including The Maltese Falcon. At its west end, Polk Street's storefronts begin the commercial strip that runs north for a mile through Polk Gulch.",
+    facts: [
+      {
+        icon: "star",
+        title: "A women's athletic club from 1915",
+        text:
+          "The Woman's Athletic Club of San Francisco was founded in 1915, modeled on the Woman's Athletic Club of Chicago. Architects Bliss and Faville designed its Italian Renaissance Revival clubhouse, built in phases in 1917 and 1923, with a swimming pool dug into the basement. Now the Metropolitan Club, it was listed on the National Register of Historic Places in 2004. It is a private club.",
+        place: "Metropolitan Club (National Register)",
+        where: "640 Sutter St",
+        at: [-122.41114, 37.78918],
+        source: "https://en.wikipedia.org/wiki/Metropolitan_Club_(San_Francisco)",
+      },
+      {
+        icon: "quake",
+        title: "A home for the fire chief",
+        text:
+          "Fire Chief Dennis Sullivan was fatally injured in the 1906 earthquake when a tower of the California Hotel fell through his quarters on Bush Street, and he died four days later; his firefighters fought the fire for three days without him. A memorial fund raised by subscription, together with $15,000 from the Board of Supervisors, paid for this house, built in 1922 with a garage for the chief's cars and quarters for the chief upstairs. It became City Landmark No. 42 in 1971.",
+        place: "Dennis T. Sullivan Memorial Fire Chief's Home (City Landmark No. 42)",
+        where: "870 Bush St",
+        at: [-122.41159, 37.78986],
+        source: "https://sfmuseum.org/hist1/home.html",
+      },
+      {
+        icon: "house",
+        title: "Cornices in even files",
+        text:
+          "Stand at Sutter and Jones to see the district the National Register nomination describes: side-by-side cornices marching up and down the hill, on apartment houses and residential hotels built out to the front of their lots. About 46 percent of the buildings are clad in stucco and 42 percent in brick. Ornamental streetlights run through the district, and the nomination found it still almost entirely residential.",
+        place: "Lower Nob Hill Apartment Hotel District (National Register)",
+        where: "Sutter St & Jones St",
+        at: [-122.41362, 37.78865],
+        source: "https://npgallery.nps.gov/pdfhost/docs/NRHP/Text/91000957.pdf",
+      },
+      {
+        icon: "tower",
+        title: "A Spanish Colonial Revival hotel",
+        text:
+          "The architect H. C. Baumann designed the Gaylord Hotel in the late 1920s in the Spanish Colonial Revival style, inspired by the buildings of the 1915 Panama-California Exposition in San Diego, a style popular then for large apartment buildings. It stands inside the Lower Nob Hill Apartment Hotel District and became City Landmark No. 159 in 1983.",
+        place: "Gaylord Hotel (City Landmark No. 159)",
+        where: "620 Jones St",
+        at: [-122.41292, 37.78718],
+        source: "https://noehill.com/sf/landmarks/sf159.asp",
+      },
+      {
+        icon: "book",
+        title: "Sam Spade's apartment",
+        text:
+          "Dashiell Hammett lived in this building from 1926 to 1929 and wrote his first three novels here: Red Harvest, The Dain Curse and The Maltese Falcon. Sam Spade's apartment in The Maltese Falcon is modeled on Hammett's, on the northwest corner of the fourth floor. A plaque reading “Home of Dashiell Hammett and Sam Spade” was dedicated on March 19, 2005. The apartments are private homes.",
+        place: "891 Post Street",
+        where: "891 Post St (Post St & Hyde St)",
+        at: [-122.41636, 37.7872],
+        source: "https://www.ala.org/united/products_services/literarylandmarks/landmarksbyyear/2005/hammett",
+      },
+      {
+        icon: "shopping",
+        title: "Where the Polk Street strip begins",
+        text:
+          "These blocks belong to the city's Polk Street commercial district, a strip about a mile long of buildings with homes above ground-floor shops and a continuous, pedestrian-oriented commercial frontage. To keep its small storefronts, the planning code generally prohibits merging them. The blocks between Post and Bush mark where the strip meets the apartment-house district.",
+        place: "Polk Street shops",
+        where: "Polk St & Sutter St",
+        at: [-122.4202, 37.78815],
+        source: "https://gocodebook.com/library/us/ca/san-francisco-planning/article-7-neighborhood-commercial-districts/sec.-723.-polk-street-neighborhood-commercial-district",
+      },
+    ],
+    walk: {
+      intro:
+        "A walk of about a mile across the National Register district, from the old women's athletic club on Sutter Street up to the fire chief's house on Bush, down Jones Street past the Gaylord, and west along Post and Sutter to Polk Street. Expect a few short, steep blocks on the cross streets. The Powell Street cable cars run a block east of Mason Street, near the start.",
+      miles: 1,
+      minutes: 45,
+      tip:
+        "Look up as you go: the nomination notes that almost every building carries a galvanized-iron cornice, and the hill makes them easy to see in a row.",
+    },
     restaurants: [
       { name: "Liholiho Yacht Club", address: "871 Sutter St", phone: "(415) 440-5446", url: "https://lycsf.com" },
       { name: "Cocobang", address: "550 Taylor St", phone: "(415) 292-5144", url: "https://cocobang.org" },
@@ -8595,17 +8828,98 @@ export const NEIGHBORHOODS = {
     transit: "Cable cars run along the hill above: Powell-Hyde and Powell-Mason on Powell Street and the California Street line. Muni buses 2, 3, 19, 27, 38 and 1 serve the surrounding streets.",
   },
 
+  // sources: https://www.foundsf.org/index.php?title=A_HISTORY_OF_UNION_SQUARE https://www.foundsf.org/index.php?title=UNION_SQUARE_AFTER_1906 https://gocodebook.com/library/us/ca/san-francisco-planning/part-xvi/article-11-preservation-of-buildings-and-districts-of-architectural-historical-and-aesthetic/sec.-1125.-severability/appendix-e-to-article-11 https://en.wikipedia.org/wiki/Union_Square,_San_Francisco https://en.wikipedia.org/wiki/Dewey_Monument https://www.sfmta.com/cable-cars
   "Downtown / Union Square": {
-    spirit: "San Francisco's grand front parlor of department stores, theater marquees, and cable-car bells, gathered around one historic plaza.",
-    reasons: ["The city's retail and department-store core", "Heart of the Theater District", "Transit hub for the entire Bay Area", "Walk-everywhere hotel and dining density"],
-    history: "Union Square takes its name from the pro-Union rallies held here on the eve of the Civil War. At its center stands the Dewey Monument, a 97-foot column topped by the bronze figure 'Victory,' dedicated by President Theodore Roosevelt on May 14, 1903, to commemorate Admiral George Dewey's win at Manila Bay. The neighborhood rebuilt rapidly after the 1906 earthquake and fire, anchored by the Westin St. Francis hotel, which had opened on Powell Street in 1904. For more than a century it has remained the city's central district of flagship stores, grand hotels, and theaters.",
-    facts: [
-      { icon: "art", title: "The Victory statue", text: "The Dewey Monument's bronze 'Victory' was modeled by Alma de Bretteville Spreckels and sculpted by Robert Ingersoll Aitken, dedicated in 1903." },
-      { icon: "house", title: "The Westin St. Francis", text: "Opened in 1904, the St. Francis is the only hotel directly on Union Square and survived the 1906 disaster." },
-      { icon: "tram", title: "Powell cable-car turnaround", text: "At Powell and Market, the Powell-Hyde and Powell-Mason cars are spun by hand on the city's most-photographed turntable." },
-      { icon: "movie", title: "The Theater District", text: "The Curran, Orpheum, and American Conservatory Theater anchor the live-stage blocks just west of the square." },
-      { icon: "quake", title: "Rebuilt after 1906", text: "Much of the district was leveled by the 1906 earthquake and fire, then rebuilt within a few years as the city's retail core." },
+    spirit:
+      "A public square since 1850, ringed by shops and hotels, most of them built within a decade of the 1906 fire, with the Powell Street cable cars climbing past it.",
+    reasons: [
+      "Union Square, public land since 1850",
+      "Cable cars on Powell Street",
+      "A conservation district of post-1906 buildings",
+      "The city's only Frank Lloyd Wright building",
     ],
+    history:
+      "Union Square was set aside on the earliest town surveys, and in 1850 Colonel John Geary, the first mayor of San Francisco under American rule, deeded it to the city to be held for park purposes. During the Civil War it took its name from the pro-Union rallies held there, often led by the Unitarian minister Thomas Starr King, whose church faced the square. In 1903 President Theodore Roosevelt dedicated the Dewey Monument at its center, honoring the U.S. Navy's victory at Manila Bay in 1898. By then the blocks around the square were a mix of churches, houses and shops, and a retail district had grown up around it and along Market Street.\n\nThe 1906 earthquake and fire destroyed the buildings around the square; the St. Francis Hotel, which had opened in 1904, survived but was gutted. The district was rebuilt fast: the city's Kearny-Market-Mason-Sutter Conservation District, which covers these blocks, notes that the whole area went up in less than 20 years and most of it in less than 10, in small-scaled, light-colored buildings mostly four to eight stories tall. Most hotels moved west of Union Square after the fire, and since the 1920s lower Grant Avenue and the Union Square area have been the city's main shopping district. In 1941 and 1942 a multilevel garage designed by Timothy Pflueger was dug beneath the square, and the park was rebuilt on its roof.\n\nThe district has changed with the economy. Some department stores closed in the late 1960s, and new stores and hotels opened in the 1970s and 1980s. The San Francisco Standard counted 203 retailers in or near the square in 2019 and found 107 of them still open four years later, and in February 2024 Macy's announced it would close its Union Square store.",
+    facts: [
+      {
+        icon: "tram",
+        title: "The cable cars voters kept",
+        text:
+          "The Powell-Hyde and Powell-Mason cable cars start at this turntable at Powell and Market. In 1947 Mayor Roger Lapham said the city should get rid of all its cable car lines; Friedel Klussmann formed the Citizens' Committee to Save the Cable Cars, and that November voters passed Measure 10 by a wide margin. In 1964 the cable car system was declared a National Historic Landmark.",
+        place: "Powell Street cable car turntable",
+        where: "Powell St & Market St",
+        at: [-122.4077, 37.78471],
+        source: "https://www.sfmta.com/blog/how-friedel-klussmann-saved-cable-cars-70-years-ago",
+      },
+      {
+        icon: "park",
+        title: "A park on a garage roof",
+        text:
+          "The square took its name from pro-Union rallies during the Civil War. President Theodore Roosevelt dedicated the Dewey Monument at its center on May 14, 1903; its figure of Victory, by sculptor Robert Aitken on a column by architect Newton Tharp, marks the naval victory at Manila Bay. After the 1906 fire, temporary buildings in the park housed guests of the gutted St. Francis Hotel. In 1941 the block was dug out to an average of 48 feet for a garage that opened in 1942, and the monument was strengthened with a concrete core and set back on the new park above.",
+        place: "Union Square",
+        where: "Geary, Powell, Post & Stockton Sts",
+        at: [-122.40752, 37.78793],
+        source: "https://www.foundsf.org/index.php?title=A_HISTORY_OF_UNION_SQUARE",
+      },
+      {
+        icon: "art",
+        title: "Frank Lloyd Wright's only San Francisco building",
+        text:
+          "Maiden Lane was called Morton Street in 1869, a street of small cottages used as brothels; merchants pushed to rename it Maiden Lane in 1922. At 140, Frank Lloyd Wright remodeled a shop for V. C. Morris in 1948–49, hiding a spiral ramp and a skylit round room behind a windowless brick front with an arched tunnel entrance. It is the only one of his roughly 300 surviving buildings in San Francisco. The city made the exterior Landmark No. 72 in 1975 and added the interior in 2016.",
+        place: "V. C. Morris Gift Shop (City Landmark No. 72)",
+        where: "140 Maiden Ln",
+        at: [-122.40592, 37.78819],
+        source: "https://default.sfplanning.org/Preservation/landmarks_designation/hp_VCMorrisGiftShop_DesignationReport_FINAL.pdf",
+      },
+      {
+        icon: "shopping",
+        title: "The shopping district since the 1920s",
+        text:
+          "The best-known stores in the city stood on Kearny Street in the 1870s and 1880s, then moved toward Market Street and the Grant Avenue and Union Square area. The city's conservation-district rules for these blocks record that lower Grant Avenue and the Union Square area have been San Francisco's main shopping district since the 1920s. The storefronts on Grant, Post, Geary and Stockton fill light-colored buildings, mostly four to eight stories, rebuilt after the 1906 fire.",
+        place: "Grant Avenue shops",
+        where: "Grant Ave & Post St",
+        at: [-122.40525, 37.78895],
+        source: "https://gocodebook.com/library/us/ca/san-francisco-planning/part-xvi/article-11-preservation-of-buildings-and-districts-of-architectural-historical-and-aesthetic/sec.-1125.-severability/appendix-e-to-article-11",
+      },
+      {
+        icon: "tower",
+        title: "An early glass curtain wall",
+        text:
+          "Willis Polk designed this 1918 building with a front of glass hung in front of its structure, one of the country's first glass curtain walls, trimmed with ornamental ironwork and fire escapes. It is named for Andrew Hallidie, the cable car pioneer. It became City Landmark No. 37 and was listed on the National Register of Historic Places in 1971, and a two-year restoration of its facade was finished in 2013.",
+        place: "Hallidie Building (City Landmark No. 37)",
+        where: "130 Sutter St",
+        at: [-122.40306, 37.79021],
+        source: "https://en.wikipedia.org/wiki/Hallidie_Building",
+      },
+      {
+        icon: "book",
+        title: "A library founded in 1854",
+        text:
+          "The Mechanics' Institute was founded in 1854, and its library lost its collection in the 1906 earthquake and fire. It merged with the Mercantile Library and hired Albert Pissis to design this Beaux-Arts building, completed in 1909, with two floors for the library and a spiral staircase of iron and marble rising from the lobby. It became City Landmark No. 134 in 1981.",
+        place: "Mechanics' Institute (City Landmark No. 134)",
+        where: "57 Post St",
+        at: [-122.40304, 37.78885],
+        source: "https://noehill.com/sf/landmarks/sf134.asp",
+      },
+      {
+        icon: "water",
+        title: "Where survivors met in 1906",
+        text:
+          "The actress Lotta Crabtree gave this cast-iron fountain to the city, and it was dedicated on September 9, 1875. After the 1906 earthquake and fire it became a meeting point for survivors, and since 1919 people have gathered here before dawn on April 18 to mark the anniversary. The soprano Luisa Tetrazzini sang here on Christmas Eve 1910. It was listed on the National Register and named City Landmark No. 73 in 1975.",
+        place: "Lotta's Fountain (City Landmark No. 73)",
+        where: "Market, Geary & Kearny Sts",
+        at: [-122.4033, 37.78794],
+        source: "https://en.wikipedia.org/wiki/Lotta%27s_Fountain",
+      },
+    ],
+    walk: {
+      intro:
+        "A line of about a mile from the cable car turntable at Powell and Market up to Union Square, east along Maiden Lane and Grant Avenue, and down through the older blocks near Montgomery Street to Lotta's Fountain on Market. Powell Street Station (BART and Muni Metro) is at the start, and Montgomery Street Station is a block from the end.",
+      miles: 0.9,
+      minutes: 40,
+      tip:
+        "Come to Lotta's Fountain before dawn on April 18 for the yearly gathering that marks the 1906 earthquake.",
+    },
     restaurants: [
       { name: "John's Grill", address: "63 Ellis St", phone: "(415) 986-0069", url: "https://www.johnsgrill.com" },
       { name: "Kin Khao", address: "55 Cyril Magnin St", phone: "(415) 362-7456", url: "https://www.kinkhao.com" },
@@ -8621,18 +8935,98 @@ export const NEIGHBORHOODS = {
     transit: "Powell St Station serves BART and Muni Metro (J, K, L, M, N lines); the underground Union Square/Market St Station serves Muni Metro as well. Powell-Hyde and Powell-Mason cable cars turn around at Powell and Market, alongside the F-Market streetcar and many bus lines.",
   },
 
+  // sources: https://sfmuseum.org/hist/chron1.html https://www.foundsf.org/index.php?title=Yerba_Buena_Center:_Redevelopment_and_a_Working_Class_Community%E2%80%99s_Resistance https://www.todco.org/history https://noehill.com/sf/landmarks/sf004.asp https://en.wikipedia.org/wiki/St._Patrick%27s_Catholic_Church_(San_Francisco,_California) https://en.wikipedia.org/wiki/Yerba_Buena_Gardens https://en.wikipedia.org/wiki/Moscone_Center https://en.wikipedia.org/wiki/Contemporary_Jewish_Museum https://yerbabuena.org/art/leroy-king-carousel
   "Yerba Buena": {
-    spirit: "San Francisco's cultural living room — a walkable cluster of world-class museums, public gardens, and convention halls wrapped in glassy high-rise condos and hotels, where the city quite literally began.",
-    reasons: ["The city's densest concentration of museums", "Built around a downtown park with a memorial waterfall", "Transit-rich: BART, Muni Metro, Central Subway, F-line", "Walk-everywhere dining, shopping, and nightlife"],
-    aka: "SoMa cultural district",
-    history: "The neighborhood takes its name from Yerba Buena, the Mexican-era pueblo founded around 1835 whose name (Spanish for 'good herb') came from a fragrant mint that grew nearby; on January 30, 1847 the settlement was renamed San Francisco. The blocks south of Market were cleared in a long, contested mid-20th-century redevelopment effort that displaced many existing residents and businesses. The first phase of Yerba Buena Gardens opened in 1993 atop the underground halls of the Moscone Convention Center, anchored by the Yerba Buena Center for the Arts. Over the following decades a dense museum cluster took shape around the gardens, and the district filled in with residential towers and hotels.",
-    facts: [
-      { icon: "art", title: "SFMOMA", text: "The San Francisco Museum of Modern Art at 151 Third Street reopened in May 2016 after a Snohetta-designed expansion that roughly tripled its gallery space." },
-      { icon: "water", title: "MLK Memorial Waterfall", text: "Yerba Buena Gardens opened in 1993; behind its memorial waterfall, glass panels honor Dr. Martin Luther King Jr. with his words from the civil rights movement." },
-      { icon: "fair", title: "Moscone Center", text: "The George R. Moscone Convention Center — named for the San Francisco mayor assassinated in 1978 — tucks much of its exhibition hall underground, beneath Yerba Buena Gardens." },
-      { icon: "flag", title: "Where San Francisco began", text: "The district recalls the original Yerba Buena settlement, the small Mexican-era pueblo that grew into San Francisco." },
-      { icon: "subway", title: "Central Subway", text: "The Yerba Buena/Moscone Station on Muni's T Third Street line opened in November 2022, its glass roof drawing daylight three stories down to the platform." },
+    spirit:
+      "Museums, gardens and a convention center built on South of Market blocks of residential hotels cleared by redevelopment, with St. Patrick's Church and the housing its displaced tenants fought for still among them.",
+    reasons: [
+      "Yerba Buena Gardens, opened in 1993",
+      "Museums around one downtown park",
+      "St. Patrick's, an 1870s church kept through redevelopment",
+      "Senior housing won by the tenants' lawsuit",
     ],
+    history:
+      "Yerba Buena was the name of the settlement that, by order of alcalde Washington Bartlett, became San Francisco on January 30, 1847. More than a century later the name was revived for the Yerba Buena Center, an urban renewal project on 87 acres of South of Market. During the Depression, Howard Street between Third and Fourth had been labeled “Skid Row,” and in 1962 Redevelopment Agency director Justin Herman told a Senate committee that the area's residents, if left where they were, would “deteriorate some of our most valuable areas.” Standing in the project's way were some 3,000 residential hotel tenants and more than 300 families. When the city's landmarks board reviewed St. Patrick's Church in 1967, it noted that the Redevelopment Agency would keep the church while all the older hotels and dwellings around it were scheduled for demolition.\n\nIn 1969 several hundred residents formed Tenants and Owners in Opposition to Redevelopment (TOOR), led by George Woolf, a longshore and cannery union organizer then in his eighties, under the slogan “We Won't Move!” Many members were retired union members, among them seamen and dockworkers, and some had lived in the district for decades. Their federal lawsuit for decent relocation housing stopped the project for four years, and the 1973 settlement required the city and the agency to set aside four sites in the project area for new housing, paid for with hotel tax funds.\n\nThe Moscone Convention Center, named for Mayor George Moscone, who was assassinated in 1978, opened in 1981, its exhibition hall extending underground beneath what became Yerba Buena Gardens. The first block of the gardens opened on October 11, 1993, with the Yerba Buena Center for the Arts; the second, between Howard and Folsom, opened in 1998. TOOR's development corporation, now TODCO, opened Woolf House in 1979 and three more senior buildings on its sites through 1988. SFMOMA moved to Third Street in 1995, and in 2008 the Contemporary Jewish Museum opened in the old Jessie Street power substation; it suspended operations in December 2024 and in March 2026 announced that it would sell the building.",
+    facts: [
+      {
+        icon: "fair",
+        title: "A 1906 carousel from Playland",
+        text:
+          "This hand-carved carousel was built by Charles I. D. Looff in 1906. In 1914 it went into the Looff Hippodrome at Ocean Beach, at the amusement park later named Playland-at-the-Beach, and it was one of the pieces saved when Playland was torn down. A collector, Marianne Stevens, bought it, and it now runs beside the Children's Creativity Museum as the LeRoy King Carousel.",
+        place: "LeRoy King Carousel",
+        where: "221 4th St",
+        at: [-122.40212, 37.78334],
+        source: "https://www.kqed.org/news/11925112",
+      },
+      {
+        icon: "house",
+        title: "Housing the tenants won",
+        text:
+          "In 1969 tenants of the area's residential hotels formed TOOR to fight demolition of their homes, and their federal lawsuit halted the Yerba Buena project for four years. The 1973 settlement gave them four sites in the project area for new housing, financed with city hotel tax funds. Woolf House, the first, opened here in 1979 with 112 apartments for seniors and is named for TOOR's chairman, George Woolf, who died in 1971.",
+        place: "Woolf House",
+        where: "801 Howard St (4th St & Howard St)",
+        at: [-122.40246, 37.78278],
+        source: "https://www.todco.org/history",
+      },
+      {
+        icon: "water",
+        title: "A memorial behind a waterfall",
+        text:
+          "The first block of Yerba Buena Gardens opened on October 11, 1993. The Martin Luther King Jr. memorial, Revelation, was one of the concessions that came out of the long fight over the project: a walkway behind a 50-by-20-foot waterfall where excerpts of King's speeches are etched in glass, in the languages of San Francisco's sister cities. It is the work of poet Estella Majoza, sculptor Houston Conwill and architect Joseph De Pace.",
+        place: "Martin Luther King Jr. Memorial, Yerba Buena Gardens",
+        where: "Yerba Buena Gardens, Howard St side",
+        at: [-122.40225, 37.78453],
+        source: "https://www.foundsf.org/index.php?title=Martin_Luther_King,_Jr._Memorial",
+      },
+      {
+        icon: "church",
+        title: "The church redevelopment kept",
+        text:
+          "St. Patrick's parish held its first Mass in 1851, and the church on Mission Street dates from the 1870s. The 1906 fire left only its foundation and parts of its walls, and the parish rebuilt it to a similar design. In 1967 the city's landmarks board noted that the Redevelopment Agency would preserve the church and its rectory while all the older hotels and dwellings around it were demolished. It became City Landmark No. 4 in 1968.",
+        place: "St. Patrick's Church (City Landmark No. 4)",
+        where: "756 Mission St",
+        at: [-122.40341, 37.78524],
+        source: "https://noehill.com/sf/landmarks/sf004.asp",
+      },
+      {
+        icon: "factory",
+        title: "A power station dressed as a monument",
+        text:
+          "Willis Polk designed this Pacific Gas and Electric substation in 1905; fire and then the 1906 earthquake and fire destroyed the work, and Polk redrew it in 1906, with an east annex added in 1909. The city's landmark report calls it the prototype of the company's effort to make civic ornaments of its industrial buildings. It was listed on the National Register in 1974 and became City Landmark No. 87 in 1977. Daniel Libeskind's addition for the Contemporary Jewish Museum opened in 2008.",
+        place: "Jessie Street Substation (City Landmark No. 87)",
+        where: "736 Mission St (Jessie Square)",
+        at: [-122.40367, 37.78604],
+        source: "https://sfplanninggis.org/docs/landmarks_and_districts/LM87.pdf",
+      },
+      {
+        icon: "star",
+        title: "The arts center at the gardens",
+        text:
+          "The Yerba Buena Center for the Arts opened in 1993 with the first block of the gardens. Fumihiko Maki designed its galleries and forum building, and James Stewart Polshek and Todd Schliemann designed the theater next to it.",
+        place: "Yerba Buena Center for the Arts",
+        where: "701 Mission St (3rd St & Mission St)",
+        at: [-122.40125, 37.7851],
+        source: "https://en.wikipedia.org/wiki/Yerba_Buena_Center_for_the_Arts",
+      },
+      {
+        icon: "art",
+        title: "The modern art museum's third home",
+        text:
+          "The San Francisco Museum of Art was founded in 1935 on the fourth floor of the Veterans Building in the Civic Center. It moved into Mario Botta's building on Third Street in January 1995, and after a three-year closure it reopened on May 14, 2016, with an expansion by Snøhetta that added about 142,000 square feet of gallery space.",
+        place: "San Francisco Museum of Modern Art",
+        where: "151 3rd St",
+        at: [-122.40074, 37.78592],
+        source: "https://en.wikipedia.org/wiki/San_Francisco_Museum_of_Modern_Art",
+      },
+    ],
+    walk: {
+      intro:
+        "A short loop through the blocks the Yerba Buena Center project cleared, from the carousel and Woolf House at Fourth and Howard, across the gardens to St. Patrick's and Jessie Square on Mission Street, and over to the arts center and SFMOMA on Third Street. The Yerba Buena/Moscone Station (Muni Metro T) is a block from the start, and Powell Street and Montgomery Street stations are two blocks north of the end.",
+      miles: 0.7,
+      minutes: 35,
+      tip:
+        "Read the words on the gardens' cornerstone: TODCO's senior poets' work was engraved there in 1993.",
+    },
     restaurants: [
       { name: "Tropisueno", address: "75 Yerba Buena Ln", phone: "(415) 985-2264", url: "https://www.tropisueno.com" },
       { name: "Dirty Habit", address: "12 4th St", phone: "(415) 348-1555", url: "https://www.zhotelssf.com/hotels/dirty-habit" },
