@@ -9126,16 +9126,68 @@ export const NEIGHBORHOODS = {
     transit: "The gated entrance is off Arguello Blvd. Muni 33-Ashbury stops at Arguello and California, one block south; the 1-California runs along California St; the 2-Sutter and 43-Masonic serve nearby Presidio Heights; the 38-Geary runs along Geary Blvd to the south.",
   },
 
+  // sources: https://www.sfchronicle.com/totalsf/article/holly-park-bernal-heights-sf-20192235.php https://bernalwood.com/2016/05/31/a-brief-history-of-holly-parks-creation-rise-decline-and-fabulous-rejuvenation/ https://en.wikipedia.org/wiki/Holly_Park_(San_Francisco) https://foundsf.org/San_Francisco_Housing_Authority_1937-1965:_The_Early_Decades https://sfha.org/about/our-story
   "Holly Park": {
-    spirit: "Bernal's quiet green crown — a ring of homes wrapped around a round hilltop park, where a single loop path delivers a 360-degree sweep of the city and the streets below stay residential and calm.",
-    reasons: ["360-degree views from one of SF's oldest parks", "Quiet, walkable residential streets", "Cortland Ave's shops minutes away", "Hilltop loop path and playground at the center"],
-    history: "Holly Park sits on land carved from the old Bernal land grant and set aside as one of San Francisco's earliest park reservations in the 1860s, donated to the city in 1862. For decades the surrounding Bernal Heights slopes were sparsely built, leaving the new public land hard to reach; the park was improved in the 1920s and again with city funding from the 1950s onward. Today its 7.5-acre hilltop oval, crowned by Holly Hill, is ringed by Victorian and cottage-style homes along Holly Park Circle. The name likely traces to the hollyleaf (Islais) cherry that once grew near Islais Creek just south of the hill.",
-    facts: [
-      { icon: "park", title: "One of SF's oldest parks", text: "Holly Park was set aside as a public reservation in the 1860s and donated to the city in 1862, making it among San Francisco's oldest municipal parks." },
-      { icon: "tower", title: "360-degree views", text: "A loop path around the summit of Holly Hill opens up panoramic views of downtown, the Salesforce Tower, the Bay, and Sutro Tower." },
-      { icon: "house", title: "A round park ringed by homes", text: "Holly Park Circle wraps the 7.5-acre oval, with homes facing the green on all sides along Bocana, Highland, Appleton, and Murray streets." },
-      { icon: "art", title: "Public art on the hill", text: "A kinetic sculpture, 'Odonatoa' by Joyce Hsu, stands near the children's playground." },
+    spirit:
+      "A round hilltop park on Bernal Heights' south slope, ringed by Holly Park Circle, with the city's first public housing on its north side.",
+    reasons: [
+      "Hilltop park set aside in 1862",
+      "Holly Park Circle rings the park",
+      "Cortland Avenue shops at the northeast corner",
+      "Holly Courts, 1940, by Arthur Brown Jr.",
     ],
+    history:
+      "The hill was part of the Bernal family's Mexican land grant, Rancho Rincon de las Salinas y Potrero Viejo. In 1862 a group of property owners that included railroad attorney Harvey S. Brown bought the hilltop and deeded it to the city for a park, but for about two decades little was done with it: the west end became a dumping ground and the east side was dug out for rock and gravel. In 1889 a group speaking for 4,000 homeowners demanded the park they had been promised, and in December 1890 the Chronicle ran \"A Ruined Park,\" reporting that prisoners from the House of Correction had cut into the hill for rock to pave Mission Street. Neighbors stopped the park's destruction, but not the loss of its peak, which was cut down to the level of the damaged east side.\n\nIn 1894 the Holly Park Improvement Club got the city to build Holly Park Avenue, today's Holly Park Circle, around the hill. After the 1906 earthquake the surrounding slopes filled with houses, and in 1926 the park was properly landscaped, with basketball and tennis courts, a playground and the eucalyptus trees that now tower over it. In June 1940 the San Francisco Housing Authority opened its first project, Holly Courts, just north of the park.\n\nIn 1991 Rec and Park fenced off the playground, citing hazardous conditions. After voters approved open-space bonds in 2000, neighbors organized as Friends of Holly Park, the city approved their upgrade plan in 2002, and the renovated park reopened about two years later.",
+    facts: [
+      {
+        icon: "shop",
+        title: "Where Cortland's shops begin",
+        text:
+          "The neighborhood's northeast corner touches the Cortland Avenue Neighborhood Commercial District, which the city's planning code places along Cortland Avenue between Bonview and Folsom streets and describes as a small-scale linear shopping street serving the surrounding neighborhood. From here its storefronts run east along Cortland.",
+        place: "Cortland Avenue shops",
+        where: "Cortland Ave & Bennington St",
+        at: [-122.4174, 37.739],
+        source: "https://gocodebook.com/library/us/ca/san-francisco-planning/article-7-neighborhood-commercial-districts/sec.-738.-cortland-avenue-neighborhood-commercial-district",
+      },
+      {
+        icon: "road",
+        title: "A street the neighbors asked for",
+        text:
+          "In 1894 the Holly Park Improvement Club persuaded the city to build Holly Park Avenue around the park; it is now Holly Park Circle, and houses face the green from all around it. The park itself waited until 1926 for real landscaping, when courts, a playground and its eucalyptus trees went in.",
+        place: "Holly Park Circle",
+        where: "Holly Park Cir, north side",
+        at: [-122.419, 37.738],
+        source: "https://bernalwood.com/2016/05/31/a-brief-history-of-holly-parks-creation-rise-decline-and-fabulous-rejuvenation/",
+      },
+      {
+        icon: "park",
+        title: "The hill that lost its peak",
+        text:
+          "Property owners deeded this hilltop to the city for a park in 1862. By 1890 the Chronicle was calling it \"a park in name only\": prisoners from the House of Correction had cut a gap into the hill to get rock for paving Mission Street, and in the end the peak was leveled to the height of the damaged east side. The flattened top is now the park's 7.5-acre oval, with a ballfield at its center. Near the playground stands Odonatoa, a kinetic sculpture of painted stainless steel by Oakland artist Joyce Hsu.",
+        place: "Holly Park",
+        where: "Hilltop of Holly Park, inside Holly Park Cir",
+        at: [-122.41994, 37.73722],
+        source: "https://www.sfchronicle.com/totalsf/article/holly-park-bernal-heights-sf-20192235.php",
+      },
+      {
+        icon: "house",
+        title: "The city's first public housing",
+        text:
+          "Holly Courts opened in June 1940 as the San Francisco Housing Authority's first project, 118 homes that the Authority calls the first public housing development west of the Mississippi. Arthur Brown Jr., architect of City Hall and Coit Tower, designed ten two-story blocks with flat roofs, separate entrances and small gardens; he had first planned tiled French Country roofs, but federal rules pushed him to a modern design. The housing was not open to all: of the projects the Authority opened from 1940 to 1943, only Westside Courts housed Black tenants, while the other 1,600 units, Holly Courts' among them, had none; in 1942 the Authority adopted a \"neighborhood pattern\" policy that segregated its projects by race.",
+        place: "Holly Courts",
+        where: "100 Appleton Ave",
+        at: [-122.42227, 37.73777],
+        source: "https://foundsf.org/San_Francisco_Housing_Authority_1937-1965:_The_Early_Decades",
+      },
+    ],
+    walk: {
+      intro:
+        "A short walk from the Cortland Avenue shops at the neighborhood's northeast corner, around Holly Park Circle and up onto the hilltop park, ending at Holly Courts near Mission Street. The park's loop path adds a full circle of views if you have time.",
+      miles: 0.7,
+      minutes: 30,
+      tip:
+        "Before heading down, walk the paths around the hilltop: the park is known for its views of the city and the bay.",
+    },
     nearby: ["Bernal Heights", "the Mission"],
     restaurants: [
       { name: "Moki's Sushi & Pacific Grill", address: "615 Cortland Ave", phone: "(415) 970-9336", url: "https://mokisf.com" },
@@ -9150,18 +9202,69 @@ export const NEIGHBORHOODS = {
     transit: "The 67-Bernal Heights climbs the hill nearby (Ellsworth and Crescent), and the 24-Divisadero runs along Cortland Ave; the 14-Mission and 49 run down Mission St. Glen Park and 24th St Mission BART are a short ride away.",
   },
 
-  "Fairmount": {
-    spirit: "A hushed hillside of Victorians on the western slope of Bernal Heights, tucked between Glen Park, the Mission, and Bernal — one of San Francisco's oldest homestead tracts, prized for quiet streets, sun, and a short walk to Glen Park BART.",
-    reasons: ["One of the city's earliest homestead tracts", "Quiet, walkable Victorian streets", "Steps from Glen Park BART and the J Church", "Tucked between Glen Park, the Mission, and Bernal"],
-    aka: "Fairmount Heights",
-    history: "The Fairmount Tract was platted in 1861, one of San Francisco's earliest suburban subdivisions west of the Mission, when the area was still rural hinterland beyond the Valencia Street horse railroad. The Fairmount School opened to students of the new tract in September 1864, making it one of the oldest schools in the city. Build-out came in waves: a burst in the 1880s, especially after the electric streetcar line reached Chenery Street in 1892, another after the 1906 earthquake, and a third following World War I. The original large lots were subdivided over time, filling the hillside with the modest Victorians and Edwardians that still line its streets. Today the neighborhood is often folded into Glen Park on maps, but its name survives in Fairmount Street and the surrounding tract.",
-    facts: [
-      { icon: "book", title: "Fairmount School, 1864", text: "The Fairmount School opened to students of the newly platted tract in September 1864, one of the oldest schools in San Francisco." },
-      { icon: "house", title: "An early homestead tract", text: "Platted in 1861, the Fairmount Tract predates Glen Park and Sunnyside by roughly 30 years and is among the oldest residential districts on the city's west side." },
-      { icon: "tram", title: "The streetcar era", text: "An electric streetcar line reached nearby Chenery Street in 1892, spurring a wave of home-building on the hillside." },
-      { icon: "subway", title: "BART at the bottom of the hill", text: "Glen Park BART, at Diamond and Bosworth, sits just downhill, putting downtown and the airport line within easy reach." },
-      { icon: "stairs", title: "A hillside of Victorians", text: "The neighborhood climbs the southeastern slope above College Hill, its streets lined with Victorian and Edwardian homes." },
+  // sources: https://glenparkhistory.org/fairmount-heights-c13bl https://www.glenparkhistory.org/the-old-mission-road-in-glen-park https://www.glenparkhistory.org/single-post/2016/12/28/richard-chenery-forgotten-california-pioneer https://foundsf.org/Fairmount_Heights https://sunnysidehistory.org/2020/03/04/bodies-in-the-well-trapdoors-in-the-foyer-how-the-poole-bell-house-became-mired-in-myths/ https://www.glenparkassociation.org/string-of-trails-addition-helps-connect-glen-park/
+  Fairmount: {
+    spirit:
+      "A hillside tract of curving streets on the west side of the Bernal Gap, laid out in 1864 above the old road and rail line to San Jose.",
+    reasons: [
+      "Laid out in 1864",
+      "Curving streets that follow the hill",
+      "Victorian-era houses and flats",
+      "Billy Goat Hill at the top",
     ],
+    aka: "Fairmount Heights",
+    history:
+      "In December 1862 the Pacific Railroad Homestead Association, with Richard Chenery as president and James Laidley as vice president, announced plans to divide about 120 to 130 acres on the eastern edge of the old Rancho San Miguel into as many as 600 lots along the new San Francisco and San Jose Railroad. The Civil War seems to have stalled the plan, and on February 27, 1864, the land came back on the market as Fairmount. The first lots went on sale on March 19, 1864, and agents Cobb & Sinton sold $57,000 worth that day. The tract's streets carry its founders' names (Chenery, Laidley, and Randall for their notary, Albert G. Randall), and they curve with the hill instead of following a grid. Where the name Fairmount came from may never be known; the Glen Park neighborhood history project points to the founders' Boston-area roots and Boston's own hilly Fairmount, and to names such as Beacon and Arlington on the tract map.\n\nThe tract sits on the west side of the Bernal Gap, the low pass between Fairmount and Bernal hills that Juan Bautista de Anza's expedition crossed in 1776. Early roads to San Jose ran through it, and in the early 1860s the railroad carved the Bernal Cut through the gap, today the route of San Jose Avenue. In 1868, according to a history residents compiled in 1959, people here worked as carriage makers, stablers, painters and in the building trades. About a third of the houses in Fairmount and upper Noe Valley went up in the 1880s, on 25-by-100-foot lots, with false fronts and recessed doorways; flats followed, and from 1907 to 1916 sewers, streets and sidewalks went in a block or two at a time.",
+    facts: [
+      {
+        icon: "road",
+        title: "The gap Anza walked through",
+        text:
+          "This low pass between Fairmount and Bernal hills is the Bernal Gap; Juan Bautista de Anza's 1776 expedition is the first recorded European crossing of it. In the early 1860s builders of the San Francisco and San Jose Railroad carved the Bernal Cut through it for their tracks; the cut, between Randall and Natick streets, now carries San Jose Avenue. An 1856 survey map already shows a San Jose Road following the same line.",
+        place: "Bernal Cut",
+        where: "San Jose Ave & Randall St",
+        at: [-122.4245, 37.7393],
+        source: "https://www.glenparkhistory.org/the-old-mission-road-in-glen-park",
+      },
+      {
+        icon: "road",
+        title: "A street on an old road",
+        text:
+          "Chenery Street first appears on the Fairmount Homestead Association's survey map of May 1864 and is named for Richard Chenery, a Massachusetts-born gold rush hotelkeeper and merchant who led the tract's founders. An 1856 map shows a \"San Jose Road used in 1850-52\" reaching Chenery near Randall and curving on toward Diamond Street, and local historians believe Chenery and Arlington streets grew out of that road.",
+        place: "Chenery & Randall",
+        where: "Chenery St & Randall St",
+        at: [-122.4256, 37.73975],
+        source: "https://www.glenparkhistory.org/the-old-mission-road-in-glen-park",
+      },
+      {
+        icon: "house",
+        title: "A house with a false legend",
+        text:
+          "Attorney John Pascoe Poole built this Stick-Eastlake house in 1887. His widow, Annie, sold it in 1906 to Teresa Bell, widow of the financier Thomas Bell, and Bell added the third story with its mansard roof. Later writers tied the house to Mary Ellen Pleasant and told of bodies and trapdoors, but the Sunnyside History Project found that Pleasant never lived here and died before Bell bought it, and found nothing credible in the murder stories. The house was split into apartments in the 1930s, when much of its large lot was sold off.",
+        place: "Poole-Bell House",
+        where: "196 Laidley St (at Fairmount St)",
+        at: [-122.42934, 37.73952],
+        source: "https://sunnysidehistory.org/2020/03/04/bodies-in-the-well-trapdoors-in-the-foyer-how-the-poole-bell-house-became-mired-in-myths/",
+      },
+      {
+        icon: "park",
+        title: "A park on the hilltop",
+        text:
+          "Billy Goat Hill, at the corner of 30th and Laidley streets, became a city park in 1975 and covers about 3.5 acres; stairs and a dirt path climb to a lookout with views of downtown and the Bay Bridge. In July 2016 Rec and Park opened the Beacon Trail, 74 steps up from Beacon Street and on to Walter Haas Playground in Diamond Heights, replacing an informal path.",
+        place: "Billy Goat Hill",
+        where: "30th St & Laidley St",
+        at: [-122.43326, 37.74141],
+        source: "https://en.wikipedia.org/wiki/Billy_Goat_Hill,_San_Francisco",
+      },
+    ],
+    walk: {
+      intro:
+        "A short, steep walk from the Bernal Cut on San Jose Avenue up through the 1864 tract: Chenery Street, Fairmount Street to the Poole-Bell House on Laidley, then along Laidley to Billy Goat Hill.",
+      miles: 0.8,
+      minutes: 35,
+      tip:
+        "From the top of Billy Goat Hill, the Beacon Trail continues west to Walter Haas Playground in Diamond Heights.",
+    },
     nearby: ["Glen Park", "the Mission", "Bernal Heights"],
     restaurants: [
       { name: "Manzoni", address: "2788 Diamond St", phone: "(415) 334-2251", url: "https://www.manzonisf.com" },
@@ -9177,16 +9280,78 @@ export const NEIGHBORHOODS = {
     transit: "Glen Park BART sits just downhill at Diamond and Bosworth, served by Muni buses 23, 35, 36, 44 and 52. The J Church Muni Metro stops nearby at San Jose/Glen Park in the San Jose Avenue median.",
   },
 
+  // sources: https://diva.sfsu.edu/collections/kirkeberg/11363 https://bernalwood.com/2012/03/26/a-brief-history-of-peralta-avenues-discontinuity-problem/ https://bernalwood.com/2011/04/12/what-the-bayshore-freeway-took-from-us-adam-eve-faith-and-joy/ https://sfplanning.org/sites/default/files/resources/2019-05/Bernal%20Heights%20East%20Slope%20Building%20Guidelines.pdf https://sfplanning.org/sites/default/files/documents/legis/code-summaries/071122_Bernal_Brewster_Joy.pdf https://foundsf.org/Peralta_Street_and_Bernal_Heights_North_Slope
   "Peralta Heights": {
-    spirit: "A hidden pocket on Bernal Heights' northeast slope, where steep streets, secret stairways, and tucked-away gardens climb toward sweeping views of downtown and the bay.",
-    reasons: ["Quiet, tucked-away residential streets", "Hidden stairways and hillside gardens", "Big views toward downtown and the bay", "Steps from Bernal's Cortland Avenue"],
-    history: "The enclave sits on the northeast flank of Bernal Heights, built on land that was once part of Rancho Rincon de las Salinas y Potrero Viejo, a Mexican land grant. Peralta Avenue and the neighborhood take their name from the prominent Peralta family of Spanish-era California land-grant holders. Like much of Bernal, the area's slopes proved too steep for a full street grid, so paths and public stairways were threaded between the hillside lots. Modest early homes and gardens filled in along these winding streets, giving the pocket its quiet, hidden-away character.",
-    facts: [
-      { icon: "house", title: "A Peralta namesake", text: "Peralta Avenue, the spine of the enclave, honors the Peralta family of Spanish and Mexican California land-grant fame." },
-      { icon: "stairs", title: "Stairway streets", text: "Bernal's slopes were too steep for a full grid, so public stairways link the hillside streets, a hallmark of the neighborhood." },
-      { icon: "tower", title: "Downtown views", text: "The northeast-facing slope opens up big views toward downtown San Francisco and the bay." },
-      { icon: "park", title: "Gardens on the hill", text: "Hidden gardens tucked along the steep lots and stairways give the pocket its green, tucked-away feel." },
+    spirit:
+      "The steep northeast slope of Bernal Heights, where Peralta Avenue breaks into stairways and garden paths between short blocks above the Bayshore Freeway.",
+    reasons: [
+      "Stairways and garden paths",
+      "Steep hillside blocks",
+      "Under the East Slope Building Guidelines since 1986",
+      "Bounded by Precita Avenue and the freeway",
     ],
+    history:
+      "Max Kirkeberg, who lived in this corner of Bernal Heights for 45 years and photographed it in hundreds of slides now held by San Francisco State University, wrote that it \"could also be called 'Peralta Heights'\": the ridge running from Bernal Hill toward Potrero Hill forms its core and gives it a distinctive street grid. He set its boundaries as Precita Avenue on the north, Peralta Avenue on the west after the street turns at Mullen Avenue, and the James Lick (Highway 101) Freeway on the east.\n\nMuch of the street plan existed first on paper. A 1924 map shows Peralta Avenue and Esmeralda Avenue as planned streets, and 1938 aerial photographs show that the only built part of Peralta was three blocks uphill from Precita Avenue and Army Street (now Cesar Chavez). Peralta was later built mostly along its planned route, but where the hill is too steep it is a stairway or a garden path, and today it runs in at least eight separate pieces. The Bayshore Freeway, built along the east edge in the 1950s, erased two small streets, Adam and Eve, and turned Faith Street into a dead end.\n\nIn October 1986 residents' East Slope Preservation Committee published building guidelines for the east slope, which the Planning Commission accepted on November 13, 1986. They described the area's history as \"one of benign neglect by the City\": dirt roads and undeveloped hillsides gave it a rural character, while the lack of roads and services \"periodically presented real danger to the residents.\" The guidelines ask new houses to keep the scale of the older ones, and the Planning Department still publishes them.",
+    facts: [
+      {
+        icon: "road",
+        title: "The only Peralta built by 1938",
+        text:
+          "Peralta Avenue is split into at least eight separate segments, the remains of a street plan that existed mostly on paper. In 1938 aerial photographs, these lower blocks, parallel to and uphill from Precita Avenue and Army Street (now Cesar Chavez), were the only part of Peralta that had actually been built.",
+        place: "Lower Peralta Avenue",
+        where: "100 block of Peralta Ave",
+        at: [-122.40737, 37.74745],
+        source: "https://bernalwood.com/2012/03/26/a-brief-history-of-peralta-avenues-discontinuity-problem/",
+      },
+      {
+        icon: "stairs",
+        title: "A street made of stairs",
+        text:
+          "On this part of the hill, Peralta's right-of-way is largely garden paths and stairways rather than pavement. The Peralta Stairs start here at Samoset Street and drop northward down the hill through the plantings.",
+        place: "Peralta Stairs",
+        where: "Peralta Ave & Samoset St",
+        at: [-122.40888, 37.74474],
+        source: "https://foundsf.org/Peralta_Street_and_Bernal_Heights_North_Slope",
+      },
+      {
+        icon: "park",
+        title: "Gardens on the steps",
+        text:
+          "Steps drop from Rutledge Street down to Brewster Street, and in 2005 community gardens filled the slope just north of them, with more garden steps between Brewster and Franconia streets. In 1973 Max Kirkeberg photographed Brewster Street as \"almost rural,\" with mostly older, smaller homes; by 1987 he described the blocks near Rutledge as \"uniform post-WWII tract housing.\"",
+        place: "Rutledge-Brewster steps",
+        where: "Rutledge St & Brewster St",
+        at: [-122.4069, 37.74505],
+        source: "https://diva.sfsu.edu/bundles/228320",
+      },
+      {
+        icon: "road",
+        title: "What the freeway took",
+        text:
+          "The Bayshore Freeway was built along the foot of this slope in the 1950s. Comparing 1940s street maps with today's, Bernal Heights historians found that it wiped out two small streets, Adam and Eve, so completely that no trace remains, and cut Faith Street off into a dead end.",
+        place: "Faith Street",
+        where: "Faith St",
+        at: [-122.40647, 37.74419],
+        source: "https://bernalwood.com/2011/04/12/what-the-bayshore-freeway-took-from-us-adam-eve-faith-and-joy/",
+      },
+      {
+        icon: "house",
+        title: "Building rules for a fragile slope",
+        text:
+          "In 2007 the city put interim controls on new construction on five assessor's blocks in the Brewster/Joy area, in effect from October 22, 2007, to April 14, 2009. New buildings needed conditional use approval, and the Planning Commission had to find that sewer and flooding problems had been fixed, that emergency vehicles could get through, that hydrant water pressure was adequate, and that erosion and landslide protections were in place.",
+        place: "Brewster and Joy",
+        where: "Brewster St & Joy St",
+        at: [-122.40684, 37.74378],
+        source: "https://sfplanning.org/sites/default/files/documents/legis/code-summaries/071122_Bernal_Brewster_Joy.pdf",
+      },
+    ],
+    walk: {
+      intro:
+        "A short, steep walk from the lower blocks of Peralta Avenue near Cesar Chavez Street up to the Peralta Stairs at Samoset, then across to the Rutledge-Brewster steps and down to Faith and Joy streets at the freeway edge. There is no shopping street in the neighborhood.",
+      miles: 0.6,
+      minutes: 30,
+      tip:
+        "Wear shoes with good grip: several blocks here are stairways or garden paths rather than paved street.",
+    },
     nearby: ["Bernal Heights", "the Mission", "Precita Park"],
     restaurants: [
       { name: "Emmy's Spaghetti Shack", address: "3230 Mission St", phone: "(415) 206-2086", url: "https://sfspaghettishack.com" },
@@ -9279,17 +9444,68 @@ export const NEIGHBORHOODS = {
     transit: "14-Mission and 14R-Mission Rapid run along nearby Mission St; the 67-Bernal Heights and 24-Divisadero connect up the hill and to Cortland Ave. Balboa Park and 24th St Mission BART stations are a short ride away.",
   },
 
+  // sources: https://default.sfplanning.org/Preservation/landmarks_designation/hp_UniversityMoundLadiesHome_DesignationReport_FINAL.pdf https://www.cbsnews.com/sanfrancisco/news/san-francisco-reservoir-reopens-after-seismic-upgrade
   "University Mound": {
-    spirit: "A quiet, sun-touched hillside in the city's southeast where single-family homes climb toward a giant reservoir, and the Portola flatlands hum just downhill on San Bruno Avenue.",
-    reasons: ["Calm, residential streets of single-family homes", "Steps from the Portola's diverse San Bruno Ave eats", "Minutes from sprawling McLaren Park", "Deep, layered local history"],
-    history: "The name dates to 1859, when Rev. George Burrowes founded University College (also called City College) and acquired hilltop land here by 1862, intending a grand campus that was never built; the surrounding streets were laid out and named for schools and educators. Crowning the hill is the University Mound Reservoir, an SFPUC facility holding about 140 million gallons that supplies roughly a quarter of San Francisco's tap water, second in size only to the Sunset Reservoir. Just downhill, the adjacent Portola earned the nickname the 'Garden District,' its slopes once dense with commercial greenhouses and nurseries that grew much of the city's flower crop. The University Mound Ladies Home, founded in 1884 with money from philanthropist James Lick, gave single women a place to live for 130 years before closing in 2014. The area filled in with modest single-family homes through the 20th century.",
-    facts: [
-      { icon: "water", title: "140 million gallons", text: "The University Mound Reservoir atop the hill holds about 140 million gallons and supplies roughly a quarter of San Francisco's tap water, second only to the Sunset Reservoir." },
-      { icon: "book", title: "The university that never was", text: "The neighborhood is named for University College, founded in 1859, which acquired land here by 1862 for a campus that was ultimately never built." },
-      { icon: "park", title: "McLaren Park next door", text: "John McLaren Park, one of the largest parks in San Francisco, spreads out just to the west." },
-      { icon: "flag", title: "The Garden District", text: "The neighboring Portola was long called the Garden District for the greenhouses and flower nurseries that once blanketed its hillsides." },
-      { icon: "house", title: "130 years of refuge", text: "The University Mound Ladies Home, endowed by James Lick and opened in 1884, housed women until it closed in 2014." },
+    spirit:
+      "A grid of streets named for East Coast colleges on the slope south of Silver Avenue, with a city reservoir and a 1932 landmark along University Street.",
+    reasons: [
+      "Streets named for East Coast colleges",
+      "A city landmark on University Street",
+      "Reservoir basins from 1885 and 1937",
+      "Laid out in 1862, built out by the 1960s",
     ],
+    history:
+      "The land was part of the Rancho Rincon de las Salinas y Potrero Viejo. H. S. Brown had it surveyed in 1862, and the University Mound Survey was recorded on May 1, 1863: blocks of eight lots each, with most streets named for East Coast universities and colleges (Oxford, Harvard, Yale, Amherst, Princeton, Dartmouth, Holyoke and Bowdoin), and a four-by-two-block area between University and Cambridge streets set aside as \"University College Grounds.\" University Mound College, a Presbyterian boarding school for boys, put up a three-story Second Empire building here in December 1875, after its first building burned earlier that year. The college ran out of money and closed, and the building went up for auction in 1879.\n\nIn 1884 the trustees of the Lick Old Ladies' Home, founded with a $100,000 bequest in James Lick's will, bought the old college and 25 acres for $30,000; in 1896 they renamed it the University Mound Old Ladies' Home. Growth was slow: cattle still roamed the tract in the 1890s, and building picked up only after the 1906 earthquake and fire. In 1913 the Brown Estate put 300 lots on sale at prices starting at $400, with houses built on terms of $10 a month, yet some roads were still unpaved in 1939, and the area was not fully built out until the 1960s.\n\nWith its eastern slope and southern exposure the area suited farming, and by the 1920s at least 19 nurseries in the surrounding Portola district grew most of the flowers sold in San Francisco. In the late 1930s some of them closed when their land was taken by the city for McLaren Park and the University Mound Reservoir system.",
+    facts: [
+      {
+        icon: "money",
+        title: "Lots for $400",
+        text:
+          "In 1913 the Brown Estate bought up the tract around the old college grounds and advertised 300 lots, each with an ocean view, just off Mission Street on Silver Avenue and 20 minutes from Third and Market. Lots started at $400, and homes could be built on payments of $10 a month, pitched as no more than rent. Some roads stayed unpaved for decades, and the area was not fully built out until the 1960s.",
+        place: "Silver Avenue",
+        where: "700 block of Silver Ave",
+        at: [-122.42152, 37.72882],
+        source: "https://default.sfplanning.org/Preservation/landmarks_designation/hp_UniversityMoundLadiesHome_DesignationReport_FINAL.pdf",
+      },
+      {
+        icon: "book",
+        title: "A college that gave the streets their names",
+        text:
+          "The 1863 University Mound Survey named most of its streets for East Coast schools, Princeton among them, and set aside the blocks between University and Cambridge streets, from Wayland Street to Henry Street (now Felton), as \"University College Grounds.\" University Mound College, a Presbyterian boarding school for boys, rebuilt here after a fire in 1875 but closed for lack of money and auctioned its building in 1879.",
+        place: "Princeton Street",
+        where: "200 block of Princeton St",
+        at: [-122.4155, 37.72713],
+        source: "https://default.sfplanning.org/Preservation/landmarks_designation/hp_UniversityMoundLadiesHome_DesignationReport_FINAL.pdf",
+      },
+      {
+        icon: "star",
+        title: "A landmark for a home for women",
+        text:
+          "James Lick's will left $100,000 to found a home for elderly women, and in 1884 its trustees bought the old college building and 25 acres here. Rist & Coffey's Colonial Revival building replaced the wooden college in 1931-32, after the state licensing board declined to act on the home's application because the wooden building was considered unsafe in a fire. The home was sold in 2014 to an assisted-living provider, and in 2015 the city made the building Landmark No. 269, calling it one of the few high-style Colonial Revival institutional buildings in San Francisco.",
+        place: "University Mound Old Ladies' Home",
+        where: "350 University St",
+        at: [-122.41383, 37.72575],
+        source: "https://default.sfplanning.org/Preservation/landmarks_designation/hp_UniversityMoundLadiesHome_DesignationReport_FINAL.pdf",
+      },
+      {
+        icon: "water",
+        title: "The city's water across the street",
+        text:
+          "University Mound Reservoir lies just east of University Street. Its north basin, across from the old ladies' home, went into service in 1885, when this was a windswept, thinly settled part of the city a mile from the nearest streetcar; the south basin was built in 1937. After a seismic upgrade that left it empty for two years, the north basin was put back in service; CBS reported that it supplies about a quarter of the city's tap water, and the SFPUC counts on it for drinking and firefighting water after a major earthquake.",
+        place: "University Mound Reservoir",
+        where: "University St & Bacon St",
+        at: [-122.4134, 37.7245],
+        source: "https://www.cbsnews.com/sanfrancisco/news/san-francisco-reservoir-reopens-after-seismic-upgrade",
+      },
+    ],
+    walk: {
+      intro:
+        "A short walk from Silver Avenue down Princeton Street through the college-named grid to University Street, the old ladies' home and the reservoir. There is no shopping street in the neighborhood.",
+      miles: 0.7,
+      minutes: 25,
+      tip:
+        "The last block of greenhouses from the old nursery district still stands along Hamilton Street, east of the reservoir.",
+    },
     nearby: ["the Portola"],
     restaurants: [
       { name: "Breakfast at Tiffany's", address: "2499 San Bruno Ave", phone: "(415) 468-8805", url: "https://www.breakfastattiffanyssf.com" },
@@ -9435,18 +9651,79 @@ export const NEIGHBORHOODS = {
     transit: "Muni 9-San Bruno and 8-Bayshore buses serve the nearby San Bruno Ave and Bayshore corridors; the T-Third light rail runs along Third St in the Bayview. Bayshore Caltrain station at 400 Tunnel Ave is just south.",
   },
 
-  "Ingleside": {
-    spirit: "A southwest village strung along Ocean Avenue — where a 1962 burger drive-in, family taquerias, and an all-ages brewery sit in the shadow of City College, all an easy hop from the K-line and Balboa Park BART.",
-    reasons: ["Real working commercial strip on Ocean Ave", "Transit-rich: K-Ingleside Metro plus Balboa Park BART", "Next door to City College's Ocean campus", "One of the city's most neighborly districts"],
-    aka: "OMI (Ocean View-Merced Heights-Ingleside)",
-    history: "The neighborhood traces to the Ingleside Racetrack, which the Pacific Coast Jockey Club opened just off Ocean Road (now Ocean Avenue) on November 28, 1895, drawing thousands by special rail line and becoming the first American track with a real starting gate. Streetcar service reached Ocean Avenue the same year to serve the track, and after the racetrack era ended the area filled in with single-family homes along the new lines, accelerated when the K-Ingleside opened through the Twin Peaks Tunnel on February 3, 1918. City College of San Francisco opened its permanent Ocean campus at Ocean and Phelan avenues on August 27, 1940, anchoring the district. The old racetrack oval survives as the curving loop of Urbano Drive in the adjacent Ingleside Terraces residence park, home to a giant 1913 sundial. Today Ingleside is a residential community, with the Ocean Avenue corridor as its commercial heart.",
-    facts: [
-      { icon: "book", title: "City College's flagship", text: "CCSF's Ocean campus opened at Ocean and Phelan in 1940, its Timothy Pflueger-designed Science Hall a showpiece of monumental architecture." },
-      { icon: "tram", title: "Streetcar since 1918", text: "The K-Ingleside began running through the Twin Peaks Tunnel on February 3, 1918, and still rolls down the middle of Ocean Avenue today." },
-      { icon: "book", title: "Ingleside Branch Library", text: "The neighborhood's public library sits right on the strip at 1298 Ocean Ave, a modern branch rebuilt for the community." },
-      { icon: "road", title: "A racetrack in the street grid", text: "The 1895 Ingleside Racetrack's oval lives on as the curving loop of Urbano Drive in neighboring Ingleside Terraces." },
-      { icon: "subway", title: "Two rail systems at the door", text: "Balboa Park BART and the K and M Muni Metro lines all meet at the neighborhood's eastern edge." },
+  // sources: https://sfog.us/homes/OMI-feb2010.pdf https://sfplanning.org/resource/historic-context-statements https://www.sfchronicle.com/vault/article/How-S-F-neighborhood-sprouted-where-horses-once-16302613.php https://default.sfplanning.org/Preservation/landmarks_designation/hp_InglesidePresbyterianMural_DesignationReport_FINAL.pdf https://www.sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances15/o0209-15.pdf
+  Ingleside: {
+    spirit:
+      "The blocks south of Ocean Avenue between City College and Ashton Avenue, laid out by Adolph Sutro in 1890 and built up along the streetcar line after 1906.",
+    reasons: [
+      "Ocean Avenue shops on its north edge",
+      "K-Ingleside streetcar since 1918",
+      "A 1923 church that is a city landmark",
+      "Street grid from Sutro's 1890 Lakeview tract",
     ],
+    aka: "Lakeview",
+    history:
+      "Ocean Avenue began as the Ocean House Road, a path running west from the San Jose Road to roadhouses at Lake Merced that newspapers mentioned as early as 1853. In 1885 Cornelius Stagg opened a roadhouse at the road and today's Junipero Serra Boulevard and called it the Ingleside House, after a Celtic word for a domestic fireplace. In 1881 Adolph Sutro had bought much of the old Rancho San Miguel, and in 1890 he platted the land south of the road as a subdivision named Lakeview, which gave the future Ingleside its street grid and most of its street names. Sales were slow, but most people called the area Ingleside after the roadhouse, and when the Ingleside Racetrack opened next door on Thanksgiving Day, November 28, 1895, drawing more than 10,000 people, the Lakeview name gave way. Saloons and restaurants opened along Ocean Avenue for the race crowds, and a Market Street Railway streetcar line ran out Ocean Avenue to the track that same year.\n\nAfter the 1906 earthquake and fire, the closed racetrack became the Ingleside Model Camp for refugees, and the Lakeview blocks saw their first real building boom, most of it within a block of Ocean Avenue. Between 1900 and 1915 the number of buildings in Ingleside rose from 57 to about 450, and its population from 473 in 1900 to 2,412 in 1910. Some of the area's oldest congregations began as services for camp refugees. In 1918 the K-Ingleside became the first Muni line through the new Twin Peaks Tunnel, and Ocean Avenue grew into a streetcar shopping street in the 1910s and 1920s.\n\nIn 1912 the racetrack land west of Ashton Avenue became Ingleside Terraces, a residence park whose deeds barred buyers or occupants of African, Japanese, Chinese or \"any Mongolian\" descent; the U.S. Supreme Court ruled such covenants unenforceable in 1948. Ingleside itself, like Merced Heights and Ocean View, generally had no racial covenants outside the residence parks, and from the 1940s it became one of the few parts of the city where African Americans could buy homes. The neighborhood was almost completely built out by 1950.",
+    facts: [
+      {
+        icon: "tram",
+        title: "Where the K line once ended",
+        text:
+          "From 1895 the Market Street Railway's \"Ingleside line\" ran out Mission Street from the Ferry Building, turned west on Ocean Avenue and ended at the racetrack entrance; extended to Ocean Beach as the No. 12, it ran until 1948. In 1918 the K-Ingleside became the first Muni line through the Twin Peaks Tunnel, running from West Portal to Junipero Serra Boulevard and then along Ocean Avenue to Brighton Avenue, here.",
+        place: "Ocean Avenue at Brighton",
+        where: "Ocean Ave & Brighton Ave",
+        at: [-122.4552, 37.72355],
+        source: "https://sfog.us/homes/OMI-feb2010.pdf",
+      },
+      {
+        icon: "church",
+        title: "A church built for nine congregations",
+        text:
+          "Ingleside United Presbyterian began in 1907 as a Sabbath school for refugees from the racetrack camp, and broke ground on this corner in 1909. After a fire destroyed the first church in 1920, nine Protestant congregations together built the present Neoclassical building, designed by Ingleside Terraces developer Joseph A. Leonard and finished in 1923, with a gymnasium in place of a pipe organ. Inside, Reverend Roland Gordon began the collage-mural The Great Cloud of Witnesses in 1980, an image of Muhammad Ali pasted to the gym wall; it now covers rooms, stairways and halls on all three levels with images of African Americans in history. In 2016 the city made the church and mural Landmark No. 273.",
+        place: "Ingleside Presbyterian Church",
+        where: "1345 Ocean Ave (at Granada Ave)",
+        at: [-122.45691, 37.72354],
+        source: "https://default.sfplanning.org/Preservation/landmarks_designation/hp_InglesidePresbyterianMural_DesignationReport_FINAL.pdf",
+      },
+      {
+        icon: "shop",
+        title: "Built on the south side first",
+        text:
+          "Fire insurance maps of 1899-1900 show 15 buildings facing Ocean Avenue in the blocks between Ashton Avenue and Howth Street; by 1913-15 there were 47, all but three on this south side, because the north side still belonged to the Sutro estate and was thick with forest. Today the city zones Ocean Avenue as a small-scale, transit-oriented shopping street, developed around the streetcar in the 1920s, with shops on the ground floor and housing above.",
+        place: "Ocean Avenue shops",
+        where: "1600 block of Ocean Ave, south side",
+        at: [-122.4593, 37.7244],
+        source: "https://www.sfbos.org/ftp/uploadedfiles/bdsupvrs/ordinances15/o0209-15.pdf",
+      },
+      {
+        icon: "church",
+        title: "A church across from the camp",
+        text:
+          "After the 1906 earthquake, the racetrack's owner offered the closed track across Ashton Avenue as a refugee camp. The Ingleside Model Camp took in almost 500 refugees in October 1906 and closed in January 1908, and many campers found homes nearby. St. Emydius, the Catholic parish, opened its church here at Ashton and DeMontfort avenues in 1913, across the street from the former camp.",
+        place: "St. Emydius Church",
+        where: "Ashton Ave & DeMontfort Ave",
+        at: [-122.46191, 37.72327],
+        source: "https://sfog.us/homes/OMI-feb2010.pdf",
+      },
+      {
+        icon: "flag",
+        title: "The racetrack's edge",
+        text:
+          "The Ingleside Racetrack filled the land bounded by Ashton Avenue, Junipero Serra Boulevard, Ocean Avenue and Holloway Avenue, across the street from this corner. In 1912 developer Joseph Leonard turned it into Ingleside Terraces, a residence park whose deeds barred buyers or occupants of African, Japanese, Chinese or \"any Mongolian\" descent; the U.S. Supreme Court ruled such covenants unenforceable in 1948.",
+        place: "Holloway and Ashton",
+        where: "Holloway Ave & Ashton Ave",
+        at: [-122.462, 37.7218],
+        source: "https://www.sfchronicle.com/vault/article/How-S-F-neighborhood-sprouted-where-horses-once-16302613.php",
+      },
+    ],
+    walk: {
+      intro:
+        "A walk west along the south side of Ocean Avenue from Brighton Avenue, past Ingleside Presbyterian Church and the shops, then south on Ashton Avenue along the edge of the old racetrack to Holloway Avenue. The K-Ingleside stops on Ocean Avenue at both ends.",
+      miles: 0.7,
+      minutes: 30,
+      tip:
+        "Across Ashton Avenue, in neighboring Ingleside Terraces, Urbano Drive follows the oval of the old racetrack, and a giant sundial dedicated on October 10, 1913, stands at its center on Entrada Court.",
+    },
     restaurants: [
       { name: "Beep's Burgers", address: "1051 Ocean Ave", phone: "(415) 584-2650", url: "https://www.beepsburgers.com" },
       { name: "Sakesan Sushi & Robata", address: "1400 Ocean Ave", phone: "(415) 347-7898" },
